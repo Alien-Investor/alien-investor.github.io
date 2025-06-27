@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alien Investor</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alien Investor 👽</title>
   <style>
     body {
-      background: black;
-      color: #00ffcc;
-      font-family: monospace;
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
       text-align: center;
       margin: 0;
     }
@@ -17,20 +17,26 @@
       background-size: cover;
       background-position: center;
       height: 300px;
+      position: relative;
     }
     img.profil {
       width: 150px;
       height: 150px;
-      margin-top: -75px;
       border-radius: 50%;
       border: 4px solid #00ffcc;
+      position: absolute;
+      bottom: -75px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #000;
     }
     h1 {
-      margin: 10px 0 0;
+      margin-top: 90px;
+      font-size: 2em;
     }
-    p.claim {
+    .claim {
       font-size: 1.2em;
-      margin-top: 5px;
+      margin: 10px 0 30px;
       font-weight: bold;
     }
     .links a {
@@ -38,19 +44,25 @@
       text-decoration: none;
       display: block;
       margin: 10px;
+      font-size: 1.1em;
     }
   </style>
 </head>
 <body>
-  <header></header>
-  <img src="Alien_Investor_Profilbild.jpg" alt="Profilbild" class="profil" />
-  <h1>Alien Investor 👽</h1>
-  <p class="claim">„Vertrau niemandem – manage deine Finanzen selbst. Aliens sind frei!“</p>
-  <div class="links">
-    <a href="https://x.com/AlienInvestor33" target="_blank">📢 X (Twitter)</a>
-    <a href="https://www.youtube.com/@Alien-Investor" target="_blank">▶️ YouTube</a>
-    <a href="https://www.mein.online-impressum.de/alien-investor/" target="_blank">📜 Impressum</a>
-    <a href="nostr:npub1cnlymdm5jz8eayycwynhze4s2zh9n0y04atce8ahxl5qfkptplls0s40hp" target="_blank">⚡ Nostr Profil</a>
-  </div>
+  <header>
+    <img src="Alien_Investor_Profilbild.jpg" alt="Profilbild" class="profil">
+  </header>
+
+  <main>
+    <h1>Alien Investor 👽</h1>
+    <p class="claim">„Vertrau niemandem – manage deine Finanzen selbst. Aliens sind frei!“</p>
+
+    <div class="links">
+      <a href="https://x.com/AlienInvestor33" target="_blank">📢 X (Twitter)</a>
+      <a href="https://www.youtube.com/@Alien-Investor" target="_blank">▶️ YouTube</a>
+      <a href="https://www.mein.online-impressum.de/alien-investor/" target="_blank">📜 Impressum</a>
+      <a href="nostr:npub1cnlymdm5jz8eayycwynhze4s2zh9n0y04atce8ahxl5qfkptplls0s40hp" target="_blank">⚡ Nostr Profil</a>
+    </div>
+  </main>
 </body>
 </html>
