@@ -7,16 +7,40 @@
   <style>
     body { font-family: sans-serif; background: #111; color: #eee; padding: 2em; }
     h1 { color: #f55; }
+    h3 { color: #0af; }
     a { color: #0af; text-decoration: none; }
     p { line-height: 1.6; }
     hr { margin: 2em 0; border: 0; border-top: 1px solid #333; }
     code { background-color: #222; padding: 0.2em 0.4em; border-radius: 4px; }
+
+    .author {
+      color: #ccc;
+      font-style: italic;
+      margin-top: -1em;
+      margin-bottom: 2em;
+    }
+
+    .like-button {
+      display: inline-block;
+      background-color: #333;
+      color: lime;
+      border: 1px solid #555;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      user-select: none;
+      margin-bottom: 2em;
+    }
+
+    .like-button:hover {
+      background-color: #444;
+    }
   </style>
 </head>
 <body>
 
   <h1>🔺 Inflation stiehlt dir deine Lebenszeit</h1>
-  <p><em>von Alien Investor</em></p>
+  <p class="author">von Alien Investor</p>
 
   <p>Geld ist gespeicherte Lebensenergie.</p>
 
@@ -27,6 +51,9 @@
   <p>Deshalb sage ich: <strong>Vertrau niemandem – manage deine Finanzen selbst</strong>. Bild dich weiter, setz auf Bitcoin, sichere dir Eigentum, investiere unabhängig.</p>
 
   <p>Freiheit beginnt bei deiner Geldentscheidung.</p>
+
+  <!-- Like-Button -->
+  <div class="like-button" onclick="likeArticle()">👍 Gefällt mir <span id="likeCount">0</span></div>
 
   <hr>
   <p style="font-size: 0.9em; color: #aaa;">
@@ -42,9 +69,19 @@
     <li>⚡ Bitcoin Lightning: <code>alien_investor@strike.me</code></li>
     <li>₿ Bitcoin Onchain: <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code></li>
   </ul>
-  <p>Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸</p>
+
+  <h3>📬 Kontakt</h3>
+  <p>E-Mail: <a href="mailto:Alien-Investor@proton.me">Alien-Investor@proton.me</a></p>
 
   <p><a href="blog.html">← Zurück zum Blog</a></p>
+
+  <script>
+    let count = 0;
+    function likeArticle() {
+      count++;
+      document.getElementById('likeCount').innerText = count;
+    }
+  </script>
 
 </body>
 </html>
