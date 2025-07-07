@@ -18,6 +18,27 @@
       border-radius: 4px;
       font-size: 0.95em;
     }
+    em { color: #aaa; }
+    .like-button {
+      margin-top: 2em;
+    }
+    button {
+      background-color: #222;
+      color: #fff;
+      border: 1px solid #444;
+      padding: 0.5em 1em;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #333;
+    }
+    footer {
+      margin-top: 3em;
+      padding-top: 2em;
+      border-top: 1px solid #444;
+      font-size: 0.9em;
+    }
   </style>
 </head>
 <body>
@@ -68,21 +89,40 @@
     </li>
   </ul>
 
-  <hr>
-  <p style="font-size: 0.9em; color: #aaa;">
-    👽 <strong>Haftungsausschluss:</strong><br>
-    Dieser Artikel ist keine Finanz-, Steuer- oder Rechtsberatung.<br>
-    Ich teile hier nur meine persönliche Alien-Meinung 🛸 – unabhängig, rebellisch und frei.<br>
-    Investieren ist mit Risiken verbunden. Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
-  </p>
+  <div class="like-button">
+    <button onclick="likeArticle()">👍 Gefällt mir <span id="like-count">0</span></button>
+  </div>
 
-  <h2>💸 Unterstütze meine Arbeit</h2>
-  <ul>
-    <li>☕ <strong>Fiat:</strong> <a href="https://ko-fi.com/alieninvestor" target="_blank">Spenden via Ko-fi (PayPal)</a></li>
-    <li>⚡ <strong>Lightning:</strong> <a href="https://strike.me/alien_investor" target="_blank">alien_investor@strike.me</a></li>
-    <li>₿ <strong>Bitcoin Onchain:</strong><br><code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code></li>
-  </ul>
+  <script>
+    const storageKey = 'likes-bitcoinartikel';
+    let count = localStorage.getItem(storageKey) || 0;
+    document.getElementById('like-count').textContent = count;
 
-  <p><a href="blog.html">← Zurück zur Blogübersicht</a></p>
+    function likeArticle() {
+      count++;
+      localStorage.setItem(storageKey, count);
+      document.getElementById('like-count').textContent = count;
+    }
+  </script>
+
+  <footer>
+    <p>📬 Kontakt: <a href="mailto:Alien-Investor@proton.me">Alien-Investor@proton.me</a></p>
+
+    <p style="font-size: 0.9em; color: #aaa;">
+      👽 <strong>Haftungsausschluss:</strong><br>
+      Dieser Artikel ist keine Finanz-, Steuer- oder Rechtsberatung.<br>
+      Ich teile hier nur meine persönliche Alien-Meinung 🛸 – unabhängig, rebellisch und frei.<br>
+      Investieren ist mit Risiken verbunden. Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
+    </p>
+
+    <h2>💸 Unterstütze meine Arbeit</h2>
+    <ul>
+      <li>☕ <strong>Fiat:</strong> <a href="https://ko-fi.com/alieninvestor" target="_blank">Spenden via Ko-fi (PayPal)</a></li>
+      <li>⚡ <strong>Lightning:</strong> <a href="https://strike.me/alien_investor" target="_blank">alien_investor@strike.me</a></li>
+      <li>₿ <strong>Bitcoin Onchain:</strong><br><code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code></li>
+    </ul>
+
+    <p><a href="blog.html">← Zurück zur Blogübersicht</a></p>
+  </footer>
 </body>
 </html>
