@@ -2,53 +2,88 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Inflation stiehlt dir deine Lebenszeit – Alien Investor</title>
+  <title>Was ist Geld – und warum es deine Lebenszeit bedroht</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body { font-family: sans-serif; background: #111; color: #eee; padding: 2em; }
-    h1 { color: #f55; }
+    body { font-family: sans-serif; background: #111; color: #eee; padding: 2em; line-height: 1.6; }
+    h1 { color: #0f0; }
+    h2 { color: #0af; margin-top: 1.5em; }
     a { color: #0af; text-decoration: none; }
-    p { line-height: 1.6; }
-    hr { margin: 2em 0; border: 0; border-top: 1px solid #333; }
-    code { background-color: #222; padding: 0.2em 0.4em; border-radius: 4px; }
+    a:hover { text-decoration: underline; }
+    code {
+      background-color: #222;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      font-size: 0.95em;
+    }
+    #like-button {
+      margin-top: 2em;
+      padding: 0.5em 1em;
+      background-color: #222;
+      color: #0f0;
+      border: 1px solid #0f0;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #like-count {
+      margin-left: 1em;
+      font-weight: bold;
+    }
+    footer {
+      margin-top: 3em;
+      font-size: 0.9em;
+      color: #aaa;
+    }
   </style>
 </head>
 <body>
 
-  <h1>🔺 Inflation stiehlt dir deine Lebenszeit</h1>
+  <h1>💰 Was ist Geld – und warum es deine Lebenszeit bedroht</h1>
   <p><em>von Alien Investor</em></p>
 
-  <p>Geld ist gespeicherte Lebensenergie.</p>
+  <!-- DEIN ARTIKELTEXT HIER (bleibt wie gehabt) -->
 
-  <p>Du bekommst es für deine Zeit, deine Kreativität, deine Leistung. Wenn Inflation diese Kaufkraft mindert, bedeutet das: <strong>Der Staat stiehlt dir nicht nur Geld – er stiehlt dir Lebenszeit</strong>.</p>
+  <!-- ... -->
 
-  <p>Inflation ist kein Naturgesetz. Sie ist staatlich gewollt, politisch gesteuert und systemisch eingebaut. Und sie trifft immer die Schwächsten zuerst.</p>
-
-  <p>Deshalb sage ich: <strong>Vertrau niemandem – manage deine Finanzen selbst</strong>. Bild dich weiter, setz auf Bitcoin, sichere dir Eigentum, investiere unabhängig.</p>
-
-  <p>Freiheit beginnt bei deiner Geldentscheidung.</p>
-
-  <hr>
-  <p style="font-size: 0.9em; color: #aaa;">
-    👽 <strong>Haftungsausschluss:</strong><br>
-    Dieser Artikel ist keine Finanz-, Steuer- oder Rechtsberatung.<br>
-    Ich teile hier nur meine persönliche Alien-Meinung 🛸 – unabhängig, rebellisch und frei.<br>
-    Investieren ist mit Risiken verbunden. Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
-  </p>
-
-  <h3>💸 Unterstütze meine Arbeit</h3>
+  <h2>💸 Unterstütze meine Arbeit</h2>
   <ul>
-    <li>☕ <a href="https://ko-fi.com/alieninvestor" target="_blank">Spenden via Ko-fi (PayPal, Fiat)</a></li>
-    <li>⚡ Bitcoin Lightning: <code>alien_investor@strike.me</code></li>
-    <li>₿ Bitcoin Onchain: <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code></li>
+    <li><strong>Fiat:</strong> <a href="https://ko-fi.com/alieninvestor" target="_blank">Spenden via Ko-fi (PayPal)</a></li>
+    <li><strong>Lightning:</strong> <a href="https://strike.me/alien_investor" target="_blank">alien_investor@strike.me</a></li>
+    <li><strong>Bitcoin Onchain:</strong><br><code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code></li>
   </ul>
-  <p>Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸</p>
 
-  <p style="margin-top: 2em; font-size: 0.9em;">
-    📬 <strong>Kontakt:</strong> Alien-Investor@proton.me
-  </p>
+  <!-- LIKE-FUNKTION -->
+  <button id="like-button">👍 Gefällt mir</button>
+  <span id="like-count">0</span>
 
-  <p><a href="blog.html">← Zurück zum Blog</a></p>
+  <footer>
+    <hr>
+    <p>
+      📬 <strong>Kontakt:</strong> <a href="mailto:Alien-Investor@proton.me">Alien-Investor@proton.me</a>
+    </p>
+    <p>
+      👽 <strong>Haftungsausschluss:</strong><br>
+      Dieser Artikel ist keine Finanz-, Steuer- oder Rechtsberatung.<br>
+      Ich teile hier nur meine persönliche Alien-Meinung 🛸 – unabhängig, rebellisch und frei.<br>
+      Investieren ist mit Risiken verbunden. Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
+    </p>
+    <p><a href="blog.html">← Zurück zum Blog</a></p>
+  </footer>
+
+  <script>
+    const likeBtn = document.getElementById("like-button");
+    const likeCount = document.getElementById("like-count");
+
+    const STORAGE_KEY = "likes-geldartikel";
+    let likes = parseInt(localStorage.getItem(STORAGE_KEY)) || 0;
+    likeCount.textContent = likes;
+
+    likeBtn.addEventListener("click", () => {
+      likes++;
+      localStorage.setItem(STORAGE_KEY, likes);
+      likeCount.textContent = likes;
+    });
+  </script>
 
 </body>
 </html>
