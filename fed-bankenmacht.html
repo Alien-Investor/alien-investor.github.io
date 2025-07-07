@@ -21,16 +21,44 @@
       color: #00ffcc;
       text-decoration: none;
     }
+    a:hover {
+      text-decoration: underline;
+    }
     code {
       background-color: #111;
       padding: 0.2em 0.4em;
       border-radius: 4px;
       color: #0f0;
     }
+    em {
+      color: #ccc;
+    }
+    .like-button {
+      margin-top: 2em;
+    }
+    button {
+      background-color: #111;
+      color: #fff;
+      border: 1px solid #444;
+      padding: 0.5em 1em;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #222;
+    }
+    footer {
+      margin-top: 3em;
+      padding-top: 2em;
+      border-top: 1px solid #333;
+      font-size: 0.9em;
+    }
   </style>
 </head>
 <body>
+
   <h1>🏛 Die geheime Geburt der FED – wie Banker das Geldsystem übernahmen</h1>
+  <p><em>von Alien Investor</em></p>
 
   <h2>⚠️ Die Krise vor der Krise: Panik von 1907</h2>
   <p>Im Jahr 1907 kam es zu einer schweren Finanzkrise in den USA. Banken kollabierten, das Vertrauen in das Geldsystem wankte. Die großen Finanzmänner jener Zeit, wie J.P. Morgan, sprangen ein, um das System zu stabilisieren. Doch es war klar: Man brauchte ein "modernes" Zentralbanksystem – so lautete zumindest die offizielle Erklärung.</p>
@@ -56,25 +84,44 @@
 
   <p><strong>Bitcoin, Gold, Eigentum und Wissen</strong> sind dein Schutz. <strong>Vertraue niemandem – schon gar nicht denen, die das Geldsystem erfunden haben.</strong></p>
 
-  <hr>
-
-  <p style="font-size:0.85em; color:#888;">
-    👽 <strong>Haftungsausschluss:</strong><br>
-    Dieser Artikel ist keine Finanz-, Steuer- oder Rechtsberatung.<br>
-    Ich teile hier nur meine persönliche Alien-Meinung 🛸 – unabhängig, rebellisch und frei.<br>
-    Investieren ist mit Risiken verbunden. Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
-  </p>
-
-  <div style="margin-top: 2em;">
-    <h2>💸 Unterstütze meine Arbeit</h2>
-    <ul>
-      <li>☕ Spenden via <a href="https://ko-fi.com/alieninvestor" target="_blank">Ko-fi</a> (PayPal, Fiat)</li>
-      <li>⚡ Bitcoin Lightning: <code>alien_investor@strike.me</code></li>
-      <li>₿ Bitcoin Onchain: <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code></li>
-    </ul>
-    <p>Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸</p>
+  <div class="like-button">
+    <button onclick="likeArticle()">👍 Gefällt mir <span id="like-count">0</span></button>
   </div>
 
-  <p><a href="blog.html">← Zurück zum Blog</a></p>
+  <script>
+    const storageKey = 'likes-fedartikel';
+    let count = localStorage.getItem(storageKey) || 0;
+    document.getElementById('like-count').textContent = count;
+
+    function likeArticle() {
+      count++;
+      localStorage.setItem(storageKey, count);
+      document.getElementById('like-count').textContent = count;
+    }
+  </script>
+
+  <footer>
+    <p>📬 Kontakt: <a href="mailto:Alien-Investor@proton.me">Alien-Investor@proton.me</a></p>
+
+    <p style="font-size:0.85em; color:#888;">
+      👽 <strong>Haftungsausschluss:</strong><br>
+      Dieser Artikel ist keine Finanz-, Steuer- oder Rechtsberatung.<br>
+      Ich teile hier nur meine persönliche Alien-Meinung 🛸 – unabhängig, rebellisch und frei.<br>
+      Investieren ist mit Risiken verbunden. Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
+    </p>
+
+    <div style="margin-top: 2em;">
+      <h2>💸 Unterstütze meine Arbeit</h2>
+      <ul>
+        <li>☕ Spenden via <a href="https://ko-fi.com/alieninvestor" target="_blank">Ko-fi</a> (PayPal, Fiat)</li>
+        <li>⚡ Bitcoin Lightning: <code>alien_investor@strike.me</code></li>
+        <li>₿ Bitcoin Onchain: <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code></li>
+      </ul>
+      <p>Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸</p>
+    </div>
+
+    <p><a href="blog.html">← Zurück zum Blog</a></p>
+  </footer>
+
 </body>
 </html>
