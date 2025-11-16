@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cypherpunks: Wie ein paar Sturköpfe unser Recht auf Verschlüsselung erkämpft haben</title>
+  <meta name="description" content="In diesem Artikel geht es um die spannende wahre Geschichte der Entstehung der Cypherpunks">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 2em;
+    }
+    h1, h2, h3 { color: #00ffcc; }
+    a { color: #00ffcc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; }
+    em { color: #ccc; }
+    .byline { margin-top: -0.8em; margin-bottom: 1.2em; }
+    .like-button { margin-top: 2em; }
+    button {
+      background-color: #111; color: #fff; border: 1px solid #444;
+      padding: 0.5em 1em; border-radius: 5px; cursor: pointer;
+    }
+    button:hover { background-color: #222; }
+    footer { margin-top: 3em; padding-top: 2em; border-top: 1px solid #333; font-size: 0.9em; }
+    .support ul { margin: 0.3em 0 0 1.2em; }
+    blockquote.highlight {
+      margin-top: 2em;
+      padding: 1em 1.2em;
+      border-left: 3px solid #00ffcc;
+      background-color: #111;
+      font-style: italic;
+      color: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <h1>Cypherpunks: Wie ein paar Sturköpfe unser Recht auf Verschlüsselung erkämpft haben 🤖</h1>
+  <p class="byline">von Alien Investor</p>
+  <!-- BEGIN ARTICLE CONTENT -->
+  <article id="content">
+    <h2>Die Ausgangslage: Das Netz als Überwachungsraum</h2>
+    <p>Stell dir das frühe Internet vor: ein neuer Raum, voller Möglichkeiten – aber rechtlich noch Wildwest. Regierungen dachten: Perfekt. Endlich ein Kommunikationsraum, in dem wir alles mitlesen können.</p>
+    <p>Starke Verschlüsselung war damals kein normales Werkzeug, sondern offiziell eine Kriegswaffe. In den USA fiel Krypto-Software in die gleiche Kategorie wie Waffenexporte. Wer starke Kryptographie ins Ausland „exportierte“, konnte Ärger bekommen.</p>
+    <h2>Wer waren die Cypherpunks?</h2>
+    <p>Die Cypherpunks waren keine Partei, keine Firma, keine NGO. Es waren: Nerds – Kryptographen – Anarchistische Denker – Libertäre, Hacker, Freaks</p>
+    <p>Sie organisierten sich über eine Mailingliste und hatten eine einfache, radikale Idee: Privatsphäre ist kein Luxus, sondern eine Voraussetzung für Freiheit. Und im digitalen Zeitalter gibt es Privatsphäre nur mit starker Verschlüsselung.</p>
+    <h2>Kryptographie als Kriegswaffe – die „Crypto Wars“</h2>
+    <p>In den 1990ern behandelte die US-Regierung starke Kryptographie wie Munition. Konsequenzen: Export von Krypto-Software war streng reguliert, Browser durften ins Ausland oft nur mit schwacher Verschlüsselung ausgeliefert werden.</p>
+    <h2>Der Clipper-Chip</h2>
+    <p>Der Clipper-Chip sollte in Telefonen und Geräten eingebaut werden. Er versprach „Sicherheit“ – aber mit einem Haken: Verschlüsselung ja, aber die Schlüssel sollten bei Staat/Behörden hinterlegt sein (Key Escrow).</p>
+    <h2>PGP und Phil Zimmermann</h2>
+    <p>1991 veröffentlichte Phil Zimmermann PGP (Pretty Good Privacy). Zum ersten Mal konnten normale Menschen E-Mails mit starker Kryptographie verschlüsseln, Dateien signieren, sich gegen Massenüberwachung wehren – kostenlos.</p>
+    <h2>Kreativer Ungehorsam</h2>
+    <p>Die Cypherpunks kämpften nicht nur in Gerichten, sondern im Alltag. RSA auf dem T-Shirt: Ein paar Zeilen Kryptocode wurden auf Shirts gedruckt. Wer es trug, „exportierte“ theoretisch Kryptographie.</p>
+    <!-- END ARTICLE CONTENT -->
+  </article>
+  <blockquote class="highlight">
+    "Vertraue niemandem! Manage deine Finanzen selbst!"
+  </blockquote>
+  <div class="like-button">
+    <button onclick="likeArticle()">👍 Gefällt mir <span id="like-count">0</span></button>
+  </div>
+  <script>
+    const storageKey = window.location.pathname + "-likes";
+    let count = parseInt(localStorage.getItem(storageKey) || "0", 10);
+    document.getElementById("like-count").textContent = count;
+    function likeArticle() {
+      count++;
+      localStorage.setItem(storageKey, String(count));
+      document.getElementById("like-count").textContent = count;
+    }
+  </script>
+  <footer>
+    <p>📬 Kontakt:
+      <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>
+    </p>
+    <p style="font-size:0.95em; color:#bbb;">
+      👽 <strong>Haftungsausschluss:</strong><br>
+      Keine Finanz-, Steuer- oder Rechtsberatung – nur persönliche Alien-Meinung.<br>
+      Investieren ist mit Risiken verbunden. Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
+    </p>
+    <div class="support" style="margin-top: 2em;">
+      <h2>💸 Unterstütze meine Arbeit</h2>
+      <ul>
+        <li>☕ Spenden via
+          <a href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener">Ko-fi</a>
+        </li>
+        <li>⚡ Bitcoin Lightning:
+          <code>alien_investor@strike.me</code>
+        </li>
+        <li>₿ Bitcoin Onchain:
+          <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code>
+        </li>
+      </ul>
+    </div>
+    <p><a href="/blog.html">← Zurück zum Blog</a></p>
+  </footer>
+</body>
+</html>
