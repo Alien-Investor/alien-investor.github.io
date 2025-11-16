@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kryptographie und warum sie unverzichtbar für unsere Freiheit ist</title>
+  <meta name="description" content="In diesem kurzen Artikel erfährst du warum Kryptographie uns umgibt und welche Arten es davon gibt.">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 2em;
+    }
+    h1, h2, h3 { color: #00ffcc; }
+    a { color: #00ffcc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; }
+    em { color: #ccc; }
+    .byline { margin-top: -0.8em; margin-bottom: 1.2em; }
+    .like-button { margin-top: 2em; }
+    button {
+      background-color: #111; color: #fff; border: 1px solid #444;
+      padding: 0.5em 1em; border-radius: 5px; cursor: pointer;
+    }
+    button:hover { background-color: #222; }
+    footer { margin-top: 3em; padding-top: 2em; border-top: 1px solid #333; font-size: 0.9em; }
+    .support ul { margin: 0.3em 0 0 1.2em; }
+    blockquote.highlight {
+      margin-top: 2em;
+      padding: 1em 1.2em;
+      border-left: 3px solid #00ffcc;
+      background-color: #111;
+      font-style: italic;
+      color: #ddd;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🔓 Kryptographie und warum sie unverzichtbar für unsere Freiheit ist</h1>
+  <p class="byline"><em>von Alien Investor</em></p>
+
+  <!-- BEGIN ARTICLE CONTENT -->
+  <article id="content">
+    <h2>Kryptographie im Alltag 🔒</h2>
+    <p>Kryptographie klingt nach Raketenwissenschaft – ist aber im Alltag längst überall.</p>
+    <p>Immer wenn du eine Website mit „https“ aufrufst, Signal benutzt oder Bitcoin verschickst, läuft im Hintergrund Mathematik, die dafür sorgt, dass niemand heimlich mitlesen oder deine Daten manipulieren kann.</p>
+
+    <h2>Symmetrische und asymmetrische Kryptographie 🔑</h2>
+    <p>Grundsätzlich gibt es zwei große Bereiche: symmetrische und asymmetrische Kryptographie.</p>
+    <p>Bei symmetrischen Verfahren verschlüsseln und entschlüsseln beide Seiten mit demselben geheimen Schlüssel – schnell und effizient, aber das Problem ist: Wie tauscht man diesen Schlüssel sicher aus?</p>
+
+    <h2>Asymmetrische Kryptographie 🔓</h2>
+    <p>Asymmetrische Kryptographie löst das, indem sie ein Schlüsselpaar nutzt: einen öffentlichen Schlüssel, den jeder sehen darf, und einen privaten, der niemals das Gerät verlassen sollte.</p>
+    <p>Damit kannst du etwa Nachrichten verschlüsseln, Signaturen prüfen – oder eben Bitcoin-Transaktionen eindeutig einer Adresse zuordnen.</p>
+
+    <h2>Kryptographie und Macht 🚫</h2>
+    <p>Spannend wird es da, wo Kryptographie auf Macht trifft. Staaten, Banken und Konzerne hätten gerne Zugriff auf alles – „zu deiner Sicherheit“.</p>
+
+    <h2>Kryptographie als Werkzeug für Selbstbestimmung 🔑</h2>
+    <p>Starke Verschlüsselung dreht den Spieß um: Plötzlich kann der einzelne Mensch Daten, Geld und Kommunikation wirksam vor fremdem Zugriff schützen.</p>
+    <p>Genau deshalb ist Kryptographie nicht nur Technik, sondern ein Werkzeug für Selbstbestimmung. Wer seine Schlüssel kontrolliert, kontrolliert seine Werte – ob das nun Nachrichten, Dokumente oder private Keys für Bitcoin sind.</p>
+
+  </article>
+  <!-- END ARTICLE CONTENT -->
+
+  <div class="like-button">
+    <button onclick="likeArticle()">👍 Gefällt mir <span id="like-count">0</span></button>
+  </div>
+
+  <script>
+    const storageKey = window.location.pathname + "-likes";
+    let count = parseInt(localStorage.getItem(storageKey) || "0", 10);
+    document.getElementById("like-count").textContent = count;
+
+    function likeArticle() {
+      count++;
+      localStorage.setItem(storageKey, String(count));
+      document.getElementById("like-count").textContent = count;
+    }
+  </script>
+
+  <footer>
+    <p>📬 Kontakt:
+      <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>
+    </p>
+
+    <p style="font-size:0.95em; color:#bbb;">
+      👽 <strong>Haftungsausschluss:</strong><br>
+      Keine Finanz-, Steuer- oder Rechtsberatung – nur persönliche Alien-Meinung.<br>
+      Investieren ist mit Risiken verbunden. Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
+    </p>
+
+    <div class="support" style="margin-top: 2em;">
+      <h2>💸 Unterstütze meine Arbeit</h2>
+      <ul>
+        <li>☕ Spenden via
+          <a href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener">Ko-fi</a>
+        </li>
+        <li>⚡ Bitcoin Lightning:
+          <code>alien_investor@strike.me</code>
+        </li>
+        <li>₿ Bitcoin Onchain:
+          <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code>
+        </li>
+      </ul>
+    </div>
+
+    <p><a href="/blog.html">← Zurück zum Blog</a></p>
+  </footer>
+
+</body>
+</html>
