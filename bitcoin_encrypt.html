@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wie Bitcoin Verschlüsselung benutzt</title>
+  <meta name="description" content="Eine kurze Erklärung der Sicherheitsmechanismen im Bitcoin Netzwerk">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 2em;
+    }
+    h1, h2, h3 { color: #00ffcc; }
+    a { color: #00ffcc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; }
+    em { color: #ccc; }
+    .byline { margin-top: -0.8em; margin-bottom: 1.2em; }
+    .like-button { margin-top: 2em; }
+    button {
+      background-color: #111; color: #fff; border: 1px solid #444;
+      padding: 0.5em 1em; border-radius: 5px; cursor: pointer;
+    }
+    button:hover { background-color: #222; }
+    footer { margin-top: 3em; padding-top: 2em; border-top: 1px solid #333; font-size: 0.9em; }
+    .support ul { margin: 0.3em 0 0 1.2em; }
+    blockquote.highlight {
+      margin-top: 2em;
+      padding: 1em 1.2em;
+      border-left: 4px solid #00ffcc;
+      background-color: #111;
+      font-style: italic;
+      color: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <h1>Wie Bitcoin Verschlüsselung benutzt 🤖</h1>
+  <p class="byline"><em>von Alien Investor</em></p>
+  <!-- BEGIN ARTICLE CONTENT -->
+  <article id="content">
+    <h2>Bitcoin ist Kryptographie, kein Bankkonto 💸</h2>
+    <p>Bitcoin ist im Kern kein „digitales Geldkonto“, sondern ein Haufen Mathematik: Kryptographie, Hashfunktionen, Signaturen, verteilte Rechner.</p>
+    <p>Statt zu sagen „Die Bank führt ein Konto für dich“, sagt Bitcoin:</p>
+    <blockquote>"Du hast einen geheimen Schlüssel. Wer diesen Schlüssel hat, kontrolliert die Coins."</blockquote>
+    <h2>Private Key, Public Key, Adresse – dein Tresor im Kryptoland 🔑</h2>
+    <p Wenn du eine Bitcoin-Wallet erstellst, passiert im Hintergrund Folgendes:</p>
+    <ul>
+      <li>Es wird ein **privater Schlüssel** erzeugt – eine große Zufallszahl.</li>
+      <li>Aus diesem privaten Schlüssel wird ein **öffentliches Schlüssel** berechnet.</li>
+      <li>Aus dem öffentlichen Schlüssel wird deine **Bitcoin-Adresse** abgeleitet.</li>
+    </ul>
+    <p>Bildlich:</p>
+    <ul>
+      <li>Der **private Schlüssel** ist der Generalschlüssel zu deinem Tresor.</li>
+      <li>Der **öffentliches Schlüssel** ist das Schloss.</li>
+      <li>Die **Adresse** ist die lesbare Version, die du anderen gibst („Schick mir dahin Bitcoin“).</li>
+    </ul>
+    <p>Wichtig:</p>
+    <p>Der Weg ist einseitig. Aus der Adresse oder dem öffentlichen Schlüssel kommst du praktisch nicht zurück zum privaten Schlüssel. Das ist der Schutzschild.</p>
+    <h2>Digitale Signaturen: Senden heißt unterschreiben 📨</h2>
+    <p Wenn du Bitcoin verschickst, „verschlüsselst“ du nicht einfach etwas – du **signierst** eine Transaktion.</p>
+    <ul>
+      <li>Deine Wallet baut eine Transaktion: „Von Adresse X nach Adresse Y, mit Betrag Z“. </li>
+      <li>Dann wird diese Transaktion mit deinem **privaten Schlüssel digital signiert**. </li>
+      <li>Jeder Knoten im Netzwerk kann mit deinem **öffentlichem Schlüssel prüfen**, ob die Signatur gültig ist.</li>
+    </ul>
+    <p>Damit beweist du:</p>
+    <blockquote>"Ich bin der legitime Besitzer dieses Outputs und erlaube diese Ausgabe."</blockquote>
+    <h2>Hashfunktionen: Die DNA von Blöcken und Transaktionen 🔒</h2>
+    <p>Bitcoin benutzt auch intensiv **Hashfunktionen** (z. B. SHA-256). Ein Hash ist wie ein digitaler Fingerabdruck:</p>
+    <ul>
+      <li>Du gibst eine beliebige Datenmenge hinein (Transaktion, Blockheader, etc.).</li>
+      <li>Du bekommst einen festen, scheinbar zufälligen Output heraus.</li>
+    </ul>
+    <p>Eigenschaften:</p>
+    <ul>
+      <li>Kleine Änderung an den Daten → völlig anderer Hash.</li>
+      <li>Von Hash zurück auf die ursprünglichen Daten zu kommen ist praktisch unmöglich.</li>
+    </ul>
+    <h2>Mining & Proof-of-Work: Arbeit statt Vertrauen 💪</h2>
+    <p>Beim Mining passiert nicht „ein bisschen Raten“, sondern massiver Einsatz von Rechenleistung:</p>
+    <ul>
+      <li>Miner nehmen den Blockinhalt + eine Zahl (Nonce)</li>
+      <li>Sie suchen so lange, bis der Hash eines Blocks eine bestimmte Bedingung erfüllt (z. B. mit einer bestimmten Anzahl führender Nullen).</li>
+    </ul>
+    <p>Das ist Kryptographie als **Arbeitsnachweis**:</p>
+    <ul>
+      <li>Es ist extrem aufwendig, einen gültigen Hash zu finden.</li>
+      <li>Aber extrem einfach, ihn zu überprüfen.</li>
+    </ul>
+    <h2>Was Bitcoin NICHT verschlüsselt: Transparenz als Feature 🔍</h2>
+    <p>Wichtiges Missverständnis:</p>
+    <p>Bitcoin verschlüsselt **nicht** einfach alles.</p>
+    <ul>
+      <li>Die Blockchain ist öffentlich einsehbar.</li>
+      <li>Jeder kann Transaktionen und Beträge sehen.</li>
+      <li>Was nicht direkt sichtbar ist: Wem die Adresse „gehört“ – das ist pseudonym, nicht anonym.</li>
+    </ul>
+    <p>Die Verschlüsselung in Bitcoin schützt:</p>
+    <ul>
+      <li>die **Kontrolle über die Coins** (private Schlüssel, Signaturen),</li>
+      <li>die **Unveränderbarkeit** der Historie (Hashes, Proof-of-Work).</li>
+    </ul>
+    <h2>Warum das alles mit Freiheit zu tun hat 🌟</h2>
+    <p>Die Kryptographie bei Bitcoin sorgt dafür, dass du:</p>
+    <ul>
+      <li>niemanden fragen musst, ob du Geld verschieben darfst,</li>
+      <li>nicht um Erlaubnis bitten musst, ein Konto zu eröffnen,</li>
+      <li>nicht von der Laune einer Bank oder eines Staates abhängst, ob du „dein“ Geld noch nutzen darfst.</li>
+    </ul>
+    <p>Der Satz „Not your keys, not your coins“ ist nicht nur ein Meme, sondern die Konsequenz der Kryptographie:</p>
+    <ul>
+      <li Wenn du den **privaten Schlüssel** nicht kontrollierst, kontrollierst du das Asset nicht.</li>
+      <li>Wenn du ihn **selbst verwahrst**, bist du nicht mehr Kunde – du bist Eigentümer im mathematischen Sinne.</li>
+    </ul>
+    <p>Genau das ist der Cypherpunk-Traum:</p>
+    <ul>
+      <li>Kein Vertrauen in Institutionen nötig,</li>
+      <li>sondern Vertrauen in offen geprüften Code, offene Mathematik und deine eigene Verantwortung.</li>
+    </ul>
+    <h2>Kurzfassung in einem Satz 📚</h2>
+    <p>Bitcoin nutzt Kryptographie nicht als Deko, sondern als Fundament:</p>
+    <blockquote>"Private Schlüssel, Signaturen, Hashes und Proof-of-Work sorgen dafür, dass du **ohne Bank, ohne Staat, nur mit Mathematik** Eigentum halten und übertragen kannst – solange du deine Schlüssel wie deinen Lebenssaft beschützt."</blockquote>
+  </article>
+  <!-- END ARTICLE CONTENT -->
+  <div class="like-button">
+    <button onclick="likeArticle()">👍 Gefällt mir <span id="like-count">0</span></button>
+  </div>
+  <script>
+    const storageKey = window.location.pathname + "-likes";
+    let count = parseInt(localStorage.getItem(storageKey) || "0", 10);
+    document.getElementById("like-count").textContent = count;
+    function likeArticle() {
+      count++;
+      localStorage.setItem(storageKey, String(count));
+      document.getElementById("like-count").textContent = count;
+    }
+  </script>
+  <footer>
+    <p>📬 Kontakt:
+      <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>
+    </p>
+    <p style="font-size:0.95em; color:#bbb;">
+      👽 <strong>Haftungsausschluss:</strong><br>
+      Keine Finanz-, Steuer- oder Rechtsberatung – nur persönliche Alien-Meinung.<br>
+      Investieren ist mit Risiken verbunden. Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
+    </p>
+    <div class="support" style="margin-top: 2em;">
+      <h2>💸 Unterstütze meine Arbeit</h2>
+      <ul>
+        <li>☕ Spenden via
+          <a href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener">Ko-fi</a>
+        </li>
+        <li>⚡ Bitcoin Lightning:
+          <code>alien-investor@strike.me</code>
+        </li>
+        <li>₿ Bitcoin Onchain:
+          <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code>
+        </li>
+      </ul>
+    </div>
+    <p><a href="/blog.html">← Zurück zum Blog</a></p>
+  </footer>
+</body>
+</html>
