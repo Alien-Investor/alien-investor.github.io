@@ -4,11 +4,13 @@
   <meta charset="UTF-8">
   <title>Inflation stiehlt dir deine Lebenszeit – Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Kurz erklärt, warum Inflation dir nicht nur Geld, sondern Lebenszeit stiehlt – und warum du deine Finanzen selbst managen solltest.">
   <style>
     body { font-family: sans-serif; background: #111; color: #eee; padding: 2em; }
     h1 { color: #f55; }
     h3 { color: #0af; }
     a { color: #0af; text-decoration: none; }
+    a:hover { text-decoration: underline; }
     p { line-height: 1.6; }
     hr { margin: 2em 0; border: 0; border-top: 1px solid #333; }
     code { background-color: #222; padding: 0.2em 0.4em; border-radius: 4px; }
@@ -35,6 +37,24 @@
     .like-button:hover {
       background-color: #444;
     }
+
+    .affiliate-box {
+      border: 1px solid #00ffcc;
+      background-color: #000;
+      padding: 1em 1.2em;
+      margin: 2em 0;
+      border-radius: 8px;
+    }
+    .affiliate-box h3 {
+      margin-top: 0;
+      color: #0af;
+    }
+    .affiliate-box ul {
+      margin-left: 1.2em;
+    }
+    .affiliate-box p {
+      margin-bottom: 0.6em;
+    }
   </style>
 </head>
 <body>
@@ -51,6 +71,36 @@
   <p>🛡️ Deshalb sage ich: <strong>Vertrau niemandem – manage deine Finanzen selbst</strong>. Bild dich weiter, setz auf Bitcoin, sichere dir Eigentum, investiere unabhängig.</p>
 
   <p>🚪 Freiheit beginnt bei deiner Geldentscheidung.</p>
+
+  <section class="affiliate-box">
+    <h3>🧱 Nächster Schritt: Deine Lebenszeit vor Inflation schützen</h3>
+    <p>
+      Wenn Geld deine Lebenszeit ist, dann ist es gefährlich, sie komplett im Fiat-System zu halten. Du brauchst Werkzeuge,
+      mit denen du dich Stück für Stück aus der Inflationsfalle befreist.
+    </p>
+    <ul>
+      <li>
+        📈 <strong>Bitcoin kaufen in Europa – 21bitcoin</strong><br>
+        Ideal, um regelmäßig sats zu stapeln und nicht alles in entwertenden Euros zu lassen.<br>
+        Mit dem Code <strong>3G8CM</strong> erhältst du reduzierte Gebühren ab 0,79&nbsp;%:<br>
+        <a href="https://alien-investor.org/21bitcoin" target="_blank" rel="noopener">
+          https://alien-investor.org/21bitcoin
+        </a>
+      </li>
+      <li style="margin-top:1em;">
+        🛡️ <strong>Bitcoin selbst verwahren – BitBox Hardware-Wallet</strong><br>
+        „Not your keys, not your coins.“ Nur wenn du die Schlüssel hältst, gehört dir die Lebenszeit, die du in Bitcoin gesteckt hast, wirklich.<br>
+        5&nbsp;% Rabatt mit dem Code <strong>ALIENINVESTOR</strong> im offiziellen Shop:<br>
+        <a href="https://alien-investor.org/bitbox" target="_blank" rel="noopener">
+          https://alien-investor.org/bitbox
+        </a>
+      </li>
+    </ul>
+    <p style="font-size:0.9em; color:#aaa;">
+      <em>Werbung / Affiliate-Hinweis:</em> Einige der Links sind Affiliate-Links. Wenn du über sie kaufst oder die Codes nutzt,
+      erhalte ich eine kleine Provision. Für dich wird es nicht teurer – im Fall der Rabatte sogar günstiger.
+    </p>
+  </section>
 
   <!-- Like-Button -->
   <div class="like-button" onclick="likeArticle()">👍 Gefällt mir <span id="likeCount">0</span></div>
@@ -71,14 +121,18 @@
   </ul>
 
   <h3>📬 Kontakt</h3>
-  <p> <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+  <p><a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
 
   <p><a href="blog.html">← Zurück zum Blog</a></p>
 
   <script>
-    let count = 0;
+    const storageKey = 'likes-inflation-artikel';
+    let count = parseInt(localStorage.getItem(storageKey) || '0', 10);
+    document.getElementById('likeCount').innerText = count;
+
     function likeArticle() {
       count++;
+      localStorage.setItem(storageKey, String(count));
       document.getElementById('likeCount').innerText = count;
     }
   </script>
