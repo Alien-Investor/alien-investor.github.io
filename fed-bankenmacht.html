@@ -145,4 +145,48 @@
     <p style="font-size:0.9em; color:#aaa;">
       <em>Werbung / Affiliate-Hinweis:</em> Einige der Links sind Affiliate-Links. Wenn du über sie kaufst oder die Codes nutzt,
       erhalte ich eine kleine Provision. Für dich wird es nicht teurer – im Fall der Rabatte sogar günstiger.
-      So unterstützt du unabhängige Inhalte außerhalb des Fiat-Narra
+      So unterstützt du unabhängige Inhalte außerhalb des Fiat-Narrativs.
+    </p>
+  </section>
+
+  <div class="like-button">
+    <button onclick="likeArticle()">👍 Gefällt mir <span id="like-count">0</span></button>
+  </div>
+
+  <script>
+    const storageKey = 'likes-fedartikel';
+    let count = parseInt(localStorage.getItem(storageKey) || '0', 10);
+    document.getElementById('like-count').textContent = count;
+
+    function likeArticle() {
+      count++;
+      localStorage.setItem(storageKey, String(count));
+      document.getElementById('like-count').textContent = count;
+    }
+  </script>
+
+  <footer>
+    <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+
+    <p style="font-size:0.85em; color:#888;">
+      👽 <strong>Haftungsausschluss:</strong><br>
+      Dieser Artikel ist keine Finanz-, Steuer- oder Rechtsberatung.<br>
+      Ich teile hier nur meine persönliche Alien-Meinung 🛸 – unabhängig, rebellisch und frei.<br>
+      Investieren ist mit Risiken verbunden. Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
+    </p>
+
+    <div style="margin-top: 2em;">
+      <h2>💸 Unterstütze meine Arbeit</h2>
+      <ul>
+        <li>☕ Spenden via <a href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener">Ko-fi</a> (PayPal, Fiat)</li>
+        <li>⚡ Bitcoin Lightning: <code>alien_investor@strike.me</code></li>
+        <li>₿ Bitcoin Onchain: <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code></li>
+      </ul>
+      <p>Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸</p>
+    </div>
+
+    <p><a href="blog.html">← Zurück zum Blog</a></p>
+  </footer>
+
+</body>
+</html>
