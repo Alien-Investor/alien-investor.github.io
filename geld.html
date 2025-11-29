@@ -7,49 +7,68 @@
   <meta name="description" content="Warum Geld gespeicherte Lebenszeit ist, wie das Fiat-System dich enteignet – und welche Werkzeuge dir helfen, deine finanzielle Energie zu schützen.">
   <style>
     body {
-      font-family: sans-serif;
-      background: #111;
-      color: #eee;
-      padding: 2em;
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
       line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 2em;
     }
-    h1 { color: #0f0; }
-    h2 { color: #0af; margin-top: 1.5em; }
-    a { color: #0af; text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    h1, h2, h3 {
+      color: #00ffcc;
+    }
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
     code {
-      background-color: #222;
+      background-color: #111;
       padding: 0.2em 0.4em;
       border-radius: 4px;
+      color: #0f0;
       font-size: 0.95em;
     }
-    em { color: #aaa; }
-    blockquote {
-      border-left: 4px solid #0af;
-      padding-left: 1em;
+    em {
       color: #ccc;
-      font-style: italic;
-      margin-top: 2em;
+    }
+    .byline {
+      margin-top: -0.8em;
+      margin-bottom: 1.2em;
     }
     .like-button {
       margin-top: 2em;
     }
     button {
-      background-color: #222;
+      background-color: #111;
       color: #fff;
       border: 1px solid #444;
       padding: 0.5em 1em;
-      cursor: pointer;
       border-radius: 5px;
+      cursor: pointer;
     }
     button:hover {
-      background-color: #444;
+      background-color: #222;
     }
     footer {
       margin-top: 3em;
       padding-top: 2em;
-      border-top: 1px solid #444;
+      border-top: 1px solid #333;
       font-size: 0.9em;
+    }
+    .support ul {
+      margin: 0.3em 0 0 1.2em;
+    }
+    blockquote.highlight {
+      margin-top: 2em;
+      padding: 1em 1.2em;
+      border-left: 3px solid #00ffcc;
+      background-color: #111;
+      font-style: italic;
+      color: #ddd;
     }
     .affiliate-box {
       border: 1px solid #00ffcc;
@@ -60,7 +79,7 @@
     }
     .affiliate-box h2 {
       margin-top: 0;
-      color: #0af;
+      color: #00ffcc;
     }
     .affiliate-box ul {
       margin-left: 1.2em;
@@ -73,7 +92,7 @@
 <body>
 
   <h1>💰 Was ist Geld – und warum es deine Lebenszeit bedroht</h1>
-  <p><em>von Alien Investor</em></p>
+  <p class="byline"><em>von Alien Investor</em></p>
 
   <h2>🧠 Geld ist gespeicherte Lebenszeit</h2>
   <p>Jeder Euro, jeder Franken, jede digitale Zahl auf deinem Konto – sie steht für etwas, das du geopfert hast: deine Zeit, deine Energie, deine Nerven. Geld ist gespeicherte Lebensleistung. Es ist eine Art Batterie deiner Kraft.</p>
@@ -102,7 +121,7 @@
   <p>Geld ist nichts anderes als gespeicherte Lebenszeit. Wenn der Staat dein Geld entwertet, stiehlt er dir dein Leben – still, elegant, systemisch.</p>
   <p><strong>Deshalb: Schütze dein Geld. Schütze deine Zeit. Schütze dich.</strong></p>
 
-  <blockquote>
+  <blockquote class="highlight">
     „Geld ist Energie. Und Energie ist Leben. Wer dein Geld kontrolliert, kontrolliert dich.“
   </blockquote>
 
@@ -169,7 +188,9 @@
   </script>
 
   <footer>
-    <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    <p>📬 Kontakt:
+      <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>
+    </p>
 
     <p style="font-size: 0.9em; color: #aaa;">
       👽 <strong>Haftungsausschluss:</strong><br>
@@ -178,14 +199,23 @@
       Investieren ist mit Risiken verbunden. Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
     </p>
 
-    <h2>💸 Unterstütze meine Arbeit</h2>
-    <ul>
-      <li><strong>Fiat:</strong> <a href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener">Spenden via Ko-fi (PayPal)</a></li>
-      <li><strong>⚡ Lightning:</strong> <code>alien_investor@strike.me</code></li>
-      <li><strong>₿ Bitcoin Onchain:</strong><br><code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code></li>
-    </ul>
+    <div class="support" style="margin-top: 2em;">
+      <h2>💸 Unterstütze meine Arbeit</h2>
+      <ul>
+        <li>☕ Spenden via
+          <a href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener">Ko-fi</a>
+        </li>
+        <li>⚡ Bitcoin Lightning:
+          <code>alien_investor@strike.me</code>
+        </li>
+        <li>₿ Bitcoin Onchain:
+          <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code>
+        </li>
+      </ul>
+    </div>
 
     <p><a href="blog.html">← Zurück zum Blog</a></p>
   </footer>
+
 </body>
 </html>
