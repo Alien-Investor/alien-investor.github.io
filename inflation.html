@@ -2,42 +2,74 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Inflation stiehlt dir deine Lebenszeit – Alien Investor</title>
+  <title>🔺 Inflation stiehlt dir deine Lebenszeit – Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Kurz erklärt, warum Inflation dir nicht nur Geld, sondern Lebenszeit stiehlt – und warum du deine Finanzen selbst managen solltest.">
   <style>
-    body { font-family: sans-serif; background: #111; color: #eee; padding: 2em; }
-    h1 { color: #f55; }
-    h3 { color: #0af; }
-    a { color: #0af; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    p { line-height: 1.6; }
-    hr { margin: 2em 0; border: 0; border-top: 1px solid #333; }
-    code { background-color: #222; padding: 0.2em 0.4em; border-radius: 4px; }
-
-    .author {
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 2em;
+    }
+    h1, h2, h3 {
+      color: #00ffcc;
+    }
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    code {
+      background-color: #111;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      color: #0f0;
+      font-size: 0.95em;
+    }
+    em {
       color: #ccc;
-      font-style: italic;
-      margin-top: -1em;
-      margin-bottom: 2em;
     }
-
+    .byline {
+      margin-top: -0.8em;
+      margin-bottom: 1.2em;
+    }
     .like-button {
-      display: inline-block;
-      background-color: #333;
-      color: lime;
-      border: 1px solid #555;
-      padding: 8px 12px;
-      border-radius: 8px;
+      margin-top: 2em;
+    }
+    button {
+      background-color: #111;
+      color: #fff;
+      border: 1px solid #444;
+      padding: 0.5em 1em;
+      border-radius: 5px;
       cursor: pointer;
-      user-select: none;
-      margin-bottom: 2em;
     }
-
-    .like-button:hover {
-      background-color: #444;
+    button:hover {
+      background-color: #222;
     }
-
+    footer {
+      margin-top: 3em;
+      padding-top: 2em;
+      border-top: 1px solid #333;
+      font-size: 0.9em;
+    }
+    .support ul {
+      margin: 0.3em 0 0 1.2em;
+    }
+    blockquote.highlight {
+      margin-top: 2em;
+      padding: 1em 1.2em;
+      border-left: 3px solid #00ffcc;
+      background-color: #111;
+      font-style: italic;
+      color: #ddd;
+    }
     .affiliate-box {
       border: 1px solid #00ffcc;
       background-color: #000;
@@ -47,7 +79,7 @@
     }
     .affiliate-box h3 {
       margin-top: 0;
-      color: #0af;
+      color: #00ffcc;
     }
     .affiliate-box ul {
       margin-left: 1.2em;
@@ -60,7 +92,7 @@
 <body>
 
   <h1>🔺 Inflation stiehlt dir deine Lebenszeit</h1>
-  <p class="author">von Alien Investor</p>
+  <p class="byline"><em>von Alien Investor</em></p>
 
   <p>💡 <strong>Geld ist gespeicherte Lebensenergie</strong>.</p>
 
@@ -71,6 +103,11 @@
   <p>🛡️ Deshalb sage ich: <strong>Vertrau niemandem – manage deine Finanzen selbst</strong>. Bild dich weiter, setz auf Bitcoin, sichere dir Eigentum, investiere unabhängig.</p>
 
   <p>🚪 Freiheit beginnt bei deiner Geldentscheidung.</p>
+
+  <!-- Standard-Zitat im neuen Style -->
+  <blockquote class="highlight">
+    „Vertraue niemandem! Manage deine Finanzen selbst!“
+  </blockquote>
 
   <section class="affiliate-box">
     <h3>🧱 Nächster Schritt: Deine Lebenszeit vor Inflation schützen</h3>
@@ -102,28 +139,9 @@
     </p>
   </section>
 
-  <!-- Like-Button -->
-  <div class="like-button" onclick="likeArticle()">👍 Gefällt mir <span id="likeCount">0</span></div>
-
-  <hr>
-  <p style="font-size: 0.9em; color: #aaa;">
-    👽 <strong>Haftungsausschluss:</strong><br>
-    Dieser Artikel ist keine Finanz-, Steuer- oder Rechtsberatung.<br>
-    Ich teile hier nur meine persönliche Alien-Meinung 🛸 – unabhängig, rebellisch und frei.<br>
-    Investieren ist mit Risiken verbunden. Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
-  </p>
-
-  <h3>💸 Unterstütze meine Arbeit</h3>
-  <ul>
-    <li>☕ <a href="https://ko-fi.com/alieninvestor" target="_blank">Spenden via Ko-fi (PayPal, Fiat)</a></li>
-    <li>⚡ Bitcoin Lightning: <code>alien_investor@strike.me</code></li>
-    <li>₿ Bitcoin Onchain: <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code></li>
-  </ul>
-
-  <h3>📬 Kontakt</h3>
-  <p><a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
-
-  <p><a href="blog.html">← Zurück zum Blog</a></p>
+  <div class="like-button">
+    <button onclick="likeArticle()">👍 Gefällt mir <span id="likeCount">0</span></button>
+  </div>
 
   <script>
     const storageKey = 'likes-inflation-artikel';
@@ -136,6 +154,36 @@
       document.getElementById('likeCount').innerText = count;
     }
   </script>
+
+  <footer>
+    <p>📬 Kontakt:
+      <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>
+    </p>
+
+    <p style="font-size:0.9em; color:#bbb;">
+      👽 <strong>Haftungsausschluss:</strong><br>
+      Dieser Artikel ist keine Finanz-, Steuer- oder Rechtsberatung.<br>
+      Ich teile hier nur meine persönliche Alien-Meinung 🛸 – unabhängig, rebellisch und frei.<br>
+      Investieren ist mit Risiken verbunden. Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
+    </p>
+
+    <div class="support" style="margin-top: 2em;">
+      <h3>💸 Unterstütze meine Arbeit</h3>
+      <ul>
+        <li>☕ Spenden via
+          <a href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener">Ko-fi</a>
+        </li>
+        <li>⚡ Bitcoin Lightning:
+          <code>alien_investor@strike.me</code>
+        </li>
+        <li>₿ Bitcoin Onchain:
+          <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code>
+        </li>
+      </ul>
+    </div>
+
+    <p><a href="blog.html">← Zurück zum Blog</a></p>
+  </footer>
 
 </body>
 </html>
