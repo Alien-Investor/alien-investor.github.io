@@ -69,6 +69,17 @@
     .affiliate-box h2 {
       margin-top: 0;
     }
+    .box {
+      border: 1px solid #00ffcc;
+      background-color: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      font-size: 0.95em;
+    }
+    .box h3 {
+      margin-top: 0;
+    }
     .like-button {
       margin-top: 2em;
     }
@@ -266,67 +277,67 @@
     Zocker.“
   </blockquote>
 
-  <section class="affiliate-box">
-    <h2>🧱 Raus aus dem Fiat-Spiel: Eigentum statt Papierversprechen</h2>
-    <p>
-      Wenn eine private Zentralbank dein Geldsystem steuert, ist klar, auf wessen Seite das Spiel läuft.
-      Du kannst das System nicht von heute auf morgen ändern – aber du kannst entscheiden, wie viel
-      deines Vermögens du noch darin gefangen hältst.
+  <!-- Neuer Standard-Affiliate-Block wie bei der Alphabet-Analyse -->
+  <div class="box">
+    <h3>🧰 Tools für echte Eigentümer (Werbung/Affiliate)</h3>
+    <p style="font-size:0.95em;">
+      Wenn du Aktien und Bitcoin möglichst eigenverantwortlich halten willst, nutze nicht nur dein Bankdepot:
     </p>
     <ul>
       <li>
-        📈 <strong>Bitcoin kaufen in Europa – 21bitcoin</strong><br>
-        Nutze Bitcoin als knappes, zensurresistentes Gegengewicht zum Fiat-System.<br>
-        Mit dem Code <strong>3G8CM</strong> erhältst du reduzierte Gebühren ab 0,79&nbsp;%:<br>
-        <a href="https://alien-investor.org/21bitcoin" target="_blank" rel="noopener">
-          https://alien-investor.org/21bitcoin
-        </a>
+        🇨🇭 <strong>Investieren mit Swissquote:</strong><br>
+        Ich nutze Swissquote in der Schweiz – dort kannst du saubere Namensaktien halten und hast keine
+        deutsche Bank dazwischen.<br>
+        👉 <a href="https://alien-investor.org/swissquote" target="_blank">https://alien-investor.org/swissquote</a>
       </li>
-      <li style="margin-top:1em;">
-        🔐 <strong>Bitcoin sicher in Selbstverwahrung – BitBox</strong><br>
-        Hardware-Wallet statt Börse oder Trading-App. Deine Keys, deine Coins.<br>
-        5&nbsp;% Rabatt mit dem Code <strong>ALIENINVESTOR</strong> im offiziellen Shop:<br>
-        <a href="https://alien-investor.org/bitbox" target="_blank" rel="noopener">
-          https://alien-investor.org/bitbox
-        </a>
+      <li>
+        📊 <strong>US-Aktien über IBKR:</strong><br>
+        Für viele internationale Titel bietet sich Interactive Brokers als Zugang an – insbesondere in Kombination
+        mit DRS/Transfer Agenten.<br>
+        👉 <a href="https://alien-investor.org/interactive-brokers" target="_blank">https://alien-investor.org/interactive-brokers</a>
       </li>
-      <li style="margin-top:1em;">
-        🇨🇭 <strong>Echte Aktien statt reiner Buchhaltung – Swissquote</strong><br>
-        Schweizer Broker, mit dem du echte Namensaktien halten kannst – näher an der Idee von
-        „wirklichem Eigentum“, weiter weg vom reinen Fiat-Papiercasino.<br>
-        Code für Trading Credits: <strong>xb9mi5</strong><br>
-        <a href="https://alien-investor.org/swissquote" target="_blank" rel="noopener">
-          https://alien-investor.org/swissquote
-        </a>
+      <li>
+        ₿ <strong>Bitcoin in Selbstverwahrung:</strong><br>
+        Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox – es gibt die klassische BitBox02 und die neue
+        BitBox für iPhone (Nova).<br>
+        👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
       </li>
-      <li style="margin-top:1em;">
-        🔐 <strong>Mail &amp; Cloud ohne Big Tech – Proton</strong><br>
-        Wenn du das Finanzsystem hinterfragst, willst du deine Kommunikation nicht bei denselben Konzernen parken.<br>
-        <a href="https://alien-investor.org/proton" target="_blank" rel="noopener">
-          https://alien-investor.org/proton
-        </a>
+      <li>
+        🛡️ <strong>Privacy &amp; Mail:</strong><br>
+        Für E-Mail, VPN und Cloud nutze ich Proton – datensparsam und ohne Big-Tech-Abhängigkeit.<br>
+        👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
       </li>
     </ul>
-    <p style="font-size:0.9em; color:#aaa;">
-      <em>Werbung / Affiliate-Hinweis:</em> Einige der Links sind Affiliate-Links. Wenn du über sie kaufst oder die Codes nutzt,
-      erhalte ich eine kleine Provision. Für dich wird es nicht teurer – im Fall der Rabatte sogar günstiger.
-      So unterstützt du unabhängige Inhalte außerhalb des Fiat-Narrativs.
+    <p style="font-size:0.85em; color:#aaa;">
+      Hinweis: Bei einigen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit,
+      ohne dass es dich mehr kostet. Danke! 👽
     </p>
-  </section>
+  </div>
 
+  <!-- Neuer Standard-Like-Button -->
   <div class="like-button">
-    <button onclick="likeArticle()">👍 Gefällt mir <span id="like-count">0</span></button>
+    <button id="likeButton">👍 Gefällt mir</button>
+    <span id="likeCount">0</span>
+    <span style="color:#bbb;">(Speicherung nur lokal im Browser)</span>
   </div>
 
   <script>
-    const storageKey = window.location.pathname + "-likes";
-    let count = parseInt(localStorage.getItem(storageKey) || "0", 10);
-    document.getElementById("like-count").textContent = count;
-    function likeArticle() {
-      count++;
-      localStorage.setItem(storageKey, String(count));
-      document.getElementById("like-count").textContent = count;
-    }
+    (function() {
+      const storageKey = window.location.pathname + "-likes";
+      const btn = document.getElementById('likeButton');
+      const span = document.getElementById('likeCount');
+
+      let count = parseInt(localStorage.getItem(storageKey) || "0", 10);
+      span.textContent = count;
+
+      btn.addEventListener('click', function() {
+        count += 1;
+        span.textContent = count;
+        localStorage.setItem(storageKey, String(count));
+        btn.disabled = true;
+        btn.textContent = "Danke! 👽";
+      });
+    })();
   </script>
 
   <footer>
