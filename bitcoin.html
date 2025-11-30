@@ -44,6 +44,33 @@
     }
     .like-button {
       margin-top: 2em;
+      padding: 1em 1.2em;
+      border: 1px solid #00ffcc;
+      border-radius: 8px;
+      background-color: #000;
+      display: inline-block;
+      font-size: 0.9em;
+    }
+    .like-button button {
+      background-color: #111;
+      color: #fff;
+      border: 1px solid #00ffcc;
+      padding: 0.4em 0.8em;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 0.5em;
+    }
+    .like-button button:hover {
+      background-color: #022;
+    }
+    .like-button .like-count {
+      font-weight: bold;
+      margin-right: 0.5em;
+    }
+    .like-button .like-info {
+      display: block;
+      margin-top: 0.4em;
+      color: #aaa;
     }
     button {
       background-color: #111;
@@ -163,19 +190,29 @@
   </section>
 
   <div class="like-button">
-    <button onclick="likeArticle()">👍 Gefällt mir <span id="like-count">0</span></button>
+    <button id="like-button">👍 Gefällt mir</button>
+    <span class="like-count" id="like-count">0</span>
+    <span class="like-info">Speichert nur lokal im Browser, kein Tracking, keine externen Cookies.</span>
   </div>
 
   <script>
-    const storageKey = 'likes-bitcoinartikel';
-    let count = parseInt(localStorage.getItem(storageKey) || '0', 10);
-    document.getElementById('like-count').textContent = count;
+    (function () {
+      const storageKey = window.location.pathname + '-likes';
+      const button = document.getElementById('like-button');
+      const countSpan = document.getElementById('like-count');
 
-    function likeArticle() {
-      count++;
-      localStorage.setItem(storageKey, String(count));
-      document.getElementById('like-count').textContent = count;
-    }
+      let count = parseInt(localStorage.getItem(storageKey) || '0', 10);
+      if (Number.isNaN(count)) {
+        count = 0;
+      }
+      countSpan.textContent = String(count);
+
+      button.addEventListener('click', function () {
+        count++;
+        localStorage.setItem(storageKey, String(count));
+        countSpan.textContent = String(count);
+      });
+    })();
   </script>
 
   <footer>
