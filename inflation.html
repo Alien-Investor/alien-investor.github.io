@@ -140,19 +140,28 @@
   </section>
 
   <div class="like-button">
-    <button onclick="likeArticle()">👍 Gefällt mir <span id="likeCount">0</span></button>
+    <button id="likeButton">👍 Gefällt mir</button>
+    <span id="likeCount">0</span>
+    <span style="color:#bbb;">(Speicherung nur lokal im Browser)</span>
   </div>
 
   <script>
-    const storageKey = 'likes-inflation-artikel';
-    let count = parseInt(localStorage.getItem(storageKey) || '0', 10);
-    document.getElementById('likeCount').innerText = count;
+    (function() {
+      const storageKey = window.location.pathname + "-likes";
+      const btn = document.getElementById('likeButton');
+      const span = document.getElementById('likeCount');
 
-    function likeArticle() {
-      count++;
-      localStorage.setItem(storageKey, String(count));
-      document.getElementById('likeCount').innerText = count;
-    }
+      let count = parseInt(localStorage.getItem(storageKey) || "0", 10);
+      span.textContent = count;
+
+      btn.addEventListener('click', function() {
+        count += 1;
+        span.textContent = count;
+        localStorage.setItem(storageKey, String(count));
+        btn.disabled = true;
+        btn.textContent = "Danke! 👽";
+      });
+    })();
   </script>
 
   <footer>
