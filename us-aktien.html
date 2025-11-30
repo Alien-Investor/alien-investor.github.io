@@ -42,9 +42,33 @@
       margin-top: -0.8em;
       margin-bottom: 1.2em;
     }
+
     .like-button {
       margin-top: 2em;
+      font-size: 0.9em;
     }
+    .like-button button {
+      background-color: #111;
+      color: #fff;
+      border: 1px solid #00ffcc;
+      padding: 0.4em 0.8em;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 0.5em;
+    }
+    .like-button button:hover {
+      background-color: #022;
+    }
+    .like-button .like-count {
+      font-weight: bold;
+      margin-right: 0.5em;
+    }
+    .like-button .like-info {
+      display: block;
+      margin-top: 0.4em;
+      color: #aaa;
+    }
+
     button {
       background-color: #111;
       color: #fff;
@@ -152,19 +176,32 @@
   </section>
 
   <div class="like-button">
-    <button onclick="likeArticle()">👍 Gefällt mir <span id="like-count">0</span></button>
+    <button id="likeButton">👍 Gefällt mir</button>
+    <span class="like-count" id="likeCount">0</span>
+    <span class="like-info">Speichert nur lokal im Browser, kein Tracking, keine externen Cookies.</span>
   </div>
 
   <script>
-    const storageKey = 'likes-usaktien-artikel';
-    let count = parseInt(localStorage.getItem(storageKey) || '0', 10);
-    document.getElementById('like-count').textContent = count;
+    (function () {
+      const storageKey = window.location.pathname + '-likes';
+      const btn = document.getElementById('likeButton');
+      const countSpan = document.getElementById('likeCount');
 
-    function likeArticle() {
-      count++;
-      localStorage.setItem(storageKey, String(count));
-      document.getElementById('like-count').textContent = count;
-    }
+      let count = parseInt(localStorage.getItem(storageKey) || '0', 10);
+      if (Number.isNaN(count)) {
+        count = 0;
+      }
+      countSpan.textContent = String(count);
+
+      btn.addEventListener('click', function () {
+        if (btn.disabled) return;
+        count++;
+        localStorage.setItem(storageKey, String(count));
+        countSpan.textContent = String(count);
+        btn.disabled = true;
+        btn.textContent = 'Danke! 👽';
+      });
+    })();
   </script>
 
   <footer>
