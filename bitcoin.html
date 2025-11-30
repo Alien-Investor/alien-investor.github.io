@@ -190,16 +190,16 @@
   </section>
 
   <div class="like-button">
-    <button id="like-button">👍 Gefällt mir</button>
-    <span class="like-count" id="like-count">0</span>
+    <button id="likeButton">👍 Gefällt mir</button>
+    <span class="like-count" id="likeCount">0</span>
     <span class="like-info">Speichert nur lokal im Browser, kein Tracking, keine externen Cookies.</span>
   </div>
 
   <script>
     (function () {
       const storageKey = window.location.pathname + '-likes';
-      const button = document.getElementById('like-button');
-      const countSpan = document.getElementById('like-count');
+      const btn = document.getElementById('likeButton');
+      const countSpan = document.getElementById('likeCount');
 
       let count = parseInt(localStorage.getItem(storageKey) || '0', 10);
       if (Number.isNaN(count)) {
@@ -207,10 +207,13 @@
       }
       countSpan.textContent = String(count);
 
-      button.addEventListener('click', function () {
+      btn.addEventListener('click', function () {
+        if (btn.disabled) return;
         count++;
         localStorage.setItem(storageKey, String(count));
         countSpan.textContent = String(count);
+        btn.disabled = true;
+        btn.textContent = 'Danke! 👽';
       });
     })();
   </script>
