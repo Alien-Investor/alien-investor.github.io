@@ -27,82 +27,60 @@
     }
     .byline {
       font-size: 0.9em;
-      color: #ccc;
+      color: #bbb;
+      margin-bottom: 1.5em;
+    }
+    img.hero {
+      width: 100%;
+      max-height: 450px;
+      object-fit: cover;
+      display: block;
       margin-bottom: 1.5em;
     }
     .box {
-      margin-top: 2em;
-      padding: 1.2em 1.4em;
       border: 1px solid #00ffcc;
-      border-radius: 10px;
-      background-color: #050505;
+      background: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      font-size: 0.95em;
     }
     .box h3 {
       margin-top: 0;
     }
     ul {
-      margin-left: 1.2em;
+      padding-left: 1.2em;
     }
     li {
-      margin-bottom: 0.4em;
-    }
-    .highlight {
-      color: #00ffcc;
-      font-weight: bold;
-    }
-    .tag {
-      display: inline-block;
-      padding: 0.2em 0.6em;
-      border-radius: 999px;
-      border: 1px solid #00ffcc;
-      font-size: 0.8em;
-      margin-right: 0.3em;
       margin-bottom: 0.3em;
     }
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
     .like-button {
-      margin-top: 2.5em;
-      padding: 1.2em;
-      border-radius: 10px;
-      border: 1px solid #333;
-      text-align: center;
-      background-color: #050505;
+      margin: 2em 0;
+      display: flex;
+      align-items: center;
+      gap: 0.75em;
+      font-size: 0.95em;
     }
     .like-button button {
-      background-color: #00ffcc;
+      background: #00ffcc;
       color: #000;
       border: none;
-      padding: 0.6em 1.4em;
-      border-radius: 999px;
-      font-weight: bold;
+      padding: 0.4em 0.9em;
+      border-radius: 4px;
       cursor: pointer;
-      margin-bottom: 0.5em;
-    }
-    .like-button button:disabled {
-      background-color: #333;
-      color: #888;
-      cursor: default;
-    }
-    .like-count {
       font-weight: bold;
-      margin: 0 0.2em;
     }
-    .like-info {
-      font-size: 0.8em;
-      color: #aaa;
-    }
-    .donation-box {
-      margin-top: 2.5em;
-    }
-    .sources-box {
-      font-size: 0.9em;
-      color: #ddd;
-      margin-top: 2em;
-    }
-    .sources-box ul {
-      margin-top: 0.5em;
-    }
-    .tools-box {
-      margin-top: 2.5em;
+    .like-button span {
+      min-width: 2em;
+      display: inline-block;
     }
     footer {
       margin-top: 3em;
@@ -122,629 +100,265 @@
 </head>
 <body>
 
-  <h1>🌪️Münchener Rück (Munich Re, MUV2) – die Versicherung der Katastrophen</h1>
+  <h1>📊 Münchener Rück (Munich Re, MUV2) – Aktienanalyse für langfristige Eigentümer</h1>
   <p class="byline">
-    Aktienanalyse für langfristige Eigentümer – Stand: Dezember 2025 · von Alien Investor 👽
+    Von Alien Investor – Stand: Dezember 2025. Keine Finanz-, Steuer- oder Rechtsberatung.
   </p>
 
-  <div class="box">
-    <p>
-      Für den außerirdischen Investor, der den Planeten Erde als ein Netz aus Risiken, Schulden und Kapitalströmen beobachtet,
-      ist die Münchener Rückversicherungs-Gesellschaft (im Folgenden <strong>„Munich Re“</strong> oder <strong>„Münchener Rück“</strong>)
-      eine Art finanzieller Stoßdämpfer der Zivilisation. Sie verdient Geld damit, die schlimmsten Albträume der Menschheit
-      – Hurrikane, Erdbeben, Cyberangriffe, Pandemien – in berechenbare Cashflows zu verwandeln.
-    </p>
-    <p>
-      Kurz gesagt: Wo andere Angst haben, rechnet Munich Re mit Wahrscheinlichkeiten.
-    </p>
-  </div>
+  <p>
+    Für den außerirdischen Investor, der den Planeten Erde als ein Netz aus Risiken, Schulden und Kapitalströmen beobachtet, ist die Münchener Rückversicherungs-Gesellschaft (im Folgenden <strong>„Munich Re“</strong> oder <strong>„Münchener Rück“</strong>) eine Art finanzieller Stoßdämpfer der Zivilisation. Sie verdient Geld damit, die schlimmsten Albträume der Menschheit – Hurrikane, Erdbeben, Cyberangriffe, Pandemien – in berechenbare Cashflows zu verwandeln.
+  </p>
+  <p>
+    Kurz gesagt: Wo andere Angst haben, rechnet Munich Re mit Wahrscheinlichkeiten.
+  </p>
+
+  <blockquote>
+    „Vertrau niemandem – auch nicht mir. Schau dir die Zahlen an, denke selbst, und entscheide dann,
+    ob die Münchener Rück in dein eigenes Freiheits-Setup passt.“ 👽
+  </blockquote>
 
   <h2>1) Kurzüberblick</h2>
   <p>
-    Die Münchener Rück ist einer der größten Rückversicherer der Welt und Teil eines globalen Oligopols aus wenigen,
-    kapitalstarken Spezialisten. Für den Alien Investor ist sie kein Wachstums-Märchenerzähler, sondern eine
-    <span class="highlight">Cashflow-Maschine mit Panzer-Bilanz</span>.
+    Die Münchener Rück ist einer der größten Rückversicherer der Welt und Teil eines globalen Oligopols aus wenigen, kapitalstarken Spezialisten. Für den Alien Investor ist sie kein Wachstums-Märchenerzähler, sondern eine <strong>Cashflow-Maschine mit Panzer-Bilanz</strong>.
   </p>
-
   <ul>
-    <li><strong>Ticker:</strong> MUV2</li>
-    <li><strong>ISIN:</strong> DE0008430026</li>
-    <li><strong>Börse:</strong> Primäre Notierung an der Frankfurter Wertpapierbörse (Xetra), Schwergewicht im DAX 40</li>
+    <li><strong>Ticker:</strong> MUV2 (ISIN: DE0008430026)</li>
     <li><strong>Branche:</strong> Finanzdienstleistungen – Rückversicherung, Erstversicherung, Asset Management</li>
-    <li><strong>Marktkapitalisierung:</strong> ca. 69–70 Mrd. EUR (Ende 2025)</li>
+    <li><strong>Marktstellung:</strong> Globales Schwergewicht im DAX 40, Weltmarktführer der Risikoabsicherung.</li>
   </ul>
 
+  <h2>2) Geschäftsmodell & Segmente</h2>
   <p>
-    Der Aktienkurs bewegt sich Ende 2025 in einer Spanne von etwa <strong>530–535 EUR</strong> und notiert damit
-    <strong>nahe eines historischen Höchststands</strong>. Die Liquidität ist hoch, wodurch der Titel für institutionelle
-    Investoren jeder Größenordnung handelbar ist.
-  </p>
-
-  <h3>Bewertung im Marktvergleich</h3>
-  <ul>
-    <li><strong>KGV (TTM):</strong> ca. 11–12</li>
-    <li><strong>Forward-KGV (2025e):</strong> ca. 11 bzw. leicht darunter</li>
-    <li><strong>S&amp;P 500 KGV (TTM):</strong> ~28</li>
-    <li><strong>Shiller-CAPE des S&amp;P 500:</strong> ~39–40</li>
-  </ul>
-
-  <p>
-    Während US-Aktien im Schnitt das rund 28-fache ihrer Gewinne kosten und damit enorme Wachstumserwartungen eingepreist haben,
-    wird der Weltmarktführer der Risikoabsicherung mit einem KGV von rund 11 bewertet. Ein Alien könnte sich fragen:
-    <span class="highlight">Warum wird ein Unternehmen mit Eigenkapitalrenditen über 20 % wie ein langweiliger Versorger
-    bepreist?</span>
-  </p>
-
-  <h2>2) Geschäftsmodell &amp; Segmente</h2>
-  <p>
-    Munich Re verkauft keine physischen Produkte, sondern ein Versprechen: Sie stellt Kapital bereit, wenn andere es verloren haben.
-    Kunden zahlen <strong>Prämien im Voraus</strong>, die als Kapitalstock („Float“) angelegt werden, bis ein Schaden eintritt –
-    oder auch nicht. Es entstehen zwei Gewinnquellen:
-  </p>
-  <ul>
-    <li><strong>Technisches Ergebnis:</strong> Prämien minus Schäden und Kosten (Combined Ratio)</li>
-    <li><strong>Kapitalanlageergebnis:</strong> Zinsen und Dividenden auf den Float</li>
-  </ul>
-  <p>
-    Operativ steht die Munich Re auf drei Säulen:
-  </p>
-
-  <h3>2.1 Rückversicherung (Reinsurance) – der Motor</h3>
-  <p>
-    Das historische Kerngeschäft und der wichtigste Treiber der Eigenkapitalrendite. Die Munich Re übernimmt Risiken von
-    Erstversicherern (z. B. Allianz, AXA), Industriekonzernen und teils Staaten.
-  </p>
-
-  <ul>
-    <li>
-      <strong>Schaden/Unfall-Rückversicherung (Property &amp; Casualty, P&amp;C):</strong><br>
-      Abdeckung von Naturkatastrophen (Hurrikane, Erdbeben, Fluten), menschengemachten Katastrophen (Explosionen, Brände),
-      Haftpflicht, Luftfahrt, Transport, Cyber usw.
-      <br><br>
-      <em>Art des Geschäfts:</em> Hoch zyklisch. In „ruhigen“ Jahren sprudeln die Gewinne, in Katastrophenjahren federt Munich Re die
-      Verluste des Systems ab. Aktuell befindet sich der Markt in einer verlängerten <strong>„Hard Market“-Phase</strong>:
-      Risikokapital ist knapp, Preise und Konditionen sind stark zugunsten der Rückversicherer.
-    </li>
-    <li>
-      <strong>Leben/Gesundheit-Rückversicherung (Life &amp; Health, L&amp;H):</strong><br>
-      Absicherung biometrischer Risiken wie Sterblichkeit, Langlebigkeit, Berufsunfähigkeit.
-      <br><br>
-      <em>Art des Geschäfts:</em> Langfristig, grundsätzlich stabiler als P&amp;C und kaum mit Finanzmarktschocks korreliert,
-      aber sensibel für Pandemien und medizinische Inflation. Einzelne Bestände litten zuletzt unter etwas höherer Sterblichkeit
-      als erwartet.
-    </li>
-    <li>
-      <strong>Global Specialty Insurance (GSI):</strong><br>
-      Bündelt Spezialrisiken (z. B. Agrar, erneuerbare Energien, Nischenmärkte) und wird inzwischen als eigenes Segment ausgewiesen.
-      Die <strong>Combined Ratio von rund 82–83 %</strong> unterstreicht die hohe Profitabilität.
-    </li>
-  </ul>
-
-  <h3>2.2 Erstversicherung (ERGO) – das Fundament</h3>
-  <p>
-    Über die Tochter <strong>ERGO</strong> agiert Munich Re als Erstversicherer im Massenmarkt (Leben, Sach, Kranken) in Deutschland
-    und international. ERGO war lange ein Problemfall, liefert nach harter Restrukturierung aber inzwischen
-    <strong>stabile, planbare Gewinne</strong>.
-  </p>
-  <p>
-    Charakteristik:
-  </p>
-  <ul>
-    <li>Defensives Massengeschäft nach dem Gesetz der großen Zahlen</li>
-    <li>Geringere Volatilität als reine Rückversicherung</li>
-    <li>Combined Ratios im Bereich von ~88–89 % – gesundes Niveau für Endkundengeschäft</li>
-  </ul>
-
-  <h3>2.3 Asset Management (MEAG) – der Zinshebel</h3>
-  <p>
-    Die <strong>MEAG</strong> verwaltet die Kapitalanlagen des Konzerns (und Fremdgelder). Da Prämien im Voraus bezahlt werden,
-    verfügt Munich Re über einen enormen Kapitalstock von deutlich über 200 Mrd. EUR.
-  </p>
-  <p>
-    In der Nullzinsphase war dies eher ein Klotz am Bein. Mit der Zinswende wurde daraus ein Turbo:
-  </p>
-  <ul>
-    <li><strong>Reinvestment Yield:</strong> aktuell etwas über 4 %</li>
-    <li><strong>Laufende Verzinsung (Running Yield):</strong> knapp darunter</li>
-  </ul>
-  <p>
-    Das Portfolio ist konservativ (hoher Anteil an Staats- und Unternehmensanleihen guter Bonität). Die Zinswende bedeutet:
-    <span class="highlight">Milliarden zusätzlicher, relativ risikoarmer Erträge</span> Jahr für Jahr.
-  </p>
-
-  <h2>3) Wachstum &amp; Entwicklung</h2>
-  <p>
-    Durch IFRS 17 haben sich die Bilanzierungsregeln geändert, was langfristige Vergleiche erschwert.
-    Die Richtung ist aber klar: <strong>weniger Volumen-Fokus, mehr Qualitäts-Fokus</strong>.
-  </p>
-
-  <h3>3.1 Umsatz (Versicherungsumsatz)</h3>
-  <ul>
-    <li>
-      Die Versicherungsumsätze bewegen sich auf hohem Niveau, sind aber durch bewusste Portfoliosäuberung („Pruning“)
-      eher stabil bis leicht rückläufig.
-    </li>
-    <li>
-      Unprofitable Verträge, vor allem in den USA (Stichwort <em>Social Inflation</em>), werden reduziert oder nicht verlängert –
-      Umsatz geht zurück, Marge rauf.
-    </li>
-    <li>
-      Ein starker Euro drückt die in EUR ausgewiesenen Prämien, da ein großer Teil des Geschäfts in USD läuft.
-    </li>
-  </ul>
-  <p>
-    Für 2025 liegt die Guidance für den Versicherungsumsatz bei rund <strong>61 Mrd. EUR</strong>
-    (leicht gesenkt von ursprünglich 62 Mrd. EUR).
-  </p>
-
-  <h3>3.2 Gewinnentwicklung</h3>
-  <ul>
-    <li><strong>2023:</strong> Nettogewinn ca. 4,6 Mrd. EUR – Ziel deutlich übertroffen</li>
-    <li><strong>2024:</strong> Rekordergebnis von rund 5,7 Mrd. EUR</li>
-    <li><strong>2025 (Guidance):</strong> Ziel ~6 Mrd. EUR Nettogewinn – die Entwicklung steuert klar darauf zu</li>
-  </ul>
-  <p>
-    Die Botschaft: <span class="highlight">Aus jedem Euro Versicherungsumsatz wird immer mehr Gewinn herausgeholt.</span>
-  </p>
-
-  <h3>3.3 Q3 2025 – Goldlöckchen-Quartal</h3>
-  <ul>
-    <li><strong>Nettoergebnis:</strong> ca. 2,0 Mrd. EUR (+120 % gegenüber Q3 2024)</li>
-    <li><strong>Versicherungsumsatz:</strong> ca. 14,6 Mrd. EUR (-6 % YoY, vor allem Währungseffekte / Pruning)</li>
-    <li><strong>P&amp;C Net Profit:</strong> ca. 1,19 Mrd. EUR (+ >300 % YoY)</li>
-    <li><strong>Großschäden:</strong> nur ~2,9 % der Netto-Versicherungseinnahmen statt der historisch erwarteten 14–17 %</li>
-    <li><strong>RoE:</strong> ~24 % – Werte, die eher nach Tech als nach Versicherer aussehen</li>
-  </ul>
-  <p>
-    Die Kombination aus hohen Prämien (Hard Market) und außergewöhnlich niedrigen Großschäden macht Q3 2025 zu einem
-    Ausnahmequartal. Munich Re nutzt den Rückenwind, um Reserven zu stärken und Puffer für schlechtere Jahre aufzubauen.
-  </p>
-
-  <h2>4) Profitabilität &amp; Bilanz</h2>
-  <p>
-    Die Bilanz ist das wichtigste Verkaufsargument. In einer Welt voller Kreditrisiken präsentiert sich Munich Re als
-    <span class="highlight">„finanzieller Bunker“</span>.
-  </p>
-
-  <h3>4.1 Margen &amp; Combined Ratio</h3>
-  <ul>
-    <li>
-      <strong>P&amp;C Combined Ratio Q3 2025:</strong> ~62,7 % (Vorjahr: ~89,5 %).
-      Selbst „normalisiert“ (unter Annahme üblicher Großschäden) liegt sie bei starken ~79 %.
-    </li>
-    <li>
-      <strong>GSI Combined Ratio:</strong> rund 82–83 % – exzellentes Niveau für Spezialgeschäft.
-    </li>
-    <li>
-      <strong>ERGO:</strong> Combined Ratios im Bereich von 88–89 % im In- und Ausland – stabiler, solider Unterbau.
-    </li>
-  </ul>
-
-  <h3>4.2 Kapitalanlage &amp; Cashflows</h3>
-  <p>
-    Das Geschäftsmodell sorgt für stetigen <strong>operativen Cashflow</strong>, weil Prämien vor dem Schadenereignis fließen.
-    Der Float wird zum Großteil in Anleihen hoher Qualität investiert.
+    Munich Re verkauft keine physischen Produkte, sondern ein Versprechen: Sie stellt Kapital bereit, wenn andere es verloren haben. Kunden zahlen Prämien im Voraus, die als Kapitalstock („Float“) angelegt werden. Es entstehen zwei Gewinnquellen:
   </p>
   <ul>
     <li>
-      <strong>Kapitalanlageergebnis 9M 2025:</strong> knapp 5,9 Mrd. EUR – der Zinshebel arbeitet voll für den Aktionär.
+      <strong>Rückversicherung (Reinsurance) – der Motor:</strong> Das historische Kerngeschäft. Abdeckung von Naturkatastrophen (P&C) und biometrischen Risiken (Life & Health). Aktuell befindet sich der Markt in einer verlängerten „Hard Market“-Phase (hohe Preise).
     </li>
     <li>
-      Die Wiederanlagerendite liegt bei etwas über 4 %, bei sehr defensiver Portfolioausrichtung.
+      <strong>Erstversicherung (ERGO) – das Fundament:</strong> Über die Tochter ERGO agiert Munich Re als Erstversicherer im Massenmarkt. ERGO liefert nach Restrukturierung inzwischen stabile, planbare Gewinne.
+    </li>
+    <li>
+      <strong>Asset Management (MEAG) – der Zinshebel:</strong> Die MEAG verwaltet die Kapitalanlagen (>200 Mrd. EUR). Die Zinswende bedeutet hier Milliarden zusätzlicher, relativ risikoarmer Erträge.
     </li>
   </ul>
 
-  <h3>4.3 Solvency II – die „Panzer-Bilanz“</h3>
+  <h2>3) Wachstum & Entwicklung</h2>
   <p>
-    Die <strong>Solvency-II-Quote</strong> misst, wie viel Eigenmittel ein Versicherer im Verhältnis zu seinen Risiken hält.
+    Durch IFRS 17 haben sich die Bilanzierungsregeln geändert. Die Richtung ist aber klar: weniger Volumen-Fokus, mehr Qualitäts-Fokus.
   </p>
   <ul>
-    <li><strong>Regulatorisch gefordert:</strong> 100 %</li>
-    <li><strong>Interner Zielkorridor Munich Re:</strong> 175–220 %</li>
-    <li><strong>Tatsächliche Quote (Q3 2025):</strong> ~293 %</li>
+    <li>
+      <strong>Umsatz:</strong> Die Versicherungsumsätze bewegen sich auf hohem Niveau (Guidance 2025: ~61 Mrd. EUR), sind aber durch bewusste Portfoliosäuberung („Pruning“) eher stabil. Unprofitable Verträge werden reduziert.
+    </li>
+    <li>
+      <strong>Gewinn:</strong> Rekordergebnisse. 2024 wurden ca. 5,7 Mrd. EUR erzielt, für 2025 liegt das Ziel bei ~6 Mrd. EUR. Aus jedem Euro Umsatz wird immer mehr Gewinn herausgeholt.
+    </li>
+    <li>
+      <strong>Q3 2025:</strong> Ein „Goldlöckchen-Quartal“ mit 2,0 Mrd. EUR Nettoergebnis und einer extrem niedrigen Großschadenbelastung.
+    </li>
   </ul>
+
+  <h2>4) Profitabilität & Bilanz</h2>
   <p>
-    Das ist <strong>massive Überkapitalisierung</strong>. Selbst extrem schwere Szenarien (200-Jahres-Katastrophe) dürften
-    verkraftbar sein, ohne neues Kapital aufnehmen zu müssen. Im Gegenteil: In einem solchen Umfeld könnte Munich Re als
-    <span class="highlight">„Last Man Standing“</span> Marktanteile von geschwächten Wettbewerbern einsammeln.
+    Die Bilanz ist das wichtigste Verkaufsargument. In einer Welt voller Kreditrisiken präsentiert sich Munich Re als „finanzieller Bunker“.
   </p>
+  <ul>
+    <li>
+      <strong>Margen:</strong> Die Combined Ratio im P&C-Geschäft ist exzellent (Q3 2025: ~62,7 %, normalisiert ~79 %). Werte unter 100 % bedeuten profitables versicherungstechnisches Geschäft.
+    </li>
+    <li>
+      <strong>Solvency II („Panzer-Bilanz“):</strong> Die Quote liegt bei ~293 % (gefordert sind 100 %, internes Ziel bis 220 %). Das ist massive Überkapitalisierung. Selbst extrem schwere Szenarien dürften verkraftbar sein.
+    </li>
+    <li>
+      <strong>Cashflow:</strong> Der Zinshebel arbeitet voll für den Aktionär. Die Wiederanlagerendite liegt bei etwas über 4 % im konservativen Portfolio.
+    </li>
+  </ul>
 
   <h2>5) Aktuelle strategische Themen</h2>
-
-  <h3>5.1 Ambition 2025 &amp; Ausblick</h3>
-  <p>
-    Das aktuelle Strategieprogramm <strong>„Ambition 2025“</strong> sah u. a. vor:
-  </p>
-  <ul>
-    <li>Eigenkapitalrendite (RoE) von <strong>12–14 %</strong></li>
-    <li>Ergebniswachstum von >5 % p. a.</li>
-  </ul>
-  <p>
-    Die Realität: In den letzten Jahren lag die RoE <strong>deutlich über 16 %</strong> – das Zielband wurde klar übertroffen.
-    Ein neues Strategieprogramm ab 2026 wird erwartet, wahrscheinlich mit Fokus auf:
-  </p>
-  <ul>
-    <li>diszipliniertes Underwriting</li>
-    <li>hohen Kapitalrückfluss (Dividenden, Aktienrückkäufe)</li>
-    <li>selektives Wachstum in attraktiven Nischen (Cyber, KI, erneuerbare Energien)</li>
-  </ul>
-
-  <h3>5.2 Rückzug aus Munich Re Ventures</h3>
-  <p>
-    Die separate Venture-Capital-Einheit <strong>„Munich Re Ventures“</strong> (Volumen ~1,2 Mrd. USD) wird geschlossen
-    und in die MEAG integriert. Das ist ein klares Signal:
-  </p>
-  <ul>
-    <li>Weniger externe Wetten auf InsurTechs</li>
-    <li>Mehr Fokus auf das Kerngeschäft und saubere Kapitalallokation</li>
-    <li>Kostendisziplin in Zeiten überzogener Tech-Bewertungen</li>
-  </ul>
-
-  <h3>5.3 Kampf gegen Social Inflation (USA)</h3>
-  <p>
-    In den USA treiben hohe Schadenersatzurteile („Nuclear Verdicts“) die Kosten im Haftpflichtbereich nach oben
-    (<strong>Social Inflation</strong>). Munich Re reagiert mit:
-  </p>
-  <ul>
-    <li>konsequenter Reduktion problematischer US-Casualty-Bestände</li>
-    <li>deutlichen Preiserhöhungen</li>
-    <li>vorsichtiger Reservestärkung</li>
-  </ul>
-  <p>
-    Das unterscheidet Munich Re positiv von manchen Wettbewerbern, die diese Probleme länger ignoriert haben.
-  </p>
-
-  <h3>5.4 Cyber &amp; KI – Grenzen der Versicherbarkeit</h3>
-  <p>
-    Munich Re ist Marktführer in der <strong>Cyber-Versicherung</strong>. Strategisch entscheidend:
-  </p>
   <ul>
     <li>
-      Einführung klarer <strong>„Cyber War Exclusions“</strong> – staatliche Cyberkriege werden explizit aus dem Deckungsumfang
-      ausgeschlossen, um systemische Totalschäden zu vermeiden.
+      <strong>Ambition 2025:</strong> Die Ziele (RoE 12–14 %) wurden deutlich übertroffen (aktuell >16 %). Ein neues Programm ab 2026 wird erwartet, wahrscheinlich mit Fokus auf Kapitalrückfluss.
     </li>
     <li>
-      Aufbau von Produkten wie <strong>„aiSure“</strong>, die die Leistungsfähigkeit von KI-Modellen der Kunden absichern.
-      So partizipiert Munich Re am KI-Boom, ohne selbst Tech-Konzern sein zu müssen.
+      <strong>Rückzug aus Venture Capital:</strong> Die Einheit „Munich Re Ventures“ wird integriert. Ein Signal für mehr Fokus auf das Kerngeschäft und Kostendisziplin.
+    </li>
+    <li>
+      <strong>Kampf gegen Social Inflation:</strong> In den USA werden problematische Haftpflicht-Bestände reduziert und Preise erhöht, um steigenden Gerichtskosten entgegenzuwirken.
+    </li>
+    <li>
+      <strong>Cyber & KI:</strong> Munich Re ist Marktführer in der Cyber-Versicherung, führt aber klare „War Exclusions“ ein. Mit Produkten wie „aiSure“ wird die Leistungsfähigkeit von KI-Modellen abgesichert.
     </li>
   </ul>
 
   <h2>6) Bewertung im Kontext</h2>
   <p>
-    Für den rationalen Investor zählt nicht nur die Qualität, sondern auch der Preis.
+    Basierend auf den vorliegenden Daten (Stand Ende 2025):
   </p>
-
-  <h3>6.1 Historische Bewertung</h3>
-  <p>
-    Mit einem KGV von etwa 11 bewegt sich Munich Re im mittleren Bereich der eigenen historischen Spanne (typisch 10–14).
-    Gleichzeitig ist die <strong>Eigenkapitalrendite heute deutlich höher</strong> als früher (stabil über 20 % vs. früher 10–12 %).
-  </p>
-  <p>
-    Das bedeutet: <span class="highlight">Strukturell bessere Profitabilität – aber kein höheres Multiple.</span>
-    Der Markt hat die Qualitätsverbesserung der letzten Jahre noch nicht vollständig eingepreist.
-  </p>
-
-  <h3>6.2 Vergleich mit dem Gesamtmarkt</h3>
-  <ul>
-    <li>Munich Re: KGV ~11</li>
-    <li>S&amp;P 500: KGV ~28, Shiller-CAPE ~39–40</li>
-  </ul>
-  <p>
-    Für 1 Dollar Gewinn:
-  </p>
-  <ul>
-    <li>zahlt der Markt bei US-Aktien ~28 Dollar</li>
-    <li>bei Munich Re nur ~11 Dollar</li>
-  </ul>
-  <p>
-    Der Bewertungsabschlag ist extrem – getrieben durch die Begeisterung für US-Tech und Growth sowie eine generelle Skepsis
-    gegenüber europäischen Finanzwerten.
-  </p>
-
-  <h3>6.3 Einordnung: Günstig bis fair</h3>
-  <p>
-    Ein Unternehmen mit:
-  </p>
-  <ul>
-    <li>Solvency-Quote nahe 300 %</li>
-    <li>RoE über 20 %</li>
-    <li>Oligopolstellung in einem systemrelevanten Markt</li>
-  </ul>
-  <p>
-    …das zu KGV ~11 gehandelt wird, ist aus Sicht des Alien Investors mindestens <strong>„günstig bis fair“</strong>.
-    Der Markt preist einen hohen Risikoabschlag für Klimawandel, Katastrophen und Finanzsektor ein – übersieht aber teilweise,
-    dass Munich Re an der <em>Neu-Bepreisung genau dieser Risiken</em> verdient.
-  </p>
-
-  <h2>7) Wettbewerbsumfeld &amp; Konkurrenten</h2>
-  <p>
-    Die Rückversicherungsbranche ist ein <strong>klassisches Oligopol</strong>. Die Eintrittsbarrieren sind extrem hoch:
-    regulatorisches Kapital, Ratings, Datenhistorie, Vertrauen der Erstversicherer.
-  </p>
-
-  <h3>Wichtige Wettbewerber</h3>
   <ul>
     <li>
-      <strong>Swiss Re (Schweiz):</strong> Einer der größten Rückversicherer der Welt, beim Volumen der Rückversicherungsprämien
-      aktuell leicht vor Munich Re. Hatte in den letzten Jahren immer wieder Profitabilitätsprobleme im US-Haftpflichtsegment.
+      <strong>KGV (P/E):</strong> Mit einem KGV von ca. 11–12 wird die Aktie bewertet wie ein langweiliger Versorger, obwohl die Eigenkapitalrendite (RoE) bei über 20 % liegt.
     </li>
     <li>
-      <strong>Hannover Rück (Deutschland):</strong> Effizienter „Pure Play“-Rückversicherer ohne eigene ERGO-Struktur,
-      lange als Profitabilitätsmaßstab der Branche gesehen. Etwas kleiner und weniger diversifiziert als Munich Re.
+      <strong>Marktvergleich:</strong> Während der S&P 500 mit einem KGV von ~28 gehandelt wird, gibt es bei Munich Re einen massiven Bewertungsabschlag.
     </li>
     <li>
-      <strong>SCOR (Frankreich):</strong> Kleinerer europäischer Player mit höherer Volatilität und wiederkehrenden Problemen
-      vor allem in der Lebensrückversicherung.
-    </li>
-    <li>
-      <strong>Berkshire Hathaway / Gen Re (USA):</strong> Warren Buffetts Rückversicherungsarm, mit praktisch unbegrenzter
-      Kapitalpower. Agiert opportunistisch – verstärkt Engagement nur, wenn die Preise attraktiv sind.
+      <strong>Einordnung:</strong> Der Markt preist einen hohen Risikoabschlag für Katastrophen ein – übersieht aber, dass Munich Re genau an der Bepreisung dieser Risiken verdient.
     </li>
   </ul>
 
-  <h3>Moat (Burggraben)</h3>
+  <h2>7) Wettbewerbsumfeld & Konkurrenten</h2>
+  <p>
+    Die Rückversicherungsbranche ist ein klassisches Oligopol mit hohen Eintrittsbarrieren.
+  </p>
   <ul>
     <li>
-      <strong>Kapitalstärke &amp; Rating:</strong> Die extrem hohe Solvency-Quote erlaubt es, Risiken zu zeichnen, die andere
-      nicht tragen können. Für Erstversicherer ist die Bonität des Rückversicherers entscheidend – hier ist Munich Re
-      „Goldstandard“.
+      <strong>Swiss Re:</strong> Einer der größten Konkurrenten, hatte zuletzt aber öfter Profitabilitätsprobleme im US-Geschäft.
     </li>
     <li>
-      <strong>Daten &amp; Modellierung:</strong> Schadendaten über mehr als 140 Jahre, Zugriff auf globale Experten (Meteorologen,
-      Aktuare, Juristen). Ein solcher Datenschatz ist für neue Wettbewerber praktisch unkopierbar.
+      <strong>Hannover Rück:</strong> Sehr effizienter „Pure Play“-Rückversicherer, aber weniger diversifiziert als Munich Re.
     </li>
     <li>
-      <strong>Diversifikation:</strong> Kombination aus Rückversicherung, Erstversicherung (ERGO) und Asset Management (MEAG)
-      sorgt für abgemilderte Schwankungen gegenüber reinen Rückversicherern.
+      <strong>Berkshire Hathaway (Gen Re):</strong> Warren Buffetts opportunistischer Arm, der nur zeichnet, wenn die Preise stimmen.
+    </li>
+    <li>
+      <strong>Moat (Burggraben):</strong> Die extrem hohe Solvency-Quote und ein Datenschatz aus über 140 Jahren machen das Geschäft für neue Angreifer fast unmöglich zu kopieren.
     </li>
   </ul>
 
   <h2>8) Kundenperspektive</h2>
-
-  <h3>8.1 B2B – Rückversicherungskunden</h3>
-  <p>
-    In der Branche genießt Munich Re einen exzellenten Ruf:
-  </p>
-  <ul>
-    <li>hohe Kapazitäten auch für sehr große Risiken</li>
-    <li>verlässliche Schadenregulierung und Vertragsstabilität</li>
-    <li>technisches Know-how bei komplexen Risiken (z. B. Cyber, erneuerbare Energien)</li>
-  </ul>
-
-  <h3>8.2 B2C – ERGO-Kunden</h3>
-  <p>
-    ERGO bewegt sich im typischen Spektrum eines Massenversicherers:
-  </p>
   <ul>
     <li>
-      Online-Bewertungen zeigen ein gemischtes Bild – wie bei fast allen großen Versicherern:
-      Kritik gibt es an Bürokratie, Bearbeitungszeiten und Ablehnungen im Kleingedruckten.
+      <strong>B2B (Rückversicherung):</strong> Munich Re genießt einen exzellenten Ruf für Kapazitätsstärke und Verlässlichkeit („Goldstandard“).
     </li>
     <li>
-      Positive Stimmen heben schnelle Auszahlungen bei digital eingereichten Rechnungen und kompetente Beratung hervor.
+      <strong>B2C (ERGO):</strong> Typisches Bild eines Massenversicherers. Kritik an Bürokratie, Lob für digitale Rechnungsstellung. Keine Hinweise auf systematische Skandale.
     </li>
   </ul>
-  <p>
-    Wichtig: Es gibt <strong>keine Hinweise auf systematische Skandale oder Betrug</strong>. Das „Grundrauschen“
-    an Unzufriedenheit gehört bei Versicherern fast zum Geschäftsmodell.
-  </p>
 
   <h2>9) Mitarbeiterperspektive</h2>
   <p>
-    Ein Blick nach innen ist wichtig, denn ohne gute Mitarbeiter gibt es kein gutes Underwriting.
+    Die Stimmung ist stabil und professionell.
   </p>
   <ul>
     <li>
-      Bewertungen auf Portalen wie Kununu/Glassdoor zeichnen ein Bild eines <strong>sehr attraktiven Arbeitgebers</strong>
-      im Konzernbereich (Munich Re) mit hoher Weiterempfehlungsrate.
+      <strong>Attraktivität:</strong> Gilt als sehr sicherer Arbeitgeber mit exzellenter Vergütung („Goldener Käfig“). Hohe Weiterempfehlungsrate auf Portalen wie Kununu/Glassdoor.
     </li>
     <li>
-      ERGO liegt etwas darunter, was typisch ist für stärker operativ geprägten Vertrieb und Service.
+      <strong>Kultur:</strong> Eher „Elite-Firma“ für Mathematiker und Aktuare als hipper Tech-Start-up. Kritik gibt es gelegentlich an langsamen Entscheidungsprozessen („Tanker“).
     </li>
   </ul>
+
+  <h2>10) Chancen & Risiken</h2>
+  <p><strong>Die Chancen:</strong></p>
+  <ul>
+    <li>Verlängerter „Hard Market“ sorgt weiter für hohe Margen.</li>
+    <li>Zins-Bonanza bringt Milliarden an risikoarmen Erträgen aus dem Float.</li>
+    <li>Massive Kapitalrückführungen (Dividenden/Rückkäufe) durch Überkapitalisierung.</li>
+    <li>Technologieführerschaft bei Cyber-Versicherungen.</li>
+  </ul>
+  <p><strong>Die Risiken:</strong></p>
+  <ul>
+    <li><strong>Klimawandel:</strong> Wenn Schäden (Sekundärgefahren wie Hagel/Flut) schneller steigen als die Prämien.</li>
+    <li><strong>Social Inflation (USA):</strong> Explodierende Schadenersatzsummen vor US-Gerichten.</li>
+    <li><strong>Schwarzer Schwan:</strong> Ein globaler, synchroner Cyber-Ausfall oder geopolitische Eskalationen.</li>
+  </ul>
+
+  <h2>11) Alien-Fazit 🛸</h2>
   <p>
-    Pluspunkte aus Mitarbeitersicht:
+    Aus Sicht eines Alien Investors ist die Münchener Rück ein <strong>finanzieller Bunker</strong> in einer unsicheren Welt. Sie profitiert von Angst und Zinsen.
   </p>
-  <ul>
-    <li>sehr gute Vergütung und Sozialleistungen („Goldener Käfig“)</li>
-    <li>hohe Jobsicherheit und internationales Umfeld</li>
-  </ul>
   <p>
-    Kritikpunkte:
-  </p>
-  <ul>
-    <li>Bürokratie, teilweise langsame Entscheidungsprozesse („Tanker“)</li>
-    <li>hohe Arbeitslast in Spitzenzeiten (z. B. Erneuerungsrunden)</li>
-  </ul>
-  <p>
-    Insgesamt macht der Konzern einen <strong>stabilen, aber fordernden Eindruck</strong> – eher Elite-Firma für
-    Mathematiker, Analysten und Spezialisten als hipper Tech-Start-up-Klon.
+    Mit einer Solvency-Quote von fast 300 % und einer Bewertung von KGV ~11 ist das Verhältnis von Qualität zu Preis selten so attraktiv wie hier – wenn man bereit ist, auf die "Story" von Tech-Aktien zu verzichten und stattdessen harte Cashflows und Dividenden bevorzugt. Für Trader langweilig, für geduldige Eigentümer eine „Versicherung gegen die Dummheit des Systems“.
   </p>
 
-  <h2>10) Chancen &amp; Risiken</h2>
-
-  <h3>10.1 Zentrale Chancen</h3>
-  <ul>
-    <li>
-      <strong>Verlängerter Hard Market:</strong> Solange Risikokapital knapp bleibt, kann Munich Re höhere Prämien
-      und strengere Konditionen durchsetzen. Der Markt könnte länger „hart“ bleiben, als viele Investoren erwarten.
-    </li>
-    <li>
-      <strong>Zins-Bonanza:</strong> Der riesige Float wird endlich wieder sinnvoll verzinst. Jeder zusätzliche Basispunkt
-      Rendite bringt Millionen an quasi risikoarmen Erträgen.
-    </li>
-    <li>
-      <strong>Kapitalrückführung:</strong> Mit einer Solvency-Quote nahe 300 % sitzt der Konzern auf überschüssigem Kapital.
-      Steigende Dividenden und Aktienrückkäufe sind naheliegende Optionen.
-    </li>
-    <li>
-      <strong>Technologieführerschaft:</strong> Gelingt es, Cyber-Versicherungen und KI-Produkte wie aiSure skalierbar zu machen,
-      hat Munich Re durch seine Pionierrolle einen First-Mover-Vorteil.
-    </li>
-  </ul>
-
-  <h3>10.2 Zentrale Risiken</h3>
-  <ul>
-    <li>
-      <strong>Klimawandel &amp; Sekundärgefahren:</strong> Wenn die Schadensrealität (Starkregen, Hagel, Waldbrände) schneller
-      eskaliert als die Prämien, drohen höhere Volatilität und mögliche Verluste. Modellrisiko ist real.
-    </li>
-    <li>
-      <strong>Social Inflation (USA):</strong> Bleiben oder werden die US-Gerichte noch aggressiver bei Schadenersatzsummen,
-      könnte nachträglicher Reservenaufbau nötig werden.
-    </li>
-    <li>
-      <strong>Cyber-„Schwarzer Schwan“:</strong> Ein globaler, synchroner Ausfall großer Cloud-Plattformen wäre ein extremer Test
-      für die Branche – trotz Ausschlussklauseln könnte es Überraschungen geben.
-    </li>
-    <li>
-      <strong>Geopolitik:</strong> Kriege und Sanktionen wirken über viele Kanäle (Flugzeuge, Schiffe, Lieferketten,
-      Betriebsunterbrechungen) in die Bilanzen hinein.
-    </li>
-  </ul>
-
-  <h2>11) Alien-Fazit</h2>
-  <p>
-    Aus Sicht eines Alien Investors ist die Münchener Rück ein <strong>finanzieller Bunker</strong> in einer zunehmend
-    unsicheren Welt. Sie verdient Geld mit der professionellen Organisation von Angst und Risiko.
-  </p>
-  <ul>
-    <li>
-      Die <strong>Bilanzqualität</strong> mit einer Solvency-Quote nahe 300 % ist absurd hoch – weit über dem, was Aufseher
-      fordern. Das macht das Unternehmen quasi „unkaputtbar“ in normalen Szenarien.
-    </li>
-    <li>
-      Operativ nutzt Munich Re die <strong>Hard-Market-Phase</strong> und die <strong>Zinswende</strong> konsequent,
-      um Rekordergebnisse einzufahren.
-    </li>
-    <li>
-      Die <strong>Bewertung</strong> (KGV ~11) behandelt den Titel wie einen langweiligen Versorger, obwohl die
-      Eigenkapitalrenditen auf Tech-Niveau liegen. Das ist eine interessante Diskrepanz.
-    </li>
-  </ul>
-
-  <p>
-    Für den Alien Investor ist Munich Re damit:
-  </p>
-  <ul>
-    <li><strong>Basisbaustein</strong> für Stabilität und robusten Cashflow</li>
-    <li><strong>Inflationsschutz</strong> über den Zinshebel und Prämienanpassungen</li>
-    <li>
-      ein <strong>antizyklisches Investment</strong> in eine von vielen unterschätzte Branche, die im Hintergrund
-      das globale Risiko-Management am Laufen hält
-    </li>
-  </ul>
-
-  <p>
-    <strong>Für wen könnte die Aktie passen?</strong>
-  </p>
-  <ul>
-    <li>für langfristige Eigentümer, die eher Cashflows als Storytelling suchen</li>
-    <li>für Investoren, die bewusst gegen die Übergewichtung von US-Tech und Growth steuern wollen</li>
-    <li>für Anleger, die extreme Katastrophen <em>nicht</em> wegdiskutieren, sondern bewusst über ein starkes Geschäftsmodell bepreisen lassen wollen</li>
-  </ul>
-
-  <p>
-    Für Trader und Quartals-Gewinnjäger ist Munich Re dagegen eher langweilig – für geduldige Miteigentümer könnte sie
-    eine Art <span class="highlight">„Versicherung gegen die Dummheit des Systems“</span> sein.
+  <p style="font-size:0.9em; color:#bbb; margin-top:2em;">
+    Keine Finanz-, Steuer- oder Rechtsberatung – nur eine Einordnung der vorliegenden Daten aus Alien-Sicht.
   </p>
 
- <div class="box">
-  <h3>🧰 Tools für echte Eigentümer (Werbung/Affiliate)</h3>
-  <p style="font-size:0.95em;">
-    Wenn du Aktien und Bitcoin möglichst eigenverantwortlich halten willst, nutze nicht nur dein Bankdepot:
-  </p>
-  <ul>
-    <li>
-      🇨🇭 <strong>Investieren mit Swissquote:</strong><br>
-      Ich nutze Swissquote in der Schweiz – dort kannst du saubere Namensaktien halten und hast keine
-      deutsche Bank dazwischen.<br>
-      👉 <a href="https://alien-investor.org/swissquote" target="_blank">https://alien-investor.org/swissquote</a>
-    </li>
-    <li>
-      📊 <strong>US-Aktien über IBKR:</strong><br>
-      Für viele internationale Titel bietet sich Interactive Brokers als Zugang an – insbesondere in Kombination
-      mit DRS/Transfer Agenten.<br>
-      👉 <a href="https://alien-investor.org/interactive-brokers" target="_blank">https://alien-investor.org/interactive-brokers</a>
-    </li>
-    <li>
-      💥 <strong>Bitcoin kaufen in Europa – 21bitcoin:</strong><br>
-      Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges sats stapeln – ohne Shitcoins.<br>
-      Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du dauerhaft 0,2&nbsp;Prozentpunkte Gebührenreduktion
-      auf Sofort- und Sparplankäufe.<br>
-      👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
-    </li>
-    <li>
-      ₿ <strong>Bitcoin in Selbstverwahrung:</strong><br>
-      Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox – es gibt die klassische BitBox02 und die neue
-      BitBox für iPhone (Nova).<br>
-      👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
-    </li>
-    <li>
-      🛡️ <strong>Privacy &amp; Mail:</strong><br>
-      Für E-Mail, VPN und Cloud nutze ich Proton – datensparsam und ohne Big-Tech-Abhängigkeit.<br>
-      👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
-    </li>
-  </ul>
-  <p style="font-size:0.85em; color:#aaa;">
-    Hinweis: Bei einigen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit,
-    ohne dass es dich mehr kostet. Danke! 👽
-  </p>
-</div>
+  <div class="box">
+    <h3>🧰 Tools für echte Eigentümer (Werbung/Affiliate)</h3>
+    <p style="font-size:0.95em;">
+      Wenn du Aktien und Bitcoin möglichst eigenverantwortlich halten willst, nutze nicht nur dein Bankdepot:
+    </p>
+    <ul>
+      <li>
+        🇨🇭 <strong>Investieren mit Swissquote:</strong><br>
+        Ich nutze Swissquote in der Schweiz – dort kannst du saubere Namensaktien halten und hast keine
+        deutsche Bank dazwischen.<br>
+        👉 <a href="https://alien-investor.org/swissquote" target="_blank">https://alien-investor.org/swissquote</a>
+      </li>
+      <li>
+        📊 <strong>US-Aktien über IBKR:</strong><br>
+        Für viele internationale Titel bietet sich Interactive Brokers als Zugang an – insbesondere in Kombination
+        mit DRS/Transfer Agenten.<br>
+        👉 <a href="https://alien-investor.org/interactive-brokers" target="_blank">https://alien-investor.org/interactive-brokers</a>
+      </li>
+      <li>
+        💥 <strong>Bitcoin kaufen in Europa – 21bitcoin:</strong><br>
+        Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges sats stapeln – ohne Shitcoins.<br>
+        Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du dauerhaft 0,2&nbsp;Prozentpunkte Gebührenreduktion
+        auf Sofort- und Sparplankäufe.<br>
+        👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
+      </li>
+      <li>
+        ₿ <strong>Bitcoin in Selbstverwahrung:</strong><br>
+        Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox – es gibt die klassische BitBox02 und die neue
+        BitBox für iPhone (Nova).<br>
+        👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
+      </li>
+      <li>
+        🛡️ <strong>Privacy &amp; Mail:</strong><br>
+        Für E-Mail, VPN und Cloud nutze ich Proton – datensparsam und ohne Big-Tech-Abhängigkeit.<br>
+        👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
+      </li>
+    </ul>
+    <p style="font-size:0.85em; color:#aaa;">
+      Hinweis: Bei einigen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit,
+      ohne dass es dich mehr kostet. Danke! 👽
+    </p>
+  </div>
 
   <div class="like-button">
-    <button id="like-button">Gefällt mir 💚</button><br>
-    <span class="like-info">
-      Dieser Artikel hat bereits
-      <span class="like-count" id="like-count">0</span>
-      Likes von Erdlingen gesammelt.
-    </span>
-    <p class="like-info">
-      Die Likes werden nur lokal in deinem Browser gespeichert (LocalStorage) – kein Tracking, kein externes Script.
+    <button id="likeButton">👍 Gefällt mir</button>
+    <span id="likeCount">0</span>
+    <span style="color:#bbb;">(Speicherung nur lokal im Browser)</span>
+  </div>
+
+  <p><a href="aktien-analysen.html">⬅ Zurück zur Übersicht der Aktienanalysen</a></p>
+  <p><a href="blog.html">⬅ Zurück zum Blog</a></p>
+
+  <div class="box">
+    <h3>📚 Quellen (Auswahl)</h3>
+    <p style="font-size:0.95em;">
+      Die Analyse basiert auf Geschäftsberichten der Münchener Rück (2023/2024), Zwischenberichten Q3 2025,
+      offiziellen Investor-Präsentationen, Branchenstudien (Swiss Re Sigma) sowie Marktdaten (KGV, Shiller-CAPE)
+      bis Ende 2025.
     </p>
   </div>
 
-  <div class="box donation-box">
-    <h3>🛸 Unterstütze den Alien Investor</h3>
-    <p>
-      Wenn dir diese Analyse geholfen hat und du meine Arbeit unterstützen willst, kannst du das hier tun:
-    </p>
-    <ul>
-      <li><strong>☕ Ko-fi:</strong> Kleine Spende für Kaffee und Rechenkraft</li>
-      <li><strong>⚡ Bitcoin Lightning:</strong> über meine Strike/Nostr-Adresse (siehe Profil/Blog)</li>
-      <li><strong>₿ On-Chain:</strong> Bitcoin-Adresse findest du im Blog/Impressum</li>
-    </ul>
-    <p>
-      Jeder Support hilft mir, weiter unabhängig über Bitcoin, echtes Eigentum und das Finanzsystem zu schreiben –
-      ohne Paywall, ohne Datenverkauf.
-    </p>
-  </div>
-
-  <div class="box sources-box">
-    <h3>📚 Quellen &amp; weiterführende Infos</h3>
-    <ul>
-      <li>Geschäftsbericht und SFCR der Münchener Rück (2023/2024)</li>
-      <li>Zwischenbericht Q3 2025 der Münchener Rück</li>
-      <li>Equity Story / Investor-Präsentationen von Munich Re</li>
-      <li>Vergleichsdaten S&amp;P 500 (KGV, Shiller-CAPE)</li>
-      <li>Branchenberichte zu Rückversicherungsmarkt (Swiss Re Sigma, Branchenstudien)</li>
-    </ul>
-  </div>
+  <h3>💸 Unterstütze meine Arbeit</h3>
+  <ul>
+    <li>☕ <a href="https://ko-fi.com/alieninvestor" target="_blank">Spenden via Ko-fi (PayPal, Fiat)</a></li>
+    <li>⚡ Bitcoin Lightning: <code>alien_investor@strike.me</code></li>
+    <li>₿ Bitcoin Onchain: <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code></li>
+  </ul>
+  <p>Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸</p>
 
   <footer>
-    <p><strong>Haftungsausschluss:</strong></p>
-    <p>
-      Keine Finanz-, Steuer- oder Rechtsberatung – nur persönliche Alien-Meinung. Ich bin kein Finanzberater,
-      keine Bank, keine Versicherung. Ich teile nur, wie ich als „Alien Investor“ über Geld, Risiken und Eigentum nachdenke.
-      Triff deine Entscheidungen immer selbst, informiere dich breit und übernimm Verantwortung für dein Handeln.
-    </p>
+    <p>👽 <strong>Haftungsausschluss:</strong><br>
+      Dieser Artikel stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
+      Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
+      Investieren ist mit Risiken verbunden – du kannst Geld verlieren. Prüfe Informationen selbst
+      und handle eigenverantwortlich.</p>
+    <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
   </footer>
 
   <script>
     (function() {
       const storageKey = window.location.pathname + "-likes";
-      const btn = document.getElementById('like-button');
-      const span = document.getElementById('like-count');
+      const btn = document.getElementById('likeButton');
+      const span = document.getElementById('likeCount');
 
       let count = parseInt(localStorage.getItem(storageKey) || "0", 10);
       span.textContent = count;
