@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wasabi Wallet: CoinJoin, Einrichtung & Privatsphäre – meine Recherche (ohne Praxis-Mythen)</title>
+  <meta name="description" content="Wasabi Wallet erklärt: Was ist Wasabi, wie funktioniert CoinJoin (WabiSabi), was bringt es wirklich – und wo sind die typischen Fallen. Hinweis: reine Recherche, keine Praxiserfahrung.">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 2em;
+    }
+    h1, h2, h3 { color: #00ffcc; }
+    a { color: #00ffcc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; }
+    em { color: #ccc; }
+    .byline { margin-top: -0.8em; margin-bottom: 1.2em; }
+    .like-button {
+      margin: 2em 0;
+      display: flex;
+      align-items: center;
+      gap: 0.75em;
+      font-size: 0.95em;
+    }
+    .like-button button {
+      background: #00ffcc;
+      color: #000;
+      border: none;
+      padding: 0.4em 0.9em;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .like-button span { min-width: 2em; display: inline-block; }
+    button {
+      background-color: #111; color: #fff; border: 1px solid #444;
+      padding: 0.5em 1em; border-radius: 5px; cursor: pointer;
+    }
+    button:hover { background-color: #222; }
+    footer { margin-top: 3em; padding-top: 2em; border-top: 1px solid #333; font-size: 0.9em; }
+    .support ul { margin: 0.3em 0 0 1.2em; }
+    blockquote.highlight {
+      margin-top: 2em;
+      padding: 1em 1.2em;
+      border-left: 3px solid #00ffcc;
+      background-color: #111;
+      font-style: italic;
+      color: #ddd;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Wasabi Wallet: CoinJoin, Einrichtung & Privatsphäre – meine Recherche 🧅</h1>
+  <p class="byline"><em>von Alien Investor</em></p>
+
+  <section style="margin-top:1.2em; padding:1em; border:1px solid #00ffcc; border-radius:8px; background-color:#050505;">
+    <h2 style="margin-top:0;">🔎 Transparenz</h2>
+    <p style="margin-bottom:0;">
+      Ich habe Wasabi <strong>selbst noch nicht genutzt</strong> und keine eigene Praxiserfahrung damit.
+      Dieser Beitrag basiert auf meinem <strong>eigenen Research</strong> (Dokumentation, technische Einordnung, typische Risiken).
+      Vielleicht ist es für dich trotzdem interessant – als Überblick, nicht als „ich hab das schon alles durchgespielt“-Story.
+    </p>
+    <p style="margin-top:0.7em; color:#ccc; font-size:0.95em;">
+      Wenn du mit CoinJoin experimentierst: starte klein, teste sauber und rechne mit Reibung bei Dienstleistern. Keine Beratung, nur Einordnung.
+    </p>
+  </section>
+
+  <!-- BEGIN ARTICLE CONTENT -->
+  <article id="content">
+
+    <h2>1) Was ist die Wasabi Wallet?</h2>
+    <p>
+      Wasabi ist eine <strong>Open-Source</strong> Bitcoin-Wallet für Desktop, die sich auf Privatsphäre konzentriert.
+      Sie ist <strong>non-custodial</strong>: Du kontrollierst deine Private Keys selbst.
+      Der Fokus liegt auf zwei Ebenen:
+    </p>
+    <ul>
+      <li><strong>Netzwerk-Privatsphäre:</strong> Kommunikation läuft typischerweise über Tor (IP-Verschleierung).</li>
+      <li><strong>On-Chain-Privatsphäre:</strong> CoinJoin, um Input- und Output-Zuordnung zu erschweren.</li>
+    </ul>
+
+    <h2>2) Wie funktioniert CoinJoin in Wasabi grob?</h2>
+    <p>
+      CoinJoin bedeutet: Mehrere Teilnehmer bauen gemeinsam eine Bitcoin-Transaktion.
+      Außenstehende sehen dann nicht mehr eindeutig, welcher Output zu welchem Input gehört.
+      Wasabi nutzt dafür den Ansatz <strong>WabiSabi</strong> (Credential-basiert).
+    </p>
+    <p>
+      Vereinfacht gesagt: Du registrierst Inputs, bekommst anonyme Nachweise (Credentials) und registrierst Outputs später getrennt.
+      In der Dokumentation wird außerdem das Konzept beschrieben, dass die „Input-Seite“ und die „Output-Seite“ (oft als „Alice“ und „Bob“ erklärt)
+      über getrennte Kommunikationspfade/Streams laufen sollen, um triviale Korrelation zu erschweren.
+    </p>
+
+    <blockquote class="highlight">
+      CoinJoin ist keine Unsichtbarkeit. Es ist ein Werkzeug, das Analyse erschwert – und danach ist Disziplin Pflicht.
+    </blockquote>
+
+    <h2>3) Wichtige Begriffe (damit du nicht auf Marketing reinfällst)</h2>
+    <ul>
+      <li><strong>Pseudonym vs. anonym:</strong> Bitcoin ist öffentlich. Ohne zusätzliche Maßnahmen bist du oft überraschend gut analysierbar.</li>
+      <li><strong>UTXO-Denken:</strong> Privatsphäre ist „welcher Coin wird wofür ausgegeben?“ – nicht „Kontostand“.</li>
+      <li><strong>Coin Control:</strong> UTXOs bewusst auswählen und trennen. Das ist die Basis jeder Privatsphäre-Strategie.</li>
+      <li><strong>Heuristiken:</strong> Analysten nutzen Muster (Merge, Change, Timing, Reuse). CoinJoin ist ein Gegenspieler – kein Allheilmittel.</li>
+    </ul>
+
+    <h2>4) „Einrichtung“ – eher als Denkmodell, nicht als Anleitung</h2>
+    <p>
+      Ich schreibe das bewusst nicht als Schritt-für-Schritt-Anleitung aus eigener Praxis.
+      Aber wenn du das Thema recherchierst, tauchen fast immer die gleichen Punkte auf:
+    </p>
+    <ul>
+      <li><strong>Quelle prüfen:</strong> Download nur von offizieller Seite oder GitHub. Signaturen/Hashes sind sinnvoll.</li>
+      <li><strong>Backup sauber machen:</strong> Seed offline notieren, sicher lagern, Passwort stark setzen.</li>
+      <li><strong>Trennung planen:</strong> Überlege vorher, welche Coins du überhaupt coinjoinen willst und welche nicht.</li>
+      <li><strong>Testen statt glauben:</strong> Erst kleine Beträge, erst Verhalten verstehen, dann skalieren.</li>
+    </ul>
+
+    <h2>5) Macht Wasabi Bitcoin „anonym“?</h2>
+    <p><strong>Nein.</strong> Bitcoin ist grundsätzlich pseudonym: die Blockchain ist öffentlich.</p>
+    <p>
+      CoinJoin kann die Zuordnung von Inputs zu Outputs stark erschweren.
+      Aber der häufigste Fehler ist nicht „die Wallet“, sondern das Verhalten danach:
+    </p>
+    <ul>
+      <li><strong>UTXO-Merge:</strong> mehrere getrennte Coins später zusammen ausgeben.</li>
+      <li><strong>Adress-Reuse:</strong> dieselbe Adresse wiederverwenden.</li>
+      <li><strong>KYC-Rückkopplung:</strong> private UTXOs später wieder mit KYC-Flows vermischen.</li>
+      <li><strong>Vorhersehbare Muster:</strong> Timing, Beträge, „immer gleiches Verhalten“.</li>
+    </ul>
+
+    <blockquote class="highlight">
+      Wenn du nach dem CoinJoin wieder alles zusammenwirfst, war der CoinJoin nur ein teurer Umweg.
+    </blockquote>
+
+    <h2>6) Coordinator-Shutdown 2024: Warum das relevant ist</h2>
+    <p>
+      Der bekannte Standard-Coordinator (zkSNACKs) hat seinen CoinJoin-Dienst am <strong>1. Juni 2024</strong> eingestellt.
+      Wasabi funktioniert weiterhin als Wallet, aber CoinJoin hängt seitdem davon ab, welchen Coordinator du verwendest bzw. konfigurierst.
+    </p>
+    <p>
+      Das ist wichtig, weil ein Coordinator Regeln und Parameter setzen kann (z. B. Gebühren, Teilnahmebedingungen, Ablehnungen bestimmter UTXOs).
+      CoinJoin ist ein Protokoll – aber Coordinator-Politik ist trotzdem ein Faktor.
+    </p>
+
+    <h2>7) Praktische Reibung: Börsen, Banken, „Compliance“</h2>
+    <p>
+      CoinJoin ist technisch eine Kooperations-Transaktion. Trotzdem kann es in der Realität Ärger geben:
+      Börsen/Banken können Einzahlungen aus CoinJoin-Kontext blocken oder Nachweise verlangen.
+      Das ist nicht „gut“, aber es ist die Welt, in der wir leben.
+    </p>
+    <ul>
+      <li>Wenn du testen willst: starte klein und halte deine Flows sauber getrennt.</li>
+      <li>Wenn du später zurück in „KYC-Welt“ willst: rechne mit Fragen.</li>
+      <li>Wenn du Privatsphäre willst: akzeptiere, dass Privatsphäre unkomfortabel sein kann.</li>
+    </ul>
+
+    <h2>Alien-Fazit</h2>
+    <p>
+      Ich finde Wasabi als Thema spannend, weil es zeigt: Privatsphäre ist nicht ein Knopf, sondern ein Verhalten.
+      CoinJoin kann helfen – aber nur, wenn du Trennung und Coin Control ernst nimmst.
+      Dieser Artikel ist ein Research-Überblick. Wenn ich irgendwann selbst teste, kann ich hier ein Update ergänzen.
+    </p>
+
+  </article>
+  <!-- END ARTICLE CONTENT -->
+
+  <blockquote class="highlight">
+    "Vertraue niemandem! Manage deine Finanzen selbst!"
+  </blockquote>
+
+  <div class="like-button">
+    <button id="likeButton">👍 Gefällt mir</button>
+    <span id="likeCount">0</span>
+    <span style="color:#bbb;">(Speicherung nur lokal im Browser)</span>
+  </div>
+
+  <script>
+    (function() {
+      const storageKey = window.location.pathname + "-likes";
+      const btn = document.getElementById("likeButton");
+      const span = document.getElementById("likeCount");
+
+      let count = parseInt(localStorage.getItem(storageKey) || "0", 10);
+      span.textContent = count;
+
+      btn.addEventListener("click", function() {
+        count += 1;
+        span.textContent = count;
+        localStorage.setItem(storageKey, String(count));
+        btn.disabled = true;
+        btn.textContent = "Danke! 👽";
+      });
+    })();
+  </script>
+
+  <section style="margin-top:2em; padding:1em; border:1px solid #00ffcc; border-radius:8px; background-color:#050505;">
+    <h2>🛡️ Cypherpunk-Tools: Selbstverwahrung & Privatsphäre</h2>
+
+    <p>
+      Wenn du es mit Privatsphäre ernst meinst, brauchst du zwei Dinge:
+      <strong>eigene Schlüssel für dein Geld</strong> und <strong>digitale Kommunikation ohne Datenkraken</strong>.
+    </p>
+
+    <ul>
+      <li>
+        <strong>21bitcoin – Bitcoin kaufen in Europa (Bitcoin-only)</strong><br>
+        Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges sats stapeln – ohne Shitcoins.<br>
+        Mit dem Code <code>ALIENINVESTOR</code> erhältst du dauerhaft
+        <strong>0,2&nbsp;Prozentpunkte Gebührenreduktion</strong> auf Sofort- und Sparplankäufe.<br>
+        👉 <a href="https://alien-investor.org/21bitcoin" target="_blank" rel="noopener noreferrer">
+          alien-investor.org/21bitcoin
+        </a>
+      </li>
+
+      <li style="margin-top:1em;">
+        <strong>BitBox02 – Bitcoin in Selbstverwahrung</strong><br>
+        Hardware-Wallet statt Börse oder Trading-App. Deine Keys, deine Coins.<br>
+        👉 <a href="https://alien-investor.org/bitbox" target="_blank" rel="noopener noreferrer">
+          alien-investor.org/bitbox
+        </a>
+      </li>
+
+      <li style="margin-top:1em;">
+        <strong>BitBox Nova (für iPhones) – BitBox fürs iPhone-Setup</strong><br>
+        Für iPhone-Nutzer, die Selbstverwahrung sauber aufsetzen wollen.<br>
+        👉 <a href="https://alien-investor.org/bitbox" target="_blank" rel="noopener noreferrer">
+          alien-investor.org/bitbox
+        </a>
+      </li>
+
+      <li style="margin-top:1em;">
+        <strong>Proton Unlimited – E-Mail, Cloud &amp; VPN aus der Schweiz</strong><br>
+        Ende-zu-Ende-Verschlüsselung, weniger Tracking, mehr Souveränität statt Big-Tech-Überwachung.<br>
+        👉 <a href="https://alien-investor.org/proton" target="_blank" rel="noopener noreferrer">
+          alien-investor.org/proton
+        </a>
+      </li>
+    </ul>
+
+    <p style="font-size:0.9em; color:#ccc;">
+      Hinweis: Das sind Affiliate-/Referral-Links. Wenn du sie nutzt, unterstützt du meine Arbeit,
+      ohne mehr zu bezahlen. Keine Finanz-, Steuer- oder Rechtsberatung, nur meine persönliche Alien-Meinung. 👽
+    </p>
+  </section>
+
+  <footer>
+    <p>📬 Kontakt:
+      <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>
+    </p>
+
+    <p style="font-size:0.95em; color:#bbb;">
+      👽 <strong>Haftungsausschluss:</strong><br>
+      Keine Finanz-, Steuer- oder Rechtsberatung – nur persönliche Alien-Meinung.<br>
+      Nutze Software auf eigenes Risiko. Teste mit kleinen Beträgen und handle eigenverantwortlich.
+    </p>
+
+    <div class="support" style="margin-top: 2em;">
+      <h2>💸 Unterstütze meine Arbeit</h2>
+      <ul>
+        <li>☕ Spenden via
+          <a href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener">Ko-fi</a>
+        </li>
+        <li>⚡ Bitcoin Lightning:
+          <code>alien_investor@strike.me</code>
+        </li>
+        <li>₿ Bitcoin Onchain:
+          <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code>
+        </li>
+      </ul>
+    </div>
+
+    <p><a href="/blog.html">← Zurück zum Blog</a></p>
+  </footer>
+
+</body>
+</html>
