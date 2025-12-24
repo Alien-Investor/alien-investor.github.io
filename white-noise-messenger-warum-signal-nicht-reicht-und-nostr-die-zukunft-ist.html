@@ -106,13 +106,13 @@
   <p class="byline"><em>von Alien Investor</em></p>
 
   <p>
-    Wir befinden uns in einem digitalen Rüstungswettlauf. [cite_start]Auf der einen Seite: Staaten und Geheimdienste, die unter dem Deckmantel von „Kinderschutz“ (Chat-Kontrolle, Client-Side Scanning) jede private Nachricht scannen wollen[cite: 5]. Auf der anderen Seite: wir, die Bürger, die ein Recht auf Privatsphäre haben.
+    Wir befinden uns in einem digitalen Rüstungswettlauf. Auf der einen Seite: Staaten und Geheimdienste, die unter dem Deckmantel von „Kinderschutz“ (Chat-Kontrolle, Client-Side Scanning) jede private Nachricht scannen wollen. Auf der anderen Seite: wir, die Bürger, die ein Recht auf Privatsphäre haben.
   </p>
   <p>
-    Lange Zeit galt Signal als der Goldstandard. Doch Signal hat ein Problem: Es ist zentralisiert und kennt deine Telefonnummer. [cite_start]Es weiß, <em>wer</em> mit <em>wem</em> spricht[cite: 4]. In einer Zeit, in der Metadaten tödlicher sein können als der Inhalt, reicht das nicht mehr.
+    Lange Zeit galt Signal als der Goldstandard. Doch Signal hat ein Problem: Es ist zentralisiert und kennt deine Telefonnummer. Es weiß, <em>wer</em> mit <em>wem</em> spricht. In einer Zeit, in der Metadaten tödlicher sein können als der Inhalt, reicht das nicht mehr.
   </p>
   <p>
-    Hier betritt <strong>White Noise</strong> das Spielfeld. [cite_start]Ein Messenger, gebaut auf dem Nostr-Protokoll, finanziert ohne Venture Capital, und technologisch so konzipiert, dass Überwachung mathematisch unmöglich wird[cite: 1, 3].
+    Hier betritt <strong>White Noise</strong> das Spielfeld. Ein Messenger, gebaut auf dem Nostr-Protokoll, finanziert ohne Venture Capital, und technologisch so konzipiert, dass Überwachung mathematisch unmöglich wird.
   </p>
 
   <h2>1. Das Problem: Walled Gardens und die Metadaten-Falle</h2>
@@ -120,49 +120,49 @@
     Selbst bei WhatsApp oder Signal sind deine Nachrichten „Ende-zu-Ende-verschlüsselt“ (E2EE). Das ist gut, aber nicht genug.
   </p>
   <ul>
-    <li><strong>Der Server sieht alles:</strong> Auch wenn Signal den Inhalt nicht lesen kann, sieht der Server den „Sozialgraphen“. Er weiß, dass du um 02:00 Uhr nachts mit einem investigativen Journalisten schreibst. [cite_start]Diese Metadaten sind für Geheimdienste oft wertvoller als der Text selbst[cite: 4].</li>
-    <li><strong>Identitätszwang:</strong> Du brauchst eine Telefonnummer. [cite_start]Damit ist deine digitale Identität unwiderruflich mit deiner physischen Person (SIM-Registrierung, KYC) verknüpft[cite: 4].</li>
+    <li><strong>Der Server sieht alles:</strong> Auch wenn Signal den Inhalt nicht lesen kann, sieht der Server den „Sozialgraphen“. Er weiß, dass du um 02:00 Uhr nachts mit einem investigativen Journalisten schreibst. Diese Metadaten sind für Geheimdienste oft wertvoller als der Text selbst.</li>
+    <li><strong>Identitätszwang:</strong> Du brauchst eine Telefonnummer. Damit ist deine digitale Identität unwiderruflich mit deiner physischen Person (SIM-Registrierung, KYC) verknüpft.</li>
     <li><strong>Zensur-Gefahr:</strong> Ein zentraler Server kann abgeschaltet oder blockiert werden. Eine App im Apple App Store kann auf Druck von Regierungen entfernt werden.</li>
   </ul>
 
   <h2>2. Die Lösung: White Noise & Nostr</h2>
   <p>
-    [cite_start]White Noise ist keine Firma, sondern Software, die ein Protokoll nutzt: <strong>Nostr</strong> (Notes and Other Stuff Transmitted by Relays)[cite: 8].
+    White Noise ist keine Firma, sondern Software, die ein Protokoll nutzt: <strong>Nostr</strong> (Notes and Other Stuff Transmitted by Relays).
   </p>
   <ul>
-    <li><strong>Keine Telefonnummer:</strong> Deine Identität ist ein kryptographisches Schlüsselpaar (Public Key <code>npub</code> / Private Key <code>nsec</code>). [cite_start]Niemand weiß, wer hinter dem Schlüssel steckt[cite: 8].</li>
-    <li><strong>Kein zentraler Server:</strong> Nachrichten laufen über „dumme“ Relays. Wenn ein Relay dich blockiert, nutzt du einfach einen anderen. [cite_start]Es gibt keinen „Kill Switch“[cite: 8].</li>
-    <li><strong>Freedom Tech:</strong> Hinter dem Projekt stehen Cypherpunks wie Jeff Gardner und Max Hillebrand. [cite_start]Finanziert wird es durch Spenden von <strong>OpenSats</strong> (u.a. Jack Dorsey) – keine Investoren, die deine Daten verkaufen wollen[cite: 3].</li>
+    <li><strong>Keine Telefonnummer:</strong> Deine Identität ist ein kryptographisches Schlüsselpaar (Public Key <code>npub</code> / Private Key <code>nsec</code>). Niemand weiß, wer hinter dem Schlüssel steckt.</li>
+    <li><strong>Kein zentraler Server:</strong> Nachrichten laufen über „dumme“ Relays. Wenn ein Relay dich blockiert, nutzt du einfach einen anderen. Es gibt keinen „Kill Switch“.</li>
+    <li><strong>Freedom Tech:</strong> Hinter dem Projekt stehen Cypherpunks wie Jeff Gardner und Max Hillebrand. Finanziert wird es durch Spenden von <strong>OpenSats</strong> (u.a. Jack Dorsey) – keine Investoren, die deine Daten verkaufen wollen.</li>
   </ul>
 
   <blockquote>
-    [cite_start]„White Noise ist der technische Versuch, das Machtgefälle zwischen Staat und Individuum wieder zugunsten des Individuums zu verschieben.“ [cite: 1]
+    „White Noise ist der technische Versuch, das Machtgefälle zwischen Staat und Individuum wieder zugunsten des Individuums zu verschieben.“
   </blockquote>
 
   <h2>3. Die Technik-Magie: MLS und NIP-EE</h2>
   <p>
-    Nostr war ursprünglich wie ein schwarzes Brett (Twitter-Alternative), nicht für private Chats gebaut. Frühere Versuche (NIP-04) waren kryptographisch schwach und leckten Metadaten. [cite_start]White Noise ändert das radikal durch die Implementierung von <strong>MLS (Messaging Layer Security)</strong> über den neuen Standard <strong>NIP-EE</strong>[cite: 1].
+    Nostr war ursprünglich wie ein schwarzes Brett (Twitter-Alternative), nicht für private Chats gebaut. Frühere Versuche (NIP-04) waren kryptographisch schwach und leckten Metadaten. White Noise ändert das radikal durch die Implementierung von <strong>MLS (Messaging Layer Security)</strong> über den neuen Standard <strong>NIP-EE</strong>.
   </p>
 
   <h3>Warum MLS alles ändert</h3>
   <p>
-    In herkömmlichen Messengern (Signal-Protokoll) ist Gruppenkommunikation ineffizient. Wenn du eine Nachricht an 100 Leute schickst, muss dein Handy sie 100-mal verschlüsseln. [cite_start]Das skaliert nicht[cite: 2].
+    In herkömmlichen Messengern (Signal-Protokoll) ist Gruppenkommunikation ineffizient. Wenn du eine Nachricht an 100 Leute schickst, muss dein Handy sie 100-mal verschlüsseln. Das skaliert nicht.
   </p>
   <p>
-    White Noise nutzt MLS (IETF RFC 9420). Dabei sind die Teilnehmer wie Blätter in einem Baum organisiert. [cite_start]Die Verschlüsselung ist hocheffizient (logarithmische Komplexität)[cite: 1, 2].
+    White Noise nutzt MLS (IETF RFC 9420). Dabei sind die Teilnehmer wie Blätter in einem Baum organisiert. Die Verschlüsselung ist hocheffizient (logarithmische Komplexität).
   </p>
   <ul>
-    [cite_start]<li><strong>Skalierbarkeit:</strong> Verschlüsselte Gruppen mit Tausenden Teilnehmern (z. B. Protestbewegungen) sind möglich, ohne dass das Handy glüht[cite: 2].</li>
-    [cite_start]<li><strong>Forward Secrecy:</strong> Selbst wenn dein Schlüssel heute gestohlen wird, können alte Nachrichten nicht entschlüsselt werden[cite: 1].</li>
-    <li><strong>Post-Compromise Security:</strong> Das System „heilt“ sich selbst. [cite_start]Sobald du einen neuen Schlüssel sendest (automatisch), wird ein Angreifer wieder ausgesperrt[cite: 17].</li>
+    <li><strong>Skalierbarkeit:</strong> Verschlüsselte Gruppen mit Tausenden Teilnehmern (z. B. Protestbewegungen) sind möglich, ohne dass das Handy glüht.</li>
+    <li><strong>Forward Secrecy:</strong> Selbst wenn dein Schlüssel heute gestohlen wird, können alte Nachrichten nicht entschlüsselt werden.</li>
+    <li><strong>Post-Compromise Security:</strong> Das System „heilt“ sich selbst. Sobald du einen neuen Schlüssel sendest (automatisch), wird ein Angreifer wieder ausgesperrt.</li>
   </ul>
 
   <h3>Tarnkappe für Metadaten: Sealed Sender</h3>
   <p>
-    [cite_start]Damit der Relay-Server nicht sieht, wer mit wem spricht, nutzt White Noise sogenannte „Gift Wraps“ (NIP-59)[cite: 4, 16].
+    Damit der Relay-Server nicht sieht, wer mit wem spricht, nutzt White Noise sogenannte „Gift Wraps“ (NIP-59).
   </p>
   <p>
-    Stell dir vor, du packst einen Brief in einen Umschlag, verschlüsselst ihn, und packst diesen Umschlag in einen weiteren Umschlag, der an niemanden Bestimmtes adressiert scheint (bzw. an einen zufälligen Schlüssel). Für den Relay sieht das alles nur aus wie „Weißes Rauschen“ (White Noise). [cite_start]Er leitet Daten weiter, ohne zu wissen, wer der echte Absender oder Empfänger ist[cite: 16].
+    Stell dir vor, du packst einen Brief in einen Umschlag, verschlüsselst ihn, und packst diesen Umschlag in einen weiteren Umschlag, der an niemanden Bestimmtes adressiert scheint (bzw. an einen zufälligen Schlüssel). Für den Relay sieht das alles nur aus wie „Weißes Rauschen“ (White Noise). Er leitet Daten weiter, ohne zu wissen, wer der echte Absender oder Empfänger ist.
   </p>
 
   <h2>4. Infrastruktur: Tor & Blossom</h2>
@@ -170,8 +170,8 @@
     Selbst die beste App hilft nicht, wenn der Server deine IP-Adresse sieht.
   </p>
   <ul>
-    <li><strong>Tor-Integration:</strong> White Noise ist darauf ausgelegt, über das Tor-Netzwerk zu laufen (aktuell via Orbot/Socks5, bald direkt integriert). [cite_start]Damit wird deine physische Adresse (IP) von deiner digitalen Identität (Nostr-Key) entkoppelt[cite: 18, 20].</li>
-    <li><strong>Blossom Server (Medien):</strong> Bilder und Sprachnachrichten werden nicht auf zentralen Servern gespeichert, sondern auf dezentralen „Blossom“-Servern. Der Clou: Die Dateien werden <em>vor</em> dem Upload verschlüsselt. Der Server hostet nur Datensalat. [cite_start]Den Schlüssel zum Entschlüsseln haben nur die Teilnehmer im Chat[cite: 21, 23].</li>
+    <li><strong>Tor-Integration:</strong> White Noise ist darauf ausgelegt, über das Tor-Netzwerk zu laufen (aktuell via Orbot/Socks5, bald direkt integriert). Damit wird deine physische Adresse (IP) von deiner digitalen Identität (Nostr-Key) entkoppelt.</li>
+    <li><strong>Blossom Server (Medien):</strong> Bilder und Sprachnachrichten werden nicht auf zentralen Servern gespeichert, sondern auf dezentralen „Blossom“-Servern. Der Clou: Die Dateien werden <em>vor</em> dem Upload verschlüsselt. Der Server hostet nur Datensalat. Den Schlüssel zum Entschlüsseln haben nur die Teilnehmer im Chat.</li>
   </ul>
 
   <h2>5. Zensurresistenz: Der Zap Store</h2>
@@ -179,7 +179,7 @@
     Was passiert, wenn Apple oder Google die App verbieten, weil sie keine Hintertüren einbauen will?
   </p>
   <p>
-    White Noise setzt strategisch auf den <strong>Zap Store</strong>. Das ist ein dezentraler App-Store auf Nostr-Basis. Entwickler signieren ihre Apps kryptographisch. [cite_start]Solange auch nur ein Relay das Manifest hostet, kannst du die App installieren – vorbei an den Torwächtern im Silicon Valley[cite: 27].
+    White Noise setzt strategisch auf den <strong>Zap Store</strong>. Das ist ein dezentraler App-Store auf Nostr-Basis. Entwickler signieren ihre Apps kryptographisch. Solange auch nur ein Relay das Manifest hostet, kannst du die App installieren – vorbei an den Torwächtern im Silicon Valley.
   </p>
 
   <div class="box">
@@ -203,10 +203,10 @@
 
   <h2>6. Alien-Fazit: Souveränität ist kein Feature, sondern Arbeit</h2>
   <p>
-    White Noise ist (noch) kein „Klick-und-Fertig“-Ersatz für WhatsApp. [cite_start]Die Verwaltung von Schlüsseln (Nsec) und die Nutzung von Tor erfordern ein Mindestmaß an technischem Verständnis[cite: 3].
+    White Noise ist (noch) kein „Klick-und-Fertig“-Ersatz für WhatsApp. Die Verwaltung von Schlüsseln (Nsec) und die Nutzung von Tor erfordern ein Mindestmaß an technischem Verständnis.
   </p>
   <p>
-    Aber es ist aktuell die wohl robusteste Antwort auf den Überwachungsstaat. [cite_start]Wenn die EU mit der Chat-Kontrolle kommt, ist White Noise technisch nicht in der Lage, zu kooperieren („Plausible Deniability“ durch Architektur)[cite: 28]. Es gibt keinen Server zum Beschlagnahmen und keinen CEO zum Verhaften.
+    Aber es ist aktuell die wohl robusteste Antwort auf den Überwachungsstaat. Wenn die EU mit der Chat-Kontrolle kommt, ist White Noise technisch nicht in der Lage, zu kooperieren („Plausible Deniability“ durch Architektur). Es gibt keinen Server zum Beschlagnahmen und keinen CEO zum Verhaften.
   </p>
   <p>
     Für Journalisten, Aktivisten und echte Eigentümer ihrer Daten ist das Projekt ein Leuchtturm. Es zeigt, dass Privatsphäre im 21. Jahrhundert möglich ist – wenn wir bereit sind, die bequemen Käfige der Tech-Giganten zu verlassen.
