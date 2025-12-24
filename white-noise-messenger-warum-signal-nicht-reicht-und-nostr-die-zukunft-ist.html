@@ -212,110 +212,21 @@
     Für Journalisten, Aktivisten und echte Eigentümer ihrer Daten ist das Projekt ein Leuchtturm. Es zeigt, dass Privatsphäre im 21. Jahrhundert möglich ist – wenn wir bereit sind, die bequemen Käfige der Tech-Giganten zu verlassen.
   </p>
 
-  <div class="box">
-  <h3>🧰 Tools für echte Eigentümer (Werbung/Affiliate)</h3>
-  <p style="font-size:0.95em;">
-    Wenn du Aktien und Bitcoin möglichst eigenverantwortlich halten willst, nutze nicht nur dein Bankdepot:
+  <h2>7. Das Fundament: Mach dein Handy zum digitalen Bunker</h2>
+  <p>
+    Ein sicherer Messenger ist nur die halbe Miete. Wenn dein Betriebssystem (Stock Android oder iOS)
+    jeden Tastaturanschlag protokolliert oder Screenshots macht, hilft auch die beste Verschlüsselung nichts.
+    Ein Messenger wie White Noise auf einem unsicheren Gerät ist wie eine Stahltür an einem Kartenhaus.
+  </p>
+  <p>
+    Echte Souveränität erreichst du erst mit einem gehärteten Betriebssystem: <strong>GrapheneOS</strong>.
+    Lies hier, warum das für mich der Goldstandard ist und wie du es installierst:
   </p>
   <ul>
     <li>
-      🇨🇭 <strong>Investieren mit Swissquote:</strong><br>
-      Ich nutze Swissquote in der Schweiz – dort kannst du saubere Namensaktien halten und hast keine
-      deutsche Bank dazwischen.<br>
-      👉 <a href="https://alien-investor.org/swissquote" target="_blank">https://alien-investor.org/swissquote</a>
+      🛡️ <strong>Hintergrund-Wissen:</strong><br>
+      <a href="https://alien-investor.org/grapheneos-sicheres-android.html">
+        GrapheneOS – sicheres Android für Menschen, die nicht überwacht werden wollen
+      </a>
     </li>
-    <li>
-      📊 <strong>US-Aktien über IBKR:</strong><br>
-      Für viele internationale Titel bietet sich Interactive Brokers als Zugang an – insbesondere in Kombination
-      mit DRS/Transfer Agenten.<br>
-      👉 <a href="https://alien-investor.org/interactive-brokers" target="_blank">https://alien-investor.org/interactive-brokers</a>
-    </li>
-    <li>
-      💥 <strong>Bitcoin kaufen in Europa – 21bitcoin:</strong><br>
-      Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges sats stapeln – ohne Shitcoins.<br>
-      Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du dauerhaft 0,2&nbsp;Prozentpunkte Gebührenreduktion
-      auf Sofort- und Sparplankäufe.<br>
-      👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
-    </li>
-    <li>
-      ₿ <strong>Bitcoin in Selbstverwahrung:</strong><br>
-      Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox – es gibt die klassische BitBox02 und die neue
-      BitBox für iPhone (Nova).<br>
-      👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
-    </li>
-    <li>
-      🛡️ <strong>Privacy &amp; Mail:</strong><br>
-      Für E-Mail, VPN und Cloud nutze ich Proton – datensparsam und ohne Big-Tech-Abhängigkeit.<br>
-      👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
-    </li>
-  </ul>
-  <p style="font-size:0.85em; color:#aaa;">
-    Hinweis: Bei einigen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit,
-    ohne dass es dich mehr kostet. Danke! 👽
-  </p>
-</div>
-
-  <div class="like-button">
-    <button id="likeButton">👍 Gefällt mir</button>
-    <span id="likeCount">0</span>
-    <span style="color:#bbb;">(Speicherung nur lokal im Browser)</span>
-  </div>
-
-  <div class="box">
-    <h3>📚 Quellen (Auswahl)</h3>
-    <p style="font-size:0.95em;">
-      Dieser Artikel basiert auf technischen Dokumentationen und Whitepapern zum White Noise Projekt, 
-      den offiziellen IETF-Spezifikationen zu MLS (RFC 9420) sowie Analysen zur NIP-EE Implementierung 
-      und dem Nostr-Protokoll (Stand: Dezember 2025).
-    </p>
-  </div>
-
-  <footer>
-    <p>📬 Kontakt:
-      <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>
-    </p>
-
-    <p style="font-size:0.9em; color:#bbb;">
-      👽 <strong>Haftungsausschluss:</strong><br>
-      Dieser Artikel ist keine Rechts-, Steuer- oder Anlageberatung.<br>
-      Ich teile hier nur meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
-      Technische Änderungen und rechtliche Rahmenbedingungen können sich ändern, prüfe dein Setup immer selbst.
-    </p>
-
-    <h3>💸 Unterstütze meine Arbeit</h3>
-    <ul>
-      <li>☕ Fiat-Spenden via Ko-fi:
-        <a href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener">https://ko-fi.com/alieninvestor</a>
-      </li>
-      <li>⚡ Bitcoin Lightning:
-        <code>alien_investor@strike.me</code>
-      </li>
-      <li>₿ Bitcoin Onchain:
-        <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code>
-      </li>
-    </ul>
-
-    <p><a href="blog.html">← Zurück zum Blog</a></p>
-  </footer>
-
-  <script>
-    (function() {
-      const storageKey = window.location.pathname + "-likes";
-      const btn = document.getElementById('likeButton');
-      const span = document.getElementById('likeCount');
-
-      let count = parseInt(localStorage.getItem(storageKey) || "0", 10);
-      span.textContent = count;
-
-      btn.addEventListener('click', function() {
-        count += 1;
-        span.textContent = count;
-        localStorage.setItem(storageKey, String(count));
-        btn.disabled = true;
-        btn.textContent = "Danke! 👽";
-      });
-    })();
-  </script>
-
-</body>
-</html>
+    <li style="margin-top:0.5em
