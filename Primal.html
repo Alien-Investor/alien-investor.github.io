@@ -185,13 +185,22 @@
     (CSPRNG) und erzeugt daraus robuste Schlüsselbits.
   </p>
   <pre><code># Erzeugt 32 Bytes (256 Bit) reinen Zufall als Hex-String
-openssl rand -hex 32 > raw_secret.hex
+openssl rand -hex 32 &gt; raw_secret.hex
 
 # Anzeigen (Niemals laut vorlesen!)
 cat raw_secret.hex</code></pre>
   <p>
     Ergebnis: Ein 64-Zeichen langer Hex-String. Das ist dein Raw Private Key.
   </p>
+  <p>
+    Wenn du den Key in Amber importieren willst, brauchst du das Nostr-Format (<code>nsec</code>).
+    Dafür encodieren wir den Hex-Key (wenn <code>nak</code> verfügbar ist):
+  </p>
+  <pre><code># Hex-Key ins nsec-Format encodieren (ohne den Key als Shell-Argument zu verwenden)
+./nak encode nsec &lt; raw_secret.hex &gt; nsec_key.txt
+
+# Anzeigen
+cat nsec_key.txt</code></pre>
 
   <h3>Option B: Der Standard-Weg (nak)</h3>
   <p>
@@ -199,7 +208,7 @@ cat raw_secret.hex</code></pre>
     Nostr-Format (<code>nsec</code>) encodieren.
   </p>
   <pre><code># Generiert den Private Key als Hex (Raw Secret)
-./nak key generate > raw_secret.hex
+./nak key generate &gt; raw_secret.hex
 
 # Encodiert den Hex-Key ins nsec-Format (ohne den Key als Shell-Argument zu verwenden)
 ./nak encode nsec &lt; raw_secret.hex &gt; nsec_key.txt
@@ -241,9 +250,10 @@ qrencode -t ANSIUTF8 -r nsec_key.txt</code></pre>
     Speicher von Amber und wird diesen idealerweise nie wieder verlassen.
   </p>
   <p>
-    <strong>Konfigurations-Hinweis:</strong> Stelle sicher, dass Amber für kritische Events (z. B. Kind 1: Text Posts,
-    Kind 4: DMs) immer um Erlaubnis fragt. Aktiviere „Always sign without prompting“ nur sehr gezielt (wenn überhaupt),
-    sonst kann ein kompromittierter Client Unfug signieren lassen.
+    <strong>Konfigurations-Hinweis:</strong> Stelle sicher, dass Amber für kritische Events immer um Erlaubnis fragt,
+    z. B. Kind 1 (Notes). Bei DMs hängt es vom verwendeten DM-Standard ab (älter: NIP-04 / Kind 4; moderner: NIP-17 in vielen Clients).
+    Aktiviere „Always sign without prompting“ nur sehr gezielt (wenn überhaupt), sonst kann ein kompromittierter Client
+    Unfug signieren lassen.
   </p>
 
   <h2>Teil V: Das Interface (Primal)</h2>
@@ -317,6 +327,16 @@ qrencode -t ANSIUTF8 -r nsec_key.txt</code></pre>
     „Vertraue niemandem. Verifiziere alles.“
   </blockquote>
 
+  <!-- NEU: Verlinkung deines GrapheneOS-Artikels (vor der Toolbox) -->
+  <div class="box">
+    <h3>📌 Weiterführend: GrapheneOS – warum das Fundament zählt</h3>
+    <p style="font-size:0.95em;">
+      Wenn du die wichtigsten Eigenschaften von GrapheneOS (Hardening, Rechte-Management, Sandboxing, Netzwerk-Kontrolle)
+      sauber verstehen willst, lies meinen Artikel:<br>
+      👉 <a href="https://alien-investor.org/grapheneos-sicheres-android.html" target="_blank" rel="noopener noreferrer">https://alien-investor.org/grapheneos-sicheres-android.html</a>
+    </p>
+  </div>
+
   <div class="box">
     <h3>🧰 Tools für echte Eigentümer (Werbung/Affiliate)</h3>
     <p style="font-size:0.95em;">
@@ -325,18 +345,18 @@ qrencode -t ANSIUTF8 -r nsec_key.txt</code></pre>
     <ul>
       <li>
         📱 <strong>GrapheneOS &amp; Pixel:</strong><br>
-        Das Fundament für mobile Sicherheit. Google-Pixel-Hardware ohne Google-Überwachung.<br>
-        👉 <a href="https://grapheneos.org" target="_blank">https://grapheneos.org</a>
+        Stark gehärtetes Android ohne Google-Apps/Play-Dienste (wenn du es so einrichtest) und mit Fokus auf Security-Hardening.<br>
+        👉 <a href="https://grapheneos.org" target="_blank" rel="noopener noreferrer">https://grapheneos.org</a>
       </li>
       <li>
         ₿ <strong>Bitcoin in Selbstverwahrung:</strong><br>
         Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox02.<br>
-        👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
+        👉 <a href="https://alien-investor.org/bitbox" target="_blank" rel="noopener noreferrer">https://alien-investor.org/bitbox</a>
       </li>
       <li>
         🛡️ <strong>Privacy &amp; Mail:</strong><br>
         Für E-Mail, VPN und Cloud nutze ich Proton – datensparsam und ohne Big-Tech-Abhängigkeit.<br>
-        👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
+        👉 <a href="https://alien-investor.org/proton" target="_blank" rel="noopener noreferrer">https://alien-investor.org/proton</a>
       </li>
     </ul>
     <p style="font-size:0.85em; color:#aaa;">
@@ -357,10 +377,10 @@ qrencode -t ANSIUTF8 -r nsec_key.txt</code></pre>
       Diese Anleitung basiert auf den offiziellen Dokumentationen der verwendeten Open-Source-Tools:
     </p>
     <ul>
-      <li><a href="https://github.com/fiatjaf/nak" target="_blank">nak (Nostr Army Knife) GitHub</a></li>
-      <li><a href="https://github.com/greenart7c3/Amber" target="_blank">Amber Signer GitHub</a></li>
-      <li><a href="https://tails.net" target="_blank">Tails OS Dokumentation</a></li>
-      <li><a href="https://github.com/nostr-protocol/nips" target="_blank">Nostr Implementation Possibilities (NIPs)</a></li>
+      <li><a href="https://github.com/fiatjaf/nak" target="_blank" rel="noopener noreferrer">nak (Nostr Army Knife) GitHub</a></li>
+      <li><a href="https://github.com/greenart7c3/Amber" target="_blank" rel="noopener noreferrer">Amber Signer GitHub</a></li>
+      <li><a href="https://tails.net" target="_blank" rel="noopener noreferrer">Tails OS Dokumentation</a></li>
+      <li><a href="https://github.com/nostr-protocol/nips" target="_blank" rel="noopener noreferrer">Nostr Implementation Possibilities (NIPs)</a></li>
     </ul>
   </div>
 
@@ -378,7 +398,7 @@ qrencode -t ANSIUTF8 -r nsec_key.txt</code></pre>
       <h2>💸 Unterstütze meine Arbeit</h2>
       <ul>
         <li>☕ Spenden via
-          <a href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener">Ko-fi</a>
+          <a href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener noreferrer">Ko-fi</a>
         </li>
         <li>⚡ Bitcoin Lightning:
           <code>alien_investor@strike.me</code>
@@ -393,17 +413,29 @@ qrencode -t ANSIUTF8 -r nsec_key.txt</code></pre>
 
   <script>
     (function() {
-      const storageKey = window.location.pathname + "-likes";
+      const baseKey = window.location.pathname;
+      const countKey = baseKey + "-likes";
+      const likedKey = baseKey + "-liked";
+
       const btn = document.getElementById('likeButton');
       const span = document.getElementById('likeCount');
 
-      let count = parseInt(localStorage.getItem(storageKey) || "0", 10);
+      let count = parseInt(localStorage.getItem(countKey) || "0", 10);
       span.textContent = count;
 
+      const alreadyLiked = localStorage.getItem(likedKey) === "true";
+      if (alreadyLiked) {
+        btn.disabled = true;
+        btn.textContent = "Danke! 👽";
+      }
+
       btn.addEventListener('click', function() {
+        if (localStorage.getItem(likedKey) === "true") return;
+
         count += 1;
         span.textContent = count;
-        localStorage.setItem(storageKey, String(count));
+        localStorage.setItem(countKey, String(count));
+        localStorage.setItem(likedKey, "true");
         btn.disabled = true;
         btn.textContent = "Danke! 👽";
       });
