@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>🛡️ NextDNS – Die Firewall gegen Überwachung und Zensur durch deinen Internetanbieter</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Schluss mit Tracking und Netzsperren: Warum Standard-DNS von Telekom & Vodafone deine Privatsphäre gefährdet und wie NextDNS dich schützt.">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 2em;
+    }
+    h1, h2, h3 {
+      color: #00ffcc;
+    }
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    em {
+      color: #ccc;
+    }
+    code {
+      background-color: #111;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      color: #0f0;
+      font-size: 0.95em;
+    }
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      padding-left: 1em;
+      margin: 2em 0;
+      color: #ddd;
+      font-style: italic;
+    }
+    ul {
+      margin-left: 1.2em;
+    }
+    .byline {
+      margin-top: -0.8em;
+      margin-bottom: 1.2em;
+      color: #ccc;
+      font-style: italic;
+    }
+    .box {
+      border: 1px solid #00ffcc;
+      background-color: #050505;
+      padding: 1em 1.2em;
+      margin: 2em 0;
+      border-radius: 8px;
+    }
+    .box h2, .box h3 {
+      margin-top: 0;
+    }
+    .like-button {
+      margin: 2em 0;
+      display: flex;
+      align-items: center;
+      gap: 0.75em;
+      font-size: 0.95em;
+    }
+    .like-button button {
+      background: #00ffcc;
+      color: #000;
+      border: none;
+      padding: 0.4em 0.9em;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .like-button span {
+      min-width: 2em;
+      display: inline-block;
+    }
+    button {
+      background-color: #111;
+      color: #fff;
+      border: 1px solid #444;
+      padding: 0.5em 1em;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #222;
+    }
+    footer {
+      margin-top: 3em;
+      padding-top: 2em;
+      border-top: 1px solid #333;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🛡️ NextDNS – Die Firewall gegen Überwachung und Zensur durch deinen Internetanbieter</h1>
+  <p class="byline"><em>von Alien Investor</em></p>
+
+  <p>
+    Das Domain Name System (DNS) ist das Telefonbuch des Internets. Ohne DNS weiß dein Browser nicht,
+    welche IP-Adresse hinter <code>google.de</code> oder <code>alien-investor.org</code> steckt.
+    In der Regel wird dieses Telefonbuch von deinem Internetanbieter (ISP) wie der Deutschen Telekom
+    oder Vodafone bereitgestellt.
+  </p>
+  <p>
+    Das Problem: Wer das Telefonbuch kontrolliert, sieht nicht nur, wen du anrufst – er kann
+    Anrufe auch blockieren oder dich falsch verbinden. Dein ISP-DNS ist heute ein kritischer Kontrollpunkt
+    für Datensammlung, Metadaten-Speicherung und Zensur durch die Hintertür.
+  </p>
+  <p>
+    Die Lösung für digitale Selbstverteidigung heißt für mich aktuell <strong>NextDNS</strong>.
+    Warum du wechseln solltest und was das technisch bedeutet, klären wir jetzt.
+  </p>
+
+  <h2>1. Der Status Quo: Dein ISP liest mit</h2>
+  <p>
+    Die großen deutschen Provider operieren in einem Spannungsfeld zwischen Netzstabilität,
+    Gesetzen und kommerziellen Interessen. Das Ergebnis ist für deine Privatsphäre oft ernüchternd.
+  </p>
+
+  <h3>Datenspeicherung und Marketing</h3>
+  <p>
+    Auch wenn die DSGVO gilt, nutzen ISPs Spielräume.
+  </p>
+  <ul>
+    <li>
+      <strong>Deutsche Telekom:</strong> Speichert DNS-Metadaten und IP-Adressen oft bis zu 7 Tage zur
+      „Missbrauchsbekämpfung“. Das ist legitim für die Netzsicherheit, bedeutet aber: Ein Protokoll
+      deines digitalen Lebens liegt eine Woche lang auf Abruf bereit.
+    </li>
+    <li>
+      <strong>Vodafone:</strong> Hier verschwimmt die Grenze zwischen Technik und Kommerz noch stärker.
+      Daten können – entsprechende Opt-Ins im Kleingedruckten vorausgesetzt – auch für Marketingzwecke
+      oder zur Segmentierung genutzt werden. Dein Surfverhalten verrät deine finanzielle Situation,
+      Gesundheit und politische Einstellung.
+    </li>
+  </ul>
+
+  <h3>Zensur durch die Hintertür: Die CUII</h3>
+  <p>
+    Noch problematischer ist die Rolle der „Clearingstelle Urheberrecht im Internet“ (CUII).
+    Das ist privatisierte Rechtsdurchsetzung. Rechteinhaber und ISPs entscheiden gemeinsam, welche
+    Seiten gesperrt werden – ohne Gerichtsurteil im Einzelfall.
+  </p>
+  <p>
+    Technisch ist das <strong>DNS-Spoofing</strong> (oder „Lying DNS“). Wenn du eine gesperrte Seite aufrufst,
+    lügt dich dein Provider an:
+  </p>
+  <ul>
+    <li>Er liefert nicht die echte IP-Adresse.</li>
+    <li>Stattdessen bekommst du eine Sperrseite oder einen technischen Fehler (NXDOMAIN).</li>
+  </ul>
+  <p>
+    Du akzeptierst damit ein gefiltertes Internet, dessen Grenzen von einem privaten Gremium gezogen werden.
+  </p>
+
+  <h2>2. NextDNS: Deine Firewall in der Cloud</h2>
+  <p>
+    NextDNS dreht den Spieß um. Es ist ein Cloud-basierter Resolver, der nicht auf „Durchleiten“,
+    sondern auf „Schützen“ programmiert ist.
+  </p>
+
+  <h3>Souveränität über deine Daten</h3>
+  <p>
+    Im Gegensatz zum ISP entscheidest du hier über das Logging.
+  </p>
+  <ul>
+    <li><strong>No-Logging:</strong> Du kannst einstellen, dass absolut nichts gespeichert wird.</li>
+    <li><strong>Datenresidenz:</strong> Wenn du Logs zur Fehleranalyse brauchst, kannst du als Speicherort
+    die <strong>Schweiz</strong> wählen. Damit entziehst du deine Daten dem direkten Zugriff durch
+    EU-Rechtshilfeabkommen oder der „14 Eyes“-Überwachungsallianz.</li>
+  </ul>
+
+  <h3>Aktive Abwehr von Trackern (CNAME Uncloaking)</h3>
+  <p>
+    Moderne Tracker tarnen sich oft als harmlose Unterseite der besuchten Website (z. B. <code>metrics.zeitung.de</code> statt <code>tracker.adtech.com</code>).
+    Browser-Blocker lassen sich davon oft täuschen. NextDNS löst diese Tarnung auf DNS-Ebene auf und
+    blockiert die Anfrage, bevor sie dein Gerät verlässt. Das schützt nicht nur den Browser, sondern
+    auch das gesamte Betriebssystem (Windows-Telemetrie, macOS Call-Home).
+  </p>
+
+  <h3>Schutz für IoT-Geräte</h3>
+  <p>
+    Dein Smart-TV (Samsung, Xiaomi etc.) und deine smarten Glühbirnen plaudern ständig nach Hause.
+    Da du auf diesen Geräten keinen Adblocker installieren kannst, ist NextDNS die einzige
+    wirksame Verteidigungslinie. Es blockiert die Telemetrie-Server der Hersteller direkt an der Quelle.
+  </p>
+
+  <blockquote>
+    „NextDNS ist nicht nur ein Telefonbuch, sondern ein Türsteher. Du bestimmst, wer in dein Netzwerk
+    rein darf und welche Daten rausgehen.“
+  </blockquote>
+
+  <h2>3. Performance und technische Realität</h2>
+  <p>
+    Ein häufiges Argument gegen externe DNS-Anbieter ist die Latenz (Ping).
+    Messungen zeigen jedoch, dass NextDNS durch Server in Frankfurt (DE-CIX) und Berlin extrem schnell ist
+    (oft ca. 8 ms Latenz).
+  </p>
+  <p>
+    <strong>Wichtiger als der Ping:</strong> Da NextDNS Werbung und Tracker gar nicht erst lädt,
+    muss dein Browser deutlich weniger Daten herunterladen. Das beschleunigt den Seitenaufbau im Alltag
+    spürbar mehr, als 5 Millisekunden Latenz dich kosten würden.
+  </p>
+
+  <h2>4. Die Nachteile: Komfort vs. Sicherheit</h2>
+  <p>
+    Wer Souveränität will, muss auch Verantwortung übernehmen. NextDNS ist kein „Set-and-Forget“-System
+    für Leute, die sich nicht kümmern wollen.
+  </p>
+
+  <h3>Das Problem mit den „False Positives“</h3>
+  <p>
+    Wenn du scharfe Filterlisten aktivierst, werden manchmal Dinge blockiert, die du brauchst.
+  </p>
+  <ul>
+    <li><strong>Banking-Apps:</strong> Deutsche Apps (Sparkasse, Volksbanken) nutzen oft Sicherheits-Frameworks,
+    die Tracker-ähnliche Techniken verwenden. Werden diese blockiert, stürzt die App ab.</li>
+    <li><strong>Smart Home:</strong> Blockierst du den Ad-Server deines Smart-TVs, funktionieren vielleicht
+    auch die Updates oder der App-Store nicht mehr.</li>
+  </ul>
+  <p>
+    Du musst bereit sein, ins Log zu schauen und Domains auf eine <strong>Whitelist</strong> zu setzen.
+    Das ist der Preis der Freiheit.
+  </p>
+
+  <h3>Vertrauensverschiebung (Shift of Trust)</h3>
+  <p>
+    Machen wir uns nichts vor: Du löst das Vertrauensproblem nicht komplett, du verschiebst es.
+    Statt der Telekom vertraust du nun NextDNS. Der Unterschied: NextDNS hat ein Geschäftsmodell, das auf
+    Datenschutz basiert, während ISPs Datenmonetarisierung als Zusatzgeschäft sehen.
+  </p>
+
+  <h2>5. Umsetzung: Wie du NextDNS startest</h2>
+
+  <h3>Der Königsweg: FritzBox mit DNS-over-TLS (DoT)</h3>
+  <p>
+    In Deutschland ist die FritzBox Standard. Seit Fritz!OS 7.20 unterstützt sie native Verschlüsselung.
+    Das ist der beste Weg, weil du so dein ganzes Heimnetzwerk auf einmal schützt.
+  </p>
+  <ol>
+    <li>Erstelle ein Profil auf der NextDNS-Webseite.</li>
+    <li>Gehe in der FritzBox zu <code>Internet -> Zugangsdaten -> DNS-Server</code>.</li>
+    <li>Aktiviere „Verschlüsselte Namensauflösung im Internet (DNS over TLS)“.</li>
+    <li>Trage deine NextDNS-Adresse ein (z. B. <code>[Deine-ID].dns.nextdns.io</code>).</li>
+    <li>Wichtig: Aktiviere die Zertifikatsprüfung ("Strict Mode"), um Manipulationen auszuschließen.</li>
+  </ol>
+  <p>
+    <em>Pro-Tipp:</em> Da deutsche Anschlüsse dynamische IPs haben, musst du in der FritzBox zusätzlich
+    ein DynDNS-Update einrichten (Link-IP Feature), damit NextDNS weiß, dass du es bist.
+  </p>
+
+  <h3>Unterwegs: iOS und Android</h3>
+  <p>
+    Für dein Smartphone gibt es keine App-Pflicht.
+    iOS unterstützt native Konfigurationsprofile (signierte XML-Dateien), die tief ins System greifen
+    und sehr stabil laufen. Android bietet unter „Privates DNS“ eine einfache Einstellung für DoT.
+    So bist du auch im mobilen Netz oder im fremden WLAN geschützt.
+  </p>
+
+  <h2>6. Alien-Fazit: Hol dir die Hoheit zurück</h2>
+  <p>
+    Der Wechsel zu einem privaten Resolver wie NextDNS ist ein strategischer Schritt.
+    Du entziehst dich der Massenüberwachung durch ISPs und der Zensur durch die CUII.
+    Gleichzeitig härtest du dein Netzwerk gegen Malware und Phishing.
+  </p>
+  <p>
+    Ja, es erfordert am Anfang etwas Arbeit (Whitelisting). Aber für jeden, der Bitcoin hält,
+    sensible Daten verarbeitet oder einfach nicht der gläserne Bürger sein will, ist dieser Schritt alternativlos.
+    <strong>Standard-Einstellungen sind für Touristen. Eigentümer konfigurieren ihre Infrastruktur selbst.</strong>
+  </p>
+
+  <div class="box">
+  <h3>🧰 Tools für echte Eigentümer (Werbung/Affiliate)</h3>
+  <p style="font-size:0.95em;">
+    Wenn du Aktien und Bitcoin möglichst eigenverantwortlich halten willst, nutze nicht nur dein Bankdepot:
+  </p>
+  <ul>
+    <li>
+      🇨🇭 <strong>Investieren mit Swissquote:</strong><br>
+      Ich nutze Swissquote in der Schweiz – dort kannst du saubere Namensaktien halten und hast keine
+      deutsche Bank dazwischen.<br>
+      👉 <a href="https://alien-investor.org/swissquote" target="_blank">https://alien-investor.org/swissquote</a>
+    </li>
+    <li>
+      📊 <strong>US-Aktien über IBKR:</strong><br>
+      Für viele internationale Titel bietet sich Interactive Brokers als Zugang an – insbesondere in Kombination
+      mit DRS/Transfer Agenten.<br>
+      👉 <a href="https://alien-investor.org/interactive-brokers" target="_blank">https://alien-investor.org/interactive-brokers</a>
+    </li>
+    <li>
+      💥 <strong>Bitcoin kaufen in Europa – 21bitcoin:</strong><br>
+      Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges sats stapeln – ohne Shitcoins.<br>
+      Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du dauerhaft 0,2&nbsp;Prozentpunkte Gebührenreduktion
+      auf Sofort- und Sparplankäufe.<br>
+      👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
+    </li>
+    <li>
+      ₿ <strong>Bitcoin in Selbstverwahrung:</strong><br>
+      Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox – es gibt die klassische BitBox02 und die neue
+      BitBox für iPhone (Nova).<br>
+      👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
+    </li>
+    <li>
+      🛡️ <strong>Privacy &amp; Mail:</strong><br>
+      Für E-Mail, VPN und Cloud nutze ich Proton – datensparsam und ohne Big-Tech-Abhängigkeit.<br>
+      👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
+    </li>
+  </ul>
+  <p style="font-size:0.85em; color:#aaa;">
+    Hinweis: Bei einigen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit,
+    ohne dass es dich mehr kostet. Danke! 👽
+  </p>
+</div>
+
+  <div class="like-button">
+    <button id="likeButton">👍 Gefällt mir</button>
+    <span id="likeCount">0</span>
+    <span style="color:#bbb;">(Speicherung nur lokal im Browser)</span>
+  </div>
+
+  <div class="box">
+    <h3>📚 Quellen (Auswahl)</h3>
+    <p style="font-size:0.95em;">
+      Dieser Artikel basiert auf technischen Evaluierungsberichten zu privaten DNS-Resolvern vs. ISP-Infrastrukturen,
+      den offiziellen Datenschutzbestimmungen von Deutsche Telekom und Vodafone sowie technischen Dokumentationen
+      von NextDNS und der CUII. Stand der technischen Daten: 2025.
+    </p>
+  </div>
+
+  <script>
+    (function() {
+      const storageKey = window.location.pathname + "-likes";
+      const btn = document.getElementById('likeButton');
+      const span = document.getElementById('likeCount');
+
+      let count = parseInt(localStorage.getItem(storageKey) || "0", 10);
+      span.textContent = count;
+
+      btn.addEventListener('click', function() {
+        count += 1;
+        span.textContent = count;
+        localStorage.setItem(storageKey, String(count));
+        btn.disabled = true;
+        btn.textContent = "Danke! 👽";
+      });
+    })();
+  </script>
+
+  <footer>
+    <p>📬 Kontakt:
+      <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>
+    </p>
+    <p style="font-size:0.95em; color:#bbb;">
+      👽 <strong>Haftungsausschluss:</strong><br>
+      Keine Finanz-, Steuer- oder Rechtsberatung – nur persönliche Alien-Meinung.<br>
+      Technik entwickelt sich weiter. Prüfe dein Setup selbst und handle auf eigene Verantwortung.
+    </p>
+    <div class="support" style="margin-top: 2em;">
+      <h2>💸 Unterstütze meine Arbeit</h2>
+      <ul>
+        <li>☕ Spenden via
+          <a href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener">Ko-fi</a>
+        </li>
+        <li>⚡ Bitcoin Lightning:
+          <code>alien_investor@strike.me</code>
+        </li>
+        <li>₿ Bitcoin Onchain:
+          <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code>
+        </li>
+      </ul>
+    </div>
+    <p><a href="blog.html">← Zurück zum Blog</a></p>
+  </footer>
+
+</body>
+</html>
