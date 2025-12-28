@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>🔐 Das Souveräne Protokoll – Architektur einer unkonfiszierbaren digitalen Identität | Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Nostr Guide für Paranoide: Wie du eine unkonfiszierbare digitale Identität erstellst. Air-Gapped, Linux, Amber und Primal. Weg vom Plattform-Feudalismus.">
+  <meta name="description" content="Nostr Guide für echte Eigentümer: Wie du eine unkonfiszierbare digitale Identität erstellst. Air-Gapped, Linux, Amber und Primal. Keine Kompromisse bei der Sicherheit.">
   <style>
     body {
       background-color: #000;
@@ -126,204 +126,203 @@
   <p class="byline"><em>von Alien Investor</em></p>
 
   <p>
-    Wir leben in einer Epoche des digitalen Feudalismus. Auf Plattformen wie X (ehemals Twitter), Instagram
-    oder LinkedIn bist du lediglich ein Pächter. Dein Account, deine Reichweite und deine Reputation sind
-    ein „Mietverhältnis“, das jederzeit durch einen simplen Datenbank-Befehl beendet werden kann.
+    Auf Nostr bist du keine Zeile in der Datenbank eines Tech-Giganten. Du bist ein kryptographischer Schlüssel.
+    Dein privater Schlüssel (<code>nsec</code>) ist deine Stimme, deine Identität und dein Ruf.
+    Wer diesen Schlüssel hat, <strong>ist</strong> du.
   </p>
   <p>
-    Ein echter Eigentümer akzeptiert keine ungedeckten Verbindlichkeiten. Deshalb wechseln wir von Plattformen
-    (zentralisiert) zu Protokollen (dezentral).
+    Die meisten Nutzer begehen täglich digitalen Harakiri: Sie kopieren ihren nsec aus einem Passwort-Manager
+    und fügen ihn direkt in Apps ein. Das funktioniert, ist aber aus sicherheitsarchitektonischer Sicht ein Albtraum.
+    Dein „Login“ ist eigentlich eine Kapitulation.
   </p>
   <p>
-    In <strong>Nostr</strong> ist deine Identität kein Eintrag auf dem Server eines Silicon-Valley-Konzerns,
-    sondern ein mathematischer Beweis. Dein Privater Schlüssel (nsec) ist das Äquivalent zu einem Goldbarren
-    im Tresor. Wer den Schlüssel hat, <em>ist</em> die Identität. Dieser Guide beschreibt den einzigen akzeptablen
-    Weg für Sicherheits-Maximalisten, eine Nostr-Identität zu erschaffen: Offline, isoliert und kryptographisch rein.
+    Dieser Guide zeigt den einzigen Weg, der für den „Alien Investor“ akzeptabel ist: Die strikte Trennung von
+    Identität (Key) und Interface (App).
   </p>
 
-  <h2>Teil I: Die Vorbereitung (Der Reinraum)</h2>
+  <h2>Phase I: Der Reinraum (Vorbereitung)</h2>
   <p>
-    Erstelle deine ewige Identität niemals auf einem kompromittierten Windows- oder macOS-System, das permanent
-    online ist („Hot Machine“). Malware und Keylogger warten nur darauf. Wir benötigen eine sterile Umgebung.
+    Erstelle deine ewige Identität niemals auf einem kompromittierten Windows- oder macOS-System („Hot Machine“).
+    Wir benötigen eine sterile Umgebung.
   </p>
   
   <h3>Das Werkzeug</h3>
   <ul>
     <li>
-      <strong>Betriebssystem:</strong> Tails OS (oder ein frisches Linux-Live-System). Es läuft nur im RAM
-      und „vergisst“ alles nach dem Ausschalten.
+      <strong>OS:</strong> Tails OS (oder ein frisches Linux-Live-System). Es läuft nur im RAM und „vergisst“
+      alles nach dem Ausschalten.
     </li>
     <li>
-      <strong>Hardware:</strong> Ein Laptop (WLAN deaktiviert/Kabel gezogen) und ein Android-Smartphone
-      (idealerweise mit GrapheneOS, Stock Android ist akzeptabel).
+      <strong>Hardware:</strong> Ein Laptop (WLAN deaktiviert/Kabel gezogen) und ein Android-Smartphone.
     </li>
     <li>
-      <strong>Software (vorab auf USB-Stick laden):</strong>
-      <ul>
-        <li><code>nak</code> (Nostr Army Knife – Linux Binary)</li>
-        <li><code>Amber</code> (APK von GitHub/F-Droid – Android Signer)</li>
-      </ul>
+      <strong>Software (vorab auf USB laden):</strong> <code>nak</code> (Linux Binary) und <code>Amber</code>
+      (APK von F-Droid/GitHub).
     </li>
   </ul>
 
-  <div class="highlight">
-    <strong>Das Mindset:</strong> Wir gehen davon aus, dass jede Online-Umgebung feindselig ist
-    („Adversarial Mindset“). Clipboard-Sniffer und Malware warten nur darauf, einen String, der mit
-    <code>nsec1...</code> beginnt, abzugreifen.
-  </div>
-
-  <h2>Teil II: Die Genesis (Offline im Terminal)</h2>
+  <h2>Phase II: Die Genesis (Offline im Terminal)</h2>
   <p>
-    Fahre dein Linux-System hoch. Ziehe das Netzwerkkabel. Deaktiviere WLAN. Wir sind jetzt komplett „Air-Gapped“.
-    Wir nutzen das Terminal, um echte Entropie (Zufall) zu erzeugen. Wir vertrauen keinen Browser-Generatoren.
+    Fahre das Linux-System hoch. Trenne das Internet. Wir sind jetzt „Air-Gapped“. Wir vertrauen keinen
+    Browser-Generatoren, sondern mathematisch reiner Entropie im Terminal.
   </p>
 
   <h3>Option A: Der Puristen-Weg (OpenSSL)</h3>
   <p>
-    Jedes Linux-System hat OpenSSL. Es nutzt das Rauschen deiner Hardware (Tastatur-Interrupts, Mausbewegungen),
-    um unvorhersehbare Zahlen zu generieren.
+    Nutzt das Hardware-Rauschen für echten Zufall.
   </p>
   <pre><code># Erzeugt 32 Bytes (256 Bit) reinen Zufall als Hex-String
 openssl rand -hex 32 > raw_secret.hex
 
 # Anzeigen (Niemals laut vorlesen!)
 cat raw_secret.hex</code></pre>
-  <p>
-    Ergebnis: Ein 64-Zeichen langer Hex-String. Das ist dein Raw Private Key.
-  </p>
 
   <h3>Option B: Der Standard-Weg (nak)</h3>
   <p>
-    Falls du <code>nak</code> auf dem USB-Stick hast, kannst du direkt das Nostr-Format erzeugen.
+    Erzeugt direkt das Nostr-Format.
   </p>
   <pre><code># Generiert den Key direkt im nsec-Format
 ./nak key generate > nsec_key.txt
 
 # Anzeigen
 cat nsec_key.txt</code></pre>
-  <p>
-    <strong>Wichtig:</strong> Dieser Schlüssel existiert jetzt nur im RAM dieses Offline-Rechners.
-    Sobald du ihn ausschaltest, ist er weg. Wir müssen ihn nun sichern und übertragen.
-  </p>
+  
+  <div class="highlight">
+    <strong>Warnung:</strong> Dieser Schlüssel existiert jetzt nur im flüchtigen RAM.
+    Sobald der Strom weg ist, ist er weg.
+  </div>
 
-  <h2>Teil III: Die Übertragung (Die Air-Gap Brücke)</h2>
+  <h2>Phase III: Die Brücke (Optischer Transfer)</h2>
   <p>
-    Wie bekommen wir den Schlüssel auf das Smartphone, ohne das Internet oder Kabel zu nutzen? Optisch.
-    Wir wandeln den Schlüssel im Terminal in einen QR-Code um.
+    Das Clipboard ist ein öffentlicher Marktplatz. Malware scannt Zwischenablagen nach Strings, die mit
+    <code>nsec1...</code> beginnen. Cloud-Tastaturen (Gboard, SwiftKey) senden Eingaben an Server.
+    Deshalb übertragen wir den Key optisch, ohne Kabel oder Funk.
   </p>
-  <pre><code># Für den Hex-String oder nsec-String
+  <pre><code># Wandelt den nsec im Terminal in einen QR-Code um
 qrencode -t ANSIUTF8 $(cat nsec_key.txt)</code></pre>
+
+  <h2>Phase IV: Der Tresor (Amber & Signer-Logik)</h2>
   <p>
-    Ein QR-Code erscheint in deinem Terminal. Das ist die einzige Brücke zwischen deiner Cold-Storage-Erstellung
-    und deinem Hot-Device.
+    Wir fügen den Key niemals direkt in eine Social-Media-App wie Primal oder Damus ein. Social-Apps sind komplex,
+    hängen am Internet und verarbeiten fremde Daten (Bilder, Videos). Ein Exploit dort würde deinen Key exponieren
+    („Hot Wallet Falle“).
+  </p>
+  <p>
+    Wir nutzen <strong>Amber</strong>.
+  </p>
+  <p>
+    Amber ist ein Event-Signer. Die App tut genau eine Sache: Sie bewacht deinen Key und signiert Dinge für dich
+    – aber sie verrät den Key niemals.
   </p>
 
-  <h2>Teil IV: Der Tresor (Amber)</h2>
-  <p>
-    Wir geben den Schlüssel niemals direkt in eine Social-Media-App ein. Wir nutzen <strong>Amber</strong>.
-    Amber ist ein „Signer“. Es fungiert als dein digitales Hardware-Wallet für Nostr.
-  </p>
+  <h3>Der Prozess</h3>
   <ol>
-    <li>Nimm dein Android-Smartphone.</li>
-    <li>Schalte den <strong>Flugmodus</strong> ein. (Totale Isolation).</li>
-    <li>Installiere/Öffne Amber.</li>
-    <li>Wähle „Schlüssel importieren“ → „Scan QR“.</li>
-    <li>Scanne den QR-Code vom Linux-Bildschirm.</li>
-    <li>Sichere Amber sofort mit einer PIN oder Biometrie.</li>
+    <li>Smartphone in den <strong>Flugmodus</strong>.</li>
+    <li>Öffne Amber -> „Schlüssel importieren“ -> „Scan QR“.</li>
+    <li>Scanne den Code vom Linux-Terminal.</li>
+    <li>Sichere Amber biometrisch (Fingerprint).</li>
+    <li>Entziehe Amber (optional aber empfohlen) in den Android-Einstellungen die Berechtigung für den Internetzugriff.</li>
   </ol>
-  <p>
-    Erst jetzt darfst du den Flugmodus deaktivieren. Dein <code>nsec</code> liegt nun verschlüsselt im sicheren
-    Speicher von Amber und wird diesen nie wieder verlassen.
-  </p>
-  <p>
-    <strong>Konfigurations-Hinweis:</strong> Stelle sicher, dass Amber für kritische Events (Kind 1: Text Posts,
-    Kind 4: DMs) immer um Erlaubnis fragt. Aktiviere nicht „Always sign without prompting“ für alles.
-  </p>
 
-  <h2>Teil V: Das Interface (Primal)</h2>
+  <h3>Die Logik dahinter (Scheckbuch-Analogie)</h3>
+  <ul>
+    <li>
+      <strong>Der alte Weg (Key in der App):</strong> Du gibst der App dein ganzes Scheckbuch und unterschreibst
+      Blanko-Schecks. Die App kann alles tun.
+    </li>
+    <li>
+      <strong>Der Signer-Weg (Amber):</strong> Die App kommt mit einem ausgefüllten Scheck (einem Event) zu dir
+      und fragt: „Kannst du das bitte unterschreiben?“ Amber prüft es, signiert es kryptographisch und gibt nur
+      die Signatur zurück. Der Key verlässt Amber nie.
+    </li>
+  </ul>
+
+  <h2>Phase V: Das Interface (Primal & NIP-55)</h2>
   <p>
-    Jetzt installieren wir den Client, also das Fenster zur Welt. Wir nutzen beispielsweise <strong>Primal</strong>
-    wegen der Geschwindigkeit und User Experience (Amethyst ist eine valide Alternative).
-  </p>
-  <h3>Der kritische Moment</h3>
-  <p>
-    Beim ersten Start fragt Primal nach einem Login. Millionen Nutzer tippen hier ihren nsec ein.
-    <strong>Du tust das nicht.</strong>
+    Jetzt installieren wir den Client (z.B. Primal). Wenn du Primal startest, wirst du nach einem Login gefragt.
+    Hier scheitern die meisten. Sie tippen ihren nsec ein. <strong>Du tust das nicht.</strong>
   </p>
   <ul>
-    <li>Wähle die Option „Log in with External Signer“ (oder das Schlüsselsymbol).</li>
+    <li>Wähle beim Login „Log in with External Signer“ (oft ein Schlüssel-Symbol oder die Option, nur den Public Key/npub einzugeben).</li>
     <li>Primal sendet ein Signal an dein Handy (Android Intent).</li>
     <li>Amber öffnet sich: „Primal requests your public key. Allow?“</li>
     <li>Bestätige dies.</li>
   </ul>
-  <p>
-    Was ist passiert? Primal hat nur deinen öffentlichen Schlüssel (npub) erhalten. Primal weiß nicht, wie
-    dein privater Schlüssel lautet.
-  </p>
-  <p>
-    Wenn du jetzt einen Post verfasst:
-  </p>
-  <ol>
-    <li>Primal erstellt den Text.</li>
-    <li>Primal schickt den Text an Amber.</li>
-    <li>Du bestätigst in Amber (oder per Auto-Sign, wenn du es für einfache Posts erlaubt hast).</li>
-    <li>Amber signiert kryptographisch und gibt nur die <strong>Signatur</strong> zurück.</li>
-    <li>Primal sendet den signierten Post ins Netzwerk.</li>
-  </ol>
-  <p>
-    Selbst wenn Primal gehackt wird, ist dein Account sicher. Sie können deinen Schlüssel nicht stehlen,
-    weil sie ihn nie hatten.
-  </p>
 
-  <h2>Teil VI: Das Backup (Stahl statt Papier)</h2>
+  <h3>Das Ergebnis</h3>
   <p>
-    Digitale Daten korrumpieren. Papier verbrennt. Ein echter Alien Investor sichert für die Ewigkeit.
+    Du nutzt den Client nur noch als Interface („Viewport“). Dein Key liegt sicher im Tresor von Amber („Vault“).
+    Selbst wenn Primal morgen gehackt wird oder ein böses Update ausrollt, läuft der Angriff ins Leere.
+    Sie können deine Identität nicht stehlen, weil sie sie gar nicht haben.
+  </p>
+  
+  <div class="highlight">
+    <strong>Pro-Tipp für Umsteiger („The Primal Nuke“):</strong><br>
+    Falls du Primal schon installiert hattest: Einfaches Ausloggen reicht nicht. Gehe zu Android Einstellungen ->
+    Apps -> Primal -> Speicher -> Daten löschen. Zwinge das System, den Speicherbereich physikalisch zu bereinigen,
+    bevor du dich neu via Signer einloggst.
+  </div>
+
+  <h2>Phase VI: Die Ewigkeit (Backup)</h2>
+  <p>
+    Software ist vergänglich. Papier verbrennt. Ein „Alien Investor“ sichert seinen Fortbestand gegen die Elemente.
   </p>
   <ul>
     <li>
-      <strong>Der Code:</strong> Das, was wir in Teil II generiert haben (Hex oder Seed Phrase), ist dein Backup.
+      <strong>Das Artefakt:</strong> Der Hex-Code oder die Seed-Phrase aus Phase II.
     </li>
     <li>
-      <strong>Das Medium:</strong> Stanze diesen Code in eine Edelstahlplatte (V2A/V4A).
+      <strong>Das Medium:</strong> Stanze diesen Code in eine Edelstahlplatte.
     </li>
     <li>
-      <strong>Die Lagerung:</strong> Ein Exemplar gehört in den Tresor, ein weiteres an einen geografisch
-      getrennten, sicheren Ort („Dead Man Switch“).
+      <strong>Die Lagerung:</strong> Ein Exemplar in den Tresor, ein weiteres geographisch getrennt
+      („Dead Man Switch“).
     </li>
   </ul>
 
-  <h2>Alien-Fazit: Willkommen in der Souveränität</h2>
+  <h2>Fazit: Autorität zurückgewinnen</h2>
   <p>
-    Du hast soeben eine digitale Identität geschaffen, die:
+    Bequemlichkeit ist der Feind der Sicherheit. Copy-Pasting von Private Keys ist eine schlechte Angewohnheit
+    aus der Web2-Welt, die wir ablegen müssen.
   </p>
-  <ul>
-    <li>Air-Gapped geboren wurde (keine Malware konnte sie bei der Geburt sehen).</li>
-    <li>Segregiert gelagert ist (der Client kennt das Geheimnis nicht).</li>
-    <li>Physisch gesichert ist (Stahl überdauert Feuer).</li>
-  </ul>
   <p>
-    Das ist der Unterschied zwischen „einen Account haben“ und „eine Identität besitzen“. Du bist jetzt kein
-    User mehr. Du bist ein souveräner Knoten im Netzwerk.
+    Mit diesem Setup verwandelst du dein Smartphone effektiv in ein „Hardware Wallet Light“. Du tauschst
+    ein systemisches Risiko gegen eine gehärtete Architektur.
+    Du bist jetzt kein User mehr. Du bist souverän.
   </p>
-
-  <blockquote class="highlight">
-    „Vertraue niemandem. Verifiziere alles.“
-  </blockquote>
+  <p>
+    <em>Money, Power, Bitcoin — and OPSEC.</em>
+  </p>
 
   <div class="box">
     <h3>🧰 Tools für echte Eigentümer (Werbung/Affiliate)</h3>
     <p style="font-size:0.95em;">
-      Wenn du Souveränität ernst meinst, nutze Hardware und Dienste, die dich respektieren:
+      Wenn du Aktien und Bitcoin möglichst eigenverantwortlich halten willst, nutze nicht nur dein Bankdepot:
     </p>
     <ul>
       <li>
-        📱 <strong>GrapheneOS &amp; Pixel:</strong><br>
-        Das Fundament für mobile Sicherheit. Google-Pixel-Hardware ohne Google-Überwachung.<br>
-        👉 <a href="https://grapheneos.org" target="_blank">https://grapheneos.org</a>
+        🇨🇭 <strong>Investieren mit Swissquote:</strong><br>
+        Ich nutze Swissquote in der Schweiz – dort kannst du saubere Namensaktien halten und hast keine
+        deutsche Bank dazwischen.<br>
+        👉 <a href="https://alien-investor.org/swissquote" target="_blank">https://alien-investor.org/swissquote</a>
+      </li>
+      <li>
+        📊 <strong>US-Aktien über IBKR:</strong><br>
+        Für viele internationale Titel bietet sich Interactive Brokers als Zugang an – insbesondere in Kombination
+        mit DRS/Transfer Agenten.<br>
+        👉 <a href="https://alien-investor.org/interactive-brokers" target="_blank">https://alien-investor.org/interactive-brokers</a>
+      </li>
+      <li>
+        💥 <strong>Bitcoin kaufen in Europa – 21bitcoin:</strong><br>
+        Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges sats stapeln – ohne Shitcoins.<br>
+        Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du dauerhaft 0,2&nbsp;Prozentpunkte Gebührenreduktion
+        auf Sofort- und Sparplankäufe.<br>
+        👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
       </li>
       <li>
         ₿ <strong>Bitcoin in Selbstverwahrung:</strong><br>
-        Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox02.<br>
+        Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox – es gibt die klassische BitBox02 und die neue
+        BitBox für iPhone (Nova).<br>
         👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
       </li>
       <li>
@@ -345,16 +344,11 @@ qrencode -t ANSIUTF8 $(cat nsec_key.txt)</code></pre>
   </div>
 
   <div class="box">
-    <h3>📚 Quellen & Ressourcen</h3>
+    <h3>📚 Ressourcen</h3>
     <p style="font-size:0.95em;">
-      Diese Anleitung basiert auf den offiziellen Dokumentationen der verwendeten Open-Source-Tools:
+      Diese Anleitung basiert auf den Best Practices für OpSec im Nostr-Protokoll und den offiziellen
+      Dokumentationen der verwendeten Tools (nak, Amber, Tails OS).
     </p>
-    <ul>
-      <li><a href="https://github.com/fiatjaf/nak" target="_blank">nak (Nostr Army Knife) GitHub</a></li>
-      <li><a href="https://github.com/greenart7c3/Amber" target="_blank">Amber Signer GitHub</a></li>
-      <li><a href="https://tails.net" target="_blank">Tails OS Dokumentation</a></li>
-      <li><a href="https://github.com/nostr-protocol/nips" target="_blank">Nostr Implementation Possibilities (NIPs)</a></li>
-    </ul>
   </div>
 
   <footer>
@@ -363,9 +357,9 @@ qrencode -t ANSIUTF8 $(cat nsec_key.txt)</code></pre>
     </p>
     <p style="font-size:0.95em; color:#bbb;">
       👽 <strong>Haftungsausschluss:</strong><br>
-      Dieser Artikel ist keine IT-Sicherheitsberatung oder Rechtsberatung.<br>
+      Dieser Artikel ist keine IT-Sicherheits- oder Rechtsberatung.<br>
       Ich teile hier nur mein persönliches Setup – unabhängig, rebellisch und frei.<br>
-      Sicherheit ist ein Prozess, kein Zustand. Handle eigenverantwortlich.
+      Sicherheit ist ein Prozess. Handle eigenverantwortlich.
     </p>
     <div class="support" style="margin-top: 2em;">
       <h2>💸 Unterstütze meine Arbeit</h2>
