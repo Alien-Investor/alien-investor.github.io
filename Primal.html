@@ -141,7 +141,11 @@
   <h3>Das Werkzeug</h3>
   <ul>
     <li><strong>Smartphone:</strong> Android (idealerweise GrapheneOS). Flugmodus muss möglich sein.</li>
-    <li><strong>Signer:</strong> <strong>Amber</strong> (erzeugt und verwahrt den Key).</li>
+    <li>
+      <strong>Signer:</strong> <strong>Amber</strong> (erzeugt und verwahrt den Key).<br>
+      <em>Optional:</em> Es gibt auch eine <strong>„Offline“-Variante</strong> von Amber (in den Releases als <code>amber-offline-...</code>),
+      wenn du den Signer möglichst „stumm“ halten willst.
+    </li>
     <li><strong>Client:</strong> <strong>Primal</strong> (oder Amethyst) – aber nur per External Signer.</li>
   </ul>
 
@@ -167,6 +171,19 @@
     <strong>Wichtig:</strong> Der Private Key bleibt in Amber. Du behandelst Amber wie ein Hardware-Wallet für Nostr.
     Keine Experimente, keine „Always sign without prompting“-Bequemlichkeit ohne Grund.
   </div>
+
+  <h3>GrapheneOS Extra: Network-Berechtigung für Amber deaktivieren</h3>
+  <p>
+    Wenn du GrapheneOS nutzt, kannst du Amber zusätzlich härten: Entziehe Amber die <strong>Network</strong>-Berechtigung.
+    Dann hat Amber weder direkten noch indirekten Netzwerkzugriff – und bleibt ein reiner Signer.
+  </p>
+  <ul>
+    <li><strong>Einstellungen → Apps → Amber → Berechtigungen → Network → AUS</strong></li>
+    <li>
+      Wenn du Amber jemals als „Bunker“ oder für netzwerkbasierte Funktionen nutzen willst, musst du Network natürlich wieder aktivieren.
+      Für das reine Signieren im Zusammenspiel mit einem Client ist „Network AUS“ aber ein sehr sauberes Setup.
+    </li>
+  </ul>
 
   <h3>Option C (für Einsteiger): „Ich lasse mir einen nsec geben“</h3>
   <p>
@@ -299,10 +316,12 @@
   <div class="box">
     <h3>📚 Quellen & Ressourcen</h3>
     <p style="font-size:0.95em;">
-      Offizielle Ressourcen zu den verwendeten Open-Source-Komponenten:
+      Offizielle Ressourcen zu den verwendeten Komponenten:
     </p>
     <ul>
-      <li><a href="https://github.com/greenart7c3/Amber" target="_blank" rel="noopener noreferrer">Amber Signer (GitHub)</a></li>
+      <li><a href="https://github.com/greenart7c3/Amber" target="_blank" rel="noopener noreferrer">Amber (GitHub)</a></li>
+      <li><a href="https://github.com/greenart7c3/Amber/releases" target="_blank" rel="noopener noreferrer">Amber Releases (inkl. Offline-APKs)</a></li>
+      <li><a href="https://grapheneos.org/features" target="_blank" rel="noopener noreferrer">GrapheneOS Features (Network Permission Toggle)</a></li>
       <li><a href="https://github.com/nostr-protocol/nips" target="_blank" rel="noopener noreferrer">Nostr NIPs (Spezifikationen)</a></li>
       <li><a href="https://primal.net" target="_blank" rel="noopener noreferrer">Primal (Client)</a></li>
     </ul>
