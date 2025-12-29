@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>🔐 Das Souveräne Protokoll – Architektur einer unkonfiszierbaren digitalen Identität | Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Nostr Guide für Paranoide: Wie du eine unkonfiszierbare digitale Identität erstellst. Air-Gapped, Linux, Amber und Primal. Weg vom Plattform-Feudalismus.">
+  <meta name="description" content="Nostr Guide für Paranoide: Wie du eine unkonfiszierbare digitale Identität erstellst. Amber als Signer, Primal als Client. Weg vom Plattform-Feudalismus.">
   <style>
     body {
       background-color: #000;
@@ -15,19 +15,10 @@
       margin: auto;
       padding: 2em;
     }
-    h1, h2, h3 {
-      color: #00ffcc;
-    }
-    a {
-      color: #00ffcc;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    em {
-      color: #ccc;
-    }
+    h1, h2, h3 { color: #00ffcc; }
+    a { color: #00ffcc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    em { color: #ccc; }
     code {
       background-color: #111;
       padding: 0.2em 0.4em;
@@ -51,12 +42,8 @@
       color: #ddd;
       font-style: italic;
     }
-    ul {
-      margin-left: 1.2em;
-    }
-    li {
-      margin-bottom: 0.5em;
-    }
+    ul { margin-left: 1.2em; }
+    li { margin-bottom: 0.5em; }
     .byline {
       margin-top: -0.8em;
       margin-bottom: 1.2em;
@@ -70,9 +57,7 @@
       margin: 2em 0;
       border-radius: 8px;
     }
-    .box h2, .box h3 {
-      margin-top: 0;
-    }
+    .box h2, .box h3 { margin-top: 0; }
     .like-button {
       margin: 2em 0;
       display: flex;
@@ -101,9 +86,7 @@
       border-radius: 5px;
       cursor: pointer;
     }
-    button:hover {
-      background-color: #222;
-    }
+    button:hover { background-color: #222; }
     footer {
       margin-top: 3em;
       padding-top: 2em;
@@ -136,211 +119,130 @@
   </p>
   <p>
     In <strong>Nostr</strong> ist deine Identität kein Eintrag auf dem Server eines Silicon-Valley-Konzerns,
-    sondern ein mathematischer Beweis. Dein Privater Schlüssel (nsec) ist das Äquivalent zu einem Goldbarren
-    im Tresor. Wer den Schlüssel hat, <em>ist</em> die Identität. Dieser Guide beschreibt den einzigen akzeptablen
-    Weg für Sicherheits-Maximalisten, eine Nostr-Identität zu erschaffen: Offline, isoliert und kryptographisch rein.
+    sondern ein mathematischer Beweis. Dein Privater Schlüssel (<code>nsec</code>) ist das Äquivalent zu einem Goldbarren
+    im Tresor. Wer den Schlüssel hat, <em>ist</em> die Identität.
   </p>
+  <p>
+    Dieser Guide beschreibt den pragmatischen Weg, der für die meisten Sicherheits-Fans der einzig sinnvolle ist:
+    <strong>Key wird im Signer erzeugt und bleibt dort.</strong> Der Client bekommt nur den <code>npub</code> – und Signaturen.
+  </p>
+
+  <div class="highlight">
+    <strong>Regel #1:</strong> Tippe deinen <code>nsec</code> niemals in Primal, Amethyst oder irgendeinen Browser-Login.
+    Der <code>nsec</code> gehört in den Signer. Punkt.
+  </div>
 
   <h2>Teil I: Die Vorbereitung (Der Reinraum)</h2>
   <p>
-    Erstelle deine ewige Identität niemals auf einem kompromittierten Windows- oder macOS-System, das permanent
-    online ist („Hot Machine“). Malware und Keylogger warten nur darauf. Wir benötigen eine sterile Umgebung.
+    Erstelle deine Identität nicht in einer Umgebung, der du nicht vertraust. Wenn du GrapheneOS nutzt: perfekt.
+    Wenn nicht: so gut wie möglich absichern.
   </p>
-  
+
   <h3>Das Werkzeug</h3>
   <ul>
-    <li>
-      <strong>Betriebssystem:</strong> Tails OS (oder ein frisches Linux-Live-System). Es läuft primär im RAM
-      und „vergisst“ ohne aktiv genutzten Persistent Storage alles nach dem Ausschalten.
-    </li>
-    <li>
-      <strong>Hardware:</strong> Ein Laptop (WLAN deaktiviert/Kabel gezogen) und ein Android-Smartphone
-      (idealerweise mit GrapheneOS, Stock Android ist akzeptabel).
-    </li>
-    <li>
-      <strong>Software (vorab auf USB-Stick laden):</strong>
-      <ul>
-        <li><code>nak</code> (Nostr Army Knife – Linux Binary)</li>
-        <li><code>qrencode</code> (QR-Code im Terminal; falls nicht vorhanden, als Binary mitbringen)</li>
-        <li><code>Amber</code> (APK von GitHub/F-Droid – Android Signer)</li>
-      </ul>
-    </li>
+    <li><strong>Smartphone:</strong> Android (idealerweise GrapheneOS). Flugmodus muss möglich sein.</li>
+    <li><strong>Signer:</strong> <strong>Amber</strong> (erzeugt und verwahrt den Key).</li>
+    <li><strong>Client:</strong> <strong>Primal</strong> (oder Amethyst) – aber nur per External Signer.</li>
   </ul>
 
   <div class="highlight">
-    <strong>Das Mindset:</strong> Wir gehen davon aus, dass jede Online-Umgebung feindselig ist
-    („Adversarial Mindset“). Clipboard-Sniffer und Malware warten nur darauf, einen String, der mit
-    <code>nsec1...</code> beginnt, abzugreifen.
+    <strong>Das Mindset:</strong> Wir gehen davon aus, dass jede Online-Umgebung feindselig ist.
+    Clipboard-Sniffer und Malware warten nur darauf, einen String, der mit <code>nsec1...</code> beginnt, abzugreifen.
   </div>
 
-  <h2>Teil II: Die Genesis (Offline im Terminal)</h2>
+  <h2>Teil II: Die Genesis (Key-Erzeugung direkt in Amber)</h2>
   <p>
-    Fahre dein Linux-System hoch. Ziehe das Netzwerkkabel. Deaktiviere WLAN. Wir sind jetzt komplett „Air-Gapped“.
-    Wir nutzen das Terminal, um echte Entropie (Zufall) zu erzeugen. Wir vertrauen keinen Browser-Generatoren.
+    Wir lassen den Schlüssel nicht von irgendeiner Website erzeugen. Wir erzeugen ihn dort, wo er hingehört:
+    <strong>im Signer</strong>.
   </p>
 
-  <h3>Option A: Der Puristen-Weg (OpenSSL)</h3>
-  <p>
-    Jedes Linux-System hat OpenSSL. Es zieht Zufall aus dem kryptographischen Zufallszahlengenerator des Betriebssystems
-    (CSPRNG) und erzeugt daraus robuste Schlüsselbits.
-  </p>
-  <pre><code># Erzeugt 32 Bytes (256 Bit) reinen Zufall als Hex-String
-openssl rand -hex 32 &gt; raw_secret.hex
+  <ol>
+    <li><strong>Flugmodus an.</strong> Optional: WLAN/Bluetooth zusätzlich aus.</li>
+    <li><strong>Amber öffnen</strong> und <strong>„Neuen Account erstellen“</strong> / „Create new“ wählen.</li>
+    <li>Amber erzeugt ein neues Keypair (Private Key + Public Key).</li>
+    <li><strong>Amber sofort absichern:</strong> PIN/Biometrie, System-Sperre aktiv.</li>
+  </ol>
 
-# Maximalisten-Sanity-Check: einmal Pubkey ableiten (wenn Fehler: neu erzeugen)
-./nak key public &lt; raw_secret.hex &gt; /dev/null</code></pre>
-  <p>
-    Ergebnis: Ein 64-Zeichen langer Hex-String. Das ist dein Raw Private Key.
-  </p>
-  <p>
-    Wenn du den Key in Amber importieren willst, brauchst du das Nostr-Format (<code>nsec</code>).
-    Dafür encodieren wir den Hex-Key:
-  </p>
-  <pre><code># Hex-Key ins nsec-Format encodieren (ohne den Key als Shell-Argument zu verwenden)
-./nak encode nsec &lt; raw_secret.hex &gt; nsec_key.txt</code></pre>
+  <div class="highlight">
+    <strong>Wichtig:</strong> Der Private Key bleibt in Amber. Du behandelst Amber wie ein Hardware-Wallet für Nostr.
+    Keine Experimente, keine „Always sign without prompting“-Bequemlichkeit ohne Grund.
+  </div>
 
-  <h3>Option B: Der Standard-Weg (nak)</h3>
+  <h3>Option C (für Einsteiger): „Ich lasse mir einen nsec geben“</h3>
   <p>
-    Falls du <code>nak</code> auf dem USB-Stick hast, kannst du den Key sauber erzeugen und anschließend ins
-    Nostr-Format (<code>nsec</code>) encodieren.
+    Manche lassen sich den <code>nsec</code> von einer App oder einer anderen Person erzeugen, weil sie es technisch nicht können.
+    Das ist möglich, aber du musst verstehen: Du kaufst dir damit <strong>Vertrauen</strong>.
   </p>
-  <pre><code># Generiert den Private Key als Hex (Raw Secret)
-./nak key generate &gt; raw_secret.hex
-
-# Encodiert den Hex-Key ins nsec-Format
-./nak encode nsec &lt; raw_secret.hex &gt; nsec_key.txt</code></pre>
-  <p>
-    <strong>Wichtig:</strong> Dieser Schlüssel existiert nur in der Live-Session (RAM),
-    solange du keine Persistenz aktivierst und nichts auf ein Laufwerk speicherst.
-  </p>
-
-  <h3>Option C: „Ich lasse den nsec erzeugen“ (Komfort gegen Vertrauen)</h3>
-  <p>
-    Viele Leute können (oder wollen) das technische Setup nicht selbst machen und lassen sich ihren <code>nsec</code>
-    von einer App, einem Tool oder sogar von einer anderen Person erzeugen. Das ist als Einstieg möglich – aber du
-    musst verstehen, was du damit kaufst: <strong>Vertrauen</strong>.
-  </p>
-
   <div class="highlight">
     <strong>Harter Fakt:</strong> Wer deinen <code>nsec</code> erzeugt oder sieht, kann theoretisch auch deine Identität übernehmen.
-    Behandle jeden fremd erzeugten <code>nsec</code> grundsätzlich so, als könnte er kompromittiert sein.
+    Behandle jeden fremd erzeugten <code>nsec</code> so, als könnte er kompromittiert sein.
   </div>
-
   <p>
-    Wenn du diesen Weg gehst, gilt eine Regel: <strong>Der nsec gehört so schnell wie möglich in einen Signer wie Amber</strong>.
-    Nicht in Primal. Nicht in Amethyst. Nicht in irgendeinen Browser-Login.
+    Wenn du diesen Weg gehst, gilt eine Regel: <strong>Der nsec gehört so schnell wie möglich in Amber</strong>.
+    Nicht in Primal. Nicht in Amethyst. Nicht in einen Browser.
   </p>
 
-  <ul>
-    <li><strong>Sofortmaßnahme:</strong> Importiere den <code>nsec</code> direkt in Amber und nutze danach nur noch „External Signer“ im Client.</li>
-    <li><strong>Kein Cloud-Kram:</strong> Niemals per E-Mail, Messenger, Notizen-App, Screenshot oder Passwort-Manager hin- und herschieben.</li>
-    <li><strong>Wenn Transfer nötig ist:</strong> Am besten optisch per QR (und nicht per Copy &amp; Paste über die Zwischenablage).</li>
-    <li><strong>Wenn du doch Copy &amp; Paste machst:</strong> Einmal. Danach Zwischenablage leeren, Gerät sperren/neu starten. Android merkt sich Clipboard oft länger als man denkt.</li>
-  </ul>
-
+  <h2>Teil III: Das Interface (Primal)</h2>
   <p>
-    Für Sicherheits-Maximalisten ist Option C nur eine <em>Übergangslösung</em>. Wenn du später bereit bist,
-    machst du eine echte Air-Gap-Genesis (Option A/B) und migrierst: neuen Key, neuer <code>npub</code>,
-    und du kündigst die neue Identität auf dem alten Account an.
+    Jetzt installieren wir den Client, also das Fenster zur Welt. Wir nutzen <strong>Primal</strong> wegen der Geschwindigkeit
+    und User Experience (Amethyst ist eine valide Alternative).
   </p>
 
-  <h2>Teil III: Die Übertragung (Die Air-Gap Brücke)</h2>
-  <p>
-    Wie bekommen wir den Schlüssel auf das Smartphone, ohne das Internet oder Kabel zu nutzen? Optisch.
-    Wir wandeln den Schlüssel im Terminal in einen QR-Code um.
-  </p>
-  <pre><code># QR-Code aus Datei erzeugen (Key taucht nicht als Shell-Argument auf)
-qrencode -t ANSIUTF8 &lt; nsec_key.txt</code></pre>
-  <p>
-    Ein QR-Code erscheint in deinem Terminal. Das ist die einzige Brücke zwischen deiner Cold-Storage-Erstellung
-    und deinem Hot-Device.
-  </p>
-
-  <h2>Teil IV: Der Tresor (Amber)</h2>
-  <p>
-    Wir geben den Schlüssel niemals direkt in eine Social-Media-App ein. Wir nutzen <strong>Amber</strong>.
-    Amber ist ein „Signer“. Es fungiert als dein digitales Hardware-Wallet für Nostr.
-  </p>
-  <ol>
-    <li>Nimm dein Android-Smartphone.</li>
-    <li>Schalte den <strong>Flugmodus</strong> ein. (Totale Isolation).</li>
-    <li>Installiere/Öffne Amber.</li>
-    <li>Wähle „Schlüssel importieren“ → „Scan QR“.</li>
-    <li>Scanne den QR-Code vom Linux-Bildschirm.</li>
-    <li>Sichere Amber sofort mit einer PIN oder Biometrie.</li>
-  </ol>
-  <p>
-    Erst jetzt darfst du den Flugmodus deaktivieren. Dein <code>nsec</code> liegt nun verschlüsselt in Amber
-    und wird diesen idealerweise nie wieder verlassen.
-  </p>
-  <p>
-    <strong>Konfigurations-Hinweis:</strong> Stelle sicher, dass Amber für kritische Events immer um Erlaubnis fragt
-    (z. B. Kind 1: Text Notes). Bei DMs hängt es vom Standard ab: älter NIP-04 (Kind 4, deprecated), moderner NIP-17
-    (u. a. Gift Wrap Kind 1059 / DM-Kinds 14/15 je nach Client-Flow). 
-    Aktiviere „Always sign without prompting“ nur sehr gezielt (wenn überhaupt).
-  </p>
-
-  <h2>Teil V: Das Interface (Primal)</h2>
-  <p>
-    Jetzt installieren wir den Client, also das Fenster zur Welt. Wir nutzen beispielsweise <strong>Primal</strong>
-    wegen der Geschwindigkeit und User Experience (Amethyst ist eine valide Alternative).
-  </p>
   <h3>Der kritische Moment</h3>
   <p>
-    Beim ersten Start fragt Primal nach einem Login. Millionen Nutzer tippen hier ihren nsec ein.
+    Beim ersten Start fragt Primal nach einem Login. Millionen Nutzer tippen hier ihren <code>nsec</code> ein.
     <strong>Du tust das nicht.</strong>
   </p>
+
   <ul>
-    <li>Wähle die Option „Log in with External Signer“ (oder das Schlüsselsymbol).</li>
-    <li>Primal ruft Amber über den Android External Signer Flow nach NIP-55 auf (Intents/Content Resolver, je nach App/Modus).</li>
-    <li>Amber öffnet sich: „Primal requests your public key. Allow?“</li>
+    <li>Wähle „Log in with External Signer“ (oder das Schlüsselsymbol).</li>
+    <li>Primal ruft Amber als External Signer auf.</li>
+    <li>Amber fragt: „Primal requests your public key. Allow?“</li>
     <li>Bestätige dies.</li>
   </ul>
+
   <p>
-    Was ist passiert? Primal hat nur deinen öffentlichen Schlüssel (npub) erhalten. Primal weiß nicht, wie
-    dein privater Schlüssel lautet.
+    Was ist passiert? Primal hat nur deinen öffentlichen Schlüssel (<code>npub</code>) erhalten. Primal kennt das Geheimnis nicht.
   </p>
-  <p>
-    Wenn du jetzt einen Post verfasst:
-  </p>
+
+  <p>Wenn du postest:</p>
   <ol>
     <li>Primal erstellt den Text.</li>
     <li>Primal schickt die Signaturanfrage an Amber.</li>
-    <li>Du bestätigst in Amber (oder per bewusst gesetzter Auto-Sign-Regel, falls du das so konfiguriert hast).</li>
-    <li>Amber signiert kryptographisch und gibt nur die <strong>Signatur</strong> zurück.</li>
+    <li>Du bestätigst in Amber.</li>
+    <li>Amber signiert und gibt nur die <strong>Signatur</strong> zurück.</li>
     <li>Primal sendet den signierten Post ins Netzwerk.</li>
   </ol>
-  <p>
-    Selbst wenn Primal kompromittiert wird, ist dein Schlüssel nicht automatisch verloren, weil der Client ihn nie hatte.
-    <strong>Aber:</strong> Wenn dein Smartphone kompromittiert ist oder du Amber zu großzügig freigibst, kann auch dieses Setup
-    missbraucht werden. Souveränität heißt: minimale Rechte, maximale Skepsis.
-  </p>
 
-  <h2>Teil VI: Das Backup (Stahl statt Papier)</h2>
+  <div class="highlight">
+    <strong>Reality Check:</strong> Das schützt dich vor „Client klaut nsec“. Es schützt dich nicht, wenn dein Smartphone komplett kompromittiert ist
+    oder du Amber zu großzügig freigibst. Souveränität heißt: minimale Rechte, maximale Skepsis.
+  </div>
+
+  <h2>Teil IV: Das Backup (Stahl statt Papier)</h2>
   <p>
     Digitale Daten korrumpieren. Papier verbrennt. Ein echter Alien Investor sichert für die Ewigkeit.
   </p>
+
   <ul>
-    <li>
-      <strong>Der Code:</strong> Der Private Key aus Teil II (als <code>nsec</code> oder Hex) ist dein Backup.
-    </li>
-    <li>
-      <strong>Das Medium:</strong> Stanze diesen Code in eine Edelstahlplatte (V2A/V4A).
-    </li>
-    <li>
-      <strong>Die Lagerung:</strong> Ein Exemplar gehört in den Tresor, ein weiteres an einen geografisch
-      getrennten, sicheren Ort.
-    </li>
+    <li><strong>Der Code:</strong> Dein Private Key (<code>nsec</code>) ist dein Backup.</li>
+    <li><strong>Das Medium:</strong> Stanze ihn in Edelstahl (V2A/V4A) oder lagere ihn extrem sicher offline.</li>
+    <li><strong>Die Lagerung:</strong> Ein Exemplar in den Tresor, ein weiteres an einen geografisch getrennten Ort.</li>
   </ul>
+
+  <div class="highlight">
+    <strong>Regel #2:</strong> Kein Cloud-Backup, keine Screenshots, kein Messenger, keine Notizen-App, kein Copy &amp; Paste-Marathon.
+    Einmal sauber sichern. Dann bleibt der <code>nsec</code> in Amber.
+  </div>
 
   <h2>Alien-Fazit: Willkommen in der Souveränität</h2>
   <p>
     Du hast soeben eine digitale Identität geschaffen, die:
   </p>
   <ul>
-    <li>Air-Gapped geboren wurde (keine Malware konnte sie bei der Geburt sehen).</li>
+    <li>Im Signer geboren wurde (nicht in einem zufälligen Client).</li>
     <li>Segregiert gelagert ist (der Client kennt das Geheimnis nicht).</li>
-    <li>Physisch gesichert ist (Stahl überdauert Feuer).</li>
+    <li>Physisch gesichert werden kann (Stahl überdauert Feuer).</li>
   </ul>
   <p>
     Das ist der Unterschied zwischen „einen Account haben“ und „eine Identität besitzen“. Du bist jetzt kein
@@ -351,7 +253,6 @@ qrencode -t ANSIUTF8 &lt; nsec_key.txt</code></pre>
     „Vertraue niemandem. Verifiziere alles.“
   </blockquote>
 
-  <!-- NEU: Verlinkung deines GrapheneOS-Artikels (vor der Toolbox) -->
   <div class="box">
     <h3>📌 Weiterführend: GrapheneOS – warum das Fundament zählt</h3>
     <p style="font-size:0.95em;">
@@ -398,13 +299,12 @@ qrencode -t ANSIUTF8 &lt; nsec_key.txt</code></pre>
   <div class="box">
     <h3>📚 Quellen & Ressourcen</h3>
     <p style="font-size:0.95em;">
-      Diese Anleitung basiert auf den offiziellen Dokumentationen der verwendeten Open-Source-Tools:
+      Offizielle Ressourcen zu den verwendeten Open-Source-Komponenten:
     </p>
     <ul>
-      <li><a href="https://github.com/fiatjaf/nak" target="_blank" rel="noopener noreferrer">nak (Nostr Army Knife) GitHub</a></li>
-      <li><a href="https://github.com/greenart7c3/Amber" target="_blank" rel="noopener noreferrer">Amber Signer GitHub</a></li>
-      <li><a href="https://tails.net" target="_blank" rel="noopener noreferrer">Tails OS Dokumentation</a></li>
-      <li><a href="https://github.com/nostr-protocol/nips" target="_blank" rel="noopener noreferrer">Nostr Implementation Possibilities (NIPs)</a></li>
+      <li><a href="https://github.com/greenart7c3/Amber" target="_blank" rel="noopener noreferrer">Amber Signer (GitHub)</a></li>
+      <li><a href="https://github.com/nostr-protocol/nips" target="_blank" rel="noopener noreferrer">Nostr NIPs (Spezifikationen)</a></li>
+      <li><a href="https://primal.net" target="_blank" rel="noopener noreferrer">Primal (Client)</a></li>
     </ul>
   </div>
 
