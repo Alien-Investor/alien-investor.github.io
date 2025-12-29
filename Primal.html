@@ -172,32 +172,24 @@
     Keine Experimente, keine „Always sign without prompting“-Bequemlichkeit ohne Grund.
   </div>
 
+  <div class="highlight">
+    <strong>Keine Fremd-Erzeugung:</strong> Lass dir niemals einen <code>nsec</code> von anderen erzeugen oder zuschicken.
+    Wer den <code>nsec</code> sieht, kann theoretisch deine Identität übernehmen. Erzeuge den Key direkt in Amber
+    und nutze danach ausschließlich „External Signer“ im Client.
+  </div>
+
   <h3>GrapheneOS Extra: Network-Berechtigung für Amber deaktivieren</h3>
   <p>
     Wenn du GrapheneOS nutzt, kannst du Amber zusätzlich härten: Entziehe Amber die <strong>Network</strong>-Berechtigung.
-    Dann hat Amber weder direkten noch indirekten Netzwerkzugriff – und bleibt ein reiner Signer.
+    Dann hat Amber keinen Netzwerkzugriff – und bleibt ein reiner Signer.
   </p>
   <ul>
     <li><strong>Einstellungen → Apps → Amber → Berechtigungen → Network → AUS</strong></li>
     <li>
-      Wenn du Amber jemals als „Bunker“ oder für netzwerkbasierte Funktionen nutzen willst, musst du Network natürlich wieder aktivieren.
-      Für das reine Signieren im Zusammenspiel mit einem Client ist „Network AUS“ aber ein sehr sauberes Setup.
+      Wenn du Amber jemals für netzwerkbasierte Funktionen nutzen willst, musst du Network wieder aktivieren.
+      Für das reine Signieren im Zusammenspiel mit einem Client ist „Network AUS“ ein sehr sauberes Setup.
     </li>
   </ul>
-
-  <h3>Option C (für Einsteiger): „Ich lasse mir einen nsec geben“</h3>
-  <p>
-    Manche lassen sich den <code>nsec</code> von einer App oder einer anderen Person erzeugen, weil sie es technisch nicht können.
-    Das ist möglich, aber du musst verstehen: Du kaufst dir damit <strong>Vertrauen</strong>.
-  </p>
-  <div class="highlight">
-    <strong>Harter Fakt:</strong> Wer deinen <code>nsec</code> erzeugt oder sieht, kann theoretisch auch deine Identität übernehmen.
-    Behandle jeden fremd erzeugten <code>nsec</code> so, als könnte er kompromittiert sein.
-  </div>
-  <p>
-    Wenn du diesen Weg gehst, gilt eine Regel: <strong>Der nsec gehört so schnell wie möglich in Amber</strong>.
-    Nicht in Primal. Nicht in Amethyst. Nicht in einen Browser.
-  </p>
 
   <h2>Teil III: Das Interface (Primal)</h2>
   <p>
@@ -319,8 +311,7 @@
       Offizielle Ressourcen zu den verwendeten Komponenten:
     </p>
     <ul>
-      <li><a href="https://github.com/greenart7c3/Amber" target="_blank" rel="noopener noreferrer">Amber (GitHub)</a></li>
-      <li><a href="https://github.com/greenart7c3/Amber/releases" target="_blank" rel="noopener noreferrer">Amber Releases (inkl. Offline-APKs)</a></li>
+      <li><a href="https://github.com/greenart7c3/Amber/releases" target="_blank" rel="noopener noreferrer">Amber (Releases inkl. Offline-APK)</a></li>
       <li><a href="https://grapheneos.org/features" target="_blank" rel="noopener noreferrer">GrapheneOS Features (Network Permission Toggle)</a></li>
       <li><a href="https://github.com/nostr-protocol/nips" target="_blank" rel="noopener noreferrer">Nostr NIPs (Spezifikationen)</a></li>
       <li><a href="https://primal.net" target="_blank" rel="noopener noreferrer">Primal (Client)</a></li>
