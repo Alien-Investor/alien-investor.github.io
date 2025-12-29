@@ -187,20 +187,17 @@
   <pre><code># Erzeugt 32 Bytes (256 Bit) reinen Zufall als Hex-String
 openssl rand -hex 32 &gt; raw_secret.hex
 
-# Anzeigen (Niemals laut vorlesen!)
-cat raw_secret.hex</code></pre>
+# Maximalisten-Sanity-Check: einmal Pubkey ableiten (wenn Fehler: neu erzeugen)
+./nak key public &lt; raw_secret.hex &gt; /dev/null</code></pre>
   <p>
     Ergebnis: Ein 64-Zeichen langer Hex-String. Das ist dein Raw Private Key.
   </p>
   <p>
     Wenn du den Key in Amber importieren willst, brauchst du das Nostr-Format (<code>nsec</code>).
-    Dafür encodieren wir den Hex-Key (wenn <code>nak</code> verfügbar ist):
+    Dafür encodieren wir den Hex-Key:
   </p>
   <pre><code># Hex-Key ins nsec-Format encodieren (ohne den Key als Shell-Argument zu verwenden)
-./nak encode nsec &lt; raw_secret.hex &gt; nsec_key.txt
-
-# Anzeigen
-cat nsec_key.txt</code></pre>
+./nak encode nsec &lt; raw_secret.hex &gt; nsec_key.txt</code></pre>
 
   <h3>Option B: Der Standard-Weg (nak)</h3>
   <p>
@@ -210,14 +207,41 @@ cat nsec_key.txt</code></pre>
   <pre><code># Generiert den Private Key als Hex (Raw Secret)
 ./nak key generate &gt; raw_secret.hex
 
-# Encodiert den Hex-Key ins nsec-Format (ohne den Key als Shell-Argument zu verwenden)
-./nak encode nsec &lt; raw_secret.hex &gt; nsec_key.txt
-
-# Anzeigen
-cat nsec_key.txt</code></pre>
+# Encodiert den Hex-Key ins nsec-Format
+./nak encode nsec &lt; raw_secret.hex &gt; nsec_key.txt</code></pre>
   <p>
-    <strong>Wichtig:</strong> Dieser Schlüssel existiert jetzt nur im RAM dieses Offline-Rechners.
-    Sobald du ihn ausschaltest, ist er weg. Wir müssen ihn nun sichern und übertragen.
+    <strong>Wichtig:</strong> Dieser Schlüssel existiert nur in der Live-Session (RAM),
+    solange du keine Persistenz aktivierst und nichts auf ein Laufwerk speicherst.
+  </p>
+
+  <h3>Option C: „Ich lasse den nsec erzeugen“ (Komfort gegen Vertrauen)</h3>
+  <p>
+    Viele Leute können (oder wollen) das technische Setup nicht selbst machen und lassen sich ihren <code>nsec</code>
+    von einer App, einem Tool oder sogar von einer anderen Person erzeugen. Das ist als Einstieg möglich – aber du
+    musst verstehen, was du damit kaufst: <strong>Vertrauen</strong>.
+  </p>
+
+  <div class="highlight">
+    <strong>Harter Fakt:</strong> Wer deinen <code>nsec</code> erzeugt oder sieht, kann theoretisch auch deine Identität übernehmen.
+    Behandle jeden fremd erzeugten <code>nsec</code> grundsätzlich so, als könnte er kompromittiert sein.
+  </div>
+
+  <p>
+    Wenn du diesen Weg gehst, gilt eine Regel: <strong>Der nsec gehört so schnell wie möglich in einen Signer wie Amber</strong>.
+    Nicht in Primal. Nicht in Amethyst. Nicht in irgendeinen Browser-Login.
+  </p>
+
+  <ul>
+    <li><strong>Sofortmaßnahme:</strong> Importiere den <code>nsec</code> direkt in Amber und nutze danach nur noch „External Signer“ im Client.</li>
+    <li><strong>Kein Cloud-Kram:</strong> Niemals per E-Mail, Messenger, Notizen-App, Screenshot oder Passwort-Manager hin- und herschieben.</li>
+    <li><strong>Wenn Transfer nötig ist:</strong> Am besten optisch per QR (und nicht per Copy &amp; Paste über die Zwischenablage).</li>
+    <li><strong>Wenn du doch Copy &amp; Paste machst:</strong> Einmal. Danach Zwischenablage leeren, Gerät sperren/neu starten. Android merkt sich Clipboard oft länger als man denkt.</li>
+  </ul>
+
+  <p>
+    Für Sicherheits-Maximalisten ist Option C nur eine <em>Übergangslösung</em>. Wenn du später bereit bist,
+    machst du eine echte Air-Gap-Genesis (Option A/B) und migrierst: neuen Key, neuer <code>npub</code>,
+    und du kündigst die neue Identität auf dem alten Account an.
   </p>
 
   <h2>Teil III: Die Übertragung (Die Air-Gap Brücke)</h2>
@@ -226,7 +250,7 @@ cat nsec_key.txt</code></pre>
     Wir wandeln den Schlüssel im Terminal in einen QR-Code um.
   </p>
   <pre><code># QR-Code aus Datei erzeugen (Key taucht nicht als Shell-Argument auf)
-qrencode -t ANSIUTF8 -r nsec_key.txt</code></pre>
+qrencode -t ANSIUTF8 &lt; nsec_key.txt</code></pre>
   <p>
     Ein QR-Code erscheint in deinem Terminal. Das ist die einzige Brücke zwischen deiner Cold-Storage-Erstellung
     und deinem Hot-Device.
@@ -246,14 +270,14 @@ qrencode -t ANSIUTF8 -r nsec_key.txt</code></pre>
     <li>Sichere Amber sofort mit einer PIN oder Biometrie.</li>
   </ol>
   <p>
-    Erst jetzt darfst du den Flugmodus deaktivieren. Dein <code>nsec</code> liegt nun verschlüsselt im sicheren
-    Speicher von Amber und wird diesen idealerweise nie wieder verlassen.
+    Erst jetzt darfst du den Flugmodus deaktivieren. Dein <code>nsec</code> liegt nun verschlüsselt in Amber
+    und wird diesen idealerweise nie wieder verlassen.
   </p>
   <p>
-    <strong>Konfigurations-Hinweis:</strong> Stelle sicher, dass Amber für kritische Events immer um Erlaubnis fragt,
-    z. B. Kind 1 (Notes). Bei DMs hängt es vom verwendeten DM-Standard ab (älter: NIP-04 / Kind 4; moderner: NIP-17 in vielen Clients).
-    Aktiviere „Always sign without prompting“ nur sehr gezielt (wenn überhaupt), sonst kann ein kompromittierter Client
-    Unfug signieren lassen.
+    <strong>Konfigurations-Hinweis:</strong> Stelle sicher, dass Amber für kritische Events immer um Erlaubnis fragt
+    (z. B. Kind 1: Text Notes). Bei DMs hängt es vom Standard ab: älter NIP-04 (Kind 4, deprecated), moderner NIP-17
+    (u. a. Gift Wrap Kind 1059 / DM-Kinds 14/15 je nach Client-Flow). 
+    Aktiviere „Always sign without prompting“ nur sehr gezielt (wenn überhaupt).
   </p>
 
   <h2>Teil V: Das Interface (Primal)</h2>
@@ -268,7 +292,7 @@ qrencode -t ANSIUTF8 -r nsec_key.txt</code></pre>
   </p>
   <ul>
     <li>Wähle die Option „Log in with External Signer“ (oder das Schlüsselsymbol).</li>
-    <li>Primal ruft Amber über den External-Signer-Mechanismus (Android Intent) auf.</li>
+    <li>Primal ruft Amber über den Android External Signer Flow nach NIP-55 auf (Intents/Content Resolver, je nach App/Modus).</li>
     <li>Amber öffnet sich: „Primal requests your public key. Allow?“</li>
     <li>Bestätige dies.</li>
   </ul>
@@ -288,7 +312,7 @@ qrencode -t ANSIUTF8 -r nsec_key.txt</code></pre>
   </ol>
   <p>
     Selbst wenn Primal kompromittiert wird, ist dein Schlüssel nicht automatisch verloren, weil der Client ihn nie hatte.
-    <strong>Aber:</strong> Wenn du Amber zu großzügig freigibst (oder dein Smartphone kompromittiert ist), kann auch dieses Setup
+    <strong>Aber:</strong> Wenn dein Smartphone kompromittiert ist oder du Amber zu großzügig freigibst, kann auch dieses Setup
     missbraucht werden. Souveränität heißt: minimale Rechte, maximale Skepsis.
   </p>
 
