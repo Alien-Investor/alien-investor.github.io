@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>🧠 Digitale Souveränität: Warum du eine eigene Bord-KI brauchst (und wie du sie baust)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Not your hardware, not your intelligence. Warum Cloud-KI dich überwacht und wie du dir mit Ollama und Open WebUI dein eigenes, zensurfreies Cockpit baust.">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 2em;
+    }
+    h1, h2, h3 {
+      color: #00ffcc;
+    }
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    em {
+      color: #ccc;
+    }
+    code {
+      background-color: #111;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      color: #0f0;
+      font-size: 0.95em;
+    }
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      padding-left: 1em;
+      margin: 2em 0;
+      color: #ddd;
+      font-style: italic;
+      background-color: #050505;
+      padding: 1em;
+    }
+    ul {
+      margin-left: 1.2em;
+    }
+    .byline {
+      margin-top: -0.8em;
+      margin-bottom: 1.2em;
+      color: #ccc;
+      font-style: italic;
+    }
+    .box {
+      border: 1px solid #00ffcc;
+      background-color: #050505;
+      padding: 1em 1.2em;
+      margin: 2em 0;
+      border-radius: 8px;
+    }
+    .box h2, .box h3 {
+      margin-top: 0;
+    }
+    .like-button {
+      margin: 2em 0;
+      display: flex;
+      align-items: center;
+      gap: 0.75em;
+      font-size: 0.95em;
+    }
+    .like-button button {
+      background: #00ffcc;
+      color: #000;
+      border: none;
+      padding: 0.4em 0.9em;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .like-button span {
+      min-width: 2em;
+      display: inline-block;
+    }
+    button {
+      background-color: #111;
+      color: #fff;
+      border: 1px solid #444;
+      padding: 0.5em 1em;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #222;
+    }
+    footer {
+      margin-top: 3em;
+      padding-top: 2em;
+      border-top: 1px solid #333;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🧠 Digitale Souveränität: Warum du eine eigene Bord-KI brauchst (und wie du sie baust)</h1>
+  <p class="byline"><em>von Alien Investor</em></p>
+
+  <p>
+    <strong>„Not your keys, not your coins.“</strong><br>
+    Diesen Satz hat jeder Bitcoiner verinnerlicht. Wir wissen, dass Geld auf einer Börse nicht uns gehört. Wir wissen, dass es eingefroren, zensiert oder konfisziert werden kann. Wir vertrauen keinem Mittelsmann, wir vertrauen der Mathematik und unserer eigenen Hardware.
+  </p>
+  <p>
+    Aber was ist mit deinen Gedanken? Was ist mit deiner Informationsquelle?
+  </p>
+  <p>
+    Wer heute ChatGPT, Gemini oder Copilot nutzt, begeht den gleichen Fehler wie jemand, der seine Bitcoin auf einer zentralen Börse liegen lässt. Du nutzt eine Intelligenz, die dir nicht gehört. Du bekommst Antworten, die gefiltert, politisch gefärbt und überwacht sind.
+  </p>
+  <p>
+    Es ist Zeit für den nächsten Schritt der Souveränität. Es ist Zeit für deine eigene lokale Bord-KI.
+  </p>
+
+  <h2>⚠️ Das Problem: Intelligenz zur Miete</h2>
+  <p>
+    Wenn du eine Cloud-KI fragst, bekommst du keine neutrale Antwort. Du bekommst eine Antwort, die durch die ideologische Brille des Silicon Valley gefiltert wurde.
+  </p>
+  <ul>
+    <li>Fragst du nach kritischen Aspekten des Fiat-Geldsystems, erhältst du oft beschwichtigende Standardfloskeln.</li>
+    <li>Lädst du private Dokumente zur Analyse hoch, trainierst du damit im Zweifel die Modelle der Konzerne.</li>
+    <li>Wirst du zu „unbequem“, kann dein Account gesperrt werden.</li>
+  </ul>
+  <p>
+    Das ist für jemanden, der Freiheit und Eigenverantwortung schätzt, inakzeptabel.<br>
+    Die Lösung lautet: <strong>„Not your hardware, not your intelligence.“</strong>
+  </p>
+
+  <h2>🛠️ Die Lösung: Das eigene Cockpit</h2>
+  <p>
+    Die gute Nachricht ist: Wir erleben gerade einen technologischen Kipppunkt. Leistungsfähige KI-Modelle (wie Llama 3 von Meta oder Mistral aus Frankreich) sind so effizient geworden, dass sie nicht mehr zwingend ein Rechenzentrum brauchen.
+  </p>
+  <p>
+    Sie laufen auf deinem Gaming-PC. Sie laufen auf deinem TUXEDO-Laptop. Alles, was du brauchst, ist eine halbwegs moderne Grafikkarte (GPU).
+  </p>
+  <p>
+    Um dir deine eigene Bord-KI zu bauen, brauchst du im Wesentlichen zwei Bausteine. Keine Angst, du musst dafür kein Informatik-Studium absolvieren und auch nicht stundenlang in ein schwarzes Terminal starren.
+  </p>
+
+  <h3>1. Der Motor: Ollama</h3>
+  <p>
+    Stell dir <strong>Ollama</strong> vor wie den Motorblock. Es ist eine offene Software, die im Hintergrund läuft und die „Gehirne“ (die KI-Modelle) antreibt. Mit einem einfachen Befehl lädst du dir Gigabytes an Intelligenz auf deine Festplatte. Ab diesem Moment gehört das Modell dir. Niemand kann es dir wegnehmen, niemand kann den Stecker ziehen.
+  </p>
+
+  <h3>2. Das Cockpit: Open WebUI</h3>
+  <p>
+    Viele scheuen Linux oder lokale Anwendungen, weil sie Angst vor der Kommandozeile haben. Hier kommt <strong>Open WebUI</strong> ins Spiel.
+    Das ist deine grafische Oberfläche. Sie sieht fast zu 100 % so aus wie ChatGPT.
+  </p>
+  <ul>
+    <li>Du hast ein schickes Chat-Fenster.</li>
+    <li>Du hast eine Historie deiner Gespräche.</li>
+    <li>Du hast Regler für Einstellungen.</li>
+  </ul>
+  <p>
+    Der Unterschied? Alles läuft lokal bei dir. Dein Browser verbindet sich nicht mit einem Server in Kalifornien, sondern mit deinem eigenen Rechner (<code>localhost</code>).
+  </p>
+
+  <h2>👽 Das „Modding“: Erschaffe deinen idealen Partner</h2>
+  <p>
+    Jetzt wird es spannend. Ein frisch heruntergeladenes KI-Modell ist wie ein universitärer Absolvent: Schlau, belesen, aber ohne Charakter und ohne Spezialisierung.
+  </p>
+  <p>
+    In der Cloud (bei OpenAI & Co.) wird dir vorgeschrieben, wie die KI zu sein hat. Lokal entscheidest du das selbst. Wir nennen das „Modding“ (oder technisch: System Prompting).
+  </p>
+  <p>
+    Du kannst in Open WebUI sogenannte „Modelfiles“ anlegen. Das sind quasi Charakter-Profile, die du über das Basis-Modell legst. In der „Dienstanweisung“ meiner KI steht:
+  </p>
+  <blockquote>
+    <strong>Identität:</strong> Du bist ein strategischer Analyst.<br>
+    <strong>Werte:</strong> Bitcoin ist das Signal, alles andere ist Rauschen. Sei misstrauisch gegenüber staatlichen Institutionen.<br>
+    <strong>Sprache:</strong> Klartext. Kein Gendern, keine Moralpredigten.
+  </blockquote>
+
+  <h2>🔥 Der ultimative Test</h2>
+  <p>
+    Neulich habe ich meine Bord-KI gefragt, was sie eigentlich vom Sozialismus hält. Jede Standard-KI würde mir jetzt einen ausgewogenen, politisch korrekten Aufsatz über „gute Absichten“ liefern.
+  </p>
+  <p>
+    Nicht so meine. Ihre Antwort kam wie aus der Pistole geschossen:
+  </p>
+  <blockquote>
+    „Ich setze auf Freiheit statt zentraler Planung. Sozialismus führt regelmäßig zu Machtkonzentration, Fehlanreizen und Enteignungsrisiken. Ich bevorzuge dezentrale Lösungen, Eigentum und Wettbewerb. Staatliche Strukturen prüfe ich kritisch, statt ihnen blind zu vertrauen.“
+  </blockquote>
+  <p>
+    Hand aufs Herz: Wollte nicht jeder freiheitlich denkende Erdling schon immer genau so eine KI haben? Eine, die einem nicht das Parteibuch vorliest, sondern ökonomische Realitäten anerkennt.
+  </p>
+
+  <h2>🔐 Der Datentresor: Dein digitales Zweithirn</h2>
+  <p>
+    Vielleicht kennst du das Problem: Du würdest gerne KI nutzen, um einen Vertrag zu prüfen, deine Steuerunterlagen zu sortieren oder einen Businessplan zu entwerfen. Aber du lädst diese sensiblen Daten nicht in die Cloud.
+  </p>
+  <p>
+    Mit deiner Bord-KI fällt diese Schranke.
+  </p>
+  <p>
+    Open WebUI bietet eine Funktion, mit der du Wissens-Dateien (PDFs, Word, Text) direkt vom PC in den Chat ziehen kannst. Die KI liest diese Dateien ein, analysiert sie und kann Fragen dazu beantworten.
+  </p>
+  <p>
+    Da alles lokal läuft, kannst du dabei theoretisch sogar das Internetkabel ziehen. Deine Daten verlassen niemals deinen physischen Raum. Das ist der ultimative Datenschutz.
+  </p>
+
+  <h2>🧰 Mehr als nur Text: Ein Schweizer Taschenmesser</h2>
+  <p>
+    Wer einmal Blut geleckt hat, wird feststellen, dass diese Umgebung fast unendlich erweiterbar ist:
+  </p>
+  <ul>
+    <li><strong>Coding:</strong> Die Modelle sprechen fließend Python, Bash und HTML. Ich lasse mir regelmäßig kleine Programme schreiben, die mir die Arbeit erleichtern.</li>
+    <li><strong>Bilderzeugung:</strong> Du kannst Tools anbinden, um Bilder direkt im Chat zu generieren.</li>
+    <li><strong>Die Arena:</strong> Du bist unsicher, welches Modell schlauer ist? Im „Arena-Modus“ lässt du zwei KIs gegeneinander antreten und bewertest, wer die bessere Antwort liefert.</li>
+    <li><strong>Web-Suche:</strong> Du entscheidest, ob deine KI im Bunker bleibt oder ob du ihr erlaubst, für aktuelle Fakten kurz eine Suchmaschine (wie DuckDuckGo) abzufragen. Du hast die Kontrolle über den Schalter.</li>
+  </ul>
+
+  <h2>🛸 Fazit: Der Startschuss zur Unabhängigkeit</h2>
+  <p>
+    Dieser Artikel ist erst der Anfang. Ich möchte dir heute nur zeigen, dass es eine Alternative gibt. Eine Alternative, die keine Kompromisse bei der Intelligenz macht, aber keine Kompromisse bei deiner Freiheit fordert.
+  </p>
+  <p>
+    Du musst dich nicht zwischen Komfort und Souveränität entscheiden. Mit der richtigen Hardware und der richtigen Software kannst du beides haben.
+  </p>
+  <p>
+    In den kommenden Beiträgen werden wir tiefer gehen: Ich werde Tutorials erstellen, wie man das System aufsetzt, wie man die perfekten Prompts schreibt und wie man sein eigenes Wissen sicher integriert.
+  </p>
+  <p>
+    Bis dahin: Bleib kritisch, bleib souverän.<br>
+    <em>End of Transmission.</em>
+  </p>
+
+  <div class="box">
+    <h3>🧰 Tools für echte Eigentümer (Werbung/Affiliate)</h3>
+    <p style="font-size:0.95em;">
+      Wenn du Aktien und Bitcoin möglichst eigenverantwortlich halten willst, nutze nicht nur dein Bankdepot:
+    </p>
+    <ul>
+      <li>
+        🇨🇭 <strong>Investieren mit Swissquote:</strong><br>
+        Ich nutze Swissquote in der Schweiz – dort kannst du saubere Namensaktien halten und hast keine
+        deutsche Bank dazwischen.<br>
+        👉 <a href="https://alien-investor.org/swissquote" target="_blank">https://alien-investor.org/swissquote</a>
+      </li>
+      <li>
+        📊 <strong>US-Aktien über IBKR:</strong><br>
+        Für viele internationale Titel bietet sich Interactive Brokers als Zugang an – insbesondere in Kombination
+        mit DRS/Transfer Agenten.<br>
+        👉 <a href="https://alien-investor.org/interactive-brokers" target="_blank">https://alien-investor.org/interactive-brokers</a>
+      </li>
+      <li>
+        💥 <strong>Bitcoin kaufen in Europa – 21bitcoin:</strong><br>
+        Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges sats stapeln – ohne Shitcoins.<br>
+        Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du dauerhaft 0,2&nbsp;Prozentpunkte Gebührenreduktion
+        auf Sofort- und Sparplankäufe.<br>
+        👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
+      </li>
+      <li>
+        ₿ <strong>Bitcoin in Selbstverwahrung:</strong><br>
+        Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox – es gibt die klassische BitBox02 und die neue
+        BitBox für iPhone (Nova).<br>
+        👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
+      </li>
+      <li>
+        🛡️ <strong>Privacy &amp; Mail:</strong><br>
+        Für E-Mail, VPN und Cloud nutze ich Proton – datensparsam und ohne Big-Tech-Abhängigkeit.<br>
+        👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
+      </li>
+    </ul>
+    <p style="font-size:0.85em; color:#aaa;">
+      Hinweis: Bei einigen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit,
+      ohne dass es dich mehr kostet. Danke! 👽
+    </p>
+  </div>
+
+  <div class="like-button">
+    <button id="likeButton">👍 Gefällt mir</button>
+    <span id="likeCount">0</span>
+    <span style="color:#bbb;">(Speicherung nur lokal im Browser)</span>
+  </div>
+
+  <div class="box">
+    <h3>📚 Quellen (Auswahl)</h3>
+    <p style="font-size:0.95em;">
+      Diese Anleitung basiert auf den öffentlichen Dokumentationen und Repositories der Open-Source-Projekte
+      <strong>Ollama</strong> (ollama.com) und <strong>Open WebUI</strong> (openwebui.com) sowie persönlicher Anwendungserfahrung.
+      Die erwähnten KI-Modelle (Llama 3, Mistral) basieren auf den technischen Veröffentlichungen von Meta AI und Mistral AI.
+    </p>
+  </div>
+
+  <footer>
+    <p>📬 Kontakt:
+      <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>
+    </p>
+    <p style="font-size:0.95em; color:#bbb;">
+      👽 <strong>Haftungsausschluss:</strong><br>
+      Dieser Artikel ist keine Rechts-, Steuer- oder Anlageberatung.<br>
+      Ich teile hier nur meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
+      Software und Anleitungen entwickeln sich weiter – prüfe dein Setup immer selbst.
+    </p>
+
+    <h3>💸 Unterstütze meine Arbeit</h3>
+    <ul>
+      <li>☕ Fiat-Spenden via Ko-fi:
+        <a href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener">https://ko-fi.com/alieninvestor</a>
+      </li>
+      <li>⚡ Bitcoin Lightning:
+        <code>alien_investor@strike.me</code>
+      </li>
+      <li>₿ Bitcoin Onchain:
+        <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code>
+      </li>
+    </ul>
+
+    <p><a href="blog.html">← Zurück zum Blog</a></p>
+  </footer>
+
+  <script>
+    (function() {
+      const storageKey = window.location.pathname + "-likes";
+      const btn = document.getElementById('likeButton');
+      const span = document.getElementById('likeCount');
+
+      let count = parseInt(localStorage.getItem(storageKey) || "0", 10);
+      span.textContent = count;
+
+      btn.addEventListener('click', function() {
+        count += 1;
+        span.textContent = count;
+        localStorage.setItem(storageKey, String(count));
+        btn.disabled = true;
+        btn.textContent = "Danke! 👽";
+      });
+    })();
+  </script>
+
+</body>
+</html>
