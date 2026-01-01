@@ -107,7 +107,7 @@
 
   <p>
     Android war einmal das „offene“ System. Wer eine App wollte, lud die APK herunter, aktivierte
-    „Unbekannte Herkunft“ und war drin. Das ist vorbei.
+    „Unbekannte Apps installieren“ und war drin. Das ist vorbei.
     Google baut im Hintergrund an einer fundamentalen Architekturänderung, die das freie Installieren von Software
     zwar nicht technisch unmöglich macht, aber durch so viele Hürden und Warnungen erstickt, dass es für
     Normalnutzer faktisch stirbt.
@@ -125,18 +125,19 @@
     Das neue Modell dreht das um: Vertrauen wird zentral vergeben.
   </p>
   <p>
-    Ab September 2026 (Start in Pilotregionen wie Brasilien &amp; Singapur, ab 2027+ global geplant) müssen Apps
-    auf zertifizierten Android-Geräten einer <strong>verifizierten Entwickleridentität</strong> zugeordnet sein.
+    Ab September 2026 (Start in Pilotregionen wie Brasilien, Indonesien, Singapur &amp; Thailand, ab 2027+ global geplant) müssen Apps
+    auf zertifizierten Android-Geräten <strong>registriert</strong> und einer <strong>verifizierten Entwickleridentität</strong> zugeordnet sein.
     Es geht nicht mehr nur um eine kryptografische Signatur (ist die Datei integer?), sondern um Bürokratie (wer bist du?).
   </p>
   <ul>
-    <li><strong>Der Zwang:</strong> Entwickler müssen ihre App-Signing-Keys bei Google registrieren.</li>
-    <li><strong>Die Daten:</strong> Name, Adresse, Telefonnummer, D-U-N-S Nummer (für Firmen) und ggf. Ausweisdokumente.</li>
-    <li><strong>Die Gebühr:</strong> Einmalig 25 USD für „Full Distribution“.</li>
+    <li><strong>Der Zwang:</strong> Entwickler müssen ihre Package Names (und zugehörige App-Signing-Keys) bei Google registrieren.</li>
+    <li><strong>Die Daten:</strong> Name, Adresse, E-Mail, Telefonnummer; bei Firmen zusätzlich Website-Verifizierung und D-U-N-S Nummer sowie je nach Land Organisationsdokumente.</li>
+    <li><strong>Die Gebühr:</strong> Einmalig 25 USD für „Full Distribution“ (Limited Distribution für Hobbyisten/Studenten ist angekündigt, aber mit Limits).</li>
   </ul>
   <p>
-    Wer sich diesem Regime nicht unterwirft (z. B. pseudonyme Cypherpunks oder Hobby-Entwickler), dessen App
-    gilt als „unregistriert“. Und unregistrierte Apps werden vom Betriebssystem künftig wie Malware behandelt.
+    Wer sich diesem Regime komplett entzieht (z. B. pseudonyme Cypherpunks oder Entwickler, die nicht registrieren wollen), dessen App
+    gilt als „unregistriert“. Und unregistrierte Apps werden auf zertifizierten Geräten künftig standardmäßig blockiert
+    oder in einen Hochrisiko-Installationspfad gedrückt.
   </p>
 
   <h2>2. „Advanced Flow“ – Die Waffe heißt UX</h2>
@@ -151,8 +152,8 @@
   </p>
   <ul>
     <li><strong>Scare Screens:</strong> Warnmeldungen, die legitime Software visuell in die Nähe von Betrug und Viren rücken.</li>
-    <li><strong>Friktion:</strong> Zusätzliche Bestätigungsschritte, Wartezeiten oder biometrische Zwangspausen.</li>
-    <li><strong>Identitäts-Check:</strong> Das System signalisiert dir permanent: „Das hier ist unsicher, weil Google den Autor nicht kennt.“</li>
+    <li><strong>Friktion:</strong> Zusätzliche Bestätigungsschritte und „Anti-Scam“-Sicherungen (konkret kann das je nach Version variieren).</li>
+    <li><strong>Identitäts-Check:</strong> Das System signalisiert dir permanent: „Das hier ist unsicher, weil Google den Autor nicht verifiziert/registriert hat.“</li>
   </ul>
   <p>
     Das Ziel ist klar: Für „Power User“ bleibt ein Notausgang, aber der Durchschnittsnutzer wird so lange mit
@@ -168,7 +169,7 @@
   <p>
     F-Droid hat bisher viele Apps selbst kompiliert und mit <em>eigenen</em> Schlüsseln signiert. Das war ein
     Sicherheitsfeature. Im neuen Google-Modell wird es zum Bumerang:
-    F-Droid müsste als Organisation diese Schlüssel registrieren. Sollte Google das F-Droid-Konto sperren oder
+    F-Droid müsste als Organisation diese Schlüssel/Packages registrieren. Sollte Google das F-Droid-Konto sperren oder
     einschränken, wären tausende Apps plötzlich „unregistriert“ und nur noch über den terrorisierenden
     Advanced Flow installierbar.
   </p>
@@ -192,18 +193,19 @@
   </p>
   <p>
     Warum? GrapheneOS basiert auf AOSP (Android Open Source Project), ist aber nicht an Googles Zertifizierungs-Backend gebunden.
-    Das Betriebssystem führt <strong>keinen Abgleich mit der Google-Entwicklerdatenbank</strong> durch, um dir
+    Das Betriebssystem erzwingt <strong>keinen</strong> Abgleich mit der Google-Entwicklerdatenbank als Voraussetzung, um dir
     die Installation zu erlauben. Auf GrapheneOS bleibt Sideloading das, was es sein soll: Deine Entscheidung.
   </p>
 
   <h3>Der Endgegner: Play Integrity API</h3>
   <p>
     Doch auch GrapheneOS hat einen Feind: Banking-Apps und Behörden-Software, die die <strong>Play Integrity API</strong>
-    (speziell <code>MEETS_STRONG_INTEGRITY</code>) erzwingen. Diese API prüft hardwareseitig, ob auf dem Gerät
-    das „originale, zertifizierte“ Google-Android läuft.
+    (speziell <code>MEETS_DEVICE_INTEGRITY</code> oder <code>MEETS_STRONG_INTEGRITY</code>) erzwingen. Diese Signale sind an „genuine/certified device“-Kriterien gekoppelt
+    und werden in der Praxis häufig als Google-Zertifizierungsfilter eingesetzt.
   </p>
   <p>
-    GrapheneOS fällt durch diese Prüfung, weil es nicht von Google signiert ist. Das Ergebnis: Die App verweigert den Dienst.
+    GrapheneOS besteht in der Regel nur <code>MEETS_BASIC_INTEGRITY</code>; <code>MEETS_DEVICE_INTEGRITY</code> und <code>MEETS_STRONG_INTEGRITY</code> werden nicht erreicht,
+    weil diese Stufen auf Google-Zertifizierung und den dazugehörigen Attestationsketten beruhen. Das Ergebnis: Die App verweigert den Dienst.
     Der Kampf verlagert sich also von „kann ich es installieren?“ zu „darf ich es ausführen?“.
   </p>
 
@@ -219,6 +221,23 @@
     Das könnte strategisch alles ändern: Ein Gerät, das ab Werk sicher ist, ohne dass man erst ein Pixel
     von Google kaufen und flashen muss.
   </p>
+
+  <div class="box">
+    <h3>👽 Wissen ist Widerstand: GrapheneOS Deep Dives</h3>
+    <p>Willst du tiefer in den Kaninchenbau? Ich habe zwei detaillierte Dossiers für dich, die das Thema vertiefen:</p>
+    <ul style="margin-top:1em;">
+      <li>
+        🛡️ <strong>Das Fundament verstehen:</strong><br>
+        <a href="https://alien-investor.org/grapheneos-sicheres-android.html" target="_blank">GrapheneOS – Sicheres Android für Menschen, die nicht überwacht werden wollen</a><br>
+        <em style="font-size:0.9em; color:#aaa;">Warum Härtung wichtiger ist als "Privacy Settings" und wie es unter der Haube funktioniert.</em>
+      </li>
+      <li style="margin-top:1em;">
+        📱 <strong>In die Praxis umsetzen:</strong><br>
+        <a href="https://alien-investor.org/grapheneos-installation.html" target="_blank">Installation & Einrichtung – Der Schritt-für-Schritt Guide</a><br>
+        <em style="font-size:0.9em; color:#aaa;">Von der Vorbereitung des Pixels bis zum ersten Boot – ohne Angst vor dem Brick.</em>
+      </li>
+    </ul>
+  </div>
 
   <h2>5. Alien-Fazit: Was du jetzt tun musst</h2>
   <p>
@@ -290,7 +309,7 @@
   <div class="box">
     <h3>📚 Quellen (Auswahl)</h3>
     <p style="font-size:0.95em;">
-      Diese Analyse basiert auf offiziellen Ankündigungen im Google Security Blog (August 2025), der Dokumentation
+      Diese Analyse basiert auf offiziellen Ankündigungen im Google Security Blog (25. August 2025), der Dokumentation
       zur „Android Developer Verification“, technischen Spezifikationen der Play Integrity API sowie Community-Analysen
       zum AOSP-Code und der Roadmap von GrapheneOS.
     </p>
