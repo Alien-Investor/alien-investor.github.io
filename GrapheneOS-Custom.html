@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🛡️ GrapheneOS: Die Konfiguration der Souveränität – vom Smartphone zum digitalen Bunker</title>
+  <meta name="description" content="GrapheneOS zu installieren ist nur der erste Schritt. Hier sind die wichtigsten Einstellungen (Auto-Reboot, Duress-PIN, Profile), um dein Gerät wirklich gegen Überwachung zu härten.">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 2em;
+    }
+    h1, h2, h3 { color: #00ffcc; }
+    a { color: #00ffcc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; }
+    em { color: #ccc; }
+    .byline { margin-top: -0.8em; margin-bottom: 1.2em; color: #bbb; font-style: italic;}
+    .like-button {
+      margin: 2em 0;
+      display: flex;
+      align-items: center;
+      gap: 0.75em;
+      font-size: 0.95em;
+    }
+    .like-button button {
+      background: #00ffcc;
+      color: #000;
+      border: none;
+      padding: 0.4em 0.9em;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .like-button span {
+      min-width: 2em;
+      display: inline-block;
+    }
+    button {
+      background-color: #111; color: #fff; border: 1px solid #444;
+      padding: 0.5em 1em; border-radius: 5px; cursor: pointer;
+    }
+    button:hover { background-color: #222; }
+    footer { margin-top: 3em; padding-top: 2em; border-top: 1px solid #333; font-size: 0.9em; }
+    .support ul { margin: 0.3em 0 0 1.2em; }
+    blockquote.highlight {
+      margin-top: 2em;
+      padding: 1em 1.2em;
+      border-left: 3px solid #00ffcc;
+      background-color: #111;
+      font-style: italic;
+      color: #ddd;
+    }
+    .box {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+    }
+    ul { margin-left: 1.2em; margin-bottom: 1em; }
+    li { margin-bottom: 0.4em; }
+  </style>
+</head>
+<body>
+
+  <h1>🛡️ GrapheneOS: Die Konfiguration der Souveränität – vom Smartphone zum digitalen Bunker</h1>
+  <p class="byline"><em>von Alien Investor</em></p>
+
+  <article id="content">
+    <p>Du hast dein Telefon „de-googled“. Du hast GrapheneOS installiert. Das ist ein Sieg.</p>
+    <p>Aber: Direkt „out of the box“ muss auch GrapheneOS Kompromisse zwischen maximaler Sicherheit und Bequemlichkeit eingehen. Um sich in einer feindlichen Umgebung wirklich auf ein Gerät verlassen zu können, musst du es konfigurieren.</p>
+    <p>Wir ändern hier nicht einfach nur ein paar Klingeltöne. Wir reduzieren die Angriffsfläche massiv. Hier sind fünf kritische Konfigurationen, die dein Telefon in einen gehärteten Knotenpunkt verwandeln.</p>
+
+    <h2>1. Der Kill-Switch: Automatischer Neustart (Auto Reboot)</h2>
+    <h3>Das Konzept</h3>
+    <p>Sobald dein Telefon eingeschaltet und mindestens einmal entsperrt wurde, befinden sich die Verschlüsselungs-Keys im Arbeitsspeicher (Status: <em>After First Unlock</em>). Wenn ein fähiger Angreifer dein Telefon in diesem Zustand beschlagnahmt, hat er ein größeres Zeitfenster, um Daten zu extrahieren.</p>
+    <p>Startet das Telefon neu, wechselt es in den Zustand <em>Before First Unlock</em> (BFU). Die Keys werden aus dem Speicher geworfen. Das Gerät ist „at rest“ verschlüsselt. Es ist effektiv ein Ziegelstein.</p>
+
+    <h3>Die Konfiguration</h3>
+    <p>GrapheneOS erlaubt dir, diesen Prozess zu automatisieren. Wenn das Gerät eine bestimmte Zeit lang nicht entsperrt wurde, erzwingt es einen Neustart.</p>
+    <ul>
+      <li><strong>Pfad:</strong> <code>Einstellungen</code> → <code>Sicherheit & Datenschutz</code> → <code>Exploit-Schutz</code> → <code>Automatischer Neustart</code></li>
+      <li><strong>Empfehlung:</strong> Stelle dies auf 12 Stunden oder weniger. (Standard sind 18 Stunden; je nach deinem Bedrohungsmodell kannst du bis auf 10 Minuten runtergehen).</li>
+    </ul>
+
+    <h2>2. Die nukleare Option: Duress-Passwort (Zwangspasswort)</h2>
+    <h3>Das Konzept</h3>
+    <p>Verschlüsselung schützt dich vor Mathematik. Sie schützt dich nicht vor einem Schraubenschlüssel („Rubber-Hose Cryptanalysis“).</p>
+    <p>Wenn du unter Androhung von Gewalt oder an einer Grenzkontrolle gezwungen wirst, dein Telefon zu entsperren, hilft dir eine normale PIN nicht weiter. Hier kommt das <strong>Duress-Passwort</strong> ins Spiel. Es ist ein spezielles, alternatives Passwort. Gibst du es ein, wird das Gerät nicht entsperrt, sondern <strong>unwiderruflich gelöscht</strong> (inklusive installierter eSIMs). Die kryptografischen Schlüssel werden vernichtet.</p>
+
+    <h3>Die Konfiguration</h3>
+    <p>Dies ist deine letzte Verteidigungslinie. Nutze sie nur, wenn physischer Zwang Teil deines Bedrohungsmodells ist. Das Ergebnis ist ein „sauberes“ Gerät im Werkszustand.</p>
+    <ul>
+      <li><strong>Pfad:</strong> <code>Einstellungen</code> → <code>Sicherheit & Datenschutz</code> → <code>Geräteentsperrung</code> → <code>Duress password</code> (manchmal als Zwangspasswort übersetzt)</li>
+      <li><strong>Aktion:</strong> Definiere eine PIN oder ein Passwort, das beim Eingeben das gesamte Gerät löscht.</li>
+    </ul>
+
+    <h2>3. Netzwerk-Hygiene: Privates DNS & VPN-Killswitch</h2>
+    <h3>Das Konzept</h3>
+    <p>Dein Mobilfunkanbieter oder ISP sieht jede Domain, die du aufrufst. Diese Metadaten sind oft wertvoller als der Inhalt der Verbindung. Außerdem: Wenn deine VPN-Verbindung auch nur für eine Sekunde abbricht, können Daten über deine normale Leitung „leaken“.</p>
+
+    <h3>Die Konfiguration</h3>
+    <p>Du musst deine DNS-Anfragen verschlüsseln (z. B. via NextDNS oder Quad9) und sicherstellen, dass kein Datenpaket das Gerät ohne VPN-Tunnel verlässt.</p>
+    <ul>
+      <li><strong>Privates DNS:</strong> <code>Einstellungen</code> → <code>Netzwerk & Internet</code> → <code>Privates DNS</code> → <em>Hostname des Anbieters eingeben</em>.</li>
+      <li><strong>VPN-Killswitch:</strong> <code>Einstellungen</code> → <code>Netzwerk & Internet</code> → <code>VPN</code> → (Zahnrad-Icon beim Anbieter) → Aktiviere <strong>„Durchgehend aktives VPN“</strong> UND <strong>„Verbindungen ohne VPN blockieren“</strong>.</li>
+    </ul>
+
+    <h2>4. Abschottung: Nutzerprofile (User Profiles)</h2>
+    <h3>Das Konzept</h3>
+    <p>In einem Standard-Android-Setup leben fast alle Apps im selben Nutzerprofil. Das ist riskant. Apps können untereinander kommunizieren oder Daten abgreifen.</p>
+    <p>Nutzerprofile verwenden die Isolationsebene des Betriebssystems, um Nutzer in Sandboxen zu stecken – mit getrennten App-Instanzen und getrennten Daten. Deine Banking-App sollte nicht wissen, dass deine Social-Media-App existiert.</p>
+
+    <h3>Die Konfiguration</h3>
+    <p>Behandle Profile wie physisch getrennte Räume.</p>
+    <ul>
+      <li><strong>Pfad:</strong> <code>Einstellungen</code> → <code>System</code> → <code>Mehrere Nutzer</code></li>
+      <li><strong>Aktion:</strong> Erstelle separate Profile für „Banking“, „Social Media“ oder „Hochsicherheit“.</li>
+      <li><em>Hinweis:</em> Du kannst bis zu 32 sekundäre Nutzerprofile anlegen.</li>
+    </ul>
+
+    <h2>5. Hardware-Härtung: Sensoren und Biometrie</h2>
+    <h3>Das Konzept</h3>
+    <p>Biometrie (Fingerabdruck) dient der Bequemlichkeit, nicht der Sicherheit. In manchen Rechtsräumen kannst du leichter gezwungen werden, deinen Finger aufzulegen, als ein Passwort herauszugeben. Kameras und Mikrofone sind die ultimativen Spionage-Werkzeuge.</p>
+
+    <h3>Die Konfiguration</h3>
+    <ul>
+      <li><strong>Kamera & Mikrofon:</strong> Füge die Kacheln „Kamerazugriff“ und „Mikrofonzugriff“ zu deinen Schnelleinstellungen (Quick Settings) hinzu. Wenn du diese ausschaltest, wird der Zugriff systemweit auf Hardware-Ebene blockiert.</li>
+      <li><strong>Sensoren:</strong> GrapheneOS erlaubt es zudem, Apps standardmäßig den Zugriff auf Sensoren (Beschleunigungsmesser etc.) zu verwehren.</li>
+      <li><strong>Fingerabdruck:</strong> Wenn du Grenzen überschreitest oder dich in kritischen Situationen befindest, deaktiviere die biometrische Entsperrung vorübergehend. Verlasse dich auf eine starke alphanumerische Passphrase.</li>
+    </ul>
+
+    <h2>Fazit: Souveränität ist ein Prozess</h2>
+    <p>Souveränität ist kein Produkt, das du kaufst. Es ist ein Prozess. GrapheneOS liefert die Mauern. Diese Einstellungen liefern die Schlösser.</p>
+    <p>Nimm dir die Zeit, dein eigenes Bedrohungsmodell zu verstehen.</p>
+
+  </article>
+  <blockquote class="highlight">
+    „Bequemlichkeit ist der Feind der Sicherheit.“ 👽
+  </blockquote>
+
+  <div class="box">
+    <h3>🧰 Tools für echte Eigentümer (Werbung/Affiliate)</h3>
+    <p style="font-size:0.95em;">
+      Wenn du Aktien und Bitcoin möglichst eigenverantwortlich halten willst, nutze nicht nur dein Bankdepot:
+    </p>
+    <ul>
+      <li>
+        🇨🇭 <strong>Investieren mit Swissquote:</strong><br>
+        Ich nutze Swissquote in der Schweiz – dort kannst du saubere Namensaktien halten und hast keine
+        deutsche Bank dazwischen.<br>
+        👉 <a href="https://alien-investor.org/swissquote" target="_blank">https://alien-investor.org/swissquote</a>
+      </li>
+      <li>
+        📊 <strong>US-Aktien über IBKR:</strong><br>
+        Für viele internationale Titel bietet sich Interactive Brokers als Zugang an – insbesondere in Kombination
+        mit DRS/Transfer Agenten.<br>
+        👉 <a href="https://alien-investor.org/interactive-brokers" target="_blank">https://alien-investor.org/interactive-brokers</a>
+      </li>
+      <li>
+        💥 <strong>Bitcoin kaufen in Europa – 21bitcoin:</strong><br>
+        Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges sats stapeln – ohne Shitcoins.<br>
+        Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du dauerhaft 0,2&nbsp;Prozentpunkte Gebührenreduktion
+        auf Sofort- und Sparplankäufe.<br>
+        👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
+      </li>
+      <li>
+        ₿ <strong>Bitcoin in Selbstverwahrung:</strong><br>
+        Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox – es gibt die klassische BitBox02 und die neue
+        BitBox für iPhone (Nova).<br>
+        👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
+      </li>
+      <li>
+        🛡️ <strong>Privacy &amp; Mail:</strong><br>
+        Für E-Mail, VPN und Cloud nutze ich Proton – datensparsam und ohne Big-Tech-Abhängigkeit.<br>
+        👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
+      </li>
+    </ul>
+    <p style="font-size:0.85em; color:#aaa;">
+      Hinweis: Bei einigen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit,
+      ohne dass es dich mehr kostet. Danke! 👽
+    </p>
+  </div>
+
+  <div class="like-button">
+    <button id="likeButton">👍 Gefällt mir</button>
+    <span id="likeCount">0</span>
+    <span style="color:#bbb;">(Speicherung nur lokal im Browser)</span>
+  </div>
+
+  <script>
+    (function() {
+      const storageKey = window.location.pathname + "-likes";
+      const btn = document.getElementById("likeButton");
+      const span = document.getElementById("likeCount");
+
+      let count = parseInt(localStorage.getItem(storageKey) || "0", 10);
+      span.textContent = count;
+
+      btn.addEventListener("click", function() {
+        count += 1;
+        span.textContent = count;
+        localStorage.setItem(storageKey, String(count));
+        btn.disabled = true;
+        btn.textContent = "Danke! 👽";
+      });
+    })();
+  </script>
+
+  <footer>
+    <p>📬 Kontakt:
+      <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>
+    </p>
+    <p style="font-size:0.95em; color:#bbb;">
+      👽 <strong>Haftungsausschluss:</strong><br>
+      Keine Finanz-, Steuer- oder Rechtsberatung – nur persönliche Alien-Meinung.<br>
+      Investieren ist mit Risiken verbunden. Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
+    </p>
+    <div class="support" style="margin-top: 2em;">
+      <h2>💸 Unterstütze meine Arbeit</h2>
+      <ul>
+        <li>☕ Spenden via
+          <a href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener">Ko-fi</a>
+        </li>
+        <li>⚡ Bitcoin Lightning:
+          <code>alien_investor@strike.me</code>
+        </li>
+        <li>₿ Bitcoin Onchain:
+          <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code>
+        </li>
+      </ul>
+    </div>
+    <p><a href="/blog.html">← Zurück zum Blog</a></p>
+  </footer>
+</body>
+</html>
