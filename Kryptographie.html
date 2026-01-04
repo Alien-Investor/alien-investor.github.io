@@ -128,6 +128,10 @@
     Diese Anleitung liefert dir zwei auditierbare Bash-Skripte, um sensible Ordner mit Standard-GPG und AES256 zu verschlüsseln und zu entschlüsseln.
     Keine Cloud, kein Abo, einfach nur reine Mathematik und Linux.
   </p>
+  
+  <p style="font-size: 0.9em; color: #888;">
+    Tags: Privacy · GPG · Linux · Bash · SelfCustody · Cypherpunk · Security
+  </p>
 
   <blockquote>
     „Don't trust, verify.“<br>
@@ -323,29 +327,38 @@ esac
 
   <h2>5. Der Workflow: Wie du es benutzt</h2>
   <p>
-    Hier ist der exakte Prozess, um deine Daten zu sichern.
+    Hier ist der exakte Prozess, um deine Daten sicher zu verpacken.
   </p>
 
   <h3>1. Daten verschlüsseln</h3>
   <ul>
-    <li>Bewege die Dateien, die du schützen willst, in einen Ordner innerhalb deines Home-Verzeichnisses. Nehmen wir an, dein Ordner heißt <code>PrivateDocs</code>.</li>
+    <li>Verschiebe die Dateien, die du schützen willst, in einen Ordner innerhalb deines Home-Verzeichnisses. Nehmen wir an, dein Ordner heißt <code>PrivateDocs</code>.</li>
     <li>Führe das Skript aus:
       <pre><code>./encrypt-folder.sh</code></pre>
     </li>
     <li>Das Skript fragt nach dem Ordnernamen. Tippe: <code>PrivateDocs</code></li>
     <li>GPG fragt dich dann nach einem Passwort (Passphrase). Wähle ein starkes.</li>
-    <li>Das Skript erstellt eine Datei namens <code>Encrypted_PrivateDocs.tar.gz.gpg</code>.</li>
+    <li>Das Skript erstellt daraufhin zwei Dateien:
+      <ul>
+        <li>Das verschlüsselte Archiv: <code>Encrypted_PrivateDocs.tar.gz.gpg</code></li>
+        <li>Eine Prüfsummen-Datei: <code>Encrypted_PrivateDocs.tar.gz.gpg.sha256</code></li>
+      </ul>
+    </li>
   </ul>
+  <div class="box">
+    <strong>Wichtig:</strong><br>
+    Halte diese beiden Dateien immer zusammen. Die Prüfsumme erlaubt es dem Entschlüsselungs-Skript zu verifizieren, dass deine Daten nicht beschädigt oder manipuliert wurden.
+  </div>
 
   <h3>2. Daten entschlüsseln</h3>
   <ul>
-    <li>Lege die verschlüsselte Datei in dein Home- oder Downloads-Verzeichnis.</li>
+    <li>Lege die verschlüsselte Datei (und die Prüfsummen-Datei) in dein Home- oder Downloads-Verzeichnis.</li>
     <li>Führe das Skript aus:
       <pre><code>./decrypt-folder.sh</code></pre>
     </li>
     <li>Das Skript fragt nach dem Dateinamen. Tippe: <code>Encrypted_PrivateDocs.tar.gz</code></li>
-    <li><strong>Wichtig:</strong> Tippe NICHT die <code>.gpg</code> Endung mit ein. Das Skript sucht automatisch danach.</li>
-    <li>Gib dein Passwort ein, wenn du gefragt wirst. Das Skript prüft die Checksumme (falls vorhanden) und stellt deine Daten wieder her.</li>
+    <li><strong>Hinweis:</strong> Tippe NICHT die <code>.gpg</code> Endung mit ein. Das Skript sucht automatisch anhand des Namens nach der Datei.</li>
+    <li>Gib dein Passwort ein, wenn du gefragt wirst. Das Skript verifiziert die Prüfsumme und stellt deine Daten direkt in deinem Home-Verzeichnis wieder her (in einem Ordner namens <code>Restore</code> oder entsprechend dem Originalnamen).</li>
   </ul>
 
   <h2>6. Warum das wichtig ist</h2>
