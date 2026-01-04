@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>🔐 Der digitale Bunker: Souveränität per Bash-Skript | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Baue deine eigenen Verschlüsselungs-Tools mit 50 Zeilen Bash. GPG, AES256 und Linux – auditierbar, sicher und ohne Cloud-Zwang.">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 2em;
+    }
+    h1, h2, h3 {
+      color: #00ffcc;
+    }
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    code {
+      background-color: #111;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      color: #0f0;
+      font-size: 0.95em;
+      font-family: "Courier New", Courier, monospace;
+    }
+    pre {
+      background-color: #111;
+      padding: 1em;
+      border-radius: 5px;
+      overflow-x: auto;
+      border: 1px solid #333;
+    }
+    pre code {
+      background-color: transparent;
+      padding: 0;
+      color: #0f0;
+      border-radius: 0;
+    }
+    em {
+      color: #ccc;
+    }
+    .byline {
+      margin-top: -0.8em;
+      margin-bottom: 1.2em;
+      color: #ccc;
+      font-style: italic;
+    }
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      padding-left: 1em;
+      margin: 2em 0;
+      color: #ddd;
+      font-style: italic;
+      background: #050505;
+      padding: 1em;
+    }
+    .box {
+      border: 1px solid #00ffcc;
+      background-color: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      font-size: 0.95em;
+    }
+    .box h3 {
+      margin-top: 0;
+    }
+    .like-button {
+      margin: 2em 0;
+      display: flex;
+      align-items: center;
+      gap: 0.75em;
+      font-size: 0.95em;
+    }
+    .like-button button {
+      background: #00ffcc;
+      color: #000;
+      border: none;
+      padding: 0.4em 0.9em;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .like-button span {
+      min-width: 2em;
+      display: inline-block;
+    }
+    footer {
+      margin-top: 3em;
+      padding-top: 2em;
+      border-top: 1px solid #333;
+      font-size: 0.9em;
+      color: #bbb;
+    }
+    ul {
+      margin-left: 1.2em;
+    }
+    li {
+      margin-bottom: 0.5em;
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 1.2em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🔐 Der digitale Bunker: Souveränität per Skript</h1>
+  <p class="byline"><em>von Alien Investor</em></p>
+
+  <p>
+    <strong>Baue deine eigenen Verschlüsselungs-Tools mit 50 Zeilen Bash.</strong>
+  </p>
+  <p>
+    Echte Privatsphäre basiert auf Transparenz, nicht auf geheimen Apps oder Blackboxes.
+    Diese Anleitung liefert dir zwei auditierbare Bash-Skripte, um sensible Ordner mit Standard-GPG und AES256 zu verschlüsseln und zu entschlüsseln.
+    Keine Cloud, kein Abo, einfach nur reine Mathematik und Linux.
+  </p>
+  
+  <p style="font-size: 0.9em; color: #888;">
+    Tags: Privacy · GPG · Linux · Bash · SelfCustody · Cypherpunk · Security
+  </p>
+
+  <blockquote>
+    „Don't trust, verify.“<br>
+    Wir sagen das über Bitcoin-Nodes. Wir sollten es auch über unsere Sicherheits-Tools sagen.
+  </blockquote>
+
+  <p>
+    Viele Menschen verlassen sich auf komplexe Apps mit glänzenden Oberflächen, um ihre Daten zu verstecken.
+    Aber Komplexität ist der Feind der Sicherheit. Jede Zeile Code, die du nicht geschrieben hast (und nicht lesen kannst), ist ein potenzielles Sicherheitsrisiko.
+  </p>
+  <p>
+    Die robusteste Verschlüsselung kommt oft von Werkzeugen, die seit Jahrzehnten getestet werden: <strong>GPG</strong> und <strong>Tar</strong>.
+  </p>
+  <p>
+    Im Folgenden findest du zwei Skripte, die ich nutze, um Daten zu sichern. Sie verwandeln jeden Ordner in ein verschlüsseltes <code>.tar.gz.gpg</code>-Archiv.
+    Sie funktionieren auf deinem High-End-Linux-Desktop und sogar auf deinem Smartphone (via Termux).
+  </p>
+  
+  <h3>Warum Skripte nutzen?</h3>
+  <ul>
+    <li><strong>Auditierbarkeit:</strong> Du kannst jede Zeile lesen. Keine versteckten Hintertüren.</li>
+    <li><strong>Standardisierung:</strong> Der Output ist Standard-OpenPGP. Du kannst es auch in 20 Jahren noch entschlüsseln, selbst wenn diese Skripte verloren gehen.</li>
+    <li><strong>Geschwindigkeit:</strong> Es kombiniert Archivierung, Komprimierung und Verschlüsselung in einem einzigen Datenstrom (Stream).</li>
+  </ul>
+
+  <h2>1. Das Konzept</h2>
+  <p>
+    Wir erfinden das Rad nicht neu. Wir ketten Standard-Tools aneinander:
+  </p>
+  <ul>
+    <li><strong>Tar:</strong> Bündelt Dateien zusammen.</li>
+    <li><strong>Gzip:</strong> Komprimiert sie.</li>
+    <li><strong>GPG (AES256):</strong> Verschlüsselt sie symmetrisch.</li>
+  </ul>
+  
+  <div class="box">
+    <strong>⚠️ OPSEC-Hinweis:</strong><br>
+    Diese Skripte nutzen symmetrische Verschlüsselung. Die Sicherheit hängt vollständig von der Stärke deines Passworts ab. Nutze ein langes Passwort mit hoher Entropie (Zufälligkeit), das du nirgendwo sonst verwendest.
+  </div>
+
+  <h2>2. Teil 1: Das Schild (Verschlüsselung)</h2>
+  <p>
+    Speichere diesen Code als Datei namens <code>encrypt-folder.sh</code>.
+  </p>
+
+<pre><code>#!/bin/bash
+# 🔒 Unified Encryption Script
+# Output: ~/Encrypted_&lt;Folder&gt;.tar.gz.gpg (+ .sha256)
+
+set -Eeuo pipefail
+umask 077
+
+read -p "📁 Enter folder name to encrypt: " FOLDERNAME
+
+if [ -z "${FOLDERNAME:-}" ]; then
+  echo "❌ No name entered. Aborting."
+  exit 1
+fi
+
+SRC="$HOME/$FOLDERNAME"
+
+if [ ! -d "$SRC" ]; then
+  echo "❌ Folder not found: $SRC"
+  exit 1
+fi
+
+# Determine output path (Desktop vs. Termux)
+if [ -d "$HOME/storage/downloads" ]; then
+  # Termux (Android)
+  OUTDIR="$HOME/storage/downloads"
+else
+  # Linux Desktop
+  OUTDIR="$HOME"
+fi
+
+TARGET="$OUTDIR/Encrypted_${FOLDERNAME}.tar.gz.gpg"
+
+if [ -f "$TARGET" ]; then
+  TARGET="$OUTDIR/Encrypted_${FOLDERNAME}_$(date +%F_%H%M).tar.gz.gpg"
+fi
+
+echo "📦 Packing & Encrypting → $TARGET"
+
+# Stream: Tar -> Gzip -> GPG (AES256)
+# No unencrypted temporary files are created on disk.
+tar -C "$HOME" -cf - -- "$FOLDERNAME" \
+  | gzip -9 \
+  | gpg --symmetric --cipher-algo AES256 --compress-level 0 --no-symkey-cache \
+  -o "$TARGET"
+
+# Create checksum
+( cd "$(dirname "$TARGET")" && sha256sum "$(basename "$TARGET")" > "$(basename "$TARGET").sha256" )
+
+# Notify (Linux only)
+if command -v notify-send >/dev/null 2>&1; then
+  notify-send "✅ Encrypted" "Archive: $(basename "$TARGET")"
+fi
+
+echo "✅ Done: $(basename "$TARGET")"
+echo "🧩 SHA256: $(basename "$TARGET").sha256"
+</code></pre>
+
+  <h2>3. Teil 2: Der Schlüssel (Entschlüsselung)</h2>
+  <p>
+    Speichere diesen Code als Datei namens <code>decrypt-folder.sh</code>.
+  </p>
+
+<pre><code>#!/usr/bin/env bash
+# decrypt-folder.sh – Decrypts &lt;NAME&gt;[.tar.gz].gpg
+# Features: SHA256 check, Loopback fallback, Auto-Extract
+
+set -Eeuo pipefail
+umask 077
+export GPG_TTY="${GPG_TTY:-$(tty 2>/dev/null || true)}"
+
+die(){ printf "❌ %s\n" "$*" >&2; exit 1; }
+
+# Input: Name or path
+NAME="${1-}"
+
+if [ -z "$NAME" ]; then
+  printf "Filename of the encrypted archive (without .gpg)? "
+  IFS= read -r NAME
+fi
+
+[ -n "$NAME" ] || die "No name provided."
+
+# Strip .gpg if provided
+NAME="${NAME%.gpg}"
+
+# Find the file in common locations
+CAND=(
+  "$HOME/${NAME}.gpg"
+  "$HOME/Downloads/${NAME}.gpg"
+  "$PWD/${NAME}.gpg"
+)
+
+INPUT=""
+for p in "${CAND[@]}"; do
+  [ -f "$p" ] && INPUT="$p" && break
+done
+
+[ -n "$INPUT" ] || die "Not found: ${NAME}.gpg"
+
+# Destination
+OUT_TAR="$HOME/${NAME}"
+STAMP="$(date +%F_%H%M%S)"
+RESTORE="$HOME/Restore/${NAME}_${STAMP}"
+
+# SHA Check
+if [ -f "${INPUT}.sha256" ]; then
+  echo "🔎 Checking SHA256 ..."
+  exp="$(awk '{print $1}' "${INPUT}.sha256")"
+  act="$(sha256sum "$INPUT" | awk '{print $1}')"
+  if [ "$exp" = "$act" ]; then
+    echo "✅ SHA256 OK"
+  else
+    echo "⚠️  SHA256 Mismatch! Proceed with caution."
+  fi
+fi
+
+# Select Mode
+printf "Mode: [T]AR Write (Default) / [E]xtract / [L]ist: "
+read -r -n1 MODE || true; echo
+MODE=${MODE:-T}
+
+case "$MODE" in
+  L|l)
+    gpg --decrypt "$INPUT" | tar -tz
+    ;;
+  E|e)
+    mkdir -p "$RESTORE"
+    echo "📦 Extracting to: $RESTORE"
+    gpg --decrypt "$INPUT" | tar -xz -C "$RESTORE"
+    echo "✅ Finished: $RESTORE"
+    ;;
+  T|t|*)
+    [ -f "$OUT_TAR" ] && rm -f "$OUT_TAR"
+    echo "📝 Writing: $OUT_TAR"
+    gpg --output "$OUT_TAR" --decrypt "$INPUT"
+    echo "✅ Finished: $OUT_TAR"
+    ;;
+esac
+</code></pre>
+
+  <h2>4. Installation</h2>
+  <p>
+    Erstelle die Dateien (z. B. mit <code>nano</code>).<br>
+    Füge den Code von oben ein.<br>
+    Mache sie ausführbar:
+  </p>
+<pre><code>chmod +x encrypt-folder.sh decrypt-folder.sh</code></pre>
+
+  <h2>5. Der Workflow: Wie du es benutzt</h2>
+  <p>
+    Hier ist der exakte Prozess, um deine Daten zu sichern.
+  </p>
+
+  <h3>1. Daten verschlüsseln</h3>
+  <ul>
+    <li>Bewege die Dateien, die du schützen willst, in einen Ordner innerhalb deines Home-Verzeichnisses. Nehmen wir an, dein Ordner heißt <code>PrivateDocs</code>.</li>
+    <li>Führe das Skript aus:
+      <pre><code>./encrypt-folder.sh</code></pre>
+    </li>
+    <li>Das Skript fragt nach dem Ordnernamen. Tippe: <code>PrivateDocs</code></li>
+    <li>GPG fragt dich dann nach einem Passwort (Passphrase). Wähle ein starkes.</li>
+    <li>Das Skript erstellt eine Datei namens <code>Encrypted_PrivateDocs.tar.gz.gpg</code>.</li>
+  </ul>
+
+  <h3>2. Daten entschlüsseln</h3>
+  <ul>
+    <li>Lege die verschlüsselte Datei in dein Home- oder Downloads-Verzeichnis.</li>
+    <li>Führe das Skript aus:
+      <pre><code>./decrypt-folder.sh</code></pre>
+    </li>
+    <li>Das Skript fragt nach dem Dateinamen. Tippe: <code>Encrypted_PrivateDocs.tar.gz</code></li>
+    <li><strong>Wichtig:</strong> Tippe NICHT die <code>.gpg</code> Endung mit ein. Das Skript sucht automatisch danach.</li>
+    <li>Gib dein Passwort ein, wenn du gefragt wirst. Das Skript prüft die Checksumme (falls vorhanden) und stellt deine Daten wieder her.</li>
+  </ul>
+
+  <h2>6. Warum das wichtig ist</h2>
+  <p>
+    In einer Welt der Überwachung sind Metadaten oft exponiert. Aber dein „Cold Storage“ – deine Backups, deine privaten Dokumente – muss mathematisch sicher sein.
+  </p>
+  <p>
+    Indem du einfache Skripte nutzt, reduzierst du die Angriffsfläche (Attack Surface). Es gibt keine App, die aktualisiert werden muss, keinen Cloud-Sync, den man versehentlich anlässt, und keinen proprietären Code, dem man blind vertrauen muss.
+  </p>
+  <p>
+    <strong>Letzter Gedanke:</strong><br>
+    Werkzeuge sind nur so gut wie der Nutzer. Halte dein System sauber, dein Terminal sicher und deine Passwörter lang.
+  </p>
+
+  <div class="box">
+    <h3>🧰 Tools für echte Eigentümer (Werbung/Affiliate)</h3>
+    <p style="font-size:0.95em;">
+      Wenn du Aktien und Bitcoin möglichst eigenverantwortlich halten willst, nutze nicht nur dein Bankdepot:
+    </p>
+    <ul>
+      <li>
+        🇨🇭 <strong>Investieren mit Swissquote:</strong><br>
+        Ich nutze Swissquote in der Schweiz – dort kannst du saubere Namensaktien halten und hast keine
+        deutsche Bank dazwischen.<br>
+        👉 <a href="https://alien-investor.org/swissquote" target="_blank">https://alien-investor.org/swissquote</a>
+      </li>
+      <li>
+        📊 <strong>US-Aktien über IBKR:</strong><br>
+        Für viele internationale Titel bietet sich Interactive Brokers als Zugang an – insbesondere in Kombination
+        mit DRS/Transfer Agenten.<br>
+        👉 <a href="https://alien-investor.org/interactive-brokers" target="_blank">https://alien-investor.org/interactive-brokers</a>
+      </li>
+      <li>
+        💥 <strong>Bitcoin kaufen in Europa – 21bitcoin:</strong><br>
+        Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges sats stapeln – ohne Shitcoins.<br>
+        Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du dauerhaft 0,2&nbsp;Prozentpunkte Gebührenreduktion
+        auf Sofort- und Sparplankäufe.<br>
+        👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
+      </li>
+      <li>
+        ₿ <strong>Bitcoin in Selbstverwahrung:</strong><br>
+        Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox – es gibt die klassische BitBox02 und die neue
+        BitBox für iPhone (Nova).<br>
+        👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
+      </li>
+      <li>
+        🛡️ <strong>Privacy &amp; Mail:</strong><br>
+        Für E-Mail, VPN und Cloud nutze ich Proton – datensparsam und ohne Big-Tech-Abhängigkeit.<br>
+        👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
+      </li>
+    </ul>
+    <p style="font-size:0.85em; color:#aaa;">
+      Hinweis: Bei einigen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit,
+      ohne dass es dich mehr kostet. Danke! 👽
+    </p>
+  </div>
+
+  <div class="like-button">
+    <button id="likeButton">👍 Gefällt mir</button>
+    <span id="likeCount">0</span>
+    <span style="color:#bbb;">(Speicherung nur lokal im Browser)</span>
+  </div>
+
+  <div class="box">
+    <h3>📚 Quellen (Auswahl)</h3>
+    <p style="font-size:0.95em;">
+      Diese Anleitung basiert auf der offiziellen Dokumentation von GNU Privacy Guard (GPG) und GNU Tar sowie
+      gängigen Best Practices für Bash-Scripting und Datensicherheit unter Linux.
+    </p>
+  </div>
+
+  <h3>💸 Unterstütze meine Arbeit</h3>
+  <ul>
+    <li>☕ <a href="https://ko-fi.com/alieninvestor" target="_blank">Spenden via Ko-fi (PayPal, Fiat)</a></li>
+    <li>⚡ Bitcoin Lightning: <code>alien_investor@strike.me</code></li>
+    <li>₿ Bitcoin Onchain: <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code></li>
+  </ul>
+  <p>Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸</p>
+
+  <footer>
+    <p>👽 <strong>Haftungsausschluss:</strong><br>
+      Dieser Artikel stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
+      Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
+      Die Nutzung von Verschlüsselungssoftware erfolgt auf eigenes Risiko. Datenverlust durch verlorene Passwörter ist möglich.
+    </p>
+    <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    <p><a href="blog.html">⬅ Zurück zum Blog</a></p>
+  </footer>
+
+  <script>
+    (function() {
+      const storageKey = window.location.pathname + "-likes";
+      const btn = document.getElementById('likeButton');
+      const span = document.getElementById('likeCount');
+
+      let count = parseInt(localStorage.getItem(storageKey) || "0", 10);
+      span.textContent = count;
+
+      btn.addEventListener('click', function() {
+        count += 1;
+        span.textContent = count;
+        localStorage.setItem(storageKey, String(count));
+        btn.disabled = true;
+        btn.textContent = "Danke! 👽";
+      });
+    })();
+  </script>
+
+</body>
+</html>
