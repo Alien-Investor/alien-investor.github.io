@@ -110,6 +110,13 @@
     .support ul {
       margin: 0.3em 0 0 1.2em;
     }
+    .prev-article {
+      margin: 2em 0;
+      padding: 1em;
+      border: 1px dashed #00ffcc;
+      border-radius: 8px;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -136,7 +143,7 @@
 
   <h2>1. Die Vorbereitung: Termux startklar machen</h2>
   <p>
-    Auf GrapheneOS installierst du Termux am besten über den Store <strong>F-Droid</strong> (nicht Play Store, dort ist die Version veraltet).<br>
+    Auf GrapheneOS installierst du Termux am besten über <strong>F-Droid</strong> (nicht über den Play Store, dort ist die Version veraltet).<br>
     Sobald du das schwarze Terminal vor dir hast, aktualisieren wir die Pakete und installieren die nötigen Werkzeuge. Das ist das Fundament.
   </p>
   <p>Tippe folgende Befehle nacheinander ein:</p>
@@ -155,7 +162,7 @@ pkg install termux-tools tar gnupg</code></pre>
 
   <h2>2. Teil 1: Das mobile Schild (Verschlüsselung)</h2>
   <p>
-    Das Skript <code>encrypt-folder.sh</code> für Termux ist intelligent. Es erkennt automatisch, ob es auf einem Android-System läuft, und leitet die Ausgabe in den Ordner <code>Downloads</code>, damit du die verschlüsselte Datei später einfach finden und teilen kannst.
+    Das Skript <code>encrypt-folder.sh</code> für Termux ist intelligent. Es erkennt automatisch, ob es auf einem Android-System läuft, und leitet die Ausgabe in den Ordner Downloads, damit du die verschlüsselte Datei später einfach finden und teilen kannst.
   </p>
 
   <h3>Ein Blick unter die Haube: Die Sicherheits-Mechanik</h3>
@@ -376,40 +383,34 @@ fi</code></pre>
   <h2>4. Der Workflow im Feld</h2>
   <p>Hier ist der taktische Ablauf, um deine Daten sicher zu bewegen.</p>
 
-  <h3>Szenario A: Verschlüsseln auf dem Phone</h3>
+  <h3>Szenario A: Verschlüsseln und Entschlüsseln auf dem Telefon (Loop)</h3>
   <ol>
     <li>Du hast einen Ordner (z.B. <code>Finanzen</code>) in deinem Download-Bereich.</li>
     <li>Öffne Termux.</li>
     <li>Starte das Skript: <code>~/Skripte/encrypt-folder.sh</code></li>
     <li>Tippe den Ordnernamen ein: <code>Finanzen</code></li>
-    <li>Gib dein Passwort ein (Blind-Eingabe).</li>
-    <li><strong>Ergebnis:</strong> In deinem normalen Download-Ordner (Dateien-App) liegen nun <code>Verschlüsselt_Finanzen.tar.gz.gpg</code> und die <code>.sha256</code>-Datei. Bereit zum sicheren Versand.</li>
+    <li><strong>Ergebnis:</strong> In deinem normalen Download-Ordner liegen nun <code>Verschlüsselt_Finanzen.tar.gz.gpg</code> und die Checksumme.</li>
+    <li>Willst du sie testen/entschlüsseln? Führe einfach <code>~/Skripte/decrypt-folder.sh</code> aus.</li>
   </ol>
 
-  <h3>Szenario B: Entschlüsseln (vom PC erhalten) – Ohne Frust</h3>
+  <h3>Szenario B: Daten vom PC entschlüsseln (Der Ernstfall)</h3>
   <p>
-    Hier lauert eine Falle für Neueinsteiger: Termux hat sein eigenes, isoliertes Dateisystem („Termux Home“). Wenn du Dateien dort entpackst, sind sie für deine normale „Dateien“-App oft unsichtbar.
+    Du hast eine verschlüsselte Datei (z. B. <code>Verschlüsselt_Backup.tar.gz.gpg</code>) von deinem PC auf dein Handy übertragen.
   </p>
-  <p><strong>Die Lösung:</strong> Wir arbeiten direkt auf dem gemeinsamen Speicher („Downloads“).</p>
-
   <ul>
-    <li><strong>Zielgebiet ansteuern:</strong><br>
-    Wechsle in Termux zuerst direkt in deinen Android-Download-Ordner. Das ist der wichtigste Schritt!
-    <pre><code>cd ~/storage/downloads</code></pre>
+    <li><strong>Schritt 1: Speicherort</strong><br>
+    Stelle sicher, dass die Datei im <strong>Android-Download-Ordner</strong> liegt. Mein Skript sucht dort automatisch nach der neuesten Datei.
     </li>
-    <li><strong>Feuer frei:</strong><br>
-    Starte erst jetzt das Entschlüsselungs-Skript.
+    <li><strong>Schritt 2: Feuer frei</strong><br>
+    Öffne Termux und starte das Skript:
     <pre><code>~/Skripte/decrypt-folder.sh</code></pre>
     </li>
-    <li><strong>Ablauf:</strong><br>
-    Das Skript greift sich automatisch die neueste verschlüsselte Datei (z. B. <code>Verschlüsselt_Backup.tar.gz.gpg</code>). Es prüft die Integrität (SHA256). Nach der Passworteingabe wird der Ordner direkt hier entpackt.
-    </li>
-    <li><strong>Sichtung:</strong><br>
-    Öffne nun deine normale GrapheneOS „Dateien“-App. Du findest deinen entschlüsselten Ordner sofort unter Downloads. Kein Suchen, kein Kopieren.
+    <li><strong>Schritt 3: Wo sind die Daten?</strong><br>
+    Das Skript entschlüsselt die Daten standardmäßig in das <strong>Termux-Home-Verzeichnis</strong> (nicht zurück nach Downloads, um Chaos zu vermeiden).<br>
+    <br>
+    Öffne deine „Dateien“-App. Du findest dort in der Seitenleiste oder unter „Speicherorte“ einen Eintrag namens <strong>Termux</strong>. Dort liegt dein entschlüsselter Ordner, bereit zur Einsicht. Dies ist ein gespiegelter Bereich, auf den du bequem zugreifen kannst.
     </li>
   </ul>
-
-  <p><strong>Hinweis:</strong> Würdest du das Skript ohne den <code>cd</code>-Befehl im Start-Ordner von Termux ausführen, landen die entschlüsselten Dateien im „Termux Private Storage“. Diese sind im normalen Dateimanager nur sichtbar, wenn du im Menü links unten auf „Termux“ klickst (was oft deaktiviert oder versteckt ist). Erspare dir den Ärger – nutze den Download-Ordner.</p>
 
   <h2>5. Warum „Auditierbarkeit“ King ist</h2>
   <p>
@@ -426,6 +427,14 @@ fi</code></pre>
     <li>GPG verschlüsselt.</li>
     <li>SHA256 verifiziert.</li>
   </ul>
+
+  <div class="prev-article">
+    <h3>🔗 Vorgeschichte: Das Fundament</h3>
+    <p>
+      Dies ist Teil 2 der Serie. Den Einstieg und die Desktop-Skripte findest du hier:<br>
+      👉 <a href="https://alien-investor.org/Kryptographie.html">Zum ersten Teil: Der Digitale Bunker</a>
+    </p>
+  </div>
 
   <div class="box">
     <h3>🧰 Tools für echte Eigentümer (Werbung/Affiliate)</h3>
