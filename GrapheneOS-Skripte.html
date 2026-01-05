@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>🛡️ Der mobile Bunker: Verschlüsselung auf GrapheneOS (Termux Edition) | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sichere Verschlüsselung unterwegs mit GrapheneOS und Termux. Ein Workflow für echte Souveränität: Archive mobil öffnen und sicher erstellen.">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 2em;
+    }
+    h1, h2, h3 {
+      color: #00ffcc;
+    }
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    em {
+      color: #ccc;
+    }
+    code {
+      background-color: #111;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      color: #0f0;
+      font-size: 0.95em;
+      font-family: "Courier New", Courier, monospace;
+    }
+    pre {
+      background-color: #111;
+      padding: 1em;
+      border-radius: 8px;
+      overflow-x: auto;
+      border: 1px solid #333;
+    }
+    pre code {
+      background-color: transparent;
+      padding: 0;
+      color: #0f0;
+      border: none;
+    }
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      padding-left: 1em;
+      margin: 2em 0;
+      color: #ddd;
+      font-style: italic;
+      background-color: #050505;
+      padding: 1em;
+    }
+    ul, ol {
+      margin-left: 1.2em;
+    }
+    li {
+      margin-bottom: 0.5em;
+    }
+    .byline {
+      margin-top: -0.8em;
+      margin-bottom: 1.2em;
+      color: #ccc;
+      font-style: italic;
+    }
+    .box {
+      border: 1px solid #00ffcc;
+      background-color: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+    }
+    .box h3 {
+      margin-top: 0;
+    }
+    .like-button {
+      margin: 2em 0;
+      display: flex;
+      align-items: center;
+      gap: 0.75em;
+      font-size: 0.95em;
+    }
+    .like-button button {
+      background: #00ffcc;
+      color: #000;
+      border: none;
+      padding: 0.4em 0.9em;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .like-button span {
+      min-width: 2em;
+      display: inline-block;
+    }
+    footer {
+      margin-top: 3em;
+      padding-top: 2em;
+      border-top: 1px solid #333;
+      font-size: 0.9em;
+      color: #bbb;
+    }
+    .support ul {
+      margin: 0.3em 0 0 1.2em;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🛡️ Der mobile Bunker: Verschlüsselung auf GrapheneOS (Termux Edition)</h1>
+  <p class="byline"><em>von Alien Investor</em></p>
+
+  <p>
+    Souveränität endet nicht an der Schreibtischkante. Nimm deine digitale Festung mit.
+  </p>
+  <p>
+    Im ersten Teil haben wir den „Digitalen Bunker“ auf dem Linux-Desktop gebaut. Wir haben gelernt, dass wahre Sicherheit auf Auditierbarkeit basiert, nicht auf bunten Apps. Doch Investoren und Strategen sind mobil. Was nützt das sicherste Archiv zu Hause, wenn du unterwegs auf sensitive Dokumente zugreifen oder Daten sicher exfiltrieren musst?
+  </p>
+  <p>
+    Die meisten mobilen Lösungen sind „Blackboxes“. Du drückst einen Knopf, etwas passiert, und du hoffst, dass der Entwickler keinen Generalschlüssel hat. Das ist inakzeptabel.
+  </p>
+  <p>
+    Wir nutzen <strong>GrapheneOS</strong>, das einzige mobile Betriebssystem, das Sicherheitsarchitektur ernst nimmt. Und wir nutzen <strong>Termux</strong>, einen Terminal-Emulator, der dein Smartphone in einen vollwertigen Linux-Computer verwandelt.
+  </p>
+  <p>
+    Das Ziel: Ein Workflow. Zwei Geräte. Identische Mathematik.<br>
+    Ein Archiv, das du auf deinem Tuxedo-Laptop verschlüsselst, muss auf deinem GrapheneOS-Phone zu öffnen sein – und umgekehrt.
+  </p>
+
+  <h2>1. Die Vorbereitung: Termux startklar machen</h2>
+  <p>
+    Auf GrapheneOS installierst du Termux am besten über den Store <strong>F-Droid</strong> (nicht Play Store, dort ist die Version veraltet).<br>
+    Sobald du das schwarze Terminal vor dir hast, aktualisieren wir die Pakete und installieren die nötigen Werkzeuge. Das ist das Fundament.
+  </p>
+  <p>Tippe folgende Befehle nacheinander ein:</p>
+  <pre><code>pkg update && pkg upgrade
+pkg install termux-tools tar gnupg</code></pre>
+
+  <h3>Der Zugriff auf den Speicher</h3>
+  <p>
+    Termux lebt isoliert. Damit die Skripte auf deine Downloads zugreifen können (wo deine Daten liegen), müssen wir die Brücke zum Android-Dateisystem schlagen.
+  </p>
+  <p>Führe aus:</p>
+  <pre><code>termux-setup-storage</code></pre>
+  <p>Bestätige den Dialog auf dem Bildschirm („Zulassen“).</p>
+  <p>Lege nun einen Ordner für deine Werkzeuge an:</p>
+  <pre><code>mkdir -p ~/Skripte</code></pre>
+
+  <h2>2. Teil 1: Das mobile Schild (Verschlüsselung)</h2>
+  <p>
+    Das Skript <code>encrypt-folder.sh</code> für Termux ist intelligent. Es erkennt automatisch, ob es auf einem Android-System läuft, und leitet die Ausgabe in den Ordner <code>Downloads</code>, damit du die verschlüsselte Datei später einfach finden und teilen kannst.
+  </p>
+
+  <h3>Ein Blick unter die Haube: Die Sicherheits-Mechanik</h3>
+  <p>
+    Bevor wir den Code kopieren, achten wir auf ein Detail, das Profi-Code von Bastel-Skripten unterscheidet. Am Anfang des Skripts findest du den Bereich „Helpers“:
+  </p>
+  <ul>
+    <li><strong>Die Notbremse (die):</strong> Wenn irgendetwas schiefgeht (z. B. Speicher voll, Zugriff verweigert), bricht das Skript sofort hart ab (<code>exit 1</code>). Es macht nicht einfach weiter und produziert korrupte Daten.</li>
+    <li><strong>Der Ausrüstungs-Check (need):</strong> Bevor auch nur ein Byte verschlüsselt wird, prüft das Skript, ob alle Werkzeuge (tar, gpg) an Bord sind. Fehlt etwas, startet es gar nicht erst.</li>
+  </ul>
+  <p>So sieht Code aus, der dich im Ernstfall nicht im Stich lässt.</p>
+
+  <p>Erstelle die Datei:</p>
+  <pre><code>nano ~/Skripte/encrypt-folder.sh</code></pre>
+
+  <p>Füge diesen Code ein:</p>
+  <pre><code>#!/usr/bin/env bash
+# encrypt-folder.sh — Ordner verlustfrei packen und symmetrisch (AES-256) verschlüsseln,
+# ohne Klartext-Zwischendatei. Zusätzlich wird eine .sha256 erzeugt.
+# Phone (GrapheneOS/Termux): Ausgabe nach ~/storage/downloads
+# PC (TUXEDO OS): Ausgabe nach $HOME
+
+set -Eeuo pipefail
+umask 077
+
+# -------------------- Helpers --------------------
+die() { printf "❌ %s\n" "$*" >&2; exit 1; }
+need() { command -v "$1" >/dev/null 2>&1 || die "Benötigtes Programm fehlt: $1"; }
+
+need tar
+need gpg
+need sha256sum
+
+# Zielausgabe je nach System bestimmen
+OUT_DIR="$HOME"
+if [ -d "$HOME/storage/downloads" ]; then
+  OUT_DIR="$HOME/storage/downloads"
+fi
+
+# Eingabe: optional als Argument, sonst Prompt
+INPUT="${1-}"
+if [ -z "$INPUT" ]; then
+  printf "📁 Bitte gib den Ordnernamen ein: "
+  IFS= read -r INPUT
+fi
+
+[ -n "$INPUT" ] || die "Kein Name eingegeben."
+
+# Pfad normalisieren:
+# Erlaubt: SAP | storage/downloads/SAP | ~/storage/downloads/SAP
+#          /sdcard/Download/SAP | /storage/emulated/0/Download/SAP | /voller/pfad/SAP
+case "$INPUT" in
+  ~/*) SRC="$HOME/${INPUT#~/}" ;;
+  storage/*) SRC="$HOME/$INPUT" ;;  # Termux-Symlink
+  /sdcard/Download/*)
+      SRC="$HOME/storage/downloads/${INPUT#/sdcard/Download/}" ;;
+  /storage/emulated/0/Download/*)
+      SRC="$HOME/storage/downloads/${INPUT#/storage/emulated/0/Download/}" ;;
+  /*) SRC="$INPUT" ;;
+  *)
+      if [ -d "$HOME/storage/downloads/$INPUT" ]; then
+        SRC="$HOME/storage/downloads/$INPUT"
+      else
+        SRC="$HOME/$INPUT"
+      fi
+      ;;
+esac
+
+[ -e "$SRC" ] || die "Pfad nicht gefunden: $SRC"
+[ -d "$SRC" ] || die "Das ist keine Ordner-Struktur: $SRC"
+
+BASE="$(basename "$SRC")"
+
+# Optional: Leerzeichen im Namen durch Unterstrich ersetzen (nur für die Zieldatei)
+BASE_SAFE="${BASE// /_}"
+
+OUT_FILE="$OUT_DIR/Verschlüsselt_${BASE_SAFE}.tar.gz.gpg"
+
+# Kollision vermeiden
+if [ -e "$OUT_FILE" ]; then
+  OUT_FILE="$OUT_DIR/Verschlüsselt_${BASE_SAFE}_$(date +%Y-%m-%d_%H-%M-%S).tar.gz.gpg"
+fi
+
+printf "📦 Packe & verschlüssele → %s\n" "$OUT_FILE"
+
+# Archivieren + Verschlüsseln ohne Klartext-Zwischendatei
+# Tipp: Für loopback-Pinentry (ohne curses-Prompt): ~/.gnupg/gpg.conf -> allow-loopback-pinentry
+# und unten: --pinentry-mode loopback ergänzen.
+tar -C "$(dirname "$SRC")" -cz "$BASE" \
+| gpg --symmetric --cipher-algo AES256 -o "$OUT_FILE" \
+|| die "gpg fehlgeschlagen"
+
+# Prüfsumme schreiben
+sha256sum "$OUT_FILE" > "${OUT_FILE}.sha256"
+
+printf "✅ Fertig:\n   %s\n   %s\n   Standort: %s\n" \
+  "$(basename "$OUT_FILE")" "$(basename "${OUT_FILE}.sha256")" "$OUT_DIR"</code></pre>
+  
+  <p><em>(Speichern in nano mit STRG+O, Enter, dann STRG+X)</em></p>
+
+  <h2>3. Teil 2: Der mobile Schlüssel (Entschlüsselung)</h2>
+  <p>
+    Unterwegs hast du oft ein Problem: Cloud-Dienste oder Downloads benennen Dateien um. Aus <code>Datei.gpg</code> wird plötzlich <code>Datei.gpg.pgp</code> oder <code>Datei (1).gpg</code>.<br>
+    Dieses Skript ist die „Cloud-Edition“. Es ist extrem robust, findet deine Datei auch bei falschen Endungen und prüft die SHA256-Summe.
+  </p>
+
+  <p>Erstelle die Datei:</p>
+  <pre><code>nano ~/Skripte/decrypt-folder.sh</code></pre>
+
+  <p>Füge diesen Code ein:</p>
+  <pre><code>#!/usr/bin/env bash
+# decrypt-folder.sh (Cloud-Edition)
+# - Findet .gpg UND .pgp (Doppel-Endung durch Cloud/Download)
+# - Smarter SHA-Check (prüft auch, ob das .pgp zu viel ist)
+
+set -Eeuo pipefail
+umask 077
+
+export GPG_TTY="${GPG_TTY:-$(tty 2>/dev/null || true)}"
+
+DL_DIR="$HOME/storage/downloads"
+
+die(){ printf "❌ %s\n" "$*" >&2; exit 1; }
+
+# --- 1. Automatische Dateiwahl (GPG & PGP) ---
+NAME="${1-}"
+INPUT=""
+
+if [ -z "$NAME" ]; then
+  # Sucht nach .gpg ODER .pgp, sortiert nach Zeit (neueste zuerst)
+  # 2>/dev/null unterdrückt Fehler, falls eine Art nicht da ist
+  LATEST="$(ls -t "$DL_DIR"/*.gpg "$DL_DIR"/*.pgp 2>/dev/null | head -n1 || true)"
+  
+  if [ -n "$LATEST" ]; then
+    INPUT="$LATEST"
+    printf "🤖 Datei gefunden: %s\n" "$(basename "$INPUT")"
+  else
+    printf "Keine Datei gefunden. Name eingeben: "
+    IFS= read -r NAME
+    [ -n "$NAME" ] || die "Abbruch."
+  fi
+fi
+
+# Fallback: Manuelle Pfadsuche
+if [ -z "$INPUT" ]; then
+    # Wir probieren diverse Varianten durch
+    VARIANTS=(
+      "${NAME}"
+      "${NAME}.gpg"
+      "${NAME}.pgp"
+      "${NAME}.gpg.pgp"
+      "Verschlüsselt_${NAME}.gpg"
+    )
+    
+    for v in "${VARIANTS[@]}"; do
+        # Prüfen in PWD und Downloads
+        if [ -f "$PWD/$v" ]; then INPUT="$PWD/$v"; break; fi
+        if [ -f "$DL_DIR/$v" ]; then INPUT="$DL_DIR/$v"; break; fi
+    done
+fi
+
+[ -n "$INPUT" ] || die "Quelldatei nicht gefunden."
+
+# --- 2. Intelligenter SHA256 Check ---
+# Fall A: Standard (Datei.gpg.sha256)
+SHA_CANDIDATE_1="${INPUT}.sha256"
+
+# Fall B: Cloud-Fehler (Datei.gpg.pgp -> Datei.gpg.sha256)
+SHA_CANDIDATE_2="${INPUT%.pgp}.sha256"
+
+SHA_FILE=""
+
+if [ -f "$SHA_CANDIDATE_1" ]; then
+    SHA_FILE="$SHA_CANDIDATE_1"
+elif [ -f "$SHA_CANDIDATE_2" ]; then
+    SHA_FILE="$SHA_CANDIDATE_2"
+    echo "ℹ️  Korrigiere SHA-Pfad (ignoriere .pgp Endung)..."
+fi
+
+if [ -n "$SHA_FILE" ]; then
+    printf "🔎 Prüfe Integrität (SHA256)..."
+    EXPECTED=$(awk '{print $1}' "$SHA_FILE")
+    ACTUAL=$(sha256sum "$INPUT" | awk '{print $1}')
+
+    if [ "$EXPECTED" = "$ACTUAL" ]; then
+        echo " ✅ OK."
+    else
+        echo " ❌ FEHLER!"
+        echo "   WARNUNG: Checksummen stimmen nicht überein!"
+        echo "   Datei könnte korrupt sein."
+        printf "   Trotzdem fortfahren? (j/N) "
+        read -r -n 1 REPLY
+        echo
+        if [[ ! $REPLY =~ ^[Jj]$ ]]; then
+            die "Abbruch."
+        fi
+    fi
+else
+    echo "ℹ️  Keine .sha256 Datei gefunden (Check übersprungen)."
+fi
+
+# --- 3. Entschlüsseln & Entpacken ---
+printf "🔓 Entschlüssle & Entpacke..."
+
+if gpg --quiet --decrypt "$INPUT" | tar -xz; then
+    echo " ✅ Fertig."
+    echo "📂 Ordner liegt in: $PWD"
+elif gpg --quiet --pinentry-mode loopback --decrypt "$INPUT" | tar -xz; then
+    echo " ✅ Fertig."
+    echo "📂 Ordner liegt in: $PWD"
+else
+    die "Fehler."
+fi</code></pre>
+
+  <p>Mach beide Skripte ausführbar:</p>
+  <pre><code>chmod +x ~/Skripte/encrypt-folder.sh ~/Skripte/decrypt-folder.sh</code></pre>
+
+  <h2>4. Der Workflow im Feld</h2>
+  <p>Hier ist der taktische Ablauf, um deine Daten sicher zu bewegen.</p>
+
+  <h3>Szenario A: Verschlüsseln auf dem Phone</h3>
+  <ol>
+    <li>Du hast einen Ordner (z.B. <code>Finanzen</code>) in deinem Download-Bereich.</li>
+    <li>Öffne Termux.</li>
+    <li>Starte das Skript: <code>~/Skripte/encrypt-folder.sh</code></li>
+    <li>Tippe den Ordnernamen ein: <code>Finanzen</code></li>
+    <li>Gib dein Passwort ein (Blind-Eingabe).</li>
+    <li><strong>Ergebnis:</strong> In deinem normalen Download-Ordner (Dateien-App) liegen nun <code>Verschlüsselt_Finanzen.tar.gz.gpg</code> und die <code>.sha256</code>-Datei. Bereit zum sicheren Versand.</li>
+  </ol>
+
+  <h3>Szenario B: Entschlüsseln (vom PC erhalten) – Ohne Frust</h3>
+  <p>
+    Hier lauert eine Falle für Neueinsteiger: Termux hat sein eigenes, isoliertes Dateisystem („Termux Home“). Wenn du Dateien dort entpackst, sind sie für deine normale „Dateien“-App oft unsichtbar.
+  </p>
+  <p><strong>Die Lösung:</strong> Wir arbeiten direkt auf dem gemeinsamen Speicher („Downloads“).</p>
+
+  <ul>
+    <li><strong>Zielgebiet ansteuern:</strong><br>
+    Wechsle in Termux zuerst direkt in deinen Android-Download-Ordner. Das ist der wichtigste Schritt!
+    <pre><code>cd ~/storage/downloads</code></pre>
+    </li>
+    <li><strong>Feuer frei:</strong><br>
+    Starte erst jetzt das Entschlüsselungs-Skript.
+    <pre><code>~/Skripte/decrypt-folder.sh</code></pre>
+    </li>
+    <li><strong>Ablauf:</strong><br>
+    Das Skript greift sich automatisch die neueste verschlüsselte Datei (z. B. <code>Verschlüsselt_Backup.tar.gz.gpg</code>). Es prüft die Integrität (SHA256). Nach der Passworteingabe wird der Ordner direkt hier entpackt.
+    </li>
+    <li><strong>Sichtung:</strong><br>
+    Öffne nun deine normale GrapheneOS „Dateien“-App. Du findest deinen entschlüsselten Ordner sofort unter Downloads. Kein Suchen, kein Kopieren.
+    </li>
+  </ul>
+
+  <p><strong>Hinweis:</strong> Würdest du das Skript ohne den <code>cd</code>-Befehl im Start-Ordner von Termux ausführen, landen die entschlüsselten Dateien im „Termux Private Storage“. Diese sind im normalen Dateimanager nur sichtbar, wenn du im Menü links unten auf „Termux“ klickst (was oft deaktiviert oder versteckt ist). Erspare dir den Ärger – nutze den Download-Ordner.</p>
+
+  <h2>5. Warum „Auditierbarkeit“ King ist</h2>
+  <p>
+    Du könntest eine App aus dem AppStore laden, die „AES Safe Box“ heißt. Aber weißt du, was sie mit deinen Keys macht?
+  </p>
+
+  <blockquote>
+    Keine Magie. Nur Mathematik. Das ist der Weg des Alien Investors.
+  </blockquote>
+
+  <p>Mit diesen Skripten siehst du jeden Befehl:</p>
+  <ul>
+    <li>Tar packt.</li>
+    <li>GPG verschlüsselt.</li>
+    <li>SHA256 verifiziert.</li>
+  </ul>
+
+  <div class="box">
+    <h3>🧰 Tools für echte Eigentümer (Werbung/Affiliate)</h3>
+    <p style="font-size:0.95em;">
+      Wenn du Aktien und Bitcoin möglichst eigenverantwortlich halten willst, nutze nicht nur dein Bankdepot:
+    </p>
+    <ul>
+      <li>
+        🇨🇭 <strong>Investieren mit Swissquote:</strong><br>
+        Ich nutze Swissquote in der Schweiz – dort kannst du saubere Namensaktien halten und hast keine
+        deutsche Bank dazwischen.<br>
+        👉 <a href="https://alien-investor.org/swissquote" target="_blank">https://alien-investor.org/swissquote</a>
+      </li>
+      <li>
+        📊 <strong>US-Aktien über IBKR:</strong><br>
+        Für viele internationale Titel bietet sich Interactive Brokers als Zugang an – insbesondere in Kombination
+        mit DRS/Transfer Agenten.<br>
+        👉 <a href="https://alien-investor.org/interactive-brokers" target="_blank">https://alien-investor.org/interactive-brokers</a>
+      </li>
+      <li>
+        💥 <strong>Bitcoin kaufen in Europa – 21bitcoin:</strong><br>
+        Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges sats stapeln – ohne Shitcoins.<br>
+        Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du dauerhaft 0,2&nbsp;Prozentpunkte Gebührenreduktion
+        auf Sofort- und Sparplankäufe.<br>
+        👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
+      </li>
+      <li>
+        ₿ <strong>Bitcoin in Selbstverwahrung:</strong><br>
+        Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox – es gibt die klassische BitBox02 und die neue
+        BitBox für iPhone (Nova).<br>
+        👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
+      </li>
+      <li>
+        🛡️ <strong>Privacy &amp; Mail:</strong><br>
+        Für E-Mail, VPN und Cloud nutze ich Proton – datensparsam und ohne Big-Tech-Abhängigkeit.<br>
+        👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
+      </li>
+    </ul>
+    <p style="font-size:0.85em; color:#aaa;">
+      Hinweis: Bei einigen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit,
+      ohne dass es dich mehr kostet. Danke! 👽
+    </p>
+  </div>
+
+  <div class="like-button">
+    <button id="likeButton">👍 Gefällt mir</button>
+    <span id="likeCount">0</span>
+    <span style="color:#bbb;">(Speicherung nur lokal im Browser)</span>
+  </div>
+
+  <p><a href="blog.html">⬅ Zurück zum Blog</a></p>
+
+  <div class="support" style="margin-top: 2em;">
+    <h3>💸 Unterstütze meine Arbeit</h3>
+    <ul>
+      <li>☕ <a href="https://ko-fi.com/alieninvestor" target="_blank">Spenden via Ko-fi (PayPal, Fiat)</a></li>
+      <li>⚡ Bitcoin Lightning: <code>alien_investor@strike.me</code></li>
+      <li>₿ Bitcoin Onchain: <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code></li>
+    </ul>
+  </div>
+
+  <footer>
+    <p>👽 <strong>Haftungsausschluss:</strong><br>
+      Dieser Artikel stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
+      Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
+      Investieren ist mit Risiken verbunden – du kannst Geld verlieren. Prüfe Informationen selbst
+      und handle eigenverantwortlich.
+    </p>
+    <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+  </footer>
+
+  <script>
+    (function() {
+      const storageKey = window.location.pathname + "-likes";
+      const btn = document.getElementById('likeButton');
+      const span = document.getElementById('likeCount');
+
+      let count = parseInt(localStorage.getItem(storageKey) || "0", 10);
+      span.textContent = count;
+
+      btn.addEventListener('click', function() {
+        count += 1;
+        span.textContent = count;
+        localStorage.setItem(storageKey, String(count));
+        btn.disabled = true;
+        btn.textContent = "Danke! 👽";
+      });
+    })();
+  </script>
+
+</body>
+</html>
