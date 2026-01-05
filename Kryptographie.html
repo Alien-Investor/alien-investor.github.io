@@ -130,7 +130,7 @@
   </p>
 
   <blockquote>
-    „Don't trust, verify.“<br>
+    „Don't trust, verify.“<br><br>
     Wir sagen das über Bitcoin-Nodes. Wir sollten es auch über unsere Sicherheits-Tools sagen.
   </blockquote>
 
@@ -164,7 +164,7 @@
   </ul>
   
   <div class="box">
-    <strong>⚠️ OPSEC-Hinweis:</strong><br>
+    <strong>⚠️ OPSEC-Hinweis:</strong><br><br>
     Diese Skripte nutzen symmetrische Verschlüsselung. Die Sicherheit hängt vollständig von der Stärke deines Passworts ab. Nutze ein langes Passwort mit hoher Entropie (Zufälligkeit), das du nirgendwo sonst verwendest.
   </div>
 
@@ -236,8 +236,8 @@ echo "🧩 SHA256: $(basename "$TARGET").sha256"
   </p>
 
 <pre><code>#!/usr/bin/env bash
-# decrypt-folder.sh – Decrypts &lt;NAME&gt;[.tar.gz].gpg
-# Features: SHA256 check, Loopback fallback, Auto-Extract
+# decrypt-folder.sh – Decrypts &lt;NAME&gt;[.tar.gz].gpg from ~ or ~/Downloads.
+# Features: SHA256 check, Loopback fallback, Auto-Extract (E), List (L), Default: Write TAR (T)
 
 set -Eeuo pipefail
 umask 077
@@ -245,39 +245,36 @@ export GPG_TTY="${GPG_TTY:-$(tty 2>/dev/null || true)}"
 
 die(){ printf "❌ %s\n" "$*" >&2; exit 1; }
 
-# Input: Name or path
+# --- Input: Name or path, with or without .gpg ---
 NAME="${1-}"
-
 if [ -z "$NAME" ]; then
-  printf "Filename of the encrypted archive (without .gpg)? "
+  printf "Enter the filename of the encrypted archive (without .gpg): "
   IFS= read -r NAME
 fi
-
 [ -n "$NAME" ] || die "No name provided."
 
-# Strip .gpg if provided
+# Strip .gpg if user provided it
 NAME="${NAME%.gpg}"
 
-# Find the file in common locations
+# Find candidate paths for the .gpg file
 CAND=(
   "$HOME/${NAME}.gpg"
   "$HOME/Downloads/${NAME}.gpg"
   "$PWD/${NAME}.gpg"
 )
-
 INPUT=""
 for p in "${CAND[@]}"; do
   [ -f "$p" ] && INPUT="$p" && break
 done
+[ -n "$INPUT" ] || die "Not found: ${NAME}.gpg (checked ~, ~/Downloads, and PWD)."
 
-[ -n "$INPUT" ] || die "Not found: ${NAME}.gpg"
-
-# Destination
-OUT_TAR="$HOME/${NAME}"
+# Destinations
+OUT_TAR="$HOME/${NAME}"                                # e.g. ~/Encrypted_Data.tar.gz
 STAMP="$(date +%F_%H%M%S)"
 RESTORE="$HOME/Restore/${NAME}_${STAMP}"
+mkdir -p "$HOME/Restore"
 
-# SHA Check
+# Optional SHA-Check (path-independent comparison)
 if [ -f "${INPUT}.sha256" ]; then
   echo "🔎 Checking SHA256 ..."
   exp="$(awk '{print $1}' "${INPUT}.sha256")"
@@ -294,20 +291,40 @@ printf "Mode: [T]AR Write (Default) / [E]xtract / [L]ist: "
 read -r -n1 MODE || true; echo
 MODE=${MODE:-T}
 
+# Helper Functions (with Loopback Fallback for stability)
+decrypt_to_tar() {
+  gpg --decrypt "$INPUT" | tar -xz -C "$RESTORE" && return 0
+  echo "⚠️  Standard input failed. Attempting loopback mode..."
+  gpg --pinentry-mode loopback --decrypt "$INPUT" | tar -xz -C "$RESTORE"
+}
+decrypt_to_file() {
+  gpg --output "$OUT_TAR" --decrypt "$INPUT" && return 0
+  echo "⚠️  Standard input failed. Attempting loopback mode..."
+  gpg --pinentry-mode loopback --output "$OUT_TAR" --decrypt "$INPUT"
+}
+
 case "$MODE" in
   L|l)
-    gpg --decrypt "$INPUT" | tar -tz
+    gpg --decrypt "$INPUT" | tar -tz || \
+    gpg --pinentry-mode loopback --decrypt "$INPUT" | tar -tz
     ;;
   E|e)
     mkdir -p "$RESTORE"
     echo "📦 Extracting to: $RESTORE"
-    gpg --decrypt "$INPUT" | tar -xz -C "$RESTORE"
+    decrypt_to_tar
+    if command -v notify-send >/dev/null 2>&1; then
+      notify-send "✅ Extracted" "$RESTORE"
+    fi
     echo "✅ Finished: $RESTORE"
     ;;
   T|t|*)
+    # Default: Write decrypted .tar.gz to HOME
     [ -f "$OUT_TAR" ] && rm -f "$OUT_TAR"
     echo "📝 Writing: $OUT_TAR"
-    gpg --output "$OUT_TAR" --decrypt "$INPUT"
+    decrypt_to_file
+    if command -v notify-send >/dev/null 2>&1; then
+      notify-send "✅ Decrypted" "$OUT_TAR"
+    fi
     echo "✅ Finished: $OUT_TAR"
     ;;
 esac
@@ -319,7 +336,7 @@ esac
     Füge den Code von oben ein.<br>
     Mache sie ausführbar:
   </p>
-<pre><code>chmod +x encrypt-folder.sh decrypt-folder.sh</code></pre>
+  <pre><code>chmod +x encrypt-folder.sh decrypt-folder.sh</code></pre>
 
   <h2>5. Der Workflow: Wie du es benutzt</h2>
   <p>
@@ -342,7 +359,7 @@ esac
     </li>
   </ul>
   <div class="box">
-    <strong>Wichtig:</strong><br>
+    <strong>Wichtig:</strong><br><br>
     Halte diese beiden Dateien immer zusammen. Die Prüfsumme erlaubt es dem Entschlüsselungs-Skript zu verifizieren, dass deine Daten nicht beschädigt oder manipuliert wurden.
   </div>
 
@@ -365,7 +382,7 @@ esac
     Indem du einfache Skripte nutzt, reduzierst du die Angriffsfläche (Attack Surface). Es gibt keine App, die aktualisiert werden muss, keinen Cloud-Sync, den man versehentlich anlässt, und keinen proprietären Code, dem man blind vertrauen muss.
   </p>
   <p>
-    <strong>Letzter Gedanke:</strong><br>
+    <strong>Letzter Gedanke:</strong><br><br>
     Werkzeuge sind nur so gut wie der Nutzer. Halte dein System sauber, dein Terminal sicher und deine Passwörter lang.
   </p>
 
