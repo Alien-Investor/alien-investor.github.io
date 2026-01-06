@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Der digitale Bunker: Kommandozeilen-Komfort mit Bash Aliases | Alien Investor</title>
+  <meta name="description" content="Mache deine Verschlüsselungs-Skripte zu nativen Befehlen. Anleitung für Bash Aliases unter Linux und GrapheneOS (Termux). Sicherheit muss einfach sein.">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 2em;
+    }
+    h1, h2, h3 { color: #00ffcc; }
+    a { color: #00ffcc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; font-family: monospace; }
+    pre { background-color: #111; padding: 1em; border-radius: 4px; overflow-x: auto; color: #0f0; border-left: 3px solid #00ffcc; }
+    em { color: #ccc; }
+    .byline { margin-top: -0.8em; margin-bottom: 1.2em; font-style: italic; color: #bbb; }
+    .box { border: 1px solid #00ffcc; background-color: #050505; padding: 1em 1.2em; margin: 2em 0; border-radius: 8px; }
+    .box h2, .box h3 { margin-top: 0; }
+    .like-button { margin: 2em 0; display: flex; align-items: center; gap: 0.75em; font-size: 0.95em; }
+    .like-button button { background: #00ffcc; color: #000; border: none; padding: 0.4em 0.9em; border-radius: 4px; cursor: pointer; font-weight: bold; }
+    .like-button span { min-width: 2em; display: inline-block; }
+    button { background-color: #111; color: #fff; border: 1px solid #444; padding: 0.5em 1em; border-radius: 5px; cursor: pointer; }
+    button:hover { background-color: #222; }
+    blockquote.highlight { margin-top: 2em; padding: 1em 1.2em; border-left: 3px solid #00ffcc; background-color: #111; font-style: italic; color: #ddd; }
+    footer { margin-top: 3em; padding-top: 2em; border-top: 1px solid #333; font-size: 0.9em; }
+    .support ul { margin: 0.3em 0 0 1.2em; }
+  </style>
+</head>
+<body>
+
+  <h1>⌨️ Der digitale Bunker: Kommandozeilen-Komfort</h1>
+  <p class="byline"><em>von Alien Investor</em></p>
+
+  <article id="content">
+    
+    <p>„Komplexität ist der Feind der Sicherheit.“ Aber Reibung ist der Feind der Anwendung.</p>
+    
+    <p>Wenn der Schutz deiner Daten sich wie lästige Arbeit anfühlt – weil du jedes Mal lange Pfade wie <code>~/Scripts/encrypt-folder.sh</code> eintippen musst – wirst du es „nur dieses eine Mal“ sein lassen. Und genau in dem Moment machst du dich angreifbar.</p>
+    
+    <p>In den vorherigen Teilen dieser Serie haben wir robuste Verschlüsselungs-Skripte gebaut. Jetzt integrieren wir sie so tief in dein System, dass sie sich anfühlen wie native Befehle. Wir brauchen keine bunten Icons oder GUIs. Wir nutzen <strong>Aliases</strong>.</p>
+
+    <h2>Das Konzept: Dein Befehl, deine Regeln</h2>
+    <p>Ein Alias ist nichts anderes als ein benutzerdefinierter Spitzname für einen Befehl auf der Kommandozeile. Anstatt den vollen Pfad zu deinem Skript zu tippen, schreibst du einfach nur <code>encrypt</code>. Die Shell erledigt den Rest.</p>
+    <p>Das funktioniert auf deinem Linux-Desktop genauso wie in Termux auf GrapheneOS.</p>
+
+    <h2>Schritt 1: Finde deine Konfigurationsdatei</h2>
+    <p>Dein Terminal (die Shell) hat eine Konfigurationsdatei, die jedes Mal geladen wird, wenn du eine neue Sitzung startest.</p>
+    <ul>
+      <li><strong>Bash-Nutzer</strong> (Standard auf den meisten Linux-Distros und Termux): <code>~/.bashrc</code></li>
+      <li><strong>Zsh-Nutzer</strong> (Standard auf macOS und manchen Linux-Setups): <code>~/.zshrc</code></li>
+    </ul>
+    <p>Um herauszufinden, was du nutzt, tippe:</p>
+    <pre><code>echo $SHELL</code></pre>
+
+    <h2>Schritt 2: Den Alias setzen</h2>
+    <p>Öffne deine Konfigurationsdatei mit einem Texteditor (z. B. <code>nano</code>).</p>
+    <p>Auf Termux oder Standard Ubuntu/Debian (Bash):</p>
+    <pre><code>nano ~/.bashrc</code></pre>
+
+    <p>Scrolle ganz nach unten und füge die folgenden Zeilen ein (vorausgesetzt, du hast deine Skripte wie empfohlen im Ordner „Scripts“ gespeichert):</p>
+
+    <pre><code># --- Alien Investor Security Aliases ---
+alias encrypt="~/Scripts/encrypt-folder.sh"
+alias decrypt="~/Scripts/decrypt-folder.sh"</code></pre>
+
+    <p><em>Hinweis: Das <code>#</code> am Anfang markiert einen Kommentar, damit du später noch weißt, was diese Zeilen tun.</em></p>
+
+    <p>Stelle sicher, dass die Skripte auch ausführbar sind (falls du das noch nicht erledigt hast):</p>
+    <pre><code>chmod +x ~/Scripts/encrypt-folder.sh ~/Scripts/decrypt-folder.sh</code></pre>
+
+    <p>Speichere die Datei (<code>STRG+O</code>, Enter) und beende den Editor (<code>STRG+X</code>).</p>
+
+    <h2>Schritt 3: Aktivieren</h2>
+    <p>Damit die Änderungen wirksam werden, musst du die Konfiguration neu laden (oder das Terminal einfach neu starten).</p>
+    <p>Für Bash:</p>
+    <pre><code>source ~/.bashrc</code></pre>
+    <p>Für Zsh:</p>
+    <pre><code>source ~/.zshrc</code></pre>
+
+    <h2>Das Ergebnis</h2>
+    <p>Dein Workflow ist jetzt nahtlos.</p>
+    
+    <h3>Verschlüsseln:</h3>
+    <p>Öffne dein Terminal und tippe einfach:</p>
+    <pre><code>encrypt</code></pre>
+    <p>Das Skript startet sofort.</p>
+
+    <h3>Entschlüsseln:</h3>
+    <p>Navigiere in den entsprechenden Ordner und tippe:</p>
+    <pre><code>decrypt</code></pre>
+
+    <p>Indem du die Hürde für den Einstieg senkst, wird Sicherheit zum Muskelgedächtnis, nicht zur Aufgabe.</p>
+
+    <h2>Die Serie „Digitaler Bunker“</h2>
+    <p>Vervollständige dein Setup mit den Anleitungen aus den vorherigen Teilen:</p>
+    <ul>
+      <li><a href="Kryptographie.html">Teil 1: Die Grundlagen der Kryptographie</a></li>
+      <li><a href="GrapheneOS-Skripte.html">Teil 2: Skripte für GrapheneOS & Linux</a></li>
+    </ul>
+
+  </article>
+  <blockquote class="highlight">
+    „Mach dir dein Werkzeug untertan. Wenn die Kommandozeile für dich arbeitet, hast du die Kontrolle.“ 👽
+  </blockquote>
+
+  <div class="like-button">
+    <button id="likeButton">👍 Gefällt mir</button>
+    <span id="likeCount">0</span>
+    <span style="color:#bbb;">(Speicherung nur lokal im Browser)</span>
+  </div>
+
+  <script>
+    (function() {
+      const storageKey = window.location.pathname + "-likes";
+      const btn = document.getElementById("likeButton");
+      const span = document.getElementById("likeCount");
+
+      let count = parseInt(localStorage.getItem(storageKey) || "0", 10);
+      span.textContent = count;
+
+      btn.addEventListener("click", function() {
+        count += 1;
+        span.textContent = count;
+        localStorage.setItem(storageKey, String(count));
+        btn.disabled = true;
+        btn.textContent = "Danke! 👽";
+      });
+    })();
+  </script>
+
+  <section class="box">
+    <h2>🧰 Tools für echte Eigentümer (Werbung/Affiliate)</h2>
+    <p style="font-size:0.95em;">
+      Wenn du deine Daten und Werte eigenverantwortlich halten willst, brauchst du das richtige Werkzeug:
+    </p>
+    <ul>
+      <li>
+        💥 <strong>Bitcoin kaufen in Europa – 21bitcoin:</strong><br>
+        Bitcoin-only App aus Europa, ideal für DCA – ohne Shitcoins.<br>
+        Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du dauerhaft 0,2&nbsp;Prozentpunkte Gebührenreduktion.<br>
+        👉 <a href="https://alien-investor.org/21bitcoin" target="_blank" rel="noopener noreferrer">alien-investor.org/21bitcoin</a>
+      </li>
+      <li style="margin-top:1em;">
+        🛡️ <strong>BitBox – Bitcoin in Selbstverwahrung:</strong><br>
+        Hardware-Wallet aus der Schweiz. Deine Keys, deine Coins.<br>
+        👉 <a href="https://alien-investor.org/bitbox" target="_blank" rel="noopener noreferrer">alien-investor.org/bitbox</a>
+      </li>
+      <li style="margin-top:1em;">
+        🇨🇭 <strong>Investieren mit Swissquote:</strong><br>
+        Saubere Namensaktien halten, ohne deutsche Bank dazwischen.<br>
+        👉 <a href="https://alien-investor.org/swissquote" target="_blank" rel="noopener noreferrer">alien-investor.org/swissquote</a>
+      </li>
+      <li style="margin-top:1em;">
+        🔐 <strong>Proton – Privacy aus der Schweiz:</strong><br>
+        E-Mail, VPN und Cloud ohne Big-Tech-Überwachung.<br>
+        👉 <a href="https://alien-investor.org/proton" target="_blank" rel="noopener noreferrer">alien-investor.org/proton</a>
+      </li>
+    </ul>
+    <p style="font-size:0.85em; color:#aaa;">
+      Hinweis: Dies sind Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit, ohne mehr zu bezahlen. Danke! 👽
+    </p>
+  </section>
+
+  <footer>
+    <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    
+    <p style="font-size:0.95em; color:#bbb;">
+      👽 <strong>Haftungsausschluss:</strong><br>
+      Keine Finanz-, Steuer- oder Rechtsberatung – nur persönliche Alien-Meinung.<br>
+      Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
+    </p>
+
+    <div class="support" style="margin-top: 2em;">
+      <h2>💸 Unterstütze meine Arbeit</h2>
+      <ul>
+        <li>☕ Spenden via <a href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener">Ko-fi</a></li>
+        <li>⚡ Bitcoin Lightning: <code>alien_investor@strike.me</code></li>
+        <li>₿ Bitcoin Onchain: <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code></li>
+      </ul>
+    </div>
+    <p><a href="blog.html">← Zurück zum Blog</a></p>
+  </footer>
+
+</body>
+</html>
