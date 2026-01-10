@@ -64,12 +64,20 @@
     .box h2, .box h3 {
       margin-top: 0;
     }
-    /* Tabellen-Styling für den P2P-Vergleich */
+    
+    /* NEU: Container für scrollbare Tabellen auf Mobile */
+    .table-scroll {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin-bottom: 1em;
+    }
+    
     table {
       width: 100%;
       border-collapse: collapse;
-      margin: 2em 0;
+      margin: 0; /* Margin wird jetzt vom Container gehandhabt */
       font-size: 0.9em;
+      min-width: 600px; /* Erzwingt Mindestbreite, damit nichts gequetscht wird -> Trigger für Scrollbalken */
     }
     th, td {
       border: 1px solid #333;
@@ -80,6 +88,7 @@
       background-color: #111;
       color: #00ffcc;
     }
+
     .like-button {
       margin: 2em 0;
       display: flex;
@@ -231,47 +240,52 @@
 
   <div class="box">
     <h3>⚔️ Vergleich der P2P-Marktplätze (Stand Januar 2026)</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Marktplatz</th>
-          <th>Typ</th>
-          <th>Sicherheit</th>
-          <th>Privatsphäre</th>
-          <th>Eignung</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Bisq</strong></td>
-          <td>Desktop (Tor)</td>
-          <td>Hoch (Multisig)</td>
-          <td>Hoch</td>
-          <td>Größere Volumen, Geduld</td>
-        </tr>
-        <tr>
-          <td><strong>RoboSats</strong></td>
-          <td>Web (Tor/LN)</td>
-          <td>Mittel (Bonds)</td>
-          <td>Hoch</td>
-          <td>Schnell, Lightning-nah</td>
-        </tr>
-        <tr>
-          <td><strong>Peach</strong></td>
-          <td>Mobile App</td>
-          <td>Mittel</td>
-          <td>Mittel</td>
-          <td>Einsteiger, Convenience</td>
-        </tr>
-        <tr>
-          <td><strong>Hodl Hodl</strong></td>
-          <td>Web (Clearnet)</td>
-          <td>Mittel (Multisig)</td>
-          <td>Mittel</td>
-          <td>Web-Trader</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Marktplatz</th>
+            <th>Typ</th>
+            <th>Sicherheit</th>
+            <th>Privatsphäre</th>
+            <th>Eignung</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Bisq</strong></td>
+            <td>Desktop (Tor)</td>
+            <td>Hoch (Multisig)</td>
+            <td>Hoch</td>
+            <td>Größere Volumen, Geduld</td>
+          </tr>
+          <tr>
+            <td><strong>RoboSats</strong></td>
+            <td>Web (Tor/LN)</td>
+            <td>Mittel (Bonds)</td>
+            <td>Hoch</td>
+            <td>Schnell, Lightning-nah</td>
+          </tr>
+          <tr>
+            <td><strong>Peach</strong></td>
+            <td>Mobile App</td>
+            <td>Mittel</td>
+            <td>Mittel</td>
+            <td>Einsteiger, Convenience</td>
+          </tr>
+          <tr>
+            <td><strong>Hodl Hodl</strong></td>
+            <td>Web (Clearnet)</td>
+            <td>Mittel (Multisig)</td>
+            <td>Mittel</td>
+            <td>Web-Trader</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:0.85em; color:#bbb;">
+      ℹ️ <em>Tipp: Tabelle nach rechts wischen für alle Details.</em>
+    </p>
   </div>
 
   <h2>Privatsphäre & Sicherheit: Sauber bleiben in einer überwachten Welt</h2>
