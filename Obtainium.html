@@ -111,7 +111,7 @@
     aber Zensur und totale Überwachung liefern.
   </p>
   <p>
-    Wenn Google entscheidet, dass eine App „unerwünscht“ ist (wie AdBlocker, systemkritische Tools oder Krypto-Apps),
+    Wenn Google entscheidet, dass eine App „unerwünscht“ ist (wie AdBlocker, bestimmte systemkritische Tools oder Apps, die gegen Store-Policies verstoßen),
     verschwindet sie. Wenn du echte digitale Souveränität willst, musst du aus diesem System ausbrechen.
   </p>
   <p>
@@ -122,8 +122,9 @@
 
   <h2>1. Das Problem: Die Mittelsmänner</h2>
   <p>
-    Normalerweise funktioniert App-Installation so: Ein Entwickler lädt Code hoch, Google prüft (und zensiert) ihn,
-    signiert ihn oft neu und liefert ihn an dich aus. Du vertraust nicht dem Entwickler, sondern Google.
+    Normalerweise funktioniert App-Installation so: Ein Entwickler lädt Code hoch, Google prüft (und kann sperren) ihn.
+    Wenn „Play App Signing“ aktiv ist, signiert Google die ausgelieferten APKs mit dem App-Signing-Key (hochgeladen wird mit dem Upload-Key).
+    Du vertraust nicht nur dem Entwickler, sondern in der Praxis auch dem Store-Betreiber.
   </p>
   <p>
     <strong>Obtainium</strong> ändert die Spielregeln. Es ist ein „Update-Manager“, der die Mittelsmänner eliminiert.
@@ -131,7 +132,7 @@
   </p>
 
   <blockquote>
-    „Obtainium ist die direkte Lieferkette für Software. Vom Coder direkt auf dein Gerät. Keine Zensur, kein Tracking, kein Bullshit.“
+    „Obtainium ist die direkte Lieferkette für Software. Vom Coder direkt auf dein Gerät. Keine zentrale Zensur, kein Store-Tracking, kein Bullshit.“
   </blockquote>
 
   <h2>2. Architektur & Funktionsweise: Wie es unter der Haube läuft</h2>
@@ -146,9 +147,9 @@
   </p>
   <ul>
     <li><strong>Vorteil:</strong> Extrem schnell. Oft hast du das Update Minuten nach dem Release.</li>
-    <li><strong>Das Rate-Limit-Problem:</strong> GitHub erlaubt anonymen Nutzern nur wenige Abfragen pro Stunde.
+    <li><strong>Das Rate-Limit-Problem:</strong> GitHub erlaubt anonymen Nutzern nur ca. 60 API-Abfragen pro Stunde (pro IP).
     Power-User mit vielen Apps hinterlegen in Obtainium einfach einen „Personal Access Token“ (PAT),
-    um dieses Limit zu sprengen.</li>
+    um typischerweise auf deutlich höhere Limits (z.B. ~5.000 pro Stunde) zu kommen.</li>
   </ul>
 
   <h3>HTML-Fallback & Web Scraping</h3>
@@ -174,7 +175,7 @@
   <h3>Die Android-Signatur als Anker</h3>
   <p>
     Jede Android-App muss vom Entwickler kryptografisch signiert sein. Android installiert ein Update NUR DANN,
-    wenn die Signatur exakt mit der bereits installierten App übereinstimmt.
+    wenn die Signatur (bzw. die Signatur-Lineage) zur bereits installierten App passt.
   </p>
   <ul>
     <li>
@@ -201,19 +202,19 @@
 
   <h3>Obtainium vs. Google Play Store</h3>
   <ul>
-    <li><strong>Google Play:</strong> Zensur, Account-Zwang, massives Daten-Tracking. Bequem, aber ein Gefängnis.</li>
+    <li><strong>Google Play:</strong> Zensur, Account-Pflicht (in der Praxis), massives Daten-Tracking. Bequem, aber ein Gefängnis.</li>
     <li><strong>Obtainium:</strong> Zensur-resistent. Selbst wenn Google eine App bannt, bekommst du deine Updates weiter.
     Kein Account nötig.</li>
   </ul>
 
   <h3>Obtainium vs. F-Droid</h3>
   <p>
-    Viele FOSS-Fans lieben F-Droid. Aber F-Droid hat ein Problem: Sie bauen die Apps selbst und signieren sie mit
-    ihren eigenen Schlüsseln.
+    Viele FOSS-Fans lieben F-Droid. Aber F-Droid hat ein Problem: Sie bauen Apps oft selbst und signieren sie typischerweise mit
+    eigenen Schlüsseln (bei reproduzierbaren Builds können teils upstream-signierte APKs ausgeliefert werden).
   </p>
   <ul>
-    <li><strong>Das Problem:</strong> Du musst F-Droid vertrauen, nicht dem Entwickler. Updates dauern oft Tage oder Wochen.</li>
-    <li><strong>Der Obtainium-Vorteil:</strong> Du bekommst die Original-Signatur des Entwicklers.
+    <li><strong>Das Problem:</strong> Du musst F-Droid vertrauen, nicht nur dem Entwickler. Updates dauern oft Tage oder Wochen.</li>
+    <li><strong>Der Obtainium-Vorteil:</strong> Du bekommst die Original-Signatur des Entwicklers (wenn die Quelle upstream-signiert ausliefert).
     Und du bekommst das Update sofort. Das schließt die „Patch Gap“ bei Sicherheitslücken massiv.</li>
   </ul>
 
@@ -224,12 +225,12 @@
       konnten Nutzer über Obtainium nahtlos auf Forks (Abspaltungen) wechseln. Im Play Store wäre das Ende gewesen.
     </li>
     <li>
-      <strong>Privacy by Design:</strong> Obtainium telefoniert nicht nach Hause. Es gibt keinen zentralen Server,
-      der sieht, welche Apps du installiert hast. Nur GitHub sieht deine IP beim Download – aber kein Gesamtprofil.
+      <strong>Privacy by Design:</strong> Obtainium hat keine eigenen Mirror-/Download-Server und keinen zentralen Store-Feed,
+      der sieht, welche Apps du installiert hast. Quellen wie GitHub sehen deine IP beim Abruf – aber kein automatisch aggregiertes Gesamtprofil.
     </li>
     <li>
-      <strong>Hintergrund-Updates:</strong> Dank moderner Android-APIs kann Obtainium Updates im Hintergrund installieren,
-      fast so komfortabel wie der Play Store – aber ohne die Überwachung.
+      <strong>Hintergrund-Updates:</strong> Unter Android 12+ kann Obtainium bei manchen Apps Updates weitgehend im Hintergrund einspielen
+      (typisch nur bei Updates, wenn Obtainium der „Installer of Record“ ist) – fast so komfortabel wie der Play Store, aber ohne die Ökosystem-Überwachung.
     </li>
   </ul>
 
