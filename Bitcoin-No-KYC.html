@@ -89,6 +89,20 @@
       color: #00ffcc;
     }
 
+    /* NEU: Standard für interne Lese-Empfehlungen (gestrichelte Box) */
+    .recommendation-box {
+      margin: 2em 0;
+      padding: 1em;
+      border: 1px dashed #00ffcc; /* Gestrichelt als Abgrenzung */
+      border-radius: 8px;
+      text-align: center;
+      background-color: #050505;
+    }
+    .recommendation-box h3 {
+      margin-top: 0;
+      font-size: 1.1em;
+    }
+
     .like-button {
       margin: 2em 0;
       display: flex;
@@ -407,10 +421,13 @@
     </p>
   </div>
 
-  <p style="margin-top: 2em;">
-    🔎 <strong>Weiterführender Research:</strong><br>
-    <a href="https://alien-investor.org/wasabi-wallet-research-transparent.html">Wasabi Wallet Research – Transparent (Kein Tutorial, nur Analyse)</a>
-  </p>
+  <div class="recommendation-box">
+    <h3>🔎 Weiterführender Research</h3>
+    <p>
+      Tauche tiefer in die Analyse von Privacy-Tools ein:<br>
+      👉 <a href="https://alien-investor.org/wasabi-wallet-research-transparent.html">Wasabi Wallet Research – Transparent (Kein Tutorial, nur Analyse)</a>
+    </p>
+  </div>
 
   <h3>💸 Unterstütze meine Arbeit</h3>
   <ul>
