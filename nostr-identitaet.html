@@ -48,7 +48,7 @@
       color: #ccc;
       font-style: italic;
     }
-    ul {
+    ul, ol {
       margin-left: 1.2em;
     }
     blockquote {
@@ -178,15 +178,20 @@
       Für diese Anleitung nutzen wir <strong>GitHub Pages</strong> als technische Basis. Warum? Weil es stabil ist, kostenlos HTTPS bereitstellt und die Hürden für uns übernimmt.
     </p>
 
-    <h2>Schritt 1: Deinen wahren Namen finden (der Hex-Key)</h2>
+    <h2>Schritt 1: Deinen wahren Namen berechnen (npub zu Hex)</h2>
     <p>
-      Dein öffentlicher Schlüssel beginnt meist mit <code>npub...</code>. Das ist praktisch für Menschen, aber für NIP-05 brauchen wir die Rohdaten (Hexadezimal).
+      Hier stolpern viele: Dein Nostr-Client (z. B. Primal) zeigt dir meistens deinen <strong>npub</strong>-Schlüssel an (fängt an mit <code>npub1...</code>). Das ist praktisch für Menschen, aber für die technische Verifizierung brauchen wir den „nackten“ Maschinencode: den <strong>Hex-Key</strong>.
+    </p>
+    <p>
+      Diesen Hex-Key findest du oft nicht direkt in der App. So bekommst du ihn:
     </p>
     <ol>
-      <li>Gehe in deinem Nostr-Client (z. B. Primal) auf <strong>Einstellungen > Schlüssel</strong>.</li>
-      <li>Kopiere den Public Key (Hex). Er sieht aus wie eine lange Kette aus Zahlen und Buchstaben (z. B. <code>0f1a2b3c...</code>).</li>
+      <li>Kopiere deinen öffentlichen Schlüssel (den <code>npub1...</code>) aus deinem Profil.</li>
+      <li>Gehe auf einen Konverter wie <a href="https://nostrcheck.me/converter/" target="_blank">NostrCheck.me</a> oder <a href="https://damus.io/key" target="_blank">Damus Key Converter</a>.</li>
+      <li>Füge deinen <code>npub</code> dort ein.</li>
+      <li>Kopiere den <strong>Hex Key</strong>, der dir angezeigt wird. Er besteht nur aus Zahlen (0–9) und Buchstaben (a–f), z. B. <code>c4fe4db...</code>.</li>
     </ol>
-    <p><em>Sicherheitshinweis: Gib niemals deinen Private Key (nsec) heraus!</em></p>
+    <p><em>Sicherheitshinweis: Das ist sicher, da du nur deinen öffentlichen Schlüssel umrechnest. Gib niemals deinen privaten Schlüssel (nsec) auf Webseiten ein!</em></p>
 
     <h2>Schritt 2: Die Infrastruktur (GitHub)</h2>
     <p>Wir bauen uns einen kostenlosen „Server“ (statische Website).</p>
@@ -218,7 +223,7 @@
 }</code></pre>
     <ul>
       <li><code>"satoshi"</code>: Das ist der Name, den du vor dem @-Zeichen haben willst (z. B. <code>satoshi@satoshi-fan.github.io</code>).</li>
-      <li>Der Hex-Key: Füge hier deinen Schlüssel aus Schritt 1 ein.</li>
+      <li>Der Hex-Key: Füge hier den Code ein, den du in Schritt 1 berechnet hast (ohne <code>npub</code>!).</li>
     </ul>
     <p>Speichere die Datei („Commit changes“).</p>
 
@@ -250,17 +255,17 @@
     </p>
 
     <div class="recommendation-box">
-  <h3>🔎 Weiterführender Research & Sicherheit</h3>
-  <p>
-    Noch gar kein Profil? Hier ist der einfachste Einstieg:<br>
-    👉 <a href="Primal.html">Anleitung: Wie du eine Nostr Identität erstellst (Primal)</a>
-  </p>
-  <p style="margin-top:1em;">
-    <strong>Wichtig für deine Sicherheit:</strong><br>
-    Lerne, warum dein Private Key (nsec) niemals in die Zwischenablage gehört:<br>
-    👉 <a href="nostr-sicherheit-warum-du-deinen-private-key-niemals-in-eine-app-kopieren-darfst-und-warum-du-amber-brauchst.html">Nostr-Sicherheit: Warum du Amber brauchst und Keys niemals kopieren darfst</a>
-  </p>
-</div>
+      <h3>🔎 Weiterführender Research & Sicherheit</h3>
+      <p>
+        Noch gar kein Profil? Hier ist der einfachste Einstieg:<br>
+        👉 <a href="Primal.html">Anleitung: Wie du eine Nostr Identität erstellst (Primal)</a>
+      </p>
+      <p style="margin-top:1em;">
+        <strong>Wichtig für deine Sicherheit:</strong><br>
+        Lerne, warum dein Private Key (nsec) niemals in die Zwischenablage gehört:<br>
+        👉 <a href="nostr-sicherheit-warum-du-deinen-private-key-niemals-in-eine-app-kopieren-darfst-und-warum-du-amber-brauchst.html">Nostr-Sicherheit: Warum du Amber brauchst und Keys niemals kopieren darfst</a>
+      </p>
+    </div>
 
   </article>
 
