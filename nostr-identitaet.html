@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Das silberne Häkchen der Freiheit: NIP-05 Anleitung für Nostr | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Anleitung: Wie du deine Nostr-Identität mit NIP-05 und GitHub Pages verifizierst. Werde unabhängig von Plattformen und hol dir das silberne Häkchen.">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 2em;
+    }
+    h1, h2, h3 {
+      color: #00ffcc;
+    }
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    code {
+      background-color: #111;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      color: #0f0;
+      font-size: 0.95em;
+    }
+    pre {
+      background-color: #111;
+      padding: 1em;
+      border-radius: 4px;
+      overflow-x: auto;
+      border: 1px solid #333;
+    }
+    em {
+      color: #ccc;
+    }
+    .byline {
+      margin-top: -0.8em;
+      margin-bottom: 1.2em;
+      color: #ccc;
+      font-style: italic;
+    }
+    ul {
+      margin-left: 1.2em;
+    }
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      padding-left: 1em;
+      margin: 2em 0;
+      color: #ddd;
+      font-style: italic;
+    }
+    blockquote.highlight {
+      margin-top: 2em;
+      padding: 1em 1.2em;
+      border-left: 3px solid #00ffcc;
+      background-color: #111;
+      font-style: italic;
+      color: #ddd;
+    }
+    .box {
+      border: 1px solid #00ffcc;
+      background-color: #050505;
+      padding: 1em 1.2em;
+      margin: 2em 0;
+      border-radius: 8px;
+    }
+    .box h2, .box h3 {
+      margin-top: 0;
+    }
+    
+    /* Standard für interne Lese-Empfehlungen */
+    .recommendation-box {
+      margin: 2em 0;
+      padding: 1em;
+      border: 1px dashed #00ffcc;
+      border-radius: 8px;
+      text-align: center;
+      background-color: #050505;
+    }
+    .recommendation-box h3 {
+      margin-top: 0;
+      font-size: 1.1em;
+      color: #00ffcc;
+    }
+
+    .like-button {
+      margin: 2em 0;
+      display: flex;
+      align-items: center;
+      gap: 0.75em;
+      font-size: 0.95em;
+    }
+    .like-button button {
+      background: #00ffcc;
+      color: #000;
+      border: none;
+      padding: 0.4em 0.9em;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .like-button span {
+      min-width: 2em;
+      display: inline-block;
+    }
+    button {
+      background-color: #111;
+      color: #fff;
+      border: 1px solid #444;
+      padding: 0.5em 1em;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #222;
+    }
+    footer {
+      margin-top: 3em;
+      padding-top: 2em;
+      border-top: 1px solid #333;
+      font-size: 0.9em;
+    }
+    .support ul {
+      margin: 0.3em 0 0 1.2em;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>✅ Das silberne Häkchen der Freiheit: Wie du deine Nostr-Identität unsterblich machst (Anleitung)</h1>
+  <p class="byline"><em>von Alien Investor</em></p>
+
+  <article id="content">
+    <p>Seid gegrüßt, Erdlinge und Strategen.</p>
+    <p>
+      Im alten Finanzsystem (Fiat) gehört euch euer Geld nicht – es gehört der Bank. Im alten Web (Web2) gehört euch eure Identität nicht – sie gehört X, YouTube oder Instagram. Wenn denen eure Nase nicht passt, schalten sie euch ab.
+    </p>
+    <p>
+      Auf <strong>Nostr</strong> ist das anders. Hier herrscht Self-Custody – nicht nur für Bitcoin, sondern auch für deine Stimme.
+    </p>
+    <p>
+      Viele von euch nutzen Primal oder Damus und haben Adressen wie <code>name@primal.net</code>. Das ist bequem, aber es ist immer noch eine „Mietwohnung“. Wenn Primal morgen verschwindet, ist eure schöne Adresse weg.
+    </p>
+    <p>
+      Heute zeige ich euch, wie ihr zu Eigentümern werdet. Wir holen uns das silberne Verified-Badge, indem wir unsere Identität technisch/kryptografisch mit unserer eigenen Website verknüpfen (<strong>NIP-05</strong>).
+    </p>
+    <p>
+      Das Beste: Diese Methode braucht keinen eigenen Server und ist in der Basis-Version komplett kostenlos.
+    </p>
+
+    <h2>Das Ziel: Unabhängigkeit</h2>
+    <p>Wir wollen weg von: <code>Alien-Investor@primal.net</code> (abhängig).<br>
+    Hin zu einer von zwei Stufen:</p>
+    
+    <ul>
+      <li>
+        <strong>Die Einsteiger-Lösung:</strong> <code>dein-name@dein-user.github.io</code><br>
+        Status: Verifiziert &amp; kostenlos.<br>
+        Haken: Du bist zwar weg von Social-Media-Plattformen, aber technisch „wohnst“ du jetzt bei GitHub (Microsoft).
+      </li>
+      <li>
+        <strong>Die Endgegner-Lösung:</strong> <code>dein-name@deine-domain.org</code><br>
+        Status: 100% Souverän.<br>
+        Voraussetzung: Du kaufst eine eigene Domain (ca. 12 €/Jahr). GitHub ist dann nur noch der austauschbare Dienstleister.
+      </li>
+    </ul>
+
+    <p>
+      Für diese Anleitung nutzen wir <strong>GitHub Pages</strong> als technische Basis. Warum? Weil es stabil ist, kostenlos HTTPS bereitstellt und die Hürden für uns übernimmt.
+    </p>
+
+    <h2>Schritt 1: Deinen wahren Namen finden (der Hex-Key)</h2>
+    <p>
+      Dein öffentlicher Schlüssel beginnt meist mit <code>npub...</code>. Das ist praktisch für Menschen, aber für NIP-05 brauchen wir die Rohdaten (Hexadezimal).
+    </p>
+    <ol>
+      <li>Gehe in deinem Nostr-Client (z. B. Primal) auf <strong>Einstellungen > Schlüssel</strong>.</li>
+      <li>Kopiere den Public Key (Hex). Er sieht aus wie eine lange Kette aus Zahlen und Buchstaben (z. B. <code>0f1a2b3c...</code>).</li>
+    </ol>
+    <p><em>Sicherheitshinweis: Gib niemals deinen Private Key (nsec) heraus!</em></p>
+
+    <h2>Schritt 2: Die Infrastruktur (GitHub)</h2>
+    <p>Wir bauen uns einen kostenlosen „Server“ (statische Website).</p>
+    <ol>
+      <li>Erstelle einen Account auf GitHub.</li>
+      <li>Erstelle ein neues <strong>Repository</strong>.</li>
+      <li>Nenne es exakt so: <code>dein-github-name.github.io</code><br>
+      <em>Beispiel: Wenn du auf GitHub "satoshi-fan" heißt, muss das Repo <code>satoshi-fan.github.io</code> heißen.</em></li>
+      <li>Stelle es auf <strong>Public</strong>.</li>
+    </ol>
+    <p>
+      <em>Hinweis: Falls die Seite nicht automatisch online geht, aktiviere GitHub Pages in den Repo-Settings unter „Pages“ für den main-Branch.</em>
+    </p>
+
+    <h2>Schritt 3: Der Beweis (die JSON-Datei)</h2>
+    <p>
+      Das Nostr-Protokoll sucht auf deiner Seite nach einer ganz bestimmten Datei in einem ganz bestimmten Ordner.
+    </p>
+    <ol>
+      <li>Erstelle in deinem neuen Repo eine Datei.</li>
+      <li>Tippe als Dateinamen ein: <code>.well-known/nostr.json</code><br>
+      <em>Wichtig: Der Punkt vor well-known ist entscheidend! (Wenn du die Datei über die GitHub-Weboberfläche mit dem Pfad anlegst, wird der Ordner normalerweise automatisch mit erstellt.)</em></li>
+    </ol>
+    <p>Der Inhalt der Datei:</p>
+    <pre><code>{
+  "names": {
+    "satoshi": "DEIN_HEX_KEY_VON_SCHRITT_1_HIER_EINFÜGEN"
+  }
+}</code></pre>
+    <ul>
+      <li><code>"satoshi"</code>: Das ist der Name, den du vor dem @-Zeichen haben willst (z. B. <code>satoshi@satoshi-fan.github.io</code>).</li>
+      <li>Der Hex-Key: Füge hier deinen Schlüssel aus Schritt 1 ein.</li>
+    </ul>
+    <p>Speichere die Datei („Commit changes“).</p>
+
+    <h2>Schritt 4: Das „Souveränitäts-Upgrade“ im Profil</h2>
+    <p>Jetzt müssen wir der Welt (dem Nostr-Netzwerk) sagen, wo der Beweis liegt.</p>
+    <ol>
+      <li>Öffne dein Nostr-Profil (z. B. in Primal).</li>
+      <li>Gehe auf <strong>Profil bearbeiten</strong>.</li>
+      <li>Suche das Feld <strong>NIP-05</strong> (oder „Nostr Address“ / „Verified Address“).</li>
+      <li>Trage dort deine neue Adresse ein: <code>satoshi@satoshi-fan.github.io</code></li>
+    </ol>
+    <p>
+      <em>(Nur für die Endgegner-Lösung: Wer statt der GitHub-Adresse etwas wie <code>satoshi@alien-investor.org</code> nutzen will, muss die Domain alien-investor.org natürlich vorher bei einem Hoster gekauft und via DNS-Einstellungen („CNAME“) mit GitHub verknüpft haben.)</em>
+    </p>
+    <p>Speichern.</p>
+
+    <h2>Das Ergebnis</h2>
+    <p>Innerhalb weniger Minuten passiert Magie:</p>
+    <ul>
+      <li>Der Client prüft deine Website im Hintergrund.</li>
+      <li>Er findet deinen Hex-Key in der Datei.</li>
+      <li>Er gleicht ihn mit deinem Profil ab.</li>
+    </ul>
+    <p>
+      <strong>BÄM:</strong> Je nach Client verschwindet das anbietergebundene Badge, und stattdessen erscheint ein neutrales Verifizierungszeichen (oft silbern) oder ein Hinweis wie „Verified nostr address“.
+    </p>
+    <p>
+      Du hast dich soeben unabhängiger von Plattformen gemacht. Du bist kein User mehr. Du bist eine Instanz. Willkommen in der Freiheit.
+    </p>
+
+    <div class="recommendation-box">
+      <h3>🔎 Weiterführender Research</h3>
+      <p>
+        Verstehe die Wurzeln deiner digitalen Freiheit und warum Verschlüsselung kein Verbrechen ist.<br>
+        👉 <a href="cypherpunks-geschichte.html">Cypherpunks: Wie ein paar Sturköpfe unser Recht auf Verschlüsselung erkämpft haben</a>
+      </p>
+    </div>
+
+  </article>
+
+  <blockquote class="highlight">
+    „Not your keys, not your coins“ gilt auch für eure Identität. Passt auf eure Keys auf.
+  </blockquote>
+
+  <div class="box">
+    <h3>🧰 Tools für echte Eigentümer (Werbung/Affiliate)</h3>
+    <p style="font-size:0.95em;">
+      Wenn du Aktien und Bitcoin möglichst eigenverantwortlich halten willst, nutze nicht nur dein Bankdepot:
+    </p>
+    <ul>
+      <li>
+        🇨🇭 <strong>Investieren mit Swissquote:</strong><br>
+        Ich nutze Swissquote in der Schweiz – dort kannst du saubere Namensaktien halten und hast keine
+        deutsche Bank dazwischen.<br>
+        👉 <a href="https://alien-investor.org/swissquote" target="_blank">https://alien-investor.org/swissquote</a>
+      </li>
+      <li>
+        📊 <strong>US-Aktien über IBKR:</strong><br>
+        Für viele internationale Titel bietet sich Interactive Brokers als Zugang an – insbesondere in Kombination
+        mit DRS/Transfer Agenten.<br>
+        👉 <a href="https://alien-investor.org/interactive-brokers" target="_blank">https://alien-investor.org/interactive-brokers</a>
+      </li>
+      <li>
+        💥 <strong>Bitcoin kaufen in Europa – 21bitcoin:</strong><br>
+        Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges sats stapeln – ohne Shitcoins.<br>
+        Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du dauerhaft 0,2&nbsp;Prozentpunkte Gebührenreduktion
+        auf Sofort- und Sparplankäufe.<br>
+        👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
+      </li>
+      <li>
+        ₿ <strong>Bitcoin in Selbstverwahrung:</strong><br>
+        Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox – es gibt die klassische BitBox02 und die neue
+        BitBox für iPhone (Nova).<br>
+        👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
+      </li>
+      <li>
+        🛡️ <strong>Privacy &amp; Mail:</strong><br>
+        Für E-Mail, VPN und Cloud nutze ich Proton – datensparsam und ohne Big-Tech-Abhängigkeit.<br>
+        👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
+      </li>
+    </ul>
+    <p style="font-size:0.85em; color:#aaa;">
+      Hinweis: Bei einigen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit,
+      ohne dass es dich mehr kostet. Danke! 👽
+    </p>
+  </div>
+
+  <div class="like-button">
+    <button id="likeButton">👍 Gefällt mir</button>
+    <span id="likeCount">0</span>
+    <span style="color:#bbb;">(Speicherung nur lokal im Browser)</span>
+  </div>
+
+  <script>
+    (function() {
+      const storageKey = window.location.pathname + "-likes";
+      const btn = document.getElementById("likeButton");
+      const span = document.getElementById("likeCount");
+
+      let count = parseInt(localStorage.getItem(storageKey) || "0", 10);
+      span.textContent = count;
+
+      btn.addEventListener("click", function() {
+        count += 1;
+        span.textContent = count;
+        localStorage.setItem(storageKey, String(count));
+        btn.disabled = true;
+        btn.textContent = "Danke! 👽";
+      });
+    })();
+  </script>
+
+  <footer>
+    <p>📬 Kontakt:
+      <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>
+    </p>
+    <p style="font-size:0.95em; color:#bbb;">
+      👽 <strong>Haftungsausschluss:</strong><br>
+      Keine Finanz-, Steuer- oder Rechtsberatung – nur persönliche Alien-Meinung.
+      Dies ist eine technische Anleitung zur Nutzung des Nostr-Protokolls.
+      Investieren ist mit Risiken verbunden. Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
+    </p>
+    <div class="support" style="margin-top: 2em;">
+      <h2>💸 Unterstütze meine Arbeit</h2>
+      <ul>
+        <li>☕ Spenden via
+          <a href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener">Ko-fi</a>
+        </li>
+        <li>⚡ Bitcoin Lightning:
+          <code>alien_investor@strike.me</code>
+        </li>
+        <li>₿ Bitcoin Onchain:
+          <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code>
+        </li>
+      </ul>
+    </div>
+    <p><a href="blog.html">← Zurück zum Blog</a></p>
+  </footer>
+</body>
+</html>
