@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spenden | Alien Investor</title>
+  <style>
+    body{
+      background:#000;
+      color:#fff;
+      font-family: Arial, sans-serif;
+      margin:0;
+      padding:0;
+      text-align:center;
+    }
+    .wrap{
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 24px 18px;
+    }
+    h1{
+      margin: 10px 0 18px;
+      font-size: 1.8em;
+    }
+    .hint{
+      color:#bbb;
+      margin: 0 0 18px;
+      font-size: 0.95em;
+      line-height: 1.4;
+    }
+
+    .btnrow{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin: 12px 0 10px;
+    }
+    .btn{
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid #00ffcc;
+      background:#000;
+      color:#00ffcc;
+      cursor:pointer;
+      font-size: 1rem;
+      min-width: 220px;
+      transition: background .12s ease, transform .12s ease;
+    }
+    .btn:hover{ background:#061313; }
+    .btn:active{ transform: scale(0.99); }
+
+    .panel{
+      max-height: 0;
+      overflow:hidden;
+      transition: max-height .28s ease;
+      border-radius: 14px;
+      margin: 0 auto;
+    }
+    .panel.open{
+      max-height: 900px;
+      margin-top: 10px;
+    }
+    .card{
+      border: 1px solid #00ffcc;
+      border-radius: 14px;
+      background:#050505;
+      padding: 18px;
+      margin-top: 10px;
+    }
+    .title{
+      font-size: 1.2em;
+      font-weight: bold;
+      margin: 0 0 12px;
+    }
+    .qr{
+      width: 240px;
+      max-width: 80vw;
+      background:#fff;
+      padding: 10px;
+      border-radius: 12px;
+      border: 1px solid #00ffcc;
+      display:block;
+      margin: 0 auto 12px;
+    }
+    code{
+      background:#111;
+      padding: 6px 10px;
+      border-radius: 10px;
+      display:inline-block;
+      word-break: break-all;
+      margin: 6px 0 10px;
+      color:#fff;
+    }
+    .copy{
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid #00ffcc;
+      background:#000;
+      color:#00ffcc;
+      cursor:pointer;
+    }
+    .copy:hover{ background:#061313; }
+
+    .kofi{
+      margin-top: 16px;
+      display:inline-block;
+      color:#00ffcc;
+      text-decoration:none;
+      border: 1px solid #00ffcc;
+      padding: 12px 16px;
+      border-radius: 12px;
+    }
+    .kofi:hover{ background:#061313; }
+
+    .thanks{
+      margin-top: 18px;
+      color:#ddd;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>💸 Unterstütze meine Arbeit</h1>
+    <p class="hint">
+      Wähle Lightning für schnelle Spenden. Onchain eher für größere Beträge (Gebühren beachten).
+      Du kannst auch die Adresse kopieren.
+    </p>
+
+    <div class="btnrow">
+      <button class="btn" onclick="togglePanel('ln')">⚡ Bitcoin Lightning</button>
+      <button class="btn" onclick="togglePanel('btc')">₿ Bitcoin Onchain</button>
+    </div>
+
+    <div id="ln" class="panel">
+      <div class="card">
+        <div class="title">⚡ Bitcoin Lightning</div>
+        <!-- Lege später eine Datei lightning.png ins gleiche Verzeichnis -->
+        <img class="qr" src="lightning.png" alt="Lightning QR-Code">
+        <code id="lnText">alien_investor@strike.me</code><br>
+        <button class="copy" onclick="copyText('lnText')">Adresse kopieren</button>
+      </div>
+    </div>
+
+    <div id="btc" class="panel">
+      <div class="card">
+        <div class="title">₿ Bitcoin Onchain</div>
+        <!-- Lege später eine Datei onchain.png ins gleiche Verzeichnis -->
+        <img class="qr" src="onchain.png" alt="Bitcoin Onchain QR-Code">
+        <code id="btcText">bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code><br>
+        <button class="copy" onclick="copyText('btcText')">Adresse kopieren</button>
+      </div>
+    </div>
+
+    <a class="kofi" href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener">☕ Ko-fi (PayPal/Fiat)</a>
+
+    <p class="thanks">
+      Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸
+    </p>
+  </div>
+
+  <script>
+    function togglePanel(id){
+      const ln = document.getElementById('ln');
+      const btc = document.getElementById('btc');
+
+      if(id === 'ln'){
+        ln.classList.toggle('open');
+        btc.classList.remove('open');
+      } else {
+        btc.classList.toggle('open');
+        ln.classList.remove('open');
+      }
+    }
+
+    async function copyText(elId){
+      const txt = document.getElementById(elId).innerText;
+      try{
+        await navigator.clipboard.writeText(txt);
+        alert("Kopiert.");
+      }catch(e){
+        prompt("Kopieren:", txt);
+      }
+    }
+  </script>
+</body>
+</html>
