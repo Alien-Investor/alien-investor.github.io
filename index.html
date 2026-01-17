@@ -11,15 +11,28 @@
       font-family: Arial, sans-serif;
       text-align: center;
       margin: 0;
-      padding-bottom: 20px; /* Etwas Luft am Ende */
+      padding-bottom: 20px;
     }
+
+    /* --- HEADER / BANNER --- */
     header {
       background-image: url("Alien_Investor_Banner.jpeg");
       background-size: cover;
       background-position: center;
-      height: 300px; /* 500px ist mobil oft zu viel, 300-400px ist besser */
       position: relative;
+      /* Standard-Höhe für Handys */
+      height: 300px;
     }
+
+    /* "Weiche" für große Bildschirme (ab Tablet/Desktop) */
+    @media (min-width: 768px) {
+      header {
+        height: 550px; /* Viel mehr Platz für das UFO auf dem PC */
+        background-position: center 30%; /* Richtet das Bild etwas besser aus */
+      }
+    }
+
+    /* --- PROFILBILD --- */
     img.profil {
       width: 150px;
       height: 150px;
@@ -30,15 +43,20 @@
       left: 50%;
       transform: translateX(-50%);
       background-color: #000;
+      box-shadow: 0 0 20px rgba(0, 255, 204, 0.3); /* Leichter Neon-Glow */
     }
+
     main {
-      padding: 0 15px; /* Seitenabstand für Mobile */
+      padding: 0 15px;
     }
+    
     h1 {
       margin-top: 90px;
-      font-size: 2em;
+      font-size: 2.2em;
       margin-bottom: 0.2em;
+      letter-spacing: 1px;
     }
+
     .claim {
       font-size: 1.1em;
       margin: 10px auto 30px;
@@ -47,7 +65,8 @@
       max-width: 600px;
       line-height: 1.4;
     }
-    /* Neue Klasse für die obere Link-Gruppe */
+
+    /* --- NAVIGATION --- */
     .nav-links {
       display: flex;
       flex-direction: column;
@@ -59,14 +78,14 @@
       text-decoration: none;
       font-size: 1.2em;
       font-weight: bold;
-      transition: color 0.2s;
+      transition: all 0.2s ease;
     }
     .nav-links a:hover {
       color: #fff;
-      text-decoration: underline;
+      text-shadow: 0 0 8px #00ffcc; /* Cooles Leuchten beim Drüberfahren */
     }
     
-    /* Footer Styling */
+    /* --- FOOTER --- */
     footer {
       margin-top: 60px;
       padding: 20px;
@@ -76,6 +95,7 @@
       max-width: 800px;
       margin-left: auto;
       margin-right: auto;
+      line-height: 1.6;
     }
   </style>
 </head>
@@ -99,7 +119,10 @@
     <hr style="border-color: #222; max-width: 200px; margin: 0 auto;">
 
     <div style="margin-top: 40px; margin-bottom: 40px;">
-      <h3 style="margin-bottom: 15px;">🔋 Energie aufladen</h3>
+      <h3 style="margin-bottom: 15px;">
+  🔋 Energie aufladen 
+  <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
+</h3>
       
       <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
         Treibstoff für das Mutterschiff senden
@@ -117,7 +140,7 @@
   </main>
 
   <footer>
-    <p>👽 <strong>Haftungsausschluss:</strong><br><br>
+    <p>👽 <strong>Haftungsausschluss:</strong><br>
     Diese Seite stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
     Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
     Denke selbst, vertraue niemandem, und handle eigenverantwortlich.</p>
