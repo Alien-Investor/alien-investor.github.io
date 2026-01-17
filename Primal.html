@@ -13,86 +13,92 @@
       line-height: 1.6;
       max-width: 800px;
       margin: auto;
-      padding: 2em;
+      padding: 0 15px 20px 15px; /* Mobile-Optimierung */
     }
-    h1, h2, h3 { color: #00ffcc; }
-    a { color: #00ffcc; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    em { color: #ccc; }
+
+    /* --- TYPOGRAFIE --- */
+    h1, h2, h3 {
+      color: #00ffcc;
+    }
+    h1 {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    /* --- LINKS (Neon-Glow) --- */
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc; /* Der Alien-Effekt */
+    }
+
+    /* --- STANDARD ELEMENTE --- */
     code {
       background-color: #111;
       padding: 0.2em 0.4em;
       border-radius: 4px;
       color: #0f0;
-      font-size: 0.95em;
-      font-family: "Courier New", Courier, monospace;
+      font-family: monospace;
     }
     pre {
       background-color: #111;
       padding: 1em;
-      border-radius: 8px;
-      border: 1px solid #333;
+      border-radius: 4px;
       overflow-x: auto;
+      border: 1px solid #333;
       color: #0f0;
+      font-family: monospace;
     }
-    blockquote {
-      border-left: 3px solid #00ffcc;
-      padding-left: 1em;
-      margin: 2em 0;
-      color: #ddd;
-      font-style: italic;
-    }
-    ul { margin-left: 1.2em; }
-    li { margin-bottom: 0.5em; }
+    em { color: #ccc; }
+
     .byline {
       margin-top: -0.8em;
-      margin-bottom: 1.2em;
+      margin-bottom: 2em;
       color: #ccc;
       font-style: italic;
+      text-align: center;
     }
+
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
+
+    /* --- BOXEN --- */
     .box {
       border: 1px solid #00ffcc;
-      background-color: #050505;
-      padding: 1em 1.2em;
-      margin: 2em 0;
+      background: #050505;
+      padding: 1.5em;
       border-radius: 8px;
-    }
-    .box h2, .box h3 { margin-top: 0; }
-    .like-button {
       margin: 2em 0;
-      display: flex;
-      align-items: center;
-      gap: 0.75em;
-      font-size: 0.95em;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
     }
-    .like-button button {
-      background: #00ffcc;
-      color: #000;
-      border: none;
-      padding: 0.4em 0.9em;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: bold;
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 1em; }
+
+    .recommendation-box {
+      margin: 2em 0;
+      padding: 1em;
+      border: 1px dashed #00ffcc;
+      border-radius: 8px;
+      text-align: center;
+      background-color: #050505;
     }
-    .like-button span {
-      min-width: 2em;
-      display: inline-block;
+    .recommendation-box h3 {
+      margin-top: 0;
+      font-size: 1.1em;
+      color: #00ffcc;
     }
-    button {
-      background-color: #111;
-      color: #fff;
-      border: 1px solid #444;
-      padding: 0.5em 1em;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover { background-color: #222; }
-    footer {
-      margin-top: 3em;
-      padding-top: 2em;
-      border-top: 1px solid #333;
-      font-size: 0.9em;
-    }
+
     .highlight {
       border-left: 3px solid #ff3b3b;
       margin: 1.5em 0;
@@ -100,217 +106,295 @@
       background: #110000;
       color: #f5cccc;
       font-size: 0.95em;
+      border-radius: 0 8px 8px 0;
+    }
+
+    /* --- LIKE BUTTON --- */
+    .like-button {
+      margin: 3em 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+    }
+    .like-button button {
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+    .like-button button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
+    }
+
+    /* --- NAVIGATION --- */
+    .top-nav {
+      padding: 10px 0;
+      font-size: 0.9em;
+    }
+    .back-links {
+      margin-top: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
     }
   </style>
 </head>
 <body>
 
+  <div class="top-nav">
+    <a href="index.html">⬅ Zurück zur Zentrale</a>
+  </div>
+
   <h1>🔐 Das Souveräne Protokoll – Architektur einer unkonfiszierbaren digitalen Identität</h1>
   <p class="byline"><em>von Alien Investor</em></p>
 
-  <p>
-    Wir leben in einer Epoche des digitalen Feudalismus. Auf Plattformen wie X (ehemals Twitter), Instagram
-    oder LinkedIn bist du lediglich ein Pächter. Dein Account, deine Reichweite und deine Reputation sind
-    ein „Mietverhältnis“, das jederzeit durch einen simplen Datenbank-Befehl beendet werden kann.
-  </p>
-  <p>
-    Ein echter Eigentümer akzeptiert keine ungedeckten Verbindlichkeiten. Deshalb wechseln wir von Plattformen
-    (zentralisiert) zu Protokollen (dezentral).
-  </p>
-  <p>
-    In <strong>Nostr</strong> ist deine Identität kein Eintrag auf dem Server eines Silicon-Valley-Konzerns,
-    sondern ein mathematischer Beweis. Dein Privater Schlüssel (<code>nsec</code>) ist das Äquivalent zu einem Goldbarren
-    im Tresor. Wer den Schlüssel hat, <em>ist</em> die Identität.
-  </p>
-  <p>
-    Dieser Guide beschreibt den pragmatischen Weg, der für die meisten Sicherheits-Fans der einzig sinnvolle ist:
-    <strong>Key wird im Signer erzeugt und bleibt dort.</strong> Der Client bekommt nur den <code>npub</code> – und Signaturen.
-  </p>
-
-  <div class="highlight">
-    <strong>Regel #1:</strong> Tippe deinen <code>nsec</code> niemals in Primal, Amethyst oder irgendeinen Browser-Login.
-    Der <code>nsec</code> gehört in den Signer. Punkt.
-  </div>
-
-  <h2>Teil I: Die Vorbereitung (Der Reinraum)</h2>
-  <p>
-    Erstelle deine Identität nicht in einer Umgebung, der du nicht vertraust. Wenn du GrapheneOS nutzt: perfekt.
-    Wenn nicht: so gut wie möglich absichern.
-  </p>
-
-  <h3>Das Werkzeug</h3>
-  <ul>
-    <li><strong>Smartphone:</strong> Android (idealerweise GrapheneOS). Flugmodus muss möglich sein.</li>
-    <li>
-      <strong>Signer:</strong> <strong>Amber</strong> (erzeugt und verwahrt den Key).<br>
-      <em>Optional:</em> Es gibt auch eine <strong>„Offline“-Variante</strong> von Amber (in den Releases als <code>amber-offline-...</code>),
-      wenn du den Signer möglichst „stumm“ halten willst.
-    </li>
-    <li><strong>Client:</strong> <strong>Primal</strong> (oder Amethyst) – aber nur per External Signer.</li>
-  </ul>
-
-  <div class="highlight">
-    <strong>Das Mindset:</strong> Wir gehen davon aus, dass jede Online-Umgebung feindselig ist.
-    Clipboard-Sniffer und Malware warten nur darauf, einen String, der mit <code>nsec1...</code> beginnt, abzugreifen.
-  </div>
-
-  <h2>Teil II: Die Genesis (Key-Erzeugung direkt in Amber)</h2>
-  <p>
-    Wir lassen den Schlüssel nicht von irgendeiner Website erzeugen. Wir erzeugen ihn dort, wo er hingehört:
-    <strong>im Signer</strong>.
-  </p>
-
-  <ol>
-    <li><strong>Flugmodus an.</strong> Optional: WLAN/Bluetooth zusätzlich aus.</li>
-    <li><strong>Amber öffnen</strong> und <strong>„Neuen Account erstellen“</strong> / „Create new“ wählen.</li>
-    <li>Amber erzeugt ein neues Keypair (Private Key + Public Key).</li>
-    <li><strong>Amber sofort absichern:</strong> PIN/Biometrie, System-Sperre aktiv.</li>
-  </ol>
-
-  <div class="highlight">
-    <strong>Wichtig:</strong> Der Private Key bleibt in Amber. Du behandelst Amber wie ein Hardware-Wallet für Nostr.
-    Keine Experimente, keine „Always sign without prompting“-Bequemlichkeit ohne Grund.
-  </div>
-
-  <div class="highlight">
-    <strong>Keine Fremd-Erzeugung:</strong> Lass dir niemals einen <code>nsec</code> von anderen erzeugen oder zuschicken.
-    Wer den <code>nsec</code> sieht, kann theoretisch deine Identität übernehmen. Erzeuge den Key direkt in Amber
-    und nutze danach ausschließlich „External Signer“ im Client.
-  </div>
-
-  <h3>GrapheneOS Extra: Network-Berechtigung für Amber deaktivieren</h3>
-  <p>
-    Wenn du GrapheneOS nutzt, kannst du Amber zusätzlich härten: Entziehe Amber die <strong>Network</strong>-Berechtigung.
-    Dann hat Amber keinen Netzwerkzugriff – und bleibt ein reiner Signer.
-  </p>
-  <ul>
-    <li><strong>Einstellungen → Apps → Amber → Berechtigungen → Network → AUS</strong></li>
-    <li>
-      Wenn du Amber jemals für netzwerkbasierte Funktionen nutzen willst, musst du Network wieder aktivieren.
-      Für das reine Signieren im Zusammenspiel mit einem Client ist „Network AUS“ ein sehr sauberes Setup.
-    </li>
-  </ul>
-
-  <h2>Teil III: Das Interface (Primal)</h2>
-  <p>
-    Jetzt installieren wir den Client, also das Fenster zur Welt. Wir nutzen <strong>Primal</strong> wegen der Geschwindigkeit
-    und User Experience (Amethyst ist eine valide Alternative).
-  </p>
-
-  <h3>Der kritische Moment</h3>
-  <p>
-    Beim ersten Start fragt Primal nach einem Login. Millionen Nutzer tippen hier ihren <code>nsec</code> ein.
-    <strong>Du tust das nicht.</strong>
-  </p>
-
-  <ul>
-    <li>Wähle „Log in with External Signer“ (oder das Schlüsselsymbol).</li>
-    <li>Primal ruft Amber als External Signer auf.</li>
-    <li>Amber fragt: „Primal requests your public key. Allow?“</li>
-    <li>Bestätige dies.</li>
-  </ul>
-
-  <p>
-    Was ist passiert? Primal hat nur deinen öffentlichen Schlüssel (<code>npub</code>) erhalten. Primal kennt das Geheimnis nicht.
-  </p>
-
-  <p>Wenn du postest:</p>
-  <ol>
-    <li>Primal erstellt den Text.</li>
-    <li>Primal schickt die Signaturanfrage an Amber.</li>
-    <li>Du bestätigst in Amber.</li>
-    <li>Amber signiert und gibt nur die <strong>Signatur</strong> zurück.</li>
-    <li>Primal sendet den signierten Post ins Netzwerk.</li>
-  </ol>
-
-  <div class="highlight">
-    <strong>Reality Check:</strong> Das schützt dich vor „Client klaut nsec“. Es schützt dich nicht, wenn dein Smartphone komplett kompromittiert ist
-    oder du Amber zu großzügig freigibst. Souveränität heißt: minimale Rechte, maximale Skepsis.
-  </div>
-
-  <h2>Teil IV: Das Backup (Stahl statt Papier)</h2>
-  <p>
-    Digitale Daten korrumpieren. Papier verbrennt. Ein echter Alien Investor sichert für die Ewigkeit.
-  </p>
-
-  <ul>
-    <li><strong>Der Code:</strong> Dein Private Key (<code>nsec</code>) ist dein Backup.</li>
-    <li><strong>Das Medium:</strong> Stanze ihn in Edelstahl (V2A/V4A) oder lagere ihn extrem sicher offline.</li>
-    <li><strong>Die Lagerung:</strong> Ein Exemplar in den Tresor, ein weiteres an einen geografisch getrennten Ort.</li>
-  </ul>
-
-  <div class="highlight">
-    <strong>Regel #2:</strong> Kein Cloud-Backup, keine Screenshots, kein Messenger, keine Notizen-App, kein Copy &amp; Paste-Marathon.
-    Einmal sauber sichern. Dann bleibt der <code>nsec</code> in Amber.
-  </div>
-
-  <h2>Alien-Fazit: Willkommen in der Souveränität</h2>
-  <p>
-    Du hast soeben eine digitale Identität geschaffen, die:
-  </p>
-  <ul>
-    <li>Im Signer geboren wurde (nicht in einem zufälligen Client).</li>
-    <li>Segregiert gelagert ist (der Client kennt das Geheimnis nicht).</li>
-    <li>Physisch gesichert werden kann (Stahl überdauert Feuer).</li>
-  </ul>
-  <p>
-    Das ist der Unterschied zwischen „einen Account haben“ und „eine Identität besitzen“. Du bist jetzt kein
-    User mehr. Du bist ein souveräner Knoten im Netzwerk.
-  </p>
-
-  <blockquote class="highlight">
-    „Vertraue niemandem. Verifiziere alles.“
-  </blockquote>
-
-  <div class="box">
-    <h3>📌 Weiterführend: GrapheneOS – warum das Fundament zählt</h3>
-    <p style="font-size:0.95em;">
-      Wenn du die wichtigsten Eigenschaften von GrapheneOS (Hardening, Rechte-Management, Sandboxing, Netzwerk-Kontrolle)
-      sauber verstehen willst, lies meinen Artikel:<br>
-      👉 <a href="https://alien-investor.org/grapheneos-sicheres-android.html" target="_blank" rel="noopener noreferrer">https://alien-investor.org/grapheneos-sicheres-android.html</a>
+  <article id="content">
+    <p>
+      Wir leben in einer Epoche des digitalen Feudalismus. Auf Plattformen wie X (ehemals Twitter), Instagram
+      oder LinkedIn bist du lediglich ein Pächter. Dein Account, deine Reichweite und deine Reputation sind
+      ein „Mietverhältnis“, das jederzeit durch einen simplen Datenbank-Befehl beendet werden kann.
     </p>
-  </div>
+    <p>
+      Ein echter Eigentümer akzeptiert keine ungedeckten Verbindlichkeiten. Deshalb wechseln wir von Plattformen
+      (zentralisiert) zu Protokollen (dezentral).
+    </p>
+    <p>
+      In <strong>Nostr</strong> ist deine Identität kein Eintrag auf dem Server eines Silicon-Valley-Konzerns,
+      sondern ein mathematischer Beweis. Dein Privater Schlüssel (<code>nsec</code>) ist das Äquivalent zu einem Goldbarren
+      im Tresor. Wer den Schlüssel hat, <em>ist</em> die Identität.
+    </p>
+    <p>
+      Dieser Guide beschreibt den pragmatischen Weg, der für die meisten Sicherheits-Fans der einzig sinnvolle ist:
+      <strong>Key wird im Signer erzeugt und bleibt dort.</strong> Der Client bekommt nur den <code>npub</code> – und Signaturen.
+    </p>
 
-  <div class="box">
-    <h3>🧰 Tools für echte Eigentümer (Werbung/Affiliate)</h3>
-    <p style="font-size:0.95em;">
-      Wenn du Souveränität ernst meinst, nutze Hardware und Dienste, die dich respektieren:
+    <div class="highlight">
+      <strong>Regel #1:</strong> Tippe deinen <code>nsec</code> niemals in Primal, Amethyst oder irgendeinen Browser-Login.
+      Der <code>nsec</code> gehört in den Signer. Punkt.
+    </div>
+
+    <h2>Teil I: Die Vorbereitung (Der Reinraum)</h2>
+    <p>
+      Erstelle deine Identität nicht in einer Umgebung, der du nicht vertraust. Wenn du GrapheneOS nutzt: perfekt.
+      Wenn nicht: so gut wie möglich absichern.
+    </p>
+
+    <h3>Das Werkzeug</h3>
+    <ul>
+      <li><strong>Smartphone:</strong> Android (idealerweise GrapheneOS). Flugmodus muss möglich sein.</li>
+      <li>
+        <strong>Signer:</strong> <strong>Amber</strong> (erzeugt und verwahrt den Key).<br>
+        <em>Optional:</em> Es gibt auch eine <strong>„Offline“-Variante</strong> von Amber (in den Releases als <code>amber-offline-...</code>),
+        wenn du den Signer möglichst „stumm“ halten willst.
+      </li>
+      <li><strong>Client:</strong> <strong>Primal</strong> (oder Amethyst) – aber nur per External Signer.</li>
+    </ul>
+
+    <div class="highlight">
+      <strong>Das Mindset:</strong> Wir gehen davon aus, dass jede Online-Umgebung feindselig ist.
+      Clipboard-Sniffer und Malware warten nur darauf, einen String, der mit <code>nsec1...</code> beginnt, abzugreifen.
+    </div>
+
+    <h2>Teil II: Die Genesis (Key-Erzeugung direkt in Amber)</h2>
+    <p>
+      Wir lassen den Schlüssel nicht von irgendeiner Website erzeugen. Wir erzeugen ihn dort, wo er hingehört:
+      <strong>im Signer</strong>.
+    </p>
+    <ol>
+      <li><strong>Flugmodus an.</strong> Optional: WLAN/Bluetooth zusätzlich aus.</li>
+      <li><strong>Amber öffnen</strong> und <strong>„Neuen Account erstellen“</strong> / „Create new“ wählen.</li>
+      <li>Amber erzeugt ein neues Keypair (Private Key + Public Key).</li>
+      <li><strong>Amber sofort absichern:</strong> PIN/Biometrie, System-Sperre aktiv.</li>
+    </ol>
+
+    <div class="highlight">
+      <strong>Wichtig:</strong> Der Private Key bleibt in Amber. Du behandelst Amber wie ein Hardware-Wallet für Nostr.
+      Keine Experimente, keine „Always sign without prompting“-Bequemlichkeit ohne Grund.
+    </div>
+
+    <div class="highlight">
+      <strong>Keine Fremd-Erzeugung:</strong> Lass dir niemals einen <code>nsec</code> von anderen erzeugen oder zuschicken.
+      Wer den <code>nsec</code> sieht, kann theoretisch deine Identität übernehmen. Erzeuge den Key direkt in Amber
+      und nutze danach ausschließlich „External Signer“ im Client.
+    </div>
+
+    <h3>GrapheneOS Extra: Network-Berechtigung für Amber deaktivieren</h3>
+    <p>
+      Wenn du GrapheneOS nutzt, kannst du Amber zusätzlich härten: Entziehe Amber die <strong>Network</strong>-Berechtigung.
+      Dann hat Amber keinen Netzwerkzugriff – und bleibt ein reiner Signer.
     </p>
     <ul>
+      <li><strong>Einstellungen → Apps → Amber → Berechtigungen → Network → AUS</strong></li>
       <li>
-        📱 <strong>GrapheneOS &amp; Pixel:</strong><br>
-        Stark gehärtetes Android ohne Google-Apps/Play-Dienste (wenn du es so einrichtest) und mit Fokus auf Security-Hardening.<br>
-        👉 <a href="https://grapheneos.org" target="_blank" rel="noopener noreferrer">https://grapheneos.org</a>
-      </li>
-      <li>
-        ₿ <strong>Bitcoin in Selbstverwahrung:</strong><br>
-        Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox02.<br>
-        👉 <a href="https://alien-investor.org/bitbox" target="_blank" rel="noopener noreferrer">https://alien-investor.org/bitbox</a>
-      </li>
-      <li>
-        🛡️ <strong>Privacy &amp; Mail:</strong><br>
-        Für E-Mail, VPN und Cloud nutze ich Proton – datensparsam und ohne Big-Tech-Abhängigkeit.<br>
-        👉 <a href="https://alien-investor.org/proton" target="_blank" rel="noopener noreferrer">https://alien-investor.org/proton</a>
+        Wenn du Amber jemals für netzwerkbasierte Funktionen nutzen willst, musst du Network wieder aktivieren.
+        Für das reine Signieren im Zusammenspiel mit einem Client ist „Network AUS“ ein sehr sauberes Setup.
       </li>
     </ul>
-    <p style="font-size:0.85em; color:#aaa;">
-      Hinweis: Bei einigen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit,
-      ohne dass es dich mehr kostet. Danke! 👽
+
+    <h2>Teil III: Das Interface (Primal)</h2>
+    <p>
+      Jetzt installieren wir den Client, also das Fenster zur Welt. Wir nutzen <strong>Primal</strong> wegen der Geschwindigkeit
+      und User Experience (Amethyst ist eine valide Alternative).
     </p>
-  </div>
+
+    <h3>Der kritische Moment</h3>
+    <p>
+      Beim ersten Start fragt Primal nach einem Login. Millionen Nutzer tippen hier ihren <code>nsec</code> ein.
+      <strong>Du tust das nicht.</strong>
+    </p>
+    <ul>
+      <li>Wähle „Log in with External Signer“ (oder das Schlüsselsymbol).</li>
+      <li>Primal ruft Amber als External Signer auf.</li>
+      <li>Amber fragt: „Primal requests your public key. Allow?“</li>
+      <li>Bestätige dies.</li>
+    </ul>
+    <p>
+      Was ist passiert? Primal hat nur deinen öffentlichen Schlüssel (<code>npub</code>) erhalten. Primal kennt das Geheimnis nicht.
+    </p>
+
+    <p>Wenn du postest:</p>
+    <ol>
+      <li>Primal erstellt den Text.</li>
+      <li>Primal schickt die Signaturanfrage an Amber.</li>
+      <li>Du bestätigst in Amber.</li>
+      <li>Amber signiert und gibt nur die <strong>Signatur</strong> zurück.</li>
+      <li>Primal sendet den signierten Post ins Netzwerk.</li>
+    </ol>
+
+    <div class="highlight">
+      <strong>Reality Check:</strong> Das schützt dich vor „Client klaut nsec“. Es schützt dich nicht, wenn dein Smartphone komplett kompromittiert ist
+      oder du Amber zu großzügig freigibst. Souveränität heißt: minimale Rechte, maximale Skepsis.
+    </div>
+
+    <h2>Teil IV: Das Backup (Stahl statt Papier)</h2>
+    <p>
+      Digitale Daten korrumpieren. Papier verbrennt. Ein echter Alien Investor sichert für die Ewigkeit.
+    </p>
+    <ul>
+      <li><strong>Der Code:</strong> Dein Private Key (<code>nsec</code>) ist dein Backup.</li>
+      <li><strong>Das Medium:</strong> Stanze ihn in Edelstahl (V2A/V4A) oder lagere ihn extrem sicher offline.</li>
+      <li><strong>Die Lagerung:</strong> Ein Exemplar in den Tresor, ein weiteres an einen geografisch getrennten Ort.</li>
+    </ul>
+
+    <div class="highlight">
+      <strong>Regel #2:</strong> Kein Cloud-Backup, keine Screenshots, kein Messenger, keine Notizen-App, kein Copy &amp; Paste-Marathon.
+      Einmal sauber sichern. Dann bleibt der <code>nsec</code> in Amber.
+    </div>
+
+    <h2>Alien-Fazit: Willkommen in der Souveränität</h2>
+    <p>
+      Du hast soeben eine digitale Identität geschaffen, die:
+    </p>
+    <ul>
+      <li>Im Signer geboren wurde (nicht in einem zufälligen Client).</li>
+      <li>Segregiert gelagert ist (der Client kennt das Geheimnis nicht).</li>
+      <li>Physisch gesichert werden kann (Stahl überdauert Feuer).</li>
+    </ul>
+    <p>
+      Das ist der Unterschied zwischen „einen Account haben“ und „eine Identität besitzen“. Du bist jetzt kein
+      User mehr. Du bist ein souveräner Knoten im Netzwerk.
+    </p>
+
+    <blockquote>
+      „Vertraue niemandem. Verifiziere alles.“
+    </blockquote>
+
+    <div class="recommendation-box">
+      <h3>📌 Weiterführend: GrapheneOS – warum das Fundament zählt</h3>
+      <p>
+        Wenn du die wichtigsten Eigenschaften von GrapheneOS (Hardening, Rechte-Management, Sandboxing, Netzwerk-Kontrolle)
+        sauber verstehen willst, lies meinen Artikel:<br>
+        👉 <a href="https://alien-investor.org/grapheneos-sicheres-android.html" target="_blank" rel="noopener noreferrer">GrapheneOS – Sicheres Android</a>
+      </p>
+    </div>
+
+    <div class="box">
+      <h3>🧰 Tools für echte Eigentümer (Werbung/Affiliate)</h3>
+      <p style="font-size:0.95em;">
+        Wenn du Souveränität ernst meinst, nutze Hardware und Dienste, die dich respektieren:
+      </p>
+      <ul>
+        <li>
+          📱 <strong>GrapheneOS &amp; Pixel:</strong><br>
+          Stark gehärtetes Android ohne Google-Apps/Play-Dienste (wenn du es so einrichtest) und mit Fokus auf Security-Hardening.<br>
+          👉 <a href="https://grapheneos.org" target="_blank" rel="noopener noreferrer">https://grapheneos.org</a>
+        </li>
+        <li>
+          ₿ <strong>Bitcoin in Selbstverwahrung:</strong><br>
+          Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox02.<br>
+          👉 <a href="https://alien-investor.org/bitbox" target="_blank" rel="noopener noreferrer">https://alien-investor.org/bitbox</a>
+        </li>
+        <li>
+          🛡️ <strong>Privacy &amp; Mail:</strong><br>
+          Für E-Mail, VPN und Cloud nutze ich Proton – datensparsam und ohne Big-Tech-Abhängigkeit.<br>
+          👉 <a href="https://alien-investor.org/proton" target="_blank" rel="noopener noreferrer">https://alien-investor.org/proton</a>
+        </li>
+      </ul>
+      <p style="font-size:0.85em; color:#aaa;">
+        Hinweis: Bei einigen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit,
+        ohne dass es dich mehr kostet. Danke! 👽
+      </p>
+    </div>
+
+  </article>
 
   <div class="like-button">
     <button id="likeButton">👍 Gefällt mir</button>
     <span id="likeCount">0</span>
-    <span style="color:#bbb;">(Speicherung nur lokal im Browser)</span>
+    <span style="color:#bbb; font-size: 0.9em;">(Lokal)</span>
   </div>
 
-  <div class="box">
+  <script>
+    (function() {
+      const storageKey = window.location.pathname + "-likes";
+      const btn = document.getElementById('likeButton');
+      const span = document.getElementById('likeCount');
+
+      let count = parseInt(localStorage.getItem(storageKey) || "0", 10);
+      span.textContent = count;
+
+      btn.addEventListener('click', function() {
+        count += 1;
+        span.textContent = count;
+        localStorage.setItem(storageKey, String(count));
+        btn.disabled = true;
+        btn.textContent = "Danke! 👽";
+        btn.style.borderColor = "#444";
+        btn.style.color = "#888";
+      });
+    })();
+  </script>
+
+  <div class="box" style="border-style: dashed; border-color: #333;">
     <h3>📚 Quellen & Ressourcen</h3>
-    <p style="font-size:0.95em;">
+    <p style="font-size:0.95em; color: #ccc;">
       Offizielle Ressourcen zu den verwendeten Komponenten:
     </p>
-    <ul>
+    <ul style="padding-left: 1.2em;">
       <li><a href="https://github.com/greenart7c3/Amber/releases" target="_blank" rel="noopener noreferrer">Amber (Releases inkl. Offline-APK)</a></li>
       <li><a href="https://grapheneos.org/features" target="_blank" rel="noopener noreferrer">GrapheneOS Features (Network Permission Toggle)</a></li>
       <li><a href="https://github.com/nostr-protocol/nips" target="_blank" rel="noopener noreferrer">Nostr NIPs (Spezifikationen)</a></li>
@@ -318,63 +402,38 @@
     </ul>
   </div>
 
+  <div class="back-links">
+    <a href="blog.html" style="font-size: 1.1em;">⬅ Zurück zur Blog-Übersicht</a>
+    <a href="index.html" style="font-size: 1.1em;">⬅ Zurück zur Zentrale</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+      <h3 style="margin-bottom: 15px;">
+        🔋 Energie aufladen
+        <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
+      </h3>
+      
+      <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+        Treibstoff für das Mutterschiff senden
+      </a>
+      
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸
+      </p>
+  </div>
+
   <footer>
-    <p>📬 Kontakt:
-      <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>
-    </p>
-    <p style="font-size:0.95em; color:#bbb;">
-      👽 <strong>Haftungsausschluss:</strong><br>
-      Dieser Artikel ist keine IT-Sicherheitsberatung oder Rechtsberatung.<br>
-      Ich teile hier nur mein persönliches Setup – unabhängig, rebellisch und frei.<br>
+    <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    
+    <p style="margin-top: 20px;">
+      👽 <strong>Haftungsausschluss:</strong><br><br>
+      Dieser Artikel stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
+      Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
       Sicherheit ist ein Prozess, kein Zustand. Handle eigenverantwortlich.
     </p>
-    <div class="support" style="margin-top: 2em;">
-      <h2>💸 Unterstütze meine Arbeit</h2>
-      <ul>
-        <li>☕ Spenden via
-          <a href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener noreferrer">Ko-fi</a>
-        </li>
-        <li>⚡ Bitcoin Lightning:
-          <code>alien_investor@strike.me</code>
-        </li>
-        <li>₿ Bitcoin Onchain:
-          <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code>
-        </li>
-      </ul>
-    </div>
-    <p><a href="blog.html">← Zurück zum Blog</a></p>
   </footer>
-
-  <script>
-    (function() {
-      const baseKey = window.location.pathname;
-      const countKey = baseKey + "-likes";
-      const likedKey = baseKey + "-liked";
-
-      const btn = document.getElementById('likeButton');
-      const span = document.getElementById('likeCount');
-
-      let count = parseInt(localStorage.getItem(countKey) || "0", 10);
-      span.textContent = count;
-
-      const alreadyLiked = localStorage.getItem(likedKey) === "true";
-      if (alreadyLiked) {
-        btn.disabled = true;
-        btn.textContent = "Danke! 👽";
-      }
-
-      btn.addEventListener('click', function() {
-        if (localStorage.getItem(likedKey) === "true") return;
-
-        count += 1;
-        span.textContent = count;
-        localStorage.setItem(countKey, String(count));
-        localStorage.setItem(likedKey, "true");
-        btn.disabled = true;
-        btn.textContent = "Danke! 👽";
-      });
-    })();
-  </script>
 
 </body>
 </html>
