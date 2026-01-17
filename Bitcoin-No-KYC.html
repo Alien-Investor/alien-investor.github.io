@@ -13,71 +13,95 @@
       line-height: 1.6;
       max-width: 800px;
       margin: auto;
-      padding: 2em;
+      padding: 0 15px 20px 15px; /* Mobile-Optimierung */
     }
+
+    /* --- TYPOGRAFIE --- */
     h1, h2, h3 {
       color: #00ffcc;
     }
+    h1 {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    /* --- LINKS (Neon-Glow) --- */
     a {
       color: #00ffcc;
       text-decoration: none;
+      transition: all 0.2s ease;
     }
     a:hover {
-      text-decoration: underline;
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc; /* Der Alien-Effekt */
     }
-    em {
-      color: #ccc;
-    }
+
+    /* --- STANDARD ELEMENTE --- */
     code {
       background-color: #111;
       padding: 0.2em 0.4em;
       border-radius: 4px;
       color: #0f0;
-      font-size: 0.95em;
+      font-family: monospace;
     }
-    blockquote {
-      border-left: 3px solid #00ffcc;
-      padding-left: 1em;
-      margin: 2em 0;
-      color: #ddd;
-      font-style: italic;
-    }
-    ul {
-      margin-left: 1.2em;
-    }
-    li {
-      margin-bottom: 0.5em;
-    }
+    em { color: #ccc; }
+
     .byline {
       margin-top: -0.8em;
-      margin-bottom: 1.2em;
+      margin-bottom: 2em;
       color: #ccc;
       font-style: italic;
+      text-align: center;
     }
+
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
+
+    /* --- BOXEN --- */
     .box {
       border: 1px solid #00ffcc;
-      background-color: #050505;
-      padding: 1em 1.2em;
-      margin: 2em 0;
+      background: #050505;
+      padding: 1.5em;
       border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
     }
-    .box h2, .box h3 {
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 1em; }
+
+    .recommendation-box {
+      margin: 2em 0;
+      padding: 1em;
+      border: 1px dashed #00ffcc;
+      border-radius: 8px;
+      text-align: center;
+      background-color: #050505;
+    }
+    .recommendation-box h3 {
       margin-top: 0;
+      font-size: 1.1em;
+      color: #00ffcc;
     }
-    
-    /* NEU: Container für scrollbare Tabellen auf Mobile */
+
+    /* --- TABELLEN (Scrollbar auf Mobile) --- */
     .table-scroll {
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
       margin-bottom: 1em;
     }
-    
     table {
       width: 100%;
       border-collapse: collapse;
       margin: 0;
       font-size: 0.9em;
-      min-width: 600px; /* Trigger für Scrollbalken auf kleinen Screens */
+      min-width: 600px; /* Trigger für Scrollbalken */
     }
     th, td {
       border: 1px solid #333;
@@ -89,281 +113,284 @@
       color: #00ffcc;
     }
 
-    /* NEU: Standard für interne Lese-Empfehlungen (gestrichelte Box) */
-    .recommendation-box {
-      margin: 2em 0;
-      padding: 1em;
-      border: 1px dashed #00ffcc; /* Gestrichelt als Abgrenzung */
-      border-radius: 8px;
-      text-align: center;
-      background-color: #050505;
-    }
-    .recommendation-box h3 {
-      margin-top: 0;
-      font-size: 1.1em;
-    }
-
+    /* --- LIKE BUTTON --- */
     .like-button {
-      margin: 2em 0;
+      margin: 3em 0;
       display: flex;
       align-items: center;
-      gap: 0.75em;
-      font-size: 0.95em;
+      justify-content: center;
+      gap: 1em;
     }
     .like-button button {
-      background: #00ffcc;
-      color: #000;
-      border: none;
-      padding: 0.4em 0.9em;
-      border-radius: 4px;
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
       cursor: pointer;
       font-weight: bold;
+      transition: all 0.2s ease;
     }
-    .like-button span {
-      min-width: 2em;
-      display: inline-block;
+    .like-button button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
     }
-    button {
-      background-color: #111;
-      color: #fff;
-      border: 1px solid #444;
-      padding: 0.5em 1em;
-      border-radius: 5px;
-      cursor: pointer;
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
     }
-    button:hover {
-      background-color: #222;
-    }
-    footer {
-      margin-top: 3em;
-      padding-top: 2em;
-      border-top: 1px solid #333;
+
+    /* --- NAVIGATION --- */
+    .top-nav {
+      padding: 10px 0;
       font-size: 0.9em;
     }
-    .support ul {
-      margin: 0.3em 0 0 1.2em;
+    .back-links {
+      margin-top: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
     }
   </style>
 </head>
 <body>
 
+  <div class="top-nav">
+    <a href="index.html">⬅ Zurück zur Zentrale</a>
+  </div>
+
   <h1>🛡️ Bitcoin & Privatsphäre 2026 – Der Weg zur Souveränität</h1>
   <p class="byline"><em>von Alien Investor</em></p>
 
-  <p>
-    Wir stehen an einer Gabelung. Auf der einen Seite hat sich der „institutionelle Bitcoin“ etabliert: 
-    reguliert, ETF-verpackt, von großen Vermögensverwaltern verwaltet – und an jeder Schnittstelle mit 
-    KYC/AML-Logik verheiratet. In dieser Welt sind Satoshis nicht „markiert“, aber die Wege dorthin sind es: 
-    Account, Auszahlungsadresse, Auszahlungszeitpunkt, Gegenparteien, Datenhaltung.
-  </p>
-  <p>
-    Auf der anderen Seite steht der „souveräne Bitcoin“: zensurresistentes Peer-to-Peer-Geld, so wie 
-    Satoshi Nakamoto es im Whitepaper entworfen hat.
-  </p>
-  <p>
-    Lange Zeit konnten wir in Europa bequem dazwischen leben – dank „KYC-light“ und pragmatischer Onramps. 
-    Doch diese Brücke bröckelt sichtbar. Wer 2026 Bitcoin mit möglichst wenig Datenspur halten will, 
-    muss seine Strategie anpassen.
-  </p>
-
-  <h2>Das Ende von „KYC-light“ als bequemer Standard</h2>
-  <p>
-    Über Jahre galt die Schweiz als funktionaler Zwischenraum. Dienste wie Relai oder Pocket nutzten vereinfachte 
-    Prozesse, um Bitcoin bis zu gewissen Grenzen ohne klassischen Ausweis-Upload zu ermöglichen. Das schuf 
-    Pseudonymität: Die Coins hingen zwar an einer Banküberweisung (IBAN/Name beim Zahlungsdienst), aber nicht 
-    zwingend an einem Ausweisfoto plus kompletter Identitätsakte in der App.
-  </p>
-  <p>
-    Diese Phase läuft aus. Der Bruch ist konkret:
-  </p>
-  <ul>
-    <li>
-      <strong>Relai:</strong> Kündigte im Juli 2024 an, dass alle bislang nicht verifizierten Nutzer bis zum 
-      31. Oktober 2024 eine Verifizierung abschließen müssen, um den Dienst weiter zu nutzen.
-    </li>
-    <li>
-      <strong>Pocket Bitcoin:</strong> Kündigte im Oktober 2025 „volle Verifizierung“ an. Nicht verifizierte Nutzer 
-      müssen bis zum 8. Dezember 2025 eine einmalige vollständige KYC-Verifizierung durchführen. Pocket verweist dabei 
-      u. a. auf regulatorische Anpassungen (gesenkte „KYC-light“-Schwelle) sowie internationale Rahmenwerke.
-    </li>
-  </ul>
-  <p>
-    <strong>Konsequenz:</strong> Der „komfortable App-Weg“ ist in der Praxis fast immer ein datenreicher Weg. 
-    Und Daten haben eine Eigenschaft: Sie werden nicht weniger, nur weil du später „privater“ werden willst.
-  </p>
-
-  <h2>EU-Regeln: Fakten vs. falsche Zeitachsen</h2>
-  <p>
-    Zur Klarstellung: In Europa laufen mehrere Regelwerke parallel – und viele Diskussionen vermischen „beschlossen“ mit „gilt schon“.
-  </p>
-
-  <h3>Travel Rule (TFR): schon live an den Schnittstellen</h3>
-  <p>
-    Die EU hat die „Travel Rule“ für Krypto-Transfers über Dienstleister in die Transfer-of-Funds-Regeln gezogen. 
-    In der Praxis heißt das: CASPs (Crypto-Asset Service Providers) müssen bei Transfers zu/von Self-Custody-Wallets 
-    je nach Fall zusätzliche Prüfungen vornehmen. In vielen Umsetzungen ist die Ownership-/Control-Prüfung ab 1.000&nbsp;EUR 
-    ein relevanter Schwellenwert. Diese Regeln gelten bereits seit dem <strong>30. Dezember 2024</strong>.
-  </p>
-
-  <h3>AMLR (EU-Geldwäscheverordnung): beschlossen, aber noch nicht anwendbar</h3>
-  <p>
-    Die neue EU-„Single Rulebook“-AMLR (Regulation (EU) 2024/1624) ist veröffentlicht und in Kraft getreten, 
-    sie wird aber erst ab <strong>10. Juli 2027</strong> angewendet. Wer 2026 so tut, als sei das bereits 
-    vollständig „scharf“, diskutiert in der falschen Zeitzone.
-  </p>
-
-  <h3>Bargeld-Obergrenzen: Flickenteppich</h3>
-  <p>
-    Ein EU-weiter Cash-Deckel von 10.000&nbsp;€ wird im Rahmen der AMLR vorgesehen. In vielen Ländern existieren 
-    schon heute nationale Limits – nur: Das ist kein einheitliches „Bargeld-Verbot“ ab 2026, sondern ein 
-    nationaler Flickenteppich mit einer EU-weiten Klammer ab 2027.
-  </p>
-  <p>
-    <strong>Fazit:</strong> Der bequeme Weg über regulierte Broker bleibt legal und bequem – aber er ist strukturell 
-    ein überwachter Weg. Wer Datenspuren minimieren will, muss verstehen, wo die Schnittstellen sitzen.
-  </p>
-
-  <h2>P2P-Marktplätze: Infrastruktur ohne zentrale Verwahrung</h2>
-  <p>
-    Wenn zentrale Börsen (CEX) voll im KYC-/AML-Netz hängen, werden Peer-to-Peer (P2P) Marktplätze als Infrastruktur wichtiger: 
-    Sie verbinden Käufer und Verkäufer direkter – ohne dass eine zentrale Firma deine Coins dauerhaft verwahrt.
-  </p>
-  <p style="font-size:0.9em; color:#bbb;">
-    <em>Wichtig: „P2P“ ist kein Freifahrtschein. Identifikations- und Meldepflichten können je nach Jurisdiktion, 
-    Zahlungsweg und Plattform variieren. Prüfe Recht, Steuerregeln und Bank-AGB.</em>
-  </p>
-
-  <ul>
-    <li>
-      <strong>Bisq (Der dezentrale Panzer):</strong> Open-Source-Desktop-Client. 
-      Sicherheit durch 2-von-2 Multisig und Sicherheitsleistung. Mit „Bisq Easy“ gibt es ein vereinfachtes Protokoll, 
-      das stärker über Reputation arbeitet. Nachteil: Langsamer, technischer.
-    </li>
-    <li>
-      <strong>RoboSats (Schnell & Günstig):</strong> Arbeitet typischerweise über Tor und Lightning. 
-      Setzt auf „Bonds“ (Kautionen), die bei Fehlverhalten verloren gehen. Vorteil: Sehr schnell, oft günstig.
-    </li>
-    <li>
-      <strong>Peach Bitcoin (Mobile Mittelweg):</strong> Mobile-first mit Fokus auf Nutzerführung (UX). 
-      Trade-off: Handy-Umgebung bedeutet mehr Metadaten-Risiko (IP, Push-Notifications, App-Telemetrie).
-    </li>
-    <li>
-      <strong>Hodl Hodl (Web):</strong> Non-custodial Multisig-Escrow im Web-Interface. Betont, keine US-Kunden zu bedienen.
-    </li>
-  </ul>
-
-  <div class="box">
-    <h3>⚔️ Vergleich der P2P-Marktplätze (Stand Januar 2026)</h3>
-    <div class="table-scroll">
-      <table>
-        <thead>
-          <tr>
-            <th>Marktplatz</th>
-            <th>Typ</th>
-            <th>Sicherheit</th>
-            <th>Privatsphäre</th>
-            <th>Eignung</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Bisq</strong></td>
-            <td>Desktop (Tor)</td>
-            <td>Hoch (Multisig)</td>
-            <td>Hoch</td>
-            <td>Größere Volumen, Geduld</td>
-          </tr>
-          <tr>
-            <td><strong>RoboSats</strong></td>
-            <td>Web (Tor/LN)</td>
-            <td>Mittel (Bonds)</td>
-            <td>Hoch</td>
-            <td>Schnell, Lightning-nah</td>
-          </tr>
-          <tr>
-            <td><strong>Peach</strong></td>
-            <td>Mobile App</td>
-            <td>Mittel</td>
-            <td>Mittel</td>
-            <td>Einsteiger, Convenience</td>
-          </tr>
-          <tr>
-            <td><strong>Hodl Hodl</strong></td>
-            <td>Web (Clearnet)</td>
-            <td>Mittel (Multisig)</td>
-            <td>Mittel</td>
-            <td>Web-Trader</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <p style="font-size:0.85em; color:#bbb;">
-      ℹ️ <em>Tipp: Tabelle nach rechts wischen für alle Details.</em>
+  <article id="content">
+    <p>
+      Wir stehen an einer Gabelung. Auf der einen Seite hat sich der „institutionelle Bitcoin“ etabliert:
+      reguliert, ETF-verpackt, von großen Vermögensverwaltern verwaltet – und an jeder Schnittstelle mit
+      KYC/AML-Logik verheiratet. In dieser Welt sind Satoshis nicht „markiert“, aber die Wege dorthin sind es:
+      Account, Auszahlungsadresse, Auszahlungszeitpunkt, Gegenparteien, Datenhaltung.
     </p>
-  </div>
+    <p>
+      Auf der anderen Seite steht der „souveräne Bitcoin“: zensurresistentes Peer-to-Peer-Geld, so wie
+      Satoshi Nakamoto es im Whitepaper entworfen hat.
+    </p>
+    <p>
+      Lange Zeit konnten wir in Europa bequem dazwischen leben – dank „KYC-light“ und pragmatischer Onramps.
+      Doch diese Brücke bröckelt sichtbar. Wer 2026 Bitcoin mit möglichst wenig Datenspur halten will,
+      muss seine Strategie anpassen.
+    </p>
 
-  <h2>Privatsphäre & Sicherheit: Sauber bleiben in einer überwachten Welt</h2>
-  <p>
-    Datenspuren entstehen nicht nur beim Kauf – sie entstehen später, wenn du Dinge vermischst.
-  </p>
+    <h2>Das Ende von „KYC-light“ als bequemer Standard</h2>
+    <p>
+      Über Jahre galt die Schweiz als funktionaler Zwischenraum. Dienste wie Relai oder Pocket nutzten vereinfachte
+      Prozesse, um Bitcoin bis zu gewissen Grenzen ohne klassischen Ausweis-Upload zu ermöglichen. Das schuf
+      Pseudonymität: Die Coins hingen zwar an einer Banküberweisung (IBAN/Name beim Zahlungsdienst), aber nicht
+      zwingend an einem Ausweisfoto plus kompletter Identitätsakte in der App.
+    </p>
+    <p>
+      Diese Phase läuft aus. Der Bruch ist konkret:
+    </p>
+    <ul>
+      <li>
+        <strong>Relai:</strong> Kündigte im Juli 2024 an, dass alle bislang nicht verifizierten Nutzer bis zum
+        31. Oktober 2024 eine Verifizierung abschließen müssen, um den Dienst weiter zu nutzen.
+      </li>
+      <li>
+        <strong>Pocket Bitcoin:</strong> Kündigte im Oktober 2025 „volle Verifizierung“ an. Nicht verifizierte Nutzer
+        müssen bis zum 8. Dezember 2025 eine einmalige vollständige KYC-Verifizierung durchführen. Pocket verweist dabei
+        u. a. auf regulatorische Anpassungen (gesenkte „KYC-light“-Schwelle) sowie internationale Rahmenwerke.
+      </li>
+    </ul>
+    <p>
+      <strong>Konsequenz:</strong> Der „komfortable App-Weg“ ist in der Praxis fast immer ein datenreicher Weg.
+      Und Daten haben eine Eigenschaft: Sie werden nicht weniger, nur weil du später „privater“ werden willst.
+    </p>
 
-  <h3>Nach dem Vorgehen gegen Samourai/Whirlpool: Risiko-Realismus</h3>
-  <p>
-    Im April 2024 wurden Entwickler von Samourai Wallet in den USA festgenommen (Vorwürfe u. a. Geldwäsche, 
-    „unlicensed money transmitting“). Das hat die Risikolage rund um bestimmte Privacy-Dienste sichtbar verändert. 
-    Das bedeutet nicht „Privatsphäre ist verboten“. Es bedeutet:
-  </p>
-  <ul>
-    <li>Tools sind nicht gleich Risiko.</li>
-    <li>Jurisdiktion, Betreiberstruktur, Zentralisierung und Kommunikation entscheiden mit.</li>
-    <li>Wer Privacy-Technik nutzt, sollte verstehen, was er tut – und wofür er es tut.</li>
-  </ul>
+    <h2>EU-Regeln: Fakten vs. falsche Zeitachsen</h2>
+    <p>
+      Zur Klarstellung: In Europa laufen mehrere Regelwerke parallel – und viele Diskussionen vermischen „beschlossen“ mit „gilt schon“.
+    </p>
 
-  <h3>Wallet-Hygiene & Coin Control</h3>
-  <p>
-    Der häufigste Fehler: Du kaufst „privacy-sensibler“ über P2P und schickst am Ende alles auf dieselbe Wallet-Struktur, 
-    die du auch für voll-identifizierte Bestände nutzt.
-  </p>
-  <blockquote>
-    „Vermische keine UTXOs aus unterschiedlichen Kontexten leichtfertig. Ein gemeinsamer Input kann sonst deine Trennung zunichtemachen.“
-  </blockquote>
-  <p>
-    Nutze Wallets mit <strong>Coin Control</strong> (z. B. Sparrow), label deine UTXOs („P2P-Kauf Jan 2026“) und halte Flüsse getrennt – 
-    nicht als Magie, sondern als saubere Buchhaltung deiner Privatsphäre.
-  </p>
+    <h3>Travel Rule (TFR): schon live an den Schnittstellen</h3>
+    <p>
+      Die EU hat die „Travel Rule“ für Krypto-Transfers über Dienstleister in die Transfer-of-Funds-Regeln gezogen.
+      In der Praxis heißt das: CASPs (Crypto-Asset Service Providers) müssen bei Transfers zu/von Self-Custody-Wallets
+      je nach Fall zusätzliche Prüfungen vornehmen. In vielen Umsetzungen ist die Ownership-/Control-Prüfung ab 1.000&nbsp;EUR
+      ein relevanter Schwellenwert. Diese Regeln gelten bereits seit dem <strong>30. Dezember 2024</strong>.
+    </p>
 
-  <h2>Das Risiko: De-Banking & Compliance-Reibung</h2>
-  <p>
-    Der Gegner ist heute oft nicht die Polizei, sondern die Compliance-Maschine: Banken nutzen automatisierte 
-    AML-/Fraud-Modelle, die Muster bewerten – und manchmal überreagieren.
-  </p>
-  <p>
-    <strong>Typische Red Flags:</strong> Häufige Zahlungen an wechselnde Privatpersonen, unklare Zahlungstexte 
-    oder Muster, die nicht zum Profil passen.
-  </p>
-  <p>
-    <strong>Gegenmaßnahme (legal & banal):</strong>
-  </p>
-  <ul>
-    <li>Dokumentiere, was du tust (Belege, Chats, Rechnungen, Steuern).</li>
-    <li>Nutze <strong>klare, wahrheitsgemäße Verwendungszwecke</strong> – keine Irreführung.</li>
-    <li>Trenne bei Bedarf Budgets/Konten aus Ordnung und Übersicht, nicht als „Trick“.</li>
-    <li>Wenn du regelmäßig P2P nutzt: Kläre vorab, welche Erwartungen deine Bank hat.</li>
-  </ul>
+    <h3>AMLR (EU-Geldwäscheverordnung): beschlossen, aber noch nicht anwendbar</h3>
+    <p>
+      Die neue EU-„Single Rulebook“-AMLR (Regulation (EU) 2024/1624) ist veröffentlicht und in Kraft getreten,
+      sie wird aber erst ab <strong>10. Juli 2027</strong> angewendet. Wer 2026 so tut, als sei das bereits
+      vollständig „scharf“, diskutiert in der falschen Zeitzone.
+    </p>
 
-  <h2>Alien-Fazit: Souveränität ist Arbeit 👽</h2>
-  <p>
-    Die Zeiten von „bisschen Privacy nebenbei“ werden härter, weil Schnittstellen dichter reguliert sind und 
-    Datenpfade länger gespeichert werden. Der Markt spaltet sich in den <strong>weißen Markt</strong> (bequem, stark geregelt) 
-    und den <strong>freien Markt</strong> (P2P, mehr Reibung, mehr Eigenverantwortung).
-  </p>
-  <p>
-    Wenn du echte finanzielle Unabhängigkeit willst, musst du lernen, diese Tools zu bedienen – und die Spielregeln zu verstehen. 
-    Lerne Linux, lerne Tor, lerne Coin Control. Es lohnt sich.
-  </p>
+    <h3>Bargeld-Obergrenzen: Flickenteppich</h3>
+    <p>
+      Ein EU-weiter Cash-Deckel von 10.000&nbsp;€ wird im Rahmen der AMLR vorgesehen. In vielen Ländern existieren
+      schon heute nationale Limits – nur: Das ist kein einheitliches „Bargeld-Verbot“ ab 2026, sondern ein
+      nationaler Flickenteppich mit einer EU-weiten Klammer ab 2027.
+    </p>
+    <p>
+      <strong>Fazit:</strong> Der bequeme Weg über regulierte Broker bleibt legal und bequem – aber er ist strukturell
+      ein überwachter Weg. Wer Datenspuren minimieren will, muss verstehen, wo die Schnittstellen sitzen.
+    </p>
+
+    <h2>P2P-Marktplätze: Infrastruktur ohne zentrale Verwahrung</h2>
+    <p>
+      Wenn zentrale Börsen (CEX) voll im KYC-/AML-Netz hängen, werden Peer-to-Peer (P2P) Marktplätze als Infrastruktur wichtiger:
+      Sie verbinden Käufer und Verkäufer direkter – ohne dass eine zentrale Firma deine Coins dauerhaft verwahrt.
+    </p>
+    <p style="font-size:0.9em; color:#bbb; margin-bottom: 2em;">
+      <em>Wichtig: „P2P“ ist kein Freifahrtschein. Identifikations- und Meldepflichten können je nach Jurisdiktion,
+      Zahlungsweg und Plattform variieren. Prüfe Recht, Steuerregeln und Bank-AGB.</em>
+    </p>
+    <ul>
+      <li>
+        <strong>Bisq (Der dezentrale Panzer):</strong> Open-Source-Desktop-Client.
+        Sicherheit durch 2-von-2 Multisig und Sicherheitsleistung. Mit „Bisq Easy“ gibt es ein vereinfachtes Protokoll,
+        das stärker über Reputation arbeitet. Nachteil: Langsamer, technischer.
+      </li>
+      <li>
+        <strong>RoboSats (Schnell & Günstig):</strong> Arbeitet typischerweise über Tor und Lightning.
+        Setzt auf „Bonds“ (Kautionen), die bei Fehlverhalten verloren gehen. Vorteil: Sehr schnell, oft günstig.
+      </li>
+      <li>
+        <strong>Peach Bitcoin (Mobile Mittelweg):</strong> Mobile-first mit Fokus auf Nutzerführung (UX).
+        Trade-off: Handy-Umgebung bedeutet mehr Metadaten-Risiko (IP, Push-Notifications, App-Telemetrie).
+      </li>
+      <li>
+        <strong>Hodl Hodl (Web):</strong> Non-custodial Multisig-Escrow im Web-Interface. Betont, keine US-Kunden zu bedienen.
+      </li>
+    </ul>
+
+    <div class="box">
+      <h3>⚔️ Vergleich der P2P-Marktplätze (Stand Januar 2026)</h3>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Marktplatz</th>
+              <th>Typ</th>
+              <th>Sicherheit</th>
+              <th>Privatsphäre</th>
+              <th>Eignung</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Bisq</strong></td>
+              <td>Desktop (Tor)</td>
+              <td>Hoch (Multisig)</td>
+              <td>Hoch</td>
+              <td>Größere Volumen, Geduld</td>
+            </tr>
+            <tr>
+              <td><strong>RoboSats</strong></td>
+              <td>Web (Tor/LN)</td>
+              <td>Mittel (Bonds)</td>
+              <td>Hoch</td>
+              <td>Schnell, Lightning-nah</td>
+            </tr>
+            <tr>
+              <td><strong>Peach</strong></td>
+              <td>Mobile App</td>
+              <td>Mittel</td>
+              <td>Mittel</td>
+              <td>Einsteiger, Convenience</td>
+            </tr>
+            <tr>
+              <td><strong>Hodl Hodl</strong></td>
+              <td>Web (Clearnet)</td>
+              <td>Mittel (Multisig)</td>
+              <td>Mittel</td>
+              <td>Web-Trader</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:0.85em; color:#bbb;">
+        ℹ️ <em>Tipp: Tabelle nach rechts wischen für alle Details.</em>
+      </p>
+    </div>
+
+    <h2>Privatsphäre & Sicherheit: Sauber bleiben in einer überwachten Welt</h2>
+    <p>
+      Datenspuren entstehen nicht nur beim Kauf – sie entstehen später, wenn du Dinge vermischst.
+    </p>
+
+    <h3>Nach dem Vorgehen gegen Samourai/Whirlpool: Risiko-Realismus</h3>
+    <p>
+      Im April 2024 wurden Entwickler von Samourai Wallet in den USA festgenommen (Vorwürfe u. a. Geldwäsche,
+      „unlicensed money transmitting“). Das hat die Risikolage rund um bestimmte Privacy-Dienste sichtbar verändert.
+      Das bedeutet nicht „Privatsphäre ist verboten“. Es bedeutet:
+    </p>
+    <ul>
+      <li>Tools sind nicht gleich Risiko.</li>
+      <li>Jurisdiktion, Betreiberstruktur, Zentralisierung und Kommunikation entscheiden mit.</li>
+      <li>Wer Privacy-Technik nutzt, sollte verstehen, was er tut – und wofür er es tut.</li>
+    </ul>
+
+    <h3>Wallet-Hygiene & Coin Control</h3>
+    <p>
+      Der häufigste Fehler: Du kaufst „privacy-sensibler“ über P2P und schickst am Ende alles auf dieselbe Wallet-Struktur,
+      die du auch für voll-identifizierte Bestände nutzt.
+    </p>
+    <blockquote>
+      „Vermische keine UTXOs aus unterschiedlichen Kontexten leichtfertig. Ein gemeinsamer Input kann sonst deine Trennung zunichtemachen.“
+    </blockquote>
+    <p>
+      Nutze Wallets mit <strong>Coin Control</strong> (z. B. Sparrow), label deine UTXOs („P2P-Kauf Jan 2026“) und halte Flüsse getrennt –
+      nicht als Magie, sondern als saubere Buchhaltung deiner Privatsphäre.
+    </p>
+
+    <h2>Das Risiko: De-Banking & Compliance-Reibung</h2>
+    <p>
+      Der Gegner ist heute oft nicht die Polizei, sondern die Compliance-Maschine: Banken nutzen automatisierte
+      AML-/Fraud-Modelle, die Muster bewerten – und manchmal überreagieren.
+    </p>
+    <p>
+      <strong>Typische Red Flags:</strong> Häufige Zahlungen an wechselnde Privatpersonen, unklare Zahlungstexte
+      oder Muster, die nicht zum Profil passen.
+    </p>
+    <p>
+      <strong>Gegenmaßnahme (legal & banal):</strong>
+    </p>
+    <ul>
+      <li>Dokumentiere, was du tust (Belege, Chats, Rechnungen, Steuern).</li>
+      <li>Nutze <strong>klare, wahrheitsgemäße Verwendungszwecke</strong> – keine Irreführung.</li>
+      <li>Trenne bei Bedarf Budgets/Konten aus Ordnung und Übersicht, nicht als „Trick“.</li>
+      <li>Wenn du regelmäßig P2P nutzt: Kläre vorab, welche Erwartungen deine Bank hat.</li>
+    </ul>
+
+    <h2>Alien-Fazit: Souveränität ist Arbeit 👽</h2>
+    <p>
+      Die Zeiten von „bisschen Privacy nebenbei“ werden härter, weil Schnittstellen dichter reguliert sind und
+      Datenpfade länger gespeichert werden. Der Markt spaltet sich in den <strong>weißen Markt</strong> (bequem, stark geregelt)
+      und den <strong>freien Markt</strong> (P2P, mehr Reibung, mehr Eigenverantwortung).
+    </p>
+    <p>
+      Wenn du echte finanzielle Unabhängigkeit willst, musst du lernen, diese Tools zu bedienen – und die Spielregeln zu verstehen.
+      Lerne Linux, lerne Tor, lerne Coin Control. Es lohnt sich.
+    </p>
+  </article>
 
   <div class="box">
-    <h3>🧰 Tools für echte Eigentümer (Werbung/Affiliate)</h3>
+    <h3>🧰 Tools für echte Eigentümer</h3>
     <p style="font-size:0.95em;">
       Wenn du Aktien und Bitcoin möglichst eigenverantwortlich halten willst, nutze nicht nur dein Bankdepot:
     </p>
@@ -399,7 +426,7 @@
         👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
       </li>
     </ul>
-    <p style="font-size:0.85em; color:#aaa;">
+    <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">
       Hinweis: Bei einigen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit,
       ohne dass es dich mehr kostet. Danke! 👽
     </p>
@@ -408,33 +435,8 @@
   <div class="like-button">
     <button id="likeButton">👍 Gefällt mir</button>
     <span id="likeCount">0</span>
-    <span style="color:#bbb;">(Speicherung nur lokal im Browser)</span>
+    <span style="color:#bbb; font-size: 0.9em;">(Lokal)</span>
   </div>
-
-  <div class="box">
-    <h3>📚 Quellen (Auswahl)</h3>
-    <p style="font-size:0.95em;">
-      Diese Analyse basiert auf öffentlichen Mitteilungen von Relai (Juli 2024) und Pocket Bitcoin (Oktober 2025) 
-      zu geänderten KYC-Richtlinien, den offiziellen Texten der EU-Geldwäscheverordnung (Regulation EU 2024/1624) 
-      und der Transfer-of-Funds-Verordnung (TFR) sowie Dokumentationen der genannten P2P-Protokolle (Bisq, RoboSats). 
-      Stand: Januar 2026.
-    </p>
-  </div>
-
-  <div class="recommendation-box">
-    <h3>🔎 Weiterführender Research</h3>
-    <p>
-      Tauche tiefer in die Analyse von Privacy-Tools ein:<br>
-      👉 <a href="https://alien-investor.org/wasabi-wallet-research-transparent.html">Wasabi Wallet Research – Transparent (Kein Tutorial, nur Analyse)</a>
-    </p>
-  </div>
-
-  <h3>💸 Unterstütze meine Arbeit</h3>
-  <ul>
-    <li>☕ <a href="https://ko-fi.com/alieninvestor" target="_blank">Spenden via Ko-fi (PayPal, Fiat)</a></li>
-    <li>⚡ Bitcoin Lightning: <code>alien_investor@strike.me</code></li>
-    <li>₿ Bitcoin Onchain: <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code></li>
-  </ul>
 
   <script>
     (function() {
@@ -451,23 +453,61 @@
         localStorage.setItem(storageKey, String(count));
         btn.disabled = true;
         btn.textContent = "Danke! 👽";
+        btn.style.borderColor = "#444";
+        btn.style.color = "#888";
       });
     })();
   </script>
 
-  <footer>
-    <p>📬 Kontakt:
-      <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>
+  <div class="box" style="border-style: dashed; border-color: #333;">
+    <h3>📚 Quellen (Auswahl)</h3>
+    <p style="font-size:0.95em; color: #ccc;">
+      Diese Analyse basiert auf öffentlichen Mitteilungen von Relai (Juli 2024) und Pocket Bitcoin (Oktober 2025)
+      zu geänderten KYC-Richtlinien, den offiziellen Texten der EU-Geldwäscheverordnung (Regulation EU 2024/1624)
+      und der Transfer-of-Funds-Verordnung (TFR) sowie Dokumentationen der genannten P2P-Protokolle (Bisq, RoboSats).
+      Stand: Januar 2026.
     </p>
+  </div>
 
-    <p style="font-size:0.9em; color:#bbb;">
-      👽 <strong>Haftungsausschluss:</strong><br>
+  <div class="recommendation-box">
+    <h3>🔎 Weiterführender Research</h3>
+    <p>
+      Tauche tiefer in die Analyse von Privacy-Tools ein:<br>
+      👉 <a href="https://alien-investor.org/wasabi-wallet-research-transparent.html">Wasabi Wallet Research – Transparent (Kein Tutorial, nur Analyse)</a>
+    </p>
+  </div>
+
+  <div class="back-links">
+    <a href="blog.html" style="font-size: 1.1em;">⬅ Zurück zur Blog-Übersicht</a>
+    <a href="index.html" style="font-size: 1.1em;">⬅ Zurück zur Zentrale</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+      <h3 style="margin-bottom: 15px;">
+        🔋 Energie aufladen
+        <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
+      </h3>
+      
+      <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+        Treibstoff für das Mutterschiff senden
+      </a>
+      
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸
+      </p>
+  </div>
+
+  <footer>
+    <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    
+    <p style="margin-top: 20px;">
+      👽 <strong>Haftungsausschluss:</strong><br><br>
       Dieser Artikel ist keine Rechts-, Steuer- oder Anlageberatung.<br>
       Ich teile hier nur meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
       Technische Änderungen und rechtliche Rahmenbedingungen können sich ändern, prüfe dein Setup immer selbst.
     </p>
-
-    <p><a href="blog.html">← Zurück zum Blog</a></p>
   </footer>
 
 </body>
