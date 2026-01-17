@@ -6,331 +6,244 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Bitcoin Master-Analyse Jan 2026: Preis bei 93k USD, Venezuela-Krise, ETF-Zuflüsse und Power Law Divergenz. Warum On-Chain-Daten einen 'Bull Market Reset' signalisieren.">
   <style>
-    body {
-      background-color: #000;
-      color: #fff;
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      max-width: 800px;
-      margin: auto;
-      padding: 2em;
-    }
-    h1, h2, h3 {
-      color: #00ffcc;
-    }
-    a {
-      color: #00ffcc;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    em {
-      color: #ccc;
-    }
-    code {
-      background-color: #111;
-      padding: 0.2em 0.4em;
-      border-radius: 4px;
-      color: #0f0;
-      font-size: 0.95em;
-    }
-    blockquote {
-      border-left: 3px solid #00ffcc;
-      padding-left: 1em;
-      margin: 2em 0;
-      color: #ddd;
-      font-style: italic;
-    }
-    ul {
-      margin-left: 1.2em;
-    }
-    .byline {
-      margin-top: -0.8em;
-      margin-bottom: 1.2em;
-      color: #ccc;
-      font-style: italic;
-    }
-    .box {
-      border: 1px solid #00ffcc;
-      background-color: #050505;
-      padding: 1em 1.2em;
-      margin: 2em 0;
-      border-radius: 8px;
-    }
-    .box h2, .box h3 {
-      margin-top: 0;
-    }
-    .highlight {
-      border-left: 3px solid #ff3b3b;
-      margin: 1.5em 0;
-      padding: 0.8em 1em;
-      background: #110000;
-      color: #f5cccc;
-      font-size: 0.95em;
-    }
-    .like-button {
-      margin: 2em 0;
-      display: flex;
-      align-items: center;
-      gap: 0.75em;
-      font-size: 0.95em;
-    }
-    .like-button button {
-      background: #00ffcc;
-      color: #000;
-      border: none;
-      padding: 0.4em 0.9em;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    .like-button span {
-      min-width: 2em;
-      display: inline-block;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1em 0;
-      font-size: 0.9em;
-    }
-    th, td {
-      border: 1px solid #333;
-      padding: 0.5em;
-      text-align: left;
-    }
-    th {
-      background-color: #111;
-      color: #00ffcc;
-    }
-    button {
-      background-color: #111;
-      color: #fff;
-      border: 1px solid #444;
-      padding: 0.5em 1em;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #222;
-    }
-    footer {
-      margin-top: 3em;
-      padding-top: 2em;
-      border-top: 1px solid #333;
-      font-size: 0.9em;
-    }
-    .support ul {
-      margin: 0.3em 0 0 1.2em;
-    }
+    body { background-color: #000; color: #fff; font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 0 15px 20px 15px; }
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+    code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; font-family: monospace; }
+    em { color: #ccc; }
+    .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
+    blockquote { border-left: 3px solid #00ffcc; margin: 2em 0; padding: 0.5em 1em; color: #ddd; background: #050505; font-style: italic; }
+    .box { border: 1px solid #00ffcc; background: #050505; padding: 1.5em; border-radius: 8px; margin: 2em 0; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
+    .highlight { border-left: 3px solid #ff3b3b; margin: 1.5em 0; padding: 0.8em 1em; background: #110000; color: #f5cccc; font-size: 0.95em; border-radius: 0 8px 8px 0; }
+    .recommendation-box { margin: 2em 0; padding: 1em; border: 1px dashed #00ffcc; border-radius: 8px; text-align: center; background-color: #050505; }
+    .recommendation-box h3 { margin-top: 0; font-size: 1.1em; color: #00ffcc; }
+    .like-button { margin: 3em 0; display: flex; align-items: center; justify-content: center; gap: 1em; }
+    .like-button button { background: #000; color: #00ffcc; border: 1px solid #00ffcc; padding: 0.6em 1.2em; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.2s ease; }
+    .like-button button:hover { background: #00ffcc; color: #000; box-shadow: 0 0 15px #00ffcc; }
+    .like-button button:disabled { border-color: #444; color: #888; background: #111; cursor: default; }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    .back-links { margin-top: 40px; text-align: center; display: flex; flex-direction: column; gap: 10px; }
+    footer { margin-top: 60px; padding: 20px; font-size: 0.85em; color: #666; border-top: 1px solid #222; text-align: center; }
+    ul { padding-left: 1.2em; }
+    li { margin-bottom: 0.5em; }
+    
+    /* Spezifisches Tabellen-Design für die ETF-Tabelle */
+    table { width: 100%; border-collapse: collapse; margin: 2em 0; font-size: 0.9em; background-color: #050505; border: 1px solid #333; }
+    th, td { border: 1px solid #333; padding: 0.8em; text-align: left; }
+    th { background-color: #111; color: #00ffcc; }
+    tr:nth-child(even) { background-color: #0a0a0a; }
   </style>
 </head>
 <body>
 
+  <div class="top-nav">
+    <a href="index.html">⬅ Zurück zur Zentrale</a>
+  </div>
+
   <h1>📉 Master-Analyse: Bitcoin-Marktzyklus & On-Chain-Forensik – Januar 2026</h1>
   <p class="byline"><em>von Alien Investor – Stand: 5. Januar 2026</em></p>
 
-  <p>
-    Wir schreiben den 5. Januar 2026. Der globale Finanzmarkt befindet sich in einem Zustand erhöhter Entropie, der für den ungeschulten Beobachter wie reines Chaos wirken mag, für den „Alien Investor“ jedoch eine Phase mathematischer Präzision darstellt.
-  </p>
-  <p>
-    Während die geopolitischen Schlagzeilen von US-Militäroperationen in Venezuela dominiert werden, vollzieht das Bitcoin-Netzwerk im Hintergrund eine fundamentale Metamorphose. Der Preis oszilliert zwischen <strong>90.000 und 94.000 USD</strong> – eine Zone, die viele als Unsicherheit fehlinterpretieren, während On-Chain-Metriken eine der seltensten Konstellationen der Geschichte signalisieren: eine massive Divergenz zwischen Preisrealität und fundamentaler Netzwerkgesundheit.
-  </p>
+  <article id="content">
+    <div class="box">
+      <h3>👽 Mini-Fazit</h3>
+      <p style="font-size:0.95em;">
+        Bitcoin bei 93.000 USD wirkt teuer, ist aber fundamental unterbewertet. Makro (Zinssenkungen), Netzwerk (Hashrate ATH) und Bewertung (MVRV Reset) konvergieren. Die Energie der monatelangen Konsolidierung muss entweichen – der Weg des geringsten Widerstands führt nach oben.
+      </p>
+    </div>
 
-  <blockquote>
-    „Diese Master-Analyse ist keine Unterhaltung. Sie ist eine forensische Dekonstruktion des Marktzyklus im Januar 2026. Wir ignorieren den Lärm und fokussieren uns auf die Signale der Blockchain und die Thermodynamik des Marktes.“ 👽
-  </blockquote>
+    <p>
+      Wir schreiben den 5. Januar 2026. Der globale Finanzmarkt befindet sich in einem Zustand erhöhter Entropie, der für den ungeschulten Beobachter wie reines Chaos wirken mag, für den „Alien Investor“ jedoch eine Phase mathematischer Präzision darstellt.
+    </p>
+    <p>
+      Während die geopolitischen Schlagzeilen von US-Militäroperationen in Venezuela dominiert werden, vollzieht das Bitcoin-Netzwerk im Hintergrund eine fundamentale Metamorphose. Der Preis oszilliert zwischen <strong>90.000 und 94.000 USD</strong> – eine Zone, die viele als Unsicherheit fehlinterpretieren, während On-Chain-Metriken eine der seltensten Konstellationen der Geschichte signalisieren: eine massive Divergenz zwischen Preisrealität und fundamentaler Netzwerkgesundheit.
+    </p>
 
-  <h2>1. Die Makro-Matrix: Geopolitik und die Flucht in die Wahrheit</h2>
-  <p>
-    Bitcoin operiert nicht im Vakuum. Um die Trajektorie für 2026 zu verstehen, müssen wir das makroökonomische Spielfeld kartieren.
-  </p>
+    <blockquote>
+      „Diese Master-Analyse ist keine Unterhaltung. Sie ist eine forensische Dekonstruktion des Marktzyklus im Januar 2026. Wir ignorieren den Lärm und fokussieren uns auf die Signale der Blockchain und die Thermodynamik des Marktes.“ 👽
+    </blockquote>
 
-  <h3>Der Venezuela-Katalysator</h3>
-  <p>
-    Der Jahresauftakt 2026 wird von einer Eskalation in Südamerika überschattet. Historisch reagieren Märkte auf Kriegsausbrüche mit einem „Risk-Off“-Impuls. Doch diesmal beobachten wir eine Entkopplung: Während traditionelle Märkte Volatilität zeigen, bewegen sich Gold (ca. 4.455 USD) und Bitcoin (> 93.000 USD) im Gleichschritt stabil.
-  </p>
-  <p>
-    Der Markt beginnt, eine <strong>„Souveränitäts-Prämie“</strong> einzupreisen. Wenn staatliche Souveränität bedroht ist, wird die Zensurresistenz von Bitcoin nicht als Bug, sondern als primäres Feature wahrgenommen.
-  </p>
+    <h2>1. Die Makro-Matrix: Geopolitik und die Flucht in die Wahrheit</h2>
+    <p>
+      Bitcoin operiert nicht im Vakuum. Um die Trajektorie für 2026 zu verstehen, müssen wir das makroökonomische Spielfeld kartieren.
+    </p>
 
-  <h3>Die Zinsfalle der Fed</h3>
-  <p>
-    Die US-Arbeitslosenquote ist auf 4,6 % gestiegen – der höchste Stand seit Ende 2021. Für uns ist das ein zynisches, aber bullisches Signal. Die Federal Reserve wird gezwungen sein, ihren restriktiven Kurs aufzugeben. Märkte preisen für 2026 aggressive Zinssenkungen ein. Wir befinden uns in der „Goldlöckchen-Zone“: Die Wirtschaft ist schwach genug für Stimuli, aber noch nicht kollabiert.
-  </p>
+    <h3>Der Venezuela-Katalysator</h3>
+    <p>
+      Der Jahresauftakt 2026 wird von einer Eskalation in Südamerika überschattet. Historisch reagieren Märkte auf Kriegsausbrüche mit einem „Risk-Off“-Impuls. Doch diesmal beobachten wir eine Entkopplung: Während traditionelle Märkte Volatilität zeigen, bewegen sich Gold (ca. 4.455 USD) und Bitcoin (> 93.000 USD) im Gleichschritt stabil.
+    </p>
+    <p>
+      Der Markt beginnt, eine <strong>„Souveränitäts-Prämie“</strong> einzupreisen. Wenn staatliche Souveränität bedroht ist, wird die Zensurresistenz von Bitcoin nicht als Bug, sondern als primäres Feature wahrgenommen.
+    </p>
 
-  <h2>2. Institutionalisierung: ETF-Ströme im Januar 2026</h2>
-  <p>
-    Die Daten der ersten Januarwoche sind entscheidend, um das „Smart Money“ zu lesen. Nach steuerbedingten Abflüssen im Dezember kehrten die Zuflüsse am 2. Januar 2026 mit Wucht zurück: <strong>645,6 Mio. USD Netto-Zuflüsse an einem einzigen Tag.</strong>
-  </p>
-  
-  <table>
-    <thead>
-      <tr>
-        <th>Emittent / Ticker</th>
-        <th>Status & Relevanz (Jan 2026)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>BlackRock (IBIT)</strong></td>
-        <td>Marktführer (~70% Volumen). Bitcoin ist de facto Standard-Portfolio-Baustein.</td>
-      </tr>
-      <tr>
-        <td><strong>Fidelity (FBTC)</strong></td>
-        <td>Starker Follower. Bestätigt breites institutionelles Interesse.</td>
-      </tr>
-      <tr>
-        <td><strong>Grayscale (GBTC)</strong></td>
-        <td>Abflüsse flachen ab. Der Verkaufsdruck der „Legacy-Holdings“ ist weitgehend absorbiert.</td>
-      </tr>
-    </tbody>
-  </table>
+    <h3>Die Zinsfalle der Fed</h3>
+    <p>
+      Die US-Arbeitslosenquote ist auf 4,6 % gestiegen – der höchste Stand seit Ende 2021. Für uns ist das ein zynisches, aber bullisches Signal. Die Federal Reserve wird gezwungen sein, ihren restriktiven Kurs aufzugeben. Märkte preisen für 2026 aggressive Zinssenkungen ein. Wir befinden uns in der „Goldlöckchen-Zone“: Die Wirtschaft ist schwach genug für Stimuli, aber noch nicht kollabiert.
+    </p>
 
-  <p>
-    Das Fazit: Wenn BlackRock kauft, verkaufen wir nicht. Die Preisschwäche Ende 2025 war technisch, die institutionelle Akkumulation läuft auf Hochtouren.
-  </p>
+    <h2>2. Institutionalisierung: ETF-Ströme im Januar 2026</h2>
+    <p>
+      Die Daten der ersten Januarwoche sind entscheidend, um das „Smart Money“ zu lesen. Nach steuerbedingten Abflüssen im Dezember kehrten die Zuflüsse am 2. Januar 2026 mit Wucht zurück: <strong>645,6 Mio. USD Netto-Zuflüsse an einem einzigen Tag.</strong>
+    </p>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Emittent / Ticker</th>
+          <th>Status & Relevanz (Jan 2026)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>BlackRock (IBIT)</strong></td>
+          <td>Marktführer (~70% Volumen). Bitcoin ist de facto Standard-Portfolio-Baustein.</td>
+        </tr>
+        <tr>
+          <td><strong>Fidelity (FBTC)</strong></td>
+          <td>Starker Follower. Bestätigt breites institutionelles Interesse.</td>
+        </tr>
+        <tr>
+          <td><strong>Grayscale (GBTC)</strong></td>
+          <td>Abflüsse flachen ab. Der Verkaufsdruck der „Legacy-Holdings“ ist weitgehend absorbiert.</td>
+        </tr>
+      </tbody>
+    </table>
 
-  <h2>3. Die Power Law Theorie: Gravitation des Preises</h2>
-  <p>
-    Das Bitcoin Power Law (Potenzgesetz) betrachtet Bitcoin als wachsendes Netzwerk. Es liefert im Januar 2026 erstaunliche Erkenntnisse:
-  </p>
-  <ul>
-    <li><strong>Prognostizierter Fair Value:</strong> ca. 142.782 USD.</li>
-    <li><strong>Aktueller Preis:</strong> ca. 92.000 – 93.000 USD.</li>
-    <li><strong>Anomalie:</strong> Bitcoin handelt signifikant <em>unter</em> seinem langfristigen Trend.</li>
-  </ul>
-  <p>
-    Dass wir im theoretischen Hoch-Zyklus nach dem Halving unter dem Trend liegen, deutet auf massive aufgestaute Energie hin. Der Markt hat das Potenzial, zum Trend zurückzukehren (+50 %) und diesen im Jahresverlauf typischerweise zu überschießen.
-  </p>
-  <div class="highlight">
-    <strong>Wichtig:</strong> Das „Bottom Band“ (absolute Untergrenze) liegt bei ca. <strong>50.804 USD</strong>. Solange wir darüber handeln, ist der langfristige Aufwärtstrend mathematisch intakt.
-  </div>
+    <p>
+      Das Fazit: Wenn BlackRock kauft, verkaufen wir nicht. Die Preisschwäche Ende 2025 war technisch, die institutionelle Akkumulation läuft auf Hochtouren.
+    </p>
 
-  <h2>4. On-Chain-Forensik: Der „Bull Market Reset“</h2>
-  <p>
-    Die Blockchain lügt nicht. Die Daten zeigen, dass der Markt sich abgekühlt hat – wir sehen einen Reset mitten im Bullenmarkt.
-  </p>
+    <h2>3. Die Power Law Theorie: Gravitation des Preises</h2>
+    <p>
+      Das Bitcoin Power Law (Potenzgesetz) betrachtet Bitcoin als wachsendes Netzwerk. Es liefert im Januar 2026 erstaunliche Erkenntnisse:
+    </p>
+    <ul>
+      <li><strong>Prognostizierter Fair Value:</strong> ca. 142.782 USD.</li>
+      <li><strong>Aktueller Preis:</strong> ca. 92.000 – 93.000 USD.</li>
+      <li><strong>Anomalie:</strong> Bitcoin handelt signifikant <em>unter</em> seinem langfristigen Trend.</li>
+    </ul>
+    <p>
+      Dass wir im theoretischen Hoch-Zyklus nach dem Halving unter dem Trend liegen, deutet auf massive aufgestaute Energie hin. Der Markt hat das Potenzial, zum Trend zurückzukehren (+50 %) und diesen im Jahresverlauf typischerweise zu überschießen.
+    </p>
 
-  <h3>MVRV Z-Score (1.11 – 1.20)</h3>
-  <p>
-    Dieser Wert ist extrem niedrig für die Zeit kurz nach einem Allzeithoch. Ein Wert von ~1.1 bedeutet, dass kaum noch unrealisierte Gewinne im System sind, die Panikverkäufe auslösen könnten. Der Markt ist „enthebelt“.
-  </p>
+    <div class="highlight">
+      <strong>Wichtig:</strong> Das „Bottom Band“ (absolute Untergrenze) liegt bei ca. <strong>50.804 USD</strong>. Solange wir darüber handeln, ist der langfristige Aufwärtstrend mathematisch intakt.
+    </div>
 
-  <h3>Mayer Multiple (0.81 – 0.89)</h3>
-  <p>
-    Der Preis liegt unter dem 200-Tage-Durchschnitt (~106.700 USD). Werte unter 1.0 sind in einem säkularen Bullenmarkt historisch gesehen Geschenke. Trace Mayer postulierte Akkumulation unter 2.4 – wir sind weit darunter.
-  </p>
+    <h2>4. On-Chain-Forensik: Der „Bull Market Reset“</h2>
+    <p>
+      Die Blockchain lügt nicht. Die Daten zeigen, dass der Markt sich abgekühlt hat – wir sehen einen Reset mitten im Bullenmarkt.
+    </p>
 
-  <h3>Short-Term Holder (STH) Realized Price (~99.000 USD)</h3>
-  <p>
-    Der durchschnittliche Spekulant der letzten 5 Monate ist im Minus. Das erklärt die Angst (Fear & Greed Index 25–42). Die Marke von <strong>99.000 USD</strong> ist der entscheidende Widerstand. Ein Durchbruch verwandelt diese Zone von Widerstand in Unterstützung, da die „schwachen Hände“ dann wieder im Plus sind.
-  </p>
+    <h3>MVRV Z-Score (1.11 – 1.20)</h3>
+    <p>
+      Dieser Wert ist extrem niedrig für die Zeit kurz nach einem Allzeithoch. Ein Wert von ~1.1 bedeutet, dass kaum noch unrealisierte Gewinne im System sind, die Panikverkäufe auslösen könnten. Der Markt ist „enthebelt“.
+    </p>
 
-  <h2>5. Thermodynamik: Mining & Hashrate</h2>
-  <p>
-    Bitcoin ist Energie. Trotz Preiskorrektur hat die Hashrate ein neues <strong>Allzeithoch von > 1.018 EH/s</strong> erreicht. Das Netzwerk ist so sicher wie nie.
-  </p>
-  <ul>
-    <li><strong>Miner-Kapitulation beendet:</strong> Die Hash Ribbons haben ein seltenes Kaufsignal generiert. Ineffiziente Miner sind raus, die starken akkumulieren wieder.</li>
-    <li><strong>Historie:</strong> Solche Signale gingen oft massiven Preisrallyes voraus, da der Verkaufsdruck der Miner versiegt.</li>
-  </ul>
+    <h3>Mayer Multiple (0.81 – 0.89)</h3>
+    <p>
+      Der Preis liegt unter dem 200-Tage-Durchschnitt (~106.700 USD). Werte unter 1.0 sind in einem säkularen Bullenmarkt historisch gesehen Geschenke. Trace Mayer postulierte Akkumulation unter 2.4 – wir sind weit darunter.
+    </p>
 
-  <h2>6. Die Master-Strategie: Zonen & Trigger</h2>
-  <p>
-    Basierend auf der Synthese aller Modelle definieren wir für den Januar 2026 folgende Handlungszonen. Dies ist keine Finanzberatung, sondern mein persönlicher Schlachtplan.
-  </p>
+    <h3>Short-Term Holder (STH) Realized Price (~99.000 USD)</h3>
+    <p>
+      Der durchschnittliche Spekulant der letzten 5 Monate ist im Minus. Das erklärt die Angst (Fear & Greed Index 25–42). Die Marke von <strong>99.000 USD</strong> ist der entscheidende Widerstand. Ein Durchbruch verwandelt diese Zone von Widerstand in Unterstützung, da die „schwachen Hände“ dann wieder im Plus sind.
+    </p>
 
-  <h3>Zone A: Alien-Akkumulation (82k – 88k USD)</h3>
-  <p>
-    Aggressive Zone. Mayer Multiple < 0.85 und MVRV ~1.0. Hier ist das Risiko asymmetrisch zugunsten des Investors verteilt. Wir kaufen die Angst.
-  </p>
+    <h2>5. Thermodynamik: Mining & Hashrate</h2>
+    <p>
+      Bitcoin ist Energie. Trotz Preiskorrektur hat die Hashrate ein neues <strong>Allzeithoch von > 1.018 EH/s</strong> erreicht. Das Netzwerk ist so sicher wie nie.
+    </p>
+    <ul>
+      <li><strong>Miner-Kapitulation beendet:</strong> Die Hash Ribbons haben ein seltenes Kaufsignal generiert. Ineffiziente Miner sind raus, die starken akkumulieren wieder.</li>
+      <li><strong>Historie:</strong> Solche Signale gingen oft massiven Preisrallyes voraus, da der Verkaufsdruck der Miner versiegt.</li>
+    </ul>
 
-  <h3>Zone B: DCA & Bestätigung (88k – 95k USD) – <em>Aktuell</em></h3>
-  <p>
-    Sparpläne weiterlaufen lassen. Manuelle Käufe bei Dips an die untere Grenze. Wir warten auf die Rückeroberung der gleitenden Durchschnitte.
-  </p>
+    <h2>6. Die Master-Strategie: Zonen & Trigger</h2>
+    <p>
+      Basierend auf der Synthese aller Modelle definieren wir für den Januar 2026 folgende Handlungszonen. Dies ist keine Finanzberatung, sondern mein persönlicher Schlachtplan.
+    </p>
 
-  <h3>Zone C: Momentum-Ausbruch (> 99k USD)</h3>
-  <p>
-    Sobald wir den STH Realized Price nachhaltig brechen, wechselt der Modus von „Akkumulation“ zu „Halten“. Gewinne laufen lassen, keine FOMO-Käufe mehr.
-  </p>
+    <h3>Zone A: Alien-Akkumulation (82k – 88k USD)</h3>
+    <p>
+      Aggressive Zone. Mayer Multiple < 0.85 und MVRV ~1.0. Hier ist das Risiko asymmetrisch zugunsten des Investors verteilt. Wir kaufen die Angst.
+    </p>
 
-  <h2>7. Fazit: Die gespannte Feder</h2>
-  <p>
-    Bitcoin bei 93.000 USD wirkt für den Laien teuer, ist aber basierend auf unseren Modellen fundamental unterbewertet. Makro (Zinssenkungen), Netzwerk (Hashrate ATH) und Bewertung (MVRV Reset) konvergieren perfekt.
-  </p>
-  <p>
-    Die Energie, die durch die Konsolidierung seit Oktober 2025 aufgebaut wurde, muss entweichen. Der Weg des geringsten Widerstands führt nach oben – Richtung Fair Value (~142k) und darüber hinaus.
-  </p>
+    <h3>Zone B: DCA & Bestätigung (88k – 95k USD) – <em>Aktuell</em></h3>
+    <p>
+      Sparpläne weiterlaufen lassen. Manuelle Käufe bei Dips an die untere Grenze. Wir warten auf die Rückeroberung der gleitenden Durchschnitte.
+    </p>
+
+    <h3>Zone C: Momentum-Ausbruch (> 99k USD)</h3>
+    <p>
+      Sobald wir den STH Realized Price nachhaltig brechen, wechselt der Modus von „Akkumulation“ zu „Halten“. Gewinne laufen lassen, keine FOMO-Käufe mehr.
+    </p>
+
+    <h2>7. Fazit: Die gespannte Feder</h2>
+    <p>
+      Bitcoin bei 93.000 USD wirkt für den Laien teuer, ist aber basierend auf unseren Modellen fundamental unterbewertet. Makro (Zinssenkungen), Netzwerk (Hashrate ATH) und Bewertung (MVRV Reset) konvergieren perfekt.
+    </p>
+    <p>
+      Die Energie, die durch die Konsolidierung seit Oktober 2025 aufgebaut wurde, muss entweichen. Der Weg des geringsten Widerstands führt nach oben – Richtung Fair Value (~142k) und darüber hinaus.
+    </p>
+  </article>
 
   <div class="box">
-    <h3>🧰 Tools für echte Eigentümer (Werbung/Affiliate)</h3>
+    <h3>🧰 Tools für echte Eigentümer</h3>
     <p style="font-size:0.95em;">
-      Wenn du Bitcoin möglichst eigenverantwortlich halten willst, nutze nicht nur dein Bankdepot:
+      Wenn du Aktien und Bitcoin möglichst eigenverantwortlich halten willst, nutze nicht nur dein Bankdepot:
     </p>
     <ul>
       <li>
+        🇨🇭 <strong>Investieren mit Swissquote:</strong><br>
+        Ich nutze Swissquote in der Schweiz – dort kannst du saubere Namensaktien halten und hast keine
+        deutsche Bank dazwischen.<br>
+        👉 <a href="https://alien-investor.org/swissquote" target="_blank">https://alien-investor.org/swissquote</a>
+      </li>
+      <li>
+        📊 <strong>US-Aktien über IBKR:</strong><br>
+        Für viele internationale Titel bietet sich Interactive Brokers als Zugang an – insbesondere in Kombination
+        mit DRS/Transfer Agenten.<br>
+        👉 <a href="https://alien-investor.org/interactive-brokers" target="_blank">https://alien-investor.org/interactive-brokers</a>
+      </li>
+      <li>
         💥 <strong>Bitcoin kaufen in Europa – 21bitcoin:</strong><br>
-        Bitcoin-only App, ideal für DCA und regelmäßiges Sats stapeln.<br>
-        Mit Code <strong>ALIENINVESTOR</strong> dauerhaft 0,2 % Gebühren sparen.<br>
+        Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges sats stapeln – ohne Shitcoins.<br>
+        Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du dauerhaft 0,2&nbsp;Prozentpunkte Gebührenreduktion
+        auf Sofort- und Sparplankäufe.<br>
         👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
       </li>
       <li>
         ₿ <strong>Bitcoin in Selbstverwahrung:</strong><br>
-        Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox.<br>
+        Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox – es gibt die klassische BitBox02 und die neue
+        BitBox für iPhone (Nova).<br>
         👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
       </li>
       <li>
-        🇨🇭 <strong>Investieren mit Swissquote:</strong><br>
-        Saubere Namensaktien und Krypto in der Schweiz halten.<br>
-        👉 <a href="https://alien-investor.org/swissquote" target="_blank">https://alien-investor.org/swissquote</a>
-      </li>
-      <li>
         🛡️ <strong>Privacy &amp; Mail:</strong><br>
-        Proton für E-Mail und VPN – ohne Big-Tech-Abhängigkeit.<br>
+        Für E-Mail, VPN und Cloud nutze ich Proton – datensparsam und ohne Big-Tech-Abhängigkeit.<br>
         👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
       </li>
     </ul>
-    <p style="font-size:0.85em; color:#aaa;">
-      Hinweis: Affiliate-Links unterstützen meine Arbeit ohne Mehrkosten für dich. Danke! 👽
+    <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">
+      Hinweis: Bei einigen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit,
+      ohne dass es dich mehr kostet. Danke! 👽
     </p>
   </div>
 
   <div class="like-button">
     <button id="likeButton">👍 Gefällt mir</button>
     <span id="likeCount">0</span>
-    <span style="color:#bbb;">(Speicherung nur lokal im Browser)</span>
+    <span style="color:#bbb; font-size: 0.9em;">(Lokal)</span>
   </div>
 
-  <div class="box">
+  <div class="box" style="border-style: dashed; border-color: #333;">
     <h3>📚 Quellen (Auswahl)</h3>
-    <p style="font-size:0.95em;">
+    <p style="font-size:0.95em; color: #ccc;">
       Diese Analyse basiert auf On-Chain-Daten (Glassnode, CryptoQuant), ETF-Flussdaten (Farside Investors, Bloomberg Terminals), Hashrate-Statistiken (Mempool.space) sowie Makro-Daten (Fed-Reports, Arbeitsmarktdaten) mit Stand vom 5. Januar 2026. Power-Law-Berechnungen basieren auf den Modellen von Giovanni Santostasi.
     </p>
   </div>
-
-  <div class="support" style="margin-top: 2em;">
-    <h3>💸 Unterstütze meine Arbeit</h3>
-    <ul>
-      <li>☕ <a href="https://ko-fi.com/alieninvestor" target="_blank">Spenden via Ko-fi (PayPal, Fiat)</a></li>
-      <li>⚡ Bitcoin Lightning: <code>alien_investor@strike.me</code></li>
-      <li>₿ Bitcoin Onchain: <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code></li>
-    </ul>
-  </div>
-
-  <footer>
-    <p>📬 Kontakt:
-      <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>
-    </p>
-    <p style="font-size:0.95em; color:#bbb;">
-      👽 <strong>Haftungsausschluss:</strong><br>
-      Keine Finanz-, Steuer- oder Rechtsberatung – nur persönliche Alien-Meinung.<br>
-      Investieren ist mit Risiken verbunden. Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
-    </p>
-    <p><a href="/blog.html">← Zurück zum Blog</a></p>
-  </footer>
 
   <script>
     (function() {
@@ -347,9 +260,46 @@
         localStorage.setItem(storageKey, String(count));
         btn.disabled = true;
         btn.textContent = "Danke! 👽";
+        btn.style.borderColor = "#444";
+        btn.style.color = "#888";
       });
     })();
   </script>
+
+  <div class="back-links">
+    <a href="bitcoin-analysen.html" style="font-size: 1.1em;">📊 Zurück zu den Bitcoin-Analysen</a>
+    <a href="blog.html" style="font-size: 1.1em;">⬅ Zurück zum Blog</a>
+    <a href="index.html" style="font-size: 1.1em;">⬅ Zurück zur Zentrale</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+      <h3 style="margin-bottom: 15px;">
+        🔋 Energie aufladen
+        <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
+      </h3>
+      
+      <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+        Treibstoff für das Mutterschiff senden
+      </a>
+      
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸
+      </p>
+  </div>
+
+  <footer>
+    <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    
+    <p style="margin-top: 20px;">
+      👽 <strong>Haftungsausschluss:</strong><br><br>
+      Dieser Artikel stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
+      Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
+      Investieren ist mit Risiken verbunden – du kannst Geld verlieren. Prüfe Informationen selbst
+      und handle eigenverantwortlich.
+    </p>
+  </footer>
 
 </body>
 </html>
