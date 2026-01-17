@@ -13,34 +13,63 @@
       line-height: 1.6;
       max-width: 800px;
       margin: auto;
-      padding: 2em;
+      padding: 0 15px 20px 15px; /* Seitenabstand für Mobile */
     }
+
+    /* --- TYPOGRAFIE & LAYOUT --- */
     h1 {
       color: #00ffcc;
+      margin-top: 40px;
+      text-align: center;
     }
     h2 {
       color: #00ffcc;
-      margin-top: 2em;
+      margin-top: 2.5em;
+      border-bottom: 1px solid #333;
+      padding-bottom: 10px;
     }
+    
+    /* --- LINKS (Neon-Glow) --- */
     a {
       color: #00ffcc;
       text-decoration: none;
+      transition: all 0.2s ease;
     }
     a:hover {
-      text-decoration: underline;
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc;
     }
+
+    /* --- LISTEN --- */
     .article-list {
       margin-top: 1em;
+      padding-left: 20px;
     }
     .article-list li {
-      margin-bottom: 0.5em;
+      margin-bottom: 0.8em;
     }
+
+    /* --- NAVIGATION --- */
+    .top-nav {
+      padding: 10px 0;
+      font-size: 0.9em;
+    }
+    .back-links {
+      margin-top: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* --- FOOTER --- */
     footer {
-      margin-top: 3em;
-      padding: 2em 0 0 0;
+      margin-top: 60px;
+      padding: 20px;
       font-size: 0.85em;
-      color: #bbb;
-      border-top: 1px solid #333;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
     }
     code {
       background-color: #111;
@@ -53,34 +82,33 @@
 </head>
 <body>
 
-  <img src="aktien-analysen-banner.png"
-     alt="UFO vor dem Mond – Banner der Aktienanalysen"
-     style="width: 100%; max-height: 500px; object-fit: cover; display: block;">
+  <div class="top-nav">
+    <a href="index.html">⬅ Zurück zur Zentrale</a>
+  </div>
+
+  <img src="aktien-analysen-banner.png" 
+       alt="UFO vor dem Mond – Banner der Aktienanalysen"
+       style="width: 100%; height: auto; border-radius: 4px; border: 1px solid #333; margin-top: 10px;">
 
   <h1>🕵️‍♂️📊 Aktienanalysen des Alien Investors</h1>
-  <p>
-    Hier wird es nerdig: einzelne Unternehmen im Detail – Geschäftsmodell, Zahlen, Chancen &amp; Risiken.
-    Kein Daytrading, sondern langfristiges Denken wie ein Mit-Eigentümer.
+  
+  <p style="text-align: center; max-width: 600px; margin: 0 auto 40px auto; color: #ccc;">
+    Hier wird es nerdig: einzelne Unternehmen im Detail – Geschäftsmodell, Zahlen, Chancen &amp; Risiken.<br>
+    <span style="font-size:0.85em; color:#888;">Kein Daytrading, sondern langfristiges Denken wie ein Mit-Eigentümer.</span>
   </p>
 
   <h2>Wunsch-Analysen</h2>
-<p>
-  Wenn du meine Arbeit unterstützen möchtest, kannst du mir freiwillig eine Spende senden
-  (Ko-fi, Bitcoin Onchain oder Bitcoin Lightning).
-  Die entsprechenden Spendenlinks findest du am Ende dieser Seite.
-</p>
-<p>
-  Du kannst dabei im <strong>Memo / in der Nachricht</strong> gerne
-  <strong>eine Wunsch-Aktie inklusive Ticker</strong> angeben.
-  So sehe ich Anfragen direkt und werde vor Spam geschützt.
-</p>
-<p>
-  Die Analyse erfolgt nach Zeit und Verfügbarkeit.
-  Es besteht <strong>kein Anspruch</strong> auf Durchführung oder Zeitpunkt.
-</p>
-<p>
-  <a href="FAQ.html">❓ Wunsch-Analysen – Mini-FAQ</a>
-</p>
+  <p>
+    Wenn du meine Arbeit unterstützen möchtest, kannst du mir freiwillig Energie senden.
+    Du kannst dabei im <strong>Memo / in der Nachricht</strong> gerne eine <strong>Wunsch-Aktie inkl. Ticker</strong> angeben.
+    So sehe ich Anfragen direkt und werde vor Spam geschützt.
+  </p>
+  <p style="font-size: 0.9em; color: #bbb;">
+    Die Analyse erfolgt nach Zeit und Verfügbarkeit. Es besteht <strong>kein Anspruch</strong> auf Durchführung.
+  </p>
+  <p>
+    <a href="FAQ.html">❓ Wunsch-Analysen – Mini-FAQ</a>
+  </p>
   
   <h2>Verfügbare Analysen</h2>
   <ul class="article-list">
@@ -90,49 +118,55 @@
     <li><a href="sandvik-sand-der-industrielle-monolith-im-rohstoff-superzyklus.html">🏗️ Sandvik (SAND) – Der industrielle Monolith im Rohstoff-Superzyklus</a></li>
     <li><a href="wheaton-precious-metals-wpm-die-lizenz-zum-gelddrucken.html">📊🪙 Wheaton Precious Metals (WPM) – Die Lizenz zum Gelddrucken?</a></li>
     <li><a href="exxon-vs-chevron-vergleich.html">🛢️ Exxon Mobil (XOM) vs. Chevron (CVX) – Kampf der fossilen Titanen</a></li>
-    <li><a href="chevron-cvx-aktienanalyse-der-teure-bunker-der-energieversorgung.html">🛢️ Chevron (CVX) – Aktienanalyse: Der teure Bunker der Energieversorgung</a></li>
-    <li><a href="exxon-mobil-xom-der-fossile-leviathan-in-der-aera-der-transition.html">🛢️ Exxon Mobil (XOM) – Der fossile Leviathan in der Ära der Transition</a></li>
-    <li><a href="the-mosaic-company-mos-geld-stinkt-nicht-investieren-in-duengemittel.html">🚜 The Mosaic Company (MOS): Geld stinkt nicht – Investieren in Düngemittel</a></li>
+    <li><a href="chevron-cvx-aktienanalyse-der-teure-bunker-der-energieversorgung.html">🛢️ Chevron (CVX) – Der teure Bunker der Energieversorgung</a></li>
+    <li><a href="exxon-mobil-xom-der-fossile-leviathan-in-der-aera-der-transition.html">🛢️ Exxon Mobil (XOM) – Der fossile Leviathan</a></li>
+    <li><a href="the-mosaic-company-mos-geld-stinkt-nicht-investieren-in-duengemittel.html">🚜 The Mosaic Company (MOS): Geld stinkt nicht</a></li>
     <li><a href="rio-tinto-aktienanalyse.html">⛏️ Rio Tinto (RIO) – Das planetare Extraktionssystem</a></li>
-    <li><a href="rohstoff-superzyklus-2025.html">🌍⛏️ Rohstoff-Superzyklus 2025: Strategische Knappheit oder nur Hype?</a></li>
-    <li><a href="munich-re-aktienanalyse.html">🌪️ Münchener Rück (Munich Re, MUV2) – die Versicherung der Katastrophen</a></li>
-    <li><a href="Roche-Aktienanalyse.html">💊 Roche Holding AG (RO / ROG) – Aktienanalyse für langfristige Eigentümer</a></li>
-    <li><a href="Schindler-Analyse.html">🏙️ Schindler (SCHN/SCHP) – Die Steuer auf die Schwerkraft</a></li>
-    <li><a href="sci-aktienanalyse.html">⚰️ Service Corporation International (SCI) – Die Industrialisierung der Endlichkeit</a></li>
-    <li><a href="Sika-Analyse.html">🏗️ Sika (SIKA) – Schweizer Bauchemie-Riese mit Zukunftspotenzial?</a></li>
-    <li><a href="berkshire-hathaway-brkb-analyse.html">📊 Berkshire Hathaway B (BRK.B) – finanzieller Bunker mit Panzer-Bilanz</a></li>
-    <li><a href="alphabet-vs-amazon.html">🕵️‍♂️📈 Alphabet (GOOGL) vs. Amazon (AMZN) – wer ist der stärkere Tech-Gigant?</a></li>
-    <li><a href="alphabet-aktienanalyse.html">📊 Alphabet A (GOOGL) – Qualitäts-Moloch mit KI-Turbo</a></li>
-    <li><a href="amazon-amzn-analyse.html">📦 Amazon.com Inc. (AMZN) – Aktienanalyse für langfristige Eigentümer</a></li>
-    <li><a href="rollins-inc-aktienanalyse.html">🐜 Rollins Inc. (ROL) – Schädlingsbekämpfung als defensives Wachstumsbusiness</a></li>
-    <!-- Weitere Analysen kannst du später hier ergänzen -->
-    <!--
-    <li><a href="analyse-berkshire.html">🕵️‍♂️📈 Berkshire Hathaway – das Konglomerat im Langfrist-Check</a></li>
-    <li><a href="analyse-swissquote.html">🕵️‍♂️📈 Swissquote – Schweizer Broker mit Eigentumsfokus</a></li>
-    -->
+    <li><a href="rohstoff-superzyklus-2025.html">🌍⛏️ Rohstoff-Superzyklus 2025: Strategische Knappheit?</a></li>
+    <li><a href="munich-re-aktienanalyse.html">🌪️ Münchener Rück (Munich Re) – Versicherung der Katastrophen</a></li>
+    <li><a href="Roche-Aktienanalyse.html">💊 Roche Holding AG – Analyse für langfristige Eigentümer</a></li>
+    <li><a href="Schindler-Analyse.html">🏙️ Schindler – Die Steuer auf die Schwerkraft</a></li>
+    <li><a href="sci-aktienanalyse.html">⚰️ Service Corp. International (SCI) – Industrialisierung der Endlichkeit</a></li>
+    <li><a href="Sika-Analyse.html">🏗️ Sika – Schweizer Bauchemie-Riese</a></li>
+    <li><a href="berkshire-hathaway-brkb-analyse.html">📊 Berkshire Hathaway B – Finanzieller Bunker</a></li>
+    <li><a href="alphabet-vs-amazon.html">🕵️‍♂️ Alphabet vs. Amazon – Wer ist stärker?</a></li>
+    <li><a href="alphabet-aktienanalyse.html">📊 Alphabet A (GOOGL) – Qualitäts-Moloch</a></li>
+    <li><a href="amazon-amzn-analyse.html">📦 Amazon.com Inc. – Eigentümer-Analyse</a></li>
+    <li><a href="rollins-inc-aktienanalyse.html">🐜 Rollins Inc. – Schädlingsbekämpfung als Burggraben</a></li>
   </ul>
 
-   <p><a href="FAQ.html">❓ Wunsch-Analysen – Mini-FAQ</a></p>
+  <div class="back-links">
+    <a href="blog.html" style="font-size: 1.1em;">⬅ Zurück zur Blog-Übersicht</a>
+    <a href="index.html" style="font-size: 1.1em;">⬅ Zurück zur Zentrale</a>
+  </div>
 
-  <p><a href="blog.html">⬅ Zurück zur Blog-Übersicht</a></p>
-  <p><a href="/">⬅ Zurück zur Startseite</a></p>
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+      <h3 style="margin-bottom: 15px;">
+        🔋 Energie aufladen 
+        <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
+      </h3>
+      
+      <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+        Treibstoff für das Mutterschiff senden
+      </a>
+      
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸
+      </p>
+  </div>
 
   <footer>
-    <p>👽 <strong>Haftungsausschluss:</strong><br>
+    <p>👽 <strong>Haftungsausschluss:</strong><br><br>
       Diese Seite stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
       Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
       Denke selbst, vertraue niemandem, und handle eigenverantwortlich.
     </p>
 
-    <h3>💸 Unterstütze meine Arbeit</h3>
-    <ul>
-      <li>☕ <a href="https://ko-fi.com/alieninvestor" target="_blank">Spenden via Ko-fi (PayPal, Fiat)</a></li>
-      <li>⚡ Bitcoin Lightning: <code>alien_investor@strike.me</code></li>
-      <li>₿ Bitcoin Onchain: <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code></li>
-    </ul>
-    <p>Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸</p>
-
-    <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    <p style="margin-top: 20px;">
+      📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>
+    </p>
   </footer>
 
 </body>
