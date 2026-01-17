@@ -2,9 +2,9 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
+  <title>Cypherpunks: Wie ein paar Sturköpfe unser Recht auf Verschlüsselung erkämpft haben | Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cypherpunks: Wie ein paar Sturköpfe unser Recht auf Verschlüsselung erkämpft haben</title>
-  <meta name="description" content="In diesem Artikel geht es um die spannende wahre Geschichte der Entstehung der Cypherpunks">
+  <meta name="description" content="Die wahre Geschichte der Cypherpunks: Wie Phil Zimmermann, PGP und ziviler Ungehorsam die Crypto Wars gewannen und uns Privatsphäre brachten.">
   <style>
     body {
       background-color: #000;
@@ -13,170 +13,309 @@
       line-height: 1.6;
       max-width: 800px;
       margin: auto;
-      padding: 2em;
+      padding: 0 15px 20px 15px; /* Mobile-Optimierung */
     }
-    h1, h2, h3 { color: #00ffcc; }
-    a { color: #00ffcc; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; }
+
+    /* --- TYPOGRAFIE --- */
+    h1, h2, h3 {
+      color: #00ffcc;
+    }
+    h1 {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    /* --- LINKS (Neon-Glow) --- */
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc; /* Der Alien-Effekt */
+    }
+
+    /* --- STANDARD ELEMENTE --- */
+    code {
+      background-color: #111;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      color: #0f0;
+      font-family: monospace;
+    }
     em { color: #ccc; }
-    .byline { margin-top: -0.8em; margin-bottom: 1.2em; }
-    .like-button {
+
+    .byline {
+      margin-top: -0.8em;
+      margin-bottom: 2em;
+      color: #ccc;
+      font-style: italic;
+      text-align: center;
+    }
+
+    blockquote {
+      border-left: 3px solid #00ffcc;
       margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
+
+    /* --- BOXEN --- */
+    .box {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 1em; }
+
+    .recommendation-box {
+      margin: 2em 0;
+      padding: 1em;
+      border: 1px dashed #00ffcc;
+      border-radius: 8px;
+      text-align: center;
+      background-color: #050505;
+    }
+    .recommendation-box h3 {
+      margin-top: 0;
+      font-size: 1.1em;
+      color: #00ffcc;
+    }
+
+    /* --- LIKE BUTTON --- */
+    .like-button {
+      margin: 3em 0;
       display: flex;
       align-items: center;
-      gap: 0.75em;
-      font-size: 0.95em;
+      justify-content: center;
+      gap: 1em;
     }
     .like-button button {
-      background: #00ffcc;
-      color: #000;
-      border: none;
-      padding: 0.4em 0.9em;
-      border-radius: 4px;
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
       cursor: pointer;
       font-weight: bold;
+      transition: all 0.2s ease;
     }
-    .like-button span {
-      min-width: 2em;
-      display: inline-block;
+    .like-button button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
     }
-    button {
-      background-color: #111; color: #fff; border: 1px solid #444;
-      padding: 0.5em 1em; border-radius: 5px; cursor: pointer;
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
     }
-    button:hover { background-color: #222; }
-    footer { margin-top: 3em; padding-top: 2em; border-top: 1px solid #333; font-size: 0.9em; }
-    .support ul { margin: 0.3em 0 0 1.2em; }
-    blockquote.highlight {
-      margin-top: 2em;
-      padding: 1em 1.2em;
-      border-left: 3px solid #00ffcc;
-      background-color: #111;
-      font-style: italic;
-      color: #ddd;
+
+    /* --- NAVIGATION --- */
+    .top-nav {
+      padding: 10px 0;
+      font-size: 0.9em;
+    }
+    .back-links {
+      margin-top: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
     }
   </style>
 </head>
 <body>
+
+  <div class="top-nav">
+    <a href="index.html">⬅ Zurück zur Zentrale</a>
+  </div>
+
   <h1>Cypherpunks: Wie ein paar Sturköpfe unser Recht auf Verschlüsselung erkämpft haben 🤖</h1>
   <p class="byline"><em>von Alien Investor</em></p>
-  <!-- BEGIN ARTICLE CONTENT -->
+
   <article id="content">
     <h2>Die Ausgangslage: Das Netz als Überwachungsraum</h2>
-    <p>Stell dir das frühe Internet vor: ein neuer Raum, voller Möglichkeiten – aber rechtlich noch Wildwest. Regierungen dachten: Perfekt. Endlich ein Kommunikationsraum, in dem wir alles mitlesen können.</p>
-    <p>Starke Verschlüsselung war damals kein normales Werkzeug, sondern offiziell eine Kriegswaffe. In den USA fiel Krypto-Software in die gleiche Kategorie wie Waffenexporte. Wer starke Kryptographie ins Ausland „exportierte“, konnte Ärger bekommen.</p>
+    <p>
+      Stell dir das frühe Internet vor: ein neuer Raum, voller Möglichkeiten – aber rechtlich noch Wildwest. Regierungen dachten: Perfekt. Endlich ein Kommunikationsraum, in dem wir alles mitlesen können.
+    </p>
+    <p>
+      Starke Verschlüsselung war damals kein normales Werkzeug, sondern offiziell eine <strong>Kriegswaffe</strong>. In den USA fiel Krypto-Software in die gleiche Kategorie wie Waffenexporte. Wer starke Kryptographie ins Ausland „exportierte“, konnte Ärger bekommen.
+    </p>
+
     <h2>Wer waren die Cypherpunks?</h2>
-    <p>Die Cypherpunks waren keine Partei, keine Firma, keine NGO. Es waren: Nerds – Kryptographen – Anarchistische Denker – Libertäre, Hacker, Freaks</p>
-    <p>Sie organisierten sich über eine Mailingliste und hatten eine einfache, radikale Idee: Privatsphäre ist kein Luxus, sondern eine Voraussetzung für Freiheit. Und im digitalen Zeitalter gibt es Privatsphäre nur mit starker Verschlüsselung.</p>
+    <p>
+      Die Cypherpunks waren keine Partei, keine Firma, keine NGO. Es war eine lose Gruppe aus:
+    </p>
+    <ul>
+      <li>Nerds & Kryptographen</li>
+      <li>Anarchistischen Denkern</li>
+      <li>Libertären, Hackern & Freaks</li>
+    </ul>
+    <p>
+      Sie organisierten sich über eine Mailingliste und hatten eine einfache, radikale Idee: <strong>Privatsphäre ist kein Luxus, sondern eine Voraussetzung für Freiheit.</strong> Und im digitalen Zeitalter gibt es Privatsphäre nur mit starker Verschlüsselung.
+    </p>
+
     <h2>Kryptographie als Kriegswaffe – die „Crypto Wars“</h2>
-    <p>In den 1990ern behandelte die US-Regierung starke Kryptographie wie Munition. Konsequenzen: Export von Krypto-Software war streng reguliert, Browser durften ins Ausland oft nur mit schwacher Verschlüsselung ausgeliefert werden.</p>
-    <h2>Der Clipper-Chip</h2>
-    <p>Der Clipper-Chip sollte in Telefonen und Geräten eingebaut werden. Er versprach „Sicherheit“ – aber mit einem Haken: Verschlüsselung ja, aber die Schlüssel sollten bei Staat/Behörden hinterlegt sein (Key Escrow).</p>
+    <p>
+      In den 1990ern behandelte die US-Regierung starke Kryptographie wie Munition. Konsequenzen: Export von Krypto-Software war streng reguliert, Browser durften ins Ausland oft nur mit schwacher Verschlüsselung ausgeliefert werden.
+    </p>
+
+    <h3>Der Clipper-Chip</h3>
+    <p>
+      Der Clipper-Chip sollte in Telefonen und Geräten eingebaut werden. Er versprach „Sicherheit“ – aber mit einem Haken: Verschlüsselung ja, aber die Schlüssel sollten bei Staat und Behörden hinterlegt sein (Key Escrow). Ein Generalschlüssel für den Staat.
+    </p>
+
     <h2>PGP und Phil Zimmermann</h2>
-    <p>1991 veröffentlichte Phil Zimmermann PGP (Pretty Good Privacy). Zum ersten Mal konnten normale Menschen E-Mails mit starker Kryptographie verschlüsseln, Dateien signieren und sich gegen Massenüberwachung wehren – kostenlos.</p>
-    <p>Weil sich PGP schnell weltweit verbreitete, geriet Zimmermann ins Visier der US-Behörden. Sie ermittelten gegen ihn, als hätte er eine Waffe exportiert – nur, dass seine „Munition“ aus Mathematik und Quellcode bestand.</p>
-    <p>Als Antwort druckten Unterstützer den PGP-Quellcode als Buch und exportierten es ganz legal über Landesgrenzen. Bücher fallen unter Meinungs- und Pressefreiheit. Jeder, der den Code wieder eintippte, hatte erneut ein funktionierendes Verschlüsselungsprogramm. Genau dieser kreative Ungehorsam machte sichtbar, wie absurd es ist, Wissen und Mathematik wie Waffen zu behandeln.</p>
+    <p>
+      1991 veröffentlichte Phil Zimmermann <strong>PGP (Pretty Good Privacy)</strong>. Zum ersten Mal konnten normale Menschen E-Mails mit starker Kryptographie verschlüsseln, Dateien signieren und sich gegen Massenüberwachung wehren – kostenlos.
+    </p>
+    <p>
+      Weil sich PGP schnell weltweit verbreitete, geriet Zimmermann ins Visier der US-Behörden. Sie ermittelten gegen ihn, als hätte er eine Waffe exportiert – nur, dass seine „Munition“ aus Mathematik und Quellcode bestand.
+    </p>
+    <p>
+      Als Antwort druckten Unterstützer den PGP-Quellcode als <strong>Buch</strong> und exportierten es ganz legal über Landesgrenzen. Bücher fallen unter Meinungs- und Pressefreiheit. Jeder, der den Code wieder eintippte, hatte erneut ein funktionierendes Verschlüsselungsprogramm. Genau dieser kreative Ungehorsam machte sichtbar, wie absurd es ist, Wissen und Mathematik wie Waffen zu behandeln.
+    </p>
+
     <h2>Kreativer Ungehorsam</h2>
-    <p>Die Cypherpunks kämpften nicht nur in Gerichten, sondern im Alltag. RSA auf dem T-Shirt: Ein paar Zeilen Kryptocode wurden auf Shirts gedruckt. Wer es trug, „exportierte“ theoretisch Kryptographie.</p>
-    <p>Dazu kamen Bücher, Manifeste und technische Texte, die Kryptographie Schritt für Schritt erklärten und weltweit verbreiteten. Statt geheimes Expertenwissen in Unis und Militärs zu verstecken, machten die Cypherpunks Krypto zum Werkzeug für normale Menschen.</p>
-    <p>Die Botschaft dahinter: Verschlüsselung gehört nicht exklusiv Regierungen und Konzernen. Sie ist ein Werkzeug für jeden, der seine Freiheit und Privatsphäre verteidigen will.</p>
-    <!-- END ARTICLE CONTENT -->
+    <p>
+      Die Cypherpunks kämpften nicht nur in Gerichten, sondern im Alltag.
+      <strong>RSA auf dem T-Shirt:</strong> Ein paar Zeilen Kryptocode wurden auf Shirts gedruckt. Wer es trug, „exportierte“ theoretisch Kryptographie, sobald er in ein Flugzeug stieg.
+    </p>
+    <p>
+      Dazu kamen Bücher, Manifeste und technische Texte, die Kryptographie Schritt für Schritt erklärten und weltweit verbreiteten. Statt geheimes Expertenwissen in Unis und Militärs zu verstecken, machten die Cypherpunks Krypto zum Werkzeug für normale Menschen.
+    </p>
+    <p>
+      Die Botschaft dahinter: Verschlüsselung gehört nicht exklusiv Regierungen und Konzernen. Sie ist ein Werkzeug für jeden, der seine Freiheit und Privatsphäre verteidigen will.
+    </p>
+
+    <div class="box">
+      <h3>🧰 Tools für echte Eigentümer (Werbung/Affiliate)</h3>
+      <p style="font-size:0.95em;">
+        Wenn du die Cypherpunk-Werte leben willst, nutze Tools, die dich respektieren:
+      </p>
+      <ul>
+        <li>
+          🇨🇭 <strong>Investieren mit Swissquote:</strong><br>
+          Ich nutze Swissquote in der Schweiz – dort kannst du saubere Namensaktien halten und hast keine
+          deutsche Bank dazwischen.<br>
+          👉 <a href="https://alien-investor.org/swissquote" target="_blank">https://alien-investor.org/swissquote</a>
+        </li>
+        <li>
+          📊 <strong>US-Aktien über IBKR:</strong><br>
+          Für viele internationale Titel bietet sich Interactive Brokers als Zugang an – insbesondere in Kombination
+          mit DRS/Transfer Agenten.<br>
+          👉 <a href="https://alien-investor.org/interactive-brokers" target="_blank">https://alien-investor.org/interactive-brokers</a>
+        </li>
+        <li>
+          💥 <strong>Bitcoin kaufen in Europa – 21bitcoin:</strong><br>
+          Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges sats stapeln – ohne Shitcoins.<br>
+          Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du dauerhaft 0,2&nbsp;Prozentpunkte Gebührenreduktion
+          auf Sofort- und Sparplankäufe.<br>
+          👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
+        </li>
+        <li>
+          ₿ <strong>Bitcoin in Selbstverwahrung:</strong><br>
+          Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox – es gibt die klassische BitBox02 und die neue
+          BitBox für iPhone (Nova).<br>
+          👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
+        </li>
+        <li>
+          🛡️ <strong>Privacy &amp; Mail:</strong><br>
+          Für E-Mail, VPN und Cloud nutze ich Proton – datensparsam und ohne Big-Tech-Abhängigkeit.<br>
+          👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
+        </li>
+      </ul>
+      <p style="font-size:0.85em; color:#aaa;">
+        Hinweis: Bei einigen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit,
+        ohne dass es dich mehr kostet. Danke! 👽
+      </p>
+    </div>
+
   </article>
-  <blockquote class="highlight">
+
+  <blockquote>
     "Vertraue niemandem! Manage deine Finanzen selbst!"
   </blockquote>
 
   <div class="like-button">
     <button id="likeButton">👍 Gefällt mir</button>
     <span id="likeCount">0</span>
-    <span style="color:#bbb;">(Speicherung nur lokal im Browser)</span>
+    <span style="color:#bbb; font-size: 0.9em;">(Lokal)</span>
   </div>
 
   <script>
     (function() {
       const storageKey = window.location.pathname + "-likes";
-      const btn = document.getElementById("likeButton");
-      const span = document.getElementById("likeCount");
+      const btn = document.getElementById('likeButton');
+      const span = document.getElementById('likeCount');
 
       let count = parseInt(localStorage.getItem(storageKey) || "0", 10);
       span.textContent = count;
 
-      btn.addEventListener("click", function() {
+      btn.addEventListener('click', function() {
         count += 1;
         span.textContent = count;
         localStorage.setItem(storageKey, String(count));
         btn.disabled = true;
         btn.textContent = "Danke! 👽";
+        btn.style.borderColor = "#444";
+        btn.style.color = "#888";
       });
     })();
   </script>
 
-<section style="margin-top:2em; padding:1em; border:1px solid #00ffcc; border-radius:8px; background-color:#050505;">
-  <h2>🛡️ Cypherpunk-Tools: Selbstverwahrung & Privatsphäre</h2>
+  <div class="back-links">
+    <a href="blog.html" style="font-size: 1.1em;">⬅ Zurück zur Blog-Übersicht</a>
+    <a href="index.html" style="font-size: 1.1em;">⬅ Zurück zur Zentrale</a>
+  </div>
 
-  <p>
-    Wenn du es mit Cypherpunk-Ideen ernst meinst, brauchst du zwei Dinge:
-    <strong>eigene Schlüssel für dein Geld</strong> und <strong>digitale Kommunikation ohne Datenkraken</strong>.
-  </p>
+  <hr style="border-color: #222; margin: 3em 0;">
 
-  <ul>
-    <li>
-      <strong>21bitcoin – Bitcoin kaufen in Europa (Bitcoin-only)</strong><br>
-      Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges sats stapeln – ohne Shitcoins.<br>
-      Mit dem Code <code>ALIENINVESTOR</code> erhältst du dauerhaft
-      <strong>0,2&nbsp;Prozentpunkte Gebührenreduktion</strong> auf Sofort- und Sparplankäufe.<br>
-      👉 <a href="https://alien-investor.org/21bitcoin" target="_blank" rel="noopener noreferrer">
-        alien-investor.org/21bitcoin
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+      <h3 style="margin-bottom: 15px;">
+        🔋 Energie aufladen
+        <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
+      </h3>
+      
+      <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+        Treibstoff für das Mutterschiff senden
       </a>
-    </li>
-    <li style="margin-top:1em;">
-      <strong>BitBox – Bitcoin in Selbstverwahrung</strong><br>
-      Hardware-Wallet statt Börse oder Trading-App. Deine Keys, deine Coins.<br>
-      👉 <a href="https://alien-investor.org/bitbox" target="_blank" rel="noopener noreferrer">
-        alien-investor.org/bitbox
-      </a><br>
-      Mit dem Code <code>ALIENINVESTOR</code> bekommst du <strong>5&nbsp;% Rabatt</strong> im BitBox-Shop.
-    </li>
-    <li style="margin-top:1em;">
-      <strong>Proton Unlimited – E-Mail, Cloud &amp; VPN aus der Schweiz</strong><br>
-      Ende-zu-Ende-Verschlüsselung, weniger Tracking, mehr Souveränität statt Big-Tech-Überwachung.<br>
-      👉 <a href="https://alien-investor.org/proton" target="_blank" rel="noopener noreferrer">
-        alien-investor.org/proton
-      </a>
-    </li>
-  </ul>
-
-  <p style="font-size:0.9em; color:#ccc;">
-    Hinweis: Das sind Affiliate-/Referral-Links. Wenn du sie nutzt, unterstützt du meine Arbeit,
-    ohne mehr zu bezahlen. Keine Finanz-, Steuer- oder Rechtsberatung, nur meine persönliche Alien-Meinung. 👽
-  </p>
-</section>
+      
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸
+      </p>
+  </div>
 
   <footer>
-    <p>📬 Kontakt:
-      <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>
-    </p>
-    <p style="font-size:0.95em; color:#bbb;">
-      👽 <strong>Haftungsausschluss:</strong><br>
-      Keine Finanz-, Steuer- oder Rechtsberatung – nur persönliche Alien-Meinung.<br>
+    <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    
+    <p style="margin-top: 20px;">
+      👽 <strong>Haftungsausschluss:</strong><br><br>
+      Dieser Artikel stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
+      Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
       Investieren ist mit Risiken verbunden. Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
     </p>
-    <div class="support" style="margin-top: 2em;">
-      <h2>💸 Unterstütze meine Arbeit</h2>
-      <ul>
-        <li>☕ Spenden via
-          <a href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener">Ko-fi</a>
-        </li>
-        <li>⚡ Bitcoin Lightning:
-          <code>alien_investor@strike.me</code>
-        </li>
-        <li>₿ Bitcoin Onchain:
-          <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code>
-        </li>
-      </ul>
-    </div>
-    <p><a href="/blog.html">← Zurück zum Blog</a></p>
   </footer>
+
 </body>
 </html>
