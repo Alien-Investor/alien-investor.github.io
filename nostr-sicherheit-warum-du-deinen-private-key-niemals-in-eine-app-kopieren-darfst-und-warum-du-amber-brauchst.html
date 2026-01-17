@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>🔑 Nostr & Sicherheit: Warum du deinen Private Key niemals in eine App kopieren darfst (und warum du Amber brauchst)</title>
+  <title>🔑 Nostr & Sicherheit: Warum du deinen Private Key niemals in eine App kopieren darfst | Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Nostr-Sicherheit für Fortgeschrittene: Warum Copy & Paste deines nsec aus dem Passwort-Manager ein Sicherheitsrisiko ist und wie du mit Amber echte digitale Souveränität erlangst.">
   <style>
@@ -13,356 +13,396 @@
       line-height: 1.6;
       max-width: 800px;
       margin: auto;
-      padding: 2em;
+      padding: 0 15px 20px 15px; /* Mobile-Optimierung */
     }
+
+    /* --- TYPOGRAFIE --- */
     h1, h2, h3 {
       color: #00ffcc;
     }
+    h1 {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    /* --- LINKS (Neon-Glow) --- */
     a {
       color: #00ffcc;
       text-decoration: none;
+      transition: all 0.2s ease;
     }
     a:hover {
-      text-decoration: underline;
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc; /* Der Alien-Effekt */
     }
-    em {
-      color: #ccc;
-    }
+
+    /* --- STANDARD ELEMENTE --- */
     code {
       background-color: #111;
       padding: 0.2em 0.4em;
       border-radius: 4px;
       color: #0f0;
-      font-size: 0.95em;
+      font-family: monospace;
     }
-    blockquote {
-      border-left: 3px solid #00ffcc;
-      padding-left: 1em;
-      margin: 2em 0;
-      color: #ddd;
-      font-style: italic;
-    }
-    ul {
-      margin-left: 1.2em;
-    }
+    em { color: #ccc; }
+
     .byline {
       margin-top: -0.8em;
-      margin-bottom: 1.2em;
+      margin-bottom: 2em;
       color: #ccc;
       font-style: italic;
+      text-align: center;
     }
+
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
+
+    /* --- BOXEN --- */
     .box {
       border: 1px solid #00ffcc;
-      background-color: #050505;
-      padding: 1em 1.2em;
-      margin: 2em 0;
+      background: #050505;
+      padding: 1.5em;
       border-radius: 8px;
-    }
-    .box h2, .box h3 {
-      margin-top: 0;
-    }
-    .like-button {
       margin: 2em 0;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 1em; }
+
+    .recommendation-box {
+      margin: 2em 0;
+      padding: 1em;
+      border: 1px dashed #00ffcc;
+      border-radius: 8px;
+      text-align: center;
+      background-color: #050505;
+    }
+    .recommendation-box h3 {
+      margin-top: 0;
+      font-size: 1.1em;
+      color: #00ffcc;
+    }
+
+    .alert-box {
+      border-left: 3px solid #ff3b3b;
+      background-color: #1a0505;
+      padding: 1em;
+      margin: 1.5em 0;
+      color: #ffcccc;
+      border-radius: 0 8px 8px 0;
+    }
+
+    /* --- LIKE BUTTON --- */
+    .like-button {
+      margin: 3em 0;
       display: flex;
       align-items: center;
-      gap: 0.75em;
-      font-size: 0.95em;
+      justify-content: center;
+      gap: 1em;
     }
     .like-button button {
-      background: #00ffcc;
-      color: #000;
-      border: none;
-      padding: 0.4em 0.9em;
-      border-radius: 4px;
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
       cursor: pointer;
       font-weight: bold;
+      transition: all 0.2s ease;
     }
-    .like-button span {
-      min-width: 2em;
-      display: inline-block;
+    .like-button button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
     }
-    button {
-      background-color: #111;
-      color: #fff;
-      border: 1px solid #444;
-      padding: 0.5em 1em;
-      border-radius: 5px;
-      cursor: pointer;
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
     }
-    button:hover {
-      background-color: #222;
-    }
-    footer {
-      margin-top: 3em;
-      padding-top: 2em;
-      border-top: 1px solid #333;
+
+    /* --- NAVIGATION --- */
+    .top-nav {
+      padding: 10px 0;
       font-size: 0.9em;
+    }
+    .back-links {
+      margin-top: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
     }
   </style>
 </head>
 <body>
 
+  <div class="top-nav">
+    <a href="index.html">⬅ Zurück zur Zentrale</a>
+  </div>
+
   <h1>🔑 Nostr & Sicherheit: Warum du deinen Private Key niemals in eine App kopieren darfst (und warum du Amber brauchst)</h1>
   <p class="byline"><em>von Alien Investor</em></p>
 
-  <p>
-    Auf Nostr bist du keine Zeile in der Datenbank eines Tech-Konzerns. Du bist ein kryptografischer Schlüssel.
-    Dein privater Schlüssel (<code>nsec</code>) ist deine Stimme, deine Identität und dein Ruf.
-    Wer diesen Schlüssel hat, <em>ist</em> du.
-  </p>
-  <p>
-    Trotzdem begehen die meisten Nutzer – besonders die bequemen unter uns – täglich digitales Harakiri:
-    Sie kopieren ihren <code>nsec</code> aus dem Passwort-Manager und fügen ihn direkt in Apps wie Primal oder Damus ein.
-    Das funktioniert, ist aber aus sicherheitsarchitektonischer Sicht ein Albtraum.
-  </p>
-  <p>
-    Warum das so ist, warum dein Passwort-Manager hier an seine Grenzen stößt und warum du
-    dringend auf einen dedizierten Signer wie <strong>Amber</strong> umsteigen solltest, klären wir heute.
-  </p>
-
-  <h2>1. Das Problem: Dein „Login“ ist eigentlich eine Kapitulation</h2>
-  <p>
-    Wenn du dich bei einer Nostr-App wie Primal anmeldest, indem du deinen Key einfügst, passieren im Hintergrund
-    Dinge, die du verstehen musst.
-  </p>
-
-  <h3>Das Clipboard ist ein öffentlicher Marktplatz</h3>
-  <p>
-    Ein Passwort-Manager ist dafür gebaut, Geheimnisse sicher zu <em>speichern</em>. Aber um sie zu nutzen,
-    muss er sie entschlüsseln und an das Betriebssystem übergeben – meist über die Zwischenablage (Clipboard).
-  </p>
-  <ul>
-    <li>
-      <strong>Malware-Radar:</strong> Es gibt Malware, die nichts anderes tut, als das Clipboard permanent nach
-      Strings wie <code>nsec1...</code> oder Bitcoin-Adressen zu scannen (Clipboard-Hijacking).
-    </li>
-    <li>
-      <strong>Tastatur-Apps:</strong> Wenn du Gboard oder SwiftKey nutzt, landet deine Zwischenablage oft im Cache
-      der Tastatur-App – und je nach Einstellung in der Cloud von Google oder Microsoft.
-    </li>
-  </ul>
-
-  <h3>Die „Hot Wallet“-Falle</h3>
-  <p>
-    Sobald du den Key in Primal (oder eine andere Client-App) einfügst, muss die App ihn speichern, damit du
-    nicht bei jedem Like neu gefragt wirst.
-  </p>
-  <p>
-    Das bedeutet: Eine komplexe Social-Media-App mit Millionen Zeilen Code, Bild-Parsern und ständigem Internetzugriff
-    hält deinen wichtigsten Schlüssel dauerhaft im Zugriff. Findet ein Hacker eine Lücke in Primal (z. B. durch ein manipuliertes Bild),
-    kann er theoretisch deinen Key auslesen. Du hast aus deinem Client eine „Hot Wallet“ gemacht.
-  </p>
-
-  <h2>2. Die Lösung: Amber und das Prinzip der „Signer“</h2>
-  <p>
-    <strong>Amber</strong> ist ein Nostr Event Signer für Android. Die App macht genau eine Sache:
-    Sie verwahrt deinen Schlüssel und unterschreibt Dinge für dich – aber sie gibt den Schlüssel niemals heraus.
-  </p>
-
-  <h3>Unterschied: Geheimnis vs. Unterschrift</h3>
-  <ul>
-    <li>
-      <strong>Der alte Weg (Primal hat den Key):</strong> Du gibst Primal dein komplettes Scheckbuch und unterschreibst
-      Blankoschecks. Primal kann jederzeit alles tun.
-    </li>
-    <li>
-      <strong>Der Signer-Weg (Amber):</strong> Primal kommt mit einem ausgefüllten Scheck zu dir (einem Event) und fragt:
-      „Kannst du das bitte unterschreiben?“ Amber prüft das, unterschreibt kryptografisch und gibt <em>nur die Unterschrift</em> zurück.
-      Der Schlüssel selbst verlässt Amber nie.
-    </li>
-  </ul>
-  <p>
-    Technisch funktioniert das über <strong>NIP-55</strong> (Android Intents). Es findet kein Datentransfer des Schlüssels statt.
-    Primal weiß nicht einmal, wie dein Private Key aussieht; die App kennt nur deinen öffentlichen Schlüssel (npub).
-  </p>
-
-  <blockquote>
-    „Amber ist wie eine Hardware-Wallet, die als Software auf deinem Handy läuft.
-    Sie isoliert das Geheimnis von der App, die ins Internet funkt.“
-  </blockquote>
-
-  <h2>3. Warum Amber sicherer ist als dein Passwort-Manager</h2>
-  <p>
-    Viele denken: „Eine zusätzliche App vergrößert doch die Angriffsfläche?“ – Falsch.
-    In diesem Fall ist es genau umgekehrt, es nennt sich <strong>Kompartimentierung</strong>.
-  </p>
-
-  <h3>Kein Internetzugriff für den Schlüssel</h3>
-  <p>
-    Du kannst (und solltest) Amber in den Android-Einstellungen den Internetzugriff komplett entziehen.
-    Eine App, die nicht „nach Hause telefonieren“ kann, kann deinen Key nicht stehlen, selbst wenn sie kompromittiert wäre.
-    Primal hingegen <em>muss</em> online sein.
-  </p>
-
-  <h3>Android Keystore & Biometrie</h3>
-  <p>
-    Amber nutzt das <strong>Android Keystore System</strong>. Dein Schlüssel wird, wenn möglich, in einem speziellen
-    Sicherheitschip (Titan M, StrongBox) verarbeitet. Zusätzlich kannst du jede Signatur per Fingerabdruck absichern.
-    Selbst wenn jemand dein entsperrtes Handy klaut und Primal öffnet, kann er nichts posten, weil Amber deinen
-    Fingerabdruck für die Signatur verlangt.
-  </p>
-
-  <h2>4. Die „Legacy“-Frage: Mein Key wurde in Primal erstellt – ist er verbrannt?</h2>
-  <p>
-    Das ist der häufigste Einwand: <em>„Ich habe meinen Account direkt in Primal erstellt. Der Key war also schon online. Lohnt sich der Wechsel noch?“</em>
-  </p>
-  <p>
-    Die Antwort ist ein klares <strong>JA</strong>.
-  </p>
-
-  <h3>Origin Risk vs. Future Protection</h3>
-  <p>
-    Natürlich: Wenn Primal in der Vergangenheit böse war oder gehackt wurde, könnte dein Key theoretisch irgendwo auf einem Server liegen.
-    Das ist das „Ursprungsrisiko“. Aber:
-  </p>
-  <ul>
-    <li>
-      Indem du jetzt migrierst, schützt du dich vor <strong>zukünftigen</strong> Angriffen.
-    </li>
-    <li>
-      Wenn morgen ein bösartiges Update für Primal kommt oder eine Sicherheitslücke entdeckt wird, ist dein Key nicht mehr dort.
-      Der Angriff läuft ins Leere.
-    </li>
-    <li>
-      Du degradierst Primal vom „Besitzer“ deiner Identität zum bloßen „Nutzer“.
-    </li>
-  </ul>
-
-  <h2>5. Anleitung: So migrierst du richtig (Der „Primal Nuke“)</h2>
-  <p>
-    Einfach nur „Ausloggen“ reicht oft nicht, da Datenreste im Speicher bleiben können.
-    Hier ist der saubere Weg zur Souveränität:
-  </p>
-
-  <ol>
-    <li>
-      <strong>Backup prüfen:</strong> Stelle sicher, dass du deinen <code>nsec</code> sicher (offline, auf Papier/Metall) notiert hast.
-      Ohne Backup kein Zugriff!
-    </li>
-    <li>
-      <strong>Amber installieren:</strong> Lade dir Amber herunter (am besten via F-Droid oder GitHub, prüfe die Quelle).
-    </li>
-    <li>
-      <strong>Key importieren:</strong> Gib deinen <code>nsec</code> in Amber ein. Aktiviere sofort die biometrische Sperre (Fingerabdruck).
-    </li>
-    <li>
-      <strong>Der „Nuke“ bei Primal:</strong> Logge dich nicht einfach aus. Gehe in die Android-Einstellungen &rarr; Apps &rarr; Primal &rarr; Speicher &rarr; <strong>Daten löschen</strong>.
-      Das zwingt Android, den gesamten Speicherbereich der App physikalisch zu bereinigen.
-    </li>
-    <li>
-      <strong>Neustart via Signer:</strong> Öffne das „frische“ Primal. Wähle beim Login <strong>nicht</strong> „Enter nsec“, sondern
-      „Log in with external signer“ (oft ein Schlüsselsymbol).
-    </li>
-    <li>
-      <strong>Autorisieren:</strong> Amber öffnet sich und fragt um Erlaubnis. Bestätige es. Fertig.
-    </li>
-  </ol>
-  <p>
-    Jetzt nutzt du Primal nur noch als reine Oberfläche. Dein Schlüssel liegt sicher im Tresor von Amber.
-  </p>
-
-  <h2>6. Alien-Fazit: Hol dir deine Hoheit zurück</h2>
-  <p>
-    Bequemlichkeit ist der Feind der Sicherheit. Das Copy-Pasten von Private Keys ist eine schlechte Angewohnheit aus der Web2-Welt,
-    die wir ablegen müssen.
-  </p>
-  <p>
-    Die Migration zu einem Signer wie Amber transformiert dein Smartphone effektiv in eine „Hardware Wallet Light“.
-    Du tauschst ein systemisches Risiko (Key im Clipboard und in der App) gegen eine gehärtete Architektur.
-    Auch wenn es fünf Minuten dauert: Mach es. Deine digitale Identität ist es wert.
-  </p>
-
-  <section class="box">
-    <h2>🔒 Für Paranoide: Key Rotation</h2>
+  <article id="content">
     <p>
-      Wenn du zu 100% sicher sein willst, dass dein Key <em>niemals</em> kompromittiert wurde (weil er ja mal in Primal lag),
-      hilft nur eins: <strong>Key Rotation</strong>.
+      Auf Nostr bist du keine Zeile in der Datenbank eines Tech-Konzerns. Du bist ein kryptografischer Schlüssel.
+      Dein privater Schlüssel (<code>nsec</code>) ist deine Stimme, deine Identität und dein Ruf.
+      Wer diesen Schlüssel hat, <em>ist</em> du.
     </p>
+    <p>
+      Trotzdem begehen die meisten Nutzer – besonders die bequemen unter uns – täglich digitales Harakiri:
+      Sie kopieren ihren <code>nsec</code> aus dem Passwort-Manager und fügen ihn direkt in Apps wie Primal oder Damus ein.
+      Das funktioniert, ist aber aus sicherheitsarchitektonischer Sicht ein Albtraum.
+    </p>
+    <p>
+      Warum das so ist, warum dein Passwort-Manager hier an seine Grenzen stößt und warum du
+      dringend auf einen dedizierten Signer wie <strong>Amber</strong> umsteigen solltest, klären wir heute.
+    </p>
+
+    <div class="alert-box">
+      <strong>Regel #1:</strong> Tippe deinen <code>nsec</code> niemals in Primal, Amethyst oder irgendeinen Browser-Login.
+      Der <code>nsec</code> gehört in den Signer. Punkt.
+    </div>
+
+    <h2>1. Das Problem: Dein „Login“ ist eigentlich eine Kapitulation</h2>
+    <p>
+      Wenn du dich bei einer Nostr-App wie Primal anmeldest, indem du deinen Key einfügst, passieren im Hintergrund
+      Dinge, die du verstehen musst.
+    </p>
+
+    <h3>Das Clipboard ist ein öffentlicher Marktplatz</h3>
+    <p>
+      Ein Passwort-Manager ist dafür gebaut, Geheimnisse sicher zu <em>speichern</em>. Aber um sie zu nutzen,
+      muss er sie entschlüsseln und an das Betriebssystem übergeben – meist über die Zwischenablage (Clipboard).
+    </p>
+    <ul>
+      <li>
+        <strong>Malware-Radar:</strong> Es gibt Malware, die nichts anderes tut, als das Clipboard permanent nach
+        Strings wie <code>nsec1...</code> oder Bitcoin-Adressen zu scannen (Clipboard-Hijacking).
+      </li>
+      <li>
+        <strong>Tastatur-Apps:</strong> Wenn du Gboard oder SwiftKey nutzt, landet deine Zwischenablage oft im Cache
+        der Tastatur-App – und je nach Einstellung in der Cloud von Google oder Microsoft.
+      </li>
+    </ul>
+    
+
+    <h3>Die „Hot Wallet“-Falle</h3>
+    <p>
+      Sobald du den Key in Primal (oder eine andere Client-App) einfügst, muss die App ihn speichern, damit du
+      nicht bei jedem Like neu gefragt wirst.
+    </p>
+    <p>
+      Das bedeutet: Eine komplexe Social-Media-App mit Millionen Zeilen Code, Bild-Parsern und ständigem Internetzugriff
+      hält deinen wichtigsten Schlüssel dauerhaft im Zugriff. Findet ein Hacker eine Lücke in Primal (z. B. durch ein manipuliertes Bild),
+      kann er theoretisch deinen Key auslesen. Du hast aus deinem Client eine „Hot Wallet“ gemacht.
+    </p>
+
+    <h2>2. Die Lösung: Amber und das Prinzip der „Signer“</h2>
+    <p>
+      <strong>Amber</strong> ist ein Nostr Event Signer für Android. Die App macht genau eine Sache:
+      Sie verwahrt deinen Schlüssel und unterschreibt Dinge für dich – aber sie gibt den Schlüssel niemals heraus.
+    </p>
+
+    <h3>Unterschied: Geheimnis vs. Unterschrift</h3>
+    <ul>
+      <li>
+        <strong>Der alte Weg (Primal hat den Key):</strong> Du gibst Primal dein komplettes Scheckbuch und unterschreibst
+        Blankoschecks. Primal kann jederzeit alles tun.
+      </li>
+      <li>
+        <strong>Der Signer-Weg (Amber):</strong> Primal kommt mit einem ausgefüllten Scheck zu dir (einem Event) und fragt:
+        „Kannst du das bitte unterschreiben?“ Amber prüft das, unterschreibt kryptografisch und gibt <em>nur die Unterschrift</em> zurück.
+        Der Schlüssel selbst verlässt Amber nie.
+      </li>
+    </ul>
+    
+    <p>
+      Technisch funktioniert das über <strong>NIP-55</strong> (Android Intents). Es findet kein Datentransfer des Schlüssels statt.
+      Primal weiß nicht einmal, wie dein Private Key aussieht; die App kennt nur deinen öffentlichen Schlüssel (npub).
+    </p>
+
+    <blockquote>
+      „Amber ist wie eine Hardware-Wallet, die als Software auf deinem Handy läuft.
+      Sie isoliert das Geheimnis von der App, die ins Internet funkt.“
+    </blockquote>
+
+    <h2>3. Warum Amber sicherer ist als dein Passwort-Manager</h2>
+    <p>
+      Viele denken: „Eine zusätzliche App vergrößert doch die Angriffsfläche?“ – Falsch.
+      In diesem Fall ist es genau umgekehrt, es nennt sich <strong>Kompartimentierung</strong>.
+    </p>
+
+    <h3>Kein Internetzugriff für den Schlüssel</h3>
+    <p>
+      Du kannst (und solltest) Amber in den Android-Einstellungen den Internetzugriff komplett entziehen.
+      Eine App, die nicht „nach Hause telefonieren“ kann, kann deinen Key nicht stehlen, selbst wenn sie kompromittiert wäre.
+      Primal hingegen <em>muss</em> online sein.
+    </p>
+
+    <h3>Android Keystore & Biometrie</h3>
+    <p>
+      Amber nutzt das <strong>Android Keystore System</strong>. Dein Schlüssel wird, wenn möglich, in einem speziellen
+      Sicherheitschip (Titan M, StrongBox) verarbeitet. Zusätzlich kannst du jede Signatur per Fingerabdruck absichern.
+      Selbst wenn jemand dein entsperrtes Handy klaut und Primal öffnet, kann er nichts posten, weil Amber deinen
+      Fingerabdruck für die Signatur verlangt.
+    </p>
+
+    <h2>4. Die „Legacy“-Frage: Mein Key wurde in Primal erstellt – ist er verbrannt?</h2>
+    <p>
+      Das ist der häufigste Einwand: <em>„Ich habe meinen Account direkt in Primal erstellt. Der Key war also schon online. Lohnt sich der Wechsel noch?“</em>
+    </p>
+    <p>
+      Die Antwort ist ein klares <strong>JA</strong>.
+    </p>
+
+    <h3>Origin Risk vs. Future Protection</h3>
+    <p>
+      Natürlich: Wenn Primal in der Vergangenheit böse war oder gehackt wurde, könnte dein Key theoretisch irgendwo auf einem Server liegen.
+      Das ist das „Ursprungsrisiko“. Aber:
+    </p>
+    <ul>
+      <li>
+        Indem du jetzt migrierst, schützt du dich vor <strong>zukünftigen</strong> Angriffen.
+      </li>
+      <li>
+        Wenn morgen ein bösartiges Update für Primal kommt oder eine Sicherheitslücke entdeckt wird, ist dein Key nicht mehr dort.
+        Der Angriff läuft ins Leere.
+      </li>
+      <li>
+        Du degradierst Primal vom „Besitzer“ deiner Identität zum bloßen „Nutzer“.
+      </li>
+    </ul>
+
+    <h2>5. Anleitung: So migrierst du richtig (Der „Primal Nuke“)</h2>
+    <p>
+      Einfach nur „Ausloggen“ reicht oft nicht, da Datenreste im Speicher bleiben können.
+      Hier ist der saubere Weg zur Souveränität:
+    </p>
+
     <ol>
-      <li>Generiere einen komplett neuen <code>nsec</code> direkt in Amber (oder offline).</li>
-      <li>Poste mit deinem alten Account einen Hinweis auf den Umzug.</li>
-      <li>Nutze ab sofort nur noch den neuen Account.</li>
+      <li>
+        <strong>Backup prüfen:</strong> Stelle sicher, dass du deinen <code>nsec</code> sicher (offline, auf Papier/Metall) notiert hast.
+        Ohne Backup kein Zugriff!
+      </li>
+      <li>
+        <strong>Amber installieren:</strong> Lade dir Amber herunter (am besten via F-Droid oder GitHub, prüfe die Quelle).
+      </li>
+      <li>
+        <strong>Key importieren:</strong> Gib deinen <code>nsec</code> in Amber ein. Aktiviere sofort die biometrische Sperre (Fingerabdruck).
+      </li>
+      <li>
+        <strong>Der „Nuke“ bei Primal:</strong> Logge dich nicht einfach aus. Gehe in die Android-Einstellungen &rarr; Apps &rarr; Primal &rarr; Speicher &rarr; <strong>Daten löschen</strong>.
+        Das zwingt Android, den gesamten Speicherbereich der App physikalisch zu bereinigen.
+      </li>
+      <li>
+        <strong>Neustart via Signer:</strong> Öffne das „frische“ Primal. Wähle beim Login <strong>nicht</strong> „Enter nsec“, sondern
+        „Log in with external signer“ (oft ein Schlüsselsymbol).
+      </li>
+      <li>
+        <strong>Autorisieren:</strong> Amber öffnet sich und fragt um Erlaubnis. Bestätige es. Fertig.
+      </li>
     </ol>
     <p>
-      Für die meisten reicht die Migration zu Amber mit dem alten Key völlig aus – aber echte Souveränität kennt keine Kompromisse.
+      Jetzt nutzt du Primal nur noch als reine Oberfläche. Dein Schlüssel liegt sicher im Tresor von Amber.
     </p>
-  </section>
 
-  <div class="box">
-  <h3>🧰 Tools für echte Eigentümer (Werbung/Affiliate)</h3>
-  <p style="font-size:0.95em;">
-    Wenn du Aktien und Bitcoin möglichst eigenverantwortlich halten willst, nutze nicht nur dein Bankdepot:
-  </p>
-  <ul>
-    <li>
-      🇨🇭 <strong>Investieren mit Swissquote:</strong><br>
-      Ich nutze Swissquote in der Schweiz – dort kannst du saubere Namensaktien halten und hast keine
-      deutsche Bank dazwischen.<br>
-      👉 <a href="https://alien-investor.org/swissquote" target="_blank">https://alien-investor.org/swissquote</a>
-    </li>
-    <li>
-      📊 <strong>US-Aktien über IBKR:</strong><br>
-      Für viele internationale Titel bietet sich Interactive Brokers als Zugang an – insbesondere in Kombination
-      mit DRS/Transfer Agenten.<br>
-      👉 <a href="https://alien-investor.org/interactive-brokers" target="_blank">https://alien-investor.org/interactive-brokers</a>
-    </li>
-    <li>
-      💥 <strong>Bitcoin kaufen in Europa – 21bitcoin:</strong><br>
-      Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges sats stapeln – ohne Shitcoins.<br>
-      Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du dauerhaft 0,2&nbsp;Prozentpunkte Gebührenreduktion
-      auf Sofort- und Sparplankäufe.<br>
-      👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
-    </li>
-    <li>
-      ₿ <strong>Bitcoin in Selbstverwahrung:</strong><br>
-      Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox – es gibt die klassische BitBox02 und die neue
-      BitBox für iPhone (Nova).<br>
-      👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
-    </li>
-    <li>
-      🛡️ <strong>Privacy &amp; Mail:</strong><br>
-      Für E-Mail, VPN und Cloud nutze ich Proton – datensparsam und ohne Big-Tech-Abhängigkeit.<br>
-      👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
-    </li>
-  </ul>
-  <p style="font-size:0.85em; color:#aaa;">
-    Hinweis: Bei einigen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit,
-    ohne dass es dich mehr kostet. Danke! 👽
-  </p>
-</div>
+    <h2>6. Alien-Fazit: Hol dir deine Hoheit zurück</h2>
+    <p>
+      Bequemlichkeit ist der Feind der Sicherheit. Das Copy-Pasten von Private Keys ist eine schlechte Angewohnheit aus der Web2-Welt,
+      die wir ablegen müssen.
+    </p>
+    <p>
+      Die Migration zu einem Signer wie Amber transformiert dein Smartphone effektiv in eine „Hardware Wallet Light“.
+      Du tauschst ein systemisches Risiko (Key im Clipboard und in der App) gegen eine gehärtete Architektur.
+      Auch wenn es fünf Minuten dauert: Mach es. Deine digitale Identität ist es wert.
+    </p>
+
+    <div class="box">
+      <h3>🔒 Für Paranoide: Key Rotation</h3>
+      <p>
+        Wenn du zu 100% sicher sein willst, dass dein Key <em>niemals</em> kompromittiert wurde (weil er ja mal in Primal lag),
+        hilft nur eins: <strong>Key Rotation</strong>.
+      </p>
+      <ol>
+        <li>Generiere einen komplett neuen <code>nsec</code> direkt in Amber (oder offline).</li>
+        <li>Poste mit deinem alten Account einen Hinweis auf den Umzug.</li>
+        <li>Nutze ab sofort nur noch den neuen Account.</li>
+      </ol>
+      <p>
+        Für die meisten reicht die Migration zu Amber mit dem alten Key völlig aus – aber echte Souveränität kennt keine Kompromisse.
+      </p>
+    </div>
+
+    <div class="box">
+      <h3>🧰 Tools für echte Eigentümer (Werbung/Affiliate)</h3>
+      <p style="font-size:0.95em;">
+        Wenn du Aktien und Bitcoin möglichst eigenverantwortlich halten willst, nutze nicht nur dein Bankdepot:
+      </p>
+      <ul>
+        <li>
+          🇨🇭 <strong>Investieren mit Swissquote:</strong><br>
+          Ich nutze Swissquote in der Schweiz – dort kannst du saubere Namensaktien halten und hast keine
+          deutsche Bank dazwischen.<br>
+          👉 <a href="https://alien-investor.org/swissquote" target="_blank">https://alien-investor.org/swissquote</a>
+        </li>
+        <li>
+          📊 <strong>US-Aktien über IBKR:</strong><br>
+          Für viele internationale Titel bietet sich Interactive Brokers als Zugang an – insbesondere in Kombination
+          mit DRS/Transfer Agenten.<br>
+          👉 <a href="https://alien-investor.org/interactive-brokers" target="_blank">https://alien-investor.org/interactive-brokers</a>
+        </li>
+        <li>
+          💥 <strong>Bitcoin kaufen in Europa – 21bitcoin:</strong><br>
+          Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges sats stapeln – ohne Shitcoins.<br>
+          Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du dauerhaft 0,2&nbsp;Prozentpunkte Gebührenreduktion
+          auf Sofort- und Sparplankäufe.<br>
+          👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
+        </li>
+        <li>
+          ₿ <strong>Bitcoin in Selbstverwahrung:</strong><br>
+          Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox – es gibt die klassische BitBox02 und die neue
+          BitBox für iPhone (Nova).<br>
+          👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
+        </li>
+        <li>
+          🛡️ <strong>Privacy &amp; Mail:</strong><br>
+          Für E-Mail, VPN und Cloud nutze ich Proton – datensparsam und ohne Big-Tech-Abhängigkeit.<br>
+          👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
+        </li>
+      </ul>
+      <p style="font-size:0.85em; color:#aaa;">
+        Hinweis: Bei einigen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit,
+        ohne dass es dich mehr kostet. Danke! 👽
+      </p>
+    </div>
+
+  </article>
 
   <div class="like-button">
     <button id="likeButton">👍 Gefällt mir</button>
     <span id="likeCount">0</span>
-    <span style="color:#bbb;">(Speicherung nur lokal im Browser)</span>
+    <span style="color:#bbb; font-size: 0.9em;">(Lokal)</span>
   </div>
-
-  <div class="box">
-    <h3>📚 Quellen (Auswahl)</h3>
-    <p style="font-size:0.95em;">
-      Dieser Artikel basiert auf einer internen sicherheitsarchitektonischen Analyse von Nostr-Signer-Implementierungen (Stand: Dezember 2025),
-      den offiziellen Dokumentationen zu NIP-55 und NIP-46 sowie den Security-Specs des Android Keystore Systems.
-      Referenzen zu Primal und Amber beziehen sich auf die zu diesem Zeitpunkt aktuellen Versionen.
-    </p>
-  </div>
-
-  <h3>💸 Unterstütze meine Arbeit</h3>
-  <ul>
-    <li>☕ <a href="https://ko-fi.com/alieninvestor" target="_blank">Spenden via Ko-fi (PayPal, Fiat)</a></li>
-    <li>⚡ Bitcoin Lightning: <code>alien_investor@strike.me</code></li>
-    <li>₿ Bitcoin Onchain: <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code></li>
-  </ul>
-  <p>Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸</p>
-
-  <footer>
-    <p>👽 <strong>Haftungsausschluss:</strong><br>
-      Dieser Artikel stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
-      Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
-      Technische Anleitungen erfolgen auf eigenes Risiko. Prüfe Backups immer doppelt.
-    </p>
-    <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
-    <p><a href="blog.html">← Zurück zum Blog</a></p>
-  </footer>
 
   <script>
     (function() {
@@ -379,9 +419,53 @@
         localStorage.setItem(storageKey, String(count));
         btn.disabled = true;
         btn.textContent = "Danke! 👽";
+        btn.style.borderColor = "#444";
+        btn.style.color = "#888";
       });
     })();
   </script>
+
+  <div class="box" style="border-style: dashed; border-color: #333;">
+    <h3>📚 Quellen (Auswahl)</h3>
+    <p style="font-size:0.95em; color: #ccc;">
+      Dieser Artikel basiert auf einer internen sicherheitsarchitektonischen Analyse von Nostr-Signer-Implementierungen (Stand: Dezember 2025),
+      den offiziellen Dokumentationen zu NIP-55 und NIP-46 sowie den Security-Specs des Android Keystore Systems.
+      Referenzen zu Primal und Amber beziehen sich auf die zu diesem Zeitpunkt aktuellen Versionen.
+    </p>
+  </div>
+
+  <div class="back-links">
+    <a href="blog.html" style="font-size: 1.1em;">⬅ Zurück zur Blog-Übersicht</a>
+    <a href="index.html" style="font-size: 1.1em;">⬅ Zurück zur Zentrale</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+      <h3 style="margin-bottom: 15px;">
+        🔋 Energie aufladen
+        <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
+      </h3>
+      
+      <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+        Treibstoff für das Mutterschiff senden
+      </a>
+      
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸
+      </p>
+  </div>
+
+  <footer>
+    <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    
+    <p style="margin-top: 20px;">
+      👽 <strong>Haftungsausschluss:</strong><br><br>
+      Dieser Artikel stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
+      Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
+      Technische Anleitungen erfolgen auf eigenes Risiko. Prüfe Backups immer doppelt.
+    </p>
+  </footer>
 
 </body>
 </html>
