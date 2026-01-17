@@ -2,9 +2,9 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Bitcoin in einem Satz: Eigentum oder Illusion</title>
+  <title>Bitcoin in einem Satz: Eigentum oder Illusion | Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Warum Geld gespeicherte Lebenszeit ist, wie das Fiat-System dich enteignet – und welche Werkzeuge dir helfen, deine finanzielle Energie zu schützen.">
+  <meta name="description" content="Was ist Bitcoin wirklich? Eine kurze Erklärung zu begrenzter Menge, Dezentralität und warum es digitales Eigentum für alle ist.">
   <style>
     body {
       background-color: #000;
@@ -13,235 +13,272 @@
       line-height: 1.6;
       max-width: 800px;
       margin: auto;
-      padding: 2em;
+      padding: 0 15px 20px 15px; /* Mobile-Optimierung */
     }
+
+    /* --- TYPOGRAFIE --- */
     h1, h2, h3 {
       color: #00ffcc;
     }
+    h1 {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    /* --- LINKS (Neon-Glow) --- */
     a {
       color: #00ffcc;
       text-decoration: none;
+      transition: all 0.2s ease;
     }
     a:hover {
-      text-decoration: underline;
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc; /* Der Alien-Effekt */
     }
-    li {
-      margin-bottom: 0.5em;
-    }
+
+    /* --- STANDARD ELEMENTE --- */
     code {
       background-color: #111;
       padding: 0.2em 0.4em;
       border-radius: 4px;
-      font-size: 0.95em;
       color: #0f0;
+      font-family: monospace;
     }
-    em {
-      color: #ccc;
-    }
+    em { color: #ccc; }
+
     .byline {
       margin-top: -0.8em;
-      margin-bottom: 1.2em;
-    }
-    .like-button {
-      margin-top: 2em;
-      font-size: 0.9em;
-    }
-    .like-button button {
-      background-color: #111;
-      color: #fff;
-      border: 1px solid #00ffcc;
-      padding: 0.4em 0.8em;
-      border-radius: 4px;
-      cursor: pointer;
-      margin-right: 0.5em;
-    }
-    .like-button button:hover {
-      background-color: #022;
-    }
-    .like-button .like-count {
-      font-weight: bold;
-      margin-right: 0.5em;
-    }
-    .like-button .like-info {
-      display: block;
-      margin-top: 0.4em;
-      color: #aaa;
-    }
-    button {
-      background-color: #111;
-      color: #fff;
-      border: 1px solid #444;
-      padding: 0.5em 1em;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #222;
-    }
-    footer {
-      margin-top: 3em;
-      padding-top: 2em;
-      border-top: 1px solid #333;
-      font-size: 0.9em;
-    }
-    .support ul {
-      margin: 0.3em 0 0 1.2em;
-    }
-    blockquote.highlight {
-      border-left: 3px solid #00ffcc;
-      padding: 1em 1.2em;
-      background-color: #111;
-      color: #ddd;
+      margin-bottom: 2em;
+      color: #ccc;
       font-style: italic;
-      margin-top: 2em;
+      text-align: center;
     }
-    .affiliate-box {
-      border: 1px solid #00ffcc;
-      background-color: #000;
-      padding: 1em 1.2em;
+
+    blockquote {
+      border-left: 3px solid #00ffcc;
       margin: 2em 0;
-      border-radius: 8px;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
     }
-    .affiliate-box h2 {
+
+    /* --- BOXEN --- */
+    .box {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 1em; }
+
+    .recommendation-box {
+      margin: 2em 0;
+      padding: 1em;
+      border: 1px dashed #00ffcc;
+      border-radius: 8px;
+      text-align: center;
+      background-color: #050505;
+    }
+    .recommendation-box h3 {
       margin-top: 0;
+      font-size: 1.1em;
       color: #00ffcc;
     }
-    .affiliate-box ul {
-      margin-left: 1.2em;
+
+    /* --- LIKE BUTTON --- */
+    .like-button {
+      margin: 3em 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
     }
-    .affiliate-box p {
-      margin-bottom: 0.6em;
+    .like-button button {
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+    .like-button button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
+    }
+
+    /* --- NAVIGATION --- */
+    .top-nav {
+      padding: 10px 0;
+      font-size: 0.9em;
+    }
+    .back-links {
+      margin-top: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
     }
   </style>
 </head>
 <body>
+
+  <div class="top-nav">
+    <a href="index.html">⬅ Zurück zur Zentrale</a>
+  </div>
+
   <h1>Bitcoin in einem Satz: Eigentum oder Illusion?</h1>
   <p class="byline"><em>von Alien Investor</em></p>
 
-  <h2>Was ist Bitcoin in einem Satz?</h2>
-  <p>Bitcoin ist digitales Eigentum, das du selbst kontrollierst – oder die größte Illusion, wenn du es nicht verstehst.</p>
+  <article id="content">
+    <h2>Was ist Bitcoin in einem Satz?</h2>
+    <p>Bitcoin ist digitales Eigentum, das du selbst kontrollierst – oder die größte Illusion, wenn du es nicht verstehst.</p>
 
-  <h2>Warum wurde Bitcoin erschaffen?</h2>
-  <p>2008 brach das Vertrauen in das globale Finanzsystem zusammen. Banken wurden gerettet, Menschen enteignet. Bitcoin wurde als Reaktion geboren – als dezentrales, digitales Geld, das sich niemand aneignen oder manipulieren kann. Es funktioniert ohne Banken, ohne Staaten, weltweit, für jeden Menschen.</p>
+    <h2>Warum wurde Bitcoin erschaffen?</h2>
+    <p>
+      2008 brach das Vertrauen in das globale Finanzsystem zusammen. Banken wurden gerettet, Menschen enteignet.
+      Bitcoin wurde als Reaktion geboren – als dezentrales, digitales Geld, das sich niemand aneignen oder manipulieren kann.
+      Es funktioniert ohne Banken, ohne Staaten, weltweit, für jeden Menschen.
+    </p>
 
-  <h2>Was macht Bitcoin einzigartig?</h2>
-  <ul>
-    <li>🔒 <strong>Begrenzte Menge:</strong> Maximal 21 Millionen Bitcoin – nie mehr. Keine Inflation.</li>
-    <li>⚖️ <strong>Teilbarkeit:</strong> Jeder Bitcoin besteht aus 100 Millionen Satoshis.</li>
-    <li>🚀 <strong>Transportierbarkeit:</strong> Deine Seed Phrase kannst du im Kopf behalten – Bitcoin kennt keine Grenzen.</li>
-    <li>🕒 <strong>Rund um die Uhr handelbar:</strong> 24/7, ohne Börsenfeiertage oder Banken.</li>
-    <li>🌍 <strong>Global versendbar:</strong> Niemand kann Bitcoin-Transaktionen stoppen oder zensieren.</li>
-    <li>🏡 <strong>Keine Lagerkosten:</strong> Bitcoin ist digital. Keine Tresore, kein Wachdienst.</li>
-    <li>🛡️ <strong>Nicht enteigbar:</strong> Wer seine Keys besitzt, besitzt seine Bitcoin. Punkt.</li>
-    <li>🌐 <strong>Dezentral:</strong> Kein Chef, keine Firma, kein Staat kann Bitcoin kontrollieren.</li>
-    <li>🔍 <strong>Fälschungssicher:</strong> Bitcoin ist mathematisch eindeutig. Gold kann gefälscht sein – Bitcoin nicht.</li>
-    <li>⚖️ <strong>Fungibel:</strong> Jeder Satoshi ist gleichwertig – es gibt keinen "guten" oder "schlechten" Bitcoin.</li>
-    <li>🌱 <strong>Für alle Menschen:</strong> Jeder kann Bitcoin nutzen. Auch ohne Bankkonto.</li>
-    <li>🕳️ <strong>Nicht verderblich:</strong> Bitcoin verrottet nicht, rostet nicht, schimmelt nicht.</li>
-    <li>🧠 <strong>Überall zugänglich:</strong> Alles was du brauchst ist ein Gerät und Internet.</li>
-    <li>⛓️ <strong>Unumkehrbare Transaktionen:</strong> Einmal gesendet, nicht zurückholbar. Eigentum wird Realität.</li>
-  </ul>
+    <h2>Was macht Bitcoin einzigartig?</h2>
+    <ul>
+      <li>🔒 <strong>Begrenzte Menge:</strong> Maximal 21 Millionen Bitcoin – nie mehr. Keine Inflation.</li>
+      <li>⚖️ <strong>Teilbarkeit:</strong> Jeder Bitcoin besteht aus 100 Millionen Satoshis.</li>
+      <li>🚀 <strong>Transportierbarkeit:</strong> Deine Seed Phrase kannst du im Kopf behalten – Bitcoin kennt keine Grenzen.</li>
+      <li>🕒 <strong>Rund um die Uhr handelbar:</strong> 24/7, ohne Börsenfeiertage oder Banken.</li>
+      <li>🌍 <strong>Global versendbar:</strong> Niemand kann Bitcoin-Transaktionen stoppen oder zensieren.</li>
+      <li>🏡 <strong>Keine Lagerkosten:</strong> Bitcoin ist digital. Keine Tresore, kein Wachdienst.</li>
+      <li>🛡️ <strong>Nicht enteigbar:</strong> Wer seine Keys besitzt, besitzt seine Bitcoin. Punkt.</li>
+      <li>🌐 <strong>Dezentral:</strong> Kein Chef, keine Firma, kein Staat kann Bitcoin kontrollieren.</li>
+      <li>🔍 <strong>Fälschungssicher:</strong> Bitcoin ist mathematisch eindeutig. Gold kann gefälscht sein – Bitcoin nicht.</li>
+      <li>⚖️ <strong>Fungibel:</strong> Jeder Satoshi ist gleichwertig – es gibt keinen "guten" oder "schlechten" Bitcoin.</li>
+      <li>🌱 <strong>Für alle Menschen:</strong> Jeder kann Bitcoin nutzen. Auch ohne Bankkonto.</li>
+      <li>🕳️ <strong>Nicht verderblich:</strong> Bitcoin verrottet nicht, rostet nicht, schimmelt nicht.</li>
+      <li>🧠 <strong>Überall zugänglich:</strong> Alles was du brauchst ist ein Gerät und Internet.</li>
+      <li>⛓️ <strong>Unumkehrbare Transaktionen:</strong> Einmal gesendet, nicht zurückholbar. Eigentum wird Realität.</li>
+    </ul>
 
-  <h2>Bitcoin ist früh – aber nicht für immer</h2>
-  <p>Die meisten Menschen haben Bitcoin noch nicht verstanden. Viele denken, es sei ein Risiko – dabei ist es vielleicht <em>das sicherste, was du je besitzen wirst</em>. Studier Bitcoin. Jetzt ist die Zeit, in der man noch frei einsteigen kann – bevor Staaten, Banken und digitale ID-Systeme das Thema kapern wollen.</p>
+    <h2>Bitcoin ist früh – aber nicht für immer</h2>
+    <p>
+      Die meisten Menschen haben Bitcoin noch nicht verstanden. Viele denken, es sei ein Risiko – dabei ist es vielleicht
+      <em>das sicherste, was du je besitzen wirst</em>. Studier Bitcoin. Jetzt ist die Zeit, in der man noch frei einsteigen kann –
+      bevor Staaten, Banken und digitale ID-Systeme das Thema kapern wollen.
+    </p>
 
-  <blockquote class="highlight">
-    „Bitcoin ist eine friedliche Revolution. Eine Chance auf Eigentum für alle, die es begreifen.“
-  </blockquote>
+    <blockquote>
+      „Bitcoin ist eine friedliche Revolution. Eine Chance auf Eigentum für alle, die es begreifen.“
+    </blockquote>
 
- <section class="affiliate-box">
-  <h2>📈 Bitcoin kaufen & sicher lagern</h2>
-
-  <p>
-    Wenn du neu bei Bitcoin bist, brauchst du zwei Dinge:
-    <strong>einen seriösen Einstieg zum Kaufen</strong> und
-    <strong>eine eigene Wallet für echte Selbstverwahrung</strong>.
-  </p>
-
-  <ul>
-    <li>
-      <strong>1️⃣ Bitcoin kaufen mit 21bitcoin (Europa)</strong><br>
-      Ich selbst nutze 21bitcoin. Die App ist auf Bitcoin fokussiert, ohne Shitcoins, und eignet sich ideal für DCA und regelmäßiges sats stapeln.<br>
-      👉 <a href="https://alien-investor.org/21bitcoin" target="_blank" rel="noopener noreferrer">
-        alien-investor.org/21bitcoin
-      </a><br>
-      🎯 Rabatt-Code: <code>ALIENINVESTOR</code> – damit erhältst du dauerhaft
-      <strong>0,2&nbsp;Prozentpunkte Gebührenreduktion</strong> auf Sofort- und Sparplankäufe.
-    </li>
-
-    <li style="margin-top:1em;">
-      <strong>2️⃣ Bitcoin in Selbstverwahrung mit BitBox</strong><br>
-      Nach dem Kauf solltest du deine Sats auf eine eigene Hardware-Wallet ziehen – not your keys, not your coins.<br>
-      👉 <a href="https://alien-investor.org/bitbox" target="_blank" rel="noopener noreferrer">
-        alien-investor.org/bitbox
-      </a><br>
-      Mit dem Code <code>ALIENINVESTOR</code> bekommst du <strong>5&nbsp;% Rabatt</strong> im BitBox-Shop.
-    </li>
-  </ul>
-
-  <p style="font-size:0.9em; color:#ccc;">
-    Hinweis: Das sind Affiliate-/Referral-Links. Wenn du sie nutzt, unterstützt du meine Arbeit,
-    ohne mehr zu bezahlen. Keine Finanz-, Steuer- oder Rechtsberatung – nur meine persönliche Alien-Meinung. 👽
-  </p>
-</section>
+    <div class="box">
+      <h3>📈 Bitcoin kaufen & sicher lagern</h3>
+      <p>
+        Wenn du neu bei Bitcoin bist, brauchst du zwei Dinge: <strong>einen seriösen Einstieg zum Kaufen</strong>
+        und <strong>eine eigene Wallet für echte Selbstverwahrung</strong>.
+      </p>
+      <ul>
+        <li>
+          <strong>1️⃣ Bitcoin kaufen mit 21bitcoin (Europa)</strong><br>
+          Ich selbst nutze 21bitcoin. Die App ist auf Bitcoin fokussiert, ohne Shitcoins, und eignet sich ideal für DCA und regelmäßiges sats stapeln.<br>
+          👉 <a href="https://alien-investor.org/21bitcoin" target="_blank" rel="noopener noreferrer">alien-investor.org/21bitcoin</a><br>
+          Mit dem Code <code>ALIENINVESTOR</code> erhältst du dauerhaft <strong>0,2&nbsp;Prozentpunkte Gebührenreduktion</strong> auf Sofort- und Sparplankäufe.
+        </li>
+        <li>
+          <strong>2️⃣ Bitcoin in Selbstverwahrung mit BitBox</strong><br>
+          Nach dem Kauf solltest du deine Sats auf eine eigene Hardware-Wallet ziehen – not your keys, not your coins.<br>
+          👉 <a href="https://alien-investor.org/bitbox" target="_blank" rel="noopener noreferrer">alien-investor.org/bitbox</a><br>
+          Mit dem Code <code>ALIENINVESTOR</code> bekommst du <strong>5&nbsp;% Rabatt</strong> im BitBox-Shop.
+        </li>
+      </ul>
+      <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">
+        Hinweis: Das sind Affiliate-/Referral-Links. Wenn du sie nutzt, unterstützt du meine Arbeit,
+        ohne mehr zu bezahlen. Danke! 👽
+      </p>
+    </div>
+  </article>
 
   <div class="like-button">
     <button id="likeButton">👍 Gefällt mir</button>
-    <span class="like-count" id="likeCount">0</span>
-    <span class="like-info">Speichert nur lokal im Browser, kein Tracking, keine externen Cookies.</span>
+    <span id="likeCount">0</span>
+    <span style="color:#bbb; font-size: 0.9em;">(Lokal)</span>
   </div>
 
   <script>
-    (function () {
-      const storageKey = window.location.pathname + '-likes';
+    (function() {
+      const storageKey = window.location.pathname + "-likes";
       const btn = document.getElementById('likeButton');
-      const countSpan = document.getElementById('likeCount');
+      const span = document.getElementById('likeCount');
 
-      let count = parseInt(localStorage.getItem(storageKey) || '0', 10);
-      if (Number.isNaN(count)) {
-        count = 0;
-      }
-      countSpan.textContent = String(count);
+      let count = parseInt(localStorage.getItem(storageKey) || "0", 10);
+      span.textContent = count;
 
-      btn.addEventListener('click', function () {
-        if (btn.disabled) return;
-        count++;
+      btn.addEventListener('click', function() {
+        count += 1;
+        span.textContent = count;
         localStorage.setItem(storageKey, String(count));
-        countSpan.textContent = String(count);
         btn.disabled = true;
-        btn.textContent = 'Danke! 👽';
+        btn.textContent = "Danke! 👽";
+        btn.style.borderColor = "#444";
+        btn.style.color = "#888";
       });
     })();
   </script>
 
-  <footer>
-    <p>📬 Kontakt:
-      <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>
-    </p>
+  <div class="back-links">
+    <a href="blog.html" style="font-size: 1.1em;">⬅ Zurück zur Blog-Übersicht</a>
+    <a href="index.html" style="font-size: 1.1em;">⬅ Zurück zur Zentrale</a>
+  </div>
 
-    <p style="font-size: 0.9em; color: #aaa;">
-      👽 <strong>Haftungsausschluss:</strong><br>
-      Dieser Artikel ist keine Finanz-, Steuer- oder Rechtsberatung.<br>
-      Ich teile hier nur meine persönliche Alien-Meinung 🛸 – unabhängig, rebellisch und frei.<br>
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+      <h3 style="margin-bottom: 15px;">
+        🔋 Energie aufladen
+        <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
+      </h3>
+      
+      <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+        Treibstoff für das Mutterschiff senden
+      </a>
+      
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸
+      </p>
+  </div>
+
+  <footer>
+    <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    
+    <p style="margin-top: 20px;">
+      👽 <strong>Haftungsausschluss:</strong><br><br>
+      Dieser Artikel stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
+      Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
       Investieren ist mit Risiken verbunden. Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
     </p>
-
-    <div class="support" style="margin-top: 2em;">
-      <h2>💸 Unterstütze meine Arbeit</h2>
-      <ul>
-        <li>☕ Spenden via
-          <a href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener">Ko-fi</a>
-        </li>
-        <li>⚡ Bitcoin Lightning:
-          <code>alien_investor@strike.me</code>
-        </li>
-        <li>₿ Bitcoin Onchain:
-          <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code>
-        </li>
-      </ul>
-    </div>
-
-    <p><a href="blog.html">← Zurück zur Blogübersicht</a></p>
   </footer>
+
 </body>
 </html>
