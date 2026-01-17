@@ -13,44 +13,47 @@
       line-height: 1.6;
       max-width: 800px;
       margin: auto;
-      padding: 2em;
+      padding: 0 15px 20px 15px; /* Seitenabstand für Mobile */
     }
-    h1, h2, h3 {
+
+    /* --- TYPOGRAFIE & LAYOUT --- */
+    h1 {
       color: #00ffcc;
+      margin-top: 40px;
+      text-align: center;
     }
+    h2 {
+      color: #00ffcc;
+      margin-top: 2em;
+      border-bottom: 1px solid #333;
+      padding-bottom: 10px;
+    }
+    
+    /* --- LINKS (Neon-Glow) --- */
     a {
       color: #00ffcc;
       text-decoration: none;
+      transition: all 0.2s ease;
     }
     a:hover {
-      text-decoration: underline;
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc;
     }
-    code {
-      background-color: #111;
-      padding: 0.2em 0.4em;
-      border-radius: 4px;
-      color: #0f0;
-      font-size: 0.95em;
+
+    /* --- NAVIGATION --- */
+    .top-nav {
+      padding: 10px 0;
+      font-size: 0.9em;
     }
-    em {
-      color: #ccc;
+    .back-links {
+      margin-top: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
-    .byline {
-      margin-top: -0.8em;
-      margin-bottom: 1.2em;
-      color: #ccc;
-      font-style: italic;
-    }
-    ul {
-      margin-left: 1.2em;
-    }
-    blockquote {
-      border-left: 3px solid #00ffcc;
-      padding-left: 1em;
-      margin: 2em 0;
-      color: #ddd;
-      font-style: italic;
-    }
+
+    /* --- BOXEN & CODE --- */
     .box {
       border: 1px solid #00ffcc;
       background-color: #050505;
@@ -58,54 +61,39 @@
       border-radius: 8px;
       margin: 2em 0;
       font-size: 0.95em;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
     }
-    .box h3 {
-      margin-top: 0;
-    }
-
-    /* NEU: Standard für interne Lese-Empfehlungen (gestrichelte Box) */
-    .recommendation-box {
-      margin: 2em 0;
-      padding: 1em;
-      border: 1px dashed #00ffcc;
-      border-radius: 8px;
-      text-align: center;
-      background-color: #050505;
-    }
-    .recommendation-box h3 {
-      margin-top: 0;
-      font-size: 1.1em;
-      color: #00ffcc;
-    }
-
-    .like-button {
-      margin-top: 2em;
-    }
-    button {
+    code {
       background-color: #111;
-      color: #fff;
-      border: 1px solid #444;
-      padding: 0.5em 1em;
-      border-radius: 5px;
-      cursor: pointer;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      color: #0f0;
+      font-size: 0.95em;
+      font-family: monospace;
     }
-    button:hover {
-      background-color: #222;
-    }
+
+    /* --- FOOTER --- */
     footer {
-      margin-top: 3em;
-      padding-top: 2em;
-      border-top: 1px solid #333;
-      font-size: 0.9em;
-    }
-    .support ul {
-      margin: 0.3em 0 0 1.2em;
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
     }
   </style>
 </head>
 <body>
+
+  <div class="top-nav">
+    <a href="index.html">⬅ Zurück zur Zentrale</a>
+  </div>
+
   <h1>Wunsch-Analysen – Mini-FAQ</h1>
-  <p class="byline"><em>von Alien Investor</em></p>
+  
+  <p style="text-align: center; color: #ccc; margin-top: -15px; font-style: italic;">
+    Klartext statt Kleingedrucktes.
+  </p>
 
   <article id="content">
     <p>
@@ -127,18 +115,13 @@
     </p>
     
     <div class="box">
-    <h2>2) Wie stelle ich eine Anfrage?</h2>
-    <p>
-      Du kannst meine Arbeit freiwillig unterstützen (Ko-fi, Bitcoin Onchain oder Bitcoin Lightning).
-      Wenn du eine Wunsch-Aktie hast, schreibe sie im <strong>Memo / in der Nachricht</strong> dazu.
-    </p>
-    <p><strong>Format:</strong> <code>Aktie – Ticker</code></p>
-    <ul>
-      <li><code>Apple – AAPL</code></li>
-      <li><code>Microsoft – MSFT</code></li>
-      <li><code>ASML – ASML</code></li>
-    </ul>
-  </div>
+      <strong>Format-Beispiel:</strong> <code>Aktie – Ticker</code>
+      <ul style="margin-top: 10px; color: #ccc;">
+        <li><code>Apple – AAPL</code></li>
+        <li><code>Microsoft – MSFT</code></li>
+        <li><code>ASML – ASML</code></li>
+      </ul>
+    </div>
 
     <h2>3. Warum über Spenden?</h2>
     <p>
@@ -147,11 +130,11 @@
       So bleibt die Signalqualität hoch.
     </p>
 
-    <h2>4. Gibt es eine Garantie, dass du jede Anfrage bearbeitest?</h2>
+    <h2>4. Gibt es eine Garantie?</h2>
     <p>
       Nein. Die Analyse erfolgt nach Zeit und Verfügbarkeit.
       Es besteht <strong>kein Anspruch</strong> auf Durchführung oder Zeitpunkt.
-      Manche Themen passen besser, manche schlechter – ich entscheide das frei.
+      Manche Themen passen besser, manche schlechter – ich entscheide das frei nach redaktionellem Interesse.
     </p>
 
     <h2>5. Ist das Finanzberatung?</h2>
@@ -161,59 +144,48 @@
       Du triffst Entscheidungen immer selbst und eigenverantwortlich.
     </p>
 
-    <h2>6. Was ist, wenn ich keinen Memo-Text hinzufügen kann?</h2>
+    <h2>6. Kein Memo-Feld gefunden?</h2>
     <p>
-      Dann schreib mir eine kurze Mail mit der Transaktion als Hinweis und deinem Wunsch:
+      Falls dein Wallet oder Provider kein Nachrichtenfeld unterstützt, schreib mir einfach eine kurze Mail mit dem Hinweis auf die Transaktion und deinem Wunsch an:<br>
       <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>
     </p>
 
   </article>
 
-  <script>
-    (function() {
-      const storageKey = window.location.pathname + "-likes";
-      const btn = document.getElementById('likeButton');
-      const span = document.getElementById('likeCount');
+  <div class="back-links">
+    <a href="aktien-analysen.html" style="font-size: 1.1em;">📊 Zurück zu den Aktien-Analysen</a>
+    <a href="blog.html" style="font-size: 1.1em;">📚 Zurück zum Blog</a>
+    <a href="index.html" style="font-size: 1.1em;">⬅ Zurück zur Zentrale</a>
+  </div>
 
-      let count = parseInt(localStorage.getItem(storageKey) || "0", 10);
-      span.textContent = count;
+  <hr style="border-color: #222; margin: 3em 0;">
 
-      btn.addEventListener('click', function() {
-        count += 1;
-        span.textContent = count;
-        localStorage.setItem(storageKey, String(count));
-        btn.disabled = true;
-        btn.textContent = "Danke! 👽";
-      });
-    })();
-  </script>
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+      <h3 style="margin-bottom: 15px;">
+        🔋 Energie aufladen 
+        <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
+      </h3>
+      
+      <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+        Treibstoff für das Mutterschiff senden
+      </a>
+      
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸
+      </p>
+  </div>
 
   <footer>
-    <p>📬 Kontakt:
-      <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>
-    </p>
-    <p style="font-size:0.95em; color:#bbb;">
-      👽 <strong>Haftungsausschluss:</strong><br>
+    <p>👽 <strong>Haftungsausschluss:</strong><br><br>
       Diese Seite stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
       Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
       Denke selbst, vertraue niemandem, und handle eigenverantwortlich.
     </p>
-    <div class="support" style="margin-top: 2em;">
-      <h2>💸 Unterstütze meine Arbeit</h2>
-      <ul>
-        <li>☕ Spenden via
-          <a href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener">Ko-fi</a>
-        </li>
-        <li>⚡ Bitcoin Lightning:
-          <code>alien_investor@strike.me</code>
-        </li>
-        <li>₿ Bitcoin Onchain:
-          <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code>
-        </li>
-      </ul>
-    </div>
-    <p><a href="aktien-analysen.html">← Zurück zu den Aktien-Analysen</a></p>
-    <p><a href="blog.html">← Zurück zum Blog</a></p>
+
+    <p style="margin-top: 20px;">
+      📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>
+    </p>
   </footer>
+
 </body>
 </html>
