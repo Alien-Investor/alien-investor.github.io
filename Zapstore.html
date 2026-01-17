@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>📱 Nostr Zap Store: Der Angriff auf das App-Store-Monopol von Apple & Google</title>
+  <title>📱 Nostr Zap Store: Der Angriff auf das App-Store-Monopol von Apple & Google | Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Der Nostr Zap Store bricht das Duopol von Apple und Google auf. Zensurresistente App-Verteilung, Value4Value und echte digitale Souveränität. Eine Analyse.">
   <style>
@@ -13,96 +13,90 @@
       line-height: 1.6;
       max-width: 800px;
       margin: auto;
-      padding: 2em;
+      padding: 0 15px 20px 15px; /* Mobile-Optimierung */
     }
+
+    /* --- TYPOGRAFIE --- */
     h1, h2, h3 {
       color: #00ffcc;
     }
+    h1 {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    /* --- LINKS (Neon-Glow) --- */
     a {
       color: #00ffcc;
       text-decoration: none;
+      transition: all 0.2s ease;
     }
     a:hover {
-      text-decoration: underline;
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc; /* Der Alien-Effekt */
     }
-    em {
-      color: #ccc;
-    }
+
+    /* --- STANDARD ELEMENTE --- */
     code {
       background-color: #111;
       padding: 0.2em 0.4em;
       border-radius: 4px;
       color: #0f0;
-      font-size: 0.95em;
+      font-family: monospace;
     }
-    blockquote {
-      border-left: 3px solid #00ffcc;
-      padding-left: 1em;
-      margin: 2em 0;
-      color: #ddd;
-      font-style: italic;
-    }
-    ul {
-      margin-left: 1.2em;
-    }
+    em { color: #ccc; }
+
     .byline {
       margin-top: -0.8em;
-      margin-bottom: 1.2em;
+      margin-bottom: 2em;
       color: #ccc;
       font-style: italic;
+      text-align: center;
     }
+
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
+
+    /* --- BOXEN --- */
     .box {
       border: 1px solid #00ffcc;
-      background-color: #050505;
-      padding: 1em 1.2em;
-      margin: 2em 0;
+      background: #050505;
+      padding: 1.5em;
       border-radius: 8px;
-    }
-    .box h2, .box h3 {
-      margin-top: 0;
-    }
-    .like-button {
       margin: 2em 0;
-      display: flex;
-      align-items: center;
-      gap: 0.75em;
-      font-size: 0.95em;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
     }
-    .like-button button {
-      background: #00ffcc;
-      color: #000;
-      border: none;
-      padding: 0.4em 0.9em;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: bold;
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 1em; }
+
+    .recommendation-box {
+      margin: 2em 0;
+      padding: 1em;
+      border: 1px dashed #00ffcc;
+      border-radius: 8px;
+      text-align: center;
+      background-color: #050505;
     }
-    .like-button span {
-      min-width: 2em;
-      display: inline-block;
+    .recommendation-box h3 {
+      margin-top: 0;
+      font-size: 1.1em;
+      color: #00ffcc;
     }
-    button {
-      background-color: #111;
-      color: #fff;
-      border: 1px solid #444;
-      padding: 0.5em 1em;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #222;
-    }
-    footer {
-      margin-top: 3em;
-      padding-top: 2em;
-      border-top: 1px solid #333;
-      font-size: 0.9em;
-    }
+
+    /* --- TABELLEN --- */
     table {
       width: 100%;
       border-collapse: collapse;
       margin: 2em 0;
       color: #ddd;
+      font-size: 0.95em;
     }
     th, td {
       border: 1px solid #444;
@@ -113,265 +107,300 @@
       background-color: #111;
       color: #00ffcc;
     }
+
+    /* --- LIKE BUTTON --- */
+    .like-button {
+      margin: 3em 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+    }
+    .like-button button {
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+    .like-button button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
+    }
+
+    /* --- NAVIGATION --- */
+    .top-nav {
+      padding: 10px 0;
+      font-size: 0.9em;
+    }
+    .back-links {
+      margin-top: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
 
+  <div class="top-nav">
+    <a href="index.html">⬅ Zurück zur Zentrale</a>
+  </div>
+
   <h1>📱 Nostr Zap Store: Der Angriff auf das App-Store-Monopol von Apple & Google</h1>
   <p class="byline"><em>von Alien Investor</em></p>
 
-  <p>
-    Software ist heute der Zugang zur Welt. Doch wer kontrolliert, welche Software du auf deinem Telefon installieren darfst?
-    Seit über einem Jahrzehnt leben wir in einem globalen Duopol. Apple (iOS) und Google (Android) fungieren als die
-    faktischen Wärter unserer digitalen Gefängnisse – oft euphemistisch „Walled Gardens“ genannt.
-  </p>
-  <p>
-    Sie entscheiden über Zensur, sie kassieren bis zu 30 Prozent „Steuern“ auf Innovationen und sie diktieren, was digitale Souveränität
-    bedeuten darf. Doch es regt sich Widerstand. Das <strong>Nostr-Protokoll</strong>, ursprünglich als Twitter-Alternative gestartet,
-    hat eine Waffe gegen dieses Monopol entwickelt: den <strong>Nostr Zap Store</strong>.
-  </p>
-  <p>
-    Wir schauen uns an, wie dieses System funktioniert, warum Apple davor Angst hat und ob es wirklich sicher ist.
-  </p>
+  <article id="content">
+    <p>
+      Software ist heute der Zugang zur Welt. Doch wer kontrolliert, welche Software du auf deinem Telefon installieren darfst?
+      Seit über einem Jahrzehnt leben wir in einem globalen Duopol. Apple (iOS) und Google (Android) fungieren als die
+      faktischen Wärter unserer digitalen Gefängnisse – oft euphemistisch „Walled Gardens“ genannt.
+    </p>
+    <p>
+      Sie entscheiden über Zensur, sie kassieren bis zu 30 Prozent „Steuern“ auf Innovationen und sie diktieren, was digitale Souveränität
+      bedeuten darf. Doch es regt sich Widerstand. Das <strong>Nostr-Protokoll</strong>, ursprünglich als Twitter-Alternative gestartet,
+      hat eine Waffe gegen dieses Monopol entwickelt: den <strong>Nostr Zap Store</strong>.
+    </p>
+    <p>
+      Wir schauen uns an, wie dieses System funktioniert, warum Apple davor Angst hat und ob es wirklich sicher ist.
+    </p>
 
-  <h2>1. Die Architektur der Kontrolle: Warum wir eine Alternative brauchen</h2>
-  <p>
-    Um zu verstehen, warum der Zap Store wichtig ist, müssen wir das Problem benennen. Die Macht von Apple und Google
-    stützt sich auf drei Säulen: Gatekeeping, ökonomische Extraktion und Datenzentralisierung.
-  </p>
+    <h2>1. Die Architektur der Kontrolle: Warum wir eine Alternative brauchen</h2>
+    <p>
+      Um zu verstehen, warum der Zap Store wichtig ist, müssen wir das Problem benennen. Die Macht von Apple und Google
+      stützt sich auf drei Säulen: Gatekeeping, ökonomische Extraktion und Datenzentralisierung.
+    </p>
 
-  <h3>Gatekeeping als Machtinstrument</h3>
-  <p>
-    Jede App muss durch die Kontrolle der Konzerne. Was offiziell „Sicherheit“ heißt, ist oft politische oder wirtschaftliche Zensur.
-    Ein Paradebeispiel ist der Konflikt zwischen Apple und der Nostr-App <strong>Damus</strong>.
-  </p>
-  <blockquote>
-    „Apple drohte Damus mit dem Rauswurf aus dem App Store, weil Nutzer sich gegenseitig ‚Zaps‘ (Bitcoin via Lightning) für Beiträge schicken konnten.
-    Apple wollte, dass solche Zahlungen über Apples In-App-Purchase laufen (bis zu 30 % Anteil).
-    Da Zaps aber Peer-to-Peer laufen, <em>passt</em> dieses Modell technisch nicht sauber.
-    Die Folge: Apple zwang Damus, die Funktion zu beschneiden.“
-  </blockquote>
-  <p>
-    Das zeigt: Echte Peer-to-Peer-Ökonomie ist in den geschlossenen Stores unerwünscht. Wer das Geschäftsmodell der Gatekeeper bedroht, fliegt raus.
-  </p>
+    <h3>Gatekeeping als Machtinstrument</h3>
+    <p>
+      Jede App muss durch die Kontrolle der Konzerne. Was offiziell „Sicherheit“ heißt, ist oft politische oder wirtschaftliche Zensur.
+      Ein Paradebeispiel ist der Konflikt zwischen Apple und der Nostr-App <strong>Damus</strong>.
+    </p>
+    <blockquote>
+      „Apple drohte Damus mit dem Rauswurf aus dem App Store, weil Nutzer sich gegenseitig ‚Zaps‘ (Bitcoin via Lightning) für Beiträge schicken konnten.
+      Apple wollte, dass solche Zahlungen über Apples In-App-Purchase laufen (bis zu 30 % Anteil).
+      Da Zaps aber Peer-to-Peer laufen, <em>passt</em> dieses Modell technisch nicht sauber.
+      Die Folge: Apple zwang Damus, die Funktion zu beschneiden.“
+    </blockquote>
+    <p>
+      Das zeigt: Echte Peer-to-Peer-Ökonomie ist in den geschlossenen Stores unerwünscht. Wer das Geschäftsmodell der Gatekeeper bedroht, fliegt raus.
+    </p>
 
-  <h3>Die Illusion der Sicherheit</h3>
-  <p>
-    Das Argument „Nur der App Store ist sicher“ ist brüchig. Zentrale Instanzen sind ein „Single Point of Failure“.
-    Erinnern wir uns an den Skandal um „Web of Trust“ (WOT): Ein zentrales Tool, das Sicherheit versprach,
-    aber im Hintergrund unter anderem Nutzerdaten an Dritte weitergab. Wenn der Wächter korrupt ist oder gehackt wird, sind alle Nutzer gleichzeitig betroffen.
-  </p>
+    <h3>Die Illusion der Sicherheit</h3>
+    <p>
+      Das Argument „Nur der App Store ist sicher“ ist brüchig. Zentrale Instanzen sind ein „Single Point of Failure“.
+      Erinnern wir uns an den Skandal um „Web of Trust“ (WOT): Ein zentrales Tool, das Sicherheit versprach,
+      aber im Hintergrund unter anderem Nutzerdaten an Dritte weitergab. Wenn der Wächter korrupt ist oder gehackt wird, sind alle Nutzer gleichzeitig betroffen.
+    </p>
 
-  <h2>2. Der Nostr Zap Store: Technologische Dekonstruktion</h2>
-  <p>
-    Der „Zap Store“ ist keine zentrale Firma und kein zentraler Server. Er ist ein Protokoll. Er basiert auf mehreren Nostr-Standards (NIPs),
-    die zusammen eine dezentrale Infrastruktur bilden.
-  </p>
+    <h2>2. Der Nostr Zap Store: Technologische Dekonstruktion</h2>
+    <p>
+      Der „Zap Store“ ist keine zentrale Firma und kein zentraler Server. Er ist ein Protokoll. Er basiert auf mehreren Nostr-Standards (NIPs),
+      die zusammen eine dezentrale Infrastruktur bilden.
+    </p>
 
-  <h3>Das Fundament: App-Events (Kind 32267) & Releases (NIP-51)</h3>
-  <p>
-    Wie findest du eine App ohne Google? Über Nostr-Events.
-    Entwickler veröffentlichen ein signiertes App-Event (kind:32267, NIP-82) ins Nostr-Netzwerk. Darin stehen Name, Icon, Tags und Verweise auf Releases.
-    Releases werden als „Release Artifact Sets“ (kind:30063, NIP-51) modelliert und referenzieren die Datei-Metadaten (kind:1063, NIP-94) inklusive Download-URL und Hash.
-    Es ist ein dezentrales App-Manifest. Niemand kann verhindern, dass ein Entwickler dieses Event sendet. Es ist „permissionless“.
-  </p>
+    <h3>Das Fundament: App-Events (Kind 32267) & Releases (NIP-51)</h3>
+    <p>
+      Wie findest du eine App ohne Google? Über Nostr-Events.
+      Entwickler veröffentlichen ein signiertes App-Event (kind:32267, NIP-82) ins Nostr-Netzwerk. Darin stehen Name, Icon, Tags und Verweise auf Releases.
+      Releases werden als „Release Artifact Sets“ (kind:30063, NIP-51) modelliert und referenzieren die Datei-Metadaten (kind:1063, NIP-94) inklusive Download-URL und Hash.
+      Es ist ein dezentrales App-Manifest. Niemand kann verhindern, dass ein Entwickler dieses Event sendet. Es ist „permissionless“.
+    </p>
 
-  <h3>Blossom: Dezentraler Speicher</h3>
-  <p>
-    Nostr-Relays speichern in der Regel Text, keine großen Dateien. Dafür gibt es <strong>Blossom</strong>.
-    Dateien werden nicht unter einem Namen gespeichert, sondern unter ihrem kryptografischen Fingerabdruck (Hash).
-  </p>
-  <ul>
-    <li><strong>Integrität:</strong> Ändert sich ein Bit an der Datei, ändert sich der Hash. Manipulation fällt sofort auf.</li>
-    <li><strong>Zensurresistenz:</strong> Da die Datei nur über den Hash abgerufen wird, kann sie auf vielen Servern gespiegelt werden.
-    Löscht ein Server sie, holt sich dein Handy die Datei einfach woanders.</li>
-  </ul>
-
-  <h3>Kryptografische Identität</h3>
-  <p>
-    Im Zap Store gibt es keine Accounts mit E-Mail-Adresse. Entwickler identifizieren sich über ihren <strong>Public Key</strong>.
-    Release- und Update-Metadaten werden mit dem privaten Schlüssel signiert. Dein Handy prüft: „Kommt dieses Update wirklich vom gleichen Entwickler wie vorher?“
-    Das ist Supply-Chain-Security auf Linux-Niveau, aber nutzbar gemacht für Endanwender.
-  </p>
-
-  <h2>3. Value Proposition: Freiheit & Money Streaming</h2>
-  <p>
-    Warum sollte man sich den Aufwand antun? Weil das ökonomische Modell revolutionär ist.
-  </p>
-
-  <h3>Value4Value (V4V) statt 30 % Steuer</h3>
-  <p>
-    Im Zap Store gibt es keine zentrale Plattformgebühr. Wenn du eine App kaufst oder dem Entwickler Geld sendest, geschieht das über
-    <strong>Bitcoin Lightning</strong>. Das Geld fließt direkt von dir zum Entwickler.
-    Das ermöglicht Mikrotransaktionen (z. B. 10 Cent für ein Feature), die im alten System wegen der Gebühren unmöglich waren.
-  </p>
-
-  <h3>Web of Trust statt Algorithmus</h3>
-  <p>
-    In Googles Play Store siehst du, was am meisten Geld für Werbung ausgibt.
-    Im Zap Store siehst du, was dein Netzwerk empfiehlt. Wenn ein Sicherheitsforscher, dem du vertraust, eine App „zappt“ oder empfiehlt,
-    hat das mehr Gewicht als anonyme 5-Sterne-Bewertungen, die oft von Bots gekauft sind.
-  </p>
-
-  <h2>4. Dezentralität vs. Sicherheit: Ein kritischer Blick</h2>
-  <p>
-    Ohne Gatekeeper kann jeder Apps hochladen – auch Malware. Wie schützt uns der Zap Store?
-  </p>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Merkmal</th>
-        <th>Apple / Google (Zentral)</th>
-        <th>Nostr Zap Store (Dezentral)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Vertrauen</strong></td>
-        <td>Du vertraust der Marke (Blind Trust).</td>
-        <td>Du vertraust Signaturen & deinem Netzwerk (Web of Trust).</td>
-      </tr>
-      <tr>
-        <td><strong>Zensur</strong></td>
-        <td>Globaler Kill-Switch möglich.</td>
-        <td>Deutlich erschwert (Antifragil).</td>
-      </tr>
-      <tr>
-        <td><strong>Malware-Schutz</strong></td>
-        <td>Automatisierte Scanner & Review-Teams.</td>
-        <td>Community-Reporting & Isolation durch OS-Sandbox.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <p>
-    Der Schutz im Zap Store basiert auf Transparenz und Reputation. Eine App von einem unbekannten Key wird als „unverified“ markiert.
-    Zudem: Auf Android laufen Apps in einer <strong>Sandbox</strong>. Selbst eine bösartige App aus dem Zap Store kann nicht ohne entsprechende Berechtigungen
-    auf deine Kontakte oder Standortdaten zugreifen. Die Sicherheit des Betriebssystems ist die letzte Verteidigungslinie.
-  </p>
-
-  <h2>5. Praxis: Funktioniert das wirklich?</h2>
-
-  <h3>Android: Der „Happy Path“</h3>
-  <p>
-    Auf Android funktioniert der Zap Store bereits heute erstaunlich gut. Du musst einmalig das Installieren aus „unbekannten Quellen“ erlauben.
-    Danach fühlt es sich an wie ein F-Droid Store mit Social-Features. Updates können automatisch und signiert rein kommen.
-    Tools wie das <strong>zapstore-cli</strong> erlauben Entwicklern, Updates direkt aus ihrer Programmierumgebung (z. B. CI-Pipelines wie GitHub Actions)
-    in die Welt zu pushen – ohne Wartezeit, ohne Review.
-  </p>
-
-  <h3>iOS: Souveränität verweigert</h3>
-  <p>
-    Auf dem iPhone bleibt der Zap Store vorerst Theorie – außerhalb der EU (und Japan) erlaubt Apple weiterhin kein echtes Sideloading.
-    In der EU (und Japan) erlaubt Apple zwar alternative App-Marktplätze und Web-Distribution, aber nur unter strengen Apple-Regeln; echtes, freies Sideloading bleibt stark eingeschränkt.
-    Das zeigt deutlich:
-    Wer digitale Freiheit will, stößt bei Apple an eine harte Grenze.
-  </p>
-
-  <h2>6. Alien-Fazit: Ein Riss in der Mauer</h2>
-  <p>
-    Der Nostr Zap Store ist noch nicht massentauglich. Er besteht den „Oma-Test“ noch nicht.
-    Aber er ist der Beweis, dass es technisch möglich ist, Software global zu verteilen, ohne einen Konzern um Erlaubnis zu fragen
-    und ohne bis zu 30 Prozent Schutzgeld zu zahlen.
-  </p>
-  <p>
-    Es ist eine Rückkehr zu den Prinzipien des offenen Internets – kombiniert mit hartem Geld (Bitcoin) und harter Kryptografie.
-    Für Entwickler ist es ein Rettungsboot. Für Nutzer ist es ein Werkzeug der Selbstverteidigung.
-  </p>
-
-  <div class="box">
-    <h3>🧰 Tools für echte Eigentümer (Werbung/Affiliate)</h3>
-    <p style="font-size:0.95em;">
-      Wenn du deine digitale Souveränität ernst nimmst, nutze nicht nur dein Bankdepot oder den Standard-App-Store:
+    <h3>Blossom: Dezentraler Speicher</h3>
+    <p>
+      Nostr-Relays speichern in der Regel Text, keine großen Dateien. Dafür gibt es <strong>Blossom</strong>.
+      Dateien werden nicht unter einem Namen gespeichert, sondern unter ihrem kryptografischen Fingerabdruck (Hash).
     </p>
     <ul>
-      <li>
-        🇨🇭 <strong>Investieren mit Swissquote:</strong><br>
-        Ich nutze Swissquote in der Schweiz – dort kannst du saubere Namensaktien halten und hast keine
-        deutsche Bank dazwischen.<br>
-        👉 <a href="https://alien-investor.org/swissquote" target="_blank">https://alien-investor.org/swissquote</a>
-      </li>
-      <li>
-        📊 <strong>US-Aktien über IBKR:</strong><br>
-        Für viele internationale Titel bietet sich Interactive Brokers als Zugang an – insbesondere in Kombination
-        mit DRS/Transfer Agenten.<br>
-        👉 <a href="https://alien-investor.org/interactive-brokers" target="_blank">https://alien-investor.org/interactive-brokers</a>
-      </li>
-      <li>
-        💥 <strong>Bitcoin kaufen in Europa – 21bitcoin:</strong><br>
-        Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges sats stapeln – ohne Shitcoins.<br>
-        Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du, sofern der Code im Referral-/Partnerprogramm hinterlegt ist, dauerhaft 0,2&nbsp;Prozentpunkte Gebührenreduktion
-        auf Sofort- und Sparplankäufe.<br>
-        👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
-      </li>
-      <li>
-        ₿ <strong>Bitcoin in Selbstverwahrung:</strong><br>
-        Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox – es gibt die klassische BitBox02 und die neue
-        BitBox für iPhone (Nova).<br>
-        👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
-      </li>
-      <li>
-        🛡️ <strong>Privacy &amp; Mail:</strong><br>
-        Für E-Mail, VPN und Cloud nutze ich Proton – datensparsam und ohne Big-Tech-Abhängigkeit.<br>
-        👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
-      </li>
+      <li><strong>Integrität:</strong> Ändert sich ein Bit an der Datei, ändert sich der Hash. Manipulation fällt sofort auf.</li>
+      <li><strong>Zensurresistenz:</strong> Da die Datei nur über den Hash abgerufen wird, kann sie auf vielen Servern gespiegelt werden.
+      Löscht ein Server sie, holt sich dein Handy die Datei einfach woanders.</li>
     </ul>
-    <p style="font-size:0.85em; color:#aaa;">
-      Hinweis: Bei einigen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit,
-      ohne dass es dich mehr kostet. Danke! 👽
-    </p>
-  </div>
 
-  <div class="box">
-    <h3>🚀 Startrampe: Zap Store installieren</h3>
-    <p style="font-size:0.95em;">
-      Bereit, das Experiment zu wagen? Hier findest du den direkten Zugang zur App und zum Web-Katalog.
+    <h3>Kryptografische Identität</h3>
+    <p>
+      Im Zap Store gibt es keine Accounts mit E-Mail-Adresse. Entwickler identifizieren sich über ihren <strong>Public Key</strong>.
+      Release- und Update-Metadaten werden mit dem privaten Schlüssel signiert. Dein Handy prüft: „Kommt dieses Update wirklich vom gleichen Entwickler wie vorher?“
+      Das ist Supply-Chain-Security auf Linux-Niveau, aber nutzbar gemacht für Endanwender.
     </p>
-    <ul>
-      <li>
-        📲 <strong>Download (APK & Info):</strong><br>
-        <a href="https://zapstore.dev/" target="_blank">https://zapstore.dev/</a>
-      </li>
-      <li>
-        🌐 <strong>Web-Katalog (Browser):</strong><br>
-        <a href="https://nostrapps.com/" target="_blank">https://nostrapps.com/</a>
-      </li>
-    </ul>
-  </div>
+
+    <h2>3. Value Proposition: Freiheit & Money Streaming</h2>
+    <p>
+      Warum sollte man sich den Aufwand antun? Weil das ökonomische Modell revolutionär ist.
+    </p>
+
+    <h3>Value4Value (V4V) statt 30 % Steuer</h3>
+    <p>
+      Im Zap Store gibt es keine zentrale Plattformgebühr. Wenn du eine App kaufst oder dem Entwickler Geld sendest, geschieht das über
+      <strong>Bitcoin Lightning</strong>. Das Geld fließt direkt von dir zum Entwickler.
+      Das ermöglicht Mikrotransaktionen (z. B. 10 Cent für ein Feature), die im alten System wegen der Gebühren unmöglich waren.
+    </p>
+
+    <h3>Web of Trust statt Algorithmus</h3>
+    <p>
+      In Googles Play Store siehst du, was am meisten Geld für Werbung ausgibt.
+      Im Zap Store siehst du, was dein Netzwerk empfiehlt. Wenn ein Sicherheitsforscher, dem du vertraust, eine App „zappt“ oder empfiehlt,
+      hat das mehr Gewicht als anonyme 5-Sterne-Bewertungen, die oft von Bots gekauft sind.
+    </p>
+
+    <h2>4. Dezentralität vs. Sicherheit: Ein kritischer Blick</h2>
+    <p>
+      Ohne Gatekeeper kann jeder Apps hochladen – auch Malware. Wie schützt uns der Zap Store?
+    </p>
+
+    <div style="overflow-x: auto;">
+      <table>
+        <thead>
+          <tr>
+            <th>Merkmal</th>
+            <th>Apple / Google (Zentral)</th>
+            <th>Nostr Zap Store (Dezentral)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Vertrauen</strong></td>
+            <td>Du vertraust der Marke (Blind Trust).</td>
+            <td>Du vertraust Signaturen & deinem Netzwerk (Web of Trust).</td>
+          </tr>
+          <tr>
+            <td><strong>Zensur</strong></td>
+            <td>Globaler Kill-Switch möglich.</td>
+            <td>Deutlich erschwert (Antifragil).</td>
+          </tr>
+          <tr>
+            <td><strong>Malware-Schutz</strong></td>
+            <td>Automatisierte Scanner & Review-Teams.</td>
+            <td>Community-Reporting & Isolation durch OS-Sandbox.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Der Schutz im Zap Store basiert auf Transparenz und Reputation. Eine App von einem unbekannten Key wird als „unverified“ markiert.
+      Zudem: Auf Android laufen Apps in einer <strong>Sandbox</strong>. Selbst eine bösartige App aus dem Zap Store kann nicht ohne entsprechende Berechtigungen
+      auf deine Kontakte oder Standortdaten zugreifen. Die Sicherheit des Betriebssystems ist die letzte Verteidigungslinie.
+    </p>
+
+    <h2>5. Praxis: Funktioniert das wirklich?</h2>
+
+    <h3>Android: Der „Happy Path“</h3>
+    <p>
+      Auf Android funktioniert der Zap Store bereits heute erstaunlich gut. Du musst einmalig das Installieren aus „unbekannten Quellen“ erlauben.
+      Danach fühlt es sich an wie ein F-Droid Store mit Social-Features. Updates können automatisch und signiert rein kommen.
+      Tools wie das <strong>zapstore-cli</strong> erlauben Entwicklern, Updates direkt aus ihrer Programmierumgebung (z. B. CI-Pipelines wie GitHub Actions)
+      in die Welt zu pushen – ohne Wartezeit, ohne Review.
+    </p>
+
+    <h3>iOS: Souveränität verweigert</h3>
+    <p>
+      Auf dem iPhone bleibt der Zap Store vorerst Theorie – außerhalb der EU (und Japan) erlaubt Apple weiterhin kein echtes Sideloading.
+      In der EU (und Japan) erlaubt Apple zwar alternative App-Marktplätze und Web-Distribution, aber nur unter strengen Apple-Regeln; echtes, freies Sideloading bleibt stark eingeschränkt.
+      Das zeigt deutlich:
+      Wer digitale Freiheit will, stößt bei Apple an eine harte Grenze.
+    </p>
+
+    <h2>6. Alien-Fazit: Ein Riss in der Mauer</h2>
+    <p>
+      Der Nostr Zap Store ist noch nicht massentauglich. Er besteht den „Oma-Test“ noch nicht.
+      Aber er ist der Beweis, dass es technisch möglich ist, Software global zu verteilen, ohne einen Konzern um Erlaubnis zu fragen
+      und ohne bis zu 30 Prozent Schutzgeld zu zahlen.
+    </p>
+    <p>
+      Es ist eine Rückkehr zu den Prinzipien des offenen Internets – kombiniert mit hartem Geld (Bitcoin) und harter Kryptografie.
+      Für Entwickler ist es ein Rettungsboot. Für Nutzer ist es ein Werkzeug der Selbstverteidigung.
+    </p>
+
+    <div class="box">
+      <h3>🧰 Tools für echte Eigentümer (Werbung/Affiliate)</h3>
+      <p style="font-size:0.95em;">
+        Wenn du deine digitale Souveränität ernst nimmst, nutze nicht nur dein Bankdepot oder den Standard-App-Store:
+      </p>
+      <ul>
+        <li>
+          🇨🇭 <strong>Investieren mit Swissquote:</strong><br>
+          Ich nutze Swissquote in der Schweiz – dort kannst du saubere Namensaktien halten und hast keine
+          deutsche Bank dazwischen.<br>
+          👉 <a href="https://alien-investor.org/swissquote" target="_blank">https://alien-investor.org/swissquote</a>
+        </li>
+        <li>
+          📊 <strong>US-Aktien über IBKR:</strong><br>
+          Für viele internationale Titel bietet sich Interactive Brokers als Zugang an – insbesondere in Kombination
+          mit DRS/Transfer Agenten.<br>
+          👉 <a href="https://alien-investor.org/interactive-brokers" target="_blank">https://alien-investor.org/interactive-brokers</a>
+        </li>
+        <li>
+          💥 <strong>Bitcoin kaufen in Europa – 21bitcoin:</strong><br>
+          Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges sats stapeln – ohne Shitcoins.<br>
+          Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du dauerhaft 0,2&nbsp;Prozentpunkte Gebührenreduktion
+          auf Sofort- und Sparplankäufe.<br>
+          👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
+        </li>
+        <li>
+          ₿ <strong>Bitcoin in Selbstverwahrung:</strong><br>
+          Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox – es gibt die klassische BitBox02 und die neue
+          BitBox für iPhone (Nova).<br>
+          👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
+        </li>
+        <li>
+          🛡️ <strong>Privacy &amp; Mail:</strong><br>
+          Für E-Mail, VPN und Cloud nutze ich Proton – datensparsam und ohne Big-Tech-Abhängigkeit.<br>
+          👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
+        </li>
+      </ul>
+      <p style="font-size:0.85em; color:#aaa;">
+        Hinweis: Bei einigen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit,
+        ohne dass es dich mehr kostet. Danke! 👽
+      </p>
+    </div>
+
+    <div class="box">
+      <h3>🚀 Startrampe: Zap Store installieren</h3>
+      <p style="font-size:0.95em;">
+        Bereit, das Experiment zu wagen? Hier findest du den direkten Zugang zur App und zum Web-Katalog.
+      </p>
+      <ul>
+        <li>
+          📲 <strong>Download (APK & Info):</strong><br>
+          👉 <a href="https://zapstore.dev/" target="_blank">zapstore.dev</a>
+        </li>
+        <li>
+          🌐 <strong>Web-Katalog (Browser):</strong><br>
+          👉 <a href="https://nostrapps.com/" target="_blank">nostrapps.com</a>
+        </li>
+      </ul>
+    </div>
+
+  </article>
+
   <div class="like-button">
     <button id="likeButton">👍 Gefällt mir</button>
     <span id="likeCount">0</span>
-    <span style="color:#bbb;">(Speicherung nur lokal im Browser)</span>
+    <span style="color:#bbb; font-size: 0.9em;">(Lokal)</span>
   </div>
-
-  <div class="box">
-    <h3>📚 Quellen (Auswahl)</h3>
-    <p style="font-size:0.95em;">
-      Diese Analyse basiert auf technischen Spezifikationen des Nostr-Protokolls (u. a. NIP-51, NIP-82, NIP-94, Blossom),
-      Untersuchungen zum Fall Damus vs. Apple, sowie Dokumentationen zu Sideloading-Sicherheitsarchitekturen (Android Sandbox).
-      Weitere Datenpunkte umfassen Entwickler-Dokumentationen zum Zap Store CLI und Analysen zur Zensurresistenz dezentraler Netzwerke.
-    </p>
-  </div>
-
-  <h3>💸 Unterstütze meine Arbeit</h3>
-  <ul>
-    <li>☕ <a href="https://ko-fi.com/alieninvestor" target="_blank">Spenden via Ko-fi (PayPal, Fiat)</a></li>
-    <li>⚡ Bitcoin Lightning: <code>alien_investor@strike.me</code></li>
-    <li>₿ Bitcoin Onchain: <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code></li>
-  </ul>
-  <p>Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸</p>
-
-  <footer>
-    <p>👽 <strong>Haftungsausschluss:</strong><br>
-      Dieser Artikel stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
-      Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
-      Investieren und die Nutzung experimenteller Software sind mit Risiken verbunden. Prüfe Informationen selbst
-      und handle eigenverantwortlich.
-    </p>
-    <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
-    <p><a href="blog.html">⬅ Zurück zum Blog</a></p>
-  </footer>
 
   <script>
     (function() {
@@ -388,9 +417,54 @@
         localStorage.setItem(storageKey, String(count));
         btn.disabled = true;
         btn.textContent = "Danke! 👽";
+        btn.style.borderColor = "#444";
+        btn.style.color = "#888";
       });
     })();
   </script>
+
+  <div class="box" style="border-style: dashed; border-color: #333;">
+    <h3>📚 Quellen (Auswahl)</h3>
+    <p style="font-size:0.95em; color: #ccc;">
+      Diese Analyse basiert auf technischen Spezifikationen des Nostr-Protokolls (u. a. NIP-51, NIP-82, NIP-94, Blossom),
+      Untersuchungen zum Fall Damus vs. Apple, sowie Dokumentationen zu Sideloading-Sicherheitsarchitekturen (Android Sandbox).
+      Weitere Datenpunkte umfassen Entwickler-Dokumentationen zum Zap Store CLI und Analysen zur Zensurresistenz dezentraler Netzwerke.
+    </p>
+  </div>
+
+  <div class="back-links">
+    <a href="blog.html" style="font-size: 1.1em;">⬅ Zurück zur Blog-Übersicht</a>
+    <a href="index.html" style="font-size: 1.1em;">⬅ Zurück zur Zentrale</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+      <h3 style="margin-bottom: 15px;">
+        🔋 Energie aufladen
+        <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
+      </h3>
+      
+      <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+        Treibstoff für das Mutterschiff senden
+      </a>
+      
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸
+      </p>
+  </div>
+
+  <footer>
+    <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    
+    <p style="margin-top: 20px;">
+      👽 <strong>Haftungsausschluss:</strong><br><br>
+      Dieser Artikel stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
+      Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
+      Investieren und die Nutzung experimenteller Software sind mit Risiken verbunden. Prüfe Informationen selbst
+      und handle eigenverantwortlich.
+    </p>
+  </footer>
 
 </body>
 </html>
