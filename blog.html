@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -13,59 +12,77 @@
       line-height: 1.6;
       max-width: 800px;
       margin: auto;
-      padding: 2em;
+      padding: 0 15px 20px 15px; /* Etwas Seitenabstand für Handys */
     }
+
+    /* --- TYPOGRAFIE --- */
     h1 {
       color: #00ffcc;
+      margin-top: 40px;
+      text-align: center; /* Überschrift zentriert wirkt edler */
     }
     h2 {
       color: #00ffcc;
       margin-top: 2.5em;
+      border-bottom: 1px solid #333; /* Trennlinie für Struktur */
+      padding-bottom: 10px;
     }
+    
+    /* --- LINKS (mit Neon-Effekt wie auf Startseite) --- */
     a {
       color: #00ffcc;
       text-decoration: none;
+      transition: all 0.2s ease;
     }
     a:hover {
-      text-decoration: underline;
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc; /* Der Alien-Glow */
     }
+
+    /* --- LISTEN --- */
     .article-list {
       margin-top: 1em;
+      padding-left: 20px; /* Einrückung für Bulletpoints */
     }
     .article-list li {
-      margin-bottom: 0.5em;
+      margin-bottom: 0.8em; /* Mehr Luft zwischen den Artikeln */
     }
-    code {
-      background-color: #111;
-      padding: 0.2em 0.4em;
-      border-radius: 4px;
-      color: #0f0;
-      font-size: 0.95em;
+
+    /* --- NAV OBERHALB --- */
+    .top-nav {
+      padding: 10px 0;
+      font-size: 0.9em;
     }
+
+    /* --- FOOTER --- */
     footer {
-      margin-top: 3em;
-      padding: 2em 0 0 0;
+      margin-top: 60px;
+      padding: 20px;
       font-size: 0.85em;
-      color: #bbb;
-      border-top: 1px solid #333;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center; /* Zentriert wie auf der Startseite */
     }
   </style>
 </head>
 <body>
 
+  <div class="top-nav">
+    <a href="index.html">⬅ Zurück zur Zentrale</a>
+  </div>
+
   <img src="Blog_Banner.png" alt="Kosmischer Blog Banner"
-       style="width: 100%; max-height: 500px; object-fit: cover; display: block;">
+       style="width: 100%; height: auto; border-radius: 4px; border: 1px solid #333; margin-top: 10px;">
   
   <h1>👽 Blog des Alien Investors</h1>
-  <p>Hier findest du rebellische Artikel zu Finanzen, Freiheit und Selbstverantwortung.</p>
-  <p style="font-size:0.9em; color:#bbb;">
-    Die Artikel sind grob in drei Bereiche gegliedert – von Grundlagen über Bitcoin &amp; echtes Eigentum
-    bis hin zu Privacy- und Nerd-Themen.
+  
+  <p style="text-align: center; max-width: 600px; margin: 0 auto 40px auto; color: #ccc;">
+    Rebellische Artikel zu Finanzen, Freiheit und Selbstverantwortung.<br>
+    <span style="font-size:0.85em; color:#888;">Von Grundlagen über Bitcoin &amp; echtes Eigentum bis zu Privacy.</span>
   </p>
 
-  <!-- Sektion 1: Einstieg & Grundlagen -->
   <h2>🛸 Einstieg &amp; Grundlagen</h2>
-  <p style="font-size:0.9em; color:#bbb;">
+  <p style="font-size:0.9em; color:#bbb; margin-bottom: 15px;">
     Wenn du neu im Thema Geld, Inflation und Finanzsystem bist, fang hier an.
   </p>
   <ul class="article-list">
@@ -75,26 +92,21 @@
     <li><a href="vertrauen.html">🔒 Warum du niemandem vertrauen solltest – besonders beim Geld</a></li>
   </ul>
 
-  <!-- Sektion 2: Bitcoin & echtes Eigentum -->
-  <h2> ⚡Bitcoin, Aktien &amp; echtes Eigentum</h2>
-  <p style="font-size:0.9em; color:#bbb;">
+  <h2>⚡ Bitcoin, Aktien &amp; echtes Eigentum</h2>
+  <p style="font-size:0.9em; color:#bbb; margin-bottom: 15px;">
     Hier geht es um Bitcoin als Wertspeicher, Selbstverwahrung und echtes Eigentum an Aktien.
   </p>
   <ul class="article-list">
     <li><a href="Bitcoin-No-KYC.html">🛡️ Bitcoin ohne KYC 2026 – Der Weg zur wahren Souveränität</a></li>
-    <li><a href="bitcoin.html">🧡Bitcoin in einem Satz: Eigentum oder Illusion?</a></li>
+    <li><a href="bitcoin.html">🧡 Bitcoin in einem Satz: Eigentum oder Illusion?</a></li>
     <li><a href="wie-ich-den-bitcoin-kurs-bewerte.html">🧠 Wie ich den Bitcoin-Kurs bewerte – Modelle &amp; Kennzahlen im Überblick</a></li>
     <li><a href="bitcoin_encrypt.html">🔐 Wie Bitcoin Kryptographie benutzt</a></li>
     <li><a href="namensaktien.html">📜 Was sind Namensaktien – und warum ich die Schweiz liebe</a></li>
     <li><a href="us-aktien.html">📈 US-Aktien halten – aber richtig!</a></li>
-    <li><a href="direct-registration-us-aktien.html">💲 DRS – echtes Eigentum oder nur Illusion? Wie sicher sind direkt registrierte US-Aktien wirklich?</a></li>
+    <li><a href="direct-registration-us-aktien.html">💲 DRS – echtes Eigentum oder nur Illusion?</a></li>
   </ul>
 
   <h2>🕵️‍♂️📊 Aktienanalysen</h2>
-  <p style="font-size:0.9em; color:#bbb;">
-    Wenn du tiefer in einzelne Unternehmen eintauchen willst – mit Zahlen, Geschäftsmodell
-    und Chancen/Risiken aus Eigentümer-Sicht – findest du hier eine eigene Übersicht.
-  </p>
   <ul class="article-list">
     <li>
       <a href="aktien-analysen.html">🕵️‍♂️📊 Zur Übersicht der Aktienanalysen</a>
@@ -102,53 +114,50 @@
   </ul>
   
   <h2>🪙📉 Bitcoin-Kursanalysen</h2>
-  <p style="font-size:0.9em; color:#bbb;">
-    Wenn du sehen willst, wo Bitcoin aktuell im Zyklus steht – mit Kurs, Bewertung und
-    groben Nachkauf-Ranges, aber ohne Trading-Geschrei –, findest du hier eine eigene Übersicht.
-  </p>
   <ul class="article-list">
     <li>
       <a href="bitcoin-analysen.html">🪙📉 Zur Übersicht der Bitcoin-Kursanalysen</a>
     </li>
   </ul>
 
-  <!-- Sektion 3: Privacy, Krypto & Smartphone -->
   <h2>📡 Datenschutz, Kryptographie &amp; Smartphone-Sicherheit</h2>
-  <p style="font-size:0.9em; color:#bbb;">
+  <p style="font-size:0.9em; color:#bbb; margin-bottom: 15px;">
     Für alle, die Verschlüsselung, Cypherpunks und sichere Smartphones feiern – hier wird es technischer.
   </p>
   <ul class="article-list">
-    <li><a href="nostr-identitaet.html">✅ Das silberne Häkchen der Freiheit: Wie du deine Nostr-Identität unsterblich machst (Anleitung)</a></li>
-    <li><a href="Obtainium.html">📱 Obtainium – Der General-Schlüssel für dein Android (Bye bye, Google Play!)</a></li>
+    <li><a href="nostr-identitaet.html">✅ Das silberne Häkchen der Freiheit: Deine Nostr-Identität</a></li>
+    <li><a href="Obtainium.html">📱 Obtainium – Der General-Schlüssel für dein Android</a></li>
     <li><a href="Alias.html">⌨️ Der digitale Bunker: Kommandozeilen-Komfort</a></li>
-    <li><a href="GrapheneOS-Skripte.html">🛡️ Der mobile Bunker: Verschlüsselung auf GrapheneOS (Termux Edition)</a></li>
+    <li><a href="GrapheneOS-Skripte.html">🛡️ Der mobile Bunker: Verschlüsselung auf GrapheneOS</a></li>
     <li><a href="Kryptographie.html">🔐 Der digitale Bunker: Souveränität per Skript</a></li>
-    <li><a href="GrapheneOS-Custom.html">🛡️ GrapheneOS: Die Konfiguration der Souveränität – vom Smartphone zum digitalen Bunker</a></li>
-    <li><a href="Android-Zwang.html">📱 Die große Schließung: Wie Android 2026 das freie Sideloading beerdigt</a></li>
-    <li><a href="local-ai.html">🧠 Digitale Souveränität: Warum du eine eigene Bord-KI brauchst (und wie du sie baust)</a></li>
-    <li><a href="X-AGB.html">⚠️ Digitale Souveränität: Warum X (Twitter) dich zur Laborratte macht – und wie du entkommst</a></li>
-    <li><a href="Zapstore.html">📱 Nostr Zap Store: Der Angriff auf das App-Store-Monopol von Apple & Google</a></li>
-    <li><a href="Primal.html">🔐 Das Souveräne Protokoll – Architektur einer unkonfiszierbaren digitalen Identität</a></li>
-    <li><a href="DNS.html">🛡️ NextDNS – Die Firewall gegen Überwachung und Zensur durch deinen Internetanbieter</a></li>
-    <li><a href="nostr-sicherheit-warum-du-deinen-private-key-niemals-in-eine-app-kopieren-darfst-und-warum-du-amber-brauchst.html">🔑 Nostr & Sicherheit: Warum du deinen Private Key niemals in eine App kopieren darfst (und warum du Amber brauchst)</a></li>
-    <li><a href="white-noise-messenger-warum-signal-nicht-reicht-und-nostr-die-zukunft-ist.html">🔇 White Noise Messenger – Warum Signal nicht reicht und Nostr die Zukunft ist</a></li>
-    <li><a href="wasabi-wallet-research-transparent.html">🧅 Wasabi Wallet: CoinJoin & Privatsphäre – meine Recherche</a></li>
+    <li><a href="GrapheneOS-Custom.html">🛡️ GrapheneOS: Die Konfiguration der Souveränität</a></li>
+    <li><a href="Android-Zwang.html">📱 Die große Schließung: Android & Sideloading 2026</a></li>
+    <li><a href="local-ai.html">🧠 Digitale Souveränität: Warum du eine eigene Bord-KI brauchst</a></li>
+    <li><a href="X-AGB.html">⚠️ Digitale Souveränität: Warum X (Twitter) dich zur Laborratte macht</a></li>
+    <li><a href="Zapstore.html">📱 Nostr Zap Store: Angriff auf das App-Store-Monopol</a></li>
+    <li><a href="Primal.html">🔐 Das Souveräne Protokoll – Unkonfiszierbare Identität</a></li>
+    <li><a href="DNS.html">🛡️ NextDNS – Die Firewall gegen Überwachung</a></li>
+    <li><a href="nostr-sicherheit-warum-du-deinen-private-key-niemals-in-eine-app-kopieren-darfst-und-warum-du-amber-brauchst.html">🔑 Nostr & Sicherheit: Niemals den Private Key kopieren!</a></li>
+    <li><a href="white-noise-messenger-warum-signal-nicht-reicht-und-nostr-die-zukunft-ist.html">🔇 White Noise Messenger – Warum Signal nicht reicht</a></li>
+    <li><a href="wasabi-wallet-research-transparent.html">🧅 Wasabi Wallet: CoinJoin & Privatsphäre</a></li>
     <li><a href="cypherpunks-manifest.html">📜 Cypherpunk Manifest – Das Bitcoin-Ethos</a></li>
-    <li><a href="kryptographie-freiheit.html">🛡️ Kryptographie und warum sie unverzichtbar für unsere Freiheit ist</a></li>
-    <li><a href="cypherpunks-verschluesselung.html">🤖 Cypherpunks – wie Sturköpfe unser Recht auf Verschlüsselung erkämpft haben</a></li>
-    <li><a href="grapheneos-sicheres-android.html">🛡️ GrapheneOS – sicheres Android für Menschen, die nicht überwacht werden wollen</a></li>
-    <li><a href="grapheneos-installation.html">📱 GrapheneOS installieren – mehr Kontrolle über dein Smartphone</a></li>
+    <li><a href="kryptographie-freiheit.html">🛡️ Kryptographie: Unverzichtbar für Freiheit</a></li>
+    <li><a href="cypherpunks-verschluesselung.html">🤖 Cypherpunks – Kampf um Verschlüsselung</a></li>
+    <li><a href="grapheneos-sicheres-android.html">🛡️ GrapheneOS – Android ohne Überwachung</a></li>
+    <li><a href="grapheneos-installation.html">📱 GrapheneOS installieren – Anleitung</a></li>
   </ul>
 
-  <p><a href="/">⬅ Zurück zur Startseite</a></p>
+  <div style="text-align: center; margin-top: 40px;">
+    <a href="index.html" style="font-size: 1.1em;">⬅ Zurück zur Startseite</a>
+  </div>
 
-  <hr style="border-color: #333; margin: 2em 0; border-top: 1px solid #333; border-bottom: none; border-left: none; border-right: none;">
+  <hr style="border-color: #222; margin: 3em 0;">
 
-  <div style="margin-top: 40px; margin-bottom: 40px;">
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
       <h3 style="margin-bottom: 15px;">
-  🔋 Energie aufladen 
-  <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
-</h3>
+        🔋 Energie aufladen 
+        <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
+      </h3>
       
       <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
         Treibstoff für das Mutterschiff senden
@@ -157,14 +166,17 @@
       <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
         Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸
       </p>
-    </div>
+  </div>
 
   <footer>
-    <p>👽 <strong>Haftungsausschluss:</strong><br>
+    <p>👽 <strong>Haftungsausschluss:</strong><br><br>
     Dieser Blog stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
     Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
     Denke selbst, vertraue niemandem, und handle eigenverantwortlich.</p>
-    <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    
+    <p style="margin-top: 20px;">
+      📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>
+    </p>
   </footer>
 
 </body>
