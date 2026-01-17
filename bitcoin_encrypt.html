@@ -2,9 +2,9 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
+  <title>Wie Bitcoin Kryptographie benutzt 🤖 | Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wie Bitcoin Verschlüsselung benutzt</title>
-  <meta name="description" content="Eine kurze Erklärung der Sicherheitsmechanismen im Bitcoin Netzwerk">
+  <meta name="description" content="Eine kurze Erklärung der Sicherheitsmechanismen im Bitcoin Netzwerk: Private Keys, Hashing und Signaturen einfach erklärt.">
   <style>
     body {
       background-color: #000;
@@ -13,67 +13,155 @@
       line-height: 1.6;
       max-width: 800px;
       margin: auto;
-      padding: 2em;
+      padding: 0 15px 20px 15px; /* Mobile-Optimierung */
     }
-    h1, h2, h3 { color: #00ffcc; }
-    a { color: #00ffcc; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; }
-    em { color: #ccc; }
-    .byline { margin-top: -0.8em; margin-bottom: 1.2em; }
 
+    /* --- TYPOGRAFIE --- */
+    h1, h2, h3 {
+      color: #00ffcc;
+    }
+    h1 {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    /* --- LINKS (Neon-Glow) --- */
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc; /* Der Alien-Effekt */
+    }
+
+    /* --- STANDARD ELEMENTE --- */
+    code {
+      background-color: #111;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      color: #0f0;
+      font-family: monospace;
+    }
+    em { color: #ccc; }
+
+    .byline {
+      margin-top: -0.8em;
+      margin-bottom: 2em;
+      color: #ccc;
+      font-style: italic;
+      text-align: center;
+    }
+
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
+
+    /* --- BOXEN --- */
+    .box {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 1em; }
+
+    .recommendation-box {
+      margin: 2em 0;
+      padding: 1em;
+      border: 1px dashed #00ffcc;
+      border-radius: 8px;
+      text-align: center;
+      background-color: #050505;
+    }
+    .recommendation-box h3 {
+      margin-top: 0;
+      font-size: 1.1em;
+      color: #00ffcc;
+    }
+
+    /* --- LIKE BUTTON --- */
     .like-button {
-      margin-top: 2em;
-      font-size: 0.9em;
+      margin: 3em 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
     }
     .like-button button {
-      background-color: #111;
-      color: #fff;
+      background: #000;
+      color: #00ffcc;
       border: 1px solid #00ffcc;
-      padding: 0.4em 0.8em;
-      border-radius: 4px;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
       cursor: pointer;
-      margin-right: 0.5em;
+      font-weight: bold;
+      transition: all 0.2s ease;
     }
     .like-button button:hover {
-      background-color: #022;
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
     }
-    .like-button .like-count {
-      font-weight: bold;
-      margin-right: 0.5em;
-    }
-    .like-button .like-info {
-      display: block;
-      margin-top: 0.4em;
-      color: #aaa;
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
     }
 
-    button {
-      background-color: #111; color: #fff; border: 1px solid #444;
-      padding: 0.5em 1em; border-radius: 5px; cursor: pointer;
+    /* --- NAVIGATION --- */
+    .top-nav {
+      padding: 10px 0;
+      font-size: 0.9em;
     }
-    button:hover { background-color: #222; }
-    footer { margin-top: 3em; padding-top: 2em; border-top: 1px solid #333; font-size: 0.9em; }
-    .support ul { margin: 0.3em 0 0 1.2em; }
-    blockquote.highlight {
-      margin-top: 2em;
-      padding: 1em 1.2em;
-      border-left: 4px solid #00ffcc;
-      background-color: #111;
-      font-style: italic;
-      color: #ddd;
+    .back-links {
+      margin-top: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
     }
   </style>
 </head>
 <body>
+
+  <div class="top-nav">
+    <a href="index.html">⬅ Zurück zur Zentrale</a>
+  </div>
+
   <h1>Wie Bitcoin Kryptographie benutzt 🤖</h1>
   <p class="byline"><em>von Alien Investor</em></p>
-  <!-- BEGIN ARTICLE CONTENT -->
+
   <article id="content">
     <h2>Bitcoin ist Kryptographie, kein Bankkonto 💸</h2>
-    <p>Bitcoin ist im Kern kein „digitales Geldkonto“, sondern ein Haufen Mathematik: Kryptographie, Hashfunktionen, Signaturen, verteilte Rechner.</p>
-    <p>Statt zu sagen „Die Bank führt ein Konto für dich“, sagt Bitcoin:</p>
-    <blockquote>"Du hast einen geheimen Schlüssel. Wer diesen Schlüssel hat, kontrolliert die Coins."</blockquote>
+    <p>
+      Bitcoin ist im Kern kein „digitales Geldkonto“, sondern ein Haufen Mathematik: Kryptographie, Hashfunktionen,
+      Signaturen, verteilte Rechner. Statt zu sagen „Die Bank führt ein Konto für dich“, sagt Bitcoin:
+    </p>
+    <blockquote>
+      „Du hast einen geheimen Schlüssel. Wer diesen Schlüssel hat, kontrolliert die Coins.“
+    </blockquote>
 
     <h2>Private Key, Public Key, Adresse – dein Tresor im Kryptoland 🔑</h2>
     <p>Wenn du eine Bitcoin-Wallet erstellst, passiert im Hintergrund Folgendes:</p>
@@ -88,30 +176,44 @@
       <li>Der <strong>öffentliche Schlüssel</strong> ist das Schloss.</li>
       <li>Die <strong>Adresse</strong> ist die lesbare Version, die du anderen gibst („Schick mir dahin Bitcoin“).</li>
     </ul>
-    <p>Wichtig:</p>
-    <p>Der Weg ist einseitig. Aus der Adresse oder dem öffentlichen Schlüssel kommst du praktisch nicht zurück zum privaten Schlüssel. Das ist der Schutzschild.</p>
+    <p>
+      Wichtig: Der Weg ist einseitig. Aus der Adresse oder dem öffentlichen Schlüssel kommst du praktisch nicht
+      zurück zum privaten Schlüssel. Das ist der Schutzschild.
+    </p>
 
     <h2>Seed Phrase: Das menschliche Backup deines Schlüssels 🧠</h2>
-    <p>In der Praxis siehst du selten den rohen privaten Schlüssel. Deine Wallet zeigt dir stattdessen 12 oder 24 Wörter – die sogenannte <strong>Seed Phrase</strong>.</p>
+    <p>
+      In der Praxis siehst du selten den rohen privaten Schlüssel. Deine Wallet zeigt dir stattdessen 12 oder 24 Wörter –
+      die sogenannte <strong>Seed Phrase</strong>.
+    </p>
     <ul>
       <li>Diese Wörter sind die <strong>Wurzel</strong> aller deiner privaten Schlüssel und Adressen.</li>
       <li>Verlierst du sie, kannst du deine Wallet auf keinem Gerät mehr wiederherstellen.</li>
       <li>Fallen sie in falsche Hände, kann jeder deine Coins klauen – von überall auf der Welt.</li>
     </ul>
-    <p>Darum gehören Seed-Wörter offline: kein Screenshot, keine Cloud, kein Messenger. Papier oder Metall, sicher verstaut – und niemals jemandem zeigen.</p>
+    <p>
+      Darum gehören Seed-Wörter offline: kein Screenshot, keine Cloud, kein Messenger.
+      Papier oder Metall, sicher verstaut – und niemals jemandem zeigen.
+    </p>
 
     <h2>Digitale Signaturen: Senden heißt unterschreiben 📨</h2>
-    <p>Wenn du Bitcoin verschickst, „verschlüsselst“ du nicht einfach etwas – du <strong>signierst</strong> eine Transaktion.</p>
+    <p>
+      Wenn du Bitcoin verschickst, „verschlüsselst“ du nicht einfach etwas – du <strong>signierst</strong> eine Transaktion.
+    </p>
     <ul>
       <li>Deine Wallet baut eine Transaktion: „Von Adresse X nach Adresse Y, mit Betrag Z“.</li>
       <li>Dann wird diese Transaktion mit deinem <strong>privaten Schlüssel digital signiert</strong>.</li>
       <li>Jeder Knoten im Netzwerk kann mit deinem <strong>öffentlichen Schlüssel</strong> prüfen, ob die Signatur gültig ist.</li>
     </ul>
     <p>Damit beweist du:</p>
-    <blockquote>"Ich bin der legitime Besitzer dieses Outputs und erlaube diese Ausgabe."</blockquote>
+    <blockquote>
+      „Ich bin der legitime Besitzer dieses Outputs und erlaube diese Ausgabe.“
+    </blockquote>
 
     <h2>Hashfunktionen: Die DNA von Blöcken und Transaktionen 🔒</h2>
-    <p>Bitcoin benutzt auch intensiv <strong>Hashfunktionen</strong> (z. B. SHA-256). Ein Hash ist wie ein digitaler Fingerabdruck:</p>
+    <p>
+      Bitcoin benutzt auch intensiv <strong>Hashfunktionen</strong> (z. B. SHA-256). Ein Hash ist wie ein digitaler Fingerabdruck:
+    </p>
     <ul>
       <li>Du gibst eine beliebige Datenmenge hinein (Transaktion, Blockheader, etc.).</li>
       <li>Du bekommst einen festen, scheinbar zufälligen Output heraus.</li>
@@ -123,7 +225,9 @@
     </ul>
 
     <h2>Mining & Proof-of-Work: Arbeit statt Vertrauen 💪</h2>
-    <p>Beim Mining passiert nicht „ein bisschen Raten“, sondern massiver Einsatz von Rechenleistung:</p>
+    <p>
+      Beim Mining passiert nicht „ein bisschen Raten“, sondern massiver Einsatz von Rechenleistung:
+    </p>
     <ul>
       <li>Miner nehmen den Blockinhalt + eine Zahl (Nonce).</li>
       <li>Sie suchen so lange, bis der Hash eines Blocks eine bestimmte Bedingung erfüllt (z. B. mit einer bestimmten Anzahl führender Nullen).</li>
@@ -135,8 +239,7 @@
     </ul>
 
     <h2>Was Bitcoin NICHT verschlüsselt: Transparenz als Feature 🔍</h2>
-    <p>Wichtiges Missverständnis:</p>
-    <p>Bitcoin verschlüsselt <strong>nicht</strong> einfach alles.</p>
+    <p>Wichtiges Missverständnis: Bitcoin verschlüsselt <strong>nicht</strong> einfach alles.</p>
     <ul>
       <li>Die Blockchain ist öffentlich einsehbar.</li>
       <li>Jeder kann Transaktionen und Beträge sehen.</li>
@@ -156,7 +259,9 @@
       <li>Tippe deine Seed-Wörter niemals auf einer Webseite ein – echte Wallets fragen dich nur lokal danach.</li>
       <li>Teile deine Seed Phrase mit <strong>niemandem</strong>. Kein Support, kein „Freund“, kein „Gewinnspiel“ darf sie sehen.</li>
     </ul>
-    <p>Wer deine Seed kennt, braucht keine Hacker-Skills. Er braucht nur eine Wallet-App – und deine Bitcoin sind weg.</p>
+    <p>
+      Wer deine Seed kennt, braucht keine Hacker-Skills. Er braucht nur eine Wallet-App – und deine Bitcoin sind weg.
+    </p>
 
     <h2>Warum das alles mit Freiheit zu tun hat 🌟</h2>
     <p>Die Kryptographie bei Bitcoin sorgt dafür, dass du:</p>
@@ -170,112 +275,115 @@
       <li>Wenn du den <strong>privaten Schlüssel</strong> nicht kontrollierst, kontrollierst du das Asset nicht.</li>
       <li>Wenn du ihn <strong>selbst verwahrst</strong>, bist du nicht mehr Kunde – du bist Eigentümer im mathematischen Sinne.</li>
     </ul>
-    <p>Genau das ist der Cypherpunk-Traum: Kein Vertrauen in Institutionen nötig, sondern Vertrauen in offen geprüften Code, offene Mathematik und deine eigene Verantwortung. Mehr zur Vorgeschichte findest du im Artikel über die Cypherpunks hier im Blog.</p>
+    <p>
+      Genau das ist der Cypherpunk-Traum: Kein Vertrauen in Institutionen nötig, sondern Vertrauen in offen geprüften Code,
+      offene Mathematik und deine eigene Verantwortung.
+    </p>
 
     <h2>Kurzfassung in einem Satz 📚</h2>
     <p>Bitcoin nutzt Kryptographie nicht als Deko, sondern als Fundament:</p>
-    <blockquote>"Private Schlüssel, Signaturen, Hashes und Proof-of-Work sorgen dafür, dass du <strong>ohne Bank, ohne Staat, nur mit Mathematik</strong> Eigentum halten und übertragen kannst – solange du deine Schlüssel wie deinen Lebenssaft beschützt."</blockquote>
+    <blockquote>
+      „Private Schlüssel, Signaturen, Hashes und Proof-of-Work sorgen dafür, dass du <strong>ohne Bank, ohne Staat, nur mit Mathematik</strong>
+      Eigentum halten und übertragen kannst – solange du deine Schlüssel wie deinen Lebenssaft beschützt.“
+    </blockquote>
   </article>
-  <!-- END ARTICLE CONTENT -->
+
+  <div class="box">
+    <h3>🧰 Tools für echte Eigentümer</h3>
+    <p style="font-size:0.95em;">
+      Wenn du Aktien und Bitcoin möglichst eigenverantwortlich halten willst, nutze nicht nur dein Bankdepot:
+    </p>
+    <ul>
+      <li>
+        💥 <strong>Bitcoin kaufen in Europa – 21bitcoin:</strong><br>
+        Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges sats stapeln – ohne Shitcoins.<br>
+        Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du dauerhaft 0,2&nbsp;Prozentpunkte Gebührenreduktion
+        auf Sofort- und Sparplankäufe.<br>
+        👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
+      </li>
+      <li>
+        ₿ <strong>Bitcoin in Selbstverwahrung:</strong><br>
+        Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox – es gibt die klassische BitBox02 und die neue
+        BitBox für iPhone (Nova).<br>
+        👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
+      </li>
+      <li>
+        🇨🇭 <strong>Investieren mit Swissquote:</strong><br>
+        Ich nutze Swissquote in der Schweiz – dort kannst du saubere Namensaktien halten und hast keine
+        deutsche Bank dazwischen.<br>
+        👉 <a href="https://alien-investor.org/swissquote" target="_blank">https://alien-investor.org/swissquote</a>
+      </li>
+      <li>
+        🛡️ <strong>Privacy &amp; Mail:</strong><br>
+        Für E-Mail, VPN und Cloud nutze ich Proton – datensparsam und ohne Big-Tech-Abhängigkeit.<br>
+        👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
+      </li>
+    </ul>
+    <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">
+      Hinweis: Bei einigen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit,
+      ohne dass es dich mehr kostet. Danke! 👽
+    </p>
+  </div>
 
   <div class="like-button">
     <button id="likeButton">👍 Gefällt mir</button>
-    <span class="like-count" id="likeCount">0</span>
-    <span class="like-info">Speichert nur lokal im Browser, kein Tracking, keine externen Cookies.</span>
+    <span id="likeCount">0</span>
+    <span style="color:#bbb; font-size: 0.9em;">(Lokal)</span>
   </div>
 
   <script>
-    (function () {
-      const storageKey = window.location.pathname + '-likes';
+    (function() {
+      const storageKey = window.location.pathname + "-likes";
       const btn = document.getElementById('likeButton');
-      const countSpan = document.getElementById('likeCount');
+      const span = document.getElementById('likeCount');
 
-      let count = parseInt(localStorage.getItem(storageKey) || '0', 10);
-      if (Number.isNaN(count)) {
-        count = 0;
-      }
-      countSpan.textContent = String(count);
+      let count = parseInt(localStorage.getItem(storageKey) || "0", 10);
+      span.textContent = count;
 
-      btn.addEventListener('click', function () {
-        if (btn.disabled) return;
-        count++;
+      btn.addEventListener('click', function() {
+        count += 1;
+        span.textContent = count;
         localStorage.setItem(storageKey, String(count));
-        countSpan.textContent = String(count);
         btn.disabled = true;
-        btn.textContent = 'Danke! 👽';
+        btn.textContent = "Danke! 👽";
+        btn.style.borderColor = "#444";
+        btn.style.color = "#888";
       });
     })();
   </script>
 
-<section style="margin-top:2em; padding:1em; border:1px solid #00ffcc; border-radius:8px; background-color:#050505;">
-  <h2>🔐 Bitcoin kaufen & in Selbstverwahrung halten – 21bitcoin &amp; BitBox</h2>
-  <p>
-    Wenn du Bitcoin wirklich selbst halten willst (<em>not your keys, not your coins</em>),
-    brauchst du zwei Dinge: einen seriösen Einstieg zum Kaufen und eine eigene Hardware-Wallet
-    statt Börse oder Trading-App.
-  </p>
+  <div class="back-links">
+    <a href="blog.html" style="font-size: 1.1em;">⬅ Zurück zur Blog-Übersicht</a>
+    <a href="index.html" style="font-size: 1.1em;">⬅ Zurück zur Zentrale</a>
+  </div>
 
-  <h3 style="margin-top:1em;">1️⃣ Bitcoin kaufen mit 21bitcoin (Europa)</h3>
-  <p>
-    Ich selbst nutze 21bitcoin. Die App ist Bitcoin-only, ohne Shitcoins, und ideal für DCA und regelmäßiges sats stapeln.<br>
-    Mit dem Code <code>ALIENINVESTOR</code> erhältst du dauerhaft
-    <strong>0,2&nbsp;Prozentpunkte Gebührenreduktion</strong> auf Sofort- und Sparplankäufe.
-  </p>
-  <p>
-    👉 <strong>21bitcoin-Link:</strong><br>
-    <a href="https://alien-investor.org/21bitcoin" target="_blank" rel="noopener noreferrer">
-      alien-investor.org/21bitcoin
-    </a>
-  </p>
+  <hr style="border-color: #222; margin: 3em 0;">
 
-  <h3 style="margin-top:1.5em;">2️⃣ Bitcoin in Selbstverwahrung – BitBox</h3>
-  <p>
-    Nach dem Kauf sollten deine Sats auf eine eigene Hardware-Wallet wandern – nur dann gehören sie wirklich dir
-    und nicht der nächsten Börse oder App.
-  </p>
-
-  <p>
-    <strong>BitBox Shop:</strong><br>
-    👉 <a href="https://alien-investor.org/bitbox" target="_blank" rel="noopener noreferrer">
-      alien-investor.org/bitbox
-    </a>
-  </p>
-
-  <p>
-    <strong>Rabattcode:</strong> <code>ALIENINVESTOR</code><br>
-    Mit dem Code <code>ALIENINVESTOR</code> bekommst du <strong>5&nbsp;% Rabatt</strong> auf deine Bestellung.
-  </p>
-
-  <p style="font-size:0.9em; color:#ccc;">
-    Hinweis: Das sind Affiliate-/Referral-Links – du unterstützt damit meinen Content, ohne mehr zu bezahlen.
-    Keine Finanz-, Steuer- oder Rechtsberatung, nur meine persönliche Alien-Meinung. 👽
-  </p>
-</section>
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+      <h3 style="margin-bottom: 15px;">
+        🔋 Energie aufladen
+        <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
+      </h3>
+      
+      <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+        Treibstoff für das Mutterschiff senden
+      </a>
+      
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸
+      </p>
+  </div>
 
   <footer>
-    <p>📬 Kontakt:
-      <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>
-    </p>
-    <p style="font-size:0.95em; color:#bbb;">
-      👽 <strong>Haftungsausschluss:</strong><br>
-      Keine Finanz-, Steuer- oder Rechtsberatung – nur persönliche Alien-Meinung.<br>
+    <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    
+    <p style="margin-top: 20px;">
+      👽 <strong>Haftungsausschluss:</strong><br><br>
+      Dieser Artikel stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
+      Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
       Investieren ist mit Risiken verbunden. Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
     </p>
-    <div class="support" style="margin-top: 2em;">
-      <h2>💸 Unterstütze meine Arbeit</h2>
-      <ul>
-        <li>☕ Spenden via
-          <a href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener">Ko-fi</a>
-        </li>
-        <li>⚡ Bitcoin Lightning:
-          <code>alien_investor@strike.me</code>
-        </li>
-        <li>₿ Bitcoin Onchain:
-          <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code>
-        </li>
-      </ul>
-    </div>
-    <p><a href="/blog.html">← Zurück zum Blog</a></p>
   </footer>
+
 </body>
 </html>
