@@ -2,8 +2,8 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
+  <title>GrapheneOS installieren – mehr Kontrolle über dein Smartphone | Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GrapheneOS installieren – mehr Kontrolle über dein Smartphone</title>
   <meta name="description" content="Persönlicher Leitfaden zur Installation von GrapheneOS auf einem Google Pixel – mit Warnhinweisen, Voraussetzungen und Spendenaufruf für das unabhängige Projekt.">
   <style>
     body {
@@ -13,52 +13,146 @@
       line-height: 1.6;
       max-width: 800px;
       margin: auto;
-      padding: 2em;
+      padding: 0 15px 20px 15px; /* Mobile-Optimierung */
     }
-    h1, h2, h3 { color: #00ffcc; }
-    a { color: #00ffcc; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; }
+
+    /* --- TYPOGRAFIE --- */
+    h1, h2, h3 {
+      color: #00ffcc;
+    }
+    h1 {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    /* --- LINKS (Neon-Glow) --- */
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc; /* Der Alien-Effekt */
+    }
+
+    /* --- STANDARD ELEMENTE --- */
+    code {
+      background-color: #111;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      color: #0f0;
+      font-family: monospace;
+    }
     em { color: #ccc; }
-    .byline { margin-top: -0.8em; margin-bottom: 1.2em; }
-    .like-button {
+
+    .byline {
+      margin-top: -0.8em;
+      margin-bottom: 2em;
+      color: #ccc;
+      font-style: italic;
+      text-align: center;
+    }
+
+    blockquote {
+      border-left: 3px solid #00ffcc;
       margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
+
+    /* --- BOXEN --- */
+    .box {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 1em; }
+
+    .recommendation-box {
+      margin: 2em 0;
+      padding: 1em;
+      border: 1px dashed #00ffcc;
+      border-radius: 8px;
+      text-align: center;
+      background-color: #050505;
+    }
+    .recommendation-box h3 {
+      margin-top: 0;
+      font-size: 1.1em;
+      color: #00ffcc;
+    }
+
+    /* --- LIKE BUTTON --- */
+    .like-button {
+      margin: 3em 0;
       display: flex;
       align-items: center;
-      gap: 0.75em;
-      font-size: 0.95em;
+      justify-content: center;
+      gap: 1em;
     }
     .like-button button {
-      background: #00ffcc;
-      color: #000;
-      border: none;
-      padding: 0.4em 0.9em;
-      border-radius: 4px;
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
       cursor: pointer;
       font-weight: bold;
+      transition: all 0.2s ease;
     }
-    .like-button span {
-      min-width: 2em;
-      display: inline-block;
+    .like-button button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
     }
-    footer { margin-top: 3em; padding-top: 2em; border-top: 1px solid #333; font-size: 0.9em; }
-    .support ul { margin: 0.3em 0 0 1.2em; }
-    blockquote.highlight {
-      margin-top: 2em;
-      padding: 1em 1.2em;
-      border-left: 3px solid #00ffcc;
-      background-color: #111;
-      font-style: italic;
-      color: #ddd;
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
+    }
+
+    /* --- NAVIGATION --- */
+    .top-nav {
+      padding: 10px 0;
+      font-size: 0.9em;
+    }
+    .back-links {
+      margin-top: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
     }
   </style>
 </head>
 <body>
 
+  <div class="top-nav">
+    <a href="index.html">⬅ Zurück zur Zentrale</a>
+  </div>
+
   <h1>📱 GrapheneOS installieren – mehr Kontrolle über dein Smartphone</h1>
   <p class="byline"><em>von Alien Investor</em></p>
 
-  <!-- BEGIN ARTICLE CONTENT -->
   <article id="content">
     <p>
       Wenn du dieses hier liest, hast du wahrscheinlich genug von Datensammelei, vorinstallierten Google-Diensten
@@ -67,14 +161,15 @@
       <strong>Sicherheit</strong>, <strong>Privatsphäre</strong> und <strong>Kontrolle</strong> ausgelegt ist.
     </p>
 
-    <p>
-      Dieser Artikel ist mein persönlicher Leitfaden – eine Orientierung für den Einstieg.
-      Er ersetzt <strong>nicht</strong> die offizielle Dokumentation. Wenn du wirklich flashen willst,
-      lies unbedingt die Anleitung auf:
-      <a href="https://grapheneos.org" target="_blank" rel="noopener">https://grapheneos.org</a>
-      und speziell den Web-Installer unter
-      <a href="https://grapheneos.org/install/web" target="_blank" rel="noopener">https://grapheneos.org/install/web</a>.
-    </p>
+    <div class="box" style="border-style: dashed; border-color: #ff3333;">
+      <h3 style="color:#ff3333; margin-top:0;">⚠️ Wichtiger Hinweis</h3>
+      <p>
+        Dieser Artikel ist mein persönlicher Leitfaden – eine Orientierung für den Einstieg.
+        Er ersetzt <strong>nicht</strong> die offizielle Dokumentation. Wenn du wirklich flashen willst,
+        lies unbedingt die Anleitung auf der offiziellen Seite.<br><br>
+        👉 <a href="https://grapheneos.org/install/web" target="_blank" rel="noopener">Zum offiziellen Web-Installer</a>
+      </p>
+    </div>
 
     <h2>🔐 Was ist GrapheneOS – und für wen lohnt es sich?</h2>
     <p>
@@ -159,8 +254,8 @@
 
     <h2>🌐 Installation mit dem offiziellen Web-Installer</h2>
     <p>
-      Der einfachste Weg ist der offizielle <strong>Web-Installer</strong> von GrapheneOS:
-      <a href="https://grapheneos.org/install/web" target="_blank" rel="noopener">https://grapheneos.org/install/web</a>.
+      Der einfachste Weg ist der offizielle <strong>Web-Installer</strong> von GrapheneOS:<br>
+      👉 <a href="https://grapheneos.org/install/web" target="_blank" rel="noopener">https://grapheneos.org/install/web</a>
     </p>
     <p>
       Im Kern läuft es so ab (vereinfacht dargestellt – Details stehen auf der offiziellen Seite):
@@ -212,35 +307,24 @@
       Smartphone wirklich unter deine Kontrolle bringen willst.
     </p>
 
-    <section style="border: 1px solid #00ffcc; background-color: #000; padding: 1em 1.2em; margin: 2em 0; border-radius: 8px;">
-      <h2>🛡️ Warum GrapheneOS deine Unterstützung braucht</h2>
+    <div class="recommendation-box">
+      <h3>🛡️ Warum GrapheneOS deine Unterstützung braucht</h3>
       <p>
-        GrapheneOS ist kein Konzernprodukt, keine App eines Big-Tech-Riesen, sondern ein <strong>unabhängiges,
-        sicherheitsfokussiertes Projekt</strong>. Genau das macht es stark – und gleichzeitig angreifbar.
+        GrapheneOS ist kein Konzernprodukt, sondern ein <strong>unabhängiges, sicherheitsfokussiertes Projekt</strong>.
+        Staaten und Behörden haben wenig Interesse an Geräten, die sich ihrer Kontrolle entziehen.
+        Deine Spende hilft, diese Alternative am Leben zu erhalten.
       </p>
-      <p>
-        Staaten und Behörden haben wenig Interesse an Geräten, die sich ihrer Kontrolle entziehen. Immer öfter werden
-        in Europa Gesetze diskutiert, die starke Verschlüsselung, sicheres Messaging oder „zu private“ Systeme
-        einschränken würden. In Ländern wie Frankreich sieht man immer wieder Versuche, Sicherheits- und
-        Anti-Terror-Rhetorik zu nutzen, um mehr Zugriff auf Geräte und Kommunikation zu bekommen.
-      </p>
-      <p>
-        Projekte wie GrapheneOS sind ein Gegenpol dazu: Sie geben dir die Möglichkeit, ein modernes Smartphone
-        zu nutzen – ohne dich komplett nackig zu machen.
-      </p>
-      <ul>
+      <ul style="text-align: left;">
         <li>
-          💶 <strong>Spenden an GrapheneOS</strong>:<br>
-          Offizielle Spendenseite: 
-          <a href="https://grapheneos.org/donate" target="_blank" rel="noopener">https://grapheneos.org/donate</a>
+          💶 <strong>Spenden an GrapheneOS (Offizielle Seite):</strong><br>
+          <a href="https://grapheneos.org/donate" target="_blank" rel="noopener">grapheneos.org/donate</a>
         </li>
       </ul>
       <p style="font-size:0.9em; color:#ccc;">
-        Wenn dir das Projekt gefällt und du möchtest, dass es <strong>unabhängig</strong> bleibt, dann sind Spenden
-        einer der direktesten Wege, die Entwickler zu unterstützen – statt darauf zu hoffen, dass irgendwelche
-        Institutionen „uns schon schützen werden“.
+        <em>Hinweis:</em> Spende direkt an GrapheneOS – nicht an mich. So landet das Geld genau bei denen,
+        die täglich an deiner mobilen Sicherheit arbeiten.
       </p>
-    </section>
+    </div>
 
     <h2>📌 Fazit: Freiheit gibt es nicht als App-Download</h2>
     <p>
@@ -250,46 +334,65 @@
     </p>
     <p>
       Wenn du bereit bist, dich einzulesen, Verantwortung zu übernehmen und dir im Klaren bist, dass nicht alles
-      reibungslos laufen wird, kann GrapheneOS ein mächtiges Werkzeug sein. Wenn du nur ein „etwas sichereres Android“
-      ohne Aufwand willst, ist es vielleicht der falsche Weg.
+      reibungslos laufen wird, kann GrapheneOS ein mächtiges Werkzeug sein.
     </p>
     <p>
       Wie immer gilt: <strong>Vertrau niemandem – informier dich selbst.</strong>
     </p>
-  </article>
-  <!-- END ARTICLE CONTENT -->
 
-  <!-- Standard-Zitat -->
-  <blockquote class="highlight">
+    <div class="box">
+      <h3>🧰 Tools für echte Eigentümer (Werbung/Affiliate)</h3>
+      <p style="font-size:0.95em;">
+        Wenn du Aktien und Bitcoin möglichst eigenverantwortlich halten willst, nutze nicht nur dein Bankdepot:
+      </p>
+      <ul>
+        <li>
+          🇨🇭 <strong>Investieren mit Swissquote:</strong><br>
+          Ich nutze Swissquote in der Schweiz – dort kannst du saubere Namensaktien halten und hast keine
+          deutsche Bank dazwischen.<br>
+          👉 <a href="https://alien-investor.org/swissquote" target="_blank">https://alien-investor.org/swissquote</a>
+        </li>
+        <li>
+          📊 <strong>US-Aktien über IBKR:</strong><br>
+          Für viele internationale Titel bietet sich Interactive Brokers als Zugang an – insbesondere in Kombination
+          mit DRS/Transfer Agenten.<br>
+          👉 <a href="https://alien-investor.org/interactive-brokers" target="_blank">https://alien-investor.org/interactive-brokers</a>
+        </li>
+        <li>
+          💥 <strong>Bitcoin kaufen in Europa – 21bitcoin:</strong><br>
+          Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges sats stapeln – ohne Shitcoins.<br>
+          Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du dauerhaft 0,2&nbsp;Prozentpunkte Gebührenreduktion
+          auf Sofort- und Sparplankäufe.<br>
+          👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
+        </li>
+        <li>
+          ₿ <strong>Bitcoin in Selbstverwahrung:</strong><br>
+          Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox – es gibt die klassische BitBox02 und die neue
+          BitBox für iPhone (Nova).<br>
+          👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
+        </li>
+        <li>
+          🛡️ <strong>Privacy &amp; Mail:</strong><br>
+          Für E-Mail, VPN und Cloud nutze ich Proton – datensparsam und ohne Big-Tech-Abhängigkeit.<br>
+          👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
+        </li>
+      </ul>
+      <p style="font-size:0.85em; color:#aaa;">
+        Hinweis: Bei einigen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit,
+        ohne dass es dich mehr kostet. Danke! 👽
+      </p>
+    </div>
+
+  </article>
+
+  <blockquote>
     „Vertraue niemandem! Manage deine Finanzen selbst!“
   </blockquote>
-
-  <section>
-    <h2>🛡️ Sichere Bitcoin-Selbstverwahrung mit BitBox</h2>
-    <p>
-      Wenn du deine Bitcoin wirklich selbst verwahren willst, kommst du um eine gute Hardware-Wallet nicht herum.
-      Ich selbst nutze die <strong>BitBox</strong> von Shift Crypto.
-    </p>
-    <ul>
-      <li>🔐 Offizieller Shop:
-        <a href="https://alien-investor.org/bitbox" target="_blank" rel="noopener">
-          https://alien-investor.org/bitbox
-        </a>
-      </li>
-      <li>💸 <strong>5&nbsp;% Rabatt</strong> mit dem Code:
-        <strong>ALIENINVESTOR</strong>
-      </li>
-    </ul>
-    <p>
-      <em>Werbung / Affiliate-Hinweis:</em> Wenn du über diesen Link kaufst oder den Code verwendest,
-      erhalte ich eine kleine Provision. Für dich wird es dadurch nicht teurer – im Fall des Codes sogar günstiger.
-    </p>
-  </section>
 
   <div class="like-button">
     <button id="likeButton">👍 Gefällt mir</button>
     <span id="likeCount">0</span>
-    <span style="color:#bbb;">(Speicherung nur lokal im Browser)</span>
+    <span style="color:#bbb; font-size: 0.9em;">(Lokal)</span>
   </div>
 
   <script>
@@ -307,37 +410,43 @@
         localStorage.setItem(storageKey, String(count));
         btn.disabled = true;
         btn.textContent = "Danke! 👽";
+        btn.style.borderColor = "#444";
+        btn.style.color = "#888";
       });
     })();
   </script>
 
-  <footer>
-    <p>📬 Kontakt:
-      <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>
-    </p>
+  <div class="back-links">
+    <a href="blog.html" style="font-size: 1.1em;">⬅ Zurück zur Blog-Übersicht</a>
+    <a href="index.html" style="font-size: 1.1em;">⬅ Zurück zur Zentrale</a>
+  </div>
 
-    <p style="font-size:0.95em; color:#bbb;">
-      👽 <strong>Haftungsausschluss:</strong><br>
-      Keine Finanz-, Steuer- oder Rechtsberatung – nur persönliche Alien-Meinung.<br>
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+      <h3 style="margin-bottom: 15px;">
+        🔋 Energie aufladen
+        <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
+      </h3>
+      
+      <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+        Treibstoff für das Mutterschiff senden
+      </a>
+      
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸
+      </p>
+  </div>
+
+  <footer>
+    <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    
+    <p style="margin-top: 20px;">
+      👽 <strong>Haftungsausschluss:</strong><br><br>
+      Dieser Artikel stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
+      Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
       Investieren ist mit Risiken verbunden. Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
     </p>
-
-    <div class="support" style="margin-top: 2em;">
-      <h2>💸 Unterstütze meine Arbeit</h2>
-      <ul>
-        <li>☕ Spenden via
-          <a href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener">Ko-fi</a>
-        </li>
-        <li>⚡ Bitcoin Lightning:
-          <code>alien_investor@strike.me</code>
-        </li>
-        <li>₿ Bitcoin Onchain:
-          <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code>
-        </li>
-      </ul>
-    </div>
-
-    <p><a href="/blog.html">← Zurück zum Blog</a></p>
   </footer>
 
 </body>
