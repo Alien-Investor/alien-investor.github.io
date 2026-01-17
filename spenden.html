@@ -3,129 +3,193 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spenden | Alien Investor</title>
+  <title>Energieversorgung | Alien Investor</title>
   <style>
-    body{
-      background:#000;
-      color:#fff;
+    body {
+      background: #000;
+      color: #fff;
       font-family: Arial, sans-serif;
-      margin:0;
-      padding:0;
-      text-align:center;
+      margin: 0;
+      padding: 0 15px 20px 15px;
+      text-align: center;
     }
-    .wrap{
+    .wrap {
       max-width: 720px;
       margin: 0 auto;
-      padding: 24px 18px;
-    }
-    h1{
-      margin: 10px 0 18px;
-      font-size: 1.8em;
-    }
-    .hint{
-      color:#bbb;
-      margin: 0 0 18px;
-      font-size: 0.95em;
-      line-height: 1.4;
     }
 
-    .btnrow{
-      display:flex;
-      gap:12px;
-      justify-content:center;
-      flex-wrap:wrap;
-      margin: 12px 0 10px;
+    /* --- TYPOGRAFIE & LAYOUT --- */
+    h1 {
+      margin: 20px 0 18px;
+      font-size: 1.8em;
+      color: #00ffcc;
     }
-    .btn{
-      padding: 12px 16px;
+    .hint {
+      color: #bbb;
+      margin: 0 0 30px;
+      font-size: 0.95em;
+      line-height: 1.5;
+    }
+
+    /* --- NAVIGATION OBEN --- */
+    .top-nav {
+      padding: 15px 0;
+      font-size: 0.9em;
+      text-align: left; /* Oder center, je nach Geschmack */
+    }
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc;
+    }
+
+    /* --- BUTTONS (Mit Glow) --- */
+    .btnrow {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 12px 0 20px;
+    }
+    .btn {
+      padding: 14px 20px;
       border-radius: 12px;
       border: 1px solid #00ffcc;
-      background:#000;
-      color:#00ffcc;
-      cursor:pointer;
+      background: #000;
+      color: #00ffcc;
+      cursor: pointer;
       font-size: 1rem;
+      font-weight: bold;
       min-width: 220px;
-      transition: background .12s ease, transform .12s ease;
+      transition: all 0.2s ease;
     }
-    .btn:hover{ background:#061313; }
-    .btn:active{ transform: scale(0.99); }
+    .btn:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .btn:active { transform: scale(0.98); }
 
-    .panel{
+    /* --- PANELS (Aufklapp-Bereiche) --- */
+    .panel {
       max-height: 0;
-      overflow:hidden;
-      transition: max-height .28s ease;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
       border-radius: 14px;
       margin: 0 auto;
     }
-    .panel.open{
+    .panel.open {
       max-height: 900px;
       margin-top: 10px;
     }
-    .card{
+    .card {
       border: 1px solid #00ffcc;
       border-radius: 14px;
-      background:#050505;
-      padding: 18px;
+      background: #050505;
+      padding: 20px;
       margin-top: 10px;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
     }
-    .title{
+    .title {
       font-size: 1.2em;
       font-weight: bold;
-      margin: 0 0 12px;
+      margin: 0 0 15px;
+      color: #00ffcc;
     }
-    .qr{
+    .qr {
       width: 240px;
       max-width: 80vw;
-      background:#fff;
+      background: #fff;
       padding: 10px;
       border-radius: 12px;
       border: 1px solid #00ffcc;
-      display:block;
-      margin: 0 auto 12px;
+      display: block;
+      margin: 0 auto 15px;
     }
-    code{
-      background:#111;
-      padding: 6px 10px;
-      border-radius: 10px;
-      display:inline-block;
+    code {
+      background: #111;
+      padding: 8px 12px;
+      border-radius: 8px;
+      display: inline-block;
       word-break: break-all;
-      margin: 6px 0 10px;
-      color:#fff;
+      margin: 10px 0 15px;
+      color: #fff;
+      font-family: monospace;
+      border: 1px solid #333;
     }
-    .copy{
-      padding: 10px 14px;
-      border-radius: 12px;
-      border: 1px solid #00ffcc;
-      background:#000;
-      color:#00ffcc;
-      cursor:pointer;
+    .copy {
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: 1px solid #444;
+      background: #111;
+      color: #bbb;
+      cursor: pointer;
+      font-size: 0.9em;
+      transition: all 0.2s;
     }
-    .copy:hover{ background:#061313; }
+    .copy:hover {
+      border-color: #00ffcc;
+      color: #00ffcc;
+    }
 
-    .kofi{
-      margin-top: 16px;
-      display:inline-block;
-      color:#00ffcc;
-      text-decoration:none;
-      border: 1px solid #00ffcc;
-      padding: 12px 16px;
-      border-radius: 12px;
+    /* --- KO-FI SECTION --- */
+    .kofi-section {
+      margin-top: 40px;
+      border-top: 1px solid #222;
+      padding-top: 30px;
     }
-    .kofi:hover{ background:#061313; }
+    .kofi-btn {
+      display: inline-block;
+      color: #000;
+      background: #00ffcc;
+      text-decoration: none;
+      font-weight: bold;
+      border: 1px solid #00ffcc;
+      padding: 14px 24px;
+      border-radius: 12px;
+      transition: all 0.2s ease;
+      font-size: 1.1em;
+    }
+    .kofi-btn:hover {
+      box-shadow: 0 0 20px #00ffcc;
+      transform: scale(1.02);
+    }
+    .kofi-hint {
+      color: #888;
+      font-size: 0.9em;
+      margin-top: 10px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
-    .thanks{
-      margin-top: 18px;
-      color:#ddd;
-      line-height: 1.5;
+    /* --- FOOTER --- */
+    .thanks {
+      margin-top: 40px;
+      color: #888;
+      line-height: 1.6;
+      font-size: 0.9em;
+      border-top: 1px solid #222;
+      padding-top: 20px;
     }
   </style>
 </head>
 <body>
+
   <div class="wrap">
-    <h1>💸 Unterstütze meine Arbeit</h1>
+    
+    <div class="top-nav">
+      <a href="index.html">⬅ Zurück zur Zentrale</a>
+    </div>
+
+    <h1>🔋 Energieversorgung</h1>
     <p class="hint">
-      Wähle Lightning für schnelle Spenden. Onchain eher für größere Beträge (Gebühren beachten).
-      Du kannst auch die Adresse kopieren.
+      Hier kannst du Treibstoff für das Mutterschiff nachladen.<br>
+      Wähle Lightning für schnelle Energie-Schübe. Onchain eher für große Tanks (Gebühren beachten).
     </p>
 
     <div class="btnrow">
@@ -136,9 +200,9 @@
     <div id="ln" class="panel">
       <div class="card">
         <div class="title">⚡ Bitcoin Lightning</div>
-        <!-- Lege später eine Datei lightning.png ins gleiche Verzeichnis -->
         <img class="qr" src="lightning.png" alt="Lightning QR-Code">
-        <code id="lnText">alien_investor@strike.me</code><br>
+        <code id="lnText">alien_investor@strike.me</code>
+        <br>
         <button class="copy" onclick="copyText('lnText')">Adresse kopieren</button>
       </div>
     </div>
@@ -146,18 +210,31 @@
     <div id="btc" class="panel">
       <div class="card">
         <div class="title">₿ Bitcoin Onchain</div>
-        <!-- Lege später eine Datei onchain.png ins gleiche Verzeichnis -->
         <img class="qr" src="onchain.png" alt="Bitcoin Onchain QR-Code">
-        <code id="btcText">bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code><br>
+        <code id="btcText">bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code>
+        <br>
         <button class="copy" onclick="copyText('btcText')">Adresse kopieren</button>
       </div>
     </div>
 
-    <a class="kofi" href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener">☕ Ko-fi (PayPal/Fiat)</a>
+    <div class="kofi-section">
+      <h3 style="color: #fff; margin-bottom: 15px;">☕ Fiat & Dauerhafte Versorgung</h3>
+      
+      <a class="kofi-btn" href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener">
+        Via Ko-fi unterstützen
+      </a>
+      
+      <p class="kofi-hint">
+        Über Ko-fi kannst du per PayPal/Karte unterstützen.<br>
+        Dort gibt es auch die Option für eine <strong>monatliche Mitgliedschaft</strong>,<br>
+        falls du das Projekt dauerhaft und automatisiert fördern willst.
+      </p>
+    </div>
 
     <p class="thanks">
       Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸
     </p>
+  
   </div>
 
   <script>
@@ -178,7 +255,11 @@
       const txt = document.getElementById(elId).innerText;
       try{
         await navigator.clipboard.writeText(txt);
-        alert("Kopiert.");
+        // Kleines visuelles Feedback
+        const btn = document.querySelector(`button[onclick="copyText('${elId}')"]`);
+        const originalText = btn.innerText;
+        btn.innerText = "Kopiert! ✅";
+        setTimeout(() => btn.innerText = originalText, 2000);
       }catch(e){
         prompt("Kopieren:", txt);
       }
