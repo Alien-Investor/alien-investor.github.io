@@ -2,53 +2,57 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>🪙📉 Bitcoin-Kursanalysen – Alien Investor</title>
+  <title>Bitcoin-Kursanalysen – Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Bitcoin-Kursanalysen des Alien Investors: nüchterne, langfristige Einordnung des Bitcoin-Kurses – ohne Trading-Geschrei, mit Fokus auf Eigentum und Selbstverantwortung.">
+  <meta name="description" content="Bitcoin-Kursanalysen des Alien Investors: nüchterne, langfristige Einordnung des Bitcoin-Kurses – ohne Trading-Geschrei, mit Fokus auf Eigentum.">
   <style>
     body {
+      font-family: Arial, sans-serif;
       background-color: #000;
       color: #fff;
-      font-family: Arial, sans-serif;
-      line-height: 1.7;
-      max-width: 900px;
+      line-height: 1.6;
+      max-width: 800px; /* Standard-Breite wie Blog */
       margin: auto;
-      padding: 2em;
+      padding: 0 15px 20px 15px; /* Seitenabstand für Mobile */
     }
-    h1, h2, h3 {
+
+    /* --- TYPOGRAFIE & LAYOUT --- */
+    h1 {
+      color: #00ffcc;
+      margin-top: 40px;
+      text-align: center;
+    }
+    h2 {
+      color: #00ffcc;
+      margin-top: 2.5em;
+      border-bottom: 1px solid #333;
+      padding-bottom: 10px;
+    }
+    h3 {
       color: #00ffcc;
     }
+
+    /* --- LINKS (Neon-Glow) --- */
     a {
       color: #00ffcc;
       text-decoration: none;
+      transition: all 0.2s ease;
     }
     a:hover {
-      text-decoration: underline;
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc;
     }
-    p {
-      margin-bottom: 1em;
-    }
-    ul {
-      margin-left: 1.2em;
-      margin-bottom: 1.5em;
-    }
-    li {
-      margin-bottom: 0.4em;
-    }
-    .byline {
-      margin-top: -0.6em;
-      margin-bottom: 1.2em;
-      color: #bbb;
-      font-size: 0.95em;
-    }
+
+    /* --- LISTEN --- */
     .article-list {
-      list-style: none;
-      padding-left: 0;
+      margin-top: 1em;
+      padding-left: 20px;
     }
-    .article-list li::before {
-      content: "• ";
-      color: #00ffcc;
+    .article-list li {
+      margin-bottom: 0.8em;
     }
+
+    /* --- BOXEN & HINWEISE --- */
     .box {
       border: 1px solid #00ffcc;
       background: #050505;
@@ -56,24 +60,49 @@
       border-radius: 8px;
       margin: 2em 0;
       font-size: 0.95em;
+      line-height: 1.5;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
     }
-    @media (max-width: 600px) {
-      body {
-        padding: 1.2em;
-      }
+
+    /* --- NAVIGATION --- */
+    .top-nav {
+      padding: 10px 0;
+      font-size: 0.9em;
+    }
+    .back-links {
+      margin-top: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
     }
   </style>
 </head>
 <body>
 
-  <!-- Optional: Banner-Bild für Bitcoin-Analysen -->
-  <img src="bitcoin-analysen-banner.png"
+  <div class="top-nav">
+    <a href="index.html">⬅ Zurück zur Zentrale</a>
+  </div>
+
+  <img src="bitcoin-analysen-banner.png" 
        alt="UFO und Bitcoin – Banner der Bitcoin-Kursanalysen"
-       style="width: 100%; max-height: 500px; object-fit: cover; display: block;">
+       style="width: 100%; height: auto; border-radius: 4px; border: 1px solid #333; margin-top: 10px;">
 
   <h1>🪙📉 Bitcoin-Kursanalysen des Alien Investors</h1>
-  <p class="byline">
-    Nüchterne Einordnung des Bitcoin-Kurses – ohne Hype, ohne Panik. Nur Denken wie ein Eigentümer.
+  
+  <p style="text-align: center; max-width: 600px; margin: 0 auto 30px auto; color: #ccc;">
+    Nüchterne Einordnung des Bitcoin-Kurses – ohne Hype, ohne Panik.<br>
+    <span style="font-size:0.85em; color:#888;">Nur Denken wie ein Eigentümer.</span>
   </p>
 
   <p>
@@ -83,7 +112,7 @@
   </p>
 
   <div class="box">
-    <strong>Hinweis:</strong><br>
+    <strong>⚠️ Hinweis:</strong><br><br>
     Alle Analysen dienen nur zur Orientierung und sollen eigene Recherchen anstoßen.
     Es sind keine Empfehlungen. Bitcoin ist extrem volatil – du trägst die Verantwortung
     für deine Entscheidungen.
@@ -91,19 +120,17 @@
 
   <h2>Verfügbare Bitcoin-Kursanalysen</h2>
   <ul class="article-list">
-    <!-- Beispiele – passe Dateinamen und Titel an deine echten Artikel an -->
-    <li><a href="bitcoin-kursanalyse-2026-01-06.html">📉 Bitcoin-Kursanalyse – 06. Januar 2026 - Zwischen starken Fundamentaldaten und schlechter Stimmung</a></li>
-    <li><a href="bitcoin-kursanalyse-die-grosse-divergenz-katerstimmung-trotz-zinssenkungen.html">📉 Bitcoin Kursanalyse – 22. Dezember 2025 - Die große Divergenz: Katerstimmung trotz Zinssenkungen?</a></li>
-    <li><a href="bitcoin-kursanalyse-2025-12-12.html">📉 Bitcoin Kursanalyse – 12. Dezember 2025 – 28,5 % unter ATH: Konsolidierung oder Akkumulation?</a></li>
+    <li><a href="bitcoin-kursanalyse-2026-01-06.html">📉 Bitcoin-Kursanalyse – 06. Januar 2026: Zwischen starken Fundamentaldaten und schlechter Stimmung</a></li>
+    <li><a href="bitcoin-kursanalyse-die-grosse-divergenz-katerstimmung-trotz-zinssenkungen.html">📉 Bitcoin Kursanalyse – 22. Dezember 2025: Die große Divergenz</a></li>
+    <li><a href="bitcoin-kursanalyse-2025-12-12.html">📉 Bitcoin Kursanalyse – 12. Dezember 2025: 28,5 % unter ATH</a></li>
     <li><a href="bitcoin-kursanalyse-2025-12-02.html">📉 Bitcoin Kursanalyse – 2. Dezember 2025: 32 % unter Allzeithoch</a></li>
-    <!-- Neue Analysen einfach als weitere <li> hinzufügen -->
   </ul>
 
   <h2>Wie du diese Analysen lesen solltest</h2>
   <p>
     Jede einzelne Bitcoin-Kursanalyse folgt der gleichen Grundlogik wie die Aktienanalysen:
   </p>
-  <ul>
+  <ul style="color: #ccc;">
     <li>klarer Stand: Datum der Datenbasis</li>
     <li>Makro-Umfeld und Liquidität im Hintergrund</li>
     <li>On-Chain-Indikatoren und Zyklen statt Bauchgefühl</li>
@@ -127,12 +154,40 @@
     der seine Lebenszeit und Kaufkraft schützen will.
   </p>
 
-  <h2>Navigation</h2>
-  <p>
-    <a href="blog.html">⬅ Zurück zum Blog</a><br>
-    <a href="index.html">⬅ Zurück zur Startseite</a><br>
-    <a href="aktien-analysen.html">📊 Zu den Aktienanalysen</a>
-  </p>
+  <div class="back-links">
+    <a href="aktien-analysen.html" style="font-size: 1.1em;">📊 Zu den Aktienanalysen</a>
+    <a href="blog.html" style="font-size: 1.1em;">⬅ Zurück zum Blog</a>
+    <a href="index.html" style="font-size: 1.1em;">⬅ Zurück zur Zentrale</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+      <h3 style="margin-bottom: 15px;">
+        🔋 Energie aufladen 
+        <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
+      </h3>
+      
+      <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+        Treibstoff für das Mutterschiff senden
+      </a>
+      
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸
+      </p>
+  </div>
+
+  <footer>
+    <p>👽 <strong>Haftungsausschluss:</strong><br><br>
+      Diese Seite stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
+      Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
+      Denke selbst, vertraue niemandem, und handle eigenverantwortlich.
+    </p>
+
+    <p style="margin-top: 20px;">
+      📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>
+    </p>
+  </footer>
 
 </body>
 </html>
