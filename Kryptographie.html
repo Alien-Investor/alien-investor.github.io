@@ -13,165 +13,211 @@
       line-height: 1.6;
       max-width: 800px;
       margin: auto;
-      padding: 2em;
+      padding: 0 15px 20px 15px; /* Mobile-Optimierung */
     }
+
+    /* --- TYPOGRAFIE --- */
     h1, h2, h3 {
       color: #00ffcc;
     }
+    h1 {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    /* --- LINKS (Neon-Glow) --- */
     a {
       color: #00ffcc;
       text-decoration: none;
+      transition: all 0.2s ease;
     }
     a:hover {
-      text-decoration: underline;
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc; /* Der Alien-Effekt */
     }
+
+    /* --- STANDARD ELEMENTE --- */
     code {
       background-color: #111;
       padding: 0.2em 0.4em;
       border-radius: 4px;
       color: #0f0;
-      font-size: 0.95em;
-      font-family: "Courier New", Courier, monospace;
+      font-family: monospace;
     }
     pre {
       background-color: #111;
       padding: 1em;
-      border-radius: 5px;
+      border-radius: 4px;
       overflow-x: auto;
       border: 1px solid #333;
-    }
-    pre code {
-      background-color: transparent;
-      padding: 0;
       color: #0f0;
-      border-radius: 0;
+      font-family: monospace;
     }
-    em {
-      color: #ccc;
-    }
+    em { color: #ccc; }
+
     .byline {
       margin-top: -0.8em;
-      margin-bottom: 1.2em;
+      margin-bottom: 2em;
       color: #ccc;
       font-style: italic;
+      text-align: center;
     }
+
     blockquote {
       border-left: 3px solid #00ffcc;
-      padding-left: 1em;
       margin: 2em 0;
+      padding: 0.5em 1em;
       color: #ddd;
-      font-style: italic;
       background: #050505;
-      padding: 1em;
+      font-style: italic;
     }
+
+    /* --- BOXEN --- */
     .box {
       border: 1px solid #00ffcc;
-      background-color: #050505;
+      background: #050505;
       padding: 1.5em;
       border-radius: 8px;
       margin: 2em 0;
-      font-size: 0.95em;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
     }
-    .box h3 {
-      margin-top: 0;
-    }
-    .like-button {
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 1em; }
+
+    .recommendation-box {
       margin: 2em 0;
+      padding: 1em;
+      border: 1px dashed #00ffcc;
+      border-radius: 8px;
+      text-align: center;
+      background-color: #050505;
+    }
+    .recommendation-box h3 {
+      margin-top: 0;
+      font-size: 1.1em;
+      color: #00ffcc;
+    }
+
+    /* --- LIKE BUTTON --- */
+    .like-button {
+      margin: 3em 0;
       display: flex;
       align-items: center;
-      gap: 0.75em;
-      font-size: 0.95em;
+      justify-content: center;
+      gap: 1em;
     }
     .like-button button {
-      background: #00ffcc;
-      color: #000;
-      border: none;
-      padding: 0.4em 0.9em;
-      border-radius: 4px;
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
       cursor: pointer;
       font-weight: bold;
+      transition: all 0.2s ease;
     }
-    .like-button span {
-      min-width: 2em;
-      display: inline-block;
+    .like-button button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
     }
-    footer {
-      margin-top: 3em;
-      padding-top: 2em;
-      border-top: 1px solid #333;
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
+    }
+
+    /* --- NAVIGATION --- */
+    .top-nav {
+      padding: 10px 0;
       font-size: 0.9em;
-      color: #bbb;
     }
-    ul {
-      margin-left: 1.2em;
+    .back-links {
+      margin-top: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
-    li {
-      margin-bottom: 0.5em;
-    }
-    @media (max-width: 600px) {
-      body {
-        padding: 1.2em;
-      }
+
+    /* --- FOOTER --- */
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
     }
   </style>
 </head>
 <body>
 
+  <div class="top-nav">
+    <a href="index.html">⬅ Zurück zur Zentrale</a>
+  </div>
+
   <h1>🔐 Der digitale Bunker: Souveränität per Skript</h1>
   <p class="byline"><em>von Alien Investor</em></p>
 
-  <p>
-    <strong>Baue deine eigenen Verschlüsselungs-Tools mit 50 Zeilen Bash.</strong>
-  </p>
-  <p>
-    Echte Privatsphäre basiert auf Transparenz, nicht auf geheimen Apps oder Blackboxes.
-    Diese Anleitung liefert dir zwei auditierbare Bash-Skripte, um sensible Ordner mit Standard-GPG und AES256 zu verschlüsseln und zu entschlüsseln.
-    Keine Cloud, kein Abo, einfach nur reine Mathematik und Linux.
-  </p>
+  <article id="content">
+    <p>
+      <strong>Baue deine eigenen Verschlüsselungs-Tools mit 50 Zeilen Bash.</strong>
+    </p>
+    <p>
+      Echte Privatsphäre basiert auf Transparenz, nicht auf geheimen Apps oder Blackboxes.
+      Diese Anleitung liefert dir zwei auditierbare Bash-Skripte, um sensible Ordner mit Standard-GPG und AES256 zu verschlüsseln und zu entschlüsseln.
+      Keine Cloud, kein Abo, einfach nur reine Mathematik und Linux.
+    </p>
 
-  <blockquote>
-    „Don't trust, verify.“<br><br>
-    Wir sagen das über Bitcoin-Nodes. Wir sollten es auch über unsere Sicherheits-Tools sagen.
-  </blockquote>
+    <blockquote>
+      „Don't trust, verify.“<br>
+      Wir sagen das über Bitcoin-Nodes. Wir sollten es auch über unsere Sicherheits-Tools sagen.
+    </blockquote>
 
-  <p>
-    Viele Menschen verlassen sich auf komplexe Apps mit glänzenden Oberflächen, um ihre Daten zu verstecken.
-    Aber Komplexität ist der Feind der Sicherheit. Jede Zeile Code, die du nicht geschrieben hast (und nicht lesen kannst), ist ein potenzielles Sicherheitsrisiko.
-  </p>
-  <p>
-    Die robusteste Verschlüsselung kommt oft von Werkzeugen, die seit Jahrzehnten getestet werden: <strong>GPG</strong> und <strong>Tar</strong>.
-  </p>
-  <p>
-    Im Folgenden findest du zwei Skripte, die ich nutze, um Daten zu sichern. Sie verwandeln jeden Ordner in ein verschlüsseltes <code>.tar.gz.gpg</code>-Archiv.
-    Sie funktionieren auf deinem High-End-Linux-Desktop und sogar auf deinem Smartphone (via Termux).
-  </p>
-  
-  <h3>Warum Skripte nutzen?</h3>
-  <ul>
-    <li><strong>Auditierbarkeit:</strong> Du kannst jede Zeile lesen. Keine versteckten Hintertüren.</li>
-    <li><strong>Standardisierung:</strong> Der Output ist Standard-OpenPGP. Du kannst es auch in 20 Jahren noch entschlüsseln, selbst wenn diese Skripte verloren gehen.</li>
-    <li><strong>Geschwindigkeit:</strong> Es kombiniert Archivierung, Komprimierung und Verschlüsselung in einem einzigen Datenstrom (Stream).</li>
-  </ul>
+    <p>
+      Viele Menschen verlassen sich auf komplexe Apps mit glänzenden Oberflächen, um ihre Daten zu verstecken.
+      Aber Komplexität ist der Feind der Sicherheit. Jede Zeile Code, die du nicht geschrieben hast (und nicht lesen kannst), ist ein potenzielles Sicherheitsrisiko.
+    </p>
+    <p>
+      Die robusteste Verschlüsselung kommt oft von Werkzeugen, die seit Jahrzehnten getestet werden: <strong>GPG</strong> und <strong>Tar</strong>.
+    </p>
+    <p>
+      Im Folgenden findest du zwei Skripte, die ich nutze, um Daten zu sichern. Sie verwandeln jeden Ordner in ein verschlüsseltes <code>.tar.gz.gpg</code>-Archiv.
+      Sie funktionieren auf deinem High-End-Linux-Desktop und sogar auf deinem Smartphone (via Termux).
+    </p>
+    
+    <h3>Warum Skripte nutzen?</h3>
+    <ul>
+      <li><strong>Auditierbarkeit:</strong> Du kannst jede Zeile lesen. Keine versteckten Hintertüren.</li>
+      <li><strong>Standardisierung:</strong> Der Output ist Standard-OpenPGP. Du kannst es auch in 20 Jahren noch entschlüsseln, selbst wenn diese Skripte verloren gehen.</li>
+      <li><strong>Geschwindigkeit:</strong> Es kombiniert Archivierung, Komprimierung und Verschlüsselung in einem einzigen Datenstrom (Stream).</li>
+    </ul>
 
-  <h2>1. Das Konzept</h2>
-  <p>
-    Wir erfinden das Rad nicht neu. Wir ketten Standard-Tools aneinander:
-  </p>
-  <ul>
-    <li><strong>Tar:</strong> Bündelt Dateien zusammen.</li>
-    <li><strong>Gzip:</strong> Komprimiert sie.</li>
-    <li><strong>GPG (AES256):</strong> Verschlüsselt sie symmetrisch.</li>
-  </ul>
-  
-  <div class="box">
-    <strong>⚠️ OPSEC-Hinweis:</strong><br><br>
-    Diese Skripte nutzen symmetrische Verschlüsselung. Die Sicherheit hängt vollständig von der Stärke deines Passworts ab. Nutze ein langes Passwort mit hoher Entropie (Zufälligkeit), das du nirgendwo sonst verwendest.
-  </div>
+    <h2>1. Das Konzept</h2>
+    <p>
+      Wir erfinden das Rad nicht neu. Wir ketten Standard-Tools aneinander:
+    </p>
+    <ul>
+      <li><strong>Tar:</strong> Bündelt Dateien zusammen.</li>
+      <li><strong>Gzip:</strong> Komprimiert sie.</li>
+      <li><strong>GPG (AES256):</strong> Verschlüsselt sie symmetrisch.</li>
+    </ul>
+    
+    <div class="box">
+      <h3>⚠️ OPSEC-Hinweis</h3>
+      <p>
+        Diese Skripte nutzen symmetrische Verschlüsselung. Die Sicherheit hängt vollständig von der Stärke deines Passworts ab.
+        Nutze ein langes Passwort mit hoher Entropie (Zufälligkeit), das du nirgendwo sonst verwendest.
+      </p>
+    </div>
 
-  <h2>2. Teil 1: Das Schild (Verschlüsselung)</h2>
-  <p>
-    Speichere diesen Code als Datei namens <code>encrypt-folder.sh</code>.
-  </p>
+    <h2>2. Teil 1: Das Schild (Verschlüsselung)</h2>
+    <p>
+      Speichere diesen Code als Datei namens <code>encrypt-folder.sh</code>.
+    </p>
 
 <pre><code>#!/bin/bash
 # 🔒 Unified Encryption Script
@@ -230,10 +276,10 @@ echo "✅ Done: $(basename "$TARGET")"
 echo "🧩 SHA256: $(basename "$TARGET").sha256"
 </code></pre>
 
-  <h2>3. Teil 2: Der Schlüssel (Entschlüsselung)</h2>
-  <p>
-    Speichere diesen Code als Datei namens <code>decrypt-folder.sh</code>.
-  </p>
+    <h2>3. Teil 2: Der Schlüssel (Entschlüsselung)</h2>
+    <p>
+      Speichere diesen Code als Datei namens <code>decrypt-folder.sh</code>.
+    </p>
 
 <pre><code>#!/usr/bin/env bash
 # decrypt-folder.sh – Decrypts &lt;NAME&gt;[.tar.gz].gpg from ~ or ~/Downloads.
@@ -330,136 +376,56 @@ case "$MODE" in
 esac
 </code></pre>
 
-  <h2>4. Installation</h2>
-  <p>
-    Erstelle die Dateien (z. B. mit <code>nano</code>).<br>
-    Füge den Code von oben ein.<br>
-    Mache sie ausführbar:
-  </p>
-  <pre><code>chmod +x encrypt-folder.sh decrypt-folder.sh</code></pre>
-
-  <h2>5. Der Workflow: Wie du es benutzt</h2>
-  <p>
-    Hier ist der exakte Prozess, um deine Daten sicher zu verpacken.
-  </p>
-
-  <h3>1. Daten verschlüsseln</h3>
-  <ul>
-    <li>Verschiebe die Dateien, die du schützen willst, in einen Ordner innerhalb deines Home-Verzeichnisses. Nehmen wir an, dein Ordner heißt <code>PrivateDocs</code>.</li>
-    <li>Führe das Skript aus:
-      <pre><code>./encrypt-folder.sh</code></pre>
-    </li>
-    <li>Das Skript fragt nach dem Ordnernamen. Tippe: <code>PrivateDocs</code></li>
-    <li>GPG fragt dich dann nach einem Passwort (Passphrase). Wähle ein starkes.</li>
-    <li>Das Skript erstellt daraufhin zwei Dateien:
+    <div class="box">
+      <h3>🧰 Tools für echte Eigentümer (Werbung/Affiliate)</h3>
+      <p style="font-size:0.95em;">
+        Wenn du Aktien und Bitcoin möglichst eigenverantwortlich halten willst, nutze nicht nur dein Bankdepot:
+      </p>
       <ul>
-        <li>Das verschlüsselte Archiv: <code>Encrypted_PrivateDocs.tar.gz.gpg</code></li>
-        <li>Eine Prüfsummen-Datei: <code>Encrypted_PrivateDocs.tar.gz.gpg.sha256</code></li>
+        <li>
+          🇨🇭 <strong>Investieren mit Swissquote:</strong><br>
+          Ich nutze Swissquote in der Schweiz – dort kannst du saubere Namensaktien halten und hast keine
+          deutsche Bank dazwischen.<br>
+          👉 <a href="https://alien-investor.org/swissquote" target="_blank">https://alien-investor.org/swissquote</a>
+        </li>
+        <li>
+          📊 <strong>US-Aktien über IBKR:</strong><br>
+          Für viele internationale Titel bietet sich Interactive Brokers als Zugang an – insbesondere in Kombination
+          mit DRS/Transfer Agenten.<br>
+          👉 <a href="https://alien-investor.org/interactive-brokers" target="_blank">https://alien-investor.org/interactive-brokers</a>
+        </li>
+        <li>
+          💥 <strong>Bitcoin kaufen in Europa – 21bitcoin:</strong><br>
+          Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges sats stapeln – ohne Shitcoins.<br>
+          Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du dauerhaft 0,2&nbsp;Prozentpunkte Gebührenreduktion
+          auf Sofort- und Sparplankäufe.<br>
+          👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
+        </li>
+        <li>
+          ₿ <strong>Bitcoin in Selbstverwahrung:</strong><br>
+          Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox – es gibt die klassische BitBox02 und die neue
+          BitBox für iPhone (Nova).<br>
+          👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
+        </li>
+        <li>
+          🛡️ <strong>Privacy &amp; Mail:</strong><br>
+          Für E-Mail, VPN und Cloud nutze ich Proton – datensparsam und ohne Big-Tech-Abhängigkeit.<br>
+          👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
+        </li>
       </ul>
-    </li>
-  </ul>
-  <div class="box">
-    <strong>Wichtig:</strong><br><br>
-    Halte diese beiden Dateien immer zusammen. Die Prüfsumme erlaubt es dem Entschlüsselungs-Skript zu verifizieren, dass deine Daten nicht beschädigt oder manipuliert wurden.
-  </div>
+      <p style="font-size:0.85em; color:#aaa;">
+        Hinweis: Bei einigen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit,
+        ohne dass es dich mehr kostet. Danke! 👽
+      </p>
+    </div>
 
-  <h3>2. Daten entschlüsseln</h3>
-  <ul>
-    <li>Lege die verschlüsselte Datei (und die Prüfsummen-Datei) in dein Home- oder Downloads-Verzeichnis.</li>
-    <li>Führe das Skript aus:
-      <pre><code>./decrypt-folder.sh</code></pre>
-    </li>
-    <li>Das Skript fragt nach dem Dateinamen. Tippe: <code>Encrypted_PrivateDocs.tar.gz</code></li>
-    <li><strong>Hinweis:</strong> Tippe NICHT die <code>.gpg</code> Endung mit ein. Das Skript sucht automatisch anhand des Namens nach der Datei.</li>
-    <li>Gib dein Passwort ein, wenn du gefragt wirst. Das Skript verifiziert die Prüfsumme und stellt deine Daten direkt in deinem Home-Verzeichnis wieder her.</li>
-  </ul>
-
-  <h2>6. Warum das wichtig ist</h2>
-  <p>
-    In einer Welt der Überwachung sind Metadaten oft exponiert. Aber dein „Cold Storage“ – deine Backups, deine privaten Dokumente – muss mathematisch sicher sein.
-  </p>
-  <p>
-    Indem du einfache Skripte nutzt, reduzierst du die Angriffsfläche (Attack Surface). Es gibt keine App, die aktualisiert werden muss, keinen Cloud-Sync, den man versehentlich anlässt, und keinen proprietären Code, dem man blind vertrauen muss.
-  </p>
-  <p>
-    <strong>Letzter Gedanke:</strong><br><br>
-    Werkzeuge sind nur so gut wie der Nutzer. Halte dein System sauber, dein Terminal sicher und deine Passwörter lang.
-  </p>
-
-  <div class="box">
-    <h3>🧰 Tools für echte Eigentümer (Werbung/Affiliate)</h3>
-    <p style="font-size:0.95em;">
-      Wenn du Aktien und Bitcoin möglichst eigenverantwortlich halten willst, nutze nicht nur dein Bankdepot:
-    </p>
-    <ul>
-      <li>
-        🇨🇭 <strong>Investieren mit Swissquote:</strong><br>
-        Ich nutze Swissquote in der Schweiz – dort kannst du saubere Namensaktien halten und hast keine
-        deutsche Bank dazwischen.<br>
-        👉 <a href="https://alien-investor.org/swissquote" target="_blank">https://alien-investor.org/swissquote</a>
-      </li>
-      <li>
-        📊 <strong>US-Aktien über IBKR:</strong><br>
-        Für viele internationale Titel bietet sich Interactive Brokers als Zugang an – insbesondere in Kombination
-        mit DRS/Transfer Agenten.<br>
-        👉 <a href="https://alien-investor.org/interactive-brokers" target="_blank">https://alien-investor.org/interactive-brokers</a>
-      </li>
-      <li>
-        💥 <strong>Bitcoin kaufen in Europa – 21bitcoin:</strong><br>
-        Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges sats stapeln – ohne Shitcoins.<br>
-        Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du dauerhaft 0,2&nbsp;Prozentpunkte Gebührenreduktion
-        auf Sofort- und Sparplankäufe.<br>
-        👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
-      </li>
-      <li>
-        ₿ <strong>Bitcoin in Selbstverwahrung:</strong><br>
-        Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox – es gibt die klassische BitBox02 und die neue
-        BitBox für iPhone (Nova).<br>
-        👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
-      </li>
-      <li>
-        🛡️ <strong>Privacy &amp; Mail:</strong><br>
-        Für E-Mail, VPN und Cloud nutze ich Proton – datensparsam und ohne Big-Tech-Abhängigkeit.<br>
-        👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
-      </li>
-    </ul>
-    <p style="font-size:0.85em; color:#aaa;">
-      Hinweis: Bei einigen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit,
-      ohne dass es dich mehr kostet. Danke! 👽
-    </p>
-  </div>
+  </article>
 
   <div class="like-button">
     <button id="likeButton">👍 Gefällt mir</button>
     <span id="likeCount">0</span>
-    <span style="color:#bbb;">(Speicherung nur lokal im Browser)</span>
+    <span style="color:#bbb; font-size: 0.9em;">(Lokal)</span>
   </div>
-
-  <div class="box">
-    <h3>📚 Quellen (Auswahl)</h3>
-    <p style="font-size:0.95em;">
-      Diese Anleitung basiert auf der offiziellen Dokumentation von GNU Privacy Guard (GPG) und GNU Tar sowie
-      gängigen Best Practices für Bash-Scripting und Datensicherheit unter Linux.
-    </p>
-  </div>
-
-  <h3>💸 Unterstütze meine Arbeit</h3>
-  <ul>
-    <li>☕ <a href="https://ko-fi.com/alieninvestor" target="_blank">Spenden via Ko-fi (PayPal, Fiat)</a></li>
-    <li>⚡ Bitcoin Lightning: <code>alien_investor@strike.me</code></li>
-    <li>₿ Bitcoin Onchain: <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code></li>
-  </ul>
-  <p>Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸</p>
-
-  <footer>
-    <p>👽 <strong>Haftungsausschluss:</strong><br>
-      Dieser Artikel stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
-      Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
-      Die Nutzung von Verschlüsselungssoftware erfolgt auf eigenes Risiko. Datenverlust durch verlorene Passwörter ist möglich.
-    </p>
-    <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
-    <p><a href="blog.html">⬅ Zurück zum Blog</a></p>
-  </footer>
 
   <script>
     (function() {
@@ -476,9 +442,52 @@ esac
         localStorage.setItem(storageKey, String(count));
         btn.disabled = true;
         btn.textContent = "Danke! 👽";
+        btn.style.borderColor = "#444";
+        btn.style.color = "#888";
       });
     })();
   </script>
+
+  <div class="box" style="border-style: dashed; border-color: #333;">
+    <h3>📚 Quellen (Auswahl)</h3>
+    <p style="font-size:0.95em; color: #ccc;">
+      Diese Anleitung basiert auf der offiziellen Dokumentation von GNU Privacy Guard (GPG) und GNU Tar sowie
+      gängigen Best Practices für Bash-Scripting und Datensicherheit unter Linux.
+    </p>
+  </div>
+
+  <div class="back-links">
+    <a href="blog.html" style="font-size: 1.1em;">⬅ Zurück zur Blog-Übersicht</a>
+    <a href="index.html" style="font-size: 1.1em;">⬅ Zurück zur Zentrale</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+      <h3 style="margin-bottom: 15px;">
+        🔋 Energie aufladen
+        <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
+      </h3>
+      
+      <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+        Treibstoff für das Mutterschiff senden
+      </a>
+      
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸
+      </p>
+  </div>
+
+  <footer>
+    <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    
+    <p style="margin-top: 20px;">
+      👽 <strong>Haftungsausschluss:</strong><br><br>
+      Dieser Artikel stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
+      Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
+      Die Nutzung von Verschlüsselungssoftware erfolgt auf eigenes Risiko. Datenverlust durch verlorene Passwörter ist möglich.
+    </p>
+  </footer>
 
 </body>
 </html>
