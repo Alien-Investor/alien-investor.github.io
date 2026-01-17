@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>🔒 Warum du niemandem vertrauen solltest – besonders beim Geld</title>
+  <title>🔒 Warum du niemandem vertrauen solltest – besonders beim Geld | Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Warum du beim Thema Geld weder Banken, Staat noch Finanzprodukten blind vertrauen solltest – und warum echte Eigenverantwortung entscheidend ist.">
   <style>
@@ -13,150 +13,236 @@
       line-height: 1.6;
       max-width: 800px;
       margin: auto;
-      padding: 2em;
+      padding: 0 15px 20px 15px; /* Mobile-Optimierung */
     }
+
+    /* --- TYPOGRAFIE --- */
     h1, h2, h3 {
       color: #00ffcc;
     }
+    h1 {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    /* --- LINKS (Neon-Glow) --- */
     a {
       color: #00ffcc;
       text-decoration: none;
+      transition: all 0.2s ease;
     }
     a:hover {
-      text-decoration: underline;
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc; /* Der Alien-Effekt */
     }
+
+    /* --- STANDARD ELEMENTE --- */
     code {
       background-color: #111;
       padding: 0.2em 0.4em;
       border-radius: 4px;
       color: #0f0;
-      font-size: 0.95em;
+      font-family: monospace;
     }
-    em {
-      color: #ccc;
-    }
+    em { color: #ccc; }
+
     .byline {
       margin-top: -0.8em;
-      margin-bottom: 1.2em;
-    }
-    .like-button {
-      margin-top: 2em;
-    }
-    button {
-      background-color: #111;
-      color: #fff;
-      border: 1px solid #444;
-      padding: 0.5em 1em;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #222;
-    }
-    footer {
-      margin-top: 3em;
-      padding-top: 2em;
-      border-top: 1px solid #333;
-      font-size: 0.9em;
-    }
-    .support ul {
-      margin: 0.3em 0 0 1.2em;
-    }
-    blockquote.highlight {
-      margin-top: 2em;
-      padding: 1em 1.2em;
-      border-left: 3px solid #00ffcc;
-      background-color: #111;
+      margin-bottom: 2em;
+      color: #ccc;
       font-style: italic;
-      color: #ddd;
+      text-align: center;
     }
-    .affiliate-box {
-      border: 1px solid #00ffcc;
-      background-color: #000;
-      padding: 1em 1.2em;
+
+    blockquote {
+      border-left: 3px solid #00ffcc;
       margin: 2em 0;
-      border-radius: 8px;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
     }
-    .affiliate-box h2 {
+
+    /* --- BOXEN --- */
+    .box {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 1em; }
+
+    .recommendation-box {
+      margin: 2em 0;
+      padding: 1em;
+      border: 1px dashed #00ffcc;
+      border-radius: 8px;
+      text-align: center;
+      background-color: #050505;
+    }
+    .recommendation-box h3 {
       margin-top: 0;
+      font-size: 1.1em;
       color: #00ffcc;
     }
-    .affiliate-box ul {
-      margin-left: 1.2em;
+
+    /* --- LIKE BUTTON --- */
+    .like-button {
+      margin: 3em 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
     }
-    .affiliate-box p {
-      margin-bottom: 0.6em;
+    .like-button button {
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+    .like-button button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
+    }
+
+    /* --- NAVIGATION --- */
+    .top-nav {
+      padding: 10px 0;
+      font-size: 0.9em;
+    }
+    .back-links {
+      margin-top: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
     }
   </style>
 </head>
 <body>
+
+  <div class="top-nav">
+    <a href="index.html">⬅ Zurück zur Zentrale</a>
+  </div>
+
   <h1>🔒 Warum du niemandem vertrauen solltest – besonders beim Geld</h1>
   <p class="byline"><em>von Alien Investor</em></p>
 
-  <p>Geld ist gespeicherte Energie, deine Lebenszeit, deine Arbeitskraft. Wer darüber bestimmt, hat Macht – und diese Macht wird schamlos ausgenutzt.</p>
+  <article id="content">
+    <p>
+      Geld ist gespeicherte Energie, deine Lebenszeit, deine Arbeitskraft. Wer darüber bestimmt, hat Macht
+      – und diese Macht wird schamlos ausgenutzt.
+    </p>
 
-  <h2>💳 Dein Konto: Kein Eigentum, nur ein Anspruch</h2>
-  <p>Was viele nicht wissen: Das Geld auf deinem Bankkonto gehört dir <strong>nicht</strong>. Du hast nur einen <em>Rückzahlungsanspruch</em> gegen die Bank. Im Krisenfall kann dieser Anspruch wertlos werden – oder vom Staat beschnitten.</p>
+    <h2>💳 Dein Konto: Kein Eigentum, nur ein Anspruch</h2>
+    <p>
+      Was viele nicht wissen: Das Geld auf deinem Bankkonto gehört dir <strong>nicht</strong>.
+      Du hast nur einen <em>Rückzahlungsanspruch</em> gegen die Bank. Im Krisenfall kann dieser Anspruch
+      wertlos werden – oder vom Staat beschnitten.
+    </p>
 
-  <h2>🚩 EU-Ideen: Zugriff auf Spareinlagen</h2>
-  <p>Die EU hat wiederholt darüber diskutiert, Spareinlagen zur Finanzierung gemeinsamer Projekte heranzuziehen. Das ist kein Hirngespinst, sondern eine reale Gefahr. Dein Erspartes wird als "Topf" gesehen – nicht als dein Eigentum.</p>
+    <h2>🚩 EU-Ideen: Zugriff auf Spareinlagen</h2>
+    <p>
+      Die EU hat wiederholt darüber diskutiert, Spareinlagen zur Finanzierung gemeinsamer Projekte heranzuziehen.
+      Das ist kein Hirngespinst, sondern eine reale Gefahr. Dein Erspartes wird als "Topf" gesehen – nicht als dein Eigentum.
+    </p>
 
-  <h2>🕵️‍♂️ Crashpropheten &amp; Goldhändler: Panik als Geschäftsmodell</h2>
-  <p>Manche Influencer inszenieren den Weltuntergang, nur um ihre überteuerten Goldprodukte oder Fonds zu verkaufen. Oft stecken genau die Händler dahinter, die von der Angst profitieren. Angst verkauft sich eben gut.</p>
+    <h2>🕵️‍♂️ Crashpropheten &amp; Goldhändler: Panik als Geschäftsmodell</h2>
+    <p>
+      Manche Influencer inszenieren den Weltuntergang, nur um ihre überteuerten Goldprodukte oder Fonds zu verkaufen.
+      Oft stecken genau die Händler dahinter, die von der Angst profitieren. Angst verkauft sich eben gut.
+    </p>
 
-  <h2>🧾 Fonds und Bankberater: Verpackte Kostenfallen</h2>
-  <p>Fondsmanager verdienen selbst bei Verlusten. Und Bankberater? Sie sind oft nur <strong>Verkäufer</strong> mit Verkaufszielen. Die Produkte sind komplex, intransparent und oft teuer. Dein Gewinn ist deren Nebensache.</p>
+    <h2>🧾 Fonds und Bankberater: Verpackte Kostenfallen</h2>
+    <p>
+      Fondsmanager verdienen selbst bei Verlusten. Und Bankberater? Sie sind oft nur <strong>Verkäufer</strong>
+      mit Verkaufszielen. Die Produkte sind komplex, intransparent und oft teuer. Dein Gewinn ist deren Nebensache.
+    </p>
 
-  <h2>💰 Versicherungen: Sicherheit für wen?</h2>
-  <p>Versicherungen gelten als sicher – aber Gesetze wie <em>Solvency II</em> schützen in erster Linie die Versicherung, nicht dich. Im Notfall kann die Leistung gekürzt werden – zahlen musst du trotzdem weiter.</p>
+    <h2>💰 Versicherungen: Sicherheit für wen?</h2>
+    <p>
+      Versicherungen gelten als sicher – aber Gesetze wie <em>Solvency II</em> schützen in erster Linie die Versicherung,
+      nicht dich. Im Notfall kann die Leistung gekürzt werden – zahlen musst du trotzdem weiter.
+    </p>
 
-  <h2>👁️ ETFs &amp; Aktien: Besitz oder Illusion?</h2>
-  <p>Und selbst wenn du "investierst" – in ETFs, Fonds oder Aktien – ist dir klar, dass du im Zweifel gar <strong>nichts wirklich besitzt</strong>? In den meisten Fällen bist du nur ein Anspruchsberechtigter auf Buchungsebene. Eigentumsrechte? Fehlanzeige.</p>
+    <h2>👁️ ETFs &amp; Aktien: Besitz oder Illusion?</h2>
+    <p>
+      Und selbst wenn du "investierst" – in ETFs, Fonds oder Aktien – ist dir klar, dass du im Zweifel gar
+      <strong>nichts wirklich besitzt</strong>? In den meisten Fällen bist du nur ein Anspruchsberechtigter
+      auf Buchungsebene. Eigentumsrechte? Fehlanzeige.
+    </p>
+    <p>
+      👉 <strong>Ich gehe in einem späteren Artikel darauf ein, wie du echtes Eigentum an Aktien bekommst
+      und dich aus der Abhängigkeit von Brokern befreist.</strong>
+    </p>
 
-  <p>👉 <strong>Ich gehe in einem späteren Artikel darauf ein, wie du echtes Eigentum an Aktien bekommst und dich aus der Abhängigkeit von Brokern befreist.</strong></p>
+    <h2>📈 Fazit</h2>
+    <p>
+      Verlass dich nicht auf "Institutionen". Informier dich selbst. Dein Geld ist deine Energie, deine Lebenszeit.
+      Nur du kannst sie schützen.
+    </p>
 
-  <h2>📈 Fazit</h2>
-  <p>Verlass dich nicht auf "Institutionen". Informier dich selbst. Dein Geld ist deine Energie, deine Lebenszeit. Nur du kannst sie schützen.</p>
+    <blockquote>
+      „Vertraue niemandem! Manage deine Finanzen selbst!“
+    </blockquote>
 
-  <blockquote class="highlight">
-    „Vertraue niemandem! Manage deine Finanzen selbst!“
-  </blockquote>
-
-<section class="affiliate-box">
-  <h2>🧱 Nächster Schritt: Bitcoin selbst kaufen &amp; sicher verwahren</h2>
-  <p>
-    Wenn du dich nicht länger auf Banken, Fonds und Versicherer verlassen willst, musst du zwei Dinge selbst in die Hand nehmen:
-    den Kauf deiner Bitcoin und die sichere Verwahrung.
-  </p>
-  <ul>
-    <li>
-      📈 <strong>Bitcoin kaufen in Europa – 21bitcoin</strong><br>
-      Europäischer Bitcoin-Broker mit Fokus auf Einfachheit und DCA – ideal, um regelmäßig sats zu stapeln.<br>
-      Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du dauerhaft 0,2&nbsp;Prozentpunkte Gebührenreduktion
-      auf Sofort- und Sparplankäufe:<br>
-      <a href="https://alien-investor.org/21bitcoin" target="_blank" rel="noopener">
-        https://alien-investor.org/21bitcoin
-      </a>
-    </li>
-    <li style="margin-top:1em;">
-      🛡️ <strong>Bitcoin sicher verwahren – BitBox Hardware-Wallet</strong><br>
-      Deine Keys, deine Coins – ohne Bank dazwischen.<br>
-      5&nbsp;% Rabatt mit dem Code <strong>ALIENINVESTOR</strong> im offiziellen Shop:<br>
-      <a href="https://alien-investor.org/bitbox" target="_blank" rel="noopener">
-        https://alien-investor.org/bitbox
-      </a>
-    </li>
-  </ul>
-  <p style="font-size:0.9em; color:#aaa;">
-    <em>Werbung / Affiliate-Hinweis:</em> Wenn du über diese Links kaufst oder die Codes nutzt,
-    erhalte ich eine kleine Provision. Für dich wird es nicht teurer – im Fall der Rabatte sogar günstiger.
-  </p>
-</section>
+    <div class="box">
+      <h3>🧱 Nächster Schritt: Bitcoin selbst kaufen &amp; sicher verwahren</h3>
+      <p>
+        Wenn du dich nicht länger auf Banken, Fonds und Versicherer verlassen willst, musst du zwei Dinge selbst in die Hand nehmen:
+        den Kauf deiner Bitcoin und die sichere Verwahrung.
+      </p>
+      <ul>
+        <li>
+          📈 <strong>Bitcoin kaufen in Europa – 21bitcoin</strong><br>
+          Europäischer Bitcoin-Broker mit Fokus auf Einfachheit und DCA – ideal, um regelmäßig sats zu stapeln.<br>
+          Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du dauerhaft 0,2&nbsp;Prozentpunkte Gebührenreduktion
+          auf Sofort- und Sparplankäufe:<br>
+          👉 <a href="https://alien-investor.org/21bitcoin" target="_blank" rel="noopener">alien-investor.org/21bitcoin</a>
+        </li>
+        <li>
+          🛡️ <strong>Bitcoin sicher verwahren – BitBox Hardware-Wallet</strong><br>
+          Deine Keys, deine Coins – ohne Bank dazwischen.<br>
+          5&nbsp;% Rabatt mit dem Code <strong>ALIENINVESTOR</strong> im offiziellen Shop:<br>
+          👉 <a href="https://alien-investor.org/bitbox" target="_blank" rel="noopener">alien-investor.org/bitbox</a>
+        </li>
+      </ul>
+      <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">
+        <em>Hinweis:</em> Affiliate-Links. Wenn du über diese Links kaufst oder die Codes nutzt, erhalte ich eine kleine Provision.
+        Für dich wird es nicht teurer – im Fall der Rabatte sogar günstiger. Danke! 👽
+      </p>
+    </div>
+  </article>
 
   <div class="like-button">
     <button id="likeButton">👍 Gefällt mir</button>
     <span id="likeCount">0</span>
-    <span style="color:#bbb;">(Speicherung nur lokal im Browser)</span>
+    <span style="color:#bbb; font-size: 0.9em;">(Lokal)</span>
   </div>
 
   <script>
@@ -174,38 +260,44 @@
         localStorage.setItem(storageKey, String(count));
         btn.disabled = true;
         btn.textContent = "Danke! 👽";
+        btn.style.borderColor = "#444";
+        btn.style.color = "#888";
       });
     })();
   </script>
 
-  <footer>
-    <p>📬 Kontakt:
-      <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>
-    </p>
+  <div class="back-links">
+    <a href="blog.html" style="font-size: 1.1em;">⬅ Zurück zur Blog-Übersicht</a>
+    <a href="index.html" style="font-size: 1.1em;">⬅ Zurück zur Zentrale</a>
+  </div>
 
-    <p style="font-size: 0.9em; color: #aaa;">
-      👽 <strong>Haftungsausschluss:</strong><br>
-      Dieser Artikel ist keine Finanz-, Steuer- oder Rechtsberatung.<br>
-      Ich teile hier nur meine persönliche Alien-Meinung 🛸 – unabhängig, rebellisch und frei.<br>
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+      <h3 style="margin-bottom: 15px;">
+        🔋 Energie aufladen
+        <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
+      </h3>
+      
+      <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+        Treibstoff für das Mutterschiff senden
+      </a>
+      
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸
+      </p>
+  </div>
+
+  <footer>
+    <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    
+    <p style="margin-top: 20px;">
+      👽 <strong>Haftungsausschluss:</strong><br><br>
+      Dieser Artikel stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
+      Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
       Investieren ist mit Risiken verbunden. Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
     </p>
-
-    <div class="support" style="margin-top: 2em;">
-      <h2>💸 Unterstütze meine Arbeit</h2>
-      <ul>
-        <li>☕ Spenden via
-          <a href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener">Ko-fi</a>
-        </li>
-        <li>⚡ Bitcoin Lightning:
-          <code>alien_investor@strike.me</code>
-        </li>
-        <li>₿ Bitcoin Onchain:
-          <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code>
-        </li>
-      </ul>
-    </div>
-
-    <p><a href="blog.html">← Zurück zur Blogübersicht</a></p>
   </footer>
+
 </body>
 </html>
