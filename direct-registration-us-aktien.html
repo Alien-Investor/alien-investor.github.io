@@ -2,9 +2,9 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
+  <title>DRS – echtes Eigentum oder nur Illusion? Wie sicher sind direkt registrierte US-Aktien wirklich? | Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DRS – echtes Eigentum oder nur Illusion? Wie sicher sind direkt registrierte US-Aktien wirklich?</title>
-  <meta name="description" content="Was bedeutet Direct Registration (DRS) für dein Eigentum an US-Aktien wie Alphabet oder Rollins? Einordnung von Eigentumsbegriff, Intermediärrisiken und Extremszenarien mit Verweis auf offizielle Quellen.">
+  <meta name="description" content="Was bedeutet Direct Registration (DRS) für dein Eigentum an US-Aktien? Einordnung von Eigentumsbegriff, Intermediärrisiken und Extremszenarien.">
   <style>
     body {
       background-color: #000;
@@ -13,64 +13,146 @@
       line-height: 1.6;
       max-width: 800px;
       margin: auto;
-      padding: 2em;
+      padding: 0 15px 20px 15px; /* Mobile-Optimierung */
     }
-    h1, h2, h3 { color: #00ffcc; }
-    a { color: #00ffcc; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; }
-    em { color: #ccc; }
-    .byline { margin-top: -0.8em; margin-bottom: 1.2em; }
 
+    /* --- TYPOGRAFIE --- */
+    h1, h2, h3 {
+      color: #00ffcc;
+    }
+    h1 {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    /* --- LINKS (Neon-Glow) --- */
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc; /* Der Alien-Effekt */
+    }
+
+    /* --- STANDARD ELEMENTE --- */
+    code {
+      background-color: #111;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      color: #0f0;
+      font-family: monospace;
+    }
+    em { color: #ccc; }
+
+    .byline {
+      margin-top: -0.8em;
+      margin-bottom: 2em;
+      color: #ccc;
+      font-style: italic;
+      text-align: center;
+    }
+
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
+
+    /* --- BOXEN --- */
+    .box {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 1em; }
+
+    .recommendation-box {
+      margin: 2em 0;
+      padding: 1em;
+      border: 1px dashed #00ffcc;
+      border-radius: 8px;
+      text-align: center;
+      background-color: #050505;
+    }
+    .recommendation-box h3 {
+      margin-top: 0;
+      font-size: 1.1em;
+      color: #00ffcc;
+    }
+
+    /* --- LIKE BUTTON --- */
     .like-button {
-      margin-top: 2em;
-      font-size: 0.9em;
+      margin: 3em 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
     }
     .like-button button {
-      background-color: #111;
-      color: #fff;
+      background: #000;
+      color: #00ffcc;
       border: 1px solid #00ffcc;
-      padding: 0.4em 0.8em;
-      border-radius: 4px;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
       cursor: pointer;
-      margin-right: 0.5em;
+      font-weight: bold;
+      transition: all 0.2s ease;
     }
     .like-button button:hover {
-      background-color: #022;
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
     }
-    .like-button .like-count {
-      font-weight: bold;
-      margin-right: 0.5em;
-    }
-    .like-button .like-info {
-      display: block;
-      margin-top: 0.4em;
-      color: #aaa;
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
     }
 
-    button {
-      background-color: #111; color: #fff; border: 1px solid #444;
-      padding: 0.5em 1em; border-radius: 5px; cursor: pointer;
+    /* --- NAVIGATION --- */
+    .top-nav {
+      padding: 10px 0;
+      font-size: 0.9em;
     }
-    button:hover { background-color: #222; }
-    footer { margin-top: 3em; padding-top: 2em; border-top: 1px solid #333; font-size: 0.9em; }
-    .support ul { margin: 0.3em 0 0 1.2em; }
-    blockquote.highlight {
-      margin-top: 2em;
-      padding: 1em 1.2em;
-      border-left: 3px solid #00ffcc;
-      background-color: #111;
-      font-style: italic;
-      color: #ddd;
+    .back-links {
+      margin-top: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
     }
   </style>
 </head>
 <body>
 
+  <div class="top-nav">
+    <a href="index.html">⬅ Zurück zur Zentrale</a>
+  </div>
+
   <h1>DRS – echtes Eigentum oder nur Illusion? Wie sicher sind direkt registrierte US-Aktien wirklich?</h1>
   <p class="byline"><em>von Alien Investor</em></p>
 
-  <!-- BEGIN ARTICLE CONTENT -->
   <article id="content">
     <p>
       Viele Anleger hören zum ersten Mal von DRS, wenn es um „echtes Eigentum“ an US-Aktien geht.
@@ -184,136 +266,113 @@
       – und bewusst entscheidest, welche Intermediäre du brauchst und welche nicht.
     </p>
 
-    <h2>Quellen &amp; weiterführende Links</h2>
-    <ul>
-      <li>
-        U.S. Securities and Exchange Commission (SEC): Investor-Publikationen zu
-        <em>Direct Registration</em> und <em>Street Name</em>.
-        <br>
-        <a href="https://www.sec.gov" target="_blank" rel="noopener">https://www.sec.gov</a>
-      </li>
-      <li>
-        SEC Investor Bulletin: Grundlagen zu Eigentum an Wertpapieren (registered vs. beneficial owner).
-        <br>
-        <a href="https://www.sec.gov/files/ib_rights_of_security_holders.pdf" target="_blank" rel="noopener">
-          https://www.sec.gov/files/ib_rights_of_security_holders.pdf
-        </a>
-      </li>
-      <li>
-        FINRA: Informationen zur Verwahrung von Wertpapieren und zu DRS als Alternative zu Papierurkunden.
-        <br>
-        <a href="https://www.finra.org/investors" target="_blank" rel="noopener">
-          https://www.finra.org/investors
-        </a>
-      </li>
-      <li>
-        Computershare: FAQ und Erläuterungen zum Direct Registration System (DRS).
-        <br>
-        <a href="https://www.computershare.com" target="_blank" rel="noopener">
-          https://www.computershare.com
-        </a>
-      </li>
-      <li>
-        Equiniti / EQ Shareowner Services: Informationen zu registrierten Aktionären und Direktregistrierung.
-        <br>
-        <a href="https://equiniti.com" target="_blank" rel="noopener">
-          https://equiniti.com
-        </a>
-      </li>
-      <li>
-        DTCC: Rolle von DTC und Cede &amp; Co. in der US-Wertpapierverwahrung.
-        <br>
-        <a href="https://www.dtcc.com" target="_blank" rel="noopener">
-          https://www.dtcc.com
-        </a>
-      </li>
-    </ul>
+    <div class="box" style="border-style: dashed; border-color: #333;">
+      <h3>📚 Quellen &amp; weiterführende Links</h3>
+      <ul style="padding-left: 1.2em;">
+        <li>
+          U.S. Securities and Exchange Commission (SEC): Investor-Publikationen zu <em>Direct Registration</em> und <em>Street Name</em>.<br>
+          👉 <a href="https://www.sec.gov" target="_blank" rel="noopener">sec.gov</a>
+        </li>
+        <li>
+          SEC Investor Bulletin: Grundlagen zu Eigentum an Wertpapieren.<br>
+          👉 <a href="https://www.sec.gov/files/ib_rights_of_security_holders.pdf" target="_blank" rel="noopener">PDF ansehen</a>
+        </li>
+        <li>
+          FINRA: Informationen zur Verwahrung von Wertpapieren.<br>
+          👉 <a href="https://www.finra.org/investors" target="_blank" rel="noopener">finra.org</a>
+        </li>
+        <li>
+          Computershare: FAQ zum Direct Registration System (DRS).<br>
+          👉 <a href="https://www.computershare.com" target="_blank" rel="noopener">computershare.com</a>
+        </li>
+        <li>
+          DTCC: Rolle von DTC und Cede &amp; Co.<br>
+          👉 <a href="https://www.dtcc.com" target="_blank" rel="noopener">dtcc.com</a>
+        </li>
+      </ul>
+    </div>
   </article>
-  <!-- END ARTICLE CONTENT -->
 
-  <!-- Standard-Zitat -->
-  <blockquote class="highlight">
+  <blockquote>
     „Vertraue niemandem! Manage deine Finanzen selbst!“
   </blockquote>
 
   <div class="like-button">
     <button id="likeButton">👍 Gefällt mir</button>
-    <span class="like-count" id="likeCount">0</span>
-    <span class="like-info">Speichert nur lokal im Browser, kein Tracking, keine externen Cookies.</span>
+    <span id="likeCount">0</span>
+    <span style="color:#bbb; font-size: 0.9em;">(Lokal)</span>
   </div>
 
   <script>
-    (function () {
-      const storageKey = window.location.pathname + '-likes';
+    (function() {
+      const storageKey = window.location.pathname + "-likes";
       const btn = document.getElementById('likeButton');
-      const countSpan = document.getElementById('likeCount');
+      const span = document.getElementById('likeCount');
 
-      let count = parseInt(localStorage.getItem(storageKey) || '0', 10);
-      if (Number.isNaN(count)) {
-        count = 0;
-      }
-      countSpan.textContent = String(count);
+      let count = parseInt(localStorage.getItem(storageKey) || "0", 10);
+      span.textContent = count;
 
-      btn.addEventListener('click', function () {
-        if (btn.disabled) return;
-        count++;
+      btn.addEventListener('click', function() {
+        count += 1;
+        span.textContent = count;
         localStorage.setItem(storageKey, String(count));
-        countSpan.textContent = String(count);
         btn.disabled = true;
-        btn.textContent = 'Danke! 👽';
+        btn.textContent = "Danke! 👽";
+        btn.style.borderColor = "#444";
+        btn.style.color = "#888";
       });
     })();
   </script>
 
-  <section style="margin-top:2em; padding:1em; border:1px solid #00ffcc; border-radius:8px; background-color:#050505;">
-    <h2>👽 Werbung / DRS-Broker & echte Eigentums-Tools</h2>
+  <div class="box">
+    <h3>👽 Werbung / DRS-Broker &amp; echte Eigentums-Tools</h3>
     <p>
       Wenn du DRS und echte Eintragung im Aktienregister ernst meinst, brauchst du Broker,
       die beim Thema Eigentum mitspielen – und nicht nur Buchpositionen bei Cede &amp; Co. verwalten.
     </p>
     <ul>
       <li>
-        <strong>Interactive Brokers (IBKR)</strong> – mein Weg, um US-Aktien aus dem
-        Broker-Universum in Richtung Computershare &amp; Co. zu bewegen.<br>
-        👉 <a href="https://alien-investor.org/interactive-brokers" target="_blank" rel="noopener noreferrer">
-          Zu Interactive Brokers (Referral-Link)
-        </a>
+        <strong>Interactive Brokers (IBKR):</strong><br>
+        Mein Weg, um US-Aktien aus dem Broker-Universum in Richtung Computershare &amp; Co. zu bewegen.<br>
+        👉 <a href="https://alien-investor.org/interactive-brokers" target="_blank" rel="noopener">Zu Interactive Brokers (Referral-Link)</a>
       </li>
     </ul>
-    <p style="font-size:0.9em; color:#ccc;">
-      Hinweis: Das ist ein Werbe- bzw. Referral-Link. Wenn du ihn nutzt, unterstützt du meine Arbeit –
-      für dich bleibt der Preis gleich. Keine Finanz-, Steuer- oder Rechtsberatung, nur meine persönliche
-      Alien-Meinung. 👽
+    <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">
+      Hinweis: Affiliate-Link. Wenn du ihn nutzt, unterstützt du meine Arbeit, ohne dass es dich mehr kostet. Danke! 👽
     </p>
-  </section>
+  </div>
+
+  <div class="back-links">
+    <a href="blog.html" style="font-size: 1.1em;">⬅ Zurück zur Blog-Übersicht</a>
+    <a href="index.html" style="font-size: 1.1em;">⬅ Zurück zur Zentrale</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+      <h3 style="margin-bottom: 15px;">
+        🔋 Energie aufladen
+        <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
+      </h3>
+      
+      <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+        Treibstoff für das Mutterschiff senden
+      </a>
+      
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸
+      </p>
+  </div>
 
   <footer>
-    <p>📬 Kontakt:
-      <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>
-    </p>
-
-    <p style="font-size:0.95em; color:#bbb;">
-      👽 <strong>Haftungsausschluss:</strong><br>
-      Keine Finanz-, Steuer- oder Rechtsberatung – nur persönliche Alien-Meinung.<br>
+    <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    
+    <p style="margin-top: 20px;">
+      👽 <strong>Haftungsausschluss:</strong><br><br>
+      Dieser Artikel stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
+      Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
       Investieren ist mit Risiken verbunden. Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
     </p>
-
-    <div class="support" style="margin-top: 2em;">
-      <h2>💸 Unterstütze meine Arbeit</h2>
-      <ul>
-        <li>☕ Spenden via
-          <a href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener">Ko-fi</a>
-        </li>
-        <li>⚡ Bitcoin Lightning:
-          <code>alien_investor@strike.me</code>
-        </li>
-        <li>₿ Bitcoin Onchain:
-          <code>bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code>
-        </li>
-      </ul>
-    </div>
-
-    <p><a href="/blog.html">← Zurück zum Blog</a></p>
   </footer>
 
 </body>
