@@ -11,12 +11,13 @@
       font-family: Arial, sans-serif;
       text-align: center;
       margin: 0;
+      padding-bottom: 20px; /* Etwas Luft am Ende */
     }
     header {
       background-image: url("Alien_Investor_Banner.jpeg");
       background-size: cover;
       background-position: center;
-      height: 500px;
+      height: 300px; /* 500px ist mobil oft zu viel, 300-400px ist besser */
       position: relative;
     }
     img.profil {
@@ -30,37 +31,56 @@
       transform: translateX(-50%);
       background-color: #000;
     }
+    main {
+      padding: 0 15px; /* Seitenabstand für Mobile */
+    }
     h1 {
       margin-top: 90px;
       font-size: 2em;
+      margin-bottom: 0.2em;
     }
     .claim {
-      font-size: 1.2em;
-      margin: 10px 0 30px;
+      font-size: 1.1em;
+      margin: 10px auto 30px;
       font-weight: bold;
+      color: #ccc;
+      max-width: 600px;
+      line-height: 1.4;
     }
-    .links a {
+    /* Neue Klasse für die obere Link-Gruppe */
+    .nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 40px;
+    }
+    .nav-links a {
       color: #00ffcc;
       text-decoration: none;
-      display: block;
-      margin: 10px;
-      font-size: 1.1em;
+      font-size: 1.2em;
+      font-weight: bold;
+      transition: color 0.2s;
     }
-    .links a:hover {
+    .nav-links a:hover {
+      color: #fff;
       text-decoration: underline;
     }
-    /* Liste im Support-Bereich ohne Standard-Punkte */
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    ul li {
-      margin: 5px 0;
+    
+    /* Footer Styling */
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
     }
   </style>
 </head>
 <body>
+
   <header>
     <img src="Alien_Investor_Profilbild.jpg" alt="Profilbild" class="profil">
   </header>
@@ -69,39 +89,39 @@
     <h1>Alien Investor 👽</h1>
     <p class="claim">„Vertrau niemandem – manage deine Finanzen selbst. Aliens sind frei!“</p>
 
-    <div class="links">
+    <div class="nav-links">
       <a href="/blog.html">📚 Blog</a>
-      <!-- Nostr-Link in der Social-Sektion -->
       <a href="https://primal.net/p/nprofile1qqsvfljdka6fpru7jzv8zfm3v6c9ptjehj8674uvn7mn06qymq4sllcaer9fr" target="_blank">🦩 Nostr - Folge mir zensurfrei</a>
       <a href="https://www.youtube.com/@Alien-Investor" target="_blank">▶️ YouTube</a>
       <a href="https://www.mein.online-impressum.de/alien-investor/" target="_blank">📜 Impressum</a>
-
-      <hr>
-      <h3>💸 Unterstütze meine Arbeit</h3>
-      <ul>
-        <li>🛸 <a href="/spenden.html">Mission unterstützen</a></li>
-      </ul>
-      <p>Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸</p>
-      <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
     </div>
+
+    <hr style="border-color: #222; max-width: 200px; margin: 0 auto;">
+
+    <div style="margin-top: 40px; margin-bottom: 40px;">
+      <h3 style="margin-bottom: 15px;">🔋 Energie aufladen</h3>
+      
+      <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+        Treibstoff für das Mutterschiff senden
+      </a>
+      
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸
+      </p>
+    </div>
+
+    <div style="margin-top: 30px;">
+      📬 Kontakt: <a href="mailto:kontakt@alien-investor.org" style="color:#00ffcc; text-decoration:none;">kontakt@alien-investor.org</a>
+    </div>
+
   </main>
 
-  <footer style="margin-top: 3em; padding: 2em; font-size: 0.85em; color: #888;">
-    <hr style="border-color: #333; margin-bottom: 1em;">
-    <p>👽 <strong>Haftungsausschluss:</strong><br>
+  <footer>
+    <p>👽 <strong>Haftungsausschluss:</strong><br><br>
     Diese Seite stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
     Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
     Denke selbst, vertraue niemandem, und handle eigenverantwortlich.</p>
-
-    <div style="margin-top: 2em; font-size: 0.85em; color: #555;">
-      👁️ Besucherzähler:
-      <img src="https://hitwebcounter.com/counter/counter.php?page=21068247&style=0036&nbdigits=6&type=ip&initCount=0"
-           alt="Besucherzähler"
-           style="vertical-align: middle; max-width: 100px; min-height: 20px; display: inline-block;"
-           referrerpolicy="no-referrer" />
-    </div>
   </footer>
+
 </body>
 </html>
-
-
