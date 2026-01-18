@@ -1,0 +1,499 @@
+Das ist eine sehr gute Frage. Wenn wir den ursprünglichen Deepsearch-Bericht noch einmal **ganz genau** gegen den HTML-Entwurf prüfen, habe ich tatsächlich drei **technisch sehr relevante Details** unterschlagen, die für einen echten "Deep Dive" wichtig sind:
+
+1. **Live Web Access (Brave Search):** Ich habe nicht erklärt, wie Maple auf das Internet zugreift (via Privacy-Proxy und Brave Search API), ohne die IP des Nutzers zu leaken. Das ist ein Killer-Feature im Vergleich zu "offline" lokalen LLMs.
+2. **Traffic Analysis (Metadaten):** Ein extrem wichtiger Punkt für Hochrisiko-Nutzer. Selbst mit E2EE kann ein ISP anhand der Paketgröße/Timing erkennen, *dass* du KI nutzt, auch wenn er den Inhalt nicht sieht. Das fehlte im Risikoteil.
+3. **Synchronisation & Vision:** Die Funktionsweise der Geräte-Synchronisation (verschlüsselte Blobs) und die Bilderkennung (Gemma 3 Vision) fehlten.
+
+Hier ist der **aktualisierte, finale HTML-Code**. Ich habe diese Punkte in neue Abschnitte (2.3 und 6.2) integriert und die Modell-Liste ergänzt.
+
+```html
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Maple AI Deep-Dive: Souveräne KI und vertrauliches Rechnen | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tiefenanalyse zu Maple AI: Wie Confidential Computing, AWS Nitro Enclaves und OpenSecret echte Privatsphäre für LLMs ermöglichen. Ein Bericht für Eigentümer.">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.7;
+      max-width: 800px; /* Standardbreite */
+      margin: auto;
+      padding: 0 15px 20px 15px; /* Mobile-Optimierung */
+    }
+
+    /* --- TYPOGRAFIE & LAYOUT --- */
+    h1, h2, h3 {
+      color: #00ffcc;
+    }
+    h1 {
+      margin-top: 40px;
+      text-align: center;
+    }
+    
+    /* --- LINKS (Neon-Glow) --- */
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc; /* Der Alien-Effekt */
+    }
+
+    /* --- STANDARD ELEMENTE --- */
+    .byline {
+      font-size: 0.9em;
+      color: #bbb;
+      margin-bottom: 2em;
+      text-align: center;
+      font-style: italic;
+    }
+    
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
+    
+    /* --- ZUSATZ FÜR WARNUNGEN --- */
+    .highlight {
+      border-left: 3px solid #ff3b3b;
+      margin: 1.5em 0;
+      padding: 0.8em 1em;
+      background: #110000;
+      color: #f5cccc;
+      font-size: 0.95em;
+      border-radius: 0 8px 8px 0;
+    }
+
+    ul { padding-left: 1.2em; }
+    li { margin-bottom: 0.5em; }
+    em { color: #ccc; }
+    code {
+      background-color: #111;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      color: #0f0;
+      font-size: 0.95em;
+      font-family: monospace;
+    }
+
+    /* --- TABELLE --- */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2em 0;
+      font-size: 0.9em;
+    }
+    th, td {
+      border: 1px solid #333;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #111;
+      color: #00ffcc;
+    }
+    tr:nth-child(even) {
+      background-color: #0a0a0a;
+    }
+
+    /* --- BOXEN (Glow-Style) --- */
+    .box {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      font-size: 0.95em;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .box h3 { margin-top: 0; }
+    
+    .recommendation-box {
+      margin: 2em 0;
+      padding: 1em;
+      border: 1px dashed #00ffcc;
+      border-radius: 8px;
+      text-align: center;
+      background-color: #050505;
+    }
+    .recommendation-box h3 {
+      margin-top: 0;
+      font-size: 1.1em;
+      color: #00ffcc;
+    }
+
+    /* --- LIKE BUTTON (Alien Style) --- */
+    .like-button {
+      margin: 3em 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+      font-size: 1em;
+    }
+    .like-button button {
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+      font-size: 1em;
+    }
+    .like-button button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
+      box-shadow: none;
+    }
+
+    /* --- NAVIGATION --- */
+    .top-nav {
+      padding: 10px 0;
+      font-size: 0.9em;
+    }
+    .back-links {
+      margin-top: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="index.html">⬅ Zurück zur Zentrale</a>
+  </div>
+
+  <h1>🧠 Maple AI & OpenSecret: Die Festung für deine Gedanken – Tiefenanalyse</h1>
+  <p class="byline"><em>von Alien Investor</em></p>
+
+  <article id="content">
+    <p>
+      Wir leben in einem fundamentalen Sicherheitsdilemma. Moderne KI-Modelle (LLMs) sind zur kritischen Infrastruktur für Wissensarbeit geworden.
+      Doch der Preis für diese Intelligenz ist hoch: Du musst deine intimsten Gedanken, Geschäftsgeheimnisse und Ideen an zentralisierte "Black Boxes"
+      wie OpenAI, Google oder Anthropic senden.
+    </p>
+    <p>
+      Für Cypherpunks, Anwälte und freiheitsliebende Aliens ist das inakzeptabel. Die Antwort der Industrie war bisher: "Vertrau uns einfach."
+      <strong>Maple AI</strong> (trymaple.ai) tritt an, um dieses Paradigma zu brechen. Nicht mit Versprechen, sondern mit kryptografischen Beweisen.
+      Dieser Bericht analysiert die Technologie, die Risiken und warum dieses Projekt mehr ist als nur ein weiterer KI-Wrapper.
+    </p>
+
+    <div class="highlight">
+      <strong>Achtung, Verwechslungsgefahr:</strong> Es gibt ein Unternehmen namens "Maple" für Restaurant-Reservierungen.
+      Wir sprechen hier über <strong>Maple AI (trymaple.ai)</strong> – das "Freedom Tech"-Projekt für verschlüsselte KI.
+    </div>
+
+    <h2>1. Ursprung: Aus der Asche der Mutiny Wallet</h2>
+    <p>
+      Maple AI ist kein klassisches Silicon-Valley-Startup, das auf den Hype-Train aufspringt. Es ist der direkte Nachfolger
+      des Teams hinter der <strong>Mutiny Wallet</strong> – einer innovativen, selbstverwahrenden Bitcoin-Lightning-Wallet.
+    </p>
+    <p>
+      Als das Team 2024/2025 den Betrieb der Wallet aufgrund regulatorischer Hürden einstellen musste, vollzog es einen strategischen "Pivot".
+      Die ideologische Basis blieb identisch: <strong>Daten sind toxischer Abfall ("Toxic Waste").</strong>
+      Wer Daten sammelt, schafft Haftungsrisiken und Überwachungsstrukturen.
+      Die Human Rights Foundation (HRF) listete das Projekt bereits als eines der "Top 15 Freedom Tech Projects of 2025".
+    </p>
+
+    <h2>2. Die Architektur: OpenSecret & AWS Nitro Enclaves</h2>
+    <p>
+      Wie kann Maple behaupten, deine Daten nicht zu sehen, wenn sie auf deren Servern verarbeitet werden?
+      Die Antwort liegt im <strong>Confidential Computing</strong>. Maple ist im Kern eine Implementierung der Backend-Plattform "OpenSecret".
+    </p>
+
+    <h3>Der Tresorraum: AWS Nitro Enclaves</h3>
+    <p>
+      Normalerweise hat ein Server-Administrator (Root) Zugriff auf alles, was im Speicher passiert. Maple nutzt jedoch
+      <strong>AWS Nitro Enclaves</strong>. Das sind isolierte Rechenumgebungen:
+    </p>
+    <ul>
+      <li><strong>Kein SSH-Zugang:</strong> Selbst die Maple-Entwickler können sich nicht in die Enklave einloggen.</li>
+      <li><strong>Kein Disk-Speicher:</strong> Die Enklave ist "diskless". Sobald der Strom weg ist oder der Prozess endet, sind die Daten weg (Zero Data Retention).</li>
+      <li><strong>Kein offenes Internet:</strong> Die Enklave kommuniziert nur über einen streng definierten, lokalen Kanal.</li>
+    </ul>
+
+    <h3>Der Beweis: Remote Attestation</h3>
+    <p>
+      Das ist der entscheidende Punkt ("Don't trust, verify"): Bevor dein Gerät auch nur ein Byte an Daten sendet,
+      verlangt es einen sogenannten "Attestation Report". Das ist eine kryptografische Signatur direkt von der AWS-Hardware.
+    </p>
+    <p>
+      Dieser Bericht bestätigt: "Ich bin eine echte Nitro Enklave und ich führe exakt den Programmcode aus, dessen Hash du erwartest."
+      Da der Code Open Source ist (Reproducible Builds via NixOS), kann jeder verifizieren, dass keine Hintertüren eingebaut sind.
+    </p>
+
+    <div class="box">
+      <h3>🌐 Wie Live-Websuche (Brave) funktioniert</h3>
+      <p>
+        Ein häufiges Problem bei sicheren Enklaven ist, dass sie keinen Internetzugriff haben dürfen. Maple löst das mit einem "Privacy Proxy":
+      </p>
+      <ul>
+        <li>Dein verschlüsselter Prompt landet in der Enklave.</li>
+        <li>Die Enklave entschlüsselt ihn, erkennt eine Suchanfrage und sendet diese über einen Proxy an <strong>Brave Search</strong>.</li>
+        <li>Brave sieht nur die IP des Maple-Servers, nicht deine IP.</li>
+        <li>Die Suchergebnisse fließen zurück in die Enklave, werden dort verarbeitet und verschlüsselt an dich gesendet.</li>
+      </ul>
+      <p>So erhältst du Live-Daten, ohne dass Google oder Bing ein Profil über dich erstellen können.</p>
+    </div>
+
+    <h2>3. Die Modelle: Das China-Paradoxon & Vision</h2>
+    <p>
+      Maple trainiert keine eigenen Modelle, sondern hostet die besten Open-Weight-Modelle der Welt.
+    </p>
+    <ul>
+      <li>
+        <strong>DeepSeek R1 & Kimi K2 (China):</strong> Maple nutzt chinesische Spitzenmodelle, die in Benchmarks oft GPT-4 schlagen.
+        Normalerweise ein Datenschutz-Albtraum. Aber: Da diese Modelle in der isolierten US-Enklave ohne Internetzugriff laufen,
+        können sie keine Daten nach China funken. Man nutzt die Waffe des Gegners gegen ihn selbst.
+      </li>
+      <li>
+        <strong>GPT-OSS-120B (USA):</strong> Ein seltenes, offenes Modell von OpenAI mit starken "Reasoning"-Fähigkeiten.
+      </li>
+      <li>
+        <strong>Gemma 3 (Vision):</strong> Auch Bilderkennung ist möglich. Du kannst Screenshots oder Fotos analysieren lassen – ebenfalls vollständig in der Enklave verarbeitet.
+      </li>
+    </ul>
+
+    <h2>4. Maple Proxy: KI für Entwickler ohne Spionage</h2>
+    <p>
+      Für Entwickler ist das Feature "Maple Proxy" ein Gamechanger. Es ist ein kleines Programm, das lokal auf deinem Rechner läuft und
+      so tut, als wäre es der OpenAI-Server.
+    </p>
+    <p>
+      Du kannst Tools wie <strong>Cursor, VS Code oder Windsurf</strong> nutzen und einfach auf deinen lokalen Port umleiten.
+      Der Proxy verschlüsselt alles und schickt es in die Enklave. So kannst du proprietäre Coding-Tools nutzen, ohne dass dein Code
+      bei Microsoft oder OpenAI landet.
+    </p>
+
+    <h2>5. Preise & Wahre Anonymität</h2>
+    <p>
+      Das Geschäftsmodell ist transparent: Maple finanziert sich durch direkte Nutzerzahlungen.
+      Die Preisstruktur ähnelt der Konkurrenz, bietet aber echte "De-Banking"-Resistenz durch Bitcoin.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Plan</th>
+          <th>Preis</th>
+          <th>Zielgruppe & Limit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Free</strong></td>
+          <td>$0</td>
+          <td>Zum Testen. Limitiert auf ~25 Nachrichten/Woche.</td>
+        </tr>
+        <tr>
+          <td><strong>Pro</strong></td>
+          <td>$20</td>
+          <td><strong>Standard.</strong> Zugriff auf DeepSeek R1, Kimi K2 & GPT-OSS.</td>
+        </tr>
+        <tr>
+          <td><strong>Max</strong></td>
+          <td>$100</td>
+          <td>Power-User & Entwickler (20x Limits). Ideal für Proxy.</td>
+        </tr>
+        <tr>
+          <td><strong>Team</strong></td>
+          <td>$30 / User</td>
+          <td>Für Kanzleien/Praxen. Zentrales Billing.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="box">
+      <h3>⚡ Bezahlen mit Bitcoin & Lightning</h3>
+      <p>
+        Als Erbe der Mutiny Wallet integriert Maple native Bitcoin-Zahlungen.
+      </p>
+      <ul>
+        <li><strong>Anonymität:</strong> Du kannst ohne Bankkonto oder Klarnamen zahlen (keine PII-Pflicht).</li>
+        <li><strong>Lightning Network:</strong> Sofortige, gebührenarme Zahlungen.</li>
+        <li><strong>Rabatt:</strong> Wer mit Bitcoin zahlt, erhält teilweise Rabatte.</li>
+      </ul>
+    </div>
+
+    <h2>6. Kritische Analyse: Wo sind die Haken?</h2>
+    <p>
+      Wo Licht ist, ist auch Schatten. Sicherheit kostet Komfort.
+    </p>
+    <ul>
+      <li>
+        <strong>Latenz (Ping):</strong> Der kryptografische Handshake kostet Zeit. Maple fühlt sich weniger "snappy" an als ChatGPT.
+      </li>
+      <li>
+        <strong>Verlustrisiko:</strong> Verlierst du deine Recovery Phrase, ist der Account weg. Es gibt keinen Support-Reset.
+      </li>
+      <li>
+        <strong>Traffic Analysis (Metadaten):</strong> Dies ist ein Risiko für Hochziele (Dissidenten). Auch wenn der Inhalt verschlüsselt ist,
+        könnte ein ISP anhand der Paketgröße und des Timings erkennen, *dass* du intensiv mit einer KI kommunizierst.
+        Maple bietet hiergegen (noch) keine Obfuskierung.
+      </li>
+      <li>
+        <strong>Sync-Grenzen:</strong> Die Synchronisation zwischen Geräten erfolgt über verschlüsselte "Blobs". Der Server sieht zwar nicht den Inhalt,
+        aber er sieht, wann und wie viel synchronisiert wird (Metadaten-Leck).
+      </li>
+    </ul>
+
+    <h2>7. Alien-Fazit: Nische oder Zukunft?</h2>
+    <p>
+      Für den Durchschnittsnutzer ist Maple AI Overkill. Aber für Anwälte, Ärzte, Entwickler und alle, die
+      sensible Daten verarbeiten, ist es potenziell alternativlos. Es ist der Beweis, dass "Confidential Computing" den Labortisch verlassen hat.
+    </p>
+
+  </article>
+
+  <div class="recommendation-box">
+    <h3>🔎 Weiterführender Research</h3>
+    <p>
+      Passend zum Thema Sicherheit: Wie du dein Smartphone komplett entgooglest.<br>
+      👉 <a href="grapheneos.html">GrapheneOS – Das sichere Android</a>
+    </p>
+  </div>
+
+  <div class="box">
+    <h3>🧰 Tools für echte Eigentümer</h3>
+    <p style="font-size:0.95em;">
+      Wenn du Aktien und Bitcoin möglichst eigenverantwortlich halten willst, nutze nicht nur dein Bankdepot:
+    </p>
+    <ul>
+      <li>
+        🇨🇭 <strong>Investieren mit Swissquote:</strong><br>
+        Saubere Namensaktien halten ohne deutsche Bank dazwischen.<br>
+        👉 <a href="https://alien-investor.org/swissquote" target="_blank">https://alien-investor.org/swissquote</a>
+      </li>
+      <li>
+        📊 <strong>US-Aktien über IBKR:</strong><br>
+        Der Standard für internationale Titel und DRS-Optionen.<br>
+        👉 <a href="https://alien-investor.org/interactive-brokers" target="_blank">https://alien-investor.org/interactive-brokers</a>
+      </li>
+      <li>
+        💥 <strong>Bitcoin kaufen in Europa – 21bitcoin:</strong><br>
+        Bitcoin-only App, ideal für DCA. Mit Code <strong>ALIENINVESTOR</strong> dauerhaft Gebühren sparen.<br>
+        👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
+      </li>
+      <li>
+        ₿ <strong>Bitcoin in Selbstverwahrung:</strong><br>
+        Hardware-Wallet statt Börsenkonto. (Code: ALIENINVESTOR).<br>
+        👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
+      </li>
+      <li>
+        🛡️ <strong>Privacy &amp; Mail:</strong><br>
+        Für E-Mail, VPN und Cloud nutze ich Proton – wie Maple AI, nur für Mail.<br>
+        👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
+      </li>
+    </ul>
+    <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">
+      Hinweis: Bei einigen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit,
+      ohne dass es dich mehr kostet. Danke! 👽
+    </p>
+  </div>
+
+  <div class="like-button">
+    <button id="likeButton">👍 Gefällt mir</button>
+    <span id="likeCount">0</span>
+    <span style="color:#bbb; font-size: 0.9em;">(Lokal gespeichert)</span>
+  </div>
+
+  <div class="box" style="border-style: dashed; border-color: #333;">
+    <h3>📚 Quellen (Auswahl)</h3>
+    <p style="font-size:0.95em; color: #ccc;">
+      Dieser Bericht basiert auf technischer Dokumentation von Maple AI (OpenSecret Whitepaper), AWS Nitro Documentation,
+      GitHub-Repositories (OpenSecretCloud) sowie unabhängigen Sicherheitsanalysen (Stand: 2025/2026).
+    </p>
+  </div>
+
+  <script>
+    (function() {
+      const storageKey = window.location.pathname + "-likes";
+      const btn = document.getElementById('likeButton');
+      const span = document.getElementById('likeCount');
+
+      let count = parseInt(localStorage.getItem(storageKey) || "0", 10);
+      span.textContent = count;
+
+      btn.addEventListener('click', function() {
+        count += 1;
+        span.textContent = count;
+        localStorage.setItem(storageKey, String(count));
+        btn.disabled = true;
+        btn.textContent = "Danke! 👽";
+        btn.style.borderColor = "#444";
+        btn.style.color = "#888";
+      });
+    })();
+  </script>
+
+  <div class="back-links">
+    <a href="blog.html" style="font-size: 1.1em;">⬅ Zurück zum Blog</a>
+    <a href="index.html" style="font-size: 1.1em;">⬅ Zurück zur Zentrale</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+      <h3 style="margin-bottom: 15px;">
+        🔋 Energie aufladen 
+        <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
+      </h3>
+      
+      <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+        Treibstoff für das Mutterschiff senden
+      </a>
+      
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸
+      </p>
+  </div>
+
+  <footer>
+    <p>📬 Kontakt:
+      <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>
+    </p>
+
+    <p style="margin-top: 20px;">
+      👽 <strong>Haftungsausschluss:</strong><br><br>
+      Dieser Artikel stellt keine Finanz-, Steuer- oder Rechtsberatung dar.
+      Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.
+      Technologie entwickelt sich schnell, prüfe Informationen selbst.
+    </p>
+  </footer>
+
+</body>
+</html>
+
+```
