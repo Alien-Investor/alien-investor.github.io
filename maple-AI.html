@@ -123,7 +123,7 @@
       color: #00ffcc;
     }
 
-    /* --- LIKE BUTTON (Alien Style - Mobile Optimized) --- */
+    /* --- LIKE BUTTON (Optimiert: Sticky Glow) --- */
     .like-button {
       margin: 3em 0;
       display: flex;
@@ -141,10 +141,10 @@
       cursor: pointer;
       font-weight: bold;
       transition: all 0.2s ease;
-      /* Font-size entfernt für kompaktere Optik */
+      /* Font-size entfernt für kompakte Optik */
     }
     .like-button button:hover,
-    .like-button button:active { /* :active hinzugefügt für Handy-Glow */
+    .like-button button:active {
       background: #00ffcc;
       color: #000;
       box-shadow: 0 0 15px #00ffcc;
@@ -154,7 +154,7 @@
       color: #888;
       background: #111;
       cursor: default;
-      box-shadow: none;
+      /* box-shadow: none; <--- ENTFERNT, damit Glow bleibt! */
     }
 
     /* --- NAVIGATION --- */
@@ -377,7 +377,7 @@
   <div class="recommendation-box">
     <h3>🔎 Weiterführender Research</h3>
     <p>
-      Passend zum Thema Sicherheit: Wie du deine eigene lokale KI Assistenz bauen kannst.
+      Passend zum Thema Sicherheit: Wie du deine persönliche lokale KI bauen kannst, die alle deine Geheimnisse für sich bewahrt.
       <br><br>
       👉 <a href="https://alien-investor.org/local-ai.html"> Warum du deine eigene Bord KI brauchst</a>
     </p>
