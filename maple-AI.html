@@ -1,12 +1,3 @@
-Das ist eine sehr gute Frage. Wenn wir den ursprünglichen Deepsearch-Bericht noch einmal **ganz genau** gegen den HTML-Entwurf prüfen, habe ich tatsächlich drei **technisch sehr relevante Details** unterschlagen, die für einen echten "Deep Dive" wichtig sind:
-
-1. **Live Web Access (Brave Search):** Ich habe nicht erklärt, wie Maple auf das Internet zugreift (via Privacy-Proxy und Brave Search API), ohne die IP des Nutzers zu leaken. Das ist ein Killer-Feature im Vergleich zu "offline" lokalen LLMs.
-2. **Traffic Analysis (Metadaten):** Ein extrem wichtiger Punkt für Hochrisiko-Nutzer. Selbst mit E2EE kann ein ISP anhand der Paketgröße/Timing erkennen, *dass* du KI nutzt, auch wenn er den Inhalt nicht sieht. Das fehlte im Risikoteil.
-3. **Synchronisation & Vision:** Die Funktionsweise der Geräte-Synchronisation (verschlüsselte Blobs) und die Bilderkennung (Gemma 3 Vision) fehlten.
-
-Hier ist der **aktualisierte, finale HTML-Code**. Ich habe diese Punkte in neue Abschnitte (2.3 und 6.2) integriert und die Modell-Liste ergänzt.
-
-```html
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -495,5 +486,3 @@ Hier ist der **aktualisierte, finale HTML-Code**. Ich habe diese Punkte in neue 
 
 </body>
 </html>
-
-```
