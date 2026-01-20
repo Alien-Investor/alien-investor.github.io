@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>BitBox02 Einrichtung: Der ultimative Guide für Linux, Android & iPhone (Nova)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Anleitung zur Einrichtung der BitBox02 auf Linux, Android und iOS (Nova). udev-Regeln, Backups und Sicherheitstipps für echte Selbstverwahrung.">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 0 15px 20px 15px;
+    }
+
+    /* --- TYPOGRAFIE --- */
+    h1, h2, h3 { color: #00ffcc; }
+    h1 {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    /* --- LINKS (Neon-Glow) --- */
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc; /* Der Alien-Effekt */
+    }
+
+    /* --- STANDARD ELEMENTE --- */
+    code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; font-family: monospace; }
+    em { color: #ccc; }
+
+    .byline {
+      margin-top: -0.8em;
+      margin-bottom: 2em;
+      color: #ccc;
+      font-style: italic;
+      text-align: center;
+    }
+
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
+
+    /* --- TABELLE (Extra für diesen Artikel) --- */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2em 0;
+      font-size: 0.9em;
+    }
+    th, td {
+      border: 1px solid #333;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      color: #00ffcc;
+      background-color: #111;
+    }
+    tr:nth-child(even) {
+      background-color: #050505;
+    }
+
+    /* --- BOXEN --- */
+    .box {
+      border: 1px solid #00ffcc;
+      background-color: #050505;
+      padding: 1.5em;
+      margin: 2em 0;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .box h3 { margin-top: 0; }
+    .box ul { margin-left: 1.2em; }
+
+    /* --- LIKE BUTTON --- */
+    .like-button {
+      margin: 3em 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+      font-size: 1em;
+    }
+    .like-button button {
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+    .like-button button:hover,
+    .like-button button:active {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
+    }
+
+    /* --- NAVIGATION --- */
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    .back-links {
+      margin-top: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="index.html">⬅ Zurück zur Zentrale</a>
+  </div>
+
+  <h1>BitBox02 Einrichtung: Der ultimative Guide für Linux, Android & iPhone (Nova) 🔐</h1>
+  <p class="byline"><em>von Alien Investor</em></p>
+
+  <article id="content">
+    <p>
+      Wer seine Bitcoin nicht selbst verwahrt, besitzt keine Bitcoin, sondern nur ein Versprechen einer Bank oder Börse.
+      Der Wechsel zur Hardware-Wallet (Cold Storage) ist der wichtigste Schritt in die finanzielle Souveränität.
+      Doch gerade für Nutzer von Linux oder dem neuen iPhone-Modell (BitBox02 Nova) gibt es ein paar Fallstricke bei der Einrichtung.
+    </p>
+    <p>
+      In diesem Guide gehen wir den Prozess Schritt für Schritt durch – sicher, sauber und ohne Panik.
+    </p>
+
+    <h2>1. Vorbereitung: Die „Clean Room“-Phase</h2>
+    <p>
+      Bevor du irgendwelche Hardware verbindest, bereiten wir die digitale Umgebung vor. Sicherheit beginnt nicht beim Einstecken, sondern beim Download der Software.
+    </p>
+    <p>
+      <strong>Offizielle Quelle:</strong> Lade die BitBoxApp <em>ausschließlich</em> hier herunter:<br>
+      👉 <a href="https://bitbox.swiss/start" target="_blank" rel="noopener">https://bitbox.swiss/start</a><br>
+      (Dieser Link leitet dich automatisch zur richtigen Version für Linux, Android oder iOS weiter).
+    </p>
+
+    <div class="box" style="border-color: #ff3b3b; box-shadow: 0 0 10px rgba(255, 59, 59, 0.15);">
+      <h3 style="color: #ff3b3b;">⚠️ Kritischer Einschub für Linux-User (der „udev“-Checkpoint)</h3>
+      <p>
+        Nutzt du Debian, Ubuntu, Fedora oder Arch? Dann scheitert der Erstkontakt oft. Die App sieht die BitBox nicht, obwohl sie leuchtet.
+      </p>
+      <p>
+        <strong>Der Grund:</strong> Dein Linux-System erlaubt USB-Geräten aus Sicherheitsgründen nicht automatisch den Zugriff (<em>User Permissions</em>).<br>
+        <strong>Der Fix:</strong> Du musst die sogenannten <code>udev</code>-Regeln installieren.
+      </p>
+      <ol>
+        <li>Gehe auf die <a href="https://shiftcrypto.support" target="_blank" rel="noopener">Shift Crypto Help Center Seite</a> und suche nach „Linux“.</li>
+        <li>Dort findest du den Befehl oder die Datei, die in den Ordner <code>/etc/udev/rules.d/</code> gehört.</li>
+        <li>Oft gehört (je nach Distro) auch dieser Schritt dazu:<br>
+            <code>sudo usermod -aG plugdev $USER</code></li>
+        <li><strong>Wichtig:</strong> Danach einmal ab- und wieder anmelden (oder das System neustarten). Erst dann die App starten.</li>
+      </ol>
+    </div>
+
+    <h2>2. Der Setup-Prozess (Universal-Protokoll)</h2>
+    <p>
+      Egal ob Linux, Android oder Apple (Nova) – der Kernprozess ist identisch und folgt dem Prinzip „Don’t Trust, Verify“.
+    </p>
+
+    <h3>Schritt 1: Der Handschlag (Pairing)</h3>
+    <p>
+      Du verbindest die BitBox02 mit deinem Gerät:
+    </p>
+    <ul>
+      <li><strong>Linux/Android:</strong> via USB-C-Kabel.</li>
+      <li><strong>Apple (nur BitBox02 Nova):</strong> via Bluetooth (in der App scannen).<br>
+      <em>Hinweis: Die iOS-App nutzt für die Kommunikation mit der Nova ausschließlich Bluetooth (auch bei iPhone 15+), um die strikten USB-Restriktionen von Apple zu umgehen.</em></li>
+    </ul>
+    <p>
+      <strong>Sicherheits-Check:</strong> Auf dem Display der BitBox und auf deinem Bildschirm erscheint ein Pairing-Code.
+      Bestätige diesen nur, wenn beide Codes absolut identisch sind. Das verhindert Man-in-the-Middle-Angriffe.
+    </p>
+
+    <h3>Schritt 2: Das Cold-Storage-Backup (die MicroSD-Karte)</h3>
+    <p>
+      Die BitBox schreibt ein <strong>verschlüsseltes Backup</strong> deines Seeds auf die mitgelieferte MicroSD-Karte.
+      Hier gilt eiserne Disziplin:
+    </p>
+    <ul>
+      <li>Niemals steckst du diese Karte in deinen PC oder dein Handy, um „nachzuschauen“, ob was drauf ist.</li>
+      <li>Die Karte bleibt „air-gapped“. Sie berührt nur die BitBox.</li>
+    </ul>
+
+    <h3>Schritt 3: Das Geräte-Passwort</h3>
+    <p>
+      Du wählst ein Passwort direkt am Gerät (durch Berührung der Sensoren an den Seiten).
+      Wichtig zu verstehen: Dieses Passwort schützt nur gegen den physischen Diebstahl des Geräts selbst – es ist <em>nicht</em> dein Wiederherstellungsschlüssel (Seed).
+    </p>
+
+    <div class="box">
+       <h3>🛡️ Hardware-Wallet Empfehlung</h3>
+       <p>
+         Falls du noch keine Hardware-Wallet hast oder auf das offene, sichere Design der BitBox aus der Schweiz umsteigen willst:
+       </p>
+       <p>
+         Mit dem Code <code>ALIENINVESTOR</code> erhältst du <strong>5 % Rabatt</strong> auf deine Bestellung.
+       </p>
+       <p>
+         👉 <a href="https://alien-investor.org/bitbox" target="_blank" rel="noopener">Hier geht's zur BitBox (BitBox02 & Nova)</a>
+       </p>
+       <p style="font-size:0.85em; color:#aaa;">(Affiliate-Link – Supporte den Widerstand ohne Mehrkosten für dich.)</p>
+    </div>
+
+    <h2>3. Level Expert: Die optionale Passphrase</h2>
+    <p>
+      In den Einstellungen der BitBox findest du die Option „Optionale Passphrase“. Das ist die Funktion, an der sich die meisten Anfänger die Finger verbrennen.
+      Lies das hier genau, bevor du den Haken setzt.
+    </p>
+
+    <blockquote>
+      „Die Passphrase ist kein 'Extra-Passwort' für deine bestehende Wallet. Sie erzeugt mathematisch eine <strong>komplett neue Wallet</strong>.“
+    </blockquote>
+
+    <p>
+      So funktioniert die Mathematik dahinter:
+    </p>
+    <ul>
+      <li>Seed = Wallet A (deine „Haupt-Wallet“)</li>
+      <li>Seed + Passphrase „Geheim123“ = Wallet B (komplett leere, neue Wallet)</li>
+      <li>Seed + Passphrase „Geheim124“ = Wallet C (wieder eine andere Wallet)</li>
+    </ul>
+    <p>
+      <strong>Das Risiko:</strong> Die BitBox speichert diese Passphrase nicht. Sie prüft auch nicht, ob sie „richtig“ ist.
+      Wenn du dich beim Einrichten oder Wiederherstellen vertippst, öffnest du einfach eine neue, leere Wallet.
+      Wenn du Coins dorthin schickst und den Tippfehler vergisst, sind die Coins <strong>mathematisch unzugänglich verloren</strong>.
+    </p>
+    <p>
+      Nutze dieses Feature nur, wenn du genau weißt, was du tust (z. B. für „Plausible Deniability“).
+    </p>
+
+    <h2>4. Zusammenfassung der Plattformen</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>System</th>
+          <th>Verbindung</th>
+          <th>Besonderheit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Linux</strong></td>
+          <td>USB-C</td>
+          <td>Benötigt <code>udev</code>-Regeln! Sicherste Umgebung (da Open-Source-OS).</td>
+        </tr>
+        <tr>
+          <td><strong>Android</strong></td>
+          <td>USB-C</td>
+          <td>Braucht oft „OTG“ (On-The-Go)-Aktivierung in den Android-Einstellungen.</td>
+        </tr>
+        <tr>
+          <td><strong>Apple (iOS)</strong></td>
+          <td>Bluetooth</td>
+          <td><strong>Nur mit BitBox02 Nova möglich.</strong> Nutzt das „Whisper“-Protokoll. USB-Verbindung wird unter iOS von der App nicht unterstützt.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top: 2em;">
+      Sicherheit ist kein Zustand, sondern ein Prozess. Nimm dir Zeit für die Einrichtung, mach keine Hektik und prüfe alles doppelt.
+      Deine finanzielle Freiheit ist es wert.
+    </p>
+
+  </article>
+
+  <div class="like-button">
+    <button id="likeButton">👍 Gefällt mir</button>
+    <span id="likeCount">0</span>
+    <span style="color:#bbb; font-size: 0.9em;">(Lokal gespeichert)</span>
+  </div>
+
+  <script>
+    (function() {
+      const storageKey = window.location.pathname + "-likes";
+      const btn = document.getElementById('likeButton');
+      const span = document.getElementById('likeCount');
+
+      let count = parseInt(localStorage.getItem(storageKey) || "0", 10);
+      span.textContent = count;
+
+      btn.addEventListener('click', function() {
+        count += 1;
+        span.textContent = count;
+        localStorage.setItem(storageKey, String(count));
+        btn.disabled = true;
+        btn.textContent = "Danke! 👽";
+        btn.style.borderColor = "#444";
+        btn.style.color = "#888";
+      });
+    })();
+  </script>
+
+  <div class="back-links">
+    <a href="blog.html" style="font-size: 1.1em;">⬅ Zurück zur Blog-Übersicht</a>
+    <a href="index.html" style="font-size: 1.1em;">⬅ Zurück zur Zentrale</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+      <h3 style="margin-bottom: 15px;">
+        🔋 Energie aufladen
+        <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
+      </h3>
+
+      <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+        Treibstoff für das Mutterschiff senden
+      </a>
+
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸
+      </p>
+  </div>
+
+  <footer>
+    <p>📬 Kontakt:
+      <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>
+    </p>
+
+    <p style="margin-top: 20px;">
+      👽 <strong>Haftungsausschluss:</strong><br><br>
+      Dieser Artikel ist keine Rechts- oder Anlageberatung, sondern eine technische Anleitung.<br>
+      Ich teile hier nur meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
+      Du bist selbst für die Sicherheit deiner Keys verantwortlich.
+    </p>
+  </footer>
+
+</body>
+</html>
