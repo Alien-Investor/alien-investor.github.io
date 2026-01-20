@@ -55,7 +55,8 @@
       background: #050505;
       padding: 0.5em 1em;
     }
-    ul { margin-left: 1.2em; }
+    ul, ol { margin-left: 1.2em; }
+    li { margin-bottom: 0.5em; }
     
     .byline {
       margin-top: -0.8em;
@@ -157,17 +158,14 @@
 
   <article id="content">
     <p>
-      "Not your keys, not your coins." Das ist das erste Gesetz der Bitcoin-Souveränität. Aber hast du schon über das zweite Gesetz nachgedacht?
+      "Not your keys, not your coins." Das ist das erste Gesetz der Bitcoin-Souveränität. Aber hast du schon über das zweite Gesetz nachgedacht? 
       <strong>"Lost keys, lost coins."</strong>
     </p>
     <p>
-      Das größte Paradoxon der Selbstverwahrung ist der Tod. Wenn du dein Setup so sicher machst, dass kein Dieb der Welt daran kommt,
-      kommen vermutlich auch deine Erben nicht daran. Machst du es für deine Erben zugänglich (Zettel im Safe, Anwalt mit Schlüssel),
-      schaffst du Sicherheitslücken, durch die du schon zu Lebzeiten alles verlieren kannst.
+      Das größte Paradoxon der Selbstverwahrung ist der Tod. Wenn du dein Setup so sicher machst, dass kein Dieb der Welt daran kommt, kommen vermutlich auch deine Erben nicht daran. Machst du es für deine Erben zugänglich (Zettel im Safe, Anwalt mit Schlüssel), schaffst du Sicherheitslücken, durch die du schon zu Lebzeiten alles verlieren kannst.
     </p>
     <p>
-      Millionen von Bitcoin sind bereits für immer verloren, weil Besitzer gestorben sind und ihre Schlüssel mit ins Grab genommen haben.
-      Die Lösung dafür war bisher kompliziert oder erforderte Vertrauen in Dritte. Bis jetzt.
+      Millionen von Bitcoin sind bereits für immer verloren, weil Besitzer gestorben sind und ihre Schlüssel mit ins Grab genommen haben. Die Lösung dafür war bisher kompliziert oder erforderte Vertrauen in Dritte. Bis jetzt.
     </p>
     <p>
       In diesem Artikel zeige ich dir, wie die <strong>Liana Wallet</strong> dieses Problem löst – mit einem programmierbaren "Dead Man's Switch" direkt auf der Blockchain.
@@ -183,28 +181,23 @@
       <li><strong>Der "Zettel im Tresor":</strong> Einfach, aber riskant. Findet ein Einbrecher den Zettel, ist das Geld weg ("Wrench Attack").</li>
     </ul>
     <p>
-      Was wir brauchen, ist ein System, das <strong>zu Lebzeiten maximal sicher</strong> ist (niemand kann ohne dich ausgeben) und <strong>im Todesfall automatisch zugänglich</strong> wird.
+      Was wir brauchen, ist ein System, das <strong>zu Lebzeiten maximal sicher</strong> ist (niemand kann ohne dich ausgeben) und <strong>im Todesfall zuverlässig zugänglich</strong> wird.
     </p>
 
     <h2>2. Die Lösung: Liana und die "15-Monate-Strategie"</h2>
     <p>
-      Liana ist eine Wallet, die Logik in deine Transaktionen einbaut. Sie nutzt eine Funktion von Bitcoin namens <strong>Timelocks</strong> (Zeitsperren).
-      Das Konzept funktioniert wie ein digitaler Totmannschalter.
+      Liana ist eine Wallet, die Logik in deine Transaktionen einbaut. Sie nutzt eine Funktion von Bitcoin namens <strong>Timelocks</strong> (Zeitsperren). Das Konzept funktioniert wie ein digitaler Totmannschalter.
     </p>
-    
+
     <h3>So funktioniert der "Dead Man's Switch":</h3>
-    <ol>
+    <ul>
       <li><strong>Der Primär-Pfad (Du lebst):</strong> Du hast deine normalen Hardware-Wallets (z.B. eine BitBox02). Damit kannst du deine Coins <em>jederzeit</em> bewegen.</li>
-      <li><strong>Der Wiederherstellungs-Pfad (Der Erbe):</strong> Es gibt einen zweiten Schlüssel (den des Erben). Dieser ist im Code der Wallet hinterlegt, aber <em>kryptographisch ungültig</em>, solange eine bestimmte Zeit nicht vergangen ist.</li>
-      <li><strong>Der Timer:</strong> Wir stellen einen Timer auf der Blockchain ein, zum Beispiel <strong>15 Monate</strong>.</li>
-    </ol>
+      <li><strong>Der Wiederherstellungs-Pfad (Der Erbe):</strong> Es gibt einen zweiten Schlüssel (den des Erben). Dieser ist in der Wallet-Policy (im Skript) hinterlegt, aber <em>nicht spendbar</em>, solange die Zeitsperre nicht erfüllt ist.</li>
+      <li><strong>Die Zeitsperre:</strong> Wir definieren z.B. 15 Monate als relatives Timelock (in Blöcken).</li>
+      <li><strong>Der Refresh:</strong> Jedes Mal, wenn du eine Transaktion tätigst (oder dir selbst einmal im Jahr Geld schickst, ein sogenannter "Refresh"), werden die alten UTXOs ersetzt – und damit beginnt die Zeitsperre für die neuen UTXOs wieder bei null. Der Erben-Pfad bleibt bis zur Reife der Zeitsperre nicht nutzbar.</li>
+    </ul>
     <p>
-      Jedes Mal, wenn du eine Transaktion tätigst (oder dir selbst einmal im Jahr Geld schickst, ein sogenannter "Refresh"), wird der Timer auf der Blockchain zurückgesetzt.
-      Der Schlüssel des Erben bleibt wertlos.
-    </p>
-    <p>
-      <strong>Das Szenario:</strong> Solltest du versterben oder handlungsunfähig werden, stoppen deine Transaktionen. Der Timer läuft ab. Nach 15 Monaten (ca. 65.000 Blöcke)
-      wird der Wiederherstellungs-Pfad auf der Blockchain gültig. Erst jetzt – und keinen Tag früher – kann der Schlüssel des Erben die Coins bewegen.
+      <strong>Das Szenario:</strong> Solltest du versterben oder handlungsunfähig werden, stoppen deine Transaktionen. Die Zeitsperre reift weiter. Nach 15 Monaten (ca. 65.000 Blöcke) ist der Wiederherstellungs-Pfad spendbar. Erst dann – und nicht vorher – kann der Schlüssel des Erben die Coins bewegen.
     </p>
 
     <div class="box">
@@ -214,23 +207,21 @@
       </p>
       <ul>
         <li><strong>12 Monate Zyklus:</strong> Jeder verantwortungsbewusste Bitcoiner sollte einmal im Jahr ein Audit machen (Firmware-Updates, Backups prüfen, Bestände konsolidieren).</li>
-        <li><strong>3 Monate Puffer:</strong> Wenn du dein jährliches Audit vergisst oder im Krankenhaus liegst, hast du 90 Tage Sicherheitspuffer, bevor der Erben-Schlüssel aktiv wird.</li>
+        <li><strong>3 Monate Puffer:</strong> Wenn du dein jährliches Audit vergisst oder im Krankenhaus liegst, hast du 90 Tage Sicherheitspuffer, bevor der Erben-Pfad spendbar wird.</li>
       </ul>
     </div>
 
     <h2>3. Unter der Haube: Miniscript & Decaying Multisig</h2>
     <p>
-      Wie ist das technisch möglich? Liana nutzt <strong>Miniscript</strong>. Das ist eine Sprache, die Bitcoin-Script (den Maschinencode von Bitcoin) lesbar und sicher macht.
-      Es erlaubt uns, Bedingungen wie "UND", "ODER" und "ÄLTER ALS" zu verknüpfen.
+      Wie ist das technisch möglich? Liana nutzt <strong>Miniscript</strong>. Das ist eine Sprache, die Bitcoin-Script (den Maschinencode von Bitcoin) lesbar und sicher macht. Es erlaubt uns, Bedingungen wie "UND", "ODER" und "ÄLTER ALS" zu verknüpfen.
     </p>
     <p>
-      Ein mächtiges Feature dabei ist das <strong>Decaying Multisig</strong> (zerfallende Multisignatur). Stell dir vor, du hast ein hochsicheres Firmen-Setup mit 3 von 5 Schlüsseln.
-      Verlierst du 3 Schlüssel, sind die Coins normalerweise weg. Mit Liana kannst du programmieren:
+      Ein mächtiges Feature dabei ist das <strong>Decaying Multisig</strong> (zerfallende Multisignatur). Stell dir vor, du hast ein hochsicheres Firmen-Setup mit 3 von 5 Schlüsseln. Verlierst du 3 Schlüssel, sind die Coins normalerweise weg. Mit Liana kannst du programmieren:
     </p>
     <ul>
       <li><strong>Heute:</strong> Es werden 3 von 5 Schlüsseln benötigt.</li>
-      <li><strong>Nach 4 Jahren Inaktivität:</strong> Es reichen 2 von 5 Schlüsseln.</li>
-      <li><strong>Nach 5 Jahren Inaktivität:</strong> Es reicht 1 von 5 Schlüsseln.</li>
+      <li><strong>Nach 4 Jahren UTXO-Alter (ohne Refresh):</strong> Es reichen 2 von 5 Schlüsseln.</li>
+      <li><strong>Nach 5 Jahren UTXO-Alter (ohne Refresh):</strong> Es reicht 1 von 5 Schlüsseln.</li>
     </ul>
     <p>
       Das wandelt das Risiko eines "Totalverlusts" in das Risiko einer "temporären Sperre" um. Genial, oder?
@@ -244,25 +235,23 @@
     <h3>Phase 1: Design & Topologie</h3>
     <p>
       Entscheide dich für eine Struktur.
-      <br><strong>Primär (Alltag):</strong> Z.B. deine BitBox02 (Single Sig) oder ein 2-aus-3 Setup für hohe Sicherheit.
-      <br><strong>Wiederherstellung (Erbe):</strong> Ein separater Schlüssel (z.B. ein Ledger oder SeedSigner), der sicher beim Erben oder im Bankschließfach liegt.
     </p>
+    <ul>
+      <li><strong>Primär (Alltag):</strong> Z.B. deine BitBox02 (Single Sig) oder ein 2-aus-3 Setup für hohe Sicherheit.</li>
+      <li><strong>Wiederherstellung (Erbe):</strong> Ein separater Schlüssel (z.B. ein Ledger oder SeedSigner), der sicher beim Erben oder im Bankschließfach liegt.</li>
+    </ul>
 
     <h3>Phase 2: Schlüssel generieren</h3>
     <p>
-      Generiere den Schlüssel für den Erben auf einem <strong>separaten, sauberen Gerät</strong>. Dieser Schlüssel darf niemals deinen normalen Computer berühren.
-      Nach der Erstellung wird der Seed (die 12/24 Wörter) auf Stahl gesichert und versiegelt. Nur der öffentliche Schlüssel (xpub) kommt in die Liana-Software.
+      Generiere den Schlüssel für den Erben auf einem <strong>separaten, sauberen Gerät</strong>. Dieser Schlüssel darf niemals deinen normalen Computer berühren. Nach der Erstellung wird der Seed (die 12/24 Wörter) auf Stahl gesichert und versiegelt. Nur der öffentliche Schlüssel (xpub) kommt in die Liana-Software.
     </p>
 
     <h3>Phase 3: Einrichtung in Liana</h3>
     <p>
-      Du installierst die Liana Desktop-App (Windows/Mac/Linux). Du verknüpfst deinen Primärschlüssel und den xpub des Erben-Schlüssels.
-      Dann setzt du den Timelock (z.B. 65.000 Blöcke).
+      Du installierst die Liana Desktop-App (Windows/Mac/Linux). Du verknüpfst deinen Primärschlüssel und den xpub des Erben-Schlüssels. Dann setzt du den Timelock (z.B. 65.000 Blöcke).
     </p>
     <blockquote class="highlight">
-      <strong>Wichtig:</strong> Bei Liana reicht der Seed nicht als Backup! Du musst zwingend auch den <strong>Deskriptor</strong> sichern.
-      Der Deskriptor ist der Bauplan, der sagt: "Dieser Seed gehört zu einem Timelock-Skript". Ohne Deskriptor finden deine Erben die Coins auf der Blockchain nicht.
-      (Seit Liana v13 gibt es verschlüsselte Deskriptor-Backups, die das vereinfachen).
+      <strong>Wichtig:</strong> Bei Liana reicht der Seed nicht als Backup! Du musst zwingend auch den <strong>Deskriptor</strong> sichern. Der Deskriptor ist der Bauplan, der sagt: "Dieser Seed gehört zu einem Timelock-Skript". Ohne Deskriptor können deine Erben die Wallet-Struktur nicht rekonstruieren. (Seit Liana v13 gibt es verschlüsselte Deskriptor-Backups, die das vereinfachen).
     </blockquote>
 
     <h3>Phase 4: Das Übergabe-Paket</h3>
@@ -281,11 +270,8 @@
       Liana ist ein Software-Koordinator. Die Sicherheit kommt von deiner Hardware-Wallet.
     </p>
     <ul>
-      <li><strong>Hardware:</strong> Die <strong>BitBox02 (Bitcoin-only)</strong> ist ideal, da sie Miniscript nativ unterstützt.
-      Sie zeigt dir auf dem Display genau an: "Ausgebbar nach 65.000 Blöcken". Das verhindert, dass gehackte Software dich austrickst.</li>
-      <li><strong>Node (Knotenpunkt):</strong> Um zu wissen, ob 15 Monate vergangen sind, muss Liana die Blockchain kennen.
-      Keine Sorge, du brauchst keine 600 GB Speicher. Liana bietet eine "Managed Pruned Node".
-      Sie lädt die Kette einmal herunter, verifiziert alles, und löscht alte Daten. Das braucht nur ca. 10–20 GB Platz auf deinem Laptop.</li>
+      <li><strong>Hardware:</strong> Die <strong>BitBox02 (Bitcoin-only)</strong> ist ideal, da sie Miniscript nativ unterstützt. Sie zeigt dir auf dem Display die Wallet-Policy inklusive der Timelock-Regeln (z.B. „spendbar nach X Blöcken“). Das verhindert, dass gehackte Software dich austrickst.</li>
+      <li><strong>Node (Knotenpunkt):</strong> Um zu wissen, ob die Zeitsperre erfüllt ist, muss Liana die Blockchain kennen. Keine Sorge, du brauchst keine 600 GB Speicher. Liana bietet eine "Managed Pruned Node". Sie lädt die Kette einmal herunter, verifiziert alles, und löscht alte Daten. Das braucht typischerweise nur einen niedrigen zweistelligen GB-Bereich an Platz auf deinem Laptop.</li>
     </ul>
 
     <div class="recommendation-box">
@@ -300,19 +286,17 @@
       </p>
     </div>
 
-    <h2>6. Sicherheit: Erst Testen, dann Erben!</h2>
+    <h2>6. Sicherheit: Erst testen, dann erben!</h2>
     <p>
-      Du steckst deine Lebensersparnisse nicht in ein Skript, das du nicht getestet hast. Ein Tippfehler im Code könnte Coins für immer sperren.
-      Aber: Teste nicht im teuren Mainnet und nicht im chaotischen Testnet3.
+      Du steckst deine Lebensersparnisse nicht in ein Skript, das du nicht getestet hast. Ein Fehler in der Policy könnte Coins für immer sperren. Aber: Teste nicht im teuren Mainnet und nicht im chaotischen Testnet3.
     </p>
     <p>
-      <strong>Nutze Bitcoin Signet.</strong> Liana lässt dich mit einem Klick eine Signet-Wallet erstellen.
-      Dort laufen Blöcke zuverlässig.
+      <strong>Nutze Bitcoin Signet.</strong> Liana lässt dich mit einem Klick eine Signet-Wallet erstellen. Dort laufen Blöcke zuverlässig.
     </p>
     <ul>
       <li>Hole dir wertlose Signet-Coins (Faucet).</li>
-      <li>Setze ein Timelock auf 20 Blöcke (ca. 3 Stunden).</li>
-      <li>Simuliere deinen Tod (warte 3 Stunden).</li>
+      <li>Setze ein Timelock auf 20 Blöcke (ca. 3,5 Stunden).</li>
+      <li>Simuliere deinen Tod (warte ca. 3,5 Stunden).</li>
       <li>Versuche, mit dem Erben-Schlüssel wiederherzustellen.</li>
     </ul>
     <p>
@@ -321,14 +305,12 @@
 
     <h2>7. Fazit: Die Evolution der Souveränität</h2>
     <p>
-      Liana transformiert das Risiko des Todes ("Bus-Faktor") von einer Katastrophe in einen automatisierten Prozess.
-      Es ist der aktuelle Goldstandard für digitale Vererbung ohne Vertrauenspersonen.
+      Liana transformiert das Risiko des Todes ("Bus-Faktor") von einer Katastrophe in einen automatisierten Prozess. Es ist der aktuelle Goldstandard für digitale Vererbung ohne Vertrauenspersonen.
     </p>
     <p>
-      Es erfordert Disziplin (einmal im Jahr den "Refresh" machen), aber der Lohn ist absolute Gewissheit:
-      Deine Coins gehören dir – und wenn du gehst, gehören sie genau denen, die du bestimmt hast. Nicht dem Staat, nicht der Bank und nicht dem Daten-Nirvana.
+      Es erfordert Disziplin (einmal im Jahr den "Refresh" machen), aber der Lohn ist absolute Gewissheit: Deine Coins gehören dir – und wenn du gehst, gehören sie genau denen, die du bestimmt hast. Nicht dem Staat, nicht der Bank und nicht dem Daten-Nirvana.
     </p>
-    
+
     <h2>8. Pro-Tipps: Mobile, Privacy & Risiken</h2>
     <p>
       Für fortgeschrittene Nutzer gibt es zwei wichtige Details zu beachten:
