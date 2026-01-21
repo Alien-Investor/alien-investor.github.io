@@ -205,7 +205,6 @@
     <p>
       Die Verbindung zur BitBox02 Nova erfolgt unter iOS ausschließlich per Bluetooth. Grund dafür sind die strikten USB-Restriktionen von Apple, die eine direkte USB-Kommunikation mit Hardware-Wallets verhindern.
       Auf Linux, Android und Desktop-Systemen wird die BitBox ganz normal per USB verbunden.
-      Auch bei Bluetooth-Einrichtung benötigt die Nova weiterhin eine USB-Stromversorgung, da sie keinen Akku besitzt.
     </p>
 
     <p>
@@ -213,15 +212,37 @@
       Bestätige diesen nur, wenn beide Codes absolut identisch sind. Das verhindert Man-in-the-Middle-Angriffe.
     </p>
 
-    <h3>Schritt 2: Das Cold-Storage-Backup (die MicroSD-Karte)</h3>
+    <h3>Schritt 2: Das Cold-Storage-Backup (MicroSD vs. 24 Wörter)</h3>
     <p>
-      Die BitBox schreibt ein <strong>verschlüsseltes Backup</strong> deines Seeds auf die mitgelieferte MicroSD-Karte.
-      Hier gilt eiserne Disziplin:
+      Die BitBox schreibt standardmäßig ein <strong>verschlüsseltes Backup</strong> deines Seeds auf die mitgelieferte MicroSD-Karte.
     </p>
     <ul>
       <li>Niemals steckst du diese Karte in deinen PC oder dein Handy, um „nachzuschauen“, ob was drauf ist.</li>
       <li>Die Karte bleibt „air-gapped“. Sie berührt nur die BitBox.</li>
     </ul>
+    
+    <div class="box">
+      <h3>❓ Muss ich die 24 Wörter aufschreiben?</h3>
+      <p>
+        <strong>Standard:</strong> Nein. Die BitBox ist so konzipiert, dass das MicroSD-Backup ausreicht. Das verhindert Schreibfehler, die oft passieren.
+      </p>
+      <p>
+        <strong>Alien-Empfehlung:</strong> Ja, mach es trotzdem! Eine MicroSD-Karte ist Elektronik und kann kaputtgehen. Ein Stück Papier (oder besser Stahl) hält ewig.
+      </p>
+      <p>
+        Du kannst dir die Wörter jederzeit in der App anzeigen lassen: <br>
+        <em>Gerät verwalten > Wiederherstellungswörter anzeigen.</em>
+      </p>
+      
+      <hr style="border-color: #333; margin: 1.5em 0;">
+      
+      <p style="color: #ff3b3b; font-weight: bold;">⚠️ Überlebenswichtige Regeln beim Notieren:</p>
+      <ul style="color: #ddd;">
+        <li><strong>Keine Zeugen:</strong> Vergewissere dich, dass du absolut unbeobachtet bist.</li>
+        <li><strong>Keine Kameras:</strong> Achte auf Webcams am Laptop oder Überwachungskameras im Raum.</li>
+        <li><strong>Stille:</strong> Sprich die Wörter <u>niemals</u> laut aus! Alles heutzutage hat Mikrofone (Handy, Smart Speaker, Laptop) und könnte mitlauschen.</li>
+      </ul>
+    </div>
 
     <h3>Schritt 3: Das Geräte-Passwort</h3>
     <p>
