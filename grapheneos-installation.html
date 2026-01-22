@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>GrapheneOS installieren – mehr Kontrolle über dein Smartphone | Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Persönlicher Leitfaden zur Installation von GrapheneOS auf einem Google Pixel – mit Warnhinweisen, Voraussetzungen und Spendenaufruf für das unabhängige Projekt.">
+  <meta name="description" content="Schritt-für-Schritt Anleitung zur Installation von GrapheneOS auf einem Google Pixel. Fastboot, Web-Installer, Relock und Sicherheits-Check.">
   <style>
     body {
       background-color: #000;
@@ -13,39 +13,21 @@
       line-height: 1.6;
       max-width: 800px;
       margin: auto;
-      padding: 0 15px 20px 15px; /* Mobile-Optimierung */
+      padding: 0 15px 20px 15px;
     }
 
     /* --- TYPOGRAFIE --- */
-    h1, h2, h3 {
-      color: #00ffcc;
-    }
-    h1 {
-      margin-top: 40px;
-      text-align: center;
-    }
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
 
     /* --- LINKS (Neon-Glow) --- */
-    a {
-      color: #00ffcc;
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-    a:hover {
-      color: #fff;
-      text-shadow: 0 0 8px #00ffcc; /* Der Alien-Effekt */
-    }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
 
     /* --- STANDARD ELEMENTE --- */
-    code {
-      background-color: #111;
-      padding: 0.2em 0.4em;
-      border-radius: 4px;
-      color: #0f0;
-      font-family: monospace;
-    }
+    code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; font-family: monospace; }
     em { color: #ccc; }
-
+    
     .byline {
       margin-top: -0.8em;
       margin-bottom: 2em;
@@ -73,9 +55,7 @@
       box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
     }
     .box h3 { margin-top: 0; }
-    .box ul { padding-left: 1.2em; }
-    .box li { margin-bottom: 1em; }
-
+    
     .recommendation-box {
       margin: 2em 0;
       padding: 1em;
@@ -84,64 +64,20 @@
       text-align: center;
       background-color: #050505;
     }
-    .recommendation-box h3 {
-      margin-top: 0;
-      font-size: 1.1em;
-      color: #00ffcc;
-    }
+    .recommendation-box h3 { margin-top: 0; font-size: 1.1em; color: #00ffcc; }
 
     /* --- LIKE BUTTON --- */
-    .like-button {
-      margin: 3em 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1em;
-    }
-    .like-button button {
-      background: #000;
-      color: #00ffcc;
-      border: 1px solid #00ffcc;
-      padding: 0.6em 1.2em;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: all 0.2s ease;
-    }
-    .like-button button:hover {
-      background: #00ffcc;
-      color: #000;
-      box-shadow: 0 0 15px #00ffcc;
-    }
-    .like-button button:disabled {
-      border-color: #444;
-      color: #888;
-      background: #111;
-      cursor: default;
-    }
+    .like-button { margin: 3em 0; display: flex; align-items: center; justify-content: center; gap: 1em; font-size: 1em; }
+    .like-button button { background: #000; color: #00ffcc; border: 1px solid #00ffcc; padding: 0.6em 1.2em; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.2s ease; }
+    .like-button button:hover, .like-button button:active { background: #00ffcc; color: #000; box-shadow: 0 0 15px #00ffcc; }
+    .like-button button:disabled { border-color: #444; color: #888; background: #111; cursor: default; }
 
     /* --- NAVIGATION --- */
-    .top-nav {
-      padding: 10px 0;
-      font-size: 0.9em;
-    }
-    .back-links {
-      margin-top: 40px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    .back-links { margin-top: 40px; text-align: center; display: flex; flex-direction: column; gap: 10px; }
 
     /* --- FOOTER --- */
-    footer {
-      margin-top: 60px;
-      padding: 20px;
-      font-size: 0.85em;
-      color: #666;
-      border-top: 1px solid #222;
-      text-align: center;
-    }
+    footer { margin-top: 60px; padding: 20px; font-size: 0.85em; color: #666; border-top: 1px solid #222; text-align: center; }
   </style>
 </head>
 <body>
@@ -155,7 +91,7 @@
 
   <article id="content">
     <p>
-      Wenn du dieses hier liest, hast du wahrscheinlich genug von Datensammelei, vorinstallierten Google-Diensten
+      Wenn du das hier liest, hast du wahrscheinlich genug von Datensammelei, vorinstallierten Google-Diensten
       und dem Gefühl, dass dein Smartphone mehr dir <em>gehört</em> als du ihm. Genau hier kommt
       <strong>GrapheneOS</strong> ins Spiel: ein gehärtetes Android für Google-Pixel-Geräte, das auf
       <strong>Sicherheit</strong>, <strong>Privatsphäre</strong> und <strong>Kontrolle</strong> ausgelegt ist.
@@ -166,7 +102,9 @@
       <p>
         Dieser Artikel ist mein persönlicher Leitfaden – eine Orientierung für den Einstieg.
         Er ersetzt <strong>nicht</strong> die offizielle Dokumentation. Wenn du wirklich flashen willst,
-        lies unbedingt die Anleitung auf der offiziellen Seite.<br><br>
+        lies unbedingt die Anleitung auf der offiziellen Seite.
+      </p>
+      <p>
         👉 <a href="https://grapheneos.org/install/web" target="_blank" rel="noopener">Zum offiziellen Web-Installer</a>
       </p>
     </div>
@@ -175,170 +113,154 @@
     <p>
       GrapheneOS ist ein freies, sicherheitsoptimiertes Betriebssystem für aktuelle Google-Pixel-Geräte.
       Es baut auf Android/Open Source auf, entfernt aber Google-Tracking, härtet das System
-      und gibt dir deutlich mehr Kontrolle:
+      und gibt dir deutlich mehr Kontrolle.
     </p>
     <ul>
-      <li>kein vorinstalliertes Google-Konto, keine erzwungenen Google-Services,</li>
-      <li>stark gehärtete Sandbox, verbesserte Speicher- und Exploit-Sicherheit,</li>
-      <li>Option, Google-Dienste später als <em>sandboxed</em> Apps zu installieren – wenn du es willst.</li>
-    </ul>
-    <p>
-      Es lohnt sich für Menschen, die:
-    </p>
-    <ul>
-      <li>ihre Privatsphäre ernster nehmen als Bequemlichkeit,</li>
-      <li>bereit sind, auf manche Komfort-Features und Apps zu verzichten,</li>
-      <li>ein Google-Pixel besitzen (oder sich eins dafür holen).</li>
+      <li>Kein vorinstalliertes Google-Konto, keine erzwungenen Services.</li>
+      <li>Stark gehärtete Sandbox und Speichersicherheit.</li>
+      <li>Option, Google-Dienste später isoliert (sandboxed) zu installieren.</li>
     </ul>
 
     <h2>⚠️ Bevor du startest: Risiken & Klartext</h2>
     <p>
-      Bevor du überhaupt daran denkst, den Bootloader zu öffnen oder irgendetwas zu flashen,
-      musst du ein paar unangenehme Wahrheiten akzeptieren:
+      Bevor du den Bootloader öffnest:
     </p>
     <ul>
-      <li>
-        <strong>Garantie & Support:</strong> In vielen Fällen geht die Hersteller-Garantie verloren,
-        wenn du ein alternatives OS flashst oder den Bootloader entsperrst.
-      </li>
-      <li>
-        <strong>Datenverlust:</strong> Beim Flashen wird das Gerät in der Regel vollständig gelöscht.
-        Ohne Backup sind deine Daten weg – endgültig.
-      </li>
-      <li>
-        <strong>Apps funktionieren nicht mehr:</strong> Gerade Banking-Apps, TAN-Apps, bestimmte
-        Streaming- und Google-Apps können Probleme machen oder komplett streiken.
-      </li>
-      <li>
-        <strong>Eigenverantwortung:</strong> Wenn etwas schiefgeht (Soft-Brick, Bootloop, Datenverlust),
-        trägst du das Risiko selbst.
-      </li>
+      <li><strong>Garantieverlust:</strong> Oft erlischt die Herstellergarantie.</li>
+      <li><strong>Datenverlust:</strong> Dein Gerät wird komplett gelöscht. Ohne Backup sind die Daten weg.</li>
+      <li><strong>Eigenverantwortung:</strong> Du trägst das Risiko, wenn etwas schiefgeht.</li>
     </ul>
-    <p>
-      Kurz: Flashen ist nichts für „mal eben schnell“. Nimm dir Zeit, lies die Doku, und entscheide bewusst.
-    </p>
 
-    <h2>🧰 Voraussetzungen für die Installation</h2>
-    <p>
-      Für GrapheneOS brauchst du kein Hacker-Labor, aber ein paar Dinge sind Pflicht:
-    </p>
+    <h2>🧰 Voraussetzungen</h2>
     <ul>
-      <li>Ein unterstütztes <strong>Google-Pixel-Gerät</strong> (z. B. Pixel 6, 7, 8, 9 – siehe Liste auf grapheneos.org).</li>
-      <li>Einen <strong>PC oder Laptop</strong> mit Windows, macOS oder Linux.</li>
-      <li>Ein zuverlässiges <strong>USB-C-Kabel</strong>.</li>
-      <li>
-        Optionale, aber empfehlenswerte Tools:
-        <a href="https://developer.android.com/studio/releases/platform-tools" target="_blank" rel="noopener">Android Platform-Tools (ADB/Fastboot)</a>.
-      </li>
-      <li>Ein <strong>vollständiges Backup</strong> aller wichtigen Daten deines bisherigen Systems.</li>
+      <li>Ein unterstütztes <strong>Google Pixel</strong>.</li>
+      <li>PC/Laptop (Windows, macOS, Linux).</li>
+      <li>Ein zuverlässiges <strong>Original-USB-C-Kabel</strong>.</li>
+      <li>Einen Chromium-basierten Browser (z.B. Brave, Chromium, Vanadium).</li>
     </ul>
 
-    <h2>📱 Vorbereitung auf dem Pixel</h2>
+    <h2>1. Vorbereitung auf dem Pixel (Settings)</h2>
     <p>
-      Bevor du mit dem Web-Installer arbeitest, musst du dein Pixel vorbereiten:
+      Bevor wir Kabel stecken, musst du das Pixel softwareseitig vorbereiten:
     </p>
     <ol>
       <li>
-        <strong>Entwickleroptionen aktivieren:</strong> Einstellungen → Über das Telefon → mehrmals auf „Build-Nummer“ tippen,
-        bis die Entwickleroptionen freigeschaltet sind.
+        <strong>Entwickleroptionen aktivieren:</strong> Einstellungen → Über das Telefon → 7x auf „Build-Nummer“ tippen.
       </li>
       <li>
-        <strong>OEM-Entsperrung freigeben:</strong> Wieder zurück in den Einstellungen → System → Entwickler Optionen (neuer Punkt) „OEM-Entsperrung“ aktivieren.
-         Ohne das bleibt der Bootloader gesperrt.
+        <strong>OEM-Entsperrung zulassen:</strong> Zurück zu Einstellungen → System → Entwickleroptionen.
+        Schalter bei „OEM-Entsperrung“ aktivieren. (Ohne das geht nichts!)
       </li>
       <li>
-        <strong>USB-Debugging aktivieren:</strong> Ebenfalls in den Entwickleroptionen einschalten,
-        damit dein Rechner mit dem Gerät sprechen kann.
+        <strong>USB-Debugging aktivieren:</strong> Optional, aber oft hilfreich für die Erkennung.
       </li>
     </ol>
 
-    <h2>🌐 Installation mit dem offiziellen Web-Installer</h2>
+    <h2>2. Ab in den Fastboot-Modus</h2>
     <p>
-      Der einfachste Weg ist der offizielle <strong>Web-Installer</strong> von GrapheneOS:<br>
-      👉 <a href="https://grapheneos.org/install/web" target="_blank" rel="noopener">https://grapheneos.org/install/web</a>
-    </p>
-    <p>
-      Im Kern läuft es so ab (vereinfacht dargestellt – Details stehen auf der offiziellen Seite):
-    </p>
-    <ol>
-      <li>
-        Du öffnest die Installationsseite im Chromium-basierten Browser (z. B. Chromium, Brave, neuer Edge).
-      </li>
-      <li>
-        Du verbindest dein Pixel per USB mit dem Rechner und erlaubst die Verbindung.
-      </li>
-      <li>
-        Der Installer prüft das Gerät, lädt die passende GrapheneOS-Version herunter und führt dich Schritt für Schritt
-        durch das Entsperren des Bootloaders und das Flashen.
-      </li>
-      <li>
-        Nach dem Flashen wirst du in der Regel dazu aufgefordert, den Bootloader wieder zu <strong>sperren</strong>
-        (relock), um die Sicherheitsvorteile von GrapheneOS voll auszunutzen.
-      </li>
-      <li>
-        Anschließend richtest du dein Gerät neu ein – ohne Google-Zwang, dafür mit deutlich mehr Kontrolle.
-      </li>
-    </ol>
-    <p>
-      Wichtig: Halte dich genau an die Hinweise auf der Install-Seite. Wenn du unsicher bist, lieber
-      <strong>nochmal lesen</strong>, statt irgendwas blind zu bestätigen.
-    </p>
-
-    <h2>🧬 Leben mit GrapheneOS: Alltag ohne Vollüberwachung</h2>
-    <p>
-      Nach der Installation ist dein Pixel kein „normales Android“ mehr, sondern ein deutlich gehärtetes System.
-      Das hat Vor- und Nachteile:
+      Jetzt wird es ernst. Damit der Installer Zugriff hat, muss das Handy in den Bootloader-Modus:
     </p>
     <ul>
-      <li>
-        Du kannst Apps über alternative Quellen installieren (z. B. F-Droid, Aurora Store) – musst aber
-        stärker selbst beurteilen, was du dir installierst.
-      </li>
-      <li>
-        Google-Dienste sind optional: Du kannst sie als <em>Sandbox-Apps</em> nachinstallieren, wenn du z. B. Push-Dienste brauchst –
-        aber sie haben deutlich weniger Macht über dein System.
-      </li>
-      <li>
-        Profile und Nutzerkonten lassen sich so nutzen, dass du Privates, Arbeit, Banking oder sensible Apps trennen kannst.
-      </li>
+      <li>Schalte das Pixel komplett <strong>aus</strong>.</li>
+      <li>Verbinde es mit dem Original-Kabel an deinen PC/Laptop.</li>
+      <li>Halte nun die <strong>Power-Taste</strong> und die <strong>Leiser-Taste (Volume Down)</strong> gleichzeitig gedrückt.</li>
+      <li>Warte, bis du im <strong>Fastboot Mode</strong> bist (ein schwarzer Screen mit technischem Text).</li>
     </ul>
+
+    <h2>3. Installation mit dem Web-Installer</h2>
     <p>
-      GrapheneOS ist kein „Einsteigerprojekt“ – aber es ist einer der konsequentesten Schritte, wenn du dein
-      Smartphone wirklich unter deine Kontrolle bringen willst.
+      Öffne nun am PC den <a href="https://grapheneos.org/install/web" target="_blank">offiziellen Web-Installer</a>.
+      Folge den Anweisungen auf dem Bildschirm strikt. Hier ist der Ablauf im Detail:
     </p>
 
-    <div class="recommendation-box">
-      <h3>🛡️ Warum GrapheneOS deine Unterstützung braucht</h3>
+    <h3>A) Verbindung & Unlock</h3>
+    <p>
+      Klicke im Browser auf den Button, um dein Gerät zu verbinden. Es öffnet sich ein <strong>Popup-Fenster</strong>:
+      Wähle hier dein Pixel aus (z.B. "Pixel 8") und klicke auf "Verbinden".
+    </p>
+    <p>
+      Klicke dann auf <strong>„Unlock Bootloader“</strong>.
+    </p>
+    <ul>
+      <li>Das Handy zeigt jetzt einen Warnbildschirm.</li>
+      <li>Nutze die <strong>Lautstärke-Tasten</strong> (Lauter/Leiser), um den Menüpunkt zum Entsperren auszuwählen ("Unlock the bootloader").</li>
+      <li>Bestätige die Auswahl mit der <strong>Power-Taste</strong>.</li>
+    </ul>
+
+    <h3>B) Download & Flash</h3>
+    <p>
+      Jetzt klickst du im Browser auf <strong>„Download Release“</strong>. Das System lädt das Image herunter.
+    </p>
+    
+    <div class="box" style="border-color: #ff3333;">
+      <h3>🛠️ Troubleshooting-Tipp</h3>
       <p>
-        GrapheneOS ist kein Konzernprodukt, sondern ein <strong>unabhängiges, sicherheitsfokussiertes Projekt</strong>.
-        Staaten und Behörden haben wenig Interesse an Geräten, die sich ihrer Kontrolle entziehen.
-        Deine Spende hilft, diese Alternative am Leben zu erhalten.
-      </p>
-      <ul style="text-align: left;">
-        <li>
-          💶 <strong>Spenden an GrapheneOS (Offizielle Seite):</strong><br>
-          <a href="https://grapheneos.org/donate" target="_blank" rel="noopener">grapheneos.org/donate</a>
-        </li>
-      </ul>
-      <p style="font-size:0.9em; color:#ccc;">
-        <em>Hinweis:</em> Spende direkt an GrapheneOS – nicht an mich. So landet das Geld genau bei denen,
-        die täglich an deiner mobilen Sicherheit arbeiten.
+        Falls du eine Fehlermeldung wie <code>Error: storage quota has been exceeded</code> bekommst:
+        Das liegt oft an Browser-Erweiterungen oder vollem Cache.
+        <strong>Lösung:</strong> Installiere dir einen sauberen Chromium-Browser (ohne Extensions) nur für diesen Zweck
+        oder nutze den Inkognito-Modus, falls unterstützt.
       </p>
     </div>
 
-    <h2>📌 Fazit: Freiheit gibt es nicht als App-Download</h2>
     <p>
-      GrapheneOS zu installieren heißt: Du gehst bewusst ein paar Risiken und Unbequemlichkeiten ein, um dafür
-      mehr Kontrolle zu bekommen. Du verzichtest auf ein bisschen Komfort – und gewinnst dafür ein Stück digitale
-      Selbstbestimmung zurück.
+      Ist der Download fertig? Dann klicke auf <strong>„Flash Release“</strong>.
     </p>
     <p>
-      Wenn du bereit bist, dich einzulesen, Verantwortung zu übernehmen und dir im Klaren bist, dass nicht alles
-      reibungslos laufen wird, kann GrapheneOS ein mächtiges Werkzeug sein.
+      <strong>Nicht wundern:</strong> Das Telefon wird während dieses Prozesses mehrmals neu starten.
+      Das ist völlig normal. Fass nichts an, bis der Browser sagt, dass er fertig ist ("Flashed successfully").
+    </p>
+
+    <h3>C) Den Bootloader wieder schließen (Lock)</h3>
+    <p>
+      Dieser Schritt ist essenziell für die Sicherheit!
+    </p>
+    <ol>
+      <li>Klicke im Browser auf <strong>„Lock Bootloader“</strong>.</li>
+      <li>Auf dem Handy erscheint wieder ein Menü. Nutze die <strong>Lautstärke-Tasten</strong>, um die Option zum Schließen (Lock) auszuwählen.</li>
+      <li>Bestätige mit der <strong>Power-Taste</strong>.</li>
+    </ol>
+    <p>
+      Auf dem Bildschirm sollte jetzt in grüner Schrift stehen:<br>
+      <code>Device State: locked (unlockable)</code>.
+    </p>
+
+    <h2>4. Der erste Start & Verifizierung</h2>
+    <p>
+      Wenn "Locked" angezeigt wird, kannst du das Telefon starten. Drücke dazu die <strong>Power-Taste</strong>
+      (neben dem Punkt "Start" im Display-Menü).
     </p>
     <p>
-      Wie immer gilt: <strong>Vertrau niemandem – informier dich selbst.</strong>
+      Beim Hochfahren siehst du einen gelben Warnhinweis:
+      <br><em>„Your device is loading a different operating system.“</em>
     </p>
+    <p>
+      Das ist <strong>normal</strong> und wird ab jetzt immer so sein – es zeigt dir, dass nicht mehr das Google-Android läuft.
+    </p>
+    
+    <blockquote style="border-color: #00ffcc;">
+      <strong>Vertrauen ist gut, Kontrolle ist besser:</strong><br>
+      Auf diesem Warnbildschirm wird auch eine ID angezeigt. Vergleiche diese ID mit dem Abschnitt
+      <strong>„Verified boot key hash“</strong> auf der GrapheneOS-Website (scrolle dort runter zu deinem Modell).
+      Wenn die Hashes übereinstimmen: Glückwunsch, dein System ist sauber und sicher installiert! 👽
+    </blockquote>
+
+    <h2>5. Leben mit GrapheneOS</h2>
+    <p>
+      Dein Pixel ist jetzt gehärtet. Du hast keinen Play Store (ab Werk), dafür volle Kontrolle.
+      Apps installierst du über F-Droid, Aurora Store oder du nutzt die GrapheneOS-eigenen "Sandboxed Google Play" Dienste,
+      falls du Push-Benachrichtigungen oder Maps zwingend brauchst.
+    </p>
+    <p>
+      Willkommen auf der anderen Seite.
+    </p>
+
+    <div class="recommendation-box">
+      <h3>🛡️ Supporte die Unabhängigkeit</h3>
+      <p>
+        GrapheneOS ist ein Non-Profit-Projekt. Wenn du das OS nutzt, hilf ihnen mit einer Spende, unabhängig zu bleiben.<br>
+        👉 <a href="https://grapheneos.org/donate" target="_blank" rel="noopener">grapheneos.org/donate</a>
+      </p>
+    </div>
 
     <div class="box">
       <h3>🧰 Tools für echte Eigentümer (Werbung/Affiliate)</h3>
@@ -384,10 +306,6 @@
     </div>
 
   </article>
-
-  <blockquote>
-    „Vertraue niemandem! Manage deine Finanzen selbst!“
-  </blockquote>
 
   <div class="like-button">
     <button id="likeButton">👍 Gefällt mir</button>
@@ -445,7 +363,7 @@
       👽 <strong>Haftungsausschluss:</strong><br><br>
       Dieser Artikel stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
       Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
-      Investieren ist mit Risiken verbunden. Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
+      Die Installation erfolgt auf eigene Gefahr.
     </p>
   </footer>
 
