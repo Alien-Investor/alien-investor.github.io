@@ -170,23 +170,49 @@
       (Dieser Link leitet dich automatisch zur richtigen Version für Linux, Android oder iOS weiter).
     </p>
 
-    <div class="box" style="border-color: #ff3b3b; box-shadow: 0 0 10px rgba(255, 59, 59, 0.15);">
-      <h3 style="color: #ff3b3b;">⚠️ Kritischer Einschub für Linux-User (der „udev“-Checkpoint)</h3>
-      <p>
-        Nutzt du Debian, Ubuntu, Fedora oder Arch? Dann scheitert der Erstkontakt oft. Die App sieht die BitBox nicht, obwohl sie leuchtet.
-      </p>
-      <p>
-        <strong>Der Grund:</strong> Dein Linux-System erlaubt USB-Geräten aus Sicherheitsgründen nicht automatisch den Zugriff (<em>User Permissions</em>).<br>
-        <strong>Der Fix:</strong> Du musst die sogenannten <code>udev</code>-Regeln installieren.
-      </p>
-      <ol>
-        <li>Gehe auf die <a href="https://shiftcrypto.support" target="_blank" rel="noopener">Shift Crypto Help Center Seite</a> und suche nach „Linux“.</li>
-        <li>Dort findest du den Befehl oder die Datei, die in den Ordner <code>/etc/udev/rules.d/</code> gehört.</li>
-        <li>Oft gehört (je nach Distro) auch dieser Schritt dazu:<br>
-            <code>sudo usermod -aG plugdev $USER</code></li>
-        <li><strong>Wichtig:</strong> Danach einmal ab- und wieder anmelden (oder das System neustarten). Erst dann die App starten.</li>
-      </ol>
-    </div>
+   <div class="box" style="border-color: #ff3b3b; box-shadow: 0 0 10px rgba(255, 59, 59, 0.15);">
+  <h3 style="color: #ff3b3b;">⚠️ Kritischer Einschub für Linux-User (der „udev“-Checkpoint)</h3>
+
+  <p>
+    Nutzt du Debian, Ubuntu, Fedora oder Arch? Dann scheitert der Erstkontakt oft.
+    Die App sieht die BitBox nicht, obwohl sie leuchtet.
+  </p>
+
+  <p>
+    <strong>Der Grund:</strong> Linux erlaubt USB-Geräten aus Sicherheitsgründen
+    keinen automatischen Benutzerzugriff (<em>User Permissions</em>).<br>
+    <strong>Der Fix:</strong> Du musst die sogenannten <code>udev</code>-Regeln für die BitBox installieren.
+  </p>
+
+  <ol>
+    <li>
+      Öffne das
+      <a href="https://support.bitbox.swiss/de_DE/bitbox02-probleme/bitbox-verbindet-nicht"
+         target="_blank" rel="noopener">
+        Shift Crypto Help Center
+      </a>
+      und suche nach „Linux“ bzw. „udev“.
+    </li>
+
+    <li>
+      Dort findest du die Datei
+      <code>52-bitbox02.rules</code>, die nach
+      <code>/etc/udev/rules.d/</code>
+      installiert werden muss.
+    </li>
+
+    <li>
+      <em>Optional (nur bei manchen Distributionen notwendig):</em><br>
+      <code>sudo usermod -aG plugdev $USER</code>
+    </li>
+
+    <li>
+      <strong>Wichtig:</strong> Danach einmal ab- und wieder anmelden
+      (oder das System neu starten).<br>
+      Erst danach die BitBoxApp starten.
+    </li>
+  </ol>
+</div>
 
     <h2>2. Der Setup-Prozess (Universal-Protokoll)</h2>
     <p>
