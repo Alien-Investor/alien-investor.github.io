@@ -156,7 +156,7 @@
   <article id="content">
     <p>Du hast dein Telefon „de-googled“. Du hast GrapheneOS installiert. Das ist ein Sieg.</p>
     <p>Aber: Direkt „out of the box“ muss auch GrapheneOS Kompromisse zwischen maximaler Sicherheit und Bequemlichkeit eingehen. Um sich in einer feindlichen Umgebung wirklich auf ein Gerät verlassen zu können, musst du es konfigurieren.</p>
-    <p>Wir ändern hier nicht einfach nur ein paar Klingeltöne. Wir reduzieren die Angriffsfläche massiv. Hier sind fünf kritische Konfigurationen, die dein Telefon in einen gehärteten Knotenpunkt verwandeln.</p>
+    <p>Wir ändern hier nicht einfach nur ein paar Klingeltöne. Wir reduzieren die Angriffsfläche massiv. Hier sind sechs kritische Konfigurationen, die dein Telefon in einen gehärteten Knotenpunkt verwandeln.</p>
 
     <h2>1. Der Kill-Switch: Automatischer Neustart (Auto Reboot)</h2>
     <h3>Das Konzept</h3>
@@ -166,7 +166,7 @@
     <h3>Die Konfiguration</h3>
     <p>GrapheneOS erlaubt dir, diesen Prozess zu automatisieren. Wenn das Gerät eine bestimmte Zeit lang nicht entsperrt wurde, erzwingt es einen Neustart.</p>
     <ul>
-      <li><strong>Pfad:</strong> <code>Einstellungen</code> → <code>Sicherheit & Datenschutz</code> → <code>Exploit-Schutz</code> → <code>Automatischer Neustart</code></li>
+      <li><strong>Pfad:</strong> <code>Einstellungen</code> → <code>Datenschutz & Sicherheit</code> → <code>Exploit-Protection</code> → <code>Auto Reboot</code></li>
       <li><strong>Empfehlung:</strong> Stelle dies auf 12 Stunden oder weniger. (Standard sind 18 Stunden; je nach deinem Bedrohungsmodell kannst du bis auf 10 Minuten runtergehen).</li>
     </ul>
 
@@ -217,6 +217,18 @@
       <li><strong>Fingerabdruck:</strong> Wenn du Grenzen überschreitest oder dich in kritischen Situationen befindest, deaktiviere die biometrische Entsperrung vorübergehend. Verlasse dich auf eine starke alphanumerische Passphrase.</li>
     </ul>
 
+    <h2>6. Die strategische Stille: Wi-Fi Calling & Flugmodus</h2>
+    <h3>Das Konzept</h3>
+    <p>Solange dein Mobilfunkmodem aktiv ist, kommuniziert es zwangsläufig mit Funkmasten. Das ermöglicht Triangulation und erstellt ein lückenloses Bewegungsprofil bei deinem Provider – selbst ohne GPS. Das ist ein Leck in deiner Positionsdaten-Sicherheit.</p>
+    <p>Zudem ist die ständige Suche nach Netzempfang einer der größten Energiefresser. Ein Stratege verschwendet keine Ressourcen. Wenn du dich in einer sicheren WLAN-Umgebung befindest, ist die Verbindung zu den Türmen ein unnötiges Risiko.</p>
+    <h3>Die Konfiguration</h3>
+    <p>Wir leiten die Kommunikation durch den WLAN-Tunnel und schalten das Mobilfunk-Radio physisch ab. Du bleibst telefonisch erreichbar, aber für die Funkmasten bist du effektiv unsichtbar.</p>
+    <ul>
+      <li><strong>Pfad:</strong> <code>Einstellungen</code> → <code>Netzwerk & Internet</code> → <code>SIM-Karten</code> → <code>[Deine SIM auswählen]</code> → <code>Anruffunktion (Calling)</code></li>
+      <li><strong>Aktion:</strong> Setze die Einstellung auf „WLAN bevorzugt“ (Wi-Fi preferred).</li>
+      <li><strong>Operatives Vorgehen:</strong> Aktiviere den Flugmodus (kappt alle Verbindungen) und schalte danach manuell nur das WLAN wieder an. Dein Gerät funkt nun nicht mehr an Masten, empfängt aber Anrufe und SMS verschlüsselt über das Internet.</li>
+    </ul>
+
     <h2>Fazit: Souveränität ist ein Prozess</h2>
     <p>Souveränität ist kein Produkt, das du kaufst. Es ist ein Prozess. GrapheneOS liefert die Mauern. Diese Einstellungen liefern die Schlösser.</p>
     <p>Nimm dir die Zeit, dein eigenes Bedrohungsmodell zu verstehen.</p>
@@ -253,7 +265,7 @@
         <li>
           ₿ <strong>Bitcoin in Selbstverwahrung:</strong><br>
           Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox – es gibt die klassische BitBox02 und die neue
-          BitBox für iPhone (Nova).<br>
+          BitBox for iPhone (Nova).<br>
           👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
         </li>
         <li>
