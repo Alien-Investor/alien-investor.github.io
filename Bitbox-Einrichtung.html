@@ -15,10 +15,11 @@
     em { color: #ccc; }
     .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
     blockquote { border-left: 3px solid #00ffcc; margin: 2em 0; padding: 0.5em 1em; color: #ddd; background: #050505; font-style: italic; }
-    .box { border: 1px solid #00ffcc; background: #050505; padding: 1.5em; border-radius: 8px; margin: 2em 0; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
     table { width: 100%; border-collapse: collapse; margin: 2em 0; font-size: 0.9em; }
     th, td { border: 1px solid #333; padding: 10px; text-align: left; }
     th { color: #00ffcc; background-color: #111; }
+    tr:nth-child(even) { background-color: #050505; }
+    .box { border: 1px solid #00ffcc; background: #050505; padding: 1.5em; border-radius: 8px; margin: 2em 0; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
     .like-button { margin: 3em 0; display: flex; align-items: center; justify-content: center; gap: 1em; font-size: 1em; }
     .like-button button { background: #000; color: #00ffcc; border: 1px solid #00ffcc; padding: 0.6em 1.2em; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.2s ease; }
     .like-button button:hover, .like-button button:active { background: #00ffcc; color: #000; box-shadow: 0 0 15px #00ffcc; }
@@ -30,7 +31,9 @@
 </head>
 <body>
 
-  <div class="top-nav"><a href="index.html">⬅ Zurück zur Zentrale</a></div>
+  <div class="top-nav">
+    <a href="index.html">⬅ Zurück zur Zentrale</a>
+  </div>
 
   <h1>BitBox02 Einrichtung: Der ultimative Guide für Linux, Android & iPhone (Nova) 🔐</h1>
   <p class="byline"><em>von Alien Investor</em></p>
@@ -39,55 +42,154 @@
     <p>
       Wer seine Bitcoin nicht selbst verwahrt, besitzt keine Bitcoin, sondern nur ein Versprechen einer Bank oder Börse.
       Der Wechsel zur Hardware-Wallet (Cold Storage) ist der wichtigste Schritt in die finanzielle Souveränität.
+      Doch gerade für Nutzer von Linux oder dem neuen iPhone-Modell (BitBox02 Nova) gibt es ein paar Fallstricke bei der Einrichtung.
+    </p>
+    <p>
+      In diesem Guide gehen wir den Prozess Schritt für Schritt durch – sicher, sauber und ohne Panik.
     </p>
 
     <h2>1. Vorbereitung: Die „Clean Room“-Phase</h2>
     <p>
-      Lade die BitBoxApp <em>ausschließlich</em> von der offiziellen Quelle: 
-      👉 <a href="https://bitbox.swiss/start" target="_blank">https://bitbox.swiss/start</a>
+      Bevor du irgendwelche Hardware verbindest, bereiten wir die digitale Umgebung vor. Sicherheit beginnt nicht beim Einstecken, sondern beim Download der Software.
+    </p>
+    <p>
+      <strong>Offizielle Quelle:</strong> Lade die BitBoxApp <em>ausschließlich</em> hier herunter:<br><br>
+      👉 <a href="https://bitbox.swiss/start" target="_blank" rel="noopener">https://bitbox.swiss/start</a><br><br>
+      (Dieser Link leitet dich automatisch zur richtigen Version für Linux, Android oder iOS weiter).
     </p>
 
-    <div class="box" style="border-color: #ff3b3b;">
-      <h3 style="color: #ff3b3b;">⚠️ Checkpoint für Linux-User</h3>
-      <p>
-        Damit die App deine BitBox erkennt, musst du <code>udev</code>-Regeln installieren. Lade die Datei <code>52-bitbox02.rules</code> aus dem Shift Crypto Help Center und kopiere sie nach <code>/etc/udev/rules.d/</code>. Danach einmal neu anmelden!
-      </p>
-    </div>
+   <div class="box" style="border-color: #ff3b3b; box-shadow: 0 0 10px rgba(255, 59, 59, 0.15);">
+  <h3 style="color: #ff3b3b;">⚠️ Kritischer Einschub für Linux-User (der „udev“-Checkpoint)</h3>
+  <p>
+    Nutzt du Debian, Ubuntu, Fedora oder Arch? Dann scheitert der Erstkontakt oft.
+    Die App sieht die BitBox nicht, obwohl sie leuchtet.
+  </p>
+  <p>
+    <strong>Der Grund:</strong> Linux erlaubt USB-Geräten aus Sicherheitsgründen
+    keinen automatischen Benutzerzugriff (<em>User Permissions</em>).<br><br>
+    <strong>Der Fix:</strong> Du musst die sogenannten <code>udev</code>-Regeln für die BitBox installieren.
+  </p>
+  <ol>
+    <li>
+      Öffne das
+      <a href="https://support.bitbox.swiss/de_DE/bitbox02-probleme/bitbox-verbindet-nicht"
+         target="_blank" rel="noopener">
+        Shift Crypto Help Center
+      </a>
+      und suche nach „Linux“ bzw. „udev“.
+    </li>
+    <li>
+      Dort findest du die Datei
+      <code>52-bitbox02.rules</code>, die nach
+      <code>/etc/udev/rules.d/</code>
+      installiert werden muss.
+    </li>
+    <li>
+      <em>Optional (nur bei manchen Distributionen notwendig):</em><br>
+      <code>sudo usermod -aG plugdev $USER</code>
+    </li>
+    <li>
+      <strong>Wichtig:</strong> Danach einmal ab- und wieder anmelden
+      (oder das System neu starten).<br><br>
+      Erst danach die BitBoxApp starten.
+    </li>
+  </ol>
+</div>
 
-    <h2>2. Der Setup-Prozess</h2>
+    <h2>2. Der Setup-Prozess (Universal-Protokoll)</h2>
+    <p>
+      Egal ob Linux, Android oder Apple (Nova) – der Kernprozess ist identisch und folgt dem Prinzip „Don’t Trust, Verify“.
+    </p>
+
     <h3>Schritt 1: Der Handschlag (Pairing)</h3>
     <p>
-      Verbinde die BitBox via USB-C (Linux/Android) oder Bluetooth (iPhone Nova). Bestätige den Pairing-Code nur, wenn er auf beiden Displays exakt identisch ist.
+      Du verbindest die BitBox02 mit deinem Gerät:
+    </p>
+    <ul>
+      <li><strong>Linux/Android:</strong> via USB-C-Kabel.</li>
+      <li><strong>Apple (nur BitBox02 Nova):</strong> via Bluetooth (in der App scannen).</li>
+    </ul>
+    
+    <p>
+      Die Verbindung zur BitBox02 Nova erfolgt unter iOS ausschließlich per Bluetooth. Grund dafür sind die strikten USB-Restriktionen von Apple, die eine direkte USB-Kommunikation mit Hardware-Wallets verhindern.
+      Auf Linux, Android und Desktop-Systemen wird die BitBox ganz normal per USB verbunden.
+    </p>
+
+    <p>
+      <strong>Sicherheits-Check:</strong> Auf dem Display der BitBox und auf deinem Bildschirm erscheint ein Pairing-Code.
+      Bestätige diesen nur, wenn beide Codes absolut identisch sind. Das verhindert Man-in-the-Middle-Angriffe.
     </p>
 
     <h3>Schritt 2: Das Geräte-Passwort</h3>
     <p>
-      Wähle ein Passwort direkt am Gerät. Dieses schützt die Hardware vor physischem Zugriff. Wichtig: Das ist <em>nicht</em> dein Seed!
+      Du wählst ein Passwort direkt am Gerät (durch Berührung der Sensoren an den Seiten).<br>
+      Wichtig zu verstehen: Dieses Passwort schützt nur gegen den physischen Diebstahl des Geräts selbst – es ist <em>nicht</em> dein Wiederherstellungsschlüssel (Seed).
     </p>
 
     <h3>Schritt 3: Das Cold-Storage-Backup (MicroSD vs. 24 Wörter)</h3>
     <p>
-      Die BitBox fordert dich nun auf, die MicroSD-Karte einzustecken, um ein verschlüsseltes Backup deines Seeds zu erstellen. Dies ist der wichtigste Moment: Ohne dieses Backup (oder die Wörter) ist dein Geld weg, falls die Hardware kaputtgeht.
+      Die BitBoxApp fordert dich nun auf, die MicroSD-Karte einzustecken, um das verschlüsselte Backup deines Seeds aufzuspielen.
     </p>
-
+    <ul>
+      <li>Niemals steckst du diese Karte in deinen PC oder dein Handy, um „nachzuschauen“, ob was drauf ist.</li>
+      <li>Die Karte bleibt „air-gapped“. Sie berührt nur die BitBox.</li>
+    </ul>
+    
     <div class="box">
       <h3>❓ Muss ich die 24 Wörter aufschreiben?</h3>
-      <p><strong>Standard:</strong> Nein. Das MicroSD-Backup reicht technisch aus und verhindert Schreibfehler.</p>
-      <p><strong>Alien-Empfehlung:</strong> Ja, mach es trotzdem! Elektronik kann versagen. Papier oder Stahl hält ewig.</p>
+      <p>
+        <strong>Standard:</strong> Nein. Die BitBox ist so konzipiert, dass das MicroSD-Backup ausreicht. Das verhindert Schreibfehler, die oft passieren.
+      </p>
+      <p>
+        <strong>Alien-Empfehlung:</strong> Ja, mach es trotzdem! Eine MicroSD-Karte ist Elektronik und kann kaputtgehen. Ein Stück Papier (oder besser Stahl) hält ewig.
+      </p>
+      <p>
+        Du kannst dir die Wörter jederzeit in der App anzeigen lassen: <br><br>
+        <em>Gerät verwalten > Wiederherstellungswörter anzeigen.</em>
+      </p>
+      
       <hr style="border-color: #333; margin: 1.5em 0;">
+      
       <p style="color: #ff3b3b; font-weight: bold;">⚠️ Überlebenswichtige Regeln beim Notieren:</p>
-      <ul>
-        <li><strong>Keine Zeugen:</strong> Sei absolut allein.</li>
-        <li><strong>Keine Kameras:</strong> Achte auf Handys, Laptops und Überwachungskameras.</li>
-        <li><strong>Stille:</strong> Sprich die Wörter <u>niemals</u> laut aus! Mikrofone lauschen überall.</li>
+      <ul style="color: #ddd;">
+        <li><strong>Keine Zeugen:</strong> Vergewissere dich, dass du absolut unbeobachtet bist.</li>
+        <li><strong>Keine Kameras:</strong> Achte auf Webcams am Laptop oder Überwachungskameras im Raum.</li>
+        <li><strong>Stille:</strong> Sprich die Wörter <u>niemals</u> laut aus! Alles heutzutage hat Mikrofone (Handy, Smart Speaker, Laptop) und könnte mitlauschen.</li>
       </ul>
     </div>
 
     <h2>3. Level Expert: Die optionale Passphrase</h2>
     <p>
-      Die Passphrase erzeugt eine komplett neue Wallet. Wenn du sie vergisst oder dich vertippst, sind deine dorthin gesendeten Coins <strong>mathematisch verloren</strong>. Nutze dieses Feature nur, wenn du den Unterschied zwischen Seed und Passphrase vollends verstehst.
+      In den Einstellungen der BitBox findest du die Option „Optionale Passphrase“. Das ist die Funktion, an der sich die meisten Anfänger die Finger verbrennen.
     </p>
 
+    <blockquote>
+      „Die Passphrase ist kein 'Extra-Passwort' für deine bestehende Wallet. Sie erzeugt mathematisch eine <strong>komplett neue Wallet</strong>.“
+    </blockquote>
+
+    <p>
+      <strong>Bevor du diesen Schalter aktivierst, lies zwingend diesen Artikel:</strong><br><br>
+      👉 <a href="https://blog.bitbox.swiss/de/optionale-passphrase-vorteile-und-risiken/" target="_blank" rel="noopener">Warnung & Anleitung: Optionale Passphrase – Vorteile und Risiken</a>
+    </p>
+
+    <p>
+      So funktioniert die Mathematik dahinter:
+    </p>
+    <ul>
+      <li>Seed = Wallet A (deine „Haupt-Wallet“)</li>
+      <li>Seed + Passphrase „Geheim123“ = Wallet B (komplett leere, neue Wallet)</li>
+      <li>Seed + Passphrase „Geheim124“ = Wallet C (wieder eine andere Wallet)</li>
+    </ul>
+    <p>
+      <strong>Das Risiko:</strong> Die BitBox speichert diese Passphrase nicht. Sie prüft auch nicht, ob sie „richtig“ ist.<br>
+      Wenn du dich beim Einrichten oder Wiederherstellen vertippst, öffnest du einfach eine neue, leere Wallet.<br>
+      Wenn du Coins dorthin schickst und den Tippfehler vergisst, sind die Coins <strong>mathematisch unzugänglich verloren</strong>.
+    </p>
+    <p>
+      Nutze dieses Feature nur, wenn du genau weißt, was du tust (z. B. für „Plausible Deniability“).
+    </p>
+
+    <h2>4. Zusammenfassung der Plattformen</h2>
     <table>
       <thead>
         <tr>
@@ -100,20 +202,25 @@
         <tr>
           <td><strong>Linux</strong></td>
           <td>USB-C</td>
-          <td>Benötigt <code>udev</code>-Regeln.</td>
+          <td>Benötigt <code>udev</code>-Regeln! Sicherste Umgebung (da Open-Source-OS).</td>
         </tr>
         <tr>
           <td><strong>Android</strong></td>
           <td>USB-C</td>
-          <td>Eventuell OTG aktivieren.</td>
+          <td>Braucht oft „OTG“ (On-The-Go)-Aktivierung in den Android-Einstellungen.</td>
         </tr>
         <tr>
           <td><strong>Apple (iOS)</strong></td>
           <td>Bluetooth</td>
-          <td>Nur mit BitBox02 Nova.</td>
+          <td><strong>Nur mit BitBox02 Nova möglich.</strong> Nutzt das „Whisper“-Protokoll. USB-Verbindung wird unter iOS von der App nicht unterstützt.</td>
         </tr>
       </tbody>
     </table>
+
+    <p style="margin-top: 2em;">
+      Sicherheit ist kein Zustand, sondern ein Prozess. Nimm dir Zeit für die Einrichtung, mach keine Hektik und prüfe alles doppelt.<br>
+      Deine finanzielle Freiheit ist es wert.
+    </p>
   </article>
 
   <div class="box">
@@ -149,7 +256,8 @@
 
   <footer>
     <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
-    <p style="margin-top: 20px;">👽 <strong>Haftungsausschluss:</strong><br><br>Keine Finanz-, Steuer- oder Rechtsberatung. Nur persönliche Meinung. Denke selbst.</p>
+    <p style="margin-top: 20px;">👽 <strong>Haftungsausschluss:</strong><br><br>Dieser Artikel ist keine Rechts- oder Anlageberatung, sondern eine technische Anleitung. Ich teile hier nur meine persönliche Alien-Meinung. Du bist selbst für die Sicherheit deiner Keys verantwortlich.</p>
   </footer>
+
 </body>
 </html>
