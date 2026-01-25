@@ -37,26 +37,26 @@
 
     <h2>1. Kurzüberblick</h2>
     <p>
-      Shelter ist eine freie Open-Source-App, die Androids <strong>Work-Profile-Funktion</strong> nutzt, um eine zweite, isolierte App-Umgebung auf demselben Nutzerprofil zu erstellen. Du kannst Apps in dieses Work Profile installieren oder aus dem Hauptprofil „klonen“ und so getrennt betreiben.
+      Shelter ist eine freie Open-Source-App, die Androids Work-Profile-Funktion nutzt, um eine zweite, isolierte App-Umgebung auf demselben Nutzerprofil zu erstellen. Du kannst Apps in dieses Work Profile installieren oder aus dem Hauptprofil „klonen“ und so getrennt betreiben. Typischer Zweck: Tracking-lastige Apps, Zweitkonten oder Apps mit unnötigen Berechtigungsforderungen in eine abgekapselte Umgebung verschieben.
     </p>
 
     <h2>2. Wie Shelter technisch funktioniert (und wo die Grenzen sind)</h2>
     <p>
-      Shelter erstellt und verwaltet ein Work Profile (auch „Managed Profile“). Das ist eine Android-Systemfunktion; Shelter ist nur die komfortable Oberfläche dafür.
+      Shelter erstellt/verwaltet ein Work Profile (auch „Managed Profile“). Das ist eine Android-Systemfunktion, Shelter ist nur die komfortable Oberfläche dafür. Apps im Work Profile laufen in einem separaten Profil-Speicherbereich und sind von Apps im persönlichen Bereich getrennt (eigene App-Daten, eigener „Container“).
     </p>
-    <ul>
-      <li>Apps im Work Profile laufen in einem separaten Profil-Speicherbereich und sind von Apps im persönlichen Bereich getrennt (eigene App-Daten, eigener „Container“).</li>
-      <li><strong>Wichtig:</strong> Android-Apps sind ohnehin sandboxed. Das Work Profile ist eine zusätzliche Trennungsebene, besonders praktisch für getrennte Datenräume.</li>
-      <li><strong>Grenze:</strong> Das Work Profile ist nicht dasselbe wie ein komplett separater Android-Nutzer (User Profile). Bei GrapheneOS sind User Profiles oft die stärkere Trennung.</li>
-    </ul>
+    <p>
+      <strong>Wichtig:</strong> Android-Apps sind ohnehin sandboxed. Das Work Profile ist eine zusätzliche Trennungsebene. 
+      <strong>Grenze:</strong> Das Work Profile ist nicht dasselbe wie ein komplett separater Android-Nutzer (User Profile). Bei GrapheneOS wird oft betont, dass User Profiles in vielen Fällen die „stärkere“ Trennung sind.
+    </p>
 
     <h2>3. Features von Shelter (praxisrelevant)</h2>
     <ul>
-      <li><strong>Work Profile verwalten:</strong> Einfaches an- und ausschalten der Umgebung.</li>
-      <li><strong>Apps klonen:</strong> Apps duplizieren für getrennte Logins und Daten.</li>
+      <li><strong>Work Profile verwalten:</strong> Profil einfach an/aus schalten.</li>
+      <li><strong>Apps klonen:</strong> Eine App duplizieren für separaten Login und Daten.</li>
       <li><strong>Apps einfrieren (Freeze):</strong> Apps schlafen legen, um Hintergrundaktivität zu stoppen.</li>
-      <li><strong>Auto-Freeze:</strong> Automatisches Deaktivieren bei Display-aus.</li>
-      <li><strong>File Shuttle:</strong> Gezielter Dateitransfer zwischen den Profilen.</li>
+      <li><strong>Auto-Freeze:</strong> Reduziert Tracking/Akkuverbrauch automatisch bei Display aus.</li>
+      <li><strong>File Shuttle:</strong> Dateien zwischen den Profilen hin- und herschieben.</li>
+      <li><strong>Daten-Trennung:</strong> Getrennte Container für Logins und lokale Daten.</li>
     </ul>
 
     <div class="recommendation-box">
@@ -66,16 +66,56 @@
 
     <h2>4. Sinnvolle Anwendungsfälle (konkret)</h2>
     <ul>
-      <li><strong>WhatsApp isolieren:</strong> Kontakte und Dateien vor neugierigen Blicken schützen.</li>
-      <li><strong>Social Media bündeln:</strong> Tracking-lastige Apps wie TikTok oder Instagram einkäfigen.</li>
-      <li><strong>Banking & Finanzen:</strong> Sensible Apps strikt vom restlichen System trennen.</li>
-      <li><strong>Google Play Dienste:</strong> Google-abhängige Apps gezielt in das Work Profile verschieben.</li>
+      <li><strong>WhatsApp isolieren:</strong> Damit es nicht deine privaten Kontakte/Dateien abgreift.</li>
+      <li><strong>Social Media (X/TikTok/Insta):</strong> Nur im Work Profile, das bei Nichtgebrauch aus bleibt.</li>
+      <li><strong>Zweitkonten:</strong> Zwei Telegram-Accounts oder E-Mail-Logins durch Klonen.</li>
+      <li><strong>Banking separat:</strong> Strikte Trennung von Alltags- und Finanz-Apps.</li>
+      <li><strong>Google Play Dienste (GrapheneOS):</strong> Google-abhängige Apps konzentriert in den Work-Container bündeln.</li>
+      <li><strong>„Big Brother Apps“:</strong> Apps mit aggressivem Tracking einkäfigen.</li>
     </ul>
 
-    <h2>5. GrapheneOS-spezifisch: Was ist „sinnvoll“?</h2>
+    <h2>5. Für wen geeignet / für wen nicht</h2>
+    <p><strong>Geeignet für:</strong> Leute, die problematische Apps brauchen, aber privat sauber bleiben wollen; Nutzer von Zweitkonten; GrapheneOS-User für Google-Isolation.</p>
+    <p><strong>Nicht geeignet für:</strong> Nutzer, die maximal harte Trennung wollen (hier User Profiles prüfen) oder Leute, die mehrere unabhängige Container parallel brauchen.</p>
+
+    <h2>6. Vorteile und Nachteile</h2>
+    <p><strong>Vorteile:</strong> Praktische Trennung ohne Nutzerwechsel; "Kill Switch" für Apps; Zweitinstanzen ohne Basteln.</p>
+    <p><strong>Nachteile:</strong> Shelter benötigt Admin-Rolle im Work-Kontext; User Profiles sind oft "sauberer"; Daten innerhalb des Work-Profiles bleiben für Work-Apps erreichbar.</p>
+
+    <h2>7. GrapheneOS-spezifisch: Was ist „sinnvoll“?</h2>
     <p>
-      GrapheneOS-Nutzer setzen Shelter oft als Komfortlösung ein, um Google-abhängige Apps isoliert zu betreiben, ohne ständig den Benutzer wechseln zu müssen. Es bleibt ein sauberer, systemnaher Hebel für mehr digitale Selbstverteidigung.
+      In der GrapheneOS-Community wird oft empfohlen: User Profiles > Work Profile für maximale Trennung. Shelter ist jedoch eine Komfortlösung für Apps, die dauerhaft Benachrichtigungen liefern sollen, ohne ständig den ganzen Nutzer zu wechseln. Viele setzen Sandboxed Google Play gezielt in Shelter ein.
     </p>
+
+    <h2>8. Setup-Guide: Ein sinnvolles Shelter-Setup</h2>
+    <ol>
+      <li>Shelter via F-Droid installieren.</li>
+      <li>Work Profile in Shelter erstellen.</li>
+      <li>Apps klonen oder im Work Profile neu installieren.</li>
+      <li>Permissions minimieren (Kontakte im Work Profile leer lassen).</li>
+      <li>Freeze für Apps nutzen, die nicht ständig laufen müssen.</li>
+      <li>Shortcut für schnelles An/Aus des Work Profiles anlegen.</li>
+    </ol>
+
+    <h2>9. Risiken & typische Fallstricke</h2>
+    <p>
+      Shelter ist kein Unsichtbarkeitsmantel. Tracking im Work Profile bleibt Tracking. Da Shelter Admin-Rechte braucht, muss die App aus vertrauenswürdiger Quelle kommen. Bei Deinstallation immer erst das Profil über die App entfernen.
+    </p>
+
+    <h2>10. Fazit</h2>
+    <p>
+      Shelter ist ein praktisches Werkzeug, um Apps einzukäfigen. Es bietet getrennte Daten und einen schnellen Aus-Schalter. Für GrapheneOS ist es eine Komfortlösung; für maximale Isolation bleibt das User Profile der Goldstandard.
+    </p>
+
+    <h2>11. Best-Practices-Checkliste (kurz und hart)</h2>
+    <ul>
+      <li>Nur Trennungs-Apps ins Work Profile.</li>
+      <li>Kontakte im Work Profile leer halten.</li>
+      <li>Work Profile aus, wenn nicht benötigt.</li>
+      <li>Freeze nutzen.</li>
+      <li>File Shuttle sparsam einsetzen.</li>
+      <li>Google-Apps bündeln.</li>
+    </ul>
 
     <div class="box">
       <h3>🧰 Tools für echte Eigentümer</h3>
@@ -96,6 +136,8 @@
         Diese Analyse basiert auf der technischen Dokumentation von Shelter und Praxistests auf GrapheneOS (Stand 2025/2026).<br><br>
         <strong>Download Shelter:</strong><br>
         👉 <a href="https://f-droid.org/de/packages/net.typeblog.shelter/" target="_blank">https://f-droid.org/de/packages/net.typeblog.shelter/</a><br>
+        👉 <a href="https://play.google.com/store/apps/details?id=net.typeblog.shelter" target="_blank">https://play.google.com/store/apps/details?id=net.typeblog.shelter</a>
+      </p>
     </div>
 
     <div class="like-button">
