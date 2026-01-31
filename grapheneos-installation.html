@@ -2,9 +2,9 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>GrapheneOS installieren: Dein Smartphone als digitaler Bunker | Alien Investor</title>
+  <title>GrapheneOS installieren – Dein Smartphone als digitaler Bunker | Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Schritt-für-Schritt Anleitung zur Installation von GrapheneOS auf Google Pixel Geräten. Mehr Privatsphäre und Sicherheit ohne Google-Tracking.">
+  <meta name="description" content="Anleitung zur Installation von GrapheneOS auf Google Pixel Geräten. Mehr Privatsphäre und Sicherheit ohne Google-Tracking.">
   <style>
     /* --- ALIEN-STANDARD 2.1 CSS --- */
     body { background-color: #000; color: #fff; font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 0 15px 20px 15px; }
@@ -51,12 +51,12 @@
   
   <article id="content">
     <p>
-      Wenn du das hier liest, hast du wahrscheinlich genug von Datensammelei und vorinstallierten Google-Diensten. GrapheneOS ist ein gehärtetes Android für Google-Pixel-Geräte, das auf Sicherheit und Privatsphäre ohne Kompromisse ausgelegt ist.
+      Wenn du das hier liest, hast du wahrscheinlich genug von Datensammelei, vorinstallierten Google-Diensten und dem Gefühl, dass dein Smartphone mehr dir <em>gehört</em> als du ihm. Genau hier kommt <strong>GrapheneOS</strong> ins Spiel: ein gehärtetes Android für Google-Pixel-Geräte, das auf Sicherheit, Privatsphäre und Kontrolle ausgelegt ist.
     </p>
 
     <div class="box" style="border-color: #ff3b3b;">
       <h3 style="color: #ff3b3b;">⚠️ Wichtiger Hinweis</h3>
-      <p>Dieser Artikel ist ein persönlicher Leitfaden zur Orientierung. Er ersetzt <strong>nicht</strong> die offizielle Dokumentation. Lies unbedingt die Anleitung auf der offiziellen Seite, bevor du startest.</p>
+      <p>Dieser Artikel ist mein persönlicher Leitfaden – eine Orientierung für den Einstieg. Er ersetzt <strong>nicht</strong> die offizielle Dokumentation. Wenn du wirklich flashen willst, lies unbedingt die Anleitung auf der offiziellen Seite.</p>
       <p>👉 <a href="https://grapheneos.org/install/web" target="_blank">Zum offiziellen Web-Installer</a></p>
     </div>
 
@@ -65,8 +65,8 @@
       <iframe 
         width="560" 
         height="315" 
-        src="https://www.youtube.com/embed/HIER_VIDEO_ID_EINTRAGEN" 
-        title="GrapheneOS Installation" 
+        src="https://www.youtube.com/embed/S_B7Xf5eDyo" 
+        title="GrapheneOS Anleitung" 
         frameborder="0" 
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
         allowfullscreen>
@@ -74,26 +74,42 @@
       <p><em>In diesem Video zeigt dir mein Bordtechniker, wie du dein Pixel in einen digitalen Bunker verwandelst.</em></p>
     </div>
 
-    <h2>🔒 Warum GrapheneOS?</h2>
+    <h2>🔓 Warum GrapheneOS – und für wen lohnt es sich?</h2>
     <p>
-      GrapheneOS baut auf dem AOSP auf, entfernt aber sämtliches Google-Tracking und härtet den Kernel sowie die Sandbox-Strukturen massiv ab.
+      GrapheneOS ist ein freies, sicherheitsoptimiertes Betriebssystem für aktuelle Google-Pixel-Geräte. Es baut auf dem Android Open Source Project (AOSP) auf, entfernt aber sämtliches Google-Tracking, härtet das System und gibt dir deutlich mehr Kontrolle.
     </p>
     <ul>
-      <li>Kein Google-Konto-Zwang.</li>
-      <li>Vollständig isolierte "Sandboxed Google Play" Dienste (optional).</li>
-      <li>Maximale Speichersicherheit durch gehärtete Allocatoren.</li>
+      <li>Kein vorinstalliertes Google-Konto, keine erzwungenen Services.</li>
+      <li>Stark gehärtete Sandbox und Speichersicherheit.</li>
+      <li>Option, Google-Dienste später isoliert (sandboxed) zu installieren.</li>
     </ul>
 
+    <p>
+        Wenn „Locked“ angezeigt wird, kannst du das Telefon starten. Drücke dazu die <strong>Power-Taste</strong> (neben dem Punkt „Start“ im Display-Menü).
+    </p>
+    <p>
+        Beim Hochfahren siehst du einen gelben Warnhinweis:<br>
+        <em>„Your device is loading a different operating system.“</em>
+    </p>
+    <p>Das ist <strong>normal</strong> und wird ab jetzt immer so sein – es zeigt dir, dass nicht mehr das Google-Android läuft.</p>
+
     <blockquote>
-      „Vertrauen ist gut, Kontrolle ist besser. Vergleiche immer den Verified Boot Key Hash auf dem Warnbildschirm mit den Angaben auf der offiziellen Website.“ 👽
+      „Vertrauen ist gut, Kontrolle ist besser. Vergleiche immer den <strong>Verified boot key hash</strong> auf dem Warnbildschirm mit den Angaben auf der GrapheneOS-Website. Wenn die Hashes übereinstimmen: Glückwunsch, dein System ist sauber und sicher installiert!“ 👽
     </blockquote>
+
+    <h2>5. Leben mit GrapheneOS</h2>
+    <p>
+        Dein Pixel ist jetzt gehärtet. Du hast keinen Play Store (ab Werk), dafür volle Kontrolle. Apps installierst du über F-Droid, Aurora Store oder du nutzt die GrapheneOS-eigenen „Sandboxed Google Play“ Dienste, falls du Push-Benachrichtigungen oder Maps zwingend brauchst.
+    </p>
+    <p>Willkommen auf der anderen Seite.</p>
 
     <div class="box box-center">
       <h3>📚 Quellen & Ressourcen</h3>
       <ul>
-        <li>👉 <a href="https://grapheneos.org" target="_blank">Offizielle GrapheneOS Website</a></li>
-        <li>👉 <a href="https://developer.android.com/tools/releases/platform-tools" target="_blank">Android Platform Tools</a></li>
+        <li>👉 <a href="https://grapheneos.org/install/web" target="_blank">Offizieller GrapheneOS Web-Installer</a></li>
+        <li>👉 <a href="https://developer.android.com/tools/releases/platform-tools" target="_blank">Android Plattform Tools (Kommunikation)</a></li>
         <li>👉 <a href="https://grapheneos.org/donate" target="_blank">GrapheneOS unterstützen (Spenden)</a></li>
+        <li>👉 <a href="blog.html" target="_blank">Blog-Artikel zum Nachlesen</a></li>
       </ul>
     </div>
   </article>
@@ -136,7 +152,7 @@
 
   <footer>
     <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
-    <p style="margin-top: 20px;">👽 <strong>Haftungsausschluss:</strong><br><br>Keine Finanz-, Steuer- oder Rechtsberatung. Nur persönliche Meinung eines Aliens. Das Flashen von Geräten erfolgt auf eigene Gefahr.</p>
+    <p style="margin-top: 20px;">👽 <strong>Haftungsausschluss:</strong><br><br>Keine Finanz-, Steuer- oder Rechtsberatung. Dieser Artikel dient der Information über IT-Sicherheit. Das Flashen von Geräten erfolgt auf eigene Gefahr.</p>
   </footer>
 </body>
 </html>
