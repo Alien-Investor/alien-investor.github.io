@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Schritt-für-Schritt Anleitung zur Installation von GrapheneOS auf Google Pixel Geräten. Mehr Privatsphäre und Sicherheit ohne Google-Tracking.">
   <style>
+    /* --- ALIEN-STANDARD 2.1 CSS --- */
     body { background-color: #000; color: #fff; font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 0 15px 20px 15px; }
     h1, h2, h3 { color: #00ffcc; }
     h1 { margin-top: 40px; text-align: center; }
@@ -15,16 +16,28 @@
     em { color: #ccc; }
     .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
     blockquote { border-left: 3px solid #00ffcc; margin: 2em 0; padding: 0.5em 1em; color: #ddd; background: #050505; font-style: italic; }
-    .box { border: 1px solid #00ffcc; background: #050505; padding: 1.5em; border-radius: 8px; margin: 2em 0; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
     
-    /* Zentrierung für Video-Container */
-    .video-container { text-align: center; margin: 2em 0; }
-    .video-container iframe, .video-container video { max-width: 100%; border-radius: 8px; border: 1px solid #333; }
+    /* Boxen System */
+    .box { border: 1px solid #00ffcc; background: #050505; padding: 1.5em; border-radius: 8px; margin: 2em 0; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
+    .box h3 { margin-top: 0; }
+    .box-center { text-align: center; }
+    .box-center ul { list-style: none; padding: 0; }
+    .box-center li { margin-bottom: 10px; }
 
+    /* Video-Zentrierung & Glow */
+    .video-container { text-align: center; margin: 2em 0; }
+    .video-container iframe, .video-container video, .video-container img { 
+      max-width: 100%; 
+      border-radius: 8px; 
+      border: 1px solid #00ffcc; 
+    }
+
+    /* Interaktive Elemente */
     .like-button { margin: 3em 0; display: flex; align-items: center; justify-content: center; gap: 1em; font-size: 1em; }
     .like-button button { background: #000; color: #00ffcc; border: 1px solid #00ffcc; padding: 0.6em 1.2em; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.2s ease; }
     .like-button button:hover, .like-button button:active { background: #00ffcc; color: #000; box-shadow: 0 0 15px #00ffcc; }
     .like-button button:disabled { border-color: #444; color: #888; background: #111; cursor: default; }
+    
     .top-nav { padding: 10px 0; font-size: 0.9em; }
     .back-links { margin-top: 40px; text-align: center; display: flex; flex-direction: column; gap: 10px; }
     footer { margin-top: 60px; padding: 20px; font-size: 0.85em; color: #666; border-top: 1px solid #222; text-align: center; }
@@ -38,46 +51,48 @@
   
   <article id="content">
     <p>
-      Wenn du das hier liest, hast du wahrscheinlich genug von Datensammelei, vorinstallierten Google-Diensten und dem Gefühl, dass dein Smartphone mehr dir <em>gehört</em> als du ihm. Genau hier kommt <strong>GrapheneOS</strong> ins Spiel: ein gehärtetes Android für Google-Pixel-Geräte, das auf Sicherheit, Privatsphäre und Kontrolle ausgelegt ist.
+      Wenn du das hier liest, hast du wahrscheinlich genug von Datensammelei und vorinstallierten Google-Diensten. GrapheneOS ist ein gehärtetes Android für Google-Pixel-Geräte, das auf Sicherheit und Privatsphäre ohne Kompromisse ausgelegt ist.
     </p>
 
     <div class="box" style="border-color: #ff3b3b;">
       <h3 style="color: #ff3b3b;">⚠️ Wichtiger Hinweis</h3>
-      <p>Dieser Artikel ist mein persönlicher Leitfaden – eine Orientierung für den Einstieg. Er ersetzt <strong>nicht</strong> die offizielle Dokumentation. Wenn du wirklich flashen willst, lies unbedingt die Anleitung auf der offiziellen Seite.</p>
+      <p>Dieser Artikel ist ein persönlicher Leitfaden zur Orientierung. Er ersetzt <strong>nicht</strong> die offizielle Dokumentation. Lies unbedingt die Anleitung auf der offiziellen Seite, bevor du startest.</p>
       <p>👉 <a href="https://grapheneos.org/install/web" target="_blank">Zum offiziellen Web-Installer</a></p>
     </div>
 
     <h2>🎬 Video-Anleitung: Schritt für Schritt</h2>
     <div class="video-container">
-      <img src="Bildschirmfoto_20260131_131157.jpg" alt="Video-Vorschau" style="width:100%; max-width:560px; border: 1px solid #00ffcc;">
+      <iframe 
+        width="560" 
+        height="315" 
+        src="https://www.youtube.com/embed/HIER_VIDEO_ID_EINTRAGEN" 
+        title="GrapheneOS Installation" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+      </iframe>
       <p><em>In diesem Video zeigt dir mein Bordtechniker, wie du dein Pixel in einen digitalen Bunker verwandelst.</em></p>
     </div>
 
-    <h2>🔒 Was ist GrapheneOS – und für wen lohnt es sich?</h2>
+    <h2>🔒 Warum GrapheneOS?</h2>
     <p>
-      GrapheneOS ist ein freies, sicherheitsoptimiertes Betriebssystem. Es baut auf dem Android Open Source Project (AOSP) auf, entfernt aber sämtliches Google-Tracking und härtet das System gegen Angriffe ab.
+      GrapheneOS baut auf dem AOSP auf, entfernt aber sämtliches Google-Tracking und härtet den Kernel sowie die Sandbox-Strukturen massiv ab.
     </p>
     <ul>
-      <li>Kein vorinstalliertes Google-Konto, keine erzwungenen Services.</li>
-      <li>Stark gehärtete Sandbox und Speichersicherheit.</li>
-      <li>Option, Google-Dienste später isoliert (sandboxed) zu installieren.</li>
+      <li>Kein Google-Konto-Zwang.</li>
+      <li>Vollständig isolierte "Sandboxed Google Play" Dienste (optional).</li>
+      <li>Maximale Speichersicherheit durch gehärtete Allocatoren.</li>
     </ul>
 
     <blockquote>
-      „Vertrauen ist gut, Kontrolle ist besser. Auf dem Warnbildschirm beim Booten wird eine ID angezeigt. Vergleiche diese mit dem Fingerprint auf der GrapheneOS-Website. Wenn sie übereinstimmen: Glückwunsch, dein System ist sauber.“ 👽
+      „Vertrauen ist gut, Kontrolle ist besser. Vergleiche immer den Verified Boot Key Hash auf dem Warnbildschirm mit den Angaben auf der offiziellen Website.“ 👽
     </blockquote>
 
-    <h2>5. Leben mit GrapheneOS</h2>
-    <p>
-      Dein Pixel ist jetzt gehärtet. Du hast keinen Play Store ab Werk, dafür volle Kontrolle. Apps installierst du über <strong>F-Droid</strong>, <strong>Aurora Store</strong> oder du nutzt die GrapheneOS-eigenen "Sandboxed Google Play" Dienste, falls du Push-Benachrichtigungen oder Maps zwingend brauchst.
-    </p>
-    <p>Willkommen auf der anderen Seite.</p>
-
-    <div class="box">
-      <h3 style="text-align: center;">📚 Quellen (Auswahl)</h3>
-      <ul style="list-style: none; padding: 0; text-align: center;">
-        <li>👉 <a href="https://grapheneos.org" target="_blank">Offizieller GrapheneOS Web-Installer</a></li>
-        <li>👉 <a href="https://developer.android.com/tools/releases/platform-tools" target="_blank">Android Platform Tools (Kommunikation)</a></li>
+    <div class="box box-center">
+      <h3>📚 Quellen & Ressourcen</h3>
+      <ul>
+        <li>👉 <a href="https://grapheneos.org" target="_blank">Offizielle GrapheneOS Website</a></li>
+        <li>👉 <a href="https://developer.android.com/tools/releases/platform-tools" target="_blank">Android Platform Tools</a></li>
         <li>👉 <a href="https://grapheneos.org/donate" target="_blank">GrapheneOS unterstützen (Spenden)</a></li>
       </ul>
     </div>
@@ -86,12 +101,31 @@
   <div class="like-button">
     <button id="likeButton">👍 Gefällt mir</button> <span id="likeCount">0</span> <span style="color:#bbb; font-size: 0.9em;">(Lokal)</span>
   </div>
-  <script>(function(){const k=window.location.pathname+"-likes";const b=document.getElementById('likeButton');const s=document.getElementById('likeCount');let c=parseInt(localStorage.getItem(k)||"0",10);s.textContent=c;b.addEventListener('click',function(){c++;s.textContent=c;localStorage.setItem(k,String(c));b.disabled=true;b.textContent="Danke! 👽";b.style.borderColor="#444";b.style.color="#888";});})();</script>
+  
+  <script>
+    (function(){
+      const k=window.location.pathname+"-likes";
+      const b=document.getElementById('likeButton');
+      const s=document.getElementById('likeCount');
+      let c=parseInt(localStorage.getItem(k)||"0",10);
+      s.textContent=c;
+      b.addEventListener('click',function(){
+        c++;
+        s.textContent=c;
+        localStorage.setItem(k,String(c));
+        b.disabled=true;
+        b.textContent="Danke! 👽";
+        b.style.borderColor="#444";
+        b.style.color="#888";
+      });
+    })();
+  </script>
 
   <div class="back-links">
     <a href="blog.html" style="font-size: 1.1em;">⬅ Zurück zur Blog-Übersicht</a>
     <a href="index.html" style="font-size: 1.1em;">⬅ Zurück zur Zentrale</a>
   </div>
+
   <hr style="border-color: #222; margin: 3em 0;">
   
   <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
@@ -102,7 +136,7 @@
 
   <footer>
     <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
-    <p style="margin-top: 20px;">👽 <strong>Haftungsausschluss:</strong><br><br>Keine Finanz-, Steuer- oder Rechtsberatung. Dieser Artikel dient der Information über IT-Sicherheit. Das Flashen von Hardware erfolgt auf eigene Gefahr.</p>
+    <p style="margin-top: 20px;">👽 <strong>Haftungsausschluss:</strong><br><br>Keine Finanz-, Steuer- oder Rechtsberatung. Nur persönliche Meinung eines Aliens. Das Flashen von Geräten erfolgt auf eigene Gefahr.</p>
   </footer>
 </body>
 </html>
