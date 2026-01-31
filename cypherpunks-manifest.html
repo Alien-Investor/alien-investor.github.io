@@ -6,142 +6,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Cypherpunks Manifest: Souveränität, Privatsphäre, eigene Schlüssel, eigene Nodes. Das ethische Fundament von Bitcoin – klar, kompromisslos, zeitlos.">
   <style>
-    body {
-      background-color: #000;
-      color: #fff;
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      max-width: 800px;
-      margin: auto;
-      padding: 0 15px 20px 15px; /* Mobile-Optimierung */
-    }
-
-    /* --- TYPOGRAFIE --- */
-    h1, h2, h3 {
-      color: #00ffcc;
-    }
-    h1 {
-      margin-top: 40px;
-      text-align: center;
-    }
-
-    /* --- LINKS (Neon-Glow) --- */
-    a {
-      color: #00ffcc;
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-    a:hover {
-      color: #fff;
-      text-shadow: 0 0 8px #00ffcc; /* Der Alien-Effekt */
-    }
-
-    /* --- STANDARD ELEMENTE --- */
-    code {
-      background-color: #111;
-      padding: 0.2em 0.4em;
-      border-radius: 4px;
-      color: #0f0;
-      font-family: monospace;
-    }
+    body { background-color: #000; color: #fff; font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 0 15px 20px 15px; }
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+    code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; font-family: monospace; }
     em { color: #ccc; }
+    .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
+    blockquote { border-left: 3px solid #00ffcc; margin: 2em 0; padding: 0.5em 1em; color: #ddd; background: #050505; font-style: italic; }
+    .box { border: 1px solid #00ffcc; background: #050505; padding: 1.5em; border-radius: 8px; margin: 2em 0; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
+    
+    /* ZENTRIERTER VIDEO CONTAINER */
+    .video-wrapper { display: flex; justify-content: center; margin: 2em 0; }
+    .video-container { 
+      position: relative; width: 100%; max-width: 560px; padding-bottom: 31.25%; height: 0; 
+      border: 1px solid #00ffcc; border-radius: 8px; overflow: hidden; box-shadow: 0 0 15px rgba(0, 255, 204, 0.1);
+    }
+    @media (max-width: 600px) { .video-container { padding-bottom: 56.25%; } }
+    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
-    .byline {
-      margin-top: -0.8em;
-      margin-bottom: 2em;
-      color: #ccc;
-      font-style: italic;
-      text-align: center;
-    }
-
-    blockquote {
-      border-left: 3px solid #00ffcc;
-      margin: 2em 0;
-      padding: 0.5em 1em;
-      color: #ddd;
-      background: #050505;
-      font-style: italic;
-    }
-
-    /* --- BOXEN --- */
-    .box {
-      border: 1px solid #00ffcc;
-      background: #050505;
-      padding: 1.5em;
-      border-radius: 8px;
-      margin: 2em 0;
-      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
-    }
-    .box h3 { margin-top: 0; }
-    .box ul { padding-left: 1.2em; }
-    .box li { margin-bottom: 1em; }
-
-    .recommendation-box {
-      margin: 2em 0;
-      padding: 1em;
-      border: 1px dashed #00ffcc;
-      border-radius: 8px;
-      text-align: center;
-      background-color: #050505;
-    }
-    .recommendation-box h3 {
-      margin-top: 0;
-      font-size: 1.1em;
-      color: #00ffcc;
-    }
-
-    /* --- LIKE BUTTON --- */
-    .like-button {
-      margin: 3em 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1em;
-    }
-    .like-button button {
-      background: #000;
-      color: #00ffcc;
-      border: 1px solid #00ffcc;
-      padding: 0.6em 1.2em;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: all 0.2s ease;
-    }
-    .like-button button:hover {
-      background: #00ffcc;
-      color: #000;
-      box-shadow: 0 0 15px #00ffcc;
-    }
-    .like-button button:disabled {
-      border-color: #444;
-      color: #888;
-      background: #111;
-      cursor: default;
-    }
-
-    /* --- NAVIGATION --- */
-    .top-nav {
-      padding: 10px 0;
-      font-size: 0.9em;
-    }
-    .back-links {
-      margin-top: 40px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    /* --- FOOTER --- */
-    footer {
-      margin-top: 60px;
-      padding: 20px;
-      font-size: 0.85em;
-      color: #666;
-      border-top: 1px solid #222;
-      text-align: center;
-    }
+    .like-button { margin: 3em 0; display: flex; align-items: center; justify-content: center; gap: 1em; font-size: 1em; }
+    .like-button button { background: #000; color: #00ffcc; border: 1px solid #00ffcc; padding: 0.6em 1.2em; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.2s ease; }
+    .like-button button:hover, .like-button button:active { background: #00ffcc; color: #000; box-shadow: 0 0 15px #00ffcc; }
+    .like-button button:disabled { border-color: #444; color: #888; background: #111; cursor: default; }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    .back-links { margin-top: 40px; text-align: center; display: flex; flex-direction: column; gap: 10px; }
+    footer { margin-top: 60px; padding: 20px; font-size: 0.85em; color: #666; border-top: 1px solid #222; text-align: center; }
   </style>
 </head>
 <body>
@@ -160,6 +51,22 @@
       Bitcoin ist kein Produkt. Bitcoin ist kein „Investmentvehikel“.
       Bitcoin ist ein Werkzeug für Souveränität.
     </p>
+
+    <div class="video-wrapper">
+      <div class="video-container">
+        <iframe 
+          src="https://www.youtube.com/embed/gNCdb6g6asE" 
+          title="Das Cypherpunk Manifest – Warum Bitcoin mehr als Geld ist" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          referrerpolicy="strict-origin-when-cross-origin" 
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+    <p style="text-align: center; font-size: 0.9em; color: #bbb; margin-top: -1em;">
+      <em>In diesem Video zeige ich dir die philosophischen Wurzeln von Bitcoin: Das Cypherpunk Manifest.</em>
+    </p>
+
     <p>
       Das Bitcoin-Ethos stammt aus der Cypherpunk-Bewegung:
       Widerstand gegen Kontrolle, Überwachung und fremde Autorität – nicht als Pose, sondern als Praxis.
@@ -228,46 +135,16 @@
     </p>
 
     <div class="box">
-      <h3>🧰 Tools für echte Eigentümer (Werbung/Affiliate)</h3>
-      <p style="font-size:0.95em;">
-        Wenn du Aktien und Bitcoin möglichst eigenverantwortlich halten willst, nutze nicht nur dein Bankdepot:
-      </p>
+      <h3>🧰 Tools für echte Eigentümer</h3>
+      <p style="font-size:0.95em;">Wenn du Aktien und Bitcoin eigenverantwortlich halten willst:</p>
       <ul>
-        <li>
-          🇨🇭 <strong>Investieren mit Swissquote:</strong><br>
-          Ich nutze Swissquote in der Schweiz – dort kannst du saubere Namensaktien halten und hast keine
-          deutsche Bank dazwischen.<br>
-          👉 <a href="https://alien-investor.org/swissquote" target="_blank">https://alien-investor.org/swissquote</a>
-        </li>
-        <li>
-          📊 <strong>US-Aktien über IBKR:</strong><br>
-          Für viele internationale Titel bietet sich Interactive Brokers als Zugang an – insbesondere in Kombination
-          mit DRS/Transfer Agenten.<br>
-          👉 <a href="https://alien-investor.org/interactive-brokers" target="_blank">https://alien-investor.org/interactive-brokers</a>
-        </li>
-        <li>
-          💥 <strong>Bitcoin kaufen in Europa – 21bitcoin:</strong><br>
-          Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges sats stapeln – ohne Shitcoins.<br>
-          Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du dauerhaft 0,2&nbsp;Prozentpunkte Gebührenreduktion
-          auf Sofort- und Sparplankäufe.<br>
-          👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
-        </li>
-        <li>
-          ₿ <strong>Bitcoin in Selbstverwahrung:</strong><br>
-          Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox – es gibt die klassische BitBox02 und die neue
-          BitBox für iPhone (Nova).<br>
-          👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
-        </li>
-        <li>
-          🛡️ <strong>Privacy &amp; Mail:</strong><br>
-          Für E-Mail, VPN und Cloud nutze ich Proton – datensparsam und ohne Big-Tech-Abhängigkeit.<br>
-          👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
-        </li>
+        <li>🇨🇭 <strong>Swissquote:</strong> Namensaktien in der Schweiz. 👉 <a href="https://alien-investor.org/swissquote" target="_blank">https://alien-investor.org/swissquote</a></li>
+        <li>📊 <strong>Interactive Brokers:</strong> Internationaler Marktzugang. 👉 <a href="https://alien-investor.org/interactive-brokers" target="_blank">https://alien-investor.org/interactive-brokers</a></li>
+        <li>💥 <strong>21bitcoin:</strong> Bitcoin-only App (Code <strong>ALIENINVESTOR</strong> nutzen). 👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a></li>
+        <li>₿ <strong>BitBox:</strong> Hardware-Wallet für die sichere Selbstverwahrung (Code <strong>ALIENINVESTOR</strong> nutzen). 👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a></li>
+        <li>🛡️ <strong>Proton:</strong> Privacy-Schutz für Mail, VPN und Cloud. 👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a></li>
       </ul>
-      <p style="font-size:0.85em; color:#aaa;">
-        Hinweis: Bei einigen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit,
-        ohne dass es dich mehr kostet. Danke! 👽
-      </p>
+      <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">Hinweis: Affiliate-Links. Supporte meine Arbeit ohne Mehrkosten. Danke! 👽</p>
     </div>
 
   </article>
@@ -276,32 +153,17 @@
     "Vertraue niemandem! Manage deine Finanzen selbst!"
   </blockquote>
 
-  <div class="like-button">
-    <button id="likeButton">👍 Gefällt mir</button>
-    <span id="likeCount">0</span>
-    <span style="color:#bbb; font-size: 0.9em;">(Lokal)</span>
+  <div class="box" style="border-style: dashed; border-color: #333;">
+    <h3>📚 Ressourcen & Quellen</h3>
+    <p style="font-size:0.95em; color: #ccc;">
+      Basierend auf dem Video-Vortrag von <a href="http://www.youtube.com/watch?v=gNCdb6g6asE" target="_blank">Alien Investor (2025)</a> sowie den ursprünglichen Cypherpunk-Diskursen und Bitcoin-Grundlagen.
+    </p>
   </div>
 
-  <script>
-    (function() {
-      const storageKey = window.location.pathname + "-likes";
-      const btn = document.getElementById('likeButton');
-      const span = document.getElementById('likeCount');
-
-      let count = parseInt(localStorage.getItem(storageKey) || "0", 10);
-      span.textContent = count;
-
-      btn.addEventListener('click', function() {
-        count += 1;
-        span.textContent = count;
-        localStorage.setItem(storageKey, String(count));
-        btn.disabled = true;
-        btn.textContent = "Danke! 👽";
-        btn.style.borderColor = "#444";
-        btn.style.color = "#888";
-      });
-    })();
-  </script>
+  <div class="like-button">
+    <button id="likeButton">👍 Gefällt mir</button> <span id="likeCount">0</span> <span style="color:#bbb; font-size: 0.9em;">(Lokal)</span>
+  </div>
+  <script>(function(){const k=window.location.pathname+"-likes";const b=document.getElementById('likeButton');const s=document.getElementById('likeCount');let c=parseInt(localStorage.getItem(k)||"0",10);s.textContent=c;b.addEventListener('click',function(){c++;s.textContent=c;localStorage.setItem(k,String(c));b.disabled=true;b.textContent="Danke! 👽";b.style.borderColor="#444";b.style.color="#888";});})();</script>
 
   <div class="back-links">
     <a href="blog.html" style="font-size: 1.1em;">⬅ Zurück zur Blog-Übersicht</a>
@@ -311,29 +173,14 @@
   <hr style="border-color: #222; margin: 3em 0;">
 
   <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
-      <h3 style="margin-bottom: 15px;">
-        🔋 Energie aufladen
-        <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
-      </h3>
-      
-      <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
-        Treibstoff für das Mutterschiff senden
-      </a>
-      
-      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
-        Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸
-      </p>
+      <h3 style="margin-bottom: 15px;">🔋 Energie aufladen <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span></h3>
+      <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">Treibstoff für das Mutterschiff senden</a>
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸</p>
   </div>
 
   <footer>
     <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
-    
-    <p style="margin-top: 20px;">
-      👽 <strong>Haftungsausschluss:</strong><br><br>
-      Dieser Artikel stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
-      Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
-      Investieren ist mit Risiken verbunden. Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
-    </p>
+    <p style="margin-top: 20px;">👽 <strong>Haftungsausschluss:</strong><br><br>Keine Finanz-, Steuer- oder Rechtsberatung. Nur persönliche Meinung. Denke selbst.</p>
   </footer>
 
 </body>
