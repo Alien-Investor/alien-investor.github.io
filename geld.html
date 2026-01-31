@@ -90,6 +90,28 @@
       color: #00ffcc;
     }
 
+    /* --- VIDEO INTEGRATION (NEU) --- */
+    .video-wrapper {
+      display: flex;
+      justify-content: center;
+      margin: 2em 0;
+    }
+    .video-container { 
+      position: relative; 
+      width: 100%; 
+      max-width: 560px; 
+      padding-bottom: 31.25%; 
+      height: 0; 
+      border: 1px solid #00ffcc; 
+      border-radius: 8px; 
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(0, 255, 204, 0.1);
+    }
+    @media (max-width: 600px) {
+      .video-container { padding-bottom: 56.25%; }
+    }
+    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
     /* --- LIKE BUTTON --- */
     .like-button {
       margin: 3em 0;
@@ -160,6 +182,21 @@
       deine Zeit, deine Energie, deine Nerven. Geld ist gespeicherte Lebensleistung. Es ist eine Art Batterie deiner Kraft.
     </p>
 
+    <div class="video-wrapper">
+      <div class="video-container">
+        <iframe 
+          src="https://www.youtube.com/embed/03iYrmRTqI0" 
+          title="Was ist Geld – und warum es deine Lebenszeit stiehlt" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          referrerpolicy="strict-origin-when-cross-origin" 
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+    <p style="text-align: center; font-size: 0.9em; color: #bbb; margin-top: -1em;">
+      <em>In diesem Video zeige ich dir, warum Geld mehr ist als nur bedrucktes Papier – und wie es dir gestohlen wird.</em>
+    </p>
+
     <h2>📜 Geld hatte viele Formen</h2>
     <p>
       Muscheln, Perlen, Salz, Gold, Silber – Menschen haben schon immer Wege gesucht, ihren Tauschwert zu speichern.
@@ -218,27 +255,27 @@
           📈 <strong>Bitcoin kaufen in Europa – 21bitcoin</strong><br>
           Bitcoin-only App aus Europa, einfacher Einstieg und DCA – ideal, um regelmäßig sats zu stapeln und nicht alles in entwertenden Euros zu lassen.<br>
           Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du dauerhaft 0,2&nbsp;Prozentpunkte Gebührenreduktion auf Sofort- und Sparplankäufe:<br>
-          👉 <a href="https://alien-investor.org/21bitcoin" target="_blank" rel="noopener">alien-investor.org/21bitcoin</a>
+          👉 <a href="https://alien-investor.org/21bitcoin" target="_blank" rel="noopener">https://alien-investor.org/21bitcoin</a>
         </li>
         <li>
           🛡️ <strong>Bitcoin selbst verwahren – BitBox Hardware-Wallet</strong><br>
           „Not your keys, not your coins.“ Mit der BitBox hältst du deine Lebenszeit selbst in der Hand.<br>
           5&nbsp;% Rabatt mit dem Code <strong>ALIENINVESTOR</strong> im offiziellen Shop:<br>
-          👉 <a href="https://alien-investor.org/bitbox" target="_blank" rel="noopener">alien-investor.org/bitbox</a>
+          👉 <a href="https://alien-investor.org/bitbox" target="_blank" rel="noopener">https://alien-investor.org/bitbox</a>
         </li>
         <li>
           🇨🇭 <strong>Investieren mit Swissquote:</strong><br>
           Ich nutze Swissquote in der Schweiz – dort kannst du saubere Namensaktien halten und hast keine deutsche Bank dazwischen.<br>
-          👉 <a href="https://alien-investor.org/swissquote" target="_blank" rel="noopener">alien-investor.org/swissquote</a>
+          👉 <a href="https://alien-investor.org/swissquote" target="_blank" rel="noopener">https://alien-investor.org/swissquote</a>
         </li>
         <li>
           🔐 <strong>Mail &amp; Cloud ohne Big Tech – Proton</strong><br>
           E-Mail, Cloud, VPN und Passwortmanager aus der Schweiz – für weniger Datenabfluss.<br>
-          👉 <a href="https://alien-investor.org/proton" target="_blank" rel="noopener">alien-investor.org/proton</a>
+          👉 <a href="https://alien-investor.org/proton" target="_blank" rel="noopener">https://alien-investor.org/proton</a>
         </li>
       </ul>
-      <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">
-        <em>Hinweis:</em> Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit, ohne dass es dich mehr kostet. Danke! 👽
+      <p style="font-size:0.85em; color:#aaa; margin-top: 15px;"><br>
+        <em>Hinweis:</em> Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit, ohne dass es dich mehr kostet. Danke! 👽<br>
       </p>
     </div>
   </article>
