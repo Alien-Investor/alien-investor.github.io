@@ -17,22 +17,12 @@
     .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
     blockquote { border-left: 3px solid #00ffcc; margin: 2em 0; padding: 0.5em 1em; color: #ddd; background: #050505; font-style: italic; }
     
-    /* Boxen System */
     .box { border: 1px solid #00ffcc; background: #050505; padding: 1.5em; border-radius: 8px; margin: 2em 0; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
     .box h3 { margin-top: 0; }
-    .box-center { text-align: center; }
-    .box-center ul { list-style: none; padding: 0; }
-    .box-center li { margin-bottom: 10px; }
 
-    /* Video-Zentrierung & Glow */
-    .video-container { text-align: center; margin: 2em 0; }
-    .video-container iframe, .video-container video, .video-container img { 
-      max-width: 100%; 
-      border-radius: 8px; 
-      border: 1px solid #00ffcc; 
-    }
+    .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; border: 1px solid #00ffcc; border-radius: 8px; margin: 2em 0; }
+    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
-    /* Interaktive Elemente */
     .like-button { margin: 3em 0; display: flex; align-items: center; justify-content: center; gap: 1em; font-size: 1em; }
     .like-button button { background: #000; color: #00ffcc; border: 1px solid #00ffcc; padding: 0.6em 1.2em; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.2s ease; }
     .like-button button:hover, .like-button button:active { background: #00ffcc; color: #000; box-shadow: 0 0 15px #00ffcc; }
@@ -51,110 +41,75 @@
   
   <article id="content">
     <p>
-      Wenn du das hier liest, hast du wahrscheinlich genug von Datensammelei, vorinstallierten Google-Diensten und dem Gefühl, dass dein Smartphone mehr dir <em>gehört</em> als du ihm. Genau hier kommt <strong>GrapheneOS</strong> ins Spiel: ein gehärtetes Android für Google-Pixel-Geräte, das auf <strong>Sicherheit</strong>, <strong>Privatsphäre</strong> und <strong>Kontrolle</strong> ausgelegt ist.
+      Wenn du das hier liest, hast du wahrscheinlich genug von Datensammelei, vorinstallierten Google-Diensten und dem Gefühl, dass dein Smartphone mehr dir <em>gehört</em> als du ihm. Genau hier kommt <strong>GrapheneOS</strong> ins Spiel.
     </p>
 
     <div class="box" style="border-style: dashed; border-color: #ff3333;">
       <h3 style="color:#ff3333; margin-top:0;">⚠️ Wichtiger Hinweis</h3>
-      <p>
-        Dieser Artikel ist mein persönlicher Leitfaden – eine Orientierung für den Einstieg. Er ersetzt <strong>nicht</strong> die offizielle Dokumentation. Wenn du wirklich flashen willst, lies unbedingt die Anleitung auf der offiziellen Seite.
-      </p>
-      <p>
-        👉 <a href="https://grapheneos.org/install/web" target="_blank" rel="noopener">Zum offiziellen Web-Installer</a>
-      </p>
+      <p>Dieser Artikel ist mein persönlicher Leitfaden. Er ersetzt <strong>nicht</strong> die offizielle Dokumentation.</p>
+      <p>👉 <a href="https://grapheneos.org/install/web" target="_blank">Zum offiziellen Web-Installer</a></p>
     </div>
 
     <h2>🎬 Video-Anleitung: Schritt für Schritt</h2>
     <div class="video-container">
-      <iframe 
-        width="560" 
-        height="315" 
-        src="https://www.youtube.com/embed/64eV2ih23fk" 
-        title="GrapheneOS Anleitung" 
-        frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-        allowfullscreen>
-      </iframe>
-      <p><em>In diesem Video zeigt dir mein Bordtechniker, wie du dein Pixel in einen digitalen Bunker verwandelst.</em></p>
+      <iframe src="https://www.youtube.com/embed/64eV2ih23fk" allowfullscreen></iframe>
     </div>
+    <p style="text-align: center; font-size: 0.9em; color: #bbb;"><em>Video auf Deutsch: Mein technisches Briefing zum digitalen Bunker-Phone.</em></p>
 
-    <h2>🔐 Was ist GrapheneOS – und für wen lohnt es sich?</h2>
-    <p>
-      GrapheneOS ist ein freies, sicherheitsoptimiertes Betriebssystem für aktuelle Google-Pixel-Geräte. Es baut auf Android/Open Source auf, entfernt aber Google-Tracking, härtet das System und gibt dir deutlich mehr Kontrolle.
-    </p>
-    <ul>
-      <li>Kein vorinstalliertes Google-Konto, keine erzwungenen Services.</li>
-      <li>Stark gehärtete Sandbox und Speichersicherheit.</li>
-      <li>Option, Google-Dienste später isoliert (sandboxed) zu installieren.</li>
-    </ul>
-
-    <h2>⚠️ Bevor du startest: Risiken & Klartext</h2>
-    <p>Bevor du den Bootloader öffnest:</p>
-    <ul>
-      <li><strong>Garantieverlust:</strong> Oft erlischt die Herstellergarantie.</li>
-      <li><strong>Datenverlust:</strong> Dein Gerät wird komplett gelöscht. Ohne Backup sind die Daten weg.</li>
-      <li><strong>Eigenverantwortung:</strong> Du trägst das Risiko, wenn etwas schiefgeht.</li>
-    </ul>
+    <h2>🔐 Was ist GrapheneOS?</h2>
+    <p>GrapheneOS ist ein gehärtetes Betriebssystem für Google Pixel-Geräte, das auf Privatsphäre und Sicherheit optimiert wurde.</p>
 
     <h2>🧰 Voraussetzungen</h2>
     <ul>
       <li>Ein unterstütztes <strong>Google Pixel</strong>.</li>
-      <li>PC/Laptop mit installierten <a href="https://developer.android.com/tools/releases/platform-tools?hl=de" target="_blank">Android Platform Tools</a>.</li>
+      <li>PC/Laptop mit installierten <a href="https://developer.android.com/tools/releases/platform-tools?hl=de" target="_blank">Android Platform Tools</a> für die Kommunikation.</li>
       <li>Ein zuverlässiges <strong>Original-USB-C-Kabel</strong>.</li>
       <li>Einen Chromium-basierten Browser (z.B. Brave, Chromium).</li>
     </ul>
 
     <h2>1. Vorbereitung auf dem Pixel</h2>
     <ol>
-      <li><strong>Entwickleroptionen:</strong> Einstellungen → Über das Telefon → 7x auf „Build-Nummer“ tippen.</li>
-      <li><strong>OEM-Entsperrung:</strong> Einstellungen → System → Entwickleroptionen → „OEM-Entsperrung“ aktivieren.</li>
-      <li><strong>USB-Debugging:</strong> Optional für bessere Erkennung aktivieren.</li>
+      <li><strong>Entwickleroptionen aktivieren:</strong> Einstellungen → Über das Telefon → 7x auf „Build-Nummer“ tippen.</li>
+      <li><strong>OEM-Entsperrung zulassen:</strong> Einstellungen → System → Entwickleroptionen → „OEM-Entsperrung“ aktivieren.</li>
+      <li><strong>USB-Debugging aktivieren:</strong> Optional für die Erkennung in den Entwickleroptionen einschalten.</li>
     </ol>
 
-    <h2>2. Fastboot-Modus</h2>
+    <h2>2. Ab in den Fastboot-Modus</h2>
     <ul>
-      <li>Schalte das Pixel aus.</li>
-      <li>Verbinde es mit dem PC.</li>
-      <li>Halte <strong>Power</strong> und <strong>Leiser (Volume Down)</strong> gleichzeitig gedrückt, bis der Fastboot Mode erscheint.</li>
+      <li>Schalte das Pixel komplett aus.</li>
+      <li>Verbinde es per Kabel mit dem PC.</li>
+      <li>Halte <strong>Power</strong> und <strong>Leiser (Volume Down)</strong> gleichzeitig gedrückt, bis der technische Fastboot-Screen erscheint.</li>
     </ul>
 
-    <h2>3. Installation (Web-Installer)</h2>
-    <p>Folge am PC dem <a href="https://grapheneos.org/install/web" target="_blank">Web-Installer</a>:</p>
-    <ul>
-      <li><strong>Unlock:</strong> Klicke auf „Unlock Bootloader“, bestätige am Handy mit den Tasten.</li>
-      <li><strong>Flash:</strong> Klicke auf „Download Release“ und dann „Flash Release“. Nicht anfassen währenddessen!</li>
-      <li><strong>Lock:</strong> Klicke auf „Lock Bootloader“, bestätige am Handy. Der Status muss wieder <code>locked</code> sein.</li>
-    </ul>
+    <h2>3. Installation mit dem Web-Installer</h2>
+    <p>Öffne den <a href="https://grapheneos.org/install/web" target="_blank">Web-Installer</a> und folge diesen Schritten:</p>
+    <h3>A) Unlock Bootloader</h3>
+    <p>Klicke im Browser auf „Unlock Bootloader“. Bestätige am Handy mit den Lautstärketasten („Unlock the bootloader“) und der Power-Taste.</p>
+    <h3>B) Download & Flash</h3>
+    <p>Klicke auf „Download Release“. Sobald fertig, klicke auf „Flash Release“. Das Handy startet mehrfach neu – <strong>Kabel nicht ziehen!</strong></p>
+    <h3>C) Bootloader schließen (Lock)</h3>
+    <p>Klicke auf „Lock Bootloader“. Wähle am Handy mit den Tasten die Option zum Sperren aus. Das ist essenziell für die Sicherheit!</p>
 
     <h2>4. Start & Verifizierung</h2>
-    <p>
-      Der gelbe Warnhinweis beim Start ist normal. Vergleiche die angezeigte ID mit dem <strong>„Verified boot key hash“</strong> auf der GrapheneOS-Website.
-    </p>
+    <p>Vergleiche beim ersten Start die angezeigte ID mit dem <strong>„Verified boot key hash“</strong> auf der GrapheneOS-Website, um sicherzugehen, dass das System sauber ist.</p>
 
-    <blockquote>
-      „Vertrauen ist gut, Kontrolle ist besser. Dein System ist erst dann sicher, wenn der Bootloader wieder geschlossen ist.“ 👽
-    </blockquote>
-
-    <div class="box">
-  <h3>🧰 Tools für echte Eigentümer</h3>
-  <p style="font-size:0.95em;">Wenn du Aktien und Bitcoin eigenverantwortlich halten willst:</p>
-  <ul>
-    <li>💥 <strong>21bitcoin:</strong> Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges sats stapeln (Code <strong>ALIENINVESTOR</strong> nutzen).<br>👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a></li>
-    
-    <li>₿ <strong>BitBox:</strong> Hardware-Wallet für die sichere Selbstverwahrung deiner Bitcoin (Code <strong>ALIENINVESTOR</strong> nutzen).<br>👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a></li>
-    
-    <li>🛡️ <strong>Proton:</strong> Schweizer Rundum-Schutz für E-Mail, VPN und Cloud – datensparsam und sicher.<br>👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a></li>
-  </ul>
-  <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">Hinweis: Bei diesen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit, ohne dass es dich mehr kostet. Danke! 👽</p>
-</div>
+    <div class="box" style="border-style: dashed; border-color: #333;">
+      <h3>📚 Ressourcen & Quellen</h3>
+      <p style="font-size:0.95em; color: #ccc;">
+        👉 <a href="https://grapheneos.org/install/web" target="_blank">GrapheneOS Web-Installer</a><br>
+        👉 <a href="https://developer.android.com/tools/releases/platform-tools?hl=de" target="_blank">Android Plattform Tools</a><br>
+        👉 <a href="https://grapheneos.org/donate" target="_blank">Spendenlink an GrapheneOS</a><br>
+        👉 <a href="https://alien-investor.org/grapheneos-installation.html">Blog-Artikel zum Nachlesen</a>
+      </p>
+    </div>
 
     <div class="box">
       <h3>🧰 Tools für echte Eigentümer</h3>
       <p style="font-size:0.95em;">Wenn du Aktien und Bitcoin eigenverantwortlich halten willst:</p>
       <ul>
-        <li>💥 <strong>21bitcoin:</strong> Bitcoin-only App aus Europa (Code <strong>ALIENINVESTOR</strong>). 👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">Link</a></li>
-        <li>₿ <strong>BitBox:</strong> Hardware-Wallet für die Selbstverwahrung (Code <strong>ALIENINVESTOR</strong>). 👉 <a href="https://alien-investor.org/bitbox" target="_blank">Link</a></li>
-        <li>🛡️ <strong>Proton:</strong> Schweizer Privacy-Schutz für Mail & VPN. 👉 <a href="https://alien-investor.org/proton" target="_blank">Link</a></li>
+        <li>💥 <strong>21bitcoin:</strong> Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges sats stapeln (Code <strong>ALIENINVESTOR</strong> nutzen).<br>👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a></li>
+        <li>₿ <strong>BitBox:</strong> Hardware-Wallet für die sichere Selbstverwahrung deiner Bitcoin (Code <strong>ALIENINVESTOR</strong> nutzen).<br>👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a></li>
+        <li>🛡️ <strong>Proton:</strong> Schweizer Rundum-Schutz für E-Mail, VPN und Cloud – datensparsam und sicher.<br>👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a></li>
       </ul>
       <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">Hinweis: Affiliate-Links. Supporte meine Arbeit ohne Mehrkosten. Danke! 👽</p>
     </div>
@@ -163,42 +118,23 @@
   <div class="like-button">
     <button id="likeButton">👍 Gefällt mir</button> <span id="likeCount">0</span> <span style="color:#bbb; font-size: 0.9em;">(Lokal)</span>
   </div>
-  
-  <script>
-    (function(){
-      const k=window.location.pathname+"-likes";
-      const b=document.getElementById('likeButton');
-      const s=document.getElementById('likeCount');
-      let c=parseInt(localStorage.getItem(k)||"0",10);
-      s.textContent=c;
-      b.addEventListener('click',function(){
-        c++;
-        s.textContent=c;
-        localStorage.setItem(k,String(c));
-        b.disabled=true;
-        b.textContent="Danke! 👽";
-        b.style.borderColor="#444";
-        b.style.color="#888";
-      });
-    })();
-  </script>
+  <script>(function(){const k=window.location.pathname+"-likes";const b=document.getElementById('likeButton');const s=document.getElementById('likeCount');let c=parseInt(localStorage.getItem(k)||"0",10);s.textContent=c;b.addEventListener('click',function(){c++;s.textContent=c;localStorage.setItem(k,String(c));b.disabled=true;b.textContent="Danke! 👽";b.style.borderColor="#444";b.style.color="#888";});})();</script>
 
   <div class="back-links">
     <a href="blog.html" style="font-size: 1.1em;">⬅ Zurück zur Blog-Übersicht</a>
     <a href="index.html" style="font-size: 1.1em;">⬅ Zurück zur Zentrale</a>
   </div>
-
   <hr style="border-color: #222; margin: 3em 0;">
   
   <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
       <h3 style="margin-bottom: 15px;">🔋 Energie aufladen <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span></h3>
       <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">Treibstoff für das Mutterschiff senden</a>
-      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸</p>
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">Danke für deine Unterstützung! 👽🛸</p>
   </div>
 
   <footer>
     <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
-    <p style="margin-top: 20px;">👽 <strong>Haftungsausschluss:</strong><br><br>Keine Finanz-, Steuer- oder Rechtsberatung. Die Installation von GrapheneOS erfolgt auf eigene Gefahr.</p>
+    <p style="margin-top: 20px;">👽 <strong>Haftungsausschluss:</strong><br><br>Keine Beratung. Die Installation erfolgt auf eigene Gefahr.</p>
   </footer>
 </body>
 </html>
