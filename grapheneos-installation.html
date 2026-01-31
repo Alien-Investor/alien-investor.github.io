@@ -16,8 +16,30 @@
     .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
     blockquote { border-left: 3px solid #00ffcc; margin: 2em 0; padding: 0.5em 1em; color: #ddd; background: #050505; font-style: italic; }
     .box { border: 1px solid #00ffcc; background: #050505; padding: 1.5em; border-radius: 8px; margin: 2em 0; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
-    .recommendation-box { margin: 2em 0; padding: 1em; border: 1px dashed #00ffcc; border-radius: 8px; text-align: center; background-color: #050505; }
-    .recommendation-box h3 { margin-top: 0; font-size: 1.1em; color: #00ffcc; }
+    
+    /* ZENTRIERTER VIDEO CONTAINER */
+    .video-wrapper {
+      display: flex;
+      justify-content: center;
+      margin: 2em 0;
+    }
+    .video-container { 
+      position: relative; 
+      width: 100%; 
+      max-width: 560px; /* Standard Youtube Breite */
+      padding-bottom: 31.25%; /* Behält Proportionen bei max-width */
+      height: 0; 
+      border: 1px solid #00ffcc; 
+      border-radius: 8px; 
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(0, 255, 204, 0.1);
+    }
+    /* Korrektur für Responsive-Verhalten bei 16:9 */
+    @media (max-width: 600px) {
+      .video-container { padding-bottom: 56.25%; }
+    }
+    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
     .like-button { margin: 3em 0; display: flex; align-items: center; justify-content: center; gap: 1em; font-size: 1em; }
     .like-button button { background: #000; color: #00ffcc; border: 1px solid #00ffcc; padding: 0.6em 1.2em; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.2s ease; }
     .like-button button:hover, .like-button button:active { background: #00ffcc; color: #000; box-shadow: 0 0 15px #00ffcc; }
@@ -53,20 +75,20 @@
       </p>
     </div>
 
-    <div class="video-container">
-  <iframe 
-    src="https://www.youtube.com/embed/64eV2ih23fk" 
-    title="GrapheneOS Installation Guide" 
-    frameborder="0" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-    referrerpolicy="strict-origin-when-cross-origin" 
-    allowfullscreen>
-  </iframe>
-</div>
-<p style="text-align: center; font-size: 0.9em; color: #bbb; margin-top: -1em;">
-  <em>In diesem Video zeigt dir mein Bordtechniker, wie du dein Pixel in einen digitalen Bunker verwandelst. (Video auf Deutsch)</em>
-</p>
-
+    <div class="video-wrapper">
+      <div class="video-container">
+        <iframe 
+          src="https://www.youtube.com/embed/64eV2ih23fk" 
+          title="GrapheneOS Installation Guide" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          referrerpolicy="strict-origin-when-cross-origin" 
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+    <p style="text-align: center; font-size: 0.9em; color: #bbb; margin-top: -1em;">
+      <em>In diesem Video zeigt dir mein Bordtechniker, wie du dein Pixel in einen digitalen Bunker verwandelst. (Video auf Deutsch)</em>
+    </p>
 
     <h2>🔐 Was ist GrapheneOS – und für wen lohnt es sich?</h2>
     <p>
@@ -174,7 +196,7 @@
       <li>Bestätige mit der <strong>Power-Taste</strong>.</li>
     </ol>
     <p>
-      Auf dem Bildschirm sollte jetzt in grüner Schrift stehen:<br>
+      Auf dem Bildschirm sollte jetzt in grüner Schrift stehen:<br><br>
       <code>Device State: locked (<span style="color:#ff3333;">unlockable</span>)</code>.
     </p>
 
@@ -184,7 +206,7 @@
       (neben dem Punkt "Start" im Display-Menü).
     </p>
     <p>
-      Beim Hochfahren siehst du einen gelben Warnhinweis:<br>
+      Beim Hochfahren siehst du einen gelben Warnhinweis:<br><br>
       <em>„Your device is loading a different operating system.“</em>
     </p>
     <p>
@@ -209,31 +231,30 @@
     </p>
 
     <div class="box" style="border-style: dashed; border-color: #00ffcc;">
-  <h3>📚 Ressourcen & Quellen</h3>
-  <p style="font-size:0.95em; color: #ccc;">
-    👉 Zum offiziellen GrapheneOS Web-Installer:<br>
-    <a href="https://grapheneos.org/install/web" target="_blank">https://grapheneos.org/install/web</a><br><br>
-    👉 Android Plattform Tools (für die Kommunikation):<br>
-    <a href="https://developer.android.com/tools/releases/platform-tools?hl=de" target="_blank">https://developer.android.com/tools/releases/platform-tools?hl=de</a><br><br>
-    👉 Unterstütze das Projekt – Spendenlink an GrapheneOS:<br>
-    <a href="https://grapheneos.org/donate" target="_blank">https://grapheneos.org/donate</a><br><br>
-    👉 Mein ausführlicher Blog-Artikel zum Nachlesen:<br>
-    <a href="https://alien-investor.org/grapheneos-installation.html">https://alien-investor.org/grapheneos-installation.html</a>
-  </p>
-</div>
+      <h3>📚 Ressourcen & Quellen</h3>
+      <p style="font-size:0.95em; color: #ccc;">
+        👉 Zum offiziellen GrapheneOS Web-Installer:<br><br>
+        <a href="https://grapheneos.org/install/web" target="_blank">https://grapheneos.org/install/web</a><br><br>
+        👉 Android Plattform Tools (für die Kommunikation):<br><br>
+        <a href="https://developer.android.com/tools/releases/platform-tools?hl=de" target="_blank">https://developer.android.com/tools/releases/platform-tools?hl=de</a><br><br>
+        👉 Unterstütze das Projekt – Spendenlink an GrapheneOS:<br><br>
+        <a href="https://grapheneos.org/donate" target="_blank">https://grapheneos.org/donate</a><br><br>
+        👉 Mein ausführlicher Blog-Artikel zum Nachlesen:<br><br>
+        <a href="https://alien-investor.org/grapheneos-installation.html">https://alien-investor.org/grapheneos-installation.html</a>
+      </p>
+    </div>
 
     <div class="box">
-  <h3>🧰 Tools für echte Eigentümer</h3>
-  <p style="font-size:0.95em;">Wenn du Aktien und Bitcoin eigenverantwortlich halten willst:</p>
-  <ul>
-    <li>💥 <strong>21bitcoin:</strong> Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges sats stapeln (Code <strong>ALIENINVESTOR</strong> nutzen).<br>👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a></li>
-    
-    <li>₿ <strong>BitBox:</strong> Hardware-Wallet für die sichere Selbstverwahrung deiner Bitcoin (Code <strong>ALIENINVESTOR</strong> nutzen).<br>👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a></li>
-    
-    <li>🛡️ <strong>Proton:</strong> Schweizer Rundum-Schutz für E-Mail, VPN und Cloud – datensparsam und sicher.<br>👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a></li>
-  </ul>
-  <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">Hinweis: Bei diesen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit, ohne dass es dich mehr kostet. Danke! 👽</p>
-</div>
+      <h3>🧰 Tools für echte Eigentümer</h3>
+      <p style="font-size:0.95em;">Wenn du Aktien und Bitcoin eigenverantwortlich halten willst:</p>
+      <ul>
+        <li>💥 <strong>21bitcoin:</strong> Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges sats stapeln (Code <strong>ALIENINVESTOR</strong> nutzen).<br>👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a></li>
+        <li>₿ <strong>BitBox:</strong> Hardware-Wallet für die sichere Selbstverwahrung deiner Bitcoin (Code <strong>ALIENINVESTOR</strong> nutzen).<br>👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a></li>
+        <li>🛡️ <strong>Proton:</strong> Schweizer Rundum-Schutz für E-Mail, VPN und Cloud – datensparsam und sicher.<br>👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a></li>
+      </ul>
+      <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">Hinweis: Bei diesen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit, ohne dass es dich mehr kostet. Danke! 👽</p>
+    </div>
+  </article>
 
   <div class="like-button">
     <button id="likeButton">👍 Gefällt mir</button> <span id="likeCount">0</span> <span style="color:#bbb; font-size: 0.9em;">(Lokal)</span>
