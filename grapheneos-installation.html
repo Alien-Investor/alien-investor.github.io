@@ -16,9 +16,8 @@
     .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
     blockquote { border-left: 3px solid #00ffcc; margin: 2em 0; padding: 0.5em 1em; color: #ddd; background: #050505; font-style: italic; }
     .box { border: 1px solid #00ffcc; background: #050505; padding: 1.5em; border-radius: 8px; margin: 2em 0; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
-    .box h3 { margin-top: 0; }
-    .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; border: 1px solid #00ffcc; border-radius: 8px; margin: 2em 0; }
-    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    .recommendation-box { margin: 2em 0; padding: 1em; border: 1px dashed #00ffcc; border-radius: 8px; text-align: center; background-color: #050505; }
+    .recommendation-box h3 { margin-top: 0; font-size: 1.1em; color: #00ffcc; }
     .like-button { margin: 3em 0; display: flex; align-items: center; justify-content: center; gap: 1em; font-size: 1em; }
     .like-button button { background: #000; color: #00ffcc; border: 1px solid #00ffcc; padding: 0.6em 1.2em; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.2s ease; }
     .like-button button:hover, .like-button button:active { background: #00ffcc; color: #000; box-shadow: 0 0 15px #00ffcc; }
@@ -29,12 +28,11 @@
   </style>
 </head>
 <body>
-
   <div class="top-nav"><a href="index.html">⬅ Zurück zur Zentrale</a></div>
-
+  
   <h1>📱 GrapheneOS installieren – mehr Kontrolle über dein Smartphone</h1>
   <p class="byline"><em>von Alien Investor</em></p>
-
+  
   <article id="content">
     <p>
       Wenn du das hier liest, hast du wahrscheinlich genug von Datensammelei, vorinstallierten Google-Diensten
@@ -50,14 +48,10 @@
         Er ersetzt <strong>nicht</strong> die offizielle Dokumentation. Wenn du wirklich flashen willst,
         lies unbedingt die Anleitung auf der offiziellen Seite.
       </p>
-      <p>👉 <a href="https://grapheneos.org/install/web" target="_blank" rel="noopener">Zum offiziellen Web-Installer</a></p>
+      <p>
+        👉 <a href="https://grapheneos.org/install/web" target="_blank" rel="noopener">Zum offiziellen Web-Installer</a>
+      </p>
     </div>
-
-    <h2>🎬 Video-Anleitung: Schritt für Schritt</h2>
-    <div class="video-container">
-      <iframe src="https://www.youtube.com/embed/64eV2ih23fk" allowfullscreen></iframe>
-    </div>
-    <p style="text-align: center; font-size: 0.9em; color: #bbb;"><em>Video auf Deutsch: Mein technisches Briefing zum digitalen Bunker-Phone.</em></p>
 
     <h2>🔐 Was ist GrapheneOS – und für wen lohnt es sich?</h2>
     <p>
@@ -72,7 +66,9 @@
     </ul>
 
     <h2>⚠️ Bevor du startest: Risiken & Klartext</h2>
-    <p>Bevor du den Bootloader öffnest:</p>
+    <p>
+      Bevor du den Bootloader öffnest:
+    </p>
     <ul>
       <li><strong>Garantieverlust:</strong> Oft erlischt die Herstellergarantie.</li>
       <li><strong>Datenverlust:</strong> Dein Gerät wird komplett gelöscht. Ohne Backup sind die Daten weg.</li>
@@ -82,13 +78,15 @@
     <h2>🧰 Voraussetzungen</h2>
     <ul>
       <li>Ein unterstütztes <strong>Google Pixel</strong>.</li>
-      <li>PC/Laptop (Windows, macOS, Linux) mit installierten <a href="https://developer.android.com/tools/releases/platform-tools?hl=de" target="_blank">Android Platform Tools</a> für die Kommunikation.</li>
+      <li>PC/Laptop (Windows, macOS, Linux) mit installierten <a href="https://developer.android.com/tools/releases/platform-tools?hl=de" target="_blank">Android Platform Tools</a>, um die Kommunikation mit dem Pixel zu gewährleisten.</li>
       <li>Ein zuverlässiges <strong>Original-USB-C-Kabel</strong>.</li>
       <li>Einen Chromium-basierten Browser (z.B. Brave, Chromium, Vanadium).</li>
     </ul>
 
     <h2>1. Vorbereitung auf dem Pixel (Settings)</h2>
-    <p>Bevor wir Kabel stecken, musst du das Pixel softwareseitig vorbereiten:</p>
+    <p>
+      Bevor wir Kabel stecken, musst du das Pixel softwareseitig vorbereiten:
+    </p>
     <ol>
       <li><strong>Entwickleroptionen aktivieren:</strong> Einstellungen → Über das Telefon → 7x auf „Build-Nummer“ tippen.</li>
       <li><strong>OEM-Entsperrung zulassen:</strong> Zurück zu Einstellungen → System → Entwickleroptionen. Schalter bei „OEM-Entsperrung“ aktivieren. (Ohne das geht nichts!)</li>
@@ -96,7 +94,9 @@
     </ol>
 
     <h2>2. Ab in den Fastboot-Modus</h2>
-    <p>Jetzt wird es ernst. Damit der Installer Zugriff hat, muss das Handy in den Bootloader-Modus:</p>
+    <p>
+      Jetzt wird es ernst. Damit der Installer Zugriff hat, muss das Handy in den Bootloader-Modus:
+    </p>
     <ul>
       <li>Schalte das Pixel komplett <strong>aus</strong>.</li>
       <li>Verbinde es mit dem Original-Kabel an deinen PC/Laptop.</li>
@@ -105,11 +105,19 @@
     </ul>
 
     <h2>3. Installation mit dem Web-Installer</h2>
-    <p>Öffne nun am PC den <a href="https://grapheneos.org/install/web" target="_blank">offiziellen Web-Installer</a>. Folge den Anweisungen auf dem Bildschirm strikt. Hier ist der Ablauf im Detail:</p>
+    <p>
+      Öffne nun am PC den <a href="https://grapheneos.org/install/web" target="_blank">offiziellen Web-Installer</a>.
+      Folge den Anweisungen auf dem Bildschirm strikt. Hier ist der Ablauf im Detail:
+    </p>
 
     <h3>A) Verbindung & Unlock</h3>
-    <p>Klicke im Browser auf den blauen Button <strong>„Unlock Bootloader“</strong>.</p>
-    <p>Daraufhin öffnet sich meist das Auswahl-Fenster für USB-Geräte: Wähle hier dein Pixel aus (z.B. "Pixel 8") und klicke auf "Verbinden".</p>
+    <p>
+      Klicke im Browser auf den blauen Button <strong>„Unlock Bootloader“</strong>.
+    </p>
+    <p>
+      Daraufhin öffnet sich meist das Auswahl-Fenster für USB-Geräte:
+      Wähle hier dein Pixel aus (z.B. "Pixel 8") und klicke auf "Verbinden".
+    </p>
     <ul>
       <li>Das Handy zeigt jetzt einen Warnbildschirm.</li>
       <li>Nutze die <strong>Lautstärke-Tasten</strong> (Lauter/Leiser), um den Menüpunkt zum Entsperren auszuwählen ("Unlock the bootloader").</li>
@@ -117,53 +125,81 @@
     </ul>
 
     <h3>B) Download & Flash</h3>
-    <p>Jetzt klickst du im Browser auf <strong>„Download Release“</strong>. Das System lädt das Image herunter.</p>
+    <p>
+      Jetzt klickst du im Browser auf <strong>„Download Release“</strong>. Das System lädt das Image herunter.
+    </p>
     
     <div class="box" style="border-color: #ff3333;">
       <h3>🛠️ Troubleshooting-Tipp</h3>
-      <p>Falls du eine Fehlermeldung wie <code>Error: storage quota has been exceeded</code> bekommst, ist dein Browser-Speicher voll.</p>
-      <p><strong>Lösung:</strong> Installiere dir einen sauberen Chromium-Browser (ohne Extensions) nur für diesen Zweck.<br><br>
-      ⚠️ <strong>Wichtig:</strong> Nutze <strong>keinen Inkognito-Modus</strong>! Dieser begrenzt den temporären Speicher so stark, dass der Download fast immer fehlschlägt.</p>
+      <p>
+        Falls du eine Fehlermeldung wie <code>Error: storage quota has been exceeded</code> bekommst, ist dein Browser-Speicher voll.
+      </p>
+      <p>
+        <strong>Lösung:</strong> Installiere dir einen sauberen Chromium-Browser (ohne Extensions) nur für diesen Zweck.<br><br>
+        ⚠️ <strong>Wichtig:</strong> Nutze <strong>keinen Inkognito-Modus</strong>! Dieser begrenzt den temporären Speicher so stark,
+        dass der Download des großen Image-Files fast immer fehlschlägt.
+      </p>
     </div>
 
-    <p>Ist der Download fertig? Dann klicke auf <strong>„Flash Release“</strong>.</p>
-    <p><strong>Nicht wundern:</strong> Das Telefon wird während dieses Prozesses mehrmals neu starten. Das ist völlig normal. Fass nichts an, bis der Browser sagt, dass er fertig ist (Ladebalken voll).</p>
+    <p>
+      Ist der Download fertig? Dann klicke auf <strong>„Flash Release“</strong>.
+    </p>
+    <p>
+      <strong>Nicht wundern:</strong> Das Telefon wird während dieses Prozesses mehrmals neu starten.
+      Das ist völlig normal. Fass nichts an, bis der Browser sagt, dass er fertig ist (Ladebalken voll).
+    </p>
 
     <h3>C) Den Bootloader wieder schließen (Lock)</h3>
-    <p>Dieser Schritt ist essenziell für die Sicherheit!</p>
+    <p>
+      Dieser Schritt ist essenziell für die Sicherheit!
+    </p>
     <ol>
       <li>Klicke im Browser auf <strong>„Lock Bootloader“</strong>.</li>
       <li>Auf dem Handy erscheint wieder ein Menü. Nutze die <strong>Lautstärke-Tasten</strong>, um die Option zum Schließen (Lock) auszuwählen.</li>
       <li>Bestätige mit der <strong>Power-Taste</strong>.</li>
     </ol>
-    <p>Auf dem Bildschirm sollte jetzt in grüner Schrift stehen:<br><code>Device State: locked (<span style="color:#ff3333;">unlockable</span>)</code>.</p>
+    <p>
+      Auf dem Bildschirm sollte jetzt in grüner Schrift stehen:<br>
+      <code>Device State: locked (<span style="color:#ff3333;">unlockable</span>)</code>.
+    </p>
 
     <h2>4. Der erste Start & Verifizierung</h2>
-    <p>Wenn "Locked" angezeigt wird, kannst du das Telefon starten. Drücke dazu die <strong>Power-Taste</strong> (neben dem Punkt "Start" im Display-Menü).</p>
-    <p>Beim Hochfahren siehst du einen gelben Warnhinweis: <em>„Your device is loading a different operating system.“</em></p>
-    <p>Das ist <strong>normal</strong> und wird ab jetzt immer so sein – es zeigt dir, dass nicht mehr das Google-Android läuft.</p>
+    <p>
+      Wenn "Locked" angezeigt wird, kannst du das Telefon starten. Drücke dazu die <strong>Power-Taste</strong>
+      (neben dem Punkt "Start" im Display-Menü).
+    </p>
+    <p>
+      Beim Hochfahren siehst du einen gelben Warnhinweis:<br>
+      <em>„Your device is loading a different operating system.“</em>
+    </p>
+    <p>
+      Das ist <strong>normal</strong> und wird ab jetzt immer so sein – es zeigt dir, dass nicht mehr das Google-Android läuft.
+    </p>
     
     <blockquote style="border-color: #00ffcc;">
       <strong>Vertrauen ist gut, Kontrolle ist besser:</strong><br><br>
       Auf diesem Warnbildschirm wird auch eine ID angezeigt. Vergleiche diese ID mit dem Abschnitt
-      <strong>„Verified boot key hash“</strong> auf der GrapheneOS-Website.
+      <strong>„Verified boot key hash“</strong> auf der GrapheneOS-Website, auf der wir auch die Installation gemacht haben (scrolle dort runter zu deinem Modell).
       Wenn die Hashes übereinstimmen: Glückwunsch, dein System ist sauber und sicher installiert! 👽
     </blockquote>
 
     <h2>5. Leben mit GrapheneOS</h2>
-    <p>Dein Pixel ist jetzt gehärtet. Du hast keinen Play Store (ab Werk), dafür volle Kontrolle. Apps installierst du über F-Droid, Aurora Store oder du nutzt die GrapheneOS-eigenen "Sandboxed Google Play" Dienste.</p>
+    <p>
+      Dein Pixel ist jetzt gehärtet. Du hast keinen Play Store (ab Werk), dafür volle Kontrolle.
+      Apps installierst du über F-Droid, Aurora Store oder du nutzt die GrapheneOS-eigenen "Sandboxed Google Play" Dienste,
+      falls du Push-Benachrichtigungen oder Maps zwingend brauchst.
+    </p>
+    <p>
+      Willkommen auf der anderen Seite.
+    </p>
 
     <div class="box" style="border-style: dashed; border-color: #333;">
-      <h3>📚 Ressourcen & Quellen</h3>
+      <h3>📚 Quellen (Auswahl)</h3>
       <p style="font-size:0.95em; color: #ccc;">
-        👉 Zum offiziellen GrapheneOS Web-Installer:<br>
-        <a href="https://grapheneos.org/install/web" target="_blank">https://grapheneos.org/install/web</a><br><br>
-        👉 Android Plattform Tools (für die Kommunikation):<br>
-        <a href="https://developer.android.com/tools/releases/platform-tools?hl=de" target="_blank">https://developer.android.com/tools/releases/platform-tools?hl=de</a><br><br>
-        👉 Unterstütze das Projekt – Spendenlink an GrapheneOS:<br>
-        <a href="https://grapheneos.org/donate" target="_blank">https://grapheneos.org/donate</a><br><br>
-        👉 Mein ausführlicher Blog-Artikel zum Nachlesen:<br>
-        <a href="https://alien-investor.org/grapheneos-installation.html">https://alien-investor.org/grapheneos-installation.html</a>
+        👉 <a href="https://grapheneos.org/install/web" target="_blank">Offizieller GrapheneOS Web-Installer</a><br>
+        👉 <a href="https://developer.android.com/tools/releases/platform-tools?hl=de" target="_blank">Android Plattform Tools (Kommunikation)</a><br>
+        👉 <a href="https://grapheneos.org/donate" target="_blank">GrapheneOS unterstützen (Spenden)</a><br>
+        👉 <a href="https://alien-investor.org/grapheneos-installation.html">Blog-Artikel zum Nachlesen</a>
       </p>
     </div>
 
@@ -171,9 +207,9 @@
       <h3>🧰 Tools für echte Eigentümer</h3>
       <p style="font-size:0.95em;">Wenn du Aktien und Bitcoin eigenverantwortlich halten willst:</p>
       <ul>
-        <li>💥 <strong>21bitcoin:</strong> Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges sats stapeln (Code <strong>ALIENINVESTOR</strong> nutzen).<br>👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a></li>
-        <li>₿ <strong>BitBox:</strong> Hardware-Wallet für die sichere Selbstverwahrung deiner Bitcoin (Code <strong>ALIENINVESTOR</strong> nutzen).<br>👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a></li>
-        <li>🛡️ <strong>Proton:</strong> Schweizer Rundum-Schutz für E-Mail, VPN und Cloud – datensparsam und sicher.<br>👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a></li>
+        <li>💥 <strong>21bitcoin:</strong> Bitcoin-only App (Code ALIENINVESTOR). 👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">Link</a></li>
+        <li>₿ <strong>BitBox:</strong> Hardware-Wallet (Code ALIENINVESTOR). 👉 <a href="https://alien-investor.org/bitbox" target="_blank">Link</a></li>
+        <li>🛡️ <strong>Proton:</strong> Privacy & Mail (VPN/Cloud). 👉 <a href="https://alien-investor.org/proton" target="_blank">Link</a></li>
       </ul>
       <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">Hinweis: Affiliate-Links. Supporte meine Arbeit ohne Mehrkosten. Danke! 👽</p>
     </div>
@@ -193,12 +229,12 @@
   <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
       <h3 style="margin-bottom: 15px;">🔋 Energie aufladen <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span></h3>
       <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">Treibstoff für das Mutterschiff senden</a>
-      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">Danke für deine Unterstützung! 👽🛸</p>
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸</p>
   </div>
 
   <footer>
     <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
-    <p style="margin-top: 20px;">👽 <strong>Haftungsausschluss:</strong><br><br>Keine Beratung. Die Installation erfolgt auf eigene Gefahr.</p>
+    <p style="margin-top: 20px;">👽 <strong>Haftungsausschluss:</strong><br><br>Keine Finanz-, Steuer- oder Rechtsberatung. Nur persönliche Meinung. Die Installation erfolgt auf eigene Gefahr.</p>
   </footer>
 </body>
 </html>
