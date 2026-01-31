@@ -6,35 +6,164 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="GrapheneOS im Überblick: Was es ist, wie es deine Privatsphäre schützt, welche Sicherheitsfunktionen es bietet und warum das Projekt unabhängige Spenden braucht.">
   <style>
-    body { background-color: #000; color: #fff; font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 0 15px 20px 15px; }
-    h1, h2, h3 { color: #00ffcc; }
-    h1 { margin-top: 40px; text-align: center; }
-    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
-    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
-    code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; font-family: monospace; }
-    em { color: #ccc; }
-    .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
-    blockquote { border-left: 3px solid #00ffcc; margin: 2em 0; padding: 0.5em 1em; color: #ddd; background: #050505; font-style: italic; }
-    .box { border: 1px solid #00ffcc; background: #050505; padding: 1.5em; border-radius: 8px; margin: 2em 0; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
-    .recommendation-box { margin: 2em 0; padding: 1em; border: 1px dashed #00ffcc; border-radius: 8px; text-align: center; background-color: #050505; }
-    .recommendation-box h3 { margin-top: 0; font-size: 1.1em; color: #00ffcc; }
-
-    /* ZENTRIERTER VIDEO CONTAINER */
-    .video-wrapper { display: flex; justify-content: center; margin: 2em 0; }
-    .video-container { 
-      position: relative; width: 100%; max-width: 560px; padding-bottom: 31.25%; height: 0; 
-      border: 1px solid #00ffcc; border-radius: 8px; overflow: hidden; box-shadow: 0 0 15px rgba(0, 255, 204, 0.1);
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 0 15px 20px 15px; /* Mobile-Optimierung */
     }
-    @media (max-width: 600px) { .video-container { padding-bottom: 56.25%; } }
+
+    /* --- TYPOGRAFIE --- */
+    h1, h2, h3 {
+      color: #00ffcc;
+    }
+    h1 {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    /* --- LINKS (Neon-Glow) --- */
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc; /* Der Alien-Effekt */
+    }
+
+    /* --- STANDARD ELEMENTE --- */
+    code {
+      background-color: #111;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      color: #0f0;
+      font-family: monospace;
+    }
+    em { color: #ccc; }
+
+    .byline {
+      margin-top: -0.8em;
+      margin-bottom: 2em;
+      color: #ccc;
+      font-style: italic;
+      text-align: center;
+    }
+
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
+
+    /* --- BOXEN --- */
+    .box {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 1em; }
+
+    .recommendation-box {
+      margin: 2em 0;
+      padding: 1em;
+      border: 1px dashed #00ffcc;
+      border-radius: 8px;
+      text-align: center;
+      background-color: #050505;
+    }
+    .recommendation-box h3 {
+      margin-top: 0;
+      font-size: 1.1em;
+      color: #00ffcc;
+    }
+
+    /* --- VIDEO INTEGRATION (NEU) --- */
+    .video-wrapper {
+      display: flex;
+      justify-content: center;
+      margin: 2em 0;
+    }
+    .video-container { 
+      position: relative; 
+      width: 100%; 
+      max-width: 560px; 
+      padding-bottom: 31.25%; 
+      height: 0; 
+      border: 1px solid #00ffcc; 
+      border-radius: 8px; 
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(0, 255, 204, 0.1);
+    }
+    @media (max-width: 600px) {
+      .video-container { padding-bottom: 56.25%; }
+    }
     .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
-    .like-button { margin: 3em 0; display: flex; align-items: center; justify-content: center; gap: 1em; font-size: 1em; }
-    .like-button button { background: #000; color: #00ffcc; border: 1px solid #00ffcc; padding: 0.6em 1.2em; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.2s ease; }
-    .like-button button:hover, .like-button button:active { background: #00ffcc; color: #000; box-shadow: 0 0 15px #00ffcc; }
-    .like-button button:disabled { border-color: #444; color: #888; background: #111; cursor: default; }
-    .top-nav { padding: 10px 0; font-size: 0.9em; }
-    .back-links { margin-top: 40px; text-align: center; display: flex; flex-direction: column; gap: 10px; }
-    footer { margin-top: 60px; padding: 20px; font-size: 0.85em; color: #666; border-top: 1px solid #222; text-align: center; }
+    /* --- LIKE BUTTON --- */
+    .like-button {
+      margin: 3em 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+    }
+    .like-button button {
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+    .like-button button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
+    }
+
+    /* --- NAVIGATION --- */
+    .top-nav {
+      padding: 10px 0;
+      font-size: 0.9em;
+    }
+    .back-links {
+      margin-top: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -79,14 +208,16 @@
     <p>
       GrapheneOS ist ein freies, quelloffenes Betriebssystem auf Basis von Android (AOSP), das speziell
       auf <strong>Sicherheit und Privatsphäre</strong> optimiert wurde. Es läuft aktuell ausschließlich
-      auf <strong>Google Pixel</strong>-Smartphones, weil diese moderne Sicherheits-Hardware mitbringen und der Bootloader entsperrt werden kann.
+      auf <strong>Google Pixel</strong>-Smartphones, weil diese moderne Sicherheits-Hardware (Titan-M-Chip,
+      Verified Boot, aktuelle Firmware) mitbringen und der Bootloader entsperrt werden kann.
     </p>
+    <p>Wichtig:</p>
     <ul>
       <li>Keine vorinstallierten Google-Apps oder Google-Dienste.</li>
       <li>Stark gehärtetes System unter der Haube (Kernel, Speicher, Systembibliotheken).</li>
       <li>Extrem feingranulare Kontrolle über App-Berechtigungen (Netzwerk, Speicher, Kontakte, Sensoren).</li>
       <li>Optionale, <strong>eingesandete</strong> Google-Dienste, falls du sie unbedingt brauchst.</li>
-      <li>Finanziert über Spenden, entwickelt als Non-Profit-Projekt.</li>
+      <li>Finanziert über Spenden, entwickelt als Non-Profit-Projekt – keine Datenverwertung, keine Werbung.</li>
     </ul>
 
     <blockquote>
@@ -94,15 +225,224 @@
       wenig Schnickschnack, viel Substanz – und ein klares Ziel: dein Gerät gegen Angriffe zu härten.“
     </blockquote>
 
-    <h2>🔒 Härtung unter der Haube</h2>
+    <h2>🔒 Härtung unter der Haube – wie GrapheneOS dein Gerät schützt</h2>
+
+    <h3>Gehärteter Kernel & Speicher</h3>
     <p>
-      GrapheneOS legt viel Arbeit in Bereiche, die du nie siehst, aber spürst: Gehärteter Kernel, speziell abgesicherte Speicherallokation und Exploit-Mitigation machen es Angreifern extrem schwer, Schwachstellen auszunutzen. Durch <strong>Verified Boot</strong> wird zudem sichergestellt, dass beim Start nur originaler, unveränderter Code ausgeführt wird.
+      GrapheneOS legt viel Arbeit in Bereiche, die du nie siehst, aber in jeder Sekunde spürst:
+    </p>
+    <ul>
+      <li>
+        <strong>Gehärteter Kernel:</strong> Der Linux-Kernel wird mit zusätzlichen Schutzmechanismen
+        kompiliert und restriktiver konfiguriert. Das reduziert Angriffsfläche und erschwert Exploits.
+      </li>
+      <li>
+        <strong>Gehärtete Standardbibliothek (libc) &amp; hardened_malloc:</strong>
+        Fehler in Speichermanagement und C-Bibliotheken sind ein klassischer Angriffsvektor.
+        GrapheneOS nutzt einen speziell gehärteten Speicher-Allocator, der Speicherfehler
+        schneller aufdeckt und Exploit-Ketten erschwert.
+      </li>
+      <li>
+        <strong>Exploit-Mitigation:</strong> Dinge wie Address Space Layout Randomization (ASLR),
+        Stack Canaries, strenge Compiler-Flags und schnelle Speicherbereinigung („memory wiping“)
+        sollen selbst 0-Day-Exploits deutlich schwerer machen.
+      </li>
+    </ul>
+
+    <h3>Verified Boot & Manipulationsschutz</h3>
+    <p>
+      Wie beim Stock-Pixel prüft auch GrapheneOS beim Start, ob der Systemzustand unverändert ist
+      (<strong>Verified Boot</strong>). Nur: das Projekt nutzt diese Basis sehr konsequent.
+    </p>
+    <ul>
+      <li>
+        Es wird nur von GrapheneOS signierter Code ausgeführt – Rootkits oder manipulierte Systemimages
+        fliegen auf.
+      </li>
+      <li>
+        Updates erfolgen als <strong>A/B-Updates</strong> im Hintergrund. Wenn etwas schiefgeht,
+        kann auf die vorherige, funktionierende Partition zurückgerollt werden.
+      </li>
+      <li>
+        Sicherheitsupdates werden extrem schnell eingespielt – oft gleichauf oder sogar schneller als Google.
+      </li>
+    </ul>
+
+    <h3>Minimierte Angriffsfläche im Alltag</h3>
+    <p>
+      Eine große Stärke von GrapheneOS: viele Funktionen, die sonst heimlich „offen“ sind, werden
+      vorsorglich zugemacht – ohne dir das Gerät unbrauchbar zu machen.
+    </p>
+    <ul>
+      <li>USB ist im gesperrten Zustand komplett tot – kein Datenzugriff, keine „Forensik“ per Kabel.</li>
+      <li>NFC/Bluetooth sind nicht permanent aktiv, sondern werden restriktiver gehandhabt.</li>
+      <li>Debugging-Schnittstellen und unnötige Systemdienste sind standardmäßig deaktiviert.</li>
+    </ul>
+    <p>
+      Das ist wie ein Bitcoin-Setup ohne offenen Remote-Access: weniger Bequemlichkeit für Angreifer,
+      kaum Einbußen für dich.
     </p>
 
-    <h2>🕵️‍♂️ Privatsphäre by Design</h2>
+    <h2>🔐 Gerätesperre: PIN-Scrambling, Duress-Passwort & lange Passwörter</h2>
     <p>
-      GrapheneOS gibt dir die volle Kontrolle zurück. Mit dem <strong>Netzwerk-Schalter</strong> kannst du jeder App einzeln das Internet entziehen. <strong>Storage Scopes</strong> erlauben es dir, Apps nur Zugriff auf spezifische Ordner zu gewähren, statt auf deinen gesamten Speicher.
+      GrapheneOS hat die Sperrbildschirm-Logik deutlich weitergedacht als Standard-Android. Besonders spannend:
     </p>
+    <ul>
+      <li>
+        <strong>PIN-Scrambling:</strong> Die Ziffern auf dem PIN-Pad werden bei jedem Entsperren neu gemischt.
+        Shoulder-Surfer und Kameras können so viel schwerer Muster erkennen.
+      </li>
+      <li>
+        <strong>Duress-Passwort:</strong> Du kannst ein spezielles „Notfall-Passwort“ setzen. Gibst du es ein,
+        werden deine Daten gelöscht, statt das Gerät zu entsperren – etwa, wenn du unter Zwang bist.
+      </li>
+      <li>
+        <strong>Lange Passwörter:</strong> GrapheneOS erlaubt absurd lange Passwörter (64+ Zeichen) und
+        kombiniert Fingerabdruck optional mit zusätzlicher PIN. Brute-Force wird damit praktisch sinnlos.
+      </li>
+    </ul>
+    <p>
+      Für alle, die Bitcoin- oder persönliche Daten auf dem Gerät haben, ist das ein massives Upgrade.
+    </p>
+
+    <h2>🕵️‍♂️ Privatsphäre by Design – wie GrapheneOS deine Daten schützt</h2>
+
+    <h3>Kein Google out-of-the-box</h3>
+    <p>
+      Ein frisches GrapheneOS-Gerät sieht aus wie ein „nacktes“ Android:
+    </p>
+    <ul>
+      <li>Kein Gmail, kein Google Maps, kein YouTube, kein Google-Konto-Zwang.</li>
+      <li>Keine dauerhafte Telemetrie an Google-Server.</li>
+      <li>Kein Hintergrund-Tracking durch vorinstallierte Big-Tech-Apps.</li>
+    </ul>
+    <p>
+      Du entscheidest, <em>ob</em> du Google-Dienste hinzufügen willst – nicht umgekehrt.
+    </p>
+
+    <h3>Feingranulare App-Berechtigungen</h3>
+    <p>
+      GrapheneOS gibt dir Schalter, die sich viele Nutzer seit Jahren wünschen:
+    </p>
+    <ul>
+      <li>
+        <strong>Netzwerk-Schalter pro App:</strong> Du kannst Apps das Internet komplett entziehen,
+        z. B. für Offline-Games oder PDF-Reader, die nichts „nach Hause telefonieren“ sollen.
+      </li>
+      <li>
+        <strong>Sensor-Schalter:</strong> Mikrofon, Kamera, Bewegungssensoren – pro App steuerbar.
+      </li>
+      <li>
+        <strong>Storage Scopes:</strong> Du kannst einer App nur einen bestimmten Ordner als „Welt“ geben.
+        Die App glaubt, sie sieht alles – in Wahrheit sieht sie nur, was du dem Scope zuweist.
+      </li>
+      <li>
+        <strong>Contact Scopes:</strong> Apps bekommen ein leeres oder minimales Adressbuch, statt dein
+        komplettes soziales Netzwerk auszulesen.
+      </li>
+    </ul>
+    <p>
+      In der Praxis heißt das: Banking-App sieht nur das Nötigste, Messenger können nicht in deine Fotos
+      wühlen, und Notizen-Apps brauchen kein Internet.
+    </p>
+
+    <h3>Netzwerk- & Standort-Datenschutz</h3>
+    <p>
+      GrapheneOS schließt zusätzlich viele Datenschutz-Lücken, die in Standard-Android offen sind:
+    </p>
+    <ul>
+      <li>
+        <strong>Randomisierte MAC-Adresse:</strong> Bei jeder WLAN-Verbindung eine neue MAC – Tracking über
+        Hotspots wird erschwert.
+      </li>
+      <li>
+        <strong>Minimierte Standortdaten:</strong> Kein automatisches Bewegungsprofil, keine dauerhafte
+        Speicherung von Standort-Historien durch das System.
+      </li>
+      <li>
+        <strong>Blockieren von Identifier-Leaks:</strong> Eindeutige Gerätekennungen werden versteckt oder
+        unnötigen Apps vorenthalten.
+      </li>
+    </ul>
+
+    <h2>📦 Apps & Alltag: Kann man damit „normal“ leben?</h2>
+    <p>
+      Die wichtigste Frage: Kommt man mit GrapheneOS im Alltag klar – oder ist das nur etwas für Nerds
+      im Bunker?
+    </p>
+
+    <h3>App-Kompatibilität</h3>
+    <p>
+      GrapheneOS basiert auf aktuellem AOSP. Das heißt:
+    </p>
+    <ul>
+      <li>Normale Android-Apps (APKs) laufen in der Regel problemlos.</li>
+      <li>Du kannst App-Stores wie <strong>F-Droid</strong>, <strong>Aurora Store</strong> oder eigene Repos nutzen.</li>
+      <li>Messenger (Signal, Threema, Telegram), Browser, Maps-Alternativen, Banking-Apps – vieles funktioniert.</li>
+    </ul>
+    <p>
+      Ein Vorteil: Du kannst Apps aus mehreren Quellen kombinieren und so ein Setup bauen, das
+      wirklich zu deinem Threat-Model passt.
+    </p>
+
+    <h3>Sandboxed Google Play – wenn du es wirklich brauchst</h3>
+    <p>
+      Viele Apps setzen Google Play Services voraus. GrapheneOS hat dafür eine saubere Lösung:
+      <strong>Sandboxed Google Play</strong>.
+    </p>
+    <ul>
+      <li>Originale Google-Play-Dienste laufen als normale App – ohne tiefe Systemrechte.</li>
+      <li>Sie sitzen in derselben Sandbox wie jede andere App.</li>
+      <li>Push-Notifications &amp; einige Google-abhängige Apps funktionieren trotzdem.</li>
+    </ul>
+    <p>
+      Einschränkung: Apps, die ein „zertifiziertes“ Gerät erwarten (SafetyNet / Play Integrity),
+      z. B. Google Pay oder manche Banken, können trotzdem streiken. Hier musst du abwägen:
+      Sicherheit &amp; Unabhängigkeit vs. maximaler Komfort.
+    </p>
+
+    <h2>🏛 Projekt, Finanzierung & politische Dimension</h2>
+    <p>
+      GrapheneOS ist kein Start-up, das versucht, dich später über Werbung oder Daten zu monetarisieren.
+      Hinter dem Projekt steht eine <strong>Non-Profit-Organisation</strong> (GrapheneOS Foundation) in Kanada.
+    </p>
+    <ul>
+      <li>
+        <strong>Open Source:</strong> Code öffentlich einsehbar, diskutiert und überprüfbar.
+      </li>
+      <li>
+        <strong>Spendenfinanziert:</strong> Nutzer und Unterstützer halten das Projekt am Laufen – nicht
+        Werbekunden oder Staaten.
+      </li>
+      <li>
+        <strong>Upstream-Beiträge:</strong> Viele Sicherheitsverbesserungen fließen zurück ins allgemeine
+        Android-Ökosystem und verbessern damit auch Geräte, die nie GrapheneOS sehen.
+      </li>
+    </ul>
+    <p>
+      In einer Zeit, in der Staaten immer wieder versuchen, Verschlüsselung zu schwächen und Hintertüren
+      zu legitimieren, sind Projekte wie GrapheneOS ein Stachel im Fleisch der Kontrollfantasien –
+      und genau deshalb so wichtig.
+    </p>
+
+    <h2>👤 Für wen lohnt sich GrapheneOS – und für wen nicht?</h2>
+    <p>
+      GrapheneOS ist kein „Klick, klick, alles wie vorher“-System. Es lohnt sich besonders, wenn:
+    </p>
+    <ul>
+      <li>du <strong>Bitcoin</strong> oder andere Werte auf deinem Smartphone verwaltest,</li>
+      <li>du viel mit sensiblen Kontakten (Journalisten, Aktivisten, Mandanten, Patienten, etc.) arbeitest,</li>
+      <li>du generell kein Fan davon bist, dein Leben an Google, Meta &amp; Co. auszuliefern,</li>
+      <li>du bereit bist, ein bisschen Zeit in Einrichtung, Backup und App-Strategie zu investieren.</li>
+    </ul>
+    <p>
+      Weniger geeignet ist GrapheneOS, wenn:
+    </p>
+    <ul>
+      <li>du unbedingt Google Pay, alle offiziellen Banking-Apps und maximalen Komfort out-of-the-box willst,</li>
+      <li>du keine Lust hast, dich überhaupt mit Sicherheit und Bedrohungsmodellen zu beschäftigen,</li>
+      <li>du mit einem vom Hersteller vollintegrierten Ökosystem komplett glücklich bist.</li>
+    </ul>
 
     <h2>✅ Fazit: Dein Smartphone kann mehr als nur Daten verschenken</h2>
     <p>
@@ -115,37 +455,117 @@
       unabhängiges Smartphone-Betriebssystem in dein Setup – genau wie
       <strong>Selbstverwahrung bei Bitcoin</strong> und <strong>echtes Eigentum bei Aktien</strong>.
     </p>
+    <p>
+      Projekte wie GrapheneOS brauchen uns alle – nicht nur als Nutzer, sondern auch als
+      Unterstützer. Staaten und Konzerne haben riesige Budgets, unabhängige Sicherheitsprojekte
+      haben nur eins: eine Community, die versteht, was auf dem Spiel steht.
+    </p>
+
+    <div class="recommendation-box">
+      <h3>💚 Spende für GrapheneOS – damit unabhängige Sicherheit überlebt</h3>
+      <p>
+        GrapheneOS ist ein Forschungs- und Sicherheitsprojekt, das dich nicht mit Werbung zuspammt,
+        deine Daten nicht verkauft und keine Hintertüren einbaut. Genau deshalb ist es auf
+        <strong>Spenden</strong> angewiesen.
+      </p>
+      <ul style="text-align: left;">
+        <li>
+          🌐 Offizielle Projektseite: <a href="https://grapheneos.org" target="_blank" rel="noopener">grapheneos.org</a>
+        </li>
+        <li>
+          💸 Spenden &amp; Unterstützung: <a href="https://grapheneos.org/donate" target="_blank" rel="noopener">grapheneos.org/donate</a>
+        </li>
+      </ul>
+      <p style="font-size:0.9em; color:#ccc;">
+        <em>Hinweis:</em> Spende direkt an GrapheneOS – nicht an mich. So landet das Geld genau bei denen,
+        die täglich an deiner mobilen Sicherheit arbeiten.
+      </p>
+    </div>
 
     <div class="box">
-      <h3>🧰 Tools für echte Eigentümer</h3>
-      <p style="font-size:0.95em;">Wenn du Aktien und Bitcoin eigenverantwortlich halten willst:</p>
+      <h3>🧰 Tools für echte Eigentümer (Werbung/Affiliate)</h3>
+      <p style="font-size:0.95em;">
+        Wenn du Aktien und Bitcoin möglichst eigenverantwortlich halten willst, nutze nicht nur dein Bankdepot:
+      </p>
       <ul>
-        <li>🇨🇭 <strong>Swissquote:</strong> Namensaktien in der Schweiz. 👉 <a href="https://alien-investor.org/swissquote" target="_blank">https://alien-investor.org/swissquote</a></li>
-        <li>📊 <strong>Interactive Brokers:</strong> Internationaler Marktzugang. 👉 <a href="https://alien-investor.org/interactive-brokers" target="_blank">https://alien-investor.org/interactive-brokers</a></li>
-        <li>💥 <strong>21bitcoin:</strong> Bitcoin-only App (Code <strong>ALIENINVESTOR</strong> nutzen). 👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a></li>
-        <li>₿ <strong>BitBox:</strong> Hardware-Wallet für die Selbstverwahrung (Code <strong>ALIENINVESTOR</strong> nutzen). 👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a></li>
-        <li>🛡️ <strong>Proton:</strong> Privacy-Schutz für Mail, VPN und Cloud. 👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a></li>
+        <li>
+          🇨🇭 <strong>Investieren mit Swissquote:</strong><br>
+          Ich nutze Swissquote in der Schweiz – dort kannst du saubere Namensaktien halten und hast keine
+          deutsche Bank dazwischen.<br>
+          👉 <a href="https://alien-investor.org/swissquote" target="_blank">https://alien-investor.org/swissquote</a>
+        </li>
+        <li>
+          📊 <strong>US-Aktien über IBKR:</strong><br>
+          Für viele internationale Titel bietet sich Interactive Brokers als Zugang an – insbesondere in Kombination
+          mit DRS/Transfer Agenten.<br>
+          👉 <a href="https://alien-investor.org/interactive-brokers" target="_blank">https://alien-investor.org/interactive-brokers</a>
+        </li>
+        <li>
+          💥 <strong>Bitcoin kaufen in Europa – 21bitcoin:</strong><br>
+          Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges sats stapeln – ohne Shitcoins.<br>
+          Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du dauerhaft 0,2&nbsp;Prozentpunkte Gebührenreduktion
+          auf Sofort- und Sparplankäufe.<br>
+          👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
+        </li>
+        <li>
+          ₿ <strong>Bitcoin in Selbstverwahrung:</strong><br>
+          Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox – es gibt die klassische BitBox02 und die neue
+          BitBox für iPhone (Nova).<br>
+          👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
+        </li>
+        <li>
+          🛡️ <strong>Privacy &amp; Mail:</strong><br>
+          Für E-Mail, VPN und Cloud nutze ich Proton – datensparsam und ohne Big-Tech-Abhängigkeit.<br>
+          👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
+        </li>
       </ul>
-      <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">Hinweis: Affiliate-Links. Supporte meine Arbeit ohne Mehrkosten. Danke! 👽</p>
+      <p style="font-size:0.85em; color:#aaa;">
+        Hinweis: Bei einigen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit,
+        ohne dass es dich mehr kostet. Danke! 👽
+      </p>
     </div>
+
   </article>
 
   <div class="box" style="border-style: dashed; border-color: #333;">
-    <h3>📚 Ressourcen & weiterführende Links</h3>
+    <h3>📚 Quellen & weiterführende Links</h3>
     <ul style="padding-left: 1.2em;">
-      <li>Offizielle Projektseite: <a href="https://grapheneos.org" target="_blank">grapheneos.org</a></li>
-      <li>Features-Übersicht: <a href="https://grapheneos.org/features" target="_blank">grapheneos.org/features</a></li>
-      <li>Dokumentation & Installation: <a href="https://grapheneos.org/install" target="_blank">grapheneos.org/install</a></li>
+      <li>Offizielle Projektseite: <a href="https://grapheneos.org" target="_blank" rel="noopener">grapheneos.org</a></li>
+      <li>Features-Übersicht: <a href="https://grapheneos.org/features" target="_blank" rel="noopener">grapheneos.org/features</a></li>
+      <li>Dokumentation &amp; Installation: <a href="https://grapheneos.org/install" target="_blank" rel="noopener">grapheneos.org/install</a></li>
     </ul>
     <p style="font-size:0.9em; color:#ccc;">
-      Basierend auf technischen Analysen und der offiziellen Dokumentation von <a href="https://grapheneos.org" target="_blank">GrapheneOS</a>.
+      Viele der genannten Punkte wurden aus technischen Analysen, Tests und der offiziellen GrapheneOS-Dokumentation
+      zusammengetragen und für diesen Artikel zusammengefasst.
     </p>
   </div>
 
   <div class="like-button">
-    <button id="likeButton">👍 Gefällt mir</button> <span id="likeCount">0</span> <span style="color:#bbb; font-size: 0.9em;">(Lokal)</span>
+    <button id="likeButton">👍 Gefällt mir</button>
+    <span id="likeCount">0</span>
+    <span style="color:#bbb; font-size: 0.9em;">(Lokal)</span>
   </div>
-  <script>(function(){const k=window.location.pathname+"-likes";const b=document.getElementById('likeButton');const s=document.getElementById('likeCount');let c=parseInt(localStorage.getItem(k)||"0",10);s.textContent=c;b.addEventListener('click',function(){c++;s.textContent=c;localStorage.setItem(k,String(c));b.disabled=true;b.textContent="Danke! 👽";b.style.borderColor="#444";b.style.color="#888";});})();</script>
+
+  <script>
+    (function() {
+      const storageKey = window.location.pathname + "-likes";
+      const btn = document.getElementById('likeButton');
+      const span = document.getElementById('likeCount');
+
+      let count = parseInt(localStorage.getItem(storageKey) || "0", 10);
+      span.textContent = count;
+
+      btn.addEventListener('click', function() {
+        count += 1;
+        span.textContent = count;
+        localStorage.setItem(storageKey, String(count));
+        btn.disabled = true;
+        btn.textContent = "Danke! 👽";
+        btn.style.borderColor = "#444";
+        btn.style.color = "#888";
+      });
+    })();
+  </script>
 
   <div class="back-links">
     <a href="blog.html" style="font-size: 1.1em;">⬅ Zurück zur Blog-Übersicht</a>
@@ -155,14 +575,30 @@
   <hr style="border-color: #222; margin: 3em 0;">
 
   <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
-      <h3 style="margin-bottom: 15px;">🔋 Energie aufladen <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span></h3>
-      <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">Treibstoff für das Mutterschiff senden</a>
-      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸</p>
+      <h3 style="margin-bottom: 15px;">
+        🔋 Energie aufladen
+        <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
+      </h3>
+      
+      <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+        Treibstoff für das Mutterschiff senden
+      </a>
+      
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸
+      </p>
   </div>
 
   <footer>
     <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
-    <p style="margin-top: 20px;">👽 <strong>Haftungsausschluss:</strong><br><br>Keine Finanz-, Steuer- oder Rechtsberatung. Nur persönliche Meinung. Denke selbst.</p>
+    
+    <p style="margin-top: 20px;">
+      👽 <strong>Haftungsausschluss:</strong><br><br>
+      Dieser Artikel stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
+      Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
+      Technische Änderungen und rechtliche Rahmenbedingungen können sich ändern, prüfe dein Setup immer selbst.
+    </p>
   </footer>
+
 </body>
 </html>
