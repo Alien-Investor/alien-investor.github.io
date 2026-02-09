@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>App Stores unter GrapheneOS – wem du vertrauen solltest (und wem nicht) | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Welchen App Stores kann man unter GrapheneOS vertrauen? Analyse zu Accrescent, Obtainium, F-Droid und Aurora Store. Sicherheit, Signaturen und Hierarchie.">
+  <style>
+    body { background-color: #000; color: #fff; font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 0 15px 20px 15px; }
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+    code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; font-family: monospace; }
+    em { color: #ccc; }
+    .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
+    blockquote { border-left: 3px solid #00ffcc; margin: 2em 0; padding: 0.5em 1em; color: #ddd; background: #050505; font-style: italic; }
+    .box { border: 1px solid #00ffcc; background: #050505; padding: 1.5em; border-radius: 8px; margin: 2em 0; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
+    .recommendation-box { margin: 2em 0; padding: 1em; border: 1px dashed #00ffcc; border-radius: 8px; text-align: center; background-color: #050505; }
+    .recommendation-box h3 { margin-top: 0; font-size: 1.1em; color: #00ffcc; }
+    .recommendation-box ul { list-style-type: none; padding: 0; text-align: left; }
+    .recommendation-box li { margin-bottom: 0.5em; padding-left: 1.5em; position: relative; }
+    .recommendation-box li::before { content: "👉"; position: absolute; left: 0; }
+    .like-button { margin: 3em 0; display: flex; align-items: center; justify-content: center; gap: 1em; font-size: 1em; }
+    .like-button button { background: #000; color: #00ffcc; border: 1px solid #00ffcc; padding: 0.6em 1.2em; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.2s ease; }
+    .like-button button:hover, .like-button button:active { background: #00ffcc; color: #000; box-shadow: 0 0 15px #00ffcc; }
+    .like-button button:disabled { border-color: #444; color: #888; background: #111; cursor: default; }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    .back-links { margin-top: 40px; text-align: center; display: flex; flex-direction: column; gap: 10px; }
+    footer { margin-top: 60px; padding: 20px; font-size: 0.85em; color: #666; border-top: 1px solid #222; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="top-nav"><a href="index.html">⬅ Zurück zur Zentrale</a></div>
+  <h1>App Stores unter GrapheneOS – wem du vertrauen solltest (und wem nicht)</h1>
+  <p class="byline"><em>von Alien Investor</em></p>
+   
+  <article id="content">
+    <h2>Ein falsches Sicherheitsgefühl</h2>
+    <p>
+      Nur weil eine App funktioniert, heißt das nicht, dass sie sauber installiert wurde.
+      Viele Nutzer konzentrieren sich bei GrapheneOS ausschließlich auf Berechtigungen. Das ist wichtig – aber unvollständig. Die Quelle einer App ist mindestens genauso entscheidend wie die Frage, auf welche Sensoren oder Daten sie zugreifen darf.
+      Eine App ist nicht einfach nur eine App.
+    </p>
+    <ul>
+      <li>Die Quelle bestimmt, wer sie gebaut hat</li>
+      <li>Die Signatur bestimmt, wer Updates ausliefern darf</li>
+      <li>Die Update-Kette bestimmt, ob Manipulation überhaupt auffallen würde</li>
+    </ul>
+    <p>
+      Signaturen und Prüfsummen sind kein Nerdkram. Sie sind die Basis jedes ernsthaften Sicherheitsmodells.
+    </p>
+
+    <h2>Wie App-Vertrauen unter GrapheneOS entsteht</h2>
+    <p>
+      GrapheneOS folgt einem einfachen, aber strengen Prinzip:
+      Die App-Signatur ist die Identität des Entwicklers.
+    </p>
+    <ul>
+      <li>Jede App wird mit einem kryptografischen Schlüssel signiert</li>
+      <li>Jedes Update muss exakt dieselbe Signatur tragen</li>
+      <li>Ändert sich die Signatur, gilt das Update als fremd</li>
+    </ul>
+    <p>
+      Wird diese Kette gebrochen, gibt es nur zwei Möglichkeiten:
+    </p>
+    <ol>
+      <li>Der Entwickler hat den Schlüssel verloren</li>
+      <li>Oder jemand anderes liefert plötzlich Code aus</li>
+    </ol>
+    <p>
+      Beides ist aus Sicherheitssicht ein Problem.
+      Diese Logik ist die Grundlage dafür, warum manche App Stores unter GrapheneOS sinnvoll sind – und andere nicht.
+    </p>
+
+    <h2>Die empfohlene Store-Hierarchie unter GrapheneOS</h2>
+    
+    <h3>1. GrapheneOS App Store – der sichere Standard</h3>
+    <p>
+      Der GrapheneOS App Store ist die erste und wichtigste Anlaufstelle. Er ist auf GrapheneOS standardmäßig vorinstalliert und heißt auf dem Gerät schlicht „App Store“.
+    </p>
+    <p>Warum?</p>
+    <ul>
+      <li>Systemnah integriert</li>
+      <li>Minimaler Funktionsumfang</li>
+      <li>Verifizierte Builds</li>
+      <li>Keine Tracker</li>
+      <li>Kein Account</li>
+      <li>Keine versteckten Abhängigkeiten</li>
+    </ul>
+    <p>
+      Alles, was hier angeboten wird, ist bewusst ausgewählt und sicher eingebunden.
+    </p>
+    <blockquote>
+      <strong>Merksatz:</strong><br>
+      Alles, was im GrapheneOS App Store verfügbar ist, ist der sichere Standard.
+    </blockquote>
+
+    <h3>2. Accrescent – klein, aber extrem sauber</h3>
+    <p>
+      Accrescent ist vielen Nutzern unbekannt, spielt aber sicherheitstechnisch in einer eigenen Liga. Accrescent sollte direkt aus dem GrapheneOS App Store installiert werden – genau dafür ist er gedacht.
+    </p>
+    <p>Merkmale:</p>
+    <ul>
+      <li>Fokus auf reproduzierbare Builds</li>
+      <li>Strikte Signaturprüfung</li>
+      <li>Keine Zwischenhändler</li>
+      <li>Keine Massen-Distribution</li>
+    </ul>
+    <p>
+      Typisches Beispiel: App Verifier.<br>
+      Accrescent bietet nur wenige Apps an – aber genau das ist der Punkt.
+      Kein App-Zoo. Keine Spielereien. Nur überprüfbarer Code.
+    </p>
+
+    <h3>3. Obtainium – ein Werkzeug für Fortgeschrittene</h3>
+    <p>
+      Obtainium ist mächtig – und genau deshalb gefährlich, wenn man nicht weiß, was man tut. Obtainium wird nicht über klassische App Stores, sondern direkt über das offizielle GitHub-Repository des Projekts installiert.
+    </p>
+    <p>Vorteile:</p>
+    <ul>
+      <li>Direkter Bezug vom Entwickler</li>
+      <li>GitHub-, GitLab- oder Release-Feeds</li>
+      <li>Keine Store-Zwischeninstanzen</li>
+    </ul>
+    <p>Risiken:</p>
+    <ul>
+      <li>Falsche Repositories</li>
+      <li>Falsche Architektur</li>
+      <li>Fehlerhafte Release-Zuordnung</li>
+      <li>Keine automatische Plausibilitätsprüfung</li>
+    </ul>
+    <blockquote>
+      <strong>Kernaussage:</strong><br>
+      Obtainium ist ein Skalpell, kein Küchenmesser.
+      Wer es nutzt, übernimmt selbst die Verantwortung für die Quelle.
+    </blockquote>
+
+    <h3>4. F-Droid – situativ nutzbar, aber mit Einschränkungen</h3>
+    <p>
+      F-Droid wird oft pauschal als „sicher“ wahrgenommen. Das ist zu kurz gedacht.
+    </p>
+    <ul>
+      <li><strong>Ja:</strong> Open Source, Transparente Builds.</li>
+      <li><strong>Aber:</strong> Verzögerte Updates, Rebuilds durch Dritte, Teilweise andere Signaturen als beim Original-Entwickler.</li>
+    </ul>
+    <p>
+      F-Droid kann sinnvoll sein:
+    </p>
+    <ul>
+      <li>Wenn es keine bessere Quelle gibt</li>
+      <li>Für einfache, nicht sicherheitskritische Tools</li>
+    </ul>
+    <p>
+      Für sensible Anwendungen ist F-Droid jedoch nicht erste Wahl.
+    </p>
+
+    <h3>Warum der Aurora Store problematisch ist</h3>
+    <p>
+      Aurora ist bequem. Und genau das ist sein Problem.
+      Sachliche Gründe zur Vorsicht:
+    </p>
+    <ul>
+      <li>Fremde App-Signaturen</li>
+      <li>Unklare Update-Kette</li>
+      <li>Umgehung des regulären Play-Ökosystems</li>
+      <li>Kein sauberes Vertrauensmodell</li>
+    </ul>
+    <blockquote>
+      <strong>Merksatz:</strong><br>
+      Bequemlichkeit ist kein Sicherheitskonzept.
+      Wer Wert auf saubere Herkunft und überprüfbare Updates legt, sollte Aurora meiden.
+    </blockquote>
+
+    <h2>Benutzerprofile – die unterschätzte Superkraft von GrapheneOS</h2>
+    <p>
+      GrapheneOS erlaubt echte Trennung auf Betriebssystem-Ebene.
+    </p>
+    <p>
+      <strong>Mehrere Benutzerprofile</strong><br>
+      Eigenschaften:
+    </p>
+    <ul>
+      <li>Physische Trennung von Apps und Daten</li>
+      <li>Kein Zugriff zwischen Profilen</li>
+      <li>Eigene App Stores pro Profil</li>
+    </ul>
+    <p>
+      Typische Einsatzszenarien: Alltag vs. Banking, Privat vs. Arbeit, Google-frei vs. Google-isoliert.
+    </p>
+    <p>
+      <strong>App-Klonen über Profile</strong><br>
+      Dasselbe App-Paket kann:
+    </p>
+    <ul>
+      <li>In verschiedenen Profilen installiert werden</li>
+      <li>Mit unterschiedlichen Konten</li>
+      <li>Mit völlig getrennten Daten</li>
+    </ul>
+    <p>
+      Ideal für: Messenger, Social Media, Test-Accounts.
+    </p>
+
+    <h3>Arbeitsprofil mit Shelter – gezielte Isolation</h3>
+    <p>
+      Shelter ermöglicht das Anlegen eines Arbeitsprofils innerhalb eines Benutzerprofils.
+    </p>
+    <p>Wichtige Eigenschaften:</p>
+    <ul>
+      <li>Logische Trennung von Apps</li>
+      <li>Keine gegenseitige Einsicht</li>
+      <li>Benachrichtigungen funktionieren zuverlässig</li>
+    </ul>
+    <p>
+      Typischer Einsatz: Google Play Store, Google Play Services.
+    </p>
+    <p>
+      So lassen sich Google-Abhängigkeiten isolieren, ohne auf Push-Benachrichtigungen zu verzichten.
+      Wichtig: Nicht perfekt, aber massiv besser als eine ungefilterte Integration.
+    </p>
+
+    <h2>Entscheidungslogik für App-Quellen</h2>
+    <p>
+      Eine einfache mentale Checkliste:
+    </p>
+    <ul>
+      <li>Gibt es die App im GrapheneOS App Store? → nutzen</li>
+      <li>Gibt es sie in Accrescent? → nutzen</li>
+      <li>Offizielle Quelle + Obtainium? → nur bei Verständnis</li>
+      <li>Nur F-Droid verfügbar? → abwägen</li>
+      <li>Aurora nötig? → Alternativen suchen</li>
+    </ul>
+
+    <h2>Fazit</h2>
+    <p>
+      GrapheneOS zwingt niemanden zu Sicherheit.
+      Es stellt Werkzeuge bereit.
+      Ob daraus echte Sicherheit entsteht, hängt allein von den Entscheidungen des Nutzers ab.
+      Wer Kontrolle will, muss Verantwortung übernehmen.
+    </p>
+
+    <div class="recommendation-box">
+      <h3>🔎 Weiterführende Artikel</h3>
+      <p style="text-align: left; padding: 0 1em;">Hier findest du mehr Details zu den erwähnten Tools und dem System:</p>
+      <ul>
+        <li><a href="grapheneos-installation.html">Installationsanleitung GrapheneOS</a></li>
+        <li><a href="GrapheneOS-Custom.html">Eigenschaften von GrapheneOS</a></li>
+        <li><a href="Obtainium.html">Obtainium Guide</a></li>
+        <li><a href="shelter-android-guide.html">Shelter App & Arbeitsprofile</a></li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <h3>🧰 Tools für echte Eigentümer</h3>
+      <p style="font-size:0.95em;">Wenn du Aktien und Bitcoin eigenverantwortlich halten willst:</p>
+      <ul>
+        <li>💥 <strong>21bitcoin:</strong> Bitcoin-only App aus Europa (Code ALIENINVESTOR).<br>👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a></li>
+        <li>₿ <strong>BitBox:</strong> Hardware-Wallet für die sichere Selbstverwahrung (Code ALIENINVESTOR).<br>👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a></li>
+        <li>🛡️ <strong>Proton:</strong> Schweizer Rundum-Schutz für E-Mail, VPN und Cloud.<br>👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a></li>
+      </ul>
+      <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">Hinweis: Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit, ohne dass es dich mehr kostet. Danke! 👽</p>
+    </div>
+
+    <div class="box" style="border-style: dashed; border-color: #333;">
+      <h3>📚 Quellen & Links</h3>
+      <p style="font-size:0.95em; color: #ccc;">
+        Direktlinks zu den besprochenen Tools:
+      </p>
+      <ul>
+        <li><a href="https://github.com/ImranR98/Obtainium" target="_blank">Obtainium auf GitHub</a></li>
+        <li><a href="https://f-droid.org/de/packages/net.typeblog.shelter/" target="_blank">Shelter via F-Droid</a></li>
+      </ul>
+    </div>
+  </article>
+   
+  <div class="like-button">
+    <button id="likeButton">👍 Gefällt mir</button> <span id="likeCount">0</span> <span style="color:#bbb; font-size: 0.9em;">(Lokal)</span>
+  </div>
+  <script>(function(){const k=window.location.pathname+"-likes";const b=document.getElementById('likeButton');const s=document.getElementById('likeCount');let c=parseInt(localStorage.getItem(k)||"0",10);s.textContent=c;b.addEventListener('click',function(){c++;s.textContent=c;localStorage.setItem(k,String(c));b.disabled=true;b.textContent="Danke! 👽";b.style.borderColor="#444";b.style.color="#888";});})();</script>
+
+  <div class="back-links">
+    <a href="blog.html" style="font-size: 1.1em;">⬅ Zurück zur Blog-Übersicht</a>
+    <a href="index.html" style="font-size: 1.1em;">⬅ Zurück zur Zentrale</a>
+  </div>
+  <hr style="border-color: #222; margin: 3em 0;">
+   
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+      <h3 style="margin-bottom: 15px;">🔋 Energie aufladen <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span></h3>
+      <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">Treibstoff für das Mutterschiff senden</a>
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸</p>
+  </div>
+
+  <footer>
+    <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    <p style="margin-top: 20px;">👽 <strong>Haftungsausschluss:</strong><br><br>Keine Finanz-, Steuer- oder Rechtsberatung. Nur persönliche Meinung. Denke selbst.</p>
+  </footer>
+</body>
+</html>
