@@ -21,6 +21,29 @@
     .recommendation-box ul { list-style-type: none; padding: 0; text-align: left; }
     .recommendation-box li { margin-bottom: 0.5em; padding-left: 1.5em; position: relative; }
     .recommendation-box li::before { content: "👉"; position: absolute; left: 0; }
+    
+    /* ZENTRIERTER VIDEO CONTAINER */
+    .video-wrapper {
+      display: flex;
+      justify-content: center;
+      margin: 2em 0;
+    }
+    .video-container { 
+      position: relative; 
+      width: 100%; 
+      max-width: 560px; 
+      padding-bottom: 31.25%; 
+      height: 0; 
+      border: 1px solid #00ffcc; 
+      border-radius: 8px; 
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(0, 255, 204, 0.1);
+    }
+    @media (max-width: 600px) {
+      .video-container { padding-bottom: 56.25%; }
+    }
+    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
     .like-button { margin: 3em 0; display: flex; align-items: center; justify-content: center; gap: 1em; font-size: 1em; }
     .like-button button { background: #000; color: #00ffcc; border: 1px solid #00ffcc; padding: 0.6em 1.2em; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.2s ease; }
     .like-button button:hover, .like-button button:active { background: #00ffcc; color: #000; box-shadow: 0 0 15px #00ffcc; }
@@ -34,14 +57,24 @@
   <div class="top-nav"><a href="index.html">⬅ Zurück zur Zentrale</a></div>
   <h1>App Stores unter GrapheneOS – wem du vertrauen solltest (und wem nicht)</h1>
   <p class="byline"><em>von Alien Investor</em></p>
-   
+  
   <article id="content">
     <h2>Ein falsches Sicherheitsgefühl</h2>
     <p>
       Nur weil eine App funktioniert, heißt das nicht, dass sie sauber installiert wurde.
-      Viele Nutzer konzentrieren sich bei GrapheneOS ausschließlich auf Berechtigungen. Das ist wichtig – aber unvollständig. Die Quelle einer App ist mindestens genauso entscheidend wie die Frage, auf welche Sensoren oder Daten sie zugreifen darf.
+      Viele Nutzer konzentrieren sich bei GrapheneOS ausschließlich auf Berechtigungen. Das ist wichtig – aber unvollständig. Die Quelle einer App ist mindestens genauso entscheidend wie die Frage, auf welche Sensoren oder Daten sie zugreifen darf.<br>
       Eine App ist nicht einfach nur eine App.
     </p>
+
+    <div class="video-wrapper">
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/iCR53OVWlUs" title="App Stores unter GrapheneOS Guide" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </div>
+    <p style="text-align: center; font-size: 0.9em; color: #bbb; margin-top: -1em;">
+      <em>In diesem Video analysiert mein Bordtechniker die verschiedenen App-Quellen und zeigt dir die sicherste Hierarchie.</em>
+    </p>
+
     <ul>
       <li>Die Quelle bestimmt, wer sie gebaut hat</li>
       <li>Die Signatur bestimmt, wer Updates ausliefern darf</li>
@@ -53,7 +86,7 @@
 
     <h2>Wie App-Vertrauen unter GrapheneOS entsteht</h2>
     <p>
-      GrapheneOS folgt einem einfachen, aber strengen Prinzip:
+      GrapheneOS folgt einem einfachen, aber strengen Prinzip:<br>
       Die App-Signatur ist die Identität des Entwicklers.
     </p>
     <ul>
@@ -92,7 +125,7 @@
       Alles, was hier angeboten wird, ist bewusst ausgewählt und sicher eingebunden.
     </p>
     <blockquote>
-      <strong>Merksatz:</strong><br>
+      <strong>Merksatz:</strong><br><br>
       Alles, was im GrapheneOS App Store verfügbar ist, ist der sichere Standard.
     </blockquote>
 
@@ -108,7 +141,7 @@
       <li>Keine Massen-Distribution</li>
     </ul>
     <p>
-      Typisches Beispiel: App Verifier.<br>
+      Typisches Beispiel: App Verifier.<br><br>
       Accrescent bietet nur wenige Apps an – aber genau das ist der Punkt.
       Kein App-Zoo. Keine Spielereien. Nur überprüfbarer Code.
     </p>
@@ -131,8 +164,8 @@
       <li>Keine automatische Plausibilitätsprüfung</li>
     </ul>
     <blockquote>
-      <strong>Kernaussage:</strong><br>
-      Obtainium ist ein Skalpell, kein Küchenmesser.
+      <strong>Kernaussage:</strong><br><br>
+      Obtainium ist ein Skalpell, kein Küchenmesser.<br>
       Wer es nutzt, übernimmt selbst die Verantwortung für die Quelle.
     </blockquote>
 
@@ -172,8 +205,8 @@
     </blockquote>
 
     <blockquote>
-      <strong>Merksatz:</strong><br>
-      Bequemlichkeit ist kein Sicherheitskonzept.
+      <strong>Merksatz:</strong><br><br>
+      Bequemlichkeit ist kein Sicherheitskonzept.<br>
       Wer Wert auf saubere Herkunft und überprüfbare Updates legt, sollte Aurora meiden.
     </blockquote>
 
@@ -182,7 +215,7 @@
       GrapheneOS erlaubt echte Trennung auf Betriebssystem-Ebene.
     </p>
     <p>
-      <strong>Mehrere Benutzerprofile</strong><br>
+      <strong>Mehrere Benutzerprofile</strong><br><br>
       Eigenschaften:
     </p>
     <ul>
@@ -194,7 +227,7 @@
       Typische Einsatzszenarien: Alltag vs. Banking, Privat vs. Arbeit, Google-frei vs. Google-isoliert.
     </p>
     <p>
-      <strong>App-Klonen über Profile</strong><br>
+      <strong>App-Klonen über Profile</strong><br><br>
       Dasselbe App-Paket kann:
     </p>
     <ul>
@@ -217,9 +250,7 @@
       <li>Benachrichtigungen funktionieren zuverlässig</li>
     </ul>
     <p>
-      Typischer Einsatz: Google Play Store, Google Play Services.
-    </p>
-    <p>
+      Typischer Einsatz: Google Play Store, Google Play Services.<br><br>
       So lassen sich Google-Abhängigkeiten isolieren, ohne auf Push-Benachrichtigungen zu verzichten.
       Wichtig: Nicht perfekt, aber massiv besser als eine ungefilterte Integration.
     </p>
@@ -273,15 +304,14 @@
 
     <h2>Fazit</h2>
     <p>
-      GrapheneOS zwingt niemanden zu Sicherheit.
-      Es stellt Werkzeuge bereit.
-      Ob daraus echte Sicherheit entsteht, hängt allein von den Entscheidungen des Nutzers ab.
+      GrapheneOS zwingt niemanden zu Sicherheit.<br>
+      Es stellt Werkzeuge bereit.<br>
+      Ob daraus echte Sicherheit entsteht, hängt allein von den Entscheidungen des Nutzers ab.<br>
       Wer Kontrolle will, muss Verantwortung übernehmen.
     </p>
 
     <div class="recommendation-box">
       <h3>🔎 Weiterführende Artikel</h3>
-      <p style="text-align: left; padding: 0 1em;">Hier findest du mehr Details zu den erwähnten Tools und dem System:</p>
       <ul>
         <li><a href="grapheneos-installation.html">Installationsanleitung GrapheneOS</a></li>
         <li><a href="GrapheneOS-Custom.html">Eigenschaften von GrapheneOS</a></li>
@@ -289,17 +319,6 @@
         <li><a href="shelter-android-guide.html">Shelter App & Arbeitsprofile</a></li>
         <li><a href="Zapstore.html">Zap Store – Apps über Nostr</a></li>
       </ul>
-    </div>
-
-    <div class="box">
-      <h3>🧰 Tools für echte Eigentümer</h3>
-      <p style="font-size:0.95em;">Wenn du Aktien und Bitcoin eigenverantwortlich halten willst:</p>
-      <ul>
-        <li>💥 <strong>21bitcoin:</strong> Bitcoin-only App aus Europa (Code ALIENINVESTOR).<br>👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a></li>
-        <li>₿ <strong>BitBox:</strong> Hardware-Wallet für die sichere Selbstverwahrung (Code ALIENINVESTOR).<br>👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a></li>
-        <li>🛡️ <strong>Proton:</strong> Schweizer Rundum-Schutz für E-Mail, VPN und Cloud.<br>👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a></li>
-      </ul>
-      <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">Hinweis: Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit, ohne dass es dich mehr kostet. Danke! 👽</p>
     </div>
 
     <div class="box" style="border-style: dashed; border-color: #333;">
@@ -318,7 +337,7 @@
       </p>
     </div>
   </article>
-   
+
   <div class="like-button">
     <button id="likeButton">👍 Gefällt mir</button> <span id="likeCount">0</span> <span style="color:#bbb; font-size: 0.9em;">(Lokal)</span>
   </div>
