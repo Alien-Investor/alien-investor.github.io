@@ -28,6 +28,12 @@
     .top-nav { padding: 10px 0; font-size: 0.9em; }
     .back-links { margin-top: 40px; text-align: center; display: flex; flex-direction: column; gap: 10px; }
     footer { margin-top: 60px; padding: 20px; font-size: 0.85em; color: #666; border-top: 1px solid #222; text-align: center; }
+
+    /* ZENTRIERTER VIDEO CONTAINER */
+    .video-wrapper { display: flex; justify-content: center; margin: 2em 0; }
+    .video-container { position: relative; width: 100%; max-width: 560px; padding-bottom: 31.25%; height: 0; border: 1px solid #00ffcc; border-radius: 8px; overflow: hidden; box-shadow: 0 0 15px rgba(0, 255, 204, 0.1); }
+    @media (max-width: 600px) { .video-container { padding-bottom: 56.25%; } }
+    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
   </style>
 </head>
 <body>
@@ -36,6 +42,16 @@
   <p class="byline"><em>von Alien Investor</em></p>
    
   <article id="content">
+
+    <div class="video-wrapper">
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/eIZNT3XlhOI" title="GrapheneOS Sandbox Berechtigungen" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </div>
+    <p style="text-align: center; font-size: 0.9em; color: #bbb; margin-top: -1em;">
+      <em>In diesem Video zeige ich dir das Prinzip der Sandbox und wie du Berechtigungen clever setzt.</em>
+    </p>
+
     <h2>Ein falsches Sicherheitsgefühl</h2>
     <p>
       Eine App startet. Fünf Popups erscheinen. Viele Nutzer klicken reflexartig auf „Zulassen“.
@@ -65,7 +81,7 @@
     <h2>Die wichtigste Denkregel</h2>
     <blockquote>
       Die zentrale Regel für jede Berechtigung:<br><br>
-      Eine App bekommt nur das, was sie für ihre Kernfunktion zwingend braucht.<br>
+      Eine App bekommt nur das, was sie für ihre Kernfunktion zwingend braucht.<br><br>
       Alles andere ist optionaler Komfort – und genau dort entstehen die meisten Probleme.
     </blockquote>
 
@@ -87,7 +103,7 @@
 
     <h3>Standort</h3>
     <p>
-      Standortdaten gehören zu den sensibelsten Informationen.
+      Standortdaten gehören zu den sensibelsten Informationen.<br>
       <strong>Unterscheidung:</strong> Exakt / Ungefähr / Nie.
     </p>
     <p><strong>Empfehlungen:</strong></p>
@@ -138,7 +154,7 @@
 
     <h2>Google Play Services in der Sandbox</h2>
     <p>
-      Ein häufiges Missverständnis:
+      Ein häufiges Missverständnis:<br>
       Google Play Services haben unter GrapheneOS keine Sonderrechte.
     </p>
     <ul>
@@ -185,8 +201,8 @@
 
     <h2>Fazit</h2>
     <p>
-      GrapheneOS gibt dir keine Sicherheit.
-      Es gibt dir Kontrolle.
+      GrapheneOS gibt dir keine Sicherheit.<br>
+      Es gibt dir Kontrolle.<br>
       Sicherheit entsteht erst durch deine Entscheidungen.
     </p>
 
@@ -216,11 +232,11 @@
     <div class="box" style="border-style: dashed; border-color: #333;">
       <h3>📚 Quellen & Support</h3>
       <p style="font-size:0.95em; color: #ccc;">
-        Offizielle Website des Projekts:<br>
+        Offizielle Website des Projekts:<br><br>
         👉 <a href="https://grapheneos.org/" target="_blank">grapheneos.org</a>
       </p>
       <p style="font-size:0.95em; color: #ccc; margin-top: 1em;">
-        GrapheneOS ist ein Open Source Projekt, das die Freiheit der Menschen schützt und durch Spenden lebt. Unterstütze das Projekt:<br>
+        GrapheneOS ist ein Open Source Projekt, das die Freiheit der Menschen schützt und durch Spenden lebt. Unterstütze das Projekt:<br><br>
         👉 <a href="https://grapheneos.org/donate" target="_blank">grapheneos.org/donate</a>
       </p>
     </div>
