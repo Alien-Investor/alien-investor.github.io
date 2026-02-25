@@ -6,227 +6,60 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Was bedeutet Direct Registration (DRS) für dein Eigentum an US-Aktien? Einordnung von Eigentumsbegriff, Intermediärrisiken und Extremszenarien.">
   <style>
-    body {
-      background-color: #000;
-      color: #fff;
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      max-width: 800px;
-      margin: auto;
-      padding: 0 15px 20px 15px; /* Mobile-Optimierung */
-    }
-
-    /* --- TYPOGRAFIE --- */
-    h1, h2, h3 {
-      color: #00ffcc;
-    }
-    h1 {
-      margin-top: 40px;
-      text-align: center;
-    }
-
-    /* --- LINKS (Neon-Glow) --- */
-    a {
-      color: #00ffcc;
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-    a:hover {
-      color: #fff;
-      text-shadow: 0 0 8px #00ffcc; /* Der Alien-Effekt */
-    }
-
-    /* --- STANDARD ELEMENTE --- */
-    code {
-      background-color: #111;
-      padding: 0.2em 0.4em;
-      border-radius: 4px;
-      color: #0f0;
-      font-family: monospace;
-    }
+    body { background-color: #000; color: #fff; font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 0 15px 20px 15px; }
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+    code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; font-family: monospace; }
     em { color: #ccc; }
-
-    .byline {
-      margin-top: -0.8em;
-      margin-bottom: 2em;
-      color: #ccc;
-      font-style: italic;
-      text-align: center;
-    }
-
-    blockquote {
-      border-left: 3px solid #00ffcc;
-      margin: 2em 0;
-      padding: 0.5em 1em;
-      color: #ddd;
-      background: #050505;
-      font-style: italic;
-    }
-
-    /* --- BOXEN --- */
-    .box {
-      border: 1px solid #00ffcc;
-      background: #050505;
-      padding: 1.5em;
-      border-radius: 8px;
-      margin: 2em 0;
-      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
-    }
-    .box h3 { margin-top: 0; }
+    .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
+    blockquote { border-left: 3px solid #00ffcc; margin: 2em 0; padding: 0.5em 1em; color: #ddd; background: #050505; font-style: italic; }
+    .box { border: 1px solid #00ffcc; background: #050505; padding: 1.5em; border-radius: 8px; margin: 2em 0; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
     .box ul { padding-left: 1.2em; }
-    .box li { margin-bottom: 1em; }
-
-    .recommendation-box {
-      margin: 2em 0;
-      padding: 1em;
-      border: 1px dashed #00ffcc;
-      border-radius: 8px;
-      text-align: center;
-      background-color: #050505;
-    }
-    .recommendation-box h3 {
-      margin-top: 0;
-      font-size: 1.1em;
-      color: #00ffcc;
-    }
-
-    /* --- LIKE BUTTON --- */
-    .like-button {
-      margin: 3em 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1em;
-    }
-    .like-button button {
-      background: #000;
-      color: #00ffcc;
-      border: 1px solid #00ffcc;
-      padding: 0.6em 1.2em;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: all 0.2s ease;
-    }
-    .like-button button:hover {
-      background: #00ffcc;
-      color: #000;
-      box-shadow: 0 0 15px #00ffcc;
-    }
-    .like-button button:disabled {
-      border-color: #444;
-      color: #888;
-      background: #111;
-      cursor: default;
-    }
-
-    /* --- NAVIGATION --- */
-    .top-nav {
-      padding: 10px 0;
-      font-size: 0.9em;
-    }
-    .back-links {
-      margin-top: 40px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    /* --- FOOTER --- */
-    footer {
-      margin-top: 60px;
-      padding: 20px;
-      font-size: 0.85em;
-      color: #666;
-      border-top: 1px solid #222;
-      text-align: center;
-    }
+    .box li { margin-bottom: 0.5em; }
+    .recommendation-box { margin: 2em 0; padding: 1em; border: 1px dashed #00ffcc; border-radius: 8px; text-align: center; background-color: #050505; }
+    .recommendation-box h3 { margin-top: 0; font-size: 1.1em; color: #00ffcc; }
+    .like-button { margin: 3em 0; display: flex; align-items: center; justify-content: center; gap: 1em; font-size: 1em; }
+    .like-button button { background: #000; color: #00ffcc; border: 1px solid #00ffcc; padding: 0.6em 1.2em; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.2s ease; }
+    .like-button button:hover, .like-button button:active { background: #00ffcc; color: #000; box-shadow: 0 0 15px #00ffcc; }
+    .like-button button:disabled { border-color: #444; color: #888; background: #111; cursor: default; }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    .back-links { margin-top: 40px; text-align: center; display: flex; flex-direction: column; gap: 10px; }
+    footer { margin-top: 60px; padding: 20px; font-size: 0.85em; color: #666; border-top: 1px solid #222; text-align: center; }
   </style>
 </head>
 <body>
-
-  <div class="top-nav">
-    <a href="index.html">⬅ Zurück zur Zentrale</a>
-  </div>
-
+  <div class="top-nav"><a href="index.html">⬅ Zurück zur Zentrale</a></div>
+  
   <h1>DRS – echtes Eigentum oder nur Illusion? Wie sicher sind direkt registrierte US-Aktien wirklich?</h1>
   <p class="byline"><em>von Alien Investor</em></p>
-
+  
   <article id="content">
-    <p>
-      Viele Anleger hören zum ersten Mal von DRS, wenn es um „echtes Eigentum“ an US-Aktien geht.
-      Die Idee klingt verlockend: Aktien wie <strong>Alphabet</strong> oder <strong>Rollins</strong> aus dem Brokerdepot
-      herausziehen und direkt beim Transfer Agent – etwa <strong>Computershare</strong> oder <strong>Equiniti</strong> – auf den eigenen Namen eintragen lassen.
-      Aber: Was bedeutet das rechtlich wirklich? Und ist es tatsächlich sicherer als die klassische Verwahrung im Brokerdepot?
-    </p>
+    <p>Viele Anleger hören zum ersten Mal von DRS, wenn es um „echtes Eigentum“ an US-Aktien geht. Die Idee klingt verlockend: Aktien wie Alphabet oder Rollins (eines der größten Schädlingsbekämpfungsunternehmen der USA) aus dem Brokerdepot herausziehen und direkt beim Transfer Agent – etwa Computershare oder Equiniti (für ausgewählte Gesellschaften; primär ein britischer Anbieter mit US-Präsenz) – auf den eigenen Namen eintragen lassen. Aber: Was bedeutet das rechtlich wirklich? Und ist es tatsächlich sicherer als die klassische Verwahrung im Brokerdepot?</p>
 
     <h2>Registered Owner vs. Beneficial Owner – wem gehört die Aktie wirklich?</h2>
-    <p>
-      Im Standardmodell liegen US-Aktien in Sammelverwahrung: Formeller Eigentümer ist in der Regel
-      die Zentralverwahrstelle <strong>DTCC</strong> (über ihre Nominee-Gesellschaft <strong>Cede &amp; Co.</strong>),
-      dein Broker führt dich nur als <em>beneficial owner</em> – also wirtschaftlich Berechtigten.
-      Du hast Anspruch auf Dividenden und Stimmrechte, aber dein Name steht <em>nicht</em> im Aktienregister des Unternehmens.
-    </p>
-    <p>
-      Beim <strong>Direct Registration System (DRS)</strong> ist das anders:
-      Du wirst als <strong>registered owner</strong> direkt in den Büchern der Gesellschaft geführt.
-      Der Transfer Agent verwaltet dein Konto, aber die Aktien sind in deinem Namen registriert – nicht im Namen eines Nominees.
-      Offizielle Unterlagen der SEC und von Transfer Agents bestätigen, dass du damit rechtlich als
-      <strong>eingetragener Eigentümer</strong> dieser Anteile giltst.
-    </p>
-    <p>
-      Wichtig: Ein <em>beneficial owner</em> und ein <em>registered owner</em> haben wirtschaftlich ähnliche Rechte
-      (Dividenden, Bezugsrechte, wirtschaftlicher Wert derselben Aktie).
-      Der Unterschied liegt in der <strong>Rechtsebene und Kontrolle</strong>:
-      Beim DRS ist dein Anspruch direkt gegen die Gesellschaft gerichtet, beim Broker läuft alles über mehrere Intermediäre.
-    </p>
+    <p>Im Standardmodell liegen US-Aktien in Sammelverwahrung: Formeller Eigentümer ist in der Regel die Zentralverwahrstelle DTCC (über ihre Nominee-Gesellschaft Cede &amp; Co.), dein Broker führt dich nur als <em>beneficial owner</em> – also wirtschaftlich Berechtigten. Du hast Anspruch auf Dividenden und Stimmrechte, aber dein Name steht nicht im Aktienregister des Unternehmens.</p>
+    <p>Beim Direct Registration System (DRS) ist das anders: Du wirst als <em>registered owner</em> direkt in den Büchern der Gesellschaft geführt. Der Transfer Agent verwaltet dein Konto, aber die Aktien sind in deinem Namen registriert – nicht im Namen eines Nominees. Offizielle Unterlagen der SEC und von Transfer Agents bestätigen, dass du damit rechtlich als eingetragener Eigentümer dieser Anteile giltst.</p>
+    <p>Wichtig: Ein beneficial owner und ein registered owner haben wirtschaftlich ähnliche Rechte (Dividenden, Bezugsrechte, wirtschaftlicher Wert derselben Aktie). Der Unterschied liegt in der Rechtsebene und Kontrolle: Beim DRS ist dein Anspruch direkt gegen die Gesellschaft gerichtet, beim Broker läuft alles über mehrere Intermediäre.</p>
 
     <h2>Schutz vor Intermediärrisiken – was DRS wirklich bringt</h2>
-    <p>
-      Wenn du Alphabet- oder Rollins-Aktien aus deinem Brokerdepot per DRS zu Computershare oder Equiniti übertragen lässt,
-      schaltest du einige typische Risikostellen aus:
-    </p>
+    <p>Wenn du Alphabet- oder Rollins-Aktien aus deinem Brokerdepot per DRS zu Computershare übertragen lässt, schaltest du einige typische Risikostellen aus:</p>
     <ul>
       <li><strong>Broker-Insolvenz:</strong> Geht dein Broker pleite, sind DRS-Aktien nicht Teil der Broker-Insolvenzmasse, weil der Broker sie gar nicht hält.</li>
       <li><strong>Clearing-/Nominee-Risiko:</strong> Du bist nicht mehr von Cede &amp; Co. und der Sammelverwahrung abhängig, dein Eigentum ist direkt dir zugeordnet.</li>
-      <li><strong>Aktienleihe:</strong> Deine DRS-Aktien können nicht einfach vom Broker verliehen werden, weil sie nicht „in seinem Bestand“ liegen.</li>
+      <li><strong>Aktienleihe:</strong> Deine DRS-Aktien können nicht einfach vom Broker verliehen werden, weil sie nicht „in seinem Bestand“ liegen. Hinweis: Bei manchen Brokern lässt sich die Aktienleihe auch im normalen Depot deaktivieren – DRS ist aber die konsequentere und sicherere Lösung.</li>
     </ul>
-    <p>
-      Behörden wie die SEC und Selbstregulierer wie FINRA beschreiben DRS ausdrücklich als
-      <strong>Alternative zur Street-Name-Verwahrung</strong>, bei der die Vorteile elektronischer Verwahrung erhalten bleiben,
-      ohne die Risiken von physischen Urkunden oder reiner Brokerverwahrung.
-    </p>
-    <p>
-      Natürlich bleiben andere Risiken bestehen:
-      Der Emittent kann insolvent gehen, Kurse können abstürzen, die Rechtsordnung kann sich ändern.
-      DRS macht die Aktie nicht „unkaputtbar“ – es reduziert vor allem das
-      <strong>Intermediärrisiko in der Verwahrung</strong>, nicht das Marktrisiko.
-    </p>
+    <p>Behörden wie die SEC und Selbstregulierer wie FINRA beschreiben DRS ausdrücklich als Alternative zur Street-Name-Verwahrung, bei der die Vorteile elektronischer Verwahrung erhalten bleiben, ohne die Risiken von physischen Urkunden oder reiner Brokerverwahrung.</p>
+    <p>Natürlich bleiben andere Risiken bestehen: Der Emittent kann insolvent gehen, Kurse können abstürzen, die Rechtsordnung kann sich ändern. DRS macht die Aktie nicht „unkaputtbar“ – es reduziert vor allem das Intermediärrisiko in der Verwahrung, nicht das Marktrisiko.</p>
 
     <h2>Was passiert im Ernstfall? Szenarien für DRS-Aktien</h2>
     <h3>Broker-Insolvenz</h3>
-    <p>
-      Bei klassischer Brokerverwahrung greifen in den USA Schutzmechanismen wie
-      die <strong>SIPC</strong>-Sicherung – Kundentitel sind in der Praxis in den meisten Fällen geschützt,
-      müssen aber oft umgebucht oder neu zugeordnet werden.
-      Mit DRS bist du einen Schritt „weiter vorne“: Deine Alphabet- oder Rollins-Aktien stehen direkt auf deinen Namen,
-      der Broker wird einfach überflüssig. Du kannst sie später an einen neuen Broker übertragen oder über den Transfer Agent verkaufen.
-    </p>
-
+    <p>Bei klassischer Brokerverwahrung greifen in den USA Schutzmechanismen wie die SIPC-Sicherung – Kundentitel sind in der Praxis in den meisten Fällen geschützt, müssen aber oft umgebucht oder neu zugeordnet werden. Mit DRS bist du einen Schritt „weiter vorne“: Deine Alphabet- oder Rollins-Aktien stehen direkt auf deinen Namen, der Broker wird einfach überflüssig. Du kannst sie später an einen neuen Broker übertragen oder über den Transfer Agent verkaufen.</p>
+    
     <h3>Systemkrise oder Handelsaussetzungen</h3>
-    <p>
-      In einer echten Systemkrise oder bei Handelsunterbrechungen (Circuit Breaker, Market Halts) sitzen alle im selben Boot –
-      egal ob Broker- oder DRS-Verwahrung.
-      Die Börse kann den Handel aussetzen, und auch ein Transfer Agent kann keine Orders ausführen,
-      wenn der Markt geschlossen ist.
-    </p>
-    <p>
-      Dein Vorteil als DRS-Halter:
-      Im Extremfall ist <strong>klar dokumentiert</strong>, dass du der eingetragene Eigentümer bist.
-      Das kann in Streitfällen oder bei Rekonstruktion von Eigentumsverhältnissen ein starkes Argument sein,
-      weil keine mehrstufige Kette von Intermediären aufgedröselt werden muss.
-    </p>
+    <p>In einer echten Systemkrise oder bei Handelsunterbrechungen (Circuit Breaker, Market Halts) sitzen alle im selben Boot – egal ob Broker- oder DRS-Verwahrung. Die Börse kann den Handel aussetzen, und auch ein Transfer Agent kann keine Orders ausführen, wenn der Markt geschlossen ist.</p>
+    <p>Dein Vorteil als DRS-Halter: Im Extremfall ist klar dokumentiert, dass du der eingetragene Eigentümer bist. Das kann in Streitfällen oder bei Rekonstruktion von Eigentumsverhältnissen ein starkes Argument sein, weil keine mehrstufige Kette von Intermediären aufgedröselt werden muss.</p>
 
     <h2>DRS vs. Brokerverwahrung – Pro &amp; Contra im Überblick</h2>
     <h3>Vorteile von DRS</h3>
@@ -237,104 +70,37 @@
       <li><strong>Direkte Aktionärsrechte:</strong> Stimmrechtsunterlagen, Unternehmensinfos und Dividenden kommen direkt von Transfer Agent / Emittent.</li>
       <li><strong>Sicherheit ohne Papier:</strong> Kein Zertifikat, das verloren oder gestohlen werden kann, aber trotzdem „echtes“ Eigentum.</li>
     </ul>
-
+    
     <h3>Nachteile von DRS / Vorteile des Brokerdepots</h3>
     <ul>
-      <li><strong>Weniger Liquidität:</strong> Für schnellen Verkauf musst du meist zuerst zurück ins Brokerdepot übertragen
-        oder den (oft trägen) Verkaufservice des Transfer Agents nutzen.</li>
+      <li><strong>Weniger Liquidität:</strong> Für schnellen Verkauf musst du meist zuerst zurück ins Brokerdepot übertragen oder den (oft trägen) Verkaufservice des Transfer Agents nutzen.</li>
       <li><strong>Komfort:</strong> Trading-Apps, Limit-Orders, Margin, Optionshandel – all das ist direkt nur im Brokerdepot möglich.</li>
       <li><strong>Verwaltungsaufwand:</strong> Mehrere DRS-Konten bei verschiedenen Transfer Agents, separate Logins, Transferprozesse.</li>
-      <li><strong>Keine Beleihung:</strong> DRS-Aktien sind nicht ohne Weiteres als Sicherheit für Kredite nutzbar,
-        im Depot dagegen schon (Margin, Lombardkredite).</li>
-      <li><strong>Weniger Anonymität:</strong> Als Namensaktionär bist du für das Unternehmen sichtbar;
-        manche Anleger wollen genau das vermeiden.</li>
+      <li><strong>Keine Beleihung:</strong> DRS-Aktien sind nicht ohne Weiteres als Sicherheit für Kredite nutzbar, im Depot dagegen schon (Margin, Lombardkredite).</li>
+      <li><strong>Gebühren beim Transfer Agent:</strong> Dividendenreinvestition, Verkäufe und andere Services können beim Transfer Agent Gebühren kosten, die im Brokerdepot oft kostenlos sind.</li>
+      <li><strong>Weniger Anonymität:</strong> Als Namensaktionär bist du für das Unternehmen sichtbar; manche Anleger wollen genau das vermeiden.</li>
     </ul>
 
     <h2>Fazit: DRS als Baustein für echtes Eigentum</h2>
-    <p>
-      Wenn du US-Aktien wie Alphabet oder Rollins per DRS zu Computershare oder Equiniti übertragen lässt,
-      bist du rechtlich betrachtet tatsächlich der <strong>eingetragene Eigentümer</strong>.
-      Du ziehst deine Anteile aus der Intermediärkette heraus und reduzierst das Verwahr- und Intermediärrisiko deutlich.
-    </p>
-    <p>
-      Dafür zahlst du mit etwas weniger Flexibilität und Komfort im Handel.
-      DRS ist damit kein magisches Schutzschild – aber ein <strong>wichtiger Baustein</strong>,
-      wenn du echtes Eigentum an Aktien willst und dich nicht allein auf Broker, Nominees und Sammelverwahrung verlassen möchtest.
-    </p>
-    <p>
-      Wie immer gilt: Eigentum beginnt damit, dass du verstehst, <em>wo</em> dein Risiko liegt
-      – und bewusst entscheidest, welche Intermediäre du brauchst und welche nicht.
-    </p>
-
-    <div class="box" style="border-style: dashed; border-color: #333;">
-      <h3>📚 Quellen &amp; weiterführende Links</h3>
-      <ul style="padding-left: 1.2em;">
-        <li>
-          U.S. Securities and Exchange Commission (SEC): Investor-Publikationen zu <em>Direct Registration</em> und <em>Street Name</em>.<br>
-          👉 <a href="https://www.sec.gov" target="_blank" rel="noopener">sec.gov</a>
-        </li>
-        <li>
-          SEC Investor Bulletin: Grundlagen zu Eigentum an Wertpapieren.<br>
-          👉 <a href="https://www.sec.gov/files/ib_rights_of_security_holders.pdf" target="_blank" rel="noopener">PDF ansehen</a>
-        </li>
-        <li>
-          FINRA: Informationen zur Verwahrung von Wertpapieren.<br>
-          👉 <a href="https://www.finra.org/investors" target="_blank" rel="noopener">finra.org</a>
-        </li>
-        <li>
-          Computershare: FAQ zum Direct Registration System (DRS).<br>
-          👉 <a href="https://www.computershare.com" target="_blank" rel="noopener">computershare.com</a>
-        </li>
-        <li>
-          DTCC: Rolle von DTC und Cede &amp; Co.<br>
-          👉 <a href="https://www.dtcc.com" target="_blank" rel="noopener">dtcc.com</a>
-        </li>
-      </ul>
-    </div>
+    <p>Wenn du US-Aktien wie Alphabet oder Rollins per DRS zu Computershare übertragen lässt, bist du rechtlich betrachtet tatsächlich der eingetragene Eigentümer. Du ziehst deine Anteile aus der Intermediärkette heraus und reduzierst das Verwahr- und Intermediärrisiko deutlich.</p>
+    <p>Dafür zahlst du mit etwas weniger Flexibilität und Komfort im Handel. DRS ist damit kein magisches Schutzschild – aber ein wichtiger Baustein, wenn du echtes Eigentum an Aktien willst und dich nicht allein auf Broker, Nominees und Sammelverwahrung verlassen möchtest.</p>
+    <p>Wie immer gilt: Eigentum beginnt damit, dass du verstehst, wo dein Risiko liegt – und bewusst entscheidest, welche Intermediäre du brauchst und welche nicht.</p>
   </article>
 
   <blockquote>
     „Vertraue niemandem! Manage deine Finanzen selbst!“
   </blockquote>
 
-  <div class="like-button">
-    <button id="likeButton">👍 Gefällt mir</button>
-    <span id="likeCount">0</span>
-    <span style="color:#bbb; font-size: 0.9em;">(Lokal)</span>
-  </div>
-
-  <script>
-    (function() {
-      const storageKey = window.location.pathname + "-likes";
-      const btn = document.getElementById('likeButton');
-      const span = document.getElementById('likeCount');
-
-      let count = parseInt(localStorage.getItem(storageKey) || "0", 10);
-      span.textContent = count;
-
-      btn.addEventListener('click', function() {
-        count += 1;
-        span.textContent = count;
-        localStorage.setItem(storageKey, String(count));
-        btn.disabled = true;
-        btn.textContent = "Danke! 👽";
-        btn.style.borderColor = "#444";
-        btn.style.color = "#888";
-      });
-    })();
-  </script>
-
   <div class="box">
     <h3>👽 Werbung / DRS-Broker &amp; echte Eigentums-Tools</h3>
-    <p>
-      Wenn du DRS und echte Eintragung im Aktienregister ernst meinst, brauchst du Broker,
-      die beim Thema Eigentum mitspielen – und nicht nur Buchpositionen bei Cede &amp; Co. verwalten.
+    <p style="font-size:0.95em;">
+      Wenn du DRS und echte Eintragung im Aktienregister ernst meinst, brauchst du Broker, die beim Thema Eigentum mitspielen – und nicht nur Buchpositionen bei Cede &amp; Co. verwalten.
     </p>
     <ul>
       <li>
         <strong>Interactive Brokers (IBKR):</strong><br>
         Mein Weg, um US-Aktien aus dem Broker-Universum in Richtung Computershare &amp; Co. zu bewegen.<br>
-        👉 <a href="https://alien-investor.org/interactive-brokers" target="_blank" rel="noopener">Zu Interactive Brokers (Referral-Link)</a>
+        👉 <a href="https://alien-investor.org/interactive-brokers" target="_blank">https://alien-investor.org/interactive-brokers</a>
       </li>
     </ul>
     <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">
@@ -342,38 +108,56 @@
     </p>
   </div>
 
+  <div class="box" style="border-style: dashed; border-color: #333;">
+    <h3>📚 Quellen &amp; weiterführende Links</h3>
+    <ul style="font-size: 0.95em; color: #ccc;">
+      <li>U.S. Securities and Exchange Commission (SEC): Investor-Publikationen zu Direct Registration und Street Name. 👉 <a href="https://www.sec.gov" target="_blank">sec.gov</a></li>
+      <li>SEC Investor Bulletin: Grundlagen zu Eigentum an Wertpapieren. 👉 <a href="https://www.sec.gov/files/ib_rights_of_security_holders.pdf" target="_blank">PDF ansehen</a></li>
+      <li>FINRA: Informationen zur Verwahrung von Wertpapieren. 👉 <a href="https://www.finra.org/investors" target="_blank">finra.org</a></li>
+      <li>Computershare: FAQ zum Direct Registration System (DRS). 👉 <a href="https://www.computershare.com" target="_blank">computershare.com</a></li>
+      <li>DTCC: Rolle von DTC und Cede &amp; Co. 👉 <a href="https://www.dtcc.com" target="_blank">dtcc.com</a></li>
+    </ul>
+  </div>
+
+  <div class="like-button">
+    <button id="likeButton">👍 Gefällt mir</button> <span id="likeCount">0</span> <span style="color:#bbb; font-size: 0.9em;">(Lokal)</span>
+  </div>
+  
+  <script>
+    (function(){
+      const k=window.location.pathname+"-likes";
+      const b=document.getElementById('likeButton');
+      const s=document.getElementById('likeCount');
+      let c=parseInt(localStorage.getItem(k)||"0",10);
+      s.textContent=c;
+      b.addEventListener('click',function(){
+        c++;
+        s.textContent=c;
+        localStorage.setItem(k,String(c));
+        b.disabled=true;
+        b.textContent="Danke! 👽";
+        b.style.borderColor="#444";
+        b.style.color="#888";
+      });
+    })();
+  </script>
+
   <div class="back-links">
     <a href="blog.html" style="font-size: 1.1em;">⬅ Zurück zur Blog-Übersicht</a>
     <a href="index.html" style="font-size: 1.1em;">⬅ Zurück zur Zentrale</a>
   </div>
-
+  
   <hr style="border-color: #222; margin: 3em 0;">
-
+  
   <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
-      <h3 style="margin-bottom: 15px;">
-        🔋 Energie aufladen
-        <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
-      </h3>
-      
-      <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
-        Treibstoff für das Mutterschiff senden
-      </a>
-      
-      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
-        Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸
-      </p>
+      <h3 style="margin-bottom: 15px;">🔋 Energie aufladen <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span></h3>
+      <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">Treibstoff für das Mutterschiff senden</a>
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸</p>
   </div>
 
   <footer>
     <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
-    
-    <p style="margin-top: 20px;">
-      👽 <strong>Haftungsausschluss:</strong><br><br>
-      Dieser Artikel stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
-      Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
-      Investieren ist mit Risiken verbunden. Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
-    </p>
+    <p style="margin-top: 20px;">👽 <strong>Haftungsausschluss:</strong><br><br>Dieser Artikel stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>Investieren ist mit Risiken verbunden. Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.</p>
   </footer>
-
 </body>
 </html>
