@@ -25,6 +25,12 @@
     .top-nav { padding: 10px 0; font-size: 0.9em; }
     .back-links { margin-top: 40px; text-align: center; display: flex; flex-direction: column; gap: 10px; }
     footer { margin-top: 60px; padding: 20px; font-size: 0.85em; color: #666; border-top: 1px solid #222; text-align: center; }
+
+    /* VIDEO */
+    .video-wrapper { display: flex; justify-content: center; margin: 2em 0; }
+    .video-container { position: relative; width: 100%; max-width: 560px; padding-bottom: 31.25%; height: 0; border: 1px solid #00ffcc; border-radius: 8px; overflow: hidden; box-shadow: 0 0 15px rgba(0, 255, 204, 0.1); }
+    @media (max-width: 600px) { .video-container { padding-bottom: 56.25%; } }
+    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
   </style>
 </head>
 <body>
@@ -43,12 +49,27 @@
     </p>
 
     <blockquote>
-      „Self Custody ist Eigentum durch Kryptografie. Fremdverwahrung (Custody) ist lediglich ein Anspruch durch Vertrag – abhängig von der Zahlungsfähigkeit und dem Rechtsrahmen eines Dritten.“
+      „Self Custody ist Eigentum durch Kryptografie. Fremdverwahrung (Custody) ist lediglich ein Anspruch durch Vertrag – abhängig von der Zahlungsfähigkeit und dem Rechtsrahmen eines Dritten."
     </blockquote>
+
+    <div class="video-wrapper">
+      <div class="video-container">
+        <iframe
+          src="https://www.youtube.com/embed/40IzW612FN4"
+          title="Self Custody – Warum Bitcoin in Fremdverwahrung seinen Sinn verliert"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+    <p style="text-align: center; font-size: 0.9em; color: #bbb; margin-top: -1em;">
+      <em>Warum Drittverwahrung Bitcoin angreifbar macht – und was Self Custody wirklich bedeutet. (Video auf Deutsch)</em>
+    </p>
 
     <h2>1. Warum Bitcoin in Fremdverwahrung seine Kern-Eigenschaften verliert</h2>
     <p>
-      Im klassischen Finanzsystem sind wir es gewohnt, dass eine Bank unser Geld „hält“. Bei Bitcoin ist das fundamental anders. Bitcoin gehört funktional demjenigen, der gültige Signaturen erzeugen kann. Gibst du diese Fähigkeit ab, verliert Bitcoin sofort seine wichtigsten Eigenschaften:
+      Im klassischen Finanzsystem sind wir es gewohnt, dass eine Bank unser Geld „hält". Bei Bitcoin ist das fundamental anders. Bitcoin gehört funktional demjenigen, der gültige Signaturen erzeugen kann. Gibst du diese Fähigkeit ab, verliert Bitcoin sofort seine wichtigsten Eigenschaften:
     </p>
     <ul>
       <li><strong>Verlust der Zensurresistenz:</strong> Eine echte Bitcoin-Transaktion kann von niemandem gestoppt werden. Bei Fremdverwahrung kann der Verwahrer (auf staatlichen Druck oder durch interne Compliance) Auszahlungen jederzeit blockieren oder dein Konto einfrieren.</li>
@@ -58,13 +79,13 @@
 
     <h2>2. Herdenimmunität: Warum fehlende Self Custody ein staatliches Verbot provoziert</h2>
     <p>
-      Kein Staat kann Bitcoin auf Protokollebene zerstören oder echte Self Custody global „verbieten“ – das wäre technisch kaum durchsetzbar. Der Angriff erfolgt deshalb immer über die zentralen Schnittstellen (Chokepoints). Und hier liegt die größte Gefahr für das gesamte Netzwerk:
+      Kein Staat kann Bitcoin auf Protokollebene zerstören oder echte Self Custody global „verbieten" – das wäre technisch kaum durchsetzbar. Der Angriff erfolgt deshalb immer über die zentralen Schnittstellen (Chokepoints). Und hier liegt die größte Gefahr für das gesamte Netzwerk:
     </p>
     <p>
       <strong>Der Staat kann Selbstverwahrung viel einfacher verbieten oder extrem erschweren, wenn ein Großteil der Nutzer keine Selbstverwahrung mehr betreibt.</strong>
     </p>
     <p>
-      Wenn 90 Prozent der Investoren ihre Bitcoin bequem in Wall-Street-ETFs oder bei regulierten Riesen-Börsen halten, ist es für den Gesetzgeber ein Leichtes, den Ausstieg (die Auszahlung auf die eigene Wallet) massiv zu regulieren. Genau das passiert bereits: Behörden wie das US-FinCEN ziehen die Schlinge enger. Transaktionen an sogenannte „unhosted Wallets“ werden mit Reporting-Pflichten, Identitätsprüfungen und Limits belegt.
+      Wenn 90 Prozent der Investoren ihre Bitcoin bequem in Wall-Street-ETFs oder bei regulierten Riesen-Börsen halten, ist es für den Gesetzgeber ein Leichtes, den Ausstieg (die Auszahlung auf die eigene Wallet) massiv zu regulieren. Genau das passiert bereits: Behörden wie das US-FinCEN ziehen die Schlinge enger. Transaktionen an sogenannte „unhosted Wallets" werden mit Reporting-Pflichten, Identitätsprüfungen und Limits belegt.
     </p>
     <p>
       Nutzen hingegen Millionen von Menschen echte Self Custody, entsteht eine <em>regulatorische Herdenimmunität</em>. Ein Verbot wird politisch und praktisch unmöglich. Deine Bequemlichkeit auf der Börse gefährdet also nicht nur deine eigenen Coins, sondern die Freiheit des gesamten Netzwerks.
