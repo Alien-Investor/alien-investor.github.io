@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>👽 Charts – Alien Investor</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👽</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --neon: #00ffcc;
+      --neon-dim: rgba(0, 255, 204, 0.15);
+      --neon-mid: rgba(0, 255, 204, 0.4);
+      --red: #ff4466;
+      --bg: #000;
+      --card-bg: #050f0d;
+      --border: rgba(0, 255, 204, 0.2);
+      --text-dim: #4a7a6d;
+      --text-mid: #7ab8a8;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--neon);
+      font-family: 'Share Tech Mono', monospace;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Star field */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 10% 15%, rgba(0,255,204,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 30% 40%, rgba(0,255,204,0.25) 0%, transparent 100%),
+        radial-gradient(1px 1px at 55% 20%, rgba(0,255,204,0.35) 0%, transparent 100%),
+        radial-gradient(1px 1px at 70% 60%, rgba(0,255,204,0.2) 0%, transparent 100%),
+        radial-gradient(1px 1px at 85% 30%, rgba(0,255,204,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 20% 75%, rgba(0,255,204,0.2) 0%, transparent 100%),
+        radial-gradient(1px 1px at 45% 85%, rgba(0,255,204,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 90% 80%, rgba(0,255,204,0.25) 0%, transparent 100%),
+        radial-gradient(1px 1px at 65% 90%, rgba(0,255,204,0.2) 0%, transparent 100%),
+        radial-gradient(1px 1px at 5% 50%, rgba(0,255,204,0.3) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Scanlines */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.15) 2px,
+        rgba(0, 0, 0, 0.15) 4px
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 30px 20px 60px;
+    }
+
+    /* HEADER */
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+      position: relative;
+    }
+
+    .header-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 400px;
+      height: 100px;
+      background: radial-gradient(ellipse, rgba(0,255,204,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .back-link {
+      display: inline-block;
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      color: var(--text-dim);
+      text-decoration: none;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--neon); }
+    .back-link::before { content: '◀ '; }
+
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.4rem, 4vw, 2.2rem);
+      font-weight: 900;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--neon);
+      text-shadow: 0 0 20px rgba(0,255,204,0.7), 0 0 40px rgba(0,255,204,0.3);
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      font-size: 0.75rem;
+      letter-spacing: 6px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
+
+    /* CHART NAV */
+    .chart-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 40px;
+    }
+
+    .chart-nav a {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 6px 14px;
+      background: var(--card-bg);
+      transition: color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .chart-nav a:hover {
+      color: var(--neon);
+      border-color: var(--neon-mid);
+      box-shadow: 0 0 10px rgba(0,255,204,0.1);
+    }
+
+    /* SECTION LABEL */
+    .section-label {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 4px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      border-left: 2px solid var(--neon-mid);
+      padding-left: 10px;
+    }
+
+    /* CHART SECTION */
+    .chart-section {
+      margin-bottom: 54px;
+      scroll-margin-top: 20px;
+    }
+
+    .chart-meta {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 10px;
+    }
+
+    .chart-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px rgba(255,255,255,0.15);
+    }
+
+    .chart-symbol {
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      color: var(--text-dim);
+    }
+
+    /* TradingView container */
+    .chart-wrapper {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+      background: #0a0f0d;
+    }
+
+    /* Corner accents */
+    .chart-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 24px; height: 24px;
+      border-top: 1px solid var(--neon);
+      border-left: 1px solid var(--neon);
+      opacity: 0.5;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .chart-wrapper::after {
+      content: '';
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 24px; height: 24px;
+      border-bottom: 1px solid var(--neon);
+      border-right: 1px solid var(--neon);
+      opacity: 0.5;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .tradingview-widget-container {
+      width: 100%;
+      height: 500px;
+    }
+
+    .tradingview-widget-container__widget {
+      height: 100%;
+    }
+
+    /* DIVIDER */
+    hr.alien-hr {
+      border: none;
+      border-top: 1px solid rgba(0,255,204,0.08);
+      margin: 0 0 54px;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      letter-spacing: 2px;
+      line-height: 2;
+    }
+
+    footer a {
+      color: var(--neon);
+      text-decoration: none;
+      opacity: 0.7;
+    }
+
+    @media (max-width: 600px) {
+      .tradingview-widget-container { height: 380px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <header>
+    <div class="header-glow"></div>
+    <div><a class="back-link" href="mission-control.html">Mission Control</a></div>
+    <div class="logo">👽 Charts</div>
+    <div class="subtitle">Alien Investor · Marktübersicht</div>
+  </header>
+
+  <nav class="chart-nav">
+    <a href="#bitcoin">₿ Bitcoin</a>
+    <a href="#gold">🥇 Gold</a>
+    <a href="#silber">🥈 Silber</a>
+    <a href="#oel">🛢️ Öl WTI</a>
+    <a href="#sp500">🇺🇸 S&amp;P 500</a>
+    <a href="#hangseng">🇭🇰 Hang Seng</a>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════ BITCOIN -->
+  <section class="chart-section" id="bitcoin">
+    <div class="section-label">₿ Krypto</div>
+    <div class="chart-meta">
+      <span class="chart-title">Bitcoin</span>
+      <span class="chart-symbol">BTC / USD</span>
+    </div>
+    <div class="chart-wrapper">
+      <div class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+        {
+          "width": "100%",
+          "height": "500",
+          "symbol": "BITSTAMP:BTCUSD",
+          "interval": "D",
+          "timezone": "Europe/Berlin",
+          "theme": "dark",
+          "style": "1",
+          "locale": "de",
+          "backgroundColor": "rgba(0, 0, 0, 1)",
+          "gridColor": "rgba(0, 255, 204, 0.05)",
+          "allow_symbol_change": false,
+          "calendar": false,
+          "support_host": "https://www.tradingview.com"
+        }
+        </script>
+      </div>
+    </div>
+  </section>
+
+  <hr class="alien-hr">
+
+  <!-- ═══════════════════════════════════════════════════ GOLD -->
+  <section class="chart-section" id="gold">
+    <div class="section-label">🪨 Rohstoffe</div>
+    <div class="chart-meta">
+      <span class="chart-title">Gold</span>
+      <span class="chart-symbol">XAU / USD</span>
+    </div>
+    <div class="chart-wrapper">
+      <div class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+        {
+          "width": "100%",
+          "height": "500",
+          "symbol": "TVC:GOLD",
+          "interval": "D",
+          "timezone": "Europe/Berlin",
+          "theme": "dark",
+          "style": "1",
+          "locale": "de",
+          "backgroundColor": "rgba(0, 0, 0, 1)",
+          "gridColor": "rgba(0, 255, 204, 0.05)",
+          "allow_symbol_change": false,
+          "calendar": false,
+          "support_host": "https://www.tradingview.com"
+        }
+        </script>
+      </div>
+    </div>
+  </section>
+
+  <hr class="alien-hr">
+
+  <!-- ═══════════════════════════════════════════════════ SILBER -->
+  <section class="chart-section" id="silber">
+    <div class="chart-meta">
+      <span class="chart-title">Silber</span>
+      <span class="chart-symbol">XAG / USD</span>
+    </div>
+    <div class="chart-wrapper">
+      <div class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+        {
+          "width": "100%",
+          "height": "500",
+          "symbol": "TVC:SILVER",
+          "interval": "D",
+          "timezone": "Europe/Berlin",
+          "theme": "dark",
+          "style": "1",
+          "locale": "de",
+          "backgroundColor": "rgba(0, 0, 0, 1)",
+          "gridColor": "rgba(0, 255, 204, 0.05)",
+          "allow_symbol_change": false,
+          "calendar": false,
+          "support_host": "https://www.tradingview.com"
+        }
+        </script>
+      </div>
+    </div>
+  </section>
+
+  <hr class="alien-hr">
+
+  <!-- ═══════════════════════════════════════════════════ ÖL -->
+  <section class="chart-section" id="oel">
+    <div class="chart-meta">
+      <span class="chart-title">Öl (WTI)</span>
+      <span class="chart-symbol">USOIL / USD</span>
+    </div>
+    <div class="chart-wrapper">
+      <div class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+        {
+          "width": "100%",
+          "height": "500",
+          "symbol": "TVC:USOIL",
+          "interval": "D",
+          "timezone": "Europe/Berlin",
+          "theme": "dark",
+          "style": "1",
+          "locale": "de",
+          "backgroundColor": "rgba(0, 0, 0, 1)",
+          "gridColor": "rgba(0, 255, 204, 0.05)",
+          "allow_symbol_change": false,
+          "calendar": false,
+          "support_host": "https://www.tradingview.com"
+        }
+        </script>
+      </div>
+    </div>
+  </section>
+
+  <hr class="alien-hr">
+
+  <!-- ═══════════════════════════════════════════════════ S&P 500 -->
+  <section class="chart-section" id="sp500">
+    <div class="section-label">📊 Indizes</div>
+    <div class="chart-meta">
+      <span class="chart-title">S&amp;P 500</span>
+      <span class="chart-symbol">SPX · Index</span>
+    </div>
+    <div class="chart-wrapper">
+      <div class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+        {
+          "width": "100%",
+          "height": "500",
+          "symbol": "SP:SPX",
+          "interval": "D",
+          "timezone": "America/New_York",
+          "theme": "dark",
+          "style": "1",
+          "locale": "de",
+          "backgroundColor": "rgba(0, 0, 0, 1)",
+          "gridColor": "rgba(0, 255, 204, 0.05)",
+          "allow_symbol_change": false,
+          "calendar": false,
+          "support_host": "https://www.tradingview.com"
+        }
+        </script>
+      </div>
+    </div>
+  </section>
+
+  <hr class="alien-hr">
+
+  <!-- ═══════════════════════════════════════════════════ HANG SENG -->
+  <section class="chart-section" id="hangseng">
+    <div class="chart-meta">
+      <span class="chart-title">Hang Seng</span>
+      <span class="chart-symbol">HSI · Index</span>
+    </div>
+    <div class="chart-wrapper">
+      <div class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+        {
+          "width": "100%",
+          "height": "500",
+          "symbol": "TVC:HSI",
+          "interval": "D",
+          "timezone": "Asia/Hong_Kong",
+          "theme": "dark",
+          "style": "1",
+          "locale": "de",
+          "backgroundColor": "rgba(0, 0, 0, 1)",
+          "gridColor": "rgba(0, 255, 204, 0.05)",
+          "allow_symbol_change": false,
+          "calendar": false,
+          "support_host": "https://www.tradingview.com"
+        }
+        </script>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div style="margin-bottom:8px;">alien-investor.org · Charts: TradingView</div>
+    <div style="color:rgba(74,122,109,0.7)">🚨 Keine Finanzberatung – nur persönliche Alien-Meinung. Denke selbst. Vertraue niemandem.</div>
+    <div style="margin-top:12px;"><a href="https://alien-investor.org">alien-investor.org</a></div>
+  </footer>
+
+</div>
+
+</body>
+</html>
