@@ -640,14 +640,14 @@
       } catch { return null; }
     }
 
-    // Silver via metals.live (kostenlos, kein Key)
+    // Silver via jsdelivr currency API (kostenlos, kein Key, CORS-ok)
     async function fetchSilver() {
       try {
-        const res = await fetch('https://api.metals.live/v1/spot/silver');
+        const res = await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/xag.json');
         if (!res.ok) throw new Error();
         const d = await res.json();
-        // returns [{silver: price}] or {price: X}
-        const price = Array.isArray(d) ? d[0]?.silver : d?.price || d?.silver;
+        // d.xag.usd = how many USD per 1 XAG (= silver price in USD)
+        const price = d?.xag?.usd;
         return price ? parseFloat(price) : null;
       } catch { return null; }
     }
