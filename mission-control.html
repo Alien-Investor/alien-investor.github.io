@@ -625,20 +625,25 @@
     return map[cls] || cls.toUpperCase();
   }
 
-  // ── GOLD & SILBER via Coinbase ───────────────────────────────
+  // ── GOLD & SILBER via metals-api (open.er-api fallback) ────
   async function fetchMetals() {
-    async function coinbase(pair) {
+    // Use commodity prices from twelvedata (same key as indices)
+    async function twelvePrice(symbol) {
       try {
-        const res = await fetch(`https://api.coinbase.com/v2/prices/${pair}/spot`);
+        const url = `https://api.twelvedata.com/price?symbol=${symbol}&apikey=${TWELVEDATA_KEY}`;
+        const res = await fetch(url);
         if (!res.ok) throw new Error();
         const d = await res.json();
-        return parseFloat(d?.data?.amount) || null;
+        if (d.status === 'error' || !d.price) throw new Error();
+        return parseFloat(d.price);
       } catch { return null; }
     }
+
     const [gold, silver] = await Promise.all([
-      coinbase('XAU-USD'),
-      coinbase('XAG-USD')
+      twelvePrice('XAU/USD'),
+      twelvePrice('XAG/USD')
     ]);
+
     if (gold)   { setPrice('gold-price',   gold,   2); document.getElementById('gold-change').textContent   = 'SPOT'; }
     else setError('gold-price', 'gold-change');
     if (silver) { setPrice('silver-price', silver, 2); document.getElementById('silver-change').textContent = 'SPOT'; }
@@ -648,10 +653,10 @@
     // ── ÖL & INDIZES via twelvedata.com ─────────────────────────
   async function fetchYahoo() {
     const items = [
-      { symbol: 'WTI/USD', pid: 'oil-price',   cid: 'oil-change',   dec: 2 },
-      { symbol: 'SPY',     pid: 'sp500-price', cid: 'sp500-change', dec: 2 },
-      { symbol: 'DAX',     pid: 'dax-price',   cid: 'dax-change',   dec: 0 },
-      { symbol: 'HSI',     pid: 'hsi-price',   cid: 'hsi-change',   dec: 0 },
+      { symbol: 'WTI',  pid: 'oil-price',   cid: 'oil-change',   dec: 2 },
+      { symbol: 'SPY',  pid: 'sp500-price', cid: 'sp500-change', dec: 2 },
+      { symbol: 'DAX',  pid: 'dax-price',   cid: 'dax-change',   dec: 0 },
+      { symbol: '2800', pid: 'hsi-price',   cid: 'hsi-change',   dec: 0 },
     ];
 
     await Promise.all(items.map(async ({ symbol, pid, cid, dec }) => {
