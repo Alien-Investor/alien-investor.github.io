@@ -622,15 +622,15 @@
 
   // ── GOLD via twelvedata, SILBER via CoinGecko ───────────────
   async function fetchMetals() {
-    // Gold via twelvedata
+    // Gold via twelvedata /quote (inkl. % Änderung)
     async function fetchGold() {
       try {
-        const url = `https://api.twelvedata.com/price?symbol=XAU/USD&apikey=${TWELVEDATA_KEY}`;
+        const url = `https://api.twelvedata.com/quote?symbol=XAU/USD&apikey=${TWELVEDATA_KEY}`;
         const res = await fetch(url);
         if (!res.ok) throw new Error();
         const d = await res.json();
-        if (d.status === 'error' || !d.price) throw new Error();
-        return parseFloat(d.price);
+        if (d.status === 'error' || !d.close) throw new Error();
+        return { price: parseFloat(d.close), change: parseFloat(d.percent_change) };
       } catch { return null; }
     }
 
@@ -648,7 +648,7 @@
 
     const [gold, silver] = await Promise.all([fetchGold(), fetchSilver()]);
 
-    if (gold)   { setPrice('gold-price',   gold,   2); document.getElementById('gold-change').textContent   = 'SPOT'; }
+    if (gold)   { setPrice('gold-price', gold.price, 2); setChange('gold-change', gold.change); }
     else setError('gold-price', 'gold-change');
     if (silver) { setPrice('silver-price', silver, 2); document.getElementById('silver-change').textContent = 'SPOT'; }
     else setError('silver-price', 'silver-change');
@@ -657,21 +657,21 @@
     // ── ÖL & INDIZES via twelvedata.com ─────────────────────────
   async function fetchYahoo() {
     const items = [
-      { symbol: 'WTI',  pid: 'oil-price',   cid: 'oil-change',   dec: 2 },
-      { symbol: 'SPY',  pid: 'sp500-price', cid: 'sp500-change', dec: 2 },
-      { symbol: 'DAX',  pid: 'dax-price',   cid: 'dax-change',   dec: 0 },
-      { symbol: 'HSI:HKEX', pid: 'hsi-price',   cid: 'hsi-change',   dec: 0 },
+      { symbol: 'USO',      exchange: '',     pid: 'oil-price',   cid: 'oil-change',   dec: 2 },
+      { symbol: 'SPY',      exchange: '',     pid: 'sp500-price', cid: 'sp500-change', dec: 2 },
+      { symbol: '2800',     exchange: 'HKEX', pid: 'hsi-price',   cid: 'hsi-change',   dec: 2 },
     ];
 
-    await Promise.all(items.map(async ({ symbol, pid, cid, dec }) => {
+    await Promise.all(items.map(async ({ symbol, exchange, pid, cid, dec }) => {
       try {
-        const url = `https://api.twelvedata.com/price?symbol=${symbol}&apikey=${TWELVEDATA_KEY}`;
+        const exParam = exchange ? `&exchange=${exchange}` : '';
+        const url = `https://api.twelvedata.com/quote?symbol=${symbol}${exParam}&apikey=${TWELVEDATA_KEY}`;
         const res = await fetch(url);
         if (!res.ok) throw new Error();
         const d = await res.json();
-        if (d.status === 'error' || !d.price) throw new Error(d.message);
-        setPrice(pid, parseFloat(d.price), dec);
-        document.getElementById(cid).textContent = '';
+        if (d.status === 'error' || !d.close) throw new Error(d.message);
+        setPrice(pid, parseFloat(d.close), dec);
+        setChange(cid, parseFloat(d.percent_change));
       } catch { setError(pid, cid); }
     }));
   }
