@@ -217,6 +217,39 @@
       box-shadow: 0 0 20px rgba(0,255,204,0.06), inset 0 0 20px rgba(0,255,204,0.03);
     }
 
+    /* Clickable card link wrapper */
+    a.card-link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    a.card-link .card {
+      cursor: pointer;
+    }
+
+    a.card-link:hover .card {
+      border-color: var(--neon-mid);
+      box-shadow: 0 0 20px rgba(0,255,204,0.08), inset 0 0 20px rgba(0,255,204,0.04);
+    }
+
+    /* Chart link indicator */
+    .card-chart-hint {
+      position: absolute;
+      bottom: 8px;
+      right: 10px;
+      font-size: 0.5rem;
+      letter-spacing: 2px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    a.card-link:hover .card-chart-hint {
+      opacity: 1;
+    }
+
     /* Corner accent */
     .card::before {
       content: '';
@@ -423,46 +456,61 @@
   <!-- KRYPTO -->
   <div class="section-label">₿ Krypto</div>
   <div class="grid-main">
-    <div class="card">
-      <span class="card-icon">₿</span>
-      <div class="card-label">Bitcoin</div>
-      <div class="card-price loading" id="btc-price">SCANNING</div>
-      <div class="card-change neutral" id="btc-change">–</div>
-      <div class="card-unit">EUR</div>
-    </div>
-    <div class="card">
-      <span class="card-icon">₿</span>
-      <div class="card-label">Bitcoin</div>
-      <div class="card-price loading" id="btc-price-usd">SCANNING</div>
-      <div class="card-change neutral" id="btc-change-usd">–</div>
-      <div class="card-unit">USD</div>
-    </div>
+    <a class="card-link" href="charts.html#bitcoin">
+      <div class="card">
+        <span class="card-icon">₿</span>
+        <div class="card-label">Bitcoin</div>
+        <div class="card-price loading" id="btc-price">SCANNING</div>
+        <div class="card-change neutral" id="btc-change">–</div>
+        <div class="card-unit">EUR</div>
+        <div class="card-chart-hint">▶ Chart</div>
+      </div>
+    </a>
+    <a class="card-link" href="charts.html#bitcoin">
+      <div class="card">
+        <span class="card-icon">₿</span>
+        <div class="card-label">Bitcoin</div>
+        <div class="card-price loading" id="btc-price-usd">SCANNING</div>
+        <div class="card-change neutral" id="btc-change-usd">–</div>
+        <div class="card-unit">USD</div>
+        <div class="card-chart-hint">▶ Chart</div>
+      </div>
+    </a>
   </div>
 
   <!-- ROHSTOFFE -->
   <div class="section-label">🪨 Rohstoffe</div>
   <div class="grid-main">
-    <div class="card">
-      <span class="card-icon">🥇</span>
-      <div class="card-label">Gold</div>
-      <div class="card-price loading" id="gold-price">SCANNING</div>
-      <div class="card-change neutral" id="gold-change">–</div>
-      <div class="card-unit">USD / OZ</div>
-    </div>
-    <div class="card">
-      <span class="card-icon">🥈</span>
-      <div class="card-label">Silber</div>
-      <div class="card-price loading" id="silver-price">SCANNING</div>
-      <div class="card-change neutral" id="silver-change">–</div>
-      <div class="card-unit">USD / OZ</div>
-    </div>
-    <div class="card">
-      <span class="card-icon">🛢️</span>
-      <div class="card-label">Öl (WTI)</div>
-      <div class="card-price loading" id="oil-price">SCANNING</div>
-      <div class="card-change neutral" id="oil-change">–</div>
-      <div class="card-unit">USD · ETF (USO)</div>
-    </div>
+    <a class="card-link" href="charts.html#gold">
+      <div class="card">
+        <span class="card-icon">🥇</span>
+        <div class="card-label">Gold</div>
+        <div class="card-price loading" id="gold-price">SCANNING</div>
+        <div class="card-change neutral" id="gold-change">–</div>
+        <div class="card-unit">USD / OZ</div>
+        <div class="card-chart-hint">▶ Chart</div>
+      </div>
+    </a>
+    <a class="card-link" href="charts.html#silber">
+      <div class="card">
+        <span class="card-icon">🥈</span>
+        <div class="card-label">Silber</div>
+        <div class="card-price loading" id="silver-price">SCANNING</div>
+        <div class="card-change neutral" id="silver-change">–</div>
+        <div class="card-unit">USD / OZ</div>
+        <div class="card-chart-hint">▶ Chart</div>
+      </div>
+    </a>
+    <a class="card-link" href="charts.html#oel">
+      <div class="card">
+        <span class="card-icon">🛢️</span>
+        <div class="card-label">Öl (WTI)</div>
+        <div class="card-price loading" id="oil-price">SCANNING</div>
+        <div class="card-change neutral" id="oil-change">–</div>
+        <div class="card-unit">USD · ETF (USO)</div>
+        <div class="card-chart-hint">▶ Chart</div>
+      </div>
+    </a>
     <div class="card">
       <span class="card-icon" style="font-family:Arial;font-size:0.85rem;color:var(--neon);display:flex;align-items:center;justify-content:center;line-height:1;">$ / €</span>
       <div class="card-label">USD / EUR</div>
@@ -475,21 +523,26 @@
   <!-- INDIZES -->
   <div class="section-label">📊 Märkte</div>
   <div class="grid-main">
-    <div class="card">
-      <span class="card-icon">🇺🇸</span>
-      <div class="card-label">S&amp;P 500</div>
-      <div class="card-price loading" id="sp500-price">SCANNING</div>
-      <div class="card-change neutral" id="sp500-change">–</div>
-      <div class="card-unit">USD · ETF (SPY)</div>
-    </div>
-
-    <div class="card">
-      <span class="card-icon">🇭🇰</span>
-      <div class="card-label">Hang Seng</div>
-      <div class="card-price loading" id="hsi-price">SCANNING</div>
-      <div class="card-change neutral" id="hsi-change">–</div>
-      <div class="card-unit">HKD · INDEX</div>
-    </div>
+    <a class="card-link" href="charts.html#sp500">
+      <div class="card">
+        <span class="card-icon">🇺🇸</span>
+        <div class="card-label">S&amp;P 500</div>
+        <div class="card-price loading" id="sp500-price">SCANNING</div>
+        <div class="card-change neutral" id="sp500-change">–</div>
+        <div class="card-unit">USD · ETF (SPY)</div>
+        <div class="card-chart-hint">▶ Chart</div>
+      </div>
+    </a>
+    <a class="card-link" href="charts.html#hangseng">
+      <div class="card">
+        <span class="card-icon">🇭🇰</span>
+        <div class="card-label">Hang Seng</div>
+        <div class="card-price loading" id="hsi-price">SCANNING</div>
+        <div class="card-change neutral" id="hsi-change">–</div>
+        <div class="card-unit">HKD · INDEX</div>
+        <div class="card-chart-hint">▶ Chart</div>
+      </div>
+    </a>
   </div>
 
   <!-- FEAR & GREED -->
