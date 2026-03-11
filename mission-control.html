@@ -639,14 +639,15 @@
       } catch { return null; }
     }
 
-    // Silver via CoinGecko (kostenlos, kein Key)
+    // Silver via twelvedata
     async function fetchSilver() {
       try {
-        const url = 'https://api.coingecko.com/api/v3/simple/price?ids=silver&vs_currencies=usd';
+        const url = `https://api.twelvedata.com/price?symbol=XAG/USD&apikey=${TWELVEDATA_KEY}`;
         const res = await fetch(url);
         if (!res.ok) throw new Error();
         const d = await res.json();
-        return d?.silver?.usd || null;
+        if (d.status === 'error' || !d.price) throw new Error();
+        return parseFloat(d.price);
       } catch { return null; }
     }
 
