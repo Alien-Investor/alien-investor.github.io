@@ -463,7 +463,7 @@
       <div class="card-unit">USD / BBL</div>
     </div>
     <div class="card">
-      <span class="card-icon" style="font-family:Arial;font-size:1.3rem;color:var(--neon);">$/ €</span>
+      <span class="card-icon" style="font-family:Arial;font-size:0.85rem;color:var(--neon);display:flex;align-items:center;justify-content:center;line-height:1;">$ / €</span>
       <div class="card-label">USD / EUR</div>
       <div class="card-price loading" id="usd-eur">SCANNING</div>
       <div class="card-change neutral" id="usd-eur-change">–</div>
@@ -528,6 +528,13 @@
 </div>
 
 <script>
+  // ══════════════════════════════════════════════════════════
+  // API KEY KONFIGURATION
+  // Kostenloser Key: https://twelvedata.com → Sign Up → API Keys
+  // 800 Anfragen/Tag gratis – reicht für dieses Dashboard
+  const TWELVEDATA_KEY = '4685ce49091f419a970ba42a41091cf8; // ← Deinen Key hier eintragen
+  // ══════════════════════════════════════════════════════════
+
   // ── KONFIGURATION ──────────────────────────────────────────
   const REFRESH_INTERVAL = 5 * 60; // 5 Minuten in Sekunden
   let countdown = REFRESH_INTERVAL;
@@ -618,77 +625,46 @@
     return map[cls] || cls.toUpperCase();
   }
 
-  // ── GOLD & SILBER via goldprice.org ─────────────────────────
+  // ── GOLD & SILBER via Coinbase ───────────────────────────────
   async function fetchMetals() {
-    try {
-      const res = await fetch('https://data-asg.goldprice.org/GetData/USD-XAU,USD-XAG/1', {
-        headers: { 'x-access-token': 'goldpricez' }
-      });
-      if (!res.ok) throw new Error();
-      const data = await res.json();
-      // returns array: [ "timestamp,price,change,changePercent", ... ]
-      const parseEntry = (str) => {
-        const parts = str.split(',');
-        return { price: parseFloat(parts[1]), change: parseFloat(parts[3]) };
-      };
-      const gold   = parseEntry(data.items[0].xauPrice);
-      const silver = parseEntry(data.items[0].xagPrice);
-
-      if (gold.price)   { setPrice('gold-price',   gold.price,   2); setChange('gold-change',   gold.change); }
-      else setError('gold-price', 'gold-change');
-      if (silver.price) { setPrice('silver-price', silver.price, 2); setChange('silver-change', silver.change); }
-      else setError('silver-price', 'silver-change');
-    } catch (e) {
-      // Fallback: use exchangerate-api for XAU/XAG via USD
+    async function coinbase(pair) {
       try {
-        const [gRes, sRes] = await Promise.all([
-          fetch('https://api.coinbase.com/v2/exchange-rates?currency=XAU'),
-          fetch('https://api.coinbase.com/v2/exchange-rates?currency=XAG')
-        ]);
-        const gData = await gRes.json();
-        const sData = await sRes.json();
-        const goldUsd   = 1 / parseFloat(gData.data.rates.USD);
-        const silverUsd = 1 / parseFloat(sData.data.rates.USD);
-        if (goldUsd)   { setPrice('gold-price',   goldUsd,   2); document.getElementById('gold-change').textContent   = 'SPOT'; }
-        else setError('gold-price', 'gold-change');
-        if (silverUsd) { setPrice('silver-price', silverUsd, 2); document.getElementById('silver-change').textContent = 'SPOT'; }
-        else setError('silver-price', 'silver-change');
-      } catch {
-        setError('gold-price', 'gold-change');
-        setError('silver-price', 'silver-change');
-      }
+        const res = await fetch(`https://api.coinbase.com/v2/prices/${pair}/spot`);
+        if (!res.ok) throw new Error();
+        const d = await res.json();
+        return parseFloat(d?.data?.amount) || null;
+      } catch { return null; }
     }
+    const [gold, silver] = await Promise.all([
+      coinbase('XAU-USD'),
+      coinbase('XAG-USD')
+    ]);
+    if (gold)   { setPrice('gold-price',   gold,   2); document.getElementById('gold-change').textContent   = 'SPOT'; }
+    else setError('gold-price', 'gold-change');
+    if (silver) { setPrice('silver-price', silver, 2); document.getElementById('silver-change').textContent = 'SPOT'; }
+    else setError('silver-price', 'silver-change');
   }
 
-    // ── ÖL & INDIZES via twelvedata.com (kostenlos, CORS-ok) ────
-  // Kostenloser API Key: https://twelvedata.com (800 req/Tag)
-  // KEIN KEY = Demo-Modus mit Verzögerung, aber funktioniert
+    // ── ÖL & INDIZES via twelvedata.com ─────────────────────────
   async function fetchYahoo() {
-    const symbols = ['CL/USD','SPY/USD','DAX','HSI'];
-    const ids     = ['oil-price','sp500-price','dax-price','hsi-price'];
-    const cids    = ['oil-change','sp500-change','dax-change','hsi-change'];
-    const decs    = [2, 2, 0, 0];
+    const items = [
+      { symbol: 'WTI/USD', pid: 'oil-price',   cid: 'oil-change',   dec: 2 },
+      { symbol: 'SPY',     pid: 'sp500-price', cid: 'sp500-change', dec: 2 },
+      { symbol: 'DAX',     pid: 'dax-price',   cid: 'dax-change',   dec: 0 },
+      { symbol: 'HSI',     pid: 'hsi-price',   cid: 'hsi-change',   dec: 0 },
+    ];
 
-    async function fetchTwelve(symbol) {
+    await Promise.all(items.map(async ({ symbol, pid, cid, dec }) => {
       try {
-        const url = `https://api.twelvedata.com/price?symbol=${symbol}&apikey=demo`;
+        const url = `https://api.twelvedata.com/price?symbol=${symbol}&apikey=${TWELVEDATA_KEY}`;
         const res = await fetch(url);
         if (!res.ok) throw new Error();
         const d = await res.json();
-        return d.price ? parseFloat(d.price) : null;
-      } catch { return null; }
-    }
-
-    const prices = await Promise.all(symbols.map(fetchTwelve));
-
-    prices.forEach((price, i) => {
-      if (price) {
-        setPrice(ids[i], price, decs[i]);
-        document.getElementById(cids[i]).textContent = '';
-      } else {
-        setError(ids[i], cids[i]);
-      }
-    });
+        if (d.status === 'error' || !d.price) throw new Error(d.message);
+        setPrice(pid, parseFloat(d.price), dec);
+        document.getElementById(cid).textContent = '';
+      } catch { setError(pid, cid); }
+    }));
   }
 
     // ── USD/EUR (frankfurter.app) ──────────────────────────────
