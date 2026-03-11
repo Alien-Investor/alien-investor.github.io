@@ -641,7 +641,7 @@
 
     const [gold, silver] = await Promise.all([
       twelvePrice('XAU/USD'),
-      twelvePrice('XAG/USD:Oanda')
+      twelvePrice('XAG/USD')
     ]);
 
     if (gold)   { setPrice('gold-price',   gold,   2); document.getElementById('gold-change').textContent   = 'SPOT'; }
