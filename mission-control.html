@@ -386,12 +386,17 @@
     /* RESPONSIVE */
     @media (max-width: 600px) {
       .grid-main, .grid-wide {
-        grid-template-columns: 1fr 1fr;
+        display: flex !important;
+        flex-wrap: wrap;
+        justify-content: center;
       }
-    }
-    @media (max-width: 400px) {
-      .grid-main, .grid-wide {
-        grid-template-columns: 1fr;
+      .grid-main > .card {
+        flex: 0 1 calc(50% - 7px);
+        min-width: 140px;
+        max-width: 220px;
+      }
+      .grid-wide > .card {
+        flex: 0 1 100%;
       }
     }
   </style>
@@ -613,59 +618,75 @@
     return map[cls] || cls.toUpperCase();
   }
 
-  // ── GOLD & SILBER via stooq.com (CORS-freundlich, kein Key) ──
+  // ── GOLD & SILBER via Coinbase (CORS-freundlich, kein Key) ──
   async function fetchMetals() {
-    async function stooq(symbol) {
-      const url = `https://stooq.com/q/l/?s=${symbol}&f=sd2t2ohlcv&h&e=json`;
-      const proxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent(url);
+    async function coinbaseSpot(pair) {
       try {
-        const res = await fetch(proxy);
+        const res = await fetch(`https://api.coinbase.com/v2/prices/${pair}/spot`);
         if (!res.ok) throw new Error();
-        const wrapper = await res.json();
-        const data = JSON.parse(wrapper.contents);
-        return data?.symbols?.[0]?.close || null;
+        const data = await res.json();
+        return parseFloat(data.data.amount);
       } catch { return null; }
     }
-
-    const [gold, silver] = await Promise.all([stooq('gc.f'), stooq('si.f')]);
-
-    if (gold) { setPrice('gold-price', gold, 2); document.getElementById('gold-change').textContent = 'SPOT'; }
+    const [gold, silver] = await Promise.all([
+      coinbaseSpot('XAU-USD'),
+      coinbaseSpot('XAG-USD')
+    ]);
+    if (gold)   { setPrice('gold-price', gold, 2);     document.getElementById('gold-change').textContent = 'SPOT'; }
     else setError('gold-price', 'gold-change');
     if (silver) { setPrice('silver-price', silver, 2); document.getElementById('silver-change').textContent = 'SPOT'; }
     else setError('silver-price', 'silver-change');
   }
 
-    // ── ÖL, INDIZES via stooq.com ────────────────────────────
+    // ── ÖL & INDIZES via Yahoo Finance ──────────────────────────
   async function fetchYahoo() {
-    async function stooq(symbol) {
-      const url = `https://stooq.com/q/l/?s=${symbol}&f=sd2t2ohlcv&h&e=json`;
-      const proxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent(url);
+    const symbols = 'CL=F,^GSPC,^GDAXI,^HSI';
+    const yahooUrl = `https://query2.finance.yahoo.com/v8/finance/spark?symbols=${encodeURIComponent(symbols)}&range=1d&interval=1d`;
+    const quoteUrl = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${encodeURIComponent(symbols)}`;
+
+    let results = null;
+
+    // Try direct (works on https://)
+    try {
+      const res = await fetch(quoteUrl, { headers: { 'Accept': 'application/json' }});
+      if (res.ok) {
+        const data = await res.json();
+        results = data?.quoteResponse?.result || [];
+      }
+    } catch (_) {}
+
+    // Fallback: allorigins proxy
+    if (!results) {
       try {
+        const proxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent(quoteUrl);
         const res = await fetch(proxy);
-        if (!res.ok) throw new Error();
-        const wrapper = await res.json();
-        const d = JSON.parse(wrapper.contents)?.symbols?.[0];
-        if (!d) return null;
-        const pct = d.open && d.open !== 0 ? ((d.close - d.open) / d.open) * 100 : null;
-        return { price: d.close, change: pct };
-      } catch { return null; }
+        if (res.ok) {
+          const wrapper = await res.json();
+          const data = JSON.parse(wrapper.contents);
+          results = data?.quoteResponse?.result || [];
+        }
+      } catch (_) {}
     }
 
-    const [oil, sp500, dax, hsi] = await Promise.all([
-      stooq('cl.f'),
-      stooq('spy.us'),
-      stooq('^dax'),
-      stooq('^hsi')
-    ]);
+    if (!results) {
+      ['oil','sp500','dax','hsi'].forEach(k => setError(`${k}-price`, `${k}-change`));
+      return;
+    }
 
-    if (oil)   { setPrice('oil-price',   oil.price,   2); setChange('oil-change',   oil.change); }
-    else setError('oil-price', 'oil-change');
-    if (sp500) { setPrice('sp500-price', sp500.price, 2); setChange('sp500-change', sp500.change); }
-    else setError('sp500-price', 'sp500-change');
-    if (dax)   { setPrice('dax-price',   dax.price,   0); setChange('dax-change',   dax.change); }
-    else setError('dax-price', 'dax-change');
-    if (hsi)   { setPrice('hsi-price',   hsi.price,   0); setChange('hsi-change',   hsi.change); }
-    else setError('hsi-price', 'hsi-change');
+    const bySymbol = {};
+    results.forEach(r => { bySymbol[r.symbol] = r; });
+
+    const map = [
+      ['CL=F',   'oil-price',   'oil-change',   2],
+      ['^GSPC',  'sp500-price', 'sp500-change',  2],
+      ['^GDAXI', 'dax-price',   'dax-change',    0],
+      ['^HSI',   'hsi-price',   'hsi-change',    0],
+    ];
+    map.forEach(([sym, pid, cid, dec]) => {
+      const r = bySymbol[sym];
+      if (r) { setPrice(pid, r.regularMarketPrice, dec); setChange(cid, r.regularMarketChangePercent); }
+      else setError(pid, cid);
+    });
   }
 
     // ── USD/EUR (frankfurter.app) ──────────────────────────────
