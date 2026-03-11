@@ -641,7 +641,7 @@
 
     const [gold, silver] = await Promise.all([
       twelvePrice('XAU/USD'),
-      twelvePrice('XAG/USD')
+      twelvePrice('XAG/USD:Oanda')
     ]);
 
     if (gold)   { setPrice('gold-price',   gold,   2); document.getElementById('gold-change').textContent   = 'SPOT'; }
@@ -656,7 +656,7 @@
       { symbol: 'WTI',  pid: 'oil-price',   cid: 'oil-change',   dec: 2 },
       { symbol: 'SPY',  pid: 'sp500-price', cid: 'sp500-change', dec: 2 },
       { symbol: 'DAX',  pid: 'dax-price',   cid: 'dax-change',   dec: 0 },
-      { symbol: '2800', pid: 'hsi-price',   cid: 'hsi-change',   dec: 0 },
+      { symbol: 'HSI:HKEX', pid: 'hsi-price',   cid: 'hsi-change',   dec: 0 },
     ];
 
     await Promise.all(items.map(async ({ symbol, pid, cid, dec }) => {
