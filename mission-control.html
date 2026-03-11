@@ -463,7 +463,7 @@
       <div class="card-unit">USD / BBL</div>
     </div>
     <div class="card">
-      <span class="card-icon">💱</span>
+      <span class="card-icon" style="font-family:Arial;font-size:1.3rem;color:var(--neon);">€/$</span>
       <div class="card-label">USD / EUR</div>
       <div class="card-price loading" id="usd-eur">SCANNING</div>
       <div class="card-change neutral" id="usd-eur-change">–</div>
@@ -618,55 +618,81 @@
     return map[cls] || cls.toUpperCase();
   }
 
-  // ── GOLD & SILBER via Coinbase (CORS-freundlich, kein Key) ──
+  // ── GOLD & SILBER via goldprice.org ─────────────────────────
   async function fetchMetals() {
-    async function coinbaseSpot(pair) {
+    try {
+      const res = await fetch('https://data-asg.goldprice.org/GetData/USD-XAU,USD-XAG/1', {
+        headers: { 'x-access-token': 'goldpricez' }
+      });
+      if (!res.ok) throw new Error();
+      const data = await res.json();
+      // returns array: [ "timestamp,price,change,changePercent", ... ]
+      const parseEntry = (str) => {
+        const parts = str.split(',');
+        return { price: parseFloat(parts[1]), change: parseFloat(parts[3]) };
+      };
+      const gold   = parseEntry(data.items[0].xauPrice);
+      const silver = parseEntry(data.items[0].xagPrice);
+
+      if (gold.price)   { setPrice('gold-price',   gold.price,   2); setChange('gold-change',   gold.change); }
+      else setError('gold-price', 'gold-change');
+      if (silver.price) { setPrice('silver-price', silver.price, 2); setChange('silver-change', silver.change); }
+      else setError('silver-price', 'silver-change');
+    } catch (e) {
+      // Fallback: use exchangerate-api for XAU/XAG via USD
       try {
-        const res = await fetch(`https://api.coinbase.com/v2/prices/${pair}/spot`);
-        if (!res.ok) throw new Error();
-        const data = await res.json();
-        return parseFloat(data.data.amount);
-      } catch { return null; }
+        const [gRes, sRes] = await Promise.all([
+          fetch('https://api.coinbase.com/v2/exchange-rates?currency=XAU'),
+          fetch('https://api.coinbase.com/v2/exchange-rates?currency=XAG')
+        ]);
+        const gData = await gRes.json();
+        const sData = await sRes.json();
+        const goldUsd   = 1 / parseFloat(gData.data.rates.USD);
+        const silverUsd = 1 / parseFloat(sData.data.rates.USD);
+        if (goldUsd)   { setPrice('gold-price',   goldUsd,   2); document.getElementById('gold-change').textContent   = 'SPOT'; }
+        else setError('gold-price', 'gold-change');
+        if (silverUsd) { setPrice('silver-price', silverUsd, 2); document.getElementById('silver-change').textContent = 'SPOT'; }
+        else setError('silver-price', 'silver-change');
+      } catch {
+        setError('gold-price', 'gold-change');
+        setError('silver-price', 'silver-change');
+      }
     }
-    const [gold, silver] = await Promise.all([
-      coinbaseSpot('XAU-USD'),
-      coinbaseSpot('XAG-USD')
-    ]);
-    if (gold)   { setPrice('gold-price', gold, 2);     document.getElementById('gold-change').textContent = 'SPOT'; }
-    else setError('gold-price', 'gold-change');
-    if (silver) { setPrice('silver-price', silver, 2); document.getElementById('silver-change').textContent = 'SPOT'; }
-    else setError('silver-price', 'silver-change');
   }
 
-    // ── ÖL & INDIZES via Yahoo Finance ──────────────────────────
+    // ── ÖL & INDIZES ─────────────────────────────────────────────
   async function fetchYahoo() {
     const symbols = 'CL=F,^GSPC,^GDAXI,^HSI';
-    const yahooUrl = `https://query2.finance.yahoo.com/v8/finance/spark?symbols=${encodeURIComponent(symbols)}&range=1d&interval=1d`;
-    const quoteUrl = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${encodeURIComponent(symbols)}`;
 
-    let results = null;
-
-    // Try direct (works on https://)
-    try {
-      const res = await fetch(quoteUrl, { headers: { 'Accept': 'application/json' }});
-      if (res.ok) {
-        const data = await res.json();
-        results = data?.quoteResponse?.result || [];
-      }
-    } catch (_) {}
-
-    // Fallback: allorigins proxy
-    if (!results) {
+    async function tryFetch(url, headers = {}) {
       try {
-        const proxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent(quoteUrl);
-        const res = await fetch(proxy);
-        if (res.ok) {
-          const wrapper = await res.json();
-          const data = JSON.parse(wrapper.contents);
-          results = data?.quoteResponse?.result || [];
-        }
-      } catch (_) {}
+        const res = await fetch(url, { headers: { 'Accept': 'application/json', ...headers }});
+        if (!res.ok) throw new Error();
+        const data = await res.json();
+        return data?.quoteResponse?.result || null;
+      } catch { return null; }
     }
+
+    async function tryProxy(url) {
+      try {
+        const proxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent(url);
+        const res = await fetch(proxy);
+        if (!res.ok) throw new Error();
+        const wrapper = await res.json();
+        const data = JSON.parse(wrapper.contents);
+        return data?.quoteResponse?.result || null;
+      } catch { return null; }
+    }
+
+    const quoteUrl = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${encodeURIComponent(symbols)}`;
+    const quoteUrl2 = `https://query2.finance.yahoo.com/v7/finance/quote?symbols=${encodeURIComponent(symbols)}`;
+
+    let results =
+      await tryFetch(quoteUrl) ||
+      await tryFetch(quoteUrl2) ||
+      await tryProxy(quoteUrl) ||
+      await tryProxy(quoteUrl2) ||
+      null;
 
     if (!results) {
       ['oil','sp500','dax','hsi'].forEach(k => setError(`${k}-price`, `${k}-change`));
