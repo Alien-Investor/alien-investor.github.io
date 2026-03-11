@@ -463,7 +463,7 @@
       <div class="card-unit">USD / BBL</div>
     </div>
     <div class="card">
-      <span class="card-icon" style="font-family:Arial;font-size:1.3rem;color:var(--neon);">€/$</span>
+      <span class="card-icon" style="font-family:Arial;font-size:1.3rem;color:var(--neon);">$/ €</span>
       <div class="card-label">USD / EUR</div>
       <div class="card-price loading" id="usd-eur">SCANNING</div>
       <div class="card-change neutral" id="usd-eur-change">–</div>
@@ -660,58 +660,34 @@
     }
   }
 
-    // ── ÖL & INDIZES ─────────────────────────────────────────────
+    // ── ÖL & INDIZES via twelvedata.com (kostenlos, CORS-ok) ────
+  // Kostenloser API Key: https://twelvedata.com (800 req/Tag)
+  // KEIN KEY = Demo-Modus mit Verzögerung, aber funktioniert
   async function fetchYahoo() {
-    const symbols = 'CL=F,^GSPC,^GDAXI,^HSI';
+    const symbols = ['CL/USD','SPY/USD','DAX','HSI'];
+    const ids     = ['oil-price','sp500-price','dax-price','hsi-price'];
+    const cids    = ['oil-change','sp500-change','dax-change','hsi-change'];
+    const decs    = [2, 2, 0, 0];
 
-    async function tryFetch(url, headers = {}) {
+    async function fetchTwelve(symbol) {
       try {
-        const res = await fetch(url, { headers: { 'Accept': 'application/json', ...headers }});
+        const url = `https://api.twelvedata.com/price?symbol=${symbol}&apikey=demo`;
+        const res = await fetch(url);
         if (!res.ok) throw new Error();
-        const data = await res.json();
-        return data?.quoteResponse?.result || null;
+        const d = await res.json();
+        return d.price ? parseFloat(d.price) : null;
       } catch { return null; }
     }
 
-    async function tryProxy(url) {
-      try {
-        const proxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent(url);
-        const res = await fetch(proxy);
-        if (!res.ok) throw new Error();
-        const wrapper = await res.json();
-        const data = JSON.parse(wrapper.contents);
-        return data?.quoteResponse?.result || null;
-      } catch { return null; }
-    }
+    const prices = await Promise.all(symbols.map(fetchTwelve));
 
-    const quoteUrl = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${encodeURIComponent(symbols)}`;
-    const quoteUrl2 = `https://query2.finance.yahoo.com/v7/finance/quote?symbols=${encodeURIComponent(symbols)}`;
-
-    let results =
-      await tryFetch(quoteUrl) ||
-      await tryFetch(quoteUrl2) ||
-      await tryProxy(quoteUrl) ||
-      await tryProxy(quoteUrl2) ||
-      null;
-
-    if (!results) {
-      ['oil','sp500','dax','hsi'].forEach(k => setError(`${k}-price`, `${k}-change`));
-      return;
-    }
-
-    const bySymbol = {};
-    results.forEach(r => { bySymbol[r.symbol] = r; });
-
-    const map = [
-      ['CL=F',   'oil-price',   'oil-change',   2],
-      ['^GSPC',  'sp500-price', 'sp500-change',  2],
-      ['^GDAXI', 'dax-price',   'dax-change',    0],
-      ['^HSI',   'hsi-price',   'hsi-change',    0],
-    ];
-    map.forEach(([sym, pid, cid, dec]) => {
-      const r = bySymbol[sym];
-      if (r) { setPrice(pid, r.regularMarketPrice, dec); setChange(cid, r.regularMarketChangePercent); }
-      else setError(pid, cid);
+    prices.forEach((price, i) => {
+      if (price) {
+        setPrice(ids[i], price, decs[i]);
+        document.getElementById(cids[i]).textContent = '';
+      } else {
+        setError(ids[i], cids[i]);
+      }
     });
   }
 
