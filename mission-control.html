@@ -625,12 +625,12 @@
     return map[cls] || cls.toUpperCase();
   }
 
-  // ── GOLD & SILBER via metals-api (open.er-api fallback) ────
+  // ── GOLD via twelvedata, SILBER via CoinGecko ───────────────
   async function fetchMetals() {
-    // Use commodity prices from twelvedata (same key as indices)
-    async function twelvePrice(symbol) {
+    // Gold via twelvedata
+    async function fetchGold() {
       try {
-        const url = `https://api.twelvedata.com/price?symbol=${symbol}&apikey=${TWELVEDATA_KEY}`;
+        const url = `https://api.twelvedata.com/price?symbol=XAU/USD&apikey=${TWELVEDATA_KEY}`;
         const res = await fetch(url);
         if (!res.ok) throw new Error();
         const d = await res.json();
@@ -639,10 +639,18 @@
       } catch { return null; }
     }
 
-    const [gold, silver] = await Promise.all([
-      twelvePrice('XAU/USD'),
-      twelvePrice('XAG/USD')
-    ]);
+    // Silver via CoinGecko (kostenlos, kein Key)
+    async function fetchSilver() {
+      try {
+        const url = 'https://api.coingecko.com/api/v3/simple/price?ids=silver&vs_currencies=usd';
+        const res = await fetch(url);
+        if (!res.ok) throw new Error();
+        const d = await res.json();
+        return d?.silver?.usd || null;
+      } catch { return null; }
+    }
+
+    const [gold, silver] = await Promise.all([fetchGold(), fetchSilver()]);
 
     if (gold)   { setPrice('gold-price',   gold,   2); document.getElementById('gold-change').textContent   = 'SPOT'; }
     else setError('gold-price', 'gold-change');
