@@ -539,7 +539,7 @@
         <div class="card-label">Hang Seng</div>
         <div class="card-price loading" id="hsi-price">SCANNING</div>
         <div class="card-change neutral" id="hsi-change">–</div>
-        <div class="card-unit">HKD · INDEX</div>
+        <div class="card-unit">USD · ETF (EWH)</div>
         <div class="card-chart-hint">▶ Chart</div>
       </div>
     </a>
@@ -712,7 +712,7 @@
     const items = [
       { symbol: 'USO',      exchange: '',     pid: 'oil-price',   cid: 'oil-change',   dec: 2 },
       { symbol: 'SPY',      exchange: '',     pid: 'sp500-price', cid: 'sp500-change', dec: 2 },
-      { symbol: '2800',     exchange: 'HKEX', pid: 'hsi-price',   cid: 'hsi-change',   dec: 2 },
+      { symbol: 'EWH',      exchange: '',     pid: 'hsi-price',   cid: 'hsi-change',   dec: 2 },
     ];
 
     await Promise.all(items.map(async ({ symbol, exchange, pid, cid, dec }) => {
