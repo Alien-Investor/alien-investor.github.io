@@ -260,6 +260,57 @@
     @media (max-width: 600px) {
       .tradingview-widget-container { height: 380px; }
     }
+
+    /* SPENDEN */
+    .donate-section {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .donate-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 24px;
+      border: 1px solid rgba(0, 255, 204, 0.15);
+      border-radius: 4px;
+      text-decoration: none;
+      color: var(--text-dim);
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      transition: border-color 0.3s, color 0.3s, box-shadow 0.3s;
+      position: relative;
+    }
+
+    .donate-link::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 12px; height: 12px;
+      border-top: 1px solid rgba(0, 255, 204, 0.3);
+      border-left: 1px solid rgba(0, 255, 204, 0.3);
+    }
+
+    .donate-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 12px; height: 12px;
+      border-bottom: 1px solid rgba(0, 255, 204, 0.3);
+      border-right: 1px solid rgba(0, 255, 204, 0.3);
+    }
+
+    .donate-link:hover {
+      border-color: rgba(0, 255, 204, 0.35);
+      color: var(--text-mid);
+      box-shadow: 0 0 14px rgba(0, 255, 204, 0.05);
+    }
+
+    .donate-icon {
+      font-size: 0.85rem;
+      opacity: 0.6;
+    }
   </style>
 </head>
 <body>
@@ -474,6 +525,15 @@
       </div>
     </div>
   </section>
+
+  <div class="donate-section">
+    <a href="https://alien-investor.org/spenden.html" class="donate-link">
+      <span class="donate-icon">⚡</span>
+      <span>Energie aufladen</span>
+      <span style="opacity:0.4;">·</span>
+      <span>Spenden</span>
+    </a>
+  </div>
 
   <footer>
     <div style="margin-bottom:8px;">alien-investor.org · Charts: TradingView</div>
