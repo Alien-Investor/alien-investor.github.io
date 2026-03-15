@@ -896,20 +896,26 @@ document.getElementById('ticker-input').addEventListener('keydown', e => {
 });
 
 async function fetchAllAV(ticker, apiKey, statusFn) {
-  const delay = ms => new Promise(r => setTimeout(r, ms));
+  const DELAY_MS = 13000;
+  const countdown = (label, step) => new Promise(resolve => {
+    let remaining = Math.round(DELAY_MS / 1000);
+    statusFn(`${label} – warte ${remaining}s (${step}/5)`);
+    const iv = setInterval(() => {
+      remaining--;
+      if (remaining <= 0) { clearInterval(iv); resolve(); }
+      else statusFn(`${label} – warte ${remaining}s (${step}/5)`);
+    }, 1000);
+  });
+
   statusFn('LADE FUNDAMENTALDATEN … (1/5)');
   const overview = await fetchAV('OVERVIEW', ticker, apiKey);
-  await delay(1200);
-  statusFn('LADE EARNINGS … (2/5)');
+  await countdown('LADE EARNINGS', 2);
   const earnings = await fetchAV('EARNINGS', ticker, apiKey);
-  await delay(1200);
-  statusFn('LADE INCOME STATEMENT … (3/5)');
+  await countdown('LADE INCOME STATEMENT', 3);
   const income = await fetchAV('INCOME_STATEMENT', ticker, apiKey);
-  await delay(1200);
-  statusFn('LADE BALANCE SHEET … (4/5)');
+  await countdown('LADE BALANCE SHEET', 4);
   const balance = await fetchAV('BALANCE_SHEET', ticker, apiKey);
-  await delay(1200);
-  statusFn('LADE CASH FLOW … (5/5)');
+  await countdown('LADE CASH FLOW', 5);
   const cashflow = await fetchAV('CASH_FLOW', ticker, apiKey);
   return { overview, earnings, income, balance, cashflow };
 }
