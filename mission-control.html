@@ -437,6 +437,180 @@
       }
     }
 
+    /* TOP NAV */
+    .top-nav { display:flex; align-items:center; gap:10px; margin-bottom:30px; }
+    .top-nav-title { font-size:.6rem; letter-spacing:2px; color:var(--text-dim); text-transform:uppercase; }
+
+    /* SETTINGS BUTTON */
+    .settings-btn {
+      margin-left: auto;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      color: var(--text-dim);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: 2px;
+      padding: 5px 12px;
+      cursor: pointer;
+      transition: all .2s;
+      text-transform: uppercase;
+    }
+    .settings-btn:hover { border-color: var(--neon-mid); color: var(--text-mid); }
+
+    /* DIALOG OVERLAY */
+    .mc-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .mc-dialog {
+      max-width: 440px;
+      width: 100%;
+      padding: 28px;
+      background: var(--card-bg);
+      border: 1px solid var(--neon-mid);
+      border-radius: 4px;
+      position: relative;
+    }
+    .mc-dialog::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 16px; height: 16px;
+      border-top: 1px solid var(--neon);
+      border-left: 1px solid var(--neon);
+      opacity: 0.5;
+    }
+    .mc-dialog-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--neon);
+      letter-spacing: 3px;
+      margin-bottom: 8px;
+    }
+    .mc-dialog-intro {
+      font-size: 0.65rem;
+      color: var(--text-mid);
+      letter-spacing: 1px;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .mc-field-label {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 2px;
+      color: var(--text-mid);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+    .mc-info-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      padding: 0 2px;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+    .mc-info-btn:hover { color: var(--neon); }
+    .mc-key-input {
+      width: 100%;
+      background: rgba(0,255,204,0.04);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      color: var(--neon);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      padding: 10px 14px;
+      outline: none;
+      transition: border-color 0.2s;
+      margin-bottom: 14px;
+    }
+    .mc-key-input:focus { border-color: var(--neon-mid); }
+    .mc-key-input::placeholder { color: var(--text-dim); font-size: 0.7rem; }
+    .mc-save-btn {
+      width: 100%;
+      background: var(--neon-dim);
+      border: 1px solid var(--neon-mid);
+      border-radius: 3px;
+      color: var(--neon);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      padding: 10px 24px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: background 0.2s;
+    }
+    .mc-save-btn:hover { background: rgba(0,255,204,0.2); }
+
+    /* INFO OVERLAY */
+    .mc-info-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 1100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .mc-info-box {
+      max-width: 360px;
+      width: 100%;
+      padding: 22px 24px;
+      background: var(--card-bg);
+      border: 1px solid var(--neon-mid);
+      border-radius: 4px;
+      position: relative;
+    }
+    .mc-info-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      color: var(--neon);
+      margin-bottom: 10px;
+    }
+    .mc-info-text {
+      font-size: 0.65rem;
+      color: var(--text-mid);
+      letter-spacing: 0.5px;
+      line-height: 1.9;
+    }
+    .mc-info-close {
+      position: absolute;
+      top: 10px; right: 12px;
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      cursor: pointer;
+      font-size: 0.7rem;
+      font-family: 'Share Tech Mono', monospace;
+    }
+    .mc-info-close:hover { color: var(--neon); }
+    .mc-dialog .mc-info-close { z-index: 1200; }
+    .mc-info-box .mc-info-close {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      z-index: 1300;
+      cursor: pointer;
+    }
+    .hidden { display: none !important; }
+
     /* SPENDEN */
     .donate-section {
       margin-top: 40px;
@@ -491,7 +665,46 @@
 </head>
 <body>
 
+<!-- MC INFO OVERLAY -->
+<div id="mc-info-overlay" class="mc-info-overlay hidden">
+  <div class="mc-info-box">
+    <button class="mc-info-close" onclick="closeMcInfo()">✕</button>
+    <div class="mc-info-title">Woher bekomme ich einen kostenlosen API Key?</div>
+    <div class="mc-info-text">
+      <span style="color:var(--neon)">①</span> Gehe auf <strong style="color:var(--neon)">twelvedata.com</strong><br>
+      <span style="color:var(--neon)">②</span> Klicke auf „Sign Up" – kostenlos, keine Kreditkarte nötig<br>
+      <span style="color:var(--neon)">③</span> Gehe zu deinem Dashboard → API Keys<br>
+      <span style="color:var(--neon)">④</span> Key kopieren und hier eintragen<br><br>
+      <span style="color:var(--yellow)">Free Tier: 800 Anfragen/Tag</span> – reicht für dieses Dashboard.
+    </div>
+  </div>
+</div>
+
+<!-- MC SETTINGS DIALOG -->
+<div id="mc-dialog-overlay" class="mc-overlay hidden">
+  <div class="mc-dialog">
+    <button class="mc-info-close" onclick="closeMcDialog()" title="Schließen">✕</button>
+    <div class="mc-dialog-title">⚙ API Key</div>
+    <div class="mc-dialog-intro">
+      Einmalig einrichten – wird lokal im Browser gespeichert. Kein Server, kein Tracking.
+    </div>
+    <label class="mc-field-label">
+      Twelve Data API Key
+      <button class="mc-info-btn" onclick="openMcInfo()" title="Info">ℹ</button>
+    </label>
+    <input class="mc-key-input" id="mc-key-input" type="text"
+      placeholder="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" autocomplete="off" spellcheck="false">
+    <button class="mc-save-btn" onclick="saveMcKey()">Key speichern &amp; starten</button>
+  </div>
+</div>
+
 <div class="container">
+
+  <div class="top-nav">
+    <span class="top-nav-title">Mission Control</span>
+    <button class="settings-btn" onclick="openMcDialog()">⚙ API Key</button>
+    <button class="mc-info-btn" onclick="openMcInfo()" title="Info zum API Key">ℹ</button>
+  </div>
 
   <header>
     <div class="header-glow"></div>
@@ -619,6 +832,21 @@
     </div>
   </div>
 
+  <!-- TOOLS -->
+  <div class="section-label">🛸 Tools</div>
+  <div class="grid-wide">
+    <a class="card-link" href="alien-analyzer/alien-analyzer.html">
+      <div class="card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:130px;">
+        <span class="card-icon" style="float:none;margin:0 0 10px 0;">👽</span>
+        <div class="card-label">Alien Analyzer</div>
+        <div class="card-price" style="font-size:1rem;letter-spacing:2px;">Value Scanner</div>
+        <div class="card-change neutral">Fairer Wert · Multiples · Dividenden</div>
+        <div class="card-unit">Aktienanalyse</div>
+        <div class="card-chart-hint">▶ Starten</div>
+      </div>
+    </a>
+  </div>
+
   <hr class="alien-hr">
 
   <div class="donate-section">
@@ -640,10 +868,37 @@
 
 <script>
   // ══════════════════════════════════════════════════════════
-  // API KEY KONFIGURATION
-  // Kostenloser Key: https://twelvedata.com → Sign Up → API Keys
-  // 800 Anfragen/Tag gratis – reicht für dieses Dashboard
-  const TWELVEDATA_KEY = '4685ce49091f419a970ba42a41091cf8'; // ← Deinen Key hier eintragen
+  // API KEY – wird aus localStorage geladen, niemals hardcodiert
+  // ══════════════════════════════════════════════════════════
+  const TWELVEDATA_KEY = localStorage.getItem('mc_td_key') || '';
+
+  // ── API KEY DIALOG ─────────────────────────────────────────
+  function openMcDialog() {
+    document.getElementById('mc-key-input').value = localStorage.getItem('mc_td_key') || '';
+    document.getElementById('mc-dialog-overlay').classList.remove('hidden');
+  }
+  function closeMcDialog() {
+    document.getElementById('mc-dialog-overlay').classList.add('hidden');
+  }
+  function saveMcKey() {
+    const val = document.getElementById('mc-key-input').value.trim();
+    if (!val) { alert('Bitte einen API Key eingeben.'); return; }
+    localStorage.setItem('mc_td_key', val);
+    closeMcDialog();
+    location.reload();
+  }
+  function openMcInfo() {
+    document.getElementById('mc-info-overlay').classList.remove('hidden');
+  }
+  function closeMcInfo() {
+    document.getElementById('mc-info-overlay').classList.add('hidden');
+  }
+  document.getElementById('mc-dialog-overlay').addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeMcDialog();
+  });
+  document.getElementById('mc-info-overlay').addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeMcInfo();
+  });
   // ══════════════════════════════════════════════════════════
 
   // ── KONFIGURATION ──────────────────────────────────────────
@@ -846,6 +1101,11 @@
   }
 
   // ── START ──────────────────────────────────────────────────
+  // Dialog als Hinweis zeigen wenn kein Key – aber fetchAll() läuft immer
+  // (Crypto/Forex brauchen keinen Key, nur Rohstoff-/Aktien-Karten fallen auf Fehler)
+  if (!TWELVEDATA_KEY) {
+    openMcDialog();
+  }
   fetchAll();
 </script>
 
