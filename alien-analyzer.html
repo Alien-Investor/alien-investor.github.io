@@ -302,7 +302,16 @@
     @media(max-width:600px) {
       .company-stats { gap:16px; }
       .tab-btn { padding:8px 12px; font-size:.55rem; letter-spacing:2px; }
-      .qc-table .qc-hint { display:none; }
+      .qc-table { table-layout:fixed; }
+      .qc-table th:nth-child(1), .qc-table td.qc-label   { width:38%; }
+      .qc-table th:nth-child(2), .qc-table td.qc-value   { width:22%; }
+      .qc-table th:nth-child(4), .qc-table td:nth-child(4){ width:28%; }
+      .qc-table .qc-compare,
+      .qc-table th:nth-child(3),
+      .qc-table .qc-hint,
+      .qc-table th:nth-child(5) { display:none; }
+      .qc-table td:nth-child(4) { white-space:nowrap; overflow:visible; }
+      .qc-table .qc-value { font-size:.65rem; }
     }
   </style>
 </head>
