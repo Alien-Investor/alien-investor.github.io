@@ -299,6 +299,12 @@
     .api-save-btn { width:100%; margin-top:8px; }
 
     .hidden { display:none !important; }
+    .tab-short { display:none; }
+    @media(max-width:768px) {
+      #chart-dividenden { min-height:250px; width:100% !important; }
+      .tab-long { display:none; }
+      .tab-short { display:inline; }
+    }
     @media(max-width:600px) {
       .company-stats { gap:16px; }
       .tab-btn { padding:8px 12px; font-size:.55rem; letter-spacing:2px; }
@@ -434,10 +440,10 @@
 
     <!-- TABS -->
     <div class="tab-bar">
-      <button class="tab-btn active" data-tab="fairvalue" onclick="switchTab('fairvalue')">⭐ Fairer Wert</button>
+      <button class="tab-btn active" data-tab="fairvalue" onclick="switchTab('fairvalue')"><span class="tab-long">⭐ Fairer Wert</span><span class="tab-short">⭐ F-Wert</span></button>
       <button class="tab-btn" data-tab="multiples" onclick="switchTab('multiples')">Multiples</button>
       <button class="tab-btn" data-tab="dividenden" onclick="switchTab('dividenden')">Dividenden</button>
-      <button class="tab-btn" data-tab="qualitaet" onclick="switchTab('qualitaet')">Qualitätscheck</button>
+      <button class="tab-btn" data-tab="qualitaet" onclick="switchTab('qualitaet')"><span class="tab-long">Qualitätscheck</span><span class="tab-short">Qualität</span></button>
     </div>
 
     <!-- TAB: FAIRER WERT -->
