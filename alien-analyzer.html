@@ -786,7 +786,7 @@ const YAHOO_PROXIES = [
 ];
 
 async function fetchTDDividends(ticker, apiKey) {
-  const url = `https://api.twelvedata.com/dividends?symbol=${encodeURIComponent(ticker)}&apikey=${apiKey}`;
+  const url = `https://api.twelvedata.com/dividends?symbol=${encodeURIComponent(ticker)}&range=20y&apikey=${apiKey}`;
   console.log('[TD-DIV] Fetch …');
   try {
     const res = await fetch(url, { signal: AbortSignal.timeout(15000) });
@@ -994,9 +994,9 @@ function preparePriceDiv(tdTimeSeries, tdDivData) {
     .map(v => ({ date: new Date(v.datetime).getTime(), price: parseFloat(v.close) }))
     .filter(p => p.price > 0 && !isNaN(p.price));
 
-  // Dividend history – Twelve Data liefert Array mit payment_date (ISO) und amount (String)
+  // Dividend history – Twelve Data liefert Array mit ex_dividend_date (ISO) und amount (String)
   state.divHistory = (tdDivData || [])
-    .map(d => ({ date: new Date(d.payment_date).getTime(), amount: parseFloat(d.amount) || 0 }))
+    .map(d => ({ date: new Date(d.ex_dividend_date).getTime(), amount: parseFloat(d.amount) || 0 }))
     .filter(d => d.amount > 0 && !isNaN(d.date))
     .sort((a, b) => a.date - b.date);
   console.log('[DIV] Dividenden:', state.divHistory.length, 'Einträge');
