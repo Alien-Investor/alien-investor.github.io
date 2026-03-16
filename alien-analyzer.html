@@ -786,7 +786,7 @@ const YAHOO_PROXIES = [
 ];
 
 async function fetchTDDividends(ticker, apiKey) {
-  const url = `https://api.twelvedata.com/dividends?symbol=${encodeURIComponent(ticker)}&range=20y&apikey=${apiKey}`;
+  const url = `https://api.twelvedata.com/dividends?symbol=${encodeURIComponent(ticker)}&range=full&apikey=${apiKey}`;
   console.log('[TD-DIV] Fetch …', url);
   try {
     const res = await fetch(url, { signal: AbortSignal.timeout(15000) });
