@@ -999,7 +999,7 @@ function preparePriceDiv(tdTimeSeries, tdDivData) {
 
   // Dividend history – Twelve Data liefert Array mit ex_dividend_date (ISO) und amount (String)
   state.divHistory = (tdDivData || [])
-    .map(d => ({ date: new Date(d.ex_dividend_date).getTime(), amount: parseFloat(d.amount) || 0 }))
+    .map(d => ({ date: new Date(d.ex_date).getTime(), amount: parseFloat(d.amount) || 0 }))
     .filter(d => d.amount > 0 && !isNaN(d.date))
     .sort((a, b) => a.date - b.date);
   console.log('[DIV] Dividenden:', state.divHistory.length, 'Einträge');
