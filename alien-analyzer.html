@@ -1475,9 +1475,10 @@ function buildFairValueChart() {
       }
     }
 
-    // Fair Value Indikator
-    const curPrice = state.fmpProfile?.price || state.priceHistory[state.priceHistory.length - 1]?.price;
-    const curEPS   = interpolateEPS(Date.now());
+    // Fair Value Indikator – nutzt letzten Chart-Datenpunkt (identisch mit Tooltip)
+    const lastPoint = filtered[filtered.length - 1];
+    const curPrice  = lastPoint.price;
+    const curEPS    = interpolateEPS(lastPoint.date);
     if (curPrice && curEPS > 0 && avgPE) {
       const fv   = curEPS * avgPE;
       const diff = (curPrice - fv) / fv;
