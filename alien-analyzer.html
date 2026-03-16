@@ -997,7 +997,8 @@ function preparePriceDiv(tdTimeSeries, tdDivData) {
     .map(v => ({ date: new Date(v.datetime).getTime(), price: parseFloat(v.close) }))
     .filter(p => p.price > 0 && !isNaN(p.price));
 
-  // Dividend history – Twelve Data liefert Array mit ex_dividend_date (ISO) und amount (String)
+  // Dividend history – Twelve Data liefert Array mit ex_date (ISO) und amount (String)
+  if (tdDivData?.length) console.log('[DIV] Erster Eintrag:', tdDivData[0]);
   state.divHistory = (tdDivData || [])
     .map(d => ({ date: new Date(d.ex_date).getTime(), amount: parseFloat(d.amount) || 0 }))
     .filter(d => d.amount > 0 && !isNaN(d.date))
