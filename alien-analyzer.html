@@ -785,54 +785,22 @@ const YAHOO_PROXIES = [
   u => `https://corsproxy.org/?url=${encodeURIComponent(u)}`,
 ];
 
-async function fetchYahooDivChart(ticker) {
-  const urls = [
-    `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}?interval=1mo&range=20y&events=div&includePrePost=false`,
-    `https://query2.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}?interval=1mo&range=20y&events=div&includePrePost=false`,
-  ];
-
-  function extractDivs(data) {
-    if (data?.chart?.error) return null;
-    const result = data?.chart?.result?.[0];
-    if (!result) return null;
-    return result.events?.dividends || {};
+async function fetchTDDividends(ticker, apiKey) {
+  const url = `https://api.twelvedata.com/dividends?symbol=${encodeURIComponent(ticker)}&apikey=${apiKey}`;
+  console.log('[TD-DIV] Fetch …');
+  try {
+    const res = await fetch(url, { signal: AbortSignal.timeout(15000) });
+    if (!res.ok) { console.warn('[TD-DIV] HTTP-Fehler:', res.status); return []; }
+    const data = await res.json();
+    if (data?.status === 'error') { console.warn('[TD-DIV] API-Fehler:', data.message); return []; }
+    const divs = data?.dividends;
+    if (!Array.isArray(divs)) { console.warn('[TD-DIV] Kein dividends-Array'); return []; }
+    console.log('[TD-DIV] OK, Dividenden:', divs.length);
+    return divs;
+  } catch (e) {
+    console.error('[TD-DIV] Exception:', e.message);
+    return [];
   }
-
-  // Direkter Fetch (klappt manchmal ohne CORS)
-  for (const url of urls) {
-    try {
-      const res = await fetch(url, { signal: AbortSignal.timeout(5000) });
-      if (res.ok) {
-        const data = await res.json();
-        const divs = extractDivs(data);
-        if (divs !== null) {
-          console.log('[YAHOO-DIV] Direkter Fetch OK, Dividenden:', Object.keys(divs).length);
-          return divs;
-        }
-      }
-    } catch { /* CORS → Proxy */ }
-  }
-
-  // Proxy-Fallback
-  for (const proxyFn of YAHOO_PROXIES) {
-    for (const url of urls) {
-      try {
-        const res = await fetch(proxyFn(url), { signal: AbortSignal.timeout(10000) });
-        if (!res.ok) continue;
-        const text = await res.text();
-        if (!text.trim()) continue;
-        const data = JSON.parse(text);
-        const divs = extractDivs(data);
-        if (divs !== null) {
-          console.log('[YAHOO-DIV] Proxy OK, Dividenden:', Object.keys(divs).length);
-          return divs;
-        }
-      } catch { /* weiter */ }
-    }
-  }
-
-  console.warn('[YAHOO-DIV] Alle Versuche fehlgeschlagen – keine Dividendendaten');
-  return {};
 }
 
 // ── FETCH: ALPHA VANTAGE ──────────────────────────────────────
@@ -965,16 +933,16 @@ async function analyzeStock(ticker) {
 
     // ── Schritt 1: Twelve Data + Yahoo parallel (verschiedene APIs, kein Rate-Limit) ──
     setStatus('LADE KURSDATEN …');
-    const [tdTS, yahooDiv] = await Promise.allSettled([
+    const [tdTS, tdDiv] = await Promise.allSettled([
       fetchTDTimeSeries(ticker, keys.twelvedata),
-      fetchYahooDivChart(ticker),
+      fetchTDDividends(ticker, keys.twelvedata),
     ]);
 
     if (tdTS.status === 'rejected') throw new Error('Kursdaten nicht abrufbar: ' + tdTS.reason?.message);
     const tdTimeSeries = tdTS.value;
-    const yahooDivData = yahooDiv.status === 'fulfilled' ? yahooDiv.value : {};
+    const tdDivData = tdDiv.status === 'fulfilled' ? tdDiv.value : [];
     console.log('Twelve Data:', tdTimeSeries.values?.length, 'Datenpunkte');
-    console.log('Yahoo Dividenden:', Object.keys(yahooDivData).length, 'Events');
+    console.log('TD Dividenden:', tdDivData.length, 'Events');
 
     // ── Schritt 2: Alpha Vantage – strikte async/await Sequenz ──────────────────
     setStatus('LADE FUNDAMENTALDATEN … (1/5)');
@@ -998,7 +966,7 @@ async function analyzeStock(ticker) {
     }
 
     setStatus('DATEN AUFBEREITEN …');
-    preparePriceDiv(tdTimeSeries, yahooDivData);
+    preparePriceDiv(tdTimeSeries, tdDivData);
     transformAVToState(avOverview, avIncome, avBalance, avCashflow, avEarnings);
     prepareEPS();
     updateHeader();
@@ -1018,7 +986,7 @@ async function analyzeStock(ticker) {
 }
 
 // ── DATA PREPARATION ──────────────────────────────────────────
-function preparePriceDiv(tdTimeSeries, yahooDivData) {
+function preparePriceDiv(tdTimeSeries, tdDivData) {
   // Price history – Twelve Data liefert newest-first → umkehren
   const values = tdTimeSeries.values || [];
   state.priceHistory = [...values]
@@ -1026,10 +994,10 @@ function preparePriceDiv(tdTimeSeries, yahooDivData) {
     .map(v => ({ date: new Date(v.datetime).getTime(), price: parseFloat(v.close) }))
     .filter(p => p.price > 0 && !isNaN(p.price));
 
-  // Dividend history – Yahoo Finance Chart (Objekt mit Timestamp-Keys)
-  state.divHistory = Object.values(yahooDivData)
-    .map(d => ({ date: (d.date || 0) * 1000, amount: d.amount || 0 }))
-    .filter(d => d.amount > 0 && d.date > 0)
+  // Dividend history – Twelve Data liefert Array mit payment_date (ISO) und amount (String)
+  state.divHistory = (tdDivData || [])
+    .map(d => ({ date: new Date(d.payment_date).getTime(), amount: parseFloat(d.amount) || 0 }))
+    .filter(d => d.amount > 0 && !isNaN(d.date))
     .sort((a, b) => a.date - b.date);
   console.log('[DIV] Dividenden:', state.divHistory.length, 'Einträge');
 }
