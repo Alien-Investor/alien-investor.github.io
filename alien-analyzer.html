@@ -1056,13 +1056,29 @@ function transformAVToState(avOverview, avIncome, avBalance, avCashflow, avEarni
   console.log('[AV] fmpProfile:', state.fmpProfile.companyName, '| PE:', state.fmpProfile.pe, '| EPS:', state.fmpProfile.eps);
 
   // ── incomeStmts – aus EARNINGS annual (bester EPS-Verlauf) ──
-  state.incomeStmts = (avEarnings?.annualEarnings || [])
-    .map(r => ({
-      date:       r.fiscalDateEnding,
-      epsdiluted: parseAV(r.reportedEPS),
-      eps:        parseAV(r.reportedEPS),
-    }))
-    .filter(r => r.epsdiluted != null && r.epsdiluted > 0);
+  {
+    const raw = (avEarnings?.annualEarnings || [])
+      .map(r => ({
+        date:       r.fiscalDateEnding,
+        epsdiluted: parseAV(r.reportedEPS),
+        eps:        parseAV(r.reportedEPS),
+      }))
+      .filter(r => r.epsdiluted != null && r.epsdiluted > 0)
+      .sort((a, b) => new Date(a.date) - new Date(b.date)); // älteste zuerst
+
+    // Neuesten Eintrag verwerfen wenn er kein volles Geschäftsjahr repräsentiert
+    // (< 330 Tage Abstand zum Vorgänger → Partial-Year-Eintrag, z.B. AAPL 2025-12-31)
+    if (raw.length >= 2) {
+      const last = raw[raw.length - 1];
+      const prev = raw[raw.length - 2];
+      const daysDiff = (new Date(last.date) - new Date(prev.date)) / (1000 * 60 * 60 * 24);
+      if (daysDiff < 330) {
+        console.log(`[AV] Letzter annualEarnings-Eintrag (${last.date}, EPS ${last.eps}) verworfen – nur ${Math.round(daysDiff)} Tage nach Vorgänger (kein volles GJ)`);
+        raw.pop();
+      }
+    }
+    state.incomeStmts = raw;
+  }
   console.log('[AV] incomeStmts:', state.incomeStmts.length, 'Jahre');
 
   // ── earningsSurprises – quarterly EPS für TTM-Fallback ──────
