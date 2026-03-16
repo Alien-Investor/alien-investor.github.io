@@ -787,18 +787,21 @@ const YAHOO_PROXIES = [
 
 async function fetchTDDividends(ticker, apiKey) {
   const url = `https://api.twelvedata.com/dividends?symbol=${encodeURIComponent(ticker)}&range=20y&apikey=${apiKey}`;
-  console.log('[TD-DIV] Fetch …');
+  console.log('[TD-DIV] Fetch …', url);
   try {
     const res = await fetch(url, { signal: AbortSignal.timeout(15000) });
+    console.log('[TD-DIV] Response status:', res.status, 'ok:', res.ok);
+    const text = await res.text();
+    console.log('[TD-DIV] Response body:', text);
     if (!res.ok) { console.warn('[TD-DIV] HTTP-Fehler:', res.status); return []; }
-    const data = await res.json();
+    const data = JSON.parse(text);
     if (data?.status === 'error') { console.warn('[TD-DIV] API-Fehler:', data.message); return []; }
     const divs = data?.dividends;
     if (!Array.isArray(divs)) { console.warn('[TD-DIV] Kein dividends-Array'); return []; }
     console.log('[TD-DIV] OK, Dividenden:', divs.length);
     return divs;
   } catch (e) {
-    console.error('[TD-DIV] Exception:', e.message);
+    console.error('[TD-DIV] Fehler:', e.message);
     return [];
   }
 }
