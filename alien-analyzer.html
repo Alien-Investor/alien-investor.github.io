@@ -527,6 +527,7 @@
         <button class="time-btn" data-years="0"  onclick="setMultRange(0)">Alle</button>
       </div>
       <div class="card chart-card" style="max-width:100%;">
+        <div id="mult-filter-warning" class="hidden" style="font-size:.6rem;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;">⚠ Viele KGV-Ausreißer gefiltert (GAAP-Sondereffekte) – Aktie möglicherweise kein klassischer Value-Titel</div>
         <div class="multiples-legend" id="mult-legend"></div>
         <canvas id="chart-multiples"></canvas>
       </div>
@@ -1599,6 +1600,10 @@ function buildMultiplesChart() {
     return (ratio != null && ratio > 0 && ratio < 80) ? ratio : null;
   });
 
+  const kgvValid = kgvData.filter(v => v !== null).length;
+  const kgvTotal = kgvData.length;
+  const kgvFilterRate = kgvTotal > 0 ? kgvValid / kgvTotal : 1;
+
   // KBV: Kurs / interpolierter Buchwert je Aktie
   const kbvData = filtered.map(p => {
     if (!getBPS) return null;
@@ -1630,6 +1635,14 @@ function buildMultiplesChart() {
   const kgvCur = state.fmpProfile?.pe  || km0.peRatio || null;
   const kbvCur = km0.pbRatio           || null;
   const kuvCur = km0.priceToSalesRatio || null;
+
+  // KGV-Filter-Warnung
+  const kgvWarn = document.getElementById('mult-filter-warning');
+  if (kgvFilterRate < 0.7) {
+    kgvWarn.classList.remove('hidden');
+  } else {
+    kgvWarn.classList.add('hidden');
+  }
 
   // Legende aufbauen
   const legendEl = document.getElementById('mult-legend');
