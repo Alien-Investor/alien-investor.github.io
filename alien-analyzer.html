@@ -1030,12 +1030,14 @@ function transformAVToState(avOverview, avIncome, avBalance, avCashflow, avEarni
     currency:    ov.Currency    || 'USD',
     price:       lastPrice,
     mktCap:      parseAV(ov.MarketCapitalization),
-    pe:          parseAV(ov.PERatio) || parseAV(ov.TrailingPE),
-    eps:         parseAV(ov.EPS)    || parseAV(ov.DilutedEPSTTM),
-    sector:      ov.Sector      || '',
-    industry:    ov.Industry    || '',
-    website:     ov.OfficialSite || '',
-    image:       null,
+    pe:               parseAV(ov.PERatio) || parseAV(ov.TrailingPE),
+    eps:              parseAV(ov.EPS)    || parseAV(ov.DilutedEPSTTM),
+    sector:           ov.Sector      || '',
+    industry:         ov.Industry    || '',
+    website:          ov.OfficialSite || '',
+    image:            null,
+    dividendYield:    parseAV(ov.DividendYield),
+    dividendPerShare: parseAV(ov.DividendPerShare),
   };
   console.log('[AV] fmpProfile:', state.fmpProfile.companyName, '| PE:', state.fmpProfile.pe, '| EPS:', state.fmpProfile.eps);
 
@@ -1644,7 +1646,15 @@ function buildDividendChart() {
   if (!divs.length || !prices.length) {
     const noDataEl = document.getElementById('div-no-data');
     noDataEl.classList.remove('hidden');
-    const s = state.divStatus;
+
+    // AV-Vorfilter: wenn AV explizit DividendYield=0 und DividendPerShare=0 meldet,
+    // ist die Aktie ein Non-Payer – unabhängig vom TD-Status (z.B. 403 Paid Plan)
+    const avDivYield = state.fmpProfile?.dividendYield;
+    const avDivPS    = state.fmpProfile?.dividendPerShare;
+    const avSaysNoDividend = (avDivYield == null || avDivYield === 0) &&
+                             (avDivPS    == null || avDivPS    === 0);
+
+    const s = avSaysNoDividend ? 'no_data' : state.divStatus;
     if (s === 'paid_plan_required') {
       noDataEl.innerHTML = `<div style="text-align:center;padding:40px;color:var(--text-dim);font-size:.65rem;letter-spacing:2px;">
         DIVIDENDENDATEN ERFORDERN EINEN PAID PLAN
@@ -1655,7 +1665,7 @@ function buildDividendChart() {
       </div>`;
     } else if (s === 'no_data') {
       noDataEl.innerHTML = `<div style="text-align:center;padding:40px;color:var(--text-dim);font-size:.65rem;letter-spacing:2px;">
-        KEINE DIVIDENDE BEKANNT – Aktie schüttet möglicherweise nicht aus
+        KEINE DIVIDENDE – Aktie schüttet nicht aus
       </div>`;
     } else {
       noDataEl.innerHTML = `<div style="text-align:center;padding:40px;color:var(--text-dim);font-size:.65rem;letter-spacing:2px;">
