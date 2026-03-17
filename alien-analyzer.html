@@ -1969,6 +1969,7 @@ function buildQualityCheck() {
 
   // ── KBV ──
   if (pb != null) {
+    const isBerkshire = ['BRK.A','BRK.B','BRK-A','BRK-B'].includes(state.ticker.toUpperCase());
     if (pb < 0) {
       rows.push(qcRow('KBV (Kurs/Buchwert)', fmt(pb, 2), '',
         ampel('yellow', 'NEGATIV'),
@@ -1976,9 +1977,16 @@ function buildQualityCheck() {
       // Nicht in scoreColors aufnehmen – kein GUT/SCHLECHT-Urteil
     } else {
       const pbColor = pb < 1.5 ? 'green' : pb <= 3 ? 'yellow' : 'red';
+      let pbHint = pb < 1 ? '⚡ Unter Buchwert' : '';
+      if (isBerkshire) {
+        if (pb < 1.2)      pbHint = '⭐ Historische Buffett-Kaufzone (harte Grenze bis 2018)';
+        else if (pb < 1.4) pbHint = '✅ Aktive Buffett-Buyback-Zone (2018–2024)';
+        else if (pb < 1.6) pbHint = '⚠ Obere Komfortzone – Buffett pausierte Buybacks 2024';
+        else               pbHint = '🚫 Über Buffetts historischer Komfortzone';
+      }
       rows.push(qcRow('KBV (Kurs/Buchwert)', fmt(pb, 2), '',
         ampel(pbColor, pbColor === 'green' ? 'GUT' : pbColor === 'yellow' ? 'FAIR' : 'HOCH'),
-        pb < 1 ? '⚡ Unter Buchwert' : ''));
+        pbHint));
       scoreColors.push(pbColor);
     }
   }
