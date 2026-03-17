@@ -372,7 +372,7 @@
   <div class="api-dialog card">
     <button style="position:absolute;top:10px;right:12px;background:none;border:none;cursor:pointer;color:var(--text-dim);font-size:.7rem;font-family:'Share Tech Mono',monospace;letter-spacing:1px;" onclick="closeBugReport()" title="Schließen">✕</button>
     <div class="api-dialog-title">🐛 Bug melden</div>
-    <div class="api-dialog-intro">Wird als E-Mail an kontakt@alien-investor.org gesendet.</div>
+    <div class="api-dialog-intro" id="bug-subtext">Wird als E-Mail an kontakt@alien-investor.org gesendet.</div>
     <div class="api-field">
       <label class="api-label" for="bug-ticker">Ticker</label>
       <input class="api-key-input" id="bug-ticker" type="text" placeholder="z.B. AAPL" autocomplete="off" spellcheck="false">
@@ -662,7 +662,15 @@ function sendBugReport() {
   const subject = encodeURIComponent('Alien Analyzer Bug: ' + ticker);
   const body    = encodeURIComponent('Ticker: ' + ticker + '\n\nBeschreibung:\n' + beschreibung);
   window.location.href = 'mailto:kontakt@alien-investor.org?subject=' + subject + '&body=' + body;
-  closeBugReport();
+  const clipboardText = 'Ticker: ' + ticker + '\n\nBeschreibung:\n' + beschreibung;
+  navigator.clipboard.writeText(clipboardText).then(() => {
+    document.getElementById('bug-subtext').textContent =
+      '✓ Inhalt in Zwischenablage kopiert – im E-Mail-Client einfügen.';
+  }).catch(() => {
+    document.getElementById('bug-subtext').textContent =
+      'E-Mail-Client geöffnet. Ticker: ' + ticker;
+  });
+  setTimeout(() => closeBugReport(), 2500);
 }
 
 document.getElementById('bug-overlay').addEventListener('click', e => {
