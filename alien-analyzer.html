@@ -368,6 +368,26 @@
   </div>
 </div>
 
+<div id="bug-overlay" class="api-overlay hidden">
+  <div class="api-dialog card">
+    <button style="position:absolute;top:10px;right:12px;background:none;border:none;cursor:pointer;color:var(--text-dim);font-size:.7rem;font-family:'Share Tech Mono',monospace;letter-spacing:1px;" onclick="closeBugReport()" title="Schließen">✕</button>
+    <div class="api-dialog-title">🐛 Bug melden</div>
+    <div class="api-dialog-intro">Wird als E-Mail an kontakt@alien-investor.org gesendet.</div>
+    <div class="api-field">
+      <label class="api-label" for="bug-ticker">Ticker</label>
+      <input class="api-key-input" id="bug-ticker" type="text" placeholder="z.B. AAPL" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="api-field">
+      <label class="api-label" for="bug-desc">Beschreibung</label>
+      <textarea class="api-key-input" id="bug-desc" rows="4" placeholder="Was ist passiert? Bei welchem Ticker?" style="resize:vertical;"></textarea>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <button class="analyse-btn api-save-btn" onclick="sendBugReport()">Senden</button>
+      <button class="analyse-btn" style="background:transparent;border:1px solid var(--border);color:var(--text-mid);" onclick="closeBugReport()">Abbrechen</button>
+    </div>
+  </div>
+</div>
+
 <div class="container">
 
   <div class="top-nav">
@@ -568,7 +588,7 @@
   </div>
 
   <footer>
-    <div style="margin-bottom:8px;">alien-investor.org · Kursdaten: Twelve Data · Fundamentaldaten: Alpha Vantage · Logos: Clearbit</div>
+    <div style="margin-bottom:8px;">alien-investor.org · Kursdaten: Twelve Data · Fundamentaldaten: Alpha Vantage · Logos: Clearbit · <a href="#" onclick="openBugReport(); return false;" style="color:var(--text-dim);text-decoration:none;opacity:.7;transition:color .2s;" onmouseover="this.style.color='var(--neon)'" onmouseout="this.style.color='var(--text-dim)'">🐛 Bug melden</a></div>
     <div style="color:rgba(74,122,109,.7)">🚨 Keine Finanzberatung – nur persönliche Alien-Meinung. Denke selbst. Vertraue niemandem.</div>
     <div style="margin-top:12px;"><a href="https://alien-investor.org">alien-investor.org</a></div>
   </footer>
@@ -624,6 +644,29 @@ function closeApiDialog() {
 // Close dialog on overlay click
 document.getElementById('api-overlay').addEventListener('click', e => {
   if (e.target === e.currentTarget) closeApiDialog();
+});
+
+function openBugReport() {
+  document.getElementById('bug-ticker').value = (state && state.ticker) ? state.ticker : '';
+  document.getElementById('bug-desc').value = '';
+  document.getElementById('bug-overlay').classList.remove('hidden');
+}
+
+function closeBugReport() {
+  document.getElementById('bug-overlay').classList.add('hidden');
+}
+
+function sendBugReport() {
+  const ticker = encodeURIComponent(document.getElementById('bug-ticker').value.trim() || '?');
+  const desc   = encodeURIComponent(document.getElementById('bug-desc').value.trim());
+  const raw    = document.getElementById('bug-ticker').value.trim() || '?';
+  const mailto = `mailto:kontakt@alien-investor.org?subject=${encodeURIComponent('Alien Analyzer Bug: ' + raw)}&body=Ticker%3A%20${ticker}%0A%0ABeschreibung%3A%0A${desc}`;
+  window.location.href = mailto;
+  closeBugReport();
+}
+
+document.getElementById('bug-overlay').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeBugReport();
 });
 
 function openAvInfo() {
@@ -1904,11 +1947,18 @@ function buildQualityCheck() {
 
   // ── KBV ──
   if (pb != null) {
-    const pbColor = pb < 1.5 ? 'green' : pb <= 3 ? 'yellow' : 'red';
-    rows.push(qcRow('KBV (Kurs/Buchwert)', fmt(pb, 2), '',
-      ampel(pbColor, pbColor === 'green' ? 'GUT' : pbColor === 'yellow' ? 'FAIR' : 'HOCH'),
-      pb < 1 ? '⚡ Unter Buchwert' : ''));
-    scoreColors.push(pbColor);
+    if (pb < 0) {
+      rows.push(qcRow('KBV (Kurs/Buchwert)', fmt(pb, 2), '',
+        ampel('yellow', 'NEGATIV'),
+        'Negatives Eigenkapital – Sonderfall prüfen'));
+      // Nicht in scoreColors aufnehmen – kein GUT/SCHLECHT-Urteil
+    } else {
+      const pbColor = pb < 1.5 ? 'green' : pb <= 3 ? 'yellow' : 'red';
+      rows.push(qcRow('KBV (Kurs/Buchwert)', fmt(pb, 2), '',
+        ampel(pbColor, pbColor === 'green' ? 'GUT' : pbColor === 'yellow' ? 'FAIR' : 'HOCH'),
+        pb < 1 ? '⚡ Unter Buchwert' : ''));
+      scoreColors.push(pbColor);
+    }
   }
 
   // ── Dividendenrendite ──
@@ -1973,7 +2023,7 @@ function buildQualityCheck() {
 
   // Substanzwert-Badge
   const substanzEl = document.getElementById('substanzwert-area');
-  if (pb != null && pb < 1.0) {
+  if (pb != null && pb > 0 && pb < 1.0) {
     substanzEl.innerHTML = `<div class="substanzwert-badge">💎 Du kaufst 1 Dollar für ${fmt(pb * 100, 0)} Cents – Aktie unter Buchwert</div>`;
   } else {
     substanzEl.innerHTML = '';
@@ -1982,7 +2032,7 @@ function buildQualityCheck() {
   // Alien-Einordnung
   const greens = scoreColors.filter(c => c === 'green').length;
   const reds   = scoreColors.filter(c => c === 'red').length;
-  const hasKBVBelow1 = pb != null && pb < 1.0;
+  const hasKBVBelow1 = pb != null && pb > 0 && pb < 1.0;
 
   let verdict;
   if (greens >= 5 && hasKBVBelow1)
