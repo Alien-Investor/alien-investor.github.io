@@ -517,13 +517,7 @@
       <div class="chart-row">
         <div class="card chart-card">
           <canvas id="chart-dividenden"></canvas>
-          <div id="div-no-data" class="hidden" style="text-align:center;padding:40px;color:var(--text-dim);font-size:.65rem;letter-spacing:2px;">
-            KEINE DIVIDENDENDATEN VERFÜGBAR
-            <div style="margin-top:8px;font-size:.6rem;letter-spacing:1px;color:var(--text-dim);opacity:.6;">
-              Dividendendaten erfordern einen Twelve Data Paid Plan &middot;
-              <a href="https://twelvedata.com/pricing" target="_blank" rel="noopener" style="color:var(--text-dim);text-decoration:underline;">twelvedata.com/pricing</a>
-            </div>
-          </div>
+          <div id="div-no-data" class="hidden"></div>
         </div>
         <div class="card chart-sidebar">
           <div class="sidebar-title">Dividende</div>
@@ -680,7 +674,8 @@ async function runAvDebug() {
   const keys = getApiKeys();
   if (!keys.alphavantage) { openApiDialog(); return; }
 
-  const ticker = (document.getElementById('ticker-input').value.trim().toUpperCase()) || 'AAPL';
+  const rawTicker = (document.getElementById('ticker-input').value.trim().toUpperCase()) || 'AAPL';
+  const ticker    = rawTicker.replace(/\./g, '-');
   const panel  = document.getElementById('debug-panel');
   const body   = document.getElementById('debug-body');
 
@@ -799,16 +794,16 @@ async function fetchTDDividends(ticker, apiKey) {
     console.log('[TD-DIV] Response status:', res.status, 'ok:', res.ok);
     const text = await res.text();
     console.log('[TD-DIV] Response body:', text);
-    if (!res.ok) { console.warn('[TD-DIV] HTTP-Fehler:', res.status); return []; }
+    if (!res.ok) { console.warn('[TD-DIV] HTTP-Fehler:', res.status); return { dividends: [], apiReached: false }; }
     const data = JSON.parse(text);
-    if (data?.status === 'error') { console.warn('[TD-DIV] API-Fehler:', data.message); return []; }
+    if (data?.status === 'error') { console.warn('[TD-DIV] API-Fehler:', data.message); return { dividends: [], apiReached: false }; }
     const divs = data?.dividends;
-    if (!Array.isArray(divs)) { console.warn('[TD-DIV] Kein dividends-Array'); return []; }
+    if (!Array.isArray(divs)) { console.warn('[TD-DIV] Kein dividends-Array'); return { dividends: [], apiReached: true }; }
     console.log('[TD-DIV] OK, Dividenden:', divs.length);
-    return divs;
+    return { dividends: divs, apiReached: true };
   } catch (e) {
     console.error('[TD-DIV] Fehler:', e.message);
-    return [];
+    return { dividends: [], apiReached: false };
   }
 }
 
@@ -821,7 +816,8 @@ function parseAV(val) {
 }
 
 async function fetchAV(avFunction, ticker, apiKey) {
-  const url = `https://www.alphavantage.co/query?function=${avFunction}&symbol=${encodeURIComponent(ticker)}&apikey=${apiKey}`;
+  const avTicker = ticker.replace(/\./g, '-');
+  const url = `https://www.alphavantage.co/query?function=${avFunction}&symbol=${encodeURIComponent(avTicker)}&apikey=${apiKey}`;
   console.log('[AV]', avFunction, 'fetch ...');
   try {
     const res = await fetch(url, { signal: AbortSignal.timeout(15000) });
@@ -949,9 +945,11 @@ async function analyzeStock(ticker) {
 
     if (tdTS.status === 'rejected') throw new Error('Kursdaten nicht abrufbar: ' + tdTS.reason?.message);
     const tdTimeSeries = tdTS.value;
-    const tdDivData = tdDiv.status === 'fulfilled' ? tdDiv.value : [];
+    const tdDivResult  = tdDiv.status === 'fulfilled' ? tdDiv.value : { dividends: [], apiReached: false };
+    const tdDivData    = tdDivResult.dividends;
+    const tdDivApiReached = tdDivResult.apiReached;
     console.log('Twelve Data:', tdTimeSeries.values?.length, 'Datenpunkte');
-    console.log('TD Dividenden:', tdDivData.length, 'Events');
+    console.log('TD Dividenden:', tdDivData.length, 'Events', '| apiReached:', tdDivApiReached);
 
     // ── Schritt 2: Alpha Vantage – strikte async/await Sequenz ──────────────────
     setStatus('LADE FUNDAMENTALDATEN … (1/5)');
@@ -975,7 +973,7 @@ async function analyzeStock(ticker) {
     }
 
     setStatus('DATEN AUFBEREITEN …');
-    preparePriceDiv(tdTimeSeries, tdDivData);
+    preparePriceDiv(tdTimeSeries, tdDivData, tdDivApiReached);
     transformAVToState(avOverview, avIncome, avBalance, avCashflow, avEarnings);
     prepareEPS();
     updateHeader();
@@ -995,13 +993,15 @@ async function analyzeStock(ticker) {
 }
 
 // ── DATA PREPARATION ──────────────────────────────────────────
-function preparePriceDiv(tdTimeSeries, tdDivData) {
+function preparePriceDiv(tdTimeSeries, tdDivData, divApiReached = false) {
   // Price history – Twelve Data liefert newest-first → umkehren
   const values = tdTimeSeries.values || [];
   state.priceHistory = [...values]
     .reverse()
     .map(v => ({ date: new Date(v.datetime).getTime(), price: parseFloat(v.close) }))
     .filter(p => p.price > 0 && !isNaN(p.price));
+
+  state.divApiReached = divApiReached;
 
   // Dividend history – Twelve Data liefert Array mit ex_date (ISO) und amount (String)
   if (tdDivData?.length) console.log('[DIV] Erster Eintrag:', tdDivData[0]);
@@ -1626,7 +1626,21 @@ function buildDividendChart() {
   const prices = state.priceHistory;
 
   if (!divs.length || !prices.length) {
-    document.getElementById('div-no-data').classList.remove('hidden');
+    const noDataEl = document.getElementById('div-no-data');
+    noDataEl.classList.remove('hidden');
+    if (state.divApiReached) {
+      noDataEl.innerHTML = `<div style="text-align:center;padding:40px;color:var(--text-dim);font-size:.65rem;letter-spacing:2px;">
+        KEINE DIVIDENDE BEKANNT – Aktie schüttet möglicherweise nicht aus
+      </div>`;
+    } else {
+      noDataEl.innerHTML = `<div style="text-align:center;padding:40px;color:var(--text-dim);font-size:.65rem;letter-spacing:2px;">
+        DIVIDENDENDATEN NICHT VERFÜGBAR
+        <div style="margin-top:8px;font-size:.6rem;letter-spacing:1px;color:var(--text-dim);opacity:.6;">
+          Dividendendaten erfordern einen Twelve Data Paid Plan &middot;
+          <a href="https://twelvedata.com/pricing" target="_blank" rel="noopener" style="color:var(--text-dim);text-decoration:underline;">twelvedata.com/pricing</a>
+        </div>
+      </div>`;
+    }
     return;
   }
   document.getElementById('div-no-data').classList.add('hidden');
