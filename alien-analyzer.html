@@ -657,11 +657,11 @@ function closeBugReport() {
 }
 
 function sendBugReport() {
-  const ticker = encodeURIComponent(document.getElementById('bug-ticker').value.trim() || '?');
-  const desc   = encodeURIComponent(document.getElementById('bug-desc').value.trim());
-  const raw    = document.getElementById('bug-ticker').value.trim() || '?';
-  const mailto = `mailto:kontakt@alien-investor.org?subject=${encodeURIComponent('Alien Analyzer Bug: ' + raw)}&body=Ticker%3A%20${ticker}%0A%0ABeschreibung%3A%0A${desc}`;
-  window.location.href = mailto;
+  const ticker      = document.getElementById('bug-ticker').value.trim() || 'kein Ticker';
+  const beschreibung = document.getElementById('bug-desc').value.trim() || 'keine Beschreibung';
+  const subject = encodeURIComponent('Alien Analyzer Bug: ' + ticker);
+  const body    = encodeURIComponent('Ticker: ' + ticker + '\n\nBeschreibung:\n' + beschreibung);
+  window.location.href = 'mailto:kontakt@alien-investor.org?subject=' + subject + '&body=' + body;
   closeBugReport();
 }
 
