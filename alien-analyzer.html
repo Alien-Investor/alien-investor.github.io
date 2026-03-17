@@ -983,12 +983,12 @@ async function analyzeStock(ticker) {
     transformAVToState(avOverview, avIncome, avBalance, avCashflow, avEarnings);
     prepareEPS();
     updateHeader();
-    buildFairValueChart();
     buildMultiplesChart();
     buildDividendChart();
     buildQualityCheck();
     showSection('results');
     switchTab('fairvalue');
+    setTimeout(() => buildFairValueChart(), 50);
 
   } catch (e) {
     console.error('analyzeStock Fehler:', e);
