@@ -1629,6 +1629,7 @@ function buildMultiplesChart() {
   const kbvAvg = seriesAvg(kbvData);
   const kuvAvg = seriesAvg(kuvData);
   const kcvAvg = seriesAvg(kcvData);
+  const kcvCur = kcvData.filter(v => v != null).slice(-1)[0] || null;
 
   // Aktuelle Werte aus FMP key-metrics[0]
   const km0 = state.keyMetrics[0] || {};
@@ -1651,7 +1652,7 @@ function buildMultiplesChart() {
     { label: 'KGV', color: '#00ffcc', cur: kgvCur, avg: kgvAvg },
     { label: 'KBV', color: '#4499ff', cur: kbvCur, avg: kbvAvg },
     { label: 'KUV', color: '#88ff44', cur: kuvCur, avg: kuvAvg },
-    { label: 'KCV', color: '#ffcc44', cur: null,   avg: kcvAvg },
+    { label: 'KCV', color: '#ffcc44', cur: kcvCur, avg: kcvAvg },
   ].forEach(item => {
     const badge = document.createElement('div');
     badge.className = 'mult-badge';
