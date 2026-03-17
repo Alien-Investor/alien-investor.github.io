@@ -21,6 +21,29 @@
     .recommendation-box h3 { margin-top: 0; font-size: 1.1em; color: #00ffcc; }
     ul { padding-left: 1.2em; }
     li { margin-bottom: 0.5em; }
+    
+    /* ZENTRIERTER VIDEO CONTAINER */
+    .video-wrapper {
+      display: flex;
+      justify-content: center;
+      margin: 2em 0;
+    }
+    .video-container { 
+      position: relative; 
+      width: 100%; 
+      max-width: 560px; 
+      padding-bottom: 31.25%; 
+      height: 0; 
+      border: 1px solid #00ffcc; 
+      border-radius: 8px; 
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(0, 255, 204, 0.1);
+    }
+    @media (max-width: 600px) {
+      .video-container { padding-bottom: 56.25%; }
+    }
+    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    
     .like-button { margin: 3em 0; display: flex; align-items: center; justify-content: center; gap: 1em; font-size: 1em; }
     .like-button button { background: #000; color: #00ffcc; border: 1px solid #00ffcc; padding: 0.6em 1.2em; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.2s ease; }
     .like-button button:hover, .like-button button:active { background: #00ffcc; color: #000; box-shadow: 0 0 15px #00ffcc; }
@@ -56,6 +79,15 @@
       seines Geldes an Dritte." 👽
     </blockquote>
 
+    <div class="video-wrapper">
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/SeTxEhk7EPQ" title="Warum jeder Bitcoiner einen eigenen Knotenpunkt betreiben sollte" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </div>
+    <p style="text-align: center; font-size: 0.9em; color: #bbb; margin-top: -1em;">
+      <em>Mein Bordtechniker erklärt detailliert, warum eine Full Node die Voraussetzung für echtes Bitcoin ist.</em>
+    </p>
+
     <h2>1. Zensurresistenz: Direkter Zugang ohne Gatekeeper</h2>
     <p>
       Eine eigene Full Node sendet Transaktionen direkt in das Peer-to-Peer-Netzwerk – typischerweise an mindestens
@@ -83,9 +115,9 @@
     <p>
       Die eigene Full Node bietet das, was Wissenschaftler als informationstheoretisch perfekte Privatsphäre für
       empfangene Transaktionen bezeichnen. Der Grund ist einfach: Die Node lädt ausnahmslos alle Transaktionen der
-      gesamten Blockchain herunter – über 230 Millionen bis heute. Ein Beobachter kann mathematisch nicht feststellen,
+      gesamten Blockchain herunter – über 800 Millionen bis heute[cite: 9, 54]. Ein Beobachter kann mathematisch nicht feststellen,
       welche davon den Betreiber betreffen, weil kein selektiver Abruf stattfindet. Wallet-Abfragen geschehen rein
-      lokal auf der eigenen Festplatte, ohne dass ein Netzwerkpaket verschickt wird.
+      lokal auf der eigenen Festplatte, ohne dass ein Netzwerkpaket verschickt wird. Zudem nutzt Bitcoin Core seit Version 0.21 das Protokoll Dandelion++ zur Verschleierung des Transaktionsursprungs – eine exzellente Ergänzung zum Privatsphäre-Argument[cite: 62].
     </p>
     <p>
       Light-Wallets und SPV-Clients zerstören diese Privatsphäre systematisch. Das ältere Protokoll BIP37
@@ -94,13 +126,13 @@
       offenlegt. Elektrum-basierte Wallets sind noch gravierender: Sie senden alle Wallet-Adressen explizit an einen
       Server, der damit die vollständige Transaktionshistorie, den Kontostand und die Adresscluster des Nutzers kennt.
       HTTP-API-Wallets bieten laut Bitcoin Wiki keinerlei Privatsphäre. Bitcoin Core hat BIP37 seit Version 0.19
-      standardmässig deaktiviert.
+      standardmäßig deaktiviert.
     </p>
 
     <h2>3. „Don't trust, verify": Was vertrauenslose Verifikation praktisch bedeutet</h2>
     <p>
       Eine Full Node prüft ausnahmslos jede Transaktion und jeden Block seit dem Genesis-Block vom 3. Januar 2009
-      gegen sämtliche Konsensregeln. Verstösst ein Block gegen auch nur eine einzige Regel, wird er sofort verworfen –
+      gegen sämtliche Konsensregeln. Verstößt ein Block gegen auch nur eine einzige Regel, wird er sofort verworfen –
       selbst wenn jede andere Node im Netzwerk ihn akzeptiert. Das Bitcoin Wiki fasst diese Eigenschaft prägnant
       zusammen: „Full nodes do what's right no matter what."
     </p>
@@ -123,9 +155,9 @@
     <h2>4. Netzwerksicherheit: Jede Node ist ein unabhängiger Regelwächter</h2>
     <p>
       Stand Februar 2026 sind weltweit rund 24.900 erreichbare Full Nodes über Bitnodes.io registriert, verteilt auf
-      über 100 Länder. Etwa 65 % davon laufen hinter Tor. Die tatsächliche Zahl liegt deutlich höher: Bitcoin-Core-
-      Entwickler Luke Dash Jr. schätzte 2021 rund 83.000 aktive Nodes, da viele hinter NAT-Firewalls laufen und
-      keine eingehenden Verbindungen akzeptieren.
+      über 100 Länder. Etwa 65 % davon laufen hinter Tor. Die tatsächliche Zahl liegt deutlich höher: Schätzungen 
+      gehen von deutlich über 75.000 bis 83.000 aktiven Nodes aus, da viele hinter NAT-Firewalls laufen und 
+      keine eingehenden Verbindungen akzeptieren[cite: 55]. Für die eigene Verifikation ist es vollkommen egal, ob eine Node erreichbar ist[cite: 1, 2]. Der Unterschied liegt lediglich im Beitrag zum Netzwerk: Eine erreichbare Node hilft anderen beim Synchronisieren und macht das Netzwerk robuster[cite: 3]. Eine nicht erreichbare Node nimmt nur, gibt aber nichts zurück[cite: 4].
     </p>
     <p>
       Jede einzelne dieser Nodes ist ein unabhängiger Durchsetzer der Konsensregeln. Miner schlagen Blöcke vor –
@@ -144,18 +176,17 @@
     </p>
     <p>
       Allen diesen Fällen liegt dasselbe Muster zugrunde: Nutzer vertrauten einem Dritten die Verwahrung und
-      Verifizierung ihrer Bitcoin an. Eine eigene Full Node eliminiert diese gesamte Risikokategorie. Die Kosten
+      Verifizierung ihrer Bitcoin an. Eine eigene Full Node eliminiert diese gesamte Risikokategorie[cite: 80]. Die Kosten
       für diese Infrastruktur sind überschaubar: Für den Preis von sechs bis zwölf Monaten typischer Bankgebühren
-      lässt sich ein Node-Setup aufbauen, das bei jährlichen Stromkosten von 10 bis 25 Euro jahrzehntelang
-      betrieben werden kann.
+      lässt sich ein Node-Setup aufbauen, das bei jährlichen Stromkosten von 15 bis 30 Euro jahrzehntelang
+      betrieben werden kann[cite: 80, 95].
     </p>
 
     <h2>6. SPV gegen Full Node: Die konkreten Risiken ohne eigene Node</h2>
     <p>
       Satoshi Nakamoto beschrieb Simplified Payment Verification (SPV) im Whitepaper als schlanke Alternative:
       Der Client lädt nur Blockheader (80 Bytes je Block, rund 4,2 MB pro Jahr) und verifiziert die Aufnahme einer
-      Transaktion in einen Block über einen Merkle-Beweis. SPV prüft jedoch nicht, ob die Transaktionen im Block
-      die Konsensregeln einhalten – es nutzt den Proof-of-Work lediglich als Proxy für Gültigkeit.
+      Transaktion in einen Block über einen Merkle-Beweis. Der entscheidende Punkt ist: Ein Merkle-Beweis beweist nur, dass eine Transaktion in einem Block enthalten ist[cite: 21, 61]. Er beweist nicht, dass der Block selbst regelkonform ist[cite: 22, 61]. SPV nutzt den Proof-of-Work somit lediglich als Proxy für Gültigkeit.
     </p>
     <p>
       Daraus ergeben sich fünf konkrete Angriffsvektoren: Eclipse-Angriffe (ein Angreifer monopolisiert alle
@@ -163,40 +194,30 @@
       werden verschwiegen), blindes Folgen bei Regeländerungen, Privatsphäre-Katastrophen durch Bloom-Filter
       und bei Lightning-Nutzern das Risiko, Gelder durch veraltete Kanalzustände zu verlieren. Das Bitcoin Wiki
       warnt unmissverständlich: „It is only reasonably secure to use a lightweight node because most of the Bitcoin
-      economy uses full nodes."
+      economy uses full nodes." [cite: 23] SPV funktioniert also nur, weil andere die schwere Arbeit machen[cite: 25].
     </p>
 
     <h2>7. Lightning Network: Souveräne Zahlungskanäle brauchen eine Full Node</h2>
     <p>
       Jede Lightning-Implementierung ist funktional von einer synchronisierten Bitcoin Full Node abhängig. Die Node
-      überwacht die Blockchain kontinuierlich auf Kanalöffnungen und -schliessungen, erkennt Betrugsversuche durch
-      widerrufene Commitment-Transaktionen und schätzt Gebühren für On-Chain-Transaktionen. Ohne diese Überwachung
-      können Kanalpartner veraltete Zustände broadcasten und Gelder stehlen.
+      überwacht die Blockchain kontinuierlich auf Kanalöffnungen und -schließungen, erkennt Betrugsversuche durch
+      widerrufene Commitment-Transaktionen und schätzt Gebühren für On-Chain-Transaktionen. Wenn ein Kanalpartner versucht, einen Kanal mit einem alten Zustand zu schließen, greift der sogenannte Penalty-Mechanismus (Justice Transaction): Die Full Node erkennt das, und man kann innerhalb eines Zeitfensters die gesamten Kanalgelder beanspruchen, wodurch der Betrüger alles verliert[cite: 26, 27, 28, 63]. 
     </p>
     <p>
-      Die vier grossen Implementierungen sind <strong>LND</strong> (Lightning Labs, Go), <strong>Core
-      Lightning</strong> (Blockstream, C), <strong>Eclair</strong> (ACINQ, Scala) und <strong>LDK</strong>
-      (Spiral/Block, Rust). Der Unterschied zwischen einer selbst betriebenen Lightning-Node und einer
-      Custodial-Lightning-Wallet ist fundamental: Die eigene Node behält die privaten Schlüssel unter Kontrolle
-      des Betreibers, speichert Zahlungsdaten ausschliesslich lokal und kann nicht durch Dritte eingeschränkt
-      werden.
+      Ohne diese eigene Überwachung können Kanalpartner alte Zustände veröffentlichen und Gelder stehlen[cite: 30]. Für Nutzer, die gelegentlich offline sind, gibt es sogenannte Watchtower-Dienste – externe Server, die im Auftrag der eigenen Node die Blockchain überwachen[cite: 31]. Dennoch gilt: Die eigene Node behält die privaten Schlüssel unter Kontrolle, speichert Zahlungsdaten ausschließlich lokal und kann nicht durch Dritte eingeschränkt werden.
     </p>
 
     <h2>8. Technische Kontrolle: Mempool, Gebühren und Broadcasting</h2>
     <p>
       Jede Full Node unterhält ihren eigenen Mempool – einen Cache gültiger, noch unbestätigter Transaktionen.
-      Es gibt keinen einheitlichen globalen Mempool; jede Node ist ihre eigene unabhängige Insel. Diese lokale
-      Sicht auf den Transaktionsmarkt ermöglicht präzise Gebührenabschätzungen und vollständige Kontrolle über
-      das Transaktions-Broadcasting.
+      Es gibt keinen einheitlichen globalen Mempool; jede Node ist ihre eigene unabhängige Insel. Wer keinen eigenen Mempool hat, verlässt sich notgedrungen auf externe Gebührenschätzer[cite: 38]. Die eigene Node hingegen gibt dir eine direkte, unverfälschte Sicht auf den aktuellen Transaktionsmarkt – komplett ohne Zwischenschicht[cite: 39].
     </p>
     <p>
       Wer Transaktionen über die eigene Node broadcastet, verhindert, dass Chain-Analytics-Firmen diese mit einer
       IP-Adresse verknüpfen. Unternehmen wie Chainalysis betreiben Sybil-Nodes, die möglichst breit im Netzwerk
-      verbunden sind, um den Ursprung von Transaktionen einzugrenzen. Die eigene Node leitet standardmässig
+      verbunden sind, um den Ursprung von Transaktionen einzugrenzen. Die eigene Node leitet standardmäßig
       Tausende fremder Transaktionen pro Tag weiter – die eigenen gehen in diesem Strom unter.
-      RBF (Replace-by-Fee) und CPFP (Child-Pays-for-Parent) entfalten ihren vollen Nutzen erst mit einer eigenen
-      Node: Statt prophylaktisch hohe Gebühren zu setzen, beginnt der Nutzer mit einer konservativen Schätzung
-      und erhöht bei Bedarf.
+      Techniken wie die Gebührenersetzung (RBF) und Elternzahlung durch Kind-Transaktion (CPFP) [cite: 34, 35] entfalten ihren vollen Nutzen erst mit einer eigenen Node: Statt prophylaktisch hohe Gebühren zu setzen, kann der Nutzer selbst entscheiden, wie viel er zahlt und wann[cite: 40].
     </p>
 
     <h2>9. Resistenz gegen 51-%-Angriffe und unerwünschte Protokolländerungen</h2>
@@ -209,11 +230,9 @@
     </p>
     <p>
       Die dramatischste Demonstration der Macht von Full Nodes war der <strong>Blocksize War von 2015 bis 2017</strong>.
-      Miner und grosse Unternehmen wollten die Blockgrösse per Hard Fork erhöhen. Das New York Agreement vereinte
-      über 80 % der Mining-Hashrate und die grössten Unternehmen der Branche hinter SegWit2x. SegWit wurde
-      aktiviert, aber die 2-MB-Hard-Fork scheiterte im November 2017 am überwältigenden Widerstand der Nutzer.
-      Trotz 80 % Mining-Unterstützung setzten sich die dezentral operierenden Full-Node-Betreiber durch. Der
-      1. August wird in der Bitcoin-Community seither als „Bitcoin Independence Day" gefeiert.
+      Miner und große Unternehmen wollten die Blockgröße per Hard Fork erhöhen. Das New York Agreement vereinte
+      über 80 % der Mining-Hashrate und die größten Unternehmen der Branche hinter SegWit2x. SegWit wurde
+      aktiviert, aber die 2-MB-Hard-Fork scheiterte im November 2017 am überwältigenden Widerstand der Nutzer. Als klar wurde, dass die überwiegende Mehrheit der wirtschaftlich relevanten Nodes SegWit2x-Blöcke ablehnen würden, zogen die Miner zurück[cite: 49]. Der 1. August 2017 wird dabei oft als Bitcoin Independence Day gefeiert, weil die Big-Block-Fraktion an diesem Tag Bitcoin Cash abspaltete und damit zugab, dass sie keine Mehrheit der Nodes hinter sich hatte[cite: 42, 45, 64]. Die Lektion bleibt: Wirtschaftliche Nodes, nicht Hashrate, definieren Bitcoin[cite: 51].
     </p>
 
     <blockquote>
@@ -227,56 +246,56 @@
       pro Monat. Der UTXO-Set belegt circa 11 GB RAM. Die Initial Block Download (IBD) – das erstmalige Herunterladen
       und Verifizieren aller Blöcke – dauert je nach Hardware zwischen 6 Stunden und mehreren Wochen. Ein
       entscheidender Optimierungstipp: Den <code>dbcache</code>-Wert in der <code>bitcoin.conf</code> auf 25 bis
-      50 % des verfügbaren RAM setzen (z.B. <code>dbcache=4000</code> bei 16 GB RAM).
+      50 % des verfügbaren RAM setzen (z.B. <code>dbcache=4000</code> bei 16 GB RAM)[cite: 81, 82].
     </p>
 
     <h3>Software-Empfehlungen</h3>
     <p>
-      <strong>Bitcoin Core</strong> (aktuell Version 30.0) ist die Referenzimplementierung und bildet das Fundament
-      aller Node-Pakete. Für Einsteiger mit einer eleganten Web-Oberfläche empfiehlt sich <strong>Umbrel</strong>
-      (umbrelOS 1.5, November 2025) mit über 300 Apps und einer Einrichtungszeit von wenigen Minuten.
+      <strong>Bitcoin Core</strong> (aktuell Version 28.1) ist die Referenzimplementierung und bildet das Fundament
+      aller Node-Pakete[cite: 55, 82, 95]. Für Einsteiger mit einer eleganten Web-Oberfläche empfiehlt sich <strong>Umbrel</strong>
+      (umbrelOS 1.5, November 2025) mit über 300 Apps und einer Einrichtungszeit von wenigen Minuten[cite: 82].
       <strong>RaspiBlitz</strong> (v1.12.0) ist das Projekt für Bastler und Lernende – vollständig quelloffen
       unter MIT-Lizenz, unterstützt NVMe-Boot auf dem Raspberry Pi 5 und bietet ein LCD-Display zur
-      Statusanzeige. <strong>Start9</strong> (StartOS) priorisiert Souveränität und Sicherheit: Alle Dienste laufen
-      in isolierten Containern, Tor ist standardmässig aktiv.
+      Statusanzeige[cite: 83]. <strong>Start9</strong> (StartOS) priorisiert Souveränität und Sicherheit: Alle Dienste laufen
+      in isolierten Containern, Tor ist standardmäßig aktiv[cite: 83].
     </p>
 
     <h3>Hardware-Empfehlungen</h3>
     <ul>
       <li>
         <strong>Raspberry Pi 5 (8 GB RAM) + NVMe-SSD:</strong> Bestes Preis-Leistungs-Verhältnis.
-        Rund 220 bis 310 Euro Gesamtkosten, 5 bis 15 Watt Stromverbrauch, IBD in ein bis drei Tagen.
+        Rund 220 bis 310 Euro Gesamtkosten, 5 bis 15 Watt Stromverbrauch, IBD in ein bis drei Tagen[cite: 84, 85, 86].
       </li>
       <li>
-        <strong>Mini-PCs mit Intel N100:</strong> 150 bis 400 Euro, mehr Leistung bei ähnlichem Stromverbrauch.
+        <strong>Mini-PCs mit Intel N100:</strong> 150 bis 400 Euro, mehr Leistung bei ähnlichem Stromverbrauch[cite: 86].
       </li>
       <li>
         <strong>Gebrauchte Business-PCs (Dell Optiplex, Lenovo ThinkCentre Mini):</strong> 50 bis 150 Euro –
-        kosteneffiziente Alternative.
+        kosteneffiziente Alternative. <em>Wichtiger Hinweis: Ältere Desktop-PCs verbrauchen typischerweise 50 bis 100 Watt, was jährliche Stromkosten von 130 bis 260 Euro bedeutet[cite: 59, 87]. Der günstige Anschaffungspreis relativiert sich dadurch schnell[cite: 88].</em>
       </li>
     </ul>
     <p>
       Eine <strong>SSD ist nicht optional, sondern zwingend</strong> – der Random-I/O-Durchsatz ist der primäre
-      Flaschenhals. NVMe ist gegenüber SATA zu bevorzugen. Beim Speicher gilt: Mindestens 2 TB wählen, da die
-      Blockchain bei aktuellem Wachstum eine 1-TB-Platte in wenigen Jahren füllt. Ein Pruned Node – der alle
+      Flaschenhals[cite: 88]. NVMe ist gegenüber SATA zu bevorzugen[cite: 89]. Beim Speicher gilt: Mindestens 2 TB wählen, da die
+      Blockchain bei aktuellem Wachstum eine 1-TB-Platte in wenigen Jahren füllt[cite: 89]. Ein Pruned Node – der alle
       Regeln verifiziert, aber alte Blöcke verwirft – kommt mit nur 5 bis 10 GB Speicher aus und ist eine valide
-      Option für Nutzer, die ausschliesslich ihre eigenen Transaktionen verifizieren wollen.
+      Option für Nutzer, die ausschließlich ihre eigenen Transaktionen verifizieren wollen[cite: 90].
     </p>
 
     <h2>Fazit: Die eigene Node als Grundpfeiler der Bitcoin-Nutzung</h2>
     <p>
       Die zehn analysierten Aspekte verdichten sich zu einer zentralen Erkenntnis: Eine Full Node ist kein optionales
       Zusatzwerkzeug, sondern die technische Voraussetzung dafür, Bitcoin so zu nutzen, wie es konzipiert wurde –
-      als zensurresistentes, privates und vertrauensloses Geldsystem. Ohne eigene Node vertraut der Nutzer implizit
-      Dritten bei der Verifikation, beim Broadcasting und beim Schutz seiner Privatsphäre.
+      als zensurresistentes, privates und vertrauensloses Geldsystem[cite: 91]. Ohne eigene Node vertraut der Nutzer implizit
+      Dritten bei der Verifikation, beim Broadcasting und beim Schutz seiner Privatsphäre[cite: 91].
     </p>
     <p>
       Der Blocksize War bewies, dass Full Nodes die letzte Instanz der Protokoll-Governance sind – mächtiger als
       Miner und Unternehmen. Die Einstiegshürde ist heute niedriger als je zuvor: Ein Raspberry Pi 5 mit NVMe-SSD
       und einer Distribution wie Umbrel oder RaspiBlitz reicht aus, um in wenigen Stunden einen vollwertigen Knoten
-      zu betreiben. Die jährlichen Betriebskosten liegen unter 25 Euro. Gemessen am Nutzen – finanzielle
+      zu betreiben[cite: 92]. Die jährlichen Betriebskosten liegen bei moderaten 15 bis 30 Euro[cite: 85, 95]. Gemessen am Nutzen – finanzielle
       Souveränität, Privatsphäre und ein konkreter Beitrag zur Sicherheit des Netzwerks – ist das ein
-      bemerkenswertes Angebot.
+      bemerkenswertes Angebot[cite: 93].
     </p>
 
     <div class="recommendation-box">
@@ -290,31 +309,15 @@
 
     <div class="box">
       <h3>🧰 Tools für echte Eigentümer</h3>
-      <p style="font-size:0.95em;">Wenn du Bitcoin möglichst eigenverantwortlich halten willst:</p>
+      <p style="font-size:0.95em;">Wenn du Aktien und Bitcoin eigenverantwortlich halten willst:</p>
       <ul>
-        <li>
-          💥 <strong>Bitcoin kaufen in Europa – 21bitcoin:</strong><br>
-          Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges Sats stapeln – ohne Shitcoins.<br>
-          Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du dauerhaft 0,2&nbsp;Prozentpunkte
-          Gebührenreduktion auf Sofort- und Sparplankäufe.<br>
-          👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
-        </li>
-        <li>
-          ₿ <strong>Bitcoin in Selbstverwahrung – BitBox:</strong><br>
-          Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox – es gibt die klassische BitBox02 und die
-          neue BitBox für iPhone (Nova).<br>
-          👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
-        </li>
-        <li>
-          🛡️ <strong>Privacy &amp; Mail – Proton:</strong><br>
-          Für E-Mail, VPN und Cloud nutze ich Proton – datensparsam und ohne Big-Tech-Abhängigkeit.<br>
-          👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
-        </li>
+        <li>🇨🇭 <strong>Swissquote:</strong> Namensaktien. 👉 <a href="https://alien-investor.org/swissquote" target="_blank">https://alien-investor.org/swissquote</a></li>
+        <li>📊 <strong>IBKR:</strong> International. 👉 <a href="https://alien-investor.org/interactive-brokers" target="_blank">https://alien-investor.org/interactive-brokers</a></li>
+        <li>💥 <strong>21bitcoin:</strong> Bitcoin-only (Code ALIENINVESTOR). 👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a></li>
+        <li>₿ <strong>BitBox:</strong> Hardware-Wallet (Code ALIENINVESTOR). 👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a></li>
+        <li>🛡️ <strong>Proton:</strong> Privacy. 👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a></li>
       </ul>
-      <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">
-        Hinweis: Bei einigen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du
-        meine Arbeit, ohne dass es dich mehr kostet. Danke! 👽
-      </p>
+      <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">Hinweis: Affiliate-Links. Supporte meine Arbeit ohne Mehrkosten. Danke! 👽</p>
     </div>
 
   </article>
@@ -376,4 +379,8 @@
     <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
     <p style="margin-top: 20px;">
       👽 <strong>Haftungsausschluss:</strong><br><br>
-      Keine Finanz-, Steuer- oder Rechtsberatung. Nur persönliche 
+      Keine Finanz-, Steuer- oder Rechtsberatung. Nur persönliche Meinung. Denke selbst.
+    </p>
+  </footer>
+</body>
+</html>
