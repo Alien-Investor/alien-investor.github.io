@@ -820,8 +820,7 @@ function parseAV(val) {
 }
 
 async function fetchAV(avFunction, ticker, apiKey) {
-  const avTicker = ticker.replace(/\./g, '-');
-  const url = `https://www.alphavantage.co/query?function=${avFunction}&symbol=${encodeURIComponent(avTicker)}&apikey=${apiKey}`;
+  const url = `https://www.alphavantage.co/query?function=${avFunction}&symbol=${encodeURIComponent(ticker)}&apikey=${apiKey}`;
   console.log('[AV]', avFunction, 'fetch ...');
   try {
     const res = await fetch(url, { signal: AbortSignal.timeout(15000) });
@@ -925,6 +924,9 @@ async function analyzeStock(ticker) {
     return;
   }
 
+  const tickerTD = ticker.replace(/-/g, '.');  // Twelve Data: BRK-B → BRK.B
+  const tickerAV = ticker.replace(/\./g, '-'); // Alpha Vantage: BRK.B → BRK-B
+
   state = {
     ticker, fmpProfile: null, incomeStmts: [], keyMetrics: [], ratios: [],
     balanceSheets: [], cashFlows: [], earningsSurprises: [],
@@ -943,8 +945,8 @@ async function analyzeStock(ticker) {
     // ── Schritt 1: Twelve Data + Yahoo parallel (verschiedene APIs, kein Rate-Limit) ──
     setStatus('LADE KURSDATEN …');
     const [tdTS, tdDiv] = await Promise.allSettled([
-      fetchTDTimeSeries(ticker, keys.twelvedata),
-      fetchTDDividends(ticker, keys.twelvedata),
+      fetchTDTimeSeries(tickerTD, keys.twelvedata),
+      fetchTDDividends(tickerTD, keys.twelvedata),
     ]);
 
     if (tdTS.status === 'rejected') throw new Error('Kursdaten nicht abrufbar: ' + tdTS.reason?.message);
@@ -959,7 +961,7 @@ async function analyzeStock(ticker) {
     setStatus('LADE FUNDAMENTALDATEN … (1/5)');
     const { overview: avOverview, earnings: avEarnings, income: avIncome,
             balance: avBalance, cashflow: avCashflow } =
-      await fetchAllAV(ticker, keys.alphavantage, setStatus);
+      await fetchAllAV(tickerAV, keys.alphavantage, setStatus);
 
     // Diagnose-Summary
     console.log('── AV Ergebnis ──');
