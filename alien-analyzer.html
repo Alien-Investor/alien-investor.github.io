@@ -1076,7 +1076,16 @@ function transformAVToState(avOverview, avIncome, avBalance, avCashflow, avEarni
   const annualIncome  = avIncome?.annualReports   || [];
   const annualBalance = avBalance?.annualReports  || [];
   const annualCF      = avCashflow?.annualReports || [];
-  const sharesOut     = parseAV(ov.SharesOutstanding);
+  let sharesOut = parseAV(ov.SharesOutstanding);
+  if (!sharesOut || sharesOut <= 0) {
+    const mcap  = parseAV(ov.MarketCapitalization);
+    const price = state.priceHistory[state.priceHistory.length - 1]?.price;
+    if (mcap && price && price > 0) sharesOut = mcap / price;
+  }
+  if (!sharesOut || sharesOut <= 0) {
+    sharesOut = parseAV(annualBalance[0]?.commonStockSharesOutstanding);
+  }
+  console.log('[SHARES] Quelle:', sharesOut ? 'OK' : 'fehlt', sharesOut);
 
   state.keyMetrics = annualIncome.map(inc => {
     const date = inc.fiscalDateEnding;
@@ -1416,7 +1425,7 @@ function buildFairValueChart() {
     const peValues = filtered.map(p => {
       const eps = interpolateEPS(p.date);
       return (eps && eps > 0) ? p.price / eps : null;
-    }).filter(v => v != null && v > 0 && v < 300);
+    }).filter(v => v != null && v > 0 && v < 80);
 
     avgPE = seriesAvg(peValues);
 
@@ -1531,7 +1540,8 @@ function buildMultiplesChart() {
   const kgvData = filtered.map(p => {
     if (!hasEPS) return null;
     const eps = interpolateEPS(p.date);
-    return (eps && eps > 0) ? Math.min(p.price / eps, 150) : null;
+    const ratio = (eps && eps > 0) ? p.price / eps : null;
+    return (ratio != null && ratio > 0 && ratio < 80) ? ratio : null;
   });
 
   // KBV: Kurs / interpolierter Buchwert je Aktie
@@ -1842,7 +1852,7 @@ function buildQualityCheck() {
       const peVals = state.priceHistory.slice(-120).map(p2 => {
         const eps = interpolateEPS(p2.date);
         return (eps && eps > 0) ? p2.price / eps : null;
-      }).filter(v => v != null && v > 0 && v < 300);
+      }).filter(v => v != null && v > 0 && v < 80);
       return peVals.length ? peVals.reduce((a, b) => a + b, 0) / peVals.length : null;
     })();
 
@@ -1863,16 +1873,21 @@ function buildQualityCheck() {
   }
 
   // ── PEG ──
-  if (peg == null && pe != null && earnGrowth3y != null && earnGrowth3y > 0) {
+  if (peg == null && pe != null && pe > 0 && pe < 80 &&
+      earnGrowth3y != null && earnGrowth3y > 0.01 && earnGrowth3y < 1.0) {
     peg = pe / (earnGrowth3y * 100);
   }
-  if (peg != null) {
-    const pegColor = peg < 1 ? 'green' : peg <= 2 ? 'yellow' : 'red';
-    const pegText  = pegColor === 'green' ? 'GUT' : pegColor === 'yellow' ? 'FAIR' : 'HOCH';
-    rows.push(qcRow('PEG-Ratio', fmt(peg, 2), 'KGV ÷ Wachstum',
-      ampel(pegColor, pegText),
-      peg < 1 ? 'Wachstum eingepreist' : peg > 2 ? 'Wachstumsprämie hoch' : ''));
-    scoreColors.push(pegColor);
+  if (peg != null && pe != null && pe > 0 && pe < 80) {
+    if (peg > 10) {
+      console.log('[PEG] nicht plausibel:', peg.toFixed(2), '– wird nicht angezeigt');
+    } else {
+      const pegColor = peg < 1 ? 'green' : peg <= 2 ? 'yellow' : 'red';
+      const pegText  = pegColor === 'green' ? 'GUT' : pegColor === 'yellow' ? 'FAIR' : 'HOCH';
+      rows.push(qcRow('PEG-Ratio', fmt(peg, 2), 'KGV ÷ Wachstum',
+        ampel(pegColor, pegText),
+        peg < 1 ? 'Wachstum eingepreist' : peg > 2 ? 'Wachstumsprämie hoch' : ''));
+      scoreColors.push(pegColor);
+    }
   }
 
   // ── KBV ──
