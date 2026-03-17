@@ -794,16 +794,20 @@ async function fetchTDDividends(ticker, apiKey) {
     console.log('[TD-DIV] Response status:', res.status, 'ok:', res.ok);
     const text = await res.text();
     console.log('[TD-DIV] Response body:', text);
-    if (!res.ok) { console.warn('[TD-DIV] HTTP-Fehler:', res.status); return { dividends: [], apiReached: false }; }
+    if (res.status === 403 || text.includes('available exclusively with')) {
+      console.warn('[TD-DIV] Paid Plan erforderlich');
+      return { dividends: [], status: 'paid_plan_required' };
+    }
+    if (!res.ok) { console.warn('[TD-DIV] HTTP-Fehler:', res.status); return { dividends: [], status: 'error' }; }
     const data = JSON.parse(text);
-    if (data?.status === 'error') { console.warn('[TD-DIV] API-Fehler:', data.message); return { dividends: [], apiReached: false }; }
+    if (data?.status === 'error') { console.warn('[TD-DIV] API-Fehler:', data.message); return { dividends: [], status: 'error' }; }
     const divs = data?.dividends;
-    if (!Array.isArray(divs)) { console.warn('[TD-DIV] Kein dividends-Array'); return { dividends: [], apiReached: true }; }
+    if (!Array.isArray(divs) || divs.length === 0) { console.warn('[TD-DIV] Kein/leeres dividends-Array'); return { dividends: [], status: 'no_data' }; }
     console.log('[TD-DIV] OK, Dividenden:', divs.length);
-    return { dividends: divs, apiReached: true };
+    return { dividends: divs, status: 'ok' };
   } catch (e) {
     console.error('[TD-DIV] Fehler:', e.message);
-    return { dividends: [], apiReached: false };
+    return { dividends: [], status: 'error' };
   }
 }
 
@@ -945,11 +949,11 @@ async function analyzeStock(ticker) {
 
     if (tdTS.status === 'rejected') throw new Error('Kursdaten nicht abrufbar: ' + tdTS.reason?.message);
     const tdTimeSeries = tdTS.value;
-    const tdDivResult  = tdDiv.status === 'fulfilled' ? tdDiv.value : { dividends: [], apiReached: false };
+    const tdDivResult  = tdDiv.status === 'fulfilled' ? tdDiv.value : { dividends: [], status: 'error' };
     const tdDivData    = tdDivResult.dividends;
-    const tdDivApiReached = tdDivResult.apiReached;
+    const tdDivStatus  = tdDivResult.status;
     console.log('Twelve Data:', tdTimeSeries.values?.length, 'Datenpunkte');
-    console.log('TD Dividenden:', tdDivData.length, 'Events', '| apiReached:', tdDivApiReached);
+    console.log('TD Dividenden:', tdDivData.length, 'Events', '| status:', tdDivStatus);
 
     // ── Schritt 2: Alpha Vantage – strikte async/await Sequenz ──────────────────
     setStatus('LADE FUNDAMENTALDATEN … (1/5)');
@@ -973,7 +977,7 @@ async function analyzeStock(ticker) {
     }
 
     setStatus('DATEN AUFBEREITEN …');
-    preparePriceDiv(tdTimeSeries, tdDivData, tdDivApiReached);
+    preparePriceDiv(tdTimeSeries, tdDivData, tdDivStatus);
     transformAVToState(avOverview, avIncome, avBalance, avCashflow, avEarnings);
     prepareEPS();
     updateHeader();
@@ -993,7 +997,7 @@ async function analyzeStock(ticker) {
 }
 
 // ── DATA PREPARATION ──────────────────────────────────────────
-function preparePriceDiv(tdTimeSeries, tdDivData, divApiReached = false) {
+function preparePriceDiv(tdTimeSeries, tdDivData, divStatus = 'error') {
   // Price history – Twelve Data liefert newest-first → umkehren
   const values = tdTimeSeries.values || [];
   state.priceHistory = [...values]
@@ -1001,7 +1005,7 @@ function preparePriceDiv(tdTimeSeries, tdDivData, divApiReached = false) {
     .map(v => ({ date: new Date(v.datetime).getTime(), price: parseFloat(v.close) }))
     .filter(p => p.price > 0 && !isNaN(p.price));
 
-  state.divApiReached = divApiReached;
+  state.divStatus = divStatus;
 
   // Dividend history – Twelve Data liefert Array mit ex_date (ISO) und amount (String)
   if (tdDivData?.length) console.log('[DIV] Erster Eintrag:', tdDivData[0]);
@@ -1628,17 +1632,22 @@ function buildDividendChart() {
   if (!divs.length || !prices.length) {
     const noDataEl = document.getElementById('div-no-data');
     noDataEl.classList.remove('hidden');
-    if (state.divApiReached) {
+    const s = state.divStatus;
+    if (s === 'paid_plan_required') {
+      noDataEl.innerHTML = `<div style="text-align:center;padding:40px;color:var(--text-dim);font-size:.65rem;letter-spacing:2px;">
+        DIVIDENDENDATEN ERFORDERN EINEN PAID PLAN
+        <div style="margin-top:8px;font-size:.6rem;letter-spacing:1px;color:var(--text-dim);opacity:.6;">
+          Dividendendaten erfordern einen Twelve Data Paid Plan &middot;
+          <a href="https://twelvedata.com/pricing" target="_blank" rel="noopener" style="color:var(--text-dim);text-decoration:underline;">twelvedata.com/pricing</a>
+        </div>
+      </div>`;
+    } else if (s === 'no_data') {
       noDataEl.innerHTML = `<div style="text-align:center;padding:40px;color:var(--text-dim);font-size:.65rem;letter-spacing:2px;">
         KEINE DIVIDENDE BEKANNT – Aktie schüttet möglicherweise nicht aus
       </div>`;
     } else {
       noDataEl.innerHTML = `<div style="text-align:center;padding:40px;color:var(--text-dim);font-size:.65rem;letter-spacing:2px;">
         DIVIDENDENDATEN NICHT VERFÜGBAR
-        <div style="margin-top:8px;font-size:.6rem;letter-spacing:1px;color:var(--text-dim);opacity:.6;">
-          Dividendendaten erfordern einen Twelve Data Paid Plan &middot;
-          <a href="https://twelvedata.com/pricing" target="_blank" rel="noopener" style="color:var(--text-dim);text-decoration:underline;">twelvedata.com/pricing</a>
-        </div>
       </div>`;
     }
     return;
