@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Bitcoin-Steuer selbst berechnen: FiFo, Haltefrist & das Open-Source Tool fürs Finanzamt 🧾</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bitcoin versteuern ohne Steuerberater-Ahnungslosigkeit: Ein Open-Source CLI-Tool berechnet FiFo, Haltefrist und steuerpflichtige Gewinne automatisch aus deinen Broker-CSVs.">
+  <style>
+    body { background-color: #000; color: #fff; font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 0 15px 20px 15px; }
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+    code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; font-family: monospace; }
+    pre { background-color: #111; padding: 1em; border-radius: 6px; overflow-x: auto; color: #0f0; font-family: monospace; font-size: 0.9em; border: 1px solid #222; }
+    em { color: #ccc; }
+    .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
+    blockquote { border-left: 3px solid #00ffcc; margin: 2em 0; padding: 0.5em 1em; color: #ddd; background: #050505; font-style: italic; }
+    table { width: 100%; border-collapse: collapse; margin: 2em 0; font-size: 0.9em; }
+    th, td { border: 1px solid #333; padding: 10px; text-align: left; }
+    th { color: #00ffcc; background-color: #111; }
+    tr:nth-child(even) { background-color: #050505; }
+    .box { border: 1px solid #00ffcc; background: #050505; padding: 1.5em; border-radius: 8px; margin: 2em 0; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
+    .like-button { margin: 3em 0; display: flex; align-items: center; justify-content: center; gap: 1em; font-size: 1em; }
+    .like-button button { background: #000; color: #00ffcc; border: 1px solid #00ffcc; padding: 0.6em 1.2em; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.2s ease; }
+    .like-button button:hover, .like-button button:active { background: #00ffcc; color: #000; box-shadow: 0 0 15px #00ffcc; }
+    .like-button button:disabled { border-color: #444; color: #888; background: #111; cursor: default; }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    .back-links { margin-top: 40px; text-align: center; display: flex; flex-direction: column; gap: 10px; }
+    footer { margin-top: 60px; padding: 20px; font-size: 0.85em; color: #666; border-top: 1px solid #222; text-align: center; }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="index.html">⬅ Zurück zur Zentrale</a>
+  </div>
+
+  <h1>Bitcoin-Steuer selbst berechnen: FiFo, Haltefrist & das Open-Source Tool fürs Finanzamt 🧾</h1>
+  <p class="byline"><em>von Alien Investor</em></p>
+
+  <article id="content">
+
+    <p>
+      Du hast Bitcoin in Selbstverwahrung. Gut. Du kaufst über mehrere Broker. Noch besser.
+      Und jetzt kommt das Finanzamt und fragt, welche Coins du wann gekauft hast, welche davon steuerfrei sind
+      und wie hoch dein steuerpflichtiger Gewinn exakt ist.
+    </p>
+    <p>
+      Für genau dieses Problem gibt es das <strong>BTC Steuertool</strong> — ein Open-Source CLI-Tool das ich
+      selbst für meine eigene Steuererklärung entwickelt habe. Es liest deine CSV-Exporte von BitBox,
+      21bitcoin, Bison, Swissquote, Strike und Pocket und berechnet daraus automatisch, was ans Finanzamt
+      muss und was steuerfrei bleibt.
+    </p>
+
+    <blockquote>
+      „Nicht Trust, Verify — auch beim Steuerberater. Wenn du weißt wie die Berechnung funktioniert,
+      bist du nicht ausgeliefert."
+    </blockquote>
+
+    <h2>1. Die Grundlage: Was das deutsche Steuerrecht sagt</h2>
+    <p>
+      Bitcoin gilt in Deutschland als privates Veräußerungsgeschäft (§ 23 EStG). Die Regeln:
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Situation</th>
+          <th>Steuerlich</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>BTC weniger als 365 Tage gehalten, dann verkauft</td>
+          <td>Gewinn steuerpflichtig</td>
+        </tr>
+        <tr>
+          <td>BTC mehr als 365 Tage gehalten, dann verkauft</td>
+          <td>Gewinn <strong>steuerfrei</strong></td>
+        </tr>
+        <tr>
+          <td>Übertrag zwischen eigenen Wallets/Konten</td>
+          <td>Kein steuerpflichtiger Vorgang</td>
+        </tr>
+        <tr>
+          <td>Gewinn unter 600 EUR/Jahr (bis 2023)</td>
+          <td>Freigrenze — kein Cent Steuer</td>
+        </tr>
+        <tr>
+          <td>Gewinn unter 1.000 EUR/Jahr (ab 2024)</td>
+          <td>Freigrenze — kein Cent Steuer</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      Die Methode heißt <strong>FiFo</strong> — First In, First Out. Das bedeutet: wer zuerst kauft,
+      verkauft auch zuerst. Klingt simpel, wird aber schnell komplex wenn du bei fünf Brokern kaufst
+      und deine BTC zwischen mehreren Wallets wandern.
+    </p>
+
+    <div class="box" style="border-color: #ff3b3b; box-shadow: 0 0 10px rgba(255, 59, 59, 0.15);">
+      <h3 style="color: #ff3b3b;">⚠️ Die Freigrenze ist eine Falle</h3>
+      <p>
+        Viele denken: „Ich bin unter 1.000 EUR, also irrelevant." Falsch.
+        Die Freigrenze ist kein Freibetrag. Bei Überschreitung wird der <em>gesamte</em> steuerpflichtige
+        Gewinn versteuert, nicht nur der Teil darüber. Ein Gewinn von 1.001 EUR ist damit vollständig
+        steuerpflichtig — nicht nur der eine Euro.
+      </p>
+    </div>
+
+    <h2>2. Das Problem bei Selbstverwahrung</h2>
+    <p>
+      Steuer-Apps wie CoinTracking oder Blockpit funktionieren gut für Börsen die alles aufzeichnen.
+      Für echte Selbstverwahrer mit Hardware-Wallets entstehen dabei Probleme:
+    </p>
+    <ul>
+      <li>Du überträgst BTC von deiner BitBox zur Börse für einen Verkauf — das sieht wie ein Kauf aus.</li>
+      <li>Du hast mehrere Wallets — die Kostenbasis wandert mit.</li>
+      <li>Swissquote kauft in USD — der historische Wechselkurs muss korrekt eingerechnet werden.</li>
+      <li>Du gibst deine kompletten Finanzdaten in eine Cloud-App ein — das widerspricht dem ganzen Sinn von Selbstverwahrung.</li>
+    </ul>
+    <p>
+      Das BTC Steuertool läuft <strong>lokal auf deinem Rechner</strong>. Keine Cloud, keine Registrierung,
+      keine fremden Server. Deine Daten bleiben bei dir.
+    </p>
+
+    <h2>3. Installation (einmalig)</h2>
+    <p>
+      Du brauchst Python 3 — auf Linux und macOS ist das bereits installiert. Dann:
+    </p>
+    <pre>git clone https://github.com/Alien-Investor/btc-steuertool.git
+cd btc-steuertool
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.txt</pre>
+    <p>
+      Das war es. Keine Datenbank, kein Server, kein Abo.
+    </p>
+
+    <h2>4. Deine CSV-Dateien ablegen</h2>
+    <p>
+      Exportiere deine CSV-Dateien aus den jeweiligen Apps und lege sie in die entsprechenden Ordner:
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Quelle</th>
+          <th>Ordner</th>
+          <th>Dateiname</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>BitBox (Hardware-Wallet)</td>
+          <td><code>bitbox/</code></td>
+          <td>beliebig, alle <code>*.csv</code> werden geladen</td>
+        </tr>
+        <tr>
+          <td>21bitcoin</td>
+          <td><code>Broker/</code></td>
+          <td>muss mit <code>21bitcoin</code> beginnen</td>
+        </tr>
+        <tr>
+          <td>Bison</td>
+          <td><code>Broker/</code></td>
+          <td><code>Bison-CSV-Gesamt.csv</code></td>
+        </tr>
+        <tr>
+          <td>Swissquote</td>
+          <td><code>Broker/</code></td>
+          <td><code>Swissquote_CSV-Gesamt.csv</code></td>
+        </tr>
+        <tr>
+          <td>Strike</td>
+          <td><code>Broker/</code></td>
+          <td><code>strike_2024.csv</code>, <code>strike_2025.csv</code> usw.</td>
+        </tr>
+        <tr>
+          <td>Pocket</td>
+          <td><code>Broker/</code></td>
+          <td>muss mit <code>Pocket</code> beginnen</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="box">
+      <h3>🔒 Deine Daten bleiben lokal</h3>
+      <p>
+        Die Ordner <code>bitbox/</code> und <code>Broker/</code> sind in der <code>.gitignore</code>
+        eingetragen — sie werden niemals versehentlich in Git eingecheckt oder online gestellt.
+        Deine Finanzdaten bleiben auf deinem Rechner.
+      </p>
+    </div>
+
+    <h2>5. Der erste Report</h2>
+    <p>
+      Einen Report für ein bestimmtes Jahr ausgeben:
+    </p>
+    <pre>.venv/bin/python src/main.py --year 2024</pre>
+    <p>
+      Alle Jahre auf einmal:
+    </p>
+    <pre>.venv/bin/python src/main.py --all</pre>
+    <p>
+      Mit formalem Nachweis für den Steuerberater oder das Finanzamt:
+    </p>
+    <pre>.venv/bin/python src/main.py --year 2024 --csv --nachweis</pre>
+    <p>
+      Das Ergebnis landet in <code>reports/</code>: ein lesbarer Steuerreport, ein druckfertiger
+      formaler Nachweis und optional CSV-Tabellen für Excel.
+    </p>
+
+    <h2>6. Was du dem Finanzamt gibst</h2>
+    <p>
+      Der Nachweis allein reicht nicht. Das Finanzamt will wissen, dass die Kaufdaten echt sind.
+      Deshalb immer zwei Teile einreichen:
+    </p>
+    <ul>
+      <li><strong>Den Steuernachweis</strong> — was das Tool erzeugt (<code>steuernachweis_JAHR.txt</code>).</li>
+      <li><strong>Die Original-CSVs der Broker</strong> — als Beleg dass die Käufe wirklich stattgefunden haben.</li>
+    </ul>
+    <p>
+      Das Tool zeigt im Nachweis unter "Quelle" genau welcher Broker welches Lot geliefert hat —
+      damit kannst du jeden einzelnen Verkauf lückenlos zurückverfolgen.
+    </p>
+
+    <h2>7. Was das Tool <em>nicht</em> ist</h2>
+    <p>
+      Kein Steuerberater-Ersatz. Wenn du steuerpflichtige Gewinne hast, lass die Ergebnisse
+      prüfen — besonders im ersten Jahr. Das Tool rechnet korrekt nach FiFo, aber du bist
+      verantwortlich für die Richtigkeit deiner Eingaben.
+    </p>
+    <p>
+      Was es ist: ein Werkzeug das dich informiert und vorbereitet — statt dich blind auf eine
+      Cloud-App vertrauen zu lassen die du nicht kontrollierst.
+    </p>
+
+    <div class="box">
+      <h3>📦 Open Source auf GitHub</h3>
+      <p>
+        Der vollständige Code ist öffentlich, kostenlos und quelloffen. Du kannst nachvollziehen,
+        wie jede Zeile der Berechnung funktioniert. Fiktive Beispieldaten für alle unterstützten
+        Broker sind ebenfalls dabei — so kannst du das Tool testen bevor du deine echten Daten einliest.
+      </p>
+      <p>
+        👉 <a href="https://github.com/Alien-Investor/btc-steuertool" target="_blank" rel="noopener">
+          github.com/Alien-Investor/btc-steuertool
+        </a>
+      </p>
+    </div>
+
+  </article>
+
+  <div class="box" style="border-style: dashed; border-color: #333;">
+    <h3>🧰 Tools für echte Eigentümer</h3>
+    <p style="font-size:0.95em;">
+      Wenn du Aktien und Bitcoin möglichst eigenverantwortlich halten willst, nutze nicht nur dein Bankdepot:
+    </p>
+    <ul>
+      <li>
+        💥 <strong>Bitcoin kaufen in Europa – 21bitcoin:</strong><br>
+        Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges sats stapeln – ohne Shitcoins.<br>
+        Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du dauerhaft 0,2&nbsp;Prozentpunkte Gebührenreduktion
+        auf Sofort- und Sparplankäufe.<br>
+        👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
+      </li>
+      <li>
+        ₿ <strong>BitBox in Selbstverwahrung:</strong><br>
+        Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox – es gibt die klassische BitBox02 und die neue
+        BitBox für iPhone (Nova).<br>
+        Mit dem Code <strong>ALIENINVESTOR</strong> bekommst du 5 % Rabatt.<br>
+        👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
+      </li>
+      <li>
+        🛡️ <strong>Privacy &amp; Mail:</strong><br>
+        Für E-Mail, VPN und Cloud nutze ich Proton – datensparsam und ohne Big-Tech-Abhängigkeit.<br>
+        👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
+      </li>
+    </ul>
+    <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">
+      Hinweis: Bei einigen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit,
+      ohne dass es dich mehr kostet. Danke! 👽
+    </p>
+  </div>
+
+  <div class="like-button">
+    <button id="likeButton">👍 Gefällt mir</button> <span id="likeCount">0</span> <span style="color:#bbb; font-size: 0.9em;">(Lokal)</span>
+  </div>
+  <script>(function(){const k=window.location.pathname+"-likes";const b=document.getElementById('likeButton');const s=document.getElementById('likeCount');let c=parseInt(localStorage.getItem(k)||"0",10);s.textContent=c;b.addEventListener('click',function(){c++;s.textContent=c;localStorage.setItem(k,String(c));b.disabled=true;b.textContent="Danke! 👽";b.style.borderColor="#444";b.style.color="#888";});})();</script>
+
+  <div class="back-links">
+    <a href="blog.html" style="font-size: 1.1em;">⬅ Zurück zur Blog-Übersicht</a>
+    <a href="index.html" style="font-size: 1.1em;">⬅ Zurück zur Zentrale</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+    <h3 style="margin-bottom: 15px;">🔋 Energie aufladen <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span></h3>
+    <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">Treibstoff für das Mutterschiff senden</a>
+    <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸</p>
+  </div>
+
+  <footer>
+    <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    <p style="margin-top: 20px;">👽 <strong>Haftungsausschluss:</strong><br><br>Dieser Artikel ist keine Rechts- oder Steuerberatung, sondern eine technische Anleitung. Ich teile hier nur meine persönliche Alien-Meinung. Für deine Steuererklärung bist du selbst verantwortlich.</p>
+  </footer>
+
+</body>
+</html>
