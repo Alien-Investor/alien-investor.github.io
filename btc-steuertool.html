@@ -126,20 +126,34 @@
 
     <h2>3. Installation (einmalig)</h2>
     <p>
-      Du brauchst Python 3 — auf Linux und macOS ist das bereits installiert. Dann:
+      Du brauchst Python 3 — auf Linux und macOS ist das bereits installiert. Auf Windows musst du es ggf. erst installieren (<a href="https://python.org" target="_blank" rel="noopener">python.org</a>).
     </p>
+    <p><strong>Mac / Linux:</strong></p>
     <pre>git clone https://github.com/Alien-Investor/btc-steuertool.git
 cd btc-steuertool
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt</pre>
+    <p><strong>Windows:</strong></p>
+    <pre>git clone https://github.com/Alien-Investor/btc-steuertool.git
+cd btc-steuertool
+python -m venv .venv
+.venv\Scripts\pip install -r requirements.txt</pre>
     <p>
       Das war es. Keine Datenbank, kein Server, kein Abo.
     </p>
 
     <h2>4. Deine CSV-Dateien ablegen</h2>
     <p>
-      Exportiere deine CSV-Dateien aus den jeweiligen Apps und lege sie in die entsprechenden Ordner:
+      Exportiere deine CSV-Dateien aus den jeweiligen Apps und lege sie in die entsprechenden Ordner.
+      Die Ordner <code>bitbox/</code> und <code>Broker/</code> existieren nach dem Klonen noch nicht —
+      sie sind in <code>.gitignore</code> eingetragen damit deine Finanzdaten nie versehentlich auf GitHub landen.
+      Du musst sie einmalig selbst anlegen:
     </p>
+    <p><strong>Mac / Linux:</strong></p>
+    <pre>mkdir -p bitbox Broker</pre>
+    <p><strong>Windows:</strong></p>
+    <pre>mkdir bitbox
+mkdir Broker</pre>
     <table>
       <thead>
         <tr>
