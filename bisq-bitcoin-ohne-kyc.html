@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Bisq: Bitcoin kaufen ohne KYC – die dezentrale Alternative | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bisq ist eine dezentrale Peer-to-Peer-Börse für Bitcoin – ohne KYC, ohne Registrierung, ohne zentralen Betreiber. Wie es funktioniert, was es kostet und für wen es sich lohnt.">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 0 15px 20px 15px;
+    }
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
+    h2 { margin-top: 2.5em; border-bottom: 1px solid #1a3a33; padding-bottom: 8px; }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+    em { color: #ccc; }
+    .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
+    .box {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 0.6em; }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1em;
+      margin: 2em 0;
+    }
+    @media (max-width: 600px) {
+      .two-col { grid-template-columns: 1fr; }
+    }
+    .col-gut {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.2em;
+      border-radius: 8px;
+    }
+    .col-schlecht {
+      border: 1px solid #ff4466;
+      background: #0a0005;
+      padding: 1.2em;
+      border-radius: 8px;
+    }
+    .col-gut h3 { color: #00ffcc; margin-top: 0; }
+    .col-schlecht h3 { color: #ff4466; margin-top: 0; }
+    ul { padding-left: 1.2em; }
+    li { margin-bottom: 0.5em; }
+    .like-button {
+      margin: 3em 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+    }
+    .like-button button {
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+    .like-button button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
+    }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    .back-links { margin-top: 40px; text-align: center; display: flex; flex-direction: column; gap: 10px; }
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="index.html">⬅ Zurück zur Zentrale</a>
+  </div>
+
+  <h1>🛡️ Bisq: Bitcoin kaufen ohne KYC</h1>
+  <p class="byline"><em>von Alien Investor</em></p>
+
+  <article id="content">
+
+    <p>
+      Du kaufst Bitcoin, weil du frei sein willst. Raus aus dem kaputten Fiat-System,
+      weg von der Kontrolle der Zentralbanken. Und was ist dein erster Schritt in diese
+      angebliche Freiheit? Du scannst deinen Reisepass ein, machst ein braves Selfie für
+      den Ident-Check und lädst beides bei einer zentralen Börse hoch. Fällt dir was auf?
+      Du tauschst gerade dein altes Gefängnis gegen ein neues.
+    </p>
+    <p>
+      Du verwahrst deine Coins vielleicht selbst auf einer Hardware-Wallet — "Not your keys,
+      not your coins" hast du verstanden. Aber solange zentrale Börsen dank KYC-Zwang
+      jede deiner Transaktionen in einer Datenbank speichern und bei der kleinsten Anfrage
+      an Behörden weitergeben, bist du komplett gläsern. Echte finanzielle Souveränität
+      sieht anders aus.
+    </p>
+    <p>
+      Hier kommt <strong>Bisq</strong> ins Spiel.
+    </p>
+
+    <h2>Was ist Bisq?</h2>
+    <p>
+      Bisq (ehemals Bitsquare, gestartet 2014) ist eine <strong>Open-Source-Desktop-Anwendung</strong>
+      für Windows, Mac und Linux — keine Website, kein Login, kein Konto.
+      Es verbindet Käufer und Verkäufer direkt über das Tor-Netzwerk,
+      ohne dass ein Mittelsmann dazwischensteht.
+    </p>
+    <p>
+      Bisq ist kein Unternehmen. Es gibt keinen CEO, keine zentralen Server, keinen
+      physischen Standort. Das Netzwerk läuft ausschließlich über die Rechner der Nutzer.
+      Wer es abschalten will, müsste gleichzeitig jeden einzelnen Nutzer weltweit abschalten.
+    </p>
+
+    <blockquote>
+      Kein Corporate-Bullshit, keine Registrierung, niemand den du um Erlaubnis fragen musst.
+      Nur du und der Handel von Mensch zu Mensch.
+    </blockquote>
+
+    <h2>Wie funktioniert der Handel?</h2>
+    <p>
+      Bisq gibt es in zwei Varianten:
+    </p>
+
+    <div class="box">
+      <h3>Bisq 1 — das klassische Protokoll</h3>
+      <p>
+        Beide Handelspartner hinterlegen eine <strong>Sicherheitskaution in Bitcoin</strong>
+        in einem 2-von-2-Multisig-Escrow auf der Bitcoin-Blockchain. Das ist der finanzielle
+        Anreiz, den Handel ehrlich abzuschließen. Die eigentliche Fiat-Zahlung — zum Beispiel
+        per SEPA-Überweisung — läuft direkt von Bankkonto zu Bankkonto. Bisq berührt das
+        Geld nie. Gibt es Streit, greift ein mehrstufiges Schlichtungsverfahren:
+        Trader-Chat → Mediation → Arbitration.
+      </p>
+      <p style="color:#aaa; font-size:0.9em;">
+        Nachteil: Du brauchst bereits eine kleine Menge Bitcoin für die Sicherheitskaution.
+      </p>
+    </div>
+
+    <div class="box">
+      <h3>Bisq 2 / Bisq Easy — für Einsteiger</h3>
+      <p>
+        Keine Sicherheitskaution notwendig. Du kannst Bitcoin kaufen ohne vorher
+        bereits Bitcoin zu besitzen. Die Sicherheit basiert auf der Reputation des Verkäufers,
+        die Beträge sind auf ca. 600 USD begrenzt. Ideal für den ersten No-KYC-Kauf.
+      </p>
+    </div>
+
+    <h2>Anonymität & Dezentralität</h2>
+    <p>
+      Bisq läuft <strong>standardmäßig über Tor</strong> — deine IP-Adresse ist
+      von Anfang an verschleiert. Persönliche Daten wie Bankverbindungen werden
+      Ende-zu-Ende-verschlüsselt übertragen und ausschließlich lokal auf deiner
+      Festplatte gespeichert. Sie werden nur mit deinem direkten Handelspartner geteilt —
+      nie mit Bisq, weil es kein "Bisq" gibt, das sie empfangen könnte.
+    </p>
+    <p>
+      Keinerlei Registrierung, kein KYC, kein Selfie mit Ausweis.
+      Du lädst die Software herunter und handelst.
+    </p>
+
+    <h2>Vor- und Nachteile auf einen Blick</h2>
+    <div class="two-col">
+      <div class="col-gut">
+        <h3>✓ Vorteile</h3>
+        <ul>
+          <li>Kein KYC, keine Registrierung</li>
+          <li>Non-custodial — du behältst immer die Kontrolle</li>
+          <li>Tor standardmäßig aktiv</li>
+          <li>Kein zentraler Honeypot für Hacker</li>
+          <li>50+ Zahlungsmethoden (SEPA, Cash by Mail u.v.m.)</li>
+          <li>Zensurresistent — nicht abschaltbar</li>
+          <li>Open Source</li>
+        </ul>
+      </div>
+      <div class="col-schlecht">
+        <h3>✗ Nachteile</h3>
+        <ul>
+          <li>5–10% Aufpreis gegenüber Marktpreis (No-KYC-Premium)</li>
+          <li>Weniger Liquidität als zentrale Börsen</li>
+          <li>Handel dauert länger (Banküberweisung)</li>
+          <li>Bisq 1 erfordert BTC-Vorbesitz</li>
+          <li>Keine Charts, kein Daytrading</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>Der BSQ Token</h2>
+    <p>
+      Um das Projekt zu finanzieren ohne eine Firma zu gründen, hat Bisq den
+      <strong>BSQ Token</strong> entwickelt — kein klassischer Altcoin, sondern ein
+      "Colored Coin" direkt auf der Bitcoin-Blockchain. 1 BSQ = 100 Satoshi.
+    </p>
+    <p>
+      Zahlst du deine Handelsgebühren in BSQ, bekommst du rund <strong>50% Rabatt</strong>.
+      Die verwendeten BSQ werden danach geburnt — aus dem Verkehr gezogen.
+      Entwickler und Helfer des Projekts werden in BSQ entlohnt, sofern die Community
+      per Abstimmung zustimmt. Keine Aktionäre, kein Vorstand — reine DAO-Governance.
+    </p>
+
+    <h2>Rechtlicher Status</h2>
+    <p>
+      Bisq ist eine regulatorische Grauzone — bewusst. Da es kein Unternehmen gibt
+      und keine Gelder verwaltet werden, entzieht sich die Software klassischen
+      Definitionen für Geldübermittler oder Börsen-Lizenzen. In den USA wird der
+      Code rechtlich oft als freie Meinungsäußerung argumentiert.
+    </p>
+    <p>
+      Die Entwickler weisen ausdrücklich darauf hin: <strong>Du bist selbst für die
+      Einhaltung der Gesetze deines Landes verantwortlich.</strong> In Deutschland
+      ist Bitcoin legal — Bisq zu nutzen ist es damit auch. Trotzdem gilt wie immer:
+      eigene Recherche ist Pflicht.
+    </p>
+
+    <h2>Fazit</h2>
+    <p>
+      Bisq tauscht Bequemlichkeit gegen maximale finanzielle Souveränität.
+      Der 5–10% Aufpreis ist der Preis für Freiheit — keine Datenbank, kein Ident-Check,
+      kein CEO der bei Behördenanfragen einknickt. Wer Bitcoin wirklich so nutzen will
+      wie es gedacht war, kommt an Bisq kaum vorbei.
+    </p>
+    <p>
+      Für den Einstieg empfiehlt sich <strong>Bisq Easy</strong> (Bisq 2) —
+      kein BTC-Vorbesitz nötig, kleine Beträge, direkter Start.
+    </p>
+
+    <blockquote>
+      Vertraue niemandem – manage deine Finanzen selbst.
+    </blockquote>
+
+    <div class="box">
+      <h3>🔎 Weiterführend</h3>
+      <ul>
+        <li>👉 <a href="https://bisq.network" target="_blank" rel="noopener">bisq.network</a> — offizielle Website</li>
+        <li>👉 <a href="self-custody.html">Self Custody: Warum Bitcoin ohne eigene Schlüssel seinen Sinn verliert</a></li>
+        <li>👉 <a href="Bitcoin-No-KYC.html">Bitcoin ohne KYC 2026 – Der Weg zur wahren Souveränität</a></li>
+      </ul>
+    </div>
+
+  </article>
+
+  <div class="like-button">
+    <button id="likeButton">👍 Gefällt mir</button>
+    <span id="likeCount">0</span>
+    <span style="color:#bbb; font-size: 0.9em;">(Lokal)</span>
+  </div>
+
+  <script>
+    (function() {
+      const storageKey = window.location.pathname + "-likes";
+      const btn = document.getElementById('likeButton');
+      const span = document.getElementById('likeCount');
+      let count = parseInt(localStorage.getItem(storageKey) || "0", 10);
+      span.textContent = count;
+      btn.addEventListener('click', function() {
+        count += 1;
+        span.textContent = count;
+        localStorage.setItem(storageKey, String(count));
+        btn.disabled = true;
+        btn.textContent = "Danke! 👽";
+        btn.style.borderColor = "#444";
+        btn.style.color = "#888";
+      });
+    })();
+  </script>
+
+  <div class="back-links">
+    <a href="blog.html" style="font-size: 1.1em;">⬅ Zurück zur Blog-Übersicht</a>
+    <a href="index.html" style="font-size: 1.1em;">⬅ Zurück zur Zentrale</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+    <h3 style="margin-bottom: 15px;">
+      🔋 Energie aufladen
+      <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
+    </h3>
+    <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+      Treibstoff für das Mutterschiff senden
+    </a>
+    <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+      Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸
+    </p>
+  </div>
+
+  <footer>
+    <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    <p style="margin-top: 20px;">
+      👽 <strong>Haftungsausschluss:</strong><br><br>
+      Keine Finanz-, Steuer- oder Rechtsberatung. Nur persönliche Meinung. Denke selbst.
+    </p>
+  </footer>
+
+</body>
+</html>
