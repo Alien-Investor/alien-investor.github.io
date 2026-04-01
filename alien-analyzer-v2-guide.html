@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>👽 Alien Analyzer V2 – Aktienanalyse in 4 Tabs erklärt | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Der Alien Analyzer V2 analysiert Aktien ohne Abo und ohne Login – direkt im Browser. Eine Einführung in die vier Tabs: Fairer Wert, Multiples, Dividenden und Qualitätscheck.">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 0 15px 20px 15px;
+    }
+
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
+    h2 { margin-top: 2.5em; border-bottom: 1px solid #1a3a33; padding-bottom: 8px; }
+
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+
+    em { color: #ccc; }
+
+    .byline {
+      margin-top: -0.8em;
+      margin-bottom: 2em;
+      color: #ccc;
+      font-style: italic;
+      text-align: center;
+    }
+
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
+
+    .video-wrapper {
+      display: flex;
+      justify-content: center;
+      margin: 2em 0;
+    }
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 560px;
+      padding-bottom: 31.25%;
+      height: 0;
+      border: 1px solid #00ffcc;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(0, 255, 204, 0.1);
+    }
+    @media (max-width: 600px) {
+      .video-container { padding-bottom: 56.25%; }
+    }
+    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
+    .tab-title-img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      margin: 1em 0 0.8em 0;
+    }
+
+    .screenshot {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      border: 1px solid #1a3a33;
+      margin: 0.8em 0 0.4em 0;
+    }
+
+    .screenshot-caption {
+      text-align: center;
+      font-size: 0.8em;
+      color: #555;
+      margin-bottom: 1.5em;
+    }
+
+    .cta-box {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .cta-box p { margin: 0 0 1em 0; color: #bbb; }
+    .cta-box a { font-size: 1.2em; font-weight: bold; border-bottom: 2px solid #00ffcc; padding-bottom: 3px; }
+
+    .like-button {
+      margin: 3em 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+    }
+    .like-button button {
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+    .like-button button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
+    }
+
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+
+    .back-links {
+      margin-top: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="index.html">⬅ Zurück zur Zentrale</a>
+  </div>
+
+  <h1>👽 Alien Analyzer V2 – Aktienanalyse in 4 Tabs erklärt</h1>
+  <p class="byline"><em>von Alien Investor</em></p>
+
+  <div class="video-wrapper">
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/nDJLBXPShVw" title="Alien Analyzer V2 – Aktienanalyse Tool Vorstellung" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <article id="content">
+
+    <p>
+      Kein Bloomberg-Terminal, kein teures Abo, kein Login. Der <strong>Alien Analyzer V2</strong> ist ein
+      browserbasiertes Value-Investing-Tool – kostenlos, direkt auf alien-investor.org.
+      Ticker eingeben, Enter – und du bekommst in Sekunden eine strukturierte Übersicht
+      über Bewertung, Kennzahlen und Qualität einer Aktie.
+    </p>
+    <p>
+      Die Daten kommen von Yahoo Finance über einen eigenen Proxy. Kein API-Key erforderlich.
+      Das Tool läuft komplett im Browser – eine einzige HTML-Datei, kein Framework, kein Build-Step.
+      Hier ist, was die vier Tabs zeigen.
+    </p>
+
+    <h2>Tab 1 – Fairer Wert</h2>
+    <img src="aa2-tab1-titel.png" alt="Tab 1 – Fairer Wert" class="tab-title-img">
+    <p>
+      Der wichtigste Tab für Value-Investoren. Du siehst den historischen Kursverlauf –
+      und darüber einen <strong>KGV-Fächer</strong>: mehrere Linien, berechnet aus dem EPS-Verlauf
+      multipliziert mit verschiedenen historischen KGV-Niveaus (unteres, mittleres, oberes Perzentil).
+    </p>
+    <p>
+      Liegt der aktuelle Kurs deutlich über dem Fächer? Historisch teuer.
+      Liegt er darunter oder am unteren Rand? Potenzielle Unterbewertung.
+      Die Sidebar liefert dir direkt den Fair-Value-Indikator als kompaktes Urteil.
+    </p>
+    <img src="aa2-tab1-screenshot.png" alt="Fairer Wert – NVIDIA" class="screenshot">
+    <p class="screenshot-caption">NVIDIA im Fairer-Wert-Tab – KGV-Fächer zeigt historische Bewertungskorridore</p>
+
+    <h2>Tab 2 – Multiples</h2>
+    <img src="aa2-tab2-titel.png" alt="Tab 2 – Multiples" class="tab-title-img">
+    <p>
+      Ein einzelner Stichtagswert sagt wenig. Entscheidend ist, wie er sich zur eigenen Geschichte verhält.
+      Tab 2 zeigt <strong>KGV, KCV, KUV und KBV</strong> historisch als Linien – über bis zu 20 Jahre.
+    </p>
+    <p>
+      So erkennst du auf einen Blick, ob das aktuelle Niveau historisch hoch oder moderat ist.
+      Ein GAAP-Filter markiert Ausreißer durch Sondereffekte – damit einmalige Abschreibungen
+      das Bild nicht verzerren.
+    </p>
+    <img src="aa2-tab2-screenshot.png" alt="Multiples – Newmont" class="screenshot">
+    <p class="screenshot-caption">Newmont im Multiples-Tab – KGV, KBV, KUV und KCV im historischen Verlauf</p>
+
+    <h2>Tab 3 – Dividenden</h2>
+    <img src="aa2-tab3-titel.png" alt="Tab 3 – Dividenden" class="tab-title-img">
+    <p>
+      Für Dividendeninvestoren der relevanteste Tab. Die <strong>Dividendenrendite</strong> wird
+      historisch als Balkendiagramm dargestellt, ergänzt um eine geglättete Rendite-Linie
+      und einen farblich markierten Rendite-Korridor – der zeigt, wo die Rendite historisch
+      als attraktiv oder überteuert galt.
+    </p>
+    <p>
+      Die Sidebar ergänzt das <strong>Dividendenwachstum (DPS)</strong> über 12 Monate, 2, 5 und 10 Jahre.
+      So siehst du nicht nur die aktuelle Rendite, sondern ob das Unternehmen sie auch
+      konsistent wachsen lässt.
+    </p>
+    <img src="aa2-tab3-screenshot.png" alt="Dividenden – Exxon Mobil" class="screenshot">
+    <p class="screenshot-caption">Exxon Mobil im Dividenden-Tab – Rendite-Verlauf und Dividendenwachstum</p>
+
+    <h2>Tab 4 – Qualitätscheck &amp; Alien-Einordnung</h2>
+    <img src="aa2-tab4-titel.png" alt="Tab 4 – Qualitätscheck &amp; Alien-Einordnung" class="tab-title-img">
+    <p>
+      Zahlen allein reichen nicht. Tab 4 sortiert die wichtigsten Fundamentaldaten in eine
+      <strong>Ampeltabelle</strong>: ROE, Margen, Debt/Equity, Free Cashflow, Eigenkapitalquote,
+      Gewinnwachstum, Aktienrückkäufe – jede Kennzahl mit einem klaren Signal:
+      GUT, STARK, TEUER, HOCH, GERING oder STABIL.
+    </p>
+    <p>
+      Am Ende des Tabs erscheint die <strong>Alien-Einordnung</strong> – ein automatisch generierter
+      Freitext-Kommentar, der Besonderheiten der jeweiligen Aktie erklärt.
+      Bei einem REIT zum Beispiel: warum KGV hier irrelevant ist und FFO der entscheidende Maßstab.
+      Bei einem Rohstoffunternehmen: warum zyklische Gewinneinbrüche die Multiples strukturell verzerren.
+      Das Tool erkennt solche Sonderfälle und gibt Kontext statt nackter Zahlen.
+    </p>
+    <img src="aa2-tab4-screenshot.png" alt="Qualitätscheck – Realty Income" class="screenshot">
+    <p class="screenshot-caption">Realty Income im Qualitätscheck – Ampeltabelle und Alien-Einordnung</p>
+
+    <h2>Fazit</h2>
+    <p>
+      Der Alien Analyzer V2 ist kein Ersatz für eigene Recherche und kein Handelssignal.
+      Er ist ein Scan-Tool – schnell, kostenlos, ohne Registrierung.
+      Ticker eingeben, vier Tabs durchklicken: du hast mehr Kontext als die meisten Privatanleger,
+      die sich nur den aktuellen Kurs anschauen.
+    </p>
+    <p>
+      Welche Aktien werden unterstützt? Grundsätzlich alles mit einem Yahoo-Finance-Ticker –
+      also US-Aktien, deutsche Titel (z.B. <code>ALV.DE</code>), Schweizer Titel (<code>NESN.SW</code>)
+      und viele weitere internationale Werte.
+    </p>
+
+    <blockquote>
+      Vertraue niemandem – manage deine Finanzen selbst.
+    </blockquote>
+
+    <div class="cta-box">
+      <p>Das Tool ist kostenlos und direkt im Browser nutzbar – kein Login, kein Abo:</p>
+      <a href="alien-analyzer.html">👽 Zum Alien Analyzer V2 →</a>
+    </div>
+
+  </article>
+
+  <div class="like-button">
+    <button id="likeButton">👍 Gefällt mir</button>
+    <span id="likeCount">0</span>
+    <span style="color:#bbb; font-size: 0.9em;">(Lokal)</span>
+  </div>
+
+  <script>
+    (function() {
+      const storageKey = window.location.pathname + "-likes";
+      const btn = document.getElementById('likeButton');
+      const span = document.getElementById('likeCount');
+      let count = parseInt(localStorage.getItem(storageKey) || "0", 10);
+      span.textContent = count;
+      btn.addEventListener('click', function() {
+        count += 1;
+        span.textContent = count;
+        localStorage.setItem(storageKey, String(count));
+        btn.disabled = true;
+        btn.textContent = "Danke! 👽";
+        btn.style.borderColor = "#444";
+        btn.style.color = "#888";
+      });
+    })();
+  </script>
+
+  <div class="back-links">
+    <a href="blog.html" style="font-size: 1.1em;">⬅ Zurück zur Blog-Übersicht</a>
+    <a href="index.html" style="font-size: 1.1em;">⬅ Zurück zur Zentrale</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+    <h3 style="margin-bottom: 15px;">
+      🔋 Energie aufladen
+      <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
+    </h3>
+    <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+      Treibstoff für das Mutterschiff senden
+    </a>
+    <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+      Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸
+    </p>
+  </div>
+
+  <footer>
+    <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    <p style="margin-top: 20px;">
+      👽 <strong>Haftungsausschluss:</strong><br><br>
+      Keine Finanz-, Steuer- oder Rechtsberatung. Nur persönliche Meinung. Denke selbst.
+    </p>
+  </footer>
+
+</body>
+</html>
