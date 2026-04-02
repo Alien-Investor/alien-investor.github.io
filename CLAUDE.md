@@ -29,10 +29,6 @@ git push
 
 ## Absolut verboten
 
-**Repository-Sichtbarkeit: Dieses Repo muss immer `private` bleiben.**
-Niemals auf `public` setzen — weder direkt noch über GitHub-Einstellungen.
-Nur `btc-steuertool` ist als public vorgesehen.
-
 **`.well-known/` niemals anfassen.**
 Dieser Ordner enthält `nostr.json` — die NIP-05 Verifikationsdatei für das verifizierte Nostr-Konto. Jede Änderung bricht die Nostr-Identitätsverifikation. Der Ordner bleibt immer unberührt.
 
