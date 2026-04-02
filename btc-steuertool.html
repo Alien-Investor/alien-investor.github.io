@@ -193,17 +193,48 @@ mkdir Broker</pre>
           <td><code>Broker/</code></td>
           <td>muss mit <code>Pocket</code> beginnen</td>
         </tr>
+        <tr>
+          <td>noKYC-Käufe (Bisq, Robosats, P2P, Bargeld)</td>
+          <td>Projektordner</td>
+          <td><code>manual_buys.csv</code> — optional, selbst anlegen</td>
+        </tr>
+        <tr>
+          <td>Private Verkäufe (P2P ohne Broker)</td>
+          <td>Projektordner</td>
+          <td><code>manual_sales.csv</code> — optional, selbst anlegen</td>
+        </tr>
       </tbody>
     </table>
 
     <div class="box">
       <h3>🔒 Deine Daten bleiben lokal</h3>
       <p>
-        Die Ordner <code>bitbox/</code> und <code>Broker/</code> sind in der <code>.gitignore</code>
-        eingetragen — sie werden niemals versehentlich in Git eingecheckt oder online gestellt.
-        Deine Finanzdaten bleiben auf deinem Rechner.
+        Die Ordner <code>bitbox/</code> und <code>Broker/</code> sowie die Dateien
+        <code>manual_buys.csv</code> und <code>manual_sales.csv</code> sind in der
+        <code>.gitignore</code> eingetragen — sie werden niemals versehentlich in Git
+        eingecheckt oder online gestellt. Deine Finanzdaten bleiben auf deinem Rechner.
       </p>
     </div>
+
+    <h2>noKYC-Käufe und private Verkäufe</h2>
+    <p>
+      Wer BTC ohne KYC-Broker kauft — über Bisq, Robosats, HodlHodl oder direkt von Person zu Person —
+      hat keine Broker-CSV. Dafür gibt es <code>manual_buys.csv</code>: eine einfache Textdatei
+      im Projektordner, in die du jeden Kauf mit Datum, BTC-Menge und EUR-Betrag einträgst.
+    </p>
+    <pre>date,btc_amount,eur_amount,note
+2024-03-10,0.01000000,550.00,Bisq P2P Kauf
+2024-07-22,0.00500000,280.00,Robosats Trade</pre>
+    <p>
+      Gleiches Prinzip für private Verkäufe ohne Broker: <code>manual_sales.csv</code> im gleichen Format.
+      Das Tool liest beide Dateien automatisch ein und verarbeitet sie wie jeden anderen Kauf oder Verkauf.
+    </p>
+    <p>
+      <strong>Zur Rechtslage:</strong> Du bist nicht verpflichtet, deinen vollständigen Wallet-Fingerprint
+      offenzulegen. Solange die Anschaffungskosten korrekt angegeben sind und steuerpflichtige Gewinne
+      vollständig gemeldet werden, ist das steuerrechtlich unbedenklich. Das Finanzamt hat keinen Anspruch
+      auf deine komplette UTXO-Historie.
+    </p>
 
     <h2>5. Der erste Report</h2>
     <p>
