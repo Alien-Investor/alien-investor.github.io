@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>The Mosaic Company (MOS) – Dünger, Zyklen & ein Burggraben aus Phosphat | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aktienanalyse The Mosaic Company (MOS): Weltgrößter Phosphatproduzent unter Buchwert. KGV am Zyklustief, 3,3 % Dividende, Seltene Erden als Wildcard. Einordnung aus Eigentümer-Sicht.">
+  <style>
+    body { background-color: #000; color: #fff; font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 0 15px 20px 15px; }
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+    code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; font-family: monospace; }
+    em { color: #ccc; }
+    .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
+    blockquote { border-left: 3px solid #00ffcc; margin: 2em 0; padding: 0.5em 1em; color: #ddd; background: #050505; font-style: italic; }
+    .box { border: 1px solid #00ffcc; background: #050505; padding: 1.5em; border-radius: 8px; margin: 2em 0; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
+    .like-button { margin: 3em 0; display: flex; align-items: center; justify-content: center; gap: 1em; }
+    .like-button button { background: #000; color: #00ffcc; border: 1px solid #00ffcc; padding: 0.6em 1.2em; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.2s ease; }
+    .like-button button:hover { background: #00ffcc; color: #000; box-shadow: 0 0 15px #00ffcc; }
+    .like-button button:disabled { border-color: #444; color: #888; background: #111; cursor: default; }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    .back-links { margin-top: 40px; text-align: center; display: flex; flex-direction: column; gap: 10px; }
+    footer { margin-top: 60px; padding: 20px; font-size: 0.85em; color: #666; border-top: 1px solid #222; text-align: center; }
+    ul { padding-left: 1.2em; }
+    li { margin-bottom: 0.5em; }
+
+    /* Analyzer Screenshot */
+    .analyzer-img { width: 100%; border-radius: 8px; border: 1px solid #1a1a1a; margin: 1.5em 0; display: block; cursor: zoom-in; transition: border-color 0.2s; }
+    .analyzer-img:hover { border-color: #00ffcc; }
+    .img-caption { font-size: 0.82em; color: #666; text-align: center; margin-top: -1em; margin-bottom: 1.5em; font-style: italic; }
+    .img-caption .zoom-hint { color: #00ffcc; opacity: 0.5; font-style: normal; font-size: 0.9em; }
+
+    /* Kennzahlen-Tabelle */
+    .kpi-table { width: 100%; border-collapse: collapse; margin: 1.5em 0; font-size: 0.95em; }
+    .kpi-table th { background: #050505; color: #00ffcc; border-bottom: 1px solid #00ffcc; padding: 8px 12px; text-align: left; }
+    .kpi-table td { padding: 7px 12px; border-bottom: 1px solid #111; }
+    .kpi-table tr:last-child td { border-bottom: none; }
+    .kpi-table .val { color: #00ffcc; font-weight: bold; font-family: monospace; }
+
+    /* Ampel Scorecard */
+    .ampel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 1.5em 0; }
+    @media (max-width: 480px) { .ampel-grid { grid-template-columns: 1fr; } }
+    .ampel-item { background: #050505; border: 1px solid #1a1a1a; border-radius: 6px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; }
+    .ampel-item .label { font-size: 0.88em; color: #ccc; }
+    .ampel-item .value { font-family: monospace; font-size: 0.9em; color: #fff; margin: 0 8px; }
+    .badge { font-size: 0.72em; font-weight: bold; padding: 2px 8px; border-radius: 4px; white-space: nowrap; }
+    .badge-gut      { background: #003d1a; color: #00cc66; border: 1px solid #00cc66; }
+    .badge-stark    { background: #003d1a; color: #00ff88; border: 1px solid #00ff88; }
+    .badge-negativ  { background: #3d0000; color: #ff4444; border: 1px solid #ff4444; }
+    .badge-teuer    { background: #3d2000; color: #ffaa00; border: 1px solid #ffaa00; }
+    .badge-gering   { background: #1a1a00; color: #cccc00; border: 1px solid #cccc00; }
+    .badge-rueck    { background: #001a3d; color: #44aaff; border: 1px solid #44aaff; }
+    .badge-na       { background: #1a1a1a; color: #888; border: 1px solid #444; }
+
+    /* Wettbewerber-Tabelle */
+    .comp-table { width: 100%; border-collapse: collapse; margin: 1.5em 0; font-size: 0.9em; }
+    .comp-table th { background: #050505; color: #00ffcc; border-bottom: 1px solid #00ffcc; padding: 8px 10px; text-align: left; font-size: 0.85em; }
+    .comp-table td { padding: 8px 10px; border-bottom: 1px solid #111; }
+    .comp-table .highlight { color: #00ffcc; font-weight: bold; }
+    .comp-table tr:last-child td { border-bottom: none; }
+
+    /* Chart Container */
+    .chart-wrap { background: #050505; border: 1px solid #1a1a1a; border-radius: 8px; padding: 1.5em 1em 1em 1em; margin: 1.5em 0; overflow-x: auto; }
+    .chart-title { font-size: 0.85em; color: #888; text-align: center; margin-bottom: 0.8em; font-family: monospace; letter-spacing: 1px; text-transform: uppercase; }
+    .chart-legend { display: flex; gap: 1.5em; justify-content: center; margin-top: 0.8em; font-size: 0.8em; color: #aaa; }
+    .legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: middle; }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="index.html">⬅ Zurück zur Zentrale</a>
+  </div>
+
+  <h1>🌱 The Mosaic Company (MOS)<br><span style="font-size:0.6em; color:#aaa;">Dünger, Zyklen & ein Burggraben aus Phosphat</span></h1>
+  <p class="byline"><em>von Alien Investor – Stand: April 2026</em></p>
+
+  <article id="content">
+
+    <p>
+      Ohne Phosphat und Kali kein Getreide. Ohne Getreide keine 8 Milliarden Menschen. The Mosaic Company sitzt an einem der wenigen echten geologischen Engpässe der modernen Ernährungskette — und wird trotzdem unter Buchwert gehandelt. Die Frage ist nicht ob das billig ist, sondern warum.
+    </p>
+
+    <blockquote>
+      „Mosaic verkauft das Fundament der Landwirtschaft. Kein Dünger — kein Essen. Das ist kein Hype, das ist Physik." 👽
+    </blockquote>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>1) Kurzüberblick</h2>
+
+    <table class="kpi-table">
+      <thead><tr><th>Kennzahl</th><th>Wert</th></tr></thead>
+      <tbody>
+        <tr><td>Ticker</td><td class="val">MOS (NYSE)</td></tr>
+        <tr><td>Kurs (April 2026)</td><td class="val">26,54 USD</td></tr>
+        <tr><td>Marktkapitalisierung</td><td class="val">8,4 Mrd. USD</td></tr>
+        <tr><td>KGV (trailing)</td><td class="val">15,6×</td></tr>
+        <tr><td>EPS (TTM)</td><td class="val">1,70 USD</td></tr>
+        <tr><td>KBV</td><td class="val">0,70 — unter Buchwert</td></tr>
+        <tr><td>Dividendenrendite</td><td class="val">3,32 %</td></tr>
+        <tr><td>Sektor</td><td class="val">Basic Materials / Agricultural Inputs</td></tr>
+      </tbody>
+    </table>
+
+    <p>
+      Mosaic ist der weltgrößte integrierte Phosphatproduzent und einer der vier größten Kaliproduzenten der Welt. Das Unternehmen versorgt globale Landwirtschaft mit den zwei Nährstoffen, die kein moderner Anbau ersetzen kann — und kontrolliert die Wertschöpfungskette von der Mine bis zum Schiff.
+    </p>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>2) Geschäftsmodell & Segmente</h2>
+
+    <p>
+      Drei Segmente, eine Logik: Rohstoffe aus dem Boden ziehen, veredeln, zum Farmer liefern.
+    </p>
+    <ul>
+      <li>
+        <strong>Phosphates</strong> — Abbau in Zentralflorida (einer der wenigen wirtschaftlichen Phosphat-Lagerstätten in der westlichen Hemisphäre), Verarbeitung zu DAP, MAP und dem Premiumprodukt <em>MicroEssentials®</em>. MicroEssentials ist ammoniakversetzt und langsamer freisetzend als Standardware — höhere Marge, weniger Rohstoffabhängigkeit.
+      </li>
+      <li>
+        <strong>Potash</strong> — Kaliabbau in Saskatchewan (Kanada). Einer der kostengünstigsten Produktionsstandorte weltweit. Saskatchewan ist geologisches Glück: großflächig, tief, hochgradig.
+      </li>
+      <li>
+        <strong>Mosaic Fertilizantes</strong> — Produktion und Vertrieb in Brasilien, dem weltgrößten Agrarimportmarkt. Direktzugang zu brasilianischen Farmern über ein eigenes Vertriebsnetz.
+      </li>
+    </ul>
+
+    <p>
+      <strong>Die vollständige Wertschöpfungskette:</strong> Eigene Minen → eigene Verarbeitungsanlagen in Florida, Louisiana und Brasilien → eigene Logistik per Schiene, Binnenschiff und Hochseefrachter. Kein externer Abhängigkeitspunkt, kein Zwischenhändler.
+    </p>
+
+    <p>
+      <strong>Der Burggraben:</strong> Phosphat-Minen in Florida entstehen nicht auf Bestellung. Der Bau einer neuen Mine kostet Milliarden und dauert 10–15 Jahre. Das Ressourcen-Eigentum ist der Moat — kein Patent, kein Netzwerkeffekt, sondern Geologie. OCP (Marokko, staatlich) ist der einzige Player, der strukturell Druck auf Mosaics Phosphat-Geschäft ausüben kann — dazu mehr unter Risiken.
+    </p>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>3) Wachstum & Entwicklung</h2>
+
+    <!-- SVG Chart: EPS Zyklus -->
+    <div class="chart-wrap">
+      <div class="chart-title">EPS-Zyklus 2021 – 2025 (USD pro Aktie)</div>
+      <svg viewBox="0 0 720 260" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:720px; display:block; margin:0 auto;">
+        <defs>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+            <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- Grid lines -->
+        <line x1="55" y1="30"  x2="700" y2="30"  stroke="#1a1a1a" stroke-width="1"/>
+        <line x1="55" y1="68"  x2="700" y2="68"  stroke="#1a1a1a" stroke-width="1"/>
+        <line x1="55" y1="106" x2="700" y2="106" stroke="#1a1a1a" stroke-width="1"/>
+        <line x1="55" y1="144" x2="700" y2="144" stroke="#1a1a1a" stroke-width="1"/>
+        <line x1="55" y1="182" x2="700" y2="182" stroke="#1a1a1a" stroke-width="1"/>
+        <line x1="55" y1="210" x2="700" y2="210" stroke="#222"    stroke-width="1"/>
+
+        <!-- Y-Axis labels -->
+        <text x="50" y="213" text-anchor="end" fill="#444" font-size="11" font-family="monospace">0</text>
+        <text x="50" y="185" text-anchor="end" fill="#444" font-size="11" font-family="monospace">2</text>
+        <text x="50" y="147" text-anchor="end" fill="#444" font-size="11" font-family="monospace">4</text>
+        <text x="50" y="109" text-anchor="end" fill="#444" font-size="11" font-family="monospace">6</text>
+        <text x="50" y="71"  text-anchor="end" fill="#444" font-size="11" font-family="monospace">8</text>
+        <text x="50" y="33"  text-anchor="end" fill="#444" font-size="11" font-family="monospace">10</text>
+        <text x="18" y="130" text-anchor="middle" fill="#555" font-size="10" font-family="monospace" transform="rotate(-90 18 130)">EPS (USD)</text>
+
+        <!-- Bars: x centers at 116, 246, 376, 506, 636 | bar width 70 -->
+        <!-- 2021: EPS 4.27 → h = 4.27 * 18 = 76.9, y = 210-77 = 133 -->
+        <rect x="81"  y="133" width="70" height="77"  fill="#00ffcc" opacity="0.25" rx="3"/>
+        <rect x="81"  y="133" width="70" height="77"  fill="none" stroke="#00ffcc" stroke-width="1" rx="3"/>
+        <text x="116" y="127" text-anchor="middle" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">4,27</text>
+        <text x="116" y="228" text-anchor="middle" fill="#666" font-size="12" font-family="monospace">2021</text>
+
+        <!-- 2022: EPS 10.06 → h = 10.06 * 18 = 181, y = 210-181 = 29 (PEAK — amber) -->
+        <rect x="211" y="29"  width="70" height="181" fill="#ffaa00" opacity="0.2" rx="3"/>
+        <rect x="211" y="29"  width="70" height="181" fill="none" stroke="#ffaa00" stroke-width="2" rx="3"/>
+        <text x="246" y="23"  text-anchor="middle" fill="#ffaa00" font-size="12" font-family="monospace" font-weight="bold" filter="url(#glow)">10,06</text>
+        <text x="246" y="228" text-anchor="middle" fill="#666" font-size="12" font-family="monospace">2022</text>
+        <text x="246" y="242" text-anchor="middle" fill="#ffaa00" font-size="9"  font-family="monospace">PEAK</text>
+
+        <!-- 2023: EPS 3.50 → h = 3.50 * 18 = 63, y = 210-63 = 147 -->
+        <rect x="341" y="147" width="70" height="63"  fill="#00ffcc" opacity="0.25" rx="3"/>
+        <rect x="341" y="147" width="70" height="63"  fill="none" stroke="#00ffcc" stroke-width="1" rx="3"/>
+        <text x="376" y="141" text-anchor="middle" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">3,50</text>
+        <text x="376" y="228" text-anchor="middle" fill="#666" font-size="12" font-family="monospace">2023</text>
+
+        <!-- 2024: EPS 0.55 → h = 0.55 * 18 = 9.9, y = 210-10 = 200 (TIEF — rot) -->
+        <rect x="471" y="200" width="70" height="10"  fill="#ff4444" opacity="0.4" rx="3"/>
+        <rect x="471" y="200" width="70" height="10"  fill="none" stroke="#ff4444" stroke-width="1" rx="3"/>
+        <text x="506" y="193" text-anchor="middle" fill="#ff4444" font-size="12" font-family="monospace" font-weight="bold">0,55</text>
+        <text x="506" y="228" text-anchor="middle" fill="#666" font-size="12" font-family="monospace">2024</text>
+        <text x="506" y="242" text-anchor="middle" fill="#ff4444" font-size="9"  font-family="monospace">TIEF</text>
+
+        <!-- 2025: EPS 1.70 → h = 1.70 * 18 = 30.6, y = 210-31 = 179 -->
+        <rect x="601" y="179" width="70" height="31"  fill="#00ffcc" opacity="0.35" rx="3"/>
+        <rect x="601" y="179" width="70" height="31"  fill="none" stroke="#00ffcc" stroke-width="1.5" rx="3"/>
+        <text x="636" y="173" text-anchor="middle" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">1,70</text>
+        <text x="636" y="228" text-anchor="middle" fill="#666" font-size="12" font-family="monospace">2025</text>
+        <text x="636" y="242" text-anchor="middle" fill="#00cc88" font-size="9"  font-family="monospace">ERHOLUNG</text>
+      </svg>
+      <div class="chart-legend">
+        <span><span class="legend-dot" style="background:#ffaa00;"></span>Peak-Jahr (Ukraine-Kriegs-Effekt)</span>
+        <span><span class="legend-dot" style="background:#ff4444;"></span>Zyklustief</span>
+        <span><span class="legend-dot" style="background:#00ffcc;"></span>Normaljahre</span>
+      </div>
+    </div>
+
+    <table class="kpi-table">
+      <thead><tr><th>Jahr</th><th>Umsatz</th><th>EPS</th><th>Op. Marge</th></tr></thead>
+      <tbody>
+        <tr><td>2021</td><td class="val">12,4 Mrd. USD</td><td class="val">4,27 USD</td><td class="val">20,0 %</td></tr>
+        <tr><td style="color:#ffaa00; font-weight:bold;">2022 ▲ Peak</td><td class="val" style="color:#ffaa00;">19,1 Mrd. USD</td><td class="val" style="color:#ffaa00;">10,06 USD</td><td class="val" style="color:#ffaa00;">25,0 %</td></tr>
+        <tr><td>2023</td><td class="val">13,7 Mrd. USD</td><td class="val">3,50 USD</td><td class="val">9,8 %</td></tr>
+        <tr><td style="color:#ff4444;">2024 ▼ Tief</td><td class="val" style="color:#ff4444;">11,1 Mrd. USD</td><td class="val" style="color:#ff4444;">0,55 USD</td><td class="val" style="color:#ff4444;">5,6 %</td></tr>
+        <tr><td>2025</td><td class="val">12,1 Mrd. USD</td><td class="val">1,70 USD</td><td class="val">6,8 %</td></tr>
+      </tbody>
+    </table>
+
+    <p>
+      <strong>Warum der Einbruch nach 2022?</strong> Der Ukraine-Krieg hat Russland und Belarus als Düngemittelexporteure temporär ausgehebelt. Kali, Phosphat und Stickstoff stiegen gleichzeitig auf Rekordpreise. Mosaic verdiente 2022 zehnmal mehr pro Aktie als heute. 2023–2025 folgte die Normalisierung. Das Gewinnwachstum von -43 % p.a. über 3 Jahre ist kein Zeichen struktureller Schwäche — es ist Zyklusnormalisierung nach einem historischen Ausnahmejahr.
+    </p>
+    <p>
+      Das ist die zentrale Lesart für alles was folgt: Alle Kennzahlen, die auf Gewinn basieren, sind am Zyklustief optisch verzerrt.
+    </p>
+
+    <a href="img/mos/mos-fairer-wert.png" target="_blank" title="Vollbild öffnen"><img src="img/mos/mos-fairer-wert.png" alt="Alien Analyzer: Fairer Wert — EPS-Verlauf MOS 10 Jahre" class="analyzer-img"></a>
+    <p class="img-caption">Alien Analyzer V2 — Fairer Wert Tab: Der EPS-Ausschlag 2022 verzerrt den historischen Schnitt so stark, dass kein belastbarer fairer Wert berechenbar ist. Das Tool zeigt das transparent. <span class="zoom-hint">↗ Zum Vergrößern klicken</span></p>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>4) Profitabilität & Bilanz</h2>
+
+    <a href="img/mos/mos-qualitaetscheck.png" target="_blank" title="Vollbild öffnen"><img src="img/mos/mos-qualitaetscheck.png" alt="Alien Analyzer: Qualitätscheck & Ampel-Bilanz MOS" class="analyzer-img"></a>
+    <p class="img-caption">Alien Analyzer V2 — Qualitätscheck: Ampelübersicht der wichtigsten Kennzahlen mit Kontext-Einordnung. <span class="zoom-hint">↗ Zum Vergrößern klicken</span></p>
+
+    <!-- Ampel Scorecard -->
+    <div class="ampel-grid">
+      <div class="ampel-item">
+        <span class="label">KGV (trailing)</span>
+        <span class="value">15,6×</span>
+        <span class="badge badge-teuer">TEUER</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">KBV</span>
+        <span class="value">0,70</span>
+        <span class="badge badge-gut">GUT</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Dividendenrendite</span>
+        <span class="value">3,32 %</span>
+        <span class="badge badge-stark">STARK</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Debt / Equity</span>
+        <span class="value">0,43</span>
+        <span class="badge badge-gut">GUT</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Free Cashflow</span>
+        <span class="value">−284 Mio.</span>
+        <span class="badge badge-negativ">NEGATIV</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Eigenkapitalquote</span>
+        <span class="value">49,4 %</span>
+        <span class="badge badge-gut">GUT</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Gewinnwachstum 3J</span>
+        <span class="value">−43 % p.a.</span>
+        <span class="badge badge-negativ">NEGATIV</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Return on Equity</span>
+        <span class="value">4,8 %</span>
+        <span class="badge badge-gering">GERING</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Aktienrückkäufe (3J)</span>
+        <span class="value">−6,4 %</span>
+        <span class="badge badge-rueck">RÜCKKÄUFE</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">PEG-Ratio</span>
+        <span class="value">—</span>
+        <span class="badge badge-na">N/A</span>
+      </div>
+    </div>
+
+    <p>
+      Das Ampelbild sieht gemischt aus — und das ist erklärbar. KBV (0,70), Debt/Equity und Eigenkapitalquote zeigen eine solide Bilanzsubstanz. Die roten Signale — negativer FCF, negatives Gewinnwachstum, niedriger ROE — sind alle dasselbe in anderen Worten: Das Unternehmen ist gerade am Zyklustief. Ein 2022er-ROE von 25 %+ sieht in diesem Bild nicht auf.
+    </p>
+    <p>
+      Das KGV von 15,6 als „TEUER" zu markieren, während die Aktie unter Buchwert notiert, ist der klassische Zykliker-Widerspruch: KGV hoch weil Gewinne gedrückt, KBV tief weil Assets real und stabil.
+    </p>
+    <p>
+      <strong>Zur Dividende:</strong> 0,88 USD/Jahr (0,22 USD/Quartal), Rendite 3,32 %, Ausschüttungsquote ca. 52 %. Das Management hält die Dividende, obwohl der FCF sie aktuell nicht vollständig deckt. Das ist eine Wette auf baldige Normalisierung — kein unbegrenztes Versprechen.
+    </p>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>5) Strategische Themen</h2>
+
+    <p>
+      <strong>Premiumprodukte:</strong> MicroEssentials®, das ammoniakhaltige Premiumdünger-Segment, macht Mosaic unabhängiger vom reinen Rohstoff-Preis. Wer ein besseres Produkt verkauft, muss nicht nur auf Marktpreise warten.
+    </p>
+    <p>
+      <strong>Portfolio-Disziplin:</strong> Mosaic hat Mosaic Potash Carlsbad verkauft (weniger strategisch) und drosselt Produktion in Brasilien bei zu hohen Schwefelpreisen. Das Management agiert nicht stur — es passt Kapazitäten ans Preisniveau an.
+    </p>
+    <p>
+      <strong>Seltene Erden — die unterschätzte Wildcard:</strong> Das Uberaba-Projekt in Brasilien, entwickelt gemeinsam mit Rainbow Rare Earths, extrahiert wirtschaftlich nutzbare Seltene-Erden-Vorkommen aus Phosphat-Rückständen. Dieser Wert ist im aktuellen Kurs nicht eingepreist. Es ist Optionalität — kein Versprechen, aber ein echter Aufwärtsfaktor.
+    </p>
+    <p>
+      <strong>Ausblick (Analystenprognosen):</strong> EPS 2026E: 1,88 USD (+11 %) | EPS 2027E: 2,43 USD (+29 %) | Umsatz 2026E: 12,84 Mrd. USD (+6,5 %). Keine Raketenmission, aber eine kontrollierte Erholung.
+    </p>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>6) Bewertung im Kontext</h2>
+
+    <a href="img/mos/mos-multiples.png" target="_blank" title="Vollbild öffnen"><img src="img/mos/mos-multiples.png" alt="Alien Analyzer: Multiples KGV KBV KUV KCV MOS 10 Jahre" class="analyzer-img"></a>
+    <p class="img-caption">Alien Analyzer V2 — Multiples Tab: KGV (15,6), KBV (0,7), KUV (0,7), KCV (7,7) im 10-Jahres-Vergleich. Der Analyzer warnt: Viele KGV-Ausreißer gefiltert (GAAP-Sondereffekte). <span class="zoom-hint">↗ Zum Vergrößern klicken</span></p>
+
+    <!-- SVG Chart: Multiples Übersicht -->
+    <div class="chart-wrap">
+      <div class="chart-title">Multiples — Aktuell vs. 10J-Durchschnitt</div>
+      <svg viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:680px; display:block; margin:0 auto;">
+        <!-- Helper: max bar width = 300, mapped to max value ~16 -->
+        <!-- KGV: current 15.6, avg 12.0 -->
+        <!-- KBV: current 0.7, avg 0.8 -->
+        <!-- KUV: current 0.7, avg 0.6 -->
+        <!-- KCV: current 7.7 (no avg shown) -->
+
+        <!-- Labels column -->
+        <text x="10" y="45"  fill="#aaa" font-size="13" font-family="monospace">KGV</text>
+        <text x="10" y="95"  fill="#aaa" font-size="13" font-family="monospace">KBV</text>
+        <text x="10" y="145" fill="#aaa" font-size="13" font-family="monospace">KUV</text>
+        <text x="10" y="185" fill="#aaa" font-size="13" font-family="monospace">KCV</text>
+
+        <!-- Scale: 320px = 20 units → 1 unit = 16px -->
+        <!-- KGV ø 12.0 → 192px | KGV curr 15.6 → 249px -->
+        <!-- Background bars (average) -->
+        <rect x="55" y="30"  width="192" height="18" fill="#003333" rx="3"/>
+        <rect x="55" y="80"  width="128" height="18" fill="#003333" rx="3"/>
+        <rect x="55" y="130" width="96"  height="18" fill="#003333" rx="3"/>
+
+        <!-- Current bars -->
+        <rect x="55" y="30"  width="249" height="18" fill="#00ffcc" opacity="0.3" rx="3"/>
+        <rect x="55" y="80"  width="112" height="18" fill="#00ffcc" opacity="0.3" rx="3"/>
+        <rect x="55" y="130" width="112" height="18" fill="#00ffcc" opacity="0.3" rx="3"/>
+        <rect x="55" y="170" width="123" height="18" fill="#00ffcc" opacity="0.3" rx="3"/>
+
+        <!-- Average line markers -->
+        <line x1="247" y1="27" x2="247" y2="51" stroke="#ffaa00" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <line x1="128" y1="77" x2="128" y2="101" stroke="#ffaa00" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <line x1="96"  y1="127" x2="96" y2="151" stroke="#ffaa00" stroke-width="1.5" stroke-dasharray="3,2"/>
+
+        <!-- Value labels -->
+        <text x="309" y="44" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">15,6</text>
+        <text x="247" y="27" fill="#ffaa00" font-size="10" font-family="monospace" text-anchor="middle">Ø 12,0</text>
+        <text x="172" y="94" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">0,70</text>
+        <text x="128" y="77" fill="#ffaa00" font-size="10" font-family="monospace" text-anchor="middle">Ø 0,8</text>
+        <text x="172" y="144" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">0,70</text>
+        <text x="96"  y="127" fill="#ffaa00" font-size="10" font-family="monospace" text-anchor="middle">Ø 0,6</text>
+        <text x="183" y="184" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">7,7</text>
+      </svg>
+      <div class="chart-legend">
+        <span><span class="legend-dot" style="background:#00ffcc; opacity:0.5;"></span>Aktueller Wert</span>
+        <span><span class="legend-dot" style="background:#ffaa00;"></span>10J-Durchschnitt</span>
+      </div>
+    </div>
+
+    <p>
+      Das KGV liegt über dem historischen Schnitt — obwohl der Kurs niedrig ist. Das ist der Zykliker-Paradox: Niedrige Gewinne machen das KGV optisch teuer. KBV (0,70) und KUV (0,70) zeigen das Gegenteil: Man kauft 1 Dollar Substanz für 70 Cent.
+    </p>
+    <p>
+      Besserer Anker als EPS-Multiples: <strong>Normalisiertes EPS</strong> bei ~2,00–2,50 USD (Analysten-Konsens 2027E: 2,43 USD) × historisches KGV von 12 ergibt einen fairen Wert von <strong>24–30 USD</strong>. Aktueller Kurs 26,54 USD — mitten in der Range. Nicht billig, nicht teuer. Fair, am Boden des Zyklus.
+    </p>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- ALIEN ANALYZER PROMO -->
+    <div class="box" style="border-color: #00ffcc; background: #020d0a;">
+      <p style="margin: 0 0 0.5em 0; font-size: 0.8em; color: #00ffcc; font-family: monospace; letter-spacing: 1px; text-transform: uppercase;">🛸 Tool-Tipp</p>
+      <p style="margin: 0 0 0.6em 0;"><strong>Die Kennzahlen in dieser Analyse stammen aus dem Alien Analyzer V2</strong> — dem eigenen Screening-Tool für Aktien. Fairer Wert, Multiples, Dividenden und Qualitätscheck auf einen Blick. Kostenlos, kein Login, kein Abo.</p>
+      <p style="margin: 0; font-size: 0.95em;">👉 <a href="alien-analyzer.html"><strong>alien-investor.org/alien-analyzer</strong></a> — Ticker eingeben, analysieren.</p>
+    </div>
+
+    <h2>7) Wettbewerbsumfeld & Moat</h2>
+
+    <!-- Competitor Table SVG + HTML -->
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Unternehmen</th>
+          <th>Fokus</th>
+          <th>Marktkapital</th>
+          <th>Besonderheit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="highlight">Mosaic (MOS)</td>
+          <td>Phosphat + Kali</td>
+          <td class="highlight">8,4 Mrd.</td>
+          <td>Größter integrierter Phosphatproduzent</td>
+        </tr>
+        <tr>
+          <td>Nutrien (NTR)</td>
+          <td>Phosphat + Kali + Retail</td>
+          <td>~34 Mrd.</td>
+          <td>Retail-Segment stabilisiert Cashflow</td>
+        </tr>
+        <tr>
+          <td>ICL Group (ICL)</td>
+          <td>Kali + Spezialdünger</td>
+          <td>~6,7 Mrd.</td>
+          <td>Israel, Spezialdünger-Fokus</td>
+        </tr>
+        <tr>
+          <td>OCP Group</td>
+          <td>Phosphat (staatlich)</td>
+          <td>nicht börsennotiert</td>
+          <td>Marokko, aggressiver Kapazitätsausbau</td>
+        </tr>
+        <tr>
+          <td>Yara International</td>
+          <td>Stickstoff</td>
+          <td>~8 Mrd.</td>
+          <td>Europäisch, Gaspreis-abhängig</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      <strong>Mosaic vs. Nutrien:</strong> Nutrien hat ein Retail-Agrarhandel-Segment, das den Cashflow auch im Preistief stabilisiert. Das fehlt Mosaic. Dafür ist Mosaic die reinere Wette auf Phosphat-Preise — mit günstigerer Bewertung. Wer einen Puffer will: Nutrien. Wer den direkteren Zyklusplay will: Mosaic.
+    </p>
+    <p>
+      <strong>OCP-Risiko:</strong> Der staatliche marokkanische Phosphat-Gigant baut aggressiv Kapazitäten aus und drückt global die Phosphatpreise. Das ist strukturell das größte Wettbewerbsrisiko für Mosaics Phosphat-Segment. [SCHÄTZUNG — nicht aus Quellen verifiziert]
+    </p>
+    <p>
+      <strong>Geopolitischer Schutz:</strong> Russland und Belarus sind durch Sanktionen als Kali-Exporteure eingeschränkt. Das reduziert das globale Angebot und stärkt die Preissetzungsmacht westlicher Produzenten wie Mosaic in Saskatchewan.
+    </p>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>8) Kundenperspektive</h2>
+
+    <p>
+      Mosaics Kunden sind keine Endverbraucher. Es sind Agrarhändler, Kooperativen und direkte Großfarmer — vor allem in Nordamerika und Brasilien. In Brasilien direkter Farmerkontakt über das Mosaic Fertilizantes Vertriebsnetz.
+    </p>
+    <p>
+      Öffentliche B2B-Kundenbewertungen existieren für dieses Segment nicht. Die Kundenbindung entsteht über Versorgungssicherheit und Premiumprodukte (MicroEssentials) — nicht über Markentreue. [NICHT VERFÜGBAR]
+    </p>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>9) Mitarbeiterperspektive</h2>
+
+    <p>
+      Mosaic beschäftigt rund 15.000 Mitarbeiter weltweit in Bergbau, Verarbeitung und Logistik. Das Unternehmen veröffentlicht einen jährlichen Sustainability Report. Bergbau ist kapitalintensiv und physisch anspruchsvoll — kein Tech-Konzern-Ambiente, aber global einer der stabileren Arbeitgeber im Rohstoffsektor. [NICHT VERFÜGBAR — keine öffentlichen Arbeitgeberbewertungen auswertbar]
+    </p>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>10) Chancen & Risiken</h2>
+
+    <!-- SVG Risk/Opportunity Visual -->
+    <div class="chart-wrap">
+      <div class="chart-title">Chancen &amp; Risiken im Überblick</div>
+      <svg viewBox="0 0 680 290" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:680px; display:block; margin:0 auto;">
+
+        <!-- Left: Chancen -->
+        <text x="160" y="22" text-anchor="middle" fill="#00cc66" font-size="12" font-family="monospace" letter-spacing="2">CHANCEN</text>
+        <line x1="20" y1="28" x2="300" y2="28" stroke="#00cc66" stroke-width="1" opacity="0.4"/>
+
+        <rect x="20"  y="38"  width="280" height="48" fill="#001a0d" rx="5" stroke="#00cc66" stroke-width="0.5" opacity="0.7"/>
+        <text x="32" y="57" fill="#00cc66" font-size="12" font-family="monospace" font-weight="bold">Geopolitische Störungen</text>
+        <text x="32" y="74" fill="#777" font-size="10" font-family="Arial">Hormus, Russland/Belarus → Angebotsverknappung</text>
+
+        <rect x="20"  y="95"  width="280" height="48" fill="#001a0d" rx="5" stroke="#00cc66" stroke-width="0.5" opacity="0.7"/>
+        <text x="32" y="114" fill="#00cc66" font-size="12" font-family="monospace" font-weight="bold">Strukturelle Nachfrage</text>
+        <text x="32" y="131" fill="#777" font-size="10" font-family="Arial">+10 Mrd. Menschen bis 2100 → mehr Dünger</text>
+
+        <rect x="20"  y="152" width="280" height="48" fill="#001a0d" rx="5" stroke="#00cc66" stroke-width="0.5" opacity="0.7"/>
+        <text x="32" y="171" fill="#00cc66" font-size="12" font-family="monospace" font-weight="bold">Seltene Erden (Uberaba)</text>
+        <text x="32" y="188" fill="#777" font-size="10" font-family="Arial">Nicht eingepreiste Optionalität in Brasilien</text>
+
+        <rect x="20"  y="209" width="280" height="48" fill="#001a0d" rx="5" stroke="#00cc66" stroke-width="0.5" opacity="0.7"/>
+        <text x="32" y="228" fill="#00cc66" font-size="12" font-family="monospace" font-weight="bold">Premiumprodukte</text>
+        <text x="32" y="245" fill="#777" font-size="10" font-family="Arial">MicroEssentials → Margenpuffer vs. Commodity</text>
+
+        <!-- Right: Risiken -->
+        <text x="520" y="22" text-anchor="middle" fill="#ff4444" font-size="12" font-family="monospace" letter-spacing="2">RISIKEN</text>
+        <line x1="380" y1="28" x2="660" y2="28" stroke="#ff4444" stroke-width="1" opacity="0.4"/>
+
+        <rect x="380" y="38"  width="280" height="48" fill="#1a0000" rx="5" stroke="#ff4444" stroke-width="0.5" opacity="0.7"/>
+        <text x="392" y="57" fill="#ff4444" font-size="12" font-family="monospace" font-weight="bold">OCP-Kapazitätsausbau</text>
+        <text x="392" y="74" fill="#777" font-size="10" font-family="Arial">Marokko drückt Phosphatpreise strukturell</text>
+
+        <rect x="380" y="95"  width="280" height="48" fill="#1a0000" rx="5" stroke="#ff4444" stroke-width="0.5" opacity="0.7"/>
+        <text x="392" y="114" fill="#ff4444" font-size="12" font-family="monospace" font-weight="bold">FCF &amp; Dividenden-Risiko</text>
+        <text x="392" y="131" fill="#777" font-size="10" font-family="Arial">FCF −284 Mio. deckt Dividende nicht vollständig</text>
+
+        <rect x="380" y="152" width="280" height="48" fill="#1a0000" rx="5" stroke="#ff4444" stroke-width="0.5" opacity="0.7"/>
+        <text x="392" y="171" fill="#ff4444" font-size="12" font-family="monospace" font-weight="bold">Umweltregulierung</text>
+        <text x="392" y="188" fill="#777" font-size="10" font-family="Arial">Florida-Minen, Rückstandsmanagement, ESG</text>
+
+        <rect x="380" y="209" width="280" height="48" fill="#1a0000" rx="5" stroke="#ff4444" stroke-width="0.5" opacity="0.7"/>
+        <text x="392" y="228" fill="#ff4444" font-size="12" font-family="monospace" font-weight="bold">Wechselkursrisiko</text>
+        <text x="392" y="245" fill="#777" font-size="10" font-family="Arial">BRL/USD volatil, Brasilien-Exposure groß</text>
+      </svg>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>11) Alien-Fazit 🛸</h2>
+
+    <a href="img/mos/mos-dividenden.png" target="_blank" title="Vollbild öffnen"><img src="img/mos/mos-dividenden.png" alt="Alien Analyzer: Dividenden-Tab MOS" class="analyzer-img"></a>
+    <p class="img-caption">Alien Analyzer V2 — Dividenden Tab: 3,32 % Rendite, +34,5 % Dividendenwachstum p.a. über 5 Jahre — nach dem tiefen Einschnitt 2020/2021. <span class="zoom-hint">↗ Zum Vergrößern klicken</span></p>
+
+    <p>
+      Mosaic ist ein Rohstoff-Zykliker mit einer Weltmarktführerposition, die man nicht einfach nachbaut. Der Burggraben liegt in der Geologie — nicht in Patenten, Marken oder Netzwerkeffekten. Wer die Minen nicht hat, kann nicht mitspielen.
+    </p>
+    <p>
+      Die Zahlen sehen am Zyklustief hässlich aus. Das ist der Punkt. KBV 0,70 bedeutet: Man kauft 1 Dollar echte Substanz (Minen, Anlagen, Lagerbestände) für 70 Cent. Das war auch bei anderen Zyklikern an Tiefs die bessere Einstiegsmöglichkeit — nicht wenn die Gewinne auf dem Höhepunkt sprudelten.
+    </p>
+    <p>
+      Die eigentliche Frage ist <em>wann</em> sich die Düngemittelpreise normalisieren — nicht <em>ob</em>. Mehr Menschen brauchen mehr Essen. Mehr Essen braucht mehr Dünger. Das ist kein Trend, das ist Arithmetik. Ein Gegenargument bleibt OCP: Marokkos staatlicher Phosphatgigant baut Kapazitäten aggressiv aus und könnte strukturell Druck auf Preise ausüben.
+    </p>
+    <p>
+      Wer Mosaic kauft, wettet nicht auf ein Wachstumsunternehmen. Man kauft reale Assets unter Buchwert, eine 3,3 % Dividende als Geduldsgehalt, und eine Gratisoption auf den nächsten Preiszyklus.
+    </p>
+
+    <blockquote>
+      „Du kaufst 1 Dollar für 70 Cent — und bekommst dafür bezahlt zu warten." 👽
+    </blockquote>
+
+  </article>
+
+  <!-- Disclaimer -->
+  <div class="box" style="border-color: #333; border-style: dashed;">
+    <p style="font-size: 0.88em; color: #888; margin: 0;">
+      <strong style="color: #aaa;">Hinweis:</strong> Diese Analyse ist keine Finanz-, Steuer- oder Rechtsberatung — nur eine Einordnung der Zahlen aus Alien-Perspektive. Alle Angaben nach bestem Wissen, ohne Gewähr. Investitionsentscheidungen liegen in eigener Verantwortung.
+    </p>
+  </div>
+
+  <!-- Tools Box -->
+  <div class="box">
+    <h3>🧰 Tools für echte Eigentümer</h3>
+    <p style="font-size:0.95em;">
+      Tools, die ich selbst nutze — für Bitcoin-Selbstverwahrung und digitale Souveränität:
+    </p>
+    <ul>
+      <li>
+        💥 <strong>Bitcoin kaufen in Europa – 21bitcoin:</strong><br>
+        Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges Sats stapeln — ohne Shitcoins.<br>
+        Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du dauerhaft 0,2 Prozentpunkte Gebührenreduktion auf Sofort- und Sparplankäufe.<br>
+        👉 <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
+      </li>
+      <li>
+        ₿ <strong>Bitcoin in Selbstverwahrung:</strong><br>
+        Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox — es gibt die klassische BitBox02 und die neue BitBox für iPhone (Nova).<br>
+        👉 <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
+      </li>
+      <li>
+        🛡️ <strong>Privacy &amp; Mail:</strong><br>
+        Für E-Mail, VPN und Cloud nutze ich Proton — datensparsam und ohne Big-Tech-Abhängigkeit.<br>
+        👉 <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
+      </li>
+    </ul>
+    <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">
+      Hinweis: Bei einigen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit, ohne dass es dich mehr kostet. Danke! 👽
+    </p>
+  </div>
+
+  <div class="like-button">
+    <button id="likeButton" onclick="this.disabled=true; document.getElementById('likeCount').textContent=parseInt(document.getElementById('likeCount').textContent)+1;">👍 Gefällt mir</button>
+    <span id="likeCount">0</span>
+    <span style="color:#bbb; font-size: 0.9em;">(Lokal)</span>
+  </div>
+
+  <div class="box" style="border-style: dashed; border-color: #333;">
+    <h3>📚 Quellen</h3>
+    <p style="font-size:0.95em; color: #ccc;">
+      Quantitative Daten: <a href="alien-analyzer.html">Alien Analyzer V2</a> (Yahoo Finance, April 2026) —
+      Qualitative Analyse: NotebookLM Recherche auf Basis von StockAnalysis, SEC Edgar, Investor Relations Mosaic, Macrotrends, Morningstar (April 2026).
+    </p>
+  </div>
+
+  <div class="back-links">
+    <a href="aktien-analysen.html" style="font-size: 1.1em;">📊 Zurück zu den Aktienanalysen</a>
+    <a href="blog.html" style="font-size: 1.1em;">⬅ Zurück zum Blog</a>
+    <a href="index.html" style="font-size: 1.1em;">⬅ Zurück zur Zentrale</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+    <h3 style="margin-bottom: 15px;">
+      🔋 Energie aufladen
+      <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
+    </h3>
+    <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+      Treibstoff für das Mutterschiff senden
+    </a>
+    <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+      Danke für deine Unterstützung — für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! 👽🛸
+    </p>
+  </div>
+
+  <script>
+    // Like-Button: persistiert in localStorage
+    const btn = document.getElementById('likeButton');
+    const cnt = document.getElementById('likeCount');
+    const key = 'like_mos_analyse';
+    if (localStorage.getItem(key)) { btn.disabled = true; }
+    cnt.textContent = localStorage.getItem(key + '_count') || '0';
+    btn.addEventListener('click', function() {
+      const n = parseInt(cnt.textContent) + 1;
+      cnt.textContent = n;
+      localStorage.setItem(key, '1');
+      localStorage.setItem(key + '_count', n);
+      btn.disabled = true;
+    });
+  </script>
+
+</body>
+</html>
