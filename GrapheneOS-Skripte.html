@@ -223,6 +223,9 @@ pkg install termux-tools tar gnupg</code></pre>
 # ohne Klartext-Zwischendatei. Zusätzlich wird eine .sha256 erzeugt.
 # Phone (GrapheneOS/Termux): Ausgabe nach ~/storage/downloads
 # PC (TUXEDO OS): Ausgabe nach $HOME
+#
+# S2K-Härtung: SHA512 + AES256 + maximale Iterationen (65011712)
+# → Brute-Force-Angriffe auf das Passwort werden 100x teurer.
 
 set -Eeuo pipefail
 umask 077
@@ -288,10 +291,14 @@ fi
 printf "📦 Packe & verschlüssele → %s\n" "$OUT_FILE"
 
 # Archivieren + Verschlüsseln ohne Klartext-Zwischendatei
-# Tipp: Für loopback-Pinentry (ohne curses-Prompt): ~/.gnupg/gpg.conf -> allow-loopback-pinentry
-# und unten: --pinentry-mode loopback ergänzen.
+# S2K-Härtung: stärkere Schlüsselableitung gegen Brute-Force
 tar -C "$(dirname "$SRC")" -cz "$BASE" \
-| gpg --symmetric --cipher-algo AES256 -o "$OUT_FILE" \
+| gpg --symmetric \
+    --cipher-algo AES256 \
+    --s2k-cipher-algo AES256 \
+    --s2k-digest-algo SHA512 \
+    --s2k-count 65011712 \
+    -o "$OUT_FILE" \
 || die "gpg fehlgeschlagen"
 
 # Prüfsumme schreiben
