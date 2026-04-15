@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Buch direkt kaufen – DRM-frei | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GrapheneOS-Handbuch DRM-frei direkt kaufen – EPUB, PDF und AZW3 als Bundle. Bezahlung via Lightning, Onchain-Bitcoin oder Ko-fi.">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+
+    body {
+      background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* --- STERNENHIMMEL --- */
+    .stars-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(ellipse at top, #0a0f1e 0%, #000 60%);
+      z-index: -2;
+    }
+    .stars-bg::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        radial-gradient(1px 1px at 10% 15%, #fff, transparent),
+        radial-gradient(1px 1px at 25% 40%, #fff, transparent),
+        radial-gradient(1px 1px at 40% 20%, #fff, transparent),
+        radial-gradient(2px 2px at 55% 60%, #00ffcc, transparent),
+        radial-gradient(1px 1px at 70% 35%, #fff, transparent),
+        radial-gradient(1px 1px at 85% 75%, #fff, transparent),
+        radial-gradient(1px 1px at 15% 80%, #fff, transparent),
+        radial-gradient(1px 1px at 35% 90%, #fff, transparent),
+        radial-gradient(1px 1px at 60% 10%, #fff, transparent),
+        radial-gradient(1px 1px at 90% 50%, #fff, transparent),
+        radial-gradient(1px 1px at 5% 55%, #fff, transparent),
+        radial-gradient(2px 2px at 75% 25%, #00ffcc, transparent);
+      animation: twinkle 6s ease-in-out infinite alternate;
+    }
+    @keyframes twinkle {
+      0% { opacity: 0.4; } 100% { opacity: 0.9; }
+    }
+
+    .wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 15px 40px 15px;
+    }
+
+    /* --- NAV --- */
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc;
+    }
+
+    /* --- HEADER --- */
+    h1 {
+      color: #00ffcc;
+      margin-top: 30px;
+      text-align: center;
+      font-size: 1.9em;
+      text-shadow: 0 0 12px rgba(0, 255, 204, 0.4);
+    }
+    h2 {
+      color: #00ffcc;
+      margin-top: 2em;
+      border-bottom: 1px solid #1a3a3a;
+      padding-bottom: 8px;
+    }
+    .lead {
+      text-align: center;
+      color: #ccc;
+      margin: 20px auto 40px auto;
+      max-width: 560px;
+    }
+
+    /* --- COVER + PITCH --- */
+    .hero {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+      background: linear-gradient(135deg, rgba(0, 20, 20, 0.6), rgba(0, 8, 15, 0.85));
+      border: 1px solid #00ffcc;
+      border-radius: 12px;
+      padding: 25px;
+      margin: 20px 0 40px 0;
+      box-shadow: 0 0 25px rgba(0, 255, 204, 0.15);
+    }
+    .hero img {
+      flex: 0 0 130px;
+      width: 130px;
+      height: auto;
+      border-radius: 4px;
+      box-shadow: 0 0 20px rgba(0, 255, 204, 0.3), 0 10px 20px rgba(0, 0, 0, 0.6);
+    }
+    .hero-text {
+      flex: 1;
+      min-width: 0;
+    }
+    .hero-text h3 { color: #00ffcc; margin: 0 0 8px 0; font-size: 1.2em; }
+    .hero-text p { color: #ddd; margin: 8px 0; font-size: 0.95em; }
+    .hero-text .price {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 6px 14px;
+      border: 1px solid #00ffcc;
+      border-radius: 6px;
+      color: #00ffcc;
+      font-weight: bold;
+      font-size: 0.95em;
+    }
+
+    /* --- ZAHLUNGS-BUTTONS --- */
+    .btnrow {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+    .btn {
+      padding: 14px 20px;
+      border-radius: 12px;
+      border: 1px solid #00ffcc;
+      background: #000;
+      color: #00ffcc;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      min-width: 220px;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+    .btn:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .btn:active { transform: scale(0.98); }
+
+    /* --- PANELS --- */
+    .panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .panel.open { max-height: 900px; margin-top: 10px; }
+
+    .card {
+      border: 1px solid #00ffcc;
+      border-radius: 14px;
+      background: #050505;
+      padding: 20px;
+      margin-top: 10px;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+      text-align: center;
+    }
+    .card .title {
+      font-size: 1.1em;
+      font-weight: bold;
+      margin: 0 0 15px;
+      color: #00ffcc;
+    }
+    .card .qr {
+      width: 220px;
+      max-width: 75vw;
+      background: #fff;
+      padding: 10px;
+      border-radius: 12px;
+      border: 1px solid #00ffcc;
+      display: block;
+      margin: 0 auto 12px;
+    }
+    .card code {
+      background: #111;
+      padding: 8px 12px;
+      border-radius: 8px;
+      display: inline-block;
+      word-break: break-all;
+      margin: 10px 0;
+      color: #fff;
+      font-family: monospace;
+      border: 1px solid #333;
+      max-width: 95%;
+    }
+    .copy {
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: 1px solid #444;
+      background: #111;
+      color: #bbb;
+      cursor: pointer;
+      font-size: 0.9em;
+      margin-top: 8px;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .copy:hover {
+      border-color: #00ffcc;
+      color: #00ffcc;
+    }
+
+    /* --- FIAT / KO-FI --- */
+    .kofi-section {
+      text-align: center;
+      margin-top: 30px;
+      padding: 20px;
+      border-top: 1px solid #222;
+    }
+    .kofi-btn {
+      display: inline-block;
+      color: #000;
+      background: #00ffcc;
+      text-decoration: none;
+      font-weight: bold;
+      border: 1px solid #00ffcc;
+      padding: 12px 22px;
+      border-radius: 12px;
+      transition: all 0.2s ease;
+      margin-top: 10px;
+    }
+    .kofi-btn:hover {
+      box-shadow: 0 0 20px #00ffcc;
+      transform: scale(1.02);
+    }
+
+    /* --- FLOW-SCHRITTE --- */
+    .flow {
+      background: #050505;
+      border-left: 3px solid #00ffcc;
+      padding: 1.2em 1.5em;
+      margin: 2em 0;
+      border-radius: 0 8px 8px 0;
+    }
+    .flow ol {
+      padding-left: 20px;
+      color: #ddd;
+    }
+    .flow li { margin-bottom: 0.8em; }
+    .flow code {
+      background: #111;
+      padding: 2px 8px;
+      border-radius: 4px;
+      color: #00ffcc;
+      font-size: 0.95em;
+    }
+
+    /* --- TRANSPARENZ-BOX --- */
+    .transparenz {
+      background: #050505;
+      border: 1px dashed #00ffcc;
+      border-radius: 8px;
+      padding: 1.2em 1.5em;
+      margin: 2em 0;
+      font-size: 0.95em;
+      color: #ccc;
+    }
+    .transparenz strong { color: #00ffcc; }
+
+    /* --- FOOTER --- */
+    footer {
+      margin-top: 50px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 640px) {
+      .hero { flex-direction: column; text-align: center; padding: 20px; }
+      .hero img { width: 140px; flex: 0 0 auto; }
+      h1 { font-size: 1.4em; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="stars-bg"></div>
+
+  <div class="wrap">
+
+    <div class="top-nav">
+      <a href="buecher.html">⬅ Zurück zu den Büchern</a>
+    </div>
+
+    <h1>📦 DRM-frei direkt kaufen</h1>
+    <p class="lead">
+      Keine Plattform dazwischen. Kein Konto-Zwang. Kein Vendor-Lock-in.<br>
+      <span style="color:#888;">EPUB + PDF + AZW3 als Bundle – auf allen Geräten deiner Wahl.</span>
+    </p>
+
+    <div class="hero">
+      <img src="grapheneos-handbuch-cover.jpg" alt="Cover GrapheneOS-Handbuch">
+      <div class="hero-text">
+        <h3>GrapheneOS: Android im Überwachungszeitalter</h3>
+        <p>Der komplette Schritt-für-Schritt-Guide – Installation, Apps ohne Google, Proton-Ökosystem, Shelter, Termux-Verschlüsselung und mehr.</p>
+        <span class="price">Richtpreis: ab 5 € – oder mehr, wenn dir das Werk mehr wert ist</span>
+      </div>
+    </div>
+
+    <h2>⚡ Zahlung</h2>
+    <p style="color:#bbb; margin-top:-10px;">
+      Wähle Lightning für schnelle, private Energie. Onchain für große Tanks. Ko-fi für PayPal oder Karte.
+    </p>
+
+    <div class="btnrow">
+      <button class="btn" onclick="togglePanel('ln')">⚡ Bitcoin Lightning</button>
+      <button class="btn" onclick="togglePanel('btc')">₿ Bitcoin Onchain</button>
+    </div>
+
+    <div id="ln" class="panel">
+      <div class="card">
+        <div class="title">⚡ Lightning (Strike)</div>
+        <img class="qr" src="lightning.png" alt="Lightning QR-Code">
+        <code id="lnText">alien_investor@strike.me</code>
+        <br>
+        <button class="copy" onclick="copyText('lnText')">Adresse kopieren</button>
+      </div>
+    </div>
+
+    <div id="btc" class="panel">
+      <div class="card">
+        <div class="title">₿ Bitcoin Onchain</div>
+        <img class="qr" src="onchain.png" alt="Bitcoin Onchain QR-Code">
+        <code id="btcText">bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code>
+        <br>
+        <button class="copy" onclick="copyText('btcText')">Adresse kopieren</button>
+      </div>
+    </div>
+
+    <div class="kofi-section">
+      <div style="color:#ccc; margin-bottom: 8px;">☕ Oder per PayPal / Karte:</div>
+      <a class="kofi-btn" href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener">
+        Via Ko-fi bezahlen
+      </a>
+    </div>
+
+    <h2>📬 So bekommst du das Buch</h2>
+    <div class="flow">
+      <ol>
+        <li>
+          <strong>Zahle</strong> mit der Methode deiner Wahl (Lightning, Onchain oder Ko-fi).
+        </li>
+        <li>
+          <strong>Schicke eine E-Mail</strong> an
+          <code>kontakt@alien-investor.org</code><br>
+          <span style="color:#aaa; font-size:0.9em;">
+            Betreff: <strong>Buch GrapheneOS</strong><br>
+            Inhalt: Zahlungsart + ungefähre Uhrzeit (bei Onchain gerne TxID).
+          </span>
+        </li>
+        <li>
+          <strong>Bundle per Antwort:</strong> Du bekommst innerhalb von 24 Stunden einen Download-Link zu EPUB + PDF + AZW3.
+        </li>
+      </ol>
+    </div>
+
+    <div class="transparenz">
+      <strong>Was du bekommst – und was nicht:</strong><br><br>
+      ✅ <strong>Kein DRM</strong> – die Dateien sind wirklich deins.<br>
+      ✅ <strong>Drei Formate</strong> – EPUB (Kobo/Tolino/Apple), AZW3 (Kindle), PDF (Desktop/Drucken).<br>
+      ✅ <strong>Kostenlose Updates</strong> – wenn eine neue Ausgabe erscheint, bekommst du sie als Direktkäufer kostenlos zurück. Schreib einfach nochmal.<br>
+      ❌ <strong>Keine Rechnung auf Firma</strong> – wenn du eine brauchst: kurz in der Mail erwähnen, dann klären wir's.<br><br>
+      <em style="color:#aaa;">
+        Dieser Weg ist bewusst manuell. Keine Plattform, kein Tracking, keine Cookies –
+        Alien-Investor-Niveau. Bei hohem Volumen automatisieren wir das später.
+      </em>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    <p style="margin-top: 20px;">
+      👽 <strong>Haftungsausschluss:</strong><br><br>
+      Dieses Buch stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
+      Die Installation von Software erfolgt auf eigene Verantwortung.<br>
+      Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
+    </p>
+  </footer>
+
+  <script>
+    function togglePanel(id){
+      const ln = document.getElementById('ln');
+      const btc = document.getElementById('btc');
+      if(id === 'ln'){
+        ln.classList.toggle('open');
+        btc.classList.remove('open');
+      } else {
+        btc.classList.toggle('open');
+        ln.classList.remove('open');
+      }
+    }
+
+    async function copyText(elId){
+      const txt = document.getElementById(elId).innerText;
+      try{
+        await navigator.clipboard.writeText(txt);
+        const btn = document.querySelector(`button[onclick="copyText('${elId}')"]`);
+        const originalText = btn.innerText;
+        btn.innerText = "Kopiert! ✅";
+        setTimeout(() => btn.innerText = originalText, 2000);
+      }catch(e){
+        prompt("Kopieren:", txt);
+      }
+    }
+  </script>
+</body>
+</html>
