@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Bücher – Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Alien-Investor-Handbücher: Bitcoin, Privacy und digitale Souveränität – für Menschen, die ihr Leben wirklich besitzen wollen.">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      color: #fff;
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* --- STERNENHIMMEL (Pure CSS) --- */
+    .stars-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(ellipse at top, #0a0f1e 0%, #000 60%);
+      z-index: -2;
+      overflow: hidden;
+    }
+    .stars-bg::before,
+    .stars-bg::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        radial-gradient(1px 1px at 7% 8%, #fff, transparent),
+        radial-gradient(1px 1px at 17% 22%, #fff, transparent),
+        radial-gradient(1px 1px at 25% 15%, #fff, transparent),
+        radial-gradient(1px 1px at 33% 9%, #fff, transparent),
+        radial-gradient(2px 2px at 41% 4%, #fff, transparent),
+        radial-gradient(1px 1px at 48% 18%, #fff, transparent),
+        radial-gradient(1px 1px at 55% 25%, #fff, transparent),
+        radial-gradient(1px 1px at 63% 11%, #00ffcc, transparent),
+        radial-gradient(1px 1px at 70% 20%, #fff, transparent),
+        radial-gradient(1px 1px at 75% 35%, #fff, transparent),
+        radial-gradient(1px 1px at 82% 7%, #fff, transparent),
+        radial-gradient(1px 1px at 90% 10%, #fff, transparent),
+        radial-gradient(1px 1px at 95% 22%, #fff, transparent),
+        radial-gradient(1px 1px at 4% 32%, #fff, transparent),
+        radial-gradient(1px 1px at 12% 48%, #fff, transparent),
+        radial-gradient(2px 2px at 22% 40%, #fff, transparent),
+        radial-gradient(1px 1px at 30% 50%, #fff, transparent),
+        radial-gradient(1px 1px at 38% 38%, #fff, transparent),
+        radial-gradient(1px 1px at 40% 65%, #00ffcc, transparent),
+        radial-gradient(1px 1px at 47% 55%, #fff, transparent),
+        radial-gradient(1px 1px at 54% 48%, #fff, transparent),
+        radial-gradient(1px 1px at 62% 60%, #fff, transparent),
+        radial-gradient(1px 1px at 70% 55%, #fff, transparent),
+        radial-gradient(1px 1px at 78% 45%, #fff, transparent),
+        radial-gradient(1px 1px at 85% 60%, #fff, transparent),
+        radial-gradient(1px 1px at 92% 52%, #fff, transparent),
+        radial-gradient(1px 1px at 8% 75%, #fff, transparent),
+        radial-gradient(2px 2px at 15% 85%, #fff, transparent),
+        radial-gradient(1px 1px at 23% 70%, #fff, transparent),
+        radial-gradient(1px 1px at 32% 92%, #fff, transparent),
+        radial-gradient(1px 1px at 40% 78%, #fff, transparent),
+        radial-gradient(1px 1px at 45% 95%, #fff, transparent),
+        radial-gradient(1px 1px at 52% 85%, #fff, transparent),
+        radial-gradient(2px 2px at 60% 90%, #00ffcc, transparent),
+        radial-gradient(1px 1px at 68% 72%, #fff, transparent),
+        radial-gradient(1px 1px at 74% 88%, #fff, transparent),
+        radial-gradient(1px 1px at 82% 78%, #fff, transparent),
+        radial-gradient(1px 1px at 88% 95%, #fff, transparent),
+        radial-gradient(1px 1px at 96% 82%, #fff, transparent),
+        radial-gradient(1px 1px at 3% 62%, #fff, transparent),
+        radial-gradient(1px 1px at 10% 60%, #fff, transparent);
+      background-size: 100% 100%;
+      animation: twinkle 6s ease-in-out infinite alternate;
+    }
+    .stars-bg::after {
+      background-image:
+        radial-gradient(1px 1px at 6% 14%, #fff, transparent),
+        radial-gradient(1px 1px at 14% 5%, #fff, transparent),
+        radial-gradient(1px 1px at 20% 30%, #fff, transparent),
+        radial-gradient(1px 1px at 28% 25%, #fff, transparent),
+        radial-gradient(1px 1px at 36% 16%, #fff, transparent),
+        radial-gradient(2px 2px at 44% 32%, #00ffcc, transparent),
+        radial-gradient(1px 1px at 52% 10%, #fff, transparent),
+        radial-gradient(1px 1px at 58% 28%, #fff, transparent),
+        radial-gradient(1px 1px at 65% 3%, #fff, transparent),
+        radial-gradient(1px 1px at 72% 14%, #fff, transparent),
+        radial-gradient(2px 2px at 80% 20%, #00ffcc, transparent),
+        radial-gradient(1px 1px at 88% 32%, #fff, transparent),
+        radial-gradient(1px 1px at 94% 7%, #fff, transparent),
+        radial-gradient(1px 1px at 5% 70%, #fff, transparent),
+        radial-gradient(1px 1px at 18% 62%, #fff, transparent),
+        radial-gradient(1px 1px at 27% 55%, #fff, transparent),
+        radial-gradient(1px 1px at 35% 80%, #fff, transparent),
+        radial-gradient(1px 1px at 43% 44%, #fff, transparent),
+        radial-gradient(1px 1px at 50% 45%, #fff, transparent),
+        radial-gradient(1px 1px at 58% 68%, #fff, transparent),
+        radial-gradient(1px 1px at 65% 60%, #fff, transparent),
+        radial-gradient(1px 1px at 73% 78%, #fff, transparent),
+        radial-gradient(1px 1px at 80% 50%, #fff, transparent),
+        radial-gradient(1px 1px at 87% 66%, #fff, transparent),
+        radial-gradient(1px 1px at 95% 50%, #fff, transparent),
+        radial-gradient(1px 1px at 9% 88%, #fff, transparent),
+        radial-gradient(1px 1px at 21% 98%, #fff, transparent),
+        radial-gradient(1px 1px at 36% 73%, #fff, transparent),
+        radial-gradient(1px 1px at 49% 75%, #fff, transparent),
+        radial-gradient(1px 1px at 63% 84%, #fff, transparent),
+        radial-gradient(1px 1px at 78% 68%, #fff, transparent),
+        radial-gradient(1px 1px at 91% 90%, #fff, transparent);
+      opacity: 0.65;
+      animation: twinkle 4s ease-in-out infinite alternate-reverse;
+    }
+    @keyframes twinkle {
+      0%   { opacity: 0.35; }
+      50%  { opacity: 0.95; }
+      100% { opacity: 0.5; }
+    }
+
+    /* --- NEBEL / MILCHSTRASSE --- */
+    .nebula {
+      position: fixed;
+      top: -10%;
+      left: -10%;
+      width: 120%;
+      height: 120%;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 900px 260px at 30% 35%, rgba(90, 30, 140, 0.22), transparent 60%),
+        radial-gradient(ellipse 1100px 200px at 70% 55%, rgba(0, 140, 180, 0.18), transparent 60%),
+        radial-gradient(ellipse 500px 180px at 50% 45%, rgba(180, 60, 140, 0.10), transparent 60%),
+        radial-gradient(circle 140px at 32% 36%, rgba(255, 255, 255, 0.10), transparent 70%),
+        radial-gradient(circle 120px at 68% 56%, rgba(0, 255, 204, 0.08), transparent 70%);
+      transform: rotate(-18deg);
+      filter: blur(30px);
+      opacity: 0.85;
+      animation: nebula-pulse 14s ease-in-out infinite alternate;
+      mix-blend-mode: screen;
+    }
+    @keyframes nebula-pulse {
+      0%   { opacity: 0.55; transform: rotate(-18deg) scale(1); }
+      50%  { opacity: 0.85; transform: rotate(-17deg) scale(1.04); }
+      100% { opacity: 0.65; transform: rotate(-19deg) scale(1.02); }
+    }
+
+    /* --- STERNSCHNUPPEN --- */
+    .shooting-star {
+      position: fixed;
+      width: 2px;
+      height: 2px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.7);
+      z-index: -1;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .shooting-star::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 120px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.8), rgba(0,255,204,0.4), transparent);
+      transform: translateX(-120px);
+    }
+    .shooting-star.s1 {
+      top: 12%;
+      left: -5%;
+      animation: shoot1 11s linear infinite;
+      animation-delay: 3s;
+    }
+    .shooting-star.s2 {
+      top: 28%;
+      left: -5%;
+      animation: shoot2 17s linear infinite;
+      animation-delay: 9s;
+    }
+    .shooting-star.s3 {
+      top: 50%;
+      left: -5%;
+      animation: shoot3 23s linear infinite;
+      animation-delay: 15s;
+    }
+    @keyframes shoot1 {
+      0%   { transform: translate(0, 0) rotate(15deg); opacity: 0; }
+      3%   { opacity: 1; }
+      8%   { transform: translate(110vw, 20vh) rotate(15deg); opacity: 0; }
+      100% { transform: translate(110vw, 20vh) rotate(15deg); opacity: 0; }
+    }
+    @keyframes shoot2 {
+      0%   { transform: translate(0, 0) rotate(22deg); opacity: 0; }
+      2%   { opacity: 1; }
+      7%   { transform: translate(115vw, 30vh) rotate(22deg); opacity: 0; }
+      100% { transform: translate(115vw, 30vh) rotate(22deg); opacity: 0; }
+    }
+    @keyframes shoot3 {
+      0%   { transform: translate(0, 0) rotate(10deg); opacity: 0; }
+      3%   { opacity: 1; }
+      9%   { transform: translate(115vw, 15vh) rotate(10deg); opacity: 0; }
+      100% { transform: translate(115vw, 15vh) rotate(10deg); opacity: 0; }
+    }
+
+    /* --- LAYOUT --- */
+    .wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 15px 40px 15px;
+    }
+
+    /* --- TYPOGRAFIE --- */
+    h1, h2, h3 { color: #00ffcc; }
+    h1 {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 2.2em;
+      text-shadow: 0 0 12px rgba(0, 255, 204, 0.4);
+    }
+    h2 {
+      margin-top: 2.5em;
+      border-bottom: 1px solid #1a3a3a;
+      padding-bottom: 10px;
+    }
+
+    /* --- LINKS --- */
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc;
+    }
+
+    /* --- NAV --- */
+    .top-nav {
+      padding: 10px 0;
+      font-size: 0.9em;
+    }
+
+    /* --- INTRO-LEAD --- */
+    .intro {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 50px auto;
+      color: #ccc;
+    }
+    .intro .tagline {
+      font-size: 0.9em;
+      color: #888;
+      margin-top: 10px;
+      display: block;
+    }
+
+    /* --- BUCH-KARTE --- */
+    .book-card {
+      display: flex;
+      gap: 30px;
+      align-items: flex-start;
+      background: linear-gradient(135deg, rgba(0, 20, 20, 0.6), rgba(0, 8, 15, 0.85));
+      border: 1px solid #00ffcc;
+      border-radius: 12px;
+      padding: 30px;
+      margin: 40px 0;
+      box-shadow: 0 0 30px rgba(0, 255, 204, 0.15),
+                  inset 0 0 20px rgba(0, 255, 204, 0.03);
+      backdrop-filter: blur(2px);
+    }
+    .book-card.coming-soon {
+      border-color: #555;
+      border-style: dashed;
+      box-shadow: none;
+      opacity: 0.75;
+    }
+
+    /* --- COVER (schwebend) --- */
+    .book-cover {
+      flex: 0 0 200px;
+      position: relative;
+    }
+    .book-cover img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      box-shadow:
+        0 0 30px rgba(0, 255, 204, 0.4),
+        0 15px 25px rgba(0, 0, 0, 0.6);
+      animation: float 6s ease-in-out infinite;
+      display: block;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(-0.5deg); }
+      50%      { transform: translateY(-12px) rotate(0.5deg); }
+    }
+    .book-cover.placeholder {
+      height: 300px;
+      background: repeating-linear-gradient(
+        45deg,
+        #0a0a0a,
+        #0a0a0a 10px,
+        #111 10px,
+        #111 20px
+      );
+      border: 1px dashed #555;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+      font-size: 0.9em;
+      text-align: center;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    /* --- BUCH-INHALT --- */
+    .book-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .book-info h2 {
+      margin-top: 0;
+      border-bottom: none;
+      padding-bottom: 0;
+      font-size: 1.5em;
+    }
+    .book-info .subtitle {
+      color: #bbb;
+      font-style: italic;
+      margin-top: -0.3em;
+      margin-bottom: 1.5em;
+    }
+    .book-info .pitch {
+      color: #ddd;
+    }
+    .book-info ul {
+      padding-left: 20px;
+      color: #ccc;
+      font-size: 0.95em;
+    }
+    .book-info li { margin-bottom: 0.5em; }
+
+    /* --- CTA-BUTTON --- */
+    .cta-button {
+      display: inline-block;
+      margin-top: 1.5em;
+      padding: 12px 28px;
+      background: transparent;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1em;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .cta-button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 20px #00ffcc;
+      text-shadow: none;
+    }
+
+    /* --- HINWEIS-BOX --- */
+    .notice {
+      background: #050505;
+      border-left: 3px solid #00ffcc;
+      padding: 1em 1.5em;
+      margin: 3em 0;
+      font-size: 0.95em;
+      color: #ccc;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 640px) {
+      .book-card {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 20px;
+      }
+      .book-cover {
+        flex: 0 0 auto;
+        max-width: 220px;
+      }
+      .book-info h2 { text-align: center; }
+      .book-info .subtitle { text-align: center; }
+      h1 { font-size: 1.6em; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="stars-bg"></div>
+  <div class="nebula"></div>
+  <div class="shooting-star s1"></div>
+  <div class="shooting-star s2"></div>
+  <div class="shooting-star s3"></div>
+
+  <div class="wrapper">
+
+    <div class="top-nav">
+      <a href="index.html">⬅ Zurück zur Zentrale</a>
+    </div>
+
+    <h1>📚 Alien-Investor-Handbücher</h1>
+
+    <p class="intro">
+      Vertieftes Wissen statt Häppchen-Content.<br>
+      Für Menschen, die ihr digitales Leben wirklich besitzen wollen.
+      <span class="tagline">Bitcoin · Privacy · Digitale Souveränität</span>
+    </p>
+
+    <!-- BAND 1: GrapheneOS -->
+    <div class="book-card">
+      <div class="book-cover">
+        <img src="grapheneos-handbuch-cover.jpg"
+             alt="Cover: GrapheneOS – Android im Überwachungszeitalter">
+      </div>
+      <div class="book-info">
+        <h2>Band 1: GrapheneOS</h2>
+        <p class="subtitle">Android im Überwachungszeitalter – Einrichtung, Apps &amp; digitale Souveränität</p>
+
+        <p class="pitch">
+          <strong>Dein Smartphone gehört dir – oder Google.</strong>
+          Android 2026 macht Sideloading zur Ausnahme. Google Play Services sitzen tiefer im System als je zuvor.
+          GrapheneOS ist die Antwort: ein gehärtetes Android, das echte Kontrolle zurückgibt – kein Root, kein Bastelkram.
+        </p>
+
+        <p style="color:#aaa; font-size:0.95em;">Was du Schritt für Schritt lernst:</p>
+        <ul>
+          <li>Installation über den offiziellen Web-Installer</li>
+          <li>Die 6 wichtigsten Einstellungen nach der Installation</li>
+          <li>Berechtigungen &amp; App-Sandbox gezielt einsetzen</li>
+          <li>Apps ohne Google Play: Obtainium, Zap Store, GrapheneOS App Store, Accrescent</li>
+          <li>Google-Ersatz aus der Schweiz: das Proton-Ökosystem</li>
+          <li>Arbeit und Privat getrennt mit Shelter</li>
+          <li>Dateiverschlüsselung mit Termux (AES-256)</li>
+        </ul>
+
+        <p style="color:#aaa; font-size:0.9em; margin-top: 1.2em;">
+          Ein lebendiges Handbuch – neue Ausgaben folgen, wenn sich das Ökosystem ändert.
+        </p>
+
+        <a href="grapheneos-book.html" class="cta-button" target="_blank" rel="noopener">
+          📕 Jetzt auf Amazon Kindle
+        </a>
+      </div>
+    </div>
+
+    <!-- BAND 2: Geheim -->
+    <div class="book-card coming-soon">
+      <div class="book-cover placeholder">
+        <span>🛸<br>?</span>
+      </div>
+      <div class="book-info">
+        <h2 style="color:#888;">Band 2 <span style="font-size:0.6em; color:#555;">(in Vorbereitung)</span></h2>
+        <p class="subtitle" style="color:#777;">Thema noch geheim.</p>
+
+        <p class="pitch" style="color:#999;">
+          Der Alien arbeitet bereits am nächsten Handbuch.
+          Was genau darin steht, verrät er noch nicht – nur so viel: es passt zur Mission.
+        </p>
+
+        <p style="color:#666; font-size:0.9em; font-style: italic; margin-top: 1.5em;">
+          Erscheint, wenn es fertig ist. Auf Nostr und hier wird es angekündigt.
+        </p>
+      </div>
+    </div>
+
+    <div class="notice">
+      <strong>Transparenz:</strong>
+      Alle hier aufgeführten Bücher sind <strong>meine eigenen Werke</strong> – geschrieben unter dem Pseudonym Alien Investor
+      und veröffentlicht über Amazon Kindle Direct Publishing.
+      Die Amazon-Links sind zusätzlich Partnerlinks: Wenn du über diese Seite kaufst, unterstützt du meine Arbeit doppelt –
+      der Preis ändert sich für dich nicht.
+      Alle Inhalte sind persönliche Einschätzungen. Die Installation von Software erfolgt auf eigene Verantwortung.
+    </div>
+
+  </div>
+
+  <footer>
+    <p>📬 Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+
+    <p style="margin-top: 20px;">
+      👽 <strong>Haftungsausschluss:</strong><br><br>
+      Die Inhalte dieser Seite stellen keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
+      Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
+      Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
+    </p>
+  </footer>
+
+</body>
+</html>
