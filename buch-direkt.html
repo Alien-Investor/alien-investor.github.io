@@ -109,7 +109,12 @@
       width: 130px;
       height: auto;
       border-radius: 4px;
-      box-shadow: 0 0 20px rgba(0, 255, 204, 0.3), 0 10px 20px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 0 30px rgba(0, 255, 204, 0.4), 0 15px 25px rgba(0, 0, 0, 0.6);
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(-0.5deg); }
+      50%      { transform: translateY(-12px) rotate(0.5deg); }
     }
     .hero-text {
       flex: 1;
