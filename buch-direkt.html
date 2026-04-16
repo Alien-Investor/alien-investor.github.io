@@ -53,6 +53,65 @@
       0% { opacity: 0.4; } 100% { opacity: 0.9; }
     }
 
+    /* --- STERNSCHNUPPEN --- */
+    .shooting-star {
+      position: fixed;
+      width: 2px;
+      height: 2px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.7);
+      z-index: -1;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .shooting-star::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 120px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.8), rgba(0,255,204,0.4), transparent);
+      transform: translateX(-120px);
+    }
+    .shooting-star.s1 {
+      top: 12%;
+      left: -5%;
+      animation: shoot1 11s linear infinite;
+      animation-delay: 3s;
+    }
+    .shooting-star.s2 {
+      top: 28%;
+      left: -5%;
+      animation: shoot2 17s linear infinite;
+      animation-delay: 9s;
+    }
+    .shooting-star.s3 {
+      top: 50%;
+      left: -5%;
+      animation: shoot3 23s linear infinite;
+      animation-delay: 15s;
+    }
+    @keyframes shoot1 {
+      0%   { transform: translate(0, 0) rotate(15deg); opacity: 0; }
+      3%   { opacity: 1; }
+      8%   { transform: translate(110vw, 20vh) rotate(15deg); opacity: 0; }
+      100% { transform: translate(110vw, 20vh) rotate(15deg); opacity: 0; }
+    }
+    @keyframes shoot2 {
+      0%   { transform: translate(0, 0) rotate(22deg); opacity: 0; }
+      2%   { opacity: 1; }
+      7%   { transform: translate(115vw, 30vh) rotate(22deg); opacity: 0; }
+      100% { transform: translate(115vw, 30vh) rotate(22deg); opacity: 0; }
+    }
+    @keyframes shoot3 {
+      0%   { transform: translate(0, 0) rotate(10deg); opacity: 0; }
+      3%   { opacity: 1; }
+      9%   { transform: translate(115vw, 15vh) rotate(10deg); opacity: 0; }
+      100% { transform: translate(115vw, 15vh) rotate(10deg); opacity: 0; }
+    }
+
     .wrap {
       max-width: 720px;
       margin: 0 auto;
@@ -301,6 +360,9 @@
 <body>
 
   <div class="stars-bg"></div>
+  <div class="shooting-star s1"></div>
+  <div class="shooting-star s2"></div>
+  <div class="shooting-star s3"></div>
 
   <div class="wrap">
 
