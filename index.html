@@ -49,6 +49,33 @@
       0% { opacity: 0.4; } 100% { opacity: 0.9; }
     }
 
+    /* --- STERNENNEBEL --- */
+    .nebula {
+      position: fixed;
+      top: -10%;
+      left: -10%;
+      width: 120%;
+      height: 120%;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 900px 260px at 30% 35%, rgba(90, 30, 140, 0.22), transparent 60%),
+        radial-gradient(ellipse 1100px 200px at 70% 55%, rgba(0, 140, 180, 0.18), transparent 60%),
+        radial-gradient(ellipse 500px 180px at 50% 45%, rgba(180, 60, 140, 0.10), transparent 60%),
+        radial-gradient(circle 140px at 32% 36%, rgba(255, 255, 255, 0.10), transparent 70%),
+        radial-gradient(circle 120px at 68% 56%, rgba(0, 255, 204, 0.08), transparent 70%);
+      transform: rotate(-18deg);
+      filter: blur(30px);
+      opacity: 0.85;
+      animation: nebula-pulse 14s ease-in-out infinite alternate;
+      mix-blend-mode: screen;
+    }
+    @keyframes nebula-pulse {
+      0%   { opacity: 0.55; transform: rotate(-18deg) scale(1); }
+      50%  { opacity: 0.85; transform: rotate(-17deg) scale(1.04); }
+      100% { opacity: 0.65; transform: rotate(-19deg) scale(1.02); }
+    }
+
     /* --- STERNSCHNUPPEN --- */
     .shooting-star {
       position: fixed;
@@ -211,6 +238,7 @@
 </head>
 <body>
   <div class="stars-bg"></div>
+  <div class="nebula"></div>
   <div class="shooting-star s1"></div>
   <div class="shooting-star s2"></div>
   <div class="shooting-star s3"></div>

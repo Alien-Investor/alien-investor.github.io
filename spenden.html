@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Energieversorgung | Alien Investor</title>
   <style>
+    html, body { overflow-x: hidden; }
     body {
       background: #000;
       color: #fff;
@@ -12,6 +13,108 @@
       margin: 0;
       padding: 0 15px 20px 15px;
       text-align: center;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* --- STERNENHIMMEL --- */
+    .stars-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: radial-gradient(ellipse at top, #0a0f1e 0%, #000 60%);
+      z-index: -2;
+    }
+    .stars-bg::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image:
+        radial-gradient(1px 1px at 10% 15%, #fff, transparent),
+        radial-gradient(1px 1px at 25% 40%, #fff, transparent),
+        radial-gradient(1px 1px at 40% 20%, #fff, transparent),
+        radial-gradient(2px 2px at 55% 60%, #00ffcc, transparent),
+        radial-gradient(1px 1px at 70% 35%, #fff, transparent),
+        radial-gradient(1px 1px at 85% 75%, #fff, transparent),
+        radial-gradient(1px 1px at 15% 80%, #fff, transparent),
+        radial-gradient(1px 1px at 35% 90%, #fff, transparent),
+        radial-gradient(1px 1px at 60% 10%, #fff, transparent),
+        radial-gradient(1px 1px at 90% 50%, #fff, transparent),
+        radial-gradient(1px 1px at 5% 55%, #fff, transparent),
+        radial-gradient(2px 2px at 75% 25%, #00ffcc, transparent);
+      animation: twinkle 6s ease-in-out infinite alternate;
+    }
+    @keyframes twinkle {
+      0% { opacity: 0.4; } 100% { opacity: 0.9; }
+    }
+
+    /* --- STERNENNEBEL --- */
+    .nebula {
+      position: fixed;
+      top: -10%;
+      left: -10%;
+      width: 120%;
+      height: 120%;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 900px 260px at 30% 35%, rgba(90, 30, 140, 0.22), transparent 60%),
+        radial-gradient(ellipse 1100px 200px at 70% 55%, rgba(0, 140, 180, 0.18), transparent 60%),
+        radial-gradient(ellipse 500px 180px at 50% 45%, rgba(180, 60, 140, 0.10), transparent 60%),
+        radial-gradient(circle 140px at 32% 36%, rgba(255, 255, 255, 0.10), transparent 70%),
+        radial-gradient(circle 120px at 68% 56%, rgba(0, 255, 204, 0.08), transparent 70%);
+      transform: rotate(-18deg);
+      filter: blur(30px);
+      opacity: 0.85;
+      animation: nebula-pulse 14s ease-in-out infinite alternate;
+      mix-blend-mode: screen;
+    }
+    @keyframes nebula-pulse {
+      0%   { opacity: 0.55; transform: rotate(-18deg) scale(1); }
+      50%  { opacity: 0.85; transform: rotate(-17deg) scale(1.04); }
+      100% { opacity: 0.65; transform: rotate(-19deg) scale(1.02); }
+    }
+
+    /* --- STERNSCHNUPPEN --- */
+    .shooting-star {
+      position: fixed;
+      width: 2px; height: 2px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.7);
+      z-index: -1;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .shooting-star::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 120px; height: 1px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.8), rgba(0,255,204,0.4), transparent);
+      transform: translateX(-120px);
+    }
+    .shooting-star.s1 { top: 12%; left: -5%; animation: shoot1 11s linear infinite; animation-delay: 3s; }
+    .shooting-star.s2 { top: 28%; left: -5%; animation: shoot2 17s linear infinite; animation-delay: 9s; }
+    .shooting-star.s3 { top: 50%; left: -5%; animation: shoot3 23s linear infinite; animation-delay: 15s; }
+    @keyframes shoot1 {
+      0%   { transform: translate(0, 0) rotate(15deg); opacity: 0; }
+      3%   { opacity: 1; }
+      8%   { transform: translate(110vw, 20vh) rotate(15deg); opacity: 0; }
+      100% { transform: translate(110vw, 20vh) rotate(15deg); opacity: 0; }
+    }
+    @keyframes shoot2 {
+      0%   { transform: translate(0, 0) rotate(22deg); opacity: 0; }
+      2%   { opacity: 1; }
+      7%   { transform: translate(115vw, 30vh) rotate(22deg); opacity: 0; }
+      100% { transform: translate(115vw, 30vh) rotate(22deg); opacity: 0; }
+    }
+    @keyframes shoot3 {
+      0%   { transform: translate(0, 0) rotate(10deg); opacity: 0; }
+      3%   { opacity: 1; }
+      9%   { transform: translate(115vw, 15vh) rotate(10deg); opacity: 0; }
+      100% { transform: translate(115vw, 15vh) rotate(10deg); opacity: 0; }
     }
     .wrap {
       max-width: 720px;
@@ -179,6 +282,11 @@
   </style>
 </head>
 <body>
+  <div class="stars-bg"></div>
+  <div class="nebula"></div>
+  <div class="shooting-star s1"></div>
+  <div class="shooting-star s2"></div>
+  <div class="shooting-star s3"></div>
 
   <div class="wrap">
     
