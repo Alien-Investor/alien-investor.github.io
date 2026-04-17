@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Alien Investor 👽</title>
   <style>
+    html, body { overflow-x: hidden; }
     body {
       background-color: #000;
       color: #fff;
@@ -12,6 +13,115 @@
       text-align: center;
       margin: 0;
       padding-bottom: 20px;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* --- STERNENHIMMEL --- */
+    .stars-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: radial-gradient(ellipse at top, #0a0f1e 0%, #000 60%);
+      z-index: -2;
+    }
+    .stars-bg::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image:
+        radial-gradient(1px 1px at 10% 15%, #fff, transparent),
+        radial-gradient(1px 1px at 25% 40%, #fff, transparent),
+        radial-gradient(1px 1px at 40% 20%, #fff, transparent),
+        radial-gradient(2px 2px at 55% 60%, #00ffcc, transparent),
+        radial-gradient(1px 1px at 70% 35%, #fff, transparent),
+        radial-gradient(1px 1px at 85% 75%, #fff, transparent),
+        radial-gradient(1px 1px at 15% 80%, #fff, transparent),
+        radial-gradient(1px 1px at 35% 90%, #fff, transparent),
+        radial-gradient(1px 1px at 60% 10%, #fff, transparent),
+        radial-gradient(1px 1px at 90% 50%, #fff, transparent),
+        radial-gradient(1px 1px at 5% 55%, #fff, transparent),
+        radial-gradient(2px 2px at 75% 25%, #00ffcc, transparent);
+      animation: twinkle 6s ease-in-out infinite alternate;
+    }
+    @keyframes twinkle {
+      0% { opacity: 0.4; } 100% { opacity: 0.9; }
+    }
+
+    /* --- STERNSCHNUPPEN --- */
+    .shooting-star {
+      position: fixed;
+      width: 2px; height: 2px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.7);
+      z-index: -1;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .shooting-star::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 120px; height: 1px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.8), rgba(0,255,204,0.4), transparent);
+      transform: translateX(-120px);
+    }
+    .shooting-star.s1 { top: 12%; left: -5%; animation: shoot1 11s linear infinite; animation-delay: 3s; }
+    .shooting-star.s2 { top: 28%; left: -5%; animation: shoot2 17s linear infinite; animation-delay: 9s; }
+    .shooting-star.s3 { top: 50%; left: -5%; animation: shoot3 23s linear infinite; animation-delay: 15s; }
+    @keyframes shoot1 {
+      0%   { transform: translate(0, 0) rotate(15deg); opacity: 0; }
+      3%   { opacity: 1; }
+      8%   { transform: translate(110vw, 20vh) rotate(15deg); opacity: 0; }
+      100% { transform: translate(110vw, 20vh) rotate(15deg); opacity: 0; }
+    }
+    @keyframes shoot2 {
+      0%   { transform: translate(0, 0) rotate(22deg); opacity: 0; }
+      2%   { opacity: 1; }
+      7%   { transform: translate(115vw, 30vh) rotate(22deg); opacity: 0; }
+      100% { transform: translate(115vw, 30vh) rotate(22deg); opacity: 0; }
+    }
+    @keyframes shoot3 {
+      0%   { transform: translate(0, 0) rotate(10deg); opacity: 0; }
+      3%   { opacity: 1; }
+      9%   { transform: translate(115vw, 15vh) rotate(10deg); opacity: 0; }
+      100% { transform: translate(115vw, 15vh) rotate(10deg); opacity: 0; }
+    }
+
+    /* --- UFO --- */
+    .ufo {
+      position: fixed;
+      top: 38%;
+      right: -80px;
+      width: 72px; height: 36px;
+      z-index: -1;
+      filter: drop-shadow(0 0 8px rgba(0, 255, 204, 0.55));
+      animation: ufo-fly 55s linear infinite;
+      animation-delay: 25s;
+      pointer-events: none;
+      opacity: 0;
+    }
+    @keyframes ufo-fly {
+      0%   { transform: translate(0, 0);           opacity: 0; }
+      2%   {                                       opacity: 1; }
+      10%  { transform: translate(-30vw, -3vh); }
+      22%  { transform: translate(-70vw, 2vh); }
+      34%  { transform: translate(-110vw, -2vh);   opacity: 1; }
+      37%  { transform: translate(-120vw, -2vh);   opacity: 0; }
+      100% { transform: translate(-120vw, -2vh);   opacity: 0; }
+    }
+    .ufo-light { animation: ufo-blink 1.2s infinite; transform-origin: center; }
+    .ufo-light:nth-child(1) { animation-delay: 0.0s; }
+    .ufo-light:nth-child(2) { animation-delay: 0.15s; }
+    .ufo-light:nth-child(3) { animation-delay: 0.30s; }
+    .ufo-light:nth-child(4) { animation-delay: 0.45s; }
+    .ufo-light:nth-child(5) { animation-delay: 0.60s; }
+    .ufo-light:nth-child(6) { animation-delay: 0.75s; }
+    @keyframes ufo-blink {
+      0%, 100% { opacity: 1; }
+      50%      { opacity: 0.25; }
     }
 
     /* --- HEADER / BANNER --- */
@@ -100,6 +210,40 @@
   </style>
 </head>
 <body>
+  <div class="stars-bg"></div>
+  <div class="shooting-star s1"></div>
+  <div class="shooting-star s2"></div>
+  <div class="shooting-star s3"></div>
+
+  <svg class="ufo" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <radialGradient id="ufo-dome" cx="50%" cy="80%" r="60%">
+        <stop offset="0%" stop-color="#5fffe0"/>
+        <stop offset="60%" stop-color="#1a3a38"/>
+        <stop offset="100%" stop-color="#0a1a1e"/>
+      </radialGradient>
+      <linearGradient id="ufo-body" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#4a5a5a"/>
+        <stop offset="50%" stop-color="#2a3638"/>
+        <stop offset="100%" stop-color="#101818"/>
+      </linearGradient>
+    </defs>
+    <!-- Kuppel -->
+    <path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/>
+    <!-- Untertasse Oberseite -->
+    <ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body)" stroke="#00ffcc" stroke-width="0.4"/>
+    <!-- Mittelband -->
+    <ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/>
+    <!-- Untertasse Unterseite -->
+    <ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/>
+    <!-- Lichter -->
+    <circle class="ufo-light" cx="20" cy="20.5" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="27" cy="21.2" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="34" cy="21.6" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="41" cy="21.6" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="48" cy="21.2" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="55" cy="20.5" r="1.3" fill="#fff"/>
+  </svg>
 
   <header>
     <img src="AlienInvestor_space_profil.png" alt="Profilbild" class="profil">
