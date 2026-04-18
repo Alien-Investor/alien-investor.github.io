@@ -471,9 +471,31 @@
         <div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px;">
           <span class="price">Richtpreis: ab 5 €</span>
           <span style="display:inline-block; padding: 6px 12px; border: 1px solid #555; border-radius: 6px; color: #aaa; font-size: 0.9em;">
-            Aktuelle Ausgabe: <strong style="color:#00ffcc;">v2.1</strong> &middot; Stand 16.04.2026
+            Aktuelle Ausgabe: <strong style="color:#00ffcc;">v2.2</strong> &middot; Stand 18.04.2026
           </span>
         </div>
+      </div>
+    </div>
+
+    <!-- EN EDITION -->
+    <div id="en" style="border-top: 1px solid #1a3a3a; margin: 40px 0 30px 0; padding-top: 30px;">
+      <h2 style="margin-top:0;">English Edition</h2>
+    </div>
+
+    <div class="hero">
+      <img src="grapheneos-handbook-cover-en.jpg" alt="Cover GrapheneOS Handbook English">
+      <div class="hero-text">
+        <h3>GrapheneOS: Android in the Age of Surveillance</h3>
+        <p>The complete English edition – installation, apps without Google, Proton ecosystem, Shelter, Termux encryption and more.</p>
+        <div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px;">
+          <span class="price">Suggested price: from $5</span>
+          <span style="display:inline-block; padding: 6px 12px; border: 1px solid #555; border-radius: 6px; color: #aaa; font-size: 0.9em;">
+            Current edition: <strong style="color:#00ffcc;">v1.1</strong> &middot; April 18, 2026
+          </span>
+        </div>
+        <p style="color:#888; font-size:0.85em; margin-top:10px;">
+          Same payment methods – write <strong style="color:#00ffcc;">Book GrapheneOS English</strong> as subject.
+        </p>
       </div>
     </div>
 
@@ -514,63 +536,128 @@
       </a>
     </div>
 
-    <h2>📬 So bekommst du das Buch</h2>
-    <div class="flow">
-      <ol>
-        <li>
-          <strong>Zahle</strong> mit der Methode deiner Wahl (Lightning, Onchain oder Ko-fi).
-        </li>
-        <li>
-          <strong>Schicke eine E-Mail</strong> an
-          <code>kontakt@alien-investor.org</code><br>
-          <span style="color:#aaa; font-size:0.9em;">
-            Betreff: <strong>Buch GrapheneOS</strong><br>
-            Inhalt: Zahlungsart + ungefähre Uhrzeit (bei Onchain gerne TxID).
-          </span>
-        </li>
-        <li>
-          <strong>Bundle per Antwort:</strong> Du bekommst innerhalb von 24 Stunden einen
-          Ende-zu-Ende-verschlüsselten <strong>Proton-Drive-Link</strong> mit Passwort —
-          gilt 48 Stunden und ist nur für dich.
-          Lade dort EPUB + MOBI + AZW3 + PDF als ZIP herunter.
-        </li>
-      </ol>
-      <p style="color:#aaa; font-size:0.9em; margin-top: 1em;">
-        Warum so? Proton Drive verschlüsselt die Datei Ende-zu-Ende. Der Schlüssel liegt im Link
-        und Passwort — Proton selbst kann nicht reinsehen. Nach Ablauf wird der Link ungültig.
-      </p>
+    <!-- LANGUAGE TOGGLE -->
+    <div style="display:flex; gap:10px; margin: 2em 0 1em 0;">
+      <button id="btn-de" class="btn" style="min-width:0; padding:10px 22px; font-size:0.95rem;"
+        onclick="setLang('de')">DE</button>
+      <button id="btn-en" class="btn" style="min-width:0; padding:10px 22px; font-size:0.95rem; background:#000; color:#555; border-color:#333;"
+        onclick="setLang('en')">EN</button>
     </div>
 
-    <h2>🔄 Lebenslange Updates</h2>
-    <div class="flow" style="border-left-color: #ffaa00;">
-      <p style="margin-top:0;">
-        Dieses Buch ist <strong>ein lebendiges Handbuch</strong>. GrapheneOS entwickelt sich weiter,
-        Apps ändern sich, neue Werkzeuge kommen dazu — die nächste Ausgabe wird folgen.
-      </p>
-      <p>
-        <strong>Wenn eine neue Version erscheint:</strong>
-        Schreibe einfach noch einmal an
-        <code>kontakt@alien-investor.org</code> mit dem Hinweis,
-        dass du die neue Ausgabe willst. Du bekommst sie <strong>kostenlos</strong> als neuen
-        Proton-Drive-Link. Kein Mehrkauf, keine Plattform-Bindung.
-      </p>
-      <p style="color:#aaa; font-size:0.9em; margin-bottom:0;">
-        Das ist mein Versprechen an Direktkäufer — anders als bei Amazon, wo du für jede neue
-        Auflage erneut zahlen müsstest. Hier zahlst du einmal und bekommst alle Updates.
-      </p>
+    <!-- DE INFO -->
+    <div id="info-de">
+      <h2>📬 So bekommst du das Buch</h2>
+      <div class="flow">
+        <ol>
+          <li><strong>Zahle</strong> mit der Methode deiner Wahl (Lightning, Onchain oder Ko-fi).</li>
+          <li>
+            <strong>Schicke eine E-Mail</strong> an <code>kontakt@alien-investor.org</code><br>
+            <span style="color:#aaa; font-size:0.9em;">
+              Betreff: <strong>Buch GrapheneOS</strong><br>
+              Inhalt: Zahlungsart + ungefähre Uhrzeit (bei Onchain gerne TxID).
+            </span>
+          </li>
+          <li>
+            <strong>Bundle per Antwort:</strong> Du bekommst innerhalb von 24 Stunden einen
+            Ende-zu-Ende-verschlüsselten <strong>Proton-Drive-Link</strong> mit Passwort —
+            gilt 48 Stunden und ist nur für dich.
+            Lade dort EPUB + MOBI + AZW3 + PDF als ZIP herunter.
+          </li>
+        </ol>
+        <p style="color:#aaa; font-size:0.9em; margin-top: 1em;">
+          Warum so? Proton Drive verschlüsselt die Datei Ende-zu-Ende. Der Schlüssel liegt im Link
+          und Passwort — Proton selbst kann nicht reinsehen. Nach Ablauf wird der Link ungültig.
+        </p>
+      </div>
+
+      <h2>🔄 Lebenslange Updates</h2>
+      <div class="flow" style="border-left-color: #ffaa00;">
+        <p style="margin-top:0;">
+          Dieses Buch ist <strong>ein lebendiges Handbuch</strong>. GrapheneOS entwickelt sich weiter,
+          Apps ändern sich, neue Werkzeuge kommen dazu — die nächste Ausgabe wird folgen.
+        </p>
+        <p>
+          <strong>Wenn eine neue Version erscheint:</strong>
+          Schreibe einfach noch einmal an <code>kontakt@alien-investor.org</code> mit dem Hinweis,
+          dass du die neue Ausgabe willst. Du bekommst sie <strong>kostenlos</strong> als neuen
+          Proton-Drive-Link. Kein Mehrkauf, keine Plattform-Bindung.
+        </p>
+        <p style="color:#aaa; font-size:0.9em; margin-bottom:0;">
+          Das ist mein Versprechen an Direktkäufer — anders als bei Amazon, wo du für jede neue
+          Auflage erneut zahlen müsstest. Hier zahlst du einmal und bekommst alle Updates.
+        </p>
+      </div>
+
+      <div class="transparenz">
+        <strong>Was du bekommst – und was nicht:</strong><br><br>
+        ✅ <strong>Kein DRM</strong> – die Dateien sind wirklich deins.<br>
+        ✅ <strong>Vier Formate</strong> – EPUB (Kobo/Tolino/Apple), MOBI (alte Kindles, z.B. Kindle 2), AZW3 (aktuelle Kindles), PDF (Desktop/Drucken).<br>
+        ✅ <strong>Lebenslange Updates</strong> – jede neue Ausgabe gratis, einfach kurze Mail.<br>
+        ✅ <strong>E2E-verschlüsselter Lieferweg</strong> via Proton Drive mit Passwort + Ablauf.<br>
+        ❌ <strong>Keine Rechnung auf Firma</strong> – wenn du eine brauchst: kurz in der Mail erwähnen, dann klären wir's.<br><br>
+        <em style="color:#aaa;">
+          Dieser Weg ist bewusst manuell. Keine Plattform, kein Tracking, keine Cookies –
+          Alien-Investor-Niveau. Bei hohem Volumen automatisieren wir das später.
+        </em>
+      </div>
     </div>
 
-    <div class="transparenz">
-      <strong>Was du bekommst – und was nicht:</strong><br><br>
-      ✅ <strong>Kein DRM</strong> – die Dateien sind wirklich deins.<br>
-      ✅ <strong>Vier Formate</strong> – EPUB (Kobo/Tolino/Apple), MOBI (alte Kindles, z.B. Kindle 2), AZW3 (aktuelle Kindles), PDF (Desktop/Drucken).<br>
-      ✅ <strong>Lebenslange Updates</strong> – jede neue Ausgabe gratis, einfach kurze Mail.<br>
-      ✅ <strong>E2E-verschlüsselter Lieferweg</strong> via Proton Drive mit Passwort + Ablauf.<br>
-      ❌ <strong>Keine Rechnung auf Firma</strong> – wenn du eine brauchst: kurz in der Mail erwähnen, dann klären wir's.<br><br>
-      <em style="color:#aaa;">
-        Dieser Weg ist bewusst manuell. Keine Plattform, kein Tracking, keine Cookies –
-        Alien-Investor-Niveau. Bei hohem Volumen automatisieren wir das später.
-      </em>
+    <!-- EN INFO -->
+    <div id="info-en" style="display:none;">
+      <h2>📬 How to get the book</h2>
+      <div class="flow">
+        <ol>
+          <li><strong>Pay</strong> with the method of your choice (Lightning, Onchain or Ko-fi).</li>
+          <li>
+            <strong>Send an email</strong> to <code>kontakt@alien-investor.org</code><br>
+            <span style="color:#aaa; font-size:0.9em;">
+              Subject: <strong>Book GrapheneOS English</strong><br>
+              Content: payment method + approximate time (for Onchain, the TxID is helpful).
+            </span>
+          </li>
+          <li>
+            <strong>Bundle by reply:</strong> Within 24 hours you will receive an
+            end-to-end-encrypted <strong>Proton Drive link</strong> with a password —
+            valid for 48 hours and created just for you.
+            Download EPUB + MOBI + AZW3 + PDF as a ZIP file.
+          </li>
+        </ol>
+        <p style="color:#aaa; font-size:0.9em; margin-top: 1em;">
+          Why this way? Proton Drive encrypts the file end-to-end. The key is in the link
+          and password — Proton itself cannot see the file. After expiry, the link becomes invalid.
+        </p>
+      </div>
+
+      <h2>🔄 Lifetime Updates</h2>
+      <div class="flow" style="border-left-color: #ffaa00;">
+        <p style="margin-top:0;">
+          This book is <strong>a living handbook</strong>. GrapheneOS keeps evolving,
+          apps change, new tools emerge — the next edition will follow.
+        </p>
+        <p>
+          <strong>When a new version is released:</strong>
+          Simply write to <code>kontakt@alien-investor.org</code> again and mention
+          that you want the new edition. You will receive it <strong>for free</strong> as a new
+          Proton Drive link. No repurchase, no platform lock-in.
+        </p>
+        <p style="color:#aaa; font-size:0.9em; margin-bottom:0;">
+          This is my promise to direct buyers — unlike Amazon, where you would need to pay again
+          for each new edition. Here you pay once and get all updates.
+        </p>
+      </div>
+
+      <div class="transparenz">
+        <strong>What you get – and what you don't:</strong><br><br>
+        ✅ <strong>No DRM</strong> – the files are truly yours.<br>
+        ✅ <strong>Four formats</strong> – EPUB (Kobo/Tolino/Apple Books), MOBI (older Kindles), AZW3 (current Kindles), PDF (desktop/printing).<br>
+        ✅ <strong>Lifetime updates</strong> – every new edition free, just a short email.<br>
+        ✅ <strong>E2E-encrypted delivery</strong> via Proton Drive with password + expiry.<br>
+        ❌ <strong>No invoice for companies</strong> – if you need one: mention it in the email and we'll sort it out.<br><br>
+        <em style="color:#aaa;">
+          This process is intentionally manual. No platform, no tracking, no cookies –
+          Alien Investor level. If volume increases, we'll automate later.
+        </em>
+      </div>
     </div>
 
   </div>
@@ -586,6 +673,34 @@
   </footer>
 
   <script>
+    function setLang(lang) {
+      const de = document.getElementById('info-de');
+      const en = document.getElementById('info-en');
+      const btnDe = document.getElementById('btn-de');
+      const btnEn = document.getElementById('btn-en');
+      if (lang === 'en') {
+        de.style.display = 'none';
+        en.style.display = 'block';
+        btnEn.style.background = '#00ffcc';
+        btnEn.style.color = '#000';
+        btnEn.style.borderColor = '#00ffcc';
+        btnDe.style.background = '#000';
+        btnDe.style.color = '#555';
+        btnDe.style.borderColor = '#333';
+      } else {
+        en.style.display = 'none';
+        de.style.display = 'block';
+        btnDe.style.background = '#00ffcc';
+        btnDe.style.color = '#000';
+        btnDe.style.borderColor = '#00ffcc';
+        btnEn.style.background = '#000';
+        btnEn.style.color = '#555';
+        btnEn.style.borderColor = '#333';
+      }
+    }
+
+    if (window.location.hash === '#en') setLang('en');
+
     function togglePanel(id){
       const ln = document.getElementById('ln');
       const btc = document.getElementById('btc');
