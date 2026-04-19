@@ -192,9 +192,28 @@
   </div>
 
   <div class="like-button">
-    <button id="likeButton">👍 Gefällt mir</button> <span id="likeCount">0</span> <span style="color:#bbb; font-size: 0.9em;">(Lokal)</span>
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-8e4f6e)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Gefällt mir</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
   </div>
-  <script>(function(){const k=window.location.pathname+"-likes";const b=document.getElementById('likeButton');const s=document.getElementById('likeCount');let c=parseInt(localStorage.getItem(k)||"0",10);s.textContent=c;b.addEventListener('click',function(){c++;s.textContent=c;localStorage.setItem(k,String(c));b.disabled=true;b.textContent="Danke! 👽";b.style.borderColor="#444";b.style.color="#888";});})();</script>
+
+  <script>
+    (function() {
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      const btn = document.getElementById('likeButton');
+      const msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
+        btn.disabled = true;
+        btn.textContent = '✓ Danke!';
+        msg.textContent = 'Freut mich, dass dir der Artikel gefallen hat.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '✓ Danke!';
+        msg.textContent = 'Freut mich, dass dir der Artikel gefallen hat.';
+      });
+    })();
+  </script>
 
   <div class="back-links">
     <a href="bitcoin-analysen.html" style="font-size: 1.1em;"><svg style="width:0.9em;height:0.9em;vertical-align:-0.12em;filter:drop-shadow(0 0 2px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="7" y1="3" x2="7" y2="7" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><rect x="4" y="7" width="6" height="9" rx="1" fill="#00ffcc"/><line x1="7" y1="16" x2="7" y2="21" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><line x1="16" y1="7" x2="16" y2="11" stroke="#00cc88" stroke-width="1.5" stroke-linecap="round"/><rect x="13" y="11" width="6" height="12" rx="1" fill="none" stroke="#00cc88" stroke-width="1.5"/><line x1="16" y1="23" x2="16" y2="27" stroke="#00cc88" stroke-width="1.5" stroke-linecap="round"/><line x1="25" y1="4" x2="25" y2="9" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><rect x="22" y="9" width="6" height="11" rx="1" fill="#00ffcc"/><line x1="25" y1="20" x2="25" y2="26" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/></svg> Zurück zu den Bitcoin-Analysen</a>

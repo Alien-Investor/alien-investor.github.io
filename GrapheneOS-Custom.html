@@ -276,28 +276,25 @@
   </article>
 
   <div class="like-button">
-    <button id="likeButton">👍 Gefällt mir</button>
-    <span id="likeCount">0</span>
-    <span style="color:#bbb; font-size: 0.9em;">(Lokal)</span>
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-287ef5)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Gefällt mir</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
   </div>
 
   <script>
     (function() {
-      const storageKey = window.location.pathname + "-likes";
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
       const btn = document.getElementById('likeButton');
-      const span = document.getElementById('likeCount');
-
-      let count = parseInt(localStorage.getItem(storageKey) || "0", 10);
-      span.textContent = count;
-
-      btn.addEventListener('click', function() {
-        count += 1;
-        span.textContent = count;
-        localStorage.setItem(storageKey, String(count));
+      const msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
         btn.disabled = true;
-        btn.textContent = "Danke! 👽";
-        btn.style.borderColor = "#444";
-        btn.style.color = "#888";
+        btn.textContent = '✓ Danke!';
+        msg.textContent = 'Freut mich, dass dir der Artikel gefallen hat.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '✓ Danke!';
+        msg.textContent = 'Freut mich, dass dir der Artikel gefallen hat.';
       });
     })();
   </script>
