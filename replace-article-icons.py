@@ -32,7 +32,8 @@ SKIP = {
     'aktien-analysen.html', 'bitcoin-analysen.html',
 }
 
-BRAND_EMOJIS = {'🛸', '👽', '⚡', '📡', '📊', '👉', '💥', '🌟', '🛡️', '📕'}
+BRAND_EMOJIS = {'🛸', '👽', '⚡', '📡', '📊', '👉', '💥', '🌟', '🛡️', '📕',
+                '📈', '🔐', '🔒', '🔑'}
 
 # ── SVG-Bausteine ─────────────────────────────────────────────────────────────
 
@@ -148,6 +149,20 @@ def star_svg():
     )
 
 
+def key_svg():
+    """Schlüssel-SVG — für 🔑 (Crypto-Key, Nostr)."""
+    s = 'width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);'
+    return (
+        f'<svg style="{s}" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">'
+        f'<circle cx="10" cy="18" r="7" fill="none" stroke="#00ffcc" stroke-width="1.8"/>'
+        f'<circle cx="10" cy="18" r="3" fill="#00ffcc" opacity="0.2"/>'
+        f'<line x1="17" y1="18" x2="32" y2="18" stroke="#00ffcc" stroke-width="2" stroke-linecap="round"/>'
+        f'<line x1="24" y1="18" x2="24" y2="23" stroke="#00ffcc" stroke-width="1.8" stroke-linecap="round"/>'
+        f'<line x1="29" y1="18" x2="29" y2="23" stroke="#00ffcc" stroke-width="1.8" stroke-linecap="round"/>'
+        f'</svg>'
+    )
+
+
 def book_svg():
     """Buch-SVG — für 📕 in Affiliate-Box (ohne Gradienten-IDs, konfliktfrei)."""
     s = 'width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);'
@@ -176,7 +191,11 @@ def replace_emojis_in_text(text, fid, link=False):
     text = text.replace('👉', star_svg())
     text = text.replace('💥', lightning_svg(link=False))
     text = text.replace('🌟', lightning_svg(link=False))
+    text = text.replace('📈', lightning_svg(link=False))
     text = text.replace('🛡️', satellite_svg(link=False))
+    text = text.replace('🔐', satellite_svg(link=False))
+    text = text.replace('🔒', satellite_svg(link=False))
+    text = text.replace('🔑', key_svg())
     text = text.replace('📕', book_svg())
     return text
 
@@ -262,10 +281,10 @@ def process_file(filepath):
         flags=re.DOTALL
     )
 
-    # <p>...</p> — nur 👉 (Link-Pfeile im Fließtext)
+    # <p>...</p> — alle Brand-Emojis im Fließtext (👽, 👉, 🔒 usw.)
     def replace_p(m):
         full = m.group(0)
-        if '👉' not in full:
+        if not has_brand_emoji(full):
             return full
         patched = patch_tag_content(full, fid, link=False)
         if patched != full:
@@ -275,6 +294,23 @@ def process_file(filepath):
     content = re.sub(
         r'<p(?:\s[^>]*)?>.*?</p>',
         replace_p,
+        content,
+        flags=re.DOTALL
+    )
+
+    # <blockquote>...</blockquote> — 👽 in Zitaten
+    def replace_blockquote(m):
+        full = m.group(0)
+        if not has_brand_emoji(full):
+            return full
+        patched = patch_tag_content(full, fid, link=False)
+        if patched != full:
+            changed_lines.append(('BQ', full.strip()[:80]))
+        return patched
+
+    content = re.sub(
+        r'<blockquote(?:\s[^>]*)?>.*?</blockquote>',
+        replace_blockquote,
         content,
         flags=re.DOTALL
     )
