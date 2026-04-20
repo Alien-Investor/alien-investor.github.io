@@ -32,7 +32,7 @@ SKIP = {
     'aktien-analysen.html', 'bitcoin-analysen.html',
 }
 
-BRAND_EMOJIS = {'🛸', '👽', '⚡', '📡', '📊'}
+BRAND_EMOJIS = {'🛸', '👽', '⚡', '📡', '📊', '👉', '💥', '🌟', '🛡️', '📕'}
 
 # ── SVG-Bausteine ─────────────────────────────────────────────────────────────
 
@@ -137,6 +137,32 @@ def candlestick_svg(link=False):
     )
 
 
+def star_svg():
+    """4-zackiger Stern — für 👉 Link-Pfeile und Bullets."""
+    return (
+        '<svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" '
+        'viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">'
+        '<path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" '
+        'fill="#00ffcc" opacity="0.85"/>'
+        '</svg>'
+    )
+
+
+def book_svg():
+    """Buch-SVG — für 📕 in Affiliate-Box (ohne Gradienten-IDs, konfliktfrei)."""
+    s = 'width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);'
+    return (
+        f'<svg style="{s}" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">'
+        f'<rect x="4" y="4" width="5" height="28" rx="1" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.7"/>'
+        f'<rect x="9" y="4" width="22" height="28" rx="1" fill="#1a3a38" stroke="#00ffcc" stroke-width="0.7"/>'
+        f'<line x1="13" y1="12" x2="27" y2="12" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/>'
+        f'<line x1="13" y1="16" x2="27" y2="16" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/>'
+        f'<line x1="13" y1="20" x2="27" y2="20" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/>'
+        f'<line x1="13" y1="24" x2="22" y2="24" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/>'
+        f'</svg>'
+    )
+
+
 # ── Ersetzungs-Logik ──────────────────────────────────────────────────────────
 
 def replace_emojis_in_text(text, fid, link=False):
@@ -146,6 +172,12 @@ def replace_emojis_in_text(text, fid, link=False):
     text = text.replace('⚡', lightning_svg(link=link))
     text = text.replace('📡', satellite_svg(link=link))
     text = text.replace('📊', candlestick_svg(link=link))
+    # Affiliate-Box + Link-Pfeile
+    text = text.replace('👉', star_svg())
+    text = text.replace('💥', lightning_svg(link=False))
+    text = text.replace('🌟', lightning_svg(link=False))
+    text = text.replace('🛡️', satellite_svg(link=False))
+    text = text.replace('📕', book_svg())
     return text
 
 
@@ -209,6 +241,40 @@ def process_file(filepath):
     content = re.sub(
         r'<a(?:\s[^>]*)?>.*?</a>',
         replace_link,
+        content,
+        flags=re.DOTALL
+    )
+
+    # <li>...</li> — Affiliate-Box Bullets + 👉
+    def replace_li(m):
+        full = m.group(0)
+        if not has_brand_emoji(full):
+            return full
+        patched = patch_tag_content(full, fid, link=False)
+        if patched != full:
+            changed_lines.append(('LI', full.strip()[:80]))
+        return patched
+
+    content = re.sub(
+        r'<li(?:\s[^>]*)?>.*?</li>',
+        replace_li,
+        content,
+        flags=re.DOTALL
+    )
+
+    # <p>...</p> — nur 👉 (Link-Pfeile im Fließtext)
+    def replace_p(m):
+        full = m.group(0)
+        if '👉' not in full:
+            return full
+        patched = patch_tag_content(full, fid, link=False)
+        if patched != full:
+            changed_lines.append(('P', full.strip()[:80]))
+        return patched
+
+    content = re.sub(
+        r'<p(?:\s[^>]*)?>.*?</p>',
+        replace_p,
         content,
         flags=re.DOTALL
     )
