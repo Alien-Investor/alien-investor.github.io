@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Great Lockdown: How Android 2026 Buries Free Sideloading | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Android shuts the gates: From 2026/2027, 'sideloading' will be massively restricted through mandatory identity verification and the 'Advanced Flow'. What this means for F-Droid, Nostr and GrapheneOS.">
+  <link rel="canonical" href="/en/Android-Zwang.html">
+  <link rel="alternate" hreflang="de" href="/Android-Zwang.html">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 0 15px 20px 15px; /* Mobile-Optimierung */
+    }
+
+    /* --- TYPOGRAFIE --- */
+    h1, h2, h3 {
+      color: #00ffcc;
+    }
+    h1 {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    /* --- LINKS (Neon-Glow) --- */
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc; /* Der Alien-Effekt */
+    }
+
+    /* --- STANDARD ELEMENTE --- */
+    code {
+      background-color: #111;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      color: #0f0;
+      font-family: monospace;
+    }
+    em { color: #ccc; }
+
+    .byline {
+      margin-top: -0.8em;
+      margin-bottom: 2em;
+      color: #ccc;
+      font-style: italic;
+      text-align: center;
+    }
+
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
+
+    /* --- BOXEN --- */
+    .box {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 1em; }
+
+    .recommendation-box {
+      margin: 2em 0;
+      padding: 1em;
+      border: 1px dashed #00ffcc;
+      border-radius: 8px;
+      text-align: center;
+      background-color: #050505;
+    }
+    .recommendation-box h3 {
+      margin-top: 0;
+      font-size: 1.1em;
+      color: #00ffcc;
+    }
+
+    /* --- LIKE BUTTON --- */
+    .like-button {
+      margin: 3em 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+    }
+    .like-button button {
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+    .like-button button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
+    }
+
+    /* --- NAVIGATION --- */
+    .top-nav {
+      padding: 10px 0;
+      font-size: 0.9em;
+    }
+    .back-links {
+      margin-top: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="/en/index.html">← Back to Mission Control</a>
+  </div>
+
+  <h1>The Great Lockdown: How Android 2026 Buries Free Sideloading</h1>
+  <p class="byline"><em>by Alien Investor</em></p>
+
+  <article id="content">
+    <p>
+      Android was once the "open" system. If you wanted an app, you downloaded the APK, toggled
+      "Install unknown apps" and you were in. That era is over.
+      Google is quietly building a fundamental architectural shift that doesn't make free software installation
+      technically impossible — it just buries it under so many warnings and friction points that it
+      effectively dies for normal users.
+    </p>
+    <p>
+      The codename for this operation could be "The Great Lockdown". The weapons:
+      <strong>Developer Verification</strong> and the so-called <strong>Advanced Flow</strong>.
+      Let's look at what's coming in 2026/2027, why F-Droid and Nostr have a problem, and why
+      GrapheneOS is becoming the last fortress.
+    </p>
+
+    <h2>1. The Paradigm Shift: From "Unknown" to "Registered"</h2>
+    <p>
+      Until now, Android operated on a simple principle: trust is the user's call. If you trust a file, the OS installs it.
+      The new model inverts that: trust is granted centrally.
+    </p>
+    <p>
+      Starting September 2026 (pilot regions: Brazil, Indonesia, Singapore &amp; Thailand — global rollout planned for 2027+), apps
+      on certified Android devices must be <strong>registered</strong> and tied to a <strong>verified developer identity</strong>.
+      This isn't just about a cryptographic signature (is the file intact?) — it's about bureaucracy (who are you?).
+    </p>
+    <ul>
+      <li><strong>The mandate:</strong> Developers must register their package names (and associated app signing keys) with Google.</li>
+      <li><strong>The data required:</strong> Name, address, email, phone number; for companies additionally website verification, a D-U-N-S number, and depending on the country, organizational documents.</li>
+      <li><strong>The fee:</strong> One-time $25 USD for "Full Distribution" (a "Limited Distribution" tier for hobbyists/students is announced but comes with restrictions).</li>
+    </ul>
+    <p>
+      Anyone who opts out of this regime entirely — pseudonymous cypherpunks, developers who refuse to register — will have their app
+      classified as "unregistered". And on certified devices, unregistered apps will be blocked by default
+      or funneled into a high-risk installation gauntlet.
+    </p>
+
+    <h2>2. "Advanced Flow" — The Weapon Is UX</h2>
+    <p>
+      Google won't ban sideloading — that would be antitrust suicide. Instead they're using
+      <strong>"Weaponized UX"</strong>.
+    </p>
+    <p>
+      When you try to install a non-registered app (say, an APK from GitHub or an alternative store),
+      you'll land in the <strong>Advanced Flow</strong>. This is no longer a simple "Yes/No" dialog —
+      it's a gauntlet:
+    </p>
+    <ul>
+      <li><strong>Scare screens:</strong> Warning messages that visually lump legitimate software in with fraud and malware.</li>
+      <li><strong>Friction:</strong> Additional confirmation steps and "anti-scam" safeguards (specifics may vary by version).</li>
+      <li><strong>Identity signaling:</strong> The system constantly signals: "This is unsafe because Google hasn't verified or registered the author."</li>
+    </ul>
+    <p>
+      The goal is clear: power users still have an escape hatch, but average users will be bombarded with
+      warnings until they give up and crawl back to the Play Store.
+    </p>
+
+    <h2>3. The Victims: F-Droid and Nostr (Zapstore)</h2>
+    <p>
+      This change hits alternative ecosystems at their core.
+    </p>
+
+    <h3>F-Droid: The Signature Problem</h3>
+    <p>
+      F-Droid has historically compiled many apps itself and signed them with <em>its own</em> keys. That was a
+      security feature. Under the new Google model it becomes a liability:
+      F-Droid would have to register those keys/packages as an organization. If Google suspends or restricts
+      the F-Droid account, thousands of apps would suddenly become "unregistered" — installable only through the
+      terrorizing Advanced Flow.
+    </p>
+
+    <h3>Zapstore (Nostr): The Last-Mile Problem</h3>
+    <p>
+      Decentralized stores like Zapstore (built on the Nostr protocol) are censorship-resistant at the <em>distribution</em> layer.
+      Nobody can stop you from finding the app. But Google controls the <strong>installer</strong>
+      on the device.
+    </p>
+    <ul>
+      <li>The installer needs the <code>REQUEST_INSTALL_PACKAGES</code> permission.</li>
+      <li>Google can heuristically classify installers that repeatedly load "unregistered" APKs as droppers (malware distributors).</li>
+      <li>Updates become hell: if every update requires running the Advanced Flow, convenience dies.</li>
+    </ul>
+
+    <h2>4. The Fortress GrapheneOS: The Only Way Out?</h2>
+    <p>
+      In this dystopian roadmap, <strong>GrapheneOS</strong> transforms from a pure privacy tool
+      into a structural necessity for digital sovereignty.
+    </p>
+    <p>
+      Why? GrapheneOS is based on AOSP (Android Open Source Project) but is not bound to Google's certification backend.
+      The operating system does <strong>not</strong> enforce a check against Google's developer database as a precondition
+      for allowing installation. On GrapheneOS, sideloading remains what it should be: your decision.
+    </p>
+
+    <h3>The Final Boss: Play Integrity API</h3>
+    <p>
+      But GrapheneOS has an enemy too: banking apps and government software that enforce the <strong>Play Integrity API</strong>
+      (specifically <code>MEETS_DEVICE_INTEGRITY</code> or <code>MEETS_STRONG_INTEGRITY</code>). These signals are tied to "genuine/certified device" criteria
+      and are routinely used in practice as Google certification filters.
+    </p>
+    <p>
+      GrapheneOS typically only passes <code>MEETS_BASIC_INTEGRITY</code>; <code>MEETS_DEVICE_INTEGRITY</code> and <code>MEETS_STRONG_INTEGRITY</code> are out of reach
+      because those tiers depend on Google certification and the associated attestation chains. The result: the app refuses to work.
+      The battle shifts from "can I install it?" to "am I allowed to run it?".
+    </p>
+
+    <blockquote>
+      "The future of Android freedom doesn't lie in asking Google to stay open.
+      It lies in owning hardware and software that don't belong to Google."
+    </blockquote>
+
+    <h3>A Glimmer of Hope: The OEM Partnership 2026/2027</h3>
+    <p>
+      According to public statements, GrapheneOS is working on a partnership with a hardware manufacturer (OEM)
+      to bring devices with official GrapheneOS support to market (target window: 2026/2027).
+      That could change everything strategically: a device that's secure out of the box, without having to buy a Pixel
+      from Google and flash it yourself.
+    </p>
+
+    <div class="recommendation-box">
+      <h3><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-2d99b8)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Knowledge Is Resistance: GrapheneOS Deep Dives</h3>
+      <p>Want to go deeper down the rabbit hole? I have two detailed dossiers that expand on the topic:</p>
+      <p><strong>Understand the foundation:</strong><br>
+        <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/grapheneos-sicheres-android.html">GrapheneOS – Secure Android for People Who Don't Want to Be Surveilled</a>
+      </p>
+      <p style="margin-top:1em;"><strong>Put it into practice:</strong><br>
+        <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/grapheneos-installation.html">Installation &amp; Setup – The Step-by-Step Guide</a>
+      </p>
+    </div>
+
+    <h2>5. Alien Verdict: What You Need to Do Now</h2>
+    <p>
+      The "Apple-ification" of Android is a done deal. The OS will split into two classes:
+      a gilded cage for consumers (Stock Android) and a rough, free zone for the sovereign (AOSP/GrapheneOS).
+    </p>
+    <p>
+      <strong>Your strategy for 2025/2026:</strong>
+    </p>
+    <ul>
+      <li><strong>Learn sideloading without fear:</strong> Use tools like <em>Obtainium</em> to load apps directly from GitHub and verify signatures.</li>
+      <li><strong>Escape Google's identity trap:</strong> Support developers who offer APKs directly instead of hiding behind the Play Store.</li>
+      <li><strong>Switch to GrapheneOS:</strong> If you're serious, there's no way around it. Keep a cheap secondary phone ("banking slave") on hand for apps that enforce Play Integrity.</li>
+    </ul>
+    <p>
+      Freedom has gotten uncomfortable. But the alternative is total dependence on a gatekeeper
+      who decides which software gets to run on your property.
+    </p>
+
+    <div class="box">
+      <h3>Tools for Real Owners (Advertising/Affiliate)</h3>
+      <p style="font-size:0.95em;">
+        Tools I use myself — for Bitcoin self-custody and digital sovereignty:
+      </p>
+      <ul>
+        <li>
+          <svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="4" y="4" width="5" height="28" rx="1" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.7"/><rect x="9" y="4" width="22" height="28" rx="1" fill="#1a3a38" stroke="#00ffcc" stroke-width="0.7"/><line x1="13" y1="12" x2="27" y2="12" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="16" x2="27" y2="16" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="20" x2="27" y2="20" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="24" x2="22" y2="24" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/></svg> <strong>Alien Investor Handbooks:</strong><br>
+          My own ebook "GrapheneOS: Android in the Age of Surveillance" — the complete step-by-step guide to everything only touched on here.<br>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/buecher" target="_blank">https://alien-investor.org/buecher</a>
+        </li>
+            <li>
+          <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Lightning" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> <strong>Buy Bitcoin in Europe – 21bitcoin:</strong><br>
+          Bitcoin-only app from Europe, ideal for DCA and stacking sats regularly — no shitcoins.<br>
+          Use code <strong>ALIENINVESTOR</strong> for a permanent 0.2&nbsp;percentage point fee reduction
+          on instant and savings plan purchases.<br>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
+        </li>
+        <li>
+          ₿ <strong>Bitcoin in self-custody:</strong><br>
+          A hardware wallet, not an exchange account. I use the BitBox — there's the classic BitBox02 and the new
+          BitBox for iPhone (Nova).<br>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
+        </li>
+        <li>
+          <svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-label="Satellite dish" role="img"><path d="M4 24 A16 16 0 0 1 20 8" fill="#00ffcc" fill-opacity="0.06" stroke="#00ffcc" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="8" r="2.8" fill="#00ffcc"/><line x1="20" y1="8" x2="28" y2="4" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><path d="M15 13 A6 6 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/><path d="M12 16 A9 9 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.45"/></svg> <strong>Privacy &amp; Mail:</strong><br>
+          For email, VPN and cloud I use Proton — minimal data collection, no Big Tech dependency.<br>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
+        </li>
+      </ul>
+      <p style="font-size:0.85em; color:#aaa;">
+        Note: Some of these links are affiliate links. Using them supports my work
+        at no extra cost to you. Thanks! <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-aff" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-aff)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg>
+      </p>
+    </div>
+
+  </article>
+
+  <div class="like-button">
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-2d99b8)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Like this</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+
+  <script>
+    (function() {
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      const btn = document.getElementById('likeButton');
+      const msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      });
+    })();
+  </script>
+
+  <div class="box" style="border-style: dashed; border-color: #333;">
+    <h3>Sources (Selection)</h3>
+    <p style="font-size:0.95em; color: #ccc;">
+      This analysis is based on official announcements in the Google Security Blog (August 25, 2025), the documentation
+      for "Android Developer Verification", technical specifications of the Play Integrity API, and community analyses
+      of the AOSP code and the GrapheneOS roadmap.
+    </p>
+  </div>
+
+  <div class="back-links">
+    <a href="/en/blog.html" style="font-size: 1.1em;">← Back to Blog Overview</a>
+    <a href="/en/index.html" style="font-size: 1.1em;">← Back to Mission Control</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+      <h3 style="margin-bottom: 15px;">
+        <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energy" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Recharge
+        <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Donate)</span>
+      </h3>
+
+      <a href="/en/spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+        Send fuel to the mothership
+      </a>
+
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Thanks for your support — for free content, financial sovereignty, and the extraterrestrial resistance! <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-2d99b8" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-2d99b8" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-2d99b8)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-2d99b8)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg>
+      </p>
+  </div>
+
+  <footer>
+    <p><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Contact" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> Contact: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+
+    <p style="margin-top: 20px;">
+      <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-2d99b8" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-2d99b8)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <strong>Disclaimer:</strong><br><br>
+      This article does not constitute financial, tax, or legal advice.<br>
+      I share my personal Alien opinion here — independent, rebellious, and free.<br>
+      Investing involves risk. Think for yourself, trust no one, and act on your own responsibility.
+    </p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>

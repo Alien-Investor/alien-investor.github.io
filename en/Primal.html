@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Sovereign Protocol – Architecture of an Unconfiscatable Digital Identity | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Nostr guide for the paranoid: how to build an unconfiscatable digital identity. Amber as signer, Primal as client. Away from platform feudalism.">
+  <link rel="canonical" href="/en/Primal.html">
+  <link rel="alternate" hreflang="de" href="/Primal.html">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 0 15px 20px 15px; /* Mobile-Optimierung */
+    }
+
+    /* --- TYPOGRAFIE --- */
+    h1, h2, h3 {
+      color: #00ffcc;
+    }
+    h1 {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    /* --- LINKS (Neon-Glow) --- */
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc; /* Der Alien-Effekt */
+    }
+
+    /* --- STANDARD ELEMENTE --- */
+    code {
+      background-color: #111;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      color: #0f0;
+      font-family: monospace;
+    }
+    pre {
+      background-color: #111;
+      padding: 1em;
+      border-radius: 4px;
+      overflow-x: auto;
+      border: 1px solid #333;
+      color: #0f0;
+      font-family: monospace;
+    }
+    em { color: #ccc; }
+
+    .byline {
+      margin-top: -0.8em;
+      margin-bottom: 2em;
+      color: #ccc;
+      font-style: italic;
+      text-align: center;
+    }
+
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
+
+    /* --- BOXEN --- */
+    .box {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 1em; }
+
+    .recommendation-box {
+      margin: 2em 0;
+      padding: 1em;
+      border: 1px dashed #00ffcc;
+      border-radius: 8px;
+      text-align: center;
+      background-color: #050505;
+    }
+    .recommendation-box h3 {
+      margin-top: 0;
+      font-size: 1.1em;
+      color: #00ffcc;
+    }
+
+    .highlight {
+      border-left: 3px solid #ff3b3b;
+      margin: 1.5em 0;
+      padding: 0.8em 1em;
+      background: #110000;
+      color: #f5cccc;
+      font-size: 0.95em;
+      border-radius: 0 8px 8px 0;
+    }
+
+    /* --- LIKE BUTTON --- */
+    .like-button {
+      margin: 3em 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+    }
+    .like-button button {
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+    .like-button button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
+    }
+
+    /* --- NAVIGATION --- */
+    .top-nav {
+      padding: 10px 0;
+      font-size: 0.9em;
+    }
+    .back-links {
+      margin-top: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="/en/index.html">← Back to Mission Control</a>
+  </div>
+
+  <h1>The Sovereign Protocol – Architecture of an Unconfiscatable Digital Identity</h1>
+  <p class="byline"><em>by Alien Investor</em></p>
+
+  <article id="content">
+    <p>
+      We live in an era of digital feudalism. On platforms like X (formerly Twitter), Instagram
+      or LinkedIn, you are merely a tenant. Your account, your reach, and your reputation are
+      a "rental agreement" that can be terminated at any moment with a simple database command.
+    </p>
+    <p>
+      A true owner accepts no uncovered liabilities. That's why we move from platforms
+      (centralized) to protocols (decentralized).
+    </p>
+    <p>
+      In <strong>Nostr</strong>, your identity is not an entry on a Silicon Valley corporation's server,
+      but a mathematical proof. Your private key (<code>nsec</code>) is the equivalent of a gold bar
+      in the vault. Whoever holds the key, <em>is</em> the identity.
+    </p>
+    <p>
+      This guide describes the pragmatic path that is the only sensible one for most security-minded users:
+      <strong>Key is generated in the signer and stays there.</strong> The client only gets the <code>npub</code> — and signatures.
+    </p>
+
+    <div class="highlight">
+      <strong>Rule #1:</strong> Never type your <code>nsec</code> into Primal, Amethyst, or any browser login.
+      The <code>nsec</code> belongs in the signer. Full stop.
+    </div>
+
+    <h2>Part I: The Preparation (The Clean Room)</h2>
+    <p>
+      Do not create your identity in an environment you don't trust. If you're running GrapheneOS: perfect.
+      If not: lock it down as much as possible.
+    </p>
+
+    <h3>The Tools</h3>
+    <ul>
+      <li><strong>Smartphone:</strong> Android (ideally GrapheneOS). Airplane mode must be possible.</li>
+      <li>
+        <strong>Signer:</strong> <strong>Amber</strong> (generates and stores the key).<br>
+        <em>Optional:</em> There is also an <strong>"offline" variant</strong> of Amber (in the releases as <code>amber-offline-...</code>),
+        if you want to keep the signer as silent as possible.
+      </li>
+      <li><strong>Client:</strong> <strong>Primal</strong> (or Amethyst) — but only via External Signer.</li>
+    </ul>
+
+    <div class="highlight">
+      <strong>The mindset:</strong> We assume every online environment is hostile.
+      Clipboard sniffers and malware are just waiting to grab a string that starts with <code>nsec1...</code>.
+    </div>
+
+    <h2>Part II: The Genesis (Key Generation Directly in Amber)</h2>
+    <p>
+      We don't let some random website generate the key. We generate it where it belongs:
+      <strong>in the signer</strong>.
+    </p>
+    <ol>
+      <li><strong>Enable airplane mode.</strong> Optional: also disable Wi-Fi/Bluetooth.</li>
+      <li><strong>Open Amber</strong> and select <strong>"Create new account"</strong> / "Create new".</li>
+      <li>Amber generates a new keypair (private key + public key).</li>
+      <li><strong>Secure Amber immediately:</strong> PIN/biometrics, system lock active.</li>
+    </ol>
+
+    <div class="highlight">
+      <strong>Important:</strong> The private key stays in Amber. You treat Amber like a hardware wallet for Nostr.
+      No experiments, no "Always sign without prompting" convenience for no good reason.
+    </div>
+
+    <div class="highlight">
+      <strong>No third-party generation:</strong> Never let anyone generate or send you an <code>nsec</code>.
+      Whoever sees the <code>nsec</code> can theoretically take over your identity. Generate the key directly in Amber
+      and use exclusively "External Signer" in the client from that point on.
+    </div>
+
+    <h3>GrapheneOS Extra: Disable Network Permission for Amber</h3>
+    <p>
+      If you're running GrapheneOS, you can harden Amber further: revoke the <strong>Network</strong> permission from Amber.
+      This cuts off Amber's network access — keeping it a pure signer.
+    </p>
+    <ul>
+      <li><strong>Settings → Apps → Amber → Permissions → Network → OFF</strong></li>
+      <li>
+        If you ever want to use Amber for network-based features, you'll need to re-enable Network.
+        For pure signing in combination with a client, "Network OFF" is a very clean setup.
+      </li>
+    </ul>
+
+    <h2>Part III: The Interface (Primal)</h2>
+    <p>
+      Now we install the client — the window to the world. We use <strong>Primal</strong> for its speed
+      and user experience (Amethyst is a valid alternative).
+    </p>
+
+    <h3>The Critical Moment</h3>
+    <p>
+      On first launch, Primal asks for a login. Millions of users type their <code>nsec</code> here.
+      <strong>You don't.</strong>
+    </p>
+    <ul>
+      <li>Choose "Log in with External Signer" (or the key icon).</li>
+      <li>Primal calls Amber as External Signer.</li>
+      <li>Amber asks: "Primal requests your public key. Allow?"</li>
+      <li>Confirm this.</li>
+    </ul>
+    <p>
+      What just happened? Primal only received your public key (<code>npub</code>). Primal does not know the secret.
+    </p>
+
+    <p>When you post:</p>
+    <ol>
+      <li>Primal composes the text.</li>
+      <li>Primal sends the signing request to Amber.</li>
+      <li>You confirm in Amber.</li>
+      <li>Amber signs and returns only the <strong>signature</strong>.</li>
+      <li>Primal broadcasts the signed post to the network.</li>
+    </ol>
+
+    <div class="highlight">
+      <strong>Reality check:</strong> This protects you from "client steals nsec". It does not protect you if your smartphone is fully compromised
+      or you grant Amber permissions too generously. Sovereignty means: minimal permissions, maximum skepticism.
+    </div>
+
+    <h2>Part IV: The Backup (Steel, Not Paper)</h2>
+    <p>
+      Digital data corrupts. Paper burns. A true Alien Investor secures for eternity.
+    </p>
+    <ul>
+      <li><strong>The code:</strong> Your private key (<code>nsec</code>) is your backup.</li>
+      <li><strong>The medium:</strong> Stamp it into stainless steel (V2A/V4A) or store it extremely securely offline.</li>
+      <li><strong>The storage:</strong> One copy in the safe, another at a geographically separate location.</li>
+    </ul>
+
+    <div class="highlight">
+      <strong>Rule #2:</strong> No cloud backup, no screenshots, no messenger, no notes app, no copy &amp; paste marathon.
+      Back it up cleanly once. Then the <code>nsec</code> stays in Amber.
+    </div>
+
+    <h2>Alien Verdict: Welcome to Sovereignty</h2>
+    <p>
+      You have just created a digital identity that:
+    </p>
+    <ul>
+      <li>Was born in the signer (not in some random client).</li>
+      <li>Is stored in segregation (the client does not know the secret).</li>
+      <li>Can be physically secured (steel outlasts fire).</li>
+    </ul>
+    <p>
+      That is the difference between "having an account" and "owning an identity". You are no longer
+      a user. You are a sovereign node in the network.
+    </p>
+
+    <blockquote>
+      "Trust no one. Verify everything."
+    </blockquote>
+
+    <div class="recommendation-box">
+      <h3>Further reading: GrapheneOS – why the foundation matters</h3>
+      <p>
+        If you want a solid understanding of GrapheneOS's key features (hardening, permission management, sandboxing, network control),
+        read my article:<br>
+        <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/grapheneos-sicheres-android.html" target="_blank" rel="noopener noreferrer">GrapheneOS – Secure Android</a>
+      </p>
+    </div>
+
+    <div class="box">
+      <h3>Tools for true owners (advertising/affiliate)</h3>
+      <p style="font-size:0.95em;">
+        If you're serious about sovereignty, use hardware and services that respect you:
+      </p>
+      <ul>
+        <li>
+          📱 <strong>GrapheneOS &amp; Pixel:</strong><br>
+          Heavily hardened Android without Google apps/Play services (if you set it up that way) and with a focus on security hardening.<br>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://grapheneos.org" target="_blank" rel="noopener noreferrer">https://grapheneos.org</a>
+        </li>
+        <li>
+          ₿ <strong>Bitcoin in self-custody:</strong><br>
+          Hardware wallet instead of exchange account. I use the BitBox02.<br>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/bitbox" target="_blank" rel="noopener noreferrer">https://alien-investor.org/bitbox</a>
+        </li>
+        <li>
+          <svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-label="Satellite dish" role="img"><path d="M4 24 A16 16 0 0 1 20 8" fill="#00ffcc" fill-opacity="0.06" stroke="#00ffcc" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="8" r="2.8" fill="#00ffcc"/><line x1="20" y1="8" x2="28" y2="4" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><path d="M15 13 A6 6 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/><path d="M12 16 A9 9 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.45"/></svg> <strong>Privacy &amp; Mail:</strong><br>
+          For email, VPN, and cloud I use Proton — data-minimal and without Big Tech dependency.<br>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/proton" target="_blank" rel="noopener noreferrer">https://alien-investor.org/proton</a>
+        </li>
+      </ul>
+      <p style="font-size:0.85em; color:#aaa;">
+        Note: Some of these links are affiliate links. If you use them, you support my work
+        at no extra cost to you. Thanks! <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-aff" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-aff)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg>
+      </p>
+    </div>
+
+  </article>
+
+  <div class="like-button">
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-c600d4)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Like</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+
+  <script>
+    (function() {
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      const btn = document.getElementById('likeButton');
+      const msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      });
+    })();
+  </script>
+
+  <div class="box" style="border-style: dashed; border-color: #333;">
+    <h3>Sources &amp; Resources</h3>
+    <p style="font-size:0.95em; color: #ccc;">
+      Official resources for the components used:
+    </p>
+    <ul style="padding-left: 1.2em;">
+      <li><a href="https://github.com/greenart7c3/Amber/releases" target="_blank" rel="noopener noreferrer">Amber (Releases incl. offline APK)</a></li>
+      <li><a href="https://grapheneos.org/features" target="_blank" rel="noopener noreferrer">GrapheneOS Features (Network Permission Toggle)</a></li>
+      <li><a href="https://github.com/nostr-protocol/nips" target="_blank" rel="noopener noreferrer">Nostr NIPs (Specifications)</a></li>
+      <li><a href="https://primal.net" target="_blank" rel="noopener noreferrer">Primal (Client)</a></li>
+    </ul>
+  </div>
+
+  <div class="back-links">
+    <a href="/en/blog.html" style="font-size: 1.1em;">← Back to Blog Overview</a>
+    <a href="/en/index.html" style="font-size: 1.1em;">← Back to Mission Control</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+      <h3 style="margin-bottom: 15px;">
+        <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energy" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Recharge
+        <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Donate)</span>
+      </h3>
+
+      <a href="/en/spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+        Send fuel to the mothership
+      </a>
+
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Thanks for your support — for free content, financial sovereignty, and the extraterrestrial resistance! <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-c600d4" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-c600d4" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-c600d4)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-c600d4)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg>
+      </p>
+  </div>
+
+  <footer>
+    <p><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Contact" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> Contact: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+
+    <p style="margin-top: 20px;">
+      <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-c600d4" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-c600d4)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <strong>Disclaimer:</strong><br><br>
+      This article does not constitute financial, tax, or legal advice.<br>
+      I share my personal Alien opinion here — independent, rebellious, and free.<br>
+      Security is a process, not a state. Act at your own responsibility.
+    </p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>

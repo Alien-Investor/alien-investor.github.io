@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>App Stores on GrapheneOS – Who to Trust (and Who Not To) | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Which app stores can you trust on GrapheneOS? Analysis of Accrescent, Zap Store, Obtainium, F-Droid and Aurora Store. Security, signatures and hierarchy.">
+  <link rel="canonical" href="/en/grapheneos-app-stores.html">
+  <link rel="alternate" hreflang="de" href="/grapheneos-app-stores.html">
+  <style>
+    body { background-color: #000; color: #fff; font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 0 15px 20px 15px; }
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+    code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; font-family: monospace; }
+    em { color: #ccc; }
+    .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
+    blockquote { border-left: 3px solid #00ffcc; margin: 2em 0; padding: 0.5em 1em; color: #ddd; background: #050505; font-style: italic; }
+    .box { border: 1px solid #00ffcc; background: #050505; padding: 1.5em; border-radius: 8px; margin: 2em 0; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
+    .recommendation-box { margin: 2em 0; padding: 1em; border: 1px dashed #00ffcc; border-radius: 8px; text-align: center; background-color: #050505; }
+    .recommendation-box h3 { margin-top: 0; font-size: 1.1em; color: #00ffcc; }
+    .recommendation-box ul { list-style-type: none; padding: 0; text-align: left; }
+    .recommendation-box li { margin-bottom: 0.5em; padding-left: 1.5em; position: relative; }
+    .recommendation-box li::before { content: "👉"; position: absolute; left: 0; }
+
+    /* ZENTRIERTER VIDEO CONTAINER */
+    .video-wrapper {
+      display: flex;
+      justify-content: center;
+      margin: 2em 0;
+    }
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 560px;
+      padding-bottom: 31.25%;
+      height: 0;
+      border: 1px solid #00ffcc;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(0, 255, 204, 0.1);
+    }
+    @media (max-width: 600px) {
+      .video-container { padding-bottom: 56.25%; }
+    }
+    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
+    .like-button { margin: 3em 0; display: flex; align-items: center; justify-content: center; gap: 1em; font-size: 1em; }
+    .like-button button { background: #000; color: #00ffcc; border: 1px solid #00ffcc; padding: 0.6em 1.2em; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.2s ease; }
+    .like-button button:hover, .like-button button:active { background: #00ffcc; color: #000; box-shadow: 0 0 15px #00ffcc; }
+    .like-button button:disabled { border-color: #444; color: #888; background: #111; cursor: default; }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    .back-links { margin-top: 40px; text-align: center; display: flex; flex-direction: column; gap: 10px; }
+    footer { margin-top: 60px; padding: 20px; font-size: 0.85em; color: #666; border-top: 1px solid #222; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="top-nav"><a href="/en/index.html">← Back to Mission Control</a></div>
+  <h1>App Stores on GrapheneOS – Who to Trust (and Who Not To)</h1>
+  <p class="byline"><em>by Alien Investor</em></p>
+
+  <article id="content">
+    <h2>A False Sense of Security</h2>
+    <p>
+      Just because an app works doesn't mean it was installed cleanly.
+      Many users on GrapheneOS focus exclusively on permissions. That matters — but it's incomplete. The source of an app is at least as critical as what sensors or data it's allowed to access.<br>
+      An app is not just an app.
+    </p>
+
+    <div class="video-wrapper">
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/iCR53OVWlUs" title="App Stores on GrapheneOS Guide" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </div>
+    <p style="text-align: center; font-size: 0.9em; color: #bbb; margin-top: -1em;">
+      <em>In this video we analyze the different app sources and show you the safest hierarchy.</em>
+    </p>
+
+    <ul>
+      <li>The source determines who built it</li>
+      <li>The signature determines who is allowed to deliver updates</li>
+      <li>The update chain determines whether tampering would even be noticed</li>
+    </ul>
+    <p>
+      Signatures and checksums are not nerd stuff. They are the foundation of any serious security model.
+    </p>
+
+    <h2>How App Trust Works on GrapheneOS</h2>
+    <p>
+      GrapheneOS follows a simple but strict principle:<br>
+      The app signature is the developer's identity.
+    </p>
+    <ul>
+      <li>Every app is signed with a cryptographic key</li>
+      <li>Every update must carry the exact same signature</li>
+      <li>If the signature changes, the update is treated as foreign</li>
+    </ul>
+    <p>
+      If this chain is broken, there are only two possibilities:
+    </p>
+    <ol>
+      <li>The developer lost their key</li>
+      <li>Or someone else is suddenly delivering code</li>
+    </ol>
+    <p>
+      Both are a problem from a security standpoint.
+      This logic is the foundation for why some app stores make sense on GrapheneOS — and others don't.
+    </p>
+
+    <h2>The Recommended Store Hierarchy on GrapheneOS</h2>
+
+    <h3>1. GrapheneOS App Store – the Secure Default</h3>
+    <p>
+      The GrapheneOS App Store is the first and most important starting point. It comes pre-installed on GrapheneOS and is simply called "App Store" on the device.
+    </p>
+    <p>Why?</p>
+    <ul>
+      <li>Deeply integrated with the system</li>
+      <li>Minimal feature footprint</li>
+      <li>Verified builds</li>
+      <li>No trackers</li>
+      <li>No account required</li>
+      <li>No hidden dependencies</li>
+    </ul>
+    <p>
+      Everything offered here is deliberately chosen and securely integrated.
+    </p>
+    <blockquote>
+      <strong>Key rule:</strong><br><br>
+      Anything available in the GrapheneOS App Store is the secure default.
+    </blockquote>
+
+    <h3>2. Accrescent – Small, but Extremely Clean</h3>
+    <p>
+      Accrescent is unknown to many users, but it operates in its own security league. Accrescent should be installed directly from the GrapheneOS App Store — that's exactly what it's designed for.
+    </p>
+    <p>Characteristics:</p>
+    <ul>
+      <li>Focus on reproducible builds</li>
+      <li>Strict signature verification</li>
+      <li>No intermediaries</li>
+      <li>No mass distribution</li>
+    </ul>
+    <p>
+      Typical example: App Verifier.<br><br>
+      Accrescent only offers a handful of apps — and that's precisely the point.
+      No app zoo. No gimmicks. Only verifiable code.
+    </p>
+
+    <h3>3. Obtainium – a Tool for Advanced Users</h3>
+    <p>
+      Obtainium is powerful — and that's exactly what makes it dangerous if you don't know what you're doing. Obtainium is not installed through classic app stores, but directly from the project's official GitHub repository.
+    </p>
+    <p>Advantages:</p>
+    <ul>
+      <li>Direct source from the developer</li>
+      <li>GitHub, GitLab or release feeds</li>
+      <li>No store intermediaries</li>
+    </ul>
+    <p>Risks:</p>
+    <ul>
+      <li>Wrong repositories</li>
+      <li>Wrong architecture</li>
+      <li>Incorrect release mapping</li>
+      <li>No automatic plausibility checks</li>
+    </ul>
+    <blockquote>
+      <strong>Core point:</strong><br><br>
+      Obtainium is a scalpel, not a kitchen knife.<br>
+      Whoever uses it takes full responsibility for the source.
+    </blockquote>
+
+    <h3>4. F-Droid – Situationally Useful, but with Limitations</h3>
+    <p>
+      F-Droid is often broadly perceived as "safe." That's an oversimplification.
+    </p>
+    <ul>
+      <li><strong>Yes:</strong> Open source, transparent builds.</li>
+      <li><strong>But:</strong> Delayed updates, third-party rebuilds, sometimes different signatures than the original developer.</li>
+    </ul>
+    <p>
+      F-Droid can make sense:
+    </p>
+    <ul>
+      <li>When there is no better source</li>
+      <li>For simple, non-security-critical tools</li>
+    </ul>
+    <p>
+      For sensitive applications, however, F-Droid is not the first choice.
+    </p>
+
+    <h3>Why Aurora Store Is Problematic</h3>
+    <p>
+      Aurora is convenient. And that's exactly its problem.
+      Factual reasons for caution:
+    </p>
+    <ul>
+      <li>Third-party app signatures</li>
+      <li>Opaque update chain</li>
+      <li>Bypasses the regular Play ecosystem</li>
+      <li>No clean trust model</li>
+    </ul>
+
+    <blockquote>
+      "Aurora Store is not problematic because it demonstrably distributes malicious apps, but because it technically bypasses the strict signature and update trust model of the original Play Store. This makes the cryptographic chain of trust less transparent and less robust for the user."
+    </blockquote>
+
+    <blockquote>
+      <strong>Key rule:</strong><br><br>
+      Convenience is not a security concept.<br>
+      Anyone who cares about clean provenance and verifiable updates should avoid Aurora.
+    </blockquote>
+
+    <h2>User Profiles – the Underrated Superpower of GrapheneOS</h2>
+    <p>
+      GrapheneOS enables true separation at the operating system level.
+    </p>
+    <p>
+      <strong>Multiple User Profiles</strong><br><br>
+      Properties:
+    </p>
+    <ul>
+      <li>Physical separation of apps and data</li>
+      <li>No access between profiles</li>
+      <li>Separate app stores per profile</li>
+    </ul>
+    <p>
+      Typical use cases: daily use vs. banking, personal vs. work, Google-free vs. Google-isolated.
+    </p>
+    <p>
+      <strong>App Cloning Across Profiles</strong><br><br>
+      The same app package can:
+    </p>
+    <ul>
+      <li>Be installed in different profiles</li>
+      <li>With different accounts</li>
+      <li>With completely separate data</li>
+    </ul>
+    <p>
+      Ideal for: messengers, social media, test accounts.
+    </p>
+
+    <h3>Work Profile with Shelter – Targeted Isolation</h3>
+    <p>
+      Shelter allows creating a work profile within a user profile.
+    </p>
+    <p>Key properties:</p>
+    <ul>
+      <li>Logical separation of apps</li>
+      <li>No mutual visibility</li>
+      <li>Notifications work reliably</li>
+    </ul>
+    <p>
+      Typical use: Google Play Store, Google Play Services.<br><br>
+      This lets you isolate Google dependencies without sacrificing push notifications.
+      Important: Not perfect, but massively better than unfiltered integration.
+    </p>
+
+    <h2>Decision Logic for App Sources</h2>
+    <p>
+      A simple mental checklist:
+    </p>
+    <ul>
+      <li>Is the app in the GrapheneOS App Store? → use it</li>
+      <li>Is it in Accrescent? → use it</li>
+      <li>Official source + Obtainium? → only if you understand what you're doing</li>
+      <li>Only available on F-Droid? → weigh your options</li>
+      <li>Aurora necessary? → look for alternatives</li>
+    </ul>
+
+    <h2>Zap Store – a New, Experimental Ecosystem</h2>
+    <p>
+      Alongside the classic app sources, a completely new model is emerging: the Zap Store.
+      The Zap Store comes from the Nostr community and takes a fundamentally different approach than Google Play or the Apple App Store.
+    </p>
+    <p><strong>Core ideas:</strong></p>
+    <ul>
+      <li>Developers publish their apps themselves</li>
+      <li>Identity is based on cryptographic keys (Nostr keys)</li>
+      <li>Trust is established not by a central authority, but through signatures and reputation</li>
+      <li>No control by Google or Apple</li>
+    </ul>
+    <p>The Zap Store is:</p>
+    <ul>
+      <li>Still young</li>
+      <li>Under construction technically and organizationally</li>
+    </ul>
+    <p>
+      It's not a complete replacement yet, but a solid start and very promising.
+    </p>
+    <ul>
+      <li>It is an excellent radar for new, freedom-oriented and experimental apps</li>
+      <li>It shows where alternative ecosystems can evolve</li>
+      <li>It is especially interesting for users who consciously want to operate outside centralized platforms</li>
+    </ul>
+    <p><strong>Important:</strong></p>
+    <ul>
+      <li>Zap Store relies more heavily on trust and personal responsibility</li>
+      <li>It is clearly aimed at informed users.</li>
+    </ul>
+    <p>
+      I've written a dedicated article on this, as it would go beyond the scope here.
+      All links are below, in the further reading box.
+    </p>
+
+    <h2>Conclusion</h2>
+    <p>
+      GrapheneOS doesn't force anyone into security.<br>
+      It provides tools.<br>
+      Whether real security results from that depends entirely on the user's decisions.<br>
+      Those who want control must take responsibility.
+    </p>
+
+    <div class="recommendation-box">
+      <h3>Further Reading</h3>
+      <ul>
+        <li><a href="/en/grapheneos-installation.html">GrapheneOS Installation Guide</a></li>
+        <li><a href="/en/GrapheneOS-Custom.html">GrapheneOS Features</a></li>
+        <li><a href="/en/Obtainium.html">Obtainium Guide</a></li>
+        <li><a href="/en/shelter-android-guide.html">Shelter App &amp; Work Profiles</a></li>
+        <li><a href="/en/Zapstore.html">Zap Store – Apps via Nostr</a></li>
+      </ul>
+    </div>
+
+    <div class="box" style="border-style: dashed; border-color: #333;">
+      <h3>Sources &amp; Links</h3>
+      <p style="font-size:0.95em; color: #ccc;">
+        Direct links to the tools discussed:
+      </p>
+      <ul>
+        <li><a href="https://github.com/ImranR98/Obtainium" target="_blank">Obtainium on GitHub</a></li>
+        <li><a href="https://f-droid.org/de/packages/net.typeblog.shelter/" target="_blank">Shelter via F-Droid</a></li>
+        <li><a href="https://zapstore.dev/" target="_blank">Zap Store Website</a></li>
+      </ul>
+      <p style="font-size:0.95em; color: #ccc; margin-top: 1em;">
+        GrapheneOS Support:<br>
+        <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://grapheneos.org/donate" target="_blank">grapheneos.org/donate</a>
+      </p>
+    </div>
+  </article>
+
+  <div class="box">
+    <h3>Tools for Real Owners</h3>
+    <p style="font-size:0.95em;">
+      Tools I use myself – for Bitcoin self-custody and digital sovereignty:
+    </p>
+    <ul>
+      <li>
+        <svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="4" y="4" width="5" height="28" rx="1" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.7"/><rect x="9" y="4" width="22" height="28" rx="1" fill="#1a3a38" stroke="#00ffcc" stroke-width="0.7"/><line x1="13" y1="12" x2="27" y2="12" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="16" x2="27" y2="16" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="20" x2="27" y2="20" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="24" x2="22" y2="24" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/></svg> <strong>Alien Investor Handbooks:</strong><br>
+        My own ebook "GrapheneOS: Android in the Age of Surveillance" — the complete step-by-step guide to everything only touched on here.<br>
+        <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/buecher" target="_blank">https://alien-investor.org/buecher</a>
+      </li>
+      <li>
+        <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Lightning" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> <strong>Buy Bitcoin in Europe – 21bitcoin:</strong><br>
+        Bitcoin-only app from Europe, ideal for DCA and stacking sats regularly – no shitcoins.<br>
+        Use code <strong>ALIENINVESTOR</strong> for a permanent 0.2&nbsp;percentage point fee reduction
+        on instant purchases and savings plans.<br>
+        <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
+      </li>
+      <li>
+        ₿ <strong>BitBox Self-Custody:</strong><br>
+        Hardware wallet instead of an exchange account. I use the BitBox – there's the classic BitBox02 and the new
+        BitBox for iPhone (Nova).<br>
+        Use code <strong>ALIENINVESTOR</strong> for 5% off.<br>
+        <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
+      </li>
+      <li>
+        <svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-label="Satellite dish" role="img"><path d="M4 24 A16 16 0 0 1 20 8" fill="#00ffcc" fill-opacity="0.06" stroke="#00ffcc" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="8" r="2.8" fill="#00ffcc"/><line x1="20" y1="8" x2="28" y2="4" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><path d="M15 13 A6 6 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/><path d="M12 16 A9 9 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.45"/></svg> <strong>Privacy &amp; Mail:</strong><br>
+        For email, VPN and cloud I use Proton – minimal data footprint, no Big Tech dependency.<br>
+        <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
+      </li>
+    </ul>
+    <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">
+      Note: Some of these links are affiliate links. If you use them, you support my work
+      at no extra cost to you. Thanks! <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-aff" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-aff)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg>
+    </p>
+  </div>
+
+  <div class="like-button">
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-923419)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Like</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+
+  <script>
+    (function() {
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      const btn = document.getElementById('likeButton');
+      const msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      });
+    })();
+  </script>
+
+  <div class="back-links">
+    <a href="/en/blog.html" style="font-size: 1.1em;">← Back to Blog Overview</a>
+    <a href="/en/index.html" style="font-size: 1.1em;">← Back to Mission Control</a>
+  </div>
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+      <h3 style="margin-bottom: 15px;"><svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energy" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Recharge <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Donate)</span></h3>
+      <a href="/en/spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">Send fuel to the mothership</a>
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">Thanks for your support – for free content, financial sovereignty and the alien resistance! <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-923419" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-923419" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-923419)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-923419)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg></p>
+  </div>
+
+  <footer>
+    <p><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Contact" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> Contact: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    <p style="margin-top: 20px;"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-923419" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-923419)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <strong>Disclaimer:</strong><br><br>Not financial, tax or legal advice. Personal opinion only. Think for yourself.</p>
+  </footer>
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>

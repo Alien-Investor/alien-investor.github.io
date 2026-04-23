@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Install GrapheneOS – Take Back Control of Your Smartphone | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Step-by-step guide to installing GrapheneOS on a Google Pixel. Fastboot, web installer, relock, and security verification.">
+  <link rel="canonical" href="/en/grapheneos-installation.html">
+  <link rel="alternate" hreflang="de" href="/grapheneos-installation.html">
+  <style>
+    body { background-color: #000; color: #fff; font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 0 15px 20px 15px; }
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+    code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; font-family: monospace; }
+    em { color: #ccc; }
+    .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
+    blockquote { border-left: 3px solid #00ffcc; margin: 2em 0; padding: 0.5em 1em; color: #ddd; background: #050505; font-style: italic; }
+    .box { border: 1px solid #00ffcc; background: #050505; padding: 1.5em; border-radius: 8px; margin: 2em 0; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
+
+    /* CENTERED VIDEO CONTAINER */
+    .video-wrapper {
+      display: flex;
+      justify-content: center;
+      margin: 2em 0;
+    }
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 560px; /* Standard Youtube width */
+      padding-bottom: 31.25%; /* Maintains proportions at max-width */
+      height: 0;
+      border: 1px solid #00ffcc;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(0, 255, 204, 0.1);
+    }
+    /* Fix for responsive 16:9 behavior */
+    @media (max-width: 600px) {
+      .video-container { padding-bottom: 56.25%; }
+    }
+    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
+    .like-button { margin: 3em 0; display: flex; align-items: center; justify-content: center; gap: 1em; font-size: 1em; }
+    .like-button button { background: #000; color: #00ffcc; border: 1px solid #00ffcc; padding: 0.6em 1.2em; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.2s ease; }
+    .like-button button:hover, .like-button button:active { background: #00ffcc; color: #000; box-shadow: 0 0 15px #00ffcc; }
+    .like-button button:disabled { border-color: #444; color: #888; background: #111; cursor: default; }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    .back-links { margin-top: 40px; text-align: center; display: flex; flex-direction: column; gap: 10px; }
+    footer { margin-top: 60px; padding: 20px; font-size: 0.85em; color: #666; border-top: 1px solid #222; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="top-nav"><a href="/en/index.html">← Back to Mission Control</a></div>
+
+  <h1>Install GrapheneOS – Take Back Control of Your Smartphone</h1>
+  <p class="byline"><em>by Alien Investor</em></p>
+
+  <article id="content">
+    <p>
+      If you're reading this, you're probably done with data harvesting, pre-installed Google services,
+      and the feeling that your smartphone owns <em>you</em> more than you own it. That's exactly where
+      <strong>GrapheneOS</strong> comes in: a hardened Android for Google Pixel devices, built for
+      <strong>security</strong>, <strong>privacy</strong>, and <strong>control</strong>.
+    </p>
+
+    <div class="box" style="border-style: dashed; border-color: #ff3333;">
+      <h3 style="color:#ff3333; margin-top:0;">Important Note</h3>
+      <p>
+        This article is my personal guide — an orientation for getting started.
+        It does <strong>not</strong> replace the official documentation. If you actually want to flash,
+        make sure you read the instructions on the official site.
+      </p>
+      <p><a href="https://grapheneos.org/install/web" target="_blank" rel="noopener">Go to the official web installer</a>
+      </p>
+    </div>
+
+    <div class="video-wrapper">
+      <div class="video-container">
+        <iframe
+          src="https://www.youtube.com/embed/64eV2ih23fk"
+          title="GrapheneOS Installation Guide"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+    <p style="text-align: center; font-size: 0.9em; color: #bbb; margin-top: -1em;">
+      <em>In this video my on-board technician shows you how to turn your Pixel into a digital bunker. (Video in German)</em>
+    </p>
+
+    <h2>What Is GrapheneOS – and Is It Worth It?</h2>
+    <p>
+      GrapheneOS is a free, security-hardened operating system for current Google Pixel devices.
+      It builds on Android Open Source but strips out Google tracking, hardens the system,
+      and gives you significantly more control.
+    </p>
+    <ul>
+      <li>No pre-installed Google account, no forced services.</li>
+      <li>Heavily hardened sandbox and memory security.</li>
+      <li>Option to install Google services later in an isolated (sandboxed) environment.</li>
+    </ul>
+
+    <h2>Before You Start: Risks &amp; Plain Talk</h2>
+    <p>
+      Before you unlock the bootloader:
+    </p>
+    <ul>
+      <li><strong>Warranty void:</strong> Manufacturer warranty often lapses.</li>
+      <li><strong>Data loss:</strong> Your device will be completely wiped. No backup means no data.</li>
+      <li><strong>Personal responsibility:</strong> You bear the risk if something goes wrong.</li>
+    </ul>
+
+    <h2>Prerequisites</h2>
+    <ul>
+      <li>A supported <strong>Google Pixel</strong>.</li>
+      <li>PC/laptop (Windows, macOS, Linux) with <a href="https://developer.android.com/tools/releases/platform-tools" target="_blank">Android Platform Tools</a> installed to communicate with the Pixel.</li>
+      <li>A reliable <strong>original USB-C cable</strong>.</li>
+      <li>A Chromium-based browser (e.g. Brave, Chromium, Vanadium).</li>
+    </ul>
+
+    <h2>1. Prepare Your Pixel (Settings)</h2>
+    <p>
+      Before we plug in any cables, you need to prepare the Pixel on the software side:
+    </p>
+    <ol>
+      <li><strong>Enable Developer Options:</strong> Settings → About phone → Tap "Build number" 7 times.</li>
+      <li><strong>Allow OEM unlocking:</strong> Back to Settings → System → Developer options. Enable the "OEM unlocking" toggle. (Nothing works without this!)</li>
+      <li><strong>Enable USB debugging:</strong> Optional, but often helpful for device recognition.</li>
+    </ol>
+
+    <h2>2. Enter Fastboot Mode</h2>
+    <p>
+      Now it gets serious. For the installer to have access, the phone needs to be in bootloader mode:
+    </p>
+    <ul>
+      <li>Turn the Pixel completely <strong>off</strong>.</li>
+      <li>Connect it to your PC/laptop with the original cable.</li>
+      <li>Hold the <strong>Power button</strong> and <strong>Volume Down</strong> simultaneously.</li>
+      <li>Wait until you're in <strong>Fastboot Mode</strong> (a black screen with technical text).</li>
+    </ul>
+
+    <h2>3. Installation with the Web Installer</h2>
+    <p>
+      Now open the <a href="https://grapheneos.org/install/web" target="_blank">official web installer</a> on your PC.
+      Follow the on-screen instructions strictly. Here's the flow in detail:
+    </p>
+
+    <h3>A) Connect &amp; Unlock</h3>
+    <p>
+      Click the blue <strong>"Unlock Bootloader"</strong> button in your browser.
+    </p>
+    <p>
+      A USB device selection window will usually appear:
+      Select your Pixel (e.g. "Pixel 8") and click "Connect".
+    </p>
+    <ul>
+      <li>The phone now shows a warning screen.</li>
+      <li>Use the <strong>volume buttons</strong> (up/down) to navigate to the unlock option ("Unlock the bootloader").</li>
+      <li>Confirm the selection with the <strong>Power button</strong>.</li>
+    </ul>
+
+    <h3>B) Download &amp; Flash</h3>
+    <p>
+      Now click <strong>"Download Release"</strong> in your browser. The system downloads the image.
+    </p>
+
+    <div class="box" style="border-color: #ff3333;">
+      <h3>Troubleshooting Tip</h3>
+      <p>
+        If you get an error like <code>Error: storage quota has been exceeded</code>, your browser storage is full.
+      </p>
+      <p>
+        <strong>Fix:</strong> Install a clean Chromium browser (no extensions) dedicated solely to this task.<br><br>
+        ⚠️ <strong>Important:</strong> Do <strong>not use Incognito mode</strong>! It limits temporary storage so severely
+        that downloading the large image file will almost always fail.
+      </p>
+    </div>
+
+    <p>
+      Download complete? Then click <strong>"Flash Release"</strong>.
+    </p>
+    <p>
+      <strong>Don't panic:</strong> The phone will reboot several times during this process.
+      That's completely normal. Don't touch anything until the browser says it's done (progress bar full).
+    </p>
+
+    <h3>C) Relock the Bootloader</h3>
+    <p>
+      This step is essential for security!
+    </p>
+    <ol>
+      <li>Click <strong>"Lock Bootloader"</strong> in your browser.</li>
+      <li>A menu appears on the phone again. Use the <strong>volume buttons</strong> to select the lock option.</li>
+      <li>Confirm with the <strong>Power button</strong>.</li>
+    </ol>
+    <p>
+      The screen should now display in green text:<br><br>
+      <code>Device State: locked (<span style="color:#ff3333;">unlockable</span>)</code>.
+    </p>
+
+    <h2>4. First Boot &amp; Verification</h2>
+    <p>
+      When "Locked" is shown, you can start the phone. Press the <strong>Power button</strong>
+      (next to "Start" in the on-screen menu).
+    </p>
+    <p>
+      On boot you'll see a yellow warning message:<br><br>
+      <em>"Your device is loading a different operating system."</em>
+    </p>
+    <p>
+      This is <strong>normal</strong> and will always be there from now on — it tells you that stock Google Android is no longer running.
+    </p>
+
+    <blockquote style="border-color: #00ffcc;">
+      <strong>Trust but verify:</strong><br><br>
+      This warning screen also displays an ID. Compare it with the
+      <strong>"Verified boot key hash"</strong> section on the GrapheneOS website where you ran the installation (scroll down to your model).
+      If the hashes match: congratulations, your system is clean and securely installed! <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-39db6d)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg>
+    </blockquote>
+
+    <h2>5. Life with GrapheneOS</h2>
+    <p>
+      Your Pixel is now hardened. No Play Store out of the box — but full control.
+      Install apps via F-Droid, Aurora Store, or use GrapheneOS's own "Sandboxed Google Play" services
+      if you absolutely need push notifications or Maps.
+    </p>
+    <p>
+      Welcome to the other side.
+    </p>
+
+   <div class="box" style="border-style: dashed; border-color: #00ffcc;">
+  <h3>Resources &amp; Sources</h3>
+  <p style="font-size:0.95em; color: #ccc;">
+    Official GrapheneOS web installer:<br>
+    <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://grapheneos.org/install/web" target="_blank">grapheneos.org/install/web</a><br><br>
+    Android Platform Tools (communication):<br>
+    <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://developer.android.com/tools/releases/platform-tools" target="_blank">developer.android.com/platform-tools</a><br><br>
+    Support the project (donation link):<br>
+    <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://grapheneos.org/donate" target="_blank">grapheneos.org/donate</a><br><br>
+  </p>
+</div>
+
+    <div class="box">
+      <h3>Tools for Real Owners</h3>
+      <p style="font-size:0.95em;">Tools I use myself — for Bitcoin self-custody and digital sovereignty:</p>
+      <ul>
+        <li><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="4" y="4" width="5" height="28" rx="1" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.7"/><rect x="9" y="4" width="22" height="28" rx="1" fill="#1a3a38" stroke="#00ffcc" stroke-width="0.7"/><line x1="13" y1="12" x2="27" y2="12" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="16" x2="27" y2="16" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="20" x2="27" y2="20" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="24" x2="22" y2="24" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/></svg> <strong>Alien Investor Handbooks:</strong> My own ebook "GrapheneOS: Android in the Age of Surveillance" — the complete step-by-step guide covering everything only touched on here.<br><svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/buecher" target="_blank">https://alien-investor.org/buecher</a></li>
+        <li><svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Lightning" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> <strong>21bitcoin:</strong> Bitcoin-only app from Europe, ideal for DCA and stacking sats regularly (use code <strong>ALIENINVESTOR</strong>).<br><svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a></li>
+        <li>₿ <strong>BitBox:</strong> Hardware wallet for secure Bitcoin self-custody (use code <strong>ALIENINVESTOR</strong>).<br><svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a></li>
+        <li><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-label="Satellite dish" role="img"><path d="M4 24 A16 16 0 0 1 20 8" fill="#00ffcc" fill-opacity="0.06" stroke="#00ffcc" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="8" r="2.8" fill="#00ffcc"/><line x1="20" y1="8" x2="28" y2="4" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><path d="M15 13 A6 6 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/><path d="M12 16 A9 9 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.45"/></svg> <strong>Proton:</strong> Swiss all-round protection for email, VPN, and cloud — minimal data footprint, maximum security.<br><svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a></li>
+      </ul>
+      <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">Disclosure: These are affiliate links. Using them supports my work at no extra cost to you. Thanks! <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-aff" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-aff)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg></p>
+    </div>
+  </article>
+
+  <div class="like-button">
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-39db6d)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Like</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+
+  <script>
+    (function() {
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      const btn = document.getElementById('likeButton');
+      const msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      });
+    })();
+  </script>
+
+  <div class="back-links">
+    <a href="/en/blog.html" style="font-size: 1.1em;">← Back to Blog Overview</a>
+    <a href="/en/index.html" style="font-size: 1.1em;">← Back to Mission Control</a>
+  </div>
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+      <h3 style="margin-bottom: 15px;"><svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energy" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Recharge the Engines <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Donate)</span></h3>
+      <a href="/en/spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">Send fuel to the mothership</a>
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">Thanks for your support — for free content, financial sovereignty, and the extraterrestrial resistance! <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-39db6d" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-39db6d" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-39db6d)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-39db6d)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg></p>
+  </div>
+
+  <footer>
+    <p><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Contact" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> Contact: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    <p style="margin-top: 20px;"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-39db6d" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-39db6d)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <strong>Disclaimer:</strong><br><br>Not financial, tax, or legal advice. Personal opinion only. Installation is at your own risk.</p>
+  </footer>
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>

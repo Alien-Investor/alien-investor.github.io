@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NextDNS – The Firewall Against Surveillance and Censorship by Your Internet Provider | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Done with tracking and network blocks: why standard DNS from your ISP threatens your privacy and how NextDNS protects you.">
+  <link rel="canonical" href="/en/DNS.html">
+  <link rel="alternate" hreflang="de" href="/DNS.html">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 0 15px 20px 15px; /* Mobile-Optimierung */
+    }
+
+    /* --- TYPOGRAFIE --- */
+    h1, h2, h3 {
+      color: #00ffcc;
+    }
+    h1 {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    /* --- LINKS (Neon-Glow) --- */
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc; /* Der Alien-Effekt */
+    }
+
+    /* --- STANDARD ELEMENTE --- */
+    code {
+      background-color: #111;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      color: #0f0;
+      font-family: monospace;
+    }
+    em { color: #ccc; }
+
+    .byline {
+      margin-top: -0.8em;
+      margin-bottom: 2em;
+      color: #ccc;
+      font-style: italic;
+      text-align: center;
+    }
+
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
+
+    /* --- BOXEN --- */
+    .box {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 1em; }
+
+    .recommendation-box {
+      margin: 2em 0;
+      padding: 1em;
+      border: 1px dashed #00ffcc;
+      border-radius: 8px;
+      text-align: center;
+      background-color: #050505;
+    }
+    .recommendation-box h3 {
+      margin-top: 0;
+      font-size: 1.1em;
+      color: #00ffcc;
+    }
+
+    /* --- LIKE BUTTON --- */
+    .like-button {
+      margin: 3em 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+    }
+    .like-button button {
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+    .like-button button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
+    }
+
+    /* --- NAVIGATION --- */
+    .top-nav {
+      padding: 10px 0;
+      font-size: 0.9em;
+    }
+    .back-links {
+      margin-top: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="/en/index.html">← Back to Mission Control</a>
+  </div>
+
+  <h1>NextDNS – The Firewall Against Surveillance and Censorship by Your Internet Provider</h1>
+  <p class="byline"><em>by Alien Investor</em></p>
+
+  <article id="content">
+    <p>
+      The Domain Name System (DNS) is the phone book of the internet. Without DNS, your browser has no idea
+      which IP address is behind <code>google.com</code> or <code>alien-investor.org</code>.
+      By default, this phone book is provided by your internet service provider (ISP) — think Deutsche Telekom
+      or Vodafone.
+    </p>
+    <p>
+      The problem: whoever controls the phone book doesn't just see who you're "calling" — they can
+      also block calls or route you to the wrong number. DNS is a critical control point
+      for metadata (which domains you resolve) and for filtering mechanisms at the resolver level.
+    </p>
+    <p>
+      My current tool of choice for digital self-defense is <strong>NextDNS</strong>.
+      Here's why you should make the switch and what it means technically.
+    </p>
+
+    <h2>1. The Status Quo: Your ISP Is Watching</h2>
+    <p>
+      The major providers operate in a tension between network stability,
+      legal obligations, and commercial interests. The result for your privacy is often sobering.
+    </p>
+
+    <h3>Data Retention and Commerce</h3>
+    <p>
+      Even with GDPR in play, there are grey areas and mandatory security processes.
+    </p>
+    <ul>
+      <li>
+        <strong>Deutsche Telekom:</strong> Like virtually all providers, it logs and processes
+        connection and security data (e.g. for fault analysis, abuse and attack detection).
+        That's understandable for network operations — but it means: metadata is generated and may be retained for a limited period.
+      </li>
+      <li>
+        <strong>Vodafone:</strong> Beyond operations and security, large corporations typically have
+        processes for analytics and marketing. What matters is what you actively consent to (opt-ins).
+        Even if "only" domains are visible, they often enable very clear conclusions about your interests and habits.
+      </li>
+    </ul>
+
+    <h3>DNS Blocks: The CUII</h3>
+    <p>
+      In Germany, DNS blocks are implemented via the "Clearingstelle Urheberrecht im Internet" (CUII).
+      The model remains controversial, because here rights holders and providers operate a blocking infrastructure.
+      Key context: under the CUII framework, every DNS block is subject to judicial review.
+    </p>
+    <p>
+      Technically this works as DNS manipulation/redirection: when you try to resolve a blocked domain,
+      you don't get the "normal" resolution — instead you're redirected to a blocking/info page from the provider (or a CUII landing page),
+      or the resolution simply fails from the user's perspective.
+    </p>
+    <p>
+      Bottom line: with provider DNS, you accept an internet that can be filtered at the resolver level.
+    </p>
+
+    <h2>2. NextDNS: Your DNS Firewall in the Cloud</h2>
+    <p>
+      NextDNS flips the script. It's a resolver with security and privacy features:
+      block lists, anti-phishing, anti-malware, and tracking protection — centrally managed for all your devices.
+      (Important: this is not a VPN. It doesn't replace end-to-end encryption of your connections — it protects the DNS layer.)
+    </p>
+
+    <h3>Sovereignty Over Your Data</h3>
+    <p>
+      Unlike your ISP, here you control the logging.
+    </p>
+    <ul>
+      <li><strong>No-Logging:</strong> You can disable logs entirely — no logs will be generated for that configuration.</li>
+      <li><strong>Data Residency:</strong> If you need logs for troubleshooting, you can choose where they're stored
+      (e.g. <strong>Switzerland</strong>). This can reduce your legal attack surface — but it's no guarantee of untouchability.</li>
+    </ul>
+
+    <h3>Active Defense Against Trackers (CNAME Uncloaking)</h3>
+    <p>
+      Modern trackers often disguise themselves as harmless subdomains of the website you're visiting
+      (e.g. <code>metrics.newspaper.com</code> instead of <code>tracker.adtech.com</code>). Browser blockers can sometimes be fooled by this.
+      NextDNS can trace the CNAME chain during resolution and apply block lists to the "hidden" targets as well —
+      the request is blocked before it ever leaves your device.
+    </p>
+
+    <h3>Protection for IoT Devices</h3>
+    <p>
+      Your smart TV (Samsung, Xiaomi, etc.) and your smart light bulbs are constantly phoning home.
+      Since you can't install an adblocker on these devices, a DNS filter is often the only
+      practical line of defense. It blocks telemetry and tracking domains from manufacturers right at the source.
+    </p>
+
+    <blockquote>
+      "NextDNS isn't just a phone book — it's a bouncer. You decide who gets into your network
+      and what data goes out."
+    </blockquote>
+
+    <h2>3. Performance and Technical Reality</h2>
+    <p>
+      A common argument against external DNS providers is latency (ping).
+      In practice, this depends heavily on routing. You can test it yourself, e.g. via
+      <code>ping.nextdns.io</code> (typically showing single-digit to low double-digit millisecond values — depending on your location and network).
+    </p>
+    <p>
+      <strong>More important than ping:</strong> Since NextDNS prevents ads and trackers from resolving in the first place,
+      your browser often has to load far less. In everyday use, this speeds up page load times
+      significantly more than a few milliseconds of DNS latency will cost you.
+    </p>
+
+    <h2>4. The Downsides: Convenience vs. Security</h2>
+    <p>
+      If you want sovereignty, you have to take responsibility. NextDNS is not a "set-and-forget" system
+      for people who don't want to be bothered.
+    </p>
+
+    <h3>The False Positive Problem</h3>
+    <p>
+      Enable aggressive filter lists and you will sometimes block things you actually need.
+    </p>
+    <ul>
+      <li><strong>Banking apps:</strong> Some apps use fraud protection services that look like trackers.
+      If those domains get blocked, the app may misbehave or fail to launch.</li>
+      <li><strong>Smart home:</strong> Block your smart TV's domains and you might also break
+      updates or app stores.</li>
+    </ul>
+    <p>
+      You need to be willing to check the logs (if enabled) and put domains on a <strong>whitelist</strong>.
+      That's the price of freedom.
+    </p>
+
+    <h3>Shift of Trust</h3>
+    <p>
+      Let's be honest: you don't eliminate the trust problem entirely — you shift it.
+      Instead of trusting Telekom, you now trust NextDNS. The difference: you get real levers
+      (logging off, data residency, filter logic) — and you can harden your setup transparently.
+    </p>
+
+    <h2>5. Implementation: How to Get Started with NextDNS</h2>
+
+    <h3>The Gold Standard: FritzBox with DNS-over-TLS (DoT)</h3>
+    <p>
+      The FritzBox is the standard router in Germany. Since Fritz!OS 7.20 it supports DNS-over-TLS (DoT).
+      This is the best approach because it protects your entire home network in one move.
+    </p>
+    <ol>
+      <li>Create a profile on the NextDNS website.</li>
+      <li>In the FritzBox, go to <code>Internet -> Account Information -> DNS Server</code>.</li>
+      <li>Enable "Encrypted name resolution on the internet (DNS over TLS)".</li>
+      <li>Enter your NextDNS address (e.g. <code>[Your-ID].dns.nextdns.io</code>).</li>
+      <li>If your FritzBox offers a certificate verification option: enable it (so you're not redirected to a fake resolver).</li>
+    </ol>
+    <p>
+      <em>Important:</em> With DoT (or DoH), the configuration ID is transmitted in the hostname/URL. In this case,
+      "Linked IP"/DynDNS is generally <strong>not</strong> needed. Linked IP is more of a workaround when you can only use classic
+      DNS IPv4 addresses without an ID.
+    </p>
+
+    <h3>On the Go: iOS and Android</h3>
+    <p>
+      No app required for your smartphone.
+      iOS supports native configuration profiles that hook deep into the system and run stably.
+      Android offers a simple DoT setting (hostname) under "Private DNS".
+      This keeps you protected on mobile networks and on foreign Wi-Fi.
+    </p>
+
+    <h2>6. Alien Verdict: Take Back Control</h2>
+    <p>
+      Switching to a private resolver like NextDNS is a strategic move.
+      You reduce tracking via ISP-DNS and make DNS blocks significantly harder (or at least more visible),
+      while simultaneously hardening your network against malware and phishing.
+    </p>
+    <p>
+      Yes, it takes a bit of work upfront (whitelisting). But for anyone holding Bitcoin,
+      handling sensitive data, or simply refusing to be a transparent citizen, this step is powerful.
+      <strong>Default settings are for tourists. Owners configure their own infrastructure.</strong>
+    </p>
+
+    <div class="box">
+      <h3>Tools for Real Owners (Advertising/Affiliate)</h3>
+      <p style="font-size:0.95em;">
+        Tools I use myself — for Bitcoin self-custody and digital sovereignty:
+      </p>
+      <ul>
+            <li>
+          <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Lightning bolt" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> <strong>Buy Bitcoin in Europe – 21bitcoin:</strong><br>
+          Bitcoin-only app from Europe, ideal for DCA and stacking sats regularly — no shitcoins.<br>
+          Use code <strong>ALIENINVESTOR</strong> for a permanent 0.2 percentage point fee reduction
+          on instant and savings plan purchases.<br>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
+        </li>
+        <li>
+          ₿ <strong>Bitcoin in Self-Custody:</strong><br>
+          Hardware wallet instead of exchange account. I use the BitBox — there's the classic BitBox02 and the new
+          BitBox for iPhone (Nova).<br>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
+        </li>
+        <li>
+          <svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-label="Satellite dish" role="img"><path d="M4 24 A16 16 0 0 1 20 8" fill="#00ffcc" fill-opacity="0.06" stroke="#00ffcc" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="8" r="2.8" fill="#00ffcc"/><line x1="20" y1="8" x2="28" y2="4" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><path d="M15 13 A6 6 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/><path d="M12 16 A9 9 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.45"/></svg> <strong>Privacy &amp; Mail:</strong><br>
+          For email, VPN and cloud I use Proton — data-minimal and free of Big Tech dependency.<br>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
+        </li>
+      </ul>
+      <p style="font-size:0.85em; color:#aaa;">
+        Note: Some of these links are affiliate links. If you use them, you support my work
+        at no extra cost to you. Thanks! <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-aff" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-aff)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg>
+      </p>
+    </div>
+
+  </article>
+
+  <div class="like-button">
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-fccf8a)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Like</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+
+  <script>
+    (function() {
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      const btn = document.getElementById('likeButton');
+      const msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      });
+    })();
+  </script>
+
+  <div class="box" style="border-style: dashed; border-color: #333;">
+    <h3>Sources (Selection)</h3>
+    <p style="font-size:0.95em; color: #ccc;">
+      This article is based on the official NextDNS documentation (logging/setup/diagnostics),
+      the CUII's public FAQ on DNS blocks, and AVM's information on FRITZ!OS (DoT support).
+      As of: 2025.
+    </p>
+  </div>
+
+  <div class="back-links">
+    <a href="/en/blog.html" style="font-size: 1.1em;">← Back to Blog Overview</a>
+    <a href="/en/index.html" style="font-size: 1.1em;">← Back to Mission Control</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+      <h3 style="margin-bottom: 15px;">
+        <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energy" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Recharge
+        <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Donate)</span>
+      </h3>
+
+      <a href="/en/spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+        Send fuel to the mothership
+      </a>
+
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Thanks for your support — for free content, financial sovereignty, and the extraterrestrial resistance! <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-fccf8a" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-fccf8a" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-fccf8a)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-fccf8a)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg>
+      </p>
+  </div>
+
+  <footer>
+    <p><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Contact" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> Contact: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+
+    <p style="margin-top: 20px;">
+      <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-fccf8a" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-fccf8a)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <strong>Disclaimer:</strong><br><br>
+      This article does not constitute financial, tax, or legal advice.<br>
+      I'm sharing my personal alien opinion here — independent, rebellious, and free.<br>
+      Technology evolves. Audit your own setup and act at your own responsibility.
+    </p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>
