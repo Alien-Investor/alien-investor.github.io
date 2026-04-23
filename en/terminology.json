@@ -1,0 +1,80 @@
+{
+  "_note": "Alien Investor — canonical DE→EN terminology. Apply these translations consistently across all articles.",
+
+  "financial_terms": {
+    "Aktie": "stock / share",
+    "Aktienanalyse": "stock analysis",
+    "Aktionär": "shareholder",
+    "Depot": "brokerage account",
+    "Depotübertragung": "account transfer",
+    "Direktregistrierung": "direct registration (DRS)",
+    "Dividende": "dividend",
+    "Eigenkapitalrendite": "return on equity (ROE)",
+    "EPS": "EPS",
+    "ETF": "ETF",
+    "Fiatgeld / Papiergeld": "fiat money",
+    "Freiheitsindex": "freedom index",
+    "Gewinn": "profit / earnings",
+    "Inflation": "inflation",
+    "Kaufkraft": "purchasing power",
+    "Kaufkraftverlust": "loss of purchasing power",
+    "KGV": "P/E ratio",
+    "Marktkapitalisierung": "market capitalization",
+    "Namensaktie": "registered share (name-registered)",
+    "Schuldgeldsystem": "debt-based monetary system",
+    "Sparplan": "savings plan",
+    "Umsatz": "revenue",
+    "Vermögen": "wealth / assets",
+    "Verschuldungsgrad": "debt-to-equity ratio",
+    "Wertpapier": "security",
+    "Zentralbank": "central bank",
+    "Geldmenge": "money supply",
+    "Gelddrucken": "money printing",
+    "Rohstoff": "commodity",
+    "Edelmetall": "precious metal"
+  },
+
+  "bitcoin_terms": {
+    "Blockchain": "blockchain",
+    "Cold Wallet / Kaltgeldbörse": "cold wallet",
+    "Full Node": "full node",
+    "Halving": "halving",
+    "Hardware Wallet": "hardware wallet",
+    "Hashrate": "hashrate",
+    "Lightning Network": "Lightning Network",
+    "Mempool": "mempool",
+    "Miner / Mining": "miner / mining",
+    "Multisig": "multisig",
+    "Nostr": "Nostr",
+    "Peer-to-Peer": "peer-to-peer",
+    "Satoshi / Sats": "satoshi / sats",
+    "Seed-Phrase": "seed phrase",
+    "Selbstverwahrung": "self-custody",
+    "Transaktion": "transaction",
+    "UTXO": "UTXO",
+    "Verwahrung": "custody",
+    "Wallet": "wallet"
+  },
+
+  "privacy_tech_terms": {
+    "Cypherpunk": "cypherpunk",
+    "Datenschutz": "data protection / privacy",
+    "Dezentralisierung": "decentralization",
+    "Freiheitstechnologie": "freedom technology",
+    "GrapheneOS": "GrapheneOS",
+    "Konsens": "consensus",
+    "OpSec": "OpSec",
+    "Privatsphäre": "privacy",
+    "Souveränität": "sovereignty",
+    "Überwachung": "surveillance",
+    "Verschlüsselung": "encryption"
+  },
+
+  "tone_guidelines": {
+    "style": "Clear, direct, technically precise, slightly rebellious. No corporate speak. No hype jargon.",
+    "avoid": ["leverage synergies", "cutting-edge", "game-changer", "revolutionary", "innovative solution"],
+    "disclaimer": "Keep the standard financial disclaimer (Haftungsausschluss) at the bottom of finance articles. Translate it faithfully.",
+    "author": "Alien Investor (keep as-is)",
+    "brand": "Alien Investor (keep as-is)"
+  }
+}
