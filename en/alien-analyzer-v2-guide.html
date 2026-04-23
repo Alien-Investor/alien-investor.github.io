@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Alien Analyzer V2 – Stock Analysis in 4 Tabs Explained | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The Alien Analyzer V2 analyzes stocks without a subscription and without login – directly in your browser. An introduction to the four tabs: Fair Value, Multiples, Dividends, and Quality Check.">
+  <link rel="canonical" href="https://alien-investor.org/en/alien-analyzer-v2-guide.html">
+  <link rel="alternate" hreflang="de" href="https://alien-investor.org/alien-analyzer-v2-guide.html">
+  <link rel="alternate" hreflang="en" href="https://alien-investor.org/en/alien-analyzer-v2-guide.html">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 0 15px 20px 15px;
+    }
+
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
+    h2 { margin-top: 2.5em; border-bottom: 1px solid #1a3a33; padding-bottom: 8px; }
+
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+
+    em { color: #ccc; }
+
+    .byline {
+      margin-top: -0.8em;
+      margin-bottom: 2em;
+      color: #ccc;
+      font-style: italic;
+      text-align: center;
+    }
+
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
+
+    .video-wrapper {
+      display: flex;
+      justify-content: center;
+      margin: 2em 0;
+    }
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 560px;
+      padding-bottom: 31.25%;
+      height: 0;
+      border: 1px solid #00ffcc;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(0, 255, 204, 0.1);
+    }
+    @media (max-width: 600px) {
+      .video-container { padding-bottom: 56.25%; }
+    }
+    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
+    .tab-title-img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      margin: 1em 0 0.8em 0;
+    }
+
+    .screenshot {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      border: 1px solid #1a3a33;
+      margin: 0.8em 0 0.4em 0;
+    }
+
+    .screenshot-caption {
+      text-align: center;
+      font-size: 0.8em;
+      color: #555;
+      margin-bottom: 1.5em;
+    }
+
+    .cta-box {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .cta-box p { margin: 0 0 1em 0; color: #bbb; }
+    .cta-box a { font-size: 1.2em; font-weight: bold; border-bottom: 2px solid #00ffcc; padding-bottom: 3px; }
+
+    .like-button {
+      margin: 3em 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+    }
+    .like-button button {
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+    .like-button button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
+    }
+
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+
+    .back-links {
+      margin-top: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="/en/index.html">← Back to Mission Control</a>
+  </div>
+
+  <h1><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-625b08)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Alien Analyzer V2 – Stock Analysis in 4 Tabs Explained</h1>
+  <p class="byline"><em>by Alien Investor</em></p>
+
+  <div class="video-wrapper">
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/nDJLBXPShVw" title="Alien Analyzer V2 – Stock Analysis Tool Introduction" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <article id="content">
+
+    <p>
+      No Bloomberg terminal, no expensive subscription, no login. The <strong>Alien Analyzer V2</strong> is a
+      browser-based value investing tool – free, directly on alien-investor.org.
+      Enter a ticker, hit Enter – and within seconds you get a structured overview
+      of a stock's valuation, metrics, and quality.
+    </p>
+    <p>
+      Data comes from Yahoo Finance via a dedicated proxy. No API key required.
+      The tool runs entirely in the browser – a single HTML file, no framework, no build step.
+      Here is what the four tabs show.
+    </p>
+
+    <h2>Tab 1 – Fair Value</h2>
+    <img src="/aa2-tab1-titel.png" alt="Tab 1 – Fair Value" class="tab-title-img">
+    <p>
+      The most important tab for value investors. You see the historical price chart –
+      and above it a <strong>P/E ratio fan</strong>: several lines, calculated from the EPS history
+      multiplied by various historical P/E levels (lower, mid, upper percentile).
+    </p>
+    <p>
+      Is the current price well above the fan? Historically expensive.
+      Is it below or at the lower edge? Potential undervaluation.
+      The sidebar gives you the Fair Value Indicator as a compact verdict.
+    </p>
+    <img src="/aa2-tab1-screenshot.png" alt="Fair Value – NVIDIA" class="screenshot">
+    <p class="screenshot-caption">NVIDIA in the Fair Value tab – P/E fan showing historical valuation corridors</p>
+
+    <h2>Tab 2 – Multiples</h2>
+    <img src="/aa2-tab2-titel.png" alt="Tab 2 – Multiples" class="tab-title-img">
+    <p>
+      A single snapshot figure says little. What matters is how it compares to its own history.
+      Tab 2 shows <strong>P/E, P/CF, P/S, and P/B</strong> historically as lines – over up to 20 years.
+    </p>
+    <p>
+      This lets you see at a glance whether the current level is historically high or moderate.
+      A GAAP filter marks outliers caused by one-time effects – so that exceptional write-downs
+      do not distort the picture.
+    </p>
+    <img src="/aa2-tab2-screenshot.png" alt="Multiples – Newmont" class="screenshot">
+    <p class="screenshot-caption">Newmont in the Multiples tab – P/E, P/B, P/S, and P/CF over time</p>
+
+    <h2>Tab 3 – Dividends</h2>
+    <img src="/aa2-tab3-titel.png" alt="Tab 3 – Dividends" class="tab-title-img">
+    <p>
+      The most relevant tab for dividend investors. The <strong>dividend yield</strong> is displayed
+      historically as a bar chart, supplemented by a smoothed yield line
+      and a color-coded yield corridor – showing where the yield was historically
+      considered attractive or expensive.
+    </p>
+    <p>
+      The sidebar adds <strong>dividend growth (DPS)</strong> over 12 months, 2, 5, and 10 years.
+      This way you see not just the current yield, but whether the company
+      is consistently growing it.
+    </p>
+    <img src="/aa2-tab3-screenshot.png" alt="Dividends – Exxon Mobil" class="screenshot">
+    <p class="screenshot-caption">Exxon Mobil in the Dividends tab – yield history and dividend growth</p>
+
+    <h2>Tab 4 – Quality Check &amp; Alien Assessment</h2>
+    <img src="/aa2-tab4-titel.png" alt="Tab 4 – Quality Check &amp; Alien Assessment" class="tab-title-img">
+    <p>
+      Numbers alone are not enough. Tab 4 sorts the key fundamentals into a
+      <strong>traffic-light table</strong>: ROE, margins, debt/equity, free cash flow, equity ratio,
+      earnings growth, share buybacks – each metric with a clear signal:
+      GOOD, STRONG, EXPENSIVE, HIGH, LOW, or STABLE.
+    </p>
+    <p>
+      At the end of the tab the <strong>Alien Assessment</strong> appears – an automatically generated
+      plain-text comment explaining the particularities of the stock in question.
+      For a REIT, for example: why P/E is irrelevant here and FFO is the decisive metric.
+      For a commodity company: why cyclical earnings slumps structurally distort multiples.
+      The tool recognizes these special cases and provides context instead of bare numbers.
+    </p>
+    <img src="/aa2-tab4-screenshot.png" alt="Quality Check – Realty Income" class="screenshot">
+    <p class="screenshot-caption">Realty Income in the Quality Check – traffic-light table and Alien Assessment</p>
+
+    <h2>Conclusion</h2>
+    <p>
+      The Alien Analyzer V2 is not a replacement for your own research and not a trading signal.
+      It is a scan tool – fast, free, no registration needed.
+      Enter a ticker, click through four tabs: you have more context than most retail investors
+      who only look at the current price.
+    </p>
+    <p>
+      Which stocks are supported? Essentially anything with a Yahoo Finance ticker –
+      US stocks, German tickers (e.g. <code>ALV.DE</code>), Swiss tickers (<code>NESN.SW</code>)
+      and many other international securities.
+    </p>
+
+    <blockquote>
+      Trust no one – manage your finances yourself.
+    </blockquote>
+
+    <div class="cta-box">
+      <p>The tool is free and runs directly in your browser – no login, no subscription:</p>
+      <a href="/en/alien-analyzer.html"><svg style="width:0.75em;height:0.95em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-625b08)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Open Alien Analyzer V2 →</a>
+    </div>
+
+  </article>
+
+  <div class="like-button">
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-625b08)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Like this</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+
+  <script>
+    (function() {
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      const btn = document.getElementById('likeButton');
+      const msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      });
+    })();
+  </script>
+
+  <div class="back-links">
+    <a href="/en/blog.html" style="font-size: 1.1em;">← Back to Blog</a>
+    <a href="/en/index.html" style="font-size: 1.1em;">← Back to Mission Control</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+    <h3 style="margin-bottom: 15px;">
+      <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energy" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Recharge energy
+      <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Donate)</span>
+    </h3>
+    <a href="/en/spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+      Send fuel to the mothership
+    </a>
+    <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+      Thanks for your support – for free content, financial sovereignty, and the extraterrestrial resistance! <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-625b08" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-625b08" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-625b08)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-625b08)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg>
+    </p>
+  </div>
+
+  <footer>
+    <p><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Contact" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> Contact: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    <p style="margin-top: 20px;">
+      <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-625b08" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-625b08)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <strong>Disclaimer:</strong><br><br>
+      Not financial, tax, or legal advice. Personal opinion only. Think for yourself.
+    </p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>

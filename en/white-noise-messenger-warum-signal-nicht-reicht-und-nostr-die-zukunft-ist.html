@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>White Noise Messenger – Why Signal Isn't Enough and Nostr Is the Future | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="White Noise Messenger analysis: how Nostr, MLS and NIP-EE solve the metadata problem and enable real digital sovereignty against chat surveillance.">
+  <link rel="canonical" href="https://alien-investor.org/en/white-noise-messenger-warum-signal-nicht-reicht-und-nostr-die-zukunft-ist.html">
+  <link rel="alternate" hreflang="de" href="https://alien-investor.org/white-noise-messenger-warum-signal-nicht-reicht-und-nostr-die-zukunft-ist.html">
+  <link rel="alternate" hreflang="en" href="https://alien-investor.org/en/white-noise-messenger-warum-signal-nicht-reicht-und-nostr-die-zukunft-ist.html">
+  <style>
+    body { background-color: #000; color: #fff; font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 0 15px 20px 15px; }
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+    code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; font-family: monospace; }
+    em { color: #ccc; }
+    .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
+    blockquote { border-left: 3px solid #00ffcc; margin: 2em 0; padding: 0.5em 1em; color: #ddd; background: #050505; font-style: italic; }
+    .box { border: 1px solid #00ffcc; background: #050505; padding: 1.5em; border-radius: 8px; margin: 2em 0; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
+    .recommendation-box { margin: 2em 0; padding: 1em; border: 1px dashed #00ffcc; border-radius: 8px; text-align: center; background-color: #050505; }
+    .recommendation-box h3 { margin-top: 0; font-size: 1.1em; color: #00ffcc; }
+
+    /* CENTERED VIDEO CONTAINER */
+    .video-wrapper { display: flex; justify-content: center; margin: 2em 0; }
+    .video-container {
+      position: relative; width: 100%; max-width: 560px; padding-bottom: 31.25%; height: 0;
+      border: 1px solid #00ffcc; border-radius: 8px; overflow: hidden; box-shadow: 0 0 15px rgba(0, 255, 204, 0.1);
+    }
+    @media (max-width: 600px) { .video-container { padding-bottom: 56.25%; } }
+    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
+    .like-button { margin: 3em 0; display: flex; align-items: center; justify-content: center; gap: 1em; font-size: 1em; }
+    .like-button button { background: #000; color: #00ffcc; border: 1px solid #00ffcc; padding: 0.6em 1.2em; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.2s ease; }
+    .like-button button:hover, .like-button button:active { background: #00ffcc; color: #000; box-shadow: 0 0 15px #00ffcc; }
+    .like-button button:disabled { border-color: #444; color: #888; background: #111; cursor: default; }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    .back-links { margin-top: 40px; text-align: center; display: flex; flex-direction: column; gap: 10px; }
+    footer { margin-top: 60px; padding: 20px; font-size: 0.85em; color: #666; border-top: 1px solid #222; text-align: center; }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="/en/index.html">← Back to Mission Control</a>
+  </div>
+
+  <h1>White Noise Messenger – Why Signal Isn't Enough and Nostr Is the Future</h1>
+  <p class="byline"><em>by Alien Investor</em></p>
+
+  <article id="content">
+    <p>
+      We are in a digital arms race. On one side: states and intelligence agencies that want to scan every private message under the guise of "child protection" (chat control, client-side scanning). On the other side: us, the citizens, who have a right to privacy.
+    </p>
+
+    <div class="video-wrapper">
+      <div class="video-container">
+        <iframe
+          src="https://www.youtube.com/embed/nIFXmOv4PBs"
+          title="White Noise Messenger Analysis"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+    <p style="text-align: center; font-size: 0.9em; color: #bbb; margin-top: -1em;">
+      <em>In this video I show you why Signal is no longer enough and how we can protect our privacy with White Noise.</em>
+    </p>
+
+    <p>
+      For a long time, Signal was considered the gold standard. But Signal has a problem: it is centralized and knows your phone number. It knows <em>who</em> is talking to <em>whom</em>. In an era where metadata can be more dangerous than the content itself, that is no longer enough.
+    </p>
+    <p>
+      Enter <strong>White Noise</strong>. A messenger built on the Nostr protocol, funded without venture capital, and engineered so that surveillance becomes mathematically impossible.
+    </p>
+
+    <h2>1. The Problem: Walled Gardens and the Metadata Trap</h2>
+    <p>
+      Even with WhatsApp or Signal, your messages are "end-to-end encrypted" (E2EE). That's good, but not enough.
+    </p>
+    <ul>
+      <li><strong>The server sees everything:</strong> Even if Signal can't read the content, the server sees the "social graph". It knows you're messaging an investigative journalist at 2 a.m. That metadata is often more valuable to intelligence agencies than the text itself.</li>
+      <li><strong>Identity coercion:</strong> You need a phone number. That irreversibly ties your digital identity to your physical person (SIM registration, KYC).</li>
+      <li><strong>Censorship risk:</strong> A central server can be shut down or blocked. An app in the Apple App Store can be removed under government pressure.</li>
+    </ul>
+
+    <h2>2. The Solution: White Noise &amp; Nostr</h2>
+    <p>
+      White Noise is not a company — it's software that uses a protocol: <strong>Nostr</strong> (Notes and Other Stuff Transmitted by Relays).
+    </p>
+    <ul>
+      <li><strong>No phone number:</strong> Your identity is a cryptographic key pair. Nobody knows who is behind the key.</li>
+      <li><strong>No central server:</strong> Messages travel through "dumb" relays. If one relay blocks you, you simply use another. There is no kill switch.</li>
+      <li><strong>Freedom tech:</strong> The project is backed by cypherpunks — not investors who want to sell your data.</li>
+    </ul>
+
+    <blockquote>
+      "White Noise is a technical attempt to shift the power balance between state and individual back in favour of the individual."
+    </blockquote>
+
+    <h2>3. The Technical Magic: MLS and NIP-EE</h2>
+    <p>
+      Nostr was originally not built for private chats. White Noise changes that radically by implementing <strong>MLS (Messaging Layer Security)</strong> via the new standard <strong>NIP-EE</strong>.
+    </p>
+
+    <h3>Why MLS Changes Everything</h3>
+    <p>
+      In conventional messengers, group communication is inefficient. White Noise uses MLS (IETF RFC 9420). Participants are organized like leaves on a tree.
+    </p>
+    <ul>
+      <li><strong>Scalability:</strong> Encrypted groups with thousands of participants become highly efficient.</li>
+      <li><strong>Forward secrecy:</strong> Even if your key is stolen today, old messages cannot be decrypted.</li>
+      <li><strong>Post-compromise security:</strong> The system "heals" itself through automatic key renewal.</li>
+    </ul>
+
+    <h3>Cloak for Metadata: Sealed Sender</h3>
+    <p>
+      To prevent the relay server from seeing who is talking to whom, White Noise uses "Gift Wraps" (NIP-59). To the relay, everything looks like white noise. It forwards data without knowing who the actual sender or recipient is.
+    </p>
+
+    <h2>4. Infrastructure: Tor &amp; Blossom</h2>
+    <p>
+      Even the best app is useless if the server can see your IP address.
+    </p>
+    <ul>
+      <li><strong>Tor integration:</strong> White Noise is designed to run over the Tor network. This decouples your IP from your Nostr identity.</li>
+      <li><strong>Blossom server (media):</strong> Images and voice messages are encrypted <em>before</em> upload. The server hosts only data noise.</li>
+    </ul>
+
+    <h2>5. Censorship Resistance: The Zap Store</h2>
+    <p>
+      White Noise strategically relies on the <strong>Zap Store</strong>. This is a decentralized app store built on Nostr. As long as at least one relay hosts the manifest, you can install the app — bypassing the gatekeepers in Silicon Valley.
+    </p>
+
+    <div class="box">
+      <h3>Get Started: Downloads &amp; Links</h3>
+      <ul>
+        <li>
+          <strong>White Noise App:</strong> Download for iOS &amp; Android. <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://www.whitenoise.chat/download" target="_blank" rel="noopener">whitenoise.chat/download</a>
+        </li>
+        <li>
+          <strong>Zap Store:</strong> Decentralized Nostr app store. <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://nostrapps.com/" target="_blank" rel="noopener">nostrapps.com</a>
+        </li>
+      </ul>
+    </div>
+
+    <h2>6. Alien Verdict: Sovereignty Is Not a Feature — It's Work</h2>
+    <p>
+      White Noise is currently the most robust answer to the surveillance state. If the EU rolls out chat control, White Noise is technically incapable of complying. There is no server to seize and no CEO to arrest.
+    </p>
+
+    <div class="recommendation-box">
+      <h3>The Foundation: Turn Your Phone into a Digital Bunker</h3>
+      <p>
+        A secure messenger is only half the equation. Real sovereignty requires a hardened OS:
+      </p>
+      <p style="margin-top:1em;"><strong>Background reading:</strong> <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/grapheneos-sicheres-android.html">GrapheneOS – Secure Android</a>
+      </p>
+      <p style="margin-top:1em;"><strong>Practical guide:</strong> <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/grapheneos-installation.html">GrapheneOS Installation</a>
+      </p>
+    </div>
+
+    <div class="box">
+      <h3>Tools for Real Owners</h3>
+      <p style="font-size:0.95em;">Tools I use myself — for Bitcoin self-custody and digital sovereignty:</p>
+      <ul>
+        <li><svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Lightning" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> <strong>21bitcoin:</strong> Bitcoin-only app (code <strong>ALIENINVESTOR</strong>). <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a></li>
+        <li>₿ <strong>BitBox:</strong> Hardware wallet (code <strong>ALIENINVESTOR</strong>). <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a></li>
+        <li><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-label="Satellite dish" role="img"><path d="M4 24 A16 16 0 0 1 20 8" fill="#00ffcc" fill-opacity="0.06" stroke="#00ffcc" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="8" r="2.8" fill="#00ffcc"/><line x1="20" y1="8" x2="28" y2="4" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><path d="M15 13 A6 6 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/><path d="M12 16 A9 9 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.45"/></svg> <strong>Proton:</strong> Privacy mail &amp; VPN. <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a></li>
+      </ul>
+      <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">Note: Affiliate links. Support my work at no extra cost to you. Thanks! <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-aff" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-aff)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg></p>
+    </div>
+  </article>
+
+  <div class="box" style="border-style: dashed; border-color: #333;">
+    <h3>Resources &amp; Sources</h3>
+    <p style="font-size:0.95em; color: #ccc;">
+      Based on documentation for the <a href="https://www.whitenoise.chat/" target="_blank">White Noise project</a>, the <a href="https://datatracker.ietf.org/doc/rfc9420/" target="_blank">MLS specification (RFC 9420)</a> and the <a href="https://github.com/nostr-protocol/nips" target="_blank">Nostr protocol</a>.
+    </p>
+  </div>
+
+  <div class="like-button">
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-4bc2af)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Like</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+
+  <script>
+    (function() {
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      const btn = document.getElementById('likeButton');
+      const msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      });
+    })();
+  </script>
+
+  <div class="back-links">
+    <a href="/en/blog.html" style="font-size: 1.1em;">← Back to Blog Overview</a>
+    <a href="/en/index.html" style="font-size: 1.1em;">← Back to Mission Control</a>
+  </div>
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+      <h3 style="margin-bottom: 15px;"><svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energy" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Recharge Energy <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Donate)</span></h3>
+      <a href="/en/spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">Send fuel to the mothership</a>
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">Thanks for your support — for free content, financial sovereignty and the extraterrestrial resistance! <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-4bc2af" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-4bc2af" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-4bc2af)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-4bc2af)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg></p>
+  </div>
+
+  <footer>
+    <p><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Contact" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> Contact: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    <p style="margin-top: 20px;"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-4bc2af" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-4bc2af)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <strong>Disclaimer:</strong><br><br>No financial, tax or legal advice. Personal opinion only. Think for yourself.</p>
+  </footer>
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>

@@ -1,0 +1,2105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alien Analyzer – Alien Investor</title>
+  <meta name="description" content="Alien Analyzer – stock valuation tool by Alien Investor. Fair value, multiples, dividends and quality check powered by Twelve Data &amp; Alpha Vantage.">
+  <link rel="canonical" href="/en/alien-analyzer.html">
+  <link rel="alternate" hreflang="de" href="/alien-analyzer.html">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👽</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --neon: #00ffcc;
+      --neon-dim: rgba(0,255,204,0.15);
+      --neon-mid: rgba(0,255,204,0.4);
+      --red: #ff4466;
+      --red-dim: rgba(255,68,102,0.15);
+      --yellow: #ffcc44;
+      --orange: #ff8844;
+      --bg: #000;
+      --card-bg: #050f0d;
+      --border: rgba(0,255,204,0.2);
+      --text-dim: #4a7a6d;
+      --text-mid: #7ab8a8;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      background: var(--bg);
+      color: var(--neon);
+      font-family: 'Share Tech Mono', monospace;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+    body::before {
+      content:'';
+      position:fixed; inset:0;
+      background-image:
+        radial-gradient(1px 1px at 10% 15%,rgba(0,255,204,.4) 0%,transparent 100%),
+        radial-gradient(1px 1px at 30% 40%,rgba(0,255,204,.25) 0%,transparent 100%),
+        radial-gradient(1px 1px at 55% 20%,rgba(0,255,204,.35) 0%,transparent 100%),
+        radial-gradient(1px 1px at 70% 60%,rgba(0,255,204,.2) 0%,transparent 100%),
+        radial-gradient(1px 1px at 85% 30%,rgba(0,255,204,.3) 0%,transparent 100%),
+        radial-gradient(1px 1px at 20% 75%,rgba(0,255,204,.2) 0%,transparent 100%),
+        radial-gradient(1px 1px at 45% 85%,rgba(0,255,204,.3) 0%,transparent 100%),
+        radial-gradient(1px 1px at 90% 80%,rgba(0,255,204,.25) 0%,transparent 100%);
+      pointer-events:none; z-index:0;
+    }
+    body::after {
+      content:'';
+      position:fixed; inset:0;
+      background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.15) 2px,rgba(0,0,0,.15) 4px);
+      pointer-events:none; z-index:1;
+    }
+    .container { position:relative; z-index:2; max-width:1200px; margin:0 auto; padding:30px 20px 60px; }
+
+    /* ── NAV ── */
+    .top-nav { display:flex; align-items:center; gap:16px; margin-bottom:30px; }
+    .back-link { font-size:.65rem; letter-spacing:2px; color:var(--text-dim); text-decoration:none; text-transform:uppercase; transition:color .2s; }
+    .back-link:hover { color:var(--neon); }
+    .top-nav-sep { color:var(--text-dim); opacity:.4; }
+    .top-nav-title { font-size:.6rem; letter-spacing:2px; color:var(--text-dim); }
+    .top-nav-right { margin-left:auto; display:flex; align-items:center; gap:8px; }
+    .settings-btn {
+      background:none; border:1px solid var(--border); border-radius:2px;
+      color:var(--text-dim); font-family:'Share Tech Mono',monospace; font-size:.6rem;
+      letter-spacing:2px; padding:5px 12px; cursor:pointer; transition:all .2s;
+    }
+    .settings-btn:hover { border-color:var(--neon-mid); color:var(--text-mid); }
+    .info-icon-btn {
+      background:none; border:none; cursor:pointer;
+      color:var(--text-dim); font-size:.85rem; padding:0 2px; line-height:1;
+      transition:color .2s;
+    }
+    .info-icon-btn:hover { color:var(--neon); }
+
+    /* ── HEADER ── */
+    header { text-align:center; margin-bottom:36px; position:relative; }
+    .header-glow { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:400px; height:100px; background:radial-gradient(ellipse,rgba(0,255,204,.08) 0%,transparent 70%); pointer-events:none; }
+    .logo { font-family:'Orbitron',sans-serif; font-size:clamp(1.4rem,4vw,2rem); font-weight:900; letter-spacing:4px; text-transform:uppercase; color:var(--neon); text-shadow:0 0 20px rgba(0,255,204,.7),0 0 40px rgba(0,255,204,.3); margin-bottom:6px; }
+    .subtitle { font-size:.7rem; letter-spacing:5px; color:var(--text-dim); text-transform:uppercase; }
+
+    /* ── CARD ── */
+    .card {
+      background:var(--card-bg); border:1px solid var(--border); border-radius:4px;
+      padding:20px; position:relative; overflow:hidden;
+    }
+    .card::before { content:''; position:absolute; top:0; left:0; width:20px; height:20px; border-top:1px solid var(--neon); border-left:1px solid var(--neon); opacity:.5; }
+    .card::after  { content:''; position:absolute; bottom:0; right:0; width:20px; height:20px; border-bottom:1px solid var(--neon); border-right:1px solid var(--neon); opacity:.5; }
+    .card-label { font-size:.6rem; letter-spacing:3px; color:var(--text-dim); text-transform:uppercase; margin-bottom:12px; }
+
+    /* ── SEARCH ── */
+    .search-card { margin-bottom:24px; }
+    .search-row { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+    .ticker-input {
+      background:rgba(0,255,204,.04); border:1px solid var(--border); border-radius:3px;
+      color:var(--neon); font-family:'Orbitron',sans-serif; font-size:1rem; font-weight:700;
+      letter-spacing:4px; padding:10px 16px; width:180px; text-transform:uppercase;
+      outline:none; transition:border-color .2s,box-shadow .2s;
+    }
+    .ticker-input::placeholder { color:var(--text-dim); font-size:.7rem; letter-spacing:3px; }
+    .ticker-input:focus { border-color:var(--neon-mid); box-shadow:0 0 12px rgba(0,255,204,.1); }
+    .analyse-btn {
+      background:var(--neon-dim); border:1px solid var(--neon-mid); border-radius:3px;
+      color:var(--neon); font-family:'Orbitron',sans-serif; font-size:.65rem; font-weight:700;
+      letter-spacing:3px; padding:10px 24px; cursor:pointer; text-transform:uppercase;
+      transition:background .2s,box-shadow .2s;
+    }
+    .analyse-btn:hover { background:rgba(0,255,204,.2); box-shadow:0 0 16px rgba(0,255,204,.12); }
+    .analyse-btn:disabled { opacity:.4; cursor:not-allowed; }
+    .search-hint { font-size:.6rem; color:var(--text-dim); letter-spacing:1px; }
+
+    /* ── DEBUG PANEL ── */
+    #debug-panel {
+      position:fixed; bottom:0; left:0; right:0; z-index:500;
+      background:#000; border-top:2px solid var(--neon-mid);
+      max-height:55vh; display:flex; flex-direction:column;
+    }
+    #debug-panel.hidden { display:none !important; }
+    .debug-header {
+      display:flex; align-items:center; gap:12px; padding:8px 16px;
+      background:rgba(0,255,204,.06); border-bottom:1px solid var(--border);
+      flex-shrink:0;
+    }
+    .debug-title { font-family:'Orbitron',sans-serif; font-size:.6rem; letter-spacing:3px; color:var(--neon); }
+    .debug-close {
+      margin-left:auto; background:none; border:1px solid var(--border); border-radius:2px;
+      color:var(--text-dim); cursor:pointer; font-size:.6rem; letter-spacing:1px;
+      padding:3px 10px; font-family:'Share Tech Mono',monospace;
+    }
+    .debug-close:hover { border-color:var(--neon-mid); color:var(--neon); }
+    .debug-retest {
+      background:var(--neon-dim); border:1px solid var(--neon-mid); border-radius:2px;
+      color:var(--neon); cursor:pointer; font-size:.6rem; letter-spacing:1px;
+      padding:3px 12px; font-family:'Share Tech Mono',monospace;
+    }
+    .debug-retest:hover { background:rgba(0,255,204,.25); }
+    #debug-body {
+      overflow-y:auto; padding:12px 16px; flex:1;
+      font-family:'Share Tech Mono',monospace; font-size:.7rem; line-height:1.7;
+    }
+    .dbg-section { margin-bottom:16px; }
+    .dbg-endpoint { color:var(--text-dim); letter-spacing:1px; margin-bottom:4px; font-size:.6rem; }
+    .dbg-status-ok   { color:var(--neon); }
+    .dbg-status-err  { color:var(--red); }
+    .dbg-status-warn { color:var(--yellow); }
+    .dbg-raw {
+      background:rgba(0,255,204,.03); border:1px solid rgba(0,255,204,.08);
+      border-radius:2px; padding:8px; margin-top:4px;
+      white-space:pre-wrap; word-break:break-all;
+      color:#7ab8a8; font-size:.65rem; max-height:120px; overflow-y:auto;
+    }
+
+    /* ── STATUS ── */
+    .status-message { text-align:center; padding:40px 20px; }
+    .loading-text { font-family:'Orbitron',sans-serif; font-size:.8rem; letter-spacing:6px; color:var(--text-mid); animation:blink 1s step-end infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+    .error-text { font-size:.75rem; color:var(--red); letter-spacing:2px; }
+
+    /* ── COMPANY HEADER ── */
+    .company-header { display:flex; align-items:center; gap:20px; flex-wrap:wrap; margin-bottom:24px; }
+    .company-logo { width:48px; height:48px; border-radius:8px; object-fit:contain; background:rgba(255,255,255,.05); border:1px solid var(--border); }
+    .company-logo-fallback { width:48px; height:48px; border-radius:8px; background:var(--neon-dim); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-family:'Orbitron',sans-serif; font-size:.7rem; font-weight:700; color:var(--neon); letter-spacing:1px; }
+    .company-info { flex:1; min-width:0; }
+    .company-name { font-family:'Orbitron',sans-serif; font-size:clamp(.9rem,2.5vw,1.3rem); font-weight:700; color:#fff; letter-spacing:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .company-meta { font-size:.65rem; color:var(--text-dim); letter-spacing:2px; margin-top:4px; }
+    .company-stats { display:flex; gap:24px; flex-wrap:wrap; }
+    .stat-item { text-align:center; }
+    .stat-value { font-family:'Orbitron',sans-serif; font-size:clamp(1rem,2.5vw,1.4rem); font-weight:700; color:#fff; }
+    .stat-label { font-size:.55rem; color:var(--text-dim); letter-spacing:2px; text-transform:uppercase; margin-top:2px; }
+    .stat-change { font-size:.7rem; }
+    .positive { color:var(--neon); }
+    .negative { color:var(--red); }
+
+    /* ── TABS ── */
+    .tab-bar { display:flex; gap:0; border-bottom:1px solid var(--border); margin-bottom:24px; overflow-x:auto; scrollbar-width:none; }
+    .tab-bar::-webkit-scrollbar { display:none; }
+    .tab-btn { background:none; border:none; border-bottom:2px solid transparent; color:var(--text-dim); cursor:pointer; font-family:'Orbitron',sans-serif; font-size:.6rem; letter-spacing:3px; padding:10px 20px; text-transform:uppercase; transition:color .2s,border-color .2s; white-space:nowrap; margin-bottom:-1px; }
+    .tab-btn:hover { color:var(--text-mid); }
+    .tab-btn.active { color:var(--neon); border-bottom-color:var(--neon); }
+    .tab-content { display:none; }
+    .tab-content.active { display:block; }
+
+    /* ── TIME BUTTONS ── */
+    .time-range-bar { display:flex; gap:6px; margin-bottom:16px; }
+    .time-btn { background:none; border:1px solid var(--border); border-radius:2px; color:var(--text-dim); cursor:pointer; font-family:'Share Tech Mono',monospace; font-size:.65rem; letter-spacing:1px; padding:4px 10px; transition:all .2s; }
+    .time-btn:hover { border-color:var(--neon-mid); color:var(--text-mid); }
+    .time-btn.active { background:var(--neon-dim); border-color:var(--neon-mid); color:var(--neon); }
+
+    /* ── CHART AREA ── */
+    .chart-row { display:flex; gap:16px; align-items:flex-start; }
+    .chart-card { flex:1; min-width:0; padding:20px; }
+    .chart-sidebar { width:200px; flex-shrink:0; padding:16px; }
+    @media(max-width:700px) { .chart-row{flex-direction:column} .chart-sidebar{width:100%} }
+    canvas { max-height:380px; width:100% !important; }
+    .sidebar-title { font-family:'Orbitron',sans-serif; font-size:.55rem; letter-spacing:3px; color:var(--text-dim); text-transform:uppercase; margin-bottom:12px; }
+    .sidebar-row { display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid rgba(0,255,204,.05); font-size:.65rem; }
+    .sidebar-row-label { color:var(--text-dim); }
+    .sidebar-row-vals { display:flex; gap:10px; }
+    .sidebar-col-head { color:var(--text-dim); font-size:.55rem; letter-spacing:1px; }
+    .sidebar-col-val { color:#fff; }
+    .sidebar-col-val.above { color:var(--red); }
+    .sidebar-col-val.below { color:var(--neon); }
+
+    /* ── MULTIPLES LEGEND ── */
+    .multiples-legend { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+    .mult-badge { display:inline-flex; align-items:center; gap:6px; font-size:.65rem; padding:3px 8px; border-radius:2px; border:1px solid; }
+    .mult-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+
+    /* ── QUALITY CHECK ── */
+    .qc-table { width:100%; border-collapse:collapse; font-size:.7rem; }
+    .qc-table th { font-size:.55rem; letter-spacing:3px; color:var(--text-dim); text-transform:uppercase; padding:6px 10px 10px; text-align:left; border-bottom:1px solid var(--border); }
+    .qc-table td { padding:8px 10px; border-bottom:1px solid rgba(0,255,204,.04); vertical-align:middle; }
+    .qc-table tr:last-child td { border-bottom:none; }
+    .qc-table tr:hover td { background:rgba(0,255,204,.02); }
+    .qc-label { color:var(--text-mid); white-space:nowrap; }
+    .qc-value { color:#fff; font-weight:bold; white-space:nowrap; }
+    .qc-compare { color:var(--text-dim); font-size:.6rem; }
+    .qc-hint { color:var(--text-dim); font-size:.6rem; }
+    .ampel { display:inline-flex; align-items:center; gap:5px; padding:3px 8px; border-radius:2px; font-size:.6rem; letter-spacing:2px; font-family:'Orbitron',sans-serif; white-space:nowrap; }
+    .ampel-green  { background:rgba(0,255,204,.1);   border:1px solid rgba(0,255,204,.3);  color:var(--neon); }
+    .ampel-yellow { background:rgba(255,204,68,.1);  border:1px solid rgba(255,204,68,.3); color:var(--yellow); }
+    .ampel-red    { background:rgba(255,68,102,.1);  border:1px solid rgba(255,68,102,.3); color:var(--red); }
+    .ampel-gray   { background:rgba(74,122,109,.1);  border:1px solid rgba(74,122,109,.3); color:var(--text-dim); }
+    .substanzwert-badge { display:inline-block; background:rgba(0,255,204,.12); border:1px solid rgba(0,255,204,.4); color:var(--neon); font-size:.65rem; letter-spacing:2px; padding:6px 12px; border-radius:2px; margin-top:14px; text-shadow:0 0 8px rgba(0,255,204,.4); }
+
+    /* ── ALIEN VERDICT ── */
+    .alien-verdict { margin-top:24px; padding:20px; border:1px solid var(--border); border-radius:4px; background:var(--card-bg); position:relative; }
+    .alien-verdict::before { content:''; position:absolute; top:0; left:0; width:20px; height:20px; border-top:1px solid var(--neon); border-left:1px solid var(--neon); opacity:.5; }
+    .verdict-label { font-family:'Orbitron',sans-serif; font-size:.55rem; letter-spacing:4px; color:var(--text-dim); text-transform:uppercase; margin-bottom:10px; }
+    .verdict-text { font-size:.85rem; color:var(--text-mid); letter-spacing:1px; line-height:1.7; }
+
+    /* ── DIV SIDEBAR ── */
+    .div-meta-val { font-family:'Orbitron',sans-serif; font-size:1.1rem; font-weight:700; color:#fff; }
+    .div-meta-label { font-size:.55rem; color:var(--text-dim); letter-spacing:2px; margin-top:2px; }
+    .div-bonus-table { border-collapse:collapse; font-size:.65rem; margin-top:10px; }
+    .div-bonus-table td { padding:3px 10px 3px 0; color:var(--text-dim); }
+    .div-bonus-table td:last-child { text-align:right; }
+
+    /* ── DONATE ── */
+    .donate-section { margin-top:40px; text-align:center; }
+    .donate-link {
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 24px; border:1px solid rgba(0,255,204,.15); border-radius:4px;
+      text-decoration:none; color:var(--text-dim); font-size:.65rem;
+      letter-spacing:3px; text-transform:uppercase;
+      transition:border-color .3s,color .3s,box-shadow .3s; position:relative;
+    }
+    .donate-link::before { content:''; position:absolute; top:0; left:0; width:12px; height:12px; border-top:1px solid rgba(0,255,204,.3); border-left:1px solid rgba(0,255,204,.3); }
+    .donate-link::after  { content:''; position:absolute; bottom:0; right:0; width:12px; height:12px; border-bottom:1px solid rgba(0,255,204,.3); border-right:1px solid rgba(0,255,204,.3); }
+    .donate-link:hover { border-color:rgba(0,255,204,.35); color:var(--text-mid); box-shadow:0 0 14px rgba(0,255,204,.05); }
+    .donate-icon { font-size:.85rem; opacity:.6; }
+
+    /* ── API INFO OVERLAY ── */
+    .av-info-overlay {
+      position:fixed; inset:0; background:rgba(0,0,0,.7); z-index:2000;
+      display:flex; align-items:center; justify-content:center; padding:20px;
+    }
+    .av-info-box {
+      max-width:360px; width:100%; padding:22px 24px;
+      background:var(--card-bg); border:1px solid var(--neon-mid); border-radius:4px;
+      position:relative;
+    }
+    .av-info-title { font-family:'Orbitron',sans-serif; font-size:.65rem; letter-spacing:3px; color:var(--neon); margin-bottom:10px; }
+    .av-info-text  { font-size:.65rem; color:var(--text-mid); letter-spacing:.5px; line-height:1.8; }
+    .av-info-close {
+      position:absolute; top:10px; right:12px;
+      background:none; border:none; color:var(--text-dim); cursor:pointer;
+      font-size:.7rem; letter-spacing:1px; font-family:'Share Tech Mono',monospace;
+    }
+    .av-info-close:hover { color:var(--neon); }
+    .api-info-btn {
+      background:none; border:none; cursor:pointer; color:var(--text-dim);
+      font-size:.75rem; padding:0 4px; vertical-align:middle; line-height:1;
+      transition:color .2s;
+    }
+    .api-info-btn:hover { color:var(--neon); }
+
+    /* ── FOOTER ── */
+    footer { text-align:center; margin-top:50px; font-size:.65rem; color:var(--text-dim); letter-spacing:2px; line-height:2; }
+    footer a { color:var(--neon); text-decoration:none; opacity:.7; }
+
+    /* ── API DIALOG ── */
+    .api-overlay {
+      position:fixed; inset:0; background:rgba(0,0,0,.85); z-index:1000;
+      display:flex; align-items:center; justify-content:center; padding:20px;
+    }
+    .api-dialog {
+      max-width:480px; width:100%; padding:30px;
+      background:var(--card-bg); border:1px solid var(--neon-mid);
+    }
+    .api-dialog-title { font-family:'Orbitron',sans-serif; font-size:.9rem; font-weight:700; color:var(--neon); letter-spacing:3px; margin-bottom:8px; }
+    .api-dialog-intro { font-size:.65rem; color:var(--text-mid); letter-spacing:1px; line-height:1.7; margin-bottom:24px; }
+    .api-field { margin-bottom:20px; }
+    .api-label { font-family:'Orbitron',sans-serif; font-size:.6rem; letter-spacing:2px; color:var(--text-mid); display:block; margin-bottom:6px; text-transform:uppercase; }
+    .api-hint { font-size:.6rem; color:var(--text-dim); letter-spacing:1px; margin-bottom:8px; }
+    .api-key-input { width:100%; background:rgba(0,255,204,.04); border:1px solid var(--border); border-radius:3px; color:var(--neon); font-family:'Share Tech Mono',monospace; font-size:.8rem; letter-spacing:1px; padding:10px 14px; outline:none; transition:border-color .2s; }
+    .api-key-input:focus { border-color:var(--neon-mid); }
+    .api-key-input::placeholder { color:var(--text-dim); font-size:.7rem; }
+    .api-save-btn { width:100%; margin-top:8px; }
+
+    .hidden { display:none !important; }
+    .tab-short { display:none; }
+    @media(max-width:768px) {
+      #tab-dividenden .chart-row { flex-direction:column; }
+      #tab-dividenden .chart-sidebar { width:100%; }
+      #tab-dividenden .chart-card { width:100%; }
+      #chart-dividenden { min-height:250px; width:100% !important; }
+      .tab-long { display:none; }
+      .tab-short { display:inline; }
+    }
+    @media(max-width:600px) {
+      .company-stats { gap:16px; }
+      .tab-btn { padding:8px 12px; font-size:.55rem; letter-spacing:2px; }
+      .qc-table { table-layout:fixed; }
+      .qc-table th:nth-child(1), .qc-table td.qc-label   { width:38%; }
+      .qc-table th:nth-child(2), .qc-table td.qc-value   { width:22%; }
+      .qc-table th:nth-child(4), .qc-table td:nth-child(4){ width:28%; }
+      .qc-table .qc-compare,
+      .qc-table th:nth-child(3),
+      .qc-table .qc-hint,
+      .qc-table th:nth-child(5) { display:none; }
+      .qc-table td:nth-child(4) { white-space:nowrap; overflow:visible; }
+      .qc-table .qc-value { font-size:.65rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- AV INFO OVERLAY -->
+<div id="av-info-overlay" class="av-info-overlay hidden">
+  <div class="av-info-box">
+    <button class="av-info-close" onclick="closeAvInfo()">✕</button>
+    <div class="av-info-title">Woher bekomme ich die API Keys?</div>
+    <div class="av-info-text">
+      <span style="color:var(--text-mid);letter-spacing:1px;">Twelve Data Key</span>
+      <span style="color:var(--text-dim);"> (für Kursdaten &amp; Dividenden)</span><br>
+      <span style="color:var(--neon)">①</span> <strong style="color:var(--neon)">twelvedata.com</strong> → Sign Up<br>
+      <span style="color:var(--neon)">②</span> Dashboard → API Keys → Key kopieren<br>
+      <span style="color:var(--yellow)">Free Tier: 800 requests/day</span><br><br>
+      <span style="color:var(--text-mid);letter-spacing:1px;">Alpha Vantage Key</span>
+      <span style="color:var(--text-dim);"> (for fundamentals)</span><br>
+      <span style="color:var(--neon)">①</span> <strong style="color:var(--neon)">alphavantage.co</strong> → Get Free API Key<br>
+      <span style="color:var(--neon)">②</span> Copy key after registration<br>
+      <span style="color:var(--yellow)">Free Tier: 25 requests/day</span> – approx. 5 analyses daily
+    </div>
+  </div>
+</div>
+
+<!-- API KEYS DIALOG -->
+<div id="api-overlay" class="api-overlay hidden">
+  <div class="api-dialog card">
+    <button style="position:absolute;top:10px;right:12px;background:none;border:none;cursor:pointer;color:var(--text-dim);font-size:.7rem;font-family:'Share Tech Mono',monospace;letter-spacing:1px;" onclick="closeApiDialog()" title="Close">✕</button>
+    <div class="api-dialog-title">⚙ API Keys</div>
+    <div class="api-dialog-intro">
+      One-time setup – stored locally in your browser. No server, no tracking.
+    </div>
+    <div class="api-field">
+      <label class="api-label" for="key-twelve">Twelve Data API Key</label>
+      <div class="api-hint">For historical price data · twelvedata.com/account</div>
+      <input class="api-key-input" id="key-twelve" type="text" placeholder="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="api-field">
+      <label class="api-label" for="key-av">Alpha Vantage API Key <button class="api-info-btn" onclick="openAvInfo()" title="Info">ℹ</button></label>
+      <div class="api-hint">For fundamentals (EPS, P/E, balance sheets) · alphavantage.co/support/#api-key</div>
+      <input class="api-key-input" id="key-av" type="text" placeholder="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" autocomplete="off" spellcheck="false">
+    </div>
+    <button class="analyse-btn api-save-btn" onclick="saveApiKeys()">Save keys &amp; launch</button>
+  </div>
+</div>
+
+<div id="bug-overlay" class="api-overlay hidden">
+  <div class="api-dialog card">
+    <button style="position:absolute;top:10px;right:12px;background:none;border:none;cursor:pointer;color:var(--text-dim);font-size:.7rem;font-family:'Share Tech Mono',monospace;letter-spacing:1px;" onclick="closeBugReport()" title="Close">✕</button>
+    <div class="api-dialog-title">🐛 Report Bug</div>
+    <div class="api-dialog-intro" id="bug-subtext">Will be sent as email to kontakt@alien-investor.org.</div>
+    <div class="api-field">
+      <label class="api-label" for="bug-ticker">Ticker</label>
+      <input class="api-key-input" id="bug-ticker" type="text" placeholder="e.g. AAPL" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="api-field">
+      <label class="api-label" for="bug-desc">Beschreibung</label>
+      <textarea class="api-key-input" id="bug-desc" rows="4" placeholder="What happened? Which ticker?" style="resize:vertical;"></textarea>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <button class="analyse-btn api-save-btn" onclick="sendBugReport()">Senden</button>
+      <button class="analyse-btn" style="background:transparent;border:1px solid var(--border);color:var(--text-mid);" onclick="closeBugReport()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="top-nav">
+    <a class="back-link" href="/en/mission-control.html">← Mission Control</a>
+    <span class="top-nav-sep">·</span>
+    <span class="top-nav-title">ALIEN ANALYZER</span>
+    <div class="top-nav-right">
+      <button class="settings-btn" onclick="openApiDialog()">⚙ API Keys</button>
+      <button class="info-icon-btn" onclick="openAvInfo()" title="API Key Guide">ℹ</button>
+    </div>
+  </div>
+
+  <header>
+    <div class="header-glow"></div>
+    <div class="logo">👽 Alien Analyzer</div>
+    <div class="subtitle">Value Intelligence · Alien Investor</div>
+  </header>
+
+  <!-- SEARCH -->
+  <div class="card search-card">
+    <div class="card-label">Analyse stock</div>
+    <div class="search-row">
+      <input class="ticker-input" id="ticker-input" type="text" placeholder="TICKER" maxlength="10" autocomplete="off" spellcheck="false">
+      <span class="search-hint">z.B. AAPL · MOS · BRK-B · ALV</span>
+      <button class="analyse-btn" id="analyse-btn" onclick="startAnalysis()">Analyse</button>
+      <button class="settings-btn" onclick="showDebugPanel()" title="Test Alpha Vantage API" style="font-size:.55rem;padding:5px 10px;">🔬 API-Test</button>
+    </div>
+  </div>
+
+  <!-- STATUS -->
+  <div id="status-area" class="hidden">
+    <div class="status-message">
+      <div id="status-text" class="loading-text">SCANNING MARKETS</div>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="results-area" class="hidden">
+
+    <!-- COMPANY HEADER -->
+    <div class="card" style="margin-bottom:20px;">
+      <div class="company-header">
+        <div id="company-logo-wrap">
+          <div class="company-logo-fallback" id="logo-fallback" style="display:none"></div>
+          <img class="company-logo" id="company-logo" alt="" style="display:none"
+               onerror="this.style.display='none';document.getElementById('logo-fallback').style.display='flex';">
+        </div>
+        <div class="company-info">
+          <div class="company-name" id="company-name">–</div>
+          <div class="company-meta" id="company-meta">–</div>
+        </div>
+        <div class="company-stats">
+          <div class="stat-item">
+            <div class="stat-value" id="stat-price">–</div>
+            <div class="stat-change" id="stat-change"></div>
+            <div class="stat-label" id="stat-currency">USD</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="stat-mcap">–</div>
+            <div class="stat-label">Mkt Cap.</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="stat-pe">–</div>
+            <div class="stat-label">P/E (trailing)</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="stat-eps">–</div>
+            <div class="stat-label">EPS (ttm)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABS -->
+    <div class="tab-bar">
+      <button class="tab-btn active" data-tab="fairvalue" onclick="switchTab('fairvalue')"><span class="tab-long">⭐ Fair Value</span><span class="tab-short">⭐ F-Val</span></button>
+      <button class="tab-btn" data-tab="multiples" onclick="switchTab('multiples')">Multiples</button>
+      <button class="tab-btn" data-tab="dividenden" onclick="switchTab('dividenden')">Dividends</button>
+      <button class="tab-btn" data-tab="qualitaet" onclick="switchTab('qualitaet')"><span class="tab-long">Quality Check</span><span class="tab-short">Quality</span></button>
+    </div>
+
+    <!-- TAB: FAIRER WERT -->
+    <div class="tab-content active" id="tab-fairvalue">
+      <div class="time-range-bar" id="fv-time-bar">
+        <button class="time-btn" data-years="5"  onclick="setFVRange(5)">5Y</button>
+        <button class="time-btn" data-years="8"  onclick="setFVRange(8)">8Y</button>
+        <button class="time-btn active" data-years="10" onclick="setFVRange(10)">10Y</button>
+        <button class="time-btn" data-years="15" onclick="setFVRange(15)">15Y</button>
+        <button class="time-btn" data-years="20" onclick="setFVRange(20)">20Y</button>
+        <button class="time-btn" data-years="0"  onclick="setFVRange(0)">All</button>
+      </div>
+      <div class="chart-row">
+        <div class="card chart-card">
+          <canvas id="chart-fairvalue"></canvas>
+          <div id="fv-no-eps" class="hidden" style="text-align:center;padding:20px;font-size:.65rem;letter-spacing:2px;color:var(--text-dim)">EPS DATA UNAVAILABLE – PRICE HISTORY ONLY</div>
+        </div>
+        <div class="card chart-sidebar" id="fv-sidebar">
+          <div class="sidebar-title">Multiples</div>
+          <div style="display:flex;justify-content:flex-end;gap:16px;margin-bottom:6px;">
+            <span class="sidebar-col-head">Ø 10Y</span>
+            <span class="sidebar-col-head">Cur.</span>
+          </div>
+          <div class="sidebar-row">
+            <span class="sidebar-row-label">P/E</span>
+            <div class="sidebar-row-vals">
+              <span class="sidebar-col-val" id="sb-pe-avg">–</span>
+              <span class="sidebar-col-val" id="sb-pe-cur">–</span>
+            </div>
+          </div>
+          <div class="sidebar-row">
+            <span class="sidebar-row-label">P/B</span>
+            <div class="sidebar-row-vals">
+              <span class="sidebar-col-val" id="sb-pb-avg">–</span>
+              <span class="sidebar-col-val" id="sb-pb-cur">–</span>
+            </div>
+          </div>
+          <div class="sidebar-row">
+            <span class="sidebar-row-label">P/S</span>
+            <div class="sidebar-row-vals">
+              <span class="sidebar-col-val" id="sb-ps-avg">–</span>
+              <span class="sidebar-col-val" id="sb-ps-cur">–</span>
+            </div>
+          </div>
+          <div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--border);">
+            <div class="sidebar-title">Fair Value Indicator</div>
+            <div id="fv-indicator" style="font-size:.65rem;color:var(--text-dim);letter-spacing:1px;">–</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: MULTIPLES -->
+    <div class="tab-content" id="tab-multiples">
+      <div class="time-range-bar">
+        <button class="time-btn" data-years="5"  onclick="setMultRange(5)">5Y</button>
+        <button class="time-btn active" data-years="10" onclick="setMultRange(10)">10Y</button>
+        <button class="time-btn" data-years="0"  onclick="setMultRange(0)">All</button>
+      </div>
+      <div class="card chart-card" style="max-width:100%;">
+        <div id="mult-filter-warning" class="hidden" style="font-size:.6rem;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;">⚠ Many P/E outliers filtered (GAAP special items) – may not be a classic value stock</div>
+        <div class="multiples-legend" id="mult-legend"></div>
+        <canvas id="chart-multiples"></canvas>
+      </div>
+    </div>
+
+    <!-- TAB: DIVIDENDEN -->
+    <div class="tab-content" id="tab-dividenden">
+      <div class="chart-row">
+        <div class="card chart-card">
+          <canvas id="chart-dividenden"></canvas>
+          <div id="div-no-data" class="hidden"></div>
+        </div>
+        <div class="card chart-sidebar">
+          <div class="sidebar-title">Dividend</div>
+          <div class="div-meta-val" id="div-yield-cur">–</div>
+          <div class="div-meta-label">Current Yield</div>
+          <div style="margin-top:14px;">
+            <div class="sidebar-title">Dividend Growth</div>
+            <table class="div-bonus-table">
+              <tr><td style="color:var(--text-mid)">12 months</td><td id="div-chg-1y">–</td></tr>
+              <tr><td style="color:var(--text-mid)">2 years</td><td id="div-chg-2y">–</td></tr>
+              <tr><td style="color:var(--text-mid)">5 years</td><td id="div-chg-5y">–</td></tr>
+              <tr><td style="color:var(--text-mid)">10 years</td><td id="div-chg-10y">–</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: QUALITÄTSCHECK -->
+    <div class="tab-content" id="tab-qualitaet">
+      <div class="card">
+        <div class="card-label">Quality Check &amp; Traffic-Light Score</div>
+        <table class="qc-table">
+          <thead>
+            <tr>
+              <th>Metric</th><th>Value</th><th>Benchmark</th><th>Signal</th><th>Context</th>
+            </tr>
+          </thead>
+          <tbody id="qc-tbody"></tbody>
+        </table>
+        <div id="substanzwert-area"></div>
+        <div class="alien-verdict" id="alien-verdict">
+          <div class="verdict-label">👽 Alien Verdict</div>
+          <div class="verdict-text" id="verdict-text">–</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /results-area -->
+
+  <div class="donate-section">
+    <a href="https://alien-investor.org/en/spenden.html" class="donate-link">
+      <span class="donate-icon"><svg style="width:0.6em;height:0.85em;vertical-align:-0.1em;filter:drop-shadow(0 0 2px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg></span>
+      <span>Recharge Energy</span>
+      <span style="opacity:.4;">·</span>
+      <span>Donate</span>
+    </a>
+  </div>
+
+  <footer>
+    <div style="margin-bottom:8px;">alien-investor.org · Price data: Twelve Data · Fundamentals: Alpha Vantage · Logos: Clearbit · <a href="#" onclick="openBugReport(); return false;" style="color:var(--text-dim);text-decoration:none;opacity:.7;transition:color .2s;" onmouseover="this.style.color='var(--neon)'" onmouseout="this.style.color='var(--text-dim)'">🐛 Report Bug</a></div>
+    <div style="color:rgba(74,122,109,.7)">🚨 Not financial advice – personal alien opinion only. Think for yourself. Trust no one.</div>
+    <div style="margin-top:12px;"><a href="https://alien-investor.org">alien-investor.org</a></div>
+  </footer>
+
+</div><!-- /container -->
+
+<!-- DEBUG PANEL -->
+<div id="debug-panel" class="hidden">
+  <div class="debug-header">
+    <span class="debug-title">🔬 ALPHA VANTAGE API DEBUG</span>
+    <button class="debug-retest" onclick="runAvDebug()">Retest</button>
+    <button class="debug-close" onclick="document.getElementById('debug-panel').classList.add('hidden')">✕ Close</button>
+  </div>
+  <div id="debug-body">No test run yet.</div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════════
+// ALIEN ANALYZER – Twelve Data + Alpha Vantage Edition
+// ══════════════════════════════════════════════════════════════
+
+// ── API KEY MANAGEMENT ────────────────────────────────────────
+function getApiKeys() {
+  return {
+    twelvedata:   localStorage.getItem('aa_td_key') || '',
+    alphavantage: localStorage.getItem('aa_av_key') || '',
+  };
+}
+
+function saveApiKeys() {
+  const td = document.getElementById('key-twelve').value.trim();
+  const av = document.getElementById('key-av').value.trim();
+  if (!td || !av) {
+    alert('Both API keys are required.');
+    return;
+  }
+  localStorage.setItem('aa_td_key', td);
+  localStorage.setItem('aa_av_key', av);
+  closeApiDialog();
+}
+
+function openApiDialog() {
+  const keys = getApiKeys();
+  document.getElementById('key-twelve').value = keys.twelvedata;
+  document.getElementById('key-av').value     = keys.alphavantage;
+  document.getElementById('api-overlay').classList.remove('hidden');
+}
+
+function closeApiDialog() {
+  document.getElementById('api-overlay').classList.add('hidden');
+}
+
+// Close dialog on overlay click
+document.getElementById('api-overlay').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeApiDialog();
+});
+
+function openBugReport() {
+  document.getElementById('bug-ticker').value = (state && state.ticker) ? state.ticker : '';
+  document.getElementById('bug-desc').value = '';
+  document.getElementById('bug-overlay').classList.remove('hidden');
+}
+
+function closeBugReport() {
+  document.getElementById('bug-overlay').classList.add('hidden');
+}
+
+function sendBugReport() {
+  const ticker      = document.getElementById('bug-ticker').value.trim() || 'no ticker';
+  const beschreibung = document.getElementById('bug-desc').value.trim() || 'no description';
+  const subject = encodeURIComponent('Alien Analyzer Bug: ' + ticker);
+  const body    = encodeURIComponent('Ticker: ' + ticker + '\n\nBeschreibung:\n' + beschreibung);
+  window.location.href = 'mailto:kontakt@alien-investor.org?subject=' + subject + '&body=' + body;
+  const clipboardText = 'Ticker: ' + ticker + '\n\nBeschreibung:\n' + beschreibung;
+  navigator.clipboard.writeText(clipboardText).then(() => {
+    document.getElementById('bug-subtext').textContent =
+      '✓ Content copied to clipboard – paste in your email client.';
+  }).catch(() => {
+    document.getElementById('bug-subtext').textContent =
+      'Email client opened. Ticker: ' + ticker;
+  });
+  setTimeout(() => closeBugReport(), 2500);
+}
+
+document.getElementById('bug-overlay').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeBugReport();
+});
+
+function openAvInfo() {
+  document.getElementById('av-info-overlay').classList.remove('hidden');
+}
+
+function closeAvInfo() {
+  document.getElementById('av-info-overlay').classList.add('hidden');
+}
+
+document.getElementById('av-info-overlay').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeAvInfo();
+});
+
+// ── FORMAT HELPERS ────────────────────────────────────────────
+function fmt(num, dec = 2, fallback = '–') {
+  if (num == null || isNaN(num)) return fallback;
+  return new Intl.NumberFormat('de-DE', { minimumFractionDigits: dec, maximumFractionDigits: dec }).format(num);
+}
+
+function fmtB(num) {
+  if (num == null || isNaN(num)) return '–';
+  const abs = Math.abs(num);
+  if (abs >= 1e12) return fmt(num / 1e12, 2) + ' Bio.';
+  if (abs >= 1e9)  return fmt(num / 1e9,  1) + ' Mrd.';
+  if (abs >= 1e6)  return fmt(num / 1e6,  0) + ' Mio.';
+  return fmt(num, 0);
+}
+
+function fmtPct(num, dec = 1) {
+  if (num == null || isNaN(num)) return '–';
+  return (num >= 0 ? '+' : '') + fmt(num, dec) + ' %';
+}
+
+// ── FETCH: TWELVE DATA ────────────────────────────────────────
+async function fetchTDTimeSeries(ticker, apiKey) {
+  const url = `https://api.twelvedata.com/time_series?symbol=${encodeURIComponent(ticker)}&interval=1month&outputsize=240&apikey=${apiKey}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`Twelve Data HTTP ${res.status}`);
+  const data = await res.json();
+  if (data.status === 'error') throw new Error('Twelve Data: ' + (data.message || 'Fehler'));
+  if (!data.values?.length) throw new Error('Keine Kursdaten für ' + ticker);
+  return data;
+}
+
+// ── ALPHA VANTAGE DEBUG PANEL ─────────────────────────────────
+async function runAvDebug() {
+  const keys = getApiKeys();
+  if (!keys.alphavantage) { openApiDialog(); return; }
+
+  const rawTicker = (document.getElementById('ticker-input').value.trim().toUpperCase()) || 'AAPL';
+  const ticker    = rawTicker.replace(/\./g, '-');
+  const panel  = document.getElementById('debug-panel');
+  const body   = document.getElementById('debug-body');
+
+  panel.classList.remove('hidden');
+  body.innerHTML = '<div style="color:var(--text-dim);letter-spacing:2px">TESTE ALPHA VANTAGE ENDPOINTS …</div>';
+
+  const endpoints = [
+    { label: 'OVERVIEW',         url: `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${ticker}&apikey=${keys.alphavantage}` },
+    { label: 'EARNINGS',         url: `https://www.alphavantage.co/query?function=EARNINGS&symbol=${ticker}&apikey=${keys.alphavantage}` },
+    { label: 'INCOME_STATEMENT', url: `https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol=${ticker}&apikey=${keys.alphavantage}` },
+    { label: 'BALANCE_SHEET',    url: `https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol=${ticker}&apikey=${keys.alphavantage}` },
+    { label: 'CASH_FLOW',        url: `https://www.alphavantage.co/query?function=CASH_FLOW&symbol=${ticker}&apikey=${keys.alphavantage}` },
+  ];
+
+  const DELAY_MS = 13000;
+  const dbgCountdown = (nextLabel, nextStep) => new Promise(resolve => {
+    let remaining = Math.round(DELAY_MS / 1000);
+    const placeholder = () =>
+      `<div style="color:var(--text-dim);letter-spacing:1px;margin-top:8px">` +
+      `⏳ Teste ${nextLabel}… (${nextStep}/5) – warte ${remaining}s (API Rate-Limit)</div>`;
+    body.innerHTML = html + placeholder();
+    const iv = setInterval(() => {
+      remaining--;
+      if (remaining <= 0) { clearInterval(iv); resolve(); }
+      else body.innerHTML = html + placeholder();
+    }, 1000);
+  });
+
+  let html = '';
+
+  for (let i = 0; i < endpoints.length; i++) {
+    const ep = endpoints[i];
+    const displayUrl = ep.url.replace(keys.alphavantage, '***KEY***');
+    let statusClass = 'dbg-status-warn';
+    let statusText  = '…';
+    let rawText     = '';
+
+    body.innerHTML = html +
+      `<div style="color:var(--text-dim);letter-spacing:1px;margin-top:8px">` +
+      `🔄 Teste ${ep.label}… (${i + 1}/5)</div>`;
+
+    try {
+      const t0  = Date.now();
+      const res = await fetch(ep.url, { signal: AbortSignal.timeout(15000) });
+      const ms  = Date.now() - t0;
+      const txt = await res.text();
+      rawText   = txt.length > 600 ? txt.slice(0, 600) + '\n… [gekürzt]' : txt;
+
+      if (!res.ok) {
+        statusClass = 'dbg-status-err';
+        statusText  = `HTTP ${res.status} ${res.statusText} (${ms}ms)`;
+      } else {
+        try {
+          const parsed = JSON.parse(txt);
+          const errMsg = parsed?.['Error Message'];
+          const note   = parsed?.['Note'];
+          const info   = parsed?.['Information'];
+          if (errMsg) {
+            statusClass = 'dbg-status-err';
+            statusText  = `HTTP 200 aber AV-Fehler: "${errMsg}" (${ms}ms)`;
+          } else if (note || info) {
+            statusClass = 'dbg-status-warn';
+            statusText  = `HTTP 200 – Rate-Limit: "${(note || info).slice(0, 80)}…" (${ms}ms)`;
+          } else if (typeof parsed === 'object' && Object.keys(parsed).length > 2) {
+            statusClass = 'dbg-status-ok';
+            statusText  = `HTTP 200 OK – ${Object.keys(parsed).length} Keys (${ms}ms) ✓`;
+          } else {
+            statusClass = 'dbg-status-warn';
+            statusText  = `HTTP 200 – wenige/keine Daten (${ms}ms)`;
+          }
+        } catch {
+          statusClass = 'dbg-status-warn';
+          statusText  = `HTTP 200 aber kein valides JSON (${ms}ms)`;
+        }
+      }
+    } catch (e) {
+      statusClass = 'dbg-status-err';
+      statusText  = `NETZWERK-FEHLER: ${e.message}`;
+      rawText     = 'No response – timeout or CORS.';
+    }
+
+    html += `<div class="dbg-section">
+      <div class="dbg-endpoint">▸ ${ep.label} — <span style="color:#4a7a6d">${displayUrl}</span></div>
+      <div class="${statusClass}">${statusText}</div>
+      <div class="dbg-raw">${escHtml(rawText)}</div>
+    </div>`;
+
+    if (i < endpoints.length - 1) {
+      await dbgCountdown(endpoints[i + 1].label, i + 2);
+    }
+  }
+
+  body.innerHTML = html;
+}
+
+function escHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function showDebugPanel() {
+  runAvDebug();
+}
+
+// ── FETCH: YAHOO DIVIDENDEN (Chart-Endpoint, zuverlässig) ─────
+const YAHOO_PROXIES = [
+  u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
+  u => `https://corsproxy.io/?${encodeURIComponent(u)}`,
+  u => `https://corsproxy.org/?url=${encodeURIComponent(u)}`,
+];
+
+async function fetchTDDividends(ticker, apiKey) {
+  const url = `https://api.twelvedata.com/dividends?symbol=${encodeURIComponent(ticker)}&range=full&apikey=${apiKey}`;
+  console.log('[TD-DIV] Fetch …', url);
+  try {
+    const res = await fetch(url, { signal: AbortSignal.timeout(15000) });
+    console.log('[TD-DIV] Response status:', res.status, 'ok:', res.ok);
+    const text = await res.text();
+    console.log('[TD-DIV] Response body:', text);
+    if (res.status === 403 || text.includes('available exclusively with')) {
+      console.warn('[TD-DIV] Paid Plan erforderlich');
+      return { dividends: [], status: 'paid_plan_required' };
+    }
+    if (!res.ok) { console.warn('[TD-DIV] HTTP-Fehler:', res.status); return { dividends: [], status: 'error' }; }
+    const data = JSON.parse(text);
+    if (data?.status === 'error') { console.warn('[TD-DIV] API-Fehler:', data.message); return { dividends: [], status: 'error' }; }
+    const divs = data?.dividends;
+    if (!Array.isArray(divs) || divs.length === 0) { console.warn('[TD-DIV] Kein/leeres dividends-Array'); return { dividends: [], status: 'no_data' }; }
+    console.log('[TD-DIV] OK, Dividenden:', divs.length);
+    return { dividends: divs, status: 'ok' };
+  } catch (e) {
+    console.error('[TD-DIV] Fehler:', e.message);
+    return { dividends: [], status: 'error' };
+  }
+}
+
+// ── FETCH: ALPHA VANTAGE ──────────────────────────────────────
+// Parst AV-String-Werte (AV gibt "None" für fehlende Daten zurück)
+function parseAV(val) {
+  if (val == null || val === 'None' || val === '-' || val === '') return null;
+  const n = parseFloat(val);
+  return isNaN(n) ? null : n;
+}
+
+async function fetchAV(avFunction, ticker, apiKey) {
+  const url = `https://www.alphavantage.co/query?function=${avFunction}&symbol=${encodeURIComponent(ticker)}&apikey=${apiKey}`;
+  console.log('[AV]', avFunction, 'fetch ...');
+  try {
+    const res = await fetch(url, { signal: AbortSignal.timeout(15000) });
+    console.log('[AV]', avFunction, 'status:', res.status);
+    if (!res.ok) { console.warn('[AV]', avFunction, 'HTTP-Fehler:', res.status); return null; }
+    const text = await res.text();
+    console.log('[AV]', avFunction, 'raw (150):', text.slice(0, 150));
+    const data = JSON.parse(text);
+    if (data?.['Error Message']) { console.warn('[AV]', avFunction, 'Error:', data['Error Message']); return null; }
+    if (data?.['Note'])          { console.warn('[AV]', avFunction, 'Rate-Limit Note:', data['Note']); return null; }
+    if (data?.['Information'])   { console.warn('[AV]', avFunction, 'Info:', data['Information']); return null; }
+    return data;
+  } catch (e) {
+    console.error('[AV]', avFunction, 'Exception:', e.message);
+    return null;
+  }
+}
+
+// ── STATE ─────────────────────────────────────────────────────
+let state = {
+  ticker: null,
+  // Raw API data
+  fmpProfile:        null,
+  incomeStmts:       [],
+  keyMetrics:        [],
+  ratios:            [],
+  balanceSheets:     [],
+  cashFlows:         [],
+  earningsSurprises: [],  // AV EARNINGS quarterly – quartärliche Actual-EPS
+  // Processed
+  priceHistory:  [],  // [{date (ms), price}] oldest-first
+  divHistory:    [],  // [{date (ms), amount}] oldest-first (Yahoo)
+  epsHistory:    [],  // [{date (ms), eps}] monthly, oldest-first
+  epsSynthetic:  false,
+  fvYears:       10,
+  multYears:     10,
+};
+
+let charts = {};
+
+// ── UI HELPERS ────────────────────────────────────────────────
+function showSection(name) {
+  document.getElementById('status-area').classList.add('hidden');
+  document.getElementById('results-area').classList.add('hidden');
+  if (name === 'loading') document.getElementById('status-area').classList.remove('hidden');
+  else if (name === 'results') document.getElementById('results-area').classList.remove('hidden');
+}
+
+function setStatus(text, isError = false) {
+  const el = document.getElementById('status-text');
+  el.textContent = text;
+  el.className = isError ? 'error-text' : 'loading-text';
+  showSection('loading');
+}
+
+function switchTab(name) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.toggle('active', el.id === `tab-${name}`));
+}
+
+// ── MAIN ENTRY ────────────────────────────────────────────────
+function startAnalysis() {
+  const ticker = document.getElementById('ticker-input').value.trim().toUpperCase();
+  if (!ticker) return;
+  analyzeStock(ticker);
+}
+
+document.getElementById('ticker-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') startAnalysis();
+});
+
+async function fetchAllAV(ticker, apiKey, statusFn) {
+  const DELAY_MS = 13000;
+  const countdown = (label, step) => new Promise(resolve => {
+    let remaining = Math.round(DELAY_MS / 1000);
+    statusFn(`${label} – warte ${remaining}s (${step}/5)`);
+    const iv = setInterval(() => {
+      remaining--;
+      if (remaining <= 0) { clearInterval(iv); resolve(); }
+      else statusFn(`${label} – warte ${remaining}s (${step}/5)`);
+    }, 1000);
+  });
+
+  statusFn('LOADING FUNDAMENTALS … (1/5)');
+  const overview = await fetchAV('OVERVIEW', ticker, apiKey);
+  await countdown('LOADING EARNINGS', 2);
+  const earnings = await fetchAV('EARNINGS', ticker, apiKey);
+  await countdown('LOADING INCOME STATEMENT', 3);
+  const income = await fetchAV('INCOME_STATEMENT', ticker, apiKey);
+  await countdown('LOADING BALANCE SHEET', 4);
+  const balance = await fetchAV('BALANCE_SHEET', ticker, apiKey);
+  await countdown('LOADING CASH FLOW', 5);
+  const cashflow = await fetchAV('CASH_FLOW', ticker, apiKey);
+  return { overview, earnings, income, balance, cashflow };
+}
+
+async function analyzeStock(ticker) {
+  const keys = getApiKeys();
+  if (!keys.twelvedata || !keys.alphavantage) {
+    openApiDialog();
+    return;
+  }
+
+  const tickerTD = ticker.replace(/-/g, '.');  // Twelve Data: BRK-B → BRK.B
+  const tickerAV = ticker.replace(/\./g, '-'); // Alpha Vantage: BRK.B → BRK-B
+
+  state = {
+    ticker, fmpProfile: null, incomeStmts: [], keyMetrics: [], ratios: [],
+    balanceSheets: [], cashFlows: [], earningsSurprises: [],
+    priceHistory: [], divHistory: [], epsHistory: [], epsSynthetic: false,
+    fvYears: 10, multYears: 10,
+  };
+  Object.values(charts).forEach(c => c?.destroy());
+  charts = {};
+
+  document.getElementById('analyse-btn').disabled = true;
+  setStatus('SCANNING ' + ticker + ' …');
+
+  try {
+    console.group('🛸 Alien Analyzer – API-Diagnose für ' + ticker);
+
+    // ── Schritt 1: Twelve Data + Yahoo parallel (verschiedene APIs, kein Rate-Limit) ──
+    setStatus('LOADING PRICE DATA …');
+    const [tdTS, tdDiv] = await Promise.allSettled([
+      fetchTDTimeSeries(tickerTD, keys.twelvedata),
+      fetchTDDividends(tickerTD, keys.twelvedata),
+    ]);
+
+    if (tdTS.status === 'rejected') throw new Error('Kursdaten nicht abrufbar: ' + tdTS.reason?.message);
+    const tdTimeSeries = tdTS.value;
+    const tdDivResult  = tdDiv.status === 'fulfilled' ? tdDiv.value : { dividends: [], status: 'error' };
+    const tdDivData    = tdDivResult.dividends;
+    const tdDivStatus  = tdDivResult.status;
+    console.log('Twelve Data:', tdTimeSeries.values?.length, 'Datenpunkte');
+    console.log('TD Dividenden:', tdDivData.length, 'Events', '| status:', tdDivStatus);
+
+    // ── Schritt 2: Alpha Vantage – strikte async/await Sequenz ──────────────────
+    setStatus('LOADING FUNDAMENTALS … (1/5)');
+    const { overview: avOverview, earnings: avEarnings, income: avIncome,
+            balance: avBalance, cashflow: avCashflow } =
+      await fetchAllAV(tickerAV, keys.alphavantage, setStatus);
+
+    // Diagnose-Summary
+    console.log('── AV Ergebnis ──');
+    console.log('OVERVIEW:', avOverview ? avOverview.Name || 'OK' : 'null');
+    console.log('INCOME_STATEMENT:', avIncome?.annualReports?.length ?? 0, 'Jahre');
+    console.log('BALANCE_SHEET:', avBalance?.annualReports?.length ?? 0, 'Jahre');
+    console.log('CASH_FLOW:', avCashflow?.annualReports?.length ?? 0, 'Jahre');
+    console.log('EARNINGS:', avEarnings?.annualEarnings?.length ?? 0, 'Jahre');
+    console.groupEnd();
+
+    // Debug-Panel automatisch öffnen wenn AV komplett leer ist
+    if (!avOverview && !avIncome) {
+      console.warn('⚠ Alpha Vantage liefert keine Daten – Debug-Panel wird automatisch geöffnet');
+      setTimeout(() => runAvDebug(), 500);
+    }
+
+    setStatus('PROCESSING DATA …');
+    preparePriceDiv(tdTimeSeries, tdDivData, tdDivStatus);
+    transformAVToState(avOverview, avIncome, avBalance, avCashflow, avEarnings);
+    prepareEPS();
+    updateHeader();
+    buildMultiplesChart();
+    buildDividendChart();
+    buildQualityCheck();
+    showSection('results');
+    switchTab('fairvalue');
+    setTimeout(() => buildFairValueChart(), 50);
+
+  } catch (e) {
+    console.error('analyzeStock Fehler:', e);
+    setStatus('ERROR: ' + (e.message || 'Unknown error'), true);
+  } finally {
+    document.getElementById('analyse-btn').disabled = false;
+  }
+}
+
+// ── DATA PREPARATION ──────────────────────────────────────────
+function preparePriceDiv(tdTimeSeries, tdDivData, divStatus = 'error') {
+  // Price history – Twelve Data liefert newest-first → umkehren
+  const values = tdTimeSeries.values || [];
+  state.priceHistory = [...values]
+    .reverse()
+    .map(v => ({ date: new Date(v.datetime).getTime(), price: parseFloat(v.close) }))
+    .filter(p => p.price > 0 && !isNaN(p.price));
+
+  state.divStatus = divStatus;
+
+  // Dividend history – Twelve Data liefert Array mit ex_date (ISO) und amount (String)
+  if (tdDivData?.length) console.log('[DIV] Erster Eintrag:', tdDivData[0]);
+  state.divHistory = (tdDivData || [])
+    .map(d => ({ date: new Date(d.ex_date).getTime(), amount: parseFloat(d.amount) || 0 }))
+    .filter(d => d.amount > 0 && !isNaN(d.date))
+    .sort((a, b) => a.date - b.date);
+  console.log('[DIV] Dividenden:', state.divHistory.length, 'Einträge');
+}
+
+// ── ALPHA VANTAGE → STATE TRANSFORMATION ─────────────────────
+function transformAVToState(avOverview, avIncome, avBalance, avCashflow, avEarnings) {
+  const ov = avOverview || {};
+  const lastPrice = state.priceHistory[state.priceHistory.length - 1]?.price || null;
+
+  // ── fmpProfile-kompatibler Header ────────────────────────────
+  state.fmpProfile = {
+    companyName: ov.Name        || state.ticker,
+    symbol:      ov.Symbol      || state.ticker,
+    currency:    ov.Currency    || 'USD',
+    price:       lastPrice,
+    mktCap:      parseAV(ov.MarketCapitalization),
+    pe:               parseAV(ov.PERatio) || parseAV(ov.TrailingPE),
+    eps:              parseAV(ov.EPS)    || parseAV(ov.DilutedEPSTTM),
+    sector:           ov.Sector      || '',
+    industry:         ov.Industry    || '',
+    website:          ov.OfficialSite || '',
+    image:            null,
+    dividendYield:    parseAV(ov.DividendYield),
+    dividendPerShare: parseAV(ov.DividendPerShare),
+  };
+  console.log('[AV] fmpProfile:', state.fmpProfile.companyName, '| PE:', state.fmpProfile.pe, '| EPS:', state.fmpProfile.eps);
+
+  // ── incomeStmts – aus EARNINGS annual (bester EPS-Verlauf) ──
+  {
+    const raw = (avEarnings?.annualEarnings || [])
+      .map(r => ({
+        date:       r.fiscalDateEnding,
+        epsdiluted: parseAV(r.reportedEPS),
+        eps:        parseAV(r.reportedEPS),
+      }))
+      .filter(r => r.epsdiluted != null && r.epsdiluted > 0)
+      .sort((a, b) => new Date(a.date) - new Date(b.date)); // älteste zuerst
+
+    // Neuesten Eintrag verwerfen wenn er kein volles Geschäftsjahr repräsentiert
+    // (< 330 Tage Abstand zum Vorgänger → Partial-Year-Eintrag, z.B. AAPL 2025-12-31)
+    if (raw.length >= 2) {
+      const last = raw[raw.length - 1];
+      const prev = raw[raw.length - 2];
+      const daysDiff = (new Date(last.date) - new Date(prev.date)) / (1000 * 60 * 60 * 24);
+      if (daysDiff < 330) {
+        console.log(`[AV] Letzter annualEarnings-Eintrag (${last.date}, EPS ${last.eps}) verworfen – nur ${Math.round(daysDiff)} Tage nach Vorgänger (kein volles GJ)`);
+        raw.pop();
+      }
+    }
+    state.incomeStmts = raw;
+  }
+  console.log('[AV] incomeStmts:', state.incomeStmts.length, 'Jahre');
+
+  // ── earningsSurprises – quarterly EPS für TTM-Fallback ──────
+  state.earningsSurprises = (avEarnings?.quarterlyEarnings || [])
+    .map(q => ({
+      date:                q.fiscalDateEnding,
+      actualEarningResult: parseAV(q.reportedEPS),
+    }))
+    .filter(q => q.actualEarningResult != null && q.actualEarningResult > 0);
+  console.log('[AV] earningsSurprises (quarterly):', state.earningsSurprises.length, 'Quartale');
+
+  // ── keyMetrics – per-share Werte für Multiples Chart ─────────
+  const annualIncome  = avIncome?.annualReports   || [];
+  const annualBalance = avBalance?.annualReports  || [];
+  const annualCF      = avCashflow?.annualReports || [];
+  let sharesOut = parseAV(ov.SharesOutstanding);
+  if (!sharesOut || sharesOut <= 0) {
+    const mcap  = parseAV(ov.MarketCapitalization);
+    const price = state.priceHistory[state.priceHistory.length - 1]?.price;
+    if (mcap && price && price > 0) sharesOut = mcap / price;
+  }
+  if (!sharesOut || sharesOut <= 0) {
+    sharesOut = parseAV(annualBalance[0]?.commonStockSharesOutstanding);
+  }
+  console.log('[SHARES] Quelle:', sharesOut ? 'OK' : 'fehlt', sharesOut);
+
+  state.keyMetrics = annualIncome.map(inc => {
+    const date = inc.fiscalDateEnding;
+    const bal  = annualBalance.find(b => b.fiscalDateEnding === date) || {};
+    const cf   = annualCF.find(c => c.fiscalDateEnding === date) || {};
+
+    const totalRevenue = parseAV(inc.totalRevenue);
+    const totalEquity  = parseAV(bal.totalShareholderEquity);
+    const opCashflow   = parseAV(cf.operatingCashflow);
+
+    return {
+      date,
+      bookValuePerShare:          (totalEquity  && sharesOut > 0) ? totalEquity  / sharesOut : null,
+      revenuePerShare:            (totalRevenue && sharesOut > 0) ? totalRevenue / sharesOut : null,
+      operatingCashFlowPerShare:  (opCashflow   && sharesOut > 0) ? opCashflow   / sharesOut : null,
+      // Aktuelle Multiples aus OVERVIEW (nur für km0-Felder in updateHeader)
+      pbRatio:           parseAV(ov.PriceToBookRatio),
+      priceToSalesRatio: parseAV(ov.PriceToSalesRatioTTM),
+      peRatio:           parseAV(ov.PERatio),
+      pegRatio:          parseAV(ov.PEGRatio),
+      dividendYield:     parseAV(ov.DividendYield),
+      roe:               parseAV(ov.ReturnOnEquityTTM),
+    };
+  });
+  console.log('[AV] keyMetrics:', state.keyMetrics.length, 'Jahre | SharesOutstanding:', sharesOut);
+
+  // ── ratios[0] – aktuelle Kennzahlen für Qualitätscheck ──────
+  const bs0       = annualBalance[0] || {};
+  const totalDebt = parseAV(bs0.shortLongTermDebtTotal) || parseAV(bs0.longTermDebt);
+  const eq0       = parseAV(bs0.totalShareholderEquity);
+  const deRatio   = (totalDebt && eq0 && eq0 > 0) ? totalDebt / eq0 : null;
+
+  state.ratios = [{
+    date:               new Date().toISOString().split('T')[0],
+    priceEarningsRatio: parseAV(ov.PERatio),
+    priceToBookRatio:   parseAV(ov.PriceToBookRatio),
+    priceToSalesRatio:  parseAV(ov.PriceToSalesRatioTTM),
+    dividendYield:      parseAV(ov.DividendYield),
+    debtEquityRatio:    deRatio,
+    returnOnEquity:     parseAV(ov.ReturnOnEquityTTM),
+    pegRatio:           parseAV(ov.PEGRatio),
+  }];
+
+  // ── balanceSheets ─────────────────────────────────────────────
+  state.balanceSheets = annualBalance.map(b => ({
+    date:                    b.fiscalDateEnding,
+    totalStockholdersEquity: parseAV(b.totalShareholderEquity),
+    totalAssets:             parseAV(b.totalAssets),
+    totalDebt:               parseAV(b.shortLongTermDebtTotal) || parseAV(b.longTermDebt),
+  }));
+
+  // ── cashFlows ─────────────────────────────────────────────────
+  // AV: capitalExpenditures ist meist negativ → FCF = opCF + capEx
+  state.cashFlows = annualCF.map(cf => {
+    const opCF  = parseAV(cf.operatingCashflow) || 0;
+    const capEx = parseAV(cf.capitalExpenditures) || 0;
+    return {
+      date:         cf.fiscalDateEnding,
+      freeCashFlow: opCF + capEx,
+    };
+  });
+
+  console.log('[AV] Transformation abgeschlossen: balanceSheets:', state.balanceSheets.length, '| cashFlows:', state.cashFlows.length);
+}
+
+// ── EPS-AUFBEREITUNG (nach transformAVToState) ────────────────
+function prepareEPS() {
+  state.epsHistory  = [];
+  state.epsSynthetic = false;
+
+  // Priorität 1: incomeStmts annual (aus AV EARNINGS) → interpoliert auf Monatsbasis
+  const incomeOF = [...state.incomeStmts]
+    .sort((a, b) => new Date(a.date) - new Date(b.date));
+  const epsPtsAnnual = incomeOF
+    .map(r => ({ date: new Date(r.date).getTime(), eps: r.epsdiluted ?? r.eps ?? null }))
+    .filter(p => p.date > 0 && p.eps != null && p.eps > 0);
+  console.log('[EPS] incomeStmts Punkte:', epsPtsAnnual.length);
+
+  if (epsPtsAnnual.length >= 2) {
+    state.epsHistory = state.priceHistory.map(p => ({
+      date: p.date,
+      eps:  interpolatePts(epsPtsAnnual, p.date),
+    })).filter(p => p.eps != null && p.eps > 0);
+    console.log('[EPS] Quelle: EARNINGS annual, Monatspunkte:', state.epsHistory.length);
+
+  } else if (epsPtsAnnual.length === 1) {
+    const anchor = epsPtsAnnual[0];
+    state.epsHistory = state.priceHistory.map(p => {
+      const yearsFromAnchor = (p.date - anchor.date) / (365.25 * 24 * 3600 * 1000);
+      return { date: p.date, eps: anchor.eps * Math.pow(1.05, yearsFromAnchor) };
+    }).filter(p => p.eps > 0);
+    state.epsSynthetic = true;
+    console.log('[EPS] Quelle: EARNINGS annual (1 Punkt, synthetisch)');
+  }
+
+  // Priorität 2: quarterlyEarnings TTM aus rollenden 4 Quartalen
+  if (!state.epsHistory.length && state.earningsSurprises.length >= 4) {
+    const surpOF = [...state.earningsSurprises]
+      .filter(r => r.actualEarningResult != null)
+      .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+    const ttmPts = [];
+    for (let i = 3; i < surpOF.length; i++) {
+      const sum = surpOF[i].actualEarningResult   + surpOF[i-1].actualEarningResult
+                + surpOF[i-2].actualEarningResult + surpOF[i-3].actualEarningResult;
+      if (sum > 0) ttmPts.push({ date: new Date(surpOF[i].date).getTime(), eps: sum });
+    }
+    if (ttmPts.length) {
+      state.epsHistory = state.priceHistory.map(p => ({
+        date: p.date,
+        eps:  interpolatePts(ttmPts, p.date),
+      })).filter(p => p.eps != null && p.eps > 0);
+      console.log('[EPS] Quelle: quarterly TTM, Punkte:', ttmPts.length);
+    }
+  }
+
+  // Priorität 3: AV OVERVIEW EPS (aktueller Wert, synthetisch rückgerechnet)
+  if (!state.epsHistory.length && state.fmpProfile?.eps > 0) {
+    const currentEps = state.fmpProfile.eps;
+    state.epsHistory = state.priceHistory.map(p => {
+      const yearsAgo = (Date.now() - p.date) / (365.25 * 24 * 3600 * 1000);
+      return { date: p.date, eps: currentEps / Math.pow(1.05, yearsAgo) };
+    }).filter(p => p.eps > 0);
+    state.epsSynthetic = true;
+    console.log('[EPS] Quelle: AV OVERVIEW EPS (synthetisch), Wert:', currentEps);
+  }
+
+  console.log('[EPS] Finale epsHistory:', state.epsHistory.length, '| synthetisch:', state.epsSynthetic);
+}
+
+// Lineare Interpolation aus einer sortierten Punkteliste [{date, eps}]
+function interpolatePts(pts, dateMs) {
+  if (!pts.length) return null;
+  if (dateMs <= pts[0].date) return pts[0].eps;
+  if (dateMs >= pts[pts.length - 1].date) return pts[pts.length - 1].eps;
+  for (let i = 0; i < pts.length - 1; i++) {
+    if (dateMs >= pts[i].date && dateMs <= pts[i + 1].date) {
+      const frac = (dateMs - pts[i].date) / (pts[i + 1].date - pts[i].date);
+      return pts[i].eps + frac * (pts[i + 1].eps - pts[i].eps);
+    }
+  }
+  return pts[pts.length - 1].eps;
+}
+
+// Interpoliert ein beliebiges numerisches Feld aus FMP-Jahresdaten auf einen Monatsstempel
+function makeKMInterpolator(kmOldestFirst, field) {
+  const pts = kmOldestFirst
+    .map(r => ({ date: new Date(r.date).getTime(), val: r[field] }))
+    .filter(p => p.date > 0 && p.val != null && p.val > 0 && isFinite(p.val));
+  if (!pts.length) return null;
+  return (dateMs) => {
+    if (dateMs <= pts[0].date) return pts[0].val;
+    if (dateMs >= pts[pts.length - 1].date) return pts[pts.length - 1].val;
+    for (let i = 0; i < pts.length - 1; i++) {
+      if (dateMs >= pts[i].date && dateMs < pts[i + 1].date) {
+        const frac = (dateMs - pts[i].date) / (pts[i + 1].date - pts[i].date);
+        return pts[i].val + frac * (pts[i + 1].val - pts[i].val);
+      }
+    }
+    return pts[pts.length - 1].val;
+  };
+}
+
+function interpolateEPS(dateMs) {
+  return interpolatePts(state.epsHistory, dateMs);
+}
+
+function filterByYears(data, years) {
+  if (!years) return data;
+  const cutoff = Date.now() - years * 365.25 * 24 * 3600 * 1000;
+  return data.filter(p => p.date >= cutoff);
+}
+
+function seriesAvg(arr) {
+  const valid = arr.filter(v => v != null && v > 0 && isFinite(v));
+  return valid.length ? valid.reduce((a, b) => a + b, 0) / valid.length : null;
+}
+
+// ── COMPANY HEADER ────────────────────────────────────────────
+function updateHeader() {
+  const p = state.fmpProfile || {};
+
+  const name     = p.companyName || state.ticker;
+  const currency = p.currency    || 'USD';
+  const price    = p.price       || state.priceHistory[state.priceHistory.length - 1]?.price || null;
+  const mcap     = p.mktCap      || null;
+  const pe       = p.pe          || null;
+  const eps      = p.eps         || (state.epsHistory.length ? state.epsHistory[state.epsHistory.length - 1].eps : null);
+  const sector   = p.sector      || '';
+  const industry = p.industry    || '';
+  const website  = p.website     || '';
+
+  // Kursveränderung: letzter vs. vorletzter Monat aus Twelve Data
+  const prevPrice = state.priceHistory[state.priceHistory.length - 2]?.price || null;
+  const change = (price && prevPrice) ? ((price - prevPrice) / prevPrice) : null;
+
+  document.getElementById('company-name').textContent = name;
+  document.getElementById('company-meta').textContent = [sector, industry].filter(Boolean).join(' · ') || state.ticker;
+  document.getElementById('stat-price').textContent   = price ? fmt(price, 2) : '–';
+  document.getElementById('stat-currency').textContent = currency;
+  document.getElementById('stat-mcap').textContent    = fmtB(mcap);
+  document.getElementById('stat-pe').textContent      = pe  ? fmt(pe, 1)  : '–';
+  document.getElementById('stat-eps').textContent     = eps ? fmt(eps, 2) : '–';
+
+  const changeEl = document.getElementById('stat-change');
+  if (change != null) {
+    changeEl.textContent = (change >= 0 ? '+' : '') + fmt(change * 100, 2) + ' %';
+    changeEl.className = 'stat-change ' + (change >= 0 ? 'positive' : 'negative');
+  } else {
+    changeEl.textContent = '';
+  }
+
+  // Logo: FMP-Bild zuerst, dann Clearbit
+  const logoImg = document.getElementById('company-logo');
+  const logoFb  = document.getElementById('logo-fallback');
+  logoFb.textContent = state.ticker.slice(0, 3);
+  const logoSrc = p.image || (() => {
+    const domain = website ? (() => { try { return new URL(website).hostname.replace('www.',''); } catch { return null; } })() : null;
+    return domain ? `https://logo.clearbit.com/${domain}` : null;
+  })();
+  if (logoSrc) {
+    logoImg.src = logoSrc;
+    logoImg.style.display = 'block';
+    logoFb.style.display  = 'none';
+  } else {
+    logoImg.style.display = 'none';
+    logoFb.style.display  = 'flex';
+  }
+
+  // Sidebar-Initialwerte aus FMP key-metrics (historische Durchschnitte + aktuelle Werte)
+  const cutoff10y = Date.now() - 10 * 365.25 * 24 * 3600 * 1000;
+  const km10y = state.keyMetrics.filter(r => new Date(r.date).getTime() >= cutoff10y);
+
+  const pbCur = state.keyMetrics[0]?.pbRatio || null;
+  const psCur = state.keyMetrics[0]?.priceToSalesRatio || null;
+
+  function kmAvg(field) {
+    const vals = km10y.map(r => r[field]).filter(v => v != null && v > 0 && isFinite(v));
+    return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : null;
+  }
+  const pbAvg = kmAvg('pbRatio');
+  const psAvg = kmAvg('priceToSalesRatio');
+
+  document.getElementById('sb-pe-cur').textContent = pe  ? fmt(pe, 1)   : '–';
+  document.getElementById('sb-pb-cur').textContent = pbCur ? fmt(pbCur, 1) : '–';
+  document.getElementById('sb-ps-cur').textContent = psCur ? fmt(psCur, 1) : '–';
+  document.getElementById('sb-pe-avg').textContent = '–'; // wird von buildFairValueChart gesetzt
+  document.getElementById('sb-pb-avg').textContent = pbAvg ? fmt(pbAvg, 1) : '–';
+  document.getElementById('sb-ps-avg').textContent = psAvg ? fmt(psAvg, 1) : '–';
+}
+
+// ── CHART DEFAULTS ────────────────────────────────────────────
+function chartDefaults() {
+  return {
+    responsive: true,
+    maintainAspectRatio: true,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: 'rgba(5,15,13,.95)',
+        borderColor: 'rgba(0,255,204,.2)',
+        borderWidth: 1,
+        titleColor: '#4a7a6d',
+        bodyColor:  '#7ab8a8',
+        titleFont: { family: "'Share Tech Mono',monospace", size: 10 },
+        bodyFont:  { family: "'Share Tech Mono',monospace", size: 11 },
+        padding: 10,
+      },
+    },
+    scales: {
+      x: {
+        grid:   { color: 'rgba(0,255,204,.05)', drawTicks: false },
+        ticks:  { color: '#4a7a6d', maxTicksLimit: 8, font: { family: "'Share Tech Mono',monospace", size: 10 } },
+        border: { color: 'rgba(0,255,204,.1)' },
+      },
+      y: {
+        grid:   { color: 'rgba(0,255,204,.05)', drawTicks: false },
+        ticks:  { color: '#4a7a6d', font: { family: "'Share Tech Mono',monospace", size: 10 } },
+        border: { color: 'rgba(0,255,204,.1)' },
+      },
+    },
+  };
+}
+
+function tsLabel(dateMs) {
+  const d = new Date(dateMs);
+  return d.getFullYear() + '/' + String(d.getMonth() + 1).padStart(2, '0');
+}
+
+// ── FAIRER WERT CHART ─────────────────────────────────────────
+function setFVRange(years) {
+  state.fvYears = years;
+  document.querySelectorAll('#fv-time-bar .time-btn').forEach(b =>
+    b.classList.toggle('active', parseInt(b.dataset.years) === years));
+  buildFairValueChart();
+}
+
+function buildFairValueChart() {
+  const filtered = filterByYears(state.priceHistory, state.fvYears);
+  if (!filtered.length) return;
+
+  const labels = filtered.map(p => tsLabel(p.date));
+  const prices = filtered.map(p => p.price);
+  const hasEPS = state.epsHistory.length > 0;
+  const currency = state.fmpProfile?.currency || 'USD';
+
+  // EPS-Quellen-Hinweis
+  const noEpsEl = document.getElementById('fv-no-eps');
+  if (!hasEPS) {
+    noEpsEl.textContent = 'EPS DATA UNAVAILABLE – PRICE HISTORY ONLY';
+    noEpsEl.style.color = 'var(--text-dim)';
+    noEpsEl.classList.remove('hidden');
+  } else if (state.epsSynthetic) {
+    noEpsEl.textContent = '⚠ EPS history estimated (incomplete AV dataset available)';
+    noEpsEl.style.color = 'var(--yellow)';
+    noEpsEl.classList.remove('hidden');
+  } else {
+    noEpsEl.classList.add('hidden');
+  }
+
+  let datasets = [{
+    label: 'Price',
+    data: prices,
+    borderColor: 'rgba(255,255,255,.85)',
+    backgroundColor: 'transparent',
+    borderWidth: 1.5,
+    pointRadius: 0,
+    tension: 0.1,
+    order: 1,
+  }];
+
+  let avgPE = null;
+
+  if (hasEPS) {
+    // Ø-KGV über gewählten Zeitraum berechnen
+    const peValues = filtered.map(p => {
+      const eps = interpolateEPS(p.date);
+      return (eps && eps > 0) ? p.price / eps : null;
+    }).filter(v => v != null && v > 0 && v < 80);
+
+    avgPE = seriesAvg(peValues);
+
+    if (avgPE) {
+      // Fair Value Linie
+      datasets.push({
+        label: `Fair Value (Ø KGV ${fmt(avgPE, 1)})`,
+        data: filtered.map(p => {
+          const eps = interpolateEPS(p.date);
+          return (eps && eps > 0) ? eps * avgPE : null;
+        }),
+        borderColor: '#ff8844',
+        backgroundColor: 'transparent',
+        borderWidth: 2,
+        borderDash: [6, 4],
+        pointRadius: 0,
+        tension: 0.2,
+        order: 2,
+      });
+
+      // Multiple-Fächer
+      const multiples  = [10, 15, 20, 25, 30];
+      const fanColors  = ['#00ff88','#88ff44','#ffcc44','#ff8844','#ff4466'];
+      multiples.forEach((mult, i) => {
+        datasets.push({
+          label: `KGV ${mult}`,
+          data: filtered.map(p => {
+            const eps = interpolateEPS(p.date);
+            return (eps && eps > 0) ? eps * mult : null;
+          }),
+          borderColor: fanColors[i],
+          backgroundColor: 'transparent',
+          borderWidth: 1,
+          pointRadius: 0,
+          tension: 0.2,
+          order: 3 + i,
+        });
+      });
+    }
+
+    // Sidebar: Ø-KGV + aktuelles KGV
+    if (avgPE) {
+      document.getElementById('sb-pe-avg').textContent = fmt(avgPE, 1);
+      const curPrice = state.fmpProfile?.price || state.priceHistory[state.priceHistory.length - 1]?.price;
+      let curPE = state.fmpProfile?.pe || null;
+      if (!curPE && curPrice > 0) {
+        const lastEPS = state.epsHistory[state.epsHistory.length - 1]?.eps;
+        if (lastEPS > 0) curPE = curPrice / lastEPS;
+      }
+      const peEl = document.getElementById('sb-pe-cur');
+      if (curPE) {
+        peEl.textContent = fmt(curPE, 1);
+        peEl.className = 'sidebar-col-val ' + (curPE > avgPE * 1.1 ? 'above' : curPE < avgPE * 0.9 ? 'below' : '');
+      }
+    }
+
+    // Fair Value Indicator – nutzt letzten Chart-Datenpunkt (identisch mit Tooltip)
+    const lastPoint = filtered[filtered.length - 1];
+    const curPrice  = lastPoint.price;
+    const curEPS    = interpolateEPS(lastPoint.date);
+    if (curPrice && curEPS > 0 && avgPE) {
+      const fv   = curEPS * avgPE;
+      const diff = (curPrice - fv) / fv;
+      const indEl = document.getElementById('fv-indicator');
+      if (diff > 0.15)
+        indEl.innerHTML = `<span style="color:var(--red)">▲ ${fmt(diff * 100, 0)}% ÜBER FAIR VALUE</span>`;
+      else if (diff < -0.15)
+        indEl.innerHTML = `<span style="color:var(--neon)">▼ ${fmt(Math.abs(diff) * 100, 0)}% UNTER FAIR VALUE</span>`;
+      else
+        indEl.innerHTML = `<span style="color:var(--yellow)">≈ FAIR BEWERTET (${diff >= 0 ? '+' : ''}${fmt(diff * 100, 0)}%)</span>`;
+    }
+  }
+
+  const cfg = chartDefaults();
+  cfg.plugins.tooltip.callbacks = {
+    title:  (items) => items[0]?.label || '',
+    label:  (item)  => ` ${item.dataset.label}: ${fmt(item.raw, 2)} ${currency}`,
+  };
+
+  if (charts.fv) charts.fv.destroy();
+  charts.fv = new Chart(document.getElementById('chart-fairvalue'), {
+    type: 'line',
+    data: { labels, datasets },
+    options: cfg,
+  });
+}
+
+// ── MULTIPLES CHART ───────────────────────────────────────────
+function setMultRange(years) {
+  state.multYears = years;
+  document.querySelectorAll('#tab-multiples .time-btn').forEach(b =>
+    b.classList.toggle('active', parseInt(b.dataset.years) === years));
+  buildMultiplesChart();
+}
+
+function buildMultiplesChart() {
+  const filtered = filterByYears(state.priceHistory, state.multYears);
+  if (!filtered.length) return;
+
+  const labels = filtered.map(p => tsLabel(p.date));
+
+  // FMP key-metrics oldest-first für Interpolation
+  const kmOF = [...state.keyMetrics].sort((a, b) => new Date(a.date) - new Date(b.date));
+
+  const getBPS  = makeKMInterpolator(kmOF, 'bookValuePerShare');       // KBV
+  const getRPS  = makeKMInterpolator(kmOF, 'revenuePerShare');         // KUV
+  const getCFPS = makeKMInterpolator(kmOF, 'operatingCashFlowPerShare'); // KCV
+
+  const hasEPS = state.epsHistory.length > 0;
+
+  // KGV: Kurs / interpolierter EPS
+  const kgvData = filtered.map(p => {
+    if (!hasEPS) return null;
+    const eps = interpolateEPS(p.date);
+    const ratio = (eps && eps > 0) ? p.price / eps : null;
+    return (ratio != null && ratio > 0 && ratio < 80) ? ratio : null;
+  });
+
+  const kgvValid = kgvData.filter(v => v !== null).length;
+  const kgvTotal = kgvData.length;
+  const kgvFilterRate = kgvTotal > 0 ? kgvValid / kgvTotal : 1;
+
+  // KBV: Kurs / interpolierter Buchwert je Aktie
+  const kbvData = filtered.map(p => {
+    if (!getBPS) return null;
+    const bps = getBPS(p.date);
+    return (bps && bps > 0) ? Math.min(p.price / bps, 50) : null;
+  });
+
+  // KUV: Kurs / interpolierter Umsatz je Aktie
+  const kuvData = filtered.map(p => {
+    if (!getRPS) return null;
+    const rps = getRPS(p.date);
+    return (rps && rps > 0) ? Math.min(p.price / rps, 50) : null;
+  });
+
+  // KCV: Kurs / interpolierter operativer CF je Aktie
+  const kcvData = filtered.map(p => {
+    if (!getCFPS) return null;
+    const cfps = getCFPS(p.date);
+    return (cfps && cfps > 0) ? Math.min(p.price / cfps, 100) : null;
+  });
+
+  const kgvAvg = seriesAvg(kgvData);
+  const kbvAvg = seriesAvg(kbvData);
+  const kuvAvg = seriesAvg(kuvData);
+  const kcvAvg = seriesAvg(kcvData);
+  const kcvCur = kcvData.filter(v => v != null).slice(-1)[0] || null;
+
+  // Aktuelle Werte aus FMP key-metrics[0]
+  const km0 = state.keyMetrics[0] || {};
+  const kgvCur = state.fmpProfile?.pe  || km0.peRatio || null;
+  const kbvCur = km0.pbRatio           || null;
+  const kuvCur = km0.priceToSalesRatio || null;
+
+  // KGV-Filter-Warnung
+  const kgvWarn = document.getElementById('mult-filter-warning');
+  if (kgvFilterRate < 0.7) {
+    kgvWarn.classList.remove('hidden');
+  } else {
+    kgvWarn.classList.add('hidden');
+  }
+
+  // Legende aufbauen
+  const legendEl = document.getElementById('mult-legend');
+  legendEl.innerHTML = '';
+  [
+    { label: 'KGV', color: '#00ffcc', cur: kgvCur, avg: kgvAvg },
+    { label: 'KBV', color: '#4499ff', cur: kbvCur, avg: kbvAvg },
+    { label: 'KUV', color: '#88ff44', cur: kuvCur, avg: kuvAvg },
+    { label: 'KCV', color: '#ffcc44', cur: kcvCur, avg: kcvAvg },
+  ].forEach(item => {
+    const badge = document.createElement('div');
+    badge.className = 'mult-badge';
+    badge.style.borderColor = item.color + '44';
+    badge.style.color = item.color;
+    badge.innerHTML = `<span class="mult-dot" style="background:${item.color}"></span>
+      <span>${item.label} ${item.cur ? fmt(item.cur, 1) : '–'}</span>
+      ${item.avg ? `<span style="color:var(--text-dim);font-size:.6rem">(Ø ${fmt(item.avg, 1)})</span>` : ''}`;
+    legendEl.appendChild(badge);
+  });
+
+  function avgLine(avg, color, label) {
+    if (!avg) return null;
+    return { label, data: filtered.map(() => avg), borderColor: color, borderDash: [4, 4], borderWidth: 1, pointRadius: 0, backgroundColor: 'transparent' };
+  }
+
+  const datasets = [];
+  if (hasEPS && kgvData.some(v => v != null)) {
+    datasets.push({ label: 'KGV', data: kgvData, borderColor: '#00ffcc', backgroundColor: 'transparent', borderWidth: 1.5, pointRadius: 0, tension: 0.1 });
+    const avg = avgLine(kgvAvg, '#00ffcc88', 'KGV Ø'); if (avg) datasets.push(avg);
+  }
+  if (kbvData.some(v => v != null)) {
+    datasets.push({ label: 'KBV', data: kbvData, borderColor: '#4499ff', backgroundColor: 'transparent', borderWidth: 1.5, pointRadius: 0, tension: 0.1 });
+    const avg = avgLine(kbvAvg, '#4499ff88', 'KBV Ø'); if (avg) datasets.push(avg);
+  }
+  if (kuvData.some(v => v != null)) {
+    datasets.push({ label: 'KUV', data: kuvData, borderColor: '#88ff44', backgroundColor: 'transparent', borderWidth: 1.5, pointRadius: 0, tension: 0.1 });
+    const avg = avgLine(kuvAvg, '#88ff4488', 'KUV Ø'); if (avg) datasets.push(avg);
+  }
+  if (kcvData.some(v => v != null)) {
+    datasets.push({ label: 'KCV', data: kcvData, borderColor: '#ffcc44', backgroundColor: 'transparent', borderWidth: 1.5, pointRadius: 0, tension: 0.1 });
+    const avg = avgLine(kcvAvg, '#ffcc4488', 'KCV Ø'); if (avg) datasets.push(avg);
+  }
+  if (!datasets.length) return;
+
+  const cfg = chartDefaults();
+  cfg.scales.y.title = { display: true, text: 'Multiple', color: '#4a7a6d', font: { size: 10 } };
+  cfg.plugins.tooltip.callbacks = {
+    title: (items) => items[0]?.label || '',
+    label: (item)  => ` ${item.dataset.label}: ${fmt(item.raw, 1)}`,
+  };
+
+  if (charts.mult) charts.mult.destroy();
+  charts.mult = new Chart(document.getElementById('chart-multiples'), {
+    type: 'line',
+    data: { labels, datasets },
+    options: cfg,
+  });
+}
+
+// ── DIVIDEND CHART ────────────────────────────────────────────
+function buildDividendChart() {
+  const divs   = state.divHistory;
+  const prices = state.priceHistory;
+
+  if (!divs.length || !prices.length) {
+    const noDataEl = document.getElementById('div-no-data');
+    noDataEl.classList.remove('hidden');
+
+    // AV-Vorfilter: wenn AV explizit DividendYield=0 und DividendPerShare=0 meldet,
+    // ist die Aktie ein Non-Payer – unabhängig vom TD-Status (z.B. 403 Paid Plan)
+    const avDivYield = state.fmpProfile?.dividendYield;
+    const avDivPS    = state.fmpProfile?.dividendPerShare;
+    const avSaysNoDividend = (avDivYield == null || avDivYield === 0) &&
+                             (avDivPS    == null || avDivPS    === 0);
+
+    const s = avSaysNoDividend ? 'no_data' : state.divStatus;
+    if (s === 'paid_plan_required') {
+      noDataEl.innerHTML = `<div style="text-align:center;padding:40px;color:var(--text-dim);font-size:.65rem;letter-spacing:2px;">
+        DIVIDENDENDATEN ERFORDERN EINEN PAID PLAN
+        <div style="margin-top:8px;font-size:.6rem;letter-spacing:1px;color:var(--text-dim);opacity:.6;">
+          Dividendendaten erfordern einen Twelve Data Paid Plan &middot;
+          <a href="https://twelvedata.com/pricing" target="_blank" rel="noopener" style="color:var(--text-dim);text-decoration:underline;">twelvedata.com/pricing</a>
+        </div>
+      </div>`;
+    } else if (s === 'no_data') {
+      noDataEl.innerHTML = `<div style="text-align:center;padding:40px;color:var(--text-dim);font-size:.65rem;letter-spacing:2px;">
+        KEINE DIVIDENDE – Aktie schüttet nicht aus
+      </div>`;
+    } else {
+      noDataEl.innerHTML = `<div style="text-align:center;padding:40px;color:var(--text-dim);font-size:.65rem;letter-spacing:2px;">
+        DIVIDENDENDATEN NICHT VERFÜGBAR
+      </div>`;
+    }
+    return;
+  }
+  document.getElementById('div-no-data').classList.add('hidden');
+
+  const ONE_YEAR = 365.25 * 24 * 3600 * 1000;
+
+  // Trailing-12M Dividendenrendite für jeden Monat
+  const yieldData = prices.map(p => {
+    const trailing = divs
+      .filter(d => d.date >= p.date - ONE_YEAR && d.date <= p.date)
+      .reduce((s, d) => s + d.amount, 0);
+    return trailing > 0 ? trailing / p.price * 100 : null;
+  });
+
+  // Korridor: 12-Monats-rollendes ±σ
+  const winSize = 12;
+  const corridorHigh = yieldData.map((v, i) => {
+    const w = yieldData.slice(Math.max(0, i - winSize), i + 1).filter(x => x != null);
+    if (w.length < 3) return null;
+    const mean = w.reduce((a, b) => a + b, 0) / w.length;
+    const std  = Math.sqrt(w.map(x => (x - mean) ** 2).reduce((a, b) => a + b, 0) / w.length);
+    return mean + std;
+  });
+  const corridorLow = yieldData.map((v, i) => {
+    const w = yieldData.slice(Math.max(0, i - winSize), i + 1).filter(x => x != null);
+    if (w.length < 3) return null;
+    const mean = w.reduce((a, b) => a + b, 0) / w.length;
+    const std  = Math.sqrt(w.map(x => (x - mean) ** 2).reduce((a, b) => a + b, 0) / w.length);
+    return Math.max(0, mean - std);
+  });
+
+  // Absolute Dividendenzahlung pro Monat (für Balken)
+  const divAmounts = prices.map(p => {
+    const monthly = divs.filter(d => {
+      const dd = new Date(d.date), pd = new Date(p.date);
+      return dd.getFullYear() === pd.getFullYear() && dd.getMonth() === pd.getMonth();
+    });
+    return monthly.reduce((s, d) => s + d.amount, 0) || null;
+  });
+
+  const labels = prices.map(p => tsLabel(p.date));
+
+  // Sidebar
+  const validYields = yieldData.filter(v => v != null);
+  const curYield = validYields[validYields.length - 1] || null;
+  document.getElementById('div-yield-cur').textContent = curYield ? fmt(curYield, 2) + ' %' : '–';
+
+  function yieldChangeAt(monthsBack) {
+    const idx = yieldData.length - 1 - monthsBack;
+    if (idx < 0) return null;
+    const past = yieldData[idx];
+    return (curYield && past) ? (curYield - past) / Math.abs(past) * 100 : null;
+  }
+  function renderChg(id, months) {
+    const chg = yieldChangeAt(months);
+    const el = document.getElementById(id);
+    if (chg == null) { el.textContent = '–'; return; }
+    el.textContent = (chg >= 0 ? '+' : '') + fmt(chg, 1) + ' %';
+    el.style.color = chg >= 0 ? 'var(--neon)' : 'var(--red)';
+  }
+  renderChg('div-chg-1y', 12);
+  renderChg('div-chg-2y', 24);
+  renderChg('div-chg-5y', 60);
+  renderChg('div-chg-10y', 120);
+
+  const cfg = chartDefaults();
+  cfg.scales.y2 = {
+    type: 'linear', position: 'right',
+    grid: { drawOnChartArea: false },
+    ticks: { color: '#4a7a6d', font: { size: 9 } },
+    border: { color: 'rgba(0,255,204,.1)' },
+  };
+  cfg.plugins.tooltip.callbacks = {
+    title: (items) => items[0]?.label || '',
+    label: (item) => {
+      if (item.dataset.label === 'Rendite')   return ` Rendite: ${fmt(item.raw, 2)} %`;
+      if (item.dataset.label === 'Dividende') return ` Dividende: ${fmt(item.raw, 3)}`;
+      return ` ${item.dataset.label}: ${fmt(item.raw, 2)}`;
+    },
+  };
+
+  if (charts.div) charts.div.destroy();
+  charts.div = new Chart(document.getElementById('chart-dividenden'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        { type: 'line',  label: 'Rendite',        data: yieldData,    borderColor: '#4499ff', backgroundColor: 'transparent', borderWidth: 2, pointRadius: 0, tension: 0.3, yAxisID: 'y',  order: 1 },
+        { type: 'line',  label: 'Korridor oben',  data: corridorHigh, borderColor: 'transparent', backgroundColor: 'rgba(68,153,255,.12)', fill: '+1', borderWidth: 0, pointRadius: 0, tension: 0.3, yAxisID: 'y', order: 2 },
+        { type: 'line',  label: 'Korridor unten', data: corridorLow,  borderColor: 'rgba(68,153,255,.3)', backgroundColor: 'transparent', borderDash: [3, 3], borderWidth: 1, pointRadius: 0, tension: 0.3, yAxisID: 'y', order: 3 },
+        { type: 'bar',   label: 'Dividende',       data: divAmounts,   backgroundColor: 'rgba(68,153,255,.4)', borderColor: 'rgba(68,153,255,.7)', borderWidth: 1, yAxisID: 'y2', order: 4 },
+      ],
+    },
+    options: cfg,
+  });
+}
+
+// ── QUALITY CHECK ─────────────────────────────────────────────
+const SECTOR_PE = {
+  'Technology': 28, 'Healthcare': 22, 'Financial Services': 13,
+  'Consumer Cyclical': 20, 'Consumer Defensive': 18, 'Energy': 11,
+  'Basic Materials': 13, 'Industrials': 18, 'Real Estate': 30,
+  'Utilities': 19, 'Communication Services': 22,
+};
+
+function ampel(color, text) {
+  return `<span class="ampel ampel-${color}">${text}</span>`;
+}
+function qcRow(label, value, compare, badge, hint) {
+  return `<tr>
+    <td class="qc-label">${label}</td>
+    <td class="qc-value">${value}</td>
+    <td class="qc-compare">${compare || ''}</td>
+    <td>${badge}</td>
+    <td class="qc-hint">${hint || ''}</td>
+  </tr>`;
+}
+
+function buildQualityCheck() {
+  const p   = state.fmpProfile   || {};
+  const r0  = state.ratios[0]    || {};
+  const km0 = state.keyMetrics[0]|| {};
+  const bs0 = state.balanceSheets[0] || {};
+  const cf0 = state.cashFlows[0] || {};
+
+  const sector   = p.sector || '';
+  const sectorPE = SECTOR_PE[sector] || 18;
+
+  // Kennzahlen – FMP ratios sind primär, key-metrics als Fallback
+  let pe       = p.pe                            || r0.priceEarningsRatio   || km0.peRatio              || null;
+  let pb       = r0.priceToBookRatio             || km0.pbRatio             || null;
+  let divYield = r0.dividendYield                || km0.dividendYield       || null; // Dezimal 0–1
+  let de       = r0.debtEquityRatio              || km0.debtToEquity        || null; // direkte Ratio
+  let fcf      = cf0.freeCashFlow                || null;
+  let peg      = r0.pegRatio                     || km0.pegRatio            || null;
+  let roe      = r0.returnOnEquity               || km0.roe                 || null; // Dezimal 0–1+
+
+  // Eigenkapitalquote aus Bilanz
+  let ekQuote = null;
+  if (bs0.totalStockholdersEquity && bs0.totalAssets && bs0.totalAssets > 0) {
+    ekQuote = bs0.totalStockholdersEquity / bs0.totalAssets;
+  }
+
+  // Gewinnwachstum 3J CAGR – Quelle: AV EARNINGS annual (state.incomeStmts)
+  let earnGrowth3y = null;
+  const sortedIS = [...state.incomeStmts].sort((a, b) => new Date(b.date) - new Date(a.date));
+  console.log('[EarnGrowth] incomeStmts:', sortedIS.length, 'Einträge:', sortedIS.slice(0,4).map(r => `${r.date}: ${r.epsdiluted}`));
+  if (sortedIS.length >= 4) {
+    const eps0 = parseFloat(sortedIS[0]?.epsdiluted ?? sortedIS[0]?.eps);
+    const eps3 = parseFloat(sortedIS[3]?.epsdiluted ?? sortedIS[3]?.eps);
+    const date0 = new Date(sortedIS[0].date);
+    const date3 = new Date(sortedIS[3].date);
+    const yearsDiff = (date0 - date3) / (365.25 * 24 * 3600 * 1000);
+    console.log('[EarnGrowth] eps0:', eps0, 'eps3:', eps3, 'yearsDiff:', yearsDiff.toFixed(2));
+    if (eps0 > 0 && eps3 > 0 && yearsDiff > 0.5) {
+      earnGrowth3y = Math.pow(eps0 / eps3, 1 / yearsDiff) - 1;
+    }
+  }
+  // Fallback: monatliche epsHistory, 36-Monats-Vergleich
+  if (earnGrowth3y === null && state.epsHistory.length >= 36 && !state.epsSynthetic) {
+    const epsNow   = state.epsHistory[state.epsHistory.length - 1].eps;
+    const eps3yAgo = state.epsHistory[Math.max(0, state.epsHistory.length - 37)].eps;
+    if (epsNow > 0 && eps3yAgo > 0) earnGrowth3y = Math.pow(epsNow / eps3yAgo, 1 / 3) - 1;
+    console.log('[EarnGrowth] Fallback epsHistory: epsNow', epsNow, 'eps3yAgo', eps3yAgo);
+  }
+
+  // Fallback PE aus EPS-History
+  if (pe == null && state.epsHistory.length) {
+    const curPrice = p.price || state.priceHistory[state.priceHistory.length - 1]?.price;
+    const lastEPS  = state.epsHistory[state.epsHistory.length - 1]?.eps;
+    if (curPrice > 0 && lastEPS > 0) pe = curPrice / lastEPS;
+  }
+
+  // Fallback Dividendenrendite aus Twelve Data
+  if (divYield == null && state.divHistory.length && state.priceHistory.length) {
+    const lastPrice  = state.priceHistory[state.priceHistory.length - 1].price;
+    const ONE_YEAR   = 365.25 * 24 * 3600 * 1000;
+    const trailing12 = state.divHistory
+      .filter(d => d.date >= Date.now() - ONE_YEAR)
+      .reduce((s, d) => s + d.amount, 0);
+    if (trailing12 > 0 && lastPrice > 0) divYield = trailing12 / lastPrice;
+  }
+
+  const rows = [];
+  const scoreColors = [];
+
+  // ── KGV ──
+  if (pe != null) {
+    const ownAvgPE = (() => {
+      const peVals = state.priceHistory.slice(-120).map(p2 => {
+        const eps = interpolateEPS(p2.date);
+        return (eps && eps > 0) ? p2.price / eps : null;
+      }).filter(v => v != null && v > 0 && v < 80);
+      return peVals.length ? peVals.reduce((a, b) => a + b, 0) / peVals.length : null;
+    })();
+
+    let kgvColor;
+    if (ownAvgPE && pe < ownAvgPE * 0.85 && pe < sectorPE * 0.85) kgvColor = 'green';
+    else if (ownAvgPE && pe > ownAvgPE * 1.2 && pe > sectorPE * 1.2) kgvColor = 'red';
+    else kgvColor = 'yellow';
+
+    const kgvHint = kgvColor === 'green' ? 'Discount vs sector & own history'
+      : kgvColor === 'red' ? 'Premium vs sector & own history' : 'Near historical average';
+
+    rows.push(qcRow('P/E (trailing)', fmt(pe, 1),
+      `${ownAvgPE ? 'Ø ' + fmt(ownAvgPE, 1) : '–'} · S ${fmt(sectorPE, 0)}`,
+      ampel(kgvColor, kgvColor === 'green' ? 'GOOD' : kgvColor === 'yellow' ? 'FAIR' : 'EXPENSIVE'), kgvHint));
+    scoreColors.push(kgvColor);
+
+    if (ownAvgPE) document.getElementById('sb-pe-avg').textContent = fmt(ownAvgPE, 1);
+  }
+
+  // ── PEG ──
+  if (peg == null && pe != null && pe > 0 && pe < 80 &&
+      earnGrowth3y != null && earnGrowth3y > 0.01 && earnGrowth3y < 1.0) {
+    peg = pe / (earnGrowth3y * 100);
+  }
+  if (peg != null && pe != null && pe > 0 && pe < 80) {
+    if (peg > 10) {
+      console.log('[PEG] nicht plausibel:', peg.toFixed(2), '– wird nicht angezeigt');
+    } else {
+      const pegColor = peg < 1 ? 'green' : peg <= 2 ? 'yellow' : 'red';
+      const pegText  = pegColor === 'green' ? 'GOOD' : pegColor === 'yellow' ? 'FAIR' : 'HIGH';
+      rows.push(qcRow('PEG-Ratio', fmt(peg, 2), 'P/E ÷ Growth',
+        ampel(pegColor, pegText),
+        peg < 1 ? 'Growth priced in' : peg > 2 ? 'Growth premium high' : ''));
+      scoreColors.push(pegColor);
+    }
+  }
+
+  // ── KBV ──
+  if (pb != null) {
+    const isBerkshire = ['BRK.A','BRK.B','BRK-A','BRK-B'].includes(state.ticker.toUpperCase());
+    if (pb < 0) {
+      rows.push(qcRow('P/B (Price/Book)', fmt(pb, 2), '',
+        ampel('yellow', 'NEGATIVE'),
+        'Negative equity – special case, review'));
+      // Nicht in scoreColors aufnehmen – kein GUT/SCHLECHT-Urteil
+    } else {
+      const pbColor = pb < 1.5 ? 'green' : pb <= 3 ? 'yellow' : 'red';
+      let pbHint = pb < 1 ? '⚡ Below book value' : '';
+      if (isBerkshire) {
+        if (pb < 1.2)      pbHint = '⭐ Historic Buffett buy zone (hard limit until 2018)';
+        else if (pb < 1.4) pbHint = '✅ Active Buffett buyback zone (2018–2024)';
+        else if (pb < 1.6) pbHint = '⚠ Upper comfort zone – Buffett paused buybacks 2024';
+        else               pbHint = '🚫 Above Buffett\'s historical comfort zone';
+      }
+      rows.push(qcRow('P/B (Price/Book)', fmt(pb, 2), '',
+        ampel(pbColor, pbColor === 'green' ? 'GOOD' : pbColor === 'yellow' ? 'FAIR' : 'HIGH'),
+        pbHint));
+      scoreColors.push(pbColor);
+    }
+  }
+
+  // ── Dividendenrendite ──
+  if (divYield != null) {
+    const divPct  = divYield < 1 ? divYield * 100 : divYield; // Normalisierung
+    const dyColor = divPct >= 3 ? 'green' : divPct >= 1 ? 'yellow' : 'red';
+    rows.push(qcRow('Dividend Yield', fmt(divPct, 2) + ' %', '',
+      ampel(dyColor, dyColor === 'green' ? 'STRONG' : dyColor === 'yellow' ? 'MED' : 'LOW'), ''));
+    scoreColors.push(dyColor);
+  } else {
+    rows.push(qcRow('Dividend Yield', '–', '', ampel('gray', 'KEINE'), 'No dividend'));
+    scoreColors.push('gray');
+  }
+
+  // ── Debt/Equity ──
+  if (de != null) {
+    const deColor = de < 0.5 ? 'green' : de <= 1.0 ? 'yellow' : 'red';
+    rows.push(qcRow('Debt/Equity', fmt(de, 2), '',
+      ampel(deColor, deColor === 'green' ? 'GOOD' : deColor === 'yellow' ? 'MED' : 'HIGH'),
+      de > 1 ? 'High debt' : de < 0.5 ? 'Solid balance sheet' : ''));
+    scoreColors.push(deColor);
+  }
+
+  // ── Free Cashflow ──
+  if (fcf != null) {
+    const fcfColor = fcf > 0 ? 'green' : 'red';
+    rows.push(qcRow('Free Cash Flow', fmtB(fcf), '',
+      ampel(fcfColor, fcf > 0 ? 'POSITIVE' : 'NEGATIVE'),
+      fcf < 0 ? 'Negative FCF – review' : ''));
+    scoreColors.push(fcfColor);
+  }
+
+  // ── Eigenkapitalquote ──
+  if (ekQuote != null) {
+    const ekPct   = ekQuote * 100;
+    const ekColor = ekPct >= 40 ? 'green' : ekPct >= 20 ? 'yellow' : 'red';
+    rows.push(qcRow('Equity Ratio', fmt(ekPct, 1) + ' %', '',
+      ampel(ekColor, ekColor === 'green' ? 'GOOD' : ekColor === 'yellow' ? 'MED' : 'LOW'),
+      ekPct < 20 ? 'Low equity base' : ''));
+    scoreColors.push(ekColor);
+  }
+
+  // ── Gewinnwachstum 3J ──
+  if (earnGrowth3y != null) {
+    const egPct   = earnGrowth3y * 100;
+    const egColor = egPct >= 10 ? 'green' : egPct >= 0 ? 'yellow' : 'red';
+    rows.push(qcRow('Earnings Growth 3Y', fmt(egPct, 1) + ' % p.a.', '',
+      ampel(egColor, egColor === 'green' ? 'STRONG' : egColor === 'yellow' ? 'STABLE' : 'NEGATIVE'), ''));
+    scoreColors.push(egColor);
+  }
+
+  // ── ROE ──
+  if (roe != null) {
+    const roePct  = roe * 100;
+    const roeColor = roePct >= 15 ? 'green' : roePct >= 8 ? 'yellow' : 'red';
+    rows.push(qcRow('Return on Equity', fmt(roePct, 1) + ' %', '',
+      ampel(roeColor, roeColor === 'green' ? 'GUT' : roeColor === 'yellow' ? 'MITTEL' : 'GERING'), ''));
+    scoreColors.push(roeColor);
+  }
+
+  document.getElementById('qc-tbody').innerHTML = rows.join('');
+
+  // Substanzwert-Badge
+  const substanzEl = document.getElementById('substanzwert-area');
+  if (pb != null && pb > 0 && pb < 1.0) {
+    substanzEl.innerHTML = `<div class="substanzwert-badge">💎 You buy $1 for ${fmt(pb * 100, 0)} cents – stock below book value</div>`;
+  } else {
+    substanzEl.innerHTML = '';
+  }
+
+  // Alien-Einordnung
+  const greens = scoreColors.filter(c => c === 'green').length;
+  const reds   = scoreColors.filter(c => c === 'red').length;
+  const hasKBVBelow1 = pb != null && pb > 0 && pb < 1.0;
+
+  let verdict;
+  if (greens >= 5 && hasKBVBelow1)
+    verdict = 'Classic value play – the market prices below book value. A rare opportunity. Safety margin intact – exactly the situation this analysis was built for.';
+  else if (greens >= 5)
+    verdict = 'Solid valuation with safety margin. Fundamentals show a consistent picture – the stock trades near or below its historical fair value. Check catalysts and sector context before entry.';
+  else if (greens >= 3 && reds <= 2)
+    verdict = 'Mixed picture – no clear signal in either direction. Check individual criteria carefully. Some strengths, some weaknesses – context decides.';
+  else if (reds >= 5)
+    verdict = 'Stock trades well above historical average – growth premium or simply overpriced? Safety margin missing. Not a classic value play by Alien Investor criteria.';
+  else
+    verdict = 'Mixed signals – too few clear indicators for a definitive verdict. Individual metrics and sector context are decisive. Your own analysis remains essential.';
+
+  document.getElementById('verdict-text').textContent = verdict;
+}
+
+// ── INIT ──────────────────────────────────────────────────────
+(function () {
+  // Keys vorhanden? Sonst Dialog sofort zeigen
+  const keys = getApiKeys();
+  if (!keys.twelvedata || !keys.alphavantage) {
+    openApiDialog();
+  }
+
+  // URL-Parameter ?ticker=AAPL
+  const params = new URLSearchParams(window.location.search);
+  const t = params.get('ticker');
+  if (t) {
+    document.getElementById('ticker-input').value = t.toUpperCase();
+    analyzeStock(t.toUpperCase());
+  }
+})();
+</script>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>

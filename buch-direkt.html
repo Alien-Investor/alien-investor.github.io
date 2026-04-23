@@ -454,11 +454,11 @@
   <div class="wrap">
 
     <div class="top-nav">
-      <a href="buecher.html">← Zurück zu den Büchern</a>
+      <a href="buecher.html" id="nav-back">← Zurück zu den Büchern</a>
     </div>
 
-    <h1><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Buch" role="img"><defs><linearGradient id="bk-cv-bd" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#060e12"/></linearGradient><linearGradient id="bk-sp-bd" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#0d2a28"/><stop offset="100%" stop-color="#1a3a38"/></linearGradient></defs><rect x="4" y="4" width="5" height="28" rx="1" fill="url(#bk-sp-bd)" stroke="#00ffcc" stroke-width="0.7"/><rect x="9" y="4" width="22" height="28" rx="1" fill="url(#bk-cv-bd)" stroke="#00ffcc" stroke-width="0.7"/><line x1="13" y1="12" x2="27" y2="12" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="16" x2="27" y2="16" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="20" x2="27" y2="20" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="24" x2="22" y2="24" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/></svg> DRM-frei direkt kaufen</h1>
-    <p class="lead">
+    <h1><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Buch" role="img"><defs><linearGradient id="bk-cv-bd" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#060e12"/></linearGradient><linearGradient id="bk-sp-bd" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#0d2a28"/><stop offset="100%" stop-color="#1a3a38"/></linearGradient></defs><rect x="4" y="4" width="5" height="28" rx="1" fill="url(#bk-sp-bd)" stroke="#00ffcc" stroke-width="0.7"/><rect x="9" y="4" width="22" height="28" rx="1" fill="url(#bk-cv-bd)" stroke="#00ffcc" stroke-width="0.7"/><line x1="13" y1="12" x2="27" y2="12" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="16" x2="27" y2="16" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="20" x2="27" y2="20" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="24" x2="22" y2="24" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/></svg> <span id="h1-text">DRM-frei direkt kaufen</span></h1>
+    <p class="lead" id="lead-p">
       Keine Plattform dazwischen. Kein Konto-Zwang. Kein Vendor-Lock-in.<br>
       <span style="color:#888;">EPUB + MOBI + AZW3 + PDF als Bundle – auf allen Geräten deiner Wahl.</span>
     </p>
@@ -500,7 +500,7 @@
     </div>
 
     <h2><svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Zahlung / Payment</h2>
-    <p style="color:#bbb; margin-top:-10px;">
+    <p id="pay-desc" style="color:#bbb; margin-top:-10px;">
       Wähle Lightning für schnelle, private Energie. Onchain für große Tanks. Ko-fi für PayPal oder Karte.
     </p>
 
@@ -515,7 +515,7 @@
         <img class="qr" src="lightning.png" alt="Lightning QR-Code">
         <code id="lnText">alien_investor@strike.me</code>
         <br>
-        <button class="copy" onclick="copyText('lnText')">Adresse kopieren</button>
+        <button class="copy" id="copy-ln" onclick="copyText('lnText')">Adresse kopieren</button>
       </div>
     </div>
 
@@ -525,13 +525,13 @@
         <img class="qr" src="onchain.png" alt="Bitcoin Onchain QR-Code">
         <code id="btcText">bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code>
         <br>
-        <button class="copy" onclick="copyText('btcText')">Adresse kopieren</button>
+        <button class="copy" id="copy-btc" onclick="copyText('btcText')">Adresse kopieren</button>
       </div>
     </div>
 
     <div class="kofi-section">
-      <div style="color:#ccc; margin-bottom: 8px;">☕ Oder per PayPal / Karte:</div>
-      <a class="kofi-btn" href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener">
+      <div id="kofi-label" style="color:#ccc; margin-bottom: 8px;">☕ Oder per PayPal / Karte:</div>
+      <a id="kofi-link" class="kofi-btn" href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener">
         Via Ko-fi bezahlen
       </a>
     </div>
@@ -673,11 +673,46 @@
   </footer>
 
   <script>
+    var currentLang = 'de';
+
+    var i18n = {
+      de: {
+        'nav-back':   '← Zurück zu den Büchern',
+        'nav-back-href': 'buecher.html',
+        'h1-text':    'DRM-frei direkt kaufen',
+        'lead-p':     'Keine Plattform dazwischen. Kein Konto-Zwang. Kein Vendor-Lock-in.<br><span style="color:#888;">EPUB + MOBI + AZW3 + PDF als Bundle – auf allen Geräten deiner Wahl.</span>',
+        'pay-desc':   'Wähle Lightning für schnelle, private Energie. Onchain für große Tanks. Ko-fi für PayPal oder Karte.',
+        'copy-ln':    'Adresse kopieren',
+        'copy-btc':   'Adresse kopieren',
+        'kofi-label': '☕ Oder per PayPal / Karte:',
+        'kofi-link':  'Via Ko-fi bezahlen',
+        'copied':     'Kopiert! ✅',
+        'copy-prompt':'Kopieren:'
+      },
+      en: {
+        'nav-back':   '← Back to Books',
+        'nav-back-href': '/en/buecher.html',
+        'h1-text':    'Buy DRM-free directly',
+        'lead-p':     'No platform in between. No account required. No vendor lock-in.<br><span style="color:#888;">EPUB + MOBI + AZW3 + PDF as a bundle – on all devices of your choice.</span>',
+        'pay-desc':   'Choose Lightning for fast, private energy. Onchain for larger amounts. Ko-fi for PayPal or card.',
+        'copy-ln':    'Copy address',
+        'copy-btc':   'Copy address',
+        'kofi-label': '☕ Or via PayPal / Card:',
+        'kofi-link':  'Pay via Ko-fi',
+        'copied':     'Copied! ✅',
+        'copy-prompt':'Copy:'
+      }
+    };
+
     function setLang(lang) {
-      const de = document.getElementById('info-de');
-      const en = document.getElementById('info-en');
-      const btnDe = document.getElementById('btn-de');
-      const btnEn = document.getElementById('btn-en');
+      currentLang = lang;
+      var t = i18n[lang];
+      var de = document.getElementById('info-de');
+      var en = document.getElementById('info-en');
+      var btnDe = document.getElementById('btn-de');
+      var btnEn = document.getElementById('btn-en');
+
+      // info blocks
       if (lang === 'en') {
         de.style.display = 'none';
         en.style.display = 'block';
@@ -687,6 +722,7 @@
         btnDe.style.background = '#000';
         btnDe.style.color = '#555';
         btnDe.style.borderColor = '#333';
+        window.location.hash = '#en';
       } else {
         en.style.display = 'none';
         de.style.display = 'block';
@@ -696,14 +732,33 @@
         btnEn.style.background = '#000';
         btnEn.style.color = '#555';
         btnEn.style.borderColor = '#333';
+        history.replaceState(null, '', window.location.pathname);
       }
+
+      // translate top-level UI
+      var navBack = document.getElementById('nav-back');
+      if (navBack) { navBack.textContent = t['nav-back']; navBack.href = t['nav-back-href']; }
+      var h1Txt = document.getElementById('h1-text');
+      if (h1Txt) h1Txt.textContent = t['h1-text'];
+      var leadP = document.getElementById('lead-p');
+      if (leadP) leadP.innerHTML = t['lead-p'];
+      var payDesc = document.getElementById('pay-desc');
+      if (payDesc) payDesc.textContent = t['pay-desc'];
+      var copyLn = document.getElementById('copy-ln');
+      if (copyLn) copyLn.textContent = t['copy-ln'];
+      var copyBtc = document.getElementById('copy-btc');
+      if (copyBtc) copyBtc.textContent = t['copy-btc'];
+      var kofiLabel = document.getElementById('kofi-label');
+      if (kofiLabel) kofiLabel.textContent = t['kofi-label'];
+      var kofiLink = document.getElementById('kofi-link');
+      if (kofiLink) kofiLink.textContent = t['kofi-link'];
     }
 
     if (window.location.hash === '#en') setLang('en');
 
     function togglePanel(id){
-      const ln = document.getElementById('ln');
-      const btc = document.getElementById('btc');
+      var ln = document.getElementById('ln');
+      var btc = document.getElementById('btc');
       if(id === 'ln'){
         ln.classList.toggle('open');
         btc.classList.remove('open');
@@ -714,15 +769,16 @@
     }
 
     async function copyText(elId){
-      const txt = document.getElementById(elId).innerText;
+      var txt = document.getElementById(elId).innerText;
+      var t = i18n[currentLang];
       try{
         await navigator.clipboard.writeText(txt);
-        const btn = document.querySelector(`button[onclick="copyText('${elId}')"]`);
-        const originalText = btn.innerText;
-        btn.innerText = "Kopiert! ✅";
-        setTimeout(() => btn.innerText = originalText, 2000);
+        var btn = document.querySelector('button[onclick="copyText(\'' + elId + '\')"]');
+        var originalText = btn.innerText;
+        btn.innerText = t['copied'];
+        setTimeout(function(){ btn.innerText = originalText; }, 2000);
       }catch(e){
-        prompt("Kopieren:", txt);
+        prompt(t['copy-prompt'], txt);
       }
     }
   </script>

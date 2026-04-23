@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bitcoin Inheritance Without a Lawyer: The Liana Wallet Guide &amp; Dead Man's Switch</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Don't lose your Bitcoin when you die. Liana Wallet uses Miniscript and timelocks for a Dead Man's Switch – secure, sovereign, no third parties.">
+  <link rel="canonical" href="/en/Liana-Wallet.html">
+  <link rel="alternate" hreflang="de" href="/Liana-Wallet.html">
+  <link rel="alternate" hreflang="en" href="/en/Liana-Wallet.html">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 0 15px 20px 15px;
+    }
+
+    /* --- TYPOGRAFIE --- */
+    h1, h2, h3 {
+      color: #00ffcc;
+    }
+    h1 {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    /* --- LINKS (Neon-Glow) --- */
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc; /* Der Alien-Effekt */
+    }
+
+    /* --- STANDARD ELEMENTE --- */
+    em { color: #ccc; }
+    code {
+      background-color: #111;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      color: #0f0;
+      font-size: 0.95em;
+      font-family: monospace;
+    }
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      padding-left: 1em;
+      margin: 2em 0;
+      color: #ddd;
+      font-style: italic;
+      background: #050505;
+      padding: 0.5em 1em;
+    }
+    ul { margin-left: 1.2em; }
+
+    .byline {
+      margin-top: -0.8em;
+      margin-bottom: 2em;
+      color: #ccc;
+      font-style: italic;
+      text-align: center;
+    }
+
+    /* --- BOXEN --- */
+    .box {
+      border: 1px solid #00ffcc;
+      background-color: #050505;
+      padding: 1.5em;
+      margin: 2em 0;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .box h2, .box h3 { margin-top: 0; }
+
+    .recommendation-box {
+      margin: 2em 0;
+      padding: 1em;
+      border: 1px dashed #00ffcc;
+      border-radius: 8px;
+      text-align: center;
+      background-color: #050505;
+    }
+    .recommendation-box h3 {
+      margin-top: 0;
+      font-size: 1.1em;
+      color: #00ffcc;
+    }
+
+    /* --- LIKE BUTTON --- */
+    .like-button {
+      margin: 3em 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+      font-size: 1em;
+    }
+    .like-button button {
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+    .like-button button:hover,
+    .like-button button:active {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
+    }
+
+    /* --- NAVIGATION --- */
+    .top-nav {
+      padding: 10px 0;
+      font-size: 0.9em;
+    }
+    .back-links {
+      margin-top: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="/en/index.html">← Back to Mission Control</a>
+  </div>
+
+  <h1>Bitcoin Inheritance Without a Lawyer: The Liana Wallet Guide &amp; Dead Man's Switch</h1>
+  <p class="byline"><em>by Alien Investor</em></p>
+
+  <article id="content">
+    <p>
+      "Not your keys, not your coins." That's the first law of Bitcoin sovereignty. But have you thought about the second law?
+      <strong>"Lost keys, lost coins."</strong>
+    </p>
+    <p>
+      The greatest paradox of self-custody is death. If you make your setup so secure that no thief in the world can get to it,
+      your heirs probably can't get to it either. Make it accessible for your heirs (note in a safe, lawyer with a key),
+      and you create security vulnerabilities that could cost you everything while you're still alive.
+    </p>
+    <p>
+      Millions of Bitcoin are already lost forever because owners died and took their keys to the grave.
+      Until now, the solution was either complicated or required trusting third parties.
+    </p>
+    <p>
+      In this article I'll show you how <strong>Liana Wallet</strong> solves this problem — with a programmable Dead Man's Switch directly on the blockchain.
+    </p>
+
+    <h2>1. The Problem: Why Conventional Inheritance Plans Fail</h2>
+    <p>
+      Traditionally, Bitcoiners have only bad options for inheritance:
+    </p>
+    <ul>
+      <li><strong>The Lawyer/Notary:</strong> You hand keys to a third party. That breaks the "Don't Trust, Verify" principle. The lawyer could be hacked or dishonest.</li>
+      <li><strong>Shamir's Secret Sharing (SSS):</strong> You split your seed into pieces. Mathematically secure, but operationally a nightmare. Can your heirs actually reconstruct an SSS scheme when you're gone?</li>
+      <li><strong>The "Note in the Safe":</strong> Simple, but risky. If a burglar finds the note, the money is gone ("Wrench Attack").</li>
+    </ul>
+    <p>
+      What we need is a system that is <strong>maximally secure during your lifetime</strong> (nobody can spend without you) and <strong>automatically accessible upon death</strong>.
+    </p>
+
+    <h2>2. The Solution: Liana and the "15-Month Strategy"</h2>
+    <p>
+      Liana is a wallet that builds logic into your transactions. It uses a Bitcoin feature called <strong>timelocks</strong>.
+      The concept works like a digital dead man's switch.
+    </p>
+
+    <h3>How the Dead Man's Switch works:</h3>
+    <ol>
+      <li><strong>The Primary Path (You're Alive):</strong> You have your normal hardware wallets (e.g. a BitBox02). With these you can move your coins <em>at any time</em>.</li>
+      <li><strong>The Recovery Path (The Heir):</strong> There is a second key (the heir's). It is embedded in the wallet's code but is <em>cryptographically invalid</em> until a certain amount of time has passed.</li>
+      <li><strong>The Timer:</strong> We set a timer on the blockchain — for example, <strong>15 months</strong>.</li>
+    </ol>
+    <p>
+      Every time you make a transaction (or send yourself funds once a year — a so-called "Refresh") the timer on the blockchain resets.
+      The heir's key remains worthless.
+    </p>
+    <p>
+      <strong>The scenario:</strong> If you die or become incapacitated, your transactions stop. The timer runs out. After 15 months (approx. 65,000 blocks)
+      the recovery path becomes valid on the blockchain. Only then — and not a day earlier — can the heir's key move the coins.
+    </p>
+
+    <div class="box">
+      <h3>Why exactly 15 months?</h3>
+      <p>
+        In the community (discussed by Chris Seedor, among others) the 15-month strategy has become the gold standard:
+      </p>
+      <ul>
+        <li><strong>12-month cycle:</strong> Every responsible Bitcoiner should do an annual audit (firmware updates, check backups, consolidate UTXOs).</li>
+        <li><strong>3-month buffer:</strong> If you forget your annual audit or end up in hospital, you have 90 days of safety buffer before the heir's key activates.</li>
+      </ul>
+    </div>
+
+    <h2>3. Under the Hood: Miniscript &amp; Decaying Multisig</h2>
+    <p>
+      How is this technically possible? Liana uses <strong>Miniscript</strong>. This is a language that makes Bitcoin Script (Bitcoin's machine code) readable and safe.
+      It lets us combine conditions like "AND", "OR", and "OLDER THAN".
+    </p>
+    <p>
+      A powerful feature here is <strong>Decaying Multisig</strong>. Imagine you have a high-security company setup with 3-of-5 keys.
+      If you lose 3 keys, the coins are normally gone. With Liana you can program:
+    </p>
+    <ul>
+      <li><strong>Today:</strong> 3 of 5 keys are required.</li>
+      <li><strong>After 4 years of inactivity:</strong> 2 of 5 keys suffice.</li>
+      <li><strong>After 5 years of inactivity:</strong> 1 of 5 keys suffices.</li>
+    </ul>
+    <p>
+      This converts the risk of "total loss" into the risk of "temporary lockout". Elegant, right?
+    </p>
+
+    <h2>4. Guide: Your Estate Setup in 4 Phases</h2>
+    <p>
+      Liana is not a wallet you install and forget. It is an active protocol. Here's the workflow:
+    </p>
+
+    <h3>Phase 1: Design &amp; Topology</h3>
+    <p>
+      Decide on a structure.
+      <br><strong>Primary (everyday use):</strong> E.g. your BitBox02 (single sig) or a 2-of-3 setup for high security.
+      <br><strong>Recovery (heir):</strong> A separate signing setup (e.g. a Ledger or a SeedSigner with SeedQR), stored securely with the heir or in a bank safe deposit box.
+    </p>
+
+    <div class="highlight">
+  <strong>Security Warning:</strong> A bank safe deposit box is <em>not</em> a trust-free environment.
+  Never store an unprotected seed or SeedQR there.
+  <br><br>
+  If you use a safe deposit box, the secret must be additionally protected (e.g. via a
+  <strong>BIP39 passphrase</strong> stored separately) and placed in a tamper-evident envelope.
+  Remember: with stateless devices like the SeedSigner, it's not the device but exclusively the seed or SeedQR that is the key to your wealth.
+</div>
+
+    <h3>Phase 2: Generate Keys</h3>
+    <p>
+      Generate the heir's key on a <strong>separate, clean device</strong>. This key must never touch your normal computer.
+      After creation, the seed (the 12/24 words) is secured on steel and sealed. Only the public key (xpub) goes into the Liana software.
+    </p>
+
+    <h3>Phase 3: Setup in Liana</h3>
+    <p>
+      You install the Liana desktop app (Windows/Mac/Linux). You link your primary key and the heir's xpub.
+      Then you set the timelock (e.g. 65,000 blocks).
+    </p>
+    <blockquote class="highlight">
+      <strong>Important:</strong> With Liana, the seed alone is not enough as a backup! You must also back up the <strong>descriptor</strong>.
+      The descriptor is the blueprint that says: "This seed belongs to a timelock script." Without the descriptor, your heirs cannot find the coins on the blockchain.
+      (Since Liana v13 there are encrypted descriptor backups that simplify this.)
+    </blockquote>
+
+    <h3>Phase 4: The Handover Package</h3>
+    <p>
+      Your heir receives a package physically (or via notary). It contains:
+    </p>
+    <ul>
+      <li>The recovery seed (sealed).</li>
+      <li>The descriptor (on a USB stick or as a QR code).</li>
+      <li>A simple guide: "Install Liana, load this file, enter the seed."</li>
+      <li>The instruction: "Check my address. If nothing has moved there for 15 months, you can claim the funds."</li>
+    </ul>
+
+    <h2>5. Hardware &amp; Node: What You Need</h2>
+    <p>
+      Liana is a software coordinator. The security comes from your hardware wallet.
+    </p>
+    <ul>
+      <li><strong>Hardware:</strong> The <strong>BitBox02 (Bitcoin-only)</strong> is ideal, as it natively supports Miniscript.
+      It shows you on the display exactly: "Spendable after 65,000 blocks." This prevents compromised software from tricking you.</li>
+      <li><strong>Node:</strong> To know whether 15 months have passed, Liana needs to know the blockchain.
+      Don't worry, you don't need 600 GB of storage. Liana offers a "Managed Pruned Node".
+      It downloads the chain once, verifies everything, and deletes old data. It only needs about 10–20 GB on your laptop.</li>
+    </ul>
+
+    <div class="recommendation-box">
+      <h3>Recommended Hardware for This Setup</h3>
+      <p>
+        For the Liana setup I recommend the <strong>BitBox02 Bitcoin-only Edition</strong> from Switzerland.
+        It supports Miniscript and displays the complex timelock rules directly on the screen.
+      </p>
+      <p><a href="https://alien-investor.org/bitbox" target="_blank">View BitBox02</a><br>
+        <span style="font-size:0.9em; color:#aaa;">(Code <strong>ALIENINVESTOR</strong> for 5% discount)</span>
+      </p>
+    </div>
+
+    <h2>6. Security: Test First, Inherit Later!</h2>
+    <p>
+      You don't put your life savings into a script you haven't tested. A typo in the code could lock coins forever.
+      But: don't test on the expensive mainnet or chaotic testnet3.
+    </p>
+    <p>
+      <strong>Use Bitcoin Signet.</strong> Liana lets you create a Signet wallet with one click.
+      Blocks run reliably there.
+    </p>
+    <ul>
+      <li>Get worthless Signet coins (faucet).</li>
+      <li>Set a timelock to 20 blocks (approx. 3 hours).</li>
+      <li>Simulate your death (wait 3 hours).</li>
+      <li>Try to recover using the heir's key.</li>
+    </ul>
+    <p>
+      Only when this dry run ("Fire Drill") succeeds should you set up the real wallet with real funds.
+    </p>
+
+    <h2>7. Conclusion: The Evolution of Sovereignty</h2>
+    <p>
+      Liana transforms the risk of death ("bus factor") from a catastrophe into an automated process.
+      It is the current gold standard for digital inheritance without trusted third parties.
+    </p>
+    <p>
+      It requires discipline (do the "Refresh" once a year), but the payoff is absolute certainty:
+      your coins are yours — and when you're gone, they belong exactly to those you designated. Not the state, not the bank, and not the data void.
+    </p>
+
+    <h2>8. Pro Tips: Mobile, Privacy &amp; Risks</h2>
+    <p>
+      For advanced users, there are two important details to keep in mind:
+    </p>
+    <ul>
+      <li><strong>Mobile Watch-Only:</strong> Liana is primarily desktop software. You can import your wallet via the descriptor export into the mobile app <strong>Nunchuk</strong> to safely check your balance on your phone (watch-only).</li>
+      <li><strong>Privacy Footprint:</strong> When the recovery case occurs, the entire script (including the timelock conditions) becomes visible on the blockchain. An analyst can then see: "This had a 15-month timelock."</li>
+    </ul>
+
+    <div class="recommendation-box" style="border: 1px dashed #ff3b3b;">
+      <h3 style="color: #ff3b3b;">Experts Only: Privacy Risks</h3>
+      <p>
+        Using advanced scripts and privacy techniques requires deep understanding. If you want to explore privacy tools (like CoinJoin) further, read my research report on Wasabi.
+        <br><br>
+        <strong>Warning:</strong> This content is only suitable for users who know exactly what they are doing.
+      </p>
+      <p><a href="https://alien-investor.org/wasabi-wallet-research-transparent.html" target="_blank" style="color: #ff3b3b; font-weight: bold;">Go to the Wasabi Wallet Research Report</a>
+      </p>
+    </div>
+
+  </article>
+
+  <div class="box">
+    <h3>Tools for Real Owners</h3>
+    <p style="font-size:0.95em;">
+      Tools I use myself — for Bitcoin self-custody and digital sovereignty:
+    </p>
+    <ul>
+      <li>
+        <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Lightning bolt" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> <strong>Buy Bitcoin in Europe – 21bitcoin:</strong><br>
+        Bitcoin-only app from Europe, ideal for DCA and stacking sats regularly — no shitcoins.<br>
+        With code <strong>ALIENINVESTOR</strong> you get a permanent 0.2 percentage point fee reduction
+        on instant and savings plan purchases.<br>
+        <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
+      </li>
+      <li>
+        ₿ <strong>Bitcoin in Self-Custody:</strong><br>
+        Hardware wallet instead of exchange account. I use the BitBox — there's the classic BitBox02 and the new
+        BitBox for iPhone (Nova).<br>
+        <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
+      </li>
+      <li>
+        <svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-label="Satellite dish" role="img"><path d="M4 24 A16 16 0 0 1 20 8" fill="#00ffcc" fill-opacity="0.06" stroke="#00ffcc" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="8" r="2.8" fill="#00ffcc"/><line x1="20" y1="8" x2="28" y2="4" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><path d="M15 13 A6 6 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/><path d="M12 16 A9 9 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.45"/></svg> <strong>Privacy &amp; Mail:</strong><br>
+        For email, VPN and cloud I use Proton — minimal data footprint, no Big Tech dependency.<br>
+        <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
+      </li>
+    </ul>
+    <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">
+      Note: Some links are affiliate links. If you use them, you support my work
+      at no extra cost to you. Thanks! <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-aff" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-aff)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg>
+    </p>
+  </div>
+
+  <div class="box" style="border-style: dashed; border-color: #333;">
+    <h3>Sources &amp; Further Reading</h3>
+    <p style="font-size:0.95em; color: #ccc;">
+      This guide is based on the technical documentation from Wizardsardine, Miniscript analyses and community strategies.
+    </p>
+    <ul style="margin-top: 1em;">
+      <li>🌐 <strong>Liana Official:</strong> <a href="https://wizardsardine.com/liana/" target="_blank" rel="noopener">wizardsardine.com/liana</a></li>
+      <li>💻 <strong>GitHub &amp; Download:</strong> <a href="https://github.com/wizardsardine/liana" target="_blank" rel="noopener">github.com/wizardsardine/liana</a></li>
+      <li>▶️ <strong>Video Recommendation:</strong> <a href="https://youtu.be/a7pix62KgbY?si=sB7zHHPpWV5SfofF" target="_blank" rel="noopener">Was Bitcoin bringt – "15 Monate Zeitlimit: Die geheime Bitcoin-Funktion" (Chris Seedor)</a></li>
+    </ul>
+  </div>
+
+  <div class="like-button">
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-2a7c4b)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Like</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+
+  <script>
+    (function() {
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      const btn = document.getElementById('likeButton');
+      const msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      });
+    })();
+  </script>
+
+  <div class="back-links">
+    <a href="/en/blog.html" style="font-size: 1.1em;">← Back to Blog Overview</a>
+    <a href="/en/index.html" style="font-size: 1.1em;">← Back to Mission Control</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+      <h3 style="margin-bottom: 15px;">
+        <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energy" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Recharge Energy
+        <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Donate)</span>
+      </h3>
+
+      <a href="/en/spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+        Send fuel to the mothership
+      </a>
+
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Thanks for your support — for free content, financial sovereignty and the extraterrestrial resistance! <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-2a7c4b" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-2a7c4b" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-2a7c4b)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-2a7c4b)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg>
+      </p>
+  </div>
+
+  <footer>
+    <p><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Contact" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> Contact:
+      <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>
+    </p>
+
+    <p style="margin-top: 20px;">
+      <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-2a7c4b" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-2a7c4b)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <strong>Disclaimer:</strong><br><br>
+      This article is not legal or investment advice. Using advanced wallets like Liana requires technical understanding.
+      Test everything on Signet before moving real funds. Act at your own responsibility.
+    </p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>

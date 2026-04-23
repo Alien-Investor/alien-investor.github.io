@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Digital Sovereignty: Why X (Twitter) Turns You Into a Lab Rat — and How to Escape | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Analysis of X (Twitter) Terms of Service changes 2024/2025: AI training, Texas jurisdiction and the loss of your data sovereignty. Guide to soft-exit and migration to Nostr/Bluesky.">
+  <link rel="canonical" href="/en/X-AGB.html">
+  <link rel="alternate" hreflang="de" href="/X-AGB.html">
+  <link rel="alternate" hreflang="en" href="/en/X-AGB.html">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 0 15px 20px 15px; /* Mobile-Optimierung */
+    }
+
+    /* --- TYPOGRAFIE --- */
+    h1, h2, h3 {
+      color: #00ffcc;
+    }
+    h1 {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    /* --- LINKS (Neon-Glow) --- */
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc; /* Der Alien-Effekt */
+    }
+
+    /* --- STANDARD ELEMENTE --- */
+    code {
+      background-color: #111;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      color: #0f0;
+      font-family: monospace;
+    }
+    em { color: #ccc; }
+
+    .byline {
+      margin-top: -0.8em;
+      margin-bottom: 2em;
+      color: #ccc;
+      font-style: italic;
+      text-align: center;
+    }
+
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
+
+    /* --- BOXEN --- */
+    .box {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 1em; }
+
+    .recommendation-box {
+      margin: 2em 0;
+      padding: 1em;
+      border: 1px dashed #00ffcc;
+      border-radius: 8px;
+      text-align: center;
+      background-color: #050505;
+    }
+    .recommendation-box h3 {
+      margin-top: 0;
+      font-size: 1.1em;
+      color: #00ffcc;
+    }
+
+    .alert-box {
+      border-left: 3px solid #ff3b3b;
+      background-color: #1a0505;
+      padding: 1em;
+      margin: 1.5em 0;
+      color: #ffcccc;
+      border-radius: 0 8px 8px 0;
+    }
+
+    /* --- LIKE BUTTON --- */
+    .like-button {
+      margin: 3em 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+    }
+    .like-button button {
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+    .like-button button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
+    }
+
+    /* --- NAVIGATION --- */
+    .top-nav {
+      padding: 10px 0;
+      font-size: 0.9em;
+    }
+    .back-links {
+      margin-top: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="/en/index.html">← Back to Mission Control</a>
+  </div>
+
+  <h1>Digital Sovereignty: Why X (Twitter) Turns You Into a Lab Rat — and How to Escape</h1>
+  <p class="byline"><em>by Alien Investor</em></p>
+
+  <article id="content">
+    <p>
+      We are witnessing a fundamental shift in the internet's balance of power. What X (formerly Twitter)
+      has been rolling out since late 2024 is not merely an "update to the terms of service." It is a systematic
+      recalibration of the digital social contract.
+    </p>
+    <p>
+      The platform is transforming from a community of communicating people into a resource for AI training
+      and data trading. This article forensically analyses the "enclosure" of your digital identity
+      and shows you how to make your escape — via soft-exit or hard-exit.
+    </p>
+
+    <h2>1. The Legal Architecture of Dispossession</h2>
+    <p>
+      Between autumn 2024 and January 2025, X Corp. laid the legal groundwork to exploit its user base in an airtight way.
+      Three factors converge here:
+    </p>
+    <ul>
+      <li>The integration of the AI "Grok" into the exploitation pipeline.</li>
+      <li>The flight to a business-friendly jurisdiction (Texas).</li>
+      <li>The consolidation of data transfers to "third parties".</li>
+    </ul>
+
+    <h3>November 15, 2024: The AI Pipeline Opens</h3>
+    <p>
+      The most serious change was the introduction of a de facto universal licence. X granted itself the right
+      to use "text and other information" you provide for machine learning and AI models.
+    </p>
+    <p>
+      Previously this meant "improvement of the service" (spam filters, algorithm). Today it means: your content feeds
+      commercial AI products (Grok) that may be in direct competition with you — whether you're a journalist,
+      artist or analyst. The system usually runs on opt-out: anyone who doesn't actively object (and can find the setting)
+      gets trained on.
+    </p>
+
+    <h3>The "Texas Trick": A Legal Coup</h3>
+    <p>
+      Previously the jurisdiction was often California. The new terms force many users (outside protected zones
+      like the EU) into the <strong>U.S. District Court for the Northern District of Texas</strong>.
+    </p>
+    <p>
+      Why Texas? It is seen as an eldorado for companies seeking deregulated environments. For the average user,
+      a lawsuit in Tarrant County, Texas is logistically and financially impossible. In practice, X is hardening
+      itself against collective legal action.
+    </p>
+    <div class="alert-box">
+      <strong>Note for EU citizens:</strong> Don't be intimidated. Thanks to the Brussels Ia Regulation and
+      consumer protection rights, you can generally still sue in your country of residence. The ToS often try to create
+      a "chilling effect" here — they want you to believe you no longer have any rights.
+    </div>
+
+    <h2>2. Risk Analysis: Your Digital Self as a Commodity</h2>
+
+    <h3>Risk I: The Expropriation of Your Thoughts (Grok)</h3>
+    <p>
+      Under the new ToS architecture you grant X worldwide, royalty-free rights. When you share your work on X,
+      you're feeding the machine that is supposed to replace you. Particularly insidious: AI-specific clauses (e.g. for the "Unhinged Mode"
+      or prompts) are often buried in separate "Grok Consumer Terms" to minimise X's liability, while
+      you remain fully responsible for your inputs.
+    </p>
+
+    <h3>Risk II: The Data Bazaar</h3>
+    <p>
+      Terms like "Third-Party Collaborators" are euphemisms for a global data market. When X data (political
+      leanings, location) is matched with data broker datasets (purchase behaviour), the user becomes transparent.
+      Additionally: once data leaves X, you effectively lose control. The security standards of
+      "partners" are often a black box.
+    </p>
+
+    <h3>Risk III: The $15,000 Trap</h3>
+    <p>
+      To protect its own data monopoly, X is introducing drastic penalties for scraping. Anyone who retrieves data in bulk
+      (e.g. researchers investigating disinformation) risks contractual penalties of $15,000 per million posts.
+      It's an attempt to privatise the "truth" about the platform.
+    </p>
+
+    <h2>3. Strategy I: The Soft-Exit (Damage Limitation)</h2>
+    <p>
+      If you can't leave yet due to network effects, you need to "harden" your profile.
+      Work through this checklist (menu paths may vary):
+    </p>
+
+    <div class="box">
+      <h3>Technical Configuration (Mandatory)</h3>
+      <ol>
+        <li>
+          <strong>Disable AI Training (Grok):</strong><br>
+          <em>Settings &gt; Privacy and Safety &gt; Grok &amp; Partners.</em><br>
+          Uncheck "Allow your posts... to be used for training". Also click "Delete conversation history".
+        </li>
+        <li>
+          <strong>Block data sharing:</strong><br>
+          <em>Privacy and Safety &gt; Data sharing and personalization &gt; Business partners.</em><br>
+          Uncheck "Share additional information".
+        </li>
+        <li>
+          <strong>Minimise location data:</strong><br>
+          <em>Privacy and Safety &gt; Location information.</em><br>
+          Disable "Personalize based on places" and precise location data.
+        </li>
+        <li>
+          <strong>Close DMs:</strong><br>
+          Set receiving to "Nobody" or "Verified users" to reduce phishing and spam.
+        </li>
+      </ol>
+    </div>
+
+    <p>
+      <strong>Behavioural change ("Poison the Well"):</strong><br>
+      Stop posting exclusive content. Use X only as a "link cannon" pointing to your blog.
+      Artists should use tools like <em>Glaze</em> or <em>Nightshade</em> to make their images unusable for AI.
+    </p>
+
+    <h2>4. Strategy II: The Hard-Exit (Deletion &amp; GDPR)</h2>
+    <p>
+      "Deleting" on X is a process with pitfalls.
+    </p>
+    <ul>
+      <li><strong>The 30-day trap:</strong> After deactivation the account sleeps for 30 days. If you log in during this period (even accidentally via app), everything is restored.</li>
+      <li><strong>Revoke app access (Critical!):</strong> Before you deactivate, go to <em>Security and account access &gt; Apps and sessions</em>. Revoke EVERY single app. A forgotten app pulling data in the background can sabotage the deletion.</li>
+    </ul>
+    <p>
+      <strong>The GDPR "Double Tap":</strong><br>
+      For EU citizens, clicking alone is often not enough. Write an email to the data protection officer (<code>dpo@x.com</code>)
+      and request deletion under <strong>Art. 17 GDPR</strong> (Right to Erasure), including all metadata
+      and backups.
+    </p>
+
+    <h2>5. The Alternatives: Nostr vs. Bluesky</h2>
+    <p>
+      Leaving requires a new destination. Two philosophies collide here:
+    </p>
+
+    <h3>Bluesky (Federation with guardrails) 🦋</h3>
+    <p>
+      Bluesky feels like Twitter but is built on the AT Protocol. Your identity is portable — you can
+      switch servers without losing followers. Bluesky is currently positioning itself (as of 2025) against AI training.
+      <strong>But:</strong> Almost everyone uses the central server <code>bsky.social</code>. If that goes down or changes the rules,
+      you have the same problem again.
+    </p>
+
+    <h3>Nostr (Real Sovereignty) 🟣</h3>
+    <p>
+      Nostr is not a platform, it's a protocol. There is no central server.
+    </p>
+    <ul>
+      <li><strong>Architecture:</strong> Your account is not an entry in a database, but a cryptographic key pair (private key).</li>
+      <li><strong>Censorship resistance:</strong> Nobody can delete or suspend your account. You are the sole owner.</li>
+      <li><strong>Downside:</strong> High personal responsibility. Lose your key and the account is gone.</li>
+    </ul>
+
+    <blockquote>
+      "Anyone who wants digital sovereignty must act. Staying on X under the current conditions is a
+      tacit consent to the use of your cognitive work for others' purposes."
+    </blockquote>
+
+    <div class="box" style="font-family: monospace; font-size: 0.9em; color: #0f0; overflow-wrap: break-word; word-wrap: break-word;">
+      Subject: Digital Sovereignty Under Threat ⚠️<br><br>
+      Since November 2024, X has been cementing conditions that curtail our rights:<br>
+      - AI training on our data (opt-out).<br>
+      - Worldwide licence without compensation.<br>
+      - Restricted legal recourse (Texas clause).<br><br>
+      My response: I'm drastically reducing my activity here.<br>
+      You can find me from now on on platforms that don't operate extractively:<br><br>
+      🟣 Nostr: npub1cnlymdm5jz8eayycwynhze4s2zh9n0y04atce8ahxl5qfkptplls0s40hp<br><br>
+      Recommendation for those staying: Go to Settings &gt; Privacy &gt; Grok &amp; Partners right now and uncheck the box!<br><br>
+      #DigitalSovereignty #ExitX #Nostr #Bluesky
+    </div>
+
+    <div class="alert-box">
+      <strong>⚠️ The Key Distinction: Law vs. Technology</strong><br><br>
+      Understand this: by merely using X, you have already <strong>legally agreed</strong> to the new ToS.
+      You have in principle granted the permission.<br><br>
+      The "opt-out toggle" is currently only a <strong>technical self-restraint</strong> on X's part.
+      As long as the switch is there, they have to honour it (otherwise they risk lawsuits for deception).
+      But since you've already said "yes" via the ToS, X could theoretically just remove this toggle in the future
+      without asking you again. The toggle is damage limitation for the "here and now",
+      not insurance for eternity.
+    </div>
+
+    <h2>Conclusion: Time for Real Independence</h2>
+    <p>
+      The transformation of X is a masterclass in the dangers of centralised platforms. The user faces a choice:
+      accept the role of "data serf" or take the step towards digital self-determination.
+    </p>
+    <p>
+      The tools are there. Protocols like Nostr show that an internet without feudal lords is possible.
+      It's time to use them. <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-08c610)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg>
+    </p>
+
+    <div class="box">
+      <h3>Tools for Real Owners (Advertising/Affiliate)</h3>
+      <p style="font-size:0.95em;">
+        Tools I use myself — for Bitcoin self-custody and digital sovereignty:
+      </p>
+      <ul>
+            <li>
+          <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Lightning bolt" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> <strong>Buy Bitcoin in Europe – 21bitcoin:</strong><br>
+          Bitcoin-only app from Europe, ideal for DCA and stacking sats regularly — no shitcoins.<br>
+          With code <strong>ALIENINVESTOR</strong> you get a permanent 0.2 percentage point fee reduction
+          on instant and savings plan purchases.<br>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
+        </li>
+        <li>
+          ₿ <strong>Bitcoin in Self-Custody:</strong><br>
+          Hardware wallet instead of exchange account. I use the BitBox — there's the classic BitBox02 and the new
+          BitBox for iPhone (Nova).<br>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
+        </li>
+        <li>
+          <svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-label="Satellite dish" role="img"><path d="M4 24 A16 16 0 0 1 20 8" fill="#00ffcc" fill-opacity="0.06" stroke="#00ffcc" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="8" r="2.8" fill="#00ffcc"/><line x1="20" y1="8" x2="28" y2="4" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><path d="M15 13 A6 6 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/><path d="M12 16 A9 9 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.45"/></svg> <strong>Privacy &amp; Mail:</strong><br>
+          For email, VPN and cloud I use Proton — minimal data footprint, no Big Tech dependency.<br>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
+        </li>
+      </ul>
+      <p style="font-size:0.85em; color:#aaa;">
+        Note: Some links are affiliate links. If you use them, you support my work
+        at no extra cost to you. Thanks! <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-aff" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-aff)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg>
+      </p>
+    </div>
+
+  </article>
+
+  <div class="like-button">
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-08c610)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Like</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+
+  <script>
+    (function() {
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      const btn = document.getElementById('likeButton');
+      const msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      });
+    })();
+  </script>
+
+  <div class="box" style="border-style: dashed; border-color: #333;">
+    <h3>Sources (Selection)</h3>
+    <p style="font-size:0.95em; color: #ccc;">
+      This analysis is based on the official Terms of Service and Privacy Policies of X Corp.
+      (as of January 2025), documentation on the Grok AI integration, and legal texts (GDPR, New Jersey Data Protection Act).
+    </p>
+  </div>
+
+  <div class="back-links">
+    <a href="/en/blog.html" style="font-size: 1.1em;">← Back to Blog Overview</a>
+    <a href="/en/index.html" style="font-size: 1.1em;">← Back to Mission Control</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+      <h3 style="margin-bottom: 15px;">
+        <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energy" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Recharge Energy
+        <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Donate)</span>
+      </h3>
+
+      <a href="/en/spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+        Send fuel to the mothership
+      </a>
+
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Thanks for your support — for free content, financial sovereignty and the extraterrestrial resistance! <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-08c610" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-08c610" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-08c610)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-08c610)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg>
+      </p>
+  </div>
+
+  <footer>
+    <p><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Contact" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> Contact: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+
+    <p style="margin-top: 20px;">
+      <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-08c610" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-08c610)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <strong>Disclaimer:</strong><br><br>
+      This article does not constitute financial, tax or legal advice.<br>
+      I share my personal Alien perspective here — independent, rebellious and free.<br>
+      Technical changes and legal frameworks can change; always verify your own setup.
+    </p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>

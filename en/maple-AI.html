@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Maple AI Deep Dive: Sovereign AI and Confidential Computing | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Deep analysis of Maple AI: how Confidential Computing, AWS Nitro Enclaves, and OpenSecret enable real privacy for LLMs. A report for real owners.">
+  <link rel="canonical" href="/en/maple-AI.html">
+  <link rel="alternate" hreflang="de" href="/maple-AI.html">
+  <link rel="alternate" hreflang="en" href="/en/maple-AI.html">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.7;
+      max-width: 800px; /* standard width */
+      margin: auto;
+      padding: 0 15px 20px 15px; /* mobile optimization */
+    }
+
+    /* --- TYPOGRAPHY & LAYOUT --- */
+    h1, h2, h3 {
+      color: #00ffcc;
+    }
+    h1 {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    /* --- LINKS (Neon-Glow) --- */
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc; /* The alien effect */
+    }
+
+    /* --- STANDARD ELEMENTS --- */
+    .byline {
+      font-size: 0.9em;
+      color: #bbb;
+      margin-bottom: 2em;
+      text-align: center;
+      font-style: italic;
+    }
+
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
+
+    /* --- WARNINGS --- */
+    .highlight {
+      border-left: 3px solid #ff3b3b;
+      margin: 1.5em 0;
+      padding: 0.8em 1em;
+      background: #110000;
+      color: #f5cccc;
+      font-size: 0.95em;
+      border-radius: 0 8px 8px 0;
+    }
+
+    ul { padding-left: 1.2em; }
+    li { margin-bottom: 0.5em; }
+    em { color: #ccc; }
+    code {
+      background-color: #111;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      color: #0f0;
+      font-size: 0.95em;
+      font-family: monospace;
+    }
+
+    /* --- TABLE --- */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2em 0;
+      font-size: 0.9em;
+    }
+    th, td {
+      border: 1px solid #333;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #111;
+      color: #00ffcc;
+    }
+    tr:nth-child(even) {
+      background-color: #0a0a0a;
+    }
+
+    /* --- BOXES (Glow-Style) --- */
+    .box {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      font-size: 0.95em;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .box h3 { margin-top: 0; }
+
+    .recommendation-box {
+      margin: 2em 0;
+      padding: 1em;
+      border: 1px dashed #00ffcc;
+      border-radius: 8px;
+      text-align: center;
+      background-color: #050505;
+    }
+    .recommendation-box h3 {
+      margin-top: 0;
+      font-size: 1.1em;
+      color: #00ffcc;
+    }
+
+    /* --- LIKE BUTTON (Optimized: Sticky Glow) --- */
+    .like-button {
+      margin: 3em 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+      font-size: 1em;
+    }
+    .like-button button {
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+      /* font-size removed for compact look */
+    }
+    .like-button button:hover,
+    .like-button button:active {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
+      /* box-shadow: none; <--- REMOVED to keep glow! */
+    }
+
+    /* --- NAVIGATION --- */
+    .top-nav {
+      padding: 10px 0;
+      font-size: 0.9em;
+    }
+    .back-links {
+      margin-top: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="/en/index.html">← Back to Mission Control</a>
+  </div>
+
+  <h1>Maple AI &amp; OpenSecret: The Fortress for Your Thoughts — Deep Analysis</h1>
+  <p class="byline"><em>by Alien Investor</em></p>
+
+  <article id="content">
+    <p>
+      We live in a fundamental security dilemma. Modern AI models (LLMs) have become critical infrastructure for knowledge work.
+      But the price for this intelligence is steep: you have to send your most intimate thoughts, trade secrets, and ideas to centralized "black boxes"
+      like OpenAI, Google, or Anthropic.
+    </p>
+    <p>
+      For cypherpunks, lawyers, and freedom-loving aliens, that's unacceptable. The industry's answer so far has been: "Just trust us."
+      <strong>Maple AI</strong> (trymaple.ai) aims to break this paradigm. Not with promises, but with cryptographic proofs.
+      This report analyzes the technology, the risks, and why this project is more than just another AI wrapper.
+    </p>
+
+    <div class="highlight">
+      <strong>Transparency note:</strong> I have not yet personally tested <strong>Maple AI (trymaple.ai)</strong> (though I plan to).
+      This article is based entirely on my own research. I'm writing it because Confidential Computing is central
+      to digital sovereignty. Developers and readers with deeper technical insight are explicitly invited to provide constructive feedback.
+    </div>
+
+    <h2>1. Origins: From the Ashes of Mutiny Wallet</h2>
+    <p>
+      Maple AI is not a classic Silicon Valley startup jumping on the hype train. It is the direct successor
+      of the team behind <strong>Mutiny Wallet</strong> — an innovative, self-custody Bitcoin Lightning wallet.
+    </p>
+    <p>
+      When the team had to shut down the wallet in 2024/2025 due to regulatory hurdles, it made a strategic pivot.
+      The ideological foundation remained identical: <strong>data is toxic waste.</strong>
+      Whoever collects data creates liability risk and surveillance infrastructure.
+      The Human Rights Foundation (HRF) already listed the project as one of the "Top 15 Freedom Tech Projects of 2025".
+    </p>
+
+    <h2>2. The Architecture: OpenSecret &amp; AWS Nitro Enclaves</h2>
+    <p>
+      How can Maple claim not to see your data when it's being processed on their servers?
+      The answer lies in <strong>Confidential Computing</strong>. At its core, Maple is an implementation of the backend platform "OpenSecret".
+    </p>
+
+    <h3>The Vault: AWS Nitro Enclaves</h3>
+    <p>
+      Normally a server administrator (root) has access to everything happening in memory. Maple uses
+      <strong>AWS Nitro Enclaves</strong> instead — isolated compute environments:
+    </p>
+    <ul>
+      <li><strong>No SSH access:</strong> Even Maple's own developers cannot log into the enclave.</li>
+      <li><strong>No disk storage:</strong> The enclave is diskless. Once power is cut or the process ends, the data is gone (zero data retention).</li>
+      <li><strong>No open internet:</strong> The enclave communicates only through a strictly defined local channel.</li>
+    </ul>
+
+    <h3>The Proof: Remote Attestation</h3>
+    <p>
+      This is the crucial point ("don't trust, verify"): before your device sends a single byte of data,
+      it requests an "Attestation Report" — a cryptographic signature directly from the AWS hardware.
+    </p>
+    <p>
+      This report confirms: "I am a real Nitro Enclave and I am running exactly the program code whose hash you expect."
+      Since the code is open source (reproducible builds via NixOS), anyone can verify that no backdoors have been built in.
+    </p>
+
+    <div class="box">
+      <h3>How Live Web Search (Brave) Works</h3>
+      <p>
+        A common problem with secure enclaves is that they cannot have internet access. Maple solves this with a "privacy proxy":
+      </p>
+      <ul>
+        <li>Your encrypted prompt lands in the enclave.</li>
+        <li>The enclave decrypts it, detects a search query, and sends it via a proxy to <strong>Brave Search</strong>.</li>
+        <li>Brave sees only the Maple server's IP, not your IP.</li>
+        <li>The search results flow back into the enclave, are processed there, and sent to you encrypted.</li>
+      </ul>
+      <p>This gives you live data without Google or Bing being able to build a profile on you.</p>
+    </div>
+
+    <h2>3. The Models: The China Paradox &amp; Vision</h2>
+    <p>
+      Maple doesn't train its own models — it hosts the best open-weight models in the world.
+    </p>
+    <ul>
+      <li>
+        <strong>DeepSeek R1 &amp; Kimi K2 (China):</strong> Maple uses Chinese top-tier models that often beat GPT-4 in benchmarks.
+        Normally a privacy nightmare. But: since these models run in the isolated US enclave without internet access,
+        they can't beam data back to China. Using the enemy's weapon against itself.
+      </li>
+      <li>
+        <strong>GPT-OSS-120B (USA):</strong> A rare open model from OpenAI with strong reasoning capabilities.
+      </li>
+      <li>
+        <strong>Gemma 3 (Vision):</strong> Image recognition is also available. You can analyze screenshots or photos — also fully processed inside the enclave.
+      </li>
+    </ul>
+
+    <h2>4. Maple Proxy: AI for Developers Without Surveillance</h2>
+    <p>
+      For developers, the "Maple Proxy" feature is a game changer. It's a small program that runs locally on your machine and
+      pretends to be the OpenAI server.
+    </p>
+    <p>
+      You can use tools like <strong>Cursor, VS Code, or Windsurf</strong> and simply redirect them to your local port.
+      The proxy encrypts everything and sends it into the enclave. That way you can use proprietary coding tools without your code
+      landing at Microsoft or OpenAI.
+    </p>
+
+    <h2>5. Pricing &amp; True Anonymity</h2>
+    <p>
+      The business model is transparent: Maple funds itself through direct user payments.
+      The pricing structure is similar to competitors, but offers real "de-banking" resistance through Bitcoin.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Plan</th>
+          <th>Price</th>
+          <th>Target &amp; Limit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Free</strong></td>
+          <td>$0</td>
+          <td>For testing. Limited to ~25 messages/week.</td>
+        </tr>
+        <tr>
+          <td><strong>Starter</strong></td>
+          <td>$5.99</td>
+          <td>Basic models, moderate usage. Entry point.</td>
+        </tr>
+        <tr>
+          <td><strong>Pro</strong></td>
+          <td>$20</td>
+          <td><strong>Standard.</strong> Access to DeepSeek R1, Kimi K2 &amp; GPT-OSS.</td>
+        </tr>
+        <tr>
+          <td><strong>Max</strong></td>
+          <td>$100</td>
+          <td>Power users &amp; developers (20x limits). Ideal for Proxy.</td>
+        </tr>
+        <tr>
+          <td><strong>Team</strong></td>
+          <td>$30 / user</td>
+          <td>For law firms/practices. Centralized billing.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="box">
+      <h3><svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Lightning bolt" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Pay with Bitcoin &amp; Lightning</h3>
+      <p>
+        As heir to Mutiny Wallet, Maple integrates native Bitcoin payments.
+      </p>
+      <ul>
+        <li><strong>Anonymity:</strong> You can pay without a bank account or real name (no PII required).</li>
+        <li><strong>Lightning Network:</strong> Instant, low-fee payments.</li>
+        <li><strong>Discount:</strong> Paying with Bitcoin sometimes gets you a discount.</li>
+      </ul>
+    </div>
+
+    <h2>6. Critical Analysis: Where Are the Catches?</h2>
+    <p>
+      Where there's light, there's shadow. Security costs convenience.
+    </p>
+    <ul>
+      <li>
+        <strong>Latency (Ping):</strong> The cryptographic handshake takes time. Maple feels less "snappy" than ChatGPT.
+      </li>
+      <li>
+        <strong>Loss risk:</strong> Lose your recovery phrase and the account is gone. There is no support reset.
+      </li>
+      <li>
+        <strong>Traffic analysis (metadata):</strong> This is a risk for high-value targets (dissidents). Even if the content is encrypted,
+        an ISP could infer from packet size and timing that you're actively communicating with an AI.
+        Maple doesn't (yet) offer obfuscation for this.
+      </li>
+      <li>
+        <strong>Sync limits:</strong> Synchronization between devices happens via encrypted "blobs." The server doesn't see the content,
+        but it does see when and how much is being synced (metadata leak).
+      </li>
+    </ul>
+
+    <h2>7. Alien Verdict: Niche or Future?</h2>
+    <p>
+      For the average user, Maple AI is overkill. But for lawyers, doctors, developers, and anyone handling
+      sensitive data, it's potentially without alternative. It's proof that "Confidential Computing" has left the lab.
+    </p>
+
+  </article>
+
+  <div class="recommendation-box">
+    <h3>Further Research</h3>
+    <p>
+      Related to the topic of security: how to build your own local AI that keeps all your secrets to itself.
+      <br><br>
+      <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/en/local-ai.html"> Why You Need Your Own On-Board AI</a>
+    </p>
+  </div>
+
+  <div class="box">
+    <h3>Tools for Real Owners</h3>
+    <p style="font-size:0.95em;">
+      Tools I use myself — for Bitcoin self-custody and digital sovereignty:
+    </p>
+    <ul>
+      <li>
+        <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Lightning bolt" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> <strong>Buy Bitcoin in Europe — 21bitcoin:</strong>
+        <br>Bitcoin-only app, ideal for DCA. Use code <strong>ALIENINVESTOR</strong> to save on fees permanently.
+        <br><svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
+      </li>
+      <li>
+        ₿ <strong>Bitcoin in Self-Custody:</strong>
+        <br>Hardware wallet instead of exchange account. (Code: ALIENINVESTOR).
+        <br><svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
+      </li>
+      <li>
+        <svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-label="Satellite dish" role="img"><path d="M4 24 A16 16 0 0 1 20 8" fill="#00ffcc" fill-opacity="0.06" stroke="#00ffcc" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="8" r="2.8" fill="#00ffcc"/><line x1="20" y1="8" x2="28" y2="4" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><path d="M15 13 A6 6 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/><path d="M12 16 A9 9 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.45"/></svg> <strong>Privacy &amp; Mail:</strong>
+        <br>For email, VPN, and cloud I use Proton — like Maple AI, but for mail.
+        <br><svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
+      </li>
+    </ul>
+    <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">
+      Disclosure: Some links are affiliate links. Using them supports my work at no extra cost to you. Thanks! <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-aff" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-aff)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg>
+    </p>
+  </div>
+
+  <div class="box" style="border-style: dashed; border-color: #333;">
+    <h3>Sources (Selection)</h3>
+    <p style="font-size:0.95em; color: #ccc;">
+      This report is based on technical documentation from Maple AI (OpenSecret Whitepaper), AWS Nitro Documentation,
+      GitHub repositories (OpenSecretCloud), and independent security analyses (as of 2025/2026).
+    </p>
+  </div>
+
+  <div class="like-button">
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-47c680)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Like</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+
+  <script>
+    (function() {
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      const btn = document.getElementById('likeButton');
+      const msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      });
+    })();
+  </script>
+
+  <div class="back-links">
+    <a href="/en/blog.html" style="font-size: 1.1em;">← Back to Blog</a>
+    <a href="/en/index.html" style="font-size: 1.1em;">← Back to Mission Control</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+      <h3 style="margin-bottom: 15px;">
+        <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energy" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Recharge Energy
+        <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Donate)</span>
+      </h3>
+
+      <a href="/en/spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+        Send fuel to the mothership
+      </a>
+
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Thanks for your support — for free content, financial sovereignty, and the extraterrestrial resistance! <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-47c680" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-47c680" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-47c680)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-47c680)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg>
+      </p>
+  </div>
+
+  <footer>
+    <p><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Contact" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> Contact:
+      <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>
+    </p>
+
+    <p style="margin-top: 20px;">
+      <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-47c680" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-47c680)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <strong>Disclaimer:</strong>
+      <br><br>
+      This article does not constitute financial, tax, or legal advice.<br>
+      I'm sharing my personal alien opinion here — independent, rebellious, and free.<br>
+      Technology moves fast — verify information yourself.
+    </p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>

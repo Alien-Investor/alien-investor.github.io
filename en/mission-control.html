@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>👽 Mission Control – Alien Investor</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👽</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="canonical" href="/en/mission-control.html">
+  <link rel="alternate" hreflang="de" href="/mission-control.html">
+  <style>
+    :root {
+      --neon: #00ffcc;
+      --neon-dim: rgba(0, 255, 204, 0.15);
+      --neon-mid: rgba(0, 255, 204, 0.4);
+      --red: #ff4466;
+      --red-dim: rgba(255, 68, 102, 0.15);
+      --bg: #000;
+      --card-bg: #050f0d;
+      --border: rgba(0, 255, 204, 0.2);
+      --text-dim: #4a7a6d;
+      --text-mid: #7ab8a8;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--neon);
+      font-family: 'Share Tech Mono', monospace;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Star field background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 10% 15%, rgba(0,255,204,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 30% 40%, rgba(0,255,204,0.25) 0%, transparent 100%),
+        radial-gradient(1px 1px at 55% 20%, rgba(0,255,204,0.35) 0%, transparent 100%),
+        radial-gradient(1px 1px at 70% 60%, rgba(0,255,204,0.2) 0%, transparent 100%),
+        radial-gradient(1px 1px at 85% 30%, rgba(0,255,204,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 20% 75%, rgba(0,255,204,0.2) 0%, transparent 100%),
+        radial-gradient(1px 1px at 45% 85%, rgba(0,255,204,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 90% 80%, rgba(0,255,204,0.25) 0%, transparent 100%),
+        radial-gradient(1px 1px at 65% 90%, rgba(0,255,204,0.2) 0%, transparent 100%),
+        radial-gradient(1px 1px at 5% 50%, rgba(0,255,204,0.3) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Scanline overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.15) 2px,
+        rgba(0, 0, 0, 0.15) 4px
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px 20px 50px;
+    }
+
+    /* HEADER */
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .header-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 400px;
+      height: 100px;
+      background: radial-gradient(ellipse, rgba(0,255,204,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.4rem, 4vw, 2.2rem);
+      font-weight: 900;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--neon);
+      text-shadow: 0 0 20px rgba(0,255,204,0.7), 0 0 40px rgba(0,255,204,0.3);
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      font-size: 0.75rem;
+      letter-spacing: 6px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .status-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      flex-wrap: wrap;
+    }
+
+    .status-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--neon);
+      box-shadow: 0 0 8px var(--neon);
+      animation: pulse 2s ease-in-out infinite;
+      margin-right: 6px;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .refresh-bar {
+      width: 120px;
+      height: 2px;
+      background: rgba(0,255,204,0.1);
+      border-radius: 1px;
+      overflow: hidden;
+    }
+
+    .refresh-progress {
+      height: 100%;
+      background: var(--neon);
+      width: 100%;
+      transform-origin: left;
+      transition: transform 1s linear;
+      box-shadow: 0 0 6px var(--neon);
+    }
+
+    /* SECTION LABELS */
+    .section-label {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 4px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      margin-top: 32px;
+      padding-left: 4px;
+      border-left: 2px solid var(--neon-mid);
+      padding-left: 10px;
+    }
+
+    /* GRID */
+    .grid-main {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+      justify-items: stretch;
+    }
+
+    .grid-wide {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 14px;
+      justify-items: stretch;
+    }
+
+    /* Center cards when row is not full */
+    @media (min-width: 600px) {
+      .grid-main, .grid-wide {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .grid-main > .card {
+        flex: 0 1 220px;
+        min-width: 200px;
+      }
+      .grid-wide > .card {
+        flex: 0 1 280px;
+        min-width: 260px;
+      }
+    }
+
+    /* CARD */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 18px 20px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      border-color: var(--neon-mid);
+      box-shadow: 0 0 20px rgba(0,255,204,0.06), inset 0 0 20px rgba(0,255,204,0.03);
+    }
+
+    /* Clickable card link wrapper */
+    a.card-link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    a.card-link .card {
+      cursor: pointer;
+    }
+
+    a.card-link:hover .card {
+      border-color: var(--neon-mid);
+      box-shadow: 0 0 20px rgba(0,255,204,0.08), inset 0 0 20px rgba(0,255,204,0.04);
+    }
+
+    /* Chart link indicator */
+    .card-chart-hint {
+      position: absolute;
+      bottom: 8px;
+      right: 10px;
+      font-size: 0.5rem;
+      letter-spacing: 2px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    a.card-link:hover .card-chart-hint {
+      opacity: 1;
+    }
+
+    /* Corner accent */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 20px; height: 20px;
+      border-top: 1px solid var(--neon);
+      border-left: 1px solid var(--neon);
+      opacity: 0.5;
+    }
+    .card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 20px; height: 20px;
+      border-bottom: 1px solid var(--neon);
+      border-right: 1px solid var(--neon);
+      opacity: 0.5;
+    }
+
+    .card-label {
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .card-icon {
+      float: right;
+      font-size: 1.1rem;
+      opacity: 0.7;
+      margin-top: -2px;
+    }
+
+    .card-price {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.3rem, 3vw, 1.7rem);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 1px;
+      line-height: 1;
+      margin-bottom: 8px;
+      text-shadow: 0 0 10px rgba(255,255,255,0.2);
+    }
+
+    .card-price.loading {
+      color: var(--text-dim);
+      font-size: 1rem;
+      letter-spacing: 3px;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .card-change {
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+    }
+
+    .card-change.positive {
+      color: var(--neon);
+      text-shadow: 0 0 6px rgba(0,255,204,0.4);
+    }
+    .card-change.negative {
+      color: var(--red);
+      text-shadow: 0 0 6px rgba(255,68,102,0.4);
+    }
+    .card-change.neutral {
+      color: var(--text-mid);
+    }
+
+    .card-unit {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      margin-top: 4px;
+      letter-spacing: 2px;
+    }
+
+    /* FEAR & GREED CARD */
+    .fg-card {
+      padding: 18px 20px 22px;
+    }
+
+    .fg-meter {
+      margin: 12px 0 8px;
+      height: 6px;
+      background: linear-gradient(to right,
+        #ff4466 0%,
+        #ff8844 25%,
+        #ffcc44 50%,
+        #88cc44 75%,
+        #00ffcc 100%
+      );
+      border-radius: 3px;
+      position: relative;
+    }
+
+    .fg-needle {
+      position: absolute;
+      top: -4px;
+      width: 3px;
+      height: 14px;
+      background: #fff;
+      border-radius: 2px;
+      transform: translateX(-50%);
+      box-shadow: 0 0 6px #fff;
+      transition: left 1s ease;
+    }
+
+    .fg-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.55rem;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+      margin-top: 6px;
+    }
+
+    .fg-value {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .fg-classification {
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* ERROR STATE */
+    .card-error {
+      font-size: 0.65rem;
+      color: var(--red);
+      letter-spacing: 1px;
+      opacity: 0.7;
+    }
+
+    /* DIVIDER */
+    hr.alien-hr {
+      border: none;
+      border-top: 1px solid rgba(0,255,204,0.08);
+      margin: 36px 0 0;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      letter-spacing: 2px;
+      line-height: 2;
+    }
+
+    footer a {
+      color: var(--neon);
+      text-decoration: none;
+      opacity: 0.7;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .grid-main, .grid-wide {
+        display: flex !important;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .grid-main > .card {
+        flex: 0 1 calc(50% - 7px);
+        min-width: 140px;
+        max-width: 220px;
+      }
+      .grid-wide > .card {
+        flex: 0 1 100%;
+      }
+      .fg-card .card-label {
+        text-align: center;
+      }
+    }
+
+    /* TOP NAV */
+    .top-nav { display:flex; align-items:center; gap:10px; margin-bottom:30px; }
+    .top-nav-title { font-size:.6rem; letter-spacing:2px; color:var(--text-dim); text-transform:uppercase; }
+
+    /* SETTINGS BUTTON */
+    .settings-btn {
+      margin-left: auto;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      color: var(--text-dim);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: 2px;
+      padding: 5px 12px;
+      cursor: pointer;
+      transition: all .2s;
+      text-transform: uppercase;
+    }
+    .settings-btn:hover { border-color: var(--neon-mid); color: var(--text-mid); }
+
+    /* DIALOG OVERLAY */
+    .mc-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .mc-dialog {
+      max-width: 440px;
+      width: 100%;
+      padding: 28px;
+      background: var(--card-bg);
+      border: 1px solid var(--neon-mid);
+      border-radius: 4px;
+      position: relative;
+    }
+    .mc-dialog::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 16px; height: 16px;
+      border-top: 1px solid var(--neon);
+      border-left: 1px solid var(--neon);
+      opacity: 0.5;
+    }
+    .mc-dialog-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--neon);
+      letter-spacing: 3px;
+      margin-bottom: 8px;
+    }
+    .mc-dialog-intro {
+      font-size: 0.65rem;
+      color: var(--text-mid);
+      letter-spacing: 1px;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .mc-field-label {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 2px;
+      color: var(--text-mid);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+    .mc-info-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      padding: 0 2px;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+    .mc-info-btn:hover { color: var(--neon); }
+    .mc-key-input {
+      width: 100%;
+      background: rgba(0,255,204,0.04);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      color: var(--neon);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      padding: 10px 14px;
+      outline: none;
+      transition: border-color 0.2s;
+      margin-bottom: 14px;
+    }
+    .mc-key-input:focus { border-color: var(--neon-mid); }
+    .mc-key-input::placeholder { color: var(--text-dim); font-size: 0.7rem; }
+    .mc-save-btn {
+      width: 100%;
+      background: var(--neon-dim);
+      border: 1px solid var(--neon-mid);
+      border-radius: 3px;
+      color: var(--neon);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      padding: 10px 24px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: background 0.2s;
+    }
+    .mc-save-btn:hover { background: rgba(0,255,204,0.2); }
+
+    /* INFO OVERLAY */
+    .mc-info-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 1100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .mc-info-box {
+      max-width: 360px;
+      width: 100%;
+      padding: 22px 24px;
+      background: var(--card-bg);
+      border: 1px solid var(--neon-mid);
+      border-radius: 4px;
+      position: relative;
+    }
+    .mc-info-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      color: var(--neon);
+      margin-bottom: 10px;
+    }
+    .mc-info-text {
+      font-size: 0.65rem;
+      color: var(--text-mid);
+      letter-spacing: 0.5px;
+      line-height: 1.9;
+    }
+    .mc-info-close {
+      position: absolute;
+      top: 10px; right: 12px;
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      cursor: pointer;
+      font-size: 0.7rem;
+      font-family: 'Share Tech Mono', monospace;
+    }
+    .mc-info-close:hover { color: var(--neon); }
+    .mc-dialog .mc-info-close { z-index: 1200; }
+    .mc-info-box .mc-info-close {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      z-index: 1300;
+      cursor: pointer;
+    }
+    .hidden { display: none !important; }
+
+    /* DONATE */
+    .donate-section {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .donate-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 24px;
+      border: 1px solid rgba(0, 255, 204, 0.15);
+      border-radius: 4px;
+      text-decoration: none;
+      color: var(--text-dim);
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      transition: border-color 0.3s, color 0.3s, box-shadow 0.3s;
+      position: relative;
+    }
+
+    .donate-link::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 12px; height: 12px;
+      border-top: 1px solid rgba(0, 255, 204, 0.3);
+      border-left: 1px solid rgba(0, 255, 204, 0.3);
+    }
+
+    .donate-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 12px; height: 12px;
+      border-bottom: 1px solid rgba(0, 255, 204, 0.3);
+      border-right: 1px solid rgba(0, 255, 204, 0.3);
+    }
+
+    .donate-link:hover {
+      border-color: rgba(0, 255, 204, 0.35);
+      color: var(--text-mid);
+      box-shadow: 0 0 14px rgba(0, 255, 204, 0.05);
+    }
+
+    .donate-icon {
+      font-size: 0.85rem;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+
+<!-- MC INFO OVERLAY -->
+<div id="mc-info-overlay" class="mc-info-overlay hidden">
+  <div class="mc-info-box">
+    <button class="mc-info-close" onclick="closeMcInfo()">✕</button>
+    <div class="mc-info-title">How do I get a free API key?</div>
+    <div class="mc-info-text">
+      <span style="color:var(--neon)">①</span> Go to <strong style="color:var(--neon)">twelvedata.com</strong><br>
+      <span style="color:var(--neon)">②</span> Click "Sign Up" – free, no credit card required<br>
+      <span style="color:var(--neon)">③</span> Go to your dashboard → API Keys<br>
+      <span style="color:var(--neon)">④</span> Copy the key and enter it here<br><br>
+      <span style="color:var(--yellow)">Free tier: 800 requests/day</span> – plenty for this dashboard.
+    </div>
+  </div>
+</div>
+
+<!-- MC SETTINGS DIALOG -->
+<div id="mc-dialog-overlay" class="mc-overlay hidden">
+  <div class="mc-dialog">
+    <button class="mc-info-close" onclick="closeMcDialog()" title="Close">✕</button>
+    <div class="mc-dialog-title">⚙ API Key</div>
+    <div class="mc-dialog-intro">
+      Set it up once – stored locally in your browser. No server, no tracking.
+    </div>
+    <label class="mc-field-label">
+      Twelve Data API Key
+      <button class="mc-info-btn" onclick="openMcInfo()" title="Info">ℹ</button>
+    </label>
+    <input class="mc-key-input" id="mc-key-input" type="text"
+      placeholder="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" autocomplete="off" spellcheck="false">
+    <button class="mc-save-btn" onclick="saveMcKey()">Save key &amp; launch</button>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="top-nav">
+    <span class="top-nav-title">Mission Control</span>
+    <button class="settings-btn" onclick="openMcDialog()">⚙ API Key</button>
+    <button class="mc-info-btn" onclick="openMcInfo()" title="API key info">ℹ</button>
+  </div>
+
+  <header>
+    <div class="header-glow"></div>
+    <div class="logo">👽 Mission Control</div>
+    <div class="subtitle">Alien Investor · Financial Sovereignty</div>
+    <div class="status-bar">
+      <span><span class="status-dot"></span>LIVE FEED ACTIVE</span>
+      <span id="last-update">–</span>
+      <span>
+        <div class="refresh-bar"><div class="refresh-progress" id="refresh-progress"></div></div>
+      </span>
+      <span id="countdown">–</span>
+    </div>
+  </header>
+
+  <!-- CRYPTO -->
+  <div class="section-label">₿ Crypto</div>
+  <div class="grid-main">
+    <a class="card-link" href="/en/charts.html#bitcoin">
+      <div class="card">
+        <span class="card-icon">₿</span>
+        <div class="card-label">Bitcoin</div>
+        <div class="card-price loading" id="btc-price">SCANNING</div>
+        <div class="card-change neutral" id="btc-change">–</div>
+        <div class="card-unit">EUR</div>
+        <div class="card-chart-hint">▶ Chart</div>
+      </div>
+    </a>
+    <a class="card-link" href="/en/charts.html#bitcoin">
+      <div class="card">
+        <span class="card-icon">₿</span>
+        <div class="card-label">Bitcoin</div>
+        <div class="card-price loading" id="btc-price-usd">SCANNING</div>
+        <div class="card-change neutral" id="btc-change-usd">–</div>
+        <div class="card-unit">USD</div>
+        <div class="card-chart-hint">▶ Chart</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- COMMODITIES -->
+  <div class="section-label">🪨 Commodities</div>
+  <div class="grid-main">
+    <a class="card-link" href="/en/charts.html#gold">
+      <div class="card">
+        <span class="card-icon">🥇</span>
+        <div class="card-label">Gold</div>
+        <div class="card-price loading" id="gold-price">SCANNING</div>
+        <div class="card-change neutral" id="gold-change">–</div>
+        <div class="card-unit">USD / OZ</div>
+        <div class="card-chart-hint">▶ Chart</div>
+      </div>
+    </a>
+    <a class="card-link" href="/en/charts.html#silber">
+      <div class="card">
+        <span class="card-icon">🥈</span>
+        <div class="card-label">Silver</div>
+        <div class="card-price loading" id="silver-price">SCANNING</div>
+        <div class="card-change neutral" id="silver-change">–</div>
+        <div class="card-unit">USD / OZ</div>
+        <div class="card-chart-hint">▶ Chart</div>
+      </div>
+    </a>
+    <a class="card-link" href="/en/charts.html#oel">
+      <div class="card">
+        <span class="card-icon">🛢️</span>
+        <div class="card-label">Oil (WTI)</div>
+        <div class="card-price loading" id="oil-price">SCANNING</div>
+        <div class="card-change neutral" id="oil-change">–</div>
+        <div class="card-unit">USD · ETF (USO)</div>
+        <div class="card-chart-hint">▶ Chart</div>
+      </div>
+    </a>
+    <div class="card">
+      <span class="card-icon" style="font-family:Arial;font-size:0.85rem;color:var(--neon);display:flex;align-items:center;justify-content:center;line-height:1;">$ / €</span>
+      <div class="card-label">USD / EUR</div>
+      <div class="card-price loading" id="usd-eur">SCANNING</div>
+      <div class="card-change neutral" id="usd-eur-change">–</div>
+      <div class="card-unit">EXCHANGE RATE</div>
+    </div>
+  </div>
+
+  <!-- MARKETS -->
+  <div class="section-label">📊 Markets</div>
+  <div class="grid-main">
+    <a class="card-link" href="/en/charts.html#sp500">
+      <div class="card">
+        <span class="card-icon">🇺🇸</span>
+        <div class="card-label">S&amp;P 500</div>
+        <div class="card-price loading" id="sp500-price">SCANNING</div>
+        <div class="card-change neutral" id="sp500-change">–</div>
+        <div class="card-unit">USD · ETF (SPY)</div>
+        <div class="card-chart-hint">▶ Chart</div>
+      </div>
+    </a>
+    <a class="card-link" href="/en/charts.html#hangseng">
+      <div class="card">
+        <span class="card-icon">🇭🇰</span>
+        <div class="card-label">Hang Seng</div>
+        <div class="card-price loading" id="hsi-price">SCANNING</div>
+        <div class="card-change neutral" id="hsi-change">–</div>
+        <div class="card-unit">USD · ETF (EWH)</div>
+        <div class="card-chart-hint">▶ Chart</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- FEAR & GREED -->
+  <div class="section-label">🧠 Sentiment</div>
+  <div class="grid-wide">
+    <div class="card fg-card">
+      <div class="card-label">Bitcoin Fear &amp; Greed Index</div>
+      <div style="display:flex; align-items:baseline; gap:12px; margin-top:6px;">
+        <div class="fg-value" id="btc-fg-value">–</div>
+        <div class="fg-classification" id="btc-fg-class" style="color:var(--text-mid)">–</div>
+      </div>
+      <div class="fg-meter">
+        <div class="fg-needle" id="btc-fg-needle" style="left:50%"></div>
+      </div>
+      <div class="fg-labels">
+        <span>FEAR</span>
+        <span>NEUTRAL</span>
+        <span>GREED</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOOLS -->
+  <div class="section-label">🛸 Tools</div>
+  <div class="grid-wide">
+    <a class="card-link" href="https://alien-investor.org/alien-analyzer.html">
+      <div class="card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:130px;">
+        <span class="card-icon" style="float:none;margin:0 0 10px 0;"><svg style="width:0.75em;height:0.95em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-5c9b61)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg></span>
+        <div class="card-label">Alien Analyzer</div>
+        <div class="card-price" style="font-size:1rem;letter-spacing:2px;">Value Scanner</div>
+        <div class="card-change neutral">Fair Value · Multiples · Dividends</div>
+        <div class="card-unit">Stock Analysis</div>
+        <div class="card-chart-hint">▶ Launch</div>
+      </div>
+    </a>
+  </div>
+
+  <hr class="alien-hr">
+
+  <div class="donate-section">
+    <a href="https://alien-investor.org/spenden.html" class="donate-link">
+      <span class="donate-icon"><svg style="width:0.6em;height:0.85em;vertical-align:-0.1em;filter:drop-shadow(0 0 2px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg></span>
+      <span>Recharge energy</span>
+      <span style="opacity:0.4;">·</span>
+      <span>Donate</span>
+    </a>
+  </div>
+
+  <footer>
+    <div style="margin-bottom:8px;">alien-investor.org · Data: CoinGecko · alternative.me · Twelvedata · jsdelivr · frankfurter.app</div>
+    <div style="color:rgba(74,122,109,0.7)">🚨 Not financial advice – just personal alien opinion. Think for yourself. Trust no one.</div>
+    <div style="margin-top:12px;"><a href="https://alien-investor.org">alien-investor.org</a></div>
+  </footer>
+
+</div>
+
+<script>
+  // ══════════════════════════════════════════════════════════
+  // API KEY – loaded from localStorage, never hardcoded
+  // ══════════════════════════════════════════════════════════
+  const TWELVEDATA_KEY = localStorage.getItem('mc_td_key') || '';
+
+  // ── API KEY DIALOG ─────────────────────────────────────────
+  function openMcDialog() {
+    document.getElementById('mc-key-input').value = localStorage.getItem('mc_td_key') || '';
+    document.getElementById('mc-dialog-overlay').classList.remove('hidden');
+  }
+  function closeMcDialog() {
+    document.getElementById('mc-dialog-overlay').classList.add('hidden');
+  }
+  function saveMcKey() {
+    const val = document.getElementById('mc-key-input').value.trim();
+    if (!val) { alert('Please enter an API key.'); return; }
+    localStorage.setItem('mc_td_key', val);
+    closeMcDialog();
+    location.reload();
+  }
+  function openMcInfo() {
+    document.getElementById('mc-info-overlay').classList.remove('hidden');
+  }
+  function closeMcInfo() {
+    document.getElementById('mc-info-overlay').classList.add('hidden');
+  }
+  document.getElementById('mc-dialog-overlay').addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeMcDialog();
+  });
+  document.getElementById('mc-info-overlay').addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeMcInfo();
+  });
+  // ══════════════════════════════════════════════════════════
+
+  // ── CONFIGURATION ──────────────────────────────────────────
+  const REFRESH_INTERVAL = 5 * 60; // 5 minutes in seconds
+  let countdown = REFRESH_INTERVAL;
+  let progressTimer = null;
+
+  // ── HELPERS ────────────────────────────────────────────────
+  function fmt(num, decimals = 2) {
+    if (num == null || isNaN(num)) return '–';
+    return new Intl.NumberFormat('de-DE', {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals
+    }).format(num);
+  }
+
+  function setPrice(id, value, decimals = 2) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.remove('loading');
+    el.textContent = value != null ? fmt(value, decimals) : 'ERROR';
+  }
+
+  function setChange(id, value) {
+    const el = document.getElementById(id);
+    if (!el || value == null) return;
+    const sign = value >= 0 ? '+' : '';
+    el.textContent = `${sign}${fmt(value, 2)} %`;
+    el.className = 'card-change ' + (value > 0.05 ? 'positive' : value < -0.05 ? 'negative' : 'neutral');
+  }
+
+  function setError(priceId, changeId) {
+    const p = document.getElementById(priceId);
+    const c = document.getElementById(changeId);
+    if (p) { p.classList.remove('loading'); p.innerHTML = '<span class="card-error">OFFLINE</span>'; }
+    if (c) { c.textContent = ''; }
+  }
+
+  // ── BITCOIN (CoinGecko) ────────────────────────────────────
+  async function fetchBitcoin() {
+    try {
+      const url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=eur,usd&include_24hr_change=true';
+      const res = await fetch(url);
+      if (!res.ok) throw new Error();
+      const data = await res.json();
+      const btc = data.bitcoin;
+
+      setPrice('btc-price', btc.eur, 0);
+      setChange('btc-change', btc.eur_24h_change);
+
+      setPrice('btc-price-usd', btc.usd, 0);
+      setChange('btc-change-usd', btc.usd_24h_change);
+    } catch (e) {
+      setError('btc-price', 'btc-change');
+      setError('btc-price-usd', 'btc-change-usd');
+    }
+  }
+
+  // ── BTC FEAR & GREED (alternative.me) ─────────────────────
+  async function fetchBtcFearGreed() {
+    try {
+      const res = await fetch('https://api.alternative.me/fng/?limit=1');
+      if (!res.ok) throw new Error();
+      const data = await res.json();
+      const val = parseInt(data.data[0].value);
+      const cls = data.data[0].value_classification;
+
+      document.getElementById('btc-fg-value').textContent = val;
+      document.getElementById('btc-fg-class').textContent = translateFG(cls);
+      document.getElementById('btc-fg-needle').style.left = val + '%';
+
+      const fgColor = val < 25 ? '#ff4466' : val < 45 ? '#ff8844' : val < 55 ? '#ffcc44' : val < 75 ? '#88cc44' : '#00ffcc';
+      document.getElementById('btc-fg-value').style.color = '#fff';
+      document.getElementById('btc-fg-class').style.color = fgColor;
+      document.getElementById('btc-fg-class').style.textShadow = `0 0 8px ${fgColor}`;
+    } catch (e) {
+      document.getElementById('btc-fg-value').textContent = '–';
+      document.getElementById('btc-fg-class').textContent = 'OFFLINE';
+    }
+  }
+
+  function translateFG(cls) {
+    const map = {
+      'Extreme Fear': 'EXTREME FEAR',
+      'Fear': 'FEAR',
+      'Neutral': 'NEUTRAL',
+      'Greed': 'GREED',
+      'Extreme Greed': 'EXTREME GREED'
+    };
+    return map[cls] || cls.toUpperCase();
+  }
+
+  // ── GOLD via twelvedata, SILVER via CoinGecko ───────────────
+  async function fetchMetals() {
+    // Gold via twelvedata /quote (incl. % change)
+    async function fetchGold() {
+      try {
+        const url = `https://api.twelvedata.com/quote?symbol=XAU/USD&apikey=${TWELVEDATA_KEY}`;
+        const res = await fetch(url);
+        if (!res.ok) throw new Error();
+        const d = await res.json();
+        if (d.status === 'error' || !d.close) throw new Error();
+        return { price: parseFloat(d.close), change: parseFloat(d.percent_change) };
+      } catch { return null; }
+    }
+
+    // Silver via jsdelivr currency API (free, no key, CORS-ok)
+    async function fetchSilver() {
+      try {
+        const res = await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/xag.json');
+        if (!res.ok) throw new Error();
+        const d = await res.json();
+        // d.xag.usd = how many USD per 1 XAG (= silver price in USD)
+        const price = d?.xag?.usd;
+        return price ? parseFloat(price) : null;
+      } catch { return null; }
+    }
+
+    const [gold, silver] = await Promise.all([fetchGold(), fetchSilver()]);
+
+    if (gold)   { setPrice('gold-price', gold.price, 2); setChange('gold-change', gold.change); }
+    else setError('gold-price', 'gold-change');
+    if (silver) { setPrice('silver-price', silver, 2); document.getElementById('silver-change').textContent = 'SPOT'; }
+    else setError('silver-price', 'silver-change');
+  }
+
+    // ── OIL & INDICES via twelvedata.com ─────────────────────────
+  async function fetchYahoo() {
+    const items = [
+      { symbol: 'USO',      exchange: '',     pid: 'oil-price',   cid: 'oil-change',   dec: 2 },
+      { symbol: 'SPY',      exchange: '',     pid: 'sp500-price', cid: 'sp500-change', dec: 2 },
+      { symbol: 'EWH',      exchange: '',     pid: 'hsi-price',   cid: 'hsi-change',   dec: 2 },
+    ];
+
+    await Promise.all(items.map(async ({ symbol, exchange, pid, cid, dec }) => {
+      try {
+        const exParam = exchange ? `&exchange=${exchange}` : '';
+        const url = `https://api.twelvedata.com/quote?symbol=${symbol}${exParam}&apikey=${TWELVEDATA_KEY}`;
+        const res = await fetch(url);
+        if (!res.ok) throw new Error();
+        const d = await res.json();
+        if (d.status === 'error' || !d.close) throw new Error(d.message);
+        setPrice(pid, parseFloat(d.close), dec);
+        setChange(cid, parseFloat(d.percent_change));
+      } catch { setError(pid, cid); }
+    }));
+  }
+
+    // ── USD/EUR (frankfurter.app) ──────────────────────────────
+  async function fetchForex() {
+    try {
+      const res = await fetch('https://api.frankfurter.app/latest?from=USD&to=EUR');
+      if (!res.ok) throw new Error();
+      const data = await res.json();
+      const rate = data.rates.EUR;
+      setPrice('usd-eur', rate, 4);
+      document.getElementById('usd-eur-change').textContent = '';
+    } catch (e) {
+      setError('usd-eur', 'usd-eur-change');
+    }
+  }
+
+  // ── COUNTDOWN & PROGRESS BAR ───────────────────────────────
+  function startCountdown() {
+    countdown = REFRESH_INTERVAL;
+    clearInterval(progressTimer);
+
+    const progress = document.getElementById('refresh-progress');
+    const countEl = document.getElementById('countdown');
+
+    progressTimer = setInterval(() => {
+      countdown--;
+      if (countdown <= 0) {
+        clearInterval(progressTimer);
+        fetchAll();
+        return;
+      }
+      const min = Math.floor(countdown / 60);
+      const sec = countdown % 60;
+      countEl.textContent = `NEXT: ${min}:${sec.toString().padStart(2,'0')}`;
+      progress.style.transform = `scaleX(${countdown / REFRESH_INTERVAL})`;
+    }, 1000);
+  }
+
+  // ── FETCH ALL DATA ─────────────────────────────────────────
+  async function fetchAll() {
+    const now = new Date();
+    document.getElementById('last-update').textContent =
+      `UPDATE: ${now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}`;
+
+    await Promise.allSettled([
+      fetchBitcoin(),
+      fetchBtcFearGreed(),
+      fetchMetals(),
+      fetchYahoo(),
+      fetchForex()
+    ]);
+
+    startCountdown();
+  }
+
+  // ── START ──────────────────────────────────────────────────
+  // Show dialog as hint when no key – but fetchAll() always runs
+  // (Crypto/Forex need no key; commodity/stock cards fall back to error)
+  if (!TWELVEDATA_KEY) {
+    openMcDialog();
+  }
+  fetchAll();
+</script>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>

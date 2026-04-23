@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculate Bitcoin Taxes Yourself: FiFo, Holding Period & the Open-Source Tool for Your Tax Return</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bitcoin taxes without clueless accountants: An open-source CLI tool automatically calculates FiFo, holding periods and taxable gains from your broker CSVs.">
+  <link rel="canonical" href="/en/btc-steuertool.html">
+  <link rel="alternate" hreflang="de" href="/btc-steuertool.html">
+  <link rel="alternate" hreflang="en" href="/en/btc-steuertool.html">
+  <style>
+    body { background-color: #000; color: #fff; font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 0 15px 20px 15px; }
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+    code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; font-family: monospace; }
+    pre { background-color: #111; padding: 1em; border-radius: 6px; overflow-x: auto; color: #0f0; font-family: monospace; font-size: 0.9em; border: 1px solid #222; }
+    em { color: #ccc; }
+    .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
+    blockquote { border-left: 3px solid #00ffcc; margin: 2em 0; padding: 0.5em 1em; color: #ddd; background: #050505; font-style: italic; }
+    table { width: 100%; border-collapse: collapse; margin: 2em 0; font-size: 0.9em; }
+    th, td { border: 1px solid #333; padding: 10px; text-align: left; }
+    th { color: #00ffcc; background-color: #111; }
+    tr:nth-child(even) { background-color: #050505; }
+    .box { border: 1px solid #00ffcc; background: #050505; padding: 1.5em; border-radius: 8px; margin: 2em 0; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
+    .like-button { margin: 3em 0; display: flex; align-items: center; justify-content: center; gap: 1em; font-size: 1em; }
+    .like-button button { background: #000; color: #00ffcc; border: 1px solid #00ffcc; padding: 0.6em 1.2em; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.2s ease; }
+    .like-button button:hover, .like-button button:active { background: #00ffcc; color: #000; box-shadow: 0 0 15px #00ffcc; }
+    .like-button button:disabled { border-color: #444; color: #888; background: #111; cursor: default; }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    .back-links { margin-top: 40px; text-align: center; display: flex; flex-direction: column; gap: 10px; }
+    footer { margin-top: 60px; padding: 20px; font-size: 0.85em; color: #666; border-top: 1px solid #222; text-align: center; }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="/en/index.html">← Back to Mission Control</a>
+  </div>
+
+  <h1>Calculate Bitcoin Taxes Yourself: FiFo, Holding Period & the Open-Source Tool for Your Tax Return</h1>
+  <p class="byline"><em>by Alien Investor</em></p>
+
+  <article id="content">
+
+    <p>
+      You hold Bitcoin in self-custody. Good. You buy through multiple brokers. Even better.
+      And now the tax authority asks which coins you bought when, which of them are tax-free
+      and exactly how high your taxable gain is.
+    </p>
+    <p>
+      For exactly this problem there is the <strong>BTC Tax Tool</strong> — an open-source CLI tool I
+      developed myself for my own tax return. It reads your CSV exports from BitBox,
+      21bitcoin, Bison, Swissquote, Strike and Pocket and automatically calculates what
+      has to go to the tax office and what remains tax-free.
+    </p>
+
+    <blockquote>
+      "Don't Trust, Verify — including your accountant. If you understand how the calculation works,
+      you're not at anyone's mercy."
+    </blockquote>
+
+    <h2>1. The Foundation: What German Tax Law Says</h2>
+    <p>
+      Bitcoin is classified in Germany as a private disposal transaction (§ 23 EStG). The rules:
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Situation</th>
+          <th>Tax treatment</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>BTC held less than 365 days, then sold</td>
+          <td>Profit taxable</td>
+        </tr>
+        <tr>
+          <td>BTC held more than 365 days, then sold</td>
+          <td>Profit <strong>tax-free</strong></td>
+        </tr>
+        <tr>
+          <td>Transfer between your own wallets/accounts</td>
+          <td>Not a taxable event</td>
+        </tr>
+        <tr>
+          <td>Profit under 600 EUR/year (until 2023)</td>
+          <td>Exemption threshold — not a single cent in tax</td>
+        </tr>
+        <tr>
+          <td>Profit under 1,000 EUR/year (from 2024)</td>
+          <td>Exemption threshold — not a single cent in tax</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      The method is called <strong>FiFo</strong> — First In, First Out. That means: what you buy first,
+      you also sell first. Sounds simple, but gets complicated quickly when you buy from five brokers
+      and your BTC moves between multiple wallets.
+    </p>
+
+    <div class="box" style="border-color: #ff3b3b; box-shadow: 0 0 10px rgba(255, 59, 59, 0.15);">
+      <h3 style="color: #ff3b3b;">The Exemption Threshold Is a Trap</h3>
+      <p>
+        Many people think: "I'm under 1,000 EUR, so it's irrelevant." Wrong.
+        The exemption threshold is not a tax allowance. If you exceed it, the <em>entire</em> taxable
+        profit becomes taxable — not just the part above it. A profit of 1,001 EUR is therefore fully
+        taxable — not just that one euro.
+      </p>
+    </div>
+
+    <h2>2. The Problem with Self-Custody</h2>
+    <p>
+      Tax apps like CoinTracking or Blockpit work well for exchanges that record everything.
+      For genuine self-custody holders with hardware wallets, problems arise:
+    </p>
+    <ul>
+      <li>You transfer BTC from your BitBox to an exchange for a sale — this looks like a purchase.</li>
+      <li>You have multiple wallets — the cost basis travels with them.</li>
+      <li>Swissquote buys in USD — the historical exchange rate must be correctly factored in.</li>
+      <li>You enter your complete financial data into a cloud app — that contradicts the whole point of self-custody.</li>
+    </ul>
+    <p>
+      The BTC Tax Tool runs <strong>locally on your machine</strong>. No cloud, no registration,
+      no third-party servers. Your data stays with you.
+    </p>
+
+    <h2>3. Installation (one-time)</h2>
+    <p>
+      You need Python 3 — on Linux and macOS it is already installed. On Windows you may need to install it first (<a href="https://python.org" target="_blank" rel="noopener">python.org</a>).
+    </p>
+    <p><strong>Mac / Linux:</strong></p>
+    <pre>git clone https://github.com/Alien-Investor/btc-steuertool.git
+cd btc-steuertool
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.txt</pre>
+    <p><strong>Windows:</strong></p>
+    <pre>git clone https://github.com/Alien-Investor/btc-steuertool.git
+cd btc-steuertool
+python -m venv .venv
+.venv\Scripts\pip install -r requirements.txt</pre>
+    <p>
+      That's it. No database, no server, no subscription.
+    </p>
+
+    <h2>4. Place Your CSV Files</h2>
+    <p>
+      Export your CSV files from the respective apps and place them in the corresponding folders.
+      The folders <code>bitbox/</code> and <code>Broker/</code> don't exist yet after cloning —
+      they are listed in <code>.gitignore</code> so your financial data never accidentally ends up on GitHub.
+      You need to create them once yourself:
+    </p>
+    <p><strong>Mac / Linux:</strong></p>
+    <pre>mkdir -p bitbox Broker</pre>
+    <p><strong>Windows:</strong></p>
+    <pre>mkdir bitbox
+mkdir Broker</pre>
+    <table>
+      <thead>
+        <tr>
+          <th>Source</th>
+          <th>Folder</th>
+          <th>Filename</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>BitBox (hardware wallet)</td>
+          <td><code>bitbox/</code></td>
+          <td>any name, all <code>*.csv</code> files are loaded</td>
+        </tr>
+        <tr>
+          <td>21bitcoin</td>
+          <td><code>Broker/</code></td>
+          <td>must start with <code>21bitcoin</code></td>
+        </tr>
+        <tr>
+          <td>Bison</td>
+          <td><code>Broker/</code></td>
+          <td><code>Bison-CSV-Gesamt.csv</code></td>
+        </tr>
+        <tr>
+          <td>Swissquote</td>
+          <td><code>Broker/</code></td>
+          <td><code>Swissquote_CSV-Gesamt.csv</code></td>
+        </tr>
+        <tr>
+          <td>Strike</td>
+          <td><code>Broker/</code></td>
+          <td><code>strike_2024.csv</code>, <code>strike_2025.csv</code> etc.</td>
+        </tr>
+        <tr>
+          <td>Pocket</td>
+          <td><code>Broker/</code></td>
+          <td>must start with <code>Pocket</code></td>
+        </tr>
+        <tr>
+          <td>noKYC purchases (Bisq, Robosats, P2P, cash)</td>
+          <td>Project folder</td>
+          <td><code>manual_buys.csv</code> — optional, create yourself</td>
+        </tr>
+        <tr>
+          <td>Private sales (P2P without broker)</td>
+          <td>Project folder</td>
+          <td><code>manual_sales.csv</code> — optional, create yourself</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="box">
+      <h3><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-label="Satellite dish" role="img"><path d="M4 24 A16 16 0 0 1 20 8" fill="#00ffcc" fill-opacity="0.06" stroke="#00ffcc" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="8" r="2.8" fill="#00ffcc"/><line x1="20" y1="8" x2="28" y2="4" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><path d="M15 13 A6 6 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/><path d="M12 16 A9 9 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.45"/></svg> Your data stays local</h3>
+      <p>
+        The folders <code>bitbox/</code> and <code>Broker/</code> as well as the files
+        <code>manual_buys.csv</code> and <code>manual_sales.csv</code> are listed in
+        <code>.gitignore</code> — they will never accidentally be checked into Git
+        or put online. Your financial data stays on your machine.
+      </p>
+    </div>
+
+    <h2>noKYC Purchases and Private Sales</h2>
+    <p>
+      Anyone who buys BTC without a KYC broker — via Bisq, Robosats, HodlHodl or directly person-to-person —
+      has no broker CSV. For this there is <code>manual_buys.csv</code>: a simple text file
+      in the project folder where you enter each purchase with date, BTC amount and EUR amount.
+    </p>
+    <pre>date,btc_amount,eur_amount,note
+2024-03-10,0.01000000,550.00,Bisq P2P purchase
+2024-07-22,0.00500000,280.00,Robosats trade</pre>
+    <p>
+      Same principle for private sales without a broker: <code>manual_sales.csv</code> in the same format.
+      The tool reads both files automatically and processes them like any other purchase or sale.
+    </p>
+    <p>
+      <strong>On the legal situation:</strong> You are not required to disclose your complete wallet fingerprint.
+      As long as acquisition costs are correctly stated and taxable gains are fully reported,
+      this is unproblematic under tax law. The tax authority has no claim to your complete UTXO history.
+    </p>
+
+    <h2>5. Your First Report</h2>
+    <p>
+      Output a report for a specific year:
+    </p>
+    <pre>.venv/bin/python src/main.py --year 2024</pre>
+    <p>
+      All years at once:
+    </p>
+    <pre>.venv/bin/python src/main.py --all</pre>
+    <p>
+      With formal documentation for your accountant or tax office:
+    </p>
+    <pre>.venv/bin/python src/main.py --year 2024 --csv --nachweis</pre>
+    <p>
+      The result lands in <code>reports/</code>: a readable tax report, a print-ready
+      formal proof of calculation and optionally CSV tables for Excel.
+    </p>
+
+    <h2>6. What You Submit to the Tax Office</h2>
+    <p>
+      The proof alone is not enough. The tax office wants to know that the purchase data is genuine.
+      So always submit two parts:
+    </p>
+    <ul>
+      <li><strong>The tax proof</strong> — what the tool generates (<code>steuernachweis_YEAR.txt</code>).</li>
+      <li><strong>The original broker CSVs</strong> — as evidence that the purchases actually took place.</li>
+    </ul>
+    <p>
+      The tool shows in the proof under "Source" exactly which broker provided which lot —
+      so you can trace every single sale without gaps.
+    </p>
+
+    <h2>7. What This Tool Is <em>Not</em></h2>
+    <p>
+      Not a replacement for a tax advisor. If you have taxable gains, have the results
+      reviewed — especially in the first year. The tool calculates correctly according to FiFo, but you are
+      responsible for the accuracy of your inputs.
+    </p>
+    <p>
+      What it is: a tool that informs and prepares you — instead of leaving you blindly trusting a
+      cloud app you don't control.
+    </p>
+
+    <div class="box">
+      <h3>Open Source on GitHub &amp; Codeberg</h3>
+      <p>
+        The complete code is public, free and open-source. You can verify
+        how every line of the calculation works. Fictional sample data for all supported
+        brokers is included as well — so you can test the tool before loading your real data.
+      </p>
+      <p><a href="https://github.com/Alien-Investor/btc-steuertool" target="_blank" rel="noopener">
+          github.com/Alien-Investor/btc-steuertool
+        </a>
+        &nbsp;·&nbsp;
+        🔗 <a href="https://codeberg.org/Alien-Investor/btc-steuertool" target="_blank" rel="noopener">
+          codeberg.org/Alien-Investor/btc-steuertool
+        </a>
+      </p>
+    </div>
+
+  </article>
+
+  <div class="box">
+    <h3>Tools for Real Owners</h3>
+    <p style="font-size:0.95em;">
+      Tools I use myself – for Bitcoin self-custody and digital sovereignty:
+    </p>
+    <ul>
+      <li>
+        <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Lightning bolt" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> <strong>Buy Bitcoin in Europe – 21bitcoin:</strong><br>
+        Bitcoin-only app from Europe, ideal for DCA and stacking sats regularly – no shitcoins.<br>
+        Use code <strong>ALIENINVESTOR</strong> to get a permanent 0.2&nbsp;percentage point fee reduction
+        on instant and savings plan purchases.<br>
+        <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
+      </li>
+      <li>
+        ₿ <strong>BitBox self-custody:</strong><br>
+        Hardware wallet instead of an exchange account. I use the BitBox – there's the classic BitBox02 and the new
+        BitBox for iPhone (Nova).<br>
+        Use code <strong>ALIENINVESTOR</strong> to get 5% off.<br>
+        <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
+      </li>
+      <li>
+        <svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-label="Satellite dish" role="img"><path d="M4 24 A16 16 0 0 1 20 8" fill="#00ffcc" fill-opacity="0.06" stroke="#00ffcc" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="8" r="2.8" fill="#00ffcc"/><line x1="20" y1="8" x2="28" y2="4" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><path d="M15 13 A6 6 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/><path d="M12 16 A9 9 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.45"/></svg> <strong>Privacy &amp; Mail:</strong><br>
+        For email, VPN and cloud I use Proton – minimal data footprint and no Big Tech dependency.<br>
+        <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
+      </li>
+    </ul>
+    <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">
+      Note: Some links are affiliate links. If you use them, you support my work
+      at no extra cost to you. Thanks! <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-aff" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-aff)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg>
+    </p>
+  </div>
+
+  <div class="like-button">
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-f2e078)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Like this</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+
+  <script>
+    (function() {
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      const btn = document.getElementById('likeButton');
+      const msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      });
+    })();
+  </script>
+
+  <div class="back-links">
+    <a href="/en/blog.html" style="font-size: 1.1em;">← Back to Blog Overview</a>
+    <a href="/en/index.html" style="font-size: 1.1em;">← Back to Mission Control</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+    <h3 style="margin-bottom: 15px;"><svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energy" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Recharge Energy <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Donate)</span></h3>
+    <a href="/en/spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">Send fuel to the mothership</a>
+    <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">Thanks for your support – for free content, financial sovereignty and the extraterrestrial resistance! <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-f2e078" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-f2e078" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-f2e078)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-f2e078)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg></p>
+  </div>
+
+  <footer>
+    <p><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Contact" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> Contact: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    <p style="margin-top: 20px;"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-f2e078" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-f2e078)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <strong>Disclaimer:</strong><br><br>This article is not legal or tax advice, but a technical guide. I'm sharing only my personal alien opinion here. You are responsible for your own tax return.</p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>

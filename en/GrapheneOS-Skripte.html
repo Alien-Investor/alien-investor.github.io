@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Mobile Bunker: Encryption on GrapheneOS (Termux Edition) | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Secure encryption on the go with GrapheneOS and Termux. A workflow for real sovereignty: open and create encrypted archives on mobile.">
+  <link rel="canonical" href="/en/GrapheneOS-Skripte.html">
+  <link rel="alternate" hreflang="de" href="/GrapheneOS-Skripte.html">
+  <link rel="alternate" hreflang="en" href="/en/GrapheneOS-Skripte.html">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 0 15px 20px 15px; /* Mobile-Optimierung */
+    }
+
+    /* --- TYPOGRAFIE --- */
+    h1, h2, h3 {
+      color: #00ffcc;
+    }
+    h1 {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    /* --- LINKS (Neon-Glow) --- */
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc; /* Der Alien-Effekt */
+    }
+
+    /* --- STANDARD ELEMENTE --- */
+    code {
+      background-color: #111;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      color: #0f0;
+      font-family: monospace;
+    }
+    pre {
+      background-color: #111;
+      padding: 1em;
+      border-radius: 4px;
+      overflow-x: auto;
+      border: 1px solid #333;
+      color: #0f0;
+      font-family: monospace;
+    }
+    em { color: #ccc; }
+
+    .byline {
+      margin-top: -0.8em;
+      margin-bottom: 2em;
+      color: #ccc;
+      font-style: italic;
+      text-align: center;
+    }
+
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
+
+    /* --- BOXEN --- */
+    .box {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 1em; }
+
+    .recommendation-box {
+      margin: 2em 0;
+      padding: 1em;
+      border: 1px dashed #00ffcc;
+      border-radius: 8px;
+      text-align: center;
+      background-color: #050505;
+    }
+    .recommendation-box h3 {
+      margin-top: 0;
+      font-size: 1.1em;
+      color: #00ffcc;
+    }
+
+    /* --- LIKE BUTTON --- */
+    .like-button {
+      margin: 3em 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+    }
+    .like-button button {
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+    .like-button button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
+    }
+
+    /* --- NAVIGATION --- */
+    .top-nav {
+      padding: 10px 0;
+      font-size: 0.9em;
+    }
+    .back-links {
+      margin-top: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="/en/index.html">← Back to Mission Control</a>
+  </div>
+
+  <h1>The Mobile Bunker: Encryption on GrapheneOS (Termux Edition)</h1>
+  <p class="byline"><em>by Alien Investor</em></p>
+
+  <article id="content">
+    <p>
+      Sovereignty doesn't end at the edge of your desk. Take your digital fortress with you.
+    </p>
+    <p>
+      In part one we built the "Digital Bunker" on the Linux desktop. We learned that real security is based on auditability, not flashy apps. But investors and strategists are mobile. What good is the most secure archive at home if you need to access sensitive documents on the go or securely exfiltrate data?
+    </p>
+    <p>
+      Most mobile solutions are black boxes. You press a button, something happens, and you hope the developer doesn't have a master key. That's unacceptable.
+    </p>
+    <p>
+      We use <strong>GrapheneOS</strong>, the only mobile operating system that takes security architecture seriously. And we use <strong>Termux</strong>, a terminal emulator that turns your smartphone into a full Linux computer.
+    </p>
+    <p>
+      The goal: one workflow. Two devices. Identical math.<br>
+      An archive you encrypt on your Tuxedo laptop must be openable on your GrapheneOS phone — and vice versa.
+    </p>
+
+    <h2>1. Preparation: Getting Termux Ready</h2>
+    <p>
+      On GrapheneOS, the best way to install Termux is via <strong>F-Droid</strong> (not the Play Store — that version is outdated).<br>
+      Once you have the black terminal in front of you, update the packages and install the necessary tools. This is the foundation.
+    </p>
+    <p>Type the following commands one after another:</p>
+    <pre><code>pkg update && pkg upgrade
+pkg install termux-tools tar gnupg</code></pre>
+
+    <h3>Storage Access</h3>
+    <p>
+      Termux lives in isolation. For the scripts to access your Downloads (where your data lives), we need to bridge to the Android filesystem.
+    </p>
+    <p>Run:</p>
+    <pre><code>termux-setup-storage</code></pre>
+    <p>Confirm the dialog on screen ("Allow").</p>
+    <p>Now create a folder for your tools:</p>
+    <pre><code>mkdir -p ~/Skripte</code></pre>
+
+    <h2>2. Part 1: The Mobile Shield (Encryption)</h2>
+    <p>
+      The <code>encrypt-folder.sh</code> script for Termux is intelligent. It automatically detects whether it's running on an Android system and routes the output to the Downloads folder, so you can easily find and share the encrypted file later.
+    </p>
+
+    <h3>Under the Hood: The Security Mechanics</h3>
+    <p>
+      Before we copy the code, pay attention to a detail that separates professional code from hobbyist scripts. At the start of the script you'll find the "Helpers" section:
+    </p>
+    <ul>
+      <li><strong>The emergency brake (die):</strong> If anything goes wrong (e.g. storage full, access denied), the script immediately aborts hard (<code>exit 1</code>). It doesn't just continue and produce corrupted data.</li>
+      <li><strong>The equipment check (need):</strong> Before a single byte gets encrypted, the script checks whether all tools (tar, gpg) are present. If anything is missing, it won't start at all.</li>
+    </ul>
+    <p>This is what code that won't let you down in an emergency looks like.</p>
+
+    <p>Create the file:</p>
+    <pre><code>nano ~/Skripte/encrypt-folder.sh</code></pre>
+
+    <p>Paste this code:</p>
+    <pre><code>#!/usr/bin/env bash
+# encrypt-folder.sh — Pack folder losslessly and encrypt symmetrically (AES-256),
+# without a plaintext intermediate file. Also generates a .sha256.
+# Phone (GrapheneOS/Termux): output to ~/storage/downloads
+# PC (TUXEDO OS): output to $HOME
+#
+# S2K hardening: SHA512 + AES256 + maximum iterations (65011712)
+# → Brute-force attacks on the password become 100x more expensive.
+
+set -Eeuo pipefail
+umask 077
+
+# -------------------- Helpers --------------------
+die() { printf "❌ %s\n" "$*" >&2; exit 1; }
+need() { command -v "$1" >/dev/null 2>&1 || die "Required program missing: $1"; }
+
+need tar
+need gpg
+need sha256sum
+
+# Determine output destination based on system
+OUT_DIR="$HOME"
+if [ -d "$HOME/storage/downloads" ]; then
+  OUT_DIR="$HOME/storage/downloads"
+fi
+
+# Input: optional as argument, otherwise prompt
+INPUT="${1-}"
+if [ -z "$INPUT" ]; then
+  printf "📁 Please enter the folder name: "
+  IFS= read -r INPUT
+fi
+
+[ -n "$INPUT" ] || die "No name entered."
+
+# Normalize path:
+# Allowed: SAP | storage/downloads/SAP | ~/storage/downloads/SAP
+#          /sdcard/Download/SAP | /storage/emulated/0/Download/SAP | /full/path/SAP
+case "$INPUT" in
+  ~/*) SRC="$HOME/${INPUT#~/}" ;;
+  storage/*) SRC="$HOME/$INPUT" ;;  # Termux symlink
+  /sdcard/Download/*)
+      SRC="$HOME/storage/downloads/${INPUT#/sdcard/Download/}" ;;
+  /storage/emulated/0/Download/*)
+      SRC="$HOME/storage/downloads/${INPUT#/storage/emulated/0/Download/}" ;;
+  /*) SRC="$INPUT" ;;
+  *)
+      if [ -d "$HOME/storage/downloads/$INPUT" ]; then
+        SRC="$HOME/storage/downloads/$INPUT"
+      else
+        SRC="$HOME/$INPUT"
+      fi
+      ;;
+esac
+
+[ -e "$SRC" ] || die "Path not found: $SRC"
+[ -d "$SRC" ] || die "This is not a directory: $SRC"
+
+BASE="$(basename "$SRC")"
+
+# Optional: replace spaces in name with underscore (for the output file only)
+BASE_SAFE="${BASE// /_}"
+
+OUT_FILE="$OUT_DIR/Encrypted_${BASE_SAFE}.tar.gz.gpg"
+
+# Avoid collisions
+if [ -e "$OUT_FILE" ]; then
+  OUT_FILE="$OUT_DIR/Encrypted_${BASE_SAFE}_$(date +%Y-%m-%d_%H-%M-%S).tar.gz.gpg"
+fi
+
+printf "📦 Packing & encrypting → %s\n" "$OUT_FILE"
+
+# Archive + encrypt without plaintext intermediate file
+# S2K hardening: stronger key derivation against brute force
+tar -C "$(dirname "$SRC")" -cz "$BASE" \
+| gpg --symmetric \
+    --cipher-algo AES256 \
+    --s2k-cipher-algo AES256 \
+    --s2k-digest-algo SHA512 \
+    --s2k-count 65011712 \
+    -o "$OUT_FILE" \
+|| die "gpg failed"
+
+# Write checksum
+sha256sum "$OUT_FILE" > "${OUT_FILE}.sha256"
+
+printf "✅ Done:\n   %s\n   %s\n   Location: %s\n" \
+  "$(basename "$OUT_FILE")" "$(basename "${OUT_FILE}.sha256")" "$OUT_DIR"</code></pre>
+
+    <p><em>(Save in nano with CTRL+O, Enter, then CTRL+X)</em></p>
+
+    <h2>3. Part 2: The Mobile Key (Decryption)</h2>
+    <p>
+      On the go you often run into a problem: cloud services or downloads rename files. <code>File.gpg</code> suddenly becomes <code>File.gpg.pgp</code> or <code>File (1).gpg</code>.<br>
+      This script is the "Cloud Edition." It's extremely robust, finds your file even with wrong extensions, and verifies the SHA256 checksum.
+    </p>
+
+    <p>Create the file:</p>
+    <pre><code>nano ~/Skripte/decrypt-folder.sh</code></pre>
+
+    <p>Paste this code:</p>
+    <pre><code>#!/usr/bin/env bash
+# decrypt-folder.sh (Cloud Edition)
+# - Finds .gpg AND .pgp (double extension from cloud/download)
+# - Smart SHA check (also handles the extra .pgp extension)
+
+set -Eeuo pipefail
+umask 077
+
+export GPG_TTY="${GPG_TTY:-$(tty 2>/dev/null || true)}"
+
+DL_DIR="$HOME/storage/downloads"
+
+die(){ printf "❌ %s\n" "$*" >&2; exit 1; }
+
+# --- 1. Automatic file selection (GPG & PGP) ---
+NAME="${1-}"
+INPUT=""
+
+if [ -z "$NAME" ]; then
+  # Search for .gpg OR .pgp, sorted by time (newest first)
+  # 2>/dev/null suppresses errors if one type is absent
+  LATEST="$(ls -t "$DL_DIR"/*.gpg "$DL_DIR"/*.pgp 2>/dev/null | head -n1 || true)"
+
+  if [ -n "$LATEST" ]; then
+    INPUT="$LATEST"
+    printf "🤖 File found: %s\n" "$(basename "$INPUT")"
+  else
+    printf "No file found. Enter name: "
+    IFS= read -r NAME
+    [ -n "$NAME" ] || die "Aborted."
+  fi
+fi
+
+# Fallback: manual path search
+if [ -z "$INPUT" ]; then
+    # Try various variants
+    VARIANTS=(
+      "${NAME}"
+      "${NAME}.gpg"
+      "${NAME}.pgp"
+      "${NAME}.gpg.pgp"
+      "Encrypted_${NAME}.gpg"
+    )
+
+    for v in "${VARIANTS[@]}"; do
+        # Check in PWD and Downloads
+        if [ -f "$PWD/$v" ]; then INPUT="$PWD/$v"; break; fi
+        if [ -f "$DL_DIR/$v" ]; then INPUT="$DL_DIR/$v"; break; fi
+    done
+fi
+
+[ -n "$INPUT" ] || die "Source file not found."
+
+# --- 2. Smart SHA256 check ---
+# Case A: standard (File.gpg.sha256)
+SHA_CANDIDATE_1="${INPUT}.sha256"
+
+# Case B: cloud error (File.gpg.pgp -> File.gpg.sha256)
+SHA_CANDIDATE_2="${INPUT%.pgp}.sha256"
+
+SHA_FILE=""
+
+if [ -f "$SHA_CANDIDATE_1" ]; then
+    SHA_FILE="$SHA_CANDIDATE_1"
+elif [ -f "$SHA_CANDIDATE_2" ]; then
+    SHA_FILE="$SHA_CANDIDATE_2"
+    echo "ℹ️  Correcting SHA path (ignoring .pgp extension)..."
+fi
+
+if [ -n "$SHA_FILE" ]; then
+    printf "🔎 Checking integrity (SHA256)..."
+    EXPECTED=$(awk '{print $1}' "$SHA_FILE")
+    ACTUAL=$(sha256sum "$INPUT" | awk '{print $1}')
+
+    if [ "$EXPECTED" = "$ACTUAL" ]; then
+        echo " ✅ OK."
+    else
+        echo " ❌ ERROR!"
+        echo "   WARNING: Checksums do not match!"
+        echo "   File may be corrupted."
+        printf "   Continue anyway? (y/N) "
+        read -r -n 1 REPLY
+        echo
+        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+            die "Aborted."
+        fi
+    fi
+else
+    echo "ℹ️  No .sha256 file found (check skipped)."
+fi
+
+# --- 3. Decrypt & unpack ---
+printf "🔓 Decrypting & unpacking..."
+
+if gpg --quiet --decrypt "$INPUT" | tar -xz; then
+    echo " ✅ Done."
+    echo "📂 Folder is in: $PWD"
+elif gpg --quiet --pinentry-mode loopback --decrypt "$INPUT" | tar -xz; then
+    echo " ✅ Done."
+    echo "📂 Folder is in: $PWD"
+else
+    die "Error."
+fi</code></pre>
+
+    <p>Make both scripts executable:</p>
+    <pre><code>chmod +x ~/Skripte/encrypt-folder.sh ~/Skripte/decrypt-folder.sh</code></pre>
+
+    <h2>4. The Workflow in the Field</h2>
+    <p>Here's the tactical procedure for moving your data securely.</p>
+
+    <h3>Scenario A: Encrypt and Decrypt on the Phone (Loop)</h3>
+    <ol>
+      <li>You have a folder (e.g. <code>Finances</code>) in your Downloads area.</li>
+      <li>Open Termux.</li>
+      <li>Start the script: <code>~/Skripte/encrypt-folder.sh</code></li>
+      <li>Type the folder name: <code>Finances</code></li>
+      <li><strong>Result:</strong> Your regular Downloads folder now contains <code>Encrypted_Finances.tar.gz.gpg</code> and the checksum.</li>
+      <li>Want to test/decrypt it? Just run <code>~/Skripte/decrypt-folder.sh</code>. The decrypted files will be in the Termux home directory (see step 3).</li>
+    </ol>
+
+    <h3>Scenario B: Decrypt Data from PC (The Real Case)</h3>
+    <p>
+      You've transferred an encrypted file (e.g. <code>Encrypted_Backup.tar.gz.gpg</code>) from your PC to your phone.
+    </p>
+    <ul>
+      <li><strong>Step 1: Storage location</strong><br>
+      Make sure the file is in the <strong>Android Downloads folder</strong>. The script automatically searches there for the newest file.
+      </li>
+      <li><strong>Step 2: Fire away</strong><br>
+      Open Termux and start the script:<br>
+      <pre><code>~/Skripte/decrypt-folder.sh</code></pre>
+      </li>
+      <li><strong>Step 3: Where's the data?</strong><br>
+      The script decrypts data into the <strong>Termux home directory</strong> by default (not back to Downloads, to avoid clutter).<br>
+      Open your "Files" app. In the sidebar or under "Storage locations" you'll find an entry called <strong>Termux</strong>. Your decrypted folder is there, ready to view. This is a mirrored area you can access comfortably.
+      </li>
+    </ul>
+
+    <h2>5. Why Auditability Is King</h2>
+    <p>
+      You could download an app from the AppStore called "AES Safe Box." But do you know what it does with your keys?
+    </p>
+
+    <blockquote>
+      No magic. Just math. That's the Alien Investor way.
+    </blockquote>
+
+    <p>With these scripts you see every command:</p>
+    <ul>
+      <li>Tar packs.</li>
+      <li>GPG encrypts.</li>
+      <li>SHA256 verifies.</li>
+    </ul>
+
+    <div class="recommendation-box">
+      <h3>Background: The Foundation</h3>
+      <p>
+        This is part 2 of the series. Find the introduction and the desktop scripts here:<br>
+        <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="/en/Kryptographie.html">Part 1: The Digital Bunker</a>
+      </p>
+    </div>
+
+    <div class="box">
+      <h3>Tools for Real Owners (Advertising/Affiliate)</h3>
+      <p style="font-size:0.95em;">
+        Tools I use myself — for Bitcoin self-custody and digital sovereignty:
+      </p>
+      <ul>
+        <li>
+          <svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="4" y="4" width="5" height="28" rx="1" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.7"/><rect x="9" y="4" width="22" height="28" rx="1" fill="#1a3a38" stroke="#00ffcc" stroke-width="0.7"/><line x1="13" y1="12" x2="27" y2="12" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="16" x2="27" y2="16" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="20" x2="27" y2="20" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="24" x2="22" y2="24" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/></svg> <strong>Alien Investor Handbooks:</strong><br>
+          My own ebook "GrapheneOS: Android in the Age of Surveillance" — the complete step-by-step guide to everything only touched on here.<br>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/buecher" target="_blank">https://alien-investor.org/buecher</a>
+        </li>
+            <li>
+          <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Lightning bolt" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> <strong>Buy Bitcoin in Europe – 21bitcoin:</strong><br>
+          Bitcoin-only app from Europe, ideal for DCA and stacking sats regularly — no shitcoins.<br>
+          Use code <strong>ALIENINVESTOR</strong> for a permanent 0.2&nbsp;percentage point fee reduction
+          on instant and savings plan purchases.<br>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
+        </li>
+        <li>
+          ₿ <strong>Bitcoin in self-custody:</strong><br>
+          Hardware wallet instead of exchange account. I use the BitBox — there's the classic BitBox02 and the new
+          BitBox for iPhone (Nova).<br>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
+        </li>
+        <li>
+          <svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-label="Satellite dish" role="img"><path d="M4 24 A16 16 0 0 1 20 8" fill="#00ffcc" fill-opacity="0.06" stroke="#00ffcc" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="8" r="2.8" fill="#00ffcc"/><line x1="20" y1="8" x2="28" y2="4" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><path d="M15 13 A6 6 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/><path d="M12 16 A9 9 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.45"/></svg> <strong>Privacy &amp; Mail:</strong><br>
+          For email, VPN, and cloud I use Proton — minimal data footprint, no Big Tech dependency.<br>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
+        </li>
+      </ul>
+      <p style="font-size:0.85em; color:#aaa;">
+        Note: Some links are affiliate links. If you use them, you support my work
+        at no extra cost to you. Thanks! <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-aff" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-aff)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg>
+      </p>
+    </div>
+
+  </article>
+
+  <div class="like-button">
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-a79b65)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Like</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+
+  <script>
+    (function() {
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      const btn = document.getElementById('likeButton');
+      const msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      });
+    })();
+  </script>
+
+  <div class="back-links">
+    <a href="/en/blog.html" style="font-size: 1.1em;">← Back to Blog Overview</a>
+    <a href="/en/index.html" style="font-size: 1.1em;">← Back to Mission Control</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+      <h3 style="margin-bottom: 15px;">
+        <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energy" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Recharge
+        <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Donate)</span>
+      </h3>
+
+      <a href="/en/spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+        Send fuel to the mothership
+      </a>
+
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Thanks for your support — for free content, financial sovereignty, and the alien resistance! <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-a79b65" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-a79b65" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-a79b65)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-a79b65)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg>
+      </p>
+  </div>
+
+  <footer>
+    <p><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Contact" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> Contact: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+
+    <p style="margin-top: 20px;">
+      <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-a79b65" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-a79b65)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <strong>Disclaimer:</strong><br><br>
+      This article does not constitute financial, tax, or legal advice.<br>
+      I'm sharing my personal alien opinion here — independent, rebellious, and free.<br>
+      Investing carries risks. Think for yourself, trust no one, and act on your own responsibility.
+    </p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>

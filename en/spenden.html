@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Power Supply | Alien Investor</title>
+  <link rel="canonical" href="/en/spenden.html">
+  <link rel="alternate" hreflang="de" href="/spenden.html">
+  <style>
+    html, body { overflow-x: hidden; }
+    body {
+      background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0 15px 20px 15px;
+      text-align: center;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* --- STERNENHIMMEL --- */
+    .stars-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: radial-gradient(ellipse at top, #0a0f1e 0%, #000 60%);
+      z-index: -2;
+    }
+    .stars-bg::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image:
+        radial-gradient(1px 1px at 10% 15%, #fff, transparent),
+        radial-gradient(1px 1px at 25% 40%, #fff, transparent),
+        radial-gradient(1px 1px at 40% 20%, #fff, transparent),
+        radial-gradient(2px 2px at 55% 60%, #00ffcc, transparent),
+        radial-gradient(1px 1px at 70% 35%, #fff, transparent),
+        radial-gradient(1px 1px at 85% 75%, #fff, transparent),
+        radial-gradient(1px 1px at 15% 80%, #fff, transparent),
+        radial-gradient(1px 1px at 35% 90%, #fff, transparent),
+        radial-gradient(1px 1px at 60% 10%, #fff, transparent),
+        radial-gradient(1px 1px at 90% 50%, #fff, transparent),
+        radial-gradient(1px 1px at 5% 55%, #fff, transparent),
+        radial-gradient(2px 2px at 75% 25%, #00ffcc, transparent);
+      animation: twinkle 6s ease-in-out infinite alternate;
+    }
+    @keyframes twinkle {
+      0% { opacity: 0.4; } 100% { opacity: 0.9; }
+    }
+
+    /* --- STERNENNEBEL --- */
+    .nebula {
+      position: fixed;
+      top: -10%;
+      left: -10%;
+      width: 120%;
+      height: 120%;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 900px 260px at 30% 35%, rgba(90, 30, 140, 0.22), transparent 60%),
+        radial-gradient(ellipse 1100px 200px at 70% 55%, rgba(0, 140, 180, 0.18), transparent 60%),
+        radial-gradient(ellipse 500px 180px at 50% 45%, rgba(180, 60, 140, 0.10), transparent 60%),
+        radial-gradient(circle 140px at 32% 36%, rgba(255, 255, 255, 0.10), transparent 70%),
+        radial-gradient(circle 120px at 68% 56%, rgba(0, 255, 204, 0.08), transparent 70%);
+      transform: rotate(-18deg);
+      filter: blur(30px);
+      opacity: 0.85;
+      animation: nebula-pulse 14s ease-in-out infinite alternate;
+      mix-blend-mode: screen;
+    }
+    @keyframes nebula-pulse {
+      0%   { opacity: 0.55; transform: rotate(-18deg) scale(1); }
+      50%  { opacity: 0.85; transform: rotate(-17deg) scale(1.04); }
+      100% { opacity: 0.65; transform: rotate(-19deg) scale(1.02); }
+    }
+
+    /* --- STERNSCHNUPPEN --- */
+    .shooting-star {
+      position: fixed;
+      width: 2px; height: 2px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.7);
+      z-index: -1;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .shooting-star::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 120px; height: 1px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.8), rgba(0,255,204,0.4), transparent);
+      transform: translateX(-120px);
+    }
+    .shooting-star.s1 { top: 12%; left: -5%; animation: shoot1 11s linear infinite; animation-delay: 3s; }
+    .shooting-star.s2 { top: 28%; left: -5%; animation: shoot2 17s linear infinite; animation-delay: 9s; }
+    .shooting-star.s3 { top: 50%; left: -5%; animation: shoot3 23s linear infinite; animation-delay: 15s; }
+    @keyframes shoot1 {
+      0%   { transform: translate(0, 0) rotate(15deg); opacity: 0; }
+      3%   { opacity: 1; }
+      8%   { transform: translate(110vw, 20vh) rotate(15deg); opacity: 0; }
+      100% { transform: translate(110vw, 20vh) rotate(15deg); opacity: 0; }
+    }
+    @keyframes shoot2 {
+      0%   { transform: translate(0, 0) rotate(22deg); opacity: 0; }
+      2%   { opacity: 1; }
+      7%   { transform: translate(115vw, 30vh) rotate(22deg); opacity: 0; }
+      100% { transform: translate(115vw, 30vh) rotate(22deg); opacity: 0; }
+    }
+    @keyframes shoot3 {
+      0%   { transform: translate(0, 0) rotate(10deg); opacity: 0; }
+      3%   { opacity: 1; }
+      9%   { transform: translate(115vw, 15vh) rotate(10deg); opacity: 0; }
+      100% { transform: translate(115vw, 15vh) rotate(10deg); opacity: 0; }
+    }
+    .wrap {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* --- TYPOGRAFIE & LAYOUT --- */
+    h1 {
+      margin: 20px 0 18px;
+      font-size: 1.8em;
+      color: #00ffcc;
+    }
+    .hint {
+      color: #bbb;
+      margin: 0 0 30px;
+      font-size: 0.95em;
+      line-height: 1.5;
+    }
+
+    /* --- NAVIGATION OBEN --- */
+    .top-nav {
+      padding: 15px 0;
+      font-size: 0.9em;
+      text-align: left; /* Oder center, je nach Geschmack */
+    }
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc;
+    }
+
+    /* --- BUTTONS (Mit Glow) --- */
+    .btnrow {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 12px 0 20px;
+    }
+    .btn {
+      padding: 14px 20px;
+      border-radius: 12px;
+      border: 1px solid #00ffcc;
+      background: #000;
+      color: #00ffcc;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      min-width: 220px;
+      transition: all 0.2s ease;
+    }
+    .btn:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .btn:active { transform: scale(0.98); }
+
+    /* --- PANELS (Aufklapp-Bereiche) --- */
+    .panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      border-radius: 14px;
+      margin: 0 auto;
+    }
+    .panel.open {
+      max-height: 900px;
+      margin-top: 10px;
+    }
+    .card {
+      border: 1px solid #00ffcc;
+      border-radius: 14px;
+      background: #050505;
+      padding: 20px;
+      margin-top: 10px;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .title {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin: 0 0 15px;
+      color: #00ffcc;
+    }
+    .qr {
+      width: 240px;
+      max-width: 80vw;
+      background: #fff;
+      padding: 10px;
+      border-radius: 12px;
+      border: 1px solid #00ffcc;
+      display: block;
+      margin: 0 auto 15px;
+    }
+    code {
+      background: #111;
+      padding: 8px 12px;
+      border-radius: 8px;
+      display: inline-block;
+      word-break: break-all;
+      margin: 10px 0 15px;
+      color: #fff;
+      font-family: monospace;
+      border: 1px solid #333;
+    }
+    .copy {
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: 1px solid #444;
+      background: #111;
+      color: #bbb;
+      cursor: pointer;
+      font-size: 0.9em;
+      transition: all 0.2s;
+    }
+    .copy:hover {
+      border-color: #00ffcc;
+      color: #00ffcc;
+    }
+
+    /* --- KO-FI SECTION --- */
+    .kofi-section {
+      margin-top: 40px;
+      border-top: 1px solid #222;
+      padding-top: 30px;
+    }
+    .kofi-btn {
+      display: inline-block;
+      color: #000;
+      background: #00ffcc;
+      text-decoration: none;
+      font-weight: bold;
+      border: 1px solid #00ffcc;
+      padding: 14px 24px;
+      border-radius: 12px;
+      transition: all 0.2s ease;
+      font-size: 1.1em;
+    }
+    .kofi-btn:hover {
+      box-shadow: 0 0 20px #00ffcc;
+      transform: scale(1.02);
+    }
+    .kofi-hint {
+      color: #888;
+      font-size: 0.9em;
+      margin-top: 10px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* --- FOOTER --- */
+    .thanks {
+      margin-top: 40px;
+      color: #888;
+      line-height: 1.6;
+      font-size: 0.9em;
+      border-top: 1px solid #222;
+      padding-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="stars-bg"></div>
+  <div class="nebula"></div>
+  <div class="shooting-star s1"></div>
+  <div class="shooting-star s2"></div>
+  <div class="shooting-star s3"></div>
+
+  <div class="wrap">
+
+    <div class="top-nav">
+      <a href="/en/index.html">← Back to Mission Control</a>
+    </div>
+
+    <h1><svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energy" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Power Supply</h1>
+    <p class="hint">
+      Refuel the mothership right here.<br>
+      Use Lightning for quick energy bursts. Onchain for larger transfers (watch the fees).
+    </p>
+
+    <div class="btnrow">
+      <button class="btn" onclick="togglePanel('ln')"><svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Bitcoin Lightning</button>
+      <button class="btn" onclick="togglePanel('btc')">&#x20BF; Bitcoin Onchain</button>
+    </div>
+
+    <div id="ln" class="panel">
+      <div class="card">
+        <div class="title"><svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Bitcoin Lightning</div>
+        <img class="qr" src="/lightning.png" alt="Lightning QR code">
+        <code id="lnText">alien_investor@strike.me</code>
+        <br>
+        <button class="copy" onclick="copyText('lnText')">Copy address</button>
+      </div>
+    </div>
+
+    <div id="btc" class="panel">
+      <div class="card">
+        <div class="title">&#x20BF; Bitcoin Onchain</div>
+        <img class="qr" src="/onchain.png" alt="Bitcoin Onchain QR code">
+        <code id="btcText">bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code>
+        <br>
+        <button class="copy" onclick="copyText('btcText')">Copy address</button>
+      </div>
+    </div>
+
+    <div class="kofi-section">
+      <h3 style="color: #fff; margin-bottom: 15px;">&#x2615; Fiat &amp; Recurring Support</h3>
+
+      <a class="kofi-btn" href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener">
+        Support via Ko-fi
+      </a>
+
+      <p class="kofi-hint">
+        Ko-fi accepts PayPal and card payments.<br>
+        There's also an option for a <strong>monthly membership</strong>,<br>
+        if you want to support the project on autopilot.
+      </p>
+    </div>
+
+    <p class="thanks">
+      Thanks for your support — for free content, financial sovereignty, and the extraterrestrial resistance! <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-d07d34" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-d07d34" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-d07d34)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-d07d34)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg>
+    </p>
+
+  </div>
+
+  <script>
+    function togglePanel(id){
+      const ln = document.getElementById('ln');
+      const btc = document.getElementById('btc');
+
+      if(id === 'ln'){
+        ln.classList.toggle('open');
+        btc.classList.remove('open');
+      } else {
+        btc.classList.toggle('open');
+        ln.classList.remove('open');
+      }
+    }
+
+    async function copyText(elId){
+      const txt = document.getElementById(elId).innerText;
+      try{
+        await navigator.clipboard.writeText(txt);
+        // Small visual feedback
+        const btn = document.querySelector(`button[onclick="copyText('${elId}')"]`);
+        const originalText = btn.innerText;
+        btn.innerText = "Copied! ✅";
+        setTimeout(() => btn.innerText = originalText, 2000);
+      }catch(e){
+        prompt("Copy:", txt);
+      }
+    }
+  </script>
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>
