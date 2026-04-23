@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nostr & Security: Why You Must Never Paste Your Private Key Into an App | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Advanced Nostr security: why copy-pasting your nsec from a password manager is a security risk — and how to achieve real digital sovereignty with Amber.">
+  <link rel="canonical" href="/en/nostr-sicherheit-warum-du-deinen-private-key-niemals-in-eine-app-kopieren-darfst-und-warum-du-amber-brauchst.html">
+  <link rel="alternate" hreflang="de" href="/nostr-sicherheit-warum-du-deinen-private-key-niemals-in-eine-app-kopieren-darfst-und-warum-du-amber-brauchst.html">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 0 15px 20px 15px; /* Mobile-Optimierung */
+    }
+
+    /* --- TYPOGRAFIE --- */
+    h1, h2, h3 {
+      color: #00ffcc;
+    }
+    h1 {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    /* --- LINKS (Neon-Glow) --- */
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc; /* Der Alien-Effekt */
+    }
+
+    /* --- STANDARD ELEMENTE --- */
+    code {
+      background-color: #111;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      color: #0f0;
+      font-family: monospace;
+    }
+    em { color: #ccc; }
+
+    .byline {
+      margin-top: -0.8em;
+      margin-bottom: 2em;
+      color: #ccc;
+      font-style: italic;
+      text-align: center;
+    }
+
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
+
+    /* --- BOXEN --- */
+    .box {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 1em; }
+
+    .recommendation-box {
+      margin: 2em 0;
+      padding: 1em;
+      border: 1px dashed #00ffcc;
+      border-radius: 8px;
+      text-align: center;
+      background-color: #050505;
+    }
+    .recommendation-box h3 {
+      margin-top: 0;
+      font-size: 1.1em;
+      color: #00ffcc;
+    }
+
+    .alert-box {
+      border-left: 3px solid #ff3b3b;
+      background-color: #1a0505;
+      padding: 1em;
+      margin: 1.5em 0;
+      color: #ffcccc;
+      border-radius: 0 8px 8px 0;
+    }
+
+    /* --- LIKE BUTTON --- */
+    .like-button {
+      margin: 3em 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+    }
+    .like-button button {
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+    .like-button button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
+    }
+
+    /* --- NAVIGATION --- */
+    .top-nav {
+      padding: 10px 0;
+      font-size: 0.9em;
+    }
+    .back-links {
+      margin-top: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="/en/index.html">← Back to Mission Control</a>
+  </div>
+
+  <h1>Nostr & Security: Why You Must Never Paste Your Private Key Into an App (and Why You Need Amber)</h1>
+  <p class="byline"><em>by Alien Investor</em></p>
+
+  <article id="content">
+    <p>
+      On Nostr, you are not a row in some tech corporation's database. You are a cryptographic key.
+      Your private key (<code>nsec</code>) is your voice, your identity, and your reputation.
+      Whoever holds that key <em>is</em> you.
+    </p>
+    <p>
+      And yet most users — especially the comfortable ones — commit digital harakiri on a daily basis:
+      they copy their <code>nsec</code> from a password manager and paste it directly into apps like Primal or Damus.
+      It works. But from a security architecture standpoint, it's a nightmare.
+    </p>
+    <p>
+      Why that's the case, why your password manager hits its limits here, and why you urgently need to switch
+      to a dedicated signer like <strong>Amber</strong> — that's what we're covering today.
+    </p>
+
+    <div class="alert-box">
+      <strong>Rule #1:</strong> Never type your <code>nsec</code> into Primal, Amethyst, or any browser login.
+      The <code>nsec</code> belongs in the signer. Full stop.
+    </div>
+
+    <h2>1. The Problem: Your "Login" Is Actually a Surrender</h2>
+    <p>
+      When you sign into a Nostr app like Primal by pasting your key, things happen in the background
+      that you need to understand.
+    </p>
+
+    <h3>The Clipboard Is a Public Marketplace</h3>
+    <p>
+      A password manager is built to securely <em>store</em> secrets. But to use them,
+      it has to decrypt them and hand them off to the operating system — usually via the clipboard.
+    </p>
+    <ul>
+      <li>
+        <strong>Malware on the radar:</strong> There is malware that does nothing but permanently scan the clipboard for
+        strings like <code>nsec1...</code> or Bitcoin addresses (clipboard hijacking).
+      </li>
+      <li>
+        <strong>Keyboard apps:</strong> If you use Gboard or SwiftKey, your clipboard often ends up cached
+        by the keyboard app — and depending on your settings, in Google's or Microsoft's cloud.
+      </li>
+    </ul>
+
+
+    <h3>The "Hot Wallet" Trap</h3>
+    <p>
+      Once you paste the key into Primal (or any other client app), the app has to store it so you
+      don't get prompted again on every like.
+    </p>
+    <p>
+      That means: a complex social media app with millions of lines of code, image parsers, and constant internet access
+      holds your most important key in permanent reach. If a hacker finds a vulnerability in Primal (say, through a manipulated image),
+      they could theoretically read out your key. You've just turned your client into a "hot wallet."
+    </p>
+
+    <h2>2. The Solution: Amber and the Signer Principle</h2>
+    <p>
+      <strong>Amber</strong> is a Nostr Event Signer for Android. The app does exactly one thing:
+      it holds your key and signs things for you — but it never hands the key out.
+    </p>
+
+    <h3>The Difference: Secret vs. Signature</h3>
+    <ul>
+      <li>
+        <strong>The old way (Primal holds the key):</strong> You hand Primal your entire checkbook and sign
+        blank checks. Primal can do anything at any time.
+      </li>
+      <li>
+        <strong>The signer way (Amber):</strong> Primal brings you a filled-out check (an event) and asks:
+        "Can you sign this?" Amber reviews it, signs it cryptographically, and returns <em>only the signature</em>.
+        The key itself never leaves Amber.
+      </li>
+    </ul>
+
+    <p>
+      Technically this works via <strong>NIP-55</strong> (Android Intents). No key data is transferred at all.
+      Primal doesn't even know what your private key looks like; the app only knows your public key (npub).
+    </p>
+
+    <blockquote>
+      "Amber is like a hardware wallet running as software on your phone.
+      It isolates the secret from the app that broadcasts to the internet."
+    </blockquote>
+
+    <h2>3. Why Amber Is More Secure Than Your Password Manager</h2>
+    <p>
+      Many people think: "An additional app just increases the attack surface, right?" — Wrong.
+      In this case it's the exact opposite. It's called <strong>compartmentalization</strong>.
+    </p>
+
+    <h3>No Internet Access for the Key</h3>
+    <p>
+      You can (and should) revoke Amber's internet access entirely in Android settings.
+      An app that can't "phone home" can't steal your key — even if it were compromised.
+      Primal, on the other hand, <em>must</em> be online.
+    </p>
+
+    <h3>Android Keystore &amp; Biometrics</h3>
+    <p>
+      Amber uses the <strong>Android Keystore System</strong>. Where possible, your key is processed inside a dedicated
+      security chip (Titan M, StrongBox). You can also require a fingerprint for every signature.
+      Even if someone steals your unlocked phone and opens Primal, they can't post anything — because Amber
+      requires your fingerprint to sign.
+    </p>
+
+    <h2>4. The "Legacy" Question: My Key Was Created in Primal — Is It Burned?</h2>
+    <p>
+      This is the most common objection: <em>"I created my account directly in Primal. The key was already online. Is migrating still worth it?"</em>
+    </p>
+    <p>
+      The answer is a clear <strong>YES</strong>.
+    </p>
+
+    <h3>Origin Risk vs. Future Protection</h3>
+    <p>
+      Sure: if Primal was compromised in the past or got hacked, your key could theoretically be sitting on some server.
+      That's the "origin risk." But:
+    </p>
+    <ul>
+      <li>
+        By migrating now, you protect yourself against <strong>future</strong> attacks.
+      </li>
+      <li>
+        If a malicious update ships for Primal tomorrow, or a security vulnerability gets discovered,
+        your key is no longer there. The attack hits nothing.
+      </li>
+      <li>
+        You demote Primal from "owner" of your identity to mere "user."
+      </li>
+    </ul>
+
+    <h2>5. Guide: How to Migrate Properly (The "Primal Nuke")</h2>
+    <p>
+      Simply "logging out" often isn't enough, since data remnants can remain in storage.
+      Here is the clean path to sovereignty:
+    </p>
+
+    <ol>
+      <li>
+        <strong>Check your backup:</strong> Make sure you have your <code>nsec</code> securely noted (offline, on paper or metal).
+        No backup means no access!
+      </li>
+      <li>
+        <strong>Install Amber:</strong> Download Amber (preferably via F-Droid or GitHub — verify the source).
+      </li>
+      <li>
+        <strong>Import your key:</strong> Enter your <code>nsec</code> into Amber. Immediately enable biometric lock (fingerprint).
+      </li>
+      <li>
+        <strong>The "Nuke" for Primal:</strong> Don't just log out. Go to Android Settings &rarr; Apps &rarr; Primal &rarr; Storage &rarr; <strong>Clear Data</strong>.
+        This forces Android to physically wipe the app's entire storage area.
+      </li>
+      <li>
+        <strong>Restart via Signer:</strong> Open the "fresh" Primal. At login, do <strong>not</strong> choose "Enter nsec" — choose
+        "Log in with external signer" (usually a key icon).
+      </li>
+      <li>
+        <strong>Authorize:</strong> Amber opens and asks for permission. Confirm it. Done.
+      </li>
+    </ol>
+    <p>
+      You are now using Primal purely as a front-end. Your key sits safely inside Amber's vault.
+    </p>
+
+    <h2>6. Alien Verdict: Take Back Your Sovereignty</h2>
+    <p>
+      Convenience is the enemy of security. Copy-pasting private keys is a bad habit inherited from the Web2 world —
+      one we need to leave behind.
+    </p>
+    <p>
+      Migrating to a signer like Amber effectively turns your smartphone into a "Hardware Wallet Light."
+      You trade a systemic risk (key in the clipboard and inside the app) for a hardened architecture.
+      Even if it takes five minutes: do it. Your digital identity is worth it.
+    </p>
+
+    <div class="box">
+      <h3>For the Paranoid: Key Rotation</h3>
+      <p>
+        If you want to be 100% certain your key was <em>never</em> compromised (because it once lived in Primal),
+        there is only one option: <strong>Key Rotation</strong>.
+      </p>
+      <ol>
+        <li>Generate a completely new <code>nsec</code> directly in Amber (or offline).</li>
+        <li>Post a migration notice from your old account.</li>
+        <li>From now on, use only the new account.</li>
+      </ol>
+      <p>
+        For most people, migrating to Amber with the old key is more than sufficient — but true sovereignty doesn't compromise.
+      </p>
+    </div>
+
+    <div class="box">
+      <h3>Tools for Real Owners (Advertising/Affiliate)</h3>
+      <p style="font-size:0.95em;">
+        Tools I use myself — for Bitcoin self-custody and digital sovereignty:
+      </p>
+      <ul>
+            <li>
+          <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Lightning bolt" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> <strong>Buy Bitcoin in Europe – 21bitcoin:</strong><br>
+          Bitcoin-only app from Europe, ideal for DCA and stacking sats regularly — no shitcoins.<br>
+          Use code <strong>ALIENINVESTOR</strong> for a permanent 0.2 percentage point fee reduction
+          on instant and savings plan purchases.<br>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
+        </li>
+        <li>
+          ₿ <strong>Bitcoin in self-custody:</strong><br>
+          Hardware wallet instead of exchange account. I use the BitBox — there's the classic BitBox02 and the new
+          BitBox for iPhone (Nova).<br>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
+        </li>
+        <li>
+          <svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-label="Satellite dish" role="img"><path d="M4 24 A16 16 0 0 1 20 8" fill="#00ffcc" fill-opacity="0.06" stroke="#00ffcc" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="8" r="2.8" fill="#00ffcc"/><line x1="20" y1="8" x2="28" y2="4" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><path d="M15 13 A6 6 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/><path d="M12 16 A9 9 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.45"/></svg> <strong>Privacy &amp; Mail:</strong><br>
+          For email, VPN, and cloud I use Proton — privacy-first and free from Big Tech dependency.<br>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
+        </li>
+      </ul>
+      <p style="font-size:0.85em; color:#aaa;">
+        Disclosure: Some of these links are affiliate links. Using them supports my work at no extra cost to you. Thanks! <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-aff" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-aff)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg>
+      </p>
+    </div>
+
+  </article>
+
+  <div class="like-button">
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-c05aad)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Like</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+
+  <script>
+    (function() {
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      const btn = document.getElementById('likeButton');
+      const msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      });
+    })();
+  </script>
+
+  <div class="box" style="border-style: dashed; border-color: #333;">
+    <h3>Sources (Selection)</h3>
+    <p style="font-size:0.95em; color: #ccc;">
+      This article is based on an internal security architecture analysis of Nostr signer implementations (as of December 2025),
+      the official documentation for NIP-55 and NIP-46, and the security specs of the Android Keystore System.
+      References to Primal and Amber refer to the versions current at that time.
+    </p>
+  </div>
+
+  <div class="back-links">
+    <a href="/en/blog.html" style="font-size: 1.1em;">← Back to Blog Overview</a>
+    <a href="/en/index.html" style="font-size: 1.1em;">← Back to Mission Control</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+      <h3 style="margin-bottom: 15px;">
+        <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energy" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Recharge Energy
+        <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Donations)</span>
+      </h3>
+
+      <a href="/en/spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+        Send fuel to the mothership
+      </a>
+
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Thanks for your support — for free content, financial sovereignty, and the extraterrestrial resistance! <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-c05aad" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-c05aad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-c05aad)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-c05aad)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg>
+      </p>
+  </div>
+
+  <footer>
+    <p><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Contact" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> Contact: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+
+    <p style="margin-top: 20px;">
+      <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-c05aad" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-c05aad)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <strong>Disclaimer:</strong><br><br>
+      This article does not constitute financial, tax, or legal advice.<br>
+      I share my personal Alien opinion here — independent, rebellious, and free.<br>
+      Technical instructions are followed at your own risk. Always double-check your backups.
+    </p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>

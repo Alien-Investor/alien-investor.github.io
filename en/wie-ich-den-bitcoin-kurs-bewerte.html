@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>How I Evaluate the Bitcoin Price – No Crystal Ball, But a System | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="How Alien Investor evaluates the Bitcoin price: cycles, on-chain data, Bitcoin-Gold ratio, derivatives, and macro – no crystal ball, but a system.">
+  <link rel="canonical" href="/en/wie-ich-den-bitcoin-kurs-bewerte.html">
+  <link rel="alternate" hreflang="de" href="/wie-ich-den-bitcoin-kurs-bewerte.html">
+  <style>
+    body { background-color: #000; color: #fff; font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 0 15px 20px 15px; }
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+    code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; font-family: monospace; }
+    em { color: #ccc; }
+    .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
+    blockquote { border-left: 3px solid #00ffcc; margin: 2em 0; padding: 0.5em 1em; color: #ddd; background: #050505; font-style: italic; }
+    .box { border: 1px solid #00ffcc; background: #050505; padding: 1.5em; border-radius: 8px; margin: 2em 0; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 0.5em; }
+    .like-button { margin: 3em 0; display: flex; align-items: center; justify-content: center; gap: 1em; font-size: 1em; }
+    .like-button button { background: #000; color: #00ffcc; border: 1px solid #00ffcc; padding: 0.6em 1.2em; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.2s ease; }
+    .like-button button:hover, .like-button button:active { background: #00ffcc; color: #000; box-shadow: 0 0 15px #00ffcc; }
+    .like-button button:disabled { border-color: #444; color: #888; background: #111; cursor: default; }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    .back-links { margin-top: 40px; text-align: center; display: flex; flex-direction: column; gap: 10px; }
+    footer { margin-top: 60px; padding: 20px; font-size: 0.85em; color: #666; border-top: 1px solid #222; text-align: center; }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav"><a href="/en/index.html">← Back to Mission Control</a></div>
+
+  <h1>How I Evaluate the Bitcoin Price – No Crystal Ball, But a System <svg style="width:0.85em;height:0.85em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Bitcoin" role="img"><circle cx="18" cy="18" r="15.5" fill="#00ffcc" opacity="0.12" stroke="#00ffcc" stroke-width="1.2"/><text x="18" y="24.5" text-anchor="middle" font-family="sans-serif" font-size="20" font-weight="bold" fill="#00ffcc">₿</text></svg></h1>
+  <p class="byline"><em>by Alien Investor</em></p>
+
+  <article id="content">
+    <h2>Introduction</h2>
+    <p>
+      Bitcoin is not a company. It pays no dividends, has no P/E ratio, and no quarterly conference calls
+      with management blather. Yet billions in capital move the price – sometimes sharply upward,
+      sometimes brutally down.
+    </p>
+    <p>
+      If you try to evaluate Bitcoin like a conventional stock, you'll permanently run into a wall.
+      My approach is different: I treat Bitcoin as a scarce, globally tradable, digital asset
+      and use tools that match its nature – cycles, on-chain data,
+      capital flows, sentiment, and the macro environment.
+    </p>
+    <p>
+      In this article I explain how I assess the Bitcoin price, which models and metrics I use –
+      and where the limits are. This isn't about signals like "buy now," but about a clear mental framework.
+    </p>
+
+    <h2>1. Why Bitcoin Is Valued Differently Than Stocks</h2>
+    <p>
+      A stock represents a share of a company:
+    </p>
+    <ul>
+      <li>There are revenues, costs, profits, and cash flows.</li>
+      <li>You can apply metrics like P/E ratio, price-to-book ratio, or free cash flow.</li>
+    </ul>
+    <p>
+      Bitcoin is something entirely different:
+    </p>
+    <ul>
+      <li>No company, just a protocol with a fixed supply schedule (21&nbsp;million).</li>
+      <li>No cash flow, no dividend, no balance sheet – only supply, demand, usage, and trust.</li>
+    </ul>
+    <p>
+      That's why for Bitcoin I primarily use:
+    </p>
+    <ul>
+      <li><strong>Cycle and drawdown analysis</strong> instead of P/E ratio</li>
+      <li><strong>On-chain indicators</strong> instead of earnings estimates</li>
+      <li><strong>Capital flows and derivatives</strong> instead of analyst ratings</li>
+      <li><strong>Sentiment and macro data</strong> instead of industry reports</li>
+    </ul>
+    <p>
+      The goal: figuring out whether the market is in a phase of hype and overextension,
+      or in a phase of fear, capitulation, and opportunity.
+    </p>
+
+    <h2>2. Cycles and Drawdowns – How Hard Is the Hit, Really?</h2>
+    <p>
+      Bitcoin has been running in recurring cycles for many years:
+    </p>
+    <ul>
+      <li>strong upward phases with overextension,</li>
+      <li>followed by brutal corrections and bear markets.</li>
+    </ul>
+    <p>
+      I therefore always look at:
+    </p>
+    <ul>
+      <li>How far are we from the last all-time high (in percent)?</li>
+      <li>How large is the current pullback compared to past bull-market corrections?</li>
+      <li>Does the decline look more like a normal correction or the start of a bear market?</li>
+    </ul>
+    <p>
+      Rough framework:
+    </p>
+    <ul>
+      <li>Bull-market corrections of around 30–40&nbsp;percent are "normal madness" in Bitcoin land.</li>
+      <li>Deeper drops of 60–80&nbsp;percent are more characteristic of full bear markets following overextension phases.</li>
+    </ul>
+    <p>
+      Drawdowns tell a story: not just "ouch, the price fell,"
+      but "where are we in the cycle – mid-ride or already hitting the wall?"
+    </p>
+
+    <h2>3. Bitcoin-Gold Ratio: The Battle of Store-of-Value Assets</h2>
+    <p>
+      It often helps to ignore the dollar and measure Bitcoin against the oldest money in the world: gold.
+      The <strong>Bitcoin-Gold ratio</strong> shows how many ounces of gold one bitcoin buys.
+    </p>
+    <ul>
+      <li><strong>What it means:</strong> It measures the relative strength between the "old" analog safe haven (gold) and the "new" digital safe haven (Bitcoin).</li>
+      <li><strong>The signal:</strong> When gold marks new highs (fear in the system) while Bitcoin stagnates or falls, a divergence forms. The market flees to what it has known for centuries (Lindy effect).</li>
+      <li><strong>The interpretation:</strong> Such decoupling is often a sign of market inefficiency. Since Bitcoin is mathematically harder than gold (strictly limited supply vs. elastic supply), this ratio has historically tended to correct forcefully back in Bitcoin's favor after fear phases.</li>
+    </ul>
+
+    <h2>4. On-Chain Tools – MVRV, Realized Price, Holder Structure</h2>
+    <p>
+      What makes Bitcoin special: a large portion of the data is publicly visible.
+      You can roughly see at what prices coins were last moved and how holders are behaving.
+    </p>
+    <p>A few of the most important tools I use:</p>
+
+    <p><strong>MVRV Ratio</strong></p>
+    <ul>
+      <li>The ratio of market value (market cap) to "realized cap" (value based on last moved prices).</li>
+      <li>Roughly: how far is the market price from average acquisition prices?</li>
+      <li>High MVRV values → many are sitting on large unrealized gains, risk of profit-taking increases.</li>
+      <li>Very low values → many are deep in losses, panic and capitulation become more likely.</li>
+    </ul>
+
+    <p><strong>Realized Price / Realized Cap</strong></p>
+    <ul>
+      <li>Realized Price is the average "acquisition price" of all coins.</li>
+      <li>When the price trades well above this value, sentiment is often optimistic to greedy.</li>
+      <li>When the price trades below it, fear to resignation typically prevails.</li>
+    </ul>
+
+    <p><strong>Short-term vs. long-term holders</strong></p>
+    <ul>
+      <li>Short-term holders are often nervous hands with low holding duration.</li>
+      <li>Long-term holders are less swayed by normal fluctuations.</li>
+      <li>
+        When short-term holders are selling at massive losses while long-term holders stay calm or even
+        accumulate, that's a signal of market cleansing rather than systemic breakdown.
+      </li>
+    </ul>
+
+    <p><strong>200-day moving average (200d MA)</strong></p>
+    <ul>
+      <li>A classic trend anchor.</li>
+      <li>Well above it → generally bullish environment.</li>
+      <li>Well below it → riskier territory, especially with weak sentiment.</li>
+    </ul>
+    <p>
+      I don't use it as a magic boundary, but as orientation:
+      are we in a phase with tailwinds or headwinds?
+    </p>
+
+    <h2>4.1 Network Health: Hashrate, Difficulty, and Hashprice</h2>
+    <p>
+      Beyond on-chain cost bases, I also look at the "physical" side of Bitcoin:
+      how strongly is the network secured – and how healthy is the mining ecosystem?
+    </p>
+    <ul>
+      <li><strong>Hashrate:</strong> Shows how much computing power secures the network. Rising hashrate means more competition and long-term commitment.</li>
+      <li><strong>Difficulty:</strong> Rising difficulty means mining gets harder; inefficient miners come under pressure.</li>
+      <li><strong>Hashprice:</strong> Roughly "revenue per unit of computing power." A falling hashprice means miners earn less. This can lead to "miner capitulation" (forced selling).</li>
+    </ul>
+    <p>
+      I use these values as context: <strong>high hashrate</strong> = strong network,
+      <strong>very low hashprice</strong> = stress in mining (possible pressure on the market).
+    </p>
+
+    <h2>5. Capital Flows and Market Structure – Who Is Buying, Who Is Selling?</h2>
+    <p>
+      Beyond price, it matters where money is coming from and where it's going.
+    </p>
+    <ul>
+      <li>
+        <strong>ETF inflows and outflows:</strong> Spot ETFs concentrate a lot of demand – but also panic.
+        Strong inflows are often FOMO, strong outflows often late-stage panic. Large outflows aren't a death sentence to me;
+        they're often a sign that weak hands are exiting.
+      </li>
+      <li>
+        <strong>Derivatives market (leverage &amp; squeezes):</strong> This is speculation, not ownership.
+        High "open interest" (total of all open bets) shows a lot of leverage is in play.
+        When "funding rates" (fees for leveraged positions) are extremely positive, traders are too greedy.
+        That's often the fuel for brutal "long squeezes" (chain reactions of forced liquidations) that crash the price in a flash – even though nothing has fundamentally changed.
+      </li>
+      <li>
+        <strong>Exchange balances:</strong> The fewer coins sitting on exchanges, the lower the potential
+        selling volume "at the push of a button" (supply shock potential).
+      </li>
+    </ul>
+
+    <h2>6. Sentiment and Psychology</h2>
+    <p>
+      Bitcoin is extremely psychology-driven. The same asset declared "dead" at $30,000
+      gets celebrated as a "safe haven" at $80,000.
+    </p>
+    <ul>
+      <li>
+        <strong>Sentiment indicators:</strong> Indices like "Fear &amp; Greed." Extreme greed warrants caution;
+        extreme fear often presents opportunity.
+      </li>
+      <li>
+        <strong>Media narrative:</strong> Headlines like "Bitcoin is dead" I often take seriously as a contrarian signal.
+      </li>
+      <li>
+        <strong>Retail investors:</strong> When everyone asks "is it still okay to buy now?" – it's often late.
+        When there's complete radio silence, it's often interesting for long-term buyers.
+      </li>
+    </ul>
+
+    <h2>7. Macro Environment and Bitcoin Power Law</h2>
+    <p>
+      Bitcoin doesn't exist in a vacuum. Interest rates, inflation, and risk appetite influence demand.
+      When risk assets are generally under pressure (risk-off), Bitcoin often gets dragged along.
+    </p>
+    <p>
+      <strong>Bitcoin Power Law:</strong> A long-term model on a logarithmic scale.
+      For me it's not a price-target oracle, but a rough fair-value corridor over many years – useful for seeing
+      whether we're far above or below the long-term trend.
+    </p>
+
+    <h2>8. My Process: From Data Pile to the Full Picture</h2>
+    <p>
+      In practice I don't do rocket science. My rough process:
+    </p>
+    <ol>
+      <li><strong>Where are we in the cycle?</strong> (Distance from ATH, drawdown)</li>
+      <li><strong>What do on-chain data and trend say?</strong> (MVRV, Realized Price, 200d MA)</li>
+      <li><strong>How does Bitcoin compare to gold?</strong> (Check the ratio)</li>
+      <li><strong>What are capital flows doing?</strong> (ETFs, open interest, exchange balances)</li>
+      <li><strong>What's the sentiment?</strong> (Fear vs. greed)</li>
+      <li><strong>What does the macro environment look like?</strong> (Interest rates, liquidity)</li>
+    </ol>
+    <p>
+      This doesn't produce a price target – it produces a range: at which zones would I add?
+      Where would I be cautious?
+    </p>
+
+    <h2>9. Limits and Risks</h2>
+    <p>
+      As structured as all of this sounds – it remains a highly volatile asset.
+      No model comes with a guarantee. On-chain data can't predict external shocks (regulation, politics).
+      Anyone buying Bitcoin must be able to handle massive drawdowns – mentally and financially.
+    </p>
+
+    <blockquote>
+      "Trust no one – manage your own finances. Bitcoin is just a tool for that."
+    </blockquote>
+
+    <div class="box">
+      <h3>Tools for Genuine Owners</h3>
+      <p style="font-size:0.95em;">If you want to hold Bitcoin with full self-sovereignty:</p>
+      <ul>
+        <li><svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Lightning" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> <strong>21bitcoin:</strong> Bitcoin-only app (code <strong>ALIENINVESTOR</strong>).<br><svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a></li>
+        <li>₿ <strong>BitBox:</strong> Hardware wallet (code <strong>ALIENINVESTOR</strong>).<br><svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a></li>
+        <li><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-label="Satellite dish" role="img"><path d="M4 24 A16 16 0 0 1 20 8" fill="#00ffcc" fill-opacity="0.06" stroke="#00ffcc" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="8" r="2.8" fill="#00ffcc"/><line x1="20" y1="8" x2="28" y2="4" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><path d="M15 13 A6 6 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/><path d="M12 16 A9 9 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.45"/></svg> <strong>Proton:</strong> Privacy &amp; security.<br><svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a></li>
+      </ul>
+      <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">Note: Affiliate links. Support my work at no extra cost. Thanks! <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-aff" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-aff)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg></p>
+    </div>
+
+  </article>
+
+  <div class="like-button">
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-815b95)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Like</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+
+  <script>
+    (function() {
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      const btn = document.getElementById('likeButton');
+      const msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      });
+    })();
+  </script>
+
+  <div class="back-links">
+    <a href="/en/bitcoin-analysen.html" style="font-size: 1.1em;"><svg style="width:0.9em;height:0.9em;vertical-align:-0.12em;filter:drop-shadow(0 0 2px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="7" y1="3" x2="7" y2="7" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><rect x="4" y="7" width="6" height="9" rx="1" fill="#00ffcc"/><line x1="7" y1="16" x2="7" y2="21" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><line x1="16" y1="7" x2="16" y2="11" stroke="#00cc88" stroke-width="1.5" stroke-linecap="round"/><rect x="13" y="11" width="6" height="12" rx="1" fill="none" stroke="#00cc88" stroke-width="1.5"/><line x1="16" y1="23" x2="16" y2="27" stroke="#00cc88" stroke-width="1.5" stroke-linecap="round"/><line x1="25" y1="4" x2="25" y2="9" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><rect x="22" y="9" width="6" height="11" rx="1" fill="#00ffcc"/><line x1="25" y1="20" x2="25" y2="26" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/></svg> Bitcoin Analyses</a>
+    <a href="/en/blog.html" style="font-size: 1.1em;">← Back to Blog</a>
+    <a href="/en/index.html" style="font-size: 1.1em;">← Back to Mission Control</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+      <h3 style="margin-bottom: 15px;"><svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energy" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Recharge <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Donate)</span></h3>
+      <a href="/en/spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">Send fuel to the mothership</a>
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">Thanks for your support – for free content, financial sovereignty, and the extraterrestrial resistance! <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-815b95" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-815b95" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-815b95)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-815b95)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg></p>
+  </div>
+
+  <footer>
+    <p><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Contact" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> Contact: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    <p style="margin-top: 20px;"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-815b95" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-815b95)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <strong>Disclaimer:</strong><br><br>No financial, tax, or legal advice. Personal opinion only. Think for yourself.</p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>

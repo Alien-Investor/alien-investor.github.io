@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>How Bitcoin Uses Cryptography | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A concise explanation of the security mechanisms in the Bitcoin network: private keys, hashing, and signatures — explained plainly.">
+  <link rel="canonical" href="/en/bitcoin_encrypt.html">
+  <link rel="alternate" hreflang="de" href="/bitcoin_encrypt.html">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 0 15px 20px 15px; /* Mobile-Optimierung */
+    }
+
+    /* --- TYPOGRAFIE --- */
+    h1, h2, h3 {
+      color: #00ffcc;
+    }
+    h1 {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    /* --- LINKS (Neon-Glow) --- */
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc; /* Der Alien-Effekt */
+    }
+
+    /* --- STANDARD ELEMENTE --- */
+    code {
+      background-color: #111;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      color: #0f0;
+      font-family: monospace;
+    }
+    em { color: #ccc; }
+
+    .byline {
+      margin-top: -0.8em;
+      margin-bottom: 2em;
+      color: #ccc;
+      font-style: italic;
+      text-align: center;
+    }
+
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
+
+    /* --- BOXEN --- */
+    .box {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 1em; }
+
+    .recommendation-box {
+      margin: 2em 0;
+      padding: 1em;
+      border: 1px dashed #00ffcc;
+      border-radius: 8px;
+      text-align: center;
+      background-color: #050505;
+    }
+    .recommendation-box h3 {
+      margin-top: 0;
+      font-size: 1.1em;
+      color: #00ffcc;
+    }
+
+    /* --- LIKE BUTTON --- */
+    .like-button {
+      margin: 3em 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+    }
+    .like-button button {
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+    .like-button button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
+    }
+
+    /* --- NAVIGATION --- */
+    .top-nav {
+      padding: 10px 0;
+      font-size: 0.9em;
+    }
+    .back-links {
+      margin-top: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="/en/index.html">← Back to Mission Control</a>
+  </div>
+
+  <h1>How Bitcoin Uses Cryptography</h1>
+  <p class="byline"><em>by Alien Investor</em></p>
+
+  <article id="content">
+    <h2>Bitcoin is cryptography, not a bank account</h2>
+    <p>
+      At its core, Bitcoin is not a "digital money account" — it's a stack of mathematics: cryptography, hash functions,
+      signatures, distributed computers. Instead of saying "the bank maintains an account for you," Bitcoin says:
+    </p>
+    <blockquote>
+      "You have a secret key. Whoever holds that key controls the coins."
+    </blockquote>
+
+    <h2>Private key, public key, address — your vault in the cryptosphere <svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="10" cy="18" r="7" fill="none" stroke="#00ffcc" stroke-width="1.8"/><circle cx="10" cy="18" r="3" fill="#00ffcc" opacity="0.2"/><line x1="17" y1="18" x2="32" y2="18" stroke="#00ffcc" stroke-width="2" stroke-linecap="round"/><line x1="24" y1="18" x2="24" y2="23" stroke="#00ffcc" stroke-width="1.8" stroke-linecap="round"/><line x1="29" y1="18" x2="29" y2="23" stroke="#00ffcc" stroke-width="1.8" stroke-linecap="round"/></svg></h2>
+    <p>When you create a Bitcoin wallet, here is what happens in the background:</p>
+    <ul>
+      <li>A <strong>private key</strong> is generated — a large random number.</li>
+      <li>A <strong>public key</strong> is derived from that private key.</li>
+      <li>Your <strong>Bitcoin address</strong> is derived from the public key.</li>
+    </ul>
+    <p>Visually:</p>
+    <ul>
+      <li>The <strong>private key</strong> is the master key to your vault.</li>
+      <li>The <strong>public key</strong> is the lock.</li>
+      <li>The <strong>address</strong> is the human-readable version you hand to others ("send Bitcoin here").</li>
+    </ul>
+    <p>
+      Important: the path is one-way. From the address or the public key, there is no practical route back to the
+      private key. That is the shield.
+    </p>
+
+    <h2>Seed phrase: the human-readable backup of your key <svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-label="Brain" role="img"><path d="M4 24 A16 16 0 0 1 20 8" fill="#00ffcc" fill-opacity="0.06" stroke="#00ffcc" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="8" r="2.8" fill="#00ffcc"/><line x1="20" y1="8" x2="28" y2="4" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><path d="M15 13 A6 6 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/><path d="M12 16 A9 9 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.45"/></svg></h2>
+    <p>
+      In practice, you rarely see the raw private key. Your wallet shows you 12 or 24 words instead —
+      the so-called <strong>seed phrase</strong>.
+    </p>
+    <ul>
+      <li>These words are the <strong>root</strong> of all your private keys and addresses.</li>
+      <li>Lose them, and you can no longer restore your wallet on any device.</li>
+      <li>Let them fall into the wrong hands, and anyone can steal your coins — from anywhere in the world.</li>
+    </ul>
+    <p>
+      That is why seed words belong offline: no screenshot, no cloud, no messenger.
+      Paper or metal, stored securely — and never shown to anyone.
+    </p>
+
+    <h2>Digital signatures: sending means signing <svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-label="Envelope" role="img"><path d="M4 24 A16 16 0 0 1 20 8" fill="#00ffcc" fill-opacity="0.06" stroke="#00ffcc" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="8" r="2.8" fill="#00ffcc"/><line x1="20" y1="8" x2="28" y2="4" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><path d="M15 13 A6 6 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/><path d="M12 16 A9 9 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.45"/></svg></h2>
+    <p>
+      When you send Bitcoin, you are not simply "encrypting" something — you are <strong>signing</strong> a transaction.
+    </p>
+    <ul>
+      <li>Your wallet constructs a transaction: "From address X to address Y, amount Z."</li>
+      <li>That transaction is then <strong>digitally signed with your private key</strong>.</li>
+      <li>Every node in the network can use your <strong>public key</strong> to verify that the signature is valid.</li>
+    </ul>
+    <p>With that you prove:</p>
+    <blockquote>
+      "I am the legitimate owner of this output and I authorize this spend."
+    </blockquote>
+
+    <h2>Hash functions: the DNA of blocks and transactions <svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-label="Signal" role="img"><path d="M4 24 A16 16 0 0 1 20 8" fill="#00ffcc" fill-opacity="0.06" stroke="#00ffcc" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="8" r="2.8" fill="#00ffcc"/><line x1="20" y1="8" x2="28" y2="4" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><path d="M15 13 A6 6 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/><path d="M12 16 A9 9 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.45"/></svg></h2>
+    <p>
+      Bitcoin also makes heavy use of <strong>hash functions</strong> (e.g. SHA-256). A hash is like a digital fingerprint:
+    </p>
+    <ul>
+      <li>You feed in an arbitrary amount of data (a transaction, a block header, etc.).</li>
+      <li>You get a fixed, seemingly random output.</li>
+    </ul>
+    <p>Properties:</p>
+    <ul>
+      <li>A small change in the data produces a completely different hash.</li>
+      <li>Working backwards from the hash to the original data is practically impossible.</li>
+    </ul>
+
+    <h2>Mining &amp; Proof-of-Work: work instead of trust <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Lightning" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg></h2>
+    <p>
+      Mining is not "a bit of guessing" — it is a massive expenditure of computing power:
+    </p>
+    <ul>
+      <li>Miners take the block content plus a number (nonce).</li>
+      <li>They keep trying until the hash of a block meets a specific condition (e.g. a certain number of leading zeros).</li>
+    </ul>
+    <p>This is cryptography as <strong>proof of work</strong>:</p>
+    <ul>
+      <li>Finding a valid hash is extremely costly.</li>
+      <li>But verifying one is trivially easy.</li>
+    </ul>
+
+    <h2>What Bitcoin does NOT encrypt: transparency as a feature</h2>
+    <p>Common misconception: Bitcoin does <strong>not</strong> simply encrypt everything.</p>
+    <ul>
+      <li>The blockchain is publicly visible.</li>
+      <li>Anyone can see transactions and amounts.</li>
+      <li>What is not directly visible: who "owns" an address — that is pseudonymous, not anonymous.</li>
+    </ul>
+    <p>Cryptography in Bitcoin protects:</p>
+    <ul>
+      <li><strong>control over the coins</strong> (private keys, signatures),</li>
+      <li>the <strong>immutability</strong> of the history (hashes, proof of work).</li>
+    </ul>
+
+    <h2>Practical security: how to protect your key day-to-day <svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-label="Signal" role="img"><path d="M4 24 A16 16 0 0 1 20 8" fill="#00ffcc" fill-opacity="0.06" stroke="#00ffcc" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="8" r="2.8" fill="#00ffcc"/><line x1="20" y1="8" x2="28" y2="4" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><path d="M15 13 A6 6 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/><path d="M12 16 A9 9 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.45"/></svg></h2>
+    <p>Cryptography only helps if you do not hand your keys away yourself. A few ground rules:</p>
+    <ul>
+      <li>Store your <strong>seed phrase offline</strong> (paper or metal, no photo, no cloud).</li>
+      <li>Use a <strong>hardware wallet</strong> wherever possible, so the private key never leaves a secure device.</li>
+      <li>Never type your seed words into a website — real wallets only ask for them locally.</li>
+      <li>Share your seed phrase with <strong>nobody</strong>. No support agent, no "friend," no "giveaway" gets to see it.</li>
+    </ul>
+    <p>
+      Anyone who knows your seed needs zero hacking skills. They just need a wallet app — and your Bitcoin are gone.
+    </p>
+
+    <h2>Why any of this has to do with freedom <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Lightning" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg></h2>
+    <p>The cryptography in Bitcoin means you:</p>
+    <ul>
+      <li>do not have to ask anyone for permission to move money,</li>
+      <li>do not need to apply for permission to open an account,</li>
+      <li>are not dependent on the whims of a bank or government to access "your" money.</li>
+    </ul>
+    <p>The phrase "not your keys, not your coins" is not just a meme — it is the direct consequence of cryptography:</p>
+    <ul>
+      <li>If you do not control the <strong>private key</strong>, you do not control the asset.</li>
+      <li>If you hold it <strong>yourself</strong>, you are no longer a customer — you are an owner in the mathematical sense.</li>
+    </ul>
+    <p>
+      That is the cypherpunk dream: no trust in institutions required — only trust in openly auditable code,
+      open mathematics, and your own responsibility.
+    </p>
+
+    <h2>Summary in one sentence</h2>
+    <p>Bitcoin uses cryptography not as decoration, but as its foundation:</p>
+    <blockquote>
+      "Private keys, signatures, hashes, and proof of work ensure that you can hold and transfer property
+      <strong>without a bank, without a state, with mathematics alone</strong> — as long as you guard your keys like your life depends on it."
+    </blockquote>
+  </article>
+
+  <div class="box">
+    <h3>Tools for real owners</h3>
+    <p style="font-size:0.95em;">
+      Tools I use myself — for Bitcoin self-custody and digital sovereignty:
+    </p>
+    <ul>
+      <li>
+        <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Lightning" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> <strong>Buy Bitcoin in Europe — 21bitcoin:</strong><br>
+        Bitcoin-only app from Europe, ideal for DCA and stacking sats regularly — no shitcoins.<br>
+        Use code <strong>ALIENINVESTOR</strong> for a permanent 0.2 percentage point fee reduction
+        on instant and savings-plan purchases.<br>
+        <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
+      </li>
+      <li>
+        ₿ <strong>Bitcoin in self-custody:</strong><br>
+        Hardware wallet instead of an exchange account. I use the BitBox — there is the classic BitBox02 and the new
+        BitBox for iPhone (Nova).<br>
+        <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
+      </li>
+      <li>
+        <svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-label="Signal" role="img"><path d="M4 24 A16 16 0 0 1 20 8" fill="#00ffcc" fill-opacity="0.06" stroke="#00ffcc" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="8" r="2.8" fill="#00ffcc"/><line x1="20" y1="8" x2="28" y2="4" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><path d="M15 13 A6 6 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/><path d="M12 16 A9 9 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.45"/></svg> <strong>Privacy &amp; Mail:</strong><br>
+        For email, VPN, and cloud I use Proton — minimal data collection, no Big Tech dependency.<br>
+        <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
+      </li>
+    </ul>
+    <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">
+      Disclosure: some of the links above are affiliate links. Using them supports my work at no extra cost to you. Thanks! <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-aff" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-aff)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg>
+    </p>
+  </div>
+
+  <div class="like-button">
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-735aa8)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Like</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+
+  <script>
+    (function() {
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      const btn = document.getElementById('likeButton');
+      const msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      });
+    })();
+  </script>
+
+  <div class="back-links">
+    <a href="/en/blog.html" style="font-size: 1.1em;">← Back to Blog</a>
+    <a href="/en/index.html" style="font-size: 1.1em;">← Back to Mission Control</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+      <h3 style="margin-bottom: 15px;">
+        <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energy" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Recharge
+        <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Donate)</span>
+      </h3>
+
+      <a href="/en/spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+        Send fuel to the mothership
+      </a>
+
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Thanks for your support — for free content, financial sovereignty, and the extraterrestrial resistance! <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-735aa8" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-735aa8" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-735aa8)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-735aa8)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg>
+      </p>
+  </div>
+
+  <footer>
+    <p><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Contact" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> Contact: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+
+    <p style="margin-top: 20px;">
+      <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-735aa8" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-735aa8)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <strong>Disclaimer:</strong><br><br>
+      This article does not constitute financial, tax, or legal advice.<br>
+      I share my personal Alien opinion here — independent, rebellious, and free.<br>
+      Investing involves risk. Think for yourself, trust no one, and act on your own responsibility.
+    </p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>

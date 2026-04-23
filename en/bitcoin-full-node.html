@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Why Every Bitcoiner Should Run Their Own Full Node | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="10 reasons to run your own Bitcoin full node: censorship resistance, privacy, financial sovereignty, and true independence from the network — explained from an owner's perspective.">
+  <link rel="canonical" href="/en/bitcoin-full-node.html">
+  <link rel="alternate" hreflang="de" href="/bitcoin-full-node.html">
+  <style>
+    body { background-color: #000; color: #fff; font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 0 15px 20px 15px; }
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+    code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; font-family: monospace; }
+    em { color: #ccc; }
+    .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
+    blockquote { border-left: 3px solid #00ffcc; margin: 2em 0; padding: 0.5em 1em; color: #ddd; background: #050505; font-style: italic; }
+    .box { border: 1px solid #00ffcc; background: #050505; padding: 1.5em; border-radius: 8px; margin: 2em 0; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
+    .box h3 { margin-top: 0; }
+    .recommendation-box { margin: 2em 0; padding: 1em; border: 1px dashed #00ffcc; border-radius: 8px; text-align: center; background-color: #050505; }
+    .recommendation-box h3 { margin-top: 0; font-size: 1.1em; color: #00ffcc; }
+    ul { padding-left: 1.2em; }
+    li { margin-bottom: 0.5em; }
+
+    /* ZENTRIERTER VIDEO CONTAINER */
+    .video-wrapper {
+      display: flex;
+      justify-content: center;
+      margin: 2em 0;
+    }
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 560px;
+      padding-bottom: 31.25%;
+      height: 0;
+      border: 1px solid #00ffcc;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(0, 255, 204, 0.1);
+    }
+    @media (max-width: 600px) {
+      .video-container { padding-bottom: 56.25%; }
+    }
+    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
+    .like-button { margin: 3em 0; display: flex; align-items: center; justify-content: center; gap: 1em; font-size: 1em; }
+    .like-button button { background: #000; color: #00ffcc; border: 1px solid #00ffcc; padding: 0.6em 1.2em; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.2s ease; }
+    .like-button button:hover, .like-button button:active { background: #00ffcc; color: #000; box-shadow: 0 0 15px #00ffcc; }
+    .like-button button:disabled { border-color: #444; color: #888; background: #111; cursor: default; }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    .back-links { margin-top: 40px; text-align: center; display: flex; flex-direction: column; gap: 10px; }
+    footer { margin-top: 60px; padding: 20px; font-size: 0.85em; color: #666; border-top: 1px solid #222; text-align: center; }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="/en/index.html">← Back to Mission Control</a>
+  </div>
+
+  <h1>₿ Why Every Bitcoiner Should Run Their Own Full Node</h1>
+  <p class="byline"><em>by Alien Investor</em></p>
+
+  <article id="content">
+
+    <p>
+      Running your own Bitcoin full node is the most effective tool for achieving financial sovereignty, privacy, and
+      true independence within the Bitcoin network. Anyone using Bitcoin without running their own node is inevitably
+      trusting third parties — and thereby undermining exactly the properties that distinguish Bitcoin from traditional
+      financial systems. A full node downloads the entire blockchain, verifies every single transaction against the
+      consensus rules, and gives the operator complete control over their interaction with the network. This article
+      analyzes the ten most important reasons to run your own node and offers practical recommendations for getting started.
+    </p>
+
+    <blockquote>
+      "Not your node, not your rules. Trusting someone else's servers hands the final instance of control over your
+      money to a third party." <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-b160ab)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg>
+    </blockquote>
+
+    <div class="video-wrapper">
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/SeTxEhk7EPQ" title="Why every Bitcoiner should run their own full node" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </div>
+    <p style="text-align: center; font-size: 0.9em; color: #bbb; margin-top: -1em;">
+      <em>In this video you'll learn why every Bitcoiner should run a full node</em>
+    </p>
+
+    <h2>1. Censorship Resistance: Direct Access Without Gatekeepers</h2>
+    <p>
+      Your own full node broadcasts transactions directly into the peer-to-peer network — typically to at least
+      eight outbound connections, which relay them exponentially further. No single actor can stop such a
+      transaction as long as it reaches at least one honest network participant. Anyone relying on a third-party
+      wallet or API delegates broadcasting to a centralized service that can delay, filter, or simply refuse to
+      relay transactions.
+    </p>
+    <p>
+      That transaction censorship is no theoretical threat is demonstrated by concrete cases. In May 2021, Marathon
+      Digital Holdings operated an OFAC-compliant mining pool that filtered out transactions from sanctioned addresses.
+      In November 2023, researcher 0xB10C identified that F2Pool — with roughly 13.7% of the hashrate — was
+      deliberately excluding transactions from sanctioned addresses. After public pressure, the pool disabled the
+      filtering patch. In all documented cases, the censored transactions were ultimately confirmed by other miners —
+      the decentralized network functioned as a safety net.
+    </p>
+    <p>
+      Your own node extends this resistance further: Bitcoin Core supports operation over Tor
+      (<code>proxy=127.0.0.1:9050</code>), making it impossible for even internet service providers to identify
+      Bitcoin traffic. Transactions can also be broadcast via Blockstream Satellite, mesh networks, or even amateur radio.
+    </p>
+
+    <h2>2. Privacy: Information-Theoretically Perfect Protection</h2>
+    <p>
+      Your own full node provides what researchers call information-theoretically perfect privacy for received
+      transactions. The reason is simple: the node downloads every single transaction on the entire blockchain —
+      over 800 million to date. An observer cannot mathematically determine which of these concern the operator,
+      because no selective retrieval takes place. Wallet queries happen purely locally on your own disk, without
+      a single network packet being sent. Bitcoin Core also uses the Dandelion++ protocol since version 0.21 to
+      obscure the origin of transactions — an excellent complement to the privacy argument.
+    </p>
+    <p>
+      Light wallets and SPV clients systematically destroy this privacy. The older BIP37 protocol (Bloom filters)
+      proved catastrophic: an academic study by Gervais et al. (2014) demonstrated that a single intercepted
+      Bloom filter reveals a user's Bitcoin addresses with high probability. Electrum-based wallets are even worse:
+      they explicitly send all wallet addresses to a server, which then knows the user's complete transaction
+      history, balance, and address clusters. HTTP API wallets offer zero privacy according to the Bitcoin Wiki.
+      Bitcoin Core has disabled BIP37 by default since version 0.19.
+    </p>
+
+    <h2>3. "Don't Trust, Verify": What Trustless Verification Means in Practice</h2>
+    <p>
+      A full node verifies every single transaction and every block since the genesis block of January 3, 2009,
+      against all consensus rules. If a block violates even a single rule, it is immediately rejected —
+      even if every other node in the network accepts it. The Bitcoin Wiki summarizes this property concisely:
+      "Full nodes do what's right no matter what."
+    </p>
+    <p>
+      The list of enforced rules is extensive. At the block level, the node validates, among other things: the
+      correct block subsidy (currently <strong>3.125 BTC</strong> since the halving in April 2024), the validity
+      of the proof-of-work against the current difficulty target, the block weight of at most 4 million weight
+      units (SegWit, BIP141), the correct Merkle root, and compliance with the timestamp rules.
+    </p>
+
+    <div class="box">
+      <h3>The Killer Feature: Verify 21 Million Yourself</h3>
+      <p style="font-size:0.95em;">
+        With a single command — <code>gettxoutsetinfo</code> — your own node independently verifies the total
+        supply of all Bitcoin ever created. No block explorer, no exchange, no third party can change Bitcoin's
+        monetary policy without your node immediately rejecting the corresponding blocks.
+      </p>
+    </div>
+
+    <h2>4. Network Security: Every Node Is an Independent Rule Enforcer</h2>
+    <p>
+      As of February 2026, roughly 24,900 reachable full nodes are registered on Bitnodes.io, distributed across
+      more than 100 countries. About 65% run behind Tor. The actual number is significantly higher: estimates
+      suggest well over 75,000 to 83,000 active nodes, as many operate behind NAT firewalls and accept no
+      incoming connections. For your own verification, it is entirely irrelevant whether a node is reachable.
+      The difference lies only in its contribution to the network: a reachable node helps others synchronize and
+      makes the network more robust. A non-reachable node only takes, but gives nothing back.
+    </p>
+    <p>
+      Each of these nodes is an independent enforcer of the consensus rules. Miners propose blocks —
+      nodes decide on their validity. The Bitcoin Wiki makes the distinction clear: a miner with any amount of
+      hashrate cannot create bitcoins out of thin air, cannot steal other people's coins, and cannot change
+      consensus rules — as long as full nodes enforce the rules.
+    </p>
+
+    <h2>5. Financial Sovereignty: Independence from Exchanges and Third Parties</h2>
+    <p>
+      The history of crypto exchanges provides the strongest argument for running your own node in combination
+      with self-custody. Mt. Gox lost approximately 850,000 BTC in 2014 — users waited over ten years for partial
+      reimbursement. FTX misappropriated 8 billion dollars in customer funds in 2022. Celsius Network froze
+      withdrawals and revealed a balance sheet hole of 1.2 billion dollars. QuadrigaCX, Voyager Digital,
+      BlockFi, DMM Bitcoin — the list of failed custodians is long and keeps growing.
+    </p>
+    <p>
+      All these cases share the same pattern: users trusted a third party with the custody and verification of
+      their Bitcoin. Your own full node eliminates this entire risk category. The infrastructure costs are
+      manageable: for the price of six to twelve months of typical banking fees, you can build a node setup
+      that runs for decades at annual electricity costs of 15 to 30 euros.
+    </p>
+
+    <h2>6. SPV vs. Full Node: The Concrete Risks of Not Running Your Own Node</h2>
+    <p>
+      Satoshi Nakamoto described Simplified Payment Verification (SPV) in the whitepaper as a lean alternative:
+      the client downloads only block headers (80 bytes per block, roughly 4.2 MB per year) and verifies a
+      transaction's inclusion in a block via a Merkle proof. The critical point: a Merkle proof only proves that
+      a transaction is contained in a block. It does not prove that the block itself is rule-compliant. SPV
+      therefore uses proof-of-work merely as a proxy for validity.
+    </p>
+    <p>
+      This creates five concrete attack vectors: Eclipse attacks (an attacker monopolizes all connections and
+      presents a manipulated blockchain), lying by omission (relevant transactions are withheld), blindly
+      following rule changes, privacy catastrophes through Bloom filters, and for Lightning users the risk of
+      losing funds through outdated channel states. The Bitcoin Wiki warns unambiguously: "It is only reasonably
+      secure to use a lightweight node because most of the Bitcoin economy uses full nodes." SPV only works
+      because others are doing the heavy lifting.
+    </p>
+
+    <h2>7. Lightning Network: Sovereign Payment Channels Require a Full Node</h2>
+    <p>
+      Every Lightning implementation is functionally dependent on a synchronized Bitcoin full node. The node
+      continuously monitors the blockchain for channel openings and closings, detects fraud attempts through
+      revoked commitment transactions, and estimates fees for on-chain transactions. If a channel partner
+      attempts to close a channel with an old state, the so-called penalty mechanism (justice transaction) kicks
+      in: the full node detects this, and you can claim the entire channel funds within a time window —
+      causing the cheater to lose everything.
+    </p>
+    <p>
+      Without this independent monitoring, channel partners can publish old states and steal funds. For users
+      who are occasionally offline, so-called watchtower services exist — external servers that monitor the
+      blockchain on behalf of your node. Still, the principle holds: your own node keeps private keys under
+      your control, stores payment data exclusively locally, and cannot be restricted by third parties.
+    </p>
+
+    <h2>8. Technical Control: Mempool, Fees, and Broadcasting</h2>
+    <p>
+      Every full node maintains its own mempool — a cache of valid, unconfirmed transactions. There is no single
+      global mempool; every node is its own independent island. Anyone without their own mempool is forced to
+      rely on external fee estimators. Your own node gives you a direct, unfiltered view of the current
+      transaction market — completely without an intermediary layer.
+    </p>
+    <p>
+      Broadcasting transactions through your own node prevents chain analytics firms from linking them to an
+      IP address. Companies like Chainalysis operate Sybil nodes that are connected as broadly as possible
+      across the network to narrow down the origin of transactions. Your own node relays thousands of other
+      people's transactions by default every day — your own disappear into that stream.
+      Techniques like Replace-By-Fee (RBF) and Child-Pays-For-Parent (CPFP) only reach their full potential
+      with your own node: instead of prophylactically setting high fees, you decide yourself how much to pay and when.
+    </p>
+
+    <h2>9. Resistance to 51% Attacks and Unwanted Protocol Changes</h2>
+    <p>
+      A full node protects against two fundamentally different threats: hashrate attacks and consensus rule
+      changes. An attacker with 51% of the hashrate can reorder, delay, or double-spend transactions — but
+      cannot create bitcoins out of thin air, cannot steal other people's coins, and cannot change consensus
+      rules. Any block that violates even a single rule is immediately rejected by the full node, regardless
+      of the proof-of-work behind it.
+    </p>
+    <p>
+      The most dramatic demonstration of full nodes' power was the <strong>Blocksize War of 2015 to 2017</strong>.
+      Miners and large companies wanted to increase the block size via a hard fork. The New York Agreement united
+      over 80% of the mining hashrate and the industry's largest companies behind SegWit2x. SegWit was activated,
+      but the 2 MB hard fork failed in November 2017 against the overwhelming resistance of users. When it became
+      clear that the vast majority of economically relevant nodes would reject SegWit2x blocks, the miners backed
+      down. August 1, 2017 is often celebrated as Bitcoin Independence Day, because the big-block faction split
+      off Bitcoin Cash on that day, thereby conceding they did not have a majority of nodes behind them.
+      The lesson stands: economic nodes, not hashrate, define Bitcoin.
+    </p>
+
+    <blockquote>
+      "Running a node is equivalent to an economic boycott: a direct vote on the rules by which Bitcoin operates." <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-b160ab)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg>
+    </blockquote>
+
+    <h2>10. Practical Setup: Hardware, Software, and Costs</h2>
+    <p>
+      As of February 2026, the Bitcoin blockchain spans roughly <strong>723 GB</strong> and grows by approximately
+      6 to 7 GB per month. The UTXO set occupies around 11 GB of RAM. The Initial Block Download (IBD) — the
+      first-time download and verification of all blocks — takes anywhere from 6 hours to several weeks depending
+      on hardware. A key optimization tip: set the <code>dbcache</code> value in <code>bitcoin.conf</code> to
+      25 to 50% of available RAM (e.g. <code>dbcache=4000</code> with 16 GB RAM).
+    </p>
+
+    <h3>Software Recommendations</h3>
+    <p>
+      <strong>Bitcoin Core</strong> (currently version 28.1) is the reference implementation and the foundation
+      of all node packages. For beginners looking for an elegant web interface, <strong>Umbrel</strong>
+      (umbrelOS 1.5, November 2025) is recommended — over 300 apps and setup in minutes.
+      <strong>RaspiBlitz</strong> (v1.12.0) is the project for tinkerers and learners — fully open source
+      under the MIT license, supports NVMe boot on the Raspberry Pi 5, and includes an LCD display for status
+      readouts. <strong>Start9</strong> (StartOS) prioritizes sovereignty and security: all services run in
+      isolated containers, Tor is active by default.
+    </p>
+
+    <h3>Hardware Recommendations</h3>
+    <ul>
+      <li>
+        <strong>Raspberry Pi 5 (8 GB RAM) + NVMe SSD:</strong> Best price-to-performance ratio.
+        Roughly 220 to 310 euros total cost, 5 to 15 watts power consumption, IBD in one to three days.
+      </li>
+      <li>
+        <strong>Mini PCs with Intel N100:</strong> 150 to 400 euros, more performance at similar power consumption.
+      </li>
+      <li>
+        <strong>Used business PCs (Dell Optiplex, Lenovo ThinkCentre Mini):</strong> 50 to 150 euros —
+        cost-effective alternative. <em>Important note: older desktop PCs typically consume 50 to 100 watts,
+        resulting in annual electricity costs of 130 to 260 euros. The low purchase price can quickly lose its appeal.</em>
+      </li>
+    </ul>
+    <p>
+      An <strong>SSD is not optional — it is mandatory</strong>: random I/O throughput is the primary bottleneck.
+      NVMe is preferable to SATA. On storage: choose at least 2 TB, since the blockchain will fill a 1 TB drive
+      within a few years at current growth rates. A pruned node — which verifies all rules but discards old blocks —
+      requires only 5 to 10 GB of storage and is a valid option for users who only want to verify their own transactions.
+    </p>
+
+    <h2>Conclusion: Your Own Node as the Cornerstone of Bitcoin Use</h2>
+    <p>
+      The ten aspects analyzed here converge on a single core insight: a full node is not an optional add-on,
+      but the technical prerequisite for using Bitcoin as it was designed — as a censorship-resistant, private,
+      and trustless monetary system. Without your own node, you are implicitly trusting third parties for
+      verification, broadcasting, and privacy protection.
+    </p>
+    <p>
+      The Blocksize War proved that full nodes are the final authority in protocol governance — more powerful
+      than miners and corporations. The barrier to entry has never been lower: a Raspberry Pi 5 with an NVMe
+      SSD and a distribution like Umbrel or RaspiBlitz is enough to run a fully functional node within a few
+      hours. Annual operating costs come in at a modest 15 to 30 euros. Measured against the benefit —
+      financial sovereignty, privacy, and a concrete contribution to network security — that is a remarkable deal.
+    </p>
+
+    <div class="recommendation-box">
+      <h3>Further Research</h3>
+      <p>
+        Truly owning your Bitcoin takes more than a node — it takes real self-custody.
+        Why self-custody is the only path to genuine financial sovereignty:<br><br>
+        <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/self-custody.html">Self-Custody: Why You Should Hold Your Own Bitcoin</a>
+      </p>
+    </div>
+
+    <div class="box">
+      <h3>Tools for Real Owners</h3>
+      <p style="font-size:0.95em;">Tools I use myself — for Bitcoin self-custody and digital sovereignty:</p>
+      <ul>
+        <li><svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Lightning" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> <strong>21bitcoin:</strong> Bitcoin-only (code ALIENINVESTOR). <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a></li>
+        <li>₿ <strong>BitBox:</strong> Hardware wallet (code ALIENINVESTOR). <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a></li>
+        <li><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-label="Satellite dish" role="img"><path d="M4 24 A16 16 0 0 1 20 8" fill="#00ffcc" fill-opacity="0.06" stroke="#00ffcc" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="8" r="2.8" fill="#00ffcc"/><line x1="20" y1="8" x2="28" y2="4" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><path d="M15 13 A6 6 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/><path d="M12 16 A9 9 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.45"/></svg> <strong>Proton:</strong> Privacy. <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a></li>
+      </ul>
+      <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">Note: Affiliate links. Support my work at no extra cost to you. Thanks! <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-aff" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-aff)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg></p>
+    </div>
+
+  </article>
+
+  <div class="box" style="border-style: dashed; border-color: #333;">
+    <h3>Sources (Selection)</h3>
+    <p style="font-size:0.95em; color: #ccc;">
+      This analysis is based on data from Bitnodes.io, the Bitcoin Wiki, official Bitcoin Core release notes,
+      academic studies (including Gervais et al. 2014), reports by 0xB10C, and community documentation for
+      LND, Core Lightning, Eclair, and RaspiBlitz. Data as of: February 2026.
+    </p>
+  </div>
+
+  <div class="like-button">
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-b160ab)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Like</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+
+  <script>
+    (function() {
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      const btn = document.getElementById('likeButton');
+      const msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      });
+    })();
+  </script>
+
+  <div class="back-links">
+    <a href="/en/blog.html" style="font-size: 1.1em;">← Back to Blog Overview</a>
+    <a href="/en/index.html" style="font-size: 1.1em;">← Back to Mission Control</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+    <h3 style="margin-bottom: 15px;">
+      <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energy" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Recharge the Energy
+      <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Donations)</span>
+    </h3>
+    <a href="/en/spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+      Send fuel to the mothership
+    </a>
+    <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+      Thanks for your support — for free content, financial sovereignty, and the extraterrestrial resistance! <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-b160ab" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-b160ab" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-b160ab)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-b160ab)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg>
+    </p>
+  </div>
+
+  <footer>
+    <p><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Contact" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> Contact: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    <p style="margin-top: 20px;">
+      <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-b160ab" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-b160ab)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <strong>Disclaimer:</strong><br><br>
+      Not financial, tax, or legal advice. Personal opinion only. Think for yourself.
+    </p>
+  </footer>
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>
