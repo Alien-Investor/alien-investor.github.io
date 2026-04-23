@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alien Analyzer – Alien Investor</title>
-  <meta name="description" content="Alien Analyzer – stock valuation tool by Alien Investor. Fair value, multiples, dividends and quality check powered by Twelve Data &amp; Alpha Vantage.">
+  <title>👽 Alien Analyzer – Alien Investor</title>
+  <meta name="description" content="Alien Analyzer – stock analysis tool by Alien Investor. Enter a ticker and get fair value, multiples, dividends and quality check — powered by Twelve Data &amp; Alpha Vantage.">
   <link rel="canonical" href="/en/alien-analyzer.html">
   <link rel="alternate" hreflang="de" href="/alien-analyzer.html">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👽</text></svg>">
@@ -333,17 +333,17 @@
 <div id="av-info-overlay" class="av-info-overlay hidden">
   <div class="av-info-box">
     <button class="av-info-close" onclick="closeAvInfo()">✕</button>
-    <div class="av-info-title">Woher bekomme ich die API Keys?</div>
+    <div class="av-info-title">Where do I get the API keys?</div>
     <div class="av-info-text">
       <span style="color:var(--text-mid);letter-spacing:1px;">Twelve Data Key</span>
-      <span style="color:var(--text-dim);"> (für Kursdaten &amp; Dividenden)</span><br>
+      <span style="color:var(--text-dim);"> (for price data &amp; dividends)</span><br>
       <span style="color:var(--neon)">①</span> <strong style="color:var(--neon)">twelvedata.com</strong> → Sign Up<br>
-      <span style="color:var(--neon)">②</span> Dashboard → API Keys → Key kopieren<br>
+      <span style="color:var(--neon)">②</span> Dashboard → API Keys → copy key<br>
       <span style="color:var(--yellow)">Free Tier: 800 requests/day</span><br><br>
       <span style="color:var(--text-mid);letter-spacing:1px;">Alpha Vantage Key</span>
-      <span style="color:var(--text-dim);"> (for fundamentals)</span><br>
+      <span style="color:var(--text-dim);"> (for fundamental data)</span><br>
       <span style="color:var(--neon)">①</span> <strong style="color:var(--neon)">alphavantage.co</strong> → Get Free API Key<br>
-      <span style="color:var(--neon)">②</span> Copy key after registration<br>
+      <span style="color:var(--neon)">②</span> After registration copy the key<br>
       <span style="color:var(--yellow)">Free Tier: 25 requests/day</span> – approx. 5 analyses daily
     </div>
   </div>
@@ -364,28 +364,28 @@
     </div>
     <div class="api-field">
       <label class="api-label" for="key-av">Alpha Vantage API Key <button class="api-info-btn" onclick="openAvInfo()" title="Info">ℹ</button></label>
-      <div class="api-hint">For fundamentals (EPS, P/E, balance sheets) · alphavantage.co/support/#api-key</div>
+      <div class="api-hint">For fundamental data (EPS, P/E ratio, balance sheets) · alphavantage.co/support/#api-key</div>
       <input class="api-key-input" id="key-av" type="text" placeholder="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" autocomplete="off" spellcheck="false">
     </div>
-    <button class="analyse-btn api-save-btn" onclick="saveApiKeys()">Save keys &amp; launch</button>
+    <button class="analyse-btn api-save-btn" onclick="saveApiKeys()">Save keys &amp; start</button>
   </div>
 </div>
 
 <div id="bug-overlay" class="api-overlay hidden">
   <div class="api-dialog card">
     <button style="position:absolute;top:10px;right:12px;background:none;border:none;cursor:pointer;color:var(--text-dim);font-size:.7rem;font-family:'Share Tech Mono',monospace;letter-spacing:1px;" onclick="closeBugReport()" title="Close">✕</button>
-    <div class="api-dialog-title">🐛 Report Bug</div>
-    <div class="api-dialog-intro" id="bug-subtext">Will be sent as email to kontakt@alien-investor.org.</div>
+    <div class="api-dialog-title">🐛 Report a bug</div>
+    <div class="api-dialog-intro" id="bug-subtext">Will be sent as an email to kontakt@alien-investor.org.</div>
     <div class="api-field">
       <label class="api-label" for="bug-ticker">Ticker</label>
       <input class="api-key-input" id="bug-ticker" type="text" placeholder="e.g. AAPL" autocomplete="off" spellcheck="false">
     </div>
     <div class="api-field">
-      <label class="api-label" for="bug-desc">Beschreibung</label>
+      <label class="api-label" for="bug-desc">Description</label>
       <textarea class="api-key-input" id="bug-desc" rows="4" placeholder="What happened? Which ticker?" style="resize:vertical;"></textarea>
     </div>
     <div style="display:flex;gap:10px;">
-      <button class="analyse-btn api-save-btn" onclick="sendBugReport()">Senden</button>
+      <button class="analyse-btn api-save-btn" onclick="sendBugReport()">Send</button>
       <button class="analyse-btn" style="background:transparent;border:1px solid var(--border);color:var(--text-mid);" onclick="closeBugReport()">Cancel</button>
     </div>
   </div>
@@ -399,7 +399,7 @@
     <span class="top-nav-title">ALIEN ANALYZER</span>
     <div class="top-nav-right">
       <button class="settings-btn" onclick="openApiDialog()">⚙ API Keys</button>
-      <button class="info-icon-btn" onclick="openAvInfo()" title="API Key Guide">ℹ</button>
+      <button class="info-icon-btn" onclick="openAvInfo()" title="API Key Instructions">ℹ</button>
     </div>
   </div>
 
@@ -411,12 +411,12 @@
 
   <!-- SEARCH -->
   <div class="card search-card">
-    <div class="card-label">Analyse stock</div>
+    <div class="card-label">Analyze stock</div>
     <div class="search-row">
       <input class="ticker-input" id="ticker-input" type="text" placeholder="TICKER" maxlength="10" autocomplete="off" spellcheck="false">
-      <span class="search-hint">z.B. AAPL · MOS · BRK-B · ALV</span>
-      <button class="analyse-btn" id="analyse-btn" onclick="startAnalysis()">Analyse</button>
-      <button class="settings-btn" onclick="showDebugPanel()" title="Test Alpha Vantage API" style="font-size:.55rem;padding:5px 10px;">🔬 API-Test</button>
+      <span class="search-hint">e.g. AAPL · MOS · BRK-B · ALV</span>
+      <button class="analyse-btn" id="analyse-btn" onclick="startAnalysis()">Analyze</button>
+      <button class="settings-btn" onclick="showDebugPanel()" title="Test Alpha Vantage API" style="font-size:.55rem;padding:5px 10px;">🔬 API Test</button>
     </div>
   </div>
 
@@ -450,7 +450,7 @@
           </div>
           <div class="stat-item">
             <div class="stat-value" id="stat-mcap">–</div>
-            <div class="stat-label">Mkt Cap.</div>
+            <div class="stat-label">Market Cap</div>
           </div>
           <div class="stat-item">
             <div class="stat-value" id="stat-pe">–</div>
@@ -466,7 +466,7 @@
 
     <!-- TABS -->
     <div class="tab-bar">
-      <button class="tab-btn active" data-tab="fairvalue" onclick="switchTab('fairvalue')"><span class="tab-long">⭐ Fair Value</span><span class="tab-short">⭐ F-Val</span></button>
+      <button class="tab-btn active" data-tab="fairvalue" onclick="switchTab('fairvalue')"><span class="tab-long">⭐ Fair Value</span><span class="tab-short">⭐ FV</span></button>
       <button class="tab-btn" data-tab="multiples" onclick="switchTab('multiples')">Multiples</button>
       <button class="tab-btn" data-tab="dividenden" onclick="switchTab('dividenden')">Dividends</button>
       <button class="tab-btn" data-tab="qualitaet" onclick="switchTab('qualitaet')"><span class="tab-long">Quality Check</span><span class="tab-short">Quality</span></button>
@@ -485,7 +485,7 @@
       <div class="chart-row">
         <div class="card chart-card">
           <canvas id="chart-fairvalue"></canvas>
-          <div id="fv-no-eps" class="hidden" style="text-align:center;padding:20px;font-size:.65rem;letter-spacing:2px;color:var(--text-dim)">EPS DATA UNAVAILABLE – PRICE HISTORY ONLY</div>
+          <div id="fv-no-eps" class="hidden" style="text-align:center;padding:20px;font-size:.65rem;letter-spacing:2px;color:var(--text-dim)">EPS DATA NOT AVAILABLE – PRICE CHART ONLY</div>
         </div>
         <div class="card chart-sidebar" id="fv-sidebar">
           <div class="sidebar-title">Multiples</div>
@@ -530,7 +530,7 @@
         <button class="time-btn" data-years="0"  onclick="setMultRange(0)">All</button>
       </div>
       <div class="card chart-card" style="max-width:100%;">
-        <div id="mult-filter-warning" class="hidden" style="font-size:.6rem;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;">⚠ Many P/E outliers filtered (GAAP special items) – may not be a classic value stock</div>
+        <div id="mult-filter-warning" class="hidden" style="font-size:.6rem;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;">⚠ Many P/E outliers filtered (GAAP special items) – stock may not be a classic value play</div>
         <div class="multiples-legend" id="mult-legend"></div>
         <canvas id="chart-multiples"></canvas>
       </div>
@@ -548,7 +548,7 @@
           <div class="div-meta-val" id="div-yield-cur">–</div>
           <div class="div-meta-label">Current Yield</div>
           <div style="margin-top:14px;">
-            <div class="sidebar-title">Dividend Growth</div>
+            <div class="sidebar-title">Dividend Bonus</div>
             <table class="div-bonus-table">
               <tr><td style="color:var(--text-mid)">12 months</td><td id="div-chg-1y">–</td></tr>
               <tr><td style="color:var(--text-mid)">2 years</td><td id="div-chg-2y">–</td></tr>
@@ -567,14 +567,14 @@
         <table class="qc-table">
           <thead>
             <tr>
-              <th>Metric</th><th>Value</th><th>Benchmark</th><th>Signal</th><th>Context</th>
+              <th>Metric</th><th>Value</th><th>Comparison</th><th>Signal</th><th>Context</th>
             </tr>
           </thead>
           <tbody id="qc-tbody"></tbody>
         </table>
         <div id="substanzwert-area"></div>
         <div class="alien-verdict" id="alien-verdict">
-          <div class="verdict-label">👽 Alien Verdict</div>
+          <div class="verdict-label">👽 Alien Assessment</div>
           <div class="verdict-text" id="verdict-text">–</div>
         </div>
       </div>
@@ -583,17 +583,17 @@
   </div><!-- /results-area -->
 
   <div class="donate-section">
-    <a href="https://alien-investor.org/en/spenden.html" class="donate-link">
+    <a href="https://alien-investor.org/spenden.html" class="donate-link">
       <span class="donate-icon"><svg style="width:0.6em;height:0.85em;vertical-align:-0.1em;filter:drop-shadow(0 0 2px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg></span>
-      <span>Recharge Energy</span>
+      <span>Send fuel to the mothership</span>
       <span style="opacity:.4;">·</span>
       <span>Donate</span>
     </a>
   </div>
 
   <footer>
-    <div style="margin-bottom:8px;">alien-investor.org · Price data: Twelve Data · Fundamentals: Alpha Vantage · Logos: Clearbit · <a href="#" onclick="openBugReport(); return false;" style="color:var(--text-dim);text-decoration:none;opacity:.7;transition:color .2s;" onmouseover="this.style.color='var(--neon)'" onmouseout="this.style.color='var(--text-dim)'">🐛 Report Bug</a></div>
-    <div style="color:rgba(74,122,109,.7)">🚨 Not financial advice – personal alien opinion only. Think for yourself. Trust no one.</div>
+    <div style="margin-bottom:8px;">alien-investor.org · Price data: Twelve Data · Fundamental data: Alpha Vantage · Logos: Clearbit · <a href="#" onclick="openBugReport(); return false;" style="color:var(--text-dim);text-decoration:none;opacity:.7;transition:color .2s;" onmouseover="this.style.color='var(--neon)'" onmouseout="this.style.color='var(--text-dim)'">🐛 Report a bug</a></div>
+    <div style="color:rgba(74,122,109,.7)">🚨 Not financial advice – personal Alien opinion only. Think for yourself. Trust no one.</div>
     <div style="margin-top:12px;"><a href="https://alien-investor.org">alien-investor.org</a></div>
   </footer>
 
@@ -603,7 +603,7 @@
 <div id="debug-panel" class="hidden">
   <div class="debug-header">
     <span class="debug-title">🔬 ALPHA VANTAGE API DEBUG</span>
-    <button class="debug-retest" onclick="runAvDebug()">Retest</button>
+    <button class="debug-retest" onclick="runAvDebug()">Test again</button>
     <button class="debug-close" onclick="document.getElementById('debug-panel').classList.add('hidden')">✕ Close</button>
   </div>
   <div id="debug-body">No test run yet.</div>
@@ -664,12 +664,12 @@ function sendBugReport() {
   const ticker      = document.getElementById('bug-ticker').value.trim() || 'no ticker';
   const beschreibung = document.getElementById('bug-desc').value.trim() || 'no description';
   const subject = encodeURIComponent('Alien Analyzer Bug: ' + ticker);
-  const body    = encodeURIComponent('Ticker: ' + ticker + '\n\nBeschreibung:\n' + beschreibung);
+  const body    = encodeURIComponent('Ticker: ' + ticker + '\n\nDescription:\n' + beschreibung);
   window.location.href = 'mailto:kontakt@alien-investor.org?subject=' + subject + '&body=' + body;
-  const clipboardText = 'Ticker: ' + ticker + '\n\nBeschreibung:\n' + beschreibung;
+  const clipboardText = 'Ticker: ' + ticker + '\n\nDescription:\n' + beschreibung;
   navigator.clipboard.writeText(clipboardText).then(() => {
     document.getElementById('bug-subtext').textContent =
-      '✓ Content copied to clipboard – paste in your email client.';
+      '✓ Copied to clipboard – paste in your email client.';
   }).catch(() => {
     document.getElementById('bug-subtext').textContent =
       'Email client opened. Ticker: ' + ticker;
@@ -696,15 +696,15 @@ document.getElementById('av-info-overlay').addEventListener('click', e => {
 // ── FORMAT HELPERS ────────────────────────────────────────────
 function fmt(num, dec = 2, fallback = '–') {
   if (num == null || isNaN(num)) return fallback;
-  return new Intl.NumberFormat('de-DE', { minimumFractionDigits: dec, maximumFractionDigits: dec }).format(num);
+  return new Intl.NumberFormat('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec }).format(num);
 }
 
 function fmtB(num) {
   if (num == null || isNaN(num)) return '–';
   const abs = Math.abs(num);
-  if (abs >= 1e12) return fmt(num / 1e12, 2) + ' Bio.';
-  if (abs >= 1e9)  return fmt(num / 1e9,  1) + ' Mrd.';
-  if (abs >= 1e6)  return fmt(num / 1e6,  0) + ' Mio.';
+  if (abs >= 1e12) return fmt(num / 1e12, 2) + ' T';
+  if (abs >= 1e9)  return fmt(num / 1e9,  1) + ' B';
+  if (abs >= 1e6)  return fmt(num / 1e6,  0) + ' M';
   return fmt(num, 0);
 }
 
@@ -719,8 +719,8 @@ async function fetchTDTimeSeries(ticker, apiKey) {
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Twelve Data HTTP ${res.status}`);
   const data = await res.json();
-  if (data.status === 'error') throw new Error('Twelve Data: ' + (data.message || 'Fehler'));
-  if (!data.values?.length) throw new Error('Keine Kursdaten für ' + ticker);
+  if (data.status === 'error') throw new Error('Twelve Data: ' + (data.message || 'Error'));
+  if (!data.values?.length) throw new Error('No price data for ' + ticker);
   return data;
 }
 
@@ -735,7 +735,7 @@ async function runAvDebug() {
   const body   = document.getElementById('debug-body');
 
   panel.classList.remove('hidden');
-  body.innerHTML = '<div style="color:var(--text-dim);letter-spacing:2px">TESTE ALPHA VANTAGE ENDPOINTS …</div>';
+  body.innerHTML = '<div style="color:var(--text-dim);letter-spacing:2px">TESTING ALPHA VANTAGE ENDPOINTS …</div>';
 
   const endpoints = [
     { label: 'OVERVIEW',         url: `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${ticker}&apikey=${keys.alphavantage}` },
@@ -750,7 +750,7 @@ async function runAvDebug() {
     let remaining = Math.round(DELAY_MS / 1000);
     const placeholder = () =>
       `<div style="color:var(--text-dim);letter-spacing:1px;margin-top:8px">` +
-      `⏳ Teste ${nextLabel}… (${nextStep}/5) – warte ${remaining}s (API Rate-Limit)</div>`;
+      `⏳ Testing ${nextLabel}… (${nextStep}/5) – waiting ${remaining}s (API rate limit)</div>`;
     body.innerHTML = html + placeholder();
     const iv = setInterval(() => {
       remaining--;
@@ -770,7 +770,7 @@ async function runAvDebug() {
 
     body.innerHTML = html +
       `<div style="color:var(--text-dim);letter-spacing:1px;margin-top:8px">` +
-      `🔄 Teste ${ep.label}… (${i + 1}/5)</div>`;
+      `🔄 Testing ${ep.label}… (${i + 1}/5)</div>`;
 
     try {
       const t0  = Date.now();
@@ -790,25 +790,25 @@ async function runAvDebug() {
           const info   = parsed?.['Information'];
           if (errMsg) {
             statusClass = 'dbg-status-err';
-            statusText  = `HTTP 200 aber AV-Fehler: "${errMsg}" (${ms}ms)`;
+            statusText  = `HTTP 200 but AV error: "${errMsg}" (${ms}ms)`;
           } else if (note || info) {
             statusClass = 'dbg-status-warn';
-            statusText  = `HTTP 200 – Rate-Limit: "${(note || info).slice(0, 80)}…" (${ms}ms)`;
+            statusText  = `HTTP 200 – Rate limit: "${(note || info).slice(0, 80)}…" (${ms}ms)`;
           } else if (typeof parsed === 'object' && Object.keys(parsed).length > 2) {
             statusClass = 'dbg-status-ok';
             statusText  = `HTTP 200 OK – ${Object.keys(parsed).length} Keys (${ms}ms) ✓`;
           } else {
             statusClass = 'dbg-status-warn';
-            statusText  = `HTTP 200 – wenige/keine Daten (${ms}ms)`;
+            statusText  = `HTTP 200 – few/no data (${ms}ms)`;
           }
         } catch {
           statusClass = 'dbg-status-warn';
-          statusText  = `HTTP 200 aber kein valides JSON (${ms}ms)`;
+          statusText  = `HTTP 200 but invalid JSON (${ms}ms)`;
         }
       }
     } catch (e) {
       statusClass = 'dbg-status-err';
-      statusText  = `NETZWERK-FEHLER: ${e.message}`;
+      statusText  = `NETWORK ERROR: ${e.message}`;
       rawText     = 'No response – timeout or CORS.';
     }
 
@@ -951,15 +951,15 @@ async function fetchAllAV(ticker, apiKey, statusFn) {
   const DELAY_MS = 13000;
   const countdown = (label, step) => new Promise(resolve => {
     let remaining = Math.round(DELAY_MS / 1000);
-    statusFn(`${label} – warte ${remaining}s (${step}/5)`);
+    statusFn(`${label} – waiting ${remaining}s (${step}/5)`);
     const iv = setInterval(() => {
       remaining--;
       if (remaining <= 0) { clearInterval(iv); resolve(); }
-      else statusFn(`${label} – warte ${remaining}s (${step}/5)`);
+      else statusFn(`${label} – waiting ${remaining}s (${step}/5)`);
     }, 1000);
   });
 
-  statusFn('LOADING FUNDAMENTALS … (1/5)');
+  statusFn('LOADING FUNDAMENTAL DATA … (1/5)');
   const overview = await fetchAV('OVERVIEW', ticker, apiKey);
   await countdown('LOADING EARNINGS', 2);
   const earnings = await fetchAV('EARNINGS', ticker, apiKey);
@@ -997,14 +997,14 @@ async function analyzeStock(ticker) {
   try {
     console.group('🛸 Alien Analyzer – API-Diagnose für ' + ticker);
 
-    // ── Schritt 1: Twelve Data + Yahoo parallel (verschiedene APIs, kein Rate-Limit) ──
+    // ── Step 1: Twelve Data + Yahoo parallel (different APIs, no rate limit) ──
     setStatus('LOADING PRICE DATA …');
     const [tdTS, tdDiv] = await Promise.allSettled([
       fetchTDTimeSeries(tickerTD, keys.twelvedata),
       fetchTDDividends(tickerTD, keys.twelvedata),
     ]);
 
-    if (tdTS.status === 'rejected') throw new Error('Kursdaten nicht abrufbar: ' + tdTS.reason?.message);
+    if (tdTS.status === 'rejected') throw new Error('Price data unavailable: ' + tdTS.reason?.message);
     const tdTimeSeries = tdTS.value;
     const tdDivResult  = tdDiv.status === 'fulfilled' ? tdDiv.value : { dividends: [], status: 'error' };
     const tdDivData    = tdDivResult.dividends;
@@ -1012,8 +1012,8 @@ async function analyzeStock(ticker) {
     console.log('Twelve Data:', tdTimeSeries.values?.length, 'Datenpunkte');
     console.log('TD Dividenden:', tdDivData.length, 'Events', '| status:', tdDivStatus);
 
-    // ── Schritt 2: Alpha Vantage – strikte async/await Sequenz ──────────────────
-    setStatus('LOADING FUNDAMENTALS … (1/5)');
+    // ── Step 2: Alpha Vantage – strict async/await sequence ──────────────────
+    setStatus('LOADING FUNDAMENTAL DATA … (1/5)');
     const { overview: avOverview, earnings: avEarnings, income: avIncome,
             balance: avBalance, cashflow: avCashflow } =
       await fetchAllAV(tickerAV, keys.alphavantage, setStatus);
@@ -1455,11 +1455,11 @@ function buildFairValueChart() {
   // EPS-Quellen-Hinweis
   const noEpsEl = document.getElementById('fv-no-eps');
   if (!hasEPS) {
-    noEpsEl.textContent = 'EPS DATA UNAVAILABLE – PRICE HISTORY ONLY';
+    noEpsEl.textContent = 'EPS DATA NOT AVAILABLE – PRICE CHART ONLY';
     noEpsEl.style.color = 'var(--text-dim)';
     noEpsEl.classList.remove('hidden');
   } else if (state.epsSynthetic) {
-    noEpsEl.textContent = '⚠ EPS history estimated (incomplete AV dataset available)';
+    noEpsEl.textContent = '⚠ EPS history estimated (no complete AV dataset available)';
     noEpsEl.style.color = 'var(--yellow)';
     noEpsEl.classList.remove('hidden');
   } else {
@@ -1491,7 +1491,7 @@ function buildFairValueChart() {
     if (avgPE) {
       // Fair Value Linie
       datasets.push({
-        label: `Fair Value (Ø KGV ${fmt(avgPE, 1)})`,
+        label: `Fair Value (Ø P/E ${fmt(avgPE, 1)})`,
         data: filtered.map(p => {
           const eps = interpolateEPS(p.date);
           return (eps && eps > 0) ? eps * avgPE : null;
@@ -1510,7 +1510,7 @@ function buildFairValueChart() {
       const fanColors  = ['#00ff88','#88ff44','#ffcc44','#ff8844','#ff4466'];
       multiples.forEach((mult, i) => {
         datasets.push({
-          label: `KGV ${mult}`,
+          label: `P/E ${mult}`,
           data: filtered.map(p => {
             const eps = interpolateEPS(p.date);
             return (eps && eps > 0) ? eps * mult : null;
@@ -1541,7 +1541,7 @@ function buildFairValueChart() {
       }
     }
 
-    // Fair Value Indicator – nutzt letzten Chart-Datenpunkt (identisch mit Tooltip)
+    // Fair Value Indikator – nutzt letzten Chart-Datenpunkt (identisch mit Tooltip)
     const lastPoint = filtered[filtered.length - 1];
     const curPrice  = lastPoint.price;
     const curEPS    = interpolateEPS(lastPoint.date);
@@ -1550,11 +1550,11 @@ function buildFairValueChart() {
       const diff = (curPrice - fv) / fv;
       const indEl = document.getElementById('fv-indicator');
       if (diff > 0.15)
-        indEl.innerHTML = `<span style="color:var(--red)">▲ ${fmt(diff * 100, 0)}% ÜBER FAIR VALUE</span>`;
+        indEl.innerHTML = `<span style="color:var(--red)">▲ ${fmt(diff * 100, 0)}% ABOVE FAIR VALUE</span>`;
       else if (diff < -0.15)
-        indEl.innerHTML = `<span style="color:var(--neon)">▼ ${fmt(Math.abs(diff) * 100, 0)}% UNTER FAIR VALUE</span>`;
+        indEl.innerHTML = `<span style="color:var(--neon)">▼ ${fmt(Math.abs(diff) * 100, 0)}% BELOW FAIR VALUE</span>`;
       else
-        indEl.innerHTML = `<span style="color:var(--yellow)">≈ FAIR BEWERTET (${diff >= 0 ? '+' : ''}${fmt(diff * 100, 0)}%)</span>`;
+        indEl.innerHTML = `<span style="color:var(--yellow)">≈ FAIRLY VALUED (${diff >= 0 ? '+' : ''}${fmt(diff * 100, 0)}%)</span>`;
     }
   }
 
@@ -1652,10 +1652,10 @@ function buildMultiplesChart() {
   const legendEl = document.getElementById('mult-legend');
   legendEl.innerHTML = '';
   [
-    { label: 'KGV', color: '#00ffcc', cur: kgvCur, avg: kgvAvg },
-    { label: 'KBV', color: '#4499ff', cur: kbvCur, avg: kbvAvg },
-    { label: 'KUV', color: '#88ff44', cur: kuvCur, avg: kuvAvg },
-    { label: 'KCV', color: '#ffcc44', cur: kcvCur, avg: kcvAvg },
+    { label: 'P/E', color: '#00ffcc', cur: kgvCur, avg: kgvAvg },
+    { label: 'P/B', color: '#4499ff', cur: kbvCur, avg: kbvAvg },
+    { label: 'P/S', color: '#88ff44', cur: kuvCur, avg: kuvAvg },
+    { label: 'P/CF', color: '#ffcc44', cur: kcvCur, avg: kcvAvg },
   ].forEach(item => {
     const badge = document.createElement('div');
     badge.className = 'mult-badge';
@@ -1674,20 +1674,20 @@ function buildMultiplesChart() {
 
   const datasets = [];
   if (hasEPS && kgvData.some(v => v != null)) {
-    datasets.push({ label: 'KGV', data: kgvData, borderColor: '#00ffcc', backgroundColor: 'transparent', borderWidth: 1.5, pointRadius: 0, tension: 0.1 });
-    const avg = avgLine(kgvAvg, '#00ffcc88', 'KGV Ø'); if (avg) datasets.push(avg);
+    datasets.push({ label: 'P/E', data: kgvData, borderColor: '#00ffcc', backgroundColor: 'transparent', borderWidth: 1.5, pointRadius: 0, tension: 0.1 });
+    const avg = avgLine(kgvAvg, '#00ffcc88', 'P/E Ø'); if (avg) datasets.push(avg);
   }
   if (kbvData.some(v => v != null)) {
-    datasets.push({ label: 'KBV', data: kbvData, borderColor: '#4499ff', backgroundColor: 'transparent', borderWidth: 1.5, pointRadius: 0, tension: 0.1 });
-    const avg = avgLine(kbvAvg, '#4499ff88', 'KBV Ø'); if (avg) datasets.push(avg);
+    datasets.push({ label: 'P/B', data: kbvData, borderColor: '#4499ff', backgroundColor: 'transparent', borderWidth: 1.5, pointRadius: 0, tension: 0.1 });
+    const avg = avgLine(kbvAvg, '#4499ff88', 'P/B Ø'); if (avg) datasets.push(avg);
   }
   if (kuvData.some(v => v != null)) {
-    datasets.push({ label: 'KUV', data: kuvData, borderColor: '#88ff44', backgroundColor: 'transparent', borderWidth: 1.5, pointRadius: 0, tension: 0.1 });
-    const avg = avgLine(kuvAvg, '#88ff4488', 'KUV Ø'); if (avg) datasets.push(avg);
+    datasets.push({ label: 'P/S', data: kuvData, borderColor: '#88ff44', backgroundColor: 'transparent', borderWidth: 1.5, pointRadius: 0, tension: 0.1 });
+    const avg = avgLine(kuvAvg, '#88ff4488', 'P/S Ø'); if (avg) datasets.push(avg);
   }
   if (kcvData.some(v => v != null)) {
-    datasets.push({ label: 'KCV', data: kcvData, borderColor: '#ffcc44', backgroundColor: 'transparent', borderWidth: 1.5, pointRadius: 0, tension: 0.1 });
-    const avg = avgLine(kcvAvg, '#ffcc4488', 'KCV Ø'); if (avg) datasets.push(avg);
+    datasets.push({ label: 'P/CF', data: kcvData, borderColor: '#ffcc44', backgroundColor: 'transparent', borderWidth: 1.5, pointRadius: 0, tension: 0.1 });
+    const avg = avgLine(kcvAvg, '#ffcc4488', 'P/CF Ø'); if (avg) datasets.push(avg);
   }
   if (!datasets.length) return;
 
@@ -1725,19 +1725,19 @@ function buildDividendChart() {
     const s = avSaysNoDividend ? 'no_data' : state.divStatus;
     if (s === 'paid_plan_required') {
       noDataEl.innerHTML = `<div style="text-align:center;padding:40px;color:var(--text-dim);font-size:.65rem;letter-spacing:2px;">
-        DIVIDENDENDATEN ERFORDERN EINEN PAID PLAN
+        DIVIDEND DATA REQUIRES A PAID PLAN
         <div style="margin-top:8px;font-size:.6rem;letter-spacing:1px;color:var(--text-dim);opacity:.6;">
-          Dividendendaten erfordern einen Twelve Data Paid Plan &middot;
+          Dividend data requires a Twelve Data Paid Plan &middot;
           <a href="https://twelvedata.com/pricing" target="_blank" rel="noopener" style="color:var(--text-dim);text-decoration:underline;">twelvedata.com/pricing</a>
         </div>
       </div>`;
     } else if (s === 'no_data') {
       noDataEl.innerHTML = `<div style="text-align:center;padding:40px;color:var(--text-dim);font-size:.65rem;letter-spacing:2px;">
-        KEINE DIVIDENDE – Aktie schüttet nicht aus
+        NO DIVIDEND – stock does not pay dividends
       </div>`;
     } else {
       noDataEl.innerHTML = `<div style="text-align:center;padding:40px;color:var(--text-dim);font-size:.65rem;letter-spacing:2px;">
-        DIVIDENDENDATEN NICHT VERFÜGBAR
+        DIVIDEND DATA NOT AVAILABLE
       </div>`;
     }
     return;
@@ -1815,8 +1815,8 @@ function buildDividendChart() {
   cfg.plugins.tooltip.callbacks = {
     title: (items) => items[0]?.label || '',
     label: (item) => {
-      if (item.dataset.label === 'Rendite')   return ` Rendite: ${fmt(item.raw, 2)} %`;
-      if (item.dataset.label === 'Dividende') return ` Dividende: ${fmt(item.raw, 3)}`;
+      if (item.dataset.label === 'Yield')     return ` Yield: ${fmt(item.raw, 2)} %`;
+      if (item.dataset.label === 'Dividend')  return ` Dividend: ${fmt(item.raw, 3)}`;
       return ` ${item.dataset.label}: ${fmt(item.raw, 2)}`;
     },
   };
@@ -1827,10 +1827,10 @@ function buildDividendChart() {
     data: {
       labels,
       datasets: [
-        { type: 'line',  label: 'Rendite',        data: yieldData,    borderColor: '#4499ff', backgroundColor: 'transparent', borderWidth: 2, pointRadius: 0, tension: 0.3, yAxisID: 'y',  order: 1 },
-        { type: 'line',  label: 'Korridor oben',  data: corridorHigh, borderColor: 'transparent', backgroundColor: 'rgba(68,153,255,.12)', fill: '+1', borderWidth: 0, pointRadius: 0, tension: 0.3, yAxisID: 'y', order: 2 },
-        { type: 'line',  label: 'Korridor unten', data: corridorLow,  borderColor: 'rgba(68,153,255,.3)', backgroundColor: 'transparent', borderDash: [3, 3], borderWidth: 1, pointRadius: 0, tension: 0.3, yAxisID: 'y', order: 3 },
-        { type: 'bar',   label: 'Dividende',       data: divAmounts,   backgroundColor: 'rgba(68,153,255,.4)', borderColor: 'rgba(68,153,255,.7)', borderWidth: 1, yAxisID: 'y2', order: 4 },
+        { type: 'line',  label: 'Yield',           data: yieldData,    borderColor: '#4499ff', backgroundColor: 'transparent', borderWidth: 2, pointRadius: 0, tension: 0.3, yAxisID: 'y',  order: 1 },
+        { type: 'line',  label: 'Corridor high',  data: corridorHigh, borderColor: 'transparent', backgroundColor: 'rgba(68,153,255,.12)', fill: '+1', borderWidth: 0, pointRadius: 0, tension: 0.3, yAxisID: 'y', order: 2 },
+        { type: 'line',  label: 'Corridor low',   data: corridorLow,  borderColor: 'rgba(68,153,255,.3)', backgroundColor: 'transparent', borderDash: [3, 3], borderWidth: 1, pointRadius: 0, tension: 0.3, yAxisID: 'y', order: 3 },
+        { type: 'bar',   label: 'Dividend',        data: divAmounts,   backgroundColor: 'rgba(68,153,255,.4)', borderColor: 'rgba(68,153,255,.7)', borderWidth: 1, yAxisID: 'y2', order: 4 },
       ],
     },
     options: cfg,
@@ -1941,8 +1941,8 @@ function buildQualityCheck() {
     else if (ownAvgPE && pe > ownAvgPE * 1.2 && pe > sectorPE * 1.2) kgvColor = 'red';
     else kgvColor = 'yellow';
 
-    const kgvHint = kgvColor === 'green' ? 'Discount vs sector & own history'
-      : kgvColor === 'red' ? 'Premium vs sector & own history' : 'Near historical average';
+    const kgvHint = kgvColor === 'green' ? 'Discount to sector & own history'
+      : kgvColor === 'red' ? 'Premium to sector & own history' : 'Close to historical average';
 
     rows.push(qcRow('P/E (trailing)', fmt(pe, 1),
       `${ownAvgPE ? 'Ø ' + fmt(ownAvgPE, 1) : '–'} · S ${fmt(sectorPE, 0)}`,
@@ -1963,7 +1963,7 @@ function buildQualityCheck() {
     } else {
       const pegColor = peg < 1 ? 'green' : peg <= 2 ? 'yellow' : 'red';
       const pegText  = pegColor === 'green' ? 'GOOD' : pegColor === 'yellow' ? 'FAIR' : 'HIGH';
-      rows.push(qcRow('PEG-Ratio', fmt(peg, 2), 'P/E ÷ Growth',
+      rows.push(qcRow('PEG Ratio', fmt(peg, 2), 'P/E ÷ Growth',
         ampel(pegColor, pegText),
         peg < 1 ? 'Growth priced in' : peg > 2 ? 'Growth premium high' : ''));
       scoreColors.push(pegColor);
@@ -1976,13 +1976,13 @@ function buildQualityCheck() {
     if (pb < 0) {
       rows.push(qcRow('P/B (Price/Book)', fmt(pb, 2), '',
         ampel('yellow', 'NEGATIVE'),
-        'Negative equity – special case, review'));
+        'Negative equity – check for special case'));
       // Nicht in scoreColors aufnehmen – kein GUT/SCHLECHT-Urteil
     } else {
       const pbColor = pb < 1.5 ? 'green' : pb <= 3 ? 'yellow' : 'red';
       let pbHint = pb < 1 ? '⚡ Below book value' : '';
       if (isBerkshire) {
-        if (pb < 1.2)      pbHint = '⭐ Historic Buffett buy zone (hard limit until 2018)';
+        if (pb < 1.2)      pbHint = '⭐ Historical Buffett buy zone (hard floor until 2018)';
         else if (pb < 1.4) pbHint = '✅ Active Buffett buyback zone (2018–2024)';
         else if (pb < 1.6) pbHint = '⚠ Upper comfort zone – Buffett paused buybacks 2024';
         else               pbHint = '🚫 Above Buffett\'s historical comfort zone';
@@ -1999,10 +1999,10 @@ function buildQualityCheck() {
     const divPct  = divYield < 1 ? divYield * 100 : divYield; // Normalisierung
     const dyColor = divPct >= 3 ? 'green' : divPct >= 1 ? 'yellow' : 'red';
     rows.push(qcRow('Dividend Yield', fmt(divPct, 2) + ' %', '',
-      ampel(dyColor, dyColor === 'green' ? 'STRONG' : dyColor === 'yellow' ? 'MED' : 'LOW'), ''));
+      ampel(dyColor, dyColor === 'green' ? 'STRONG' : dyColor === 'yellow' ? 'MEDIUM' : 'LOW'), ''));
     scoreColors.push(dyColor);
   } else {
-    rows.push(qcRow('Dividend Yield', '–', '', ampel('gray', 'KEINE'), 'No dividend'));
+    rows.push(qcRow('Dividend Yield', '–', '', ampel('gray', 'NONE'), 'No dividend'));
     scoreColors.push('gray');
   }
 
@@ -2010,8 +2010,8 @@ function buildQualityCheck() {
   if (de != null) {
     const deColor = de < 0.5 ? 'green' : de <= 1.0 ? 'yellow' : 'red';
     rows.push(qcRow('Debt/Equity', fmt(de, 2), '',
-      ampel(deColor, deColor === 'green' ? 'GOOD' : deColor === 'yellow' ? 'MED' : 'HIGH'),
-      de > 1 ? 'High debt' : de < 0.5 ? 'Solid balance sheet' : ''));
+      ampel(deColor, deColor === 'green' ? 'GOOD' : deColor === 'yellow' ? 'MEDIUM' : 'HIGH'),
+      de > 1 ? 'High leverage' : de < 0.5 ? 'Solid balance sheet' : ''));
     scoreColors.push(deColor);
   }
 
@@ -2020,7 +2020,7 @@ function buildQualityCheck() {
     const fcfColor = fcf > 0 ? 'green' : 'red';
     rows.push(qcRow('Free Cash Flow', fmtB(fcf), '',
       ampel(fcfColor, fcf > 0 ? 'POSITIVE' : 'NEGATIVE'),
-      fcf < 0 ? 'Negative FCF – review' : ''));
+      fcf < 0 ? 'Negative FCF – check further' : ''));
     scoreColors.push(fcfColor);
   }
 
@@ -2029,8 +2029,8 @@ function buildQualityCheck() {
     const ekPct   = ekQuote * 100;
     const ekColor = ekPct >= 40 ? 'green' : ekPct >= 20 ? 'yellow' : 'red';
     rows.push(qcRow('Equity Ratio', fmt(ekPct, 1) + ' %', '',
-      ampel(ekColor, ekColor === 'green' ? 'GOOD' : ekColor === 'yellow' ? 'MED' : 'LOW'),
-      ekPct < 20 ? 'Low equity base' : ''));
+      ampel(ekColor, ekColor === 'green' ? 'GOOD' : ekColor === 'yellow' ? 'MEDIUM' : 'LOW'),
+      ekPct < 20 ? 'Thin equity base' : ''));
     scoreColors.push(ekColor);
   }
 
@@ -2047,8 +2047,8 @@ function buildQualityCheck() {
   if (roe != null) {
     const roePct  = roe * 100;
     const roeColor = roePct >= 15 ? 'green' : roePct >= 8 ? 'yellow' : 'red';
-    rows.push(qcRow('Return on Equity', fmt(roePct, 1) + ' %', '',
-      ampel(roeColor, roeColor === 'green' ? 'GUT' : roeColor === 'yellow' ? 'MITTEL' : 'GERING'), ''));
+    rows.push(qcRow('Return on Equity (ROE)', fmt(roePct, 1) + ' %', '',
+      ampel(roeColor, roeColor === 'green' ? 'GOOD' : roeColor === 'yellow' ? 'MEDIUM' : 'LOW'), ''));
     scoreColors.push(roeColor);
   }
 
@@ -2057,7 +2057,7 @@ function buildQualityCheck() {
   // Substanzwert-Badge
   const substanzEl = document.getElementById('substanzwert-area');
   if (pb != null && pb > 0 && pb < 1.0) {
-    substanzEl.innerHTML = `<div class="substanzwert-badge">💎 You buy $1 for ${fmt(pb * 100, 0)} cents – stock below book value</div>`;
+    substanzEl.innerHTML = `<div class="substanzwert-badge">💎 You're buying $1 of assets for ${fmt(pb * 100, 0)} cents – stock below book value</div>`;
   } else {
     substanzEl.innerHTML = '';
   }
@@ -2069,15 +2069,15 @@ function buildQualityCheck() {
 
   let verdict;
   if (greens >= 5 && hasKBVBelow1)
-    verdict = 'Classic value play – the market prices below book value. A rare opportunity. Safety margin intact – exactly the situation this analysis was built for.';
+    verdict = 'Classic value play – the market is pricing this below book value. The system is offering a rare opportunity. Margin of safety present – exactly the situation this analysis was built for.';
   else if (greens >= 5)
-    verdict = 'Solid valuation with safety margin. Fundamentals show a consistent picture – the stock trades near or below its historical fair value. Check catalysts and sector context before entry.';
+    verdict = 'Solid valuation with margin of safety. Fundamentals paint a consistent picture – the stock trades near or below its historical fair value. Check catalysts and sector context before entry.';
   else if (greens >= 3 && reds <= 2)
     verdict = 'Mixed picture – no clear signal in either direction. Check individual criteria carefully. Some strengths, some weaknesses – context decides.';
   else if (reds >= 5)
-    verdict = 'Stock trades well above historical average – growth premium or simply overpriced? Safety margin missing. Not a classic value play by Alien Investor criteria.';
+    verdict = 'Stock trades well above historical average – growth premium or simply overpriced? Margin of safety is absent. Not a classic value play by Alien Investor criteria.';
   else
-    verdict = 'Mixed signals – too few clear indicators for a definitive verdict. Individual metrics and sector context are decisive. Your own analysis remains essential.';
+    verdict = 'Inconclusive – too few clear signals for a definitive assessment. Individual metrics and sector context are the deciding factors. Your own analysis remains essential.';
 
   document.getElementById('verdict-text').textContent = verdict;
 }
