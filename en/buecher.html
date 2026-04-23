@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Books – Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Alien Investor handbooks: Bitcoin, Privacy and digital sovereignty – for people who truly want to own their digital lives.">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      color: #fff;
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* --- STERNENHIMMEL (Pure CSS) --- */
+    .stars-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(ellipse at top, #0a0f1e 0%, #000 60%);
+      z-index: -2;
+      overflow: hidden;
+    }
+    .stars-bg::before,
+    .stars-bg::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        radial-gradient(1px 1px at 7% 8%, #fff, transparent),
+        radial-gradient(1px 1px at 17% 22%, #fff, transparent),
+        radial-gradient(1px 1px at 25% 15%, #fff, transparent),
+        radial-gradient(1px 1px at 33% 9%, #fff, transparent),
+        radial-gradient(2px 2px at 41% 4%, #fff, transparent),
+        radial-gradient(1px 1px at 48% 18%, #fff, transparent),
+        radial-gradient(1px 1px at 55% 25%, #fff, transparent),
+        radial-gradient(1px 1px at 63% 11%, #00ffcc, transparent),
+        radial-gradient(1px 1px at 70% 20%, #fff, transparent),
+        radial-gradient(1px 1px at 75% 35%, #fff, transparent),
+        radial-gradient(1px 1px at 82% 7%, #fff, transparent),
+        radial-gradient(1px 1px at 90% 10%, #fff, transparent),
+        radial-gradient(1px 1px at 95% 22%, #fff, transparent),
+        radial-gradient(1px 1px at 4% 32%, #fff, transparent),
+        radial-gradient(1px 1px at 12% 48%, #fff, transparent),
+        radial-gradient(2px 2px at 22% 40%, #fff, transparent),
+        radial-gradient(1px 1px at 30% 50%, #fff, transparent),
+        radial-gradient(1px 1px at 38% 38%, #fff, transparent),
+        radial-gradient(1px 1px at 40% 65%, #00ffcc, transparent),
+        radial-gradient(1px 1px at 47% 55%, #fff, transparent),
+        radial-gradient(1px 1px at 54% 48%, #fff, transparent),
+        radial-gradient(1px 1px at 62% 60%, #fff, transparent),
+        radial-gradient(1px 1px at 70% 55%, #fff, transparent),
+        radial-gradient(1px 1px at 78% 45%, #fff, transparent),
+        radial-gradient(1px 1px at 85% 60%, #fff, transparent),
+        radial-gradient(1px 1px at 92% 52%, #fff, transparent),
+        radial-gradient(1px 1px at 8% 75%, #fff, transparent),
+        radial-gradient(2px 2px at 15% 85%, #fff, transparent),
+        radial-gradient(1px 1px at 23% 70%, #fff, transparent),
+        radial-gradient(1px 1px at 32% 92%, #fff, transparent),
+        radial-gradient(1px 1px at 40% 78%, #fff, transparent),
+        radial-gradient(1px 1px at 45% 95%, #fff, transparent),
+        radial-gradient(1px 1px at 52% 85%, #fff, transparent),
+        radial-gradient(2px 2px at 60% 90%, #00ffcc, transparent),
+        radial-gradient(1px 1px at 68% 72%, #fff, transparent),
+        radial-gradient(1px 1px at 74% 88%, #fff, transparent),
+        radial-gradient(1px 1px at 82% 78%, #fff, transparent),
+        radial-gradient(1px 1px at 88% 95%, #fff, transparent),
+        radial-gradient(1px 1px at 96% 82%, #fff, transparent),
+        radial-gradient(1px 1px at 3% 62%, #fff, transparent),
+        radial-gradient(1px 1px at 10% 60%, #fff, transparent);
+      background-size: 100% 100%;
+      animation: twinkle 6s ease-in-out infinite alternate;
+    }
+    .stars-bg::after {
+      background-image:
+        radial-gradient(1px 1px at 6% 14%, #fff, transparent),
+        radial-gradient(1px 1px at 14% 5%, #fff, transparent),
+        radial-gradient(1px 1px at 20% 30%, #fff, transparent),
+        radial-gradient(1px 1px at 28% 25%, #fff, transparent),
+        radial-gradient(1px 1px at 36% 16%, #fff, transparent),
+        radial-gradient(2px 2px at 44% 32%, #00ffcc, transparent),
+        radial-gradient(1px 1px at 52% 10%, #fff, transparent),
+        radial-gradient(1px 1px at 58% 28%, #fff, transparent),
+        radial-gradient(1px 1px at 65% 3%, #fff, transparent),
+        radial-gradient(1px 1px at 72% 14%, #fff, transparent),
+        radial-gradient(2px 2px at 80% 20%, #00ffcc, transparent),
+        radial-gradient(1px 1px at 88% 32%, #fff, transparent),
+        radial-gradient(1px 1px at 94% 7%, #fff, transparent),
+        radial-gradient(1px 1px at 5% 70%, #fff, transparent),
+        radial-gradient(1px 1px at 18% 62%, #fff, transparent),
+        radial-gradient(1px 1px at 27% 55%, #fff, transparent),
+        radial-gradient(1px 1px at 35% 80%, #fff, transparent),
+        radial-gradient(1px 1px at 43% 44%, #fff, transparent),
+        radial-gradient(1px 1px at 50% 45%, #fff, transparent),
+        radial-gradient(1px 1px at 58% 68%, #fff, transparent),
+        radial-gradient(1px 1px at 65% 60%, #fff, transparent),
+        radial-gradient(1px 1px at 73% 78%, #fff, transparent),
+        radial-gradient(1px 1px at 80% 50%, #fff, transparent),
+        radial-gradient(1px 1px at 87% 66%, #fff, transparent),
+        radial-gradient(1px 1px at 95% 50%, #fff, transparent),
+        radial-gradient(1px 1px at 9% 88%, #fff, transparent),
+        radial-gradient(1px 1px at 21% 98%, #fff, transparent),
+        radial-gradient(1px 1px at 36% 73%, #fff, transparent),
+        radial-gradient(1px 1px at 49% 75%, #fff, transparent),
+        radial-gradient(1px 1px at 63% 84%, #fff, transparent),
+        radial-gradient(1px 1px at 78% 68%, #fff, transparent),
+        radial-gradient(1px 1px at 91% 90%, #fff, transparent);
+      opacity: 0.65;
+      animation: twinkle 4s ease-in-out infinite alternate-reverse;
+    }
+    @keyframes twinkle {
+      0%   { opacity: 0.35; }
+      50%  { opacity: 0.95; }
+      100% { opacity: 0.5; }
+    }
+
+    /* --- NEBEL / MILCHSTRASSE --- */
+    .nebula {
+      position: fixed;
+      top: -10%;
+      left: -10%;
+      width: 120%;
+      height: 120%;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 900px 260px at 30% 35%, rgba(90, 30, 140, 0.22), transparent 60%),
+        radial-gradient(ellipse 1100px 200px at 70% 55%, rgba(0, 140, 180, 0.18), transparent 60%),
+        radial-gradient(ellipse 500px 180px at 50% 45%, rgba(180, 60, 140, 0.10), transparent 60%),
+        radial-gradient(circle 140px at 32% 36%, rgba(255, 255, 255, 0.10), transparent 70%),
+        radial-gradient(circle 120px at 68% 56%, rgba(0, 255, 204, 0.08), transparent 70%);
+      transform: rotate(-18deg);
+      filter: blur(30px);
+      opacity: 0.85;
+      animation: nebula-pulse 14s ease-in-out infinite alternate;
+      mix-blend-mode: screen;
+    }
+    @keyframes nebula-pulse {
+      0%   { opacity: 0.55; transform: rotate(-18deg) scale(1); }
+      50%  { opacity: 0.85; transform: rotate(-17deg) scale(1.04); }
+      100% { opacity: 0.65; transform: rotate(-19deg) scale(1.02); }
+    }
+
+    /* --- STERNSCHNUPPEN --- */
+    .shooting-star {
+      position: fixed;
+      width: 2px;
+      height: 2px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.7);
+      z-index: -1;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .shooting-star::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 120px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.8), rgba(0,255,204,0.4), transparent);
+      transform: translateX(-120px);
+    }
+    .shooting-star.s1 {
+      top: 12%;
+      left: -5%;
+      animation: shoot1 11s linear infinite;
+      animation-delay: 3s;
+    }
+    .shooting-star.s2 {
+      top: 28%;
+      left: -5%;
+      animation: shoot2 17s linear infinite;
+      animation-delay: 9s;
+    }
+    .shooting-star.s3 {
+      top: 50%;
+      left: -5%;
+      animation: shoot3 23s linear infinite;
+      animation-delay: 15s;
+    }
+    @keyframes shoot1 {
+      0%   { transform: translate(0, 0) rotate(15deg); opacity: 0; }
+      3%   { opacity: 1; }
+      8%   { transform: translate(110vw, 20vh) rotate(15deg); opacity: 0; }
+      100% { transform: translate(110vw, 20vh) rotate(15deg); opacity: 0; }
+    }
+    @keyframes shoot2 {
+      0%   { transform: translate(0, 0) rotate(22deg); opacity: 0; }
+      2%   { opacity: 1; }
+      7%   { transform: translate(115vw, 30vh) rotate(22deg); opacity: 0; }
+      100% { transform: translate(115vw, 30vh) rotate(22deg); opacity: 0; }
+    }
+    @keyframes shoot3 {
+      0%   { transform: translate(0, 0) rotate(10deg); opacity: 0; }
+      3%   { opacity: 1; }
+      9%   { transform: translate(115vw, 15vh) rotate(10deg); opacity: 0; }
+      100% { transform: translate(115vw, 15vh) rotate(10deg); opacity: 0; }
+    }
+
+    /* --- UFO --- */
+    .ufo {
+      position: fixed;
+      top: 38%;
+      right: -80px;
+      width: 72px; height: 36px;
+      z-index: -1;
+      filter: drop-shadow(0 0 8px rgba(0, 255, 204, 0.55));
+      animation: ufo-fly 55s linear infinite;
+      animation-delay: 25s;
+      pointer-events: none;
+      opacity: 0;
+    }
+    @keyframes ufo-fly {
+      0%   { transform: translate(0, 0);           opacity: 0; }
+      2%   {                                       opacity: 1; }
+      10%  { transform: translate(-30vw, -3vh); }
+      22%  { transform: translate(-70vw, 2vh); }
+      34%  { transform: translate(-110vw, -2vh);   opacity: 1; }
+      37%  { transform: translate(-120vw, -2vh);   opacity: 0; }
+      100% { transform: translate(-120vw, -2vh);   opacity: 0; }
+    }
+    .ufo-light { animation: ufo-blink 1.2s infinite; transform-origin: center; }
+    .ufo-light:nth-child(1) { animation-delay: 0.0s; }
+    .ufo-light:nth-child(2) { animation-delay: 0.15s; }
+    .ufo-light:nth-child(3) { animation-delay: 0.30s; }
+    .ufo-light:nth-child(4) { animation-delay: 0.45s; }
+    .ufo-light:nth-child(5) { animation-delay: 0.60s; }
+    .ufo-light:nth-child(6) { animation-delay: 0.75s; }
+    @keyframes ufo-blink {
+      0%, 100% { opacity: 1; }
+      50%      { opacity: 0.25; }
+    }
+
+    /* --- LAYOUT --- */
+    .wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 15px 40px 15px;
+    }
+
+    /* --- TYPOGRAFIE --- */
+    h1, h2, h3 { color: #00ffcc; }
+    h1 {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 2.2em;
+      text-shadow: 0 0 12px rgba(0, 255, 204, 0.4);
+    }
+    h2 {
+      margin-top: 2.5em;
+      border-bottom: 1px solid #1a3a3a;
+      padding-bottom: 10px;
+    }
+
+    /* --- LINKS --- */
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc;
+    }
+
+    /* --- NAV --- */
+    .top-nav {
+      padding: 10px 0;
+      font-size: 0.9em;
+    }
+
+    /* --- INTRO-LEAD --- */
+    .intro {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 50px auto;
+      color: #ccc;
+    }
+    .intro .tagline {
+      font-size: 0.9em;
+      color: #888;
+      margin-top: 10px;
+      display: block;
+    }
+
+    /* --- BUCH-KARTE --- */
+    .book-card {
+      display: flex;
+      gap: 30px;
+      align-items: flex-start;
+      background: linear-gradient(135deg, rgba(0, 20, 20, 0.6), rgba(0, 8, 15, 0.85));
+      border: 1px solid #00ffcc;
+      border-radius: 12px;
+      padding: 30px;
+      margin: 40px 0;
+      box-shadow: 0 0 30px rgba(0, 255, 204, 0.15),
+                  inset 0 0 20px rgba(0, 255, 204, 0.03);
+      backdrop-filter: blur(2px);
+    }
+    .book-card.coming-soon {
+      border-color: #555;
+      border-style: dashed;
+      box-shadow: none;
+      opacity: 0.75;
+    }
+
+    /* --- COVER (schwebend) --- */
+    .book-cover {
+      flex: 0 0 200px;
+      position: relative;
+    }
+    .book-cover img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      box-shadow:
+        0 0 30px rgba(0, 255, 204, 0.4),
+        0 15px 25px rgba(0, 0, 0, 0.6);
+      animation: float 6s ease-in-out infinite;
+      display: block;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(-0.5deg); }
+      50%      { transform: translateY(-12px) rotate(0.5deg); }
+    }
+    .book-cover.placeholder {
+      height: 300px;
+      background: repeating-linear-gradient(
+        45deg,
+        #0a0a0a,
+        #0a0a0a 10px,
+        #111 10px,
+        #111 20px
+      );
+      border: 1px dashed #555;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+      font-size: 0.9em;
+      text-align: center;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    /* --- BUCH-INHALT --- */
+    .book-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .book-info h2 {
+      margin-top: 0;
+      border-bottom: none;
+      padding-bottom: 0;
+      font-size: 1.5em;
+    }
+    .book-info .subtitle {
+      color: #bbb;
+      font-style: italic;
+      margin-top: -0.3em;
+      margin-bottom: 1.5em;
+    }
+    .book-info .pitch {
+      color: #ddd;
+    }
+    .book-info ul {
+      padding-left: 20px;
+      color: #ccc;
+      font-size: 0.95em;
+    }
+    .book-info li { margin-bottom: 0.5em; }
+
+    /* --- CTA-BUTTON --- */
+    .cta-button {
+      display: inline-block;
+      margin-top: 1.5em;
+      padding: 12px 28px;
+      background: transparent;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1em;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .cta-button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 20px #00ffcc;
+      text-shadow: none;
+    }
+
+    /* --- HINWEIS-BOX --- */
+    .notice {
+      background: #050505;
+      border-left: 3px solid #00ffcc;
+      padding: 1em 1.5em;
+      margin: 3em 0;
+      font-size: 0.95em;
+      color: #ccc;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 640px) {
+      .book-card {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 20px;
+      }
+      .book-cover {
+        flex: 0 0 auto;
+        max-width: 220px;
+      }
+      .book-info h2 { text-align: center; }
+      .book-info .subtitle { text-align: center; }
+      h1 { font-size: 1.6em; }
+    }
+  </style>
+  <link rel="canonical" href="/en/buecher.html">
+  <link rel="alternate" hreflang="de" href="/buecher.html">
+</head>
+<body>
+
+  <div class="stars-bg"></div>
+  <div class="nebula"></div>
+  <div class="shooting-star s1"></div>
+  <div class="shooting-star s2"></div>
+  <div class="shooting-star s3"></div>
+
+  <svg class="ufo" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <radialGradient id="ufo-dome" cx="50%" cy="80%" r="60%">
+        <stop offset="0%" stop-color="#5fffe0"/>
+        <stop offset="60%" stop-color="#1a3a38"/>
+        <stop offset="100%" stop-color="#0a1a1e"/>
+      </radialGradient>
+      <linearGradient id="ufo-body" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#4a5a5a"/>
+        <stop offset="50%" stop-color="#2a3638"/>
+        <stop offset="100%" stop-color="#101818"/>
+      </linearGradient>
+    </defs>
+    <path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/>
+    <ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body)" stroke="#00ffcc" stroke-width="0.4"/>
+    <ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/>
+    <ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/>
+    <circle class="ufo-light" cx="20" cy="20.5" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="27" cy="21.2" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="34" cy="21.6" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="41" cy="21.6" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="48" cy="21.2" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="55" cy="20.5" r="1.3" fill="#fff"/>
+  </svg>
+
+  <div class="wrapper">
+
+    <div class="top-nav">
+      <a href="/en/index.html">← Back to Mission Control</a>
+    </div>
+
+    <h1><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Books" role="img"><defs><linearGradient id="log-bg-bu" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0d2a28"/><stop offset="100%" stop-color="#060e12"/></linearGradient><radialGradient id="log-scr-bu" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#0a2820"/><stop offset="100%" stop-color="#060e12"/></radialGradient></defs><rect x="5" y="3" width="26" height="30" rx="2.5" fill="url(#log-bg-bu)" stroke="#00ffcc" stroke-width="0.8"/><rect x="5" y="3" width="26" height="6" rx="2.5" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.8"/><rect x="5" y="6" width="26" height="3" fill="#0d2a28"/><circle cx="11" cy="6" r="1.2" fill="#00ffcc" opacity="0.9"/><circle cx="15" cy="6" r="1.2" fill="#00ffcc" opacity="0.4"/><circle cx="19" cy="6" r="1.2" fill="#00ffcc" opacity="0.2"/><rect x="7" y="11" width="22" height="19" rx="1" fill="url(#log-scr-bu)"/><line x1="10" y1="15" x2="28" y2="15" stroke="#00ffcc" stroke-width="0.6" opacity="0.6"/><line x1="10" y1="18.5" x2="28" y2="18.5" stroke="#00ffcc" stroke-width="0.6" opacity="0.6"/><line x1="10" y1="22" x2="28" y2="22" stroke="#00ffcc" stroke-width="0.6" opacity="0.6"/><line x1="10" y1="25.5" x2="21" y2="25.5" stroke="#00ffcc" stroke-width="0.6" opacity="0.6"/><rect x="21.5" y="24.5" width="1.2" height="2" rx="0.3" fill="#00ffcc" opacity="0.9"/></svg> Alien Investor Handbooks</h1>
+
+    <p class="intro">
+      In-depth knowledge instead of bite-sized content.<br>
+      For people who truly want to own their digital life.
+      <span class="tagline">Bitcoin · Privacy · Digital Sovereignty</span>
+    </p>
+
+    <!-- BAND 1 EN: GrapheneOS English Edition -->
+    <div class="book-card">
+      <div class="book-cover">
+        <img src="grapheneos-handbook-cover-en.jpg"
+             alt="Cover: GrapheneOS – Android in the Age of Surveillance">
+      </div>
+      <div class="book-info">
+        <h2>Band 1: GrapheneOS <span style="font-size:0.65em; color:#aaa; font-weight:normal;">English Edition</span></h2>
+        <p class="subtitle">Android in the Age of Surveillance – Setup, Apps &amp; Digital Sovereignty</p>
+
+        <p class="pitch">
+          <strong>Your smartphone belongs to you – or to Google.</strong>
+          The complete English edition of the GrapheneOS handbook – installation, apps without Google,
+          the Proton ecosystem, Shelter, Termux encryption and more.
+        </p>
+
+        <p style="color:#aaa; font-size:0.95em;">What you will learn step by step:</p>
+        <ul>
+          <li>Installation via the official Web Installer</li>
+          <li>The 7 most important settings after installation</li>
+          <li>Permissions &amp; app sandbox – used deliberately</li>
+          <li>Apps without Google Play: Obtainium, Zap Store, GrapheneOS App Store, Accrescent</li>
+          <li>Swiss-made Google replacement: the Proton ecosystem</li>
+          <li>Digital separation with Shelter</li>
+          <li>File encryption with Termux (AES-256)</li>
+        </ul>
+
+        <p style="color:#aaa; font-size:0.9em; margin-top: 1.2em;">
+          A living handbook – new editions follow when the ecosystem changes.<br>
+          <span style="color:#888; font-size:0.95em;">
+            Current edition: <strong style="color:#00ffcc;">v2.2</strong> · April 18, 2026
+          </span>
+        </p>
+
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top: 1.5em;">
+          <a href="https://www.amazon.de/dp/B0GX2TKSMC?tag=alieninvestor-21&linkCode=ll2" class="cta-button" target="_blank" rel="noopener" style="margin-top:0;">
+            <svg style="width:1em;height:1em;vertical-align:-0.15em;" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Book" role="img"><defs><linearGradient id="bk-cv-en" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#060e12"/></linearGradient><linearGradient id="bk-sp-en" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#0d2a28"/><stop offset="100%" stop-color="#1a3a38"/></linearGradient></defs><rect x="4" y="4" width="5" height="28" rx="1" fill="url(#bk-sp-en)" stroke="#00ffcc" stroke-width="0.7"/><rect x="9" y="4" width="22" height="28" rx="1" fill="url(#bk-cv-en)" stroke="#00ffcc" stroke-width="0.7"/><line x1="13" y1="12" x2="27" y2="12" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="16" x2="27" y2="16" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="20" x2="27" y2="20" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="24" x2="22" y2="24" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><path fill="#1e5535" stroke="#00ffcc" stroke-width="0.4" d="M19 6.5c-2.5 0-3.2 1.7-3.1 3 .1 1.4.8 2.8 3.1 3.2 2.3-.4 3-1.8 3.1-3.2.1-1.3-.6-3-3.1-3z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.3" d="M17.5 8.8c.5.5.7 1.1.5 1.4-.3.3-.9 0-1.4-.5s-.7-1.1-.5-1.4.9 0 1.4.5zm3 0c-.5.5-.7 1.1-.5 1.4.3.3.9 0 1.4-.5s.7-1.1.5-1.4-.9 0-1.4.5z"/><line x1="18" y1="7" x2="17" y2="6" stroke="#00ffcc" stroke-width="0.4" stroke-linecap="round"/><circle cx="17" cy="5.8" r="0.5" fill="#00ffcc"/><line x1="20" y1="7" x2="21" y2="6" stroke="#00ffcc" stroke-width="0.4" stroke-linecap="round"/><circle cx="21" cy="5.8" r="0.5" fill="#00ffcc"/></svg> On Amazon Kindle
+          </a>
+          <a href="/en/buch-direkt.html" class="cta-button" style="margin-top:0;">
+            <svg style="width:1em;height:1em;vertical-align:-0.15em;" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="4" y="4" width="5" height="28" rx="1" fill="url(#bk-sp-bu)" stroke="#00ffcc" stroke-width="0.7"/><rect x="9" y="4" width="22" height="28" rx="1" fill="url(#bk-cv-bu)" stroke="#00ffcc" stroke-width="0.7"/><line x1="13" y1="12" x2="27" y2="12" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="16" x2="27" y2="16" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="20" x2="27" y2="20" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="24" x2="22" y2="24" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/></svg> DRM-free direct purchase
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- BAND 1 DE: GrapheneOS -->
+    <div class="book-card">
+      <div class="book-cover">
+        <img src="grapheneos-handbuch-cover.jpg"
+             alt="Cover: GrapheneOS – Android im Überwachungszeitalter">
+      </div>
+      <div class="book-info">
+        <h2>Band 1: GrapheneOS</h2>
+        <p class="subtitle">Android im Überwachungszeitalter – Einrichtung, Apps &amp; digitale Souveränität</p>
+
+        <p class="pitch">
+          <strong>Dein Smartphone gehört dir – oder Google.</strong>
+          Android 2026 macht Sideloading zur Ausnahme. Google Play Services sitzen tiefer im System als je zuvor.
+          GrapheneOS ist die Antwort: ein gehärtetes Android, das echte Kontrolle zurückgibt – kein Root, kein Bastelkram.
+        </p>
+
+        <p style="color:#aaa; font-size:0.95em;">Was du Schritt für Schritt lernst:</p>
+        <ul>
+          <li>Installation über den offiziellen Web-Installer</li>
+          <li>Die 7 wichtigsten Einstellungen nach der Installation</li>
+          <li>Berechtigungen &amp; App-Sandbox gezielt einsetzen</li>
+          <li>Apps ohne Google Play: Obtainium, Zap Store, GrapheneOS App Store, Accrescent</li>
+          <li>Google-Ersatz aus der Schweiz: das Proton-Ökosystem</li>
+          <li>Arbeit und Privat getrennt mit Shelter</li>
+          <li>Dateiverschlüsselung mit Termux (AES-256)</li>
+        </ul>
+
+        <p style="color:#aaa; font-size:0.9em; margin-top: 1.2em;">
+          Ein lebendiges Handbuch – neue Ausgaben folgen, wenn sich das Ökosystem ändert.<br>
+          <span style="color:#888; font-size:0.95em;">
+            Aktuelle Ausgabe: <strong style="color:#00ffcc;">v2.2</strong> · Stand 18.04.2026
+          </span>
+        </p>
+
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top: 1.5em;">
+          <a href="https://www.amazon.de/dp/B0GX36746K?tag=alieninvestor-21&linkCode=ll2" class="cta-button" target="_blank" rel="noopener" style="margin-top:0;">
+            <svg style="width:1em;height:1em;vertical-align:-0.15em;" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Buch" role="img"><defs><linearGradient id="bk-cv-bu" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#060e12"/></linearGradient><linearGradient id="bk-sp-bu" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#0d2a28"/><stop offset="100%" stop-color="#1a3a38"/></linearGradient></defs><rect x="4" y="4" width="5" height="28" rx="1" fill="url(#bk-sp-bu)" stroke="#00ffcc" stroke-width="0.7"/><rect x="9" y="4" width="22" height="28" rx="1" fill="url(#bk-cv-bu)" stroke="#00ffcc" stroke-width="0.7"/><line x1="13" y1="12" x2="27" y2="12" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="16" x2="27" y2="16" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="20" x2="27" y2="20" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="24" x2="22" y2="24" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><path fill="#1e5535" stroke="#00ffcc" stroke-width="0.4" d="M19 6.5c-2.5 0-3.2 1.7-3.1 3 .1 1.4.8 2.8 3.1 3.2 2.3-.4 3-1.8 3.1-3.2.1-1.3-.6-3-3.1-3z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.3" d="M17.5 8.8c.5.5.7 1.1.5 1.4-.3.3-.9 0-1.4-.5s-.7-1.1-.5-1.4.9 0 1.4.5zm3 0c-.5.5-.7 1.1-.5 1.4.3.3.9 0 1.4-.5s.7-1.1.5-1.4-.9 0-1.4.5z"/><line x1="18" y1="7" x2="17" y2="6" stroke="#00ffcc" stroke-width="0.4" stroke-linecap="round"/><circle cx="17" cy="5.8" r="0.5" fill="#00ffcc"/><line x1="20" y1="7" x2="21" y2="6" stroke="#00ffcc" stroke-width="0.4" stroke-linecap="round"/><circle cx="21" cy="5.8" r="0.5" fill="#00ffcc"/></svg> Auf Amazon Kindle
+          </a>
+          <a href="/en/buch-direkt.html" class="cta-button" style="margin-top:0;">
+            <svg style="width:1em;height:1em;vertical-align:-0.15em;" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="4" y="4" width="5" height="28" rx="1" fill="url(#bk-sp-bu)" stroke="#00ffcc" stroke-width="0.7"/><rect x="9" y="4" width="22" height="28" rx="1" fill="url(#bk-cv-bu)" stroke="#00ffcc" stroke-width="0.7"/><line x1="13" y1="12" x2="27" y2="12" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="16" x2="27" y2="16" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="20" x2="27" y2="20" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="24" x2="22" y2="24" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/></svg> DRM-frei direkt kaufen
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- BAND 2: Geheim -->
+    <div class="book-card coming-soon">
+      <div class="book-cover placeholder">
+        <span>🛸<br>?</span>
+      </div>
+      <div class="book-info">
+        <h2 style="color:#888;">Volume 2 <span style="font-size:0.6em; color:#555;">(in preparation)</span></h2>
+        <p class="subtitle" style="color:#777;">Topic still secret.</p>
+
+        <p class="pitch" style="color:#999;">
+          The Alien is already working on the next handbook.
+          What exactly it covers hasn't been revealed yet — only this much: it fits the mission.
+        </p>
+
+        <p style="color:#666; font-size:0.9em; font-style: italic; margin-top: 1.5em;">
+          Coming when it's ready. Announced on Nostr and here.
+        </p>
+      </div>
+    </div>
+
+    <div class="notice">
+      <strong>Transparency:</strong>
+      All books listed here are <strong>my own work</strong> – written under the pseudonym Alien Investor
+      and published via Amazon Kindle Direct Publishing.
+      Amazon links are affiliate links: buying through this page supports my work at no extra cost to you.
+      All content reflects personal opinion. Installing software is at your own risk.
+      <br><br>
+      <strong>Transparenz:</strong>
+      Alle hier aufgeführten Bücher sind <strong>meine eigenen Werke</strong> – geschrieben unter dem Pseudonym Alien Investor
+      und veröffentlicht über Amazon Kindle Direct Publishing.
+      Die Amazon-Links sind zusätzlich Partnerlinks: Wenn du über diese Seite kaufst, unterstützt du meine Arbeit doppelt –
+      der Preis ändert sich für dich nicht.
+      Alle Inhalte sind persönliche Einschätzungen. Die Installation von Software erfolgt auf eigene Verantwortung.
+    </div>
+
+  </div>
+
+  <footer>
+    <p><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Contact" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> Contact: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+
+    <p style="margin-top: 20px;">
+      <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-bu" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-bu)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <strong>Disclaimer:</strong><br><br>
+      The content on this page does not constitute financial, tax, or legal advice.<br>
+      I share my personal Alien opinion here – independent, rebellious, and free.<br>
+      Think for yourself, trust no one, and act at your own risk.
+    </p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>
