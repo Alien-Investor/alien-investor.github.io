@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🛡️ GrapheneOS: The Configuration of Sovereignty – From Smartphone to Digital Bunker | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Installing GrapheneOS is only the first step. Here are the most important settings (Auto Reboot, Duress PIN, Profiles) to truly harden your device against surveillance.">
+  <link rel="canonical" href="/en/GrapheneOS-Custom.html">
+  <link rel="alternate" hreflang="de" href="/GrapheneOS-Custom.html">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 0 15px 20px 15px; /* Mobile-Optimierung */
+    }
+
+    /* --- TYPOGRAFIE --- */
+    h1, h2, h3 {
+      color: #00ffcc;
+    }
+    h1 {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    /* --- LINKS (Neon-Glow) --- */
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc; /* Der Alien-Effekt */
+    }
+
+    /* --- STANDARD ELEMENTE --- */
+    code {
+      background-color: #111;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      color: #0f0;
+      font-family: monospace;
+    }
+    em { color: #ccc; }
+
+    .byline {
+      margin-top: -0.8em;
+      margin-bottom: 2em;
+      color: #ccc;
+      font-style: italic;
+      text-align: center;
+    }
+
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
+
+    /* --- BOXEN --- */
+    .box {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 1em; }
+
+    .recommendation-box {
+      margin: 2em 0;
+      padding: 1em;
+      border: 1px dashed #00ffcc;
+      border-radius: 8px;
+      text-align: center;
+      background-color: #050505;
+    }
+    .recommendation-box h3 {
+      margin-top: 0;
+      font-size: 1.1em;
+      color: #00ffcc;
+    }
+
+    /* --- LIKE BUTTON --- */
+    .like-button {
+      margin: 3em 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+    }
+    .like-button button {
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+    .like-button button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
+    }
+
+    /* --- NAVIGATION --- */
+    .top-nav {
+      padding: 10px 0;
+      font-size: 0.9em;
+    }
+    .back-links {
+      margin-top: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="/en/index.html">← Back to Mission Control</a>
+  </div>
+
+  <h1>GrapheneOS: The Configuration of Sovereignty – From Smartphone to Digital Bunker</h1>
+  <p class="byline"><em>by Alien Investor</em></p>
+
+  <article id="content">
+    <p>You've "de-Googled" your phone. You've installed GrapheneOS. That's a win.</p>
+    <p>But: right out of the box, GrapheneOS still has to make trade-offs between maximum security and convenience. To truly rely on a device in a hostile environment, you need to configure it.</p>
+    <p>We're not just changing a few ringtones here. We're massively reducing the attack surface. Here are six critical configurations that turn your phone into a hardened node.</p>
+
+    <h2>1. The Kill Switch: Automatic Reboot (Auto Reboot)</h2>
+    <h3>The Concept</h3>
+    <p>Once your phone is switched on and has been unlocked at least once, the encryption keys are held in RAM (state: <em>After First Unlock</em>). If a capable attacker seizes your phone in this state, they have a larger time window to extract data.</p>
+    <p>When the phone reboots, it transitions to the <em>Before First Unlock</em> (BFU) state. The keys are wiped from memory. The device is encrypted "at rest". It is effectively a brick.</p>
+
+    <h3>The Configuration</h3>
+    <p>GrapheneOS lets you automate this process. If the device has not been unlocked for a set period of time, it forces a reboot.</p>
+    <ul>
+      <li><strong>Path:</strong> <code>Settings</code> → <code>Privacy &amp; Security</code> → <code>Exploit Protection</code> → <code>Auto Reboot</code></li>
+      <li><strong>Recommendation:</strong> Set this to 12 hours or less. (Default is 18 hours; depending on your threat model you can go as low as 10 minutes.)</li>
+    </ul>
+
+    <h2>2. The Nuclear Option: Duress Password</h2>
+    <h3>The Concept</h3>
+    <p>Encryption protects you from mathematics. It does not protect you from a wrench ("Rubber-Hose Cryptanalysis").</p>
+    <p>If you're forced to unlock your phone under threat of violence or at a border crossing, a normal PIN won't save you. That's where the <strong>Duress Password</strong> comes in. It's a special, alternative password. Enter it, and the device doesn't unlock — it gets <strong>irreversibly wiped</strong> (including installed eSIMs). The cryptographic keys are destroyed.</p>
+
+    <h3>The Configuration</h3>
+    <p>This is your last line of defense. Only use it if physical coercion is part of your threat model. The result is a "clean" factory-reset device.</p>
+    <ul>
+      <li><strong>Path:</strong> <code>Settings</code> → <code>Security &amp; Privacy</code> → <code>Device Unlock</code> → <code>Duress password</code></li>
+      <li><strong>Action:</strong> Define a PIN or password that wipes the entire device when entered.</li>
+    </ul>
+
+    <h2>3. Network Hygiene: Private DNS &amp; VPN Kill Switch</h2>
+    <h3>The Concept</h3>
+    <p>Your mobile carrier or ISP sees every domain you visit. This metadata is often more valuable than the content of the connection itself. And: if your VPN connection drops for even a second, data can "leak" over your regular line.</p>
+
+    <h3>The Configuration</h3>
+    <p>You need to encrypt your DNS queries (e.g. via NextDNS or Quad9) and make sure no data packet leaves the device without going through the VPN tunnel.</p>
+    <ul>
+      <li><strong>Private DNS:</strong> <code>Settings</code> → <code>Network &amp; Internet</code> → <code>Private DNS</code> → <em>Enter the provider's hostname</em>.</li>
+      <li><strong>VPN Kill Switch:</strong> <code>Settings</code> → <code>Network &amp; Internet</code> → <code>VPN</code> → (gear icon next to provider) → Enable <strong>"Always-on VPN"</strong> AND <strong>"Block connections without VPN"</strong>.</li>
+    </ul>
+
+    <h2>4. Isolation: User Profiles</h2>
+    <h3>The Concept</h3>
+    <p>In a standard Android setup, almost all apps live within the same user profile. That's risky. Apps can communicate with each other or harvest data.</p>
+    <p>User profiles use the OS isolation layer to put users into sandboxes — with separate app instances and separate data. Your banking app should not know your social media app exists.</p>
+
+    <h3>The Configuration</h3>
+    <p>Treat profiles like physically separate rooms.</p>
+    <ul>
+      <li><strong>Path:</strong> <code>Settings</code> → <code>System</code> → <code>Multiple Users</code></li>
+      <li><strong>Action:</strong> Create separate profiles for "Banking", "Social Media", or "High Security".</li>
+      <li><em>Note:</em> You can create up to 32 secondary user profiles.</li>
+    </ul>
+
+    <h2>5. Hardware Hardening: Sensors and Biometrics</h2>
+    <h3>The Concept</h3>
+    <p>Biometrics (fingerprint) are for convenience, not security. In some jurisdictions you can more easily be compelled to place your finger on a sensor than to hand over a password. Cameras and microphones are the ultimate surveillance tools.</p>
+
+    <h3>The Configuration</h3>
+    <ul>
+      <li><strong>Camera &amp; Microphone:</strong> Add the "Camera access" and "Microphone access" tiles to your Quick Settings. Toggling these off blocks access system-wide at the hardware level.</li>
+      <li><strong>Sensors:</strong> GrapheneOS also lets you deny apps access to sensors (accelerometers, etc.) by default.</li>
+      <li><strong>Fingerprint:</strong> When crossing borders or in critical situations, temporarily disable biometric unlock. Rely on a strong alphanumeric passphrase instead.</li>
+    </ul>
+
+    <h2>6. Strategic Silence: Wi-Fi Calling &amp; Airplane Mode</h2>
+    <h3>The Concept</h3>
+    <p>As long as your cellular modem is active, it inevitably communicates with cell towers. This enables triangulation and creates a seamless location profile with your carrier — even without GPS. That's a leak in your location-data security.</p>
+    <p>Constantly searching for network signal is also one of the biggest battery drains. A strategist wastes no resources. When you're in a trusted Wi-Fi environment, connecting to towers is an unnecessary risk.</p>
+    <h3>The Configuration</h3>
+    <p>We route communication through the Wi-Fi tunnel and physically disable the cellular radio. You remain reachable by phone, but to the towers you are effectively invisible.</p>
+    <ul>
+      <li><strong>Path:</strong> <code>Settings</code> → <code>Network &amp; Internet</code> → <code>SIMs</code> → <code>[Select your SIM]</code> → <code>Calling</code></li>
+      <li><strong>Action:</strong> Set the option to "Wi-Fi preferred".</li>
+      <li><strong>Operational procedure:</strong> Enable Airplane Mode (cuts all connections), then manually re-enable only Wi-Fi. Your device no longer broadcasts to towers, but receives calls and SMS encrypted over the internet.</li>
+    </ul>
+
+    <h2>Conclusion: Sovereignty Is a Process</h2>
+    <p>Sovereignty is not a product you buy. It's a process. GrapheneOS provides the walls. These settings provide the locks.</p>
+    <p>Take the time to understand your own threat model.</p>
+
+    <blockquote>
+      "Convenience is the enemy of security."
+    </blockquote>
+
+    <div class="box">
+      <h3>Tools for True Owners (Advertising/Affiliate)</h3>
+      <p style="font-size:0.95em;">
+        Tools I use myself — for Bitcoin self-custody and digital sovereignty:
+      </p>
+      <ul>
+        <li>
+          <svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="4" y="4" width="5" height="28" rx="1" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.7"/><rect x="9" y="4" width="22" height="28" rx="1" fill="#1a3a38" stroke="#00ffcc" stroke-width="0.7"/><line x1="13" y1="12" x2="27" y2="12" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="16" x2="27" y2="16" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="20" x2="27" y2="20" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="24" x2="22" y2="24" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/></svg> <strong>Alien Investor Handbooks:</strong><br>
+          My own ebook "GrapheneOS: Android in the Age of Surveillance" — the complete step-by-step guide to everything only touched on here.<br>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/buecher" target="_blank">https://alien-investor.org/buecher</a>
+        </li>
+            <li>
+          <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Lightning bolt" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> <strong>Buy Bitcoin in Europe – 21bitcoin:</strong><br>
+          Bitcoin-only app from Europe, ideal for DCA and stacking sats regularly — no shitcoins.<br>
+          Use the code <strong>ALIENINVESTOR</strong> for a permanent 0.2&nbsp;percentage point fee reduction
+          on instant and savings plan purchases.<br>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
+        </li>
+        <li>
+          ₿ <strong>Bitcoin in Self-Custody:</strong><br>
+          Hardware wallet instead of an exchange account. I use the BitBox — there's the classic BitBox02 and the new
+          BitBox for iPhone (Nova).<br>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
+        </li>
+        <li>
+          <svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-label="Satellite dish" role="img"><path d="M4 24 A16 16 0 0 1 20 8" fill="#00ffcc" fill-opacity="0.06" stroke="#00ffcc" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="8" r="2.8" fill="#00ffcc"/><line x1="20" y1="8" x2="28" y2="4" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><path d="M15 13 A6 6 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/><path d="M12 16 A9 9 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.45"/></svg> <strong>Privacy &amp; Mail:</strong><br>
+          For email, VPN, and cloud storage I use Proton — privacy-first and no Big Tech dependency.<br>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
+        </li>
+      </ul>
+      <p style="font-size:0.85em; color:#aaa;">
+        Note: Some of the links above are affiliate links. If you use them, you support my work at no extra cost to you. Thanks! <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-aff" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-aff)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg>
+      </p>
+    </div>
+
+  </article>
+
+  <div class="like-button">
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-287ef5)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Like</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+
+  <script>
+    (function() {
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      const btn = document.getElementById('likeButton');
+      const msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      });
+    })();
+  </script>
+
+  <div class="back-links">
+    <a href="/en/blog.html" style="font-size: 1.1em;">← Back to Blog Overview</a>
+    <a href="/en/index.html" style="font-size: 1.1em;">← Back to Mission Control</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+      <h3 style="margin-bottom: 15px;">
+        <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energy" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Recharge
+        <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Donate)</span>
+      </h3>
+
+      <a href="/en/spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+        Send fuel to the mothership
+      </a>
+
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Thanks for your support — for free content, financial sovereignty, and the extraterrestrial resistance! <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-287ef5" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-287ef5" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-287ef5)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-287ef5)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg>
+      </p>
+  </div>
+
+  <footer>
+    <p><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Contact" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> Contact: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+
+    <p style="margin-top: 20px;">
+      <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-287ef5" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-287ef5)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <strong>Disclaimer:</strong><br><br>
+      This article does not constitute financial, tax, or legal advice.<br>
+      I share my personal Alien opinion here — independent, rebellious, and free.<br>
+      Investing involves risks. Think for yourself, trust no one, and act on your own responsibility.
+    </p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>
