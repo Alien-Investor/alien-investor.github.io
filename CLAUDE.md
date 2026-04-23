@@ -114,6 +114,16 @@ Jede `/en/*.html` muss haben:
 - `X-AGB.html`, `template-artikel.html`, `Fidus.html`
 - `Roche-Aktienanalyse.html`, `Schindler-Analyse.html`, `Sika-Analyse.html`, `Ares-Capital.html`
 
+### Live-Tools (api.alien-investor.org) — Inline-Switching
+
+Live-Tools liegen unter `/home/alien/projekte/alien-investor/alien-analyzer-v2/` und sind ein separates Repo. Sie bekommen **kein separates `/en/`**, sondern einen inline DE|EN-Toggle (single file, `currentLang` + `i18n`-Objekt, localStorage `'alien-lang'`).
+
+**Fertig:**
+- `mission-control-v2.html` — DE|EN-Toggle in `.top-nav-right`; ~25 Strings übersetzt (Sektionslabels, Kartenbezeichnungen, Fear & Greed, Analyzer-Karte, Footer-Disclaimer)
+
+**Ausstehend:**
+- `alien-analyzer-v2.html` — ~70 JS-Strings: Alien Einordnung-Verdicts, Qualitätscheck-Labels (GUT/TEUER/STARK/MITTEL/GERING/HOCH), Metric-Hints, Tabellenköpfe (Kennzahl/Wert/Vergleich/Signal/Kontext), Statusmeldungen
+
 ### QA-Check für neue EN-Seiten
 
 ```bash
