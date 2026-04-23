@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Seite nicht gefunden | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 60px 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+    h1 { color: #00ffcc; }
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+      transition: color .2s, text-shadow .2s;
+    }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+    .hint {
+      margin-top: 2em;
+      color: #888;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <h1>404</h1>
+  <p>Diese Seite existiert nicht (noch nicht).</p>
+  <p id="en-hint" style="color:#888;">
+    English version of this article is not available yet.
+  </p>
+  <p>
+    <a id="de-link" href="/">&#8592; Zurück zur Startseite</a>
+  </p>
+  <p class="hint">Die englischen Versionen werden schrittweise veröffentlicht.</p>
+  <script>
+    // Fix the DE link after page load
+    (function () {
+      var p = window.location.pathname;
+      if (p.indexOf('/en/') === 0) {
+        var file = p.slice(4).split('/').pop() || 'index.html';
+        document.getElementById('de-link').href = '/' + file;
+        document.getElementById('de-link').textContent = '← Read in German';
+      }
+    })();
+  </script>
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>
