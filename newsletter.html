@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Newsletter — Signale aus dem All | Alien Investor</title>
+  <meta name="description" content="Trag dich in die Alien Investor Mailingliste ein und bleib in Kontakt — unabhängig von YouTube, Nostr oder anderen Plattformen.">
+  <link rel="alternate" hreflang="en" href="/en/newsletter.html">
+  <style>
+    html, body { overflow-x: hidden; }
+    body {
+      background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0 15px 20px 15px;
+      text-align: center;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* --- STERNENHIMMEL --- */
+    .stars-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: radial-gradient(ellipse at top, #0a0f1e 0%, #000 60%);
+      z-index: -2;
+    }
+    .stars-bg::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image:
+        radial-gradient(1px 1px at 10% 15%, #fff, transparent),
+        radial-gradient(1px 1px at 25% 40%, #fff, transparent),
+        radial-gradient(1px 1px at 40% 20%, #fff, transparent),
+        radial-gradient(2px 2px at 55% 60%, #00ffcc, transparent),
+        radial-gradient(1px 1px at 70% 35%, #fff, transparent),
+        radial-gradient(1px 1px at 85% 75%, #fff, transparent),
+        radial-gradient(1px 1px at 15% 80%, #fff, transparent),
+        radial-gradient(1px 1px at 35% 90%, #fff, transparent),
+        radial-gradient(1px 1px at 60% 10%, #fff, transparent),
+        radial-gradient(1px 1px at 90% 50%, #fff, transparent),
+        radial-gradient(1px 1px at 5% 55%, #fff, transparent),
+        radial-gradient(2px 2px at 75% 25%, #00ffcc, transparent);
+      animation: twinkle 6s ease-in-out infinite alternate;
+    }
+    @keyframes twinkle {
+      0% { opacity: 0.4; } 100% { opacity: 0.9; }
+    }
+
+    /* --- STERNENNEBEL --- */
+    .nebula {
+      position: fixed;
+      top: -10%;
+      left: -10%;
+      width: 120%;
+      height: 120%;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 900px 260px at 30% 35%, rgba(90, 30, 140, 0.22), transparent 60%),
+        radial-gradient(ellipse 1100px 200px at 70% 55%, rgba(0, 140, 180, 0.18), transparent 60%),
+        radial-gradient(ellipse 500px 180px at 50% 45%, rgba(180, 60, 140, 0.10), transparent 60%),
+        radial-gradient(circle 140px at 32% 36%, rgba(255, 255, 255, 0.10), transparent 70%),
+        radial-gradient(circle 120px at 68% 56%, rgba(0, 255, 204, 0.08), transparent 70%);
+      transform: rotate(-18deg);
+      filter: blur(30px);
+      opacity: 0.85;
+      animation: nebula-pulse 14s ease-in-out infinite alternate;
+      mix-blend-mode: screen;
+    }
+    @keyframes nebula-pulse {
+      0%   { opacity: 0.55; transform: rotate(-18deg) scale(1); }
+      50%  { opacity: 0.85; transform: rotate(-17deg) scale(1.04); }
+      100% { opacity: 0.65; transform: rotate(-19deg) scale(1.02); }
+    }
+
+    /* --- STERNSCHNUPPEN --- */
+    .shooting-star {
+      position: fixed;
+      width: 2px; height: 2px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.7);
+      z-index: -1;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .shooting-star::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 120px; height: 1px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.8), rgba(0,255,204,0.4), transparent);
+      transform: translateX(-120px);
+    }
+    .shooting-star.s1 { top: 12%; left: -5%; animation: shoot1 11s linear infinite; animation-delay: 3s; }
+    .shooting-star.s2 { top: 28%; left: -5%; animation: shoot2 17s linear infinite; animation-delay: 9s; }
+    .shooting-star.s3 { top: 50%; left: -5%; animation: shoot3 23s linear infinite; animation-delay: 15s; }
+    @keyframes shoot1 {
+      0%   { transform: translate(0, 0) rotate(15deg); opacity: 0; }
+      3%   { opacity: 1; }
+      8%   { transform: translate(110vw, 20vh) rotate(15deg); opacity: 0; }
+      100% { transform: translate(110vw, 20vh) rotate(15deg); opacity: 0; }
+    }
+    @keyframes shoot2 {
+      0%   { transform: translate(0, 0) rotate(22deg); opacity: 0; }
+      2%   { opacity: 1; }
+      7%   { transform: translate(115vw, 30vh) rotate(22deg); opacity: 0; }
+      100% { transform: translate(115vw, 30vh) rotate(22deg); opacity: 0; }
+    }
+    @keyframes shoot3 {
+      0%   { transform: translate(0, 0) rotate(10deg); opacity: 0; }
+      3%   { opacity: 1; }
+      9%   { transform: translate(115vw, 15vh) rotate(10deg); opacity: 0; }
+      100% { transform: translate(115vw, 15vh) rotate(10deg); opacity: 0; }
+    }
+
+    /* --- UFO --- */
+    .ufo {
+      position: fixed;
+      bottom: 18%;
+      left: -80px;
+      width: 72px; height: 36px;
+      z-index: 1;
+      pointer-events: none;
+      filter: drop-shadow(0 0 8px rgba(0, 255, 204, 0.55));
+      animation: ufo-fly 55s linear infinite;
+      animation-delay: 25s;
+      opacity: 0;
+    }
+    @keyframes ufo-fly {
+      0%   { left: -80px; opacity: 0; }
+      2%   { opacity: 1; }
+      37%  { left: 110vw; opacity: 0; }
+      100% { left: 110vw; opacity: 0; }
+    }
+    .ufo-light { animation: ufo-blink 1.2s infinite; }
+    .ufo-light:nth-child(2) { animation-delay: 0.2s; }
+    .ufo-light:nth-child(3) { animation-delay: 0.4s; }
+    .ufo-light:nth-child(4) { animation-delay: 0.6s; }
+    .ufo-light:nth-child(5) { animation-delay: 0.8s; }
+    .ufo-light:nth-child(6) { animation-delay: 1.0s; }
+    @keyframes ufo-blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+
+    /* --- LAYOUT --- */
+    .wrap {
+      max-width: 660px;
+      margin: 0 auto;
+    }
+    .top-nav {
+      padding: 15px 0;
+      font-size: 0.9em;
+      text-align: left;
+    }
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc;
+    }
+    h1 {
+      margin: 20px 0 18px;
+      font-size: 1.8em;
+      color: #00ffcc;
+    }
+    .hint {
+      color: #bbb;
+      margin: 0 0 30px;
+      font-size: 0.95em;
+      line-height: 1.6;
+    }
+
+    /* --- CARD --- */
+    .card {
+      border: 1px solid #00ffcc;
+      border-radius: 14px;
+      background: #050505;
+      padding: 28px 24px;
+      margin-top: 16px;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+      text-align: left;
+    }
+
+    /* --- FORMULAR --- */
+    .form-group {
+      margin-bottom: 18px;
+    }
+    label {
+      display: block;
+      margin-bottom: 7px;
+      color: #ccc;
+      font-size: 0.9em;
+    }
+    label .optional {
+      color: #666;
+      font-size: 0.85em;
+      margin-left: 4px;
+    }
+    input[type="email"],
+    input[type="text"] {
+      width: 100%;
+      padding: 12px 16px;
+      background: #0a0a0a;
+      border: 1px solid #333;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 1rem;
+      font-family: Arial, sans-serif;
+      box-sizing: border-box;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    input[type="email"]:focus,
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #00ffcc;
+      box-shadow: 0 0 8px rgba(0, 255, 204, 0.18);
+    }
+    input::placeholder { color: #444; }
+    .btn-submit {
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 12px;
+      border: 1px solid #00ffcc;
+      background: #000;
+      color: #00ffcc;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      margin-top: 6px;
+      transition: all 0.2s ease;
+    }
+    .btn-submit:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .btn-submit:active { transform: scale(0.98); }
+    .btn-submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .form-note {
+      color: #666;
+      font-size: 0.82em;
+      margin-top: 14px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    /* --- FEEDBACK --- */
+    .msg-success {
+      display: none;
+      text-align: center;
+      padding: 20px 10px;
+    }
+    .msg-success .icon { font-size: 2.2em; margin-bottom: 12px; }
+    .msg-success h2 { color: #00ffcc; margin: 0 0 10px; font-size: 1.3em; }
+    .msg-success p { color: #bbb; font-size: 0.95em; line-height: 1.6; margin: 0; }
+    .msg-error {
+      display: none;
+      color: #ff6060;
+      background: rgba(255, 60, 60, 0.06);
+      border: 1px solid rgba(255, 60, 60, 0.3);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.9em;
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    /* --- PGP SEKTION --- */
+    .pgp-card {
+      border: 1px solid #222;
+      border-radius: 14px;
+      background: #050505;
+      padding: 0;
+      margin-top: 16px;
+      box-shadow: 0 0 6px rgba(0, 255, 204, 0.04);
+    }
+    details {
+      text-align: left;
+    }
+    summary {
+      padding: 18px 24px;
+      cursor: pointer;
+      color: #888;
+      font-size: 0.9em;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 14px;
+      transition: color 0.2s;
+      user-select: none;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::before {
+      content: "▸";
+      color: #444;
+      font-size: 0.8em;
+      transition: transform 0.2s;
+      flex-shrink: 0;
+    }
+    details[open] summary::before { transform: rotate(90deg); }
+    details[open] summary { color: #ccc; border-radius: 14px 14px 0 0; border-bottom: 1px solid #1a1a1a; }
+    summary:hover { color: #00ffcc; }
+    .pgp-inner {
+      padding: 20px 24px 24px;
+    }
+    .pgp-inner p {
+      color: #888;
+      font-size: 0.88em;
+      line-height: 1.6;
+      margin: 0 0 16px;
+    }
+    .fingerprint-box {
+      background: #0a0a0a;
+      border: 1px solid #1e1e1e;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+    }
+    .fingerprint-box .fp-label {
+      color: #666;
+      font-size: 0.78em;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+    .fingerprint-box .fp-value {
+      font-family: monospace;
+      font-size: 0.85em;
+      color: #00ffcc;
+      word-break: break-all;
+      letter-spacing: 0.04em;
+    }
+    .fingerprint-box .fp-meta {
+      color: #555;
+      font-size: 0.78em;
+      margin-top: 6px;
+    }
+    .pgp-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+    .pgp-btn {
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: 1px solid #333;
+      background: #0a0a0a;
+      color: #888;
+      cursor: pointer;
+      font-size: 0.85em;
+      font-family: Arial, sans-serif;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .pgp-btn:hover {
+      border-color: #00ffcc;
+      color: #00ffcc;
+      text-shadow: none;
+    }
+    pre.pgp-key {
+      background: #050505;
+      border: 1px solid #1a1a1a;
+      border-radius: 8px;
+      padding: 14px;
+      font-family: monospace;
+      font-size: 0.73em;
+      color: #555;
+      white-space: pre-wrap;
+      word-break: break-all;
+      line-height: 1.5;
+      margin: 0;
+      max-height: 220px;
+      overflow-y: auto;
+    }
+    pre.pgp-key::-webkit-scrollbar { width: 4px; }
+    pre.pgp-key::-webkit-scrollbar-track { background: #0a0a0a; }
+    pre.pgp-key::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
+
+    /* --- FOOTER --- */
+    footer {
+      margin-top: 50px;
+      color: #666;
+      font-size: 0.85em;
+      border-top: 1px solid #222;
+      max-width: 660px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+      padding-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="stars-bg"></div>
+  <div class="nebula"></div>
+  <div class="shooting-star s1"></div>
+  <div class="shooting-star s2"></div>
+  <div class="shooting-star s3"></div>
+
+  <svg class="ufo" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <radialGradient id="ufo-dome" cx="50%" cy="80%" r="60%">
+        <stop offset="0%" stop-color="#5fffe0"/>
+        <stop offset="60%" stop-color="#1a3a38"/>
+        <stop offset="100%" stop-color="#0a1a1e"/>
+      </radialGradient>
+      <linearGradient id="ufo-body" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#4a5a5a"/>
+        <stop offset="50%" stop-color="#2a3638"/>
+        <stop offset="100%" stop-color="#101818"/>
+      </linearGradient>
+    </defs>
+    <path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/>
+    <ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body)" stroke="#00ffcc" stroke-width="0.4"/>
+    <ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/>
+    <ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/>
+    <circle class="ufo-light" cx="20" cy="20.5" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="27" cy="21.2" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="34" cy="21.6" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="41" cy="21.6" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="48" cy="21.2" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="55" cy="20.5" r="1.3" fill="#fff"/>
+  </svg>
+
+  <div class="wrap">
+
+    <div class="top-nav">
+      <a href="/index.html">← Zurück zur Zentrale</a>
+    </div>
+
+    <h1>
+      <svg style="width:0.85em;height:0.75em;vertical-align:-0.05em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="env-bg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#0d2a28"/>
+            <stop offset="100%" stop-color="#060e12"/>
+          </linearGradient>
+        </defs>
+        <rect x="2" y="6" width="32" height="22" rx="2.5" fill="url(#env-bg)" stroke="#00ffcc" stroke-width="0.9"/>
+        <polyline points="2,6 18,18 34,6" fill="none" stroke="#00ffcc" stroke-width="0.8"/>
+        <line x1="2" y1="28" x2="13" y2="18" stroke="#00ffcc" stroke-width="0.5" opacity="0.45"/>
+        <line x1="34" y1="28" x2="23" y2="18" stroke="#00ffcc" stroke-width="0.5" opacity="0.45"/>
+      </svg>
+      Newsletter — Signale aus dem All
+    </h1>
+
+    <p class="hint">
+      Kein Algorithmus. Kein Plattform-Risiko. Direkter Funk zwischen uns.<br>
+      Trag dich ein und du bekommst neue Inhalte, Analysen und Gedanken direkt in deine Inbox —<br>
+      egal ob YouTube dich shadowbannt oder Nostr gerade rauscht.
+    </p>
+
+    <div class="card" id="form-card">
+      <div id="form-wrap">
+        <div class="form-group">
+          <label for="nl-name">Name <span class="optional">(optional)</span></label>
+          <input type="text" id="nl-name" placeholder="Wie soll ich dich nennen?">
+        </div>
+        <div class="form-group">
+          <label for="nl-email">E-Mail-Adresse <span style="color:#ff6060; font-size:0.85em;">*</span></label>
+          <input type="email" id="nl-email" placeholder="deine@email.adresse" required>
+        </div>
+        <div id="form-error" class="msg-error"></div>
+        <button class="btn-submit" id="nl-submit" onclick="submitNewsletter()">
+          <svg style="width:0.85em;height:0.75em;vertical-align:-0.05em;" viewBox="0 0 36 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="2" y="6" width="32" height="22" rx="2.5" fill="none" stroke="currentColor" stroke-width="0.9"/>
+            <polyline points="2,6 18,18 34,6" fill="none" stroke="currentColor" stroke-width="0.8"/>
+          </svg>
+          Eintragen &amp; Signal empfangen
+        </button>
+        <p class="form-note">
+          Double-Opt-In — du bekommst nach dem Absenden eine Bestätigungsmail.<br>
+          Kein Spam. Abmeldung jederzeit per Link in jeder Mail.
+        </p>
+      </div>
+
+      <div class="msg-success" id="form-success">
+        <div class="icon">
+          <svg style="width:1.8em;height:1.5em;filter:drop-shadow(0 0 6px #00ffcc88);" viewBox="0 0 36 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="2" y="6" width="32" height="22" rx="2.5" fill="none" stroke="#00ffcc" stroke-width="1"/>
+            <polyline points="2,6 18,18 34,6" fill="none" stroke="#00ffcc" stroke-width="0.9"/>
+          </svg>
+        </div>
+        <h2>Signal abgeschickt!</h2>
+        <p>
+          Check deine Inbox — eine Bestätigungsmail ist unterwegs.<br>
+          Bitte den Link darin klicken, um die Anmeldung abzuschließen.<br>
+          <span style="color:#666; font-size:0.9em;">Nichts in der Inbox? Wirf auch einen Blick in den Spam-Ordner.</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="pgp-card">
+      <details>
+        <summary>
+          <svg style="width:0.9em;height:0.9em;flex-shrink:0;filter:drop-shadow(0 0 2px #00ffcc55);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs><radialGradient id="key-rg" cx="40%" cy="40%" r="60%"><stop offset="0%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#060e12"/></radialGradient></defs>
+            <circle cx="13" cy="14" r="7" fill="url(#key-rg)" stroke="#00ffcc" stroke-width="1.2"/>
+            <circle cx="13" cy="14" r="3.5" fill="#060e12" stroke="#00ffcc" stroke-width="0.8"/>
+            <rect x="18" y="13" width="14" height="2.5" rx="1.2" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.8"/>
+            <rect x="26" y="15.5" width="2" height="3.5" rx="0.5" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.7"/>
+            <rect x="22" y="15.5" width="2" height="2.5" rx="0.5" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.7"/>
+          </svg>
+          Für Versierte: Meine Mails mit PGP verifizieren (optional)
+        </summary>
+        <div class="pgp-inner">
+          <p>
+            Mit meinem öffentlichen PGP-Schlüssel kannst du sicherstellen, dass Newsletter-Mails wirklich von mir stammen —
+            nicht von jemand, der meinen Namen missbraucht. Das ist freiwillig und nur für Leute relevant, die sich mit Kryptographie auskennen.
+            Thunderbird, ProtonMail und viele andere Clients unterstützen PGP nativ.
+          </p>
+          <div class="fingerprint-box">
+            <div class="fp-label">Fingerprint (ed25519)</div>
+            <div class="fp-value">0908 03FC CC5F AD51 88FB&nbsp; 66DF 5FC0 87C7 EE13 FE51</div>
+            <div class="fp-meta">kontakt@alien-investor.org &middot; ProtonMail &middot; erstellt 2025-11-08</div>
+          </div>
+          <div class="pgp-actions">
+            <a href="/kontakt@alien-investor.org/pubkey.asc.key" download="kontakt-alien-investor-pubkey.asc" class="pgp-btn">
+              <svg style="width:0.85em;height:0.85em;vertical-align:-0.1em;" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M10 2 L10 13 M6 9 L10 13 L14 9" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="3" y1="17" x2="17" y2="17" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+              </svg>
+              Key herunterladen (.asc)
+            </a>
+            <button class="pgp-btn" onclick="copyKey()" id="copy-key-btn">
+              <svg style="width:0.85em;height:0.85em;vertical-align:-0.1em;" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="6" y="1" width="11" height="14" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.3"/>
+                <rect x="3" y="5" width="11" height="14" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.3"/>
+              </svg>
+              Key kopieren
+            </button>
+          </div>
+          <pre class="pgp-key" id="pgp-key-text">-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: ProtonMail
+
+xjMEaQ6RfBYJKwYBBAHaRw8BAQdAl+2cyCag1PLXV7HKc1PkfarW+G/4ScP5
+uAUe8rCU9drNN2tvbnRha3RAYWxpZW4taW52ZXN0b3Iub3JnIDxrb250YWt0
+QGFsaWVuLWludmVzdG9yLm9yZz7CwBEEExYKAIMFgmkOkXwDCwkHCRBfwIfH
+7hP+UUUUAAAAAAAcACBzYWx0QG5vdGF0aW9ucy5vcGVucGdwanMub3Jnakrp
+x1+uJQPPD8RWUiO15wm+RNIMXE80p9qD8jrddZQDFQoIBBYAAgECGQECmwMC
+HgEWIQQJCAP8zF+tUYj7Zt9fwIfH7hP+UQAAF0IBAIiiqqkBeLOUWXCJEfPG
+PuBrDi7I4MkXYntmADS/uZdVAP0VVvetfCBz7GMr3/1OGum+LFUSP8CsNJH4
+/SPuMiJdCsLAHgQQFggAkAWCaQ6RuQWDAZHgkQkQ2AbBr1l46Mc1FAAAAAAA
+HAAQc2FsdEBub3RhdGlvbnMub3BlbnBncGpzLm9yZ+cRIVjyGYo2dP/FLxv6
+NoosHG9wZW5wZ3AtY2FAcHJvdG9uLm1lIDxvcGVucGdwLWNhQHByb3Rvbi5t
+ZT4WIQQKhlL+XVM4YFeJn+nYBsGvWXjoxwAAFtgBAOZL7pr9jqLhOR6PzWac
+M6Bx/cFREWIJnbnO5uX+xKVbAQCWFHyESXLyk1raKrbKOIt6e6SCmpfvGZH8
+OXeQU76XDs44BGkOkXwSCisGAQQBl1UBBQEBB0CFH+6Pbwz5qSrefu38/FrZ
+Dd7RcR3AskUyQQfna6reBAMBCAfCvgQYFgoAcAWCaQ6RfAkQX8CHx+4T/lFF
+FAAAAAAAHAAgc2FsdEBub3RhdGlvbnMub3BlbnBncGpzLm9yZ3W+GRFOacC6
+5edBSeJ5fZe141hhV8Q+wseZ4MxI0MkFApsMFiEECQgD/MxfrVGI+2bfX8CH
+x+4T/lEAAGnPAQD7Fdoo3rJsiFAJX/fbXmN4Z/Ymrw3aqpa0H1zJyyStWQEA
+jUBNwm/aC+rM+pv2SFnCRGpfsiHDpQonjZ93XvrkVAU=
+=xc5+
+-----END PGP PUBLIC KEY BLOCK-----</pre>
+        </div>
+      </details>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>
+      <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs><radialGradient id="ai-head-f" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs>
+        <line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/>
+        <circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/>
+        <line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/>
+        <circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/>
+        <path fill="url(#ai-head-f)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/>
+        <path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/>
+        <path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/>
+      </svg>
+      Alien Investor — freie Inhalte, echtes Eigentum, außerirdische Unabhängigkeit.<br>
+      <a href="/index.html">Zurück zur Zentrale</a>
+    </p>
+  </footer>
+
+  <script>
+    async function submitNewsletter() {
+      const emailInput = document.getElementById('nl-email');
+      const nameInput = document.getElementById('nl-name');
+      const btn = document.getElementById('nl-submit');
+      const errorEl = document.getElementById('form-error');
+
+      const email = emailInput.value.trim();
+      const name = nameInput.value.trim();
+
+      errorEl.style.display = 'none';
+
+      if (!email || !email.includes('@')) {
+        errorEl.textContent = 'Bitte eine gültige E-Mail-Adresse eingeben.';
+        errorEl.style.display = 'block';
+        emailInput.focus();
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Sende Signal…';
+
+      try {
+        const res = await fetch('https://list.alien-investor.org/api/public/subscription', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: email,
+            name: name || undefined,
+            list_uuids: ['7f82aefc-873d-4cd4-8b54-2727c06895af']
+          })
+        });
+
+        if (res.ok) {
+          document.getElementById('form-wrap').style.display = 'none';
+          document.getElementById('form-success').style.display = 'block';
+        } else {
+          const data = await res.json().catch(() => ({}));
+          errorEl.textContent = data.message
+            ? 'Fehler: ' + data.message
+            : 'Etwas ist schiefgelaufen. Bitte später erneut versuchen.';
+          errorEl.style.display = 'block';
+          btn.disabled = false;
+          btn.innerHTML = '<svg style="width:0.85em;height:0.75em;vertical-align:-0.05em;" viewBox="0 0 36 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="6" width="32" height="22" rx="2.5" fill="none" stroke="currentColor" stroke-width="0.9"/><polyline points="2,6 18,18 34,6" fill="none" stroke="currentColor" stroke-width="0.8"/></svg> Eintragen &amp; Signal empfangen';
+        }
+      } catch (err) {
+        errorEl.textContent = 'Verbindungsfehler — bitte später erneut versuchen.';
+        errorEl.style.display = 'block';
+        btn.disabled = false;
+        btn.innerHTML = '<svg style="width:0.85em;height:0.75em;vertical-align:-0.05em;" viewBox="0 0 36 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="6" width="32" height="22" rx="2.5" fill="none" stroke="currentColor" stroke-width="0.9"/><polyline points="2,6 18,18 34,6" fill="none" stroke="currentColor" stroke-width="0.8"/></svg> Eintragen &amp; Signal empfangen';
+      }
+    }
+
+    document.getElementById('nl-email').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') submitNewsletter();
+    });
+
+    async function copyKey() {
+      const keyText = document.getElementById('pgp-key-text').textContent;
+      const btn = document.getElementById('copy-key-btn');
+      try {
+        await navigator.clipboard.writeText(keyText);
+        btn.textContent = '✓ Kopiert!';
+        setTimeout(() => { btn.innerHTML = '<svg style="width:0.85em;height:0.85em;vertical-align:-0.1em;" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="6" y="1" width="11" height="14" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.3"/><rect x="3" y="5" width="11" height="14" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg> Key kopieren'; }, 2000);
+      } catch (e) {
+        btn.textContent = 'Fehler beim Kopieren';
+      }
+    }
+  </script>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>
