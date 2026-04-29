@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tails OS: The Amnesic Operating System for Digital Freedom | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tails is a live OS that leaves no traces, routes everything through Tor, and disappears the moment you pull the USB stick. Who uses it, why the NSA fears it, and how to get started.">
+  <link rel="canonical" href="/en/tails-os-spurenlos-im-netz.html">
+  <link rel="alternate" hreflang="de" href="/tails-os-spurenlos-im-netz.html">
+  <style>
+    body { background-color: #000; color: #fff; font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 0 15px 20px 15px; }
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
+    h2 { margin-top: 2.5em; border-bottom: 1px solid #1a3a33; padding-bottom: 8px; }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+    code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; font-family: monospace; }
+    em { color: #ccc; }
+    .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
+    blockquote { border-left: 3px solid #00ffcc; margin: 2em 0; padding: 0.5em 1em; color: #ddd; background: #050505; font-style: italic; }
+    .box { border: 1px solid #00ffcc; background: #050505; padding: 1.5em; border-radius: 8px; margin: 2em 0; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 0.6em; }
+    .like-button { margin: 3em 0; display: flex; align-items: center; justify-content: center; gap: 1em; font-size: 1em; }
+    .like-button button { background: #000; color: #00ffcc; border: 1px solid #00ffcc; padding: 0.6em 1.2em; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.2s ease; }
+    .like-button button:hover, .like-button button:active { background: #00ffcc; color: #000; box-shadow: 0 0 15px #00ffcc; }
+    .like-button button:disabled { border-color: #444; color: #888; background: #111; cursor: default; }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    .back-links { margin-top: 40px; text-align: center; display: flex; flex-direction: column; gap: 10px; }
+    footer { margin-top: 60px; padding: 20px; font-size: 0.85em; color: #666; border-top: 1px solid #222; text-align: center; }
+    table { width: 100%; border-collapse: collapse; margin: 1.5em 0; }
+    th { background: #050505; color: #00ffcc; padding: 0.6em 1em; text-align: left; border-bottom: 1px solid #00ffcc; }
+    td { padding: 0.5em 1em; border-bottom: 1px solid #222; color: #ccc; }
+    tr:last-child td { border-bottom: none; }
+  </style>
+</head>
+<body>
+  <div class="top-nav"><a href="/en/index.html">← Back to HQ</a></div>
+
+  <h1>Tails OS: The Amnesic Operating System for Digital Freedom</h1>
+  <p class="byline"><em>by Alien Investor · April 2026</em></p>
+
+  <article id="content">
+
+    <p>
+      Every operating system you use leaves a trail.
+      Browser history. File access logs. Network connections. Swap files. Temporary data. DNS cache.
+      Your computer keeps a diary you never meant to write — and anyone with physical access can read it.
+    </p>
+    <p>
+      Tails is the answer to that problem.
+    </p>
+    <p>
+      A live operating system that boots from a USB stick, remembers nothing, routes all traffic through Tor,
+      and vanishes without a trace the moment you pull the plug. No browser history. No file access log.
+      No proof you were ever there.
+    </p>
+
+    <blockquote>
+      "Privacy is not a crime. It is self-defense."
+    </blockquote>
+
+    <h2>What Is Tails?</h2>
+
+    <p>
+      Tails stands for <strong>The Amnesic Incognito Live System</strong>. The name explains the concept completely:
+    </p>
+    <ul>
+      <li><strong>Amnesic</strong> — it forgets everything after each session</li>
+      <li><strong>Incognito</strong> — it routes all traffic through Tor</li>
+      <li><strong>Live</strong> — it runs from a USB stick, not your hard drive</li>
+    </ul>
+    <p>
+      First released on June 23, 2009, Tails emerged from the merger of two earlier projects: "Amnesia" and "Incognito."
+      In September 2024, the Tails Project officially merged with the Tor Project —
+      two of the most important privacy tools in existence, now under one non-profit roof.
+    </p>
+    <p>
+      Technically, Tails today is based on <strong>Debian 13 (Trixie)</strong>, uses the GNOME desktop, and is roughly 1.9 GB in size.
+    </p>
+
+    <h2>Three Principles That Make It Work</h2>
+
+    <h3>1. Amnesia — No Traces Left Behind</h3>
+    <p>
+      Tails runs entirely in your computer's RAM. It writes nothing to the hard drive.
+      When you shut it down or remove the USB stick, it overwrites the RAM — protection against cold-boot attacks.
+    </p>
+    <p>
+      Every session starts from zero. No browser history. No saved passwords. No trace of what you did.
+      The computer you used has no idea you were ever there.
+    </p>
+
+    <h3>2. Tor Forced Routing — Anonymity on the Network</h3>
+    <p>
+      Tails forces every outgoing connection through the Tor network. No exceptions.
+      Applications trying to reach the internet without Tor are automatically blocked.
+    </p>
+    <p>
+      Tor routes your traffic through three independent relays.
+      No single relay knows both who you are and where you're going.
+      Your ISP sees only that you're using Tor — not what you're doing with it.
+    </p>
+    <p>
+      For networks where Tor itself is blocked, Tails supports <strong>bridges</strong> —
+      obfuscated entry points that hide the fact that you're connecting to Tor at all.
+    </p>
+
+    <h3>3. Persistent Storage — Selective Memory</h3>
+    <p>
+      The amnesic design is powerful. But sometimes you need data that survives sessions:
+      passwords, documents, Wi-Fi credentials, additional software.
+    </p>
+    <p>
+      Tails solves this with an optional <strong>Persistent Storage</strong> — an encrypted partition on the USB stick itself,
+      secured with LUKS and DMCrypt. You decide what gets stored. You decide at startup whether to unlock it.
+    </p>
+    <p>
+      Important: the partition is encrypted, but not hidden.
+      A forensic analyst examining your USB stick can detect that an encrypted partition exists — but cannot read it without your passphrase.
+      Use five to seven random words. Nothing less.
+    </p>
+
+    <h2>The Software Toolbox</h2>
+
+    <p>Tails ships with a curated set of pre-configured security tools:</p>
+
+    <table>
+      <thead>
+        <tr><th>Category</th><th>Tools</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Browser</td><td>Tor Browser (Firefox), uBlock Origin, NoScript</td></tr>
+        <tr><td>Communication</td><td>Thunderbird (OpenPGP), Pidgin (OTR), OnionShare</td></tr>
+        <tr><td>Cryptography</td><td>GnuPG, Kleopatra, VeraCrypt / LUKS</td></tr>
+        <tr><td>Privacy</td><td>Metadata Cleaner (mat2), GNOME Secrets</td></tr>
+        <tr><td>Bitcoin</td><td>Electrum</td></tr>
+        <tr><td>Productivity</td><td>LibreOffice, GIMP, Inkscape, Audacity</td></tr>
+      </tbody>
+    </table>
+
+    <p>
+      Everything ships with secure defaults.
+      The goal: make doing the right thing easier than doing the wrong thing.
+    </p>
+
+    <h2>Who Uses Tails — and Why</h2>
+
+    <p>
+      <strong>Journalists and whistleblowers</strong> have the most to lose if their tools fail.
+      This is not theoretical.
+      When Edward Snowden handed classified NSA documents to journalists Glenn Greenwald, Laura Poitras,
+      and Barton Gellman, as well as security researcher Bruce Schneier, all parties used Tails for secure communication.
+      It worked.
+    </p>
+    <p>
+      <strong>Activists in repressive regimes</strong> use Tails to organize anonymously,
+      publish without attribution, and communicate without leaving evidence.
+    </p>
+    <p>
+      <strong>Privacy-conscious everyday users</strong> use it for a simpler reason:
+      booting Tails on a friend's laptop or a library computer means working privately without leaving anything behind.
+      No passwords in the browser. No session cookies. No history.
+      You leave as if you were never there.
+    </p>
+
+    <p>
+      The NSA took notice. Internal documents leaked in 2014 revealed that NSA's XKeyscore system
+      <strong>tracks and flags anyone</strong> who searches for Tails or visits its website.
+      Internal slides from 2012 classified Tails as a <em>"major threat"</em> to their mission
+      and noted that using Tails alongside other privacy tools was <em>"catastrophic"</em> to their surveillance capabilities.
+    </p>
+
+    <blockquote>
+      That is a recommendation.
+    </blockquote>
+
+    <h2>What Tails Cannot Do</h2>
+
+    <p>
+      Tails is powerful. Tails is not magic.
+    </p>
+    <ul>
+      <li>
+        <strong>BIOS and firmware attacks:</strong> No operating system protects against firmware manipulation.
+        Tails cannot either.
+      </li>
+      <li>
+        <strong>Hardware keyloggers:</strong> Physical devices attached to USB ports or between a keyboard and its connection
+        can capture keystrokes. Tails includes a screen keyboard as a countermeasure —
+        but if someone had physical access to your hardware before you sat down, software cannot fix that.
+      </li>
+      <li>
+        <strong>Compromised exit nodes:</strong> The connection from the last Tor relay to the destination server
+        is only protected if you use HTTPS. Always use HTTPS.
+      </li>
+      <li>
+        <strong>Your own behavior:</strong> Logging into your real email account while using Tails defeats the purpose.
+        Don't mix identities. Restart between tasks.
+      </li>
+    </ul>
+
+    <p>
+      A real-world example from 2017: the FBI, working with Facebook, exploited a zero-day vulnerability
+      in GNOME Videos — the default video player in Tails — to reveal the real IP address of a criminal
+      (the Buster Hernandez case). The vulnerability is believed to have been patched.
+      The lesson remains: zero-days exist, and state actors use them.
+    </p>
+
+    <h2>Installation: What You Need</h2>
+
+    <ul>
+      <li>A USB stick with at least <strong>8 GB</strong> of storage — dedicated exclusively to Tails</li>
+      <li>A <strong>64-bit x86 processor</strong> — most PCs from the last decade qualify</li>
+      <li>Download the ~1.9 GB image from <strong>tails.net only</strong> — verify the signature</li>
+      <li>Install from a clean, uninfected system</li>
+      <li>Shut down completely before inserting the USB stick — never plug it into a running system</li>
+    </ul>
+
+    <p>
+      Tails does <strong>not</strong> run on smartphones or tablets. This is not a limitation — it is the correct scope.
+    </p>
+
+    <div class="box">
+      <h3>Tails vs. GrapheneOS</h3>
+      <p>These two tools are often mentioned together. They solve different problems:</p>
+      <table>
+        <thead>
+          <tr><th></th><th>Tails</th><th>GrapheneOS</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Platform</td><td>Desktop / Laptop</td><td>Smartphone (Pixel)</td></tr>
+          <tr><td>Operation</td><td>Temporary, live from USB</td><td>Permanently installed</td></tr>
+          <tr><td>Network</td><td>Tor-forced</td><td>Standard internet</td></tr>
+          <tr><td>Purpose</td><td>Anonymity, no traces</td><td>System hardening, app sandbox</td></tr>
+        </tbody>
+      </table>
+      <p>
+        They complement each other perfectly. GrapheneOS hardens your <strong>persistent daily identity</strong> on mobile.
+        Tails creates a <strong>temporary, amnesic identity</strong> on desktop —
+        for the tasks where it matters most.
+      </p>
+    </div>
+
+    <h2>Conclusion</h2>
+
+    <p>
+      Tails is not for everyone, every day.
+      It is for specific situations where the cost of leaving a trace is too high.
+    </p>
+    <p>
+      A foreign correspondent in an authoritarian state.
+      A whistleblower preparing documents.
+      Anyone who must use a computer they don't trust.
+    </p>
+    <p>
+      For those situations, a USB stick with Tails is one of the most powerful privacy tools available.
+      The NSA confirmed it themselves.
+    </p>
+    <p>
+      Download at <a href="https://tails.net" target="_blank" rel="noopener">tails.net</a>. Verify the signature. Boot from bare metal. Use it correctly.
+    </p>
+
+    <blockquote>
+      "Trust is good. Cryptography is better."
+    </blockquote>
+
+    <div class="box">
+      <h3>Tools for True Owners</h3>
+      <ul>
+        <li>
+          <strong>GrapheneOS Handbook:</strong> Everything for a sovereign, Google-free Android — setup, apps &amp; digital sovereignty.<br>
+          <a href="https://alien-investor.org/en/buecher.html" target="_blank" rel="noopener">alien-investor.org/en/buecher.html</a>
+        </li>
+        <li>
+          <strong>Privacy &amp; Mail:</strong> Email, VPN and cloud without Big Tech — Proton.<br>
+          <a href="https://alien-investor.org/proton" target="_blank" rel="noopener">alien-investor.org/proton</a>
+        </li>
+        <li>
+          <strong>₿ Bitcoin in Self-Custody:</strong> Hardware wallet instead of exchange account. Code <code>ALIENINVESTOR</code> = 5% off the BitBox.<br>
+          <a href="https://alien-investor.org/bitbox" target="_blank" rel="noopener">alien-investor.org/bitbox</a>
+        </li>
+        <li>
+          <strong>₿ Buy Bitcoin (Europe):</strong> Bitcoin-only, no shitcoin noise. Code <code>ALIENINVESTOR</code> = permanent −0.2% fee reduction.<br>
+          <a href="https://alien-investor.org/21bitcoin" target="_blank" rel="noopener">alien-investor.org/21bitcoin</a>
+        </li>
+      </ul>
+    </div>
+
+  </article>
+
+  <div class="like-button">
+    <button id="like-btn">👍 Helpful</button>
+    <span id="like-msg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+  <script>
+    (function () {
+      document.getElementById('like-btn').addEventListener('click', function () {
+        this.disabled = true;
+        this.textContent = '✓ Thanks!';
+        document.getElementById('like-msg').textContent = 'Glad you enjoyed the article.';
+      });
+    })();
+  </script>
+
+  <div class="back-links">
+    <a href="/en/blog.html" style="font-size: 1.1em;">← Back to Blog Overview</a>
+    <a href="/en/index.html" style="font-size: 1.1em;">← Back to HQ</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+    <h3 style="margin-bottom: 15px;">
+      <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energy" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Recharge the Signal
+      <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Donate)</span>
+    </h3>
+    <a href="/en/spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+      Send fuel to the mothership
+    </a>
+    <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+      Thanks for your support – for free content, financial sovereignty, and the extraterrestrial resistance! <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-tails" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-tails" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-tails)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-tails)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg>
+    </p>
+  </div>
+
+  <footer>
+    <p><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Contact" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> Contact: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a> <span style="color:#666; font-size:0.85em;">·</span> <a href="/kontakt@alien-investor.org/pubkey.asc.key" download="kontakt-alien-investor-pubkey.asc" style="color:#555; font-size:0.8em; text-decoration:none;" title="PGP public key for encrypted messages">PGP Key</a></p>
+    <p style="margin-top: 20px;">
+      <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-tails" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-tails)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <strong>Disclaimer:</strong><br><br>
+      Not financial, tax, or legal advice. Personal opinion only. Think for yourself.
+    </p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>
