@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Vanadium: Der sicherste Browser auf Android — und warum er das kann | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Vanadium ist nicht nur ein Browser — er ist das System-WebView von GrapheneOS, tief ins OS integriert, vollständig entgoogelt und mit Hardening-Maßnahmen, die kein anderer mobiler Browser erreicht.">
+  <link rel="canonical" href="/vanadium-browser-grapheneos.html">
+  <link rel="alternate" hreflang="en" href="/en/vanadium-browser-grapheneos.html">
+  <style>
+    body { background-color: #000; color: #fff; font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 0 15px 20px 15px; }
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+    code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; font-family: monospace; }
+    em { color: #ccc; }
+    .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
+    blockquote { border-left: 3px solid #00ffcc; margin: 2em 0; padding: 0.5em 1em; color: #ddd; background: #050505; font-style: italic; }
+    .box { border: 1px solid #00ffcc; background: #050505; padding: 1.5em; border-radius: 8px; margin: 2em 0; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 0.6em; }
+    .like-button { margin: 3em 0; display: flex; align-items: center; justify-content: center; gap: 1em; font-size: 1em; }
+    .like-button button { background: #000; color: #00ffcc; border: 1px solid #00ffcc; padding: 0.6em 1.2em; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.2s ease; }
+    .like-button button:hover, .like-button button:active { background: #00ffcc; color: #000; box-shadow: 0 0 15px #00ffcc; }
+    .like-button button:disabled { border-color: #444; color: #888; background: #111; cursor: default; }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    .back-links { margin-top: 40px; text-align: center; display: flex; flex-direction: column; gap: 10px; }
+    footer { margin-top: 60px; padding: 20px; font-size: 0.85em; color: #666; border-top: 1px solid #222; text-align: center; }
+    table { width: 100%; border-collapse: collapse; margin: 1.5em 0; }
+    th { background: #050505; color: #00ffcc; padding: 0.6em 1em; text-align: left; border-bottom: 1px solid #00ffcc; }
+    td { padding: 0.5em 1em; border-bottom: 1px solid #222; color: #ccc; }
+    tr:last-child td { border-bottom: none; }
+  </style>
+</head>
+<body>
+  <div class="top-nav"><a href="index.html">← Zurück zur Zentrale</a></div>
+
+  <h1>Vanadium: Der sicherste Browser auf Android</h1>
+  <p class="byline"><em>von Alien Investor · Mai 2026</em></p>
+
+  <article id="content">
+
+    <p>
+      Jeder Browser hinterlässt Spuren. Nicht nur lokal — sondern im Netz.
+      Fingerabdrücke aus tausend kleinen Datenpunkten: Bildschirmgröße, GPU-Informationen,
+      Akkustand, Zeitzone, installierte Sensoren, Schriftarten.
+      Der Browser ist die größte Angriffsfläche auf deinem Gerät.
+    </p>
+    <p>
+      Vanadium ist GrapheneOS' Antwort auf dieses Problem.
+      Kein Marketing-Browser. Keine umbenannte Chromium-Kopie mit Privatmodus-Icon.
+      Sondern ein tief ins Betriebssystem integriertes Sicherheitswerkzeug —
+      mit Hardening-Maßnahmen, die kein anderer mobiler Browser erreicht.
+    </p>
+
+    <blockquote>
+      „Privacy is not a feature. It is an architecture."
+    </blockquote>
+
+    <h2>Was Vanadium ist — und was nicht</h2>
+
+    <p>
+      Vanadium ist ein Privacy- und Security-gehärteter Chromium-Fork, der ausschließlich für GrapheneOS entwickelt wird.
+      Er erfüllt zwei Rollen gleichzeitig:
+    </p>
+    <ul>
+      <li><strong>Standard-Browser</strong> — der Browser, den du täglich nutzt</li>
+      <li><strong>System-WebView</strong> — das Rendering-Modul, das fast alle anderen Apps auf dem Gerät nutzen, um Webinhalte darzustellen</li>
+    </ul>
+    <p>
+      Das zweite ist entscheidend. Selbst wenn du Vanadium nie direkt öffnest,
+      schützt seine Sicherheitsarchitektur das gesamte System —
+      jede App, die eine Webseite lädt, einen OAuth-Login zeigt oder einen Link öffnet, läuft durch Vanadium.
+    </p>
+    <p>
+      Vollständig entgoogelt: Vanadium verbindet sich standardmäßig nur mit GrapheneOS-Servern.
+      Genau zwei Dienste laufen im Hintergrund — Zertifikats-Updates und DNS-over-HTTPS-Konnektivitätschecks,
+      beide über GrapheneOS-Infrastruktur.
+      Keine Telemetrie. Kein Safe Browsing Reporting. Kein Google.
+    </p>
+
+    <h2>Die Hardening-Architektur</h2>
+
+    <h3>JIT-Compiler deaktiviert</h3>
+    <p>
+      Der V8 JavaScript Just-In-Time Compiler ist im Browser standardmäßig aus.
+      JIT-Compiler sind einer der häufigsten Angriffsvektoren in modernen Browsern —
+      sie generieren dynamisch ausführbaren Code im Speicher,
+      was für komplexe Exploit-Chains ausgenutzt wird.
+      Ohne JIT fällt diese gesamte Angriffskategorie weg.
+    </p>
+    <p>
+      Für WebAssembly nutzt Vanadium stattdessen den <strong>DrumBrake-Interpreter</strong> —
+      bisher exklusiv in Microsoft Edge verfügbar, jetzt in Vanadium integriert.
+      WebAssembly läuft damit sicher ohne dynamische Codegenerierung.
+    </p>
+    <p>
+      <strong>Wichtige Nuance:</strong> Im Browser ist JIT standardmäßig aus.
+      Im WebView — also für Webinhalte in anderen Apps — ist JIT standardmäßig an,
+      kann aber global oder pro App deaktiviert werden.
+    </p>
+
+    <h3>Memory Hardening: MTE + hardened_malloc</h3>
+    <p>
+      Vanadium nutzt GrapheneOS' eigenen <strong>hardened_malloc</strong> — einen sicherheitsfokussierten
+      Speicher-Allocator, der Heap-Metadaten isoliert und Heap-Spraying sowie Use-after-free-Angriffe erschwert.
+      Kombiniert mit <strong>Hardware Memory Tagging (MTE)</strong> werden Memory-Corruption-Angriffe
+      auf Hardwareebene abgefangen — noch bevor sie Schaden anrichten können.
+    </p>
+
+    <h3>Strict Site Isolation</h3>
+    <p>
+      Jede Website und jedes iframe läuft in einem eigenen Prozess.
+      Das verhindert Seitenkanal-Angriffe wie Spectre und blockiert Cross-Site-Datenzugriffe —
+      kein Tab kann die Session-Tokens oder Cookies eines anderen auslesen.
+    </p>
+
+    <h3>Post-Quantum-Kryptografie</h3>
+    <p>
+      Hybride Post-Quantum-Kryptografie ist standardmäßig aktiviert —
+      identisch mit Chromiums Verhalten auf Desktop-Systemen.
+      Auf den unterstützten Pixel-Geräten ist das kein Geschwindigkeitsproblem.
+    </p>
+
+    <h2>Was Vanadium von Haus aus sperrt</h2>
+
+    <p>
+      Das ist der Teil, der Vanadium wirklich auszeichnet.
+      Die meisten Browser müssen manuell konfiguriert werden, um sicher zu sein.
+      Bei Vanadium sind die richtigen Einstellungen von Anfang an aktiv:
+    </p>
+
+    <table>
+      <thead>
+        <tr><th>Einstellung</th><th>Standard in Vanadium</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Third-Party-Cookies</td><td>Gesperrt</td></tr>
+        <tr><td>Sensor-Zugriff (Gyroskop, Beschleunigungsmesser)</td><td>Gesperrt</td></tr>
+        <tr><td>Hintergrund-Sync</td><td>Gesperrt</td></tr>
+        <tr><td>Payment API</td><td>Gesperrt</td></tr>
+        <tr><td>DRM / Protected Media</td><td>Gesperrt</td></tr>
+        <tr><td>Hyperlink Auditing</td><td>Gesperrt</td></tr>
+        <tr><td>WebGPU</td><td>Gesperrt (Angriffsfläche)</td></tr>
+        <tr><td>Do Not Track</td><td>Aktiviert</td></tr>
+        <tr><td>WebRTC IP Handling</td><td>Privatester Wert</td></tr>
+        <tr><td>Accept-Language Header</td><td>Reduziert</td></tr>
+        <tr><td>Battery API</td><td>Zeigt immer 100 % / lädt (Fingerprint-Schutz)</td></tr>
+      </tbody>
+    </table>
+
+    <p>
+      Der letzte Punkt verdient besondere Aufmerksamkeit:
+      Die Battery API zeigt gegenüber Websites immer 100 % Ladezustand und "lädt gerade" —
+      unabhängig vom tatsächlichen Akku. Ein klassischer Fingerprinting-Vektor ist damit blind.
+    </p>
+
+    <h2>Fingerprinting-Schutz durch Uniformität</h2>
+
+    <p>
+      Vanadium setzt nicht auf aktives Fingerprint-Spoofing, sondern auf <strong>Crowd Blending</strong>:
+      Alle Vanadium-Nutzer teilen ähnliche Pixel-Hardware und identische Standardeinstellungen.
+      Im Netz sehen alle Vanadium-Instanzen nahezu gleich aus — der Einzelne taucht in der Masse unter.
+    </p>
+    <p>
+      Konkret umgesetzt durch:
+    </p>
+    <ul>
+      <li><strong>User-Agent vereinheitlicht</strong> — Standard Android-Platzhalterwerte, kein Gerätemodell, keine Build-Version</li>
+      <li><strong>High Entropy Client Hints</strong> — durch Standard-Platzhalterwerte ersetzt, kein Gerät- oder OS-Leak</li>
+      <li><strong>Battery API</strong> — immer 100 %, verhindert hardwarebasiertes Fingerprinting</li>
+      <li><strong>Do Not Track</strong> — aktiviert, hauptsächlich um Nutzer nicht durch Abweichung zu differenzieren</li>
+    </ul>
+
+    <blockquote>
+      Die wichtigste Regel: Wenig verändern. Jede Abweichung vom Standard macht dich einzigartiger — nicht anonymer.
+    </blockquote>
+
+    <h2>Sinnvolle Einstellungen</h2>
+
+    <h3>Datenschutz &amp; Sicherheit</h3>
+    <ul>
+      <li>
+        <strong>Safe Browsing → „Kein Schutz" lassen (Standard).</strong>
+        Die Optionen „Standard" und „Erweiterter Schutz" senden besuchte URLs und Seiteninhalt an Google-Server.
+        Vanadiums strukturelle Härtung schützt effektiver als ein URL-Abgleich mit Google-Datenbanken.
+      </li>
+      <li>
+        <strong>Externe Links im Inkognito-Modus öffnen → aktivieren.</strong>
+        Links aus anderen Apps (E-Mail-Client, Messenger) werden isoliert geöffnet —
+        deine Browser-Session bleibt unberührt.
+      </li>
+      <li>
+        <strong>Tabs beim Beenden schließen → aktivieren.</strong>
+        Sitzungsdaten werden beim Schließen des Browsers verworfen.
+      </li>
+      <li>
+        <strong>WebRTC IP Handling Policy → Standard lassen.</strong>
+        Vanadium setzt diesen Wert bereits auf das privateste Niveau — P2P-Verbindungen, die die echte IP leaken könnten, sind blockiert.
+      </li>
+      <li>
+        <strong>Referrer-Informationen → reduzieren oder deaktivieren</strong> für cross-origin Links,
+        wenn du nicht möchtest, dass Websites wissen, woher du kommst.
+      </li>
+    </ul>
+
+    <h3>Website-Einstellungen (Site Settings)</h3>
+    <ul>
+      <li>
+        <strong>JavaScript JIT → Standard lassen (aus).</strong>
+        Falls eine bestimmte Web-App ohne JIT nicht funktioniert,
+        per Drop-down-Menü in der Adressleiste ausschließlich für diese Site freigeben.
+      </li>
+      <li>
+        <strong>Content Filter → Standard lassen (ein).</strong>
+        EasyList + EasyPrivacy + Adblock Warning Removal List sind bereits aktiv.
+        Per-Site deaktivierbar für Seiten, die sonst brechen.
+      </li>
+      <li>
+        <strong>Individuelle Berechtigungen:</strong>
+        Kamera, Mikrofon, Standort und Benachrichtigungen sind standardmäßig auf „Nachfragen" gesetzt.
+        Nach einmaliger Nutzung wieder entziehen — nicht dauerhaft erlauben.
+      </li>
+    </ul>
+
+    <h3>WebView-Einstellungen für Apps</h3>
+    <p>
+      Unter <strong>Einstellungen → Apps → Vanadium</strong> (oder im GrapheneOS-Systemmenü)
+      lässt sich der JavaScript JIT für den WebView global deaktivieren.
+      Zusätzlich gibt es pro App eine eigene Toggle-Option.
+      Für Apps, die keine komplexen Web-Apps laden, ist das eine sinnvolle Härtungsmaßnahme.
+    </p>
+
+    <h2>Keine Erweiterungen — warum das richtig ist</h2>
+
+    <p>
+      Vanadium unterstützt bewusst keine Browser-Erweiterungen. Die offizielle Begründung:
+    </p>
+    <ul>
+      <li>Jede Erweiterungskombination macht den Browser-Fingerprint <strong>einzigartig</strong></li>
+      <li>Erweiterungen vergrößern die Angriffsfläche erheblich</li>
+      <li>Sie stehen im Widerspruch zur Strict Site Isolation</li>
+    </ul>
+    <p>
+      Der integrierte Ad-Blocker (EasyList + EasyPrivacy + Adblock Warning Removal List,
+      regional ergänzt nach aktiver Browser-Sprache) übernimmt den Grundschutz.
+      Langfristig ist uBlock Origin Filter-Format-Unterstützung geplant.
+    </p>
+
+    <h2>Vanadium im Vergleich</h2>
+
+    <table>
+      <thead>
+        <tr><th></th><th>Vanadium</th><th>Brave</th><th>Firefox</th><th>Chrome</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Engine</td><td>Chromium</td><td>Chromium</td><td>Gecko</td><td>Chromium</td></tr>
+        <tr><td>OS-Hardening</td><td>✓ (GrapheneOS)</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>JIT-los by Default</td><td>✓</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>MTE + hardened_malloc</td><td>✓</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>Entgoogelt</td><td>vollständig</td><td>weitgehend</td><td>✓</td><td>—</td></tr>
+        <tr><td>Strict Site Isolation</td><td>✓</td><td>✓</td><td>begrenzt</td><td>✓</td></tr>
+        <tr><td>Erweiterungen</td><td>— (bewusst)</td><td>✓</td><td>✓</td><td>✓</td></tr>
+        <tr><td>Ad-Blocker</td><td>integriert</td><td>Shields</td><td>mit uBlock</td><td>—</td></tr>
+        <tr><td>Post-Quantum-Krypto</td><td>✓</td><td>✓</td><td>teilweise</td><td>✓</td></tr>
+        <tr><td>Fingerprint-Resistenz</td><td>Crowd Blending</td><td>begrenzt</td><td>begrenzt</td><td>—</td></tr>
+      </tbody>
+    </table>
+
+    <p>
+      Firefox auf GrapheneOS: Die Gecko-Engine hat eine schwächere Prozess-Sandbox als Chromium
+      und profitiert nicht von der OS-Level-Hardening-Symbiose.
+      Sinnvoll, wenn uBlock Origin zwingend gebraucht wird — aber das Sicherheitsniveau ist geringer.
+    </p>
+
+    <h2>Wann Vanadium — und wann etwas anderes?</h2>
+
+    <table>
+      <thead>
+        <tr><th>Situation</th><th>Empfehlung</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Online-Banking, Krypto-Wallets</td><td>Vanadium — Strict Isolation schützt Session-Tokens</td></tr>
+        <tr><td>Sensible Logins (E-Mail, Cloud)</td><td>Vanadium — maximaler Exploit-Schutz, Tracking irrelevant (du bist eingeloggt)</td></tr>
+        <tr><td>Unbekannte oder verdächtige Links</td><td>Vanadium — JIT-los + MTE = härteste Exploit-Bedingungen</td></tr>
+        <tr><td>Social Media, News ohne Login</td><td>Vanadium im Inkognito — oder Tor Browser für maximale Anonymität</td></tr>
+        <tr><td>Web-App statt nativer App</td><td>Vanadium — PWA läuft in Sandbox, kein System-Zugriff</td></tr>
+        <tr><td>Allgemeines Surfen</td><td>Vanadium als WebView schützt ohnehin alle Apps</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Fazit</h2>
+
+    <p>
+      Vanadium ist der sicherste mobile Browser, der existiert.
+      Aber er ist das nur auf GrapheneOS — weil er ohne die OS-Integration
+      (MTE, hardened_malloc, systemweite Hardening-Architektur) nur ein härteres Chromium wäre.
+    </p>
+    <p>
+      Das Wichtigste: Die Standardeinstellungen sind die besten Einstellungen.
+      Crowd Blending funktioniert nur, wenn alle Vanadium-Nutzer gleich aussehen.
+      Nutze ihn. Verändere ihn nicht mehr als nötig. Lass ihn seine Arbeit tun.
+    </p>
+    <p>
+      Und vergiss nicht: Vanadium schützt nicht nur beim Surfen.
+      Er ist das System-WebView — und schützt damit das gesamte Ökosystem deines Telefons.
+    </p>
+
+    <blockquote>
+      „Security is not a product. It is a process — built into every layer."
+    </blockquote>
+
+    <div class="box">
+      <h3>Tools für echte Eigentümer</h3>
+      <ul>
+        <li>
+          <strong>📖 GrapheneOS: Android im Überwachungszeitalter</strong><br>
+          Einrichtung, Apps &amp; digitale Souveränität — das komplette Handbuch für dein Google-freies Android. DRM-frei, 4,99 €.<br>
+          <a href="https://alien-investor.org/buecher.html" target="_blank" rel="noopener">alien-investor.org/buecher.html</a> · auch auf Amazon KDP
+        </li>
+        <li>
+          <strong>Privacy &amp; Mail:</strong> E-Mail, VPN und Cloud ohne Big Tech — Proton.<br>
+          <a href="https://alien-investor.org/proton" target="_blank" rel="noopener">alien-investor.org/proton</a>
+        </li>
+        <li>
+          <strong>₿ Bitcoin in Selbstverwahrung:</strong> Hardware-Wallet statt Börsenkonto. Code <code>ALIENINVESTOR</code> = 5 % Rabatt auf die BitBox.<br>
+          <a href="https://alien-investor.org/bitbox" target="_blank" rel="noopener">alien-investor.org/bitbox</a>
+        </li>
+        <li>
+          <strong>₿ Bitcoin kaufen (Europa):</strong> Bitcoin-only, kein Shitcoin-Lärm. Code <code>ALIENINVESTOR</code> = dauerhaft −0,2 Prozentpunkte Gebühren.<br>
+          <a href="https://alien-investor.org/21bitcoin" target="_blank" rel="noopener">alien-investor.org/21bitcoin</a>
+        </li>
+      </ul>
+    </div>
+
+  </article>
+
+  <div class="like-button">
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><radialGradient id="ai-head-vanadium-de" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-vanadium-de)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Gefällt mir</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+  <script>
+    (function() {
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      const btn = document.getElementById('likeButton');
+      const msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
+        btn.disabled = true;
+        btn.textContent = '✓ Danke!';
+        msg.textContent = 'Freut mich, dass dir der Artikel gefallen hat.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '✓ Danke!';
+        msg.textContent = 'Freut mich, dass dir der Artikel gefallen hat.';
+      });
+    })();
+  </script>
+
+  <div class="back-links">
+    <a href="blog.html" style="font-size: 1.1em;">← Zurück zur Blog-Übersicht</a>
+    <a href="index.html" style="font-size: 1.1em;">← Zurück zur Zentrale</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+    <h3 style="margin-bottom: 15px;">
+      <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energie" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Energie aufladen
+      <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
+    </h3>
+    <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+      Treibstoff für das Mutterschiff senden
+    </a>
+    <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+      Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand!
+    </p>
+  </div>
+
+  <footer>
+    <p>Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    <p style="margin-top: 20px;">
+      <strong>Haftungsausschluss:</strong><br><br>
+      Dieser Artikel stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
+      Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
+      Investieren ist mit Risiken verbunden. Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
+    </p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>
