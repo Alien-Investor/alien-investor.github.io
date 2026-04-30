@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Tor Browser & Orbot: Anonymität auf Android — wie, wann, womit | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tor Browser und Orbot: Wie Onion Routing funktioniert, wann du welches Tool brauchst, wie du Orbot auf GrapheneOS einrichtest und Apps wie die BitBox durch Tor leitest.">
+  <link rel="canonical" href="/tor-browser-orbot.html">
+  <link rel="alternate" hreflang="en" href="/en/tor-browser-orbot.html">
+  <style>
+    body { background-color: #000; color: #fff; font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 0 15px 20px 15px; }
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+    code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; font-family: monospace; }
+    em { color: #ccc; }
+    .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
+    blockquote { border-left: 3px solid #00ffcc; margin: 2em 0; padding: 0.5em 1em; color: #ddd; background: #050505; font-style: italic; }
+    .box { border: 1px solid #00ffcc; background: #050505; padding: 1.5em; border-radius: 8px; margin: 2em 0; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 0.6em; }
+    .like-button { margin: 3em 0; display: flex; align-items: center; justify-content: center; gap: 1em; font-size: 1em; }
+    .like-button button { background: #000; color: #00ffcc; border: 1px solid #00ffcc; padding: 0.6em 1.2em; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.2s ease; }
+    .like-button button:hover, .like-button button:active { background: #00ffcc; color: #000; box-shadow: 0 0 15px #00ffcc; }
+    .like-button button:disabled { border-color: #444; color: #888; background: #111; cursor: default; }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    .back-links { margin-top: 40px; text-align: center; display: flex; flex-direction: column; gap: 10px; }
+    footer { margin-top: 60px; padding: 20px; font-size: 0.85em; color: #666; border-top: 1px solid #222; text-align: center; }
+    table { width: 100%; border-collapse: collapse; margin: 1.5em 0; }
+    th { background: #050505; color: #00ffcc; padding: 0.6em 1em; text-align: left; border-bottom: 1px solid #00ffcc; }
+    td { padding: 0.5em 1em; border-bottom: 1px solid #222; color: #ccc; }
+    tr:last-child td { border-bottom: none; }
+  </style>
+</head>
+<body>
+  <div class="top-nav"><a href="index.html">← Zurück zur Zentrale</a></div>
+
+  <h1>Tor Browser &amp; Orbot: Anonymität auf Android</h1>
+  <p class="byline"><em>von Alien Investor · Mai 2026</em></p>
+
+  <article id="content">
+
+    <p>
+      Dein ISP sieht alles. Jede Domain, die du aufrufst. Jede IP-Verbindung.
+      Ein VPN verschiebt das Problem nur — du vertraust jetzt dem VPN-Anbieter statt deinem ISP.
+      Tor löst das Problem anders.
+    </p>
+    <p>
+      Mit Tor bist du nicht auf Vertrauen angewiesen. Das Netzwerk selbst stellt sicher,
+      dass kein einzelner Punkt weiß, wer du bist und wohin du gehst.
+      Gleichzeitig: Tor ist kein Allheilmittel. Wer das Werkzeug falsch nutzt,
+      ist genauso sichtbar wie ohne.
+    </p>
+
+    <blockquote>
+      „Anonymität ist kein Zustand. Es ist ein Verhalten."
+    </blockquote>
+
+    <h2>Wie Onion Routing funktioniert</h2>
+
+    <p>
+      Tor steht für <em>The Onion Routing</em>. Das Prinzip: Deine Datenpakete werden
+      in mehrere Verschlüsselungsschichten eingewickelt — wie eine Zwiebel —
+      und dann durch eine Kette aus genau drei freiwillig betriebenen Servern geschickt.
+    </p>
+
+    <table>
+      <thead>
+        <tr><th>Node</th><th>Kennt</th><th>Weiß nicht</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Guard Node</strong> (Eingang)</td><td>Deine echte IP</td><td>Ziel-Website</td></tr>
+        <tr><td><strong>Middle Relay</strong></td><td>Vorheriger + nächster Node</td><td>Herkunft &amp; Ziel</td></tr>
+        <tr><td><strong>Exit Node</strong> (Ausgang)</td><td>Ziel-Website</td><td>Deine echte IP</td></tr>
+      </tbody>
+    </table>
+
+    <p>
+      Jeder Node entfernt genau eine Verschlüsselungsschicht — mehr erfährt er nicht.
+      Kein einzelner Punkt im Netzwerk kennt gleichzeitig Sender und Empfänger.
+      Genau das ist die Stärke: nicht Vertrauen, sondern Design.
+    </p>
+
+    <h2>Tor Browser: Der Browser, der dich verschwinden lässt</h2>
+
+    <p>
+      Der Tor Browser ist kein gewöhnlicher Browser mit Tor-Proxy.
+      Er ist ein speziell gehärteter Firefox-Fork, der mit dem Netzwerk zusammenarbeitet.
+      Das Ziel: Alle Tor-Nutzer sollen im Netz identisch aussehen.
+    </p>
+    <p>
+      Kein Fingerprint-Spoofing. Kein Verstecken. Stattdessen <strong>Crowd Blending</strong>:
+      Jeder Tor Browser hat denselben User-Agent, dieselbe Fenstergröße, dieselben Einstellungen.
+      Der Einzelne verschwindet in der Masse.
+    </p>
+
+    <h3>Was er mitbringt</h3>
+    <ul>
+      <li>Automatisches Tor-Routing ohne Setup — einfach starten und surfen</li>
+      <li>NoScript: JavaScript-Kontrolle per Sicherheitsstufe</li>
+      <li>Sitzungsisolation: Cookies und History nach jeder Session gelöscht</li>
+      <li>Neue Identität: frischer Circuit + neue Session per Klick</li>
+      <li>Zugang zu <code>.onion</code>-Diensten (Darknet-Adressen)</li>
+    </ul>
+
+    <h3>Security Levels — was sie wirklich machen</h3>
+
+    <table>
+      <thead>
+        <tr><th>Level</th><th>JavaScript</th><th>Fonts / Symbole</th><th>Audio / Video</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Standard</strong></td><td>Überall aktiv</td><td>Alle aktiv</td><td>Normal</td></tr>
+        <tr><td><strong>Safer</strong></td><td>Deaktiviert auf HTTP-Seiten</td><td>Manche deaktiviert</td><td>Click-to-play</td></tr>
+        <tr><td><strong>Safest</strong></td><td>Überall deaktiviert</td><td>Viele deaktiviert</td><td>Click-to-play</td></tr>
+      </tbody>
+    </table>
+
+    <p>
+      <strong>Standard</strong> reicht für normales anonymes Surfen — Tor schützt bereits auf Netzwerkebene.<br>
+      <strong>Safer</strong> empfiehlt sich auf unbekannten Sites oder in zensierten Netzwerken.<br>
+      <strong>Safest</strong> ist für Journalisten, Aktivisten, <code>.onion</code>-Nutzung — die meisten modernen Seiten laden dann nicht mehr vollständig.
+    </p>
+
+    <h3>Fehler, die Anonymität kosten</h3>
+    <ul>
+      <li><strong>In persönliche Konten einloggen</strong> — Google, Social Media, E-Mail: sofort enttarnt</li>
+      <li><strong>Vollbild-Modus</strong> — Fenstermaße sind Fingerprint-Daten</li>
+      <li><strong>Erweiterungen installieren</strong> — jede Extension macht den Browser einzigartig</li>
+      <li><strong>Dateien öffnen</strong> — können "phonen home" und die echte IP leaken</li>
+      <li><strong>Torrents</strong> — leaken fast immer die echte IP</li>
+    </ul>
+
+    <h2>Orbot: Tor für Android-Apps</h2>
+
+    <p>
+      Orbot ist kein Browser. Er ist ein System-Proxy für Android —
+      entwickelt vom Guardian Project zusammen mit dem Tor Project.
+      Er leitet den Traffic anderer Apps durch das Tor-Netzwerk.
+      Nicht nur das Surfen. Jede App, die du auswählst.
+    </p>
+
+    <h3>VPN-Modus vs. Proxy-Modus</h3>
+
+    <table>
+      <thead>
+        <tr><th></th><th>VPN-Modus</th><th>Proxy-Modus</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Technik</strong></td><td>Android VpnService API</td><td>SOCKS5 + HTTP-Proxy lokal</td></tr>
+        <tr><td><strong>App-Konfiguration</strong></td><td>Nicht nötig</td><td>Manuell pro App</td></tr>
+        <tr><td><strong>Welche Apps</strong></td><td>Alle (Split-Tunneling)</td><td>Nur Apps mit Proxy-Support</td></tr>
+        <tr><td><strong>VPN-Slot belegt</strong></td><td>Ja</td><td>Nein</td></tr>
+        <tr><td><strong>+ VPN kombinierbar</strong></td><td>Nein (gleichzeitig)</td><td>Ja (Tor over VPN)</td></tr>
+        <tr><td><strong>Leak-Schutz</strong></td><td>Sehr stark</td><td>Vom App-Verhalten abhängig</td></tr>
+      </tbody>
+    </table>
+
+    <p>
+      <strong>VPN-Modus</strong> ist der einfachere Weg: Orbot erstellt ein lokales VPN auf Systemebene,
+      fängt den Traffic der ausgewählten Apps ab und leitet alles durch Tor.
+      Keine App-Konfiguration nötig — einfach "Choose Apps" in den Orbot-Einstellungen nutzen.
+    </p>
+    <p>
+      <strong>Proxy-Modus</strong> (Power User Mode) belässt den VPN-Slot frei.
+      Dadurch kann Orbot gleichzeitig mit Mullvad oder ProtonVPN laufen.
+      Das ergibt "Tor over VPN": Der ISP sieht nur die VPN-Verbindung,
+      der VPN-Anbieter sieht nur Tor-Traffic, kein einzelner Punkt kennt beides.
+    </p>
+
+    <h3>Setup auf GrapheneOS</h3>
+
+    <p>
+      Download-Empfehlung: <strong>F-Droid</strong> mit dem Guardian Project Repository.
+      In F-Droid unter Einstellungen → Repositories das offizielle Guardian Project Repository aktivieren,
+      dann Orbot von dort installieren. Alternativ APK direkt von guardianproject.info.
+    </p>
+
+    <p>Empfohlene Einstellungen nach Installation:</p>
+    <ol>
+      <li>VPN-Modus aktivieren</li>
+      <li>"Choose Apps" öffnen → nur gewünschte Apps auswählen (z.B. Wallet, Messenger)</li>
+      <li>Für maximalen Leak-Schutz: Android Einstellungen → VPN → Orbot → "Verbindungen ohne VPN blockieren" aktivieren
+        <br><em>(Achtung: deaktiviert das Split-Tunneling — dann läuft alles über Tor)</em></li>
+      <li>Bridges aktivieren wenn Tor im Netzwerk blockiert wird</li>
+    </ol>
+
+    <h3>BitBox und andere Apps über Tor</h3>
+
+    <p>
+      Der einfachste Weg: Orbot im VPN-Modus starten, unter "Choose Apps" die BitBox-App
+      (oder eine andere Wallet-App) markieren — fertig. Der gesamte Netzwerkverkehr dieser App
+      läuft ab sofort über das Tor-Netzwerk, ohne dass die App selbst etwas konfigurieren muss.
+    </p>
+    <p>
+      So kommuniziert deine Wallet mit dem Node ohne dass dein ISP die Verbindung zurückverfolgen kann.
+      Keine IP-Adresse, die zu dir führt — nur anonymisierter Tor-Traffic.
+    </p>
+
+    <h2>Bridges &amp; Pluggable Transports</h2>
+
+    <p>
+      Normale Tor-Eingangsknoten sind öffentlich gelistet — Zensoren können sie blockieren.
+      Bridges sind geheime, nicht öffentlich gelistete Tor-Knoten.
+      Pluggable Transports gehen einen Schritt weiter: Sie tarnen den Tor-Traffic als etwas anderes.
+    </p>
+
+    <table>
+      <thead>
+        <tr><th>Transport</th><th>Tarnung</th><th>Wann nutzen</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>obfs4</strong></td><td>Zufälliges Rauschen</td><td>Standard-Bridge, blockiert Erkennung</td></tr>
+        <tr><td><strong>Snowflake</strong></td><td>WebRTC-Videoaufruf</td><td>Sehr schwer zu blockieren</td></tr>
+        <tr><td><strong>meek</strong></td><td>HTTPS zu Azure/Google</td><td>Letzter Ausweg — langsam</td></tr>
+        <tr><td><strong>WebTunnel</strong></td><td>WebSocket-HTTPS</td><td>Neuester Transport, tarnt als normale Site</td></tr>
+      </tbody>
+    </table>
+
+    <p>
+      Wichtig: Bridges nur nutzen wenn Tor tatsächlich blockiert ist.
+      In freien Netzwerken sind direkte Verbindungen schneller und
+      verbrauchen keine Bridge-Ressourcen, die zensierte Nutzer brauchen.
+    </p>
+
+    <p>
+      <strong>Im Tor Browser:</strong> Einstellungen → Connection → Bridges → Built-in Bridge auswählen<br>
+      <strong>In Orbot:</strong> Hauptbildschirm → "Use Bridges" aktivieren
+    </p>
+
+    <h2>Tor Browser vs. Orbot: Wann was?</h2>
+
+    <table>
+      <thead>
+        <tr><th>Szenario</th><th>Tool</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Anonym im Web surfen</td><td>Tor Browser</td></tr>
+        <tr><td>.onion-Dienste besuchen</td><td>Tor Browser</td></tr>
+        <tr><td>Recherche mit hohem Schutzbedarf</td><td>Tor Browser + Safest</td></tr>
+        <tr><td>Wallet / App über Tor leiten</td><td>Orbot VPN-Modus</td></tr>
+        <tr><td>Messenger anonym (Telegram, Molly, SimpleX)</td><td>Orbot Proxy-Modus</td></tr>
+        <tr><td>Normales Surfen auf GrapheneOS</td><td>Vanadium (nicht Tor — zu langsam)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="box">
+      <h3>Der entscheidende Unterschied</h3>
+      <p>
+        Orbot schützt deine IP-Adresse. Tor Browser schützt deine IP-Adresse
+        <em>und</em> standardisiert deinen Browser-Fingerprint.
+      </p>
+      <p>
+        Wenn du Vanadium durch Orbot leitest: deine IP ist verborgen,
+        aber dein Browser-Fingerprint unterscheidet sich vom Tor Browser.
+        Du bist dann anonym auf Netzwerkebene, aber nicht auf Browser-Ebene.
+      </p>
+      <p>
+        Für echte Anonymität beim Surfen: Tor Browser direkt nutzen — nicht Vanadium + Orbot.
+        Für Apps, die keine Browser sind: Orbot ist die richtige Wahl.
+      </p>
+    </div>
+
+    <h2>Was Tor nicht kann</h2>
+
+    <ul>
+      <li><strong>Exit-Node-Traffic:</strong> Der Exit Node sieht unverschlüsselten HTTP-Traffic. Immer HTTPS-Seiten nutzen.</li>
+      <li><strong>Dass du Tor nutzt, bleibt sichtbar:</strong> Dein ISP sieht, dass du Tor verwendest — nur nicht was. Bei Bedarf: Bridges.</li>
+      <li><strong>Traffic-Korrelation:</strong> Wenn ein mächtiger Angreifer beide Enden überwacht, kann er theoretisch Verbindungen herstellen.</li>
+      <li><strong>Nutzerfehler:</strong> Login, Vollbild, Downloads — kein Netzwerk schützt gegen eigene Fehler.</li>
+    </ul>
+
+    <blockquote>
+      „Das Netzwerk kann nur das schützen, was du ihm gibst. Was du selbst preisgibst, schützt niemand."
+    </blockquote>
+
+    <div class="box">
+      <h3>Tools für echte Eigentümer</h3>
+      <ul>
+        <li>
+          <strong>📖 GrapheneOS: Android im Überwachungszeitalter</strong><br>
+          Einrichtung, Apps &amp; digitale Souveränität — das komplette Handbuch für dein Google-freies Android. DRM-frei, 4,99 €.<br>
+          <a href="https://alien-investor.org/buecher.html" target="_blank" rel="noopener">alien-investor.org/buecher.html</a> · auch auf Amazon KDP
+        </li>
+        <li>
+          <strong>Privacy &amp; Mail:</strong> E-Mail, VPN und Cloud ohne Big Tech — Proton.<br>
+          <a href="https://alien-investor.org/proton" target="_blank" rel="noopener">alien-investor.org/proton</a>
+        </li>
+        <li>
+          <strong>₿ Bitcoin in Selbstverwahrung:</strong> Hardware-Wallet statt Börsenkonto. Code <code>ALIENINVESTOR</code> = 5 % Rabatt auf die BitBox.<br>
+          <a href="https://alien-investor.org/bitbox" target="_blank" rel="noopener">alien-investor.org/bitbox</a>
+        </li>
+        <li>
+          <strong>₿ Bitcoin kaufen (Europa):</strong> Bitcoin-only, kein Shitcoin-Lärm. Code <code>ALIENINVESTOR</code> = dauerhaft −0,2 Prozentpunkte Gebühren.<br>
+          <a href="https://alien-investor.org/21bitcoin" target="_blank" rel="noopener">alien-investor.org/21bitcoin</a>
+        </li>
+      </ul>
+    </div>
+
+  </article>
+
+  <div class="like-button">
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><radialGradient id="ai-head-tor-de" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-tor-de)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Gefällt mir</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+  <script>
+    (function() {
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      const btn = document.getElementById('likeButton');
+      const msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
+        btn.disabled = true;
+        btn.textContent = '✓ Danke!';
+        msg.textContent = 'Freut mich, dass dir der Artikel gefallen hat.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '✓ Danke!';
+        msg.textContent = 'Freut mich, dass dir der Artikel gefallen hat.';
+      });
+    })();
+  </script>
+
+  <div class="back-links">
+    <a href="blog.html" style="font-size: 1.1em;">← Zurück zur Blog-Übersicht</a>
+    <a href="index.html" style="font-size: 1.1em;">← Zurück zur Zentrale</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+    <h3 style="margin-bottom: 15px;">
+      <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energie" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Energie aufladen
+      <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
+    </h3>
+    <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+      Treibstoff für das Mutterschiff senden
+    </a>
+    <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+      Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand!
+    </p>
+  </div>
+
+  <footer>
+    <p>Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    <p style="margin-top: 20px;">
+      <strong>Haftungsausschluss:</strong><br><br>
+      Dieser Artikel stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
+      Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
+      Investieren ist mit Risiken verbunden. Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
+    </p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>
