@@ -141,7 +141,7 @@
         <tr><td>Sensor access (gyroscope, accelerometer)</td><td>Blocked</td></tr>
         <tr><td>Background sync</td><td>Blocked</td></tr>
         <tr><td>Payment API</td><td>Blocked</td></tr>
-        <tr><td>DRM / Protected Media</td><td>Blocked</td></tr>
+        <tr><td>DRM / Protected Media</td><td>Ask first</td></tr>
         <tr><td>Hyperlink auditing</td><td>Blocked</td></tr>
         <tr><td>WebGPU</td><td>Blocked (attack surface reduction)</td></tr>
         <tr><td>Do Not Track</td><td>Enabled</td></tr>
@@ -197,6 +197,11 @@
         Session data is cleared when the browser is closed.
       </li>
       <li>
+        <strong>Improve search suggestions → disable.</strong>
+        Sends everything you type in the address bar to your search engine in real time — even if you never press Enter.
+        Turn it off for maximum privacy.
+      </li>
+      <li>
         <strong>WebRTC IP Handling Policy → leave at default.</strong>
         Vanadium already sets this to the most private value — P2P connections that could leak your real IP are blocked.
       </li>
@@ -213,13 +218,13 @@
         enable it only for that site via the drop-down menu in the address bar.
       </li>
       <li>
-        <strong>Content filter → leave enabled (default).</strong>
-        EasyList + EasyPrivacy + Adblock Warning Removal List are already active.
+        <strong>Ads (built-in content filter) → leave enabled (default).</strong>
+        The setting is labeled "Ads" in the UI. Vanadium's built-in content filter uses EasyList, EasyPrivacy, and the Adblock Warning Removal List.
         Can be toggled per site for pages that break otherwise.
       </li>
       <li>
         <strong>Individual permissions:</strong>
-        Camera, microphone, location, and notifications default to "Ask."
+        Location, camera, and microphone default to "Not allowed" — notifications default to "Ask."
         Revoke access after single use — do not leave permissions permanently granted.
       </li>
     </ul>

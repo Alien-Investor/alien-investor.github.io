@@ -141,7 +141,7 @@
         <tr><td>Sensor-Zugriff (Gyroskop, Beschleunigungsmesser)</td><td>Gesperrt</td></tr>
         <tr><td>Hintergrund-Sync</td><td>Gesperrt</td></tr>
         <tr><td>Payment API</td><td>Gesperrt</td></tr>
-        <tr><td>DRM / Protected Media</td><td>Gesperrt</td></tr>
+        <tr><td>DRM / Geschützte Inhalte</td><td>Zuerst fragen</td></tr>
         <tr><td>Hyperlink Auditing</td><td>Gesperrt</td></tr>
         <tr><td>WebGPU</td><td>Gesperrt (Angriffsfläche)</td></tr>
         <tr><td>Do Not Track</td><td>Aktiviert</td></tr>
@@ -197,6 +197,11 @@
         Sitzungsdaten werden beim Schließen des Browsers verworfen.
       </li>
       <li>
+        <strong>Suchvorschläge verbessern → deaktivieren.</strong>
+        Sendet alles, was du in die Adressleiste tippst, live an die Suchmaschine — auch wenn du nie Enter drückst.
+        Für maximalen Datenschutz ausschalten.
+      </li>
+      <li>
         <strong>WebRTC IP Handling Policy → Standard lassen.</strong>
         Vanadium setzt diesen Wert bereits auf das privateste Niveau — P2P-Verbindungen, die die echte IP leaken könnten, sind blockiert.
       </li>
@@ -214,13 +219,13 @@
         per Drop-down-Menü in der Adressleiste ausschließlich für diese Site freigeben.
       </li>
       <li>
-        <strong>Content Filter → Standard lassen (ein).</strong>
-        EasyList + EasyPrivacy + Adblock Warning Removal List sind bereits aktiv.
+        <strong>Werbung (Ads) → Standard lassen (aktiv).</strong>
+        Im UI heißt die Einstellung „Ads" — dahinter steckt Vanadiums integrierter Content-Filter auf Basis von EasyList, EasyPrivacy und der Adblock Warning Removal List.
         Per-Site deaktivierbar für Seiten, die sonst brechen.
       </li>
       <li>
         <strong>Individuelle Berechtigungen:</strong>
-        Kamera, Mikrofon, Standort und Benachrichtigungen sind standardmäßig auf „Nachfragen" gesetzt.
+        Standort, Kamera und Mikrofon sind standardmäßig auf „Nicht zugelassen" gesetzt — Benachrichtigungen auf „Zuerst fragen".
         Nach einmaliger Nutzung wieder entziehen — nicht dauerhaft erlauben.
       </li>
     </ul>
