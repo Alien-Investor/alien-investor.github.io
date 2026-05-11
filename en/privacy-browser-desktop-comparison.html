@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Privacy Browser Comparison: Brave, LibreWolf, Mullvad & More | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Brave, LibreWolf, Mullvad Browser, Firefox with arkenfox, Ungoogled Chromium — which privacy browser actually protects you? A technical comparison without the fluff.">
+  <link rel="canonical" href="/en/privacy-browser-desktop-comparison.html">
+  <link rel="alternate" hreflang="de" href="/privacy-browser-desktop-vergleich.html">
+  <style>
+    body { background-color: #000; color: #fff; font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 0 15px 20px 15px; }
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+    code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; font-family: monospace; }
+    em { color: #ccc; }
+    .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
+    blockquote { border-left: 3px solid #00ffcc; margin: 2em 0; padding: 0.5em 1em; color: #ddd; background: #050505; font-style: italic; }
+    .box { border: 1px solid #00ffcc; background: #050505; padding: 1.5em; border-radius: 8px; margin: 2em 0; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 0.6em; }
+    .like-button { margin: 3em 0; display: flex; align-items: center; justify-content: center; gap: 1em; font-size: 1em; }
+    .like-button button { background: #000; color: #00ffcc; border: 1px solid #00ffcc; padding: 0.6em 1.2em; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.2s ease; }
+    .like-button button:hover, .like-button button:active { background: #00ffcc; color: #000; box-shadow: 0 0 15px #00ffcc; }
+    .like-button button:disabled { border-color: #444; color: #888; background: #111; cursor: default; }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    .back-links { margin-top: 40px; text-align: center; display: flex; flex-direction: column; gap: 10px; }
+    footer { margin-top: 60px; padding: 20px; font-size: 0.85em; color: #666; border-top: 1px solid #222; text-align: center; }
+    table { width: 100%; border-collapse: collapse; margin: 1.5em 0; }
+    th { background: #050505; color: #00ffcc; padding: 0.6em 1em; text-align: left; border-bottom: 1px solid #00ffcc; }
+    td { padding: 0.5em 1em; border-bottom: 1px solid #222; color: #ccc; }
+    tr:last-child td { border-bottom: none; }
+  </style>
+</head>
+<body>
+  <div class="top-nav"><a href="/en/index.html">← Back to Base</a></div>
+
+  <h1>Privacy Browser Comparison</h1>
+  <p class="byline"><em>by Alien Investor · May 2026</em></p>
+
+  <article id="content">
+
+    <p>
+      Your browser is the window to the internet. And the problem isn't just what you see —
+      it's what the internet sees about you.
+    </p>
+    <p>
+      Every website you visit receives your <strong>browser fingerprint</strong>: operating system,
+      screen resolution, fonts, GPU, canvas values, installed plugins, timezone, language settings.
+      This combination is as unique as a fingerprint — and it works without cookies,
+      without JavaScript tracking, without storing anything on your device.
+    </p>
+    <p>
+      Incognito mode doesn't help against this. A VPN doesn't either.
+      What you need is a browser that fundamentally alters or conceals this fingerprint.
+    </p>
+
+    <blockquote>
+      "Privacy is not a crime. It's self-defense."
+    </blockquote>
+
+    <p>
+      Five browsers compete. The Tor Browser is deliberately excluded — it has its own article.
+      This is about everyday use: fast, stable, compatible — but without surveillance.
+    </p>
+
+    <h2>The Core Question: Uniformity or Randomization?</h2>
+
+    <p>
+      All privacy browsers fight fingerprinting — but with fundamentally different strategies.
+    </p>
+    <p>
+      <strong>Uniformity (Firefox-based):</strong> All users look identical to trackers.
+      Same canvas values, same fonts, same window size via letterboxing, timezone always UTC.
+      The logic: if everyone looks the same, no one can be recognized. This concept originates from the Tor Project
+      and lives in <code>privacy.resistFingerprinting</code> (RFP) — Firefox's core anti-fingerprinting mechanism.
+    </p>
+    <p>
+      <strong>Randomization (Chromium-based):</strong> The fingerprint is slightly altered on every page load.
+      Canvas values, audio output and font measurements get random noise injected.
+      Brave's implementation is called <strong>"Farbling"</strong>. The problem: Chromium exposes hardware details
+      (GPU model, CPU core count) with high precision — advanced trackers can re-identify users through
+      these stable "hardware anchors" despite randomization.
+    </p>
+    <p>
+      For pure privacy, the Firefox-based uniformity approach is superior.
+      For security (exploit protection, sandboxing), Chromium leads.
+    </p>
+
+    <h2>The Five Browsers</h2>
+
+    <h3>1. Brave — The Beginner Browser</h3>
+
+    <p>
+      Brave is built on Chromium and ships with more privacy than any mainstream browser out of the box.
+      The built-in <strong>"Shields"</strong> block ads, cross-site trackers, third-party cookies
+      and bounce tracking — no extension required.
+    </p>
+    <p>
+      The ad blocker is written in Rust and integrated directly into the browser engine.
+      This makes it immune to Google's <strong>Manifest V3</strong> — the interface that has
+      effectively gutted powerful ad blockers like uBlock Origin in Chrome.
+      Brave users continue to get full blocking capability.
+    </p>
+
+    <div class="box">
+      <h3>Brave — Strengths &amp; Weaknesses</h3>
+      <ul>
+        <li>✅ Best web compatibility of all privacy browsers</li>
+        <li>✅ Shields active by default — zero setup required</li>
+        <li>✅ Native ad blocker (Rust), immune to MV3</li>
+        <li>✅ Fast, Chromium sandboxing</li>
+        <li>⚠️ Farbling randomization is weaker than Firefox uniformity</li>
+        <li>⚠️ Crypto bloat: Brave Wallet, Rewards, AI assistant active by default — all can be disabled</li>
+        <li>❌ 2020: Brave silently inserted affiliate codes for Binance, Coinbase, Ledger and Trezor — CEO apologized, feature was disabled</li>
+      </ul>
+    </div>
+
+    <p>
+      <strong>Best for:</strong> Beginners who want immediate protection without any setup.
+      Windows or macOS users who don't want to deal with Firefox forks.
+    </p>
+    <p>
+      <strong>After installation:</strong> Disable Brave Rewards, set Shields to "Aggressive",
+      turn off telemetry pings in settings.
+    </p>
+
+    <h3>2. LibreWolf — Hardened Firefox</h3>
+
+    <p>
+      LibreWolf is a Firefox fork with one clear goal: remove everything that doesn't need to be there
+      and harden everything that remains. Mozilla telemetry, Pocket, Firefox Sync, crash reports —
+      all gone. <code>privacy.resistFingerprinting</code> is active by default.
+      uBlock Origin is pre-installed. Cookies are cleared on close.
+    </p>
+    <p>
+      You get strong privacy without hours of configuration.
+      Updates arrive within three days of Firefox releases — sometimes the same day.
+    </p>
+
+    <div class="box">
+      <h3>LibreWolf — Strengths &amp; Weaknesses</h3>
+      <ul>
+        <li>✅ RFP active by default — strongest fingerprinting protection after Mullvad</li>
+        <li>✅ uBlock Origin pre-installed, full MV3-free power</li>
+        <li>✅ No telemetry, no Mozilla services</li>
+        <li>✅ Good web compatibility (Firefox engine)</li>
+        <li>⚠️ Updates up to 3 days after Firefox — small security window</li>
+        <li>⚠️ DRM (Netflix, Spotify) disabled by default — can be manually enabled</li>
+        <li>⚠️ Firefox Sync disabled by default — login data not auto-synced</li>
+      </ul>
+    </div>
+
+    <p>
+      <strong>Best for:</strong> Advanced users who want strong privacy without tinkering.
+      The best everyday browser for most privacy-conscious users.
+    </p>
+
+    <h3>3. Mullvad Browser — Maximum Anonymity</h3>
+
+    <p>
+      Mullvad Browser was developed jointly by the <strong>Mullvad VPN team and the Tor Project</strong>.
+      The goal: the Tor Browser's anti-fingerprinting technology without the Tor network —
+      for users who prefer a faster VPN.
+    </p>
+    <p>
+      The browser runs permanently in private mode. On close, cookies, history and all session data
+      are automatically wiped. Pre-installed: uBlock Origin, NoScript and the Mullvad Browser Extension.
+      Fingerprinting protection via the uniformity model — all users appear identical.
+    </p>
+
+    <div class="box">
+      <h3>Mullvad Browser — Strengths &amp; Weaknesses</h3>
+      <ul>
+        <li>✅ Strongest fingerprinting protection of any browser (uniformity, Tor technology)</li>
+        <li>✅ No telemetry</li>
+        <li>✅ Permanent private mode — no manual cleanup needed</li>
+        <li>✅ Optimized for VPN use</li>
+        <li>❌ Not a daily driver: logins, cookies and history are wiped on every close</li>
+        <li>❌ Do not install additional extensions — destroys the uniform fingerprint</li>
+        <li>❌ No dark mode or other customizations recommended — same reason</li>
+      </ul>
+    </div>
+
+    <p>
+      <strong>Best for:</strong> Journalists, activists, high-risk users. Anyone who needs maximum anonymity
+      for a specific task — not as a primary everyday browser. Ideal paired with Mullvad VPN.
+    </p>
+
+    <h3>4. Firefox + arkenfox — Full Control</h3>
+
+    <p>
+      Firefox is the only independent browser engine beyond Chromium with meaningful market share.
+      That alone makes its existence important.
+    </p>
+    <p>
+      <strong>arkenfox</strong> is not a browser — it's a <code>user.js</code> configuration file,
+      a script copied directly into the Firefox profile directory that hardens hundreds of
+      privacy settings at once: enable RFP, disable telemetry, max out tracking protection,
+      activate storage isolation.
+    </p>
+    <p>
+      The advantage over LibreWolf: Mozilla updates arrive immediately with no fork delay.
+      Multi-Account Containers enable true browser isolation for different identities.
+    </p>
+
+    <div class="box">
+      <h3>Firefox + arkenfox — Strengths &amp; Weaknesses</h3>
+      <ul>
+        <li>✅ Deepest control over all privacy settings</li>
+        <li>✅ Mozilla updates immediately — no fork delay</li>
+        <li>✅ Multi-Account Containers for true identity isolation</li>
+        <li>✅ Full uBlock Origin support</li>
+        <li>⚠️ High maintenance: manually manage scripts, maintain overrides, fix site breakage</li>
+        <li>⚠️ Not suitable for beginners — requires technical understanding</li>
+      </ul>
+    </div>
+
+    <p>
+      <strong>Best for:</strong> Power users with a clear threat model who want maximum control
+      over every setting and are willing to invest the time.
+    </p>
+
+    <h3>5. Ungoogled Chromium — Not Recommended</h3>
+
+    <p>
+      Ungoogled Chromium removes all Google services completely from the Chromium source code.
+      No background connections to Google servers — zero. That's the strength.
+    </p>
+    <p>
+      The weakness: <strong>there is no tracking protection and no fingerprinting protection out of the box.</strong>
+      Extensions must be installed manually — there is no Web Store.
+      Updates are not automatic and must be downloaded manually.
+      Wait too long, and you're running a browser with known, unpatched security vulnerabilities.
+    </p>
+    <p>
+      The result: a lot of effort for an outcome Brave delivers better with far less friction.
+    </p>
+
+    <h2>Manifest V3 — Why This Affects Everyone</h2>
+
+    <p>
+      Google completed the transition to <strong>Manifest V3</strong> in Chrome in late 2024.
+      The <code>webRequest</code> API — the foundation of effective ad blocking — was replaced by
+      the restricted <code>declarativeNetRequest</code> API.
+    </p>
+    <p>
+      Consequence: <strong>uBlock Origin (full version) no longer runs in Chrome.</strong>
+      uBlock Origin Lite is MV3-compatible but loses critical capabilities:
+      no cosmetic filtering, no custom filter lists, no anti-circumvention techniques.
+    </p>
+    <p>
+      <strong>Not affected:</strong> Brave (native Rust blocker, outside the extension system),
+      Firefox, LibreWolf, Mullvad Browser — all continue to offer uBlock Origin at full strength.
+    </p>
+
+    <h2>Quick Recommendation</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Profile</th>
+          <th>Recommendation</th>
+          <th>Why</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Beginner</td>
+          <td><strong>Brave</strong></td>
+          <td>Works immediately, best compatibility</td>
+        </tr>
+        <tr>
+          <td>Advanced</td>
+          <td><strong>LibreWolf</strong></td>
+          <td>Strong out of the box, no tinkering needed</td>
+        </tr>
+        <tr>
+          <td>High-risk / Anonymity</td>
+          <td><strong>Mullvad Browser</strong></td>
+          <td>Strongest fingerprinting protection</td>
+        </tr>
+        <tr>
+          <td>Power user</td>
+          <td><strong>Firefox + arkenfox</strong></td>
+          <td>Full control, immediate updates</td>
+        </tr>
+        <tr>
+          <td>Better avoided</td>
+          <td><strong>Ungoogled Chromium</strong></td>
+          <td>No protection by default, no auto-update</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>First Steps — Regardless of Which Browser</h2>
+
+    <ul>
+      <li><strong>Install uBlock Origin</strong> (except Mullvad — already included). No other blocker.</li>
+      <li><strong>Enable DNS-over-HTTPS</strong> — prevents your ISP from reading your DNS queries. Use Nextdns or Mullvad DNS.</li>
+      <li><strong>Test your fingerprint:</strong> <a href="https://coveryourtracks.eff.org" target="_blank" rel="noopener">coveryourtracks.eff.org</a> by the EFF shows how unique your browser looks to trackers.</li>
+    </ul>
+
+    <div class="box">
+      <h3>Mobile Browsers</h3>
+      <p>
+        This article covers desktop browsers. On Android — especially GrapheneOS —
+        <strong>Vanadium</strong> is the first choice: maximum sandboxing, no Google services,
+        direct security updates. A dedicated article: <a href="/en/vanadium-browser-grapheneos.html">Vanadium: The Most Secure Browser on Android</a>.
+      </p>
+    </div>
+
+  </article>
+
+  <div class="like-button">
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><radialGradient id="ai-head-browser-vergleich-en" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-browser-vergleich-en)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Like</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+  <script>
+    (function() {
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      const btn = document.getElementById('likeButton');
+      const msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      });
+    })();
+  </script>
+
+  <div class="back-links">
+    <a href="/en/blog.html" style="font-size: 1.1em;">← Back to Blog</a>
+    <a href="/en/index.html" style="font-size: 1.1em;">← Back to Base</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+    <h3 style="margin-bottom: 15px;">
+      <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energy" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Recharge
+      <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Donate)</span>
+    </h3>
+    <a href="/en/spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+      Send fuel to the mothership
+    </a>
+    <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+      Thanks for your support — for free content, financial sovereignty and the alien resistance!
+    </p>
+  </div>
+
+  <footer>
+    <p>Contact: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    <p style="margin-top: 20px;">
+      <strong>Disclaimer:</strong><br><br>
+      This article does not constitute financial, tax or legal advice.<br>
+      I share my personal alien opinion — independent, rebellious and free.<br>
+      Investing involves risk. Think for yourself, trust no one, and act on your own responsibility.
+    </p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>
