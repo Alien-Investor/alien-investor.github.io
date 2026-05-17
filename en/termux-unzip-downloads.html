@@ -290,13 +290,13 @@ echo "--- Done ---"</code></pre>
       var msg = document.getElementById('likeMsg');
       if (localStorage.getItem(key)) {
         btn.disabled = true;
-        btn.textContent = '&#x2713; Thank you!';
+        btn.textContent = '✓ Thank you!';
         msg.textContent = 'Glad you enjoyed the article.';
       }
       btn.addEventListener('click', function() {
         localStorage.setItem(key, '1');
         btn.disabled = true;
-        btn.textContent = '&#x2713; Thank you!';
+        btn.textContent = '✓ Thank you!';
         msg.textContent = 'Glad you enjoyed the article.';
       });
     })();

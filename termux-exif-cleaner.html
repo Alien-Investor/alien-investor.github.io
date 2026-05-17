@@ -315,13 +315,13 @@ if __name__ == "__main__":
       var msg = document.getElementById('likeMsg');
       if (localStorage.getItem(key)) {
         btn.disabled = true;
-        btn.textContent = '&#x2713; Danke!';
+        btn.textContent = '✓ Danke!';
         msg.textContent = 'Freut mich, dass dir der Artikel gefallen hat.';
       }
       btn.addEventListener('click', function() {
         localStorage.setItem(key, '1');
         btn.disabled = true;
-        btn.textContent = '&#x2713; Danke!';
+        btn.textContent = '✓ Danke!';
         msg.textContent = 'Freut mich, dass dir der Artikel gefallen hat.';
       });
     })();
