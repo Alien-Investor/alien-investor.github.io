@@ -148,8 +148,8 @@
     <p>If not done yet, set up access to device storage first:</p>
     <pre><code>termux-setup-storage</code></pre>
     <p>Confirm the dialog ("Allow"). Then install <code>unzip</code>:</p>
-    <pre><code>pkg update && pkg upgrade
-pkg install unzip</code></pre>
+    <pre><code>pkg update && pkg upgrade</code></pre>
+    <pre><code>pkg install unzip</code></pre>
     <p>Create a scripts folder:</p>
     <pre><code>mkdir -p ~/Skripte</code></pre>
 
@@ -214,17 +214,16 @@ echo "--- Done ---"</code></pre>
       If the Downloads folder contains no ZIP files, the script reports that and exits cleanly.
     </p>
 
-    <h2>5. Combined Workflow</h2>
+    <h2>5. ZIP vs. Encrypted Archives</h2>
     <p>
-      For those using the encryption scripts from the same series, this script fits as a preprocessing step. Workflow for encrypted archives:
+      This script handles standard ZIP files. The encryption scripts from the same series use a different format:
     </p>
-    <ol>
-      <li>Place encrypted archive (<code>Verschluesselt_Folder.tar.gz.gpg</code>) in Downloads</li>
-      <li>Decrypt with <code>~/Skripte/decrypt-folder.sh</code></li>
-      <li>Decrypted files land in the Termux home directory</li>
-    </ol>
+    <ul>
+      <li><code>encrypt-folder.sh</code> packs a folder with <code>tar</code> and encrypts it with GPG into a <code>.tar.gz.gpg</code> file</li>
+      <li><code>decrypt-folder.sh</code> decrypts and unpacks that file completely</li>
+    </ul>
     <p>
-      For plain ZIP files without encryption, this script is all you need.
+      For <code>.tar.gz.gpg</code> archives: use <code>decrypt-folder.sh</code>. For <code>.zip</code> files: use this script.
     </p>
 
     <blockquote>

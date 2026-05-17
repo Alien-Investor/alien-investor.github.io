@@ -147,8 +147,8 @@
     <p>Falls noch nicht eingerichtet, zuerst den Zugriff auf den Gerätespeicher aktivieren:</p>
     <pre><code>termux-setup-storage</code></pre>
     <p>Bestätige den Dialog ("Zulassen"). Dann <code>unzip</code> installieren:</p>
-    <pre><code>pkg update && pkg upgrade
-pkg install unzip</code></pre>
+    <pre><code>pkg update && pkg upgrade</code></pre>
+    <pre><code>pkg install unzip</code></pre>
     <p>Skript-Ordner anlegen:</p>
     <pre><code>mkdir -p ~/Skripte</code></pre>
 
@@ -213,17 +213,16 @@ echo "--- Fertig ---"</code></pre>
       Enthält der Downloads-Ordner keine ZIP-Dateien, meldet das Skript das und beendet sich sauber.
     </p>
 
-    <h2>5. Kombinierter Workflow</h2>
+    <h2>5. Abgrenzung: ZIP vs. verschlüsselte Archive</h2>
     <p>
-      Wer die Verschlüsselungs-Skripte aus der gleichen Serie nutzt, kann dieses Skript als ersten Schritt einsetzen. Ablauf:
+      Dieses Skript ist für normale ZIP-Dateien. Die Verschlüsselungs-Skripte aus dieser Serie arbeiten mit einem anderen Format:
     </p>
-    <ol>
-      <li>Verschlüsseltes Archiv (<code>Verschluesselt_Ordner.tar.gz.gpg</code>) in Downloads ablegen</li>
-      <li>Entschlüsseln mit <code>~/Skripte/decrypt-folder.sh</code></li>
-      <li>Entpackte Dateien liegen im Termux-Home-Verzeichnis</li>
-    </ol>
+    <ul>
+      <li><code>encrypt-folder.sh</code> packt einen Ordner mit <code>tar</code> und verschlüsselt ihn mit GPG zu einer <code>.tar.gz.gpg</code>-Datei</li>
+      <li><code>decrypt-folder.sh</code> entschlüsselt und entpackt diese Datei wieder vollständig</li>
+    </ul>
     <p>
-      Für normale ZIP-Dateien ohne Verschlüsselung reicht dieses Skript direkt.
+      Für <code>.tar.gz.gpg</code>-Archive: <code>decrypt-folder.sh</code> verwenden. Für <code>.zip</code>-Dateien: dieses Skript.
     </p>
 
     <blockquote>
