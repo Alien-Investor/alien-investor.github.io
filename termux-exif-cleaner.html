@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>EXIF-Daten aus Fotos entfernen mit Termux | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GPS-Koordinaten, Gerätemodell und Zeitstempel aus Fotos löschen. Ein Python-Skript für Termux auf GrapheneOS.">
+  <link rel="alternate" hreflang="de" href="/termux-exif-cleaner.html">
+  <link rel="alternate" hreflang="en" href="/en/termux-exif-cleaner.html">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 0 15px 20px 15px;
+    }
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+    code {
+      background-color: #111;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      color: #0f0;
+      font-family: monospace;
+    }
+    pre {
+      background-color: #111;
+      padding: 1em;
+      border-radius: 4px;
+      overflow-x: auto;
+      border: 1px solid #333;
+      color: #0f0;
+      font-family: monospace;
+    }
+    em { color: #ccc; }
+    .byline {
+      margin-top: -0.8em;
+      margin-bottom: 2em;
+      color: #ccc;
+      font-style: italic;
+      text-align: center;
+    }
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
+    .box {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 1em; }
+    .recommendation-box {
+      margin: 2em 0;
+      padding: 1em;
+      border: 1px dashed #00ffcc;
+      border-radius: 8px;
+      text-align: center;
+      background-color: #050505;
+    }
+    .recommendation-box h3 {
+      margin-top: 0;
+      font-size: 1.1em;
+      color: #00ffcc;
+    }
+    .like-button {
+      margin: 3em 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+    }
+    .like-button button {
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+    .like-button button:hover { background: #00ffcc; color: #000; box-shadow: 0 0 15px #00ffcc; }
+    .like-button button:disabled { border-color: #444; color: #888; background: #111; cursor: default; }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    .back-links {
+      margin-top: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="index.html">← Zurück zur Zentrale</a>
+  </div>
+
+  <h1>EXIF-Daten aus Fotos entfernen mit Termux</h1>
+  <p class="byline"><em>von Alien Investor</em></p>
+
+  <article id="content">
+    <p>
+      Jedes Foto, das du mit dem Smartphone aufnimmst, enthält unsichtbare Daten, direkt im Bild eingebettet. GPS-Koordinaten auf wenige Meter genau, Gerätemodell, Betriebssystemversion, Datum und Uhrzeit der Aufnahme. Im Fachjargon: EXIF-Metadaten.
+    </p>
+    <p>
+      Wer ein Foto weitergibt, ohne diese Daten zu entfernen, gibt Aufenthaltsort, Gerät und Aufnahmezeitpunkt mit. Das gilt für Messenger, E-Mail, Nostr, eigene Server. Plattformen mit automatischer EXIF-Bereinigung sind die Ausnahme, nicht die Regel.
+    </p>
+    <p>
+      Dieses Skript bereinigt Bilder im Downloads-Ordner auf dem Gerät, bevor sie irgendwo hingeschickt werden.
+    </p>
+
+    <h2>1. Was steckt in EXIF-Daten</h2>
+    <p>Typische Felder in EXIF-Metadaten eines Kamera-Fotos:</p>
+    <ul>
+      <li><strong>GPS-Koordinaten</strong> (Breitengrad, Längengrad, manchmal Höhe)</li>
+      <li><strong>Gerätehersteller und Modell</strong> (z.B. Google Pixel 9 Pro)</li>
+      <li><strong>Betriebssystemversion</strong></li>
+      <li><strong>Datum und Uhrzeit</strong> der Aufnahme</li>
+      <li><strong>Kameraeinstellungen</strong> (Blende, Belichtungszeit, ISO)</li>
+    </ul>
+    <p>
+      Screenshots auf Android enthalten in der Regel keine GPS-Koordinaten. KI-generierte Bilder aus ComfyUI oder Stable Diffusion haben gar keine EXIF-Daten. Das Risiko liegt bei direkt mit der Kamera-App aufgenommenen Fotos.
+    </p>
+
+    <h2>2. Vorbereitung: Python und Termux einrichten</h2>
+    <p>Falls noch nicht geschehen, richte zuerst den Zugriff auf den Gerätespeicher ein:</p>
+    <pre><code>termux-setup-storage</code></pre>
+    <p>Bestätige den Dialog ("Zulassen"). Dann Python und die Bibliothek Pillow installieren:</p>
+    <pre><code>pkg update && pkg upgrade
+pkg install python
+pip install pillow</code></pre>
+    <p>Skript-Ordner anlegen:</p>
+    <pre><code>mkdir -p ~/Skripte</code></pre>
+
+    <h2>3. Das Skript: exif-cleaner.py</h2>
+    <p>
+      Das Skript liest Bilder aus dem Downloads-Ordner, erstellt pixelgenaue Kopien ohne eingebettete Metadaten und speichert sie im Unterordner <code>bereinigt/</code>. Die Originaldateien bleiben unverändert.
+    </p>
+    <p>Datei erstellen:</p>
+    <pre><code>nano ~/Skripte/exif-cleaner.py</code></pre>
+    <p>Inhalt einfügen:</p>
+    <pre><code>#!/usr/bin/env python3
+"""
+exif-cleaner.py - Entfernt alle Metadaten (EXIF) aus Bildern (Termux-Version)
+Bereinigte Bilder werden in einem 'bereinigt/' Unterordner gespeichert.
+"""
+
+import os
+import sys
+from pathlib import Path
+from PIL import Image
+
+SUPPORTED = {'.jpg', '.jpeg', '.png', '.webp', '.bmp', '.tiff', '.tif'}
+
+def clean_image(src_path, dst_path):
+    with Image.open(src_path) as img:
+        data = img.tobytes()
+        clean = Image.frombytes(img.mode, img.size, data)
+        clean.save(dst_path)
+
+def main():
+    print("Alien EXIF-Cleaner (Termux)")
+    print("-" * 40)
+
+    base = Path.home() / "storage" / "downloads"
+    ordner = input(f"Unterordner in {base}/ (leer = ganzer Downloads-Ordner): ").strip()
+    src_dir = base / ordner if ordner else base
+
+    if not src_dir.exists() or not src_dir.is_dir():
+        print(f"Ordner nicht gefunden: {src_dir}")
+        sys.exit(1)
+
+    bilder = [f for f in src_dir.iterdir() if f.suffix.lower() in SUPPORTED]
+
+    if not bilder:
+        print(f"Keine Bilder gefunden in: {src_dir}")
+        sys.exit(1)
+
+    dst_dir = src_dir / "bereinigt"
+    dst_dir.mkdir(exist_ok=True)
+
+    print(f"\nQuelle:  {src_dir}")
+    print(f"Ziel:    {dst_dir}")
+    print(f"Bilder:  {len(bilder)} gefunden\n")
+
+    ok = 0
+    fehler = 0
+
+    for bild in sorted(bilder):
+        dst = dst_dir / bild.name
+        try:
+            clean_image(bild, dst)
+            print(f"  ok  {bild.name}")
+            ok += 1
+        except Exception as e:
+            print(f"  ERR {bild.name} - Fehler: {e}")
+            fehler += 1
+
+    print("\n" + "-" * 40)
+    print(f"{ok} Bilder bereinigt -> {dst_dir}")
+    if fehler:
+        print(f"{fehler} Fehler")
+
+if __name__ == "__main__":
+    main()</code></pre>
+    <p><em>(Speichern in nano: STRG+O, Enter, dann STRG+X)</em></p>
+
+    <h2>4. Das Skript ausführen</h2>
+    <pre><code>python ~/Skripte/exif-cleaner.py</code></pre>
+    <p>
+      Das Skript fragt nach einem Unterordner in <code>~/storage/downloads/</code>. Einfach Enter drücken, um alle Bilder im gesamten Downloads-Ordner zu bereinigen.
+    </p>
+    <p>Die bereinigten Kopien liegen danach unter:</p>
+    <pre><code>~/storage/downloads/bereinigt/</code></pre>
+    <p>
+      Unterstützte Formate: JPG, PNG, WebP, BMP, TIFF.
+    </p>
+
+    <h2>5. Wie die Bereinigung funktioniert</h2>
+    <p>
+      Die Methode ist bewusst einfach: Pillow liest die Rohdaten der Pixel (<code>img.tobytes()</code>) und erstellt daraus ein neues Bildobjekt (<code>Image.frombytes()</code>). Dieses neue Objekt enthält keine EXIF-Felder, keine ICC-Profile, keine eingebetteten Thumbnails. Nur die Pixelinformation selbst.
+    </p>
+    <p>
+      Wer überprüfen will, ob die Bereinigung geklappt hat, kann mit <code>exiftool</code> auf dem Desktop nachschauen:
+    </p>
+    <pre><code>exiftool bereinigtes-foto.jpg</code></pre>
+    <p>Erwartete Ausgabe: wenige oder keine Felder, kein GPS.</p>
+
+    <blockquote>
+      Keine unsichtbaren Daten. Kein Standort. Kein Gerät. Das ist das Ziel.
+    </blockquote>
+
+    <div class="recommendation-box">
+      <h3>Weiterführendes in dieser Serie</h3>
+      <p>
+        Verschlüsselung und Entschlüsselung von Ordnern direkt auf dem Smartphone:<br>
+        <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg>
+        <a href="GrapheneOS-Skripte.html">Der mobile Bunker: Verschlüsselung auf GrapheneOS (Termux Edition)</a>
+      </p>
+      <p>
+        ZIP-Archive automatisch entpacken mit einem Befehl:<br>
+        <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg>
+        <a href="termux-unzip-downloads.html">ZIP-Archive entpacken mit Termux</a>
+      </p>
+    </div>
+
+    <div class="box">
+      <h3>Tools für echte Eigentümer (Werbung/Affiliate)</h3>
+      <p style="font-size:0.95em;">
+        Tools, die ich selbst nutze, für Bitcoin-Selbstverwahrung und digitale Souveränität:
+      </p>
+      <ul>
+        <li>
+          <svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="4" y="4" width="5" height="28" rx="1" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.7"/><rect x="9" y="4" width="22" height="28" rx="1" fill="#1a3a38" stroke="#00ffcc" stroke-width="0.7"/><line x1="13" y1="12" x2="27" y2="12" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="16" x2="27" y2="16" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="20" x2="27" y2="20" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="24" x2="22" y2="24" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/></svg> <strong>GrapheneOS-Handbuch:</strong><br>
+          Mein Ebook "GrapheneOS: Android im Überwachungszeitalter" — der vollständige Guide zu allem, was hier nur angerissen wird.<br>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/buecher" target="_blank">https://alien-investor.org/buecher</a>
+        </li>
+        <li>
+          <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Blitz" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> <strong>Bitcoin kaufen in Europa: 21bitcoin</strong><br>
+          Bitcoin-only App aus Europa, ideal für DCA. Mit Code <strong>ALIENINVESTOR</strong> dauerhaft 0,2 Prozentpunkte Gebührenreduktion auf Sofort- und Sparplankäufe.<br>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
+        </li>
+        <li>
+          &#x20BF; <strong>Bitcoin in Selbstverwahrung:</strong><br>
+          Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox.<br>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
+        </li>
+        <li>
+          <svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-label="Satellit" role="img"><path d="M4 24 A16 16 0 0 1 20 8" fill="#00ffcc" fill-opacity="0.06" stroke="#00ffcc" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="8" r="2.8" fill="#00ffcc"/><line x1="20" y1="8" x2="28" y2="4" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><path d="M15 13 A6 6 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/><path d="M12 16 A9 9 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.45"/></svg> <strong>Privacy und Mail: Proton</strong><br>
+          E-Mail, VPN und Cloud ohne Big-Tech-Abhängigkeit.<br>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
+        </li>
+      </ul>
+      <p style="font-size:0.85em; color:#aaa;">
+        Hinweis: Bei einigen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit, ohne dass es dich mehr kostet.
+      </p>
+    </div>
+
+  </article>
+
+  <div class="like-button">
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><radialGradient id="ai-head-ec-btn" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-ec-btn)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Gefällt mir</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+
+  <script>
+    (function() {
+      var key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      var btn = document.getElementById('likeButton');
+      var msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
+        btn.disabled = true;
+        btn.textContent = '&#x2713; Danke!';
+        msg.textContent = 'Freut mich, dass dir der Artikel gefallen hat.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '&#x2713; Danke!';
+        msg.textContent = 'Freut mich, dass dir der Artikel gefallen hat.';
+      });
+    })();
+  </script>
+
+  <div class="back-links">
+    <a href="blog.html" style="font-size: 1.1em;">← Zurück zur Blog-Übersicht</a>
+    <a href="index.html" style="font-size: 1.1em;">← Zurück zur Zentrale</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+    <h3 style="margin-bottom: 15px;">
+      <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energie" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Energie aufladen
+      <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
+    </h3>
+    <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+      Treibstoff für das Mutterschiff senden
+    </a>
+    <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+      Danke für deine Unterstützung.
+    </p>
+  </div>
+
+  <footer>
+    <p><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Kontakt" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    <p style="margin-top: 20px;">
+      <strong>Haftungsausschluss:</strong><br><br>
+      Dieser Artikel stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
+      Ich teile hier meine persönliche Alien-Meinung, unabhängig, rebellisch und frei.<br>
+      Investieren ist mit Risiken verbunden. Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
+    </p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>

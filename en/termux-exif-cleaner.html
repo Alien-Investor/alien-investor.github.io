@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Remove EXIF Data from Photos with Termux | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Strip GPS coordinates, device model and timestamps from photos. A Python script for Termux on GrapheneOS.">
+  <link rel="canonical" href="/en/termux-exif-cleaner.html">
+  <link rel="alternate" hreflang="de" href="/termux-exif-cleaner.html">
+  <link rel="alternate" hreflang="en" href="/en/termux-exif-cleaner.html">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 0 15px 20px 15px;
+    }
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+    code {
+      background-color: #111;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      color: #0f0;
+      font-family: monospace;
+    }
+    pre {
+      background-color: #111;
+      padding: 1em;
+      border-radius: 4px;
+      overflow-x: auto;
+      border: 1px solid #333;
+      color: #0f0;
+      font-family: monospace;
+    }
+    em { color: #ccc; }
+    .byline {
+      margin-top: -0.8em;
+      margin-bottom: 2em;
+      color: #ccc;
+      font-style: italic;
+      text-align: center;
+    }
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
+    .box {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 1em; }
+    .recommendation-box {
+      margin: 2em 0;
+      padding: 1em;
+      border: 1px dashed #00ffcc;
+      border-radius: 8px;
+      text-align: center;
+      background-color: #050505;
+    }
+    .recommendation-box h3 {
+      margin-top: 0;
+      font-size: 1.1em;
+      color: #00ffcc;
+    }
+    .like-button {
+      margin: 3em 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+    }
+    .like-button button {
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+    .like-button button:hover { background: #00ffcc; color: #000; box-shadow: 0 0 15px #00ffcc; }
+    .like-button button:disabled { border-color: #444; color: #888; background: #111; cursor: default; }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    .back-links {
+      margin-top: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="/en/index.html">← Back to Control</a>
+  </div>
+
+  <h1>Remove EXIF Data from Photos with Termux</h1>
+  <p class="byline"><em>by Alien Investor</em></p>
+
+  <article id="content">
+    <p>
+      Every photo you take with your smartphone contains invisible data embedded directly in the image. GPS coordinates accurate to a few meters, device model, operating system version, date and time of capture. The technical term: EXIF metadata.
+    </p>
+    <p>
+      Anyone who shares a photo without removing this data also shares their location, device and the time of capture. This applies to messengers, email, Nostr, and private servers. Platforms with automatic EXIF stripping are the exception, not the rule.
+    </p>
+    <p>
+      This script cleans images in the Downloads folder on the device before they are sent anywhere.
+    </p>
+
+    <h2>1. What EXIF Data Contains</h2>
+    <p>Typical fields in EXIF metadata of a camera photo:</p>
+    <ul>
+      <li><strong>GPS coordinates</strong> (latitude, longitude, sometimes altitude)</li>
+      <li><strong>Device manufacturer and model</strong> (e.g. Google Pixel 9 Pro)</li>
+      <li><strong>Operating system version</strong></li>
+      <li><strong>Date and time</strong> of capture</li>
+      <li><strong>Camera settings</strong> (aperture, exposure time, ISO)</li>
+    </ul>
+    <p>
+      Android screenshots generally do not contain GPS coordinates. AI-generated images from ComfyUI or Stable Diffusion carry no EXIF data at all. The main risk is with photos taken directly by the camera app.
+    </p>
+
+    <h2>2. Setup: Python and Termux</h2>
+    <p>If not done yet, set up access to device storage first:</p>
+    <pre><code>termux-setup-storage</code></pre>
+    <p>Confirm the dialog ("Allow"). Then install Python and the Pillow library:</p>
+    <pre><code>pkg update && pkg upgrade
+pkg install python
+pip install pillow</code></pre>
+    <p>Create a scripts folder:</p>
+    <pre><code>mkdir -p ~/Skripte</code></pre>
+
+    <h2>3. The Script: exif-cleaner.py</h2>
+    <p>
+      The script reads images from the Downloads folder, creates pixel-accurate copies without embedded metadata, and saves them to a <code>bereinigt/</code> subfolder. The original files remain untouched.
+    </p>
+    <p>Create the file:</p>
+    <pre><code>nano ~/Skripte/exif-cleaner.py</code></pre>
+    <p>Paste the content:</p>
+    <pre><code>#!/usr/bin/env python3
+"""
+exif-cleaner.py - Removes all metadata (EXIF) from images (Termux version)
+Cleaned images are saved in a 'bereinigt/' subfolder.
+"""
+
+import os
+import sys
+from pathlib import Path
+from PIL import Image
+
+SUPPORTED = {'.jpg', '.jpeg', '.png', '.webp', '.bmp', '.tiff', '.tif'}
+
+def clean_image(src_path, dst_path):
+    with Image.open(src_path) as img:
+        data = img.tobytes()
+        clean = Image.frombytes(img.mode, img.size, data)
+        clean.save(dst_path)
+
+def main():
+    print("Alien EXIF-Cleaner (Termux)")
+    print("-" * 40)
+
+    base = Path.home() / "storage" / "downloads"
+    folder = input(f"Subfolder in {base}/ (empty = entire Downloads folder): ").strip()
+    src_dir = base / folder if folder else base
+
+    if not src_dir.exists() or not src_dir.is_dir():
+        print(f"Folder not found: {src_dir}")
+        sys.exit(1)
+
+    images = [f for f in src_dir.iterdir() if f.suffix.lower() in SUPPORTED]
+
+    if not images:
+        print(f"No images found in: {src_dir}")
+        sys.exit(1)
+
+    dst_dir = src_dir / "bereinigt"
+    dst_dir.mkdir(exist_ok=True)
+
+    print(f"\nSource:  {src_dir}")
+    print(f"Target:  {dst_dir}")
+    print(f"Images:  {len(images)} found\n")
+
+    ok = 0
+    errors = 0
+
+    for img_path in sorted(images):
+        dst = dst_dir / img_path.name
+        try:
+            clean_image(img_path, dst)
+            print(f"  ok  {img_path.name}")
+            ok += 1
+        except Exception as e:
+            print(f"  ERR {img_path.name} - Error: {e}")
+            errors += 1
+
+    print("\n" + "-" * 40)
+    print(f"{ok} images cleaned -> {dst_dir}")
+    if errors:
+        print(f"{errors} errors")
+
+if __name__ == "__main__":
+    main()</code></pre>
+    <p><em>(Save in nano: CTRL+O, Enter, then CTRL+X)</em></p>
+
+    <h2>4. Running the Script</h2>
+    <pre><code>python ~/Skripte/exif-cleaner.py</code></pre>
+    <p>
+      The script asks for a subfolder within <code>~/storage/downloads/</code>. Press Enter to process all images in the entire Downloads folder.
+    </p>
+    <p>Cleaned copies are saved to:</p>
+    <pre><code>~/storage/downloads/bereinigt/</code></pre>
+    <p>
+      Supported formats: JPG, PNG, WebP, BMP, TIFF.
+    </p>
+
+    <h2>5. How the Cleaning Works</h2>
+    <p>
+      The approach is deliberately straightforward: Pillow reads the raw pixel data (<code>img.tobytes()</code>) and builds a new image object from it (<code>Image.frombytes()</code>). This new object contains no EXIF fields, no ICC profiles, no embedded thumbnails. Only the pixel data itself.
+    </p>
+    <p>
+      To verify that cleaning worked, use <code>exiftool</code> on a desktop:
+    </p>
+    <pre><code>exiftool cleaned-photo.jpg</code></pre>
+    <p>Expected output: few or no fields, no GPS.</p>
+
+    <blockquote>
+      No invisible data. No location. No device. That is the goal.
+    </blockquote>
+
+    <div class="recommendation-box">
+      <h3>More in This Series</h3>
+      <p>
+        Encrypt and decrypt folders directly on your smartphone:<br>
+        <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg>
+        <a href="/en/GrapheneOS-Skripte.html">The Mobile Bunker: Encryption on GrapheneOS (Termux Edition)</a>
+      </p>
+      <p>
+        Unzip all archives in Downloads with a single command:<br>
+        <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg>
+        <a href="/en/termux-unzip-downloads.html">Unzip Archives with Termux</a>
+      </p>
+    </div>
+
+    <div class="box">
+      <h3>Tools for Real Owners (Ads/Affiliate)</h3>
+      <p style="font-size:0.95em;">
+        Tools I use myself, for Bitcoin self-custody and digital sovereignty:
+      </p>
+      <ul>
+        <li>
+          <svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="4" y="4" width="5" height="28" rx="1" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.7"/><rect x="9" y="4" width="22" height="28" rx="1" fill="#1a3a38" stroke="#00ffcc" stroke-width="0.7"/><line x1="13" y1="12" x2="27" y2="12" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="16" x2="27" y2="16" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="20" x2="27" y2="20" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="24" x2="22" y2="24" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/></svg> <strong>GrapheneOS Handbook:</strong><br>
+          My ebook "GrapheneOS: Android in the Age of Surveillance" — the complete guide to everything only touched on here.<br>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/buecher" target="_blank">https://alien-investor.org/buecher</a>
+        </li>
+        <li>
+          <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Lightning" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> <strong>Buy Bitcoin in Europe: 21bitcoin</strong><br>
+          Bitcoin-only app from Europe, ideal for DCA. Use code <strong>ALIENINVESTOR</strong> for a permanent 0.2 percentage point fee reduction.<br>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
+        </li>
+        <li>
+          &#x20BF; <strong>Bitcoin Self-Custody:</strong><br>
+          Hardware wallet instead of exchange account. I use the BitBox.<br>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
+        </li>
+        <li>
+          <svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-label="Satellite" role="img"><path d="M4 24 A16 16 0 0 1 20 8" fill="#00ffcc" fill-opacity="0.06" stroke="#00ffcc" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="8" r="2.8" fill="#00ffcc"/><line x1="20" y1="8" x2="28" y2="4" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><path d="M15 13 A6 6 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/><path d="M12 16 A9 9 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.45"/></svg> <strong>Privacy and Mail: Proton</strong><br>
+          Email, VPN and cloud without Big Tech dependency.<br>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
+        </li>
+      </ul>
+      <p style="font-size:0.85em; color:#aaa;">
+        Disclosure: Some links are affiliate links. Using them supports my work at no extra cost to you.
+      </p>
+    </div>
+
+  </article>
+
+  <div class="like-button">
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><radialGradient id="ai-head-ec-en-btn" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-ec-en-btn)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Like</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+
+  <script>
+    (function() {
+      var key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      var btn = document.getElementById('likeButton');
+      var msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
+        btn.disabled = true;
+        btn.textContent = '&#x2713; Thank you!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '&#x2713; Thank you!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      });
+    })();
+  </script>
+
+  <div class="back-links">
+    <a href="/en/blog.html" style="font-size: 1.1em;">← Back to Blog</a>
+    <a href="/en/index.html" style="font-size: 1.1em;">← Back to Control</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+    <h3 style="margin-bottom: 15px;">
+      <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energy" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Power Up
+      <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Donate)</span>
+    </h3>
+    <a href="/en/spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+      Send fuel to the mothership
+    </a>
+    <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+      Thank you for your support.
+    </p>
+  </div>
+
+  <footer>
+    <p><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Contact" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> Contact: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    <p style="margin-top: 20px;">
+      <strong>Disclaimer:</strong><br><br>
+      This article does not constitute financial, tax or legal advice.<br>
+      I share my personal Alien opinion here, independent, rebellious and free.<br>
+      Investing involves risks. Think for yourself, trust no one and act at your own responsibility.
+    </p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>
