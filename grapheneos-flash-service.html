@@ -185,7 +185,7 @@
     }
     .hero-img-wrap { flex: 0 0 auto; }
     .hero-img-wrap img {
-      width: 220px;
+      width: 155px;
       height: auto;
       border-radius: 14px;
       box-shadow:
@@ -458,7 +458,7 @@
       .config-grid { grid-template-columns: 1fr; }
       h1 { font-size: 1.55em; }
       .hero { flex-direction: column; gap: 20px; }
-      .hero-img-wrap img { width: 160px; }
+      .hero-img-wrap img { width: 120px; }
       .contact-box { padding: 22px 16px; }
     }
     @media (max-width: 480px) {
@@ -510,7 +510,7 @@
     <!-- HERO -->
     <div class="hero">
       <div class="hero-img-wrap">
-        <img src="/grapheneos-service-hero.png" alt="Schwebendes Pixel mit GrapheneOS im Weltraum" width="220">
+        <img src="/grapheneos-service-hero.png" alt="Schwebendes Pixel mit GrapheneOS im Weltraum" width="155">
       </div>
       <div class="hero-text">
         <h2>Privatsphäre ab dem ersten Boot</h2>
@@ -547,6 +547,7 @@
           <li><span class="chk">✓</span> Gerät bar gekauft</li>
           <li><span class="dim">–</span> Keine Vorkonfiguration</li>
           <li><span class="dim">–</span> Kein Ebook</li>
+          <li><span class="dim">–</span> Kein E-Mail-Support</li>
         </ul>
         <a href="mailto:Alien-Investor@proton.me?subject=GrapheneOS-Service Standard" class="tier-cta">Standard anfragen →</a>
       </div>
@@ -573,6 +574,8 @@
           <li><span class="chk">✓</span> Tor Browser installiert</li>
           <li><span class="chk">✓</span> Easy Notes + Organic Maps</li>
           <li><span class="chk">✓</span> Aegis + App Verifier</li>
+          <li><span class="chk">✓</span> KeePassDX Passwort-Manager</li>
+          <li><span class="chk">✓</span> E-Mail-Support (24h Antwortzeit)</li>
           <li><span class="dim">–</span> Kein Ebook</li>
         </ul>
         <a href="mailto:Alien-Investor@proton.me?subject=GrapheneOS-Service Digital Bunker" class="tier-cta">Bunker anfragen →</a>
@@ -612,6 +615,7 @@
           <li><span class="chk">✓</span> EPUB · PDF · AZW3 · MOBI</li>
           <li><span class="chk">✓</span> 23 Kapitel, DRM-frei</li>
           <li><span class="chk">✓</span> Neue Buchversion gratis</li>
+          <li><span class="chk">✓</span> E-Mail-Support (24h Antwortzeit)</li>
           <li><span class="dim">–</span> Kein Termux-Skripte-Paket</li>
         </ul>
         <a href="mailto:Alien-Investor@proton.me?subject=GrapheneOS-Service Alien Phone" class="tier-cta">Alien Phone anfragen →</a>
@@ -637,9 +641,10 @@
         </div>
         <ul class="tier-feats">
           <li><span class="chk">✓</span> Alles aus Alien Phone</li>
-          <li><span class="chk">✓</span> Termux vorinstalliert</li>
-          <li><span class="chk">✓</span> encrypt + decrypt (AES-256)</li>
-          <li><span class="chk">✓</span> exif-cleaner + unzip-Skript</li>
+          <li><span class="chk">✓</span> Termux + 4 eigene Skripte</li>
+          <li><span class="chk">✓</span> Bash-Aliasse eingerichtet</li>
+          <li><span class="chk">✓</span> Termux-Anleitung (Cheat Sheet)</li>
+          <li><span class="chk">✓</span> E-Mail-Support (24h Antwortzeit)</li>
         </ul>
         <a href="mailto:Alien-Investor@proton.me?subject=GrapheneOS-Service Alien Phone Pro" class="tier-cta">Pro anfragen →</a>
       </div>
@@ -695,12 +700,19 @@
         </div>
         <div class="ci-body">Offline-2FA-App — deine TOTP-Codes bleiben auf dem Gerät. Vault-Verschlüsselung aktiviert. Deine Accounts trägst du selbst ein.</div>
       </div>
-      <div class="config-item" style="grid-column: 1 / -1;">
+      <div class="config-item">
         <div class="ci-head">
           <svg style="width:14px;height:14px;flex:0 0 14px;" viewBox="0 0 24 24" fill="none"><path d="M12 2 L20 7 L20 17 L12 22 L4 17 L4 7 Z" stroke="#00ffcc" stroke-width="1.2"/><polyline points="9,12 11,14 15,10" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           App Verifier
         </div>
         <div class="ci-body">Prüft installierte Apps gegen die GrapheneOS-Datenbank bekannter, vertrauenswürdiger Signaturen — erkennt manipulierte oder gefälschte APKs bevor sie Schaden anrichten.</div>
+      </div>
+      <div class="config-item" style="grid-column: 1 / -1;">
+        <div class="ci-head">
+          <svg style="width:14px;height:14px;flex:0 0 14px;" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" stroke="#00ffcc" stroke-width="1.2"/><path d="M7 11 L7 7 A5 5 0 0 1 17 7 L17 11" stroke="#00ffcc" stroke-width="1.2" fill="none"/><circle cx="12" cy="16.5" r="2" fill="#00ffcc" opacity="0.7"/><line x1="12" y1="16.5" x2="12" y2="19" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg>
+          KeePassDX Passwort-Manager
+        </div>
+        <div class="ci-body">Offline-Passwort-Manager im KeePass-Format (.kdbx) — kein Konto, keine Cloud, kein Sync-Zwang. Kompatibel mit KeePassXC auf dem Desktop. Vault-Datei bleibt auf dem Gerät, du trägst deine Passwörter selbst ein.</div>
       </div>
     </div>
 
@@ -711,7 +723,7 @@
     <!-- ===== ALIEN PHONE PRO EXTRAS ===== -->
     <h2><svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 28 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14 1 C14 1 6 7 6 20 L6 27 L10 30 L10 25 C10 16 14 8 14 8 C14 8 18 16 18 25 L18 30 L22 27 L22 20 C22 7 14 1 14 1 Z" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.9"/><circle cx="14" cy="13" r="3" fill="#060e12" stroke="#00ffcc" stroke-width="0.7"/><path d="M10 26 L5 33 L10 30 Z" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.7"/><path d="M18 26 L23 33 L18 30 Z" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.7"/></svg> Alien Phone Pro — Termux-Skripte</h2>
     <p style="color:#aaa; font-size:0.91em; margin-bottom:14px;">
-      Zusätzlich zu allem aus Alien Phone: Termux mit vier eigenen Bash- und Python-Skripten — vorinstalliert und einsatzbereit ab dem ersten Start.
+      Zusätzlich zu allem aus Alien Phone: Termux mit vier eigenen Bash- und Python-Skripten, vorkonfigurierten Aliassen und einer kompakten Termux-Anleitung — alles einsatzbereit ab dem ersten Start.
     </p>
 
     <ul class="pro-list">
@@ -750,9 +762,20 @@
           <span>Entpackt jedes ZIP in einen eigenen Unterordner — kein Chaos in Downloads.</span>
         </div>
       </li>
-
-
-
+      <li>
+        <span class="pl-ico"><svg viewBox="0 0 16 16" width="16" height="16" fill="none"><path d="M2 4 L14 4 M2 7 L10 7 M2 10 L12 10" stroke="#00ffcc" stroke-width="1" stroke-linecap="round"/><path d="M11 9 L14 7 L11 5" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="pl-body">
+          <strong>Bash-Aliasse voreingerichtet</strong>
+          <span>Kurzkommandos für alle vier Skripte — z.B. <code style="color:#00ffcc;font-size:0.85em;">enc</code>, <code style="color:#00ffcc;font-size:0.85em;">dec</code>, <code style="color:#00ffcc;font-size:0.85em;">exif</code>, <code style="color:#00ffcc;font-size:0.85em;">unz</code> — plus gängige Shell-Aliasse (ll, la, ..). Direkt nutzbar ohne Tippen des vollen Skriptnamens.</span>
+        </div>
+      </li>
+      <li>
+        <span class="pl-ico"><svg viewBox="0 0 16 16" width="16" height="16" fill="none"><path d="M3 2 L13 2 L13 14 L3 14 Z" stroke="#00ffcc" stroke-width="1"/><line x1="5" y1="5" x2="11" y2="5" stroke="#00ffcc" stroke-width="0.8"/><line x1="5" y1="7.5" x2="11" y2="7.5" stroke="#00ffcc" stroke-width="0.8"/><line x1="5" y1="10" x2="9" y2="10" stroke="#00ffcc" stroke-width="0.8"/></svg></span>
+        <div class="pl-body">
+          <strong>Termux-Anleitung (Cheat Sheet)</strong>
+          <span>Kompakte Markdown-Datei auf dem Gerät: alle Befehle, alle Aliasse, alle Skript-Parameter auf einen Blick. Liegt im Home-Verzeichnis von Termux — immer griffbereit.</span>
+        </div>
+      </li>
     </ul>
 
     <!-- ===== FAQ ===== -->
