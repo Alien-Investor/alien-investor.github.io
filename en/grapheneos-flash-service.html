@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Alien Phone Service – GrapheneOS Pre-installed | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GrapheneOS pre-installed on Pixel — four tiers: Flash, Digital Bunker, Alien Phone with ebook, and Alien Phone Pro with Termux scripts. Bought with cash, paid in Bitcoin, shipped discreetly.">
+  <link rel="canonical" href="/en/grapheneos-flash-service.html">
+  <link rel="alternate" hreflang="de" href="/grapheneos-flash-service.html">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+
+    body {
+      background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* ===== SPACE BACKGROUND ===== */
+    .stars-bg {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: radial-gradient(ellipse at top, #0a0f1e 0%, #000 60%);
+      z-index: -2;
+    }
+    .stars-bg::before {
+      content: "";
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image:
+        radial-gradient(1px 1px at 10% 15%, #fff, transparent),
+        radial-gradient(1px 1px at 25% 40%, #fff, transparent),
+        radial-gradient(1px 1px at 40% 20%, #fff, transparent),
+        radial-gradient(2px 2px at 55% 60%, #00ffcc, transparent),
+        radial-gradient(1px 1px at 70% 35%, #fff, transparent),
+        radial-gradient(1px 1px at 85% 75%, #fff, transparent),
+        radial-gradient(1px 1px at 15% 80%, #fff, transparent),
+        radial-gradient(1px 1px at 35% 90%, #fff, transparent),
+        radial-gradient(1px 1px at 60% 10%, #fff, transparent),
+        radial-gradient(1px 1px at 90% 50%, #fff, transparent),
+        radial-gradient(1px 1px at 5% 55%, #fff, transparent),
+        radial-gradient(2px 2px at 75% 25%, #00ffcc, transparent);
+      animation: twinkle 6s ease-in-out infinite alternate;
+    }
+    @keyframes twinkle { 0% { opacity: 0.4; } 100% { opacity: 0.9; } }
+
+    .nebula {
+      position: fixed; top: -10%; left: -10%;
+      width: 120%; height: 120%;
+      z-index: -2; pointer-events: none;
+      background:
+        radial-gradient(ellipse 900px 260px at 30% 35%, rgba(90,30,140,0.22), transparent 60%),
+        radial-gradient(ellipse 1100px 200px at 70% 55%, rgba(0,140,180,0.18), transparent 60%),
+        radial-gradient(ellipse 500px 180px at 50% 45%, rgba(180,60,140,0.10), transparent 60%),
+        radial-gradient(circle 140px at 32% 36%, rgba(255,255,255,0.10), transparent 70%),
+        radial-gradient(circle 120px at 68% 56%, rgba(0,255,204,0.08), transparent 70%);
+      transform: rotate(-18deg);
+      filter: blur(30px); opacity: 0.85;
+      animation: nebula-pulse 14s ease-in-out infinite alternate;
+      mix-blend-mode: screen;
+    }
+    @keyframes nebula-pulse {
+      0%   { opacity: 0.55; transform: rotate(-18deg) scale(1); }
+      50%  { opacity: 0.85; transform: rotate(-17deg) scale(1.04); }
+      100% { opacity: 0.65; transform: rotate(-19deg) scale(1.02); }
+    }
+
+    .shooting-star {
+      position: fixed; width: 2px; height: 2px;
+      background: #fff; border-radius: 50%;
+      box-shadow: 0 0 6px 2px rgba(255,255,255,0.7);
+      z-index: -1; opacity: 0; pointer-events: none;
+    }
+    .shooting-star::before {
+      content: ""; position: absolute; top: 0; left: 0;
+      width: 120px; height: 1px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.8), rgba(0,255,204,0.4), transparent);
+      transform: translateX(-120px);
+    }
+    .shooting-star.s1 { top: 12%; left: -5%; animation: shoot1 11s linear infinite; animation-delay: 3s; }
+    .shooting-star.s2 { top: 28%; left: -5%; animation: shoot2 17s linear infinite; animation-delay: 9s; }
+    .shooting-star.s3 { top: 50%; left: -5%; animation: shoot3 23s linear infinite; animation-delay: 15s; }
+    @keyframes shoot1 {
+      0%   { transform: translate(0,0) rotate(15deg); opacity:0; }
+      3%   { opacity:1; }
+      8%   { transform: translate(110vw,20vh) rotate(15deg); opacity:0; }
+      100% { transform: translate(110vw,20vh) rotate(15deg); opacity:0; }
+    }
+    @keyframes shoot2 {
+      0%   { transform: translate(0,0) rotate(22deg); opacity:0; }
+      2%   { opacity:1; }
+      7%   { transform: translate(115vw,30vh) rotate(22deg); opacity:0; }
+      100% { transform: translate(115vw,30vh) rotate(22deg); opacity:0; }
+    }
+    @keyframes shoot3 {
+      0%   { transform: translate(0,0) rotate(10deg); opacity:0; }
+      3%   { opacity:1; }
+      9%   { transform: translate(115vw,15vh) rotate(10deg); opacity:0; }
+      100% { transform: translate(115vw,15vh) rotate(10deg); opacity:0; }
+    }
+
+    /* ===== UFO ===== */
+    .ufo {
+      position: fixed;
+      top: 38%; right: -80px;
+      width: 72px; height: 36px;
+      z-index: -1;
+      filter: drop-shadow(0 0 8px rgba(0,255,204,0.55));
+      animation: ufo-fly 55s linear infinite;
+      animation-delay: 25s;
+      pointer-events: none;
+      opacity: 0;
+    }
+    @keyframes ufo-fly {
+      0%   { transform: translate(0, 0);           opacity: 0; }
+      2%   {                                        opacity: 1; }
+      10%  { transform: translate(-30vw, -3vh); }
+      22%  { transform: translate(-70vw,  2vh); }
+      34%  { transform: translate(-110vw,-2vh);    opacity: 1; }
+      37%  { transform: translate(-120vw,-2vh);    opacity: 0; }
+      100% { transform: translate(-120vw,-2vh);    opacity: 0; }
+    }
+    .ufo-light { animation: ufo-blink 1.2s infinite; transform-origin: center; }
+    .ufo-light:nth-child(1) { animation-delay: 0.00s; }
+    .ufo-light:nth-child(2) { animation-delay: 0.15s; }
+    .ufo-light:nth-child(3) { animation-delay: 0.30s; }
+    .ufo-light:nth-child(4) { animation-delay: 0.45s; }
+    .ufo-light:nth-child(5) { animation-delay: 0.60s; }
+    .ufo-light:nth-child(6) { animation-delay: 0.75s; }
+    @keyframes ufo-blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.25; }
+    }
+
+    /* ===== LAYOUT ===== */
+    .wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 15px 70px 15px;
+    }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+
+    h1 {
+      color: #00ffcc;
+      margin-top: 30px;
+      text-align: center;
+      font-size: 2em;
+      text-shadow: 0 0 14px rgba(0,255,204,0.4);
+      line-height: 1.2;
+    }
+    h2 {
+      color: #00ffcc;
+      margin-top: 2.2em;
+      border-bottom: 1px solid #1a3a3a;
+      padding-bottom: 8px;
+      font-size: 1.2em;
+    }
+    h3 { color: #00ffcc; margin-top: 1.2em; font-size: 1em; }
+
+    .lead {
+      text-align: center;
+      color: #ccc;
+      margin: 14px auto 36px auto;
+      max-width: 580px;
+      font-size: 1.05em;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      justify-content: center;
+      margin: 10px 0 44px 0;
+      flex-wrap: wrap;
+    }
+    .hero-img-wrap { flex: 0 0 auto; }
+    .hero-img-wrap img {
+      width: 220px; height: auto;
+      border-radius: 14px;
+      box-shadow:
+        0 0 40px rgba(0,255,204,0.45),
+        0 0 80px rgba(0,255,204,0.15),
+        0 20px 40px rgba(0,0,0,0.7);
+      animation: float 7s ease-in-out infinite;
+      display: block;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(-1deg); }
+      50%       { transform: translateY(-14px) rotate(1deg); }
+    }
+    .hero-text { flex: 1; min-width: 220px; }
+    .hero-text h2 { border: none; margin: 0 0 10px 0; font-size: 1.3em; }
+    .hero-text p { color: #ccc; margin: 0; font-size: 0.96em; line-height: 1.6; }
+
+    /* ===== TIER CARDS – 2×2 ===== */
+    .tiers {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin: 0 0 50px 0;
+    }
+    .tier-card {
+      background: rgba(0,10,15,0.75);
+      border: 1px solid #1a3a3a;
+      border-radius: 14px;
+      padding: 22px 18px 24px;
+      display: flex; flex-direction: column;
+      position: relative;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .tier-card:hover {
+      border-color: #00ffcc44;
+      box-shadow: 0 0 20px rgba(0,255,204,0.08);
+    }
+    .tier-card.featured {
+      border-color: #00ffcc;
+      box-shadow: 0 0 30px rgba(0,255,204,0.18), inset 0 0 40px rgba(0,255,204,0.03);
+      background: rgba(0,20,20,0.85);
+    }
+    .tier-badge {
+      position: absolute; top: -11px; left: 50%;
+      transform: translateX(-50%);
+      background: #00ffcc; color: #000;
+      font-size: 0.72em; font-weight: bold;
+      padding: 3px 12px; border-radius: 20px;
+      white-space: nowrap; letter-spacing: 0.5px;
+    }
+    .tier-icon { display: flex; justify-content: center; margin-bottom: 10px; }
+    .tier-icon svg { width: 38px; height: 38px; filter: drop-shadow(0 0 6px rgba(0,255,204,0.35)); }
+    .tier-name {
+      color: #00ffcc; font-size: 1em; font-weight: bold;
+      text-align: center; margin-bottom: 4px;
+    }
+    .tier-tagline {
+      color: #777; font-size: 0.78em;
+      text-align: center; margin-bottom: 14px; min-height: 32px;
+    }
+    .tier-price { text-align: center; margin-bottom: 16px; }
+    .tier-price .amount { display: block; color: #fff; font-size: 1.7em; font-weight: bold; line-height: 1; }
+    .tier-price .base { color: #00ffcc; font-size: 1.7em; }
+    .tier-price .sub { color: #555; font-size: 0.75em; margin-top: 4px; }
+    .tier-feats { list-style: none; padding: 0; margin: 0; font-size: 0.82em; flex: 1; }
+    .tier-feats li {
+      padding: 5px 0; border-bottom: 1px solid #0f1f1f;
+      color: #bbb; display: flex; gap: 8px; align-items: flex-start;
+    }
+    .tier-feats li:last-child { border-bottom: none; }
+    .tier-feats .chk { color: #00ffcc; flex: 0 0 14px; margin-top: 1px; }
+    .tier-feats .dim { color: #3a3a3a; flex: 0 0 14px; margin-top: 1px; }
+    .tier-cta {
+      display: block; margin-top: 18px; padding: 10px 0;
+      text-align: center; border-radius: 8px;
+      font-weight: bold; font-size: 0.88em;
+      border: 1px solid #00ffcc44; color: #00ffcc;
+      background: transparent; transition: all 0.2s; text-decoration: none;
+    }
+    .tier-cta:hover {
+      background: rgba(0,255,204,0.12); border-color: #00ffcc;
+      color: #fff; text-shadow: none;
+    }
+    .tier-card.featured .tier-cta { background: rgba(0,255,204,0.1); border-color: #00ffcc; }
+
+    /* ===== DETAIL SECTIONS ===== */
+    .feature-list { list-style: none; padding: 0; margin: 12px 0 0 0; }
+    .feature-list li {
+      padding: 8px 0; border-bottom: 1px solid #0f1515;
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .feature-list li:last-child { border-bottom: none; }
+    .feature-list .icon { flex: 0 0 20px; color: #00ffcc; font-weight: bold; }
+    .feature-list .text { color: #ddd; font-size: 0.93em; }
+    .feature-list .sub { color: #777; font-size: 0.83em; display: block; margin-top: 2px; }
+
+    /* ===== CONFIG GRID ===== */
+    .config-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 16px 0; }
+    .config-item {
+      background: rgba(0,255,204,0.04); border: 1px solid #0f2a2a;
+      border-radius: 8px; padding: 12px 14px;
+    }
+    .config-item .ci-head {
+      color: #00ffcc; font-size: 0.82em; font-weight: bold;
+      margin-bottom: 4px; display: flex; align-items: center; gap: 6px;
+    }
+    .config-item .ci-body { color: #aaa; font-size: 0.8em; line-height: 1.4; }
+
+    /* ===== PRO EXTRAS LIST ===== */
+    .pro-list { list-style: none; padding: 0; margin: 14px 0; }
+    .pro-list li {
+      padding: 9px 0; border-bottom: 1px solid #0f1f1f;
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .pro-list li:last-child { border-bottom: none; }
+    .pro-list .pl-ico { flex: 0 0 18px; color: #00ffcc; margin-top: 2px; }
+    .pro-list .pl-body { flex: 1; }
+    .pro-list .pl-body strong { color: #fff; font-size: 0.92em; display: block; }
+    .pro-list .pl-body span { color: #777; font-size: 0.82em; }
+
+    /* ===== DEVICE TABLE ===== */
+    table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.88em; }
+    th {
+      background: rgba(0,255,204,0.07); color: #00ffcc;
+      text-align: left; padding: 9px 12px; border-bottom: 1px solid #1a3a3a;
+    }
+    td { padding: 8px 12px; border-bottom: 1px solid #0f1515; color: #ccc; vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.78em; font-weight: bold; }
+    .badge-best   { background: rgba(0,255,204,0.15); color: #00ffcc; border: 1px solid rgba(0,255,204,0.35); }
+    .badge-green  { background: rgba(0,255,100,0.12); color: #00ff88; border: 1px solid rgba(0,255,100,0.28); }
+    .badge-yellow { background: rgba(255,200,0,0.10); color: #ffcc44; border: 1px solid rgba(255,200,0,0.22); }
+
+    /* ===== STEP LIST ===== */
+    .steps { list-style: none; padding: 0; margin: 12px 0; }
+    .step {
+      display: flex; gap: 16px; align-items: flex-start;
+      padding: 12px 0; border-bottom: 1px solid #0f1515;
+    }
+    .step:last-child { border-bottom: none; }
+    .step-num {
+      flex: 0 0 30px; height: 30px;
+      background: rgba(0,255,204,0.08); border: 1px solid #00ffcc66;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      color: #00ffcc; font-weight: bold; font-size: 0.85em; margin-top: 2px;
+    }
+    .step-body { flex: 1; }
+    .step-body strong { color: #fff; display: block; margin-bottom: 3px; font-size: 0.95em; }
+    .step-body span { color: #999; font-size: 0.85em; }
+
+    /* ===== INFO / WARN / DISCLAIMER BOXES ===== */
+    .info-box {
+      background: rgba(0,255,204,0.04); border: 1px solid rgba(0,255,204,0.18);
+      border-radius: 8px; padding: 16px 18px; margin: 14px 0;
+    }
+    .info-box p { margin: 0 0 7px 0; color: #ccc; font-size: 0.91em; }
+    .info-box p:last-child { margin: 0; }
+    .info-box strong { color: #00ffcc; }
+
+    .warn-box {
+      background: rgba(255,150,0,0.05); border: 1px solid rgba(255,150,0,0.22);
+      border-radius: 8px; padding: 14px 18px; margin: 14px 0;
+    }
+    .warn-box p { margin: 0 0 7px 0; color: #ccc; font-size: 0.88em; }
+    .warn-box p:last-child { margin: 0; }
+    .warn-box strong { color: #ffaa44; }
+
+    .disclaimer {
+      background: rgba(255,80,80,0.03); border: 1px solid rgba(255,80,80,0.15);
+      border-radius: 8px; padding: 16px 18px; margin: 14px 0;
+    }
+    .disclaimer p { margin: 0 0 8px 0; color: #aaa; font-size: 0.86em; }
+    .disclaimer p:last-child { margin: 0; }
+    .disclaimer strong { color: #ff8888; }
+
+    /* ===== CONTACT ===== */
+    .contact-box {
+      background: linear-gradient(135deg, rgba(0,20,20,0.75), rgba(0,8,15,0.92));
+      border: 1px solid #00ffcc; border-radius: 14px; padding: 30px;
+      margin: 24px 0; text-align: center;
+      box-shadow: 0 0 30px rgba(0,255,204,0.1);
+    }
+    .contact-box h3 { margin: 0 0 10px 0; font-size: 1.15em; }
+    .contact-box p { color: #ccc; margin: 8px 0; font-size: 0.93em; }
+    .mail-link {
+      display: inline-block; margin-top: 12px; padding: 13px 32px;
+      border: 1px solid #00ffcc; border-radius: 8px;
+      color: #00ffcc; font-weight: bold; font-size: 1em; transition: all 0.2s;
+    }
+    .mail-link:hover {
+      background: #00ffcc; color: #000;
+      box-shadow: 0 0 20px #00ffcc; text-shadow: none;
+    }
+    .keyword-hint { display: block; margin-top: 12px; font-size: 0.83em; color: #666; }
+    code {
+      background: rgba(0,255,204,0.1); border: 1px solid rgba(0,255,204,0.22);
+      border-radius: 4px; padding: 2px 7px; color: #00ffcc; font-size: 0.9em;
+    }
+
+    /* ===== PAYMENT LIST ===== */
+    .pay-list { list-style: none; padding: 0; margin: 12px 0; }
+    .pay-list li {
+      display: flex; gap: 12px; align-items: flex-start;
+      padding: 10px 0; border-bottom: 1px solid #0f1515;
+    }
+    .pay-list li:last-child { border-bottom: none; }
+    .pay-icon { flex: 0 0 22px; }
+    .pay-body { flex: 1; }
+    .pay-body strong { color: #fff; font-size: 0.93em; display: block; margin-bottom: 2px; }
+    .pay-body span { color: #777; font-size: 0.83em; }
+    .pay-addr { color: #ccc; font-size: 0.78em; word-break: break-all; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      margin-top: 60px; padding: 22px 0 0 0;
+      border-top: 1px solid #111; font-size: 0.8em; color: #444; line-height: 1.7;
+    }
+    footer a { color: #444; }
+    footer a:hover { color: #00ffcc; text-shadow: none; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 560px) {
+      .tiers { grid-template-columns: 1fr; }
+      .config-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 1.55em; }
+      .hero { flex-direction: column; gap: 20px; }
+      .hero-img-wrap img { width: 160px; }
+      .contact-box { padding: 22px 16px; }
+    }
+    @media (max-width: 480px) { table { font-size: 0.78em; } }
+  </style>
+</head>
+<body>
+  <div class="stars-bg"></div>
+  <div class="nebula"></div>
+  <div class="shooting-star s1"></div>
+  <div class="shooting-star s2"></div>
+  <div class="shooting-star s3"></div>
+
+  <!-- UFO -->
+  <svg class="ufo" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <radialGradient id="ufo-dome-en" cx="50%" cy="80%" r="60%">
+        <stop offset="0%" stop-color="#00ffcc" stop-opacity="0.18"/>
+        <stop offset="100%" stop-color="#001a14" stop-opacity="0.7"/>
+      </radialGradient>
+      <linearGradient id="ufo-body-en" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1a3a38"/>
+        <stop offset="100%" stop-color="#060e12"/>
+      </linearGradient>
+    </defs>
+    <path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-en)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/>
+    <ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-en)" stroke="#00ffcc" stroke-width="0.4"/>
+    <circle class="ufo-light" cx="20" cy="20.5" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="27" cy="21.2" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="34" cy="21.6" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="41" cy="21.6" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="48" cy="21.2" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="55" cy="20.5" r="1.3" fill="#fff"/>
+  </svg>
+
+  <div class="wrap">
+
+    <div class="top-nav">
+      <a href="/en/index.html">← Back to Home</a>
+    </div>
+
+    <h1><svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 5px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="1" width="20" height="34" rx="3.5" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.9"/><rect x="5" y="6" width="14" height="22" rx="1" fill="#060e12" stroke="#00ffcc" stroke-width="0.5"/><circle cx="12" cy="31.5" r="1.8" fill="#00ffcc" opacity="0.75"/><line x1="9" y1="10" x2="15" y2="10" stroke="#00ffcc" stroke-width="0.5" opacity="0.65"/><line x1="9" y1="13" x2="15" y2="13" stroke="#00ffcc" stroke-width="0.5" opacity="0.45"/><line x1="9" y1="16" x2="13" y2="16" stroke="#00ffcc" stroke-width="0.5" opacity="0.35"/></svg> Alien Phone Service</h1>
+
+    <p class="lead">
+      I buy the Pixel <strong>cash at a shop</strong>, flash GrapheneOS, configure your digital bunker — and ship it to you. Four tiers, one goal: privacy from the very first boot.
+    </p>
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-img-wrap">
+        <img src="/grapheneos-service-hero.png" alt="Floating Pixel with GrapheneOS in space" width="220">
+      </div>
+      <div class="hero-text">
+        <h2>Privacy from the First Boot</h2>
+        <p>
+          No Google account. No telemetry. Bootloader locked. Verified Boot active.<br><br>
+          Four service tiers — from a clean flash to the fully configured <strong>Alien Phone Pro</strong> with Termux scripts and ebook bundle.
+        </p>
+      </div>
+    </div>
+
+    <!-- ===== TIER CARDS ===== -->
+    <div class="tiers">
+
+      <!-- TIER 1: STANDARD -->
+      <div class="tier-card">
+        <div class="tier-icon">
+          <svg viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.9" stroke-linejoin="round"/>
+            <polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.25"/>
+          </svg>
+        </div>
+        <div class="tier-name">Standard</div>
+        <div class="tier-tagline">Clean system, you configure yourself</div>
+        <div class="tier-price">
+          <span class="amount"><span class="base">69 €</span></span>
+          <span class="sub">+ device price (on request)</span>
+        </div>
+        <ul class="tier-feats">
+          <li><span class="chk">✓</span> GrapheneOS (current, stable)</li>
+          <li><span class="chk">✓</span> Bootloader locked</li>
+          <li><span class="chk">✓</span> Auditor verification</li>
+          <li><span class="chk">✓</span> OEM unlock disabled</li>
+          <li><span class="chk">✓</span> Device bought with cash</li>
+          <li><span class="dim">–</span> No pre-configuration</li>
+          <li><span class="dim">–</span> No ebook</li>
+        </ul>
+        <a href="mailto:Alien-Investor@proton.me?subject=GrapheneOS-Service Standard" class="tier-cta">Request Standard →</a>
+      </div>
+
+      <!-- TIER 2: DIGITAL BUNKER -->
+      <div class="tier-card">
+        <div class="tier-icon">
+          <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M18 2 L5 9 L5 20 C5 28.5 10.5 34 18 36 C25.5 34 31 28.5 31 20 L31 9 Z" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.9"/>
+            <polyline points="11,19 16,25 26,12" fill="none" stroke="#00ffcc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="tier-name">Digital Bunker</div>
+        <div class="tier-tagline">Base config from Book Chapter 5</div>
+        <div class="tier-price">
+          <span class="amount"><span class="base">99 €</span></span>
+          <span class="sub">+ device price (on request)</span>
+        </div>
+        <ul class="tier-feats">
+          <li><span class="chk">✓</span> Everything from Standard</li>
+          <li><span class="chk">✓</span> Auto-reboot 12h (kill switch)</li>
+          <li><span class="chk">✓</span> Sensor Quick Tiles set up</li>
+          <li><span class="chk">✓</span> Wi-Fi Calling + flight mode</li>
+          <li><span class="chk">✓</span> User profile isolation</li>
+          <li><span class="chk">✓</span> SeedVault backup configured</li>
+          <li><span class="dim">–</span> No ebook</li>
+        </ul>
+        <a href="mailto:Alien-Investor@proton.me?subject=GrapheneOS-Service Digital Bunker" class="tier-cta">Request Bunker →</a>
+      </div>
+
+      <!-- TIER 3: ALIEN PHONE (featured) -->
+      <div class="tier-card featured">
+        <div class="tier-badge">★ Recommended</div>
+        <div class="tier-icon">
+          <svg viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <radialGradient id="ai-head-en3" cx="50%" cy="40%" r="60%">
+                <stop offset="0%" stop-color="#3db86a"/>
+                <stop offset="70%" stop-color="#1a6635"/>
+                <stop offset="100%" stop-color="#0a2016"/>
+              </radialGradient>
+            </defs>
+            <line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/>
+            <circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/>
+            <line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/>
+            <circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/>
+            <path fill="url(#ai-head-en3)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/>
+            <path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/>
+            <path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/>
+          </svg>
+        </div>
+        <div class="tier-name">Alien Phone</div>
+        <div class="tier-tagline">Digital Bunker + Handbook — complete</div>
+        <div class="tier-price">
+          <span class="amount"><span class="base">103 €</span></span>
+          <span class="sub">+ device price (on request)</span>
+        </div>
+        <ul class="tier-feats">
+          <li><span class="chk">✓</span> Everything from Digital Bunker</li>
+          <li><span class="chk">✓</span> GrapheneOS Handbook (DE+EN)</li>
+          <li><span class="chk">✓</span> EPUB · PDF · AZW3 · MOBI</li>
+          <li><span class="chk">✓</span> 23 chapters, DRM-free</li>
+          <li><span class="chk">✓</span> New book editions free</li>
+          <li><span class="dim">–</span> No Termux scripts package</li>
+        </ul>
+        <a href="mailto:Alien-Investor@proton.me?subject=GrapheneOS-Service Alien Phone" class="tier-cta">Request Alien Phone →</a>
+      </div>
+
+      <!-- TIER 4: ALIEN PHONE PRO -->
+      <div class="tier-card">
+        <div class="tier-icon">
+          <svg viewBox="0 0 28 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M14 1 C14 1 6 7 6 20 L6 28 L10 31 L10 26 C10 17 14 8 14 8 C14 8 18 17 18 26 L18 31 L22 28 L22 20 C22 7 14 1 14 1 Z" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.9"/>
+            <circle cx="14" cy="13" r="3.5" fill="#060e12" stroke="#00ffcc" stroke-width="0.7"/>
+            <path d="M10 27 L5 34 L10 31 Z" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.7"/>
+            <path d="M18 27 L23 34 L18 31 Z" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.7"/>
+            <path d="M11 31 Q14 36 17 31" fill="#00ffcc" opacity="0.35" stroke="none"/>
+          </svg>
+        </div>
+        <div class="tier-name">Alien Phone Pro</div>
+        <div class="tier-tagline">Alien Phone + Termux &amp; Scripts Package</div>
+        <div class="tier-price">
+          <span class="amount"><span class="base">125 €</span></span>
+          <span class="sub">+ device price (on request)</span>
+        </div>
+        <ul class="tier-feats">
+          <li><span class="chk">✓</span> Everything from Alien Phone</li>
+          <li><span class="chk">✓</span> Termux pre-installed</li>
+          <li><span class="chk">✓</span> 4 Bash/Python scripts</li>
+          <li><span class="chk">✓</span> Tor Browser pre-installed</li>
+          <li><span class="chk">✓</span> Obtainium (direct app updates)</li>
+          <li><span class="chk">✓</span> Aegis offline 2FA configured</li>
+        </ul>
+        <a href="mailto:Alien-Investor@proton.me?subject=GrapheneOS-Service Alien Phone Pro" class="tier-cta">Request Pro →</a>
+      </div>
+
+    </div>
+
+    <!-- ===== DIGITAL BUNKER DETAILS ===== -->
+    <h2><svg style="width:0.85em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M18 2 L5 9 L5 20 C5 28.5 10.5 34 18 36 C25.5 34 31 28.5 31 20 L31 9 Z" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.9"/><polyline points="11,19 16,25 26,12" fill="none" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Digital Bunker — What Gets Configured</h2>
+    <p style="color:#aaa; font-size:0.91em; margin-bottom:14px;">
+      Only settings that can be applied without your credentials — from Chapter 5 of the GrapheneOS Handbook. VPN, DNS, 2FA codes, and wallets are intentionally excluded. Those keys belong in your hands.
+    </p>
+
+    <div class="config-grid">
+      <div class="config-item">
+        <div class="ci-head">
+          <svg style="width:14px;height:14px;flex:0 0 14px;" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#00ffcc" stroke-width="1.2"/><polyline points="12,7 12,12 15,15" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg>
+          Auto-Reboot 12h
+        </div>
+        <div class="ci-body">Kill switch against attacks: after 12h of inactivity the device automatically switches to the encrypted Before-First-Unlock state. Native code debugging disabled.</div>
+      </div>
+      <div class="config-item">
+        <div class="ci-head">
+          <svg style="width:14px;height:14px;flex:0 0 14px;" viewBox="0 0 24 24" fill="none"><line x1="2" y1="2" x2="22" y2="22" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M10.68 5.26A9 9 0 0 1 21 12c-1 3-3.5 5.5-6.5 7" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M5.24 8.26A9 9 0 0 0 3 12c2 5 7 8 9 8" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg>
+          Sensor Quick Tiles
+        </div>
+        <div class="ci-body">"Sensors Off" tile added to Quick Settings — disable all hardware sensors (microphone, camera, gyroscope) with a single tap.</div>
+      </div>
+      <div class="config-item">
+        <div class="ci-head">
+          <svg style="width:14px;height:14px;flex:0 0 14px;" viewBox="0 0 24 24" fill="none"><path d="M1 6l5 4 4-4 4 4 4-4 5 4" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><line x1="1" y1="14" x2="23" y2="14" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg>
+          Wi-Fi Calling &amp; Flight Mode
+        </div>
+        <div class="ci-body">Wi-Fi Calling enabled for better reachability without a cell network. Flight mode strategy configured as a secure starting point.</div>
+      </div>
+      <div class="config-item">
+        <div class="ci-head">
+          <svg style="width:14px;height:14px;flex:0 0 14px;" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#00ffcc" stroke-width="1.2"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg>
+          User Profile Isolation
+        </div>
+        <div class="ci-body">Basic profile structure set up — separate profiles for different contexts (main profile, optional work profile). Clean separation from day one.</div>
+      </div>
+      <div class="config-item" style="grid-column: 1 / -1;">
+        <div class="ci-head">
+          <svg style="width:14px;height:14px;flex:0 0 14px;" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="2" stroke="#00ffcc" stroke-width="1.2"/><path d="M8 4v3a4 4 0 0 0 8 0V4" stroke="#00ffcc" stroke-width="1.2"/></svg>
+          SeedVault Backup
+        </div>
+        <div class="ci-body">GrapheneOS's own encrypted backup system activated and configured. You set the backup destination yourself (local storage or your own cloud storage).</div>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <p><strong>Not included:</strong> VPN / Private DNS (Ch. 20), Proton account (Ch. 12), Bitcoin wallet (Ch. 23), 2FA codes (Ch. 17) — these keys belong in your hands, not mine.</p>
+    </div>
+
+    <!-- ===== ALIEN PHONE PRO EXTRAS ===== -->
+    <h2><svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 28 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14 1 C14 1 6 7 6 20 L6 27 L10 30 L10 25 C10 16 14 8 14 8 C14 8 18 16 18 25 L18 30 L22 27 L22 20 C22 7 14 1 14 1 Z" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.9"/><circle cx="14" cy="13" r="3" fill="#060e12" stroke="#00ffcc" stroke-width="0.7"/><path d="M10 26 L5 33 L10 30 Z" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.7"/><path d="M18 26 L23 33 L18 30 Z" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.7"/></svg> Alien Phone Pro — Extras Package</h2>
+    <p style="color:#aaa; font-size:0.91em; margin-bottom:14px;">
+      In addition to everything from Alien Phone: Termux with four pre-installed scripts from Chapter 16 of the handbook, plus three additional tools — ready to use from the first boot.
+    </p>
+
+    <ul class="pro-list">
+      <li>
+        <span class="pl-ico"><svg viewBox="0 0 16 16" width="16" height="16" fill="none"><rect x="1" y="1" width="14" height="14" rx="2" stroke="#00ffcc" stroke-width="1"/><line x1="4" y1="5" x2="12" y2="5" stroke="#00ffcc" stroke-width="0.8"/><line x1="4" y1="8" x2="9" y2="8" stroke="#00ffcc" stroke-width="0.8"/><rect x="8.5" y="7" width="0.8" height="2" rx="0.2" fill="#00ffcc"/></svg></span>
+        <div class="pl-body">
+          <strong>Termux (Linux Terminal for Android)</strong>
+          <span>Pre-installed and ready to use. Foundation for all scripts.</span>
+        </div>
+      </li>
+      <li>
+        <span class="pl-ico"><svg viewBox="0 0 16 16" width="16" height="16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="#00ffcc" stroke-width="1"/><path d="M5 8 L7 10 L11 6" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="pl-body">
+          <strong>encrypt-folder.sh</strong>
+          <span>AES-256 via GPG, SHA512 with 65M iterations — no plaintext temp file. Encrypt folders on demand.</span>
+        </div>
+      </li>
+      <li>
+        <span class="pl-ico"><svg viewBox="0 0 16 16" width="16" height="16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="#00ffcc" stroke-width="1"/><path d="M5 8 L7 10 L11 6" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="pl-body">
+          <strong>decrypt-folder.sh</strong>
+          <span>SHA256 verification before decryption. Detects .gpg/.pgp automatically.</span>
+        </div>
+      </li>
+      <li>
+        <span class="pl-ico"><svg viewBox="0 0 16 16" width="16" height="16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="#00ffcc" stroke-width="1"/><path d="M5 8 L7 10 L11 6" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="pl-body">
+          <strong>exif-cleaner.py</strong>
+          <span>Strips all EXIF metadata from photos (GPS, device, timestamp). Saves cleaned copies to a subfolder.</span>
+        </div>
+      </li>
+      <li>
+        <span class="pl-ico"><svg viewBox="0 0 16 16" width="16" height="16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="#00ffcc" stroke-width="1"/><path d="M5 8 L7 10 L11 6" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="pl-body">
+          <strong>unzip_downloads.sh</strong>
+          <span>Unpacks each ZIP into its own subfolder — no chaos in Downloads.</span>
+        </div>
+      </li>
+      <li>
+        <span class="pl-ico"><svg viewBox="0 0 16 16" width="16" height="16" fill="none"><circle cx="8" cy="8" r="6" stroke="#00ffcc" stroke-width="1"/><circle cx="8" cy="8" r="2" fill="#00ffcc" opacity="0.4"/></svg></span>
+        <div class="pl-body">
+          <strong>Tor Browser</strong>
+          <span>Pre-installed and ready. For anonymous browsing on the clearnet.</span>
+        </div>
+      </li>
+      <li>
+        <span class="pl-ico"><svg viewBox="0 0 16 16" width="16" height="16" fill="none"><rect x="1" y="1" width="14" height="14" rx="2" stroke="#00ffcc" stroke-width="1"/><line x1="4" y1="5" x2="12" y2="5" stroke="#00ffcc" stroke-width="0.8"/><line x1="4" y1="8" x2="12" y2="8" stroke="#00ffcc" stroke-width="0.8"/><line x1="4" y1="11" x2="8" y2="11" stroke="#00ffcc" stroke-width="0.8"/></svg></span>
+        <div class="pl-body">
+          <strong>Obtainium</strong>
+          <span>App updates directly from the developer — no Google Play, no third-party stores. Sources pre-configured.</span>
+        </div>
+      </li>
+      <li>
+        <span class="pl-ico"><svg viewBox="0 0 16 16" width="16" height="16" fill="none"><rect x="4" y="8" width="8" height="6" rx="1" stroke="#00ffcc" stroke-width="1"/><path d="M5 8 L5 6 A3 3 0 0 1 11 6 L11 8" stroke="#00ffcc" stroke-width="1"/><circle cx="8" cy="11" r="1" fill="#00ffcc" opacity="0.7"/></svg></span>
+        <div class="pl-body">
+          <strong>Aegis Authenticator</strong>
+          <span>Offline 2FA, vault encryption enabled. You add your own 2FA codes.</span>
+        </div>
+      </li>
+    </ul>
+
+    <!-- ===== SUPPORTED DEVICES ===== -->
+    <h2><svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="1" width="20" height="34" rx="3.5" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.9"/><rect x="5" y="6" width="14" height="22" rx="1" fill="#060e12" stroke="#00ffcc" stroke-width="0.5"/><circle cx="12" cy="31.5" r="1.8" fill="#00ffcc" opacity="0.75"/><line x1="9" y1="10" x2="15" y2="10" stroke="#00ffcc" stroke-width="0.5" opacity="0.65"/><line x1="9" y1="13" x2="15" y2="13" stroke="#00ffcc" stroke-width="0.5" opacity="0.45"/><line x1="9" y1="16" x2="13" y2="16" stroke="#00ffcc" stroke-width="0.5" opacity="0.35"/></svg> Supported Devices</h2>
+    <p style="color:#aaa; font-size:0.91em; margin-bottom:12px;">
+      GrapheneOS runs exclusively on Google Pixel. From Pixel 8 onwards: 7 years of security updates + Hardware Memory Tagging (MTE).
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Model</th>
+          <th>Support until (approx.)</th>
+          <th>Recommendation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Pixel 10, 10 Pro, 10a</td>
+          <td>2032 – 2033</td>
+          <td><span class="badge badge-best">Latest Generation</span></td>
+        </tr>
+        <tr>
+          <td>Pixel 9, 9 Pro, 9a</td>
+          <td>2031 – 2032</td>
+          <td><span class="badge badge-green">Highly Recommended</span></td>
+        </tr>
+        <tr>
+          <td>Pixel 8, 8 Pro, 8a</td>
+          <td>2030 – 2031</td>
+          <td><span class="badge badge-green">Recommended</span></td>
+        </tr>
+        <tr>
+          <td>Pixel 7, 7 Pro, 7a</td>
+          <td>2027 – 2028</td>
+          <td><span class="badge badge-yellow">Short remaining lifespan</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="info-box">
+      <p>
+        <strong>Beginner recommendation:</strong> Pixel 9a or 10a — best price-to-security ratio, 7 years of support, MTE active. No preferred model? Tell me your budget and I'll recommend.
+      </p>
+    </div>
+
+    <!-- ===== PROCESS ===== -->
+    <h2><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="18" cy="18" r="5" fill="#060e12" stroke="#00ffcc" stroke-width="0.8"/><path fill="#0d2a28" stroke="#00ffcc" stroke-width="0.8" d="M18 4l2 4a11 11 0 0 1 4 1.5l4-1.5 1.5 2.5-2.5 3a11 11 0 0 1 .5 4.5 11 11 0 0 1-.5 4.5l2.5 3-1.5 2.5-4-1.5a11 11 0 0 1-4 1.5l-2 4-2 0-2-4a11 11 0 0 1-4-1.5l-4 1.5-1.5-2.5 2.5-3a11 11 0 0 1-.5-4.5 11 11 0 0 1 .5-4.5l-2.5-3 1.5-2.5 4 1.5a11 11 0 0 1 4-1.5l2-4z"/></svg> How It Works</h2>
+    <ol class="steps">
+      <li class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>Email with your tier and model</strong>
+          <span>Subject: <code>GrapheneOS-Service</code> — desired tier + model or budget. I reply with the total price.</span>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>Offer — you pay only after confirming</strong>
+          <span>Device price + tier fee, transparent total. No commitment before your confirmation.</span>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong>Payment via Bitcoin or fiat</strong>
+          <span>Lightning, onchain or Ko-fi. Memo: <code>GrapheneOS-Service</code>. QR codes on the <a href="/spenden.html">payment page</a>.</span>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <strong>Pixel bought with cash</strong>
+          <span>No online account, no data profile — cash purchase at an electronics retailer. Legal in Germany up to €9,999, no ID required.</span>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <strong>Flash + configuration (depending on tier)</strong>
+          <span>Install GrapheneOS, lock bootloader, Auditor verification. From Bunker and up: all Chapter 5 settings. Pro tier: also all Termux scripts. Approx. 2–5 hours.</span>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">6</div>
+        <div class="step-body">
+          <strong>Shipping + ebook link (from Alien Phone)</strong>
+          <span>DHL — Packstation explicitly possible. From Alien Phone: personal download link for the ebook bundle (EPUB, PDF, AZW3, MOBI) via email.</span>
+        </div>
+      </li>
+    </ol>
+
+    <!-- ===== ANONYMITY ===== -->
+    <h2><svg style="width:0.85em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="7" y="18" width="22" height="15" rx="2.5" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.9"/><path d="M12 18 L12 12 A6 6 0 0 1 24 12 L24 18" fill="none" stroke="#00ffcc" stroke-width="0.9"/><circle cx="18" cy="25.5" r="2.5" fill="#00ffcc" opacity="0.75"/></svg> Anonymity &amp; Data Minimisation</h2>
+    <ul class="feature-list">
+      <li>
+        <span class="icon"><svg viewBox="0 0 18 18" width="18" height="18" fill="none"><rect x="3" y="9" width="12" height="8" rx="1.5" stroke="#00ffcc" stroke-width="1"/><path d="M6 9 L6 6 A3 3 0 0 1 12 6 L12 9" stroke="#00ffcc" stroke-width="1"/></svg></span>
+        <span class="text"><strong>Device bought with cash</strong> — no Amazon, no account. Google doesn't know who owns this device.
+          <span class="sub">Legal in Germany up to €9,999, no ID required</span>
+        </span>
+      </li>
+      <li>
+        <span class="icon"><svg viewBox="0 0 18 18" width="18" height="18" fill="none"><polygon points="10,2 3,12 8,12 7,16 14,6 9,6" fill="#00ffcc" opacity="0.8"/></svg></span>
+        <span class="text"><strong>Bitcoin Lightning or Onchain</strong> — no bank, no PayPal, no identity requirement.</span>
+      </li>
+      <li>
+        <span class="icon"><svg viewBox="0 0 18 18" width="18" height="18" fill="none"><rect x="2" y="4" width="14" height="10" rx="1.5" stroke="#00ffcc" stroke-width="1"/><polyline points="2,6 9,11 16,6" stroke="#00ffcc" stroke-width="1"/></svg></span>
+        <span class="text"><strong>Encrypted email</strong> — ProtonMail. PGP on request.
+          <span class="sub">Nostr DM also possible — ask for my npub</span>
+        </span>
+      </li>
+      <li>
+        <span class="icon"><svg viewBox="0 0 18 18" width="18" height="18" fill="none"><rect x="2" y="3" width="14" height="12" rx="1.5" stroke="#00ffcc" stroke-width="1"/><path d="M6 3 L6 6 A3 3 0 0 0 12 6 L12 3" stroke="#00ffcc" stroke-width="1"/></svg></span>
+        <span class="text"><strong>DHL Packstation possible</strong> — no home address required.</span>
+      </li>
+    </ul>
+
+    <!-- ===== PAYMENT ===== -->
+    <h2><svg style="width:0.65em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Payment</h2>
+    <ul class="pay-list">
+      <li>
+        <span class="pay-icon"><svg viewBox="0 0 22 22" width="22" height="22" fill="none"><polygon points="12,2 3,14 10,14 9,20 18,8 11,8" fill="#00ffcc" opacity="0.85"/></svg></span>
+        <div class="pay-body">
+          <strong>Bitcoin Lightning</strong>
+          <span class="pay-addr">alien_investor@strike.me</span>
+          <span>Fast, low fees</span>
+        </div>
+      </li>
+      <li>
+        <span class="pay-icon" style="font-size:1.1em;color:#00ffcc;font-weight:bold;">₿</span>
+        <div class="pay-body">
+          <strong>Bitcoin Onchain</strong>
+          <span class="pay-addr">bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</span>
+          <span>For larger amounts — check network fees</span>
+        </div>
+      </li>
+      <li>
+        <span class="pay-icon"><svg viewBox="0 0 22 22" width="22" height="22" fill="none"><path d="M11 3 C7 3 3 6 3 10 C3 14 5 17 9 19 L11 21 L13 19 C17 17 19 14 19 10 C19 6 15 3 11 3 Z" stroke="#00ffcc" stroke-width="1" fill="#0d2a28"/><path d="M8 10 C8 10 9 12 11 12 C13 12 14 10 14 10" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round"/></svg></span>
+        <div class="pay-body">
+          <strong>Fiat via Ko-fi</strong>
+          <span>PayPal or card via <a href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener">ko-fi.com/alieninvestor</a></span>
+        </div>
+      </li>
+    </ul>
+    <p style="font-size:0.85em;color:#555;margin-top:6px;">
+      QR codes + copy function: <a href="/spenden.html">Payment page →</a>
+    </p>
+
+    <!-- ===== LEGAL ===== -->
+    <h2><svg style="width:1em;height:0.9em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px rgba(255,170,68,0.6));" viewBox="0 0 36 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M18 1 L34 31 L2 31 Z" fill="#1a0d00" stroke="#ffaa44" stroke-width="0.9" stroke-linejoin="round"/><line x1="18" y1="11" x2="18" y2="21" stroke="#ffaa44" stroke-width="1.8" stroke-linecap="round"/><circle cx="18" cy="26" r="1.6" fill="#ffaa44"/></svg> Legal &amp; Disclaimer</h2>
+
+    <div class="disclaimer">
+      <p><strong>No repair service.</strong> New devices only, purchased by me. Defective or used devices are not accepted.</p>
+      <p><strong>Software "as is".</strong> Official, unmodified GrapheneOS from grapheneos.org. No warranty for compatibility with specific apps or banking services.</p>
+      <p><strong>No support contract.</strong> Service ends with delivery. Happy to answer questions by email — without any obligation regarding response time.</p>
+      <p><strong>Manufacturer warranty.</strong> The device is new (Google hardware warranty). Installing GrapheneOS voids the software warranty — this is the case with all custom ROMs.</p>
+      <p><strong>Private service.</strong> Not a commercial offering. No right of withdrawal, no statutory warranty. Purchase at your own risk.</p>
+      <p><strong>Privacy.</strong> I store only your delivery address and model request. No sharing with third parties.</p>
+    </div>
+
+    <div class="warn-box">
+      <p><strong>No affiliation with the GrapheneOS project.</strong> I install GrapheneOS as an independent service. The GrapheneOS project does not offer an installation service and is not affiliated with this offer.</p>
+    </div>
+
+    <!-- ===== CONTACT ===== -->
+    <h2><svg style="width:1em;height:0.85em;vertical-align:-0.05em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 28" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="2" width="32" height="24" rx="2.5" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.9"/><polyline points="2,4 18,15 34,4" fill="none" stroke="#00ffcc" stroke-width="0.9"/></svg> Get in Touch</h2>
+
+    <div class="contact-box">
+      <h3>Write to me — I'll reply with an offer</h3>
+      <p>
+        Choose your tier · Name your model (or budget) · Send an email.<br>
+        I'll reply with the total price and details. You only pay after confirming.
+      </p>
+      <a class="mail-link" href="mailto:Alien-Investor@proton.me?subject=GrapheneOS-Service">
+        Send Email →
+      </a>
+      <span class="keyword-hint">
+        Subject: <code>GrapheneOS-Service</code> · Response usually within 24–48 h
+      </span>
+    </div>
+
+    <div class="info-box">
+      <p>
+        <strong>What to include:</strong> Desired tier (Standard / Digital Bunker / Alien Phone / Pro) · Model or budget · Delivery address or Packstation · any questions. That's all.
+      </p>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>
+        Alien Investor · <a href="/impressum.html">Imprint</a> · <a href="mailto:Alien-Investor@proton.me">Contact</a>
+      </p>
+      <p>
+        GrapheneOS is an open source project at <a href="https://grapheneos.org" target="_blank" rel="noopener">grapheneos.org</a>. Not a commercial offering, not financial or legal advice. All decisions are your own responsibility.
+      </p>
+    </footer>
+
+  </div>
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>
