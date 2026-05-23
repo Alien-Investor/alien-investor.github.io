@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Service Payment — GrapheneOS | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Payment information for the GrapheneOS pre-install service by Alien Investor. Bitcoin Lightning, onchain and fiat option.">
+  <link rel="canonical" href="/en/grapheneos-zahlung.html">
+  <link rel="alternate" hreflang="de" href="/grapheneos-zahlung.html">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ===== SPACE BACKGROUND ===== */
+    .stars-bg {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: radial-gradient(ellipse at top, #0a0f1e 0%, #000 60%);
+      z-index: -2;
+    }
+    .stars-bg::before {
+      content: "";
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image:
+        radial-gradient(1px 1px at 10% 15%, #fff, transparent),
+        radial-gradient(1px 1px at 25% 40%, #fff, transparent),
+        radial-gradient(1px 1px at 40% 20%, #fff, transparent),
+        radial-gradient(2px 2px at 55% 60%, #00ffcc, transparent),
+        radial-gradient(1px 1px at 70% 35%, #fff, transparent),
+        radial-gradient(1px 1px at 85% 75%, #fff, transparent),
+        radial-gradient(1px 1px at 15% 80%, #fff, transparent),
+        radial-gradient(1px 1px at 60% 10%, #fff, transparent),
+        radial-gradient(1px 1px at 90% 50%, #fff, transparent);
+      animation: twinkle 6s ease-in-out infinite alternate;
+    }
+    @keyframes twinkle { 0% { opacity: 0.4; } 100% { opacity: 0.9; } }
+    .nebula {
+      position: fixed; top: -10%; left: -10%;
+      width: 120%; height: 120%;
+      z-index: -2; pointer-events: none;
+      background:
+        radial-gradient(ellipse 900px 260px at 30% 35%, rgba(90,30,140,0.22), transparent 60%),
+        radial-gradient(ellipse 1100px 200px at 70% 55%, rgba(0,140,180,0.18), transparent 60%);
+      transform: rotate(-18deg);
+      filter: blur(30px); opacity: 0.85;
+      animation: nebula-pulse 14s ease-in-out infinite alternate;
+      mix-blend-mode: screen;
+    }
+    @keyframes nebula-pulse {
+      0%   { opacity: 0.55; transform: rotate(-18deg) scale(1); }
+      100% { opacity: 0.65; transform: rotate(-19deg) scale(1.02); }
+    }
+
+    .wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 28px 20px 60px;
+    }
+    .top-nav {
+      margin-bottom: 28px;
+      font-size: 0.88em;
+    }
+    .top-nav a { color: #00ffcc; text-decoration: none; }
+    .top-nav a:hover { text-decoration: underline; }
+
+    h1 {
+      font-size: 1.7em;
+      color: #00ffcc;
+      margin: 0 0 8px 0;
+      text-shadow: 0 0 18px rgba(0,255,204,0.4);
+    }
+    .subtitle {
+      color: #aaa;
+      font-size: 0.95em;
+      margin: 0 0 32px 0;
+      line-height: 1.6;
+    }
+
+    /* ===== MEMO BOX ===== */
+    .vz-box {
+      background: rgba(0,255,204,0.05);
+      border: 1px solid rgba(0,255,204,0.3);
+      border-radius: 12px;
+      padding: 20px 22px;
+      margin-bottom: 32px;
+    }
+    .vz-box h2 {
+      color: #00ffcc;
+      font-size: 0.82em;
+      margin: 0 0 10px 0;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .vz-box p { color: #ccc; margin: 0 0 10px 0; font-size: 0.91em; }
+    .vz-box p:last-child { margin: 0; }
+    .vz-example {
+      background: rgba(0,0,0,0.4);
+      border: 1px solid #0f2a2a;
+      border-radius: 7px;
+      padding: 10px 14px;
+      margin: 10px 0 0 0;
+      font-family: monospace;
+      font-size: 0.9em;
+      color: #00ffcc;
+    }
+    .vz-example span { color: #777; font-size: 0.85em; display: block; margin-top: 4px; }
+
+    /* ===== PAYMENT CARDS ===== */
+    .payment-section h2 {
+      color: #fff;
+      font-size: 1.05em;
+      margin: 0 0 14px 0;
+      border-bottom: 1px solid #0f2a2a;
+      padding-bottom: 8px;
+    }
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .btn {
+      background: rgba(0,255,204,0.08);
+      border: 1px solid rgba(0,255,204,0.35);
+      color: #00ffcc;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.92em;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .btn:hover { background: rgba(0,255,204,0.16); border-color: #00ffcc; }
+    .btn.active { background: rgba(0,255,204,0.18); border-color: #00ffcc; }
+
+    .panel {
+      display: none;
+      background: rgba(0,20,20,0.7);
+      border: 1px solid #0f2a2a;
+      border-radius: 12px;
+      padding: 22px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .panel.open { display: block; }
+    .panel .title {
+      color: #00ffcc;
+      font-weight: bold;
+      font-size: 0.95em;
+      margin-bottom: 14px;
+    }
+    .panel .qr {
+      width: 180px;
+      height: 180px;
+      object-fit: contain;
+      border-radius: 8px;
+      background: #fff;
+      padding: 8px;
+      margin: 0 auto 14px;
+      display: block;
+    }
+    .panel code {
+      display: block;
+      word-break: break-all;
+      font-size: 0.82em;
+      color: #aaa;
+      background: rgba(0,0,0,0.4);
+      border: 1px solid #0f2a2a;
+      border-radius: 6px;
+      padding: 10px 12px;
+      margin-bottom: 12px;
+      text-align: left;
+    }
+    .copy-btn {
+      background: rgba(0,255,204,0.1);
+      border: 1px solid rgba(0,255,204,0.3);
+      color: #00ffcc;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85em;
+      transition: background 0.2s;
+    }
+    .copy-btn:hover { background: rgba(0,255,204,0.2); }
+
+    /* ===== FIAT ===== */
+    .fiat-section {
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid #0f2a2a;
+    }
+    .fiat-section h2 {
+      color: #fff;
+      font-size: 1.05em;
+      margin: 0 0 12px 0;
+    }
+    .fiat-section p { color: #999; font-size: 0.88em; margin: 0 0 12px 0; }
+    .kofi-btn {
+      display: inline-block;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid #333;
+      color: #ccc;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.9em;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .kofi-btn:hover { border-color: #00ffcc; color: #00ffcc; }
+
+    /* ===== CONTACT ===== */
+    .contact-box {
+      margin-top: 32px;
+      background: rgba(0,255,204,0.03);
+      border: 1px solid #0f2a2a;
+      border-radius: 10px;
+      padding: 16px 20px;
+      font-size: 0.88em;
+      color: #888;
+    }
+    .contact-box a { color: #00ffcc; text-decoration: none; }
+    .contact-box a:hover { text-decoration: underline; }
+
+    footer {
+      margin-top: 48px;
+      padding-top: 20px;
+      border-top: 1px solid #0f2a2a;
+      text-align: center;
+      font-size: 0.78em;
+      color: #444;
+    }
+    footer a { color: #444; text-decoration: none; }
+    footer a:hover { color: #00ffcc; }
+  </style>
+</head>
+<body>
+  <div class="stars-bg"></div>
+  <div class="nebula"></div>
+
+  <div class="wrap">
+    <div class="top-nav">
+      <a href="/en/grapheneos-flash-service.html">← Back to Service</a>
+    </div>
+
+    <h1>
+      <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="1" width="20" height="34" rx="3.5" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.9"/><rect x="5" y="6" width="14" height="22" rx="1" fill="#060e12" stroke="#00ffcc" stroke-width="0.5"/><circle cx="12" cy="31.5" r="1.8" fill="#00ffcc" opacity="0.75"/><line x1="9" y1="10" x2="15" y2="10" stroke="#00ffcc" stroke-width="0.5" opacity="0.65"/><line x1="9" y1="13" x2="15" y2="13" stroke="#00ffcc" stroke-width="0.5" opacity="0.45"/><line x1="9" y1="16" x2="13" y2="16" stroke="#00ffcc" stroke-width="0.5" opacity="0.35"/></svg>
+      Service Payment
+    </h1>
+    <p class="subtitle">
+      This is where you pay for your booked GrapheneOS service — not a donation form, but a direct payment for a concrete service.<br>
+      After payment, send an email to <a href="mailto:Alien-Investor@proton.me" style="color:#00ffcc;">Alien-Investor@proton.me</a> with confirmation and your delivery address.
+    </p>
+
+    <!-- MEMO -->
+    <div class="vz-box">
+      <h2>
+        <svg style="width:0.85em;height:0.85em;vertical-align:-0.1em;" viewBox="0 0 24 24" fill="none"><path d="M12 20h-6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h8l4 4v4" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><line x1="14" y1="16" x2="20" y2="16" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><line x1="17" y1="13" x2="17" y2="19" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/></svg>
+        What to write in the memo / note field
+      </h2>
+      <p>So I can match your payment, please include the following in the note or memo field:</p>
+      <div class="vz-example">
+        GrapheneOS [Tier] [Model]
+        <span>e.g.: GrapheneOS Alien Phone Pixel 9a</span>
+        <span>e.g.: GrapheneOS Digital Bunker Pixel 8</span>
+        <span>e.g.: GrapheneOS Pro Pixel 10</span>
+      </div>
+      <p style="margin-top:12px;">Lightning and Ko-fi both have a note field. Onchain transactions have no free-text field — in that case just send a short email with tier and model.</p>
+    </div>
+
+    <!-- BITCOIN LIGHTNING / ONCHAIN -->
+    <div class="payment-section">
+      <h2>
+        <svg style="width:0.8em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" aria-hidden="true"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg>
+        Bitcoin — recommended
+      </h2>
+
+      <div class="btn-row">
+        <button class="btn" onclick="togglePanel('ln')">⚡ Lightning</button>
+        <button class="btn" onclick="togglePanel('btc')">₿ Onchain</button>
+      </div>
+
+      <div id="ln" class="panel">
+        <div class="title">⚡ Bitcoin Lightning</div>
+        <img class="qr" src="/lightning.png" alt="Lightning QR code">
+        <code id="lnAddr">alien_investor@strike.me</code>
+        <button class="copy-btn" onclick="copyText('lnAddr')">Copy address</button>
+        <p style="color:#888;font-size:0.8em;margin-top:12px;margin-bottom:0;">Don't forget the note field: tier + model</p>
+      </div>
+
+      <div id="btc" class="panel">
+        <div class="title">₿ Bitcoin Onchain</div>
+        <img class="qr" src="/onchain.png" alt="Bitcoin onchain QR code">
+        <code id="btcAddr">bc1qlx7txusep6txqupqtu99kzvw0zvxyle25zdzc4</code>
+        <button class="copy-btn" onclick="copyText('btcAddr')">Copy address</button>
+        <p style="color:#888;font-size:0.8em;margin-top:12px;margin-bottom:0;">No free-text field for onchain → short email with tier + model is enough</p>
+      </div>
+    </div>
+
+    <!-- FIAT -->
+    <div class="fiat-section">
+      <h2>☕ Fiat option (PayPal / card)</h2>
+      <p>Prefer not to pay with Bitcoin? Use Ko-fi with PayPal or card. Enter the amount manually, write tier + model in the message field.</p>
+      <a class="kofi-btn" href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener">Open Ko-fi →</a>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="contact-box">
+      <strong style="color:#ccc;">Questions about payment?</strong><br>
+      Email <a href="mailto:Alien-Investor@proton.me">Alien-Investor@proton.me</a> — reply within 48h.<br>
+      Imprint: <a href="https://mein.online-impressum.de/alien-investor/" target="_blank" rel="noopener">mein.online-impressum.de/alien-investor</a>
+    </div>
+
+    <footer>
+      <p>
+        Alien Investor ·
+        <a href="https://mein.online-impressum.de/alien-investor/" target="_blank" rel="noopener">Imprint</a> ·
+        <a href="mailto:Alien-Investor@proton.me">Contact</a> ·
+        <a href="/en/grapheneos-flash-service.html">Back to Service</a>
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    function togglePanel(id) {
+      const ln = document.getElementById('ln');
+      const btc = document.getElementById('btc');
+      const lnBtn = document.querySelectorAll('.btn')[0];
+      const btcBtn = document.querySelectorAll('.btn')[1];
+      if (id === 'ln') {
+        const open = ln.classList.contains('open');
+        ln.classList.toggle('open', !open);
+        btc.classList.remove('open');
+        lnBtn.classList.toggle('active', !open);
+        btcBtn.classList.remove('active');
+      } else {
+        const open = btc.classList.contains('open');
+        btc.classList.toggle('open', !open);
+        ln.classList.remove('open');
+        btcBtn.classList.toggle('active', !open);
+        lnBtn.classList.remove('active');
+      }
+    }
+    function copyText(id) {
+      const el = document.getElementById(id);
+      navigator.clipboard.writeText(el.textContent.trim()).then(() => {
+        const btn = el.nextElementSibling;
+        const orig = btn.textContent;
+        btn.textContent = '✓ Copied';
+        setTimeout(() => btn.textContent = orig, 2000);
+      });
+    }
+  </script>
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>
