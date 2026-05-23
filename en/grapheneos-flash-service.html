@@ -403,6 +403,29 @@
     footer a { color: #444; }
     footer a:hover { color: #00ffcc; text-shadow: none; }
 
+    /* ===== FAQ ===== */
+    .faq { margin: 14px 0; }
+    .faq-item {
+      background: rgba(0,255,204,0.03);
+      border: 1px solid #0f2a2a;
+      border-radius: 10px;
+      padding: 16px 18px;
+      margin-bottom: 10px;
+    }
+    .faq-item dt {
+      color: #00ffcc;
+      font-weight: bold;
+      font-size: 0.95em;
+      margin-bottom: 8px;
+    }
+    .faq-item dd {
+      color: #aaa;
+      font-size: 0.88em;
+      line-height: 1.6;
+      margin: 0;
+    }
+    .faq-item dd strong { color: #ddd; }
+
     /* ===== RESPONSIVE ===== */
     @media (max-width: 560px) {
       .tiers { grid-template-columns: 1fr; }
@@ -705,6 +728,24 @@
         </div>
       </li>
     </ul>
+
+    <!-- ===== FAQ ===== -->
+    <h2><svg style="width:0.85em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="18" cy="18" r="15" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.9"/><path d="M14 13 C14 9 22 9 22 15 C22 18.5 18 19.5 18 23" stroke="#00ffcc" stroke-width="1.6" stroke-linecap="round" fill="none"/><circle cx="18" cy="27.5" r="1.8" fill="#00ffcc"/></svg> FAQ — Terms Explained</h2>
+
+    <dl class="faq">
+      <div class="faq-item">
+        <dt>What are Sensor Quick Tiles?</dt>
+        <dd>GrapheneOS adds three <strong>privacy widgets</strong> to the Quick Settings panel (pull down from the top): Camera, Microphone, and Location can each be blocked for all apps at once — with a single tap. There's also a fourth widget <strong>"Sensors Off"</strong> (GrapheneOS-exclusive) that disables all hardware sensors simultaneously: gyroscope, accelerometer, light sensor, barometer. No app can access any of them while the tile is active. I set up all four tiles in the Quick Settings panel and place them at the top — ready to use immediately.</dd>
+      </div>
+      <div class="faq-item">
+        <dt>What is Auditor verification?</dt>
+        <dd>The Auditor app uses the Pixel's <strong>Titan M2 security chip</strong> to cryptographically prove: (1) The device is running genuine, unmodified GrapheneOS. (2) The bootloader is actually locked. (3) The system has not been tampered with since the last check. This is not a screenshot or soft claim — it is a <strong>hardware-backed attestation</strong>. I run the verification before shipping and include the result. You can repeat it yourself at any time or build a trust anchor.</dd>
+      </div>
+      <div class="faq-item">
+        <dt>What does "OEM unlock disabled" mean?</dt>
+        <dd>Installing GrapheneOS requires briefly unlocking the bootloader — that's technically unavoidable. After installation it is <strong>immediately re-locked</strong>, and additionally the "OEM unlocking" toggle in Developer Options is disabled. This prevents anyone with physical access to your device from unlocking the bootloader again and flashing a compromised system. On every boot, the Titan chip verifies that GrapheneOS is unmodified (<strong>Verified Boot</strong>). If something doesn't match: the device won't start — no exceptions.</dd>
+      </div>
+    </dl>
 
     <!-- ===== SUPPORTED DEVICES ===== -->
     <h2><svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="1" width="20" height="34" rx="3.5" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.9"/><rect x="5" y="6" width="14" height="22" rx="1" fill="#060e12" stroke="#00ffcc" stroke-width="0.5"/><circle cx="12" cy="31.5" r="1.8" fill="#00ffcc" opacity="0.75"/><line x1="9" y1="10" x2="15" y2="10" stroke="#00ffcc" stroke-width="0.5" opacity="0.65"/><line x1="9" y1="13" x2="15" y2="13" stroke="#00ffcc" stroke-width="0.5" opacity="0.45"/><line x1="9" y1="16" x2="13" y2="16" stroke="#00ffcc" stroke-width="0.5" opacity="0.35"/></svg> Supported Devices</h2>
