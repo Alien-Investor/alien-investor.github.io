@@ -577,6 +577,7 @@
         <div class="tier-price">
           <span class="amount"><span class="base">103 €</span></span>
           <span class="sub">+ device price (on request)</span>
+          <span class="sub" style="color:#00ffcc;opacity:0.75;margin-top:3px;">Only €4 more than Digital Bunker</span>
         </div>
         <ul class="tier-feats">
           <li><span class="chk">✓</span> Everything from Digital Bunker</li>
@@ -617,6 +618,14 @@
         <a href="mailto:Alien-Investor@proton.me?subject=GrapheneOS-Service Alien Phone Pro" class="tier-cta">Request Pro →</a>
       </div>
 
+    </div>
+
+    <div class="info-box" style="text-align:center; margin-top:18px;">
+      <p>
+        <svg style="width:0.85em;height:0.85em;vertical-align:-0.1em;" viewBox="0 0 24 24" fill="none"><path d="M12 20h-6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h8l4 4v4" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><line x1="14" y1="16" x2="20" y2="16" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><line x1="17" y1="13" x2="17" y2="19" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <strong>Custom configurations and special requests available on request</strong> —
+        different apps, additional settings, specific setups? Just include it in your email.
+      </p>
     </div>
 
     <!-- ===== DIGITAL BUNKER DETAILS ===== -->
@@ -762,6 +771,14 @@
         <dt>What does "OEM unlock disabled" mean?</dt>
         <dd>Installing GrapheneOS requires briefly unlocking the bootloader — that's technically unavoidable. After installation it is <strong>immediately re-locked</strong>, and additionally the "OEM unlocking" toggle in Developer Options is disabled. This prevents anyone with physical access to your device from unlocking the bootloader again and flashing a compromised system. On every boot, the Titan chip verifies that GrapheneOS is unmodified (<strong>Verified Boot</strong>). If something doesn't match: the device won't start — no exceptions.</dd>
       </div>
+      <div class="faq-item">
+        <dt>Where do the installed apps come from?</dt>
+        <dd>Following a clear hierarchy depending on the app: <strong>Accrescent</strong> (GrapheneOS-native, signature-verified app store) takes priority — if an app is available there, it comes from there. Otherwise the app is fetched directly from the developer's official source via <strong>Obtainium</strong> — no middleman, no store-signature surprises. <strong>F-Droid</strong> is the third option when neither Accrescent nor Obtainium makes sense. For active Nostr users the <strong>Zap Store</strong> is also available on request. Which route is right for which app is explained in detail in the ebook (chapter on app stores).</dd>
+      </div>
+      <div class="faq-item">
+        <dt>Should I run Auditor again when the device arrives?</dt>
+        <dd>Yes — and it's a good idea. I verify the device <strong>before shipping</strong>, but the delivery journey happens between then and arrival. Start Auditor on first boot and compare the fingerprint with the verification included in the package. If everything matches, the device arrived unmodified. If anything differs — contact me immediately before setting anything else up.</dd>
+      </div>
     </dl>
 
     <!-- ===== SUPPORTED DEVICES ===== -->
@@ -806,6 +823,9 @@
       <p>
         <strong>Beginner recommendation:</strong> Pixel 9a or 10a — best price-to-security ratio, 7 years of support, MTE active. No preferred model? Tell me your budget and I'll recommend.
       </p>
+      <p style="margin-top:8px;">
+        <strong>Why is Pixel 6 not listed?</strong> GrapheneOS technically still supports it, but official update support ends October 2026 — within months of purchase you'd be without security updates. Not a sensible starting point anymore.
+      </p>
     </div>
 
     <!-- ===== PROCESS ===== -->
@@ -829,7 +849,7 @@
         <div class="step-num">3</div>
         <div class="step-body">
           <strong>Payment via Bitcoin or fiat</strong>
-          <span>Lightning, onchain or Ko-fi. Memo: <code>GrapheneOS-Service</code>. QR codes on the <a href="/spenden.html">payment page</a>.</span>
+          <span>Lightning, onchain or Ko-fi. Memo format: <code>GrapheneOS [Tier] [Model]</code> — e.g. <em>GrapheneOS Alien Phone Pixel 9a</em>. QR codes and details on the <a href="/grapheneos-zahlung.html">payment page</a>.</span>
         </div>
       </li>
       <li class="step">
@@ -908,7 +928,7 @@
       </li>
     </ul>
     <p style="font-size:0.85em;color:#555;margin-top:6px;">
-      QR codes + copy function: <a href="/spenden.html">Payment page →</a>
+      QR codes + copy function: <a href="/grapheneos-zahlung.html">Payment page →</a>
     </p>
 
     <!-- ===== LEGAL ===== -->
@@ -953,7 +973,7 @@
     <!-- FOOTER -->
     <footer>
       <p>
-        Alien Investor · <a href="/impressum.html">Imprint</a> · <a href="mailto:Alien-Investor@proton.me">Contact</a>
+        Alien Investor · <a href="https://mein.online-impressum.de/alien-investor/" target="_blank" rel="noopener">Imprint</a> · <a href="mailto:Alien-Investor@proton.me">Contact</a> · <a href="/grapheneos-zahlung.html">Payment</a>
       </p>
       <p>
         GrapheneOS is an open source project at <a href="https://grapheneos.org" target="_blank" rel="noopener">grapheneos.org</a>. Not a commercial offering, not financial or legal advice. All decisions are your own responsibility.
