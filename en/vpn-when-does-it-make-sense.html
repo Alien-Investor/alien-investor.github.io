@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>VPN — When Does It Make Sense, When Is It Useless? | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="VPN against ISP, public Wi-Fi, state surveillance or the ad industry? An honest threat-model analysis with recommendations for Mullvad, ProtonVPN and DNS setup.">
+  <link rel="canonical" href="/en/vpn-when-does-it-make-sense.html">
+  <link rel="alternate" hreflang="de" href="/vpn-wann-sinnvoll.html">
+  <style>
+    body { background-color: #000; color: #fff; font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 0 15px 20px 15px; }
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+    code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; font-family: monospace; }
+    em { color: #ccc; }
+    .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
+    blockquote { border-left: 3px solid #00ffcc; margin: 2em 0; padding: 0.5em 1em; color: #ddd; background: #050505; font-style: italic; }
+    .box { border: 1px solid #00ffcc; background: #050505; padding: 1.5em; border-radius: 8px; margin: 2em 0; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 0.6em; }
+    .like-button { margin: 3em 0; display: flex; align-items: center; justify-content: center; gap: 1em; font-size: 1em; }
+    .like-button button { background: #000; color: #00ffcc; border: 1px solid #00ffcc; padding: 0.6em 1.2em; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.2s ease; }
+    .like-button button:hover, .like-button button:active { background: #00ffcc; color: #000; box-shadow: 0 0 15px #00ffcc; }
+    .like-button button:disabled { border-color: #444; color: #888; background: #111; cursor: default; }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    .back-links { margin-top: 40px; text-align: center; display: flex; flex-direction: column; gap: 10px; }
+    footer { margin-top: 60px; padding: 20px; font-size: 0.85em; color: #666; border-top: 1px solid #222; text-align: center; }
+    table { width: 100%; border-collapse: collapse; margin: 1.5em 0; }
+    th { background: #050505; color: #00ffcc; padding: 0.6em 1em; text-align: left; border-bottom: 1px solid #00ffcc; }
+    td { padding: 0.5em 1em; border-bottom: 1px solid #222; color: #ccc; }
+    tr:last-child td { border-bottom: none; }
+  </style>
+</head>
+<body>
+  <div class="top-nav"><a href="/en/index.html">← Back to Base</a></div>
+
+  <h1>VPN — When Does It Make Sense, When Is It Useless?</h1>
+  <p class="byline"><em>by Alien Investor · May 2026</em></p>
+
+  <article id="content">
+
+    <p>
+      VPN advertising promises invisibility. "Protect your privacy with one click." "100% anonymous
+      online." "Military-grade encryption." That is marketing, not a threat model.
+    </p>
+    <p>
+      A VPN is a tool. Like any tool, it is built for specific tasks and completely unsuitable for others.
+      Buying a VPN without a threat model means buying a feeling of security, not an actual protection level.
+    </p>
+    <p>
+      This article answers one question: <strong>Does a VPN protect you from what you actually
+      want to be protected from?</strong>
+    </p>
+
+    <blockquote>
+      "A VPN shifts trust. It does not eliminate it."
+    </blockquote>
+
+    <h2>What a VPN Actually Does</h2>
+
+    <p>
+      A VPN builds an encrypted tunnel between your device and a server run by the VPN provider.
+      All traffic flows through this tunnel before reaching the public internet.
+    </p>
+    <p>
+      That has three concrete consequences:
+    </p>
+    <ul>
+      <li><strong>IP masking:</strong> Websites and services see the VPN server's IP address,
+        not your real one. Your actual location stays hidden.</li>
+      <li><strong>Encryption toward your ISP:</strong> Your internet provider sees that you are
+        connected to a VPN server. It does not see which sites you visit or what data is transmitted.</li>
+      <li><strong>Trust shift:</strong> Instead of your ISP, you now trust the VPN provider.
+        That provider sees your traffic, unless it operates a genuine no-logs policy and actually enforces it.</li>
+    </ul>
+    <p>
+      What a VPN does <em>not</em> do: it does not prevent browser fingerprinting, cookie tracking,
+      JavaScript analysis or Google login correlation. The IP address has been irrelevant to the
+      ad industry for years.
+    </p>
+
+    <h2>Protection by Threat Model</h2>
+
+    <p>
+      Five real scenarios, honestly assessed:
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Threat</th>
+          <th>VPN Protection</th>
+          <th>Why</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Public Wi-Fi (hotel, café, airport)</td>
+          <td style="color: #00ffcc; font-weight: bold;">10/10</td>
+          <td>Data leaves your device already encrypted, an attacker on the same network sees only noise</td>
+        </tr>
+        <tr>
+          <td>ISP surveillance / DNS logging</td>
+          <td style="color: #00ffcc; font-weight: bold;">9/10</td>
+          <td>ISP sees only the encrypted VPN connection, no content, no domains</td>
+        </tr>
+        <tr>
+          <td>Targeted law enforcement</td>
+          <td style="color: #aaff00; font-weight: bold;">8/10 (Mullvad/Proton) · 0/10 (free VPN)</td>
+          <td>No-logs provider with proven raid resistance vs. a provider that sells logs</td>
+        </tr>
+        <tr>
+          <td>State mass surveillance / DPI</td>
+          <td style="color: #ffaa00; font-weight: bold;">7/10</td>
+          <td>Deep packet inspection identifies VPN protocols with 85–99% accuracy (depending on method): traffic is recognizable, content is not</td>
+        </tr>
+        <tr>
+          <td>Ad industry / Google / Meta</td>
+          <td style="color: #ff4444; font-weight: bold;">1–2/10</td>
+          <td>Browser fingerprinting makes the IP address irrelevant: tracking runs via canvas, fonts, GPU</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      The most important takeaway: buying a VPN to escape Google or Meta is money spent on the wrong
+      problem. Buying a VPN to stay safe on café Wi-Fi is exactly the right call.
+    </p>
+
+    <h2>DNS and VPN: The De-Anonymization Paradox</h2>
+
+    <p>
+      This is the section most VPN guides skip, and the one that causes the most mistakes in practice.
+    </p>
+    <p>
+      Many privacy-conscious users combine a personalized <strong>NextDNS profile</strong> with a VPN.
+      The idea sounds reasonable: better filtering through NextDNS, encryption through the VPN.
+      The problem is in the details.
+    </p>
+    <p>
+      Your NextDNS profile is linked to your account. It has a unique configuration: which blocklists
+      are active, which domains you whitelist, which DNS queries you send. This yes/no answer matrix
+      creates a <strong>logical fingerprint</strong> that makes you uniquely identifiable. If those
+      queries travel through the VPN tunnel, NextDNS may not learn your real IP, but it learns
+      your behavioral pattern, which amounts to your identity.
+    </p>
+    <p>
+      Even when using Mullvad with DNS queries staying inside the tunnel: Mullvad's own dashboard
+      sometimes shows a "Leaking DNS servers" warning. This is usually a technical false alarm when
+      requests correctly remain within the tunnel. The rule still stands:
+    </p>
+
+    <div class="box">
+      <h3>DNS Recommendation by Goal</h3>
+      <ul>
+        <li><strong>Anonymity goal with VPN:</strong> Use the VPN's own DNS (e.g. Mullvad DNS Adblock).
+          Do not route NextDNS through the tunnel. The NextDNS profile creates a fingerprint that
+          defeats VPN anonymity.</li>
+        <li><strong>Home network without VPN:</strong> NextDNS at the router level is a solid choice —
+          good filtering, easy management, no fingerprint problem (you are already identifiable via
+          your home IP anyway).</li>
+        <li><strong>Home network combined with VPN:</strong> VPN traffic uses VPN DNS,
+          local traffic uses NextDNS, separate configuration per connection.</li>
+      </ul>
+    </div>
+
+    <h2>Mullvad vs. ProtonVPN</h2>
+
+    <p>
+      Anyone looking for a serious VPN provider usually ends up at one of these two. Both are
+      worth recommending. The difference lies in the threat model.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Criterion</th>
+          <th>Mullvad</th>
+          <th>ProtonVPN</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Account required</td>
+          <td>No, anonymous account number only</td>
+          <td>Yes, email address required</td>
+        </tr>
+        <tr>
+          <td>Anonymous payment</td>
+          <td>Cash, Monero, Bitcoin</td>
+          <td>Bitcoin possible, but account is linked</td>
+        </tr>
+        <tr>
+          <td>Server infrastructure</td>
+          <td>RAM-only servers, no persistent storage</td>
+          <td>Standard servers with independent audit</td>
+        </tr>
+        <tr>
+          <td>Raid test</td>
+          <td>2023: police raid with no usable result</td>
+          <td>Regular independent audits</td>
+        </tr>
+        <tr>
+          <td>Legal framework</td>
+          <td>Sweden</td>
+          <td>Switzerland (protects VPN, not email)</td>
+        </tr>
+        <tr>
+          <td>Price</td>
+          <td>Flat 5 EUR/month</td>
+          <td>Free tier + paid plans</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      Mullvad is the clear choice for maximum anonymity: no name, no email, RAM-only, proven under
+      pressure. ProtonVPN makes sense if you are already in the Proton ecosystem (Proton Mail, Proton Drive)
+      and prefer a bundle. Swiss law protects the VPN service specifically, not necessarily the
+      other services in the suite.
+    </p>
+
+    <h2>Cash Grab? Free vs. Paid VPNs</h2>
+
+    <p>
+      The VPN market is full of providers running aggressive advertising: "100% anonymous",
+      "No logs guaranteed", "Military encryption." That is not inherently false, but marketing is
+      not engineering, and ad copy is not an audit.
+    </p>
+    <p>
+      Free VPNs are the real problem. Servers cost money. If you are not paying, you are the product.
+      Numerous studies have documented that free VPN apps sell user data, inject traffic or log
+      and resell DNS queries. Stay away.
+    </p>
+    <p>
+      Reputable paid providers deliver real value, but only for the right scenarios.
+      Paying for Mullvad at 5 EUR/month gets you: ISP encryption, public Wi-Fi protection,
+      IP masking, RAM-only infrastructure and a provider that under genuine legal pressure
+      could not hand over data because none existed.
+    </p>
+    <p>
+      What you do not get: invisibility to Google, anonymity despite a browser fingerprint,
+      or protection against targeted surveillance at the OS level.
+    </p>
+
+    <h2>Recommendation by Goal</h2>
+
+    <div class="box">
+      <h3>I want to use public Wi-Fi safely</h3>
+      <p>Any reputable paid VPN will do. Mullvad or ProtonVPN are first choice.
+        Keep it active whenever you are not on your home network.</p>
+    </div>
+
+    <div class="box">
+      <h3>I want to keep my ISP out of my browsing history</h3>
+      <p>Mullvad or ProtonVPN with DNS-over-VPN (no external DNS routed through the tunnel).
+        Prefer RAM-only servers.</p>
+    </div>
+
+    <div class="box">
+      <h3>I want maximum anonymity</h3>
+      <p>Mullvad: register anonymously, pay with Monero or cash, RAM-only servers,
+        Mullvad DNS Adblock instead of an external DNS profile. Add Mullvad Browser for the
+        cleanest combination.</p>
+    </div>
+
+    <div class="box">
+      <h3>I want to get rid of Google and Meta</h3>
+      <p>A VPN barely helps here. The effective measures are: Firefox or LibreWolf with uBlock Origin,
+        no Google account in the browser, no Meta apps.
+        More: <a href="/en/privacy-browser-desktop-comparison.html">Privacy Browser Comparison</a>.</p>
+    </div>
+
+    <div class="box">
+      <h3>On Android: GrapheneOS + Mullvad VPN</h3>
+      <p>
+        GrapheneOS has a built-in per-app VPN kill switch. You can specify which apps are allowed
+        to use the VPN and which are not, no root required, directly in the OS.
+        Install Mullvad VPN from the F-Droid repository or the official Mullvad download,
+        enable always-on and kill switch. This is the cleanest mobile setup available.
+      </p>
+      <p><a href="/en/grapheneos-setup-guide.html">GrapheneOS: The Complete Setup Guide →</a></p>
+    </div>
+
+  </article>
+
+  <div class="like-button">
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><radialGradient id="ai-head-vpn-en" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-vpn-en)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Like</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+  <script>
+    (function() {
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      const btn = document.getElementById('likeButton');
+      const msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you found the article useful.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you found the article useful.';
+      });
+    })();
+  </script>
+
+  <!-- ALIEN PHONE SERVICE -->
+  <div style="background:linear-gradient(135deg,rgba(0,20,20,0.7),rgba(0,8,15,0.9));border:1px solid rgba(0,255,204,0.35);border-radius:10px;padding:20px 22px;margin:2.5em 0 1em 0;">
+    <p style="color:#00ffcc;font-weight:bold;margin:0 0 6px 0;font-size:1.05em;"><svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="1" width="20" height="34" rx="3.5" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.9"/><rect x="5" y="6" width="14" height="22" rx="1" fill="#060e12" stroke="#00ffcc" stroke-width="0.5"/><circle cx="12" cy="31.5" r="1.8" fill="#00ffcc" opacity="0.75"/><line x1="9" y1="10" x2="15" y2="10" stroke="#00ffcc" stroke-width="0.5" opacity="0.65"/><line x1="9" y1="13" x2="15" y2="13" stroke="#00ffcc" stroke-width="0.5" opacity="0.45"/><line x1="9" y1="16" x2="13" y2="16" stroke="#00ffcc" stroke-width="0.5" opacity="0.35"/></svg> Alien Phone Service</p>
+    <p style="color:#aaa;font-size:0.88em;margin:0 0 12px 0;line-height:1.5;">Want GrapheneOS but don't want to flash it yourself? I buy the Pixel bare, install GrapheneOS and optionally configure the digital bunker — delivered to your door. Bitcoin or Fiat.</p>
+    <a href="/en/grapheneos-flash-service.html" style="color:#00ffcc;font-weight:bold;font-size:0.88em;text-decoration:none;">Alien Phone Service →</a>
+  </div>
+
+  <!-- GRAPHENEOS BUCH -->
+  <div style="background:linear-gradient(135deg,rgba(0,20,20,0.7),rgba(0,8,15,0.9));border:1px solid rgba(0,255,204,0.35);border-radius:10px;padding:20px 22px;margin:2.5em 0 1em 0;">
+    <p style="color:#00ffcc;font-weight:bold;margin:0 0 6px 0;font-size:1.05em;"><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="4" y="4" width="5" height="28" rx="1" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.7"/><rect x="9" y="4" width="22" height="28" rx="1" fill="#1a3a38" stroke="#00ffcc" stroke-width="0.7"/><line x1="13" y1="12" x2="27" y2="12" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="16" x2="27" y2="16" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="20" x2="27" y2="20" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="24" x2="22" y2="24" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/></svg> GrapheneOS Book</p>
+    <p style="color:#aaa;font-size:0.88em;margin:0 0 12px 0;line-height:1.5;">The complete GrapheneOS guide — installation, app stores, sandbox, payments and digital self-defense. Available as an ebook on alien-investor.org and Amazon KDP.</p>
+    <a href="/buecher.html" style="color:#00ffcc;font-weight:bold;font-size:0.88em;text-decoration:none;">To the Book →</a>
+  </div>
+
+  <div class="back-links">
+    <a href="/en/blog.html" style="font-size: 1.1em;">← Back to Blog</a>
+    <a href="/en/index.html" style="font-size: 1.1em;">← Back to Base</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+    <h3 style="margin-bottom: 15px;">
+      <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energy" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Recharge
+      <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Donate)</span>
+    </h3>
+    <a href="/spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+      Send fuel to the mothership
+    </a>
+    <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+      Thanks for your support: for free content, financial sovereignty and the extraterrestrial resistance.
+    </p>
+  </div>
+
+  <footer>
+    <p>Contact: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    <p style="margin-top: 20px;">
+      <strong>Disclaimer:</strong><br><br>
+      This article does not constitute financial, tax or legal advice.<br>
+      I share my personal perspective: independent, technical and free.<br>
+      Some links are affiliate links. Using them supports this channel at no extra cost to you.
+    </p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>
