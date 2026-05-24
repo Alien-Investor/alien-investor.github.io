@@ -404,28 +404,62 @@
     footer a { color: #444; }
     footer a:hover { color: #00ffcc; text-shadow: none; }
 
-    /* ===== FAQ ===== */
+    /* ===== ACCORDION ===== */
+    .acc-section { margin-top: 2.2em; }
+    .acc-section > summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #1a3a3a;
+      user-select: none;
+    }
+    .acc-section > summary::-webkit-details-marker { display: none; }
+    .acc-section > summary > h2 {
+      margin: 0; border-bottom: none; padding-bottom: 0; flex: 1;
+    }
+    .acc-arrow {
+      color: #00ffcc; font-size: 0.9em; opacity: 0.65;
+      transition: transform 0.22s ease; flex: 0 0 auto;
+    }
+    .acc-section[open] > summary .acc-arrow { transform: rotate(90deg); }
+
+    /* ===== FAQ accordion ===== */
     .faq { margin: 14px 0; }
-    .faq-item {
+    .faq-acc {
       background: rgba(0,255,204,0.03);
       border: 1px solid #0f2a2a;
       border-radius: 10px;
-      padding: 16px 18px;
       margin-bottom: 10px;
     }
-    .faq-item dt {
+    .faq-acc > summary {
+      list-style: none;
+      cursor: pointer;
       color: #00ffcc;
       font-weight: bold;
       font-size: 0.95em;
-      margin-bottom: 8px;
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      user-select: none;
     }
-    .faq-item dd {
-      color: #aaa;
-      font-size: 0.88em;
-      line-height: 1.6;
-      margin: 0;
+    .faq-acc > summary::-webkit-details-marker { display: none; }
+    .faq-arrow {
+      color: #00ffcc; font-size: 0.72em; opacity: 0.6;
+      flex: 0 0 auto; transition: transform 0.2s ease;
     }
-    .faq-item dd strong { color: #ddd; }
+    .faq-acc[open] > summary .faq-arrow { transform: rotate(90deg); }
+    .faq-body {
+      color: #aaa; font-size: 0.88em; line-height: 1.6;
+      padding: 0 18px 16px; margin: 0;
+    }
+    .faq-body strong { color: #ddd; }
+    .faq-body em { color: #aaa; }
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 560px) {
@@ -630,8 +664,9 @@
     </div>
 
     <!-- ===== DIGITAL BUNKER DETAILS ===== -->
-    <h2><svg style="width:0.85em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M18 2 L5 9 L5 20 C5 28.5 10.5 34 18 36 C25.5 34 31 28.5 31 20 L31 9 Z" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.9"/><polyline points="11,19 16,25 26,12" fill="none" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Digital Bunker — What Gets Configured</h2>
-    <p style="color:#aaa; font-size:0.91em; margin-bottom:14px;">
+    <details class="acc-section">
+    <summary><h2><svg style="width:0.85em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M18 2 L5 9 L5 20 C5 28.5 10.5 34 18 36 C25.5 34 31 28.5 31 20 L31 9 Z" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.9"/><polyline points="11,19 16,25 26,12" fill="none" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Digital Bunker — What Gets Configured</h2><span class="acc-arrow">▶</span></summary>
+    <p style="color:#aaa; font-size:0.91em; margin-bottom:14px; margin-top:14px;">
       Everything that can be set up without your credentials — privacy settings and carefully selected apps that work right out of the box.
     </p>
 
@@ -697,10 +732,12 @@
     <div class="info-box">
       <p><strong>Not included — you configure yourself:</strong> VPN, Private DNS, user profile passwords, SeedVault backup destination, Bitcoin wallet, 2FA codes. Those are your keys — they belong in your hands, not mine.</p>
     </div>
+    </details>
 
     <!-- ===== ALIEN PHONE PRO EXTRAS ===== -->
-    <h2><svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 28 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14 1 C14 1 6 7 6 20 L6 27 L10 30 L10 25 C10 16 14 8 14 8 C14 8 18 16 18 25 L18 30 L22 27 L22 20 C22 7 14 1 14 1 Z" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.9"/><circle cx="14" cy="13" r="3" fill="#060e12" stroke="#00ffcc" stroke-width="0.7"/><path d="M10 26 L5 33 L10 30 Z" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.7"/><path d="M18 26 L23 33 L18 30 Z" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.7"/></svg> Alien Phone Pro — Termux Scripts</h2>
-    <p style="color:#aaa; font-size:0.91em; margin-bottom:14px;">
+    <details class="acc-section">
+    <summary><h2><svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 28 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14 1 C14 1 6 7 6 20 L6 27 L10 30 L10 25 C10 16 14 8 14 8 C14 8 18 16 18 25 L18 30 L22 27 L22 20 C22 7 14 1 14 1 Z" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.9"/><circle cx="14" cy="13" r="3" fill="#060e12" stroke="#00ffcc" stroke-width="0.7"/><path d="M10 26 L5 33 L10 30 Z" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.7"/><path d="M18 26 L23 33 L18 30 Z" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.7"/></svg> Alien Phone Pro — Termux Scripts</h2><span class="acc-arrow">▶</span></summary>
+    <p style="color:#aaa; font-size:0.91em; margin-bottom:14px; margin-top:14px;">
       In addition to everything from Alien Phone: Termux with four pre-installed Bash and Python scripts, pre-configured aliases, and a compact Termux guide — everything ready to use from the first boot.
     </p>
 
@@ -756,31 +793,33 @@
       </li>
     </ul>
 
+    </details>
+
     <!-- ===== FAQ ===== -->
     <h2><svg style="width:0.85em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="18" cy="18" r="15" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.9"/><path d="M14 13 C14 9 22 9 22 15 C22 18.5 18 19.5 18 23" stroke="#00ffcc" stroke-width="1.6" stroke-linecap="round" fill="none"/><circle cx="18" cy="27.5" r="1.8" fill="#00ffcc"/></svg> FAQ — Terms Explained</h2>
 
-    <dl class="faq">
-      <div class="faq-item">
-        <dt>What is the Privacy &amp; Permission Control widget?</dt>
-        <dd>In the Quick Settings panel (pull down from the top), modern GrapheneOS versions include the <strong>"Privacy and Permission Control"</strong> widget. It shows your current privacy status at a glance — and lets you toggle camera, microphone, or location individually with a single tap, without navigating into settings. The widget is hidden by default and must be manually activated in the Quick Settings editor and moved to the top. I set it up and place it front and centre — instantly accessible from the first boot.</dd>
-      </div>
-      <div class="faq-item">
-        <dt>What is Auditor verification?</dt>
-        <dd>The Auditor app uses the Pixel's <strong>Titan M2 security chip</strong> to cryptographically prove: (1) The device is running genuine, unmodified GrapheneOS. (2) The bootloader is actually locked. (3) The system has not been tampered with since the last check. This is not a screenshot or soft claim — it is a <strong>hardware-backed attestation</strong>. I run the verification before shipping and include the result. You can repeat it yourself at any time or build a trust anchor.</dd>
-      </div>
-      <div class="faq-item">
-        <dt>What does "OEM unlock disabled" mean?</dt>
-        <dd>Installing GrapheneOS requires briefly unlocking the bootloader — that's technically unavoidable. After installation it is <strong>immediately re-locked</strong>, and additionally the "OEM unlocking" toggle in Developer Options is disabled. This prevents anyone with physical access to your device from unlocking the bootloader again and flashing a compromised system. On every boot, the Titan chip verifies that GrapheneOS is unmodified (<strong>Verified Boot</strong>). If something doesn't match: the device won't start — no exceptions.</dd>
-      </div>
-      <div class="faq-item">
-        <dt>Where do the installed apps come from?</dt>
-        <dd>Following a clear hierarchy depending on the app: <strong>Accrescent</strong> (GrapheneOS-native, signature-verified app store) takes priority — if an app is available there, it comes from there. Otherwise the app is fetched directly from the developer's official source via <strong>Obtainium</strong> — no middleman, no store-signature surprises. <strong>F-Droid</strong> is the third option when neither Accrescent nor Obtainium makes sense. For active Nostr users the <strong>Zap Store</strong> is also available on request. Which route is right for which app is explained in detail in the ebook (chapter on app stores).</dd>
-      </div>
-      <div class="faq-item">
-        <dt>Should I run Auditor again when the device arrives?</dt>
-        <dd><em>Optional — but recommended for high threat models.</em> For most users this isn't necessary: I include the verification result and the device ships sealed. If you want maximum control or have an elevated security requirement, you can run Auditor on first boot and compare the fingerprint with the included proof — it cryptographically confirms the device arrived unmodified. A nice feature, not a requirement.</dd>
-      </div>
-    </dl>
+    <div class="faq">
+      <details class="faq-acc">
+        <summary>What is the Privacy &amp; Permission Control widget? <span class="faq-arrow">▶</span></summary>
+        <p class="faq-body">In the Quick Settings panel (pull down from the top), modern GrapheneOS versions include the <strong>"Privacy and Permission Control"</strong> widget. It shows your current privacy status at a glance — and lets you toggle camera, microphone, or location individually with a single tap, without navigating into settings. The widget is hidden by default and must be manually activated in the Quick Settings editor and moved to the top. I set it up and place it front and centre — instantly accessible from the first boot.</p>
+      </details>
+      <details class="faq-acc">
+        <summary>What is Auditor verification? <span class="faq-arrow">▶</span></summary>
+        <p class="faq-body">The Auditor app uses the Pixel's <strong>Titan M2 security chip</strong> to cryptographically prove: (1) The device is running genuine, unmodified GrapheneOS. (2) The bootloader is actually locked. (3) The system has not been tampered with since the last check. This is not a screenshot or soft claim — it is a <strong>hardware-backed attestation</strong>. I run the verification before shipping and include the result. You can repeat it yourself at any time or build a trust anchor.</p>
+      </details>
+      <details class="faq-acc">
+        <summary>What does "OEM unlock disabled" mean? <span class="faq-arrow">▶</span></summary>
+        <p class="faq-body">Installing GrapheneOS requires briefly unlocking the bootloader — that's technically unavoidable. After installation it is <strong>immediately re-locked</strong>, and additionally the "OEM unlocking" toggle in Developer Options is disabled. This prevents anyone with physical access to your device from unlocking the bootloader again and flashing a compromised system. On every boot, the Titan chip verifies that GrapheneOS is unmodified (<strong>Verified Boot</strong>). If something doesn't match: the device won't start — no exceptions.</p>
+      </details>
+      <details class="faq-acc">
+        <summary>Where do the installed apps come from? <span class="faq-arrow">▶</span></summary>
+        <p class="faq-body">Following a clear hierarchy depending on the app: <strong>Accrescent</strong> (GrapheneOS-native, signature-verified app store) takes priority — if an app is available there, it comes from there. Otherwise the app is fetched directly from the developer's official source via <strong>Obtainium</strong> — no middleman, no store-signature surprises. <strong>F-Droid</strong> is the third option when neither Accrescent nor Obtainium makes sense. For active Nostr users the <strong>Zap Store</strong> is also available on request. Which route is right for which app is explained in detail in the ebook (chapter on app stores).</p>
+      </details>
+      <details class="faq-acc">
+        <summary>Should I run Auditor again when the device arrives? <span class="faq-arrow">▶</span></summary>
+        <p class="faq-body"><em>Optional — but recommended for high threat models.</em> For most users this isn't necessary: I include the verification result and the device ships sealed. If you want maximum control or have an elevated security requirement, you can run Auditor on first boot and compare the fingerprint with the included proof — it cryptographically confirms the device arrived unmodified. A nice feature, not a requirement.</p>
+      </details>
+    </div>
 
     <!-- ===== SUPPORTED DEVICES ===== -->
     <h2><svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="1" width="20" height="34" rx="3.5" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.9"/><rect x="5" y="6" width="14" height="22" rx="1" fill="#060e12" stroke="#00ffcc" stroke-width="0.5"/><circle cx="12" cy="31.5" r="1.8" fill="#00ffcc" opacity="0.75"/><line x1="9" y1="10" x2="15" y2="10" stroke="#00ffcc" stroke-width="0.5" opacity="0.65"/><line x1="9" y1="13" x2="15" y2="13" stroke="#00ffcc" stroke-width="0.5" opacity="0.45"/><line x1="9" y1="16" x2="13" y2="16" stroke="#00ffcc" stroke-width="0.5" opacity="0.35"/></svg> Supported Devices</h2>
@@ -933,7 +972,8 @@
     </p>
 
     <!-- ===== LEGAL ===== -->
-    <h2><svg style="width:1em;height:0.9em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px rgba(255,170,68,0.6));" viewBox="0 0 36 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M18 1 L34 31 L2 31 Z" fill="#1a0d00" stroke="#ffaa44" stroke-width="0.9" stroke-linejoin="round"/><line x1="18" y1="11" x2="18" y2="21" stroke="#ffaa44" stroke-width="1.8" stroke-linecap="round"/><circle cx="18" cy="26" r="1.6" fill="#ffaa44"/></svg> Legal &amp; Disclaimer</h2>
+    <details class="acc-section">
+    <summary><h2><svg style="width:1em;height:0.9em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px rgba(255,170,68,0.6));" viewBox="0 0 36 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M18 1 L34 31 L2 31 Z" fill="#1a0d00" stroke="#ffaa44" stroke-width="0.9" stroke-linejoin="round"/><line x1="18" y1="11" x2="18" y2="21" stroke="#ffaa44" stroke-width="1.8" stroke-linecap="round"/><circle cx="18" cy="26" r="1.6" fill="#ffaa44"/></svg> Legal &amp; Disclaimer</h2><span class="acc-arrow">▶</span></summary>
 
     <div class="disclaimer">
       <p><strong>No repair service.</strong> New devices only, purchased by me. Defective or used devices are not accepted.</p>
@@ -947,6 +987,7 @@
     <div class="warn-box">
       <p><strong>No affiliation with the GrapheneOS project.</strong> I install GrapheneOS as an independent service. The GrapheneOS project does not offer an installation service and is not affiliated with this offer.</p>
     </div>
+    </details>
 
     <!-- ===== CONTACT ===== -->
     <h2><svg style="width:1em;height:0.85em;vertical-align:-0.05em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 28" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="2" width="32" height="24" rx="2.5" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.9"/><polyline points="2,4 18,15 34,4" fill="none" stroke="#00ffcc" stroke-width="0.9"/></svg> Get in Touch</h2>
