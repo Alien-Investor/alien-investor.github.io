@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Bitcoin Einsteiger-Guide — Von Null zur Self-Custody | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* ===== PRINT & SCREEN ===== */
+    @media print {
+      .no-print { display: none !important; }
+      body { background: #fff; color: #000; }
+      a { color: #000; text-decoration: underline; }
+      .chapter { page-break-before: always; }
+      .chapter:first-of-type { page-break-before: avoid; }
+      .cover { page-break-after: always; }
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+
+    body {
+      background: #0a0a0a;
+      color: #e8e8e8;
+      font-family: 'Georgia', serif;
+      line-height: 1.75;
+      font-size: 17px;
+    }
+
+    .wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 20px 80px 20px;
+    }
+
+    /* NAV */
+    .top-nav {
+      padding: 12px 0;
+      font-family: Arial, sans-serif;
+      font-size: 0.85em;
+      border-bottom: 1px solid #1a1a1a;
+      margin-bottom: 20px;
+    }
+    .top-nav a { color: #00ffcc; text-decoration: none; }
+    .top-nav a:hover { color: #fff; }
+
+    /* COVER */
+    .cover {
+      text-align: center;
+      padding: 60px 20px 50px 20px;
+      border-bottom: 1px solid #1a3a3a;
+      margin-bottom: 50px;
+    }
+    .cover-badge {
+      display: inline-block;
+      background: rgba(0,255,204,0.08);
+      border: 1px solid rgba(0,255,204,0.3);
+      color: #00ffcc;
+      font-family: Arial, sans-serif;
+      font-size: 0.75em;
+      padding: 4px 14px;
+      border-radius: 20px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .cover h1 {
+      font-size: 2.4em;
+      color: #00ffcc;
+      line-height: 1.2;
+      margin: 0 0 16px 0;
+      text-shadow: 0 0 30px rgba(0,255,204,0.25);
+    }
+    .cover .subtitle {
+      color: #999;
+      font-size: 1.05em;
+      font-style: italic;
+      margin-bottom: 30px;
+    }
+    .cover .meta {
+      font-family: Arial, sans-serif;
+      font-size: 0.8em;
+      color: #555;
+    }
+    .cover .meta span { color: #888; }
+
+    /* TOC */
+    .toc {
+      background: rgba(0,255,204,0.03);
+      border: 1px solid #1a3a3a;
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin: 0 0 50px 0;
+    }
+    .toc h2 {
+      font-family: Arial, sans-serif;
+      font-size: 0.85em;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #555;
+      margin: 0 0 16px 0;
+    }
+    .toc ol {
+      margin: 0;
+      padding-left: 20px;
+      color: #aaa;
+    }
+    .toc li {
+      padding: 4px 0;
+      font-family: Arial, sans-serif;
+      font-size: 0.92em;
+    }
+    .toc li strong { color: #00ffcc; }
+    .toc li span { color: #555; font-size: 0.88em; margin-left: 6px; }
+
+    /* CHAPTERS */
+    .chapter {
+      margin-bottom: 60px;
+    }
+    .chapter-number {
+      font-family: Arial, sans-serif;
+      font-size: 0.75em;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #00ffcc;
+      opacity: 0.7;
+      margin-bottom: 8px;
+    }
+    h2.chapter-title {
+      font-size: 1.7em;
+      color: #fff;
+      margin: 0 0 24px 0;
+      line-height: 1.25;
+      border-bottom: 1px solid #1a3a3a;
+      padding-bottom: 14px;
+    }
+    h3 {
+      font-size: 1.1em;
+      color: #00ffcc;
+      margin: 32px 0 10px 0;
+      font-family: Arial, sans-serif;
+    }
+
+    p { margin: 0 0 18px 0; color: #ccc; }
+
+    /* CALLOUT BOXES */
+    .box {
+      border-left: 3px solid #00ffcc;
+      background: rgba(0,255,204,0.04);
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin: 24px 0;
+    }
+    .box.warning {
+      border-color: #ff6b35;
+      background: rgba(255,107,53,0.05);
+    }
+    .box.tip {
+      border-color: #00cc88;
+      background: rgba(0,204,136,0.04);
+    }
+    .box p { margin: 0; font-size: 0.92em; }
+    .box strong { color: #00ffcc; }
+    .box.warning strong { color: #ff6b35; }
+    .box.tip strong { color: #00cc88; }
+
+    /* STEPS */
+    .steps {
+      counter-reset: step;
+      list-style: none;
+      padding: 0;
+      margin: 16px 0 24px 0;
+    }
+    .steps li {
+      counter-increment: step;
+      display: flex;
+      gap: 16px;
+      margin-bottom: 16px;
+      align-items: flex-start;
+    }
+    .steps li::before {
+      content: counter(step);
+      flex: 0 0 28px;
+      height: 28px;
+      background: rgba(0,255,204,0.1);
+      border: 1px solid rgba(0,255,204,0.35);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #00ffcc;
+      font-weight: bold;
+      font-size: 0.8em;
+      font-family: Arial, sans-serif;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+    .steps li p { margin: 0; }
+
+    /* TABLE */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0 28px 0;
+      font-family: Arial, sans-serif;
+      font-size: 0.88em;
+    }
+    th {
+      text-align: left;
+      color: #00ffcc;
+      border-bottom: 1px solid #1a3a3a;
+      padding: 8px 12px;
+      font-weight: bold;
+    }
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #111;
+      color: #aaa;
+      vertical-align: top;
+    }
+    tr:last-child td { border-bottom: none; }
+
+    /* RULE */
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      margin: 40px 0;
+    }
+
+    /* FOOTER */
+    .guide-footer {
+      text-align: center;
+      padding: 40px 20px;
+      border-top: 1px solid #1a3a3a;
+      font-family: Arial, sans-serif;
+      font-size: 0.82em;
+      color: #555;
+    }
+    .guide-footer a { color: #555; text-decoration: underline; }
+
+    code {
+      background: #111;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 0.88em;
+      color: #00cc88;
+    }
+
+    /* CHECKLIST */
+    .checklist {
+      list-style: none;
+      padding: 0;
+      margin: 12px 0 24px 0;
+    }
+    .checklist li {
+      padding: 6px 0 6px 28px;
+      position: relative;
+      color: #aaa;
+      font-size: 0.95em;
+    }
+    .checklist li::before {
+      content: "☐";
+      position: absolute;
+      left: 0;
+      color: #00ffcc;
+      font-size: 1em;
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top-nav no-print">
+    <a href="blog.html">← Zurück zum Blog</a>
+  </div>
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-badge">Alien Investor · Leitfaden</div>
+    <h1>Bitcoin Einsteiger-Guide</h1>
+    <p class="subtitle">Von Null zur Self-Custody — Schritt für Schritt</p>
+    <div class="meta">
+      Version 1.0 · Mai 2026<br>
+      <span>alien-investor.org</span>
+    </div>
+  </div>
+
+  <!-- TOC -->
+  <div class="toc">
+    <h2>Inhalt</h2>
+    <ol>
+      <li><strong>Warum Self-Custody nicht verhandelbar ist</strong> <span>— Das Fundament</span></li>
+      <li><strong>Bitcoin kaufen — die zwei Wege</strong> <span>— KYC vs. No-KYC</span></li>
+      <li><strong>BitBox02 einrichten</strong> <span>— Schritt für Schritt</span></li>
+      <li><strong>Die Seed Phrase — dein größter Schatz</strong> <span>— Sicherung & Fehler vermeiden</span></li>
+      <li><strong>Passphrase (25. Wort)</strong> <span>— Für wen, für wen nicht</span></li>
+      <li><strong>Erste Transaktion & nächste Schritte</strong> <span>— Was jetzt?</span></li>
+    </ol>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- KAPITEL 1 -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="chapter">
+    <div class="chapter-number">Kapitel 01</div>
+    <h2 class="chapter-title">Warum Self-Custody nicht verhandelbar ist</h2>
+
+    <p>
+      Beginnen wir mit dem Satz, der alles zusammenfasst:
+    </p>
+
+    <div class="box">
+      <p><strong>„Not your keys, not your coins."</strong><br>
+      Wer Bitcoin auf einer Exchange oder in einem ETF hält, besitzt kein Bitcoin. Er hält eine Forderung gegenüber einem Unternehmen — und die ist so gut wie das Unternehmen selbst.</p>
+    </div>
+
+    <p>
+      Bitcoin auf einer Exchange zu lassen fühlt sich bequem an. Der Kurs wird angezeigt, alles sieht nach echtem Besitz aus. Aber rechtlich und technisch besitzt du nur einen Datenbankeneintrag beim Anbieter — keine einzige Satoshi liegt in deiner Verfügungsgewalt.
+    </p>
+
+    <h3>Was beim Custodial-Modell schiefgehen kann</h3>
+    <p>
+      FTX war mal die zweitgrößte Kryptobörse der Welt. Im November 2022 war sie insolvent. Kunden verloren Milliarden — nicht weil Bitcoin versagt hat, sondern weil sie Bitcoin nicht selbst verwahrt haben. Mt. Gox, Celsius, BlockFi: Die Liste der Pleite-Exchanges ist lang. Das Muster ist immer dasselbe.
+    </p>
+    <p>
+      Dazu kommt das Regulierungsrisiko: Staaten können Bitcoin nicht auf Protokollebene angreifen — aber sie können zentralisierte Schnittstellen unter Druck setzen. Exchanges können Auszahlungen einfrieren, Limits setzen, Behördenanfragen folgen müssen. Das alles betrifft dich nicht, wenn deine Bitcoin niemand anderem gehören als dir.
+    </p>
+
+    <h3>Die gute Nachricht</h3>
+    <p>
+      Self-Custody ist keine Raketenwissenschaft. Mit einem Hardware Wallet, einer richtig gesicherten Seed Phrase und etwas Vorsicht beim Setup bist du sicherer als 90 % der Bitcoin-Besitzer weltweit. Dieser Guide zeigt dir genau wie.
+    </p>
+
+    <div class="box tip">
+      <p><strong>Faustregel:</strong> Alles was du langfristig halten willst, gehört in deine eigene Verwahrung. Was du kurzfristig handeln willst, kann kurzzeitig auf einer Exchange liegen — aber immer mit dem Plan, es abzuziehen.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- KAPITEL 2 -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="chapter">
+    <div class="chapter-number">Kapitel 02</div>
+    <h2 class="chapter-title">Bitcoin kaufen — die zwei Wege</h2>
+
+    <p>
+      Bevor du Bitcoin in deine eigene Verwahrung nehmen kannst, musst du es erst kaufen. Hier teilen sich die Wege.
+    </p>
+
+    <h3>Weg 1: Exchange mit KYC</h3>
+    <p>
+      Regulierte Exchanges wie Kraken, Bitstamp oder Bitpanda verlangen eine Identitätsprüfung (KYC — Know Your Customer). Du lädst Ausweis und Selfie hoch, wirst verifiziert und kannst dann per Banküberweisung kaufen.
+    </p>
+    <p>
+      Das ist der einfachste Einstieg und für die meisten Einsteiger der richtige erste Schritt. Der Nachteil: Deine Kaufhistorie wird dauerhaft gespeichert und mit deiner Identität verknüpft. Die EU-Regulierung (Travel Rule, seit Dezember 2024 aktiv) verpflichtet Exchanges außerdem, Transfers zu selbst verwahrten Wallets ab ~1.000 € zu dokumentieren.
+    </p>
+
+    <table>
+      <tr>
+        <th>Exchange</th>
+        <th>Besonderheit</th>
+        <th>Tipp</th>
+      </tr>
+      <tr>
+        <td>Kraken</td>
+        <td>Etabliert, breite Auswahl, EU-reguliert</td>
+        <td>Gut für den Einstieg</td>
+      </tr>
+      <tr>
+        <td>21bitcoin</td>
+        <td>Bitcoin-only, Europa, einfache App</td>
+        <td>Code <code>ALIENINVESTOR</code> = 0,2% weniger Gebühren</td>
+      </tr>
+      <tr>
+        <td>Bitpanda</td>
+        <td>Österreichisch, SEPA-freundlich</td>
+        <td>Auch für Sparpläne geeignet</td>
+      </tr>
+    </table>
+
+    <div class="box">
+      <p><strong>Wichtig nach dem Kauf:</strong> Lass Bitcoin nicht auf der Exchange liegen. Kaufen → auf dein Hardware Wallet transferieren. Das ist der Sinn dieser Anleitung.</p>
+    </div>
+
+    <h3>Weg 2: P2P ohne KYC</h3>
+    <p>
+      Wem die Datenspur zu weit geht, kauft direkt von anderen Personen — ohne Exchange, ohne Ausweiskopie. Das erfordert mehr technisches Verständnis und Geduld, gibt dafür aber maximale Privatsphäre.
+    </p>
+
+    <table>
+      <tr>
+        <th>Plattform</th>
+        <th>Typ</th>
+        <th>Für wen</th>
+      </tr>
+      <tr>
+        <td><strong>Bisq</strong></td>
+        <td>Desktop-App, Tor-basiert, Multisig-Escrow</td>
+        <td>Technisch versierte, größere Mengen, hohe Privatsphäre</td>
+      </tr>
+      <tr>
+        <td><strong>RoboSats</strong></td>
+        <td>Web, Lightning, Tor-freundlich</td>
+        <td>Schnell, kleine Beträge, Lightning-Nutzer</td>
+      </tr>
+      <tr>
+        <td><strong>Peach</strong></td>
+        <td>Mobile App, einfacher</td>
+        <td>Einsteiger die P2P ausprobieren wollen</td>
+      </tr>
+    </table>
+
+    <div class="box warning">
+      <p><strong>Coin-Hygiene:</strong> Wer P2P-Bitcoin (privat) und KYC-Bitcoin (Exchange) kauft, darf sie niemals in derselben Wallet mischen. Getrennte Wallets, getrennte UTXOs. Sonst war die Privatsphäre des P2P-Kaufs umsonst.</p>
+    </div>
+
+    <h3>Für diesen Guide: Einfach starten</h3>
+    <p>
+      Wenn du gerade erst anfängst: Kauf über eine regulierte Exchange. Datenspur hin oder her — entscheidend ist, dass deine Bitcoin danach in deiner eigenen Verwahrung landen. Das ist der nächste Schritt.
+    </p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- KAPITEL 3 -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="chapter">
+    <div class="chapter-number">Kapitel 03</div>
+    <h2 class="chapter-title">BitBox02 einrichten</h2>
+
+    <p>
+      Das Hardware Wallet ist das Herzstück deiner Self-Custody. Es speichert deine privaten Schlüssel offline — also getrennt von allem, was mit dem Internet verbunden ist. Empfehlung: die <strong>BitBox02 Bitcoin-Only Edition</strong> von Shift Crypto (Schweiz). Kaufe sie ausschließlich direkt beim Hersteller: <strong>bitbox.swiss</strong>.
+    </p>
+
+    <div class="box warning">
+      <p><strong>Nie gebraucht kaufen.</strong> Ein Hardware Wallet aus zweiter Hand kann kompromittiert sein. Nur neu, nur direkt vom Hersteller.</p>
+    </div>
+
+    <h3>Software installieren</h3>
+    <p>
+      Lade die BitBoxApp ausschließlich von <strong>bitbox.swiss/start</strong> herunter. Nirgendwo sonst.
+    </p>
+
+    <div class="box tip">
+      <p><strong>Linux-Nutzer:</strong> Ohne <code>udev</code>-Regeln erkennt die App das Gerät nicht. Lade <code>52-bitbox02.rules</code> vom Shift Crypto Help Center herunter, kopiere die Datei nach <code>/etc/udev/rules.d/</code> und melde dich einmal ab und wieder an. Erst dann starten.</p>
+    </div>
+
+    <h3>Setup Schritt für Schritt</h3>
+    <ul class="steps">
+      <li><p><strong>Gerät verbinden:</strong> USB-C an Laptop (Linux/Windows/Mac) oder Android. iOS-Nutzer brauchen die BitBox02 Nova — die verbindet per Bluetooth. Beim ersten Start erscheint ein Pairing-Code auf dem Gerät und in der App: beide müssen übereinstimmen. Erst dann bestätigen.</p></li>
+      <li><p><strong>Geräte-Passwort setzen:</strong> Dieses Passwort schützt vor physischem Zugriff durch Fremde. Es ist <em>nicht</em> deine Wallet-Sicherung — das kommt im nächsten Schritt. Wähle etwas Starkes, das du dir merken kannst.</p></li>
+      <li><p><strong>Seed generieren (MicroSD-Backup):</strong> Die App fragt, ob du eine MicroSD einlegen möchtest. Tu es. Das Gerät schreibt deine 24 Wörter auf die Karte — sie verlässt dabei nie das Gerät, berührt nie deinen Computer. Trotzdem: schreibe die 24 Wörter zusätzlich von Hand auf Papier (oder Metall). MicroSD kann kaputt gehen. Papier nicht.</p></li>
+      <li><p><strong>24 Wörter notieren:</strong> Das Gerät zeigt dir deine Recovery Words. Schreib jeden einzelnen auf — in korrekter Reihenfolge, ohne Abkürzungen. Keine Fotos, keine Screenshots, keine digitalen Kopien.</p></li>
+      <li><p><strong>Backup-Test:</strong> Die App wird dich bitten, einige Wörter zur Bestätigung einzugeben. Das ist kein Fehler — das ist die Kontrolle, dass du sie wirklich notiert hast.</p></li>
+      <li><p><strong>Fertig:</strong> Dein Hardware Wallet ist einsatzbereit. Du siehst nun eine Bitcoin-Empfangsadresse in der App.</p></li>
+    </ul>
+
+    <div class="box warning">
+      <p><strong>Beim Notieren der 24 Wörter:</strong> Keine Zeugen, keine Kameras, keine Webcams, kein Smartphone in der Nähe (Mikrofon!). Sprich die Wörter nicht laut aus.</p>
+    </div>
+
+    <h3>Empfangsadresse verifizieren</h3>
+    <p>
+      Bevor du Bitcoin an dein Wallet sendest, verifiziere die Empfangsadresse immer auf dem Gerätedisplay — nicht nur in der App auf dem Computer. Das schützt vor Malware die Adressen austauscht.
+    </p>
+
+    <table>
+      <tr>
+        <th>System</th>
+        <th>Verbindung</th>
+        <th>Besonderheit</th>
+      </tr>
+      <tr>
+        <td>Linux</td>
+        <td>USB-C</td>
+        <td>udev-Regeln nötig; sicherste Option (Open Source)</td>
+      </tr>
+      <tr>
+        <td>Android</td>
+        <td>USB-C</td>
+        <td>Ggf. OTG ("On-The-Go") in Einstellungen aktivieren</td>
+      </tr>
+      <tr>
+        <td>iOS (Apple)</td>
+        <td>Bluetooth</td>
+        <td>Nur mit BitBox02 Nova; USB nicht unterstützt</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- KAPITEL 4 -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="chapter">
+    <div class="chapter-number">Kapitel 04</div>
+    <h2 class="chapter-title">Die Seed Phrase — dein größter Schatz</h2>
+
+    <p>
+      Deine 24 Wörter (die Seed Phrase oder Recovery Phrase) sind das Wichtigste in deinem gesamten Bitcoin-Setup. Wer diese Wörter kennt, hat Zugriff auf alle Bitcoin in dieser Wallet — unabhängig vom Gerät, unabhängig vom Anbieter, unabhängig davon ob die BitBox02 existiert oder nicht.
+    </p>
+
+    <div class="box">
+      <p><strong>Die Seed Phrase ist der Schlüssel — nicht das Gerät.</strong> Geht die BitBox02 verloren, kaputt oder wird gestohlen: kein Problem, solange die Seed Phrase sicher ist. Mit jedem kompatiblen Hardware Wallet kann die Wallet wiederhergestellt werden.</p>
+    </div>
+
+    <h3>Was du tun sollst</h3>
+    <ul class="checklist">
+      <li>Handschriftlich auf Papier notieren — in korrekter Reihenfolge</li>
+      <li>An einem sicheren, trockenen, feuerfesten Ort aufbewahren</li>
+      <li>Mindestens eine Sicherungskopie an einem anderen Ort</li>
+      <li>Am besten: auf eine Metallplatte gravieren oder stempeln (feuerfest, wasserfest)</li>
+    </ul>
+
+    <h3>Was du niemals tun sollst</h3>
+    <ul class="checklist">
+      <li>Foto machen (iCloud/Google Photos synchronisiert automatisch)</li>
+      <li>In eine Notizen-App tippen (Notizen-Apps sind oft Cloud-basiert)</li>
+      <li>Per E-Mail oder Messenger verschicken</li>
+      <li>In einen Passwort-Manager eingeben (außer du verstehst die Risiken genau)</li>
+      <li>Laut vorlesen (Mikrofone sind überall)</li>
+      <li>Jemandem zeigen oder erzählen — nie</li>
+    </ul>
+
+    <div class="box warning">
+      <p><strong>Niemand braucht jemals deine Seed Phrase.</strong> Kein Support-Mitarbeiter, keine App, keine Website. Wer sie fragt, will dich bestehlen.</p>
+    </div>
+
+    <h3>Metallplatten: Warum und welche</h3>
+    <p>
+      Papier brennt bei ~233 °C. Überschwemmungen und Feuchtigkeit zerstören Tinte. Metallplatten überstehen beides. Für Bitcoin-Sicherung gibt es spezielle Lösungen (z.B. Cryptosteel, Bilodeau, oder einfache Edelstahlplatten mit Körnerschläger). Du brauchst kein teures Produkt — eine selbst gestempelte Edelstahlplatte aus dem Baumarkt ist genauso effektiv.
+    </p>
+
+    <h3>Der Backup-Test</h3>
+    <p>
+      Einen Monat nach dem Setup (oder sofort wenn du bereit bist): Teste das Backup. Installiere die BitBoxApp auf einem sauberen Gerät, wähle "Wallet wiederherstellen" und gib deine 24 Wörter ein. Wenn die Wallet korrekt erscheint, funktioniert dein Backup. Das gibt Sicherheit.
+    </p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- KAPITEL 5 -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="chapter">
+    <div class="chapter-number">Kapitel 05</div>
+    <h2 class="chapter-title">Passphrase (25. Wort)</h2>
+
+    <p>
+      Die Passphrase ist eine optionale Erweiterung der Seed Phrase. Sie ist kein "extra Passwort" auf deine bestehende Wallet — sie erzeugt eine <em>komplett andere</em> Wallet.
+    </p>
+
+    <div class="box">
+      <p><strong>Mathematisch:</strong> Seed + Passphrase A = Wallet A. Seed + Passphrase B = Wallet B. Seed ohne Passphrase = Wallet C. Jede Kombination ist eine andere Wallet mit anderen Adressen und anderem Guthaben.</p>
+    </div>
+
+    <h3>Wofür wird die Passphrase genutzt?</h3>
+    <p>
+      <strong>Plausible Deniability:</strong> Du kannst auf Wallet C (ohne Passphrase) einen kleinen Betrag lagern und unter Druck (z.B. "Zeig mir deine Wallet") überzeugend zeigen, dass das alles ist — während das echte Guthaben in Wallet A mit Passphrase liegt.
+    </p>
+    <p>
+      <strong>Zusätzliche Sicherheit:</strong> Wer physisch an deine Seed Phrase kommt, hat ohne Passphrase keinen Zugriff auf das gesicherte Guthaben.
+    </p>
+
+    <h3>Wofür nicht</h3>
+    <p>
+      Die Passphrase wird von der BitBox02 <em>nicht gespeichert</em> und nicht validiert. Das bedeutet: Ein Tippfehler erzeugt eine neue leere Wallet. Du merkst es nicht sofort. Wenn du Bitcoin an die falsche Wallet (mit falsch getippter Passphrase) sendest und das Tippfehler-Passwort vergisst, sind diese Bitcoin mathematisch verloren — für immer.
+    </p>
+
+    <div class="box warning">
+      <p><strong>Einsteiger-Empfehlung:</strong> Fang ohne Passphrase an. Eine gut gesicherte Seed Phrase reicht für die meisten Menschen. Die Passphrase ist ein Werkzeug für fortgeschrittene Nutzer die die Risiken genau verstehen.</p>
+    </div>
+
+    <p>
+      Wenn du die Passphrase später einsetzen willst: Schreibe sie genauso sorgfältig auf wie die Seed Phrase — getrennt gelagert, niemals zusammen mit den 24 Wörtern.
+    </p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- KAPITEL 6 -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="chapter">
+    <div class="chapter-number">Kapitel 06</div>
+    <h2 class="chapter-title">Erste Transaktion & nächste Schritte</h2>
+
+    <h3>Erste Transaktion</h3>
+    <p>
+      Bevor du alles auf das Hardware Wallet überträgst: Teste mit einem kleinen Betrag. Schicke z.B. 10 € worth Bitcoin von deiner Exchange auf die Empfangsadresse der BitBox02.
+    </p>
+    <ul class="steps">
+      <li><p>BitBoxApp öffnen, Hardware Wallet anschließen, einloggen.</p></li>
+      <li><p>Empfangsadresse aus der App kopieren — und zusätzlich auf dem Gerätedisplay verifizieren.</p></li>
+      <li><p>Auf der Exchange: Auszahlung / Withdraw → Adresse einfügen → Betrag → Absenden.</p></li>
+      <li><p>Warten: Bitcoin-Transaktionen brauchen in der Regel 10–60 Minuten bis zur Bestätigung (je nach Gebühr).</p></li>
+      <li><p>In der BitBoxApp erscheint der Eingang. Sobald du sicher bist dass alles funktioniert: weitere Beträge transferieren.</p></li>
+    </ul>
+
+    <div class="box tip">
+      <p><strong>Gebühren nicht zu niedrig setzen.</strong> Bei Netzwerküberlastung können Transaktionen mit zu niedrigen Gebühren sehr lange im Mempool hängen. Für zeitkritische Transfers: aktuelle Gebührenempfehlungen auf <strong>mempool.space</strong> prüfen.</p>
+    </div>
+
+    <h3>Was als nächstes kommt</h3>
+    <p>
+      Mit einem eingerichteten Hardware Wallet und gesicherter Seed Phrase hast du das Fundament gelegt. Hier sind die sinnvollen nächsten Schritte — je nach Interesse und Vertiefungsgrad:
+    </p>
+
+    <table>
+      <tr>
+        <th>Thema</th>
+        <th>Warum relevant</th>
+        <th>Einstieg</th>
+      </tr>
+      <tr>
+        <td><strong>Bitcoin Full Node</strong></td>
+        <td>Du verifizierst Transaktionen selbst — keine Abhängigkeit von Dritten</td>
+        <td>Umbrel, Start9 oder RaspiBlitz auf einem Raspberry Pi</td>
+      </tr>
+      <tr>
+        <td><strong>Lightning Network</strong></td>
+        <td>Schnelle, günstige Bitcoin-Zahlungen für den Alltag</td>
+        <td>Phoenix Wallet (einfach), eigener Node (fortgeschritten)</td>
+      </tr>
+      <tr>
+        <td><strong>Sparrow Wallet</strong></td>
+        <td>Desktop-Wallet mit vollständigem Coin Control — für die die es genau wissen wollen</td>
+        <td>sparrowwallet.com — kompatibel mit BitBox02</td>
+      </tr>
+      <tr>
+        <td><strong>Multisig</strong></td>
+        <td>Mehrere Schlüssel nötig für eine Transaktion — für große Beträge</td>
+        <td>Erst wenn du Single-Sig vollständig verstanden hast</td>
+      </tr>
+      <tr>
+        <td><strong>Privacy</strong></td>
+        <td>Tor, CoinJoin — für die die ihre Transaktionshistorie privat halten wollen</td>
+        <td>Sparrow + Whirlpool oder Bisq</td>
+      </tr>
+    </table>
+
+    <h3>Die wichtigsten Regeln zum Abschluss</h3>
+    <ul class="checklist">
+      <li>Seed Phrase sicher aufbewahren — das ist nicht verhandelbar</li>
+      <li>Hardware Wallet nur neu, nur direkt vom Hersteller kaufen</li>
+      <li>Empfangsadressen immer auf dem Gerätedisplay verifizieren</li>
+      <li>Bitcoin nicht auf Exchanges liegen lassen</li>
+      <li>Erst testen (kleiner Betrag), dann alles überweisen</li>
+      <li>Niemals jemandem die Seed Phrase zeigen oder nennen</li>
+      <li>Ruhig bleiben — Bitcoin geht nirgendwo hin</li>
+    </ul>
+
+    <div class="box">
+      <p><strong>Fragen?</strong> Schreib mir: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a> — E-Mail-Support ist im Kaufpreis dieses Guides inklusive.</p>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- DISCLAIMER & FOOTER -->
+  <div class="guide-footer">
+    <p>
+      <strong>Disclaimer:</strong> Dieser Guide ist keine Finanz-, Steuer- oder Rechtsberatung.<br>
+      Alle Entscheidungen triffst du eigenverantwortlich auf Basis eigener Recherche.
+    </p>
+    <p style="margin-top:16px;">
+      © 2026 Alien Investor · <a href="https://alien-investor.org">alien-investor.org</a><br>
+      Dieser Guide ist für den persönlichen Gebrauch lizenziert. Keine Weitergabe oder Weiterverkauf.
+    </p>
+  </div>
+
+</div>
+</body>
+</html>
