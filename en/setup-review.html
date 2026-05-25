@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Setup Review — Zeig mir dein Bitcoin-Setup | Alien Investor</title>
+  <title>Setup Review — Show Me Your Bitcoin Setup | Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Setup Review: Du beschreibst dein Bitcoin- und Depot-Setup, ich sage dir konkret was du verbessern kannst. Kein Interessenkonflikt, kein Bullshit. Festpreis 49 €.">
-  <link rel="canonical" href="/setup-review.html">
-  <link rel="alternate" hreflang="en" href="/en/setup-review.html">
+  <meta name="description" content="Setup Review: Describe your Bitcoin and portfolio setup, I'll tell you exactly what to improve. No sales interest, no BS. Fixed price €49.">
+  <link rel="canonical" href="/en/setup-review.html">
+  <link rel="alternate" hreflang="de" href="/setup-review.html">
   <style>
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
@@ -19,7 +19,6 @@
       overflow-x: hidden;
     }
 
-    /* Space Background */
     .stars-bg {
       position: fixed; top: 0; left: 0;
       width: 100%; height: 100%;
@@ -60,7 +59,6 @@
       100% { opacity: 0.8; transform: scale(1.04); }
     }
 
-    /* Layout */
     .wrap {
       max-width: 760px;
       margin: 0 auto;
@@ -95,35 +93,6 @@
       font-size: 1.05em;
     }
 
-    /* Coming Soon Badge */
-    .coming-soon-wrap {
-      text-align: center;
-      margin: 30px 0 40px 0;
-    }
-    .coming-soon-badge {
-      display: inline-block;
-      background: rgba(0,255,204,0.07);
-      border: 1px solid rgba(0,255,204,0.45);
-      color: #00ffcc;
-      padding: 10px 28px;
-      border-radius: 30px;
-      font-size: 0.9em;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      font-weight: bold;
-      animation: pulse-glow 3s ease-in-out infinite;
-    }
-    @keyframes pulse-glow {
-      0%, 100% { box-shadow: 0 0 8px rgba(0,255,204,0.2); }
-      50%       { box-shadow: 0 0 22px rgba(0,255,204,0.5); }
-    }
-    .coming-soon-sub {
-      margin-top: 10px;
-      color: #666;
-      font-size: 0.85em;
-    }
-
-    /* Checklist */
     .check-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -142,12 +111,8 @@
       margin-bottom: 4px;
       font-size: 0.95em;
     }
-    .check-item span {
-      color: #888;
-      font-size: 0.85em;
-    }
+    .check-item span { color: #888; font-size: 0.85em; }
 
-    /* How it works */
     .steps {
       counter-reset: step-counter;
       list-style: none;
@@ -178,7 +143,6 @@
     .steps li > div strong { color: #ddd; display: block; }
     .steps li > div span { color: #888; font-size: 0.9em; }
 
-    /* Price Box */
     .price-box {
       border: 1px solid rgba(0,255,204,0.3);
       background: rgba(0,255,204,0.04);
@@ -187,18 +151,9 @@
       text-align: center;
       margin: 10px 0 30px 0;
     }
-    .price-box .price {
-      font-size: 2.2em;
-      font-weight: bold;
-      color: #00ffcc;
-    }
-    .price-box .price-sub {
-      color: #888;
-      font-size: 0.85em;
-      margin-top: 6px;
-    }
+    .price-box .price { font-size: 2.2em; font-weight: bold; color: #00ffcc; }
+    .price-box .price-sub { color: #888; font-size: 0.85em; margin-top: 6px; }
 
-    /* CTA */
     .cta-wrap { text-align: center; margin: 36px 0; }
     .cta-btn {
       display: inline-block;
@@ -218,7 +173,6 @@
     }
     .cta-sub { color: #555; font-size: 0.82em; margin-top: 10px; }
 
-    /* Disclaimer */
     footer {
       margin-top: 60px;
       padding: 20px;
@@ -235,7 +189,7 @@
 
   <div class="wrap">
     <div class="top-nav">
-      <a href="blog.html">← Zurück zum Blog</a>
+      <a href="/en/blog.html">← Back to Blog</a>
     </div>
 
     <h1>
@@ -250,92 +204,88 @@
     </h1>
 
     <p class="lead">
-      Du zeigst mir dein Bitcoin- und Finanz-Setup.<br>
-      Ich sage dir ehrlich, was du verbessern kannst — kein Verkaufsinteresse, kein Bullshit.
+      Show me your Bitcoin and financial setup.<br>
+      I'll tell you honestly what to improve — no sales interest, no BS.
     </p>
 
-    <!-- Was wird geprüft -->
-    <h2>Was schaue ich mir an?</h2>
+    <h2>What do I look at?</h2>
     <div class="check-grid">
       <div class="check-item">
-        <strong>₿ Bitcoin Verwahrung</strong>
-        <span>Hardware Wallet, Passphrase, Backup-Strategie, Seed-Sicherung</span>
+        <strong>₿ Bitcoin Custody</strong>
+        <span>Hardware wallet, passphrase, backup strategy, seed security</span>
       </div>
       <div class="check-item">
         <strong>
           <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg>
           Exchange &amp; KYC
         </strong>
-        <span>Wo kaufst du? Wie viel KYC-Exposure? Alternativen ohne Datenspur</span>
+        <span>Where do you buy? How much KYC exposure? Alternatives without a data trail</span>
       </div>
       <div class="check-item">
         <strong>⚙ Node &amp; Lightning</strong>
-        <span>Hast du eine eigene Full Node? Lightning-Channels? Was könnte besser sein?</span>
+        <span>Do you run your own full node? Lightning channels? What could be better?</span>
       </div>
       <div class="check-item">
         <strong>
           <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg"><line x1="2" y1="33" x2="34" y2="33" stroke="#00ffcc" stroke-width="0.5" opacity="0.5"/><rect x="5" y="18" width="6" height="11" fill="#00ffcc" opacity="0.7" rx="0.5"/><rect x="15" y="9" width="6" height="13" fill="none" stroke="#00ffcc" stroke-width="1" rx="0.5"/><rect x="26" y="5" width="6" height="12" fill="#00ffcc" opacity="0.7" rx="0.5"/></svg>
-          Depot &amp; DRS
+          Portfolio &amp; DRS
         </strong>
-        <span>Aktien-Verwahrstelle, Direct Registration, Namensaktien — alles auf dem Schirm?</span>
+        <span>Stock custodian, direct registration, registered shares — all covered?</span>
       </div>
       <div class="check-item">
         <strong>🔒 Privacy &amp; OpSec</strong>
-        <span>Smartphone, Browser, E-Mail — wie steht's um deine digitale Privatsphäre?</span>
+        <span>Smartphone, browser, email — how's your digital privacy holding up?</span>
       </div>
       <div class="check-item">
         <strong>
           <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="none" stroke="#00ffcc" stroke-width="1.2"/></svg>
-          Dein Fokus
+          Your Focus
         </strong>
-        <span>Gibt's etwas Bestimmtes, das dich beschäftigt? Ich schaue gezielt hin.</span>
+        <span>Something specific on your mind? I'll look at it closely.</span>
       </div>
     </div>
 
-    <!-- Wie es funktioniert -->
-    <h2>Wie funktioniert's?</h2>
+    <h2>How does it work?</h2>
     <ul class="steps">
       <li>
         <div>
-          <strong>Du zahlst &amp; beschreibst dein Setup</strong>
-          <span>Per Bitcoin, Lightning oder Ko-fi. Im Memo oder per Mail schreibst du: Wallet, Exchange, Node, Depot — so viel oder wenig wie du möchtest.</span>
+          <strong>Pay &amp; describe your setup</strong>
+          <span>Via Bitcoin, Lightning or Ko-fi. In the memo or by email, describe your setup: wallet, exchange, node, portfolio — as much or as little as you like.</span>
         </div>
       </li>
       <li>
         <div>
-          <strong>Ich schaue drüber</strong>
-          <span>Ich lese dein Setup, prüfe es auf Schwachstellen und Optimierungspotenzial — mit dem Blick eines Bitcoiners ohne Verkaufsinteresse.</span>
+          <strong>I review it</strong>
+          <span>I read through your setup and check it for weaknesses and improvement potential — with the eyes of a Bitcoiner who has nothing to sell you.</span>
         </div>
       </li>
       <li>
         <div>
-          <strong>Du bekommst schriftliches Feedback</strong>
-          <span>Innerhalb weniger Tage. Klar strukturiert: was gut ist, was du verbessern solltest, konkrete nächste Schritte.</span>
+          <strong>You get written feedback</strong>
+          <span>Within a few days. Clearly structured: what's good, what you should improve, concrete next steps.</span>
         </div>
       </li>
       <li>
         <div>
-          <strong>Rückfragen inklusive</strong>
-          <span>Kurze Rückfragen per Mail sind dabei — ich erkläre gerne, warum ich was empfehle.</span>
+          <strong>Follow-up questions included</strong>
+          <span>Short follow-up questions by email are part of the deal — I'm happy to explain why I recommend what I recommend.</span>
         </div>
       </li>
     </ul>
 
-    <!-- Preis -->
-    <h2>Preis</h2>
+    <h2>Price</h2>
     <div class="price-box">
-      <div class="price">49 €</div>
-      <div class="price-sub">Festpreis — Bitcoin On-Chain, Lightning oder Ko-fi<br>Kein Abo, keine Folgekosten</div>
+      <div class="price">€49</div>
+      <div class="price-sub">Fixed price — Bitcoin on-chain, Lightning or Ko-fi<br>No subscription, no recurring costs</div>
     </div>
 
-    <!-- CTA -->
     <div class="cta-wrap">
-      <a href="spenden.html" class="cta-btn">
-        Jetzt bezahlen &amp; anfragen →
+      <a href="/en/spenden.html" class="cta-btn">
+        Pay &amp; order now →
       </a>
       <p class="cta-sub">
-        Bitcoin On-Chain, Lightning oder Ko-fi — schreib den Aktie deiner Wahl ins Memo.<br>
-        Kein Memo-Feld? <a href="mailto:kontakt@alien-investor.org?subject=Setup%20Review" style="color:#666;">Per Mail melden</a> ·
+        Bitcoin on-chain, Lightning or Ko-fi — describe your setup in the memo.<br>
+        No memo field? <a href="mailto:kontakt@alien-investor.org?subject=Setup%20Review" style="color:#666;">Send an email instead</a> ·
         <a href="/kontakt@alien-investor.org/pubkey.asc.key" download="kontakt-alien-investor-pubkey.asc" style="color:#444;font-size:0.9em;">PGP Key</a>
       </p>
     </div>
@@ -343,18 +293,18 @@
     <hr style="border-color:#1a1a1a; margin: 2em 0;">
 
     <div style="text-align:center; color:#555; font-size:0.85em; margin: 20px 0;">
-      Mehr Services:
-      <a href="FAQ.html" style="color:#555;">Wunsch-Aktienanalyse (49 €)</a> ·
-      <a href="grapheneos-flash-service.html" style="color:#555;">Alien Phone Service</a>
+      More services:
+      <a href="/en/FAQ.html" style="color:#555;">Custom Stock Analysis (€49)</a> ·
+      <a href="/en/grapheneos-flash-service.html" style="color:#555;">Alien Phone Service</a>
     </div>
 
     <footer>
       <p>
         <strong style="color:#444;">Disclaimer:</strong>
-        Dies ist keine Finanz-, Rechts- oder Steuerberatung. Ich teile meine persönliche Einschätzung — du handelst immer eigenverantwortlich.
+        This is not financial, legal or tax advice. I share my personal assessment — you always act on your own responsibility.
       </p>
       <p style="margin-top:15px;">
-        Kontakt: <a href="mailto:kontakt@alien-investor.org" style="color:#555;">kontakt@alien-investor.org</a>
+        Contact: <a href="mailto:kontakt@alien-investor.org" style="color:#555;">kontakt@alien-investor.org</a>
       </p>
     </footer>
   </div>
