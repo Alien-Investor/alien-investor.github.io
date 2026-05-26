@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bitcoin Beginner's Guide — From Zero to Self-Custody | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bitcoin Beginner's Guide: 6 chapters from zero to self-custody. Buy Bitcoin, set up BitBox02, secure your seed. No prior knowledge needed. Fixed price 15 €.">
+  <link rel="canonical" href="/en/bitcoin-einsteiger-guide.html">
+  <link rel="alternate" hreflang="de" href="/bitcoin-einsteiger-guide.html">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Space Background */
+    .stars-bg {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: radial-gradient(ellipse at top, #0a0f1e 0%, #000 60%);
+      z-index: -2;
+    }
+    .stars-bg::before {
+      content: "";
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image:
+        radial-gradient(1px 1px at 12% 18%, #fff, transparent),
+        radial-gradient(1px 1px at 28% 42%, #fff, transparent),
+        radial-gradient(2px 2px at 50% 25%, #00ffcc, transparent),
+        radial-gradient(1px 1px at 72% 60%, #fff, transparent),
+        radial-gradient(1px 1px at 88% 30%, #fff, transparent),
+        radial-gradient(1px 1px at 18% 75%, #fff, transparent),
+        radial-gradient(1px 1px at 62% 85%, #fff, transparent),
+        radial-gradient(2px 2px at 40% 55%, #00ffcc, transparent);
+      animation: twinkle 6s ease-in-out infinite alternate;
+    }
+    @keyframes twinkle { 0% { opacity: 0.4; } 100% { opacity: 0.9; } }
+
+    .nebula {
+      position: fixed; top: -10%; left: -10%;
+      width: 120%; height: 120%;
+      z-index: -2; pointer-events: none;
+      background:
+        radial-gradient(ellipse 800px 240px at 25% 40%, rgba(40,0,100,0.2), transparent 60%),
+        radial-gradient(ellipse 1000px 200px at 75% 50%, rgba(0,100,120,0.18), transparent 60%);
+      filter: blur(30px); opacity: 0.8;
+      animation: nebula-pulse 16s ease-in-out infinite alternate;
+    }
+    @keyframes nebula-pulse {
+      0%   { opacity: 0.5; transform: scale(1); }
+      100% { opacity: 0.8; transform: scale(1.05); }
+    }
+
+    /* Layout */
+    .wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 15px 80px 15px;
+    }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+
+    h1 {
+      color: #00ffcc;
+      margin-top: 30px;
+      text-align: center;
+      font-size: 2em;
+      text-shadow: 0 0 14px rgba(0,255,204,0.4);
+      line-height: 1.2;
+    }
+    h2 {
+      color: #00ffcc;
+      margin-top: 2.2em;
+      border-bottom: 1px solid #1a3a3a;
+      padding-bottom: 8px;
+      font-size: 1.15em;
+    }
+
+    .lead {
+      text-align: center;
+      color: #ccc;
+      margin: 14px auto 30px auto;
+      max-width: 580px;
+      font-size: 1.05em;
+    }
+
+    /* Coming Soon Badge */
+    .coming-soon-wrap {
+      text-align: center;
+      margin: 30px 0 40px 0;
+    }
+    .coming-soon-badge {
+      display: inline-block;
+      background: rgba(0,255,204,0.07);
+      border: 1px solid rgba(0,255,204,0.45);
+      color: #00ffcc;
+      padding: 10px 28px;
+      border-radius: 30px;
+      font-size: 0.9em;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: bold;
+      animation: pulse-glow 3s ease-in-out infinite;
+    }
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 8px rgba(0,255,204,0.2); }
+      50%       { box-shadow: 0 0 22px rgba(0,255,204,0.5); }
+    }
+    .coming-soon-sub { margin-top: 10px; color: #666; font-size: 0.85em; }
+
+    /* Chapter list */
+    .chapters {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0 30px 0;
+      counter-reset: ch-counter;
+    }
+    .chapters li {
+      counter-increment: ch-counter;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid #111;
+    }
+    .chapters li:last-child { border-bottom: none; }
+    .chapters li::before {
+      content: counter(ch-counter, decimal-leading-zero);
+      flex: 0 0 28px;
+      color: #00ffcc;
+      font-weight: bold;
+      font-size: 0.85em;
+      opacity: 0.7;
+      padding-top: 2px;
+    }
+    .chapters li strong { display: block; color: #ddd; }
+    .chapters li span { color: #777; font-size: 0.88em; }
+
+    /* For whom */
+    .for-whom {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 10px 0 30px 0;
+    }
+    .for-item {
+      background: rgba(0,255,204,0.03);
+      border: 1px solid #1a3a3a;
+      border-radius: 10px;
+      padding: 14px 16px;
+      color: #888;
+      font-size: 0.9em;
+    }
+    .for-item::before { content: "✓ "; color: #00ffcc; }
+
+    /* Price box */
+    .price-box {
+      border: 1px solid rgba(0,255,204,0.3);
+      background: rgba(0,255,204,0.04);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      margin: 10px 0 30px 0;
+    }
+    .price-box .price { font-size: 2.2em; font-weight: bold; color: #00ffcc; }
+    .price-box .price-sub { color: #888; font-size: 0.85em; margin-top: 6px; }
+
+    /* CTA */
+    .cta-wrap { text-align: center; margin: 36px 0; }
+    .cta-btn {
+      display: inline-block;
+      background: rgba(0,255,204,0.1);
+      border: 1.5px solid #00ffcc;
+      color: #00ffcc;
+      padding: 14px 36px;
+      border-radius: 8px;
+      font-size: 1.05em;
+      font-weight: bold;
+      transition: all 0.2s;
+    }
+    .cta-btn:hover {
+      background: rgba(0,255,204,0.2);
+      box-shadow: 0 0 20px rgba(0,255,204,0.3);
+      color: #fff;
+    }
+    .cta-sub { color: #555; font-size: 0.82em; margin-top: 10px; }
+
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.82em;
+      color: #555;
+      border-top: 1px solid #1a1a1a;
+      text-align: center;
+    }
+
+    @media (max-width: 480px) {
+      .for-whom { grid-template-columns: 1fr; }
+      h1 { font-size: 1.6em; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars-bg"></div>
+  <div class="nebula"></div>
+
+  <div class="wrap">
+    <div class="top-nav">
+      <a href="/en/index.html">← Back to Blog</a>
+    </div>
+
+    <h1>
+      <svg style="width:0.75em;height:0.75em;vertical-align:-0.08em;filter:drop-shadow(0 0 6px #00ffcc88);" viewBox="0 0 28 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M14,2 C8,8 7,16 7,22 L21,22 C21,16 20,8 14,2 Z" fill="#00ffcc" opacity="0.85"/>
+        <path d="M7,22 L3,31 L7,28 Z" fill="#00ffcc" opacity="0.9"/>
+        <path d="M21,22 L25,31 L21,28 Z" fill="#00ffcc" opacity="0.9"/>
+        <rect x="9" y="22" width="10" height="6" fill="#0c1416" rx="0.5"/>
+        <circle cx="14" cy="13" r="2.5" fill="none" stroke="#000" stroke-width="1"/>
+        <path d="M10,28 Q11,36 14,37 Q17,36 18,28 Z" fill="#00ffcc" opacity="0.55"/>
+      </svg>
+      Bitcoin Beginner's Guide
+    </h1>
+
+    <p class="lead">
+      From zero to your own self-custody — step by step.<br>
+      No prior knowledge needed. No bullshit.
+    </p>
+
+    <!-- For whom -->
+    <h2>Who is this for?</h2>
+    <div class="for-whom">
+      <div class="for-item">You've heard about Bitcoin for a while but don't know where to start</div>
+      <div class="for-item">You already buy Bitcoin but leave it sitting on an exchange</div>
+      <div class="for-item">You have a hardware wallet but never set everything up properly</div>
+      <div class="for-item">You don't want a YouTube rabbit hole — you want a clear roadmap</div>
+    </div>
+
+    <!-- Content -->
+    <h2>What's inside?</h2>
+    <ul class="chapters">
+      <li>
+        <div>
+          <strong>Why Bitcoin — and why custody is everything</strong>
+          <span>The foundation: inflation, self-custody, "not your keys, not your coins"</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Buying Bitcoin — with and without KYC</strong>
+          <span>Which exchange to start with, where to buy without ID (Bisq, P2P)</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Setting up a hardware wallet (BitBox02)</strong>
+          <span>Step-by-step setup — from first boot to your first transaction</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>The seed phrase — the most important thing, period</strong>
+          <span>How to back it up, where NOT to store it, steel plates vs. paper</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Passphrase (25th word) — when does it make sense?</strong>
+          <span>Extra security layer: what it adds, what it costs, how not to lose it</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Next steps: Node, Lightning &amp; beyond</strong>
+          <span>When does running a full node make sense? What is Lightning? Where to go next?</span>
+        </div>
+      </li>
+    </ul>
+
+    <!-- Format -->
+    <h2>Format</h2>
+    <p style="color:#aaa;">
+      PDF guide — read it, print it, check it off.<br>
+      No subscription, no login required. Buy once, own forever.<br>
+      Includes email support for follow-up questions after purchase.
+    </p>
+
+    <!-- Price -->
+    <h2>Price</h2>
+    <div class="price-box">
+      <div class="price">~15 €</div>
+      <div class="price-sub">Fixed price (exact price at release)<br>Bitcoin on-chain, Lightning or Ko-fi</div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-wrap">
+      <a href="/spenden.html" class="cta-btn">
+        Buy now — 15 € →
+      </a>
+      <p class="cta-sub">
+        Bitcoin on-chain, Lightning or Ko-fi — include "Bitcoin Guide" in the memo.<br>
+        You'll receive the guide by email. No memo? <a href="mailto:kontakt@alien-investor.org?subject=Bitcoin%20Beginner%20Guide" style="color:#666;">Write directly</a> ·
+        <a href="/kontakt@alien-investor.org/pubkey.asc.key" download="kontakt-alien-investor-pubkey.asc" style="color:#444;font-size:0.9em;">PGP Key</a>
+      </p>
+    </div>
+
+    <hr style="border-color:#1a1a1a; margin: 2em 0;">
+
+    <div style="text-align:center; color:#555; font-size:0.85em; margin: 20px 0;">
+      More services:
+      <a href="/en/setup-review.html" style="color:#555;">Setup Review (49 €)</a> ·
+      <a href="/en/FAQ.html" style="color:#555;">Custom Stock Analysis (49 €)</a> ·
+      <a href="/en/grapheneos-flash-service.html" style="color:#555;">Alien Phone Service</a>
+    </div>
+
+    <footer>
+      <p>
+        <strong style="color:#444;">Disclaimer:</strong>
+        This is not financial, legal or tax advice. All content is for informational and educational purposes — you act at your own responsibility.
+      </p>
+      <p style="margin-top:15px;">
+        Contact: <a href="mailto:kontakt@alien-investor.org" style="color:#555;">kontakt@alien-investor.org</a>
+      </p>
+    </footer>
+  </div>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>
