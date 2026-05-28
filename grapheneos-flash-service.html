@@ -184,16 +184,89 @@
       flex-wrap: wrap;
     }
     .hero-img-wrap { flex: 0 0 auto; }
-    .hero-img-wrap img {
-      width: 270px;
-      height: auto;
-      border-radius: 18px;
+
+    /* CSS Phone Mockup */
+    .phone-mockup {
+      position: relative;
+      width: 220px;
+      background: linear-gradient(160deg, #1c1c1e 0%, #0e0e0e 100%);
+      border-radius: 40px;
+      border: 1.5px solid #2d2d2d;
+      padding: 14px 7px 12px;
       box-shadow:
         0 0 40px rgba(0,255,204,0.45),
         0 0 80px rgba(0,255,204,0.15),
-        0 20px 40px rgba(0,0,0,0.7);
+        0 20px 40px rgba(0,0,0,0.7),
+        inset 0 0 0 1px rgba(255,255,255,0.04);
       animation: float 7s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    /* Volume buttons — right side */
+    .phone-mockup::before {
+      content: '';
+      position: absolute;
+      right: -4px;
+      top: 85px;
+      width: 3px;
+      height: 26px;
+      background: #252525;
+      border-radius: 0 2px 2px 0;
+      box-shadow: 0 34px 0 #252525;
+    }
+    /* Power button — right side */
+    .phone-mockup::after {
+      content: '';
+      position: absolute;
+      right: -4px;
+      top: 175px;
+      width: 3px;
+      height: 38px;
+      background: #252525;
+      border-radius: 0 2px 2px 0;
+    }
+    .ph-body {
+      border-radius: 28px;
+      overflow: hidden;
+    }
+    .ph-screen {
+      position: relative;
+      background: #000;
+      line-height: 0;
+      aspect-ratio: 2 / 3;
+    }
+    .ph-camera {
+      position: absolute;
+      top: 9px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 9px;
+      height: 9px;
+      background: #080808;
+      border-radius: 50%;
+      border: 1px solid #1a1a1a;
+      z-index: 5;
+    }
+    .ph-screen img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       display: block;
+    }
+    .ph-chin {
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #050a09;
+    }
+    .ph-chin::after {
+      content: '';
+      width: 48px;
+      height: 4px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 2px;
     }
     @keyframes float {
       0%, 100% { transform: translateY(0); }
@@ -515,7 +588,7 @@
       .config-grid { grid-template-columns: 1fr; }
       h1 { font-size: 1.55em; }
       .hero { flex-direction: column; gap: 20px; }
-      .hero-img-wrap img { width: 200px; }
+      .phone-mockup { width: 180px; }
       .contact-box { padding: 22px 16px; }
     }
     @media (max-width: 480px) {
@@ -567,7 +640,15 @@
     <!-- HERO -->
     <div class="hero">
       <div class="hero-img-wrap">
-        <img src="/alien-phone-foto.jpg" alt="Pixel Phone mit Alien Phone Wallpaper und GrapheneOS" width="240">
+        <div class="phone-mockup">
+          <div class="ph-body">
+            <div class="ph-screen">
+              <div class="ph-camera"></div>
+              <img src="/alien-phone-wallpaper.png" alt="Alien Phone — GrapheneOS mit Alien Wallpaper" draggable="false">
+            </div>
+            <div class="ph-chin"></div>
+          </div>
+        </div>
       </div>
       <div class="hero-text">
         <h2>Privatsphäre ab dem ersten Boot</h2>
