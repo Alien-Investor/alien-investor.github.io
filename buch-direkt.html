@@ -534,6 +534,55 @@
       <a id="kofi-link" class="kofi-btn" href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener">
         Via Ko-fi bezahlen
       </a>
+      <p id="kofi-warning" style="color:#666; font-size:0.85em; margin-top:10px; max-width:500px; margin-left:auto; margin-right:auto;">
+        Einmalige Zahlungen am besten am Desktop — auf Mobilgeräten lädt die Ko-fi-Zahlungsseite nicht immer zuverlässig. Abonnements funktionieren überall.
+      </p>
+    </div>
+
+    <!-- BANKÜBERWEISUNG -->
+    <div class="kofi-section" style="margin-top:0; border-top:1px solid #222; padding-top:20px;">
+      <div style="color:#ccc; margin-bottom:12px;">🏦 Banküberweisung / Bank Transfer</div>
+      <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:14px;">
+        <button id="bank-btn-dkb" class="btn" style="min-width:0; padding:10px 20px; font-size:0.9rem;"
+          onclick="toggleBankPanel('dkb')">🏦 DKB — Deutschland</button>
+        <button id="bank-btn-wise" class="btn" style="min-width:0; padding:10px 20px; font-size:0.9rem;"
+          onclick="toggleBankPanel('wise')">🌍 Wise — International</button>
+      </div>
+
+      <div id="bank-dkb" class="panel">
+        <div class="card" style="text-align:left;">
+          <div class="title" style="text-align:center;">🏦 DKB — SEPA Deutschland / Germany</div>
+          <p style="color:#999; font-size:0.82em; margin:0 0 2px 0;">Kontoinhaber / Account holder</p>
+          <p style="color:#ddd; margin:0 0 12px 0;">Patrik Pietruschka</p>
+          <p style="color:#999; font-size:0.82em; margin:0 0 2px 0;">IBAN</p>
+          <code id="dkbIban">DE06 1203 0000 1057 6271 09</code><br>
+          <button class="copy" onclick="copyText('dkbIban')">IBAN kopieren / Copy IBAN</button>
+          <p style="color:#999; font-size:0.82em; margin:12px 0 2px 0;">BIC</p>
+          <code id="dkbBic">BYLADEM1001</code><br>
+          <button class="copy" onclick="copyText('dkbBic')">BIC kopieren / Copy BIC</button>
+          <p style="color:#888; font-size:0.8em; margin-top:14px; margin-bottom:0; text-align:center;">
+            Betreff / Subject: „Buch GrapheneOS DE" oder „Book GrapheneOS EN"
+          </p>
+        </div>
+      </div>
+
+      <div id="bank-wise" class="panel">
+        <div class="card" style="text-align:left;">
+          <div class="title" style="text-align:center;">🌍 Wise — SEPA &amp; International</div>
+          <p style="color:#999; font-size:0.82em; margin:0 0 2px 0;">Kontoinhaber / Account holder</p>
+          <p style="color:#ddd; margin:0 0 12px 0;">Patrik Pietruschka</p>
+          <p style="color:#999; font-size:0.82em; margin:0 0 2px 0;">IBAN</p>
+          <code id="wiseIban">BE94 9052 3016 2314</code><br>
+          <button class="copy" onclick="copyText('wiseIban')">IBAN kopieren / Copy IBAN</button>
+          <p style="color:#999; font-size:0.82em; margin:12px 0 2px 0;">BIC / SWIFT</p>
+          <code id="wiseBic">TRWIBEB1XXX</code><br>
+          <button class="copy" onclick="copyText('wiseBic')">BIC kopieren / Copy BIC</button>
+          <p style="color:#555; font-size:0.78em; margin:10px 0 0 0;">Bank address: Wise, Rue du Trône 100, 3rd floor, Brussels, 1050, Belgium</p>
+          <p style="color:#888; font-size:0.8em; margin-top:12px; margin-bottom:0; text-align:center;">
+            SEPA: kostenlos / free · SWIFT: 2,39 € Wise-Gebühr / fee
+          </p>
+        </div>
+      </div>
     </div>
 
     <!-- LANGUAGE TOGGLE -->
@@ -691,10 +740,11 @@
         'pay-desc':   'Wähle Lightning für schnelle, private Energie. Onchain für große Tanks. Ko-fi für PayPal oder Karte.',
         'copy-ln':    'Adresse kopieren',
         'copy-btc':   'Adresse kopieren',
-        'kofi-label': '☕ Oder per PayPal / Karte:',
-        'kofi-link':  'Via Ko-fi bezahlen',
-        'copied':     'Kopiert! ✅',
-        'copy-prompt':'Kopieren:'
+        'kofi-label':   '☕ Oder per PayPal / Karte:',
+        'kofi-link':    'Via Ko-fi bezahlen',
+        'kofi-warning': 'Einmalige Zahlungen am besten am Desktop — auf Mobilgeräten lädt die Ko-fi-Zahlungsseite nicht immer zuverlässig. Abonnements funktionieren überall.',
+        'copied':       'Kopiert! ✅',
+        'copy-prompt':  'Kopieren:'
       },
       en: {
         'nav-back':   '← Back to Books',
@@ -704,10 +754,11 @@
         'pay-desc':   'Choose Lightning for fast, private energy. Onchain for larger amounts. Ko-fi for PayPal or card.',
         'copy-ln':    'Copy address',
         'copy-btc':   'Copy address',
-        'kofi-label': '☕ Or via PayPal / Card:',
-        'kofi-link':  'Pay via Ko-fi',
-        'copied':     'Copied! ✅',
-        'copy-prompt':'Copy:'
+        'kofi-label':   '☕ Or via PayPal / Card:',
+        'kofi-link':    'Pay via Ko-fi',
+        'kofi-warning': 'One-time payments work best on desktop — Ko-fi checkout doesn\'t always load reliably on mobile. Subscriptions work on all devices.',
+        'copied':       'Copied! ✅',
+        'copy-prompt':  'Copy:'
       }
     };
 
@@ -759,9 +810,26 @@
       if (kofiLabel) kofiLabel.textContent = t['kofi-label'];
       var kofiLink = document.getElementById('kofi-link');
       if (kofiLink) kofiLink.textContent = t['kofi-link'];
+      var kofiWarning = document.getElementById('kofi-warning');
+      if (kofiWarning) kofiWarning.textContent = t['kofi-warning'];
     }
 
     if (window.location.hash === '#en') setLang('en');
+
+    function toggleBankPanel(id) {
+      ['dkb', 'wise'].forEach(function(pid) {
+        var panel = document.getElementById('bank-' + pid);
+        var btn = document.getElementById('bank-btn-' + pid);
+        var isTarget = pid === id;
+        var wasOpen = panel.classList.contains('open');
+        var open = isTarget && !wasOpen;
+        panel.classList.toggle('open', open);
+        if (btn) {
+          btn.style.background = open ? '#00ffcc' : '#000';
+          btn.style.color = open ? '#000' : '#00ffcc';
+        }
+      });
+    }
 
     function togglePanel(id){
       var ln = document.getElementById('ln');
