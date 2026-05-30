@@ -530,12 +530,8 @@
     </div>
 
     <div class="kofi-section">
-      <div id="kofi-label" style="color:#ccc; margin-bottom: 8px;">☕ Oder per PayPal / Karte:</div>
-      <a id="kofi-link" class="kofi-btn" href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener">
-        Via Ko-fi bezahlen
-      </a>
-      <p id="kofi-warning" style="color:#666; font-size:0.85em; margin-top:10px; max-width:500px; margin-left:auto; margin-right:auto;">
-        Einmalige Zahlungen am besten am Desktop — auf Mobilgeräten lädt die Ko-fi-Zahlungsseite nicht immer zuverlässig. Abonnements funktionieren überall.
+      <p style="color:#555; font-size:0.85em; margin:0;">
+        Kein Bankkonto? <a id="kofi-link" href="https://ko-fi.com/alieninvestor" target="_blank" rel="noopener" style="color:#777; text-decoration:none;">Karte via Ko-fi</a><span id="kofi-warning"> — nur Desktop, auf Mobilgeräten leider nicht zuverlässig.</span>
       </p>
     </div>
 
@@ -737,12 +733,11 @@
         'nav-back-href': 'buecher.html',
         'h1-text':    'DRM-frei direkt kaufen',
         'lead-p':     'Keine Plattform dazwischen. Kein Konto-Zwang. Kein Vendor-Lock-in.<br><span style="color:#888;">EPUB + MOBI + AZW3 + PDF als Bundle – auf allen Geräten deiner Wahl.</span>',
-        'pay-desc':   'Wähle Lightning für schnelle, private Energie. Onchain für große Tanks. Ko-fi für PayPal oder Karte.',
-        'copy-ln':    'Adresse kopieren',
-        'copy-btc':   'Adresse kopieren',
-        'kofi-label':   '☕ Oder per PayPal / Karte:',
-        'kofi-link':    'Via Ko-fi bezahlen',
-        'kofi-warning': 'Einmalige Zahlungen am besten am Desktop — auf Mobilgeräten lädt die Ko-fi-Zahlungsseite nicht immer zuverlässig. Abonnements funktionieren überall.',
+        'pay-desc':     'Wähle Lightning für schnelle, private Energie. Onchain für große Tanks.',
+        'copy-ln':      'Adresse kopieren',
+        'copy-btc':     'Adresse kopieren',
+        'kofi-link':    'Karte via Ko-fi',
+        'kofi-warning': ' — nur Desktop, auf Mobilgeräten leider nicht zuverlässig.',
         'copied':       'Kopiert! ✅',
         'copy-prompt':  'Kopieren:'
       },
@@ -751,12 +746,11 @@
         'nav-back-href': '/en/buecher.html',
         'h1-text':    'Buy DRM-free directly',
         'lead-p':     'No platform in between. No account required. No vendor lock-in.<br><span style="color:#888;">EPUB + MOBI + AZW3 + PDF as a bundle – on all devices of your choice.</span>',
-        'pay-desc':   'Choose Lightning for fast, private energy. Onchain for larger amounts. Ko-fi for PayPal or card.',
-        'copy-ln':    'Copy address',
-        'copy-btc':   'Copy address',
-        'kofi-label':   '☕ Or via PayPal / Card:',
-        'kofi-link':    'Pay via Ko-fi',
-        'kofi-warning': 'One-time payments work best on desktop — Ko-fi checkout doesn\'t always load reliably on mobile. Subscriptions work on all devices.',
+        'pay-desc':     'Choose Lightning for fast, private energy. Onchain for larger amounts.',
+        'copy-ln':      'Copy address',
+        'copy-btc':     'Copy address',
+        'kofi-link':    'Card via Ko-fi',
+        'kofi-warning': ' — desktop only, mobile checkout is unreliable.',
         'copied':       'Copied! ✅',
         'copy-prompt':  'Copy:'
       }
@@ -806,8 +800,6 @@
       if (copyLn) copyLn.textContent = t['copy-ln'];
       var copyBtc = document.getElementById('copy-btc');
       if (copyBtc) copyBtc.textContent = t['copy-btc'];
-      var kofiLabel = document.getElementById('kofi-label');
-      if (kofiLabel) kofiLabel.textContent = t['kofi-label'];
       var kofiLink = document.getElementById('kofi-link');
       if (kofiLink) kofiLink.textContent = t['kofi-link'];
       var kofiWarning = document.getElementById('kofi-warning');
