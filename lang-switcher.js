@@ -1,7 +1,6 @@
 (function () {
   var path = window.location.pathname;
   var isEnPath = path.indexOf('/en/') === 0;
-  var isEn = isEnPath || window.location.hash === '#en';
   var file = (isEnPath ? path.slice(4) : path).split('/').pop() || 'index.html';
   var deUrl = '/' + file;
   var enUrl = '/en/' + file;
@@ -15,10 +14,14 @@
     '.lang-sep{color:#444;user-select:none}';
   document.head.appendChild(css);
 
+  function isEn() {
+    return isEnPath || window.location.hash === '#en';
+  }
+
   function makeToggle() {
     var el = document.createElement('div');
     el.className = 'lang-toggle';
-    if (isEn) {
+    if (isEn()) {
       el.innerHTML =
         '<a href="' + deUrl + '" onclick="localStorage.setItem(\'lang\',\'de\')">DE</a>' +
         '<span class="lang-sep">|</span>' +
@@ -33,6 +36,9 @@
   }
 
   function inject() {
+    var old = document.querySelector('.lang-toggle');
+    if (old) old.parentNode.removeChild(old);
+
     var nav = document.querySelector('.top-nav');
     if (nav) {
       nav.style.display = 'flex';
@@ -40,10 +46,14 @@
       nav.style.alignItems = 'center';
       nav.appendChild(makeToggle());
     } else {
-      var wrap = document.createElement('div');
-      wrap.style.cssText = 'position:fixed;top:14px;right:18px;z-index:9999;';
+      var wrap = document.getElementById('lang-toggle-wrap');
+      if (!wrap) {
+        wrap = document.createElement('div');
+        wrap.id = 'lang-toggle-wrap';
+        wrap.style.cssText = 'position:fixed;top:14px;right:18px;z-index:9999;';
+        document.body.appendChild(wrap);
+      }
       wrap.appendChild(makeToggle());
-      document.body.appendChild(wrap);
     }
   }
 
@@ -52,4 +62,7 @@
   } else {
     inject();
   }
+
+  // Re-render toggle when hash changes (für Seiten mit #en Hash-Switch wie buch-direkt.html)
+  window.addEventListener('hashchange', inject);
 })();
