@@ -1,7 +1,8 @@
 (function () {
   var path = window.location.pathname;
-  var isEn = path.indexOf('/en/') === 0 || window.location.hash === '#en';
-  var file = (isEn ? path.slice(4) : path).split('/').pop() || 'index.html';
+  var isEnPath = path.indexOf('/en/') === 0;
+  var isEn = isEnPath || window.location.hash === '#en';
+  var file = (isEnPath ? path.slice(4) : path).split('/').pop() || 'index.html';
   var deUrl = '/' + file;
   var enUrl = '/en/' + file;
 
