@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bisq: Which Payment Method Is Actually Anonymous? | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SEPA, Cash by Mail, Monero or BSQ: which Bisq payment method actually protects your privacy? A fact-checked comparison with real-world nuances.">
+  <link rel="canonical" href="/en/bisq-zahlungsmethoden-anonym.html">
+  <link rel="alternate" hreflang="de" href="/bisq-zahlungsmethoden-anonym.html">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 0 15px 20px 15px;
+    }
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
+    h2 { margin-top: 2.5em; border-bottom: 1px solid #1a3a33; padding-bottom: 8px; }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+    em { color: #ccc; }
+    .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
+    .box {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 0.6em; }
+    .warn-box {
+      border: 1px solid #ff4466;
+      background: #0a0005;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+    }
+    .warn-box h3 { color: #ff4466; margin-top: 0; }
+    .method-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2em 0;
+      font-size: 0.9em;
+    }
+    .method-table th {
+      background: #0a1a14;
+      color: #00ffcc;
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid #1a3a33;
+    }
+    .method-table td {
+      padding: 9px 12px;
+      border-bottom: 1px solid #111;
+      vertical-align: top;
+    }
+    .method-table tr:hover td { background: #050f0a; }
+    .priv-hoch { color: #00ffcc; font-weight: bold; }
+    .priv-mittel { color: #ffaa00; }
+    .priv-niedrig { color: #ff6688; }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1em;
+      margin: 2em 0;
+    }
+    @media (max-width: 600px) {
+      .two-col { grid-template-columns: 1fr; }
+      .method-table { font-size: 0.8em; }
+      .method-table th, .method-table td { padding: 7px 8px; }
+    }
+    .col-gut {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.2em;
+      border-radius: 8px;
+    }
+    .col-schlecht {
+      border: 1px solid #ff4466;
+      background: #0a0005;
+      padding: 1.2em;
+      border-radius: 8px;
+    }
+    .col-gut h3 { color: #00ffcc; margin-top: 0; }
+    .col-schlecht h3 { color: #ff4466; margin-top: 0; }
+    ul { padding-left: 1.2em; }
+    li { margin-bottom: 0.5em; }
+    .like-button {
+      margin: 3em 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+    }
+    .like-button button {
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+    .like-button button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
+    }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    .back-links { margin-top: 40px; text-align: center; display: flex; flex-direction: column; gap: 10px; }
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
+    }
+    .flow-box {
+      background: #050f0a;
+      border: 1px solid #1a3a33;
+      border-radius: 8px;
+      padding: 1.2em 1.5em;
+      margin: 2em 0;
+      font-family: monospace;
+      font-size: 0.95em;
+      line-height: 2;
+    }
+    .flow-box .step { color: #00ffcc; }
+    .flow-box .arrow { color: #555; }
+    .flow-box .note { color: #888; font-size: 0.85em; font-family: Arial, sans-serif; }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="/en/index.html">← Back to base</a>
+  </div>
+
+  <h1>Bisq: Which Payment Method Is Actually Anonymous?</h1>
+  <p class="byline"><em>by Alien Investor</em></p>
+
+  <article id="content">
+
+    <p>
+      You already know how Bisq works: no KYC, no login, no central operator.
+      What the <a href="/en/bisq-bitcoin-ohne-kyc.html">introductory article</a> left open:
+      how you pay determines how anonymous you actually are. A SEPA transfer on Bisq is
+      fundamentally different from Cash by Mail. This article makes that difference visible.
+    </p>
+
+    <h2>All Methods at a Glance</h2>
+
+    <table class="method-table">
+      <thead>
+        <tr>
+          <th>Method</th>
+          <th>Bank account</th>
+          <th>Duration</th>
+          <th>Privacy</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>SEPA</td>
+          <td>yes</td>
+          <td>up to 6 days</td>
+          <td><span class="priv-niedrig">low</span></td>
+        </tr>
+        <tr>
+          <td>SEPA Instant</td>
+          <td>yes</td>
+          <td>1 day</td>
+          <td><span class="priv-niedrig">low</span></td>
+        </tr>
+        <tr>
+          <td>Revolut / N26</td>
+          <td>neobank</td>
+          <td>1 day</td>
+          <td><span class="priv-mittel">medium</span></td>
+        </tr>
+        <tr>
+          <td>Western Union</td>
+          <td>partly</td>
+          <td>4 days</td>
+          <td><span class="priv-mittel">medium</span></td>
+        </tr>
+        <tr>
+          <td>Cash by Mail</td>
+          <td>no</td>
+          <td>4 days</td>
+          <td><span class="priv-hoch">high*</span></td>
+        </tr>
+        <tr>
+          <td>Face-to-Face</td>
+          <td>no</td>
+          <td>by arrangement</td>
+          <td><span class="priv-hoch">very high</span></td>
+        </tr>
+        <tr>
+          <td>Monero (XMR)</td>
+          <td>no</td>
+          <td>instant</td>
+          <td><span class="priv-hoch">very high</span></td>
+        </tr>
+        <tr>
+          <td>BSQ Swap</td>
+          <td>no</td>
+          <td>instant</td>
+          <td><span class="priv-hoch">high</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="color:#888; font-size:0.85em;">* Cash by Mail has limitations explained in the section below.</p>
+
+    <p>PayPal, Venmo and Cash App are deliberately not supported on Bisq. The chargeback risk
+    for sellers is too high.</p>
+
+    <h2>SEPA: Convenient, but Transparent</h2>
+
+    <p>
+      SEPA is the fastest route for most European users. The problem: it is also the most
+      transparent. The moment you transfer, the recipient sees your full legal name and IBAN.
+      The same applies in reverse. The transaction is permanently recorded in both bank histories.
+    </p>
+    <p>
+      On top of that: banks run automated AML systems. Frequent P2P transfers to unknown third
+      parties can trigger fraud alerts, freeze accounts, and in the worst case generate
+      suspicious activity reports to authorities.
+    </p>
+
+    <div class="warn-box">
+      <h3>Triangle Fraud on Bisq</h3>
+      <p>
+        Criminals can sell BTC on Bisq while using stolen bank accounts to fund the transfer.
+        Your account then receives money from a fraud scheme. You are formally uninvolved,
+        but still under scrutiny in an investigation. This is not a theoretical risk.
+      </p>
+      <p>
+        Countermeasure: never include "BTC", "Bisq" or anything crypto-related in the
+        payment reference. A dedicated account only for Bitcoin purchases protects your
+        main account.
+      </p>
+    </div>
+
+    <p>
+      If you want to use SEPA: open a separate account, for example at N26 or Revolut.
+      Your main account never touches Bisq transactions. And if the bank terminates that
+      account, you keep your normal banking intact.
+    </p>
+
+    <h2>Cash by Mail: Physical Cash by Post</h2>
+
+    <p>
+      Cash by Mail is the most popular no-bank method on Bisq. You send physical cash via
+      tracked mail, the seller confirms receipt and releases the BTC. No bank account,
+      no digital fingerprint, no AML system reading along.
+    </p>
+
+    <div class="box">
+      <h3>How a Cash-by-Mail Trade Works</h3>
+      <ul>
+        <li>Place cash in a tamper-evident inner bag</li>
+        <li>Pack into a neutral outer parcel, not a standard envelope</li>
+        <li>Document tracking number and address before sealing: film or photograph the process</li>
+        <li>Use tracked mail with delivery confirmation (e.g. Royal Mail Signed For, DHL)</li>
+        <li>Include a return address; a P.O. box or parcel locker works</li>
+      </ul>
+    </div>
+
+    <p>
+      Sounds simple. But there are nuances many overlook:
+    </p>
+
+    <div class="two-col">
+      <div class="col-gut">
+        <h3>What is genuinely private</h3>
+        <ul>
+          <li>No bank connection anywhere in the chain</li>
+          <li>Pseudonym and P.O. box as delivery address possible</li>
+          <li>No AML report, no fraud alert</li>
+          <li>No account that can be frozen</li>
+        </ul>
+      </div>
+      <div class="col-schlecht">
+        <h3>What you need to factor in</h3>
+        <ul>
+          <li>Mandatory video documentation can reveal your face, voice, and home environment</li>
+          <li>Physical address is shared with the trading partner</li>
+          <li>Courier services may require camera surveillance, signature, or ID</li>
+          <li>Package loss becomes a dispute: Bisq mediators are not required to assist</li>
+        </ul>
+      </div>
+    </div>
+
+    <p>
+      Bottom line on Cash by Mail: for most users the privacy level is sufficient. Those who want
+      maximum protection use a parcel locker as delivery address and film the process in a neutral
+      environment without personal items in the background.
+    </p>
+
+    <h2>Face-to-Face: The Most Direct Option</h2>
+
+    <p>
+      You meet the seller in person, hand over cash, they send BTC to your wallet.
+      No parcel, no postal risk. Bisq supports F2F as an official payment method with
+      its own trade protocol and dispute resolution.
+    </p>
+    <p>
+      The only downside: you need a local counterparty. In major cities there are enough
+      Bisq traders; in rural areas the search can take longer.
+    </p>
+
+    <h2>Monero as an Intermediate Layer: The Cleanest Stack</h2>
+
+    <p>
+      Anyone who wants to keep their bank account completely out of the chain, and still not
+      rely on postal logistics, uses Monero as a bridge.
+    </p>
+
+    <div class="flow-box">
+      <div><span class="step">Step 1:</span> Cash → BTC at a crypto ATM (Austria/Switzerland up to ~€250 without KYC)</div>
+      <div class="arrow">    ↓</div>
+      <div><span class="step">Step 2:</span> BTC → XMR via no-KYC instant swap</div>
+      <div class="note">    Services: Godex, Exolix, StealthEX — no account, no registration</div>
+      <div class="arrow">    ↓</div>
+      <div><span class="step">Step 3:</span> XMR → BTC on Bisq</div>
+      <div class="note">    No fiat, no bank account, no AML system</div>
+      <div class="arrow">    ↓</div>
+      <div><span class="step">Step 4:</span> BTC into self-custody</div>
+    </div>
+
+    <p>
+      Why Monero? XMR is unlinkable by design: ring signatures and stealth addresses make
+      every transaction invisible on the blockchain. A direct BTC purchase leaves a publicly
+      readable on-chain trail. Routing through Monero first breaks that chain entirely.
+    </p>
+
+    <div class="warn-box">
+      <h3>RetoSwap / Haveno: Not Recommended Right Now</h3>
+      <p>
+        RetoSwap, the best-known Haveno instance for direct fiat-to-XMR trading, was hacked
+        in May 2026. Attackers exploited a vulnerability in the Haveno protocol and stole
+        approximately 7,000 XMR (around $2.7 million). Trading has been suspended since.
+      </p>
+      <p>
+        As of June 2026: no confirmed reopening date. Do not use RetoSwap until an official
+        security update has been published and verified.
+      </p>
+    </div>
+
+    <p>
+      In Germany, Bitcoin ATMs are subject to BaFin requirements that mandate KYC for all
+      transaction sizes. Those who cannot travel to Austria or Switzerland can instead make a
+      small Bisq Easy purchase via SEPA and swap the result to XMR via instant swap.
+    </p>
+
+    <h2>BSQ: 50% Discount on Trading Fees</h2>
+
+    <p>
+      BSQ is not an altcoin. It is a coloured coin on the Bitcoin blockchain: regular satoshis
+      with an additional marker that only Bisq software can read. 1 BSQ equals 100 satoshis.
+    </p>
+    <p>
+      The only practical use for traders: paying trading fees in BSQ instead of BTC costs
+      roughly 50% less. The Bisq DAO adjusts the discount every cycle to keep it between
+      40% and 60%.
+    </p>
+
+    <div class="box">
+      <h3>Buying BSQ via BSQ Swaps</h3>
+      <p>
+        Since Bisq v1.8.0 there are BSQ Swaps: an atomic swap in a single Bitcoin transaction.
+        No escrow, no counterparty risk, settled instantly after block confirmation.
+      </p>
+      <ul>
+        <li>In Bisq: open "Buy / Sell BTC"</li>
+        <li>Select BSQ as the counter-currency</li>
+        <li>Take an existing offer or create your own</li>
+        <li>BTC is swapped for BSQ in one on-chain transaction</li>
+      </ul>
+      <p style="color:#ff8844; font-size:0.9em; margin-bottom: 0;">
+        Important: never send BSQ to a regular Bitcoin wallet. The BSQ property is lost
+        in transit and the funds are gone.
+      </p>
+    </div>
+
+    <p>
+      Worth the effort? For occasional buyers, probably not. Anyone trading regularly on Bisq
+      saves meaningfully over time with BSQ.
+    </p>
+
+    <h2>Which Method Fits Which Situation?</h2>
+
+    <div class="box">
+      <h3>I want a simple start, bank account is fine</h3>
+      <p>Separate neobank account (N26 or Revolut) plus SEPA. Low overhead, good liquidity.
+      Main account stays untouched.</p>
+    </div>
+
+    <div class="box">
+      <h3>I want no bank account in the chain</h3>
+      <p>Cash by Mail for smaller amounts. Parcel locker as delivery address, video in a neutral
+      setting, tracked mail with signature confirmation.</p>
+    </div>
+
+    <div class="box">
+      <h3>I want maximum privacy</h3>
+      <p>Monero route: cash to ATM (Austria/Switzerland) or Bisq Easy entry, then instant swap
+      to XMR via Godex or Exolix, then XMR for BTC on Bisq. No bank account,
+      no traceable fiat trail.</p>
+    </div>
+
+    <div class="box">
+      <h3>I trade regularly on Bisq</h3>
+      <p>BSQ Swaps for 50% fee discount. Combine with one of the above methods for the actual purchase.</p>
+    </div>
+
+    <blockquote>
+      The payment method is the entry point. Everything after it can be clean.
+      Everything before it leaves traces.
+    </blockquote>
+
+    <div class="box">
+      <h3>Further Reading</h3>
+      <ul>
+        <li><svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="/en/bisq-bitcoin-ohne-kyc.html">Bisq: Buy Bitcoin Without KYC</a> — the introductory article</li>
+        <li><svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="/en/self-custody.html">Self Custody: Why Bitcoin Without Your Own Keys Defeats the Purpose</a></li>
+        <li><svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://bisq.wiki/Payment_methods" target="_blank" rel="noopener">bisq.wiki/Payment_methods</a> — full official list</li>
+        <li><svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://bisq.wiki/Cash_by_mail" target="_blank" rel="noopener">bisq.wiki/Cash_by_mail</a> — official guide</li>
+      </ul>
+    </div>
+
+  </article>
+
+  <div class="like-button">
+    <button id="likeButton">
+      <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <radialGradient id="ai-head-bzm-en" cx="50%" cy="40%" r="60%">
+            <stop offset="0%" stop-color="#3db86a"/>
+            <stop offset="70%" stop-color="#1a6635"/>
+            <stop offset="100%" stop-color="#0a2016"/>
+          </radialGradient>
+        </defs>
+        <line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/>
+        <circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/>
+        <line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/>
+        <circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/>
+        <path fill="url(#ai-head-bzm-en)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/>
+        <path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/>
+        <path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/>
+      </svg>
+      Like
+    </button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+
+  <script>
+    (function() {
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      const btn = document.getElementById('likeButton');
+      const msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      });
+    })();
+  </script>
+
+  <div class="back-links">
+    <a href="/en/blog.html" style="font-size: 1.1em;">← Back to blog</a>
+    <a href="/en/index.html" style="font-size: 1.1em;">← Back to base</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+    <h3 style="margin-bottom: 15px;">
+      <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energy" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Recharge the ship
+      <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Donate)</span>
+    </h3>
+    <a href="/spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+      Send fuel to the mothership
+    </a>
+    <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+      Thanks for your support — for free content, financial sovereignty, and the extraterrestrial resistance. <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-bzm-en" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-bzm-en" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-bzm-en)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-bzm-en)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg>
+    </p>
+  </div>
+
+  <footer>
+    <p><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Contact" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> Contact: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a> <span style="color:#666; font-size:0.85em;">·</span> <a href="/kontakt@alien-investor.org/pubkey.asc.key" download="kontakt-alien-investor-pubkey.asc" style="color:#555; font-size:0.8em; text-decoration:none;" title="PGP public key for encrypted messages">PGP Key</a></p>
+    <p style="margin-top: 20px;">
+      <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img">
+        <line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/>
+        <circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/>
+        <line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/>
+        <circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/>
+        <path fill="url(#ai-head-bzm-en)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/>
+        <path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/>
+        <path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/>
+      </svg> <strong>Disclaimer:</strong><br><br>
+      No financial, tax or legal advice. Personal opinion only. Think for yourself.
+    </p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>
