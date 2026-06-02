@@ -421,6 +421,19 @@
       First coins (Bisq Easy, no-KYC) → deposit for Bisq Classic → new no-KYC coins
       → deposit for larger trade → and so on.
     </blockquote>
+    <div class="warn-box">
+      <h3>Why the deposit must be no-KYC</h3>
+      <p>
+        When a trade completes, Bisq pays out the security deposit return and the purchased
+        coins in a single UTXO. If you use KYC coins from an exchange as your deposit,
+        chain analysis links those purchased coins back to your exchange identity —
+        the entire privacy benefit of the trade is retroactively undone.
+      </p>
+      <p>
+        The fix: get your first no-KYC sats via <strong>Bisq Easy</strong> (no deposit required),
+        then use those as the deposit for Bisq Classic — that keeps the entire chain clean.
+      </p>
+    </div>
     <p>
       Tips for more experienced users:
     </p>
