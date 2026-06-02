@@ -238,6 +238,17 @@ mkdir Broker</pre>
       this is unproblematic under tax law. The tax authority has no claim to your complete UTXO history.
     </p>
 
+    <div class="box" style="border-color: #ffaa00; background: #0a0800;">
+      <h3 style="color: #ffaa00; margin-top: 0;">⚡ Update June 2026: Bisq Direct Import + noKYC Separation</h3>
+      <p>The tool now supports direct import of the Bisq trade history CSV. Simply place the export from Bisq ("Portfolio → Trades → Export") as <code>bisq.csv</code> in the <code>Broker/</code> folder — the tool automatically recognises all completed purchases.</p>
+      <ul>
+        <li><strong>Bisq direct import:</strong> No more manual entry. The parser reads price, BTC amount, EUR amount and fees directly from the Bisq export.</li>
+        <li><strong>noKYC separation in the report:</strong> Bisq purchases and <code>manual_buys.csv</code> entries do not appear in the official tax report. They only appear in a separate internal section at the end of the report — for your own overview and in case the tax authority asks.</li>
+        <li><strong>Fully local:</strong> No cloud, no API, all calculations run on your machine.</li>
+      </ul>
+      <p style="color:#aaa; font-size:0.9em;">For Robosats, HodlHodl and other P2P purchases without a CSV export, <code>manual_buys.csv</code> remains the right approach — also with noKYC separation.</p>
+    </div>
+
     <h2>5. Your First Report</h2>
     <p>
       Output a report for a specific year:
