@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Bisq Kaufanleitung: Schritt für Schritt zum ersten No-KYC Bitcoin | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Wie du auf Bisq Bitcoin ohne KYC kaufst – von der Angebotswahl über die SEPA-Überweisung bis zur Hardware Wallet. Schritt für Schritt erklärt, mit OpSec-Tipps.">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 0 15px 20px 15px;
+    }
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
+    h2 { margin-top: 2.5em; border-bottom: 1px solid #1a3a33; padding-bottom: 8px; }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+    em { color: #ccc; }
+    .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
+    .box {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 0.6em; }
+    .warn-box {
+      border: 1px solid #ff4466;
+      background: #0a0005;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+    }
+    .warn-box h3 { color: #ff4466; margin-top: 0; }
+    .step {
+      border-left: 3px solid #00ffcc;
+      background: #050505;
+      padding: 1em 1.5em;
+      margin: 1.5em 0;
+      border-radius: 0 8px 8px 0;
+    }
+    .step-num {
+      font-size: 1.4em;
+      font-weight: bold;
+      color: #00ffcc;
+      display: block;
+      margin-bottom: 0.3em;
+    }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1em;
+      margin: 2em 0;
+    }
+    @media (max-width: 600px) {
+      .two-col { grid-template-columns: 1fr; }
+    }
+    .col-gut {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.2em;
+      border-radius: 8px;
+    }
+    .col-schlecht {
+      border: 1px solid #ff4466;
+      background: #0a0005;
+      padding: 1.2em;
+      border-radius: 8px;
+    }
+    .col-gut h3 { color: #00ffcc; margin-top: 0; }
+    .col-schlecht h3 { color: #ff4466; margin-top: 0; }
+    ul { padding-left: 1.2em; }
+    li { margin-bottom: 0.5em; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5em 0;
+      font-size: 0.95em;
+    }
+    th {
+      background: #0a1a14;
+      color: #00ffcc;
+      padding: 0.6em 1em;
+      text-align: left;
+      border-bottom: 1px solid #1a3a33;
+    }
+    td {
+      padding: 0.6em 1em;
+      border-bottom: 1px solid #111;
+      vertical-align: top;
+    }
+    tr:hover td { background: #080f0c; }
+    .like-button {
+      margin: 3em 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+    }
+    .like-button button {
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+    .like-button button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
+    }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    .back-links { margin-top: 40px; text-align: center; display: flex; flex-direction: column; gap: 10px; }
+    footer {
+      margin-top: 60px;
+      padding-top: 20px;
+      border-top: 1px solid #1a1a1a;
+      color: #555;
+      font-size: 0.85em;
+    }
+    footer a { color: #777; }
+    footer a:hover { color: #00ffcc; }
+    .star-icon { width:0.8em; height:0.8em; vertical-align:-0.1em; filter:drop-shadow(0 0 3px #00ffcc88); }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="blog.html">← Blog</a> &nbsp;·&nbsp;
+    <a href="index.html">Zentrale</a>
+  </div>
+
+  <article>
+
+    <h1>Bisq Kaufanleitung: Schritt für Schritt zum ersten No-KYC Bitcoin</h1>
+    <p class="byline">von Alien Investor · Juni 2026</p>
+
+    <p>
+      Du weißt, dass Bisq existiert. Du weißt, warum No-KYC wichtig ist.
+      Aber wie läuft ein echter Kauf konkret ab — von der Angebotswahl
+      bis zu den BTC auf der Hardware Wallet? Genau das erfährst du hier.
+      Diese Anleitung basiert auf einem Live-Kauf, nicht auf Theorie.
+    </p>
+    <p>
+      Die Grundlagen zu Bisq findest du im Artikel
+      <a href="bisq-bitcoin-ohne-kyc.html">Bisq: Bitcoin kaufen ohne KYC</a>.
+      Welche Zahlungsmethoden sich für maximale Privatsphäre eignen, erklärt
+      <a href="bisq-zahlungsmethoden-anonym.html">Bisq Zahlungsmethoden: Anonym bleiben</a>.
+      Hier geht es um den praktischen Ablauf.
+    </p>
+
+    <h2>Das Henne-Ei-Problem — und wie du es löst</h2>
+    <p>
+      Bisq Classic (Bisq 1) verlangt für jeden Kauf eine <strong>Sicherheitskaution in BTC</strong>
+      — typisch 15–30% des Handelsbetrags. Das soll beide Parteien zur Vertragstreue verpflichten
+      und wird nach dem Trade vollständig zurückgezahlt.
+    </p>
+    <p>
+      Das Problem: Wer zum ersten Mal kaufen will und noch keine BTC hat, steht vor einem Paradox.
+      Du brauchst BTC um BTC zu kaufen. Und wenn du BTC von einer KYC-Börse nimmst, verunreinigst
+      du die Privatsphäre des ganzen Trades.
+    </p>
+    <p>
+      Die Lösung: <strong>Bisq Easy</strong> — Teil von Bisq 2, einer eigenen App.
+    </p>
+
+    <div class="box">
+      <h3>Bisq Easy: Der saubere Einstieg</h3>
+      <ul>
+        <li><strong>Keine Kaution nötig</strong> — du brauchst null BTC vorher</li>
+        <li>Limit ca. 600 USD pro Trade</li>
+        <li>Sicherheit basiert auf Seller-Reputation statt Escrow</li>
+        <li>Perfekt für den ersten Kauf — die so erworbenen Coins werden dann zur Kaution für Bisq Classic</li>
+      </ul>
+      <p style="margin-bottom:0; color:#888; font-size:0.9em;">
+        Download: <a href="https://bisq.network" target="_blank" rel="noopener">bisq.network</a> → Bisq 2
+      </p>
+    </div>
+
+    <p>
+      Sobald du über Bisq Easy ein paar No-KYC Sats hast, kannst du damit in Bisq Classic
+      als Kaution einsteigen. Ab dann bist du im selbstverstärkenden No-KYC-Kreislauf:
+      jede Kaution besteht aus Coins, die durch keine Behörde einem KYC-Profil zugeordnet
+      werden können.
+    </p>
+
+    <h2>Bisq Classic: Die Schritt-für-Schritt-Anleitung</h2>
+
+    <div class="step">
+      <span class="step-num">Schritt 1 — Angebot finden</span>
+      <p>
+        Im Tab <strong>KAUFEN</strong> siehst du alle verfügbaren Angebote.
+        Die Farbe der KAUFEN-Buttons zeigt dir sofort, was möglich ist:
+      </p>
+      <div class="two-col">
+        <div class="col-gut">
+          <h3>Helles Grün ✓</h3>
+          Angebot ist für dich handelbar — Zahlungsmethode passt, Betrag liegt
+          innerhalb deines Limits.
+        </div>
+        <div class="col-schlecht">
+          <h3>Ausgegraut ✗</h3>
+          Zahlungsmethode passt nicht zu deinem hinterlegten Konto, oder der
+          Betrag übersteigt dein aktuelles Limit.
+        </div>
+      </div>
+      <p>
+        Tipp: Den Schalter <em>"Angebote die meinen Zahlungskonten entsprechen"</em>
+        aktivieren — dann siehst du nur noch die handelbaren Angebote.
+      </p>
+    </div>
+
+    <div class="step">
+      <span class="step-num">Schritt 2 — Seller beurteilen</span>
+      <p>Nicht jedes Angebot ist gleich gut. Worauf du achtest:</p>
+      <table>
+        <tr>
+          <th>Kriterium</th>
+          <th>Was du willst</th>
+          <th>Warnsignal</th>
+        </tr>
+        <tr>
+          <td>Account-Alter</td>
+          <td>100+ Tage, grüner Haken</td>
+          <td>Unter 30 Tage, kein Haken</td>
+        </tr>
+        <tr>
+          <td>Kaution des Sellers</td>
+          <td>15–20%</td>
+          <td>Über 30% (ungewöhnlich)</td>
+        </tr>
+        <tr>
+          <td>Zahlungsland</td>
+          <td>Euro-Zone: DE, AT, ES, FR …</td>
+          <td>GB, CH: SEPA-Mitglieder, aber Nicht-Euro-Währung — Transfer kann scheitern</td>
+        </tr>
+        <tr>
+          <td>Preisaufschlag</td>
+          <td>Unter 15% bei SEPA Instant</td>
+          <td>Über 25% — zu teuer</td>
+        </tr>
+      </table>
+      <p style="color:#888; font-size:0.9em;">
+        Hinweis: UK und Schweiz sind SEPA-Mitglieder, führen aber primär GBP bzw. CHF.
+        SEPA-Überweisungen in EUR können dort an Kontovoraussetzungen scheitern —
+        Euro-Zone-Länder sind zuverlässiger.
+      </p>
+    </div>
+
+    <div class="step">
+      <span class="step-num">Schritt 3 — SEPA oder SEPA Instant?</span>
+      <div class="two-col">
+        <div class="col-gut">
+          <h3>SEPA Instant</h3>
+          Überweisung in Sekunden. Trade in 30–60 Minuten abgeschlossen.
+          Aufschlag: 15–25%. PC muss nur kurz offen bleiben.
+        </div>
+        <div class="col-gut" style="border-color:#888;">
+          <h3>SEPA Normal</h3>
+          Günstiger (5–15% Aufschlag). Aber 1–3 Werktage Wartezeit.
+          PC muss zum Bestätigen nochmal geöffnet werden.
+        </div>
+      </div>
+      <p>
+        Für den ersten Trade empfiehlt sich <strong>SEPA Instant</strong> — du siehst
+        heute noch ob alles funktioniert hat.
+      </p>
+    </div>
+
+    <div class="step">
+      <span class="step-num">Schritt 4 — Trade starten und Kaution hinterlegen</span>
+      <p>
+        Nach dem Klick auf KAUFEN zeigt Bisq eine Zusammenfassung: BTC-Betrag,
+        Euro-Betrag, Preisaufschlag, benötigte Gelder (Kaution + Gebühren).
+        Erst nach dem Akzeptieren der Trading Rules wird der Trade gestartet.
+      </p>
+      <p>
+        Bisq erstellt dann automatisch eine <strong>2-von-2-Multisig-Transaktion</strong>
+        auf der Bitcoin-Blockchain. Beide Parteien müssen unterzeichnen — Bisq
+        berührt dabei keine Gelder direkt.
+      </p>
+      <p>
+        Die Kaution verlässt deine Wallet erst wenn der Trade wirklich beginnt.
+        Nach erfolgreichem Abschluss bekommst du sie vollständig zurück.
+      </p>
+    </div>
+
+    <div class="step">
+      <span class="step-num">Schritt 5 — Auf Blockchain-Bestätigung warten</span>
+      <p>
+        Bisq wartet mindestens auf <strong>eine Blockchain-Bestätigung</strong> der
+        Kautionstransaktion bevor du die SEPA-Überweisung starten kannst. Das dauert
+        je nach Gebührsatz 10–60 Minuten.
+      </p>
+      <p>
+        Den Fortschritt kannst du über die angezeigte Transaktions-ID auf
+        <a href="https://mempool.space" target="_blank" rel="noopener">mempool.space</a>
+        live verfolgen. Bisq wechselt automatisch zum nächsten Schritt sobald die
+        Bestätigung da ist.
+      </p>
+      <p style="color:#888; font-size:0.9em;">
+        Bisq muss offen bleiben. Laptop-Hibernate deaktivieren — normaler Monitor-Sleep
+        ist kein Problem.
+      </p>
+    </div>
+
+    <div class="step">
+      <span class="step-num">Schritt 6 — SEPA-Überweisung senden (OpSec!)</span>
+      <p>
+        Bisq zeigt dir jetzt die IBAN des Sellers und den exakten Euro-Betrag.
+        Gehe in dein Online-Banking und überweise <strong>exakt</strong> den angezeigten Betrag.
+        Kein Cent mehr, kein Cent weniger.
+      </p>
+      <div class="warn-box">
+        <h3>⚠ OpSec: Verwendungszweck</h3>
+        <ul>
+          <li><strong>Leer lassen</strong> oder nur einen Bindestrich <code>-</code> eintragen</li>
+          <li><strong>Niemals</strong> "Bitcoin", "BTC", "Bisq" oder die Trade-ID reinschreiben</li>
+          <li>Notfalls deinen Namen — aber lieber nichts</li>
+          <li>AML-Algorithmen der Banken reagieren auf diese Begriffe</li>
+        </ul>
+      </div>
+      <p>
+        Nach der Überweisung zurück zu Bisq: Button <strong>"Zahlung begonnen"</strong> klicken.
+        Erst dann weiß der Seller, dass er seinen Kontoeingang prüfen soll.
+      </p>
+    </div>
+
+    <div class="step">
+      <span class="step-num">Schritt 7 — Seller bestätigt, BTC kommen</span>
+      <p>
+        Der Seller sieht die SEPA-Zahlung in seinem Banking und klickt in Bisq
+        "Zahlung erhalten". Die Multisig-Transaktion löst sich auf — die BTC
+        landen in deiner <strong>Bisq-internen Wallet</strong> (Hot Wallet).
+      </p>
+      <p>
+        Bei SEPA Instant dauert das in der Regel unter einer Stunde. Du musst
+        Bisq in dieser Zeit nicht durchgehend offen haben — kannst aber kurz
+        reinschauen um den Status zu sehen.
+      </p>
+    </div>
+
+    <div class="step">
+      <span class="step-num">Schritt 8 — Sofort auf Hardware Wallet</span>
+      <p>
+        Die Bisq-interne Wallet ist eine <strong>Hot Wallet</strong> — sie ist mit
+        dem Internet verbunden und damit angreifbar. Sobald die BTC angekommen sind,
+        überträgst du sie auf deine Hardware Wallet (z.B. BitBox02):
+      </p>
+      <ol>
+        <li>In der Hardware Wallet App eine Empfangsadresse generieren</li>
+        <li>In Bisq: <em>Gelder → Gelder senden</em></li>
+        <li>Adresse einfügen, alle BTC schicken</li>
+        <li>Bisq-Wallet danach leer lassen</li>
+      </ol>
+    </div>
+
+    <h2>Account Signing — was da passiert</h2>
+    <p>
+      Nach dem ersten erfolgreichen Trade signiert dein Trade-Partner dein SEPA-Konto.
+      Das bedeutet: Bisq bestätigt, dass du ein echtes, funktionierendes Konto hast
+      und Trades korrekt abwickelst.
+    </p>
+    <p>
+      Konsequenzen für dich:
+    </p>
+    <table>
+      <tr>
+        <th>Zeitraum</th>
+        <th>Max. Trade-Limit</th>
+      </tr>
+      <tr>
+        <td>Direkt nach Installation (unsigniert)</td>
+        <td>0.0020 BTC (~120 €)</td>
+      </tr>
+      <tr>
+        <td>Ab 30 Tage nach dem ersten Trade</td>
+        <td>0.03125 BTC (~1.900 €)</td>
+      </tr>
+      <tr>
+        <td>Ab 60 Tage nach dem ersten Trade</td>
+        <td>0.0624 BTC (~3.800 €)</td>
+      </tr>
+    </table>
+    <p>
+      Das Signing passiert automatisch beim ersten abgeschlossenen Trade —
+      du musst nichts extra tun. Den Status findest du unter <em>Konto</em>
+      in Bisq.
+    </p>
+
+    <h2>Nächste Trades: Den No-KYC-Kreislauf aufbauen</h2>
+    <p>
+      Der erste Trade ist getan. Ab jetzt nutzt du die neu gewonnenen No-KYC-Coins
+      als Kaution für den nächsten Kauf. Jede weitere Transaktion hat dann keinerlei
+      Verbindung zu einer KYC-Datenbank:
+    </p>
+    <blockquote>
+      Erste Coins (Bisq Easy, No-KYC) → Kaution für Bisq Classic → neue No-KYC-Coins
+      → Kaution für größeren Trade → und so weiter.
+    </blockquote>
+    <p>
+      Weitere Tipps für erfahrenere Nutzer:
+    </p>
+    <ul>
+      <li>
+        <strong>Als Maker auftreten:</strong> Statt Angebote anzunehmen selbst eines erstellen.
+        Maker zahlen deutlich niedrigere Gebühren und können den Preis selbst setzen.
+      </li>
+      <li>
+        <strong>BSQ für Gebührenrabatt:</strong> Wer regelmäßig tradet, spart mit BSQ-Token
+        rund 50% der Handelsgebühren. Erklärung im Artikel
+        <a href="bisq-zahlungsmethoden-anonym.html">Bisq Zahlungsmethoden</a>.
+      </li>
+      <li>
+        <strong>Privates Bankkonto:</strong> Ein Konto bei einer Bank ohne aufwändige
+        AML-Überwachung (z.B. N26) reduziert das Risiko von Kontoeinschränkungen bei
+        regelmäßigen P2P-Überweisungen.
+      </li>
+      <li>
+        <strong>Steuern nicht vergessen:</strong> Jeder Kauf ist steuerlich relevant.
+        Bisq exportiert eine CSV-Datei für deine Trades — kompatibel mit dem
+        <a href="btc-steuertool.html">Bitcoin Steuertool</a>.
+      </li>
+    </ul>
+
+    <h2>Fazit</h2>
+    <p>
+      Ein Bisq-Kauf ist kein One-Click-Erlebnis — und das ist gut so. Die Schritte
+      existieren weil echte Sicherheit ohne zentrale Instanz aufwendiger ist als
+      "E-Mail + Selfie + fertig". Aber wer den Prozess einmal durchlaufen hat, merkt:
+      Er ist beherrschbar. Und das Ergebnis — Bitcoin ohne dass irgendeine Datenbank
+      dich kennt — ist es wert.
+    </p>
+    <p>
+      Der Einstieg über Bisq Easy nimmt die erste Hürde weg. Danach wächst das
+      Limit automatisch mit der Zeit. Nach 30 Tagen kannst du pro Trade fast
+      2.000 Euro investieren, ohne je ein Ausweisdokument gezeigt zu haben.
+    </p>
+
+    <blockquote>
+      Finanzielle Souveränität ist kein Produkt das man kauft —
+      es ist ein Prozess den man lernt.
+    </blockquote>
+
+    <div class="box">
+      <h3>Weiterführende Artikel</h3>
+      <ul>
+        <li>
+          <svg class="star-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg>
+          <a href="bisq-bitcoin-ohne-kyc.html">Bisq: Bitcoin kaufen ohne KYC</a> — Was ist Bisq, wie funktioniert das Protokoll
+        </li>
+        <li>
+          <svg class="star-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg>
+          <a href="bisq-zahlungsmethoden-anonym.html">Bisq Zahlungsmethoden: Anonym bleiben</a> — SEPA-Risiken, Monero-Route, BSQ
+        </li>
+        <li>
+          <svg class="star-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg>
+          <a href="btc-steuertool.html">Bitcoin Steuertool</a> — Bisq-Trades importieren und steuerlich auswerten
+        </li>
+        <li>
+          <svg class="star-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg>
+          <a href="self-custody.html">Self-Custody: Warum Bitcoin ohne eigene Schlüssel keinen Sinn ergibt</a>
+        </li>
+      </ul>
+    </div>
+
+  </article>
+
+  <div class="like-button">
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><radialGradient id="ai-head-kauf1" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-kauf1)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Gefällt mir</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+
+  <script>
+    (function() {
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      const btn = document.getElementById('likeButton');
+      const msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
+        btn.disabled = true;
+        btn.textContent = '✓ Danke!';
+        msg.textContent = 'Freut mich, dass dir der Artikel gefallen hat.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '✓ Danke!';
+        msg.textContent = 'Freut mich, dass dir der Artikel gefallen hat.';
+      });
+    })();
+  </script>
+
+  <div class="back-links">
+    <a href="blog.html" style="font-size: 1.1em;">← Zurück zur Blog-Übersicht</a>
+    <a href="index.html" style="font-size: 1.1em;">← Zurück zur Zentrale</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+    <h3 style="margin-bottom: 15px;">
+      <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energie" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Energie aufladen
+      <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
+    </h3>
+    <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+      Treibstoff für das Mutterschiff senden
+    </a>
+    <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+      Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-kauf1" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-kauf1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-kauf1)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-kauf1)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg>
+    </p>
+  </div>
+
+  <footer>
+    <p><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Kontakt" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a> <span style="color:#666; font-size:0.85em;">·</span> <a href="/kontakt@alien-investor.org/pubkey.asc.key" download="kontakt-alien-investor-pubkey.asc" style="color:#555; font-size:0.8em; text-decoration:none;" title="PGP Public Key für verschlüsselte Nachrichten">PGP Key</a></p>
+    <p style="margin-top: 20px;">
+      <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-footer-kauf1" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-footer-kauf1)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <strong>Haftungsausschluss:</strong><br><br>
+      Keine Finanz-, Steuer- oder Rechtsberatung. Nur persönliche Meinung. Denke selbst.
+    </p>
+    <p><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+
+</body>
+</html>
