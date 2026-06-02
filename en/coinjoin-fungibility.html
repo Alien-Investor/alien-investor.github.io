@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CoinJoin: Cash-Like Privacy for Bitcoin | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bitcoin is pseudonymous, not anonymous. CoinJoin severs the link between inputs and outputs — restoring fungibility and privacy. What it delivers, where its limits are, and how to handle mixed coins correctly.">
+  <link rel="canonical" href="/en/coinjoin-fungibility.html">
+  <link rel="alternate" hreflang="de" href="/coinjoin-fungibilitaet.html">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 0 15px 20px 15px;
+    }
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
+    h2 { margin-top: 2.5em; border-bottom: 1px solid #1a3a33; padding-bottom: 8px; }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+    em { color: #ccc; }
+    .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
+    .box {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 0.6em; }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1em;
+      margin: 2em 0;
+    }
+    @media (max-width: 600px) {
+      .two-col { grid-template-columns: 1fr; }
+    }
+    .col-gut {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.2em;
+      border-radius: 8px;
+    }
+    .col-schlecht {
+      border: 1px solid #ff4466;
+      background: #0a0005;
+      padding: 1.2em;
+      border-radius: 8px;
+    }
+    .col-gut h3 { color: #00ffcc; margin-top: 0; }
+    .col-schlecht h3 { color: #ff4466; margin-top: 0; }
+    ul { padding-left: 1.2em; }
+    li { margin-bottom: 0.5em; }
+    .flow-diagram {
+      border: 1px solid #1a3a33;
+      background: #030d0a;
+      border-radius: 8px;
+      padding: 1.5em;
+      margin: 2em 0;
+      font-size: 0.95em;
+      color: #ccc;
+      text-align: center;
+      line-height: 2.2;
+    }
+    .flow-diagram .flow-arrow {
+      color: #00ffcc;
+      font-size: 1.1em;
+    }
+    .flow-diagram .flow-node {
+      display: inline-block;
+      border: 1px solid #00ffcc;
+      border-radius: 6px;
+      padding: 0.25em 0.8em;
+      color: #00ffcc;
+      background: #030d0a;
+      font-weight: bold;
+    }
+    .flow-diagram .flow-node-bad {
+      display: inline-block;
+      border: 1px solid #ff4466;
+      border-radius: 6px;
+      padding: 0.25em 0.8em;
+      color: #ff4466;
+      background: #0a0005;
+      font-weight: bold;
+    }
+    .flow-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5em;
+      margin: 0.4em 0;
+    }
+    .legal-box {
+      border: 1px solid #ffaa00;
+      background: #0a0800;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(255, 170, 0, 0.08);
+    }
+    .legal-box h3 { color: #ffaa00; margin-top: 0; }
+    .like-button {
+      margin: 3em 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+    }
+    .like-button button {
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+    .like-button button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
+    }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    .back-links { margin-top: 40px; text-align: center; display: flex; flex-direction: column; gap: 10px; }
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="/en/index.html">← Back to Mission Control</a>
+  </div>
+
+  <h1>CoinJoin: Cash-Like Privacy for Bitcoin</h1>
+  <p class="byline"><em>by Alien Investor</em></p>
+
+  <article id="content">
+
+    <p>
+      Bitcoin is many things — decentralized, censorship-resistant, hard-money-like.
+      But it is not anonymous. Every transaction lives on the blockchain forever,
+      publicly visible to anyone willing to look. Most Bitcoin users are
+      <strong>pseudonymous</strong>: no real name stands behind an address — until
+      someone makes the connection.
+    </p>
+    <p>
+      And that happens every day. KYC exchanges link your identity to your addresses
+      at the point of purchase. Chain-analysis firms like Chainalysis or Elliptic then
+      trace that connection forwards and backwards across the entire transaction graph.
+      Whoever knows your address knows what you hold, where it came from, and where it goes.
+    </p>
+    <p>
+      <strong>CoinJoin</strong> is the tool that cuts that thread.
+    </p>
+
+    <h2>What Is CoinJoin?</h2>
+    <p>
+      CoinJoin is not a protocol upgrade and not a sidechain — it is a transaction
+      structure described by Greg Maxwell in 2013. The idea is simple:
+      multiple users combine their transactions into a single large transaction.
+      Everyone puts Bitcoin in, everyone gets the same amount out — across different
+      outputs that can no longer be reliably traced back to the original input.
+    </p>
+    <p>
+      The result: the definitive link between "who sent" and "who received" is broken.
+      No middleman holds your coins, no custodian needs to be trusted. The construction
+      itself produces the privacy.
+    </p>
+
+    <blockquote>
+      CoinJoin is not a magic trick. It is mathematical ambiguity — but one
+      you can put to work for yourself.
+    </blockquote>
+
+    <div class="box">
+      <h3>How Does a CoinJoin Actually Work?</h3>
+      <ul>
+        <li>Multiple participants register with a coordinator (e.g. Wasabi Wallet or JoinMarket)</li>
+        <li>Everyone contributes the same amount to the shared transaction — equal denomination is essential for anonymity</li>
+        <li>The outputs are identical in size: no outside observer can tell which output belongs to which input</li>
+        <li>Each participant signs only their own input — no one can steal another person's coins</li>
+        <li>The completed transaction is broadcast to the blockchain collectively</li>
+      </ul>
+    </div>
+
+    <h2>Why Should I Care?</h2>
+    <p>
+      Financial privacy is not a luxury for criminals. It is a legitimate need
+      for ordinary people in a world where surveillance has become the norm.
+      Concrete use cases:
+    </p>
+
+    <div class="two-col">
+      <div class="col-gut">
+        <h3>Legitimate Reasons</h3>
+        <ul>
+          <li>Protection from data brokers and profiling companies</li>
+          <li>Employers or business partners should not know your holdings</li>
+          <li>Authorities get only what they are legally entitled to — nothing more</li>
+          <li>Fungibility: no "tainted coins" from someone else's transaction history</li>
+          <li>Don't become a phishing target because no one knows what you hold</li>
+          <li>Recipients cannot see your entire wallet history</li>
+          <li>KYC decoupling: break the database link that exchanges create</li>
+          <li>Business: margins and purchase prices stay private</li>
+        </ul>
+      </div>
+      <div class="col-schlecht">
+        <h3>What CoinJoin Is Not</h3>
+        <ul>
+          <li>Not a free pass for laundering criminal proceeds</li>
+          <li>Not a guarantee of complete anonymity</li>
+          <li>Not a substitute for good coin management</li>
+          <li>Not protection against your own mistakes</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>Fungibility: The Underrated Argument</h2>
+    <p>
+      Every euro note is worth the same as every other — regardless of whether it
+      previously passed through a supermarket or a casino. This property is called
+      <strong>fungibility</strong>. In theory Bitcoin is the same — but in practice it is not.
+    </p>
+    <p>
+      Chain analysis makes it possible to attach a history to specific UTXOs:
+      "These coins were once on a gambling platform", "these came from a sanctioned
+      address". Some exchanges and services reject such coins or freeze accounts.
+      That undermines Bitcoin's core promise as money.
+    </p>
+    <p>
+      CoinJoin restores fungibility. After the mix your UTXO is indistinguishable
+      from other equally-sized UTXOs — your coins are clean, neutral Bitcoin once again.
+    </p>
+
+    <h2>The Limits — Honestly Assessed</h2>
+    <p>
+      CoinJoin operates on probabilities. It creates ambiguity, not mathematical proof.
+      Anyone with sufficient resources, data points, and patience can narrow those
+      probabilities — especially if you make mistakes.
+    </p>
+
+    <div class="box" style="border-color: #ff4466; background: #0a0005;">
+      <h3 style="color: #ff4466; margin-top: 0;">The Most Common Mistakes That Render CoinJoin Worthless</h3>
+      <ul>
+        <li>
+          <strong>Merging mixed and unmixed coins:</strong> You mix 0.5 BTC
+          but still have 0.3 BTC unmixed in the same wallet. If you send both
+          together in one transaction, the anonymity is gone — the common-input-ownership
+          heuristic links all inputs.
+        </li>
+        <li>
+          <strong>Address reuse:</strong> If you always receive coins to the same address,
+          your mixed wallet is still easy to track. Always generate fresh addresses.
+        </li>
+        <li>
+          <strong>Sending output directly to a KYC exchange:</strong> You send the mixed
+          coins straight to your Binance account. You have just rebuilt the link yourself —
+          that was a complete step backwards.
+        </li>
+        <li>
+          <strong>Anonymity sets that are too small:</strong> CoinJoin with only 3–5
+          participants offers little protection. Protocols like Wasabi target significantly
+          larger sets.
+        </li>
+        <li>
+          <strong>Metadata leaks:</strong> Your IP address, your timing, your on-chain
+          behavior reveal more than the transaction itself — use Tor or a VPN when mixing.
+        </li>
+      </ul>
+    </div>
+
+    <h2>Where Do Mixed Coins Belong?</h2>
+    <p>
+      The mix is only the first step. What happens afterwards determines whether
+      the privacy holds or is immediately squandered.
+    </p>
+
+    <div class="flow-diagram">
+      <div class="flow-row">
+        <span class="flow-node-bad">KYC Exchange</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-node">Hardware Wallet</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-node">CoinJoin</span>
+      </div>
+      <div style="margin: 0.6em 0; color: #00ffcc; font-size: 0.9em;">↓ fresh address, separate UTXOs</div>
+      <div class="flow-row">
+        <span class="flow-node">Saving / Self-Custody</span>
+        <span style="color:#555; padding: 0 0.3em;">|</span>
+        <span class="flow-node">P2P Trade</span>
+        <span style="color:#555; padding: 0 0.3em;">|</span>
+        <span class="flow-node">Merchants</span>
+        <span style="color:#555; padding: 0 0.3em;">|</span>
+        <span class="flow-node">Lightning</span>
+      </div>
+      <div style="margin-top: 1em; color: #ff4466; font-size: 0.88em;">
+        NOT: Mixed coins sent directly back to a KYC exchange
+      </div>
+    </div>
+
+    <p>
+      Mixed coins belong in <strong>self-custody</strong> — on a cold wallet that
+      holds exclusively mixed UTXOs. From there you can use them for P2P purchases,
+      Lightning channel opens, or direct payments to merchants who accept Bitcoin.
+    </p>
+    <p>
+      The mistake many people make: they send freshly mixed coins straight to a
+      KYC exchange to sell. That nullifies the entire effort. The exchange receives
+      the coins, links them to your account — and therefore to your identity.
+      The result: the exact same situation as before, just with an extra on-chain detour.
+    </p>
+
+    <h2>Which Tools Are Available?</h2>
+
+    <div class="box">
+      <h3>Wasabi Wallet</h3>
+      <p>
+        The most widely known CoinJoin implementation for beginners. Desktop wallet
+        (Windows, Mac, Linux) with an integrated WabiSabi protocol. The default
+        coordinator is zkSNACKs, but public alternatives exist.
+        Tor integration is built in. Since 2024 the official coordinator blocks
+        certain addresses — those who want full control can run their own coordinator
+        or switch to other tools.
+      </p>
+    </div>
+
+    <div class="box">
+      <h3>JoinMarket</h3>
+      <p>
+        The most technically demanding but most decentralized CoinJoin tool.
+        No central coordinator — makers and takers find each other via a
+        decentralized order book. Makers earn fees for providing liquidity.
+        For technically proficient users who want zero coordinator dependency.
+      </p>
+    </div>
+
+    <div class="box">
+      <h3>Whirlpool (Samourai / Sparrow)</h3>
+      <p>
+        The CoinJoin protocol from Samourai Wallet — in a legally uncertain situation
+        since the US arrest of its developers in 2024. The protocol itself is open source;
+        Sparrow Wallet offers its own Whirlpool coordinator.
+        Anyone wanting to use Whirlpool should be familiar with the current state of
+        the situation and use an independent Sparrow coordinator.
+      </p>
+    </div>
+
+    <h2>Legal Classification</h2>
+
+    <div class="legal-box">
+      <h3>
+        <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #ffaa0088);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Note" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#ffaa00" opacity="0.9" stroke="#ffaa00" stroke-width="0.5" stroke-linejoin="round"/></svg>
+        Legal Note (as of 2026)
+      </h3>
+      <p>
+        The use of CoinJoin by individuals for legitimately acquired Bitcoin
+        is legal under current law in Germany, the EU, and the United Kingdom.
+        There is no rule that prohibits private privacy management of one's own coins.
+      </p>
+      <p>
+        The criminal proceedings of recent years — including the attack on
+        Samourai Wallet in the United States (2024) — targeted <strong>coordinator operators</strong>,
+        not ordinary users. The US prosecution argued on the basis of unlicensed
+        money transmission on the operator side — a legal construction that does
+        not translate directly to the EU.
+      </p>
+      <p>
+        <strong>This is not legal advice.</strong> Anyone operating in a regulated environment
+        (financial industry, heavily regulated jurisdiction) should seek individual legal counsel.
+        For private individuals with legitimately acquired coins, the situation under current
+        law is clear.
+      </p>
+    </div>
+
+    <h2>Conclusion</h2>
+    <p>
+      Bitcoin has an open blockchain — that is a strength, but not a mandate for total
+      transparency across all your transactions. Privacy is not a contradiction to the
+      Bitcoin ethos. It is part of it.
+    </p>
+    <p>
+      CoinJoin gives you back something that KYC exchanges and chain-analysis firms
+      are actively trying to take away: control over who knows your finances.
+      The tool is real, the limits are real, and the responsibility for clean
+      handling lies with you.
+    </p>
+
+    <blockquote>
+      With CoinJoin you buy back privacy and fungibility — and you take on the
+      responsibility not to immediately squander them through sloppy handling.
+    </blockquote>
+
+    <div class="box">
+      <h3>Further Reading</h3>
+      <ul>
+        <li>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg>
+          <a href="/en/wasabi-tails-guide.html">Wasabi on Tails: CoinJoin Setup Step by Step</a> — practical live guide
+        </li>
+        <li>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg>
+          <a href="/en/wasabi-wallet-research-transparent.html">Wasabi Wallet: CoinJoin &amp; Privacy</a> — transparency research
+        </li>
+        <li>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg>
+          <a href="/en/bisq-bitcoin-ohne-kyc.html">Bisq: Buy Bitcoin Without KYC</a> — decentralized alternative to KYC exchanges
+        </li>
+        <li>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg>
+          <a href="/en/Bitcoin-No-KYC.html">Bitcoin Without KYC 2026</a> — the complete overview
+        </li>
+      </ul>
+    </div>
+
+  </article>
+
+  <div class="like-button">
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-ffd1a2)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Like this</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+
+  <script>
+    (function() {
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      const btn = document.getElementById('likeButton');
+      const msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you found this useful.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you found this useful.';
+      });
+    })();
+  </script>
+
+  <div class="back-links">
+    <a href="/en/blog.html" style="font-size: 1.1em;">← Back to Blog</a>
+    <a href="/en/index.html" style="font-size: 1.1em;">← Back to Mission Control</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+    <h3 style="margin-bottom: 15px;">
+      <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energy" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Recharge Energy
+      <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Donate)</span>
+    </h3>
+    <a href="/spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+      Send fuel to the mothership
+    </a>
+    <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+      Thanks for your support — for free content, financial sovereignty, and the alien resistance! <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-ffd1a2" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-ffd1a2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-ffd1a2)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-ffd1a2)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg>
+    </p>
+  </div>
+
+  <footer>
+    <p><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Contact" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> Contact: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a> <span style="color:#666; font-size:0.85em;">·</span> <a href="/kontakt@alien-investor.org/pubkey.asc.key" download="kontakt-alien-investor-pubkey.asc" style="color:#555; font-size:0.8em; text-decoration:none;" title="PGP Public Key for encrypted messages">PGP Key</a></p>
+    <p style="margin-top: 20px;">
+      <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-ffd1a2" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-ffd1a2)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <strong>Disclaimer:</strong><br><br>
+      No financial, tax, or legal advice. Personal opinion only. Think for yourself.
+    </p>
+    <p><a href="/impressum.html">Impressum</a> · <a href="/datenschutz.html">Privacy Policy</a></p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>

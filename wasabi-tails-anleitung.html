@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Wasabi auf Tails: CoinJoin ohne Spuren einrichten | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Wasabi Wallet auf Tails OS: Schritt-für-Schritt-Anleitung für maximale CoinJoin-Privatsphäre — kein Schreiben auf Festplatte, Tor standardmäßig aktiv, keine Spuren nach Shutdown.">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 0 15px 20px 15px;
+    }
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
+    h2 { margin-top: 2.5em; border-bottom: 1px solid #1a3a33; padding-bottom: 8px; }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+    em { color: #ccc; }
+    .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
+    .box {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 0.6em; }
+    .box-warn {
+      border: 1px solid #ffaa00;
+      background: #0a0800;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(255, 170, 0, 0.1);
+    }
+    .box-warn h3 { margin-top: 0; color: #ffaa00; }
+    .box-warn ul { padding-left: 1.2em; }
+    .box-warn li { margin-bottom: 0.6em; }
+    .checklist {
+      border: 1px solid #00ffcc;
+      background: #020d09;
+      padding: 1.5em 1.5em 1.5em 1em;
+      border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.08);
+    }
+    .checklist h3 { margin-top: 0; }
+    .checklist ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+    .checklist li {
+      padding: 0.35em 0 0.35em 1.8em;
+      position: relative;
+      margin-bottom: 0;
+      border-bottom: 1px solid #0d2a20;
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #00ffcc;
+      font-weight: bold;
+    }
+    pre {
+      background: #080808;
+      border: 1px solid #1a3a33;
+      border-left: 3px solid #00ffcc;
+      border-radius: 6px;
+      padding: 1em 1.2em;
+      overflow-x: auto;
+      font-size: 0.88em;
+      line-height: 1.5;
+      margin: 1.2em 0;
+    }
+    code {
+      font-family: "Courier New", Courier, monospace;
+      color: #00ffcc;
+    }
+    pre code {
+      color: #c8faf0;
+    }
+    .step-label {
+      display: inline-block;
+      background: #00ffcc;
+      color: #000;
+      font-weight: bold;
+      font-size: 0.78em;
+      padding: 0.15em 0.55em;
+      border-radius: 4px;
+      margin-right: 0.4em;
+      vertical-align: middle;
+    }
+    .fingerprint {
+      font-family: "Courier New", Courier, monospace;
+      background: #050505;
+      border: 1px solid #1a3a33;
+      padding: 0.4em 0.8em;
+      border-radius: 4px;
+      color: #00ffcc;
+      font-size: 0.9em;
+      display: inline-block;
+      margin: 0.4em 0;
+      word-break: break-all;
+    }
+    .legal-note {
+      border: 1px solid #333;
+      background: #050505;
+      padding: 1em 1.5em;
+      border-radius: 6px;
+      margin: 2em 0;
+      font-size: 0.9em;
+      color: #999;
+    }
+    .legal-note strong { color: #ccc; }
+    ul { padding-left: 1.2em; }
+    li { margin-bottom: 0.5em; }
+    .like-button {
+      margin: 3em 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+    }
+    .like-button button {
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+    .like-button button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
+    }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    .back-links { margin-top: 40px; text-align: center; display: flex; flex-direction: column; gap: 10px; }
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="index.html">← Zurück zur Zentrale</a>
+  </div>
+
+  <h1>Wasabi auf Tails: CoinJoin ohne Spuren einrichten</h1>
+  <p class="byline"><em>von Alien Investor</em></p>
+
+  <article id="content">
+
+    <p>
+      Wasabi Wallet auf Tails OS ist die konsequenteste Kombination für CoinJoin mit maximaler Privatsphäre:
+      Das amnesische Betriebssystem schreibt standardmäßig nichts auf die Festplatte, der gesamte Traffic
+      läuft über Tor, und nach dem Herunterfahren bleibt keine Spur im RAM. Der Koordinator sieht nur
+      eine Tor-Exit-IP — kein Klarname, keine Heimadresse, kein Gerät.
+    </p>
+    <p>
+      Diese Anleitung geht durch den vollständigen Einrichtungsprozess: einmalige Installation im Persistent
+      Storage, Startskript, Koordinatorkonfiguration und den Mix-Workflow für ein solides Anonymitätsset.
+    </p>
+
+    <div class="legal-note">
+      <strong>Rechtlicher Hinweis:</strong> CoinJoin durch Einzelpersonen mit eigenen, legitim erworbenen
+      Bitcoin ist nach aktuellem Stand (2026) in Deutschland und der EU legal. Diese Anleitung dient
+      ausschließlich dem Schutz der finanziellen Privatsphäre. Sie stellt keine Rechtsberatung dar —
+      bei Unsicherheiten gilt: eigene Recherche und im Zweifel Rechtsberatung einholen.
+    </div>
+
+    <h2>1 — Warum Tails?</h2>
+    <p>
+      Tails ist ein Live-Betriebssystem, das von einem USB-Stick bootet und keine dauerhaften Spuren
+      hinterlässt. Für CoinJoin ergibt sich daraus ein klares Sicherheitsprofil:
+    </p>
+    <ul>
+      <li><strong>RAM-only:</strong> Das System läuft vollständig im Arbeitsspeicher. Keine Festplatten-Schreibzugriffe — nach dem Shutdown sind alle Session-Daten weg.</li>
+      <li><strong>Tor für allen Traffic:</strong> Tails leitet standardmäßig sämtlichen Netzwerkverkehr durch das Tor-Netzwerk. Der CoinJoin-Koordinator sieht nur eine Tor-Exit-IP.</li>
+      <li><strong>Persistent Storage (verschlüsselt):</strong> Ein optionaler, LUKS-verschlüsselter Bereich auf dem USB-Stick für dauerhafte Dateien. Hier landen das Wasabi-Binary und die Wallet-Daten — so muss die Software nicht nach jedem Reboot neu heruntergeladen werden.</li>
+      <li><strong>Kein Adminpasswort nötig:</strong> Für die Installation und den Betrieb von Wasabi ist kein Root-Zugriff erforderlich.</li>
+    </ul>
+
+    <div class="box">
+      <h3>Voraussetzungen</h3>
+      <ul>
+        <li>Tails USB-Stick (mindestens 16 GB empfohlen)</li>
+        <li>Persistent Storage aktiviert (beim Tails-Start einrichten: Anwendungen → Tails → Persistent Storage)</li>
+        <li>Tor-Verbindung hergestellt (Tails verbindet sich beim Start automatisch)</li>
+        <li>Kein Admin-Passwort nötig — Standardeinstellungen reichen</li>
+        <li>Hardware-Wallet für Empfang der Mix-Outputs (nicht dasselbe Gerät wie CoinJoin-Quell-Wallet)</li>
+      </ul>
+    </div>
+
+    <h2>2 — Installation (einmalig)</h2>
+
+    <p>
+      Die Installation erfolgt einmalig im Persistent Storage. Bei jedem folgenden Boot ist Wasabi
+      sofort verfügbar — kein erneuter Download.
+    </p>
+
+    <h3>Download und GPG-Verifikation</h3>
+    <p>
+      Zuerst ins Persistent-Verzeichnis wechseln, die aktuelle Version herunterladen und die
+      GPG-Signatur prüfen. Die Verifikation ist Pflicht — nur so ist sichergestellt, dass das
+      Binary nicht manipuliert wurde.
+    </p>
+
+    <pre><code>cd ~/Persistent
+VER="2.7.2"
+curl -L "https://github.com/WalletWasabi/WalletWasabi/releases/download/v${VER}/Wasabi-${VER}-linux-x64.tar.gz" \
+     -o "Wasabi-${VER}-linux-x64.tar.gz"
+curl -L "https://github.com/WalletWasabi/WalletWasabi/releases/download/v${VER}/Wasabi-${VER}-linux-x64.tar.gz.asc" \
+     -o "Wasabi-${VER}-linux-x64.tar.gz.asc"
+curl -L "https://raw.githubusercontent.com/WalletWasabi/WalletWasabi/master/PGP.txt" \
+     -o PGP.txt
+gpg --import PGP.txt
+gpg --verify "Wasabi-${VER}-linux-x64.tar.gz.asc" "Wasabi-${VER}-linux-x64.tar.gz"</code></pre>
+
+    <p>Erwarteter Fingerprint (zkSNACKs Ltd.):</p>
+    <p><span class="fingerprint">6FB3 872B 5D42 292F 5992  0797 8563 4832 8949 861E</span></p>
+
+    <p>
+      Eine Ausgabe wie <code>Good signature from "zkSNACKs Ltd."</code> reicht — die Warnung
+      <em>"Dieser Schlüssel ist nicht vertrauenswürdig beglaubigt"</em> ist in Tails normal, weil
+      der zkSNACKs-Schlüssel nicht im lokalen Web-of-Trust verankert ist. Entscheidend ist, dass
+      der Fingerprint exakt übereinstimmt.
+    </p>
+
+    <h3>Entpacken und aufräumen</h3>
+    <p>
+      Das Archiv hat eine CI-Pfadstruktur (<code>home/runner/work/...</code>), die aufgeräumt werden muss.
+      Die Startdatei heißt <code>wassabee</code> — nicht <code>WalletWasabi.Desktop</code>.
+    </p>
+
+    <pre><code>tar -pxzf "Wasabi-${VER}-linux-x64.tar.gz"
+mv ~/Persistent/home/runner/work/WalletWasabi/WalletWasabi/build/linux-x64 ~/Persistent/Wasabi
+rm -rf ~/Persistent/home</code></pre>
+
+    <h3>Symlink für Wallet-Daten</h3>
+    <p>
+      Wasabi speichert Wallet-Daten standardmäßig unter <code>~/.walletwasabi</code> — ein
+      flüchtiger Pfad im RAM. Um die Wallet über Reboots zu erhalten, wird ein Symlink
+      auf das Persistent Storage gelegt:
+    </p>
+
+    <pre><code>mkdir -p ~/Persistent/.walletwasabi
+ln -s ~/Persistent/.walletwasabi ~/.walletwasabi</code></pre>
+
+    <p>
+      Damit landen Wallet-Dateien, Einstellungen und der Blockchain-Sync-Cache dauerhaft auf dem
+      USB-Stick — geschützt durch die LUKS-Verschlüsselung des Persistent Storage.
+    </p>
+
+    <h2>3 — Startskript und Desktop-Launcher</h2>
+
+    <h3>Startskript</h3>
+    <p>
+      Das Startskript stellt sicher, dass der Symlink bei jedem Boot korrekt gesetzt ist, und
+      startet Wasabi mit den richtigen Flags:
+    </p>
+
+    <pre><code>#!/bin/bash
+# ~/Persistent/start-wasabi.sh
+
+if [ ! -L ~/.walletwasabi ]; then
+    ln -s ~/Persistent/.walletwasabi ~/.walletwasabi
+fi
+
+COORDINATOR="https://coinjoin.kruw.io"
+~/Persistent/Wasabi/wassabee \
+    --UseTor=EnabledOnlyRunning \
+    --CoordinatorUri="$COORDINATOR"</code></pre>
+
+    <pre><code>chmod +x ~/Persistent/start-wasabi.sh</code></pre>
+
+    <div class="box-warn">
+      <h3>Warum <code>--UseTor=EnabledOnlyRunning</code>?</h3>
+      <p>
+        Wasabi bringt eine eigene Tor-Integration mit. Auf Tails läuft bereits ein System-Tor-Prozess,
+        der den gesamten Traffic tunnelt. Wenn Wasabi zusätzlich ein eigenes Tor starten würde, entsteht
+        Tor-über-Tor — das ist langsamer und kann Verbindungsprobleme verursachen.
+      </p>
+      <p>
+        <code>EnabledOnlyRunning</code> bedeutet: Wasabi nutzt Tor, aber nur wenn ein Tor-Prozess
+        bereits läuft — startet keinen eigenen. Auf Tails ist das immer der Fall.
+      </p>
+    </div>
+
+    <h3>Desktop-Launcher (optional)</h3>
+    <p>
+      Damit Wasabi in der Aktivitäten-Übersicht von Tails erscheint, wird ein <code>.desktop</code>-Eintrag
+      über das Dotfiles-Feature angelegt. Dotfiles müssen im Persistent Storage aktiviert sein.
+    </p>
+
+    <pre><code>mkdir -p /live/persistence/TailsData_unlocked/dotfiles/.local/share/applications
+cat > /live/persistence/TailsData_unlocked/dotfiles/.local/share/applications/wasabi.desktop << 'EOF'
+[Desktop Entry]
+Type=Application
+Name=Wasabi (CoinJoin)
+Exec=/home/amnesia/Persistent/start-wasabi.sh
+Terminal=false
+Categories=Network;Finance;
+EOF</code></pre>
+
+    <p>
+      Der Launcher erscheint nach dem nächsten Reboot in der Aktivitäten-Übersicht. Alternativ
+      lässt sich das Skript jederzeit direkt aus dem Terminal starten.
+    </p>
+
+    <h2>4 — Koordinator: Kruw</h2>
+
+    <p>
+      Der Standard-CoinJoin-Koordinator von zkSNACKs wurde im Mai 2024 abgeschaltet — Wasabi
+      ohne externen Koordinator verbindet sich nicht. Drittanbieter-Koordinatoren sind non-custodial:
+      Sie koordinieren die Rounds, halten aber keine Coins.
+    </p>
+    <p>
+      Das Startskript verwendet <strong>Kruw</strong> (<code>coinjoin.kruw.io</code>): 0 % Koordinatorgebühren,
+      aktive Runden mit hoher Teilnehmerzahl, bewährt in der Community.
+    </p>
+    <p>
+      Alternative: <strong>OpenCoordinator</strong> (<code>api.opencoordinator.org</code>) — beide sind
+      frei wählbar, indem die Variable <code>COORDINATOR</code> im Startskript angepasst wird.
+    </p>
+
+    <div class="box">
+      <h3>Koordinator-Kontrolle</h3>
+      <p>
+        Das Koordinator-Feld in den Wasabi-Einstellungen (GUI) bleibt leer — das ist normal.
+        Der Wert wird per Startflag gesetzt und greift trotzdem. Zur Verifikation:
+      </p>
+      <pre style="margin: 0.5em 0 0 0;"><code>ps aux | grep coordinator | grep -v grep</code></pre>
+      <p style="margin-top: 0.8em; color: #aaa; font-size: 0.9em;">
+        In der Ausgabe sollte <code>--CoordinatorUri=https://coinjoin.kruw.io</code> sichtbar sein.
+      </p>
+    </div>
+
+    <p>
+      Vor dem Mix lohnt ein Blick auf <a href="https://wabisator.com" target="_blank" rel="noopener">wabisator.com</a>:
+      Dort sind aktive Rounds, Teilnehmerzahlen und Wartezeiten des Koordinators einsehbar.
+      Wenige Teilnehmer bedeuten ein schwaches Anonymitätsset — bei geringer Aktivität lieber
+      warten oder zu Stoßzeiten mixen.
+    </p>
+
+    <h2>5 — Wallet erstellen</h2>
+
+    <p>
+      Beim ersten Start: <strong>Add Wallet → Create New Wallet</strong>. Wasabi generiert einen
+      12-Wort-Seed (BIP39).
+    </p>
+
+    <div class="box-warn">
+      <h3>Seed-Sicherung — kein Kompromiss</h3>
+      <ul>
+        <li>Seed auf Papier aufschreiben — kein Foto, kein Screenshot, kein digitaler Speicher</li>
+        <li>Passphrase setzen: Eine BIP39-Passphrase ist <strong>kein</strong> optionaler Passwortschutz, sondern Teil des Schlüssels selbst</li>
+        <li>12 Wörter + Passphrase = Zugang. Eins ohne das andere ergibt eine andere, leere Wallet — ohne Fehlermeldung</li>
+        <li>Passphrase ebenfalls offline sichern, getrennt vom Seed</li>
+        <li>Eine falsche Passphrase führt zu einer anderen gültigen, aber leeren Wallet — Wasabi meldet keinen Fehler</li>
+      </ul>
+    </div>
+
+    <p>
+      Nach der Erstellung wird die Wallet durch den Koordinator registriert. Der erste Filter-Download
+      (BIP158) dauert einige Minuten — Wasabi synchronisiert dabei nicht die volle Blockchain,
+      sondern nur kompakte Filter.
+    </p>
+
+    <h2>6 — Mix-Workflow</h2>
+
+    <div class="checklist">
+      <h3>Goldene Regeln vor jedem Mix</h3>
+      <ul>
+        <li>Sauberer Boot: Nur Wasabi geöffnet, kein Login bei identitätsbindenden Diensten in dieser Session</li>
+        <li>Output-Adresse: Frische, noch nie verwendete Adresse einer Hardware-Wallet — eine Adresse pro Mix</li>
+        <li>Output nie direkt an eine KYC-Börse senden</li>
+        <li>Nur den Betrag mixen, der gemischt werden soll — nicht den gesamten Stack auf einmal</li>
+        <li>Empfangs- und Zieladressen gegenchecken: QR-Code scannen oder Zeichen für Zeichen vergleichen</li>
+        <li>Mix nicht unterbrechen: PC wach halten, Tails nicht in den Schlafmodus</li>
+        <li>AnonScore-Ziel: 50 oder höher — Standardwert von 5 ist nur der Einstieg, kein ausreichendes Set</li>
+      </ul>
+    </div>
+
+    <h3>Ablauf Schritt für Schritt</h3>
+    <p><span class="step-label">1</span> In Wasabi eine Empfangs-Adresse unter <strong>Receive</strong> erzeugen.</p>
+    <p><span class="step-label">2</span> Von der Hardware-Wallet den zu mixenden Betrag an diese Adresse senden. Mindestbetrag beachten (aktuell ~0,01 BTC, abhängig von der Round-Konfiguration des Koordinators).</p>
+    <p><span class="step-label">3</span> Mindestens 1 Bestätigung abwarten, bis der UTXO in Wasabi erscheint.</p>
+    <p><span class="step-label">4</span> Unter <strong>Privacy</strong> den UTXO auswählen und <strong>Play</strong> drücken. Auto-Mix ist per Default deaktiviert — manueller Start.</p>
+    <p><span class="step-label">5</span> Auf AnonScore 50+ warten. Je nach Koordinator-Aktivität dauert das zwischen wenigen Minuten und mehreren Stunden.</p>
+    <p><span class="step-label">6</span> Unter <strong>Send</strong> den gemixten Output an eine frische Adresse der Hardware-Wallet senden. Keine direkte Weiterleitung an eine Börse oder anderen identitätsbindenden Dienst.</p>
+    <p><span class="step-label">7</span> Tails herunterfahren. Persistent Storage ist verschlüsselt — die Wallet-Daten bleiben sicher auf dem USB-Stick.</p>
+
+    <h2>7 — Troubleshooting</h2>
+
+    <p>
+      Die häufigsten Probleme und ihre Lösung:
+    </p>
+
+    <ul>
+      <li>
+        <strong>Koordinator verbindet nicht:</strong> Einen Schrägstrich (<code>/</code>) ans Ende der
+        Koordinator-URL anhängen: <code>https://coinjoin.kruw.io/</code>. Manche Koordinatoren
+        erwarten den Trailing Slash.
+      </li>
+      <li>
+        <strong>Fehler beim Start, keine Ausgabe:</strong> Wasabi über das Terminal starten statt
+        über den Desktop-Launcher — so sind Fehlermeldungen sichtbar:
+        <pre style="margin: 0.5em 0;"><code>bash ~/Persistent/start-wasabi.sh</code></pre>
+      </li>
+      <li>
+        <strong>Koordinator-Feld in den Einstellungen leer:</strong> Das ist normal und kein Bug.
+        Der Wert wird per Startflag übergeben und ist aktiv, auch wenn die GUI nichts anzeigt.
+        Kontrolle per <code>ps aux | grep coordinator | grep -v grep</code>.
+      </li>
+      <li>
+        <strong>Sync dauert sehr lange:</strong> Beim ersten Start müssen die BIP158-Filter
+        heruntergeladen werden. Das kann je nach Tor-Verbindungsgeschwindigkeit 10–30 Minuten
+        dauern. Geduld — Tor auf Tails ist manchmal langsam.
+      </li>
+      <li>
+        <strong>Wallet nach Reboot verschwunden:</strong> Prüfen, ob der Symlink korrekt gesetzt ist.
+        Das Startskript setzt ihn bei jedem Start neu — wenn Wasabi ohne das Skript gestartet wurde,
+        kann der Symlink fehlen. Lösung: immer über <code>start-wasabi.sh</code> starten.
+      </li>
+    </ul>
+
+    <blockquote>
+      Privatsphäre ist kein Luxus — sie ist die Voraussetzung für echtes Eigentum.
+    </blockquote>
+
+    <div class="box">
+      <h3>Weiterführend</h3>
+      <ul>
+        <li>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg>
+          <a href="coinjoin-fungibilitaet.html">CoinJoin: Warum Fungibilität zählt</a>
+        </li>
+        <li>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg>
+          <a href="wasabi-wallet-research-transparent.html">Wasabi Wallet: CoinJoin &amp; Privatsphäre — der Überblick</a>
+        </li>
+        <li>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg>
+          <a href="bisq-bitcoin-ohne-kyc.html">Bisq: Bitcoin kaufen ohne KYC</a>
+        </li>
+        <li>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg>
+          <a href="tails-os-spurenlos-im-netz.html">Tails OS: Das amnesische Betriebssystem</a>
+        </li>
+      </ul>
+    </div>
+
+  </article>
+
+  <div class="like-button">
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-ffd1a2)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Gefällt mir</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+
+  <script>
+    (function() {
+      var defs = document.createElementNS('http://www.w3.org/2000/svg','defs');
+      defs.innerHTML = '<radialGradient id="ai-head-ffd1a2" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient>';
+      document.getElementById('likeButton').querySelector('svg').appendChild(defs);
+
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      const btn = document.getElementById('likeButton');
+      const msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
+        btn.disabled = true;
+        btn.textContent = '✓ Danke!';
+        msg.textContent = 'Freut mich, dass dir der Artikel gefallen hat.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '✓ Danke!';
+        msg.textContent = 'Freut mich, dass dir der Artikel gefallen hat.';
+      });
+    })();
+  </script>
+
+  <div class="back-links">
+    <a href="blog.html" style="font-size: 1.1em;">← Zurück zur Blog-Übersicht</a>
+    <a href="index.html" style="font-size: 1.1em;">← Zurück zur Zentrale</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+    <h3 style="margin-bottom: 15px;">
+      <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energie" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Energie aufladen
+      <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
+    </h3>
+    <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+      Treibstoff für das Mutterschiff senden
+    </a>
+    <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+      Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-ffd1a2" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-ffd1a2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-ffd1a2)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-ffd1a2)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg>
+    </p>
+  </div>
+
+  <footer>
+    <p><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Kontakt" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a> <span style="color:#666; font-size:0.85em;">·</span> <a href="/kontakt@alien-investor.org/pubkey.asc.key" download="kontakt-alien-investor-pubkey.asc" style="color:#555; font-size:0.8em; text-decoration:none;" title="PGP Public Key für verschlüsselte Nachrichten">PGP Key</a></p>
+    <p style="margin-top: 20px;">
+      <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-footer" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-footer)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <strong>Haftungsausschluss:</strong><br><br>
+      Keine Finanz-, Steuer- oder Rechtsberatung. Nur persönliche Meinung. Denke selbst.
+    </p>
+    <p><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>
