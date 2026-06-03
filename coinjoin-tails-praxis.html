@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Bitcoin wieder zu Bargeld machen: CoinJoin auf Tails mit Wasabi | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Wie ich CoinJoin auf Tails OS durchgeführt habe — von der ersten Zeile im Terminal bis zum Ring mit 100 % Privacy Progress. Wasabi, Kruw-Koordinator, Seed-Backup, Passphrase-Falle und ehrliche Einordnung.">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 0 15px 20px 15px;
+    }
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
+    h2 { margin-top: 2.5em; border-bottom: 1px solid #1a3a33; padding-bottom: 8px; }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+    em { color: #ccc; }
+    strong { color: #e0ffe0; }
+    .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
+    .box {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 0.6em; }
+    .box-warn {
+      border: 1px solid #ffaa00;
+      background: #0a0800;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(255, 170, 0, 0.1);
+    }
+    .box-warn h3 { margin-top: 0; color: #ffaa00; }
+    .box-warn ul { padding-left: 1.2em; }
+    .box-warn li { margin-bottom: 0.6em; }
+    .box-danger {
+      border: 1px solid #ff4466;
+      background: #0a0005;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(255, 68, 102, 0.08);
+    }
+    .box-danger h3 { margin-top: 0; color: #ff4466; }
+    .box-danger ul { padding-left: 1.2em; }
+    .box-danger li { margin-bottom: 0.6em; }
+    pre {
+      background: #030d0a;
+      border: 1px solid #1a3a33;
+      border-radius: 6px;
+      padding: 1em 1.2em;
+      overflow-x: auto;
+      font-size: 0.88em;
+      line-height: 1.5;
+      margin: 1.2em 0;
+    }
+    code {
+      font-family: 'Courier New', monospace;
+      color: #00ffcc;
+      font-size: 0.9em;
+    }
+    pre code {
+      font-size: 1em;
+      color: #b0fff0;
+    }
+    ul { padding-left: 1.2em; }
+    li { margin-bottom: 0.5em; }
+    ol { padding-left: 1.4em; }
+    ol li { margin-bottom: 0.7em; }
+    .legal-box {
+      border: 1px solid #ffaa00;
+      background: #0a0800;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(255, 170, 0, 0.08);
+    }
+    .legal-box h3 { color: #ffaa00; margin-top: 0; }
+    .passphrase-box {
+      border: 1px solid #ff4466;
+      background: #0a0005;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(255, 68, 102, 0.1);
+    }
+    .passphrase-box h3 { margin-top: 0; color: #ff4466; }
+    .passphrase-box ul { padding-left: 1.2em; }
+    .passphrase-box li { margin-bottom: 0.6em; }
+    .phase-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 1em 0;
+    }
+    .phase-list li {
+      padding: 0.5em 0.5em 0.5em 1em;
+      border-left: 3px solid #1a3a33;
+      margin-bottom: 0.6em;
+      color: #ccc;
+    }
+    .phase-list li strong { color: #00ffcc; }
+    .like-button {
+      margin: 3em 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+    }
+    .like-button button {
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+    .like-button button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
+    }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    .back-links { margin-top: 40px; text-align: center; display: flex; flex-direction: column; gap: 10px; }
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="index.html">← Zurück zur Zentrale</a>
+  </div>
+
+  <h1>Bitcoin wieder zu Bargeld machen: Ein CoinJoin auf Tails</h1>
+  <p class="byline"><em>von Alien Investor</em></p>
+
+  <article id="content">
+
+    <p>
+      Bitcoin ist nicht anonym. Das ist der erste Satz, den jeder verinnerlichen sollte,
+      der glaubt, mit ein paar Sats unbeobachtet durch die Welt zu kommen. Bitcoin ist
+      <strong>pseudonym</strong> — jede Transaktion steht für immer öffentlich in der Blockchain.
+      Sobald an irgendeiner Stelle eine Adresse mit deinem Namen verknüpft wird (und genau das
+      passiert in der Sekunde, in der du bei einer KYC-Börse abhebst), kann jeder mit den
+      richtigen Werkzeugen den Faden vor- und rückwärts ziehen: woher dein Geld kam, wohin
+      es geht, wie viel du hast.
+    </p>
+    <p>
+      Stell dir vor, alle deine Kontoauszüge wären öffentlich. Für immer. Das ist der
+      Normalzustand bei transparenter Blockchain-Nutzung. In diesem Artikel dokumentiere ich,
+      wie ich diesen Zustand mit einem <strong>CoinJoin</strong> durchbrochen habe — auf einem
+      amnesischen Tails-System, über Tor, von der ersten Vorbereitung bis zum fertig gemischten Coin.
+    </p>
+
+    <div class="legal-box">
+      <h3>
+        <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #ffaa0088);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Hinweis" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#ffaa00" opacity="0.9" stroke="#ffaa00" stroke-width="0.5" stroke-linejoin="round"/></svg>
+        Hinweis vorweg
+      </h3>
+      <p style="margin:0;">
+        Das hier ist eine Dokumentation meines eigenen Wegs — keine Finanz- oder Rechtsberatung.
+        Die Nutzung von CoinJoin für legitime Privatsphäre mit eigenen, sauber erworbenen Coins
+        ist in den meisten Jurisdiktionen legal. Das rechtliche Risiko entsteht aus der
+        Verschleierung krimineller Erlöse, nicht aus dem Werkzeug selbst. Informiere dich über
+        die Lage in deinem Land.
+      </p>
+    </div>
+
+    <h2>Warum überhaupt? Privatsphäre und Fungibilität</h2>
+    <p>
+      CoinJoin durchtrennt die eindeutige Verbindung zwischen den Inputs und Outputs einer
+      Transaktion. Viele Teilnehmer werfen ihre Coins in einen Topf, alles wird zu
+      standardisierten Stückelungen vermischt, und am Ende kann ein Beobachter nicht mehr
+      sagen, welcher Ausgang zu welchem Eingang gehört. Das Ergebnis sind zwei Dinge:
+    </p>
+    <ul>
+      <li>
+        <strong>Privatsphäre</strong> — Kontostand, Herkunft und Ausgabeverhalten sind nicht
+        mehr für jeden einsehbar, der mal eine Adresse von dir kannte.
+      </li>
+      <li>
+        <strong>Fungibilität</strong> — deine Coins verlieren ihre anhängende Geschichte und
+        werden wieder gleichwertig. Kein Tainted-Coin-Stempel, der dich diskriminiert.
+      </li>
+    </ul>
+    <p>
+      Die richtige Analogie ist Bargeld. Einem Geldschein sieht niemand an, wem er vorher
+      gehörte. CoinJoin holt diese bargeldartige Eigenschaft zurück, die ein öffentliches
+      Ledger sonst zerstört. Es ist kein magischer Unsichtbarkeitsmantel — sondern ein
+      <strong>Anonymitätsset</strong>, das mit genug Runden stark wird.
+    </p>
+
+    <h2>Die Bühne: Tails, Tor und ein sauberes Umfeld</h2>
+    <p>
+      Ich mache das nicht auf meinem Alltagsrechner, sondern auf <strong>Tails</strong> — einem
+      amnesischen Live-Betriebssystem vom USB-Stick, das allen Verkehr durch Tor leitet und nach
+      dem Herunterfahren keine Spuren hinterlässt. Das passt zum Prinzip: ein abgeschottetes
+      Umfeld für eine abgeschottete Aufgabe.
+    </p>
+    <p>Was ich vorab brauchte:</p>
+    <ul>
+      <li>
+        <strong>Persistent Storage</strong> aktiviert und entsperrt — Wasabi und die Wallet sollen
+        den Reboot überleben.
+      </li>
+      <li>
+        <strong>Tor verbunden</strong> — in der EU reicht die direkte Verbindung, keine Bridge nötig.
+      </li>
+      <li>
+        <strong>Kein Administrationspasswort nötig</strong> — Wasabi läuft komplett im User-Space.
+        Nichts muss ins System installiert werden.
+      </li>
+    </ul>
+
+    <h2>Wasabi holen — und niemals blind vertrauen</h2>
+    <p>
+      Der erste handfeste Schritt: Wasabi herunterladen. Wichtig — der Dateiname enthält die
+      Version, ein statischer Name liefert nur einen Fehler. Ich lade das Archiv
+      <strong>und</strong> die Signatur:
+    </p>
+    <pre><code>cd ~/Persistent
+VER="2.7.2"
+curl -L "https://github.com/WalletWasabi/WalletWasabi/releases/download/v${VER}/Wasabi-${VER}-linux-x64.tar.gz" \
+    -o "Wasabi-${VER}-linux-x64.tar.gz"
+curl -L "https://github.com/WalletWasabi/WalletWasabi/releases/download/v${VER}/Wasabi-${VER}-linux-x64.tar.gz.asc" \
+    -o "Wasabi-${VER}-linux-x64.tar.gz.asc"</code></pre>
+    <p>
+      Und jetzt der Schritt, den die meisten überspringen — und der bei einer Wallet, durch
+      die echte Coins laufen, nicht verhandelbar ist: <strong>verifizieren</strong>. Signatur
+      prüft die Herkunft — genau wie ich es von meiner Hardware-Wallet kenne.
+    </p>
+    <pre><code>curl -L "https://raw.githubusercontent.com/WalletWasabi/WalletWasabi/master/PGP.txt" -o PGP.txt
+gpg --import PGP.txt
+gpg --verify "Wasabi-${VER}-linux-x64.tar.gz.asc" "Wasabi-${VER}-linux-x64.tar.gz"</code></pre>
+    <p>
+      Was ich sehen will, ist „Korrekte Signatur von zkSNACKs" und der passende Fingerprint
+      <code>6FB3 872B 5D42 292F 5992 0797 8563 4832 8949 861E</code>. Die Warnung, dass der
+      Schlüssel nicht „vertrauenswürdig zertifiziert" ist, ist normal — solange der Fingerprint
+      stimmt, ist alles gut. <strong>Verify, don't trust.</strong>
+    </p>
+
+    <h2>Installieren und persistent machen</h2>
+    <p>
+      Entpackt mit erhaltenen Rechten, an einen sauberen Platz geschoben (das Archiv bringt
+      eine tiefe Build-Pfadstruktur mit), und die Wallet-Daten per Symlink ins Persistent
+      Storage gehängt, damit sie den Reboot überleben. Der Kern ist mein Startskript — es
+      sorgt für zwei Dinge: Es nutzt <strong>das Tails-eigene Tor</strong> (statt ein zweites
+      zu starten, was zu „Tor über Tor" führen würde), und es setzt gleich den Koordinator:
+    </p>
+    <pre><code>#!/bin/bash
+if [ ! -L ~/.walletwasabi ]; then
+    ln -s ~/Persistent/.walletwasabi ~/.walletwasabi
+fi
+COORDINATOR="https://coinjoin.kruw.io"
+~/Persistent/Wasabi/wassabee --UseTor=EnabledOnlyRunning --CoordinatorUri="$COORDINATOR"</code></pre>
+
+    <h2>Das eine, was du niemals verlieren darfst: Seed und Passphrase</h2>
+    <p>
+      Jetzt die Wallet. „Create New Wallet", Namen vergeben — und dann der Moment, an dem es
+      ernst wird: Wasabi zeigt die <strong>12 Wörter</strong> der Seed.
+    </p>
+    <blockquote>
+      Sofort auf Papier. Kein Foto, kein Screenshot, nichts Digitales. Diese 12 Wörter sind
+      die einzige Wiederherstellungsmöglichkeit für alles, was da gleich durchläuft.
+    </blockquote>
+    <p>
+      Danach setze ich eine <strong>Passphrase</strong> — und hier ist der Punkt, den viele
+      unterschätzen: Bei Wasabi hat die Passphrase eine <strong>Doppelrolle</strong>.
+    </p>
+
+    <div class="passphrase-box">
+      <h3>
+        <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #ff446688);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#ff4466" opacity="0.9" stroke="#ff4466" stroke-width="0.5" stroke-linejoin="round"/></svg>
+        Die Passphrase-Falle — nicht unterschätzen
+      </h3>
+      <p>
+        Die Passphrase verschlüsselt nicht nur die lokale Wallet-Datei — sie ist ein
+        <strong>echter Schlüsselbestandteil</strong> (BIP39-Passphrase). Sie wird mit den
+        12 Wörtern verrechnet, um die richtigen Schlüssel abzuleiten.
+      </p>
+      <ul>
+        <li>
+          <strong>12 Wörter + Passphrase zusammen = Zugang.</strong> Eins ohne das andere ist wertlos.
+        </li>
+        <li>
+          Gibst du bei einer Wiederherstellung eine <strong>falsche Passphrase</strong> ein,
+          lädt Wasabi einfach eine <strong>andere, leere Wallet — ohne Fehlermeldung.</strong>
+          Du würdest denken, dein Geld sei weg.
+        </li>
+      </ul>
+      <p style="margin-bottom:0;">
+        Deshalb wandert die Passphrase genauso sorgfältig aufs Papier wie die Seed, klar
+        getrennt beschriftet. Das Passwort wird pro Sitzung beim Öffnen abgefragt und nirgends
+        dauerhaft gespeichert — auf Tails nach dem Shutdown restlos weg. Dein Papier ist
+        die einzige Quelle. Genau so soll es sein.
+      </p>
+    </div>
+
+    <h2>Der Koordinator: Vertrauen, aber überprüfbar</h2>
+    <p>
+      CoinJoin braucht einen Koordinator, der die Teilnehmer einer Runde zusammenbringt. Er
+      hat dabei <strong>nie</strong> Zugriff auf deine Coins — das Verfahren ist non-custodial.
+      Seit der ursprüngliche zkSNACKs-Koordinator 2024 unter Regulierungsdruck abgeschaltet
+      wurde, wählt man einen Drittanbieter.
+    </p>
+    <p>
+      Ich habe mich für <strong>Kruw</strong> (<code>https://coinjoin.kruw.io</code>) entschieden:
+      0 % Gebühren, mit Abstand das größte Volumen und damit das stärkste Anonymitätsset. Bewusst
+      <strong>nicht</strong> genommen habe ich Koordinatoren, die über Blockchain-Analyse
+      „verdächtige" Coins herausfiltern — das ist Überwachung durch die Hintertür und untergräbt
+      genau die Fungibilität, um die es geht.
+    </p>
+    <p>
+      <strong>Bevor</strong> ich mische, prüfe ich die Aktivität — denn ein Koordinator nützt nur
+      etwas, wenn gerade Runden mit vielen Teilnehmern laufen. Auf einem CoinJoin-Explorer
+      wie <strong>wabisator.com</strong> sah ich für Kruw ein 24h-Volumen von fast 1.000 BTC,
+      während die Alternativen weit darunter lagen. Hohes Volumen = viele Teilnehmer = gutes
+      Anonymitätsset. Grünes Licht.
+    </p>
+
+    <h2>Ein Knopf für die Zukunft</h2>
+    <p>
+      Damit ich Wasabi künftig nicht jedes Mal über das Terminal starten muss, habe ich auf Tails
+      einen klickbaren Start-Button gebaut — über die <strong>Dotfiles</strong>-Funktion, die
+      ausgewählte Dateien über den amnesischen Reboot rettet. Seitdem öffne ich Wasabi mit einem
+      Klick aus dem Menü, und das Startskript mit Tor- und Koordinator-Einstellung läuft
+      automatisch mit. Kleiner Komfort, großer Unterschied im Alltag.
+    </p>
+
+    <h2>Der eigentliche Mix — Schritt für Schritt</h2>
+    <p>
+      Jetzt das Herzstück. Ich habe bewusst einen <strong>kleinen Testbetrag</strong> genommen —
+      für eine Demonstration ideal, und es zeigt nebenbei eine wichtige Eigenheit (gleich mehr).
+    </p>
+    <ol>
+      <li>
+        <strong>Empfangsadresse erzeugen.</strong> In Wasabi: Receive → ein Pflicht-Label vergeben
+        (bei mir schlicht „BitBox", denn von dort kommen die Coins) → Continue. Wasabi verlangt
+        dieses Label; es bleibt rein lokal und hilft nur der internen Coin-Verwaltung.
+      </li>
+      <li>
+        <strong>Coins einzahlen.</strong> Von der Hardware-Wallet an die Wasabi-Adresse. Adresse
+        vorher Zeichen für Zeichen prüfen — eine Bitcoin-Transaktion an die falsche Adresse ist
+        unwiderruflich weg.
+      </li>
+      <li>
+        <strong>Auf Bestätigung warten.</strong> Sobald Wasabi den Coin erkennt, kann es losgehen.
+      </li>
+      <li>
+        <strong>Play drücken.</strong> Und hier kam die erste Lektion: Wasabi mixt
+        <strong>nicht</strong> automatisch. Standardmäßig muss man aktiv auf Play drücken.
+        Außerdem meldete sich Wasabi mit <em>„Coinjoin may be uneconomical"</em> — bei kleinen
+        Beträgen fallen Mining-Gebühren anteilig stark ins Gewicht. Für eine Demo: weiterklicken.
+        Für echte Ersparnisse: mehr einzahlen.
+      </li>
+    </ol>
+    <p>
+      Dann lief es. Und es lief eine Weile — CoinJoin ist Geduldsarbeit, kein schneller Versand.
+      Ich sah die Phasen vorbeiziehen:
+    </p>
+
+    <ul class="phase-list">
+      <li><strong>„Awaiting other participants"</strong> — registriert, warte auf genug Mitstreiter.</li>
+      <li><strong>„Coinjoin in progress"</strong> — die Runde läuft aktiv.</li>
+      <li>
+        <strong>„Awaiting the blame round"</strong> — klingt dramatisch, ist aber Routine:
+        Hat ein Teilnehmer in der Signier-Phase nicht mitgemacht, startet der Koordinator eine
+        Wiederholung nur mit den Kooperativen. Das Protokoll ist robust gegen Ausfälle.
+      </li>
+      <li>
+        <strong>„Awaiting confirmed funds"</strong> — die gemischten Outputs warten auf eine
+        Blockchain-Bestätigung, bevor die nächste Runde laufen kann.
+      </li>
+    </ul>
+
+    <p>
+      Und dann der Moment, auf den es ankommt: Der <strong>Privacy Progress</strong> sprang von
+      0 % nach oben — 88 %, schließlich <strong>100 %</strong>. Im Wallet-Ring sah ich mein
+      Guthaben in mehrere anonymisierte Teile zerlegt, jeder mit seinem eigenen AnonScore, alle
+      über dem Zielwert. Aus einem nachverfolgbaren Coin waren mehrere gemischte geworden.
+    </p>
+
+    <h2>Sind die Coins jetzt sicher?</h2>
+    <p>
+      Eine berechtigte Frage mitten im Prozess. Die Antwort hat zwei Ebenen.
+    </p>
+    <p>
+      <strong>Kontrolle:</strong> Die Coins liegen die ganze Zeit in <em>meiner</em> Wallet,
+      gesteuert von meinem Seed und meiner Passphrase. Der Koordinator hatte nie Zugriff. Selbst
+      wenn der Tails-Stick in dem Moment kaputtginge — mit den 12 Wörtern und der Passphrase auf
+      Papier hole ich alles zurück, denn die Coins liegen on-chain an Adressen aus genau diesem
+      Seed. Genau dafür war das Backup.
+    </p>
+    <p>
+      <strong>Lagerung:</strong> Während des Mixens liegen die Coins in einer
+      <strong>heißen</strong> Software-Wallet — exponierter als kalte Lagerung. Der letzte,
+      abschließende Schritt im vollständigen Ablauf ist deshalb: die gemischten Coins an eine
+      <strong>frische</strong> Adresse der Hardware-Wallet senden, zurück in die Kälte.
+      Niemals an dieselbe Adresse, von der sie kamen — und auf keinen Fall zurück an eine
+      KYC-Börse, denn das würde die gerade gewonnene Privatsphäre sofort wieder zerstören.
+    </p>
+
+    <h2>Wofür das alles? Wo gemischte Coins hingehören</h2>
+    <p>
+      Der häufigste Irrtum: „Dann kann ich die Coins ja nur noch peer to peer benutzen." Falsch.
+      Gemischte Coins sind ganz normales Bitcoin — du kannst sparen, an Händler zahlen, über
+      Lightning nutzen, P2P weitergeben. Die einzige echte Reibung entsteht an einer KYC-Börse,
+      deren Analyse den Mixer-Ursprung erkennt. Und genau dorthin willst du als Privacy-Nutzer
+      ohnehin nicht zurück — das wäre, als würdest du die Tür, die du gerade geschlossen hast,
+      wieder aufreißen.
+    </p>
+    <p>
+      Das natürliche Zuhause gemischter Coins ist die selbstverwahrte, non-KYC, P2P-Welt:
+      Cold Storage, direkter Handel, Händler, Lightning. Das ist der Souveränitäts-Gedanke — raus
+      aus dem Überwachungs-Finanzsystem, hin zu Bitcoin als digitalem Bargeld, das du wirklich
+      kontrollierst.
+    </p>
+
+    <h2>Die ehrliche Einordnung</h2>
+    <p>
+      Kein Artikel über Privacy-Tools ohne die Schattenseiten — sonst wäre es Werbung,
+      keine Aufklärung.
+    </p>
+
+    <div class="box-danger">
+      <h3>Was CoinJoin nicht leistet — und wo es versagt</h3>
+      <ul>
+        <li>
+          <strong>Kein Absolutwert.</strong> CoinJoin ist Privatsphäre auf Wahrscheinlichkeitsbasis.
+          Stark mit genug Runden, aber kein magischer Schutz gegen jeden Gegner.
+        </li>
+        <li>
+          <strong>Eigene Fehler hebeln alles aus.</strong> Gemischte und ungemischte Coins
+          zusammenführen, Adressen wiederverwenden, an eine identitätsverknüpfte Adresse schicken —
+          die <strong>Coin-Kontrolle nach dem Mix</strong> ist so wichtig wie der Mix selbst.
+        </li>
+        <li>
+          <strong>Rest-Vertrauen in den Koordinator.</strong> Zentrale Koordinatoren haben
+          theoretische Schwächen, und große Pools ziehen auch zwielichtige Akteure an.
+          Das ist die Kehrseite der hohen Aktivität, die das Anonymitätsset stark macht.
+        </li>
+        <li>
+          <strong>Saubere Session.</strong> Wer in derselben Tails-Sitzung Coins mischt und
+          sich parallel mit seiner Klar-Identität irgendwo einloggt, verknüpft beides wieder.
+          Eine Mix-Session ist nur für den Mix da.
+        </li>
+        <li>
+          <strong>Kleine Beträge sind unwirtschaftlich.</strong> Die Mining-Gebühr frisst bei
+          wenigen Sats proportional viel. Für eine Demonstration egal — für echte Privatsphäre
+          nimm spürbare Beträge.
+        </li>
+      </ul>
+    </div>
+
+    <h2>Fazit</h2>
+    <p>
+      Von der ersten Zeile im Terminal bis zum Ring mit 100 % Privacy Progress war das ein
+      durchgehend selbstbestimmter Prozess: eigene Hardware, eigene Schlüssel, eigene
+      Verifikation, eigener Knopf. Kein Dienstleister, der meine Coins hält. Kein Konto, das
+      gesperrt werden kann. Nur Software, die ich überprüft habe, und ein Backup auf Papier,
+      das nur ich kenne.
+    </p>
+
+    <blockquote>
+      CoinJoin gibt dir die bargeldartige Privatsphäre und Fungibilität zurück, die das
+      öffentliche Ledger dir nimmt — und die Verantwortung, sie durch saubere Handhabung
+      nicht gleich wieder zu verspielen. Privatsphäre ist kein Verstecken. Sie ist die
+      Grundvoraussetzung für echte finanzielle Souveränität.
+    </blockquote>
+
+    <div class="box">
+      <h3>Weiterführend</h3>
+      <ul>
+        <li>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg>
+          <a href="coinjoin-fungibilitaet.html">CoinJoin: Bargeldähnliche Privatsphäre für Bitcoin</a> — das Konzept dahinter
+        </li>
+        <li>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg>
+          <a href="wasabi-tails-anleitung.html">Wasabi auf Tails: CoinJoin-Setup Schritt für Schritt</a> — technischer Setup-Guide
+        </li>
+        <li>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg>
+          <a href="tails-os-spurenlos-im-netz.html">Tails OS: Spurenlos im Netz</a> — das amnesische System im Detail
+        </li>
+        <li>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg>
+          <a href="bisq-bitcoin-ohne-kyc.html">Bisq: Bitcoin kaufen ohne KYC</a> — damit der Ausgangspunkt sauber bleibt
+        </li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <h3>Tools für echte Eigentümer</h3>
+      <ul>
+        <li>
+          <strong>📖 GrapheneOS: Android im Überwachungszeitalter</strong><br>
+          Einrichtung, Apps &amp; digitale Souveränität — das komplette Handbuch für dein Google-freies Android. DRM-frei.<br>
+          <a href="https://alien-investor.org/buecher.html" target="_blank" rel="noopener">alien-investor.org/buecher.html</a> · auch auf Amazon KDP
+        </li>
+        <li>
+          <strong>Privacy &amp; Mail:</strong> E-Mail, VPN und Cloud ohne Big Tech — Proton.<br>
+          <a href="https://alien-investor.org/proton" target="_blank" rel="noopener">alien-investor.org/proton</a>
+        </li>
+        <li>
+          <strong>₿ Bitcoin in Selbstverwahrung:</strong> Hardware-Wallet statt Börsenkonto. Code <code>ALIENINVESTOR</code> = 5 % Rabatt auf die BitBox.<br>
+          <a href="https://alien-investor.org/bitbox" target="_blank" rel="noopener">alien-investor.org/bitbox</a>
+        </li>
+        <li>
+          <strong>₿ Bitcoin kaufen (Europa):</strong> Bitcoin-only, kein Shitcoin-Lärm. Code <code>ALIENINVESTOR</code> = dauerhaft −0,2 Prozentpunkte Gebühren.<br>
+          <a href="https://alien-investor.org/21bitcoin" target="_blank" rel="noopener">alien-investor.org/21bitcoin</a>
+        </li>
+      </ul>
+    </div>
+
+  </article>
+
+  <div class="like-button">
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-ffd1a2)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Gefällt mir</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+
+  <script>
+    (function() {
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      const btn = document.getElementById('likeButton');
+      const msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
+        btn.disabled = true;
+        btn.textContent = '✓ Danke!';
+        msg.textContent = 'Freut mich, dass dir der Artikel gefallen hat.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '✓ Danke!';
+        msg.textContent = 'Freut mich, dass dir der Artikel gefallen hat.';
+      });
+    })();
+  </script>
+
+  <!-- ALIEN PHONE SERVICE -->
+  <div style="background:linear-gradient(135deg,rgba(0,20,20,0.7),rgba(0,8,15,0.9));border:1px solid rgba(0,255,204,0.35);border-radius:10px;padding:20px 22px;margin:2.5em 0 1em 0;">
+    <p style="color:#00ffcc;font-weight:bold;margin:0 0 6px 0;font-size:1.05em;"><svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="1" width="20" height="34" rx="3.5" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.9"/><rect x="5" y="6" width="14" height="22" rx="1" fill="#060e12" stroke="#00ffcc" stroke-width="0.5"/><circle cx="12" cy="31.5" r="1.8" fill="#00ffcc" opacity="0.75"/><line x1="9" y1="10" x2="15" y2="10" stroke="#00ffcc" stroke-width="0.5" opacity="0.65"/><line x1="9" y1="13" x2="15" y2="13" stroke="#00ffcc" stroke-width="0.5" opacity="0.45"/><line x1="9" y1="16" x2="13" y2="16" stroke="#00ffcc" stroke-width="0.5" opacity="0.35"/></svg> Alien Phone Service</p>
+    <p style="color:#aaa;font-size:0.88em;margin:0 0 12px 0;line-height:1.5;">Du willst GrapheneOS, aber nicht selbst flashen? Ich kaufe das Pixel bar, installiere GrapheneOS und konfiguriere optional den digitalen Bunker — fertig zu dir geliefert. Bitcoin oder Fiat.</p>
+    <a href="/grapheneos-flash-service.html" style="color:#00ffcc;font-weight:bold;font-size:0.88em;text-decoration:none;">Zum Alien Phone Service →</a>
+  </div>
+
+  <div class="back-links">
+    <a href="blog.html" style="font-size: 1.1em;">← Zurück zur Blog-Übersicht</a>
+    <a href="index.html" style="font-size: 1.1em;">← Zurück zur Zentrale</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+    <h3 style="margin-bottom: 15px;">
+      <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energie" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Energie aufladen
+      <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
+    </h3>
+    <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+      Treibstoff für das Mutterschiff senden
+    </a>
+    <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+      Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-ffd1a2" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-ffd1a2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-ffd1a2)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-ffd1a2)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg>
+    </p>
+  </div>
+
+  <footer>
+    <p><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Kontakt" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a> <span style="color:#666; font-size:0.85em;">·</span> <a href="/kontakt@alien-investor.org/pubkey.asc.key" download="kontakt-alien-investor-pubkey.asc" style="color:#555; font-size:0.8em; text-decoration:none;" title="PGP Public Key für verschlüsselte Nachrichten">PGP Key</a></p>
+    <p style="margin-top: 20px;">
+      <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-ffd1a2" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-ffd1a2)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <strong>Haftungsausschluss:</strong><br><br>
+      Keine Finanz-, Steuer- oder Rechtsberatung. Nur persönliche Meinung. Denke selbst.
+    </p>
+    <p><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>
