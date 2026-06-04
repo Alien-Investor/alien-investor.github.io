@@ -393,8 +393,26 @@ COORDINATOR="https://coinjoin.kruw.io"
     <p>
       Then the moment that matters: the <strong>Privacy Progress</strong> jumped from 0% upward —
       88%, then <strong>100%</strong>. In the wallet ring I could see my balance split into
-      several anonymized parts, each with its own AnonScore, all above the target value.
-      From one traceable coin, several mixed ones had emerged.
+      several anonymized parts, each with its own AnonScore. The history showed all completed
+      rounds. From one traceable coin, several mixed ones had emerged.
+    </p>
+
+    <p>
+      Here is a point many people get wrong — I did too: you do <strong>not</strong> wait for
+      an AnonScore to tick up to "50". The AnonScore <strong>target</strong> is a
+      <strong>setting</strong>, not a number you watch and stop at. Wasabi offers three coinjoin
+      strategies — <em>Reduce Costs</em>, <em>Default Strategy</em>, and <em>Enhance Privacy</em>
+      — each with its own target value. The two efficiency strategies aim for a low AnonScore (5),
+      while <em>Enhance Privacy</em> targets a significantly higher value. You configure this under
+      Wallet Settings → Coinjoin.
+    </p>
+
+    <p>
+      What you actually observe is the <strong>Privacy Progress</strong>: it shows how much of
+      your balance has reached the configured target. You set your goal upfront via the strategy
+      — choose <em>Enhance Privacy</em> for stronger privacy — and then wait until the Privacy
+      Progress hits <strong>100%</strong> and Wasabi shows "Hurray! All your funds are private!".
+      That is the milestone, not a specific number ticking upward.
     </p>
 
     <h2>Are the Coins Safe Now?</h2>
@@ -462,8 +480,109 @@ COORDINATOR="https://coinjoin.kruw.io"
           <strong>Small amounts are uneconomical.</strong> Mining fees eat proportionally large
           with few sats. Fine for a demonstration — for real privacy use meaningful amounts.
         </li>
+        <li>
+          <strong>Don't mix your entire stack at once.</strong> KYC exchanges detect mixer
+          origins and can reject deposits or freeze accounts. Authorities sometimes flag mixing
+          as a money laundering indicator — even with legitimate coins. CoinJoin requires
+          judgment: think carefully about which amounts you mix, for what purpose, and whether
+          that fits your situation.
+        </li>
       </ul>
     </div>
+
+    <h2>Wasabi Under the Hood: Key Settings</h2>
+    <p>
+      The defaults are already solid — Wasabi is deliberately built so that most people don't
+      need to touch anything. But sovereignty also means knowing which controls exist and what
+      they do. Here are the most important ones.
+    </p>
+
+    <h3>The Two Levers Behind the Strategies</h3>
+    <p>
+      The three coinjoin strategies — <em>Reduce Costs</em>, <em>Default Strategy</em>, and
+      <em>Enhance Privacy</em> — are really just presets for two controls: the
+      <strong>AnonScore target</strong> and <strong>non-private coin isolation</strong>. The
+      first two aim for a low AnonScore (5), while <em>Enhance Privacy</em> targets a
+      significantly higher random value. The coin isolation prevents your not-yet-private coins
+      from being registered together unfavorably in the same round. Anyone who wants full
+      control can build a <strong>custom strategy</strong> through the manual settings.
+    </p>
+
+    <h3>When and How Much Is Mixed</h3>
+    <p>
+      <strong>Auto-start</strong> is off by default — you press Play yourself. Enable it and
+      Wasabi mixes automatically until Privacy Progress hits 100%. There is also the
+      <strong>stop threshold</strong> (default 0.01 BTC): below this amount, auto-mix does not
+      start, to avoid paying disproportionate fees on small amounts. That is exactly what is
+      behind the "uneconomical" warning when mixing with a few sats. Anyone who really wants
+      to mix everything sets the threshold to 0.
+    </p>
+
+    <h3>Built-in Brakes: Fees and Minimum Size</h3>
+    <p>
+      Two values that are often underestimated: you can set the <strong>maximum mining fee</strong>
+      you are willing to pay (default 150 sat/vByte), and the <strong>minimum number of inputs</strong>
+      a round must have (default 21). The latter is a built-in privacy floor: Wasabi
+      <strong>simply does not mix in too small a group</strong> — no round, no weak hiding spot.
+      And since version 2.2.0, the client only participates in rounds where it pays the normal
+      mining fee exclusively — <strong>no coordinator fee</strong>. That is the technical
+      background when a coordinator advertises "0% fees".
+    </p>
+
+    <h3>How Privacy Is Measured: Anonymity Set vs. AnonScore</h3>
+    <p>
+      Imagine ten identical marbles and ten friends. You give one to each, collect them all back,
+      shake the bag, and redistribute. The chance of correctly identifying the original marble is
+      1 in 10 — that is the <strong>anonymity set</strong> of 10. It is the size of the group you
+      are hiding in, and it is visible to anyone on a block explorer.
+    </p>
+    <p>
+      Wasabi 2.0 uses a more precise measure with the WabiSabi protocol: the <strong>AnonScore</strong>.
+      It is calculated from the individual client's perspective, accounts for edge cases, and is
+      deliberately conservative — always <strong>equal to or lower than the set</strong>. Three
+      consequences you should know when spending:
+    </p>
+    <ul>
+      <li>If you receive <strong>multiple outputs of the same denomination</strong> in one round, your AnonScore drops compared to receiving just one.</li>
+      <li>A transaction <strong>inherits the lowest AnonScore of its inputs</strong> — a chain is only as strong as its weakest link.</li>
+      <li>Spending two equal-sized outputs from the <strong>same round</strong> together halves their anonymity. Spending them in <strong>separate</strong> transactions preserves the full privacy. (This is the precise rule behind the topic of consolidation.)</li>
+    </ul>
+
+    <h3>The Automation Works for You</h3>
+    <p>
+      Wasabi handles a lot in the background to prevent you from shooting yourself in the foot.
+      When sending, the wallet <strong>spends private and semi-private coins first</strong> and
+      keeps non-private ones as a last resort. Every receive and destination address must be
+      <strong>labeled</strong> ("who knows this address belongs to me") — not bureaucracy, but
+      part of the coin-selection logic. Used addresses disappear from the interface so you don't
+      accidentally <strong>reuse</strong> them. And the "safety coinjoins": a first deposit into
+      an empty wallet reaches at most 75% Privacy Progress in the first round — regardless of
+      the score. Further remixes bring you to 100%. That is why it often takes one or two rounds.
+    </p>
+
+    <h3>Network Privacy</h3>
+    <p>
+      Wasabi uses <strong>BIP-158 block filters</strong>: the client checks locally whether a
+      filter matches any of its addresses, and only downloads the full block on a match — over
+      a fresh Tor identity. No server learns which addresses belong to you. Inside the coinjoin
+      itself, <strong>each input gets its own Tor identity</strong> (internally called "Alice"),
+      while outputs run over separate identities ("Bob") that cannot be linked to Alice. This
+      means even the coordinator cannot connect input and output. Anyone who wants full
+      independence can connect their own <strong>full node</strong>.
+    </p>
+
+    <h3>Small but Noteworthy Extras</h3>
+    <p>
+      <strong>Discreet Mode</strong> hides all amounts in the interface — useful when someone is
+      looking over your shoulder. <strong>Multi-Share Backup</strong> splits the backup into
+      multiple 20-word sets instead of a single 12-word seed, if you want to distribute recovery
+      across multiple locations. <strong>Taproot</strong> is fully integrated: some coinjoin
+      outputs are already Taproot, and receive addresses can be generated in both formats.
+    </p>
+    <p>
+      The defaults are deliberately simple — but every one of these controls is there the moment
+      you want to steer deeper. That is the difference between using a tool and understanding it.
+    </p>
 
     <h2>Conclusion</h2>
     <p>

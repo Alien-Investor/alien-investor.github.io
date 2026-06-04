@@ -411,8 +411,16 @@ EOF</code></pre>
         <li>Nur den Betrag mixen, der gemischt werden soll — nicht den gesamten Stack auf einmal</li>
         <li>Empfangs- und Zieladressen gegenchecken: QR-Code scannen oder Zeichen für Zeichen vergleichen</li>
         <li>Mix nicht unterbrechen: PC wach halten, Tails nicht in den Schlafmodus</li>
-        <li>AnonScore-Ziel: 50 oder höher — Standardwert von 5 ist nur der Einstieg, kein ausreichendes Set</li>
+        <li>Coinjoin-Strategie vorab wählen (Wallet Settings → Coinjoin-Tab): <em>Enhance Privacy</em> für ein höheres Ziel — du beobachtest den <strong>Privacy Progress</strong>, keine hochtickende Zahl</li>
       </ul>
+    </div>
+
+    <div class="legal-note" style="border-color: #ffaa0066;">
+      <strong style="color: #ffaa00;">Eigenverantwortung vor dem Mix:</strong> Nicht den gesamten Stack auf einmal mischen.
+      KYC-Börsen erkennen Mixer-Herkunft und können Einzahlungen ablehnen oder Konten sperren.
+      Behörden werten Mischen manchmal als Geldwäsche-Indikator — selbst bei legitimen Coins.
+      CoinJoin ist ein Werkzeug, das Urteilsvermögen erfordert: Überleg dir vorher, welche Beträge
+      du wofür mischst und ob das zu deiner Situation passt.
     </div>
 
     <h3>Ablauf Schritt für Schritt</h3>
@@ -420,7 +428,7 @@ EOF</code></pre>
     <p><span class="step-label">2</span> Von der Hardware-Wallet den zu mixenden Betrag an diese Adresse senden. Mindestbetrag beachten (aktuell ~0,01 BTC, abhängig von der Round-Konfiguration des Koordinators).</p>
     <p><span class="step-label">3</span> Mindestens 1 Bestätigung abwarten, bis der UTXO in Wasabi erscheint.</p>
     <p><span class="step-label">4</span> Unter <strong>Privacy</strong> den UTXO auswählen und <strong>Play</strong> drücken. Auto-Mix ist per Default deaktiviert — manueller Start.</p>
-    <p><span class="step-label">5</span> Auf AnonScore 50+ warten. Je nach Koordinator-Aktivität dauert das zwischen wenigen Minuten und mehreren Stunden.</p>
+    <p><span class="step-label">5</span> Auf <strong>Privacy Progress 100 %</strong> warten — Wasabi meldet „Hurray! All your funds are private!" sobald alle Coins das gesetzte Ziel erreicht haben. Je nach Koordinator-Aktivität dauert das zwischen wenigen Minuten und mehreren Stunden.</p>
     <p><span class="step-label">6</span> Unter <strong>Send</strong> den gemixten Output an eine frische Adresse der Hardware-Wallet senden. Keine direkte Weiterleitung an eine Börse oder anderen identitätsbindenden Dienst.</p>
     <p><span class="step-label">7</span> Tails herunterfahren. Persistent Storage ist verschlüsselt — die Wallet-Daten bleiben sicher auf dem USB-Stick.</p>
 

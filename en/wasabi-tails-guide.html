@@ -412,8 +412,15 @@ EOF</code></pre>
         <li>Only mix the amount you intend to mix — not your entire stack at once</li>
         <li>Double-check receive and destination addresses: scan QR code or compare character by character</li>
         <li>Do not interrupt the mix: keep the PC awake, do not let Tails sleep</li>
-        <li>AnonScore target: 50 or higher — the default of 5 is just the entry point, not a sufficient set</li>
+        <li>Choose your coinjoin strategy in advance (Wallet Settings → Coinjoin tab): <em>Enhance Privacy</em> for a higher target — you watch the <strong>Privacy Progress</strong>, not a number ticking upward</li>
       </ul>
+    </div>
+
+    <div class="legal-note" style="border-color: #ffaa0066;">
+      <strong style="color: #ffaa00;">Personal responsibility before you mix:</strong> Do not mix your entire stack at once.
+      KYC exchanges detect mixer origins and can reject deposits or freeze accounts.
+      Authorities sometimes flag mixing as a money laundering indicator — even with legitimate coins.
+      CoinJoin requires judgment: think carefully about which amounts you mix, for what purpose, and whether that fits your situation.
     </div>
 
     <h3>Step-by-step process</h3>
@@ -421,7 +428,7 @@ EOF</code></pre>
     <p><span class="step-label">2</span> Send the amount to be mixed from your hardware wallet to that address. Note the minimum amount (currently ~0.01 BTC, depending on the coordinator's round configuration).</p>
     <p><span class="step-label">3</span> Wait for at least 1 confirmation before the UTXO appears in Wasabi.</p>
     <p><span class="step-label">4</span> Under <strong>Privacy</strong>, select the UTXO and press <strong>Play</strong>. Auto-Mix is disabled by default — start it manually.</p>
-    <p><span class="step-label">5</span> Wait for AnonScore 50+. Depending on coordinator activity this takes anywhere from a few minutes to several hours.</p>
+    <p><span class="step-label">5</span> Wait for <strong>Privacy Progress 100%</strong> — Wasabi shows "Hurray! All your funds are private!" once all coins have reached the configured target. Depending on coordinator activity this takes anywhere from a few minutes to several hours.</p>
     <p><span class="step-label">6</span> Under <strong>Send</strong>, send the mixed output to a fresh address on your hardware wallet. No direct forwarding to an exchange or any other identity-linked service.</p>
     <p><span class="step-label">7</span> Shut down Tails. Persistent Storage is encrypted — wallet data stays safe on the USB stick.</p>
 

@@ -412,8 +412,27 @@ COORDINATOR="https://coinjoin.kruw.io"
     <p>
       Und dann der Moment, auf den es ankommt: Der <strong>Privacy Progress</strong> sprang von
       0 % nach oben — 88 %, schließlich <strong>100 %</strong>. Im Wallet-Ring sah ich mein
-      Guthaben in mehrere anonymisierte Teile zerlegt, jeder mit seinem eigenen AnonScore, alle
-      über dem Zielwert. Aus einem nachverfolgbaren Coin waren mehrere gemischte geworden.
+      Guthaben in mehrere anonymisierte Teile zerlegt, jeder mit seinem eigenen AnonScore.
+      In der Historie standen die durchlaufenen Runden. Aus einem nachverfolgbaren Coin waren
+      mehrere gemischte geworden.
+    </p>
+
+    <p>
+      Hier ein Punkt, über den viele stolpern — ich auch: Man wartet <strong>nicht</strong>
+      darauf, dass ein AnonScore manuell auf „50" hochtickt. Der AnonScore-<strong>Zielwert</strong>
+      ist eine <strong>Einstellung</strong>, keine Zahl, die du beobachtest und bei der du stoppst.
+      Wasabi bringt drei Coinjoin-Strategien mit — <em>Reduce Costs</em>, <em>Default Strategy</em>
+      und <em>Enhance Privacy</em> —, jede mit ihrem eigenen Zielwert. Die beiden effizienten
+      zielen auf einen niedrigen AnonScore (5), <em>Enhance Privacy</em> auf einen deutlich
+      höheren Wert. Eingestellt wird das unter Wallet Settings → Coinjoin.
+    </p>
+
+    <p>
+      Was du tatsächlich beobachtest, ist der <strong>Privacy Progress</strong>: Er zeigt, wie
+      viel deines Guthabens den gesetzten Zielwert erreicht hat. Du wählst vorab dein Ziel über
+      die Strategie — für mehr Privatsphäre <em>Enhance Privacy</em> — und wartest, bis der
+      Privacy Progress <strong>100 %</strong> erreicht und Wasabi „Hurray! All your funds are
+      private!" meldet. Das ist der Meilenstein, nicht eine bestimmte Zahl, die hochläuft.
     </p>
 
     <h2>Sind die Coins jetzt sicher?</h2>
@@ -485,8 +504,111 @@ COORDINATOR="https://coinjoin.kruw.io"
           wenigen Sats proportional viel. Für eine Demonstration egal — für echte Privatsphäre
           nimm spürbare Beträge.
         </li>
+        <li>
+          <strong>Nicht den ganzen Stack auf einmal.</strong> KYC-Börsen erkennen Mixer-Herkunft
+          und können Einzahlungen ablehnen oder Konten sperren. Behörden werten Mischen manchmal
+          als Geldwäsche-Indikator — selbst bei legitimen Coins. CoinJoin erfordert Urteilsvermögen:
+          Überlege vorher, welche Beträge du wofür mischst und ob das zu deiner Situation passt.
+        </li>
       </ul>
     </div>
+
+    <h2>Wasabi unter der Haube: die wichtigsten Einstellungen</h2>
+    <p>
+      Mit den Standard-Einstellungen fährst du schon gut — Wasabi ist bewusst so gebaut, dass
+      die meisten nichts anfassen müssen. Aber Souveränität heißt auch: wissen, welche Regler
+      es gibt und was sie tun. Hier die wichtigsten.
+    </p>
+
+    <h3>Die zwei Regler hinter den Strategien</h3>
+    <p>
+      Die drei Coinjoin-Strategien — <em>Reduce Costs</em>, <em>Default Strategy</em> und
+      <em>Enhance Privacy</em> — sind in Wahrheit nur Voreinstellungen von zwei Reglern:
+      dem <strong>AnonScore-Zielwert</strong> und der <strong>Non-private coin isolation</strong>.
+      Die ersten beiden zielen auf einen niedrigen AnonScore (5), <em>Enhance Privacy</em> auf
+      einen deutlich höheren Zufallswert. Die „coin isolation" verhindert, dass deine noch nicht
+      privaten Coins ungünstig zusammen in eine Runde registriert werden. Wer es genau wissen
+      will, baut sich über die manuellen Einstellungen eine <strong>eigene Strategie</strong>.
+    </p>
+
+    <h3>Wann und wie viel gemischt wird</h3>
+    <p>
+      Der <strong>Auto-Start</strong> ist standardmäßig aus — du drückst Play selbst. Schaltest
+      du ihn ein, mischt Wasabi von allein, bis der Privacy Progress 100 % erreicht. Dazu kommt
+      die <strong>Stop-Schwelle</strong> (Standard 0,01 BTC): Unterhalb davon startet der
+      Automatik-Mix nicht, um nicht überproportional viel Gebühr für kleine Beträge zu zahlen.
+      Genau das steckt hinter der „uneconomical"-Warnung, wenn man mit wenig Sats mischt. Wer
+      wirklich alles mischen will, setzt die Schwelle auf 0.
+    </p>
+
+    <h3>Eingebaute Bremsen: Gebühren und Mindestgröße</h3>
+    <p>
+      Zwei Werte, die unterschätzt werden: Du kannst die <strong>maximale Mining-Gebühr</strong>
+      festlegen, die du zu zahlen bereit bist (Standard 150 sat/vByte), und die
+      <strong>Mindestzahl an Inputs</strong>, die eine Runde haben muss (Standard 21). Letzteres
+      ist eine eingebaute Privacy-Untergrenze: Wasabi <strong>mischt schlicht nicht in einer zu
+      kleinen Menge</strong> — keine Runde, kein schwaches Versteck. Und seit Version 2.2.0 nimmt
+      der Client nur noch an Runden teil, in denen er ausschließlich die normale Mining-Gebühr
+      zahlt — <strong>keine Koordinator-Gebühr</strong>. Das ist der technische Hintergrund, wenn
+      ein Koordinator mit „0 % Gebühren" wirbt.
+    </p>
+
+    <h3>Wie Privatsphäre gemessen wird: Anonymitätsset vs. AnonScore</h3>
+    <p>
+      Stell dir zehn identische Murmeln und zehn Freunde vor. Du gibst jedem eine, sammelst alle
+      wieder ein, schüttelst sie im Beutel und verteilst neu. Die Chance, die ursprüngliche Murmel
+      richtig zuzuordnen, liegt bei 1 zu 10 — das <strong>Anonymitätsset</strong> ist 10. Es ist
+      die Größe der Gruppe, in der du dich versteckst, und für jeden auf einem Block-Explorer sichtbar.
+    </p>
+    <p>
+      Wasabi 2.0 nutzt mit dem WabiSabi-Protokoll ein feineres Maß: den <strong>AnonScore</strong>.
+      Er wird aus Sicht des einzelnen Clients berechnet, berücksichtigt Sonderfälle und ist bewusst
+      konservativ — also immer <strong>gleich oder niedriger als das Set</strong>. Drei Konsequenzen,
+      die du beim Ausgeben kennen solltest:
+    </p>
+    <ul>
+      <li>Bekommst du in einer Runde <strong>mehrere Outputs derselben Stückelung</strong>, sinkt dein AnonScore gegenüber nur einem Output.</li>
+      <li>Eine Transaktion <strong>erbt den niedrigsten AnonScore ihrer Inputs</strong> — eine Kette ist nur so stark wie ihr schwächstes Glied.</li>
+      <li>Zwei gleich große Outputs aus <strong>derselben Runde</strong> zusammen auszugeben halbiert deren Anonymität. Gibst du sie in <strong>getrennten</strong> Transaktionen aus, bleibt die volle Privatsphäre erhalten. (Das ist die präzise Regel hinter dem Thema Konsolidierung.)</li>
+    </ul>
+
+    <h3>Die Automatik arbeitet für dich</h3>
+    <p>
+      Vieles regelt Wasabi im Hintergrund, damit man sich nicht selbst ins Knie schießt. Beim
+      Senden gibt die Wallet <strong>private und halb-private Coins zuerst</strong> aus und lässt
+      die nicht-privaten als letzte Option. Jede Empfangs- und Zieladresse muss
+      <strong>beschriftet</strong> werden („wer weiß, dass diese Adresse mir gehört") — das ist
+      kein Bürokram, sondern Teil der Coin-Auswahl-Logik. Benutzte Adressen verschwinden aus der
+      Oberfläche, damit man sie nicht versehentlich <strong>wiederverwendet</strong>. Und die
+      „Safety Coinjoins": Eine erste Einzahlung in eine leere Wallet erreicht in der ersten Runde
+      maximal 75 % Privacy Progress — egal wie hoch der Score wäre. Erst weitere Remixes bringen
+      dich auf 100 %. Deshalb dauert es oft ein bis zwei Runden.
+    </p>
+
+    <h3>Netzwerk-Privatsphäre</h3>
+    <p>
+      Wasabi nutzt <strong>BIP-158-Blockfilter</strong>: Der Client prüft lokal, ob ein Filter
+      eine seiner Adressen trifft, und lädt nur bei einem Treffer den ganzen Block — über eine
+      frische Tor-Identität. Kein Server erfährt also, welche Adressen dir gehören. Im Coinjoin
+      selbst bekommt <strong>jeder Input eine eigene Tor-Identität</strong> (intern „Alice"
+      genannt), die Outputs laufen über separate Identitäten („Bob"), die nicht mit Alice
+      verknüpfbar sind. So kann selbst der Koordinator Eingang und Ausgang nicht zusammenbringen.
+      Wer ganz unabhängig sein will, hängt seinen <strong>eigenen Full Node</strong> an.
+    </p>
+
+    <h3>Kleine, feine Extras</h3>
+    <p>
+      <strong>Discreet Mode</strong> blendet alle Beträge in der Oberfläche aus — praktisch, wenn
+      jemand über die Schulter schaut. <strong>Multi-Share-Backup</strong> zerlegt das Backup in
+      mehrere 20-Wort-Sets statt einer einzelnen 12-Wort-Seed, falls du die Wiederherstellung auf
+      mehrere Orte verteilen willst. <strong>Taproot</strong> ist voll integriert: Ein Teil der
+      Coinjoin-Outputs ist bereits Taproot, und Empfangsadressen lassen sich in beiden Formaten
+      erzeugen.
+    </p>
+    <p>
+      Der Standard ist bewusst einfach — aber jeder dieser Regler ist da, sobald du tiefer steuern
+      willst. Genau das ist der Unterschied zwischen „benutzen" und „verstehen".
+    </p>
 
     <h2>Fazit</h2>
     <p>
