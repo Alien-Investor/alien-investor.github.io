@@ -237,13 +237,16 @@ mkdir Broker</pre>
     </p>
 
     <div class="box" style="border-color: #ffaa00; background: #0a0800;">
-      <h3 style="color: #ffaa00; margin-top: 0;">⚡ Update Juni 2026: Bisq-Direktimport + noKYC-Trennung</h3>
+      <h3 style="color: #ffaa00; margin-top: 0;">⚡ Update Juni 2026: Bisq-Direktimport + strikte noKYC-Trennung</h3>
       <p>Das Tool unterstützt jetzt den direkten Import der Bisq-Trade-History-CSV. Einfach den Export aus Bisq ("Portfolio → Trades → Exportieren") als <code>bisq.csv</code> in den <code>Broker/</code>-Ordner legen — das Tool erkennt alle abgeschlossenen Käufe automatisch.</p>
       <ul>
         <li><strong>Bisq-Direktimport:</strong> Kein manuelles Abtippen mehr. Der Parser liest Preis, BTC-Menge, EUR-Betrag und Gebühren direkt aus dem Bisq-Export.</li>
-        <li><strong>noKYC-Trennung im Report:</strong> Bisq-Käufe und <code>manual_buys.csv</code>-Einträge tauchen nicht im offiziellen Finanzamt-Report auf. Sie erscheinen nur in einem separaten internen Block am Ende des Reports — für die eigene Übersicht und bei Rückfragen.</li>
-        <li><strong>Vollständig lokal:</strong> Keine Cloud, keine API, alle Berechnungen laufen auf deinem Rechner.</li>
+        <li><strong>Eigene noKYC-Datei:</strong> noKYC-Käufe tauchen in keinem Finanzamt-Dokument auf. Sie landen in einer separaten Datei <code>nokyc_intern_JAHR.txt</code> — mit deutlichem Warnhinweis am Dateianfang, damit sie nie versehentlich mit eingereicht wird.</li>
+        <li><strong>Getrennte FiFo-Pools:</strong> KYC- und noKYC-Bestände laufen in zwei strikt getrennten FiFo-Töpfen. Ein Broker-Verkauf kann einem Bisq-Kauf nie als Kostenbasis zugeordnet werden — der offizielle Nachweis bleibt garantiert in sich konsistent.</li>
+        <li><strong>noKYC-Wallets:</strong> Du führst eine dedizierte Wallet nur für noKYC-Sats? CSV in den Unterordner <code>bitbox/nokyc/</code> legen — alle Bewegungen erscheinen ausschließlich im internen Report.</li>
+        <li><strong>noKYC-Verkäufe:</strong> <code>manual_sales.csv</code> hat jetzt eine optionale Spalte <code>no_kyc</code>. P2P-Verkäufe aus dem noKYC-Bestand werden intern mit FiFo-Zuordnung, Haltedauer und Gewinn berechnet — erscheinen aber nur in der internen Datei.</li>
       </ul>
+      <p style="color:#aaa; font-size:0.9em;">Außerdem: Die Haltefrist wird jetzt kalendergenau berechnet (Jahrestag statt starrer 365-Tage-Zählung) — korrekt auch über Schaltjahre.</p>
       <p style="color:#aaa; font-size:0.9em;">Für Robosats, HodlHodl und andere P2P-Käufe ohne CSV-Export bleibt <code>manual_buys.csv</code> der richtige Weg — ebenfalls mit noKYC-Trennung.</p>
       <p style="color:#aaa; font-size:0.9em;">Bisq ist aktuell die einzige noKYC-Plattform mit dediziertem Parser. Das Tool steht unter <strong>MIT-Lizenz</strong> — wer einen Importer für Robosats, HodlHodl oder andere Plattformen beisteuern möchte, ist herzlich willkommen.</p>
     </div>
