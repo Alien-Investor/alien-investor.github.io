@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>🧾 BTC Steuertool Web – Die Anleitung: Vom CSV-Export zum Finanzamt-Report | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Schritt-für-Schritt-Anleitung für das BTC Steuertool Web: CSV-Dateien laden, noKYC-Wallets markieren, Report berechnen und die Ergebnisse verstehen — alles lokal im Browser.">
+  <style>
+    body { background-color: #000; color: #fff; font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 0 15px 20px 15px; }
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
+    h2 { margin-top: 2.5em; border-bottom: 1px solid #1a3a33; padding-bottom: 8px; }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+    em { color: #ccc; }
+    code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; font-family: monospace; }
+    .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
+    blockquote { border-left: 3px solid #00ffcc; margin: 2em 0; padding: 0.5em 1em; color: #ddd; background: #050505; font-style: italic; }
+    .screenshot { width: 100%; height: auto; border-radius: 4px; border: 1px solid #1a3a33; margin: 0.8em 0 0.4em 0; }
+    .screenshot-caption { text-align: center; font-size: 0.8em; color: #555; margin-bottom: 1.5em; }
+    .cta-box { border: 1px solid #00ffcc; background: #050505; padding: 1.5em; border-radius: 8px; margin: 2em 0; text-align: center; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
+    .box { border: 1px solid #00ffcc; background: #050505; padding: 1.5em; border-radius: 8px; margin: 2em 0; }
+    .warn-box { border: 1px solid #ff8844; background: #0a0500; padding: 1.5em; border-radius: 8px; margin: 2em 0; }
+    .warn-box h3 { color: #ff8844; margin-top: 0; }
+    table { width: 100%; border-collapse: collapse; margin: 2em 0; font-size: 0.9em; }
+    th, td { border: 1px solid #333; padding: 10px; text-align: left; }
+    th { color: #00ffcc; background-color: #111; }
+    tr:nth-child(even) { background-color: #050505; }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    footer { margin-top: 60px; padding: 20px; font-size: 0.85em; color: #666; border-top: 1px solid #222; text-align: center; }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="index.html">← Zurück zur Zentrale</a>
+  </div>
+
+  <h1>🧾 BTC Steuertool Web – Die Anleitung</h1>
+  <p class="byline"><em>Vom CSV-Export zum Finanzamt-Report — in 5 Minuten, komplett in deinem Browser</em></p>
+
+  <blockquote>
+    „Deine Transaktionsdaten verlassen nie deinen Rechner. Kein Upload, kein Account, kein Tracking —
+    die komplette Berechnung läuft lokal in deinem Browser."
+  </blockquote>
+
+  <!-- YouTube-Video folgt — Platzhalter für Embed -->
+
+  <div class="cta-box">
+    <p style="margin:0 0 0.8em 0;">Du willst direkt loslegen?</p>
+    <p style="margin:0;">
+      <a href="https://api.alien-investor.org/books/steuertool-demo/" target="_blank" rel="noopener"><strong>→ Demo öffnen</strong></a> (kostenlos, mit Beispieldaten)
+      &nbsp;·&nbsp;
+      <a href="btc-steuertool.html#zugang"><strong>→ Zugang holen — 29 €</strong></a>
+    </p>
+  </div>
+
+  <h2>Schritt 0: Was du brauchst</h2>
+  <p>
+    Nur deine CSV-Exporte. Jeder Broker und die BitBox-App bieten einen Export an — einmal pro Jahr
+    herunterladen reicht:
+  </p>
+  <table>
+    <thead><tr><th>Quelle</th><th>Wo exportieren</th></tr></thead>
+    <tbody>
+      <tr><td>BitBox</td><td>BitBoxApp → Konto → Transaktionen exportieren (pro Wallet eine CSV)</td></tr>
+      <tr><td>21bitcoin</td><td>App → Profil → Transaktionshistorie exportieren</td></tr>
+      <tr><td>Bison</td><td>App → Profil → Steuer &amp; Reporting → Transaktionsübersicht (CSV)</td></tr>
+      <tr><td>Swissquote</td><td>Web → Konto → Transaktionen → CSV-Export</td></tr>
+      <tr><td>Strike</td><td>App/Web → Aktivität → Export</td></tr>
+      <tr><td>Pocket</td><td>Web → Verlauf → CSV herunterladen</td></tr>
+      <tr><td>Bisq</td><td>Portfolio → Trades → Exportieren</td></tr>
+    </tbody>
+  </table>
+  <p>
+    Käufe ohne CSV (Robosats, Bargeld, P2P) oder bei Brokern ohne eigenen Parser trägst du in eine
+    einfache <code>manual_buys.csv</code> ein — Details weiter unten.
+  </p>
+
+  <h2>Schritt 1: Dateien laden</h2>
+  <p>
+    Öffne deinen Zugangslink. Ziehe alle CSV-Dateien gleichzeitig in die gestrichelte Zone —
+    oder klicke sie an und wähle die Dateien aus. Die Reihenfolge ist egal, Dateinamen sind egal:
+    Die App erkennt jeden Broker automatisch am Inhalt der Datei.
+  </p>
+  <img src="steuertool-guide-start.png" alt="Startansicht des BTC Steuertools mit Drop-Zone" class="screenshot">
+  <p class="screenshot-caption">Die Startansicht: CSV-Dateien einfach in die gestrichelte Zone ziehen.</p>
+
+  <h2>Schritt 2: Erkennung prüfen — und noKYC-Wallets markieren</h2>
+  <p>
+    Nach dem Laden zeigt die Tabelle jede Datei mit dem erkannten Typ. Orange markierte Einträge
+    sind noKYC-Quellen — sie bleiben strikt vom Finanzamt-Report getrennt:
+  </p>
+  <img src="steuertool-guide-dateien.png" alt="Dateitabelle mit automatisch erkannten Broker-Typen und noKYC-Hinweis" class="screenshot">
+  <p class="screenshot-caption">Alle Dateien erkannt — Bisq und manuelle Käufe automatisch als noKYC (orange).</p>
+  <div class="warn-box">
+    <h3>⚠ Der eine Handgriff, den du selbst machen musst</h3>
+    <p style="margin-bottom:0;">
+      Eine BitBox-CSV verrät nicht, ob die Wallet KYC-Coins oder noKYC-Coins enthält — das weißt nur du.
+      Führst du eine dedizierte noKYC-Wallet (z.B. für Bisq-Eingänge), stelle sie im Dropdown auf
+      <strong>„BitBox-Wallet (noKYC)"</strong>. Sonst erscheint sie im Finanzamt-Report.
+      Die orange Hinweis-Box erinnert dich daran, solange BitBox-Wallets als KYC eingestuft sind.
+    </p>
+  </div>
+  <p>
+    Wird eine Datei nicht erkannt, ist die Berechnung gesperrt, bis du den Typ manuell wählst oder
+    die Datei auf „Ignorieren" stellst — so entsteht nie ein unvollständiger Report. Fehlt dein
+    Broker komplett? Schick die CSV-Kopfzeile (ohne echte Daten) an
+    <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a> — Parser werden laufend
+    ergänzt, und als Kunde hast du neue Broker sofort, ohne irgendetwas zu installieren.
+  </p>
+
+  <h2>Schritt 3: Report berechnen</h2>
+  <p>
+    Ein Klick auf <strong>„Report berechnen"</strong>. Beim allerersten Lauf lädt die App ihre
+    Python-Umgebung in den Browser — das dauert einmalig ein paar Sekunden, danach geht es schnell.
+    Das System-Log zeigt jeden Schritt:
+  </p>
+  <img src="steuertool-guide-log.png" alt="System-Log während der Berechnung" class="screenshot">
+  <p class="screenshot-caption">Das System-Log: jede Datei, jede Transaktion, volle Transparenz.</p>
+  <div class="box">
+    <p style="margin:0;">
+      <strong>Warum das dauert:</strong> Die App lädt eine komplette Python-Laufzeitumgebung in deinen
+      Browser, statt deine Daten auf einen Server zu schicken. Das ist der Preis für echte
+      Privatsphäre — und er wird nur beim ersten Lauf fällig.
+    </p>
+  </div>
+
+  <h2>Schritt 4: Die Ergebnisse verstehen</h2>
+  <p>
+    Pro Steuerjahr bekommst du mehrere Dokumente, umschaltbar über die Tabs:
+  </p>
+  <img src="steuertool-guide-report.png" alt="Ergebnisansicht mit Jahres-Tabs und Steuerreport" class="screenshot">
+  <p class="screenshot-caption">Jahres-Tabs oben, Dokument-Tabs darunter — hier der Steuerreport 2024.</p>
+  <table>
+    <thead><tr><th>Dokument</th><th>Inhalt</th><th>Fürs Finanzamt?</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Steuerreport</strong></td><td>Lesbarer Jahresbericht: Käufe, Veräußerungen mit FiFo-Zuordnung, Haltefristen, Zusammenfassung mit Freigrenzen-Check</td><td>✅ ja</td></tr>
+      <tr><td><strong>Steuernachweis</strong></td><td>Formaler, druckfertiger Nachweis für Steuererklärung oder Steuerberater</td><td>✅ ja</td></tr>
+      <tr><td><strong>Käufe / Verkäufe (CSV)</strong></td><td>Tabellen für Excel/LibreOffice</td><td>optional</td></tr>
+      <tr><td><strong>⚠ noKYC intern</strong></td><td>Deine private Übersicht der noKYC-Bestände</td><td>❌ niemals</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Schritt 5: noKYC intern — nur für dich</h2>
+  <p>
+    Bisq-Käufe, manuelle P2P-Käufe und noKYC-Wallets landen in einem separaten internen Dokument
+    mit eigenem FiFo-Pool. Es beginnt mit einem unübersehbaren Warnhinweis:
+  </p>
+  <img src="steuertool-guide-nokyc.png" alt="noKYC-interner Report mit rotem Warnbanner" class="screenshot">
+  <p class="screenshot-caption">Der rote Banner sagt alles: Diese Datei ist nur für deine eigene Buchführung.</p>
+  <p>
+    Wichtig: Die Trennung dient deiner Privatsphäre und sauberen internen Buchführung — auch Gewinne
+    aus noKYC-Verkäufen sind steuerpflichtig und gehören in die Steuererklärung. Das Dokument zeigt
+    dir dafür FiFo-Zuordnung, Haltefristen und Gewinne.
+  </p>
+
+  <h2>Schritt 6: Herunterladen und einreichen</h2>
+  <p>
+    Über die Download-Buttons holst du dir jedes Dokument einzeln oder alle auf einmal.
+    Beim Finanzamt reichst du <strong>zwei Dinge</strong> ein:
+  </p>
+  <ul>
+    <li>den <strong>Steuernachweis</strong> (<code>steuernachweis_JAHR.txt</code>) und</li>
+    <li>die <strong>Original-CSVs deiner Broker</strong> als Beleg, dass die Käufe echt sind.</li>
+  </ul>
+  <p>
+    Der Nachweis zeigt unter „Quelle" genau, welcher Broker welches Lot geliefert hat — jeder
+    Verkauf ist lückenlos rückverfolgbar.
+  </p>
+
+  <h2>Häufige Fragen</h2>
+  <h3>Was ist mit Käufen in CHF oder USD (Swissquote, Pocket)?</h3>
+  <p>
+    Die App rechnet sie automatisch mit dem historischen Tageskurs in EUR um. Dafür fragt dein
+    Browser (nur falls nötig) die offene Kurs-API frankfurter.app an — Datum ja, Beträge nein.
+  </p>
+  <h3>Mein Broker fehlt — was nun?</h3>
+  <p>
+    Übergangslösung: Käufe in <code>manual_buys.csv</code> eintragen
+    (<code>date,btc_amount,eur_amount,note,kyc</code> — bei KYC-Brokern wie Coinbase die Spalte
+    <code>kyc</code> auf <code>ja</code> setzen). Und parallel die CSV-Kopfzeile an
+    <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a> schicken —
+    neue Parser sind meist in wenigen Tagen drin.
+  </p>
+  <h3>Ist die Demo dasselbe wie die Vollversion?</h3>
+  <p>
+    Ja — gleicher Rechenkern, gleiche Oberfläche. Die Demo arbeitet nur mit fiktiven Beispieldaten;
+    eigene Dateien laden geht erst mit dem Zugangslink:
+  </p>
+  <img src="steuertool-guide-demo-cta.png" alt="Demo-Version mit gesperrtem Upload und Zugangshinweis" class="screenshot">
+  <p class="screenshot-caption">In der Demo ist der eigene Upload gesperrt — alles andere kannst du frei ausprobieren.</p>
+
+  <div class="cta-box">
+    <h3 style="margin-top:0;">Bereit?</h3>
+    <p>
+      <a href="https://api.alien-investor.org/books/steuertool-demo/" target="_blank" rel="noopener"><strong>→ Demo ausprobieren</strong></a><br>
+      <a href="btc-steuertool.html#zugang"><strong>→ Zugang holen — 29 €, 30 Tage, alle Steuerjahre</strong></a><br>
+      <a href="btc-steuertool.html">→ Hintergrund-Artikel: FiFo, Haltefrist &amp; Steuerrecht</a>
+    </p>
+  </div>
+
+  <div class="back-links" style="margin-top:40px; text-align:center; display:flex; flex-direction:column; gap:10px;">
+    <a href="btc-steuertool.html">← Zum BTC Steuertool Artikel</a>
+    <a href="index.html">← Zurück zur Zentrale</a>
+  </div>
+
+  <footer>
+    <p>Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    <p style="margin-top: 20px;"><strong>Haftungsausschluss:</strong><br><br>
+    Diese Anleitung ist keine Steuerberatung, sondern eine technische Bedienungsanleitung.
+    Für deine Steuererklärung bist du selbst verantwortlich.
+    <a href="steuertool-rechtliches.html">AGB, Widerruf &amp; Datenschutz</a></p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>
