@@ -58,6 +58,33 @@
       bist du nicht ausgeliefert."
     </blockquote>
 
+    <div class="box" id="web-version" style="box-shadow: 0 0 20px rgba(0, 255, 204, 0.25);">
+      <h3 style="margin-top:0;">🛸 NEU: Die Web-Version — CSV reinziehen, Report bekommen</h3>
+      <p>
+        Kein Python, kein Terminal, keine Installation: Das Steuertool gibt es jetzt als Web-App.
+        Du ziehst deine CSV-Exporte in den Browser, die App erkennt jeden Broker automatisch am
+        Dateiformat und berechnet alle Steuerjahre auf einmal — Steuerreport, formaler Nachweis
+        fürs Finanzamt und Excel-Exporte zum Download.
+      </p>
+      <p>
+        <strong>Und jetzt der Punkt, der sie von CoinTracking &amp; Co. unterscheidet:</strong>
+        Deine Dateien verlassen deinen Rechner nicht. Die komplette Berechnung läuft per
+        WebAssembly <em>lokal in deinem Browser</em> — es gibt keinen Upload, keinen Account,
+        kein Tracking. Der Server liefert nur die App aus und sieht deine Daten nie.
+        Der Rechenkern ist derselbe quelloffene Code wie im CLI-Tool — jeder kann prüfen,
+        dass das stimmt.
+      </p>
+      <ul>
+        <li>Alle unterstützten Quellen: BitBox, 21bitcoin, Bison, Swissquote, Strike, Pocket, Bisq + manuelle Käufe/Verkäufe</li>
+        <li>noKYC-Bestände strikt getrennt — wie im CLI-Tool</li>
+        <li>30 Tage Zugang, unbegrenzte Berechnungen, alle Updates inklusive</li>
+      </ul>
+      <p style="margin-top:1.5em;">
+        <a href="https://api.alien-investor.org/books/steuertool-demo/" target="_blank" rel="noopener"><strong>→ Demo kostenlos ausprobieren</strong></a> (mit fiktiven Beispieldaten)<br>
+        <a href="#zugang"><strong>→ Zugang holen — 29 €, 30 Tage</strong></a>
+      </p>
+    </div>
+
     <h2>1. Die Grundlage: Was das deutsche Steuerrecht sagt</h2>
     <p>
       Bitcoin gilt in Deutschland als privates Veräußerungsgeschäft (§ 23 EStG). Die Regeln:
@@ -125,6 +152,10 @@
     </p>
 
     <h2>3. Installation (einmalig)</h2>
+    <p style="color:#aaa; font-size:0.9em;">
+      <em>Kein Terminal-Fan? Dann nimm die <a href="#web-version">Web-Version</a> —
+      die folgenden Schritte 3–5 entfallen dort komplett.</em>
+    </p>
     <p>
       Du brauchst Python 3 — auf Linux und macOS ist das bereits installiert. Auf Windows musst du es ggf. erst installieren (<a href="https://python.org" target="_blank" rel="noopener">python.org</a>).
     </p>
@@ -293,6 +324,41 @@ mkdir Broker</pre>
       Was es ist: ein Werkzeug das dich informiert und vorbereitet — statt dich blind auf eine
       Cloud-App vertrauen zu lassen die du nicht kontrollierst.
     </p>
+
+    <h2 id="zugang">Zugang zur Web-Version</h2>
+    <p>
+      Die Web-Version kostet <strong>29 € einmalig</strong> — dafür bekommst du einen persönlichen
+      Zugangslink, <strong>30 Tage gültig</strong>, mit unbegrenzten Berechnungen für alle deine
+      Steuerjahre. Kommt während deiner Zugangszeit ein neuer Broker-Parser dazu, hast du ihn
+      automatisch. Kein Abo, keine automatische Verlängerung.
+    </p>
+    <p><strong>So funktioniert es:</strong></p>
+    <ol>
+      <li>Du schickst mir eine Bestell-Mail — am einfachsten über den Button unten, der Text ist schon vorbereitet.</li>
+      <li>Ich antworte mit den Zahlungsdetails: <strong>Bitcoin über Lightning oder On-Chain</strong> — oder Ko-fi, wenn du lieber mit Karte zahlst.</li>
+      <li>Nach Zahlungseingang kommt dein persönlicher Zugangslink per Mail — in der Regel innerhalb von 24 Stunden.</li>
+    </ol>
+    <p style="text-align:center; margin: 2em 0;">
+      <a href="mailto:kontakt@alien-investor.org?subject=Bestellung%20BTC%20Steuertool%20Web-Zugang&body=Hiermit%20bestelle%20ich%20den%20BTC%20Steuertool%20Web-Zugang%20(30%20Tage)%20f%C3%BCr%2029%20Euro.%0A%0AIch%20stimme%20ausdr%C3%BCcklich%20zu%2C%20dass%20ihr%20vor%20Ablauf%20der%20Widerrufsfrist%20mit%20der%20Ausf%C3%BChrung%20des%20Vertrags%20beginnt%20(Zusendung%20des%20Zugangslinks)%2C%20und%20best%C3%A4tige%20meine%20Kenntnis%2C%20dass%20ich%20dadurch%20mein%20Widerrufsrecht%20verliere.%20Die%20AGB%20(alien-investor.org%2Fsteuertool-rechtliches.html)%20habe%20ich%20gelesen%20und%20akzeptiere%20sie.%0A%0AGew%C3%BCnschter%20Zahlungsweg%20(Bitcoin%20Lightning%20%2F%20On-Chain%20%2F%20Ko-fi)%3A%20"
+         style="display:inline-block; background:#000; color:#00ffcc; border:1px solid #00ffcc; padding:0.8em 1.6em; border-radius:8px; font-weight:bold;">
+        ⚡ Jetzt bestellen — 29 €
+      </a>
+    </p>
+    <p style="color:#aaa; font-size:0.9em;">
+      Die Bestell-Mail enthält deine Zustimmung zur sofortigen Bereitstellung (dadurch erlischt
+      das Widerrufsrecht mit Zusendung des Links — so verlangt es das Gesetz bei digitalen Inhalten).
+      Alle Details: <a href="steuertool-rechtliches.html">AGB, Widerrufsbelehrung &amp; Datenschutz</a>.
+      Gemäß § 19 UStG wird keine Umsatzsteuer ausgewiesen.
+    </p>
+    <div class="box" style="border-color:#ffaa00; background:#0a0800;">
+      <p style="margin:0; color:#ddd;">
+        <strong style="color:#ffaa00;">Klartext:</strong> Das Tool ist eine reine Berechnungshilfe —
+        keine Steuerberatung. Mein Support hilft dir bei Technik und Dateiformaten
+        (fehlt dein Broker? Schick mir die CSV-Kopfzeile!), beantwortet aber keine individuellen
+        Steuerfragen — das darf nur ein Steuerberater. Für die Richtigkeit deiner Steuererklärung
+        bist du selbst verantwortlich.
+      </p>
+    </div>
 
     <div class="box">
       <h3>Open Source auf GitHub & Codeberg</h3>
