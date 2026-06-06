@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🧾 BTC Tax Tool Web – The Guide: From CSV Export to Tax Office Report | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Step-by-step guide for the BTC Tax Tool Web: load CSV files, mark noKYC wallets, compute the report and understand the results — all locally in your browser.">
+  <link rel="canonical" href="/en/steuertool-guide.html">
+  <link rel="alternate" hreflang="de" href="/steuertool-guide.html">
+  <style>
+    body { background-color: #000; color: #fff; font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 0 15px 20px 15px; }
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
+    h2 { margin-top: 2.5em; border-bottom: 1px solid #1a3a33; padding-bottom: 8px; }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+    em { color: #ccc; }
+    code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; font-family: monospace; }
+    .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
+    blockquote { border-left: 3px solid #00ffcc; margin: 2em 0; padding: 0.5em 1em; color: #ddd; background: #050505; font-style: italic; }
+    .screenshot { width: 100%; height: auto; border-radius: 4px; border: 1px solid #1a3a33; margin: 0.8em 0 0.4em 0; }
+    .screenshot-caption { text-align: center; font-size: 0.8em; color: #555; margin-bottom: 1.5em; }
+    .cta-box { border: 1px solid #00ffcc; background: #050505; padding: 1.5em; border-radius: 8px; margin: 2em 0; text-align: center; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
+    .box { border: 1px solid #00ffcc; background: #050505; padding: 1.5em; border-radius: 8px; margin: 2em 0; }
+    .warn-box { border: 1px solid #ff8844; background: #0a0500; padding: 1.5em; border-radius: 8px; margin: 2em 0; }
+    .warn-box h3 { color: #ff8844; margin-top: 0; }
+    table { width: 100%; border-collapse: collapse; margin: 2em 0; font-size: 0.9em; }
+    th, td { border: 1px solid #333; padding: 10px; text-align: left; }
+    th { color: #00ffcc; background-color: #111; }
+    tr:nth-child(even) { background-color: #050505; }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    footer { margin-top: 60px; padding: 20px; font-size: 0.85em; color: #666; border-top: 1px solid #222; text-align: center; }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="/en/index.html">← Back to Mission Control</a>
+  </div>
+
+  <h1><svg style="width:1.15em;height:1em;vertical-align:-0.12em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 36 32" xmlns="http://www.w3.org/2000/svg" aria-label="Guide" role="img"><defs><linearGradient id="book-bg-h1en" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0d2a28"/><stop offset="100%" stop-color="#060e12"/></linearGradient></defs><path d="M18 7 C14.5 3.8, 9 3, 4 4.5 L4 26 C9 24.5, 14.5 25.2, 18 28 C21.5 25.2, 27 24.5, 32 26 L32 4.5 C27 3, 21.5 3.8, 18 7 Z" fill="url(#book-bg-h1en)" stroke="#00ffcc" stroke-width="1.4" stroke-linejoin="round"/><line x1="18" y1="7" x2="18" y2="28" stroke="#00ffcc" stroke-width="1" opacity="0.8"/><line x1="7.5" y1="10" x2="14.5" y2="9.2" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.6"/><line x1="7.5" y1="14" x2="14.5" y2="13.2" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.6"/><line x1="7.5" y1="18" x2="14.5" y2="17.2" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.6"/><line x1="21.5" y1="9.2" x2="28.5" y2="10" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.6"/><line x1="21.5" y1="13.2" x2="28.5" y2="14" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.6"/><line x1="21.5" y1="17.2" x2="28.5" y2="18" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.6"/></svg> BTC Tax Tool Web – The Guide</h1>
+  <p class="byline"><em>From CSV export to tax office report — in 5 minutes, entirely in your browser</em></p>
+
+  <blockquote>
+    "Your transaction data never leaves your machine. No upload, no account, no tracking —
+    the entire calculation runs locally in your browser."
+  </blockquote>
+
+  <div class="box">
+    <p style="margin:0;">
+      <strong>Note:</strong> The app interface is currently <strong>German only</strong> — it computes
+    reports for the German tax system (§ 23 EStG, FiFo method, one-year holding period). This guide
+    walks you through every step so the German UI is no obstacle.</p>
+  </div>
+
+  <!-- YouTube video to follow — placeholder for embed -->
+
+  <div class="cta-box">
+    <p style="margin:0 0 0.8em 0;">Want to dive right in?</p>
+    <p style="margin:0;">
+      <a href="https://api.alien-investor.org/books/steuertool-demo/" target="_blank" rel="noopener"><strong>→ Open the demo</strong></a> (free, with sample data)
+      &nbsp;·&nbsp;
+      <a href="/btc-steuertool.html#zugang"><strong>→ Get access — €29</strong></a>
+      &nbsp;·&nbsp;
+      <a href="/en/steuertool-zahlung.html">→ Straight to payment</a>
+    </p>
+  </div>
+
+  <h2>Step 0: What you need</h2>
+  <p>
+    Just your CSV exports. Every broker and the BitBox app offer an export — downloading once a year
+    is enough:
+  </p>
+  <table>
+    <thead><tr><th>Source</th><th>Where to export</th></tr></thead>
+    <tbody>
+      <tr><td>BitBox</td><td>BitBoxApp → Account → Export transactions (one CSV per wallet)</td></tr>
+      <tr><td>21bitcoin</td><td>App → Profile → Export transaction history</td></tr>
+      <tr><td>Bison</td><td>App → Profile → Tax &amp; Reporting → Transaction overview (CSV)</td></tr>
+      <tr><td>Swissquote</td><td>Web → Account → Transactions → CSV export</td></tr>
+      <tr><td>Strike</td><td>App/Web → Activity → Export</td></tr>
+      <tr><td>Pocket</td><td>Web → History → Download CSV</td></tr>
+      <tr><td>Bisq</td><td>Portfolio → Trades → Export</td></tr>
+    </tbody>
+  </table>
+  <p>
+    Purchases without a CSV (Robosats, cash, P2P) or from brokers without a dedicated parser go into
+    a simple <code>manual_buys.csv</code> — details below.
+  </p>
+
+  <h2>Step 1: Load your files</h2>
+  <p>
+    Open your access link. Drag all CSV files into the dashed zone at once — or click it and select
+    the files. Order does not matter, file names do not matter: the app detects every broker
+    automatically from the file contents.
+  </p>
+  <img src="/steuertool-guide-start.png" alt="BTC Tax Tool start view with drop zone" class="screenshot">
+  <p class="screenshot-caption">The start view: simply drag your CSV files into the dashed zone.</p>
+
+  <h2>Step 2: Check detection — and mark noKYC wallets</h2>
+  <p>
+    After loading, the table shows each file with its detected type. Entries marked orange are
+    noKYC sources — they stay strictly separated from the tax office report:
+  </p>
+  <img src="/steuertool-guide-dateien.png" alt="File table with automatically detected broker types and noKYC hint" class="screenshot">
+  <p class="screenshot-caption">All files detected — Bisq and manual purchases automatically flagged as noKYC (orange).</p>
+  <div class="warn-box">
+    <h3>⚠ The one manual step</h3>
+    <p style="margin-bottom:0;">
+      A BitBox CSV cannot reveal whether the wallet holds KYC or noKYC coins — only you know that.
+      If you run a dedicated noKYC wallet (e.g. for Bisq deposits), switch it to
+      <strong>"BitBox-Wallet (noKYC)"</strong> in the dropdown. Otherwise it will appear in the
+      official report. The orange hint box reminds you as long as BitBox wallets are classified as KYC.
+    </p>
+  </div>
+  <p>
+    If a file is not recognized, the calculation stays locked until you pick a type manually or set
+    the file to "Ignorieren" (ignore) — so an incomplete report can never happen silently. Your broker
+    missing entirely? Send the CSV header line (no real data) to
+    <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a> — parsers are added
+    continuously, and as a customer you get new brokers instantly, nothing to install.
+  </p>
+
+  <h2>Step 3: Compute the report</h2>
+  <p>
+    One click on <strong>"Report berechnen"</strong> (compute report). On the very first run the app
+    loads its Python environment into the browser — that takes a few seconds once, afterwards it is
+    fast. The system log shows every step:
+  </p>
+  <img src="/steuertool-guide-log.png" alt="System log during calculation" class="screenshot">
+  <p class="screenshot-caption">The system log: every file, every transaction, full transparency.</p>
+  <div class="box">
+    <p style="margin:0;">
+      <strong>Why it takes a moment:</strong> The app loads a complete Python runtime into your
+      browser instead of sending your data to a server. That is the price of real privacy — and you
+      only pay it on the first run.
+    </p>
+  </div>
+
+  <h2>Step 4: Understanding the results</h2>
+  <p>
+    For every tax year you get several documents, switchable via tabs:
+  </p>
+  <img src="/steuertool-guide-report.png" alt="Results view with year tabs and tax report" class="screenshot">
+  <p class="screenshot-caption">Year tabs on top, document tabs below — here the 2024 tax report.</p>
+  <table>
+    <thead><tr><th>Document</th><th>Contents</th><th>For the tax office?</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Steuerreport</strong></td><td>Readable annual report: purchases, disposals with FiFo matching, holding periods, summary with exemption-limit check</td><td>✅ yes</td></tr>
+      <tr><td><strong>Steuernachweis</strong></td><td>Formal, print-ready statement for your tax return or tax advisor</td><td>✅ yes</td></tr>
+      <tr><td><strong>Käufe / Verkäufe (CSV)</strong></td><td>Tables for Excel/LibreOffice</td><td>optional</td></tr>
+      <tr><td><strong>⚠ noKYC intern</strong></td><td>Your private overview of noKYC holdings</td><td>❌ never</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Step 5: noKYC internal — for your eyes only</h2>
+  <p>
+    Bisq purchases, manual P2P purchases and noKYC wallets end up in a separate internal document
+    with its own FiFo pool. It starts with an unmissable warning:
+  </p>
+  <img src="/steuertool-guide-nokyc.png" alt="noKYC internal report with red warning banner" class="screenshot">
+  <p class="screenshot-caption">The red banner says it all: this file is for your own bookkeeping only.</p>
+  <p>
+    Important: the separation serves your privacy and clean internal bookkeeping — gains from noKYC
+    sales are still taxable and belong in your tax return. The document gives you FiFo matching,
+    holding periods and gains for exactly that purpose.
+  </p>
+
+  <h2>Step 6: Download and file</h2>
+  <p>
+    Use the download buttons to grab each document individually or all at once. You file
+    <strong>two things</strong> with the tax office:
+  </p>
+  <ul>
+    <li>the <strong>Steuernachweis</strong> (<code>steuernachweis_YEAR.txt</code>), and</li>
+    <li>your brokers' <strong>original CSVs</strong> as proof the purchases are real.</li>
+  </ul>
+  <p>
+    The statement shows under "Quelle" (source) exactly which broker supplied which lot — every sale
+    is fully traceable.
+  </p>
+
+  <h2>Frequently asked questions</h2>
+  <h3>What about purchases in CHF or USD (Swissquote, Pocket)?</h3>
+  <p>
+    The app converts them automatically using the historical daily rate. For that, your browser
+    (only if needed) queries the open exchange-rate API frankfurter.app — dates yes, amounts no.
+  </p>
+  <h3>My broker is missing — what now?</h3>
+  <p>
+    Interim solution: enter the purchases in <code>manual_buys.csv</code>
+    (<code>date,btc_amount,eur_amount,note,kyc</code> — for KYC brokers like Coinbase set the
+    <code>kyc</code> column to <code>ja</code>). And in parallel send the CSV header line to
+    <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a> — new parsers usually
+    land within days.
+  </p>
+  <h3>Is the demo the same as the full version?</h3>
+  <p>
+    Yes — same calculation engine, same interface. The demo only works with fictional sample data;
+    loading your own files requires the access link:
+  </p>
+  <img src="/steuertool-guide-demo-cta.png" alt="Demo version with locked upload and access hint" class="screenshot">
+  <p class="screenshot-caption">In the demo your own upload is locked — everything else is free to try.</p>
+
+  <div class="cta-box">
+    <h3 style="margin-top:0;">Ready?</h3>
+    <p>
+      <a href="https://api.alien-investor.org/books/steuertool-demo/" target="_blank" rel="noopener"><strong>→ Try the demo</strong></a><br>
+      <a href="/btc-steuertool.html#zugang"><strong>→ Get access — €29, 30 days, all tax years</strong></a><br>
+      <a href="/en/steuertool-zahlung.html">→ Straight to payment (Lightning, on-chain, bank transfer, Ko-fi)</a><br>
+      <a href="/en/btc-steuertool.html">→ Background article: FiFo, holding period &amp; German tax law</a>
+    </p>
+  </div>
+
+  <div class="back-links" style="margin-top:40px; text-align:center; display:flex; flex-direction:column; gap:10px;">
+    <a href="/en/btc-steuertool.html">← To the BTC Tax Tool article</a>
+    <a href="/en/index.html">← Back to Mission Control</a>
+  </div>
+
+  <footer>
+    <p>Contact: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    <p style="margin-top: 20px;"><strong>Disclaimer:</strong><br><br>
+    This guide is not tax advice — it is a technical manual. You remain responsible for your own
+    tax return. <a href="/steuertool-rechtliches.html">Terms, withdrawal &amp; privacy (German)</a></p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>
