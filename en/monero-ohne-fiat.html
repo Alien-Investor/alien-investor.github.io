@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Monero: Private Money and How to Get It Without Fiat | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Monero is digital cash among cryptocurrencies: private by default. The history from the Bytecoin scandal to today, the privacy tech explained, how to acquire XMR without touching the fiat system, and running your own Monero node on Umbrel.">
+  <link rel="canonical" href="/en/monero-ohne-fiat.html">
+  <link rel="alternate" hreflang="de" href="/monero-ohne-fiat.html">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 0 15px 20px 15px;
+    }
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
+    h2 { margin-top: 2.5em; border-bottom: 1px solid #1a3a33; padding-bottom: 8px; }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+    em { color: #ccc; }
+    .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
+    .box {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 0.6em; }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1em;
+      margin: 2em 0;
+    }
+    @media (max-width: 600px) {
+      .two-col { grid-template-columns: 1fr; }
+    }
+    .col-gut {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.2em;
+      border-radius: 8px;
+    }
+    .col-schlecht {
+      border: 1px solid #ff4466;
+      background: #0a0005;
+      padding: 1.2em;
+      border-radius: 8px;
+    }
+    .col-gut h3 { color: #00ffcc; margin-top: 0; }
+    .col-schlecht h3 { color: #ff4466; margin-top: 0; }
+    ul { padding-left: 1.2em; }
+    li { margin-bottom: 0.5em; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2em 0;
+      font-size: 0.95em;
+    }
+    th, td {
+      border: 1px solid #1a3a33;
+      padding: 0.6em 0.8em;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { color: #00ffcc; background: #030d0a; }
+    td { color: #ddd; }
+    .flow-diagram {
+      border: 1px solid #1a3a33;
+      background: #030d0a;
+      border-radius: 8px;
+      padding: 1.5em;
+      margin: 2em 0;
+      font-size: 0.95em;
+      color: #ccc;
+      text-align: center;
+      line-height: 2.2;
+    }
+    .flow-diagram .flow-arrow {
+      color: #00ffcc;
+      font-size: 1.1em;
+    }
+    .flow-diagram .flow-node {
+      display: inline-block;
+      border: 1px solid #00ffcc;
+      border-radius: 6px;
+      padding: 0.25em 0.8em;
+      color: #00ffcc;
+      background: #030d0a;
+      font-weight: bold;
+    }
+    .flow-diagram .flow-node-bad {
+      display: inline-block;
+      border: 1px solid #ff4466;
+      border-radius: 6px;
+      padding: 0.25em 0.8em;
+      color: #ff4466;
+      background: #0a0005;
+      font-weight: bold;
+    }
+    .flow-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5em;
+      margin: 0.4em 0;
+    }
+    .legal-box {
+      border: 1px solid #ffaa00;
+      background: #0a0800;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(255, 170, 0, 0.08);
+    }
+    .legal-box h3 { color: #ffaa00; margin-top: 0; }
+    .like-button {
+      margin: 3em 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+    }
+    .like-button button {
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+    .like-button button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
+    }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    .back-links { margin-top: 40px; text-align: center; display: flex; flex-direction: column; gap: 10px; }
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="/en/index.html">← Back to Mission Control</a>
+  </div>
+
+  <h1>Monero: Private Money and How to Get It Without Fiat</h1>
+  <p class="byline"><em>by Alien Investor</em></p>
+
+  <article id="content">
+
+    <p>
+      Bitcoin is transparent money. Every transaction sits on a public blockchain
+      forever, readable by chain analysis firms, exchanges and authorities.
+      If you want privacy, you have to earn it with tools like
+      <a href="/en/coinjoin-fungibility.html">CoinJoin</a>.
+    </p>
+    <p>
+      <strong>Monero</strong> flips that principle: privacy is the default,
+      not the add-on. Sender, receiver and amount are cryptographically hidden
+      in every transaction. There is no "transparent" Monero transaction you
+      could send by accident. That is what makes XMR the digital cash among
+      cryptocurrencies, and it is exactly why many centralized exchanges
+      have removed the coin from their listings.
+    </p>
+    <p>
+      This article answers four questions: Where does Monero come from?
+      How does the privacy tech work? How do you acquire XMR without touching
+      the fiat system? And does a Monero node run on your own Umbrel node?
+    </p>
+
+    <h2>The Origin: A Scam, a Fork and a Community Revolt</h2>
+
+    <p>
+      Monero's story does not start with Monero. It starts with a whitepaper.
+      In October 2013, a person or group under the pseudonym
+      <strong>Nicolas van Saberhagen</strong> published the
+      <strong>CryptoNote whitepaper</strong> (a first version dates back to
+      December 2012). The thesis: Bitcoin's transparent, traceable blockchain
+      is a critical weakness. CryptoNote described a protocol that enforces
+      untraceability and unlinkability mathematically instead of leaving them
+      to the user. As with Satoshi Nakamoto, the identity behind the pseudonym
+      remains unknown to this day.
+    </p>
+    <p>
+      The first implementation of the protocol was <strong>Bytecoin</strong>.
+      When the project surfaced on the Bitcointalk forum in March 2014,
+      the community quickly uncovered an apparent fraud: roughly
+      <strong>82 percent of the maximum supply had already been mined</strong>
+      before the public even learned the coin existed. The technology was
+      brilliant, the distribution a disaster.
+    </p>
+    <p>
+      The answer came on <strong>April 18, 2014</strong>: a Bitcointalk user
+      with the pseudonym <strong>thankful_for_today</strong> forked the
+      Bytecoin code and launched a fresh blockchain without a premine,
+      under the name <strong>BitMonero</strong>. "Monero" is Esperanto
+      for "coin". Everyone could mine on equal terms from block 1.
+    </p>
+    <p>
+      But the story had one more twist. thankful_for_today increasingly acted
+      against the community: he planned merge mining with the discredited
+      Bytecoin network, ignored objections and disappeared entirely for days.
+      In late April 2014, a group of seven community members, among them
+      <strong>Riccardo "fluffypony" Spagni</strong>, smooth, tacotime and
+      NoodleDoodle, took over the code repository, discarded the contested
+      plans and shortened the name to <strong>Monero</strong>.
+    </p>
+
+    <blockquote>
+      Monero was born against the grain twice: as a fork against a premine scam,
+      and as a community revolt against its own founder. There is no CEO,
+      no company, no marketing budget. Only code and consensus.
+    </blockquote>
+
+    <h2>The Privacy Tech: Four Layers, One Goal</h2>
+
+    <p>
+      Monero's privacy is not a single trick but a stack of mechanisms,
+      each hiding a different piece of information. All of them apply to
+      every transaction automatically, with no opt-in and no third party.
+    </p>
+
+    <table>
+      <tr>
+        <th>Mechanism</th>
+        <th>Hides</th>
+        <th>How it works</th>
+      </tr>
+      <tr>
+        <td><strong>Stealth addresses</strong></td>
+        <td>Receiver</td>
+        <td>A unique one-time destination address is generated for every payment.
+        The receiver's public wallet address never appears on the blockchain.
+        Only the receiver can identify incoming funds using their private view key.</td>
+      </tr>
+      <tr>
+        <td><strong>Ring signatures</strong></td>
+        <td>Sender</td>
+        <td>The output actually being spent is mixed with 15 randomly selected
+        decoy outputs from the blockchain's history (ring size 16). No observer
+        can tell which of the 16 is real. A unique key image prevents double
+        spends without revealing the sender.</td>
+      </tr>
+      <tr>
+        <td><strong>RingCT</strong></td>
+        <td>Amount</td>
+        <td>Pedersen commitments encrypt the amount. The network can verify
+        mathematically that inputs equal outputs plus fees without ever
+        seeing the numbers.</td>
+      </tr>
+      <tr>
+        <td><strong>Bulletproofs+</strong></td>
+        <td>(Integrity)</td>
+        <td>Zero-knowledge range proofs guarantee that the encrypted amounts
+        are positive. Without them, an attacker could create coins out of
+        thin air using negative amounts.</td>
+      </tr>
+      <tr>
+        <td><strong>Dandelion++</strong></td>
+        <td>IP address</td>
+        <td>A new transaction is first passed along a random chain of single
+        nodes (stem phase) before being broadcast to the whole network
+        (fluff phase). Anyone monitoring the network sees it appear far away
+        from its origin.</td>
+      </tr>
+    </table>
+
+    <div class="box">
+      <h3>The most important protocol upgrades</h3>
+      <ul>
+        <li><strong>January 2017:</strong> RingCT hides amounts (mandatory from September 2017)</li>
+        <li><strong>October 2018:</strong> Bulletproofs cut transaction size by roughly 80 percent</li>
+        <li><strong>May 2020:</strong> Dandelion++ protects the IP address during broadcast</li>
+        <li><strong>October 2020:</strong> CLSAG signatures, roughly 25 percent smaller transactions, roughly 20 percent faster verification</li>
+        <li><strong>August 2022:</strong> hard fork v15 brings Bulletproofs+, view tags and the ring size increase from 11 to 16</li>
+      </ul>
+    </div>
+
+    <p>
+      The next big step is <strong>FCMP++</strong> (Full-Chain Membership Proofs):
+      instead of a ring of 16 outputs, a transaction will prove that its input
+      exists <em>somewhere</em> in the blockchain's entire output history.
+      The anonymity set jumps from 16 to over a hundred million. As of June 2026,
+      FCMP++ is under development and going through audits; it is not yet live
+      on mainnet. To follow its status, watch the official announcements
+      on getmonero.org.
+    </p>
+
+    <h2>Acquiring Monero Without Touching the Fiat System</h2>
+
+    <p>
+      If you already hold Bitcoin in self-custody, ideally
+      <a href="/en/Bitcoin-No-KYC.html">acquired without KYC</a> or decoupled
+      from your identity via <a href="/en/coinjoin-fungibility.html">CoinJoin</a>,
+      you can make the move to XMR entirely without banks, exchanges or ID.
+      Four routes, ranked by privacy quality:
+    </p>
+
+    <div class="box">
+      <h3>1. Atomic swaps with eigenwallet (formerly UnstoppableSwap)</h3>
+      <p>
+        The most direct route: a cryptographically secured BTC-for-XMR trade
+        with no middleman, no arbitrator, no registration. Technically, the swaps
+        use adaptor signatures and a 2-of-2 multisig address with a timelock on
+        the Bitcoin side: when the buyer claims the BTC, the math automatically
+        reveals the key to the XMR for the seller. If either side aborts,
+        the timelock kicks in and both get their original coins back.
+        Nobody can run off with the other party's money.
+      </p>
+      <p>
+        Since the rebrand, the software is called <strong>eigenwallet</strong>.
+        The BTC-to-XMR direction is the well-supported one. Limitations:
+        the technology is young and maker liquidity is limited.
+        Test with small amounts first, then scale up.
+      </p>
+    </div>
+
+    <div class="box">
+      <h3>2. Bisq: proven order book, transparent foundation</h3>
+      <p>
+        <a href="/en/bisq-bitcoin-ohne-kyc.html">Bisq</a> runs over Tor and trades
+        the BTC/XMR pair with decent liquidity. Both parties lock a security
+        deposit into a 2-of-2 Bitcoin multisig, the XMR transfer goes directly
+        from wallet to wallet, and a mediation process handles disputes.
+        The catch for privacy purists: escrow and deposits live on the transparent
+        Bitcoin blockchain and are visible to chain analysis (address clustering).
+        Details on the anonymity of each route:
+        <a href="/en/bisq-zahlungsmethoden-anonym.html">Bisq payment methods compared</a>.
+      </p>
+    </div>
+
+    <div class="box">
+      <h3>3. RetoSwap (Haveno): XMR as the base currency</h3>
+      <p>
+        Haveno is a Bisq fork that attacks the privacy problem at its root:
+        escrow lives as a 2-of-3 multisig on the Monero blockchain instead of
+        the transparent Bitcoin chain. The best-known network went live in
+        May 2024 as Haveno-reto and has operated as <strong>RetoSwap</strong>
+        since late 2024. There are currently no protocol fees, only network fees.
+      </p>
+      <p>
+        Two caveats deserve honesty: an academic analysis (arXiv 2505.02392)
+        shows that certain Haveno trades can be linked across both blockchains
+        based on observable timing, transaction structure and fees. And in a
+        dispute, the arbitrator necessarily sees the trade details. Usable for
+        inconspicuous amounts; for maximum privacy, the atomic swap stays ahead.
+      </p>
+    </div>
+
+    <div class="box">
+      <h3>4. Mining: fresh coins with no counterparty</h3>
+      <p>
+        Monero's mining algorithm <strong>RandomX</strong> is deliberately
+        ASIC-resistant and optimized for ordinary CPUs. Using the decentralized
+        <strong>P2Pool</strong>, you can mine without an account and without a
+        pool operator. XMR earned this way comes straight from the protocol
+        and carries no history at all. The price is patience: mining is not a
+        way to move balances quickly but a slow trickle that depends on CPU
+        power and electricity costs.
+      </p>
+    </div>
+
+    <p>
+      If you do not own any no-KYC Bitcoin yet, get the raw material first via
+      <a href="/en/bisq-kaufen-anleitung.html">Bisq</a> or Lightning-based P2P
+      platforms like RoboSats, then swap onwards. RoboSats itself trades Bitcoin
+      against fiat and between on-chain and Lightning; it is the precursor,
+      not the XMR marketplace.
+    </p>
+
+    <div class="flow-diagram">
+      <div class="flow-row">
+        <span class="flow-node">BTC in self-custody</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-node">eigenwallet atomic swap</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-node">XMR in your own wallet</span>
+      </div>
+      <div style="margin: 0.6em 0; color: #00ffcc; font-size: 0.9em;">Alternatives: Bisq | RetoSwap | P2Pool mining</div>
+      <div style="margin-top: 1em; color: #ff4466; font-size: 0.88em;">
+        NOT: buying XMR on a KYC exchange and defeating the entire purpose
+      </div>
+    </div>
+
+    <h2>A Monero Node on Your Umbrel Node: Yes, It Works</h2>
+
+    <p>
+      If you use Monero seriously, you do not connect your wallet to strangers'
+      remote nodes, because a remote node operator sees your IP address and can
+      collect metadata. The solution is the same as with Bitcoin:
+      <a href="/en/bitcoin-full-node.html">your own node</a>.
+    </p>
+    <p>
+      The official Umbrel App Store has an app for exactly that:
+      <strong>"Monero Node"</strong> (developed by deverickapollo). One click
+      installs the Monero daemon, which downloads and validates the blockchain.
+      A Raspberry Pi 5 with 8 GB RAM has enough headroom for it, even running
+      alongside Bitcoin Core, Electrs and Lightning.
+    </p>
+
+    <div class="two-col">
+      <div class="col-gut">
+        <h3>What fits</h3>
+        <ul>
+          <li>8 GB RAM is enough for monerod next to the Bitcoin apps</li>
+          <li>Pruned node: only around 100 GB instead of around 250 GB (full)</li>
+          <li>Pruning removes 7/8 of the prunable ring data with no loss of security or privacy</li>
+          <li>Growth: around 20 GB per year</li>
+          <li>Tor access from anywhere is built into Umbrel</li>
+        </ul>
+      </div>
+      <div class="col-schlecht">
+        <h3>Watch out for</h3>
+        <ul>
+          <li>The Bitcoin blockchain now sits at around 750 GB</li>
+          <li>Electrs requires an unpruned Bitcoin node</li>
+          <li>With a 1 TB SSD, only the pruned variant fits for Monero; otherwise plan for a 2 TB NVMe</li>
+          <li>The initial sync is CPU-heavy: active cooling is mandatory</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="box">
+      <h3>Connecting your wallet to your own node</h3>
+      <ul>
+        <li><strong>On your home network:</strong> in Cake Wallet, Monerujo or Feather,
+        enter the Umbrel's local IP as the node, port <code>18081</code>. Disable SSL;
+        local connections run unencrypted inside your own network.</li>
+        <li><strong>On the go via Tor:</strong> copy the .onion address from the Monero app
+        in Umbrel and enter it in the wallet with port <code>18081</code>. Feather supports
+        Tor natively, Monerujo uses Orbot. No router port forwarding required.</li>
+        <li>The wallet then scans the blockchain exclusively through your own hardware.
+        No third-party node operator sees view keys, queries or your IP.</li>
+      </ul>
+    </div>
+
+    <h2>Legal Perspective</h2>
+
+    <div class="legal-box">
+      <h3>
+        <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #ffaa0088);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Notice" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#ffaa00" opacity="0.9" stroke="#ffaa00" stroke-width="0.5" stroke-linejoin="round"/></svg>
+        Notice (as of 2026)
+      </h3>
+      <p>
+        Owning, using and privately trading Monero is legal in Germany and the EU
+        under current law. What has changed is access: many centralized exchanges
+        have delisted XMR, and regulatory pressure on privacy coins at regulated
+        trading venues keeps growing. That is precisely why the P2P routes
+        described here are not a niche but the future of access.
+      </p>
+      <p>
+        <strong>This is not legal or tax advice.</strong> For tax purposes,
+        the same principles apply to XMR in most jurisdictions as to other
+        crypto assets, including the duty to document acquisitions and disposals.
+        If in doubt, seek individual advice.
+      </p>
+    </div>
+
+    <h2>Conclusion</h2>
+    <p>
+      Monero is the most consistent money experiment of the cypherpunk legacy:
+      born from a revolt against a scam, developed by a community with no company
+      behind it, and engineered so that privacy is not an option but the foundation.
+    </p>
+    <p>
+      For Bitcoiners, XMR is not a replacement but a complement: Bitcoin as hard,
+      transparent savings, Monero as digital cash for payments that are nobody's
+      business. The route there bypasses the fiat system entirely: an atomic swap
+      out of self-custody, validated by your own node in the living room.
+    </p>
+
+    <blockquote>
+      Holding Bitcoin means owning hard money. Mastering the swap to Monero
+      without an exchange or ID adds the freedom to spend it privately.
+    </blockquote>
+
+    <div class="box">
+      <h3>Further reading</h3>
+      <ul>
+        <li>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg>
+          <a href="/en/bisq-bitcoin-ohne-kyc.html">Bisq: Buying Bitcoin without KYC</a> · the decentralized alternative to KYC exchanges
+        </li>
+        <li>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg>
+          <a href="/en/bisq-zahlungsmethoden-anonym.html">Bisq: Which payment method is truly anonymous?</a> · detailed comparison
+        </li>
+        <li>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg>
+          <a href="/en/coinjoin-fungibility.html">CoinJoin: Cash-like privacy for Bitcoin</a> · privacy on the Bitcoin side
+        </li>
+        <li>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg>
+          <a href="/en/bitcoin-full-node.html">Why every Bitcoiner should run their own full node</a> · applies to Monero just the same
+        </li>
+        <li>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg>
+          <a href="/en/Bitcoin-No-KYC.html">Bitcoin without KYC 2026</a> · the complete overview
+        </li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <h3>Tools for real owners</h3>
+      <ul>
+        <li>
+          <strong>📖 GrapheneOS: Android in the Age of Surveillance</strong><br>
+          Setup, apps &amp; digital sovereignty — the complete handbook for your Google-free Android. DRM-free.<br>
+          <a href="https://alien-investor.org/buecher.html" target="_blank" rel="noopener">alien-investor.org/buecher.html</a> · also on Amazon KDP
+        </li>
+        <li>
+          <strong>Privacy &amp; Mail:</strong> Email, VPN and cloud without Big Tech — Proton.<br>
+          <a href="https://alien-investor.org/proton" target="_blank" rel="noopener">alien-investor.org/proton</a>
+        </li>
+        <li>
+          <strong>₿ Bitcoin in self-custody:</strong> Hardware wallet instead of an exchange account. Code <code>ALIENINVESTOR</code> = 5% discount on the BitBox.<br>
+          <a href="https://alien-investor.org/bitbox" target="_blank" rel="noopener">alien-investor.org/bitbox</a>
+        </li>
+        <li>
+          <strong>₿ Buying Bitcoin (Europe):</strong> Bitcoin-only, no shitcoin noise. Code <code>ALIENINVESTOR</code> = permanent −0.2 percentage points on fees.<br>
+          <a href="https://alien-investor.org/21bitcoin" target="_blank" rel="noopener">alien-investor.org/21bitcoin</a>
+        </li>
+      </ul>
+    </div>
+
+  </article>
+
+  <div class="like-button">
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-monero-en)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Like</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+
+  <script>
+    (function() {
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      const btn = document.getElementById('likeButton');
+      const msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      });
+    })();
+  </script>
+
+  <!-- ALIEN PHONE SERVICE -->
+  <div style="background:linear-gradient(135deg,rgba(0,20,20,0.7),rgba(0,8,15,0.9));border:1px solid rgba(0,255,204,0.35);border-radius:10px;padding:20px 22px;margin:2.5em 0 1em 0;">
+    <p style="color:#00ffcc;font-weight:bold;margin:0 0 6px 0;font-size:1.05em;"><svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="1" width="20" height="34" rx="3.5" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.9"/><rect x="5" y="6" width="14" height="22" rx="1" fill="#060e12" stroke="#00ffcc" stroke-width="0.5"/><circle cx="12" cy="31.5" r="1.8" fill="#00ffcc" opacity="0.75"/><line x1="9" y1="10" x2="15" y2="10" stroke="#00ffcc" stroke-width="0.5" opacity="0.65"/><line x1="9" y1="13" x2="15" y2="13" stroke="#00ffcc" stroke-width="0.5" opacity="0.45"/><line x1="9" y1="16" x2="13" y2="16" stroke="#00ffcc" stroke-width="0.5" opacity="0.35"/></svg> Alien Phone Service</p>
+    <p style="color:#aaa;font-size:0.88em;margin:0 0 12px 0;line-height:1.5;">You want GrapheneOS but don't want to flash it yourself? I buy the Pixel with cash, install GrapheneOS and optionally configure the digital bunker — delivered ready to use. Bitcoin or fiat.</p>
+    <a href="/en/grapheneos-flash-service.html" style="color:#00ffcc;font-weight:bold;font-size:0.88em;text-decoration:none;">To the Alien Phone Service →</a>
+  </div>
+
+  <div class="back-links">
+    <a href="/en/blog.html" style="font-size: 1.1em;">← Back to the blog overview</a>
+    <a href="/en/index.html" style="font-size: 1.1em;">← Back to Mission Control</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+    <h3 style="margin-bottom: 15px;">
+      <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energy" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Recharge energy
+      <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Donate)</span>
+    </h3>
+    <a href="/en/spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+      Send fuel to the mothership
+    </a>
+    <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+      Thank you for your support – for free content, financial sovereignty and the extraterrestrial resistance! <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-monero-en" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-monero-en" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-monero-en)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-monero-en)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg>
+    </p>
+  </div>
+
+  <footer>
+    <p><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Contact" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> Contact: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a> <span style="color:#666; font-size:0.85em;">·</span> <a href="/kontakt@alien-investor.org/pubkey.asc.key" download="kontakt-alien-investor-pubkey.asc" style="color:#555; font-size:0.8em; text-decoration:none;" title="PGP public key for encrypted messages">PGP Key</a></p>
+    <p style="margin-top: 20px;">
+      <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-monero-en" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-monero-en)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <strong>Disclaimer:</strong><br><br>
+      No financial, tax or legal advice. Personal opinion only. Think for yourself.
+    </p>
+    <p><a href="/en/impressum.html">Imprint</a> · <a href="/en/datenschutz.html">Privacy</a></p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>
