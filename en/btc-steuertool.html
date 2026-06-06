@@ -147,7 +147,18 @@
       no third-party servers. Your data stays with you.
     </p>
 
-    <h2>3. Installation (one-time)</h2>
+    <div class="box" style="border-color:#888; background:#050505;">
+      <h3 style="margin-top:0; color:#ccc;">From here on: the path for technical users (free CLI tool)</h3>
+      <p style="margin-bottom:0;">
+        Sections 3–5 below describe the <strong>free CLI tool from GitHub</strong> — for everyone
+        who likes working in a terminal.<br><br>
+        <strong>Using the <a href="#web-version">web version</a>? Then there is nothing to
+        install.</strong> No Python, no download, no setup — open your browser, drop your CSVs,
+        done. Skip straight to <a href="#finanzamt">section 6: What you submit to the tax office</a>.
+      </p>
+    </div>
+
+    <h2>3. Installing the CLI tool (one-time — GitHub version only)</h2>
     <p>
       You need Python 3 — on Linux and macOS it is already installed. On Windows you may need to install it first (<a href="https://python.org" target="_blank" rel="noopener">python.org</a>).
     </p>
@@ -165,7 +176,7 @@ python -m venv .venv
       That's it. No database, no server, no subscription.
     </p>
 
-    <h2>4. Place Your CSV Files</h2>
+    <h2>4. Place Your CSV Files (CLI)</h2>
     <p>
       Export your CSV files from the respective apps and place them in the corresponding folders.
       The folders <code>bitbox/</code> and <code>Broker/</code> don't exist yet after cloning —
@@ -273,7 +284,7 @@ mkdir Broker</pre>
       <p style="color:#aaa; font-size:0.9em;">Bisq is currently the only noKYC platform with a dedicated parser. The tool is <strong>MIT-licensed</strong> — anyone wanting to contribute an importer for Robosats, HodlHodl or other platforms is very welcome.</p>
     </div>
 
-    <h2>5. Your First Report</h2>
+    <h2>5. Your First Report (CLI)</h2>
     <p>
       Output a report for a specific year:
     </p>
@@ -291,7 +302,7 @@ mkdir Broker</pre>
       formal proof of calculation and optionally CSV tables for Excel.
     </p>
 
-    <h2>6. What You Submit to the Tax Office</h2>
+    <h2 id="finanzamt">6. What You Submit to the Tax Office (Web &amp; CLI)</h2>
     <p>
       The proof alone is not enough. The tax office wants to know that the purchase data is genuine.
       So always submit two parts:

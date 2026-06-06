@@ -152,11 +152,19 @@
       keine fremden Server. Deine Daten bleiben bei dir.
     </p>
 
-    <h2>3. Installation (einmalig)</h2>
-    <p style="color:#aaa; font-size:0.9em;">
-      <em>Kein Terminal-Fan? Dann nimm die <a href="#web-version">Web-Version</a> —
-      die folgenden Schritte 3–5 entfallen dort komplett.</em>
-    </p>
+    <div class="box" style="border-color:#888; background:#050505;">
+      <h3 style="margin-top:0; color:#ccc;">Ab hier: der Weg für Techniker (freies CLI-Tool)</h3>
+      <p style="margin-bottom:0;">
+        Die folgenden Abschnitte 3–5 beschreiben das <strong>kostenlose CLI-Tool von GitHub</strong> —
+        für alle, die gern im Terminal arbeiten.<br><br>
+        <strong>Nutzt du die <a href="#web-version">Web-Version</a>? Dann gibt es nichts zu
+        installieren.</strong> Kein Python, kein Download, kein Setup — Browser öffnen, CSVs
+        reinziehen, fertig. Spring direkt zu <a href="#finanzamt">Abschnitt 6: Was du dem
+        Finanzamt gibst</a>.
+      </p>
+    </div>
+
+    <h2>3. CLI-Tool installieren (einmalig — nur GitHub-Version)</h2>
     <p>
       Du brauchst Python 3 — auf Linux und macOS ist das bereits installiert. Auf Windows musst du es ggf. erst installieren (<a href="https://python.org" target="_blank" rel="noopener">python.org</a>).
     </p>
@@ -174,7 +182,7 @@ python -m venv .venv
       Das war es. Keine Datenbank, kein Server, kein Abo.
     </p>
 
-    <h2>4. Deine CSV-Dateien ablegen</h2>
+    <h2>4. Deine CSV-Dateien ablegen (CLI)</h2>
     <p>
       Exportiere deine CSV-Dateien aus den jeweiligen Apps und lege sie in die entsprechenden Ordner.
       Die Ordner <code>bitbox/</code> und <code>Broker/</code> existieren nach dem Klonen noch nicht —
@@ -283,7 +291,7 @@ mkdir Broker</pre>
       <p style="color:#aaa; font-size:0.9em;">Bisq ist aktuell die einzige noKYC-Plattform mit dediziertem Parser. Das Tool steht unter <strong>MIT-Lizenz</strong> — wer einen Importer für Robosats, HodlHodl oder andere Plattformen beisteuern möchte, ist herzlich willkommen.</p>
     </div>
 
-    <h2>5. Der erste Report</h2>
+    <h2>5. Der erste Report (CLI)</h2>
     <p>
       Einen Report für ein bestimmtes Jahr ausgeben:
     </p>
@@ -301,7 +309,7 @@ mkdir Broker</pre>
       formaler Nachweis und optional CSV-Tabellen für Excel.
     </p>
 
-    <h2>6. Was du dem Finanzamt gibst</h2>
+    <h2 id="finanzamt">6. Was du dem Finanzamt gibst (Web &amp; CLI)</h2>
     <p>
       Der Nachweis allein reicht nicht. Das Finanzamt will wissen, dass die Kaufdaten echt sind.
       Deshalb immer zwei Teile einreichen:
