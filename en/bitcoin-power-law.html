@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bitcoin Power Law: Is the Bottom In? | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bitcoin trades at roughly half its all-time high. The power law model gives a measurable answer to the bottom question: the price sits almost exactly on the support line that has held every bear market since 2011. What the model can do, what it can't, and how to check it live.">
+  <link rel="canonical" href="/en/bitcoin-power-law.html">
+  <link rel="alternate" hreflang="de" href="/bitcoin-power-law.html">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 0 15px 20px 15px;
+    }
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
+    h2 { margin-top: 2.5em; border-bottom: 1px solid #1a3a33; padding-bottom: 8px; }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+    em { color: #ccc; }
+    .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
+    .box {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 0.6em; }
+    ul { padding-left: 1.2em; }
+    li { margin-bottom: 0.5em; }
+    .screenshot {
+      width: 100%;
+      border: 1px solid #1a3a33;
+      border-radius: 8px;
+      margin: 1.5em 0 0.4em 0;
+      display: block;
+    }
+    .screenshot-caption {
+      color: #888;
+      font-size: 0.85em;
+      text-align: center;
+      margin: 0 0 2em 0;
+    }
+    table.pl-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5em 0;
+      font-size: 0.95em;
+    }
+    table.pl-table th, table.pl-table td {
+      border: 1px solid #1a3a33;
+      padding: 0.6em 0.9em;
+      text-align: left;
+    }
+    table.pl-table th { color: #00ffcc; background: #050505; }
+    table.pl-table td { color: #ddd; }
+    .like-button {
+      margin: 3em 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+    }
+    .like-button button {
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+    .like-button button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
+    }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    .back-links { margin-top: 40px; text-align: center; display: flex; flex-direction: column; gap: 10px; }
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="/en/index.html">← Back to Home</a>
+  </div>
+
+  <h1>Bitcoin Power Law: Is the Bottom In?</h1>
+  <p class="byline"><em>by Alien Investor</em></p>
+
+  <article id="content">
+
+    <p>
+      Bitcoin trades at roughly half its all-time high of $126,080. The timeline is full of
+      crash prophets and hopium, depending on the camp. Both are noise. There is, however,
+      one model that gives a measurable answer to the same question: the <strong>power law</strong>.
+      And right now its answer is remarkably specific. The price sits almost exactly on the line
+      that has held every single bear market bottom since 2011.
+    </p>
+
+    <h2>What Is the Power Law?</h2>
+    <p>
+      Plot the Bitcoin price against time since the genesis block (January 3, 2009) on a
+      double-logarithmic scale, and for over 15 years it has stayed remarkably close to a
+      straight line. A straight line in a log-log chart means the price grows according to
+      a power law. Not exponentially, but flattening over time while still climbing.
+    </p>
+    <p>
+      The widely used calibration of the model, popularized by physicist Giovanni Santostasi:
+    </p>
+    <blockquote>
+      price ≈ 1.0117·10⁻¹⁷ × d<sup>5.82</sup> &nbsp;&nbsp;(d = days since the genesis block)
+    </blockquote>
+    <p>
+      The common explanation behind it: Bitcoin grows like a network. More users make the
+      network more valuable, and the higher value attracts new users. Feedback loops like
+      this produce power laws in many systems, from cities to social networks. Whether the
+      explanation is correct remains open. That the curve has fit so far is measurable.
+    </p>
+
+    <h2>The Corridor: Trend and Support</h2>
+    <p>
+      The formula yields two lines that together form the power law corridor:
+    </p>
+    <ul>
+      <li><strong>Trend line:</strong> the model's fair value. The price oscillates around
+        this line in cycles, sometimes far above, sometimes well below.</li>
+      <li><strong>Support:</strong> trend line × 0.42. No bear market bottom has ever broken
+        this line sustainably. The cycle bottom in November 2022 (around $15,700) landed
+        exactly on 0.42× trend.</li>
+    </ul>
+    <p>
+      There is deliberately no fixed upper boundary. Cycle tops keep landing closer to the
+      trend line each cycle, and a reliable resistance line simply does not exist:
+    </p>
+
+    <table class="pl-table">
+      <tr><th>Cycle top</th><th>Price relative to the trend line</th></tr>
+      <tr><td>December 2017</td><td>6.8× above trend</td></tr>
+      <tr><td>November 2021</td><td>2.9× above trend</td></tr>
+      <tr><td>2025 (ATH $126,080)</td><td>1.2× above trend</td></tr>
+    </table>
+
+    <p>
+      This convergence is an observation in its own right: the euphoria spikes are shrinking,
+      and the price hugs the model ever more closely. If that continues, it points to
+      declining volatility. Bitcoin is maturing.
+    </p>
+
+    <h2>Where the Price Stands Today</h2>
+    <p>
+      As of June 6, 2026, day 6,363 since the genesis block:
+    </p>
+    <ul>
+      <li>Price: around <strong>$60,300</strong></li>
+      <li>Power law trend: <strong>$138,848</strong> (price sits 56.5% below it)</li>
+      <li>Support: <strong>$58,316</strong> (price sits just a few percent above it)</li>
+      <li>Corridor position: <strong>4%</strong> (0% = support, 100% = trend line)</li>
+    </ul>
+
+    <img class="screenshot" src="/powerlaw-chart-en.png" alt="Bitcoin power law chart with trend line, support and corridor on alien-investor.org, June 2026: price sits almost on the support line">
+    <p class="screenshot-caption">The new power law chart on alien-investor.org: price (green), trend line (white dashed), support (red dashed). Status: AT SUPPORT.</p>
+
+    <p>
+      Translated: the price trades in the zone where the last major bottom formed in
+      November 2022. Historically, this exact zone was the model's strongest accumulation
+      area. Everyone who bought in this zone was right in hindsight. So far.
+    </p>
+
+    <h2>The Catch: The Support Doesn't Wait</h2>
+    <p>
+      What many overlook: the support line is not a horizontal mark like a classic chart level.
+      It rises along with the model, currently about 2.8% per month, roughly 38% per year.
+      That has an uncomfortable consequence: there is no comfortable grinding along the bottom.
+      If the price just moves sideways for a few weeks, the support catches up with it.
+    </p>
+    <p>
+      Which means the model faces its hardest test since 2022. Either the price turns up in
+      this zone, as it did in every previous cycle. Or the power law gets falsified live over
+      the coming months.
+    </p>
+
+    <h2>What the Model Cannot Do</h2>
+    <p>
+      The power law is a statistical observation across roughly 6,400 days, not a law of
+      nature. Three things belong in any honest assessment:
+    </p>
+    <ul>
+      <li><strong>The exponent depends on the data window.</strong> Newer estimates sit
+        closer to ~5.7 than 5.82. The model is a curve fit, not a derivation.</li>
+      <li><strong>It knows nothing about shocks.</strong> Regulation, macro crises, black
+        swans: none of that lives in a formula.</li>
+      <li><strong>A break of the support would not be a buy signal.</strong> It would simply
+        mean the model was wrong. Not that the price has to come back.</li>
+    </ul>
+    <p>
+      Anyone reading the model as a guarantee has misunderstood it. Anyone using it as a map
+      for orientation gets something rare: a sober benchmark in a market that runs on mood.
+    </p>
+
+    <h2>Check It Yourself: Live and Free</h2>
+    <p>
+      That is exactly why the power law model is now a permanent part of the Alien Investor
+      tools. No signup, no tracking, calculated live on every page load:
+    </p>
+    <ul>
+      <li><a href="https://api.alien-investor.org/charts.html?lang=en#powerlaw" target="_blank" rel="noopener">The power law chart</a>:
+        price since 2014 on a log scale, trend line, support, corridor, and a projection
+        24 months into the future. Plus a collapsible explanation of the model and an
+        automatic Alien Assessment that adapts to the current situation.</li>
+      <li><a href="https://api.alien-investor.org/mission-control-v2.html?lang=en" target="_blank" rel="noopener">Mission Control</a>:
+        the power law card right on the dashboard, next to prices, Fear &amp; Greed and markets.</li>
+    </ul>
+
+    <img class="screenshot" src="/powerlaw-mission-control-en.png" alt="Mission Control dashboard on alien-investor.org with the new power law card: deviation from trend and verdict at a glance">
+    <p class="screenshot-caption">Mission Control with the new power law card: deviation from trend, verdict and the key model values at a glance.</p>
+
+    <p>
+      Both tools are bilingual (EN/DE toggle) and always show the current state. The numbers
+      in this article are a snapshot from June 6, 2026. What the corridor says today, you
+      can see there.
+    </p>
+
+    <h2>Conclusion</h2>
+    <p>
+      Is the bottom in? The power law says: if the model continues to hold, then yes,
+      roughly here. The zone where the price currently trades is where bear markets have
+      historically ended. At the same time, the support keeps rising month after month and
+      leaves the price little time for indecision.
+    </p>
+    <p>
+      So the honest answer is: the model's bottom is practically reached. Whether it is the
+      actual bottom will be decided by the market over the coming weeks. Either way, the
+      corridor delivers what moods never do: a benchmark you can verify.
+    </p>
+
+    <blockquote>
+      Models are maps, not contracts. But whoever travels without a map ends up following
+      the mood of the crowd.
+    </blockquote>
+
+    <div class="box">
+      <h3>Further Reading</h3>
+      <ul>
+        <li>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg>
+          <a href="/en/wie-ich-den-bitcoin-kurs-bewerte.html">How I Evaluate the Bitcoin Price</a> — models and metrics at a glance
+        </li>
+        <li>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg>
+          <a href="/en/self-custody.html">Self-Custody: Why Bitcoin Without Your Own Keys Loses Its Point</a>
+        </li>
+        <li>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg>
+          <a href="/en/bisq-bitcoin-ohne-kyc.html">Bisq: Buying Bitcoin Without KYC</a> — the decentralized alternative to exchanges
+        </li>
+        <li>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg>
+          <a href="/en/Bitcoin-No-KYC.html">Bitcoin Without KYC 2026</a> — the complete overview
+        </li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <h3>Tools for Real Owners</h3>
+      <ul>
+        <li>
+          <strong>📖 GrapheneOS: Android in the Age of Surveillance</strong><br>
+          Setup, apps &amp; digital sovereignty — the complete guide to your Google-free Android. DRM-free.<br>
+          <a href="https://alien-investor.org/buecher.html" target="_blank" rel="noopener">alien-investor.org/buecher.html</a> · also on Amazon KDP
+        </li>
+        <li>
+          <strong>Privacy &amp; Email:</strong> Email, VPN and cloud without Big Tech — Proton.<br>
+          <a href="https://alien-investor.org/proton" target="_blank" rel="noopener">alien-investor.org/proton</a>
+        </li>
+        <li>
+          <strong>₿ Bitcoin in Self-Custody:</strong> Hardware wallet instead of exchange account. Code <code>ALIENINVESTOR</code> = 5% discount on the BitBox.<br>
+          <a href="https://alien-investor.org/bitbox" target="_blank" rel="noopener">alien-investor.org/bitbox</a>
+        </li>
+        <li>
+          <strong>₿ Buy Bitcoin (Europe):</strong> Bitcoin-only, no altcoin noise. Code <code>ALIENINVESTOR</code> = permanent −0.2 percentage points in fees.<br>
+          <a href="https://alien-investor.org/21bitcoin" target="_blank" rel="noopener">alien-investor.org/21bitcoin</a>
+        </li>
+      </ul>
+    </div>
+
+  </article>
+
+  <div class="like-button">
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-plen26)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Like</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+
+  <script>
+    (function() {
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      const btn = document.getElementById('likeButton');
+      const msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '✓ Thanks!';
+        msg.textContent = 'Glad you enjoyed the article.';
+      });
+    })();
+  </script>
+
+  <!-- ALIEN PHONE SERVICE -->
+  <div style="background:linear-gradient(135deg,rgba(0,20,20,0.7),rgba(0,8,15,0.9));border:1px solid rgba(0,255,204,0.35);border-radius:10px;padding:20px 22px;margin:2.5em 0 1em 0;">
+    <p style="color:#00ffcc;font-weight:bold;margin:0 0 6px 0;font-size:1.05em;"><svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="1" width="20" height="34" rx="3.5" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.9"/><rect x="5" y="6" width="14" height="22" rx="1" fill="#060e12" stroke="#00ffcc" stroke-width="0.5"/><circle cx="12" cy="31.5" r="1.8" fill="#00ffcc" opacity="0.75"/><line x1="9" y1="10" x2="15" y2="10" stroke="#00ffcc" stroke-width="0.5" opacity="0.65"/><line x1="9" y1="13" x2="15" y2="13" stroke="#00ffcc" stroke-width="0.5" opacity="0.45"/><line x1="9" y1="16" x2="13" y2="16" stroke="#00ffcc" stroke-width="0.5" opacity="0.35"/></svg> Alien Phone Service</p>
+    <p style="color:#aaa;font-size:0.88em;margin:0 0 12px 0;line-height:1.5;">Want GrapheneOS but don't want to flash it yourself? I source a clean Pixel, install GrapheneOS, and optionally configure the digital bunker — delivered ready to use. Bitcoin or fiat.</p>
+    <a href="/grapheneos-flash-service.html" style="color:#00ffcc;font-weight:bold;font-size:0.88em;text-decoration:none;">Alien Phone Service →</a>
+  </div>
+
+  <div class="back-links">
+    <a href="/en/blog.html" style="font-size: 1.1em;">← Back to Blog</a>
+    <a href="/en/index.html" style="font-size: 1.1em;">← Back to Home</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+    <h3 style="margin-bottom: 15px;">
+      <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energy" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Recharge Energy
+      <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Donate)</span>
+    </h3>
+    <a href="/en/spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+      Send fuel to the mothership
+    </a>
+    <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+      Thanks for your support — for free content, financial sovereignty, and the extraterrestrial resistance! <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-plen26" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-plen26" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-plen26)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-plen26)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg>
+    </p>
+  </div>
+
+  <footer>
+    <p><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Contact" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> Contact: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a> <span style="color:#666; font-size:0.85em;">·</span> <a href="/kontakt@alien-investor.org/pubkey.asc.key" download="kontakt-alien-investor-pubkey.asc" style="color:#555; font-size:0.8em; text-decoration:none;" title="PGP public key for encrypted messages">PGP Key</a></p>
+    <p style="margin-top: 20px;">
+      <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-plen26" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-plen26)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <strong>Disclaimer:</strong><br><br>
+      No financial, tax, or legal advice. Personal opinion only. Think for yourself.
+    </p>
+    <p><a href="/impressum.html">Imprint</a> · <a href="/datenschutz.html">Privacy Policy</a></p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>
