@@ -271,7 +271,7 @@ mkdir Broker</pre>
 
     <div class="box" style="border-color: #ffaa00; background: #0a0800;">
       <h3 style="color: #ffaa00; margin-top: 0;">⚡ Update June 2026: Bisq Direct Import + Strict noKYC Separation</h3>
-      <p>The tool now supports direct import of the Bisq trade history CSV. Simply place the export from Bisq ("Portfolio → Trades → Export") as <code>bisq.csv</code> in the <code>Broker/</code> folder — the tool automatically recognises all completed purchases.</p>
+      <p>The tool now supports direct import of the Bisq trade history CSV. Simply place the export from Bisq ("Portfolio → History → Export") as <code>bisq.csv</code> in the <code>Broker/</code> folder — the tool automatically recognises all completed purchases.</p>
       <ul>
         <li><strong>Bisq direct import:</strong> No more manual entry. The parser reads price, BTC amount, EUR amount and fees directly from the Bisq export.</li>
         <li><strong>Dedicated noKYC file:</strong> noKYC purchases do not appear in any tax-office document. They go into a separate file <code>nokyc_intern_YEAR.txt</code> — with a clear warning header at the top so it can never accidentally be handed in along with the official documents.</li>
