@@ -5,6 +5,13 @@
   var deUrl = '/' + file;
   var enUrl = '/en/' + file;
 
+  // Englische Slugs weichen oft vom deutschen ab (z.B. en/1968-intelligence-operation.html).
+  // Daher: explizite hreflang-Alternates der Seite bevorzugen, sonst auf gleichen Dateinamen zurückfallen.
+  var deLink = document.querySelector('link[rel="alternate"][hreflang="de"]');
+  var enLink = document.querySelector('link[rel="alternate"][hreflang="en"]');
+  if (deLink && deLink.getAttribute('href')) deUrl = deLink.getAttribute('href');
+  if (enLink && enLink.getAttribute('href')) enUrl = enLink.getAttribute('href');
+
   var css = document.createElement('style');
   css.textContent =
     '.lang-toggle{display:flex;align-items:center;gap:6px;font-size:0.85em;white-space:nowrap}' +
