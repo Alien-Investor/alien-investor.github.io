@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sachwert-Tresor — offline Bitcoin, gold & silver tracker | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sachwert-Tresor: a local, encrypted holdings tracker for Bitcoin, gold and silver. Fully offline, no account, no KYC, no cloud. Open source, free.">
+  <link rel="canonical" href="/en/sachwert-tresor.html">
+  <link rel="alternate" hreflang="de" href="/sachwert-tresor.html">
+  <link rel="alternate" hreflang="en" href="/en/sachwert-tresor.html">
+  <style>
+    body { background-color:#000; color:#fff; font-family:Arial,sans-serif; line-height:1.6; max-width:800px; margin:auto; padding:0 15px 20px 15px; }
+    h1,h2,h3 { color:#00ffcc; }
+    h1 { margin-top:40px; text-align:center; }
+    a { color:#00ffcc; text-decoration:none; transition:all 0.2s ease; }
+    a:hover { color:#fff; text-shadow:0 0 8px #00ffcc; }
+    code { background-color:#111; padding:0.2em 0.4em; border-radius:4px; color:#0f0; font-family:monospace; word-break:break-all; }
+    em { color:#ccc; }
+    .byline { margin-top:-0.8em; margin-bottom:2em; color:#ccc; font-style:italic; text-align:center; }
+    .box { border:1px solid #00ffcc; background:#050505; padding:1.5em; border-radius:8px; margin:2em 0; box-shadow:0 0 10px rgba(0,255,204,0.1); }
+    .box h3 { margin-top:0; }
+    .box ul { padding-left:1.2em; } .box li { margin-bottom:0.8em; }
+    .cta { margin:2em 0; padding:1.5em; border:1px dashed #00ffcc; border-radius:8px; text-align:center; background-color:#050505; }
+    .cta a.btn { display:inline-block; margin-top:0.5em; padding:0.7em 1.4em; border:1px solid #00ffcc; border-radius:8px; color:#00ffcc; font-weight:bold; }
+    .cta a.btn:hover { background:#00ffcc; color:#000; box-shadow:0 0 15px #00ffcc; }
+    .like-button { margin:3em 0; display:flex; align-items:center; justify-content:center; gap:1em; }
+    .like-button button { background:#000; color:#00ffcc; border:1px solid #00ffcc; padding:0.6em 1.2em; border-radius:8px; cursor:pointer; font-weight:bold; transition:all 0.2s ease; }
+    .like-button button:hover { background:#00ffcc; color:#000; box-shadow:0 0 15px #00ffcc; }
+    .like-button button:disabled { border-color:#444; color:#888; background:#111; cursor:default; }
+    .top-nav { padding:10px 0; font-size:0.9em; }
+    .back-links { margin-top:40px; text-align:center; display:flex; flex-direction:column; gap:10px; }
+    footer { margin-top:60px; padding:20px; font-size:0.85em; color:#666; border-top:1px solid #222; text-align:center; }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="/en/index.html">← Back to base</a>
+  </div>
+
+  <h1>Sachwert-Tresor</h1>
+  <p class="byline"><em>Your Bitcoin, gold and silver holdings — offline, encrypted, in your hands.</em></p>
+
+  <article id="content">
+
+    <p>
+      Most portfolio apps want an account, an email, often even an exchange login.
+      They pull your prices from the network, store your holdings in the cloud, and end up knowing
+      more about your wealth than you would like. The <strong>Sachwert-Tresor</strong> ("tangible-asset vault")
+      does the opposite: a single, local vault for your <strong>Bitcoin, gold and silver</strong> — fully
+      <strong>offline</strong>, no account, no KYC, no cloud. Your data never leaves your device in plaintext.
+    </p>
+
+    <div class="cta">
+      <h3 style="margin-top:0;">Try it right in your browser</h3>
+      <p>No download, no account — the web version runs instantly, everything stays in your browser.</p>
+      <a class="btn" href="https://api.alien-investor.org/tresor/" target="_blank" rel="noopener">→ Open the Sachwert-Tresor</a>
+    </div>
+
+    <h2>What it does</h2>
+    <div class="box">
+      <ul>
+        <li><strong>Bitcoin, gold & silver</strong> — record buys, sells and withdrawals. Metals by count × denomination (coin/bar, fineness, dealer).</li>
+        <li><strong>Net holdings & value</strong> — what you actually hold, plus invested cost. You enter current prices yourself (deliberately no network lookup) → value and profit/loss from that.</li>
+        <li><strong>KYC separation</strong> — broker buys (KYC) and private/P2P (noKYC) stay cleanly separated.</li>
+        <li><strong>Tax-tool export</strong> — exports <code>manual_buys.csv</code> / <code>manual_sales.csv</code> straight into the format of the <a href="/en/btc-steuertool.html">BTC tax tool</a>.</li>
+        <li><strong>Encrypted backup & sync</strong> — the <code>.vault</code> file is fully encrypted and can be synced between devices via Syncthing, without any cloud.</li>
+        <li><strong>Bilingual</strong> — German and English, switchable in the app.</li>
+      </ul>
+    </div>
+
+    <h2>Why offline?</h2>
+    <p>
+      A holdings tracker is a map of your wealth. That does not belong on someone else's server.
+      The Sachwert-Tresor makes <strong>not a single network request</strong> — no price APIs, no trackers,
+      no external scripts. You enter Bitcoin and metal prices manually. That is less convenient than a
+      live ticker, but it is the price for nobody listening in.
+    </p>
+
+    <h2>Security — and verifiable</h2>
+    <div class="box">
+      <ul>
+        <li>Encryption with <strong>AES-256-GCM</strong>, key derived from your passphrase via <strong>PBKDF2-SHA256 (600,000 iterations)</strong> — all through the browser's native <strong>WebCrypto</strong>, no third-party crypto code.</li>
+        <li>Optional <strong>2FA second factor</strong> (Aegis / TOTP, RFC 6238) on unlock.</li>
+        <li><strong>No reset, no backdoor.</strong> Forget the passphrase and the data is gone — but nobody else can get in either.</li>
+        <li><strong>Open source.</strong> The full client code is public — you don't have to trust, you can check that nothing phones home.</li>
+      </ul>
+    </div>
+
+    <h2>How to get it</h2>
+    <p><strong>In the browser (desktop & phone):</strong> just open <a href="https://api.alien-investor.org/tresor/" target="_blank" rel="noopener">api.alien-investor.org/tresor/</a>.</p>
+    <p>
+      <strong>As an app (Android / GrapheneOS):</strong> deliberately not on the Google Play Store, but via
+      signed releases. Easiest through <a href="https://github.com/ImranR98/Obtainium" target="_blank" rel="noopener">Obtainium</a>:
+      add the repo URL as a source and it will notify you of every update automatically.
+      Or install the <a href="https://codeberg.org/Alien-Investor/sachwert-tresor/releases/latest" target="_blank" rel="noopener">latest APK</a> directly.
+    </p>
+    <p><strong>Signature fingerprint</strong> to verify authenticity (identical across all versions):</p>
+    <p><code>SHA-256: 660f210c7a289f388bb4812c23825a77f1fc84e6a7ee58d64281b6bf5cd87988</code></p>
+
+    <div class="box">
+      <h3>Open source on Codeberg</h3>
+      <p>
+        The client code is open source (MIT license) and free. Build, signing and server internals stay
+        private; the verifiable part — the app itself — is open. No accounts, no server dependency.
+      </p>
+      <p>🔗 <a href="https://codeberg.org/Alien-Investor/sachwert-tresor" target="_blank" rel="noopener">codeberg.org/Alien-Investor/sachwert-tresor</a></p>
+    </div>
+
+    <p style="color:#ccc;">
+      The Sachwert-Tresor is <strong>free</strong>. If it helps you, the mothership appreciates some fuel — see below.
+      And if you want to file your Bitcoin buys cleanly for tax, the <a href="/en/btc-steuertool.html">BTC tax tool</a>
+      is the next step: the vault exports straight into its format.
+    </p>
+
+  </article>
+
+  <div class="like-button">
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><radialGradient id="ai-head-sten" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-sten)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Like</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+  <script>
+    (function() {
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      const btn = document.getElementById('likeButton');
+      const msg = document.getElementById('likeMsg');
+      function done(){ btn.disabled = true; btn.textContent = '✓ Thanks!'; msg.textContent = 'Glad you like the tool.'; }
+      if (localStorage.getItem(key)) done();
+      btn.addEventListener('click', function(){ localStorage.setItem(key, '1'); done(); });
+    })();
+  </script>
+
+  <div class="back-links">
+    <a href="/en/blog.html" style="font-size:1.1em;">← Back to the blog</a>
+    <a href="/en/index.html" style="font-size:1.1em;">← Back to base</a>
+  </div>
+
+  <hr style="border-color:#222; margin:3em 0;">
+
+  <div style="margin-top:40px; margin-bottom:40px; text-align:center;">
+    <h3 style="margin-bottom:15px;">
+      <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energy" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Charge energy
+      <span style="font-size:0.6em; color:#888; font-weight:normal; vertical-align:middle;">(Donate)</span>
+    </h3>
+    <a href="/en/spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom:2px solid #00ffcc; padding-bottom:4px; display:inline-block;">
+      Send fuel to the mothership
+    </a>
+  </div>
+
+  <footer>
+    <p><strong>Disclaimer:</strong><br><br>
+      This article is not financial, tax or legal advice.<br>
+      I share my personal alien opinion here – independent, rebellious and free.<br>
+      Investing carries risk. Think for yourself, trust no one, and act on your own responsibility.
+    </p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>
