@@ -171,7 +171,7 @@ fi
 
 command -v unzip >/dev/null || { echo "Error: unzip missing. Install with: pkg install unzip"; exit 1; }
 
-cd "$DOWNLOAD_DIR" || exit
+cd "$DOWNLOAD_DIR" || exit 1
 
 echo "--- Searching for ZIP archives in $DOWNLOAD_DIR ---"
 
@@ -191,9 +191,9 @@ for zipfile in "${zips[@]}"; do
     echo "Processing: $zipfile"
     foldername="${zipfile%.zip}"
     mkdir -p "$foldername"
-    unzip -q "$zipfile" -d "$foldername"
 
-    if [ $? -eq 0 ]; then
+    # Source: $zipfile (archive), target: $foldername (folder)
+    if unzip -q "$zipfile" -d "$foldername"; then
         echo "  -> Successfully extracted to: $foldername/"
     else
         echo "  -> ERROR extracting $zipfile"
