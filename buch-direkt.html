@@ -539,23 +539,23 @@
     <div class="kofi-section" style="margin-top:0; border-top:1px solid #222; padding-top:20px;">
       <div style="color:#ccc; margin-bottom:12px;">🏦 Banküberweisung / Bank Transfer</div>
       <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:14px;">
-        <button id="bank-btn-dkb" class="btn" style="min-width:0; padding:10px 20px; font-size:0.9rem;"
-          onclick="toggleBankPanel('dkb')">🏦 DKB — Deutschland</button>
+        <button id="bank-btn-santander" class="btn" style="min-width:0; padding:10px 20px; font-size:0.9rem;"
+          onclick="toggleBankPanel('santander')">🏦 Santander — Deutschland</button>
         <button id="bank-btn-wise" class="btn" style="min-width:0; padding:10px 20px; font-size:0.9rem;"
           onclick="toggleBankPanel('wise')">🌍 Wise — International</button>
       </div>
 
-      <div id="bank-dkb" class="panel">
+      <div id="bank-santander" class="panel">
         <div class="card" style="text-align:left;">
-          <div class="title" style="text-align:center;">🏦 DKB — SEPA Deutschland / Germany</div>
+          <div class="title" style="text-align:center;">🏦 Santander — SEPA Deutschland / Germany</div>
           <p style="color:#999; font-size:0.82em; margin:0 0 2px 0;">Kontoinhaber / Account holder</p>
           <p style="color:#ddd; margin:0 0 12px 0;">Patrik Pietruschka</p>
           <p style="color:#999; font-size:0.82em; margin:0 0 2px 0;">IBAN</p>
-          <code id="dkbIban">DE06 1203 0000 1057 6271 09</code><br>
-          <button class="copy" onclick="copyText('dkbIban')">IBAN kopieren / Copy IBAN</button>
+          <code id="santanderIban">DE67 3101 0833 9913 9093 56</code><br>
+          <button class="copy" onclick="copyText('santanderIban')">IBAN kopieren / Copy IBAN</button>
           <p style="color:#999; font-size:0.82em; margin:12px 0 2px 0;">BIC</p>
-          <code id="dkbBic">BYLADEM1001</code><br>
-          <button class="copy" onclick="copyText('dkbBic')">BIC kopieren / Copy BIC</button>
+          <code id="santanderBic">SCFBDE33XXX</code><br>
+          <button class="copy" onclick="copyText('santanderBic')">BIC kopieren / Copy BIC</button>
           <p style="color:#888; font-size:0.8em; margin-top:14px; margin-bottom:0; text-align:center;">
             Betreff / Subject: „Buch GrapheneOS DE" oder „Book GrapheneOS EN"
           </p>
@@ -819,7 +819,7 @@
     if (window.location.hash === '#en') setLang('en');
 
     function toggleBankPanel(id) {
-      ['dkb', 'wise'].forEach(function(pid) {
+      ['santander', 'wise'].forEach(function(pid) {
         var panel = document.getElementById('bank-' + pid);
         var btn = document.getElementById('bank-btn-' + pid);
         var isTarget = pid === id;
