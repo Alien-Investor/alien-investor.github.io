@@ -340,6 +340,29 @@
       <p class="kofi-hint" style="margin-top:8px;color:#666;">
         Tipp: Einmalige Zahlungen am besten am Desktop öffnen — auf Mobilgeräten lädt die Ko-fi-Zahlungsseite leider nicht immer zuverlässig. Abonnements funktionieren auf allen Geräten.
       </p>
+
+      <div class="btnrow" style="margin-top:26px;">
+        <button class="btn" onclick="togglePanel('sepa')">🏦 SEPA Überweisung (Euro)</button>
+      </div>
+
+      <div id="sepa" class="panel">
+        <div class="card">
+          <div class="title">🏦 SEPA Überweisung — Santander</div>
+          <p style="color:#999;font-size:0.82em;margin:0 0 2px 0;">Kontoinhaber</p>
+          <p style="color:#ccc;font-size:0.9em;margin:0 0 14px 0;">Patrik Pietruschka</p>
+          <p style="color:#999;font-size:0.82em;margin:0 0 2px 0;">IBAN</p>
+          <code id="sepaIban">DE67 3101 0833 9913 9093 56</code>
+          <br>
+          <button class="copy" onclick="copyText('sepaIban')">IBAN kopieren</button>
+          <p style="color:#999;font-size:0.82em;margin:14px 0 2px 0;">BIC</p>
+          <code id="sepaBic">SCFBDE33XXX</code>
+          <br>
+          <button class="copy" onclick="copyText('sepaBic')">BIC kopieren</button>
+          <p class="kofi-hint" style="margin-top:16px;">
+            Klassische Banküberweisung in Euro. Als Verwendungszweck reicht „Spende" — Energie fürs Mutterschiff. 🛸
+          </p>
+        </div>
+      </div>
     </div>
 
     <p class="thanks">
@@ -350,16 +373,12 @@
 
   <script>
     function togglePanel(id){
-      const ln = document.getElementById('ln');
-      const btc = document.getElementById('btc');
-
-      if(id === 'ln'){
-        ln.classList.toggle('open');
-        btc.classList.remove('open');
-      } else {
-        btc.classList.toggle('open');
-        ln.classList.remove('open');
-      }
+      ['ln','btc','sepa'].forEach(function(p){
+        const el = document.getElementById(p);
+        if(!el) return;
+        if(p === id){ el.classList.toggle('open'); }
+        else { el.classList.remove('open'); }
+      });
     }
 
     async function copyText(elId){
