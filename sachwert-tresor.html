@@ -97,6 +97,20 @@
     <p><code>SHA-256: 660f210c7a289f388bb4812c23825a77f1fc84e6a7ee58d64281b6bf5cd87988</code></p>
 
     <div class="box">
+      <h3 style="margin-top:0;">Warum die App mehr schützt als der Browser</h3>
+      <p>
+        Web-Version und App teilen denselben Code — aber die native App (seit <strong>v2.0</strong>) ist
+        auf Betriebssystem-Ebene härter abgeriegelt. Das kann eine Website technisch nicht leisten:
+      </p>
+      <ul>
+        <li><strong>Keine INTERNET-Berechtigung.</strong> Der App ist das Netz-Recht im Android-Manifest komplett entzogen — sie <em>kann</em> gar keine Verbindung aufbauen. „Keine Telemetrie“ ist damit nachprüfbar, nicht nur versprochen.</li>
+        <li><strong>FLAG_SECURE.</strong> Keine Screenshots, kein Screen-Recording, keine Bestands-Vorschau im App-Switcher.</li>
+        <li><strong>Kein Cloud-/ADB-Backup.</strong> Deine Tresor-Daten landen in keinem automatischen Backup — Sicherungen machst nur du selbst über die verschlüsselte <code>.vault</code>-Datei.</li>
+      </ul>
+      <p>Für den <strong>vollen Schutz</strong> also die APK. Die Web-Version bleibt der schnellste Weg zum Ausprobieren.</p>
+    </div>
+
+    <div class="box">
       <h3>Open Source auf Codeberg</h3>
       <p>
         Der Client-Code ist quelloffen (MIT-Lizenz) und kostenlos. Build-, Signatur- und Server-Interna

@@ -100,6 +100,20 @@
     <p><code>SHA-256: 660f210c7a289f388bb4812c23825a77f1fc84e6a7ee58d64281b6bf5cd87988</code></p>
 
     <div class="box">
+      <h3 style="margin-top:0;">Why the app protects more than the browser</h3>
+      <p>
+        The web version and the app share the same code — but the native app (since <strong>v2.0</strong>) is
+        locked down harder at the operating-system level. A website simply cannot do that:
+      </p>
+      <ul>
+        <li><strong>No INTERNET permission.</strong> The app's network right is stripped from the Android manifest entirely — it <em>cannot</em> open a connection at all. "No telemetry" is verifiable, not just promised.</li>
+        <li><strong>FLAG_SECURE.</strong> No screenshots, no screen recording, no holdings preview in the app switcher.</li>
+        <li><strong>No cloud/ADB backup.</strong> Your vault data lands in no automatic backup — you make backups yourself, via the encrypted <code>.vault</code> file.</li>
+      </ul>
+      <p>For <strong>full protection</strong> use the APK. The web version stays the fastest way to try it out.</p>
+    </div>
+
+    <div class="box">
       <h3>Open source on Codeberg</h3>
       <p>
         The client code is open source (MIT license) and free. Build, signing and server internals stay
