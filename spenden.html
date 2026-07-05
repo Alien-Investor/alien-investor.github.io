@@ -342,7 +342,8 @@
       </p>
 
       <div class="btnrow" style="margin-top:26px;">
-        <button class="btn" onclick="togglePanel('sepa')">🏦 SEPA Überweisung (Euro)</button>
+        <button class="btn" onclick="togglePanel('sepa')">🏦 Santander — SEPA / Euro</button>
+        <button class="btn" onclick="togglePanel('wise')">🌍 Wise — Fremdwährung &amp; Übersee</button>
       </div>
 
       <div id="sepa" class="panel">
@@ -359,7 +360,27 @@
           <br>
           <button class="copy" onclick="copyText('sepaBic')">BIC kopieren</button>
           <p class="kofi-hint" style="margin-top:16px;">
-            Klassische Banküberweisung in Euro. Als Verwendungszweck reicht „Spende" — Energie fürs Mutterschiff. 🛸
+            Klassische Banküberweisung in Euro innerhalb Deutschlands. Als Verwendungszweck reicht „Spende" — Energie fürs Mutterschiff. 🛸
+          </p>
+        </div>
+      </div>
+
+      <div id="wise" class="panel">
+        <div class="card">
+          <div class="title">🌍 Wise — SEPA &amp; International</div>
+          <p style="color:#999;font-size:0.82em;margin:0 0 2px 0;">Kontoinhaber</p>
+          <p style="color:#ccc;font-size:0.9em;margin:0 0 14px 0;">Patrik Pietruschka</p>
+          <p style="color:#999;font-size:0.82em;margin:0 0 2px 0;">IBAN</p>
+          <code id="wiseIban">BE94 9052 3016 2314</code>
+          <br>
+          <button class="copy" onclick="copyText('wiseIban')">IBAN kopieren</button>
+          <p style="color:#999;font-size:0.82em;margin:14px 0 2px 0;">BIC / SWIFT</p>
+          <code id="wiseBic">TRWIBEB1XXX</code>
+          <br>
+          <button class="copy" onclick="copyText('wiseBic')">BIC kopieren</button>
+          <p style="color:#555;font-size:0.78em;margin:14px 0 0 0;">Bankadresse (falls erforderlich): Wise, Rue du Trône 100, 3rd floor, Brussels, 1050, Belgium</p>
+          <p class="kofi-hint" style="margin-top:12px;">
+            Am besten für Zahlungen in Fremdwährung (USD, GBP, CHF …) und Übersee — Wise rechnet zum echten Mittelkurs um. Für Euro aus dem SEPA-Raum reicht auch das Santander-Konto. SEPA-Euro kostenlos · SWIFT aus dem Ausland: 2,39 € Wise-Gebühr. Als Verwendungszweck reicht „Spende". 🛸
           </p>
         </div>
       </div>
@@ -373,7 +394,7 @@
 
   <script>
     function togglePanel(id){
-      ['ln','btc','sepa'].forEach(function(p){
+      ['ln','btc','sepa','wise'].forEach(function(p){
         const el = document.getElementById(p);
         if(!el) return;
         if(p === id){ el.classList.toggle('open'); }

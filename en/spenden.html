@@ -344,7 +344,8 @@
       </p>
 
       <div class="btnrow" style="margin-top:26px;">
-        <button class="btn" onclick="togglePanel('sepa')">🏦 SEPA Bank Transfer (Euro)</button>
+        <button class="btn" onclick="togglePanel('sepa')">🏦 Santander — SEPA / Euro</button>
+        <button class="btn" onclick="togglePanel('wise')">🌍 Wise — Foreign currency &amp; overseas</button>
       </div>
 
       <div id="sepa" class="panel">
@@ -361,7 +362,27 @@
           <br>
           <button class="copy" onclick="copyText('sepaBic')">Copy BIC</button>
           <p class="kofi-hint" style="margin-top:16px;">
-            A classic euro bank transfer. Use „Donation" as the reference — fuel for the mothership. 🛸
+            A classic euro bank transfer within Germany. Use „Donation" as the reference — fuel for the mothership. 🛸
+          </p>
+        </div>
+      </div>
+
+      <div id="wise" class="panel">
+        <div class="card">
+          <div class="title">🌍 Wise — SEPA &amp; International</div>
+          <p style="color:#999;font-size:0.82em;margin:0 0 2px 0;">Account holder</p>
+          <p style="color:#ccc;font-size:0.9em;margin:0 0 14px 0;">Patrik Pietruschka</p>
+          <p style="color:#999;font-size:0.82em;margin:0 0 2px 0;">IBAN</p>
+          <code id="wiseIban">BE94 9052 3016 2314</code>
+          <br>
+          <button class="copy" onclick="copyText('wiseIban')">Copy IBAN</button>
+          <p style="color:#999;font-size:0.82em;margin:14px 0 2px 0;">BIC / SWIFT</p>
+          <code id="wiseBic">TRWIBEB1XXX</code>
+          <br>
+          <button class="copy" onclick="copyText('wiseBic')">Copy BIC</button>
+          <p style="color:#555;font-size:0.78em;margin:14px 0 0 0;">Bank address (if required): Wise, Rue du Trône 100, 3rd floor, Brussels, 1050, Belgium</p>
+          <p class="kofi-hint" style="margin-top:12px;">
+            Best for payments in foreign currency (USD, GBP, CHF …) and overseas — Wise converts at the real mid-market rate. For euro from within the SEPA area, the Santander account works just as well. SEPA euro is free · SWIFT from abroad: €2.39 Wise fee. Use „Donation" as the reference. 🛸
           </p>
         </div>
       </div>
@@ -375,7 +396,7 @@
 
   <script>
     function togglePanel(id){
-      ['ln','btc','sepa'].forEach(function(p){
+      ['ln','btc','sepa','wise'].forEach(function(p){
         const el = document.getElementById(p);
         if(!el) return;
         if(p === id){ el.classList.toggle('open'); }
