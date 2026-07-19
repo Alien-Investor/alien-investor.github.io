@@ -62,6 +62,7 @@
       <ul>
         <li><strong>Bitcoin, gold & silver</strong> — record buys, sells and withdrawals. Metals by count × denomination (coin/bar, fineness, dealer).</li>
         <li><strong>Net holdings & value</strong> — what you actually hold, plus invested cost. You enter current prices yourself (deliberately no network lookup) → value and profit/loss from that.</li>
+        <li><strong>EUR, USD or CHF</strong> — record each entry in its own currency (since v2.1). Totals stay separate per currency, nothing is converted — the app never fetches exchange rates. Optionally add the EUR equivalent from the transaction date so the tax-tool export stays complete.</li>
         <li><strong>KYC separation</strong> — broker buys (KYC) and private/P2P (noKYC) stay cleanly separated.</li>
         <li><strong>Tax-tool export</strong> — exports <code>manual_buys.csv</code> / <code>manual_sales.csv</code> straight into the format of the <a href="/en/btc-steuertool.html">BTC tax tool</a>.</li>
         <li><strong>Encrypted backup & sync</strong> — the <code>.vault</code> file is fully encrypted and can be synced between devices via Syncthing, without any cloud.</li>
