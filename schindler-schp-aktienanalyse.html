@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Schindler (SCHN/SCHP) – Das Abo auf die Vertikale | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aktienanalyse Schindler Holding (SCHN/SCHP): Aufzüge und Fahrtreppen mit klebrigem Servicegeschäft, Familienkontrolle und Rekordmarge. KGV 27,6, 2,6 % Dividende — Qualität zum Premiumpreis. Einordnung aus Eigentümer-Sicht.">
+  <link rel="alternate" hreflang="en" href="/en/schindler-schp-aktienanalyse.html">
+  <style>
+    body { background-color: #000; color: #fff; font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 0 15px 20px 15px; }
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+    code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; font-family: monospace; }
+    em { color: #ccc; }
+    .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
+    blockquote { border-left: 3px solid #00ffcc; margin: 2em 0; padding: 0.5em 1em; color: #ddd; background: #050505; font-style: italic; }
+    .box { border: 1px solid #00ffcc; background: #050505; padding: 1.5em; border-radius: 8px; margin: 2em 0; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
+    .like-button { margin: 3em 0; display: flex; align-items: center; justify-content: center; gap: 1em; }
+    .like-button button { background: #000; color: #00ffcc; border: 1px solid #00ffcc; padding: 0.6em 1.2em; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.2s ease; }
+    .like-button button:hover { background: #00ffcc; color: #000; box-shadow: 0 0 15px #00ffcc; }
+    .like-button button:disabled { border-color: #444; color: #888; background: #111; cursor: default; }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    .back-links { margin-top: 40px; text-align: center; display: flex; flex-direction: column; gap: 10px; }
+    footer { margin-top: 60px; padding: 20px; font-size: 0.85em; color: #666; border-top: 1px solid #222; text-align: center; }
+    ul { padding-left: 1.2em; }
+    li { margin-bottom: 0.5em; }
+
+    /* Analyzer Screenshot */
+    .analyzer-img { width: 100%; border-radius: 8px; border: 1px solid #1a1a1a; margin: 1.5em 0; display: block; cursor: zoom-in; transition: border-color 0.2s; }
+    .analyzer-img:hover { border-color: #00ffcc; }
+    .img-caption { font-size: 0.82em; color: #666; text-align: center; margin-top: -1em; margin-bottom: 1.5em; font-style: italic; }
+    .img-caption .zoom-hint { color: #00ffcc; opacity: 0.5; font-style: normal; font-size: 0.9em; }
+
+    /* Kennzahlen-Tabelle */
+    .kpi-table { width: 100%; border-collapse: collapse; margin: 1.5em 0; font-size: 0.95em; }
+    .kpi-table th { background: #050505; color: #00ffcc; border-bottom: 1px solid #00ffcc; padding: 8px 12px; text-align: left; }
+    .kpi-table td { padding: 7px 12px; border-bottom: 1px solid #111; }
+    .kpi-table tr:last-child td { border-bottom: none; }
+    .kpi-table .val { color: #00ffcc; font-weight: bold; font-family: monospace; }
+
+    /* Ampel Scorecard */
+    .ampel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 1.5em 0; }
+    @media (max-width: 480px) { .ampel-grid { grid-template-columns: 1fr; } }
+    .ampel-item { background: #050505; border: 1px solid #1a1a1a; border-radius: 6px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; }
+    .ampel-item .label { font-size: 0.88em; color: #ccc; }
+    .ampel-item .value { font-family: monospace; font-size: 0.9em; color: #fff; margin: 0 8px; }
+    .badge { font-size: 0.72em; font-weight: bold; padding: 2px 8px; border-radius: 4px; white-space: nowrap; }
+    .badge-gut      { background: #003d1a; color: #00cc66; border: 1px solid #00cc66; }
+    .badge-stark    { background: #003d1a; color: #00ff88; border: 1px solid #00ff88; }
+    .badge-negativ  { background: #3d0000; color: #ff4444; border: 1px solid #ff4444; }
+    .badge-teuer    { background: #3d2000; color: #ffaa00; border: 1px solid #ffaa00; }
+    .badge-gering   { background: #1a1a00; color: #cccc00; border: 1px solid #cccc00; }
+    .badge-rueck    { background: #001a3d; color: #44aaff; border: 1px solid #44aaff; }
+    .badge-na       { background: #1a1a1a; color: #888; border: 1px solid #444; }
+
+    /* Wettbewerber-Tabelle */
+    .comp-table { width: 100%; border-collapse: collapse; margin: 1.5em 0; font-size: 0.9em; }
+    .comp-table th { background: #050505; color: #00ffcc; border-bottom: 1px solid #00ffcc; padding: 8px 10px; text-align: left; font-size: 0.85em; }
+    .comp-table td { padding: 8px 10px; border-bottom: 1px solid #111; }
+    .comp-table .highlight { color: #00ffcc; font-weight: bold; }
+    .comp-table tr:last-child td { border-bottom: none; }
+
+    /* Chart Container */
+    .chart-wrap { background: #050505; border: 1px solid #1a1a1a; border-radius: 8px; padding: 1.5em 1em 1em 1em; margin: 1.5em 0; overflow-x: auto; }
+    .chart-title { font-size: 0.85em; color: #888; text-align: center; margin-bottom: 0.8em; font-family: monospace; letter-spacing: 1px; text-transform: uppercase; }
+    .chart-legend { display: flex; gap: 1.5em; justify-content: center; margin-top: 0.8em; font-size: 0.8em; color: #aaa; }
+    .legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: middle; }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="index.html">← Zurück zur Zentrale</a>
+  </div>
+
+  <h1>Schindler Holding (SCHN/SCHP)<br><span style="font-size:0.6em; color:#aaa;">Das Abo auf die Vertikale</span></h1>
+  <p class="byline"><em>von Alien Investor – Stand: August 2026</em></p>
+
+  <article id="content">
+
+    <p>
+      Schindler bewegt nach eigenen Angaben täglich über zwei Milliarden Menschen — und fast niemand denkt dabei an die Firma. Genau das ist das Geschäftsmodell: unsichtbare Infrastruktur, die gesetzlich gewartet werden muss, 20 bis 30 Jahre läuft und danach modernisiert wird. Der Schweizer Konzern hat 2025 seinen vierjährigen Erholungsplan mit einer Rekordmarge abgeschlossen. Die Frage ist nicht, ob das Geschäft gut ist — sondern was man dafür bezahlt.
+    </p>
+
+    <blockquote>
+      „Ein Aufzug wird einmal verkauft — und dann drei Jahrzehnte lang gewartet. Schindler verkauft keine Kabinen. Schindler verkauft ein Abo auf die Schwerkraft." <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-footer)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg>
+    </blockquote>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>1) Kurzüberblick</h2>
+
+    <table class="kpi-table">
+      <thead><tr><th>Kennzahl</th><th>Wert</th></tr></thead>
+      <tbody>
+        <tr><td>Ticker</td><td class="val">SCHP / SCHN (SIX Swiss Exchange)</td></tr>
+        <tr><td>Kurs SCHP (August 2026)</td><td class="val">265,60 CHF</td></tr>
+        <tr><td>Marktkapitalisierung</td><td class="val">~28 Mrd. CHF</td></tr>
+        <tr><td>KGV (trailing)</td><td class="val">27,6×</td></tr>
+        <tr><td>EPS (TTM)</td><td class="val">9,61 CHF</td></tr>
+        <tr><td>KBV</td><td class="val">~5,5–6</td></tr>
+        <tr><td>Dividende (GJ 2025)</td><td class="val">6,80 CHF — Rendite 2,6 %</td></tr>
+        <tr><td>Sektor</td><td class="val">Industrials / Aufzüge &amp; Fahrtreppen</td></tr>
+      </tbody>
+    </table>
+
+    <p>
+      Schindler ist einer der grössten Hersteller von Aufzügen, Fahrtreppen und Fahrsteigen der Welt — gegründet 1874 in der Zentralschweiz, operative Zentrale in Ebikon bei Luzern, Holding-Sitz in Hergiswil. Bevor man über das Geschäft spricht, muss man eine Schweizer Eigenheit verstehen: Es gibt zwei Wertpapiere.
+    </p>
+
+    <a href="img/schp-sw/schp-sw-diagramm-kapitalstruktur.png" target="_blank" title="Vollbild öffnen"><img src="img/schp-sw/schp-sw-diagramm-kapitalstruktur.png" alt="Diagramm: Kapitalstruktur Schindler Holding — Familienpool, Namensaktie SCHN, Partizipationsschein SCHP" class="analyzer-img"></a>
+    <p class="img-caption">Die Kapitalstruktur: Die Familien Schindler und Bonnard kontrollieren über den Aktionärspool 68,6 % der Stimmrechte bei rund 43 % des Kapitals (per 31.12.2025). <span class="zoom-hint">↗ Zum Vergrössern klicken</span></p>
+
+    <p>
+      Die <strong>Namensaktie SCHN</strong> (67,1 Mio. Stück) trägt das Stimmrecht — und liegt mehrheitlich im Familienpool. Der <strong>Partizipationsschein SCHP</strong> (40,7 Mio. Stück) hat kein Stimmrecht, aber exakt denselben Anspruch auf Dividende und Liquidationserlös je Titel. Wer SCHP kauft, ist Mitverdiener, nicht Mitbestimmer. Dafür ist der PS das liquidere Papier im Streubesitz. Diese Analyse rechnet mit den SCHP-Kursdaten; die Geschäftszahlen gelten für den ganzen Konzern.
+    </p>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>2) Geschäftsmodell &amp; Segmente</h2>
+
+    <p>
+      Drei Geschäftsbereiche, ein Kreislauf: Neuanlagen verkaufen, die installierte Basis warten, Altanlagen modernisieren.
+    </p>
+    <ul>
+      <li>
+        <strong>Neuanlagen</strong> — Planung, Produktion und Erstinstallation in Wohn- und Gewerbebauten sowie Infrastruktur. Aktuell das schwächste Glied: Der chinesische Neubaumarkt schrumpft strukturell.
+      </li>
+      <li>
+        <strong>Service &amp; Wartung</strong> — laufende Wartung und Reparatur der installierten Basis. Wiederkehrend, hochmargig, krisenresistent — und in den meisten Ländern gesetzlich vorgeschrieben.
+      </li>
+      <li>
+        <strong>Modernisierung</strong> — Upgrade oder Austausch alternder Anlagen. Der strukturelle Wachstumstreiber: Weltweit gelten über 7 Millionen Anlagen als veraltet, in Europa ist rund die Hälfte aller Aufzüge älter als 20 Jahre.
+      </li>
+    </ul>
+
+    <a href="img/schp-sw/schp-sw-diagramm-lebenszyklus.png" target="_blank" title="Vollbild öffnen"><img src="img/schp-sw/schp-sw-diagramm-lebenszyklus.png" alt="Diagramm: Aufzugs-Lebenszyklus — Neuanlagen, installierte Basis, Service, Modernisierung" class="analyzer-img"></a>
+    <p class="img-caption">Der Lebenszyklus-Moat: Der Verkauf ist die Eintrittskarte, Service und Modernisierung sind das Geschäft — abgesichert durch Wechselkosten und Wartungsdichte. <span class="zoom-hint">↗ Zum Vergrössern klicken</span></p>
+
+    <p>
+      2025 setzte Schindler <strong>10'947 Mio. CHF</strong> um — davon 48 % in EMEA, 29 % in Amerika, 23 % in Asien-Pazifik. Die grössten Einzelmärkte: USA (2'379 Mio.), Schweiz (1'095 Mio.), China (1'068 Mio.). Dass Schindler im Kern ein Dienstleister ist, zeigt die Belegschaft: 61 % der 67'381 Mitarbeiter arbeiten in Installation und Wartung — direkt an den Anlagen.
+    </p>
+
+    <p>
+      <strong>Der Burggraben</strong> hat vier Schichten: <em>Wechselkosten</em> (Haftung und Ausfallrisiko binden Gebäudebetreiber an den Hersteller), <em>Wartungsdichte</em> (je mehr Anlagen pro Route, desto tiefer die Kosten pro Aufzug — kleine Anbieter können nicht mithalten), <em>Technologie</em> (cloudvernetzte Anlagen, Ferndiagnose über Technical Operations Centers, proprietäre Systeme wie das PORT-Transitmanagement) und <em>Regulierung</em> (bei sicherheitskritischer Infrastruktur wechselt niemand zum Billiganbieter).
+    </p>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>3) Wachstum &amp; Entwicklung</h2>
+
+    <!-- SVG Chart: EPS Entwicklung -->
+    <div class="chart-wrap">
+      <div class="chart-title">EPS-Entwicklung 2021 – 2025 (CHF pro Titel)</div>
+      <svg viewBox="0 0 720 260" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:720px; display:block; margin:0 auto;">
+        <defs>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+            <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- Grid lines -->
+        <line x1="55" y1="30"  x2="700" y2="30"  stroke="#1a1a1a" stroke-width="1"/>
+        <line x1="55" y1="66"  x2="700" y2="66"  stroke="#1a1a1a" stroke-width="1"/>
+        <line x1="55" y1="102" x2="700" y2="102" stroke="#1a1a1a" stroke-width="1"/>
+        <line x1="55" y1="138" x2="700" y2="138" stroke="#1a1a1a" stroke-width="1"/>
+        <line x1="55" y1="174" x2="700" y2="174" stroke="#1a1a1a" stroke-width="1"/>
+        <line x1="55" y1="210" x2="700" y2="210" stroke="#222"    stroke-width="1"/>
+
+        <!-- Y-Axis labels -->
+        <text x="50" y="213" text-anchor="end" fill="#444" font-size="11" font-family="monospace">0</text>
+        <text x="50" y="177" text-anchor="end" fill="#444" font-size="11" font-family="monospace">2</text>
+        <text x="50" y="141" text-anchor="end" fill="#444" font-size="11" font-family="monospace">4</text>
+        <text x="50" y="105" text-anchor="end" fill="#444" font-size="11" font-family="monospace">6</text>
+        <text x="50" y="69"  text-anchor="end" fill="#444" font-size="11" font-family="monospace">8</text>
+        <text x="50" y="33"  text-anchor="end" fill="#444" font-size="11" font-family="monospace">10</text>
+        <text x="18" y="130" text-anchor="middle" fill="#555" font-size="10" font-family="monospace" transform="rotate(-90 18 130)">EPS (CHF)</text>
+
+        <!-- Bars: x centers at 116, 246, 376, 506, 636 | bar width 70 | scale 18px/CHF, base y=210 -->
+        <!-- 2021: EPS 7,70 → h=139, y=71 -->
+        <rect x="81"  y="71" width="70" height="139" fill="#00ffcc" opacity="0.25" rx="3"/>
+        <rect x="81"  y="71" width="70" height="139" fill="none" stroke="#00ffcc" stroke-width="1" rx="3"/>
+        <text x="116" y="65" text-anchor="middle" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">7,70</text>
+        <text x="116" y="228" text-anchor="middle" fill="#666" font-size="12" font-family="monospace">2021</text>
+
+        <!-- 2022: EPS 5,67 → h=102, y=108 (TIEF — rot) -->
+        <rect x="211" y="108" width="70" height="102" fill="#ff4444" opacity="0.25" rx="3"/>
+        <rect x="211" y="108" width="70" height="102" fill="none" stroke="#ff4444" stroke-width="1" rx="3"/>
+        <text x="246" y="102" text-anchor="middle" fill="#ff4444" font-size="12" font-family="monospace" font-weight="bold">5,67</text>
+        <text x="246" y="228" text-anchor="middle" fill="#666" font-size="12" font-family="monospace">2022</text>
+        <text x="246" y="242" text-anchor="middle" fill="#ff4444" font-size="9"  font-family="monospace">TIEF</text>
+
+        <!-- 2023: EPS 8,05 → h=145, y=65 -->
+        <rect x="341" y="65" width="70" height="145" fill="#00ffcc" opacity="0.25" rx="3"/>
+        <rect x="341" y="65" width="70" height="145" fill="none" stroke="#00ffcc" stroke-width="1" rx="3"/>
+        <text x="376" y="59" text-anchor="middle" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">8,05</text>
+        <text x="376" y="228" text-anchor="middle" fill="#666" font-size="12" font-family="monospace">2023</text>
+
+        <!-- 2024: EPS 8,83 → h=159, y=51 -->
+        <rect x="471" y="51" width="70" height="159" fill="#00ffcc" opacity="0.3" rx="3"/>
+        <rect x="471" y="51" width="70" height="159" fill="none" stroke="#00ffcc" stroke-width="1" rx="3"/>
+        <text x="506" y="45" text-anchor="middle" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">8,83</text>
+        <text x="506" y="228" text-anchor="middle" fill="#666" font-size="12" font-family="monospace">2024</text>
+
+        <!-- 2025: EPS 9,48 → h=171, y=39 (REKORD) -->
+        <rect x="601" y="39" width="70" height="171" fill="#00ffcc" opacity="0.4" rx="3"/>
+        <rect x="601" y="39" width="70" height="171" fill="none" stroke="#00ffcc" stroke-width="2" rx="3"/>
+        <text x="636" y="33" text-anchor="middle" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold" filter="url(#glow)">9,48</text>
+        <text x="636" y="228" text-anchor="middle" fill="#666" font-size="12" font-family="monospace">2025</text>
+        <text x="636" y="242" text-anchor="middle" fill="#00cc88" font-size="9"  font-family="monospace">REKORD</text>
+      </svg>
+      <div class="chart-legend">
+        <span><span class="legend-dot" style="background:#ff4444;"></span>Lieferketten-/Inflationsjahr</span>
+        <span><span class="legend-dot" style="background:#00ffcc;"></span>Erholung bis Rekord</span>
+      </div>
+    </div>
+
+    <table class="kpi-table">
+      <thead><tr><th>Jahr</th><th>Umsatz</th><th>Reingewinn</th><th>EPS</th><th>EBIT-Marge</th></tr></thead>
+      <tbody>
+        <tr><td>2021</td><td class="val">11'236 Mio. CHF</td><td class="val">881 Mio.</td><td class="val">7,70</td><td class="val">10,4 %</td></tr>
+        <tr><td style="color:#ff4444;">2022 ▼ Tief</td><td class="val" style="color:#ff4444;">11'346 Mio. CHF</td><td class="val" style="color:#ff4444;">659 Mio.</td><td class="val" style="color:#ff4444;">5,67</td><td class="val" style="color:#ff4444;">8,0 %</td></tr>
+        <tr><td>2023</td><td class="val">11'494 Mio. CHF</td><td class="val">935 Mio.</td><td class="val">8,05</td><td class="val">10,3 %</td></tr>
+        <tr><td>2024</td><td class="val">11'236 Mio. CHF</td><td class="val">1'010 Mio.</td><td class="val">8,83</td><td class="val">11,3 %</td></tr>
+        <tr><td style="color:#00ffcc; font-weight:bold;">2025 ▲ Rekord</td><td class="val">10'947 Mio. CHF</td><td class="val" style="color:#00ffcc;">1'073 Mio.</td><td class="val" style="color:#00ffcc;">9,48</td><td class="val" style="color:#00ffcc;">12,6 %</td></tr>
+      </tbody>
+    </table>
+
+    <p>
+      Die zentrale Lesart: <strong>Der Umsatz stagniert optisch — der Gewinn explodiert.</strong> Der nominale Umsatzrückgang 2025 ist fast vollständig ein Währungseffekt: Der starke Franken kostete allein 2025 rund 431 Mio. CHF Umsatz; in Lokalwährungen wuchs Schindler um 1,3 %. Dahinter lief ein vierjähriger operativer Erholungsplan (2022–2025): Nach dem Einbruch 2022 durch Lieferkettenengpässe, Inflation und China-Lockdowns hat das Management die EBIT-Marge von 8,0 % auf 12,6 % gehoben — Preisdisziplin, Effizienz und ein besserer Mix aus Service und Modernisierung.
+    </p>
+    <p>
+      Das erste Halbjahr 2026 setzt den Trend fort: Auftragseingang 5'794 Mio. CHF (+2,9 % lokal), Umsatz 5'329 Mio. CHF (+1,4 % lokal), EBIT-Marge 13,2 %, Reingewinn 542 Mio. CHF.
+    </p>
+
+    <a href="img/schp-sw/schp-sw-fairer-wert.png" target="_blank" title="Vollbild öffnen"><img src="img/schp-sw/schp-sw-fairer-wert.png" alt="Alien Analyzer: Fairer Wert — Kursverlauf und Fair-Value-Bänder SCHP 10 Jahre" class="analyzer-img"></a>
+    <p class="img-caption">Alien Analyzer V2 — Fairer Wert Tab: Der Kurs (weiss) gegen die Fair-Value-Bänder. Achtung: Der 10-Jahres-KGV-Schnitt von 44,5 ist durch gefilterte Ausreisser in den Yahoo-Daten nach oben verzerrt — der „46 % unter Fair Value"-Indikator ist deshalb mit Vorsicht zu lesen (mehr dazu in Abschnitt 6). <span class="zoom-hint">↗ Zum Vergrössern klicken</span></p>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>4) Profitabilität &amp; Bilanz</h2>
+
+    <a href="img/schp-sw/schp-sw-qualitaetscheck.png" target="_blank" title="Vollbild öffnen"><img src="img/schp-sw/schp-sw-qualitaetscheck.png" alt="Alien Analyzer: Qualitätscheck & Ampel-Bilanz Schindler SCHP" class="analyzer-img"></a>
+    <p class="img-caption">Alien Analyzer V2 — Qualitätscheck: Ampelübersicht der wichtigsten Kennzahlen mit Kontext-Einordnung. <span class="zoom-hint">↗ Zum Vergrössern klicken</span></p>
+
+    <!-- Ampel Scorecard -->
+    <div class="ampel-grid">
+      <div class="ampel-item">
+        <span class="label">KGV (trailing)</span>
+        <span class="value">27,6×</span>
+        <span class="badge badge-teuer">TEUER</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">PEG-Ratio</span>
+        <span class="value">2,60</span>
+        <span class="badge badge-teuer">HOCH</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">KBV</span>
+        <span class="value">~5,5–6</span>
+        <span class="badge badge-teuer">HOCH</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Dividendenrendite</span>
+        <span class="value">2,6 %</span>
+        <span class="badge badge-gering">MITTEL</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Debt / Equity</span>
+        <span class="value">0,13–0,15</span>
+        <span class="badge badge-gut">GUT</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Free Cashflow</span>
+        <span class="value">~1,1 Mrd.</span>
+        <span class="badge badge-stark">POSITIV</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Eigenkapitalquote</span>
+        <span class="value">43,9 %</span>
+        <span class="badge badge-gut">GUT</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Gewinnwachstum 3J</span>
+        <span class="value">+18,5 % p.a.</span>
+        <span class="badge badge-stark">STARK</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Return on Equity</span>
+        <span class="value">~21 %</span>
+        <span class="badge badge-gut">GUT</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Aktienanzahl (3J)</span>
+        <span class="value">−0,7 %</span>
+        <span class="badge badge-na">STABIL</span>
+      </div>
+    </div>
+
+    <p>
+      Die Bilanz ist der ruhige Teil dieser Geschichte: Eigenkapitalquote 43,9 % (Geschäftsbericht 2025), kaum Finanzschulden (Debt/Equity ~0,13 inklusive Leasingverbindlichkeiten), operativer Cashflow 2025 von rund 1,5 Mrd. CHF bei minimalem Capex — ein Servicegeschäft braucht keine teuren Fabriken. Der ROE lag 2025 bei rund 21 %. Hinweis zur Datenlage: Der Analyzer-Screenshot zeigt für EK-Quote (40,1 %) und ROE (23,1 %) die Yahoo-TTM-Werte — die Grössenordnung stimmt, die präzisen Werte oben stammen aus dem Geschäftsbericht.
+    </p>
+    <p>
+      <strong>Zur Dividende:</strong> Für 2025 wurden 6,80 CHF je Titel ausgeschüttet (6,00 ordentlich + 0,80 ausserordentlich), Rendite rund 2,6 %. Bemerkenswerter als die Höhe ist das Tempo: Das Dividendenwachstum lag über 5 Jahre bei gut 11 % p.a., über 10 Jahre bei knapp 10 % p.a. — gedeckt aus wachsendem Gewinn, nicht aus Substanz.
+    </p>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>5) Strategische Themen</h2>
+
+    <p>
+      <strong>Modernisierungsoffensive:</strong> 2025 führte Schindler drei modulare Pakete ein — <em>ReStore</em> (gezielte Komponenten-Upgrades), <em>ReNew</em> (umfassende Modernisierung), <em>RePlace</em> (Komplettersatz). Sie werden 2026 global ausgerollt und minimieren Ausfallzeiten in bewohnten Gebäuden. Dazu das neue Aufzugskonzept <em>Schindler X8</em> (Debüt: Mailänder Designwoche 2025): kommt ohne Überfahrt, Schachtgrube und tragenden Schacht aus und läuft am normalen Stromanschluss.
+    </p>
+    <p>
+      <strong>Digitaler Service:</strong> Der Anteil cloudvernetzter Anlagen im Wartungsportfolio stieg 2025 um weitere 10 %. Über die Technical Operations Centers diagnostiziert Schindler Fehler aus der Ferne, bevor die Anlage ausfällt — Predictive Maintenance senkt Kosten und macht Serviceverträge noch klebriger.
+    </p>
+    <p>
+      <strong>Die KONE-TKE-Fusion:</strong> Im April 2026 kündigten KONE und TK Elevator ihren Zusammenschluss an (Unternehmenswert TKE: 29,4 Mrd. EUR) — es entstünde der grösste Aufzugkonzern der Welt. CEO Paolo Compagna fährt zweigleisig: Er hat kartellrechtliche Prüfungen angekündigt — und sieht zugleich die Chance, während der jahrelangen Integration unzufriedene Kunden zu gewinnen, Techniker abzuwerben und Assets zu kaufen, welche die Fusionspartner aus Wettbewerbsgründen abgeben müssen.
+    </p>
+    <p>
+      <strong>Ausblick 2026 (Management-Guidance, im Juli bestätigt):</strong> Umsatzwachstum im niedrigen bis mittleren einstelligen Bereich (Lokalwährungen), EBIT-Marge rund 13,0 % — das erste Halbjahr lag mit 13,2 % bereits darüber. Der Markt rechnet mit einem Forward-KGV von rund 24 [Konsens laut stockanalysis.com].
+    </p>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>6) Bewertung im Kontext</h2>
+
+    <a href="img/schp-sw/schp-sw-multiples.png" target="_blank" title="Vollbild öffnen"><img src="img/schp-sw/schp-sw-multiples.png" alt="Alien Analyzer: Multiples KGV KBV KUV KCV Schindler 10 Jahre" class="analyzer-img"></a>
+    <p class="img-caption">Alien Analyzer V2 — Multiples Tab: KGV (27,6), KBV (6,1), KUV (2,6), KCV (16,1) im 10-Jahres-Vergleich. Das Tool warnt selbst: Viele KGV-Ausreisser gefiltert (GAAP-Sondereffekte). <span class="zoom-hint">↗ Zum Vergrössern klicken</span></p>
+
+    <!-- SVG Chart: Multiples Übersicht -->
+    <div class="chart-wrap">
+      <div class="chart-title">Multiples — Aktuell vs. 10J-Durchschnitt</div>
+      <svg viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:680px; display:block; margin:0 auto;">
+        <!-- Scale: 7.1px per unit, bars start x=55 -->
+        <!-- Labels column -->
+        <text x="10" y="45"  fill="#aaa" font-size="13" font-family="monospace">KGV</text>
+        <text x="10" y="95"  fill="#aaa" font-size="13" font-family="monospace">KBV</text>
+        <text x="10" y="145" fill="#aaa" font-size="13" font-family="monospace">KUV</text>
+        <text x="10" y="185" fill="#aaa" font-size="13" font-family="monospace">KCV</text>
+
+        <!-- Background bars (average): KGV 44,5→316 | KBV 5,4→38 | KUV 2,1→15 -->
+        <rect x="55" y="30"  width="316" height="18" fill="#003333" rx="3"/>
+        <rect x="55" y="80"  width="38"  height="18" fill="#003333" rx="3"/>
+        <rect x="55" y="130" width="15"  height="18" fill="#003333" rx="3"/>
+
+        <!-- Current bars: KGV 27,6→196 | KBV 6,1→43 | KUV 2,6→18 | KCV 16,1→114 -->
+        <rect x="55" y="30"  width="196" height="18" fill="#00ffcc" opacity="0.3" rx="3"/>
+        <rect x="55" y="80"  width="43"  height="18" fill="#00ffcc" opacity="0.3" rx="3"/>
+        <rect x="55" y="130" width="18"  height="18" fill="#00ffcc" opacity="0.3" rx="3"/>
+        <rect x="55" y="170" width="114" height="18" fill="#00ffcc" opacity="0.3" rx="3"/>
+
+        <!-- Average line markers -->
+        <line x1="371" y1="27" x2="371" y2="51" stroke="#ffaa00" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <line x1="93"  y1="77" x2="93"  y2="101" stroke="#ffaa00" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <line x1="70"  y1="127" x2="70" y2="151" stroke="#ffaa00" stroke-width="1.5" stroke-dasharray="3,2"/>
+
+        <!-- Value labels -->
+        <text x="256" y="44" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">27,6</text>
+        <text x="371" y="24" fill="#ffaa00" font-size="10" font-family="monospace" text-anchor="middle">Ø 44,5*</text>
+        <text x="103" y="94" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">6,1</text>
+        <text x="120" y="77" fill="#ffaa00" font-size="10" font-family="monospace">Ø 5,4</text>
+        <text x="78" y="144" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">2,6</text>
+        <text x="95" y="127" fill="#ffaa00" font-size="10" font-family="monospace">Ø 2,1</text>
+        <text x="174" y="184" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">16,1</text>
+      </svg>
+      <div class="chart-legend">
+        <span><span class="legend-dot" style="background:#00ffcc; opacity:0.5;"></span>Aktueller Wert</span>
+        <span><span class="legend-dot" style="background:#ffaa00;"></span>10J-Durchschnitt (*KGV-Ø verzerrt)</span>
+      </div>
+    </div>
+
+    <p>
+      Das KGV von 27,6 liegt optisch weit unter dem 10-Jahres-Schnitt von 44,5 — daraus zieht der Fair-Value-Indikator sein „46 % unter Fair Value". Dieses Signal ist hier <strong>zu schön, um wahr zu sein</strong>: Der historische Schnitt ist durch gefilterte GAAP-Ausreisser in der Yahoo-Datenbasis nach oben verzerrt. Ehrlicher ist der Blick auf das Chart selbst: Seit der Margenerholung 2022/2023 pendelt das KGV grob zwischen 22 und 32. Die aktuellen 27,6 liegen mitten in diesem Band — keine Schnäppchenzone.
+    </p>
+    <p>
+      KBV (~5,5–6) und KUV (2,6, über dem Schnitt von 2,1) erzählen dieselbe Geschichte: Man bezahlt für ein kapitalleichtes Qualitätsgeschäft mit Rekordmargen — nicht für unterbewertete Substanz. <strong>Modellrechnung</strong> (Annahmen, keine Prognose): Hält Schindler die Guidance, sind für 2026 rund 10 CHF EPS drin [SCHÄTZUNG auf Basis H1 2026 — nicht aus Quellen verifiziert]. Beim KGV-Band 22–28 ergäbe das rechnerisch 220–280 CHF. Der Kurs von 265,60 CHF liegt im oberen Drittel dieser Spanne: fair bis leicht ambitioniert bewertet.
+    </p>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- ALIEN ANALYZER PROMO -->
+    <div class="box" style="border-color: #00ffcc; background: #020d0a;">
+      <p style="margin: 0 0 0.5em 0; font-size: 0.8em; color: #00ffcc; font-family: monospace; letter-spacing: 1px; text-transform: uppercase;">Tool-Tipp</p>
+      <p style="margin: 0 0 0.6em 0;"><strong>Die Kennzahlen in dieser Analyse stammen aus dem Alien Analyzer V2</strong> — dem eigenen Screening-Tool für Aktien. Fairer Wert, Multiples, Dividenden und Qualitätscheck auf einen Blick. Kostenlos, kein Login, kein Abo.</p>
+      <p style="margin: 0; font-size: 0.95em;"><a href="alien-analyzer.html"><strong>alien-investor.org/alien-analyzer</strong></a> — Ticker eingeben, analysieren.</p>
+    </div>
+
+    <h2>7) Wettbewerbsumfeld &amp; Moat</h2>
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Unternehmen</th>
+          <th>Herkunft</th>
+          <th>Umsatz (zuletzt)</th>
+          <th>Besonderheit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="highlight">Schindler (SCHN/SCHP)</td>
+          <td>Schweiz</td>
+          <td class="highlight">10,9 Mrd. CHF (2025)</td>
+          <td>Familienkontrolle, 61 % der Belegschaft im Feld</td>
+        </tr>
+        <tr>
+          <td>Otis (OTIS)</td>
+          <td>USA</td>
+          <td>14,4 Mrd. USD (2025)</td>
+          <td>~2,5 Mio. Einheiten unter Wartung — grösstes Serviceportfolio</td>
+        </tr>
+        <tr>
+          <td>KONE (KNEBV)</td>
+          <td>Finnland</td>
+          <td>11,2 Mrd. EUR (2025)</td>
+          <td>übernimmt TKE (Unternehmenswert 29,4 Mrd. EUR)</td>
+        </tr>
+        <tr>
+          <td>TK Elevator</td>
+          <td>Deutschland</td>
+          <td>9,2 Mrd. EUR (GJ 2024/25)</td>
+          <td>ex-thyssenkrupp, wird Teil von KONE (Vollzug offen)</td>
+        </tr>
+        <tr>
+          <td>Mitsubishi Electric</td>
+          <td>Japan</td>
+          <td>Aufzüge als Teilsegment</td>
+          <td>stark in Japan und Asien</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      Die Branche ist ein Oligopol weniger globaler Hersteller — und sie konsolidiert sich gerade: KONE + TKE kämen zusammen auf rund 20,5 Mrd. EUR Umsatz und 3,2 Millionen Wartungseinheiten, mit etwa 65 % des Umsatzes aus Service und Modernisierung. Damit entstünde ein Rivale, der Otis vom Thron stösst und Schindler deutlich hinter sich lässt — Grösse zählt in diesem Geschäft, weil Wartungsdichte Kosten senkt.
+    </p>
+    <p>
+      Schindlers Antwort ist nicht Grösse, sondern Dichte und Kontrolle: ein familienkontrollierter Konzern, der nicht auf Quartalsdenken optimieren muss, mit tiefer Verankerung in seinen Kernmärkten. Und die Fusion hat eine zweite Seite: Jahrelange Integrationsprozesse bei den Rivalen sind historisch die beste Gelegenheit, Kunden und Techniker zu gewinnen — genau das hat CEO Compagna angekündigt.
+    </p>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>8) Kundenperspektive</h2>
+
+    <p>
+      Schindlers Kunden sind keine Endverbraucher, sondern Bauherren, Generalunternehmer, Immobilienverwalter und die öffentliche Hand. Die Kundenbindung entsteht über Verfügbarkeit und Reaktionszeit: Ein stehender Aufzug in einem Bürohochhaus oder Spital ist ein Haftungs- und Reputationsproblem — deshalb wechselt kaum jemand den Wartungspartner, solange der Service funktioniert.
+    </p>
+    <p>
+      Öffentliche B2B-Kundenbewertungen existieren für dieses Segment nicht auswertbar. [NICHT VERFÜGBAR]
+    </p>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>9) Mitarbeiterperspektive</h2>
+
+    <p>
+      67'381 Mitarbeiter Ende 2025, davon 61 % in Installation und Wartung. Der Engpassfaktor der ganzen Branche sind qualifizierte Servicetechniker — wer sie hat, kann sein Wartungsportfolio ausbauen; wer sie verliert, verliert Verträge. Die KONE-TKE-Integration dürfte den Technikermarkt in Bewegung bringen, und Schindler hat offen erklärt, dort rekrutieren zu wollen. Systematisch auswertbare Arbeitgeberbewertungen über alle Märkte: [NICHT VERFÜGBAR]
+    </p>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>10) Chancen &amp; Risiken</h2>
+
+    <!-- SVG Risk/Opportunity Visual -->
+    <div class="chart-wrap">
+      <div class="chart-title">Chancen &amp; Risiken im Überblick</div>
+      <svg viewBox="0 0 680 290" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:680px; display:block; margin:0 auto;">
+
+        <!-- Left: Chancen -->
+        <text x="160" y="22" text-anchor="middle" fill="#00cc66" font-size="12" font-family="monospace" letter-spacing="2">CHANCEN</text>
+        <line x1="20" y1="28" x2="300" y2="28" stroke="#00cc66" stroke-width="1" opacity="0.4"/>
+
+        <rect x="20"  y="38"  width="280" height="48" fill="#001a0d" rx="5" stroke="#00cc66" stroke-width="0.5" opacity="0.7"/>
+        <text x="32" y="57" fill="#00cc66" font-size="12" font-family="monospace" font-weight="bold">Modernisierungswelle</text>
+        <text x="32" y="74" fill="#777" font-size="10" font-family="Arial">&gt;7 Mio. veraltete Anlagen, EU: Hälfte &gt;20 Jahre</text>
+
+        <rect x="20"  y="95"  width="280" height="48" fill="#001a0d" rx="5" stroke="#00cc66" stroke-width="0.5" opacity="0.7"/>
+        <text x="32" y="114" fill="#00cc66" font-size="12" font-family="monospace" font-weight="bold">KONE-TKE-Integration</text>
+        <text x="32" y="131" fill="#777" font-size="10" font-family="Arial">Kunden, Techniker &amp; Assets der Rivalen gewinnen</text>
+
+        <rect x="20"  y="152" width="280" height="48" fill="#001a0d" rx="5" stroke="#00cc66" stroke-width="0.5" opacity="0.7"/>
+        <text x="32" y="171" fill="#00cc66" font-size="12" font-family="monospace" font-weight="bold">Digitaler Service</text>
+        <text x="32" y="188" fill="#777" font-size="10" font-family="Arial">Predictive Maintenance macht Verträge klebriger</text>
+
+        <rect x="20"  y="209" width="280" height="48" fill="#001a0d" rx="5" stroke="#00cc66" stroke-width="0.5" opacity="0.7"/>
+        <text x="32" y="228" fill="#00cc66" font-size="12" font-family="monospace" font-weight="bold">Urbanisierung</text>
+        <text x="32" y="245" fill="#777" font-size="10" font-family="Arial">~70 % Stadtbevölkerung bis 2050, Silver Society</text>
+
+        <!-- Right: Risiken -->
+        <text x="520" y="22" text-anchor="middle" fill="#ff4444" font-size="12" font-family="monospace" letter-spacing="2">RISIKEN</text>
+        <line x1="380" y1="28" x2="660" y2="28" stroke="#ff4444" stroke-width="1" opacity="0.4"/>
+
+        <rect x="380" y="38"  width="280" height="48" fill="#1a0000" rx="5" stroke="#ff4444" stroke-width="0.5" opacity="0.7"/>
+        <text x="392" y="57" fill="#ff4444" font-size="12" font-family="monospace" font-weight="bold">China-Neubaumarkt</text>
+        <text x="392" y="74" fill="#777" font-size="10" font-family="Arial">Immobilienkrise drückt Neuanlagen strukturell</text>
+
+        <rect x="380" y="95"  width="280" height="48" fill="#1a0000" rx="5" stroke="#ff4444" stroke-width="0.5" opacity="0.7"/>
+        <text x="392" y="114" fill="#ff4444" font-size="12" font-family="monospace" font-weight="bold">Starker Franken</text>
+        <text x="392" y="131" fill="#777" font-size="10" font-family="Arial">FX-Effekt 2025: −431 Mio. CHF Umsatz</text>
+
+        <rect x="380" y="152" width="280" height="48" fill="#1a0000" rx="5" stroke="#ff4444" stroke-width="0.5" opacity="0.7"/>
+        <text x="392" y="171" fill="#ff4444" font-size="12" font-family="monospace" font-weight="bold">Neuer Branchen-Gigant</text>
+        <text x="392" y="188" fill="#777" font-size="10" font-family="Arial">KONE+TKE: 20,5 Mrd. EUR, 3,2 Mio. Wartungseinheiten</text>
+
+        <rect x="380" y="209" width="280" height="48" fill="#1a0000" rx="5" stroke="#ff4444" stroke-width="0.5" opacity="0.7"/>
+        <text x="392" y="228" fill="#ff4444" font-size="12" font-family="monospace" font-weight="bold">Bewertungsprämie</text>
+        <text x="392" y="245" fill="#777" font-size="10" font-family="Arial">KGV 27,6 — die Qualität ist bereits eingepreist</text>
+      </svg>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>11) Alien-Fazit <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-schp" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-schp" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-schp)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-schp)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg></h2>
+
+    <a href="img/schp-sw/schp-sw-dividenden.png" target="_blank" title="Vollbild öffnen"><img src="img/schp-sw/schp-sw-dividenden.png" alt="Alien Analyzer: Dividenden-Tab Schindler SCHP" class="analyzer-img"></a>
+    <p class="img-caption">Alien Analyzer V2 — Dividenden Tab: 2,56 % Rendite, Dividendenwachstum +11,2 % p.a. über 5 Jahre, +9,7 % p.a. über 10 Jahre. <span class="zoom-hint">↗ Zum Vergrössern klicken</span></p>
+
+    <p>
+      Schindler ist das Gegenteil eines Zyklikers am Tief: ein Qualitätsunternehmen auf Rekordniveau. Der Moat ist real und mehrschichtig — Wechselkosten, Wartungsdichte, Technologie, Regulierung. Die installierte Basis wächst mit jeder verkauften Anlage, und die Modernisierungswelle vor allem in Europa ist kein Hoffnungswert, sondern Arithmetik alternder Gebäude.
+    </p>
+    <p>
+      Die Familienkontrolle ist dabei Feature und Einschränkung zugleich: Sie schützt vor kurzfristigem Aktionärsdruck und feindlichen Übernahmen — aber wer SCHP kauft, gibt jede Mitsprache ab und vertraut darauf, dass die Familien Schindler und Bonnard weiter im Interesse aller Kapitalgeber entscheiden. Die letzten Jahrzehnte sprechen dafür.
+    </p>
+    <p>
+      Der Haken ist der Preis. KGV 27,6 auf Rekordgewinnen, KBV ~6, PEG 2,6 — hier gibt es keine Sicherheitsmarge aus der Bewertung, nur aus der Qualität. Wer kauft, kauft ein margenstarkes Service-Abo mit wachsender Dividende und akzeptiert, dass die Rendite aus Gewinn- und Dividendenwachstum kommen muss, nicht aus einer Neubewertung. Kein Schnäppchen. Ein Wachpostenkandidat für die Watchlist — interessant, wenn der Markt dem Titel wieder einmal ein KGV nahe 22 zugesteht.
+    </p>
+
+    <blockquote>
+      „Qualität bekommt man bei Schindler jederzeit — einen Rabatt fast nie. Geduld ist hier die einzige Sicherheitsmarge." <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-footer)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg>
+    </blockquote>
+
+  </article>
+
+  <!-- Disclaimer -->
+  <div class="box" style="border-color: #333; border-style: dashed;">
+    <p style="font-size: 0.88em; color: #888; margin: 0;">
+      <strong style="color: #aaa;">Hinweis:</strong> Diese Analyse ist keine Finanz-, Steuer- oder Rechtsberatung — nur eine Einordnung der Zahlen aus Alien-Perspektive. Alle Angaben nach bestem Wissen, ohne Gewähr. Investitionsentscheidungen liegen in eigener Verantwortung.
+    </p>
+  </div>
+
+  <!-- Tools Box -->
+  <div class="box">
+    <h3>Tools für echte Eigentümer</h3>
+    <p style="font-size:0.95em;">
+      Tools, die ich selbst nutze — für Bitcoin-Selbstverwahrung und digitale Souveränität:
+    </p>
+    <ul>
+      <li>
+        <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Blitz" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> <strong>Bitcoin kaufen in Europa – 21bitcoin:</strong><br>
+        Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges Sats stapeln — ohne Shitcoins.<br>
+        Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du dauerhaft 0,2 Prozentpunkte Gebührenreduktion auf Sofort- und Sparplankäufe.<br>
+        <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
+      </li>
+      <li>
+        ₿ <strong>Bitcoin in Selbstverwahrung:</strong><br>
+        Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox — es gibt die klassische BitBox02 und die neue BitBox für iPhone (Nova).<br>
+        <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
+      </li>
+      <li>
+        <svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-label="Satellitenschüssel" role="img"><path d="M4 24 A16 16 0 0 1 20 8" fill="#00ffcc" fill-opacity="0.06" stroke="#00ffcc" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="8" r="2.8" fill="#00ffcc"/><line x1="20" y1="8" x2="28" y2="4" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><path d="M15 13 A6 6 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/><path d="M12 16 A9 9 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.45"/></svg> <strong>Privacy &amp; Mail:</strong><br>
+        Für E-Mail, VPN und Cloud nutze ich Proton — datensparsam und ohne Big-Tech-Abhängigkeit.<br>
+        <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
+      </li>
+    </ul>
+    <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">
+      Hinweis: Bei einigen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit, ohne dass es dich mehr kostet. Danke! <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-aff" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-aff)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg>
+    </p>
+  </div>
+
+  <div class="like-button">
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-footer)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Gefällt mir</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+
+  <script>
+    (function() {
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      const btn = document.getElementById('likeButton');
+      const msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
+        btn.disabled = true;
+        btn.textContent = '✓ Danke!';
+        msg.textContent = 'Freut mich, dass dir der Artikel gefallen hat.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '✓ Danke!';
+        msg.textContent = 'Freut mich, dass dir der Artikel gefallen hat.';
+      });
+    })();
+  </script>
+
+
+  <div class="back-links">
+    <a href="aktien-analysen.html" style="font-size: 1.1em;"><svg style="width:0.9em;height:0.9em;vertical-align:-0.12em;filter:drop-shadow(0 0 2px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="7" y1="3" x2="7" y2="7" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><rect x="4" y="7" width="6" height="9" rx="1" fill="#00ffcc"/><line x1="7" y1="16" x2="7" y2="21" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><line x1="16" y1="7" x2="16" y2="11" stroke="#00cc88" stroke-width="1.5" stroke-linecap="round"/><rect x="13" y="11" width="6" height="12" rx="1" fill="none" stroke="#00cc88" stroke-width="1.5"/><line x1="16" y1="23" x2="16" y2="27" stroke="#00cc88" stroke-width="1.5" stroke-linecap="round"/><line x1="25" y1="4" x2="25" y2="9" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><rect x="22" y="9" width="6" height="11" rx="1" fill="#00ffcc"/><line x1="25" y1="20" x2="25" y2="26" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/></svg> Zurück zu den Aktienanalysen</a>
+    <a href="blog.html" style="font-size: 1.1em;">← Zurück zum Blog</a>
+    <a href="index.html" style="font-size: 1.1em;">← Zurück zur Zentrale</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+      <h3 style="margin-bottom: 15px;">
+        <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energie" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Energie aufladen
+        <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
+      </h3>
+      <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+        Treibstoff für das Mutterschiff senden
+      </a>
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-footer" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-footer" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-footer)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-footer)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg>
+      </p>
+  </div>
+
+  <footer>
+    <p><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Kontakt" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a> <span style="color:#666; font-size:0.85em;">·</span> <a href="/kontakt@alien-investor.org/pubkey.asc.key" download="kontakt-alien-investor-pubkey.asc" style="color:#555; font-size:0.8em; text-decoration:none;" title="PGP Public Key für verschlüsselte Nachrichten">PGP Key</a></p>
+    <p style="margin-top: 20px;">
+      <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-footer" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-footer)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <strong>Haftungsausschluss:</strong><br><br>
+      Dieser Artikel stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
+      Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
+      Investieren ist mit Risiken verbunden – du kannst Geld verlieren. Prüfe Informationen selbst
+      und handle eigenverantwortlich.
+    </p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>
