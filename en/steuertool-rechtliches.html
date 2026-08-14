@@ -146,13 +146,19 @@
     promise but built that way by design — the calculation core is open source and verifiable. All
     technical components too (Python runtime, fonts) are loaded from our own server —
     no third-party CDNs.</p>
+    <p style="margin:0.75em 0 0;">To keep that promise precise, one single limitation stated openly:
+    if your data contains purchases in a foreign currency, your browser retrieves the historical
+    daily rate from an exchange-rate service. What is transmitted is the <strong>date and the
+    currency</strong> — no amounts, no quantities, no file names, no broker. Anyone who bought
+    exclusively in euros triggers <strong>not a single</strong> request to third parties. Details in
+    section 4.</p>
   </div>
 
   <h3>What We Process</h3>
   <p><strong>1. Order</strong> (legal basis: Art. 6(1)(b) GDPR) — When you order by e-mail, we process your e-mail address, the content of your order and the payment information (e.g. receipt of a Bitcoin payment). We store this data to perform the contract and for the duration of statutory retention obligations (§ 147 of the German Fiscal Code (AO): 8 years for accounting records).</p>
   <p><strong>2. Accessing the App</strong> (legal basis: Art. 6(1)(f) GDPR) — When you access your link, our server (location: Germany, Hetzner Online GmbH) processes technically necessary connection data (IP address, time, file requested) in server logs. The server also counts the calls to your access link (with no reference to content). Log data is automatically deleted after a short time.</p>
   <p><strong>3. Local storage on your device</strong> — The App stores in your browser's localStorage: the colour scheme and cached exchange rates (EUR/CHF/USD). This data stays on your device and can be deleted by you at any time via your browser settings. No cookies are set for tracking purposes; there is no analytics.</p>
-  <p><strong>4. Exchange-rate retrieval (only if needed)</strong> — If your data contains purchases in a foreign currency (CHF/USD), <em>your browser</em> retrieves historical exchange rates from the frankfurter.app API. In doing so, that service receives your IP address and the requested dates — but not amounts, transactions or any other content. Anyone who wants to avoid this can enter the rates manually in advance into an fx_cache.json (see the instructions in the repository).</p>
+  <p><strong>4. Exchange-rate retrieval (only if needed)</strong> — If your data contains purchases in a foreign currency (CHF/USD), <em>your browser</em> retrieves historical exchange rates from the frankfurter.dev API. The request goes directly from your device to that service; it does not pass through our server. What is transmitted is solely the <strong>date</strong> and the <strong>currency</strong> of the transaction in question, together with your <strong>IP address</strong> for technical reasons. What is not transmitted: amounts, bitcoin quantities, file names, the name of the broker, wallet labels or any other content of your files. Each combination of date and currency causes at most <em>one</em> request; the result is then cached locally (see section 3). Anyone who bought exclusively in euros triggers <strong>no</strong> request — the App checks this beforehand and does not even start the retrieval for euro transactions. Anyone who wants to avoid the retrieval entirely can enter the rates manually in advance into an fx_cache.json (see the instructions in the repository); no connection to third parties then takes place.</p>
 
   <h3>What We Do NOT Process</h3>
   <ul>

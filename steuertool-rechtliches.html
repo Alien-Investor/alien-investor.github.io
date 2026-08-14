@@ -142,13 +142,18 @@
     Zusage, sondern technisch so gebaut — der Rechenkern ist Open Source und überprüfbar. Auch alle
     technischen Komponenten (Python-Laufzeitumgebung, Schriftarten) werden von unserem eigenen Server
     geladen — keine Drittanbieter-CDNs.</p>
+    <p style="margin:0.75em 0 0;">Damit diese Zusage präzise bleibt, eine einzige Einschränkung offen
+    benannt: Enthalten deine Daten Käufe in Fremdwährung, fragt dein Browser den historischen
+    Tageskurs bei einem Kursdienst ab. Übertragen werden dabei <strong>Datum und Währung</strong> —
+    keine Beträge, keine Mengen, keine Dateinamen, kein Broker. Wer ausschließlich in Euro gekauft
+    hat, löst <strong>keine einzige</strong> Anfrage an Dritte aus. Details in Abschnitt 4.</p>
   </div>
 
   <h3>Was wir verarbeiten</h3>
   <p><strong>1. Bestellung</strong> (Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO) — Bei der Bestellung per E-Mail verarbeiten wir deine E-Mail-Adresse, den Inhalt deiner Bestellung und die Zahlungsinformation (z.B. Eingang einer Bitcoin-Zahlung). Diese Daten speichern wir zur Vertragsabwicklung und für die Dauer gesetzlicher Aufbewahrungspflichten (§ 147 AO: 8 Jahre für Buchungsbelege).</p>
   <p><strong>2. Abruf der App</strong> (Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO) — Beim Aufruf deines Zugangslinks verarbeitet unser Server (Standort: Deutschland, Hetzner Online GmbH) technisch notwendige Verbindungsdaten (IP-Adresse, Zeitpunkt, abgerufene Datei) in Server-Protokollen. Außerdem zählt der Server die Aufrufe deines Zugangslinks (ohne Inhaltsbezug). Logdaten werden nach kurzer Zeit automatisch gelöscht.</p>
   <p><strong>3. Lokale Speicherung auf deinem Gerät</strong> — Die App speichert im localStorage deines Browsers: das Farbschema und zwischengespeicherte Wechselkurse (EUR/CHF/USD). Diese Daten bleiben auf deinem Gerät und können von dir jederzeit über die Browser-Einstellungen gelöscht werden. Es werden keine Cookies zu Tracking-Zwecken gesetzt; es gibt kein Analytics.</p>
-  <p><strong>4. Wechselkurs-Abruf (nur falls nötig)</strong> — Enthalten deine Daten Käufe in Fremdwährung (CHF/USD), ruft <em>dein Browser</em> historische Wechselkurse von der API frankfurter.app ab. Dabei erhält dieser Dienst deine IP-Adresse und die angefragten Datumsangaben — nicht jedoch Beträge, Transaktionen oder sonstige Inhalte. Wer das vermeiden will, kann die Kurse vorab manuell in eine fx_cache.json eintragen (siehe Anleitung im Repository).</p>
+  <p><strong>4. Wechselkurs-Abruf (nur falls nötig)</strong> — Enthalten deine Daten Käufe in Fremdwährung (CHF/USD), ruft <em>dein Browser</em> historische Wechselkurse von der API frankfurter.dev ab. Der Abruf geht direkt von deinem Gerät an diesen Dienst; er läuft nicht über unseren Server. Übertragen werden dabei ausschließlich das <strong>Datum</strong> und die <strong>Währung</strong> des jeweiligen Vorgangs, technisch bedingt zusammen mit deiner <strong>IP-Adresse</strong>. Nicht übertragen werden: Beträge, Bitcoin-Mengen, Dateinamen, der Name des Brokers, Wallet-Bezeichnungen oder sonstige Inhalte deiner Dateien. Je Kombination aus Datum und Währung entsteht höchstens <em>eine</em> Anfrage; das Ergebnis wird anschließend lokal zwischengespeichert (siehe Abschnitt 3). Wer ausschließlich in Euro gekauft hat, löst <strong>keine</strong> Anfrage aus — die App prüft das vorab und bricht den Abruf für Euro-Vorgänge gar nicht erst an. Wer den Abruf vollständig vermeiden will, kann die Kurse vorab manuell in eine fx_cache.json eintragen (siehe Anleitung im Repository); dann findet keine Verbindung zu Dritten statt.</p>
 
   <h3>Was wir NICHT verarbeiten</h3>
   <ul>
