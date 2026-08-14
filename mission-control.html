@@ -859,7 +859,7 @@
   </div>
 
   <footer>
-    <div style="margin-bottom:8px;">alien-investor.org · Daten: CoinGecko · alternative.me · Twelvedata · jsdelivr · frankfurter.app</div>
+    <div style="margin-bottom:8px;">alien-investor.org · Daten: CoinGecko · alternative.me · Twelvedata · jsdelivr · frankfurter.dev</div>
     <div style="color:rgba(74,122,109,0.7)">🚨 Keine Finanzberatung – nur persönliche Alien-Meinung. Denke selbst. Vertraue niemandem.</div>
     <div style="margin-top:12px;"><a href="https://alien-investor.org">alien-investor.org</a></div>
   </footer>
@@ -1047,10 +1047,13 @@
     }));
   }
 
-    // ── USD/EUR (frankfurter.app) ──────────────────────────────
+    // ── USD/EUR (frankfurter.dev) ──────────────────────────────
   async function fetchForex() {
     try {
-      const res = await fetch('https://api.frankfurter.app/latest?from=USD&to=EUR');
+      // api.frankfurter.app antwortet seit 2026 nur noch mit 301 auf
+      // api.frankfurter.dev/v1/ — der Redirect scheitert im Browser an der CSP,
+      // deshalb direkt die Zieladresse ansprechen. Antwortstruktur unverändert.
+      const res = await fetch('https://api.frankfurter.dev/v1/latest?from=USD&to=EUR');
       if (!res.ok) throw new Error();
       const data = await res.json();
       const rate = data.rates.EUR;
