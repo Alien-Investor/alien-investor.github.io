@@ -99,16 +99,24 @@
       </thead>
       <tbody>
         <tr>
-          <td>BTC weniger als 365 Tage gehalten, dann verkauft</td>
-          <td>Gewinn steuerpflichtig</td>
+          <td>BTC höchstens ein Jahr gehalten, dann verkauft</td>
+          <td>Gewinn steuerbar — steuerpflichtig, sobald die Freigrenze erreicht ist</td>
         </tr>
         <tr>
-          <td>BTC mehr als 365 Tage gehalten, dann verkauft</td>
+          <td>BTC mehr als ein Jahr gehalten, dann verkauft</td>
           <td>Gewinn <strong>steuerfrei</strong></td>
         </tr>
         <tr>
           <td>Übertrag zwischen eigenen Wallets/Konten</td>
-          <td>Kein steuerpflichtiger Vorgang</td>
+          <td>Der übertragene Bestand: kein steuerpflichtiger Vorgang</td>
+        </tr>
+        <tr>
+          <td>Netzwerk-/Auszahlungsgebühr in Bitcoin bezahlt</td>
+          <td>Veräußerung des Gebührenanteils zum Tageskurs (BMF-Schreiben v. 06.03.2025, Rn. 54, 60) — meist Cent-Beträge, das Tool rechnet sie mit</td>
+        </tr>
+        <tr>
+          <td>Bitcoin verschenkt oder gespendet</td>
+          <td>Keine Veräußerung, aber die Coins verlassen den Bestand — Anschaffungsdaten gelten beim Empfänger weiter (§ 23 Abs. 1 Satz 3 EStG)</td>
         </tr>
         <tr>
           <td>Gewinn unter 600 EUR/Jahr (bis 2023)</td>
@@ -275,6 +283,18 @@ mkdir Broker</pre>
       vollständig gemeldet werden, ist das steuerrechtlich unbedenklich. Das Finanzamt hat keinen Anspruch
       auf deine komplette UTXO-Historie.
     </p>
+
+    <div class="box" style="border-color: #ffaa00; background: #0a0800;">
+      <h3 style="color: #ffaa00; margin-top: 0;">⚡ Update August 2026: Gebühren in Bitcoin und Schenkungen werden mitgerechnet</h3>
+      <p>Bisher galt im Tool: Überträge zwischen eigenen Wallets sind steuerneutral — Punkt. Das stimmt für den übertragenen Bestand, aber nicht für die <strong>Netzwerkgebühr</strong>, die du dabei in Bitcoin bezahlst. Die gibst du im Tausch für eine Dienstleistung her, und das ist nach der Systematik des BMF-Schreibens vom 06.03.2025 (Rn. 33, 54, 60) eine kleine Veräußerung des Gebührenanteils. Das Tool bucht sie jetzt — und damit stimmt der ausgewiesene Bestand endlich mit deiner Wallet überein.</p>
+      <ul>
+        <li><strong>Gebühren in BTC:</strong> Miner-Fees bei BitBox-Sends (auch wallet-intern), Auszahlungsgebühren von 21bitcoin, Bisq-Handelsgebühren — jede wird nach FiFo einem Lot zugeordnet, zum <strong>Tagesschlusskurs</strong> bewertet und mit Gewinn/Verlust im Report ausgewiesen (Abschnitt „GEBÜHREN IN BITCOIN"). Der Gewinn zählt in die Freigrenze. In der Praxis sind das Cent- bis Euro-Beträge pro Jahr.</li>
+        <li><strong>Kurse offline:</strong> Die Tagesschlusskurse (Bitstamp BTC/EUR, seit 2017) liegen als Tabelle im Tool. Kein Kursdienst wird angefragt — deine Transaktionsdaten verlassen den Browser weiterhin nicht, und ein Report ist morgen noch derselbe wie heute.</li>
+        <li><strong>Schenkungen und Spenden:</strong> Schreib in der BitBox-App ein Wort wie „Spende" oder „Geschenk" in die Notiz der Transaktion. Das Tool bucht sie dann als unentgeltliche Übertragung: keine Veräußerung, kein Gewinn — aber die Coins verlassen den Bestand, und der Report weist Kaufdatum und Einstand je Lot aus, weil beides beim Empfänger weitergilt (§ 23 Abs. 1 Satz 3 EStG).</li>
+        <li><strong>Transparenz:</strong> Der Steuernachweis erklärt die Methode selbst, mit Verweis auf die Randnummern. Wer die Gebühren anders einordnen möchte, sieht genau, welche Zeilen das betrifft.</li>
+      </ul>
+      <p style="color:#aaa; font-size:0.9em;">Warum kein Steuerberater-Gutachten dazu? Weil es keine ausdrückliche Verwaltungsaussage und kein Urteil gibt — nur die Systematik des BMF-Schreibens und die Praxis der großen Krypto-Steuertools, die dasselbe tun. Das Tool wählt die nachvollziehbare, dokumentierte Methode und legt sie offen. Das ersetzt keine Beratung.</p>
+    </div>
 
     <div class="box" style="border-color: #ffaa00; background: #0a0800;">
       <h3 style="color: #ffaa00; margin-top: 0;">⚡ Update Juni 2026: Bisq-Direktimport + strikte noKYC-Trennung</h3>

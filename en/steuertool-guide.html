@@ -193,6 +193,24 @@
     (only if needed) queries the open exchange-rate API frankfurter.dev — date and currency yes,
     amounts and quantities no. Anyone who bought exclusively in euros triggers no request at all.
   </p>
+  <h3>What happens to transfers between my wallets — and their fees?</h3>
+  <p>
+    The transferred holdings stay tax-neutral and keep their purchase date. The <strong>network
+    or withdrawal fee paid in bitcoin</strong>, however, is booked by the app since August 2026 as
+    a small disposal of the fee portion (BMF circular of 6 March 2025, paras. 54, 60): FiFo
+    matching, valuation at the daily closing price, its own section "GEBÜHREN IN BITCOIN" in the
+    report. Usually these are cents — but this way the reported holdings match your wallet. The
+    price table ships inside the tool; your browser makes no network request for it.
+  </p>
+  <h3>I gave bitcoin away or donated it — how do I record that?</h3>
+  <p>
+    Before exporting, put a word like "Spende", "Geschenk", "donation" or "gift" into the
+    transaction note in the BitBox app. The app then classifies the row as a gratuitous transfer:
+    no sale, no gain — but the coins leave your holdings, and the report lists purchase date and
+    cost basis per lot, because both carry over to the recipient (Sec. 23 (1) sentence 3 EStG).
+    Every row classified this way appears under "UNENTGELTLICHE ÜBERTRAGUNGEN" and the system log
+    states the count — worth a quick check.
+  </p>
   <h3>My broker is missing — what now?</h3>
   <p>
     Interim solution: enter the purchases in <code>manual_buys.csv</code>

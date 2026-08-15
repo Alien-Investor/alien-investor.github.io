@@ -184,6 +184,24 @@
     Browser (nur falls nötig) die offene Kurs-API frankfurter.dev an — Datum und Währung ja,
     Beträge und Mengen nein. Wer ausschließlich in Euro gekauft hat, löst gar keine Anfrage aus.
   </p>
+  <h3>Was passiert mit Überträgen zwischen meinen Wallets — und deren Gebühren?</h3>
+  <p>
+    Der übertragene Bestand bleibt steuerneutral und behält sein Kaufdatum. Die <strong>Netzwerk-
+    oder Auszahlungsgebühr in Bitcoin</strong> dagegen bucht die App seit August 2026 als kleine
+    Veräußerung des Gebührenanteils (BMF-Schreiben vom 06.03.2025, Rn. 54, 60): FiFo-Zuordnung,
+    Bewertung zum Tagesschlusskurs, eigener Abschnitt „GEBÜHREN IN BITCOIN" im Report. Meist sind
+    das Cent-Beträge — aber so stimmt der ausgewiesene Bestand mit deiner Wallet überein. Die
+    Kurstabelle liegt im Tool, dein Browser fragt dafür nichts im Netz an.
+  </p>
+  <h3>Ich habe Bitcoin verschenkt oder gespendet — wie erfasse ich das?</h3>
+  <p>
+    Trag in der BitBox-App vor dem Export ein Wort wie „Spende", „Geschenk" oder „Schenkung" in
+    die Notiz der Transaktion ein. Die App stuft die Zeile dann als unentgeltliche Übertragung ein:
+    kein Verkauf, kein Gewinn — aber die Coins verlassen deinen Bestand, und der Report listet je
+    Lot Kaufdatum und Einstand, weil beides beim Empfänger weitergilt (§ 23 Abs. 1 Satz 3 EStG).
+    Jede so eingestufte Zeile steht sichtbar unter „UNENTGELTLICHE ÜBERTRAGUNGEN" und das
+    System-Log nennt die Anzahl — kurz gegenprüfen.
+  </p>
   <h3>Mein Broker fehlt — was nun?</h3>
   <p>
     Übergangslösung: Käufe in <code>manual_buys.csv</code> eintragen

@@ -94,16 +94,24 @@
       </thead>
       <tbody>
         <tr>
-          <td>BTC held less than 365 days, then sold</td>
-          <td>Profit taxable</td>
+          <td>BTC held for one year or less, then sold</td>
+          <td>Profit is a taxable event — tax is due once the exemption threshold is reached</td>
         </tr>
         <tr>
-          <td>BTC held more than 365 days, then sold</td>
+          <td>BTC held for more than one year, then sold</td>
           <td>Profit <strong>tax-free</strong></td>
         </tr>
         <tr>
           <td>Transfer between your own wallets/accounts</td>
-          <td>Not a taxable event</td>
+          <td>The transferred holdings: not a taxable event</td>
+        </tr>
+        <tr>
+          <td>Network/withdrawal fee paid in bitcoin</td>
+          <td>Disposal of the fee portion at the daily rate (BMF circular of 6 March 2025, paras. 54, 60) — usually cents, the tool includes them</td>
+        </tr>
+        <tr>
+          <td>Bitcoin given away or donated</td>
+          <td>Not a disposal, but the coins leave your holdings — acquisition date and cost carry over to the recipient (Sec. 23 (1) sentence 3 EStG)</td>
         </tr>
         <tr>
           <td>Profit under 600 EUR/year (until 2023)</td>
@@ -268,6 +276,18 @@ mkdir Broker</pre>
       As long as acquisition costs are correctly stated and taxable gains are fully reported,
       this is unproblematic under tax law. The tax authority has no claim to your complete UTXO history.
     </p>
+
+    <div class="box" style="border-color: #ffaa00; background: #0a0800;">
+      <h3 style="color: #ffaa00; margin-top: 0;">⚡ Update August 2026: Fees Paid in Bitcoin and Gifts Are Now Included</h3>
+      <p>Until now the tool treated transfers between your own wallets as tax-neutral, full stop. That is true for the transferred holdings — but not for the <strong>network fee</strong> you pay in bitcoin along the way. You hand it over in exchange for a service, and under the logic of the German Federal Ministry of Finance circular of 6 March 2025 (paras. 33, 54, 60) that is a small disposal of the fee portion. The tool now books it — which also means the reported holdings finally match your wallet.</p>
+      <ul>
+        <li><strong>Fees in BTC:</strong> miner fees on BitBox sends (including wallet-internal ones), 21bitcoin withdrawal fees, Bisq trading fees — each is matched to a lot via FiFo, valued at the <strong>daily closing price</strong> and listed with gain/loss in the report (section "GEBÜHREN IN BITCOIN"). The gain counts towards the exemption threshold. In practice this amounts to cents to a few euros per year.</li>
+        <li><strong>Prices offline:</strong> the daily closing prices (Bitstamp BTC/EUR since 2017) ship as a table inside the tool. No price service is queried — your transaction data still never leaves the browser, and a report generated tomorrow is identical to one generated today.</li>
+        <li><strong>Gifts and donations:</strong> put a word like "Spende", "Geschenk", "donation" or "gift" into the transaction note in the BitBox app. The tool then books it as a gratuitous transfer: no disposal, no gain — but the coins leave your holdings, and the report shows purchase date and cost basis per lot, because both carry over to the recipient (Sec. 23 (1) sentence 3 EStG).</li>
+        <li><strong>Transparency:</strong> the tax evidence document explains the method itself, citing the paragraph numbers. Anyone who prefers a different treatment of the fees can see exactly which lines are affected.</li>
+      </ul>
+      <p style="color:#aaa; font-size:0.9em;">Why no tax-advisor opinion on this? Because there is no explicit administrative statement and no court ruling — only the logic of the BMF circular and the practice of the major crypto tax tools, which do the same. The tool picks the traceable, documented method and lays it open. This is not tax advice.</p>
+    </div>
 
     <div class="box" style="border-color: #ffaa00; background: #0a0800;">
       <h3 style="color: #ffaa00; margin-top: 0;">⚡ Update June 2026: Bisq Direct Import + Strict noKYC Separation</h3>
