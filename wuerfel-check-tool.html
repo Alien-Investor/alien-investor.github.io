@@ -26,7 +26,8 @@
     .warn { border:1px solid #ffb300; background:#0a0700; padding:1.2em 1.5em; border-radius:8px; margin:1.5em 0; box-shadow:0 0 10px rgba(255,179,0,0.12); }
     .warn h3 { color:#ffb300; margin-top:0; }
     .warn ul { padding-left:1.2em; margin-bottom:0; } .warn li { margin-bottom:0.5em; }
-    .top-nav { padding:10px 0; font-size:0.9em; display:flex; justify-content:space-between; align-items:center; gap:1em; }
+    .top-nav { padding:10px 0; font-size:0.9em; display:flex; justify-content:space-between; align-items:center; gap:1em; flex-wrap:wrap; }
+    .top-nav .links { display:flex; gap:1.2em; flex-wrap:wrap; }
     .lang-toggle { display:flex; align-items:center; gap:6px; font-size:0.85em; white-space:nowrap; }
     .lang-toggle a { color:#00ffcc; text-decoration:none; padding:2px 8px; border-radius:3px; }
     .lang-toggle a:hover { color:#fff; text-shadow:0 0 8px #00ffcc; }
@@ -220,7 +221,7 @@
   </svg>
 
   <div class="top-nav">
-    <a href="https://alien-investor.org/">← Zurück zur Zentrale</a>
+    <div class="links"><a href="https://alien-investor.org/">← Zurück zur Zentrale</a><a href="https://alien-investor.org/wuerfel-check.html">Erklärung, Download &amp; Prüfsumme</a></div>
     <div class="lang-toggle"><span class="lang-cur">DE</span><span class="lang-sep">|</span><a href="https://alien-investor.org/en/dice-check-tool.html" title="English version">EN</a></div>
   </div>
 
@@ -301,7 +302,7 @@
   <details>
     <summary>Datei prüfen: Ist das noch die Originalfassung?</summary>
     <p class="small">
-      Diese Datei kann ihren eigenen Hash nicht enthalten. Vergleiche stattdessen die SHA-256 der heruntergeladenen Datei mit dem Wert auf der Download-Seite bzw. im Buch:
+      Diese Datei kann ihren eigenen Hash nicht enthalten. Vergleiche stattdessen die SHA-256 der heruntergeladenen Datei mit dem Wert auf der <a href="https://alien-investor.org/wuerfel-check.html">Download-Seite</a> bzw. im Buch:
       Linux/macOS <code>sha256sum wuerfel-check.html</code>, Windows PowerShell <code>Get-FileHash wuerfel-check.html</code>.
       Weicht der Wert ab, Datei verwerfen und neu laden. Wer Code lesen kann: Rechtsklick → Seitenquelltext anzeigen. Der ganze Rechenweg steht im <code>&lt;script&gt;</code>-Block am Ende, rund 150 Zeilen.
     </p>
@@ -317,7 +318,7 @@
 
   <footer>
     Würfel-Check · Teil des Werkstatt-Pakets zu <em>Die eigene Bank – Bitcoin meisterlich verwahren</em> (Band 4) ·
-    <a href="https://alien-investor.org/">alien-investor.org</a> · Stand 2026-08-18 · v0.1<br>
+    <a href="https://alien-investor.org/wuerfel-check.html">Erklärseite mit Download &amp; Prüfsumme</a> · <a href="https://alien-investor.org/">alien-investor.org</a> · Stand 2026-08-18 · v0.1<br>
     Nicht vertrauen, nachrechnen. Keine Anlage-, Steuer- oder Rechtsberatung. Der Code dieser Seite steht unter MIT-Lizenz, die BIP39-Wortliste ist Teil des offenen Bitcoin-Standards.
   </footer>
 
