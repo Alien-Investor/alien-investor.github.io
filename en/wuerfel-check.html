@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Würfel-Check — SeedSigner-Würfelseed offline nachrechnen | Alien Investor</title>
+  <title>Dice Check — verify a SeedSigner dice seed offline | Alien Investor</title>
   <link rel="alternate" hreflang="de" href="/wuerfel-check.html">
   <link rel="alternate" hreflang="en" href="/en/wuerfel-check.html">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Würfel-Check: rechnet offline nach, ob der SeedSigner aus 50 oder 99 Würfelziffern die richtigen BIP39-Wörter erzeugt hat. Eine HTML-Datei, kein Server, keine Verbindung, Open Source (MIT). Kostenlos, mit Anleitung.">
+  <meta name="description" content="Dice Check: recomputes offline whether the SeedSigner turned 50 or 99 dice rolls into the correct BIP39 words. One HTML file, no server, no connection, open source (MIT). Free.">
   <style>
     body { background-color:#000; color:#fff; font-family:Arial,sans-serif; line-height:1.6; max-width:800px; margin:auto; padding:0 15px 20px 15px; }
     h1,h2,h3 { color:#00ffcc; }
@@ -200,123 +200,122 @@
   </svg>
 
   <div class="top-nav">
-    <a href="index.html">← Zurück zur Zentrale</a>
+    <a href="/en/index.html">← Back to base</a>
   </div>
 
-  <h1>Würfel-Check</h1>
-  <p class="byline"><em>Hat der SeedSigner richtig gerechnet? Würfelziffern rein, BIP39-Wörter raus — offline, in deiner Hand.</em></p>
+  <h1>Dice Check</h1>
+  <p class="byline"><em>Did the SeedSigner get it right? Dice rolls in, BIP39 words out — offline, in your hands.</em></p>
 
   <article id="content">
 
     <p>
-      Wer seinen Seed selbst würfelt, tut das, um keinem Zufallsgenerator vertrauen zu müssen. Der SeedSigner macht
-      aus <strong>50 Würfen 12 Wörter</strong> oder aus <strong>99 Würfen 24 Wörter</strong> — nach einer offen dokumentierten
-      Rechnung: SHA-256 über die Ziffernfolge, daraus die Wörter nach BIP39. Aber woher weißt du, dass das Gerät
-      wirklich so rechnet? Indem du es einmal selbst nachrechnest. Der <strong>Würfel-Check</strong> ist eine einzige
-      HTML-Datei, die genau das tut: <strong>ohne Server, ohne Verbindung, ohne fremden Code</strong>. Kostenlos, quelloffen,
-      Teil des Werkstatt-Pakets zum kommenden Band 4 <em>„Die eigene Bank – Bitcoin meisterlich verwahren"</em>.
+      If you roll your own seed, you do it so you don't have to trust a random number generator. In dice mode the
+      SeedSigner turns <strong>50 rolls into 12 words</strong> or <strong>99 rolls into 24 words</strong> — following an openly
+      documented computation: SHA-256 over the string of digits, then the BIP39 word list. But how do you know the device
+      really computes it that way? By doing the math yourself, once. The <strong>Dice Check</strong> is a single HTML file that
+      does exactly that: <strong>no server, no connection, no third-party code</strong>. Free, open source, part of the workshop
+      pack for the upcoming volume 4 <em>"Die eigene Bank – Bitcoin meisterlich verwahren"</em> (German first, English edition to follow).
     </p>
 
     <div class="warn">
-      <h3>⚠ Nur mit einem Wegwerf-Seed</h3>
+      <h3>⚠ Throwaway seeds only</h3>
       <p style="margin:0 0 0.6em 0;">
-        Die Ziffernfolge <strong>ist</strong> der Seed. Wer die 99 Ziffern kennt, kennt die Wallet. Deshalb prüfst du damit
-        die <strong>Methode</strong>, nie deinen echten Seed: Übungs-Seed würfeln, nachrechnen, verwerfen. Rechnet das Gerät
-        bei Übungsziffern richtig, rechnet es immer richtig. Der echte Seed entsteht danach am Gerät und verlässt es nie.
+        The string of digits <strong>is</strong> the seed. Whoever knows the 99 digits owns the wallet. So you use this to test
+        the <strong>method</strong>, never your real seed: roll a practice seed, recompute it, discard it. If the device gets the
+        practice digits right, it gets everything right. Your real seed is created on the device afterwards and never leaves it.
       </p>
       <p style="margin:0;">
-        Für alles, was über einen schnellen Blick hinausgeht: <strong>Datei speichern, Netz trennen, per Doppelklick öffnen.</strong>
-        Sie funktioniert genauso.
+        For anything beyond a quick look: <strong>save the file, disconnect, open it with a double-click.</strong> It works exactly the same.
       </p>
     </div>
 
     <div class="cta">
-      <h3 style="margin-top:0;">Datei holen und offline benutzen</h3>
-      <p>Rechtsklick → „Ziel speichern unter", Prüfsumme vergleichen, Netz trennen, öffnen.</p>
-      <a class="btn" href="wuerfel-check-tool.html" download="wuerfel-check.html">↓ wuerfel-check.html speichern</a>
-      <a class="btn" href="wuerfel-check-anleitung.pdf" download="wuerfel-check-anleitung.pdf">↓ Anleitung (PDF, 1 Seite)</a>
-      <p style="margin-top:1.2em; margin-bottom:0.3em; color:#ccc;">SHA-256 der Datei <code>wuerfel-check.html</code> (v0.1, Stand 18.08.2026):</p>
-      <p style="margin:0;"><code>71468f6215910bf431fc2b7071fe40919eb6f5eb79296987ab5cb37a7a65cf2c</code></p>
+      <h3 style="margin-top:0;">Get the file and use it offline</h3>
+      <p>Right-click → "Save link as", compare the checksum, disconnect, open.</p>
+      <a class="btn" href="/en/dice-check-tool.html" download="dice-check.html">↓ save dice-check.html</a>
+      <a class="btn" href="/wuerfel-check-anleitung.pdf" download="wuerfel-check-anleitung.pdf">↓ Instructions (PDF, German)</a>
+      <p style="margin-top:1.2em; margin-bottom:0.3em; color:#ccc;">SHA-256 of the file <code>dice-check.html</code> (v0.1, as of 2026-08-18):</p>
+      <p style="margin:0;"><code>2276c9c7ad8f759bc800bc3184f4c08b972161480407273fbd52f0ebad6d6e92</code></p>
       <p style="margin-top:0.8em; font-size:0.9em; color:#888;">
-        Prüfen: Linux/macOS <code>sha256sum wuerfel-check.html</code> · Windows PowerShell <code>Get-FileHash wuerfel-check.html</code>.
-        Weicht der Wert ab, Datei verwerfen und neu laden.
+        Verify: Linux/macOS <code>sha256sum dice-check.html</code> · Windows PowerShell <code>Get-FileHash dice-check.html</code>.
+        If the value differs, discard the file and download it again. The English one-page instruction sheet follows with the English workshop pack.
       </p>
       <p style="margin-top:1.4em;">
-        Nur zum Ansehen oder für einen Wegwerf-Seed geht es auch direkt: <a href="wuerfel-check-tool.html">→ Würfel-Check im Browser öffnen</a>
+        Just to have a look, or for a throwaway seed, you can also open it directly: <a href="/en/dice-check-tool.html">→ open Dice Check in the browser</a>
       </p>
     </div>
 
-    <h2>Was er kann</h2>
+    <h2>What it does</h2>
     <div class="box">
       <ul>
-        <li><strong>Nachrechnen wie das Gerät</strong> — Ziffern eingeben (Leerzeichen erlaubt), „Nachrechnen", 12 oder 24 Wörter erscheinen nummeriert. Rechenweg wie in SeedSigner OS 0.8.7 (<code>helpers/mnemonic_generation.py</code>).</li>
-        <li><strong>Automatischer Vergleich</strong> — trägst du zusätzlich die Wörter vom Display ein, markiert er jede Abweichung rot. „24/24 identisch" ist das Ziel.</li>
-        <li><strong>Prüft sich beim Start selbst</strong> — Wortliste per Hash gegen die offizielle BIP39-Liste, SHA-256 mit zwei unabhängigen Rechenwerken (Browser-WebCrypto und eine eigene, lesbare Implementierung), Selbsttest gegen die beiden Beispiele aus der SeedSigner-Dokumentation. Erst wenn alles grün ist, lässt er dich rechnen.</li>
-        <li><strong>Zeigt dir, ob du online bist</strong> — und rät dir, es nicht zu sein.</li>
-        <li><strong>„Alles löschen"</strong> — leert Eingaben und Ergebnis, danach Fenster schließen.</li>
+        <li><strong>Computes like the device</strong> — enter the digits (spaces are fine), press "Compute", 12 or 24 numbered words appear. Same math as SeedSigner OS 0.8.7 (<code>helpers/mnemonic_generation.py</code>).</li>
+        <li><strong>Automatic comparison</strong> — if you also enter the words from the display, every mismatch is marked red. "24/24 identical" is the goal.</li>
+        <li><strong>Checks itself on start</strong> — word list hashed against the official BIP39 list, SHA-256 with two independent engines (browser WebCrypto and a small readable implementation), self-test against the two examples from the SeedSigner documentation. Only when everything is green does it let you compute.</li>
+        <li><strong>Tells you whether you are online</strong> — and advises you not to be.</li>
+        <li><strong>"Clear everything"</strong> — wipes inputs and result, then close the window.</li>
       </ul>
     </div>
 
-    <h2>Warum offline, warum eine einzige Datei</h2>
+    <h2>Why offline, why a single file</h2>
     <p>
-      Ein Prüfwerkzeug für Seeds darf selbst keine Angriffsfläche sein. Deshalb steckt alles in einer Datei, die
-      <strong>keine einzige Netz-Anfrage</strong> stellt: keine externen Skripte, keine Schriften, keine Bilder, keine Analyse-Tracker.
-      Eine Content-Security-Policy im Kopf der Datei verbietet dem Browser das Nachladen und Senden ausdrücklich.
-      Wer es nachprüfen will: F12 → Netzwerk-Tab → es erscheint keine Anfrage, auch nicht beim Rechnen.
-      Und wer Code lesen kann: Rechtsklick → Seitenquelltext. Der ganze Rechenweg steht im <code>&lt;script&gt;</code>-Block
-      am Ende, rund 150 Zeilen, ohne Bibliotheken.
+      A verification tool for seeds must not be an attack surface itself. That is why everything is in one file that makes
+      <strong>not a single network request</strong>: no external scripts, no fonts, no images, no analytics. A Content Security Policy
+      in the head of the file explicitly forbids the browser to load or send anything. Want to check? F12 → Network tab → no
+      request appears, not even while computing. And if you can read code: right-click → View page source. The whole computation
+      is in the <code>&lt;script&gt;</code> block at the end, about 150 lines, no libraries.
     </p>
 
-    <h2>Nicht vertrauen, nachrechnen — auch dem Würfel-Check nicht</h2>
+    <h2>Don't trust, verify — the Dice Check included</h2>
     <div class="box">
-      <p>Ein Werkzeug allein ist ein Indiz. Zwei unabhängige Codebasen, die auf dieselben Wörter kommen wie das Gerät, sind ein Beweis. Darum gibt es im Werkstatt-Paket drei Wege:</p>
+      <p>One tool alone is a hint. Two independent code bases arriving at the same words as the device are proof. That is why the workshop pack offers three ways:</p>
       <ul>
-        <li><strong>Weg 1 — Würfel-Check</strong> (diese Datei, JavaScript im Browser, offline).</li>
-        <li><strong>Weg 2 — Prüfskript im Terminal</strong>: <code>verify_dice_seed.py</code>, rund 90 Zeilen Python ohne Fremdbibliotheken, plus Wrapper, der vor jedem Start die Hashes prüft. Läuft auch auf Tails ohne Netz. Kommt mit dem vollständigen Werkstatt-Paket zum Buch.</li>
-        <li><strong>Weg 3 — Ian Colemans BIP39-Tool</strong> offline: „Show entropy details" → Typ <strong>„Base 10"</strong>. Niemals den „Dice"-Modus, der macht aus jeder 6 eine 0.</li>
+        <li><strong>Way 1 — Dice Check</strong> (this file, JavaScript in the browser, offline).</li>
+        <li><strong>Way 2 — the terminal script</strong>: <code>verify_dice_seed.py</code>, about 90 lines of Python without third-party libraries, plus a wrapper that checks the hashes before every start. Runs on Tails without network. Ships with the full workshop pack for the book.</li>
+        <li><strong>Way 3 — Ian Coleman's BIP39 tool</strong> offline: "Show entropy details" → type <strong>"Base 10"</strong>. Never the "Dice" mode, it turns every 6 into a 0.</li>
       </ul>
-      <p style="margin-bottom:0;">Was der Test beweist: dass das Gerät standardkonform rechnet. Was er nicht beweist: ob deine Würfel fair sind und ob dein Backup lesbar ist. Dafür gibt es Würfelbecher und Restore-Drill — beides Thema im Buch.</p>
+      <p style="margin-bottom:0;">What the test proves: that the device computes to the standard. What it doesn't prove: whether your dice are fair and whether your backup is readable. That is what a dice cup and a restore drill are for — both covered in the book.</p>
     </div>
 
-    <h2>Open Source</h2>
+    <h2>Open source</h2>
     <p>
-      Der Würfel-Check steht unter <strong>MIT-Lizenz</strong>. Der Quelltext ist die Datei selbst — es gibt keinen Build-Schritt
-      und keine versteckten Teile. Die BIP39-Wortliste ist Teil des offenen Bitcoin-Standards (<code>SHA-256 2f5eed53a4727b4bf8880d8f3f199efc90e58503646d9ff8eff3a2ed3b24dbda</code>).
-      Fehler gefunden? <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>.
+      The Dice Check is <strong>MIT-licensed</strong>. The source is the file itself — no build step, no hidden parts.
+      The BIP39 word list is part of the open Bitcoin standard (<code>SHA-256 2f5eed53a4727b4bf8880d8f3f199efc90e58503646d9ff8eff3a2ed3b24dbda</code>).
+      Found a bug? <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>.
     </p>
 
     <p style="color:#ccc;">
-      Der Würfel-Check ist <strong>kostenlos</strong>. Wenn er dir hilft, freut sich das Mutterschiff über etwas Treibstoff — siehe unten.
-      Wer tiefer einsteigen will: Wie man einen Seed würfelt, warum, und was danach kommt (Passphrase, Stahl, Multisig, Vererben),
-      steht in Band 4 der Reihe <em>Digitale Souveränität</em> — in Arbeit, Ankündigung folgt auf <a href="buecher.html">der Bücherseite</a>.
+      The Dice Check is <strong>free</strong>. If it helps you, the mothership is happy about some fuel — see below.
+      Want to go deeper? How to roll a seed, why, and what comes next (passphrase, steel, multisig, inheritance) is the subject of
+      volume 4 of the series <em>Digital Sovereignty</em> — in progress, announcement to follow on <a href="/en/buecher.html">the books page</a>.
     </p>
 
   </article>
 
   <div class="back-links">
-    <a href="blog.html" style="font-size:1.1em;">← Zurück zur Blog-Übersicht</a>
-    <a href="index.html" style="font-size:1.1em;">← Zurück zur Zentrale</a>
+    <a href="/en/blog.html" style="font-size:1.1em;">← Back to the blog</a>
+    <a href="/en/index.html" style="font-size:1.1em;">← Back to base</a>
   </div>
 
   <hr style="border-color:#222; margin:3em 0;">
 
   <div style="margin-top:40px; margin-bottom:40px; text-align:center;">
     <h3 style="margin-bottom:15px;">
-      <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energie" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Energie aufladen
-      <span style="font-size:0.6em; color:#888; font-weight:normal; vertical-align:middle;">(Spenden)</span>
+      <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energy" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Charge energy
+      <span style="font-size:0.6em; color:#888; font-weight:normal; vertical-align:middle;">(Donate)</span>
     </h3>
-    <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom:2px solid #00ffcc; padding-bottom:4px; display:inline-block;">
-      Treibstoff für das Mutterschiff senden
+    <a href="/en/spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom:2px solid #00ffcc; padding-bottom:4px; display:inline-block;">
+      Send fuel to the mothership
     </a>
   </div>
 
   <footer>
-    <p><strong>Haftungsausschluss:</strong><br><br>
-      Dieser Artikel stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
-      Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
-      Investieren ist mit Risiken verbunden. Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
+    <p><strong>Disclaimer:</strong><br><br>
+      This article is not financial, tax or legal advice.<br>
+      I share my personal alien opinion here – independent, rebellious and free.<br>
+      Investing carries risk. Think for yourself, trust no one, and act on your own responsibility.
     </p>
   </footer>
+
 
   <script src="/lang-switcher.js"></script>
 </body>

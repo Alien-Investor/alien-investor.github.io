@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <!-- Content-Security-Policy: diese Seite darf NICHTS nachladen und nirgendwohin senden.
-       Kein Netz, keine externen Skripte, keine Formulare, keine Bilder von fremden Servern.
-       Prüfbar in den Entwicklerwerkzeugen des Browsers (F12 → Netzwerk: keine Anfrage). -->
+  <!-- Content-Security-Policy: this page must not load anything and must not send anything anywhere.
+       No network, no external scripts, no forms, no images from other servers.
+       Verifiable in your browser's developer tools (F12 → Network: not a single request). -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; form-action 'none'; base-uri 'none'; connect-src 'none'">
   <meta name="referrer" content="no-referrer">
-  <title>Würfel-Check – SeedSigner-Würfelseed nachrechnen | Alien Investor</title>
+  <title>Dice Check – verify a SeedSigner dice seed | Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Würfel-Check: rechnet offline nach, ob der SeedSigner aus 50 oder 99 Würfelziffern die richtigen BIP39-Wörter erzeugt hat. Eine Datei, kein Server, keine Verbindung. Nur für Wegwerf-Seeds.">
+  <meta name="description" content="Dice Check: recomputes offline whether the SeedSigner turned 50 or 99 dice rolls into the correct BIP39 words. One file, no server, no connection. Throwaway seeds only.">
   <style>
     body { background-color:#000; color:#fff; font-family:Arial,sans-serif; line-height:1.6; max-width:800px; margin:auto; padding:0 15px 20px 15px; }
     h1,h2,h3 { color:#00ffcc; }
@@ -41,7 +41,7 @@
     .pill.bad { border-color:#ff4d4d; color:#ff4d4d; }
     .pill.warnp { border-color:#ffb300; color:#ffb300; }
 
-    /* Eingabe */
+    /* Input */
     label { display:block; color:#ccc; margin:1em 0 0.3em; }
     textarea {
       width:100%; box-sizing:border-box; background:#050505; color:#fff; border:1px solid #333; border-radius:8px;
@@ -62,7 +62,7 @@
     button.secondary:hover { background:#333; color:#fff; box-shadow:none; }
     button:disabled { border-color:#333; color:#555; background:#000; cursor:default; box-shadow:none; }
 
-    /* Ergebnis */
+    /* Result */
     #result { display:none; }
     .words { display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:0.4em; margin:1em 0; }
     .w { background:#050505; border:1px solid #222; border-radius:6px; padding:0.35em 0.6em; font-family:monospace; font-size:1.05em; }
@@ -79,11 +79,8 @@
     .mono { font-family:monospace; color:#0f0; word-break:break-all; }
     .small { font-size:0.85em; color:#888; }
     details { margin:1em 0; } summary { cursor:pointer; color:#00ffcc; }
-    table { border-collapse:collapse; width:100%; margin:1em 0; font-size:0.92em; }
-    th, td { border:1px solid #222; padding:0.5em 0.7em; text-align:left; vertical-align:top; }
-    th { color:#00ffcc; background:#050505; }
 
-    /* --- STERNENHIMMEL --- */
+    /* --- STARFIELD --- */
     .stars-bg { position:fixed; top:0; left:0; width:100%; height:100%; background:radial-gradient(ellipse at top, #0a0f1e 0%, #000 60%); z-index:-2; }
     .stars-bg::before {
       content:""; position:absolute; top:0; left:0; width:100%; height:100%;
@@ -220,122 +217,122 @@
   </svg>
 
   <div class="top-nav">
-    <a href="https://alien-investor.org/">← Zurück zur Zentrale</a>
-    <div class="lang-toggle"><span class="lang-cur">DE</span><span class="lang-sep">|</span><a href="https://alien-investor.org/en/dice-check-tool.html" title="English version">EN</a></div>
+    <a href="https://alien-investor.org/en/">← Back to base</a>
+    <div class="lang-toggle"><a href="https://alien-investor.org/wuerfel-check-tool.html" title="Deutsche Fassung">DE</a><span class="lang-sep">|</span><span class="lang-cur">EN</span></div>
   </div>
 
-  <h1>Würfel-Check</h1>
-  <p class="byline"><em>Hat der SeedSigner richtig gerechnet? Würfelziffern rein, BIP39-Wörter raus – offline, in deiner Hand.</em></p>
+  <h1>Dice Check</h1>
+  <p class="byline"><em>Did the SeedSigner get it right? Dice rolls in, BIP39 words out – offline, in your hands.</em></p>
 
   <p>
-    Der SeedSigner erzeugt im Dice-Modus aus <strong>50 Würfen 12 Wörter</strong> oder aus <strong>99 Würfen 24 Wörter</strong>.
-    Die Rechnung ist offen dokumentiert: SHA-256 über die Ziffernfolge, daraus die Wortliste nach BIP39.
-    Wer dem Gerät nicht blind glauben will, rechnet einmal selbst nach. Genau das macht diese Seite –
-    <strong>ohne Server, ohne Verbindung, ohne fremden Code</strong>. Alles steht in dieser einen Datei.
+    In dice mode the SeedSigner turns <strong>50 rolls into 12 words</strong> or <strong>99 rolls into 24 words</strong>.
+    The math is openly documented: SHA-256 over the string of digits, then the BIP39 word list.
+    If you don't want to take the device's word for it, do the math yourself once. That is exactly what this page does –
+    <strong>no server, no connection, no third-party code</strong>. Everything lives in this one file.
   </p>
 
   <div class="warn">
-    <h3>⚠ Nur mit einem Wegwerf-Seed</h3>
+    <h3>⚠ Throwaway seeds only</h3>
     <ul>
-      <li><strong>Die Ziffernfolge IST der Seed.</strong> Wer die 99 Ziffern kennt, kennt die Wallet. Deshalb wird hier nie ein Seed geprüft, der jemals Coins tragen soll.</li>
-      <li><strong>Geprüft wird die Methode, nicht dein echter Seed.</strong> Rechnet das Gerät bei Übungs-Ziffern richtig, rechnet es immer richtig. Der echte Seed verlässt das Gerät nie.</li>
-      <li><strong>Für ernsthafte Prüfungen offline:</strong> Datei speichern, Netz trennen, Datei per Doppelklick öffnen. Die Seite funktioniert genauso. Danach Browser schließen.</li>
-      <li>Ein Browser ist kein Tresor: Erweiterungen, Zwischenablage und Bildschirmaufnahmen sehen mit. Auch das ist ein Grund für Wegwerf-Seeds.</li>
+      <li><strong>The string of digits IS the seed.</strong> Whoever knows the 99 digits owns the wallet. So never check a seed here that will ever hold coins.</li>
+      <li><strong>You are testing the method, not your real seed.</strong> If the device computes practice digits correctly, it computes everything correctly. Your real seed never leaves the device.</li>
+      <li><strong>For anything serious, go offline:</strong> save the file, disconnect, double-click it. It works exactly the same. Close the browser afterwards.</li>
+      <li>A browser is not a vault: extensions, the clipboard and screen recording can watch. One more reason for throwaway seeds.</li>
     </ul>
   </div>
 
   <div class="status" id="status">
-    <span class="pill" id="st-net">Verbindung: prüfe …</span>
-    <span class="pill" id="st-wl">Wortliste: prüfe …</span>
-    <span class="pill" id="st-sha">SHA-256: prüfe …</span>
-    <span class="pill" id="st-self">Selbsttest: prüfe …</span>
+    <span class="pill" id="st-net">Connection: checking …</span>
+    <span class="pill" id="st-wl">Word list: checking …</span>
+    <span class="pill" id="st-sha">SHA-256: checking …</span>
+    <span class="pill" id="st-self">Self-test: checking …</span>
   </div>
 
-  <h2>1. Würfelziffern eingeben</h2>
-  <label for="digits">Ziffern 1 bis 6, in der Reihenfolge, wie du sie am SeedSigner eingetippt hast (Leerzeichen und Zeilenumbrüche sind erlaubt):</label>
-  <textarea id="digits" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-1p-ignore="true" placeholder="z. B. 65515 22313 16521 …"></textarea>
-  <div class="counter" id="counter">0 Ziffern – erwartet 50 (12 Wörter) oder 99 (24 Wörter)</div>
+  <h2>1. Enter the dice rolls</h2>
+  <label for="digits">Digits 1 to 6, in the order you entered them on the SeedSigner (spaces and line breaks are fine):</label>
+  <textarea id="digits" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-1p-ignore="true" placeholder="e.g. 65515 22313 16521 …"></textarea>
+  <div class="counter" id="counter">0 digits – expecting 50 (12 words) or 99 (24 words)</div>
 
-  <h2>2. Wörter vom Display <span class="small">(optional, zum automatischen Vergleich)</span></h2>
-  <label for="devwords">Die Wörter, die der SeedSigner angezeigt hat (Seed Words 1/6 bis 6/6). Nummern, Punkte, Zeilenumbrüche stören nicht:</label>
-  <textarea id="devwords" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-1p-ignore="true" placeholder="z. B. 1. eyebrow 2. obvious 3. such …"></textarea>
+  <h2>2. Words from the display <span class="small">(optional, for automatic comparison)</span></h2>
+  <label for="devwords">The words the SeedSigner showed you (Seed Words 1/6 to 6/6). Numbers, dots and line breaks are ignored:</label>
+  <textarea id="devwords" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-1p-ignore="true" placeholder="e.g. 1. eyebrow 2. obvious 3. such …"></textarea>
 
   <div class="btnrow">
-    <button id="btn-calc" type="button">Nachrechnen</button>
-    <button id="btn-selftest" type="button" class="secondary">Selbsttest wiederholen</button>
-    <button id="btn-clear" type="button" class="secondary">Alles löschen</button>
+    <button id="btn-calc" type="button">Compute</button>
+    <button id="btn-selftest" type="button" class="secondary">Run self-test again</button>
+    <button id="btn-clear" type="button" class="secondary">Clear everything</button>
   </div>
 
   <div id="result">
-    <h2>3. Ergebnis</h2>
+    <h2>3. Result</h2>
     <div class="verdict neutral" id="verdict"></div>
     <div class="words" id="words"></div>
-    <p class="small">Entropie (SHA-256 der Ziffern, hex): <span class="mono" id="entropy"></span></p>
-    <p class="small">Am Gerät Wort für Wort vergleichen. <strong>Alle Wörter identisch = das Gerät rechnet korrekt.</strong> Eine Abweichung heißt fast immer: ein Tippfehler zwischen Blatt und Gerät – Ziffern prüfen, Durchlauf wiederholen. Danach „Alles löschen" und das Fenster schließen.</p>
+    <p class="small">Entropy (SHA-256 of the digits, hex): <span class="mono" id="entropy"></span></p>
+    <p class="small">Compare word by word with the device. <strong>All words identical = the device computed correctly.</strong> A mismatch almost always means a typo between your sheet and the device – check the digits, repeat the run. Then hit "Clear everything" and close the window.</p>
   </div>
 
-  <h2>Was hier genau passiert</h2>
+  <h2>What exactly happens here</h2>
   <div class="box">
     <ul>
-      <li><strong>Rechenweg wie im SeedSigner</strong> (SeedSigner OS 0.8.7, <code>src/seedsigner/helpers/mnemonic_generation.py</code>): Die Ziffern werden als Text genommen, <code>SHA-256</code> darüber gebildet. Bei 99 Würfen sind das 32 Byte = 256 Bit = 24 Wörter, bei 50 Würfen werden nur die ersten 16 Byte = 128 Bit = 12 Wörter benutzt.</li>
-      <li><strong>BIP39</strong>: An die Entropie kommt eine Prüfsumme (die ersten 8 bzw. 4 Bit von SHA-256 der Entropie), dann wird alles in 11-Bit-Blöcke geschnitten. Jeder Block ist eine Zahl von 0 bis 2047 und zeigt auf ein Wort der offiziellen englischen Wortliste.</li>
-      <li><strong>Zwei Rechenwerke</strong>: SHA-256 wird einmal mit der eingebauten WebCrypto-Funktion des Browsers und einmal mit einer eigenen, lesbaren JavaScript-Implementierung berechnet. Nur wenn beide übereinstimmen, wird ein Ergebnis angezeigt.</li>
-      <li><strong>Wortliste geprüft</strong>: Die 2048 Wörter stecken in dieser Datei. Beim Laden wird ihre SHA-256 berechnet und mit dem bekannten Wert der offiziellen Liste verglichen (<code>2f5eed53…24dbda</code>, identisch mit <code>bip39_english.txt</code> aus dem Werkstatt-Paket).</li>
-      <li><strong>Selbsttest</strong>: Beim Laden werden die beiden Beispiele aus der SeedSigner-Dokumentation (<code>docs/dice_verification.md</code>) durchgerechnet. Nur wenn beide stimmen, ist der Selbsttest grün.</li>
-      <li><strong>Nichts verlässt den Browser</strong>: Die Seite hat eine Content-Security-Policy, die jede Verbindung verbietet. Nachprüfen: F12 → Netzwerk-Tab → es erscheint keine einzige Anfrage, auch nicht beim Rechnen.</li>
+      <li><strong>Same math as the SeedSigner</strong> (SeedSigner OS 0.8.7, <code>src/seedsigner/helpers/mnemonic_generation.py</code>): the digits are taken as text and hashed with <code>SHA-256</code>. 99 rolls give 32 bytes = 256 bits = 24 words; for 50 rolls only the first 16 bytes = 128 bits = 12 words are used.</li>
+      <li><strong>BIP39</strong>: a checksum is appended to the entropy (the first 8 or 4 bits of SHA-256 of the entropy), then everything is cut into 11-bit chunks. Each chunk is a number from 0 to 2047 pointing at a word in the official English word list.</li>
+      <li><strong>Two engines</strong>: SHA-256 is computed once with the browser's built-in WebCrypto and once with a small, readable JavaScript implementation. A result is only shown if both agree.</li>
+      <li><strong>Word list verified</strong>: the 2048 words are embedded in this file. On load their SHA-256 is computed and compared with the known value of the official list (<code>2f5eed53…24dbda</code>, identical to <code>bip39_english.txt</code> in the workshop pack).</li>
+      <li><strong>Self-test</strong>: on load, both examples from the SeedSigner documentation (<code>docs/dice_verification.md</code>) are computed. The self-test only turns green if both match.</li>
+      <li><strong>Nothing leaves the browser</strong>: the page carries a Content Security Policy that forbids every connection. Check for yourself: F12 → Network tab → not a single request appears, not even while computing.</li>
     </ul>
   </div>
 
-  <h2>Zweite Meinung – dem Prüfwerkzeug nicht blind glauben</h2>
+  <h2>Second opinion – don't trust the checker blindly either</h2>
   <p>
-    Auch ein Prüfwerkzeug ist Angriffsfläche. Wer es ernst meint, rechnet mit einer zweiten, unabhängigen Codebasis gegen:
+    A verification tool is an attack surface too. If you are serious, cross-check with a second, independent code base:
   </p>
   <div class="box">
     <ul>
-      <li><strong>Prüfskript aus dem Werkstatt-Paket</strong>: <code>verify_dice_seed.py</code> (nur Python-Standardbibliothek plus <code>bip39_english.txt</code>), Aufruf ohne Argument, die Ziffern werden abgefragt. Läuft auch auf Tails ohne Netz. Der Wrapper <code>dice-check.sh</code> prüft vorher die Hashes beider Dateien gegen <code>SHA256SUMS</code>.</li>
-      <li><strong>Ian Colemans BIP39-Tool</strong> (<code>bip39-standalone.html</code>, offline geöffnet): „Show entropy details" → Entropie-Typ <strong>„Base 10"</strong> wählen und die Ziffern eintragen. <strong>Niemals den „Dice"-Modus</strong> – der macht aus jeder 6 eine 0 und liefert andere Wörter, obwohl alles richtig aussieht.</li>
-      <li>Stimmen zwei Werkzeuge und das Gerät überein, ist die Methode belegt. Dann würfelst du den echten Seed – und tippst ihn nirgendwo mehr ein.</li>
+      <li><strong>The script from the workshop pack</strong>: <code>verify_dice_seed.py</code> (Python standard library only, plus <code>bip39_english.txt</code>), run without arguments so it prompts for the digits. Works on Tails without network. The wrapper <code>dice-check.sh</code> checks both files against <code>SHA256SUMS</code> first.</li>
+      <li><strong>Ian Coleman's BIP39 tool</strong> (<code>bip39-standalone.html</code>, opened offline): "Show entropy details" → entropy type <strong>"Base 10"</strong>, then paste the digits. <strong>Never use the "Dice" mode</strong> – it turns every 6 into a 0 and produces different words while everything looks fine.</li>
+      <li>If two tools and the device agree, the method is proven. Then you roll the real seed – and never type it anywhere again.</li>
     </ul>
   </div>
 
   <details>
-    <summary>Datei prüfen: Ist das noch die Originalfassung?</summary>
+    <summary>Verify the file: is this still the original?</summary>
     <p class="small">
-      Diese Datei kann ihren eigenen Hash nicht enthalten. Vergleiche stattdessen die SHA-256 der heruntergeladenen Datei mit dem Wert auf der Download-Seite bzw. im Buch:
-      Linux/macOS <code>sha256sum wuerfel-check.html</code>, Windows PowerShell <code>Get-FileHash wuerfel-check.html</code>.
-      Weicht der Wert ab, Datei verwerfen und neu laden. Wer Code lesen kann: Rechtsklick → Seitenquelltext anzeigen. Der ganze Rechenweg steht im <code>&lt;script&gt;</code>-Block am Ende, rund 150 Zeilen.
+      This file cannot contain its own hash. Instead, compare the SHA-256 of your downloaded file with the value on the download page or in the book:
+      Linux/macOS <code>sha256sum dice-check.html</code>, Windows PowerShell <code>Get-FileHash dice-check.html</code>.
+      If the value differs, discard the file and download it again. If you can read code: right-click → View page source. The whole computation is in the <code>&lt;script&gt;</code> block at the end, about 150 lines.
     </p>
   </details>
 
   <details>
-    <summary>Was der Test beweist – und was nicht</summary>
+    <summary>What the test proves – and what it doesn't</summary>
     <p class="small">
-      <strong>Beweist:</strong> Das Gerät hat aus deinen Würfen die standardkonformen BIP39-Wörter berechnet, ohne die Entropie zu schwächen oder heimlich etwas anderes zu benutzen.
-      <strong>Beweist nicht:</strong> Ob deine Würfel fair sind, ob du beim Übertragen aufs Gerät einen Tippfehler gemacht hast (den findet der Vergleich zwar, aber erst danach), und ob dein Backup lesbar ist. Dafür gibt es das Wort-Quiz am Gerät und den Restore-Drill.
+      <strong>Proves:</strong> the device derived the standard-compliant BIP39 words from your rolls, without weakening the entropy or secretly using something else.
+      <strong>Does not prove:</strong> whether your dice are fair, whether you made a typo while entering the rolls on the device (the comparison will find it, but only afterwards), or whether your backup is readable. That is what the word quiz on the device and the restore drill are for.
     </p>
   </details>
 
   <footer>
-    Würfel-Check · Teil des Werkstatt-Pakets zu <em>Die eigene Bank – Bitcoin meisterlich verwahren</em> (Band 4) ·
-    <a href="https://alien-investor.org/">alien-investor.org</a> · Stand 2026-08-18 · v0.1<br>
-    Nicht vertrauen, nachrechnen. Keine Anlage-, Steuer- oder Rechtsberatung. Der Code dieser Seite steht unter MIT-Lizenz, die BIP39-Wortliste ist Teil des offenen Bitcoin-Standards.
+    Dice Check · part of the workshop pack for <em>Die eigene Bank – Bitcoin meisterlich verwahren</em> (volume 4, German; English edition to follow) ·
+    <a href="https://alien-investor.org/en/">alien-investor.org</a> · as of 2026-08-18 · v0.1<br>
+    Don't trust, verify. No investment, tax or legal advice. The code of this page is MIT-licensed; the BIP39 word list is part of the open Bitcoin standard.
   </footer>
 
 <script>
 (function () {
   "use strict";
 
-  /* ---------- BIP39-Wortliste (englisch, 2048 Wörter, offizielle Liste aus BIP-0039) ---------- */
+  /* ---------- BIP39 word list (English, 2048 words, official list from BIP-0039) ---------- */
   const WORDS = "abandon ability able about above absent absorb abstract absurd abuse access accident account accuse achieve acid acoustic acquire across act action actor actress actual adapt add addict address adjust admit adult advance advice aerobic affair afford afraid again age agent agree ahead aim air airport aisle alarm album alcohol alert alien all alley allow almost alone alpha already also alter always amateur amazing among amount amused analyst anchor ancient anger angle angry animal ankle announce annual another answer antenna antique anxiety any apart apology appear apple approve april arch arctic area arena argue arm armed armor army around arrange arrest arrive arrow art artefact artist artwork ask aspect assault asset assist assume asthma athlete atom attack attend attitude attract auction audit august aunt author auto autumn average avocado avoid awake aware away awesome awful awkward axis baby bachelor bacon badge bag balance balcony ball bamboo banana banner bar barely bargain barrel base basic basket battle beach bean beauty because become beef before begin behave behind believe below belt bench benefit best betray better between beyond bicycle bid bike bind biology bird birth bitter black blade blame blanket blast bleak bless blind blood blossom blouse blue blur blush board boat body boil bomb bone bonus book boost border boring borrow boss bottom bounce box boy bracket brain brand brass brave bread breeze brick bridge brief bright bring brisk broccoli broken bronze broom brother brown brush bubble buddy budget buffalo build bulb bulk bullet bundle bunker burden burger burst bus business busy butter buyer buzz cabbage cabin cable cactus cage cake call calm camera camp can canal cancel candy cannon canoe canvas canyon capable capital captain car carbon card cargo carpet carry cart case cash casino castle casual cat catalog catch category cattle caught cause caution cave ceiling celery cement census century cereal certain chair chalk champion change chaos chapter charge chase chat cheap check cheese chef cherry chest chicken chief child chimney choice choose chronic chuckle chunk churn cigar cinnamon circle citizen city civil claim clap clarify claw clay clean clerk clever click client cliff climb clinic clip clock clog close cloth cloud clown club clump cluster clutch coach coast coconut code coffee coil coin collect color column combine come comfort comic common company concert conduct confirm congress connect consider control convince cook cool copper copy coral core corn correct cost cotton couch country couple course cousin cover coyote crack cradle craft cram crane crash crater crawl crazy cream credit creek crew cricket crime crisp critic crop cross crouch crowd crucial cruel cruise crumble crunch crush cry crystal cube culture cup cupboard curious current curtain curve cushion custom cute cycle dad damage damp dance danger daring dash daughter dawn day deal debate debris decade december decide decline decorate decrease deer defense define defy degree delay deliver demand demise denial dentist deny depart depend deposit depth deputy derive describe desert design desk despair destroy detail detect develop device devote diagram dial diamond diary dice diesel diet differ digital dignity dilemma dinner dinosaur direct dirt disagree discover disease dish dismiss disorder display distance divert divide divorce dizzy doctor document dog doll dolphin domain donate donkey donor door dose double dove draft dragon drama drastic draw dream dress drift drill drink drip drive drop drum dry duck dumb dune during dust dutch duty dwarf dynamic eager eagle early earn earth easily east easy echo ecology economy edge edit educate effort egg eight either elbow elder electric elegant element elephant elevator elite else embark embody embrace emerge emotion employ empower empty enable enact end endless endorse enemy energy enforce engage engine enhance enjoy enlist enough enrich enroll ensure enter entire entry envelope episode equal equip era erase erode erosion error erupt escape essay essence estate eternal ethics evidence evil evoke evolve exact example excess exchange excite exclude excuse execute exercise exhaust exhibit exile exist exit exotic expand expect expire explain expose express extend extra eye eyebrow fabric face faculty fade faint faith fall false fame family famous fan fancy fantasy farm fashion fat fatal father fatigue fault favorite feature february federal fee feed feel female fence festival fetch fever few fiber fiction field figure file film filter final find fine finger finish fire firm first fiscal fish fit fitness fix flag flame flash flat flavor flee flight flip float flock floor flower fluid flush fly foam focus fog foil fold follow food foot force forest forget fork fortune forum forward fossil foster found fox fragile frame frequent fresh friend fringe frog front frost frown frozen fruit fuel fun funny furnace fury future gadget gain galaxy gallery game gap garage garbage garden garlic garment gas gasp gate gather gauge gaze general genius genre gentle genuine gesture ghost giant gift giggle ginger giraffe girl give glad glance glare glass glide glimpse globe gloom glory glove glow glue goat goddess gold good goose gorilla gospel gossip govern gown grab grace grain grant grape grass gravity great green grid grief grit grocery group grow grunt guard guess guide guilt guitar gun gym habit hair half hammer hamster hand happy harbor hard harsh harvest hat have hawk hazard head health heart heavy hedgehog height hello helmet help hen hero hidden high hill hint hip hire history hobby hockey hold hole holiday hollow home honey hood hope horn horror horse hospital host hotel hour hover hub huge human humble humor hundred hungry hunt hurdle hurry hurt husband hybrid ice icon idea identify idle ignore ill illegal illness image imitate immense immune impact impose improve impulse inch include income increase index indicate indoor industry infant inflict inform inhale inherit initial inject injury inmate inner innocent input inquiry insane insect inside inspire install intact interest into invest invite involve iron island isolate issue item ivory jacket jaguar jar jazz jealous jeans jelly jewel job join joke journey joy judge juice jump jungle junior junk just kangaroo keen keep ketchup key kick kid kidney kind kingdom kiss kit kitchen kite kitten kiwi knee knife knock know lab label labor ladder lady lake lamp language laptop large later latin laugh laundry lava law lawn lawsuit layer lazy leader leaf learn leave lecture left leg legal legend leisure lemon lend length lens leopard lesson letter level liar liberty library license life lift light like limb limit link lion liquid list little live lizard load loan lobster local lock logic lonely long loop lottery loud lounge love loyal lucky luggage lumber lunar lunch luxury lyrics machine mad magic magnet maid mail main major make mammal man manage mandate mango mansion manual maple marble march margin marine market marriage mask mass master match material math matrix matter maximum maze meadow mean measure meat mechanic medal media melody melt member memory mention menu mercy merge merit merry mesh message metal method middle midnight milk million mimic mind minimum minor minute miracle mirror misery miss mistake mix mixed mixture mobile model modify mom moment monitor monkey monster month moon moral more morning mosquito mother motion motor mountain mouse move movie much muffin mule multiply muscle museum mushroom music must mutual myself mystery myth naive name napkin narrow nasty nation nature near neck need negative neglect neither nephew nerve nest net network neutral never news next nice night noble noise nominee noodle normal north nose notable note nothing notice novel now nuclear number nurse nut oak obey object oblige obscure observe obtain obvious occur ocean october odor off offer office often oil okay old olive olympic omit once one onion online only open opera opinion oppose option orange orbit orchard order ordinary organ orient original orphan ostrich other outdoor outer output outside oval oven over own owner oxygen oyster ozone pact paddle page pair palace palm panda panel panic panther paper parade parent park parrot party pass patch path patient patrol pattern pause pave payment peace peanut pear peasant pelican pen penalty pencil people pepper perfect permit person pet phone photo phrase physical piano picnic picture piece pig pigeon pill pilot pink pioneer pipe pistol pitch pizza place planet plastic plate play please pledge pluck plug plunge poem poet point polar pole police pond pony pool popular portion position possible post potato pottery poverty powder power practice praise predict prefer prepare present pretty prevent price pride primary print priority prison private prize problem process produce profit program project promote proof property prosper protect proud provide public pudding pull pulp pulse pumpkin punch pupil puppy purchase purity purpose purse push put puzzle pyramid quality quantum quarter question quick quit quiz quote rabbit raccoon race rack radar radio rail rain raise rally ramp ranch random range rapid rare rate rather raven raw razor ready real reason rebel rebuild recall receive recipe record recycle reduce reflect reform refuse region regret regular reject relax release relief rely remain remember remind remove render renew rent reopen repair repeat replace report require rescue resemble resist resource response result retire retreat return reunion reveal review reward rhythm rib ribbon rice rich ride ridge rifle right rigid ring riot ripple risk ritual rival river road roast robot robust rocket romance roof rookie room rose rotate rough round route royal rubber rude rug rule run runway rural sad saddle sadness safe sail salad salmon salon salt salute same sample sand satisfy satoshi sauce sausage save say scale scan scare scatter scene scheme school science scissors scorpion scout scrap screen script scrub sea search season seat second secret section security seed seek segment select sell seminar senior sense sentence series service session settle setup seven shadow shaft shallow share shed shell sheriff shield shift shine ship shiver shock shoe shoot shop short shoulder shove shrimp shrug shuffle shy sibling sick side siege sight sign silent silk silly silver similar simple since sing siren sister situate six size skate sketch ski skill skin skirt skull slab slam sleep slender slice slide slight slim slogan slot slow slush small smart smile smoke smooth snack snake snap sniff snow soap soccer social sock soda soft solar soldier solid solution solve someone song soon sorry sort soul sound soup source south space spare spatial spawn speak special speed spell spend sphere spice spider spike spin spirit split spoil sponsor spoon sport spot spray spread spring spy square squeeze squirrel stable stadium staff stage stairs stamp stand start state stay steak steel stem step stereo stick still sting stock stomach stone stool story stove strategy street strike strong struggle student stuff stumble style subject submit subway success such sudden suffer sugar suggest suit summer sun sunny sunset super supply supreme sure surface surge surprise surround survey suspect sustain swallow swamp swap swarm swear sweet swift swim swing switch sword symbol symptom syrup system table tackle tag tail talent talk tank tape target task taste tattoo taxi teach team tell ten tenant tennis tent term test text thank that theme then theory there they thing this thought three thrive throw thumb thunder ticket tide tiger tilt timber time tiny tip tired tissue title toast tobacco today toddler toe together toilet token tomato tomorrow tone tongue tonight tool tooth top topic topple torch tornado tortoise toss total tourist toward tower town toy track trade traffic tragic train transfer trap trash travel tray treat tree trend trial tribe trick trigger trim trip trophy trouble truck true truly trumpet trust truth try tube tuition tumble tuna tunnel turkey turn turtle twelve twenty twice twin twist two type typical ugly umbrella unable unaware uncle uncover under undo unfair unfold unhappy uniform unique unit universe unknown unlock until unusual unveil update upgrade uphold upon upper upset urban urge usage use used useful useless usual utility vacant vacuum vague valid valley valve van vanish vapor various vast vault vehicle velvet vendor venture venue verb verify version very vessel veteran viable vibrant vicious victory video view village vintage violin virtual virus visa visit visual vital vivid vocal voice void volcano volume vote voyage wage wagon wait walk wall walnut want warfare warm warrior wash wasp waste water wave way wealth weapon wear weasel weather web wedding weekend weird welcome west wet whale what wheat wheel when where whip whisper wide width wife wild will win window wine wing wink winner winter wire wisdom wise wish witness wolf woman wonder wood wool word work world worry worth wrap wreck wrestle wrist write wrong yard year yellow you young youth zebra zero zone zoo".split(" ");
   const WORDLIST_SHA256 = "2f5eed53a4727b4bf8880d8f3f199efc90e58503646d9ff8eff3a2ed3b24dbda";
 
-  /* ---------- Testvektoren aus SeedSigner docs/dice_verification.md ---------- */
+  /* ---------- Test vectors from SeedSigner docs/dice_verification.md ---------- */
   const DOC_ROLLS_99 = "655152231316521321611331544441236164664431121534415633526456254462245546236542364246312613322234612";
   const DOC_WORDS_99 = "eyebrow obvious such suggest poet seven breeze blame virtual frown dynamic donor harsh pigeon express broccoli easy apology scatter force recipe shadow claim radio";
   const DOC_ROLLS_50 = "65515223131652132161133154444123616466443112153441";
   const DOC_WORDS_50 = "hole luggage safe present express tragic orbit shed switch metal identify path";
 
-  /* ---------- SHA-256, eigene Implementierung (FIPS 180-4), unabhängig von WebCrypto ---------- */
+  /* ---------- SHA-256, own implementation (FIPS 180-4), independent of WebCrypto ---------- */
   const K = new Uint32Array([
     0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,
     0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,
@@ -389,22 +386,22 @@
   const hex = (u8) => Array.from(u8, b => b.toString(16).padStart(2, "0")).join("");
   const eqBytes = (a, b) => a.length === b.length && a.every((v, i) => v === b[i]);
 
-  /* SHA-256 mit beiden Rechenwerken; wirft, wenn sie sich widersprechen. */
+  /* SHA-256 with both engines; throws if they disagree. */
   async function sha256both(bytes) {
     const own = sha256js(bytes);
     if (window.crypto && crypto.subtle) {
       const wc = new Uint8Array(await crypto.subtle.digest("SHA-256", bytes));
-      if (!eqBytes(own, wc)) throw new Error("SHA-256-Rechenwerke widersprechen sich – Datei nicht verwenden.");
+      if (!eqBytes(own, wc)) throw new Error("SHA-256 engines disagree – do not use this file.");
     }
     return own;
   }
 
-  /* ---------- Würfel → BIP39 ---------- */
+  /* ---------- Dice → BIP39 ---------- */
   function cleanDigits(s) { return s.replace(/[\s,;.\-_/|]/g, ""); }
 
   async function diceToMnemonic(rolls) {
-    if (rolls.length !== 50 && rolls.length !== 99) throw new Error(rolls.length + " Ziffern – erwartet 99 (24 Wörter) oder 50 (12 Wörter).");
-    if (/[^1-6]/.test(rolls)) throw new Error("Nur die Ziffern 1 bis 6 sind erlaubt.");
+    if (rolls.length !== 50 && rolls.length !== 99) throw new Error(rolls.length + " digits – expecting 99 (24 words) or 50 (12 words).");
+    if (/[^1-6]/.test(rolls)) throw new Error("Only the digits 1 to 6 are allowed.");
     let entropy = await sha256both(enc.encode(rolls));
     if (rolls.length === 50) entropy = entropy.slice(0, 16);
     const entBits = entropy.length * 8;
@@ -420,7 +417,7 @@
     return { words, entropy };
   }
 
-  /* ---------- Oberfläche ---------- */
+  /* ---------- UI ---------- */
   const $ = (id) => document.getElementById(id);
   const digitsEl = $("digits"), devEl = $("devwords"), counterEl = $("counter");
   const resultEl = $("result"), verdictEl = $("verdict"), wordsEl = $("words"), entropyEl = $("entropy");
@@ -432,13 +429,13 @@
   function updateCounter() {
     const n = cleanDigits(digitsEl.value).length;
     const bad = /[^1-6]/.test(cleanDigits(digitsEl.value));
-    let txt = n + " Ziffern";
-    if (bad) { txt += " – enthält andere Zeichen als 1–6"; counterEl.className = "counter bad"; }
-    else if (n === 99) { txt += " – vollständig für 24 Wörter"; counterEl.className = "counter ok"; }
-    else if (n === 50) { txt += " – vollständig für 12 Wörter"; counterEl.className = "counter ok"; }
-    else if (n < 50) { txt += " – noch " + (50 - n) + " bis 12 Wörter, " + (99 - n) + " bis 24 Wörter"; counterEl.className = "counter"; }
-    else if (n < 99) { txt += " – noch " + (99 - n) + " bis 24 Wörter"; counterEl.className = "counter"; }
-    else { txt += " – zu viele (max. 99)"; counterEl.className = "counter bad"; }
+    let txt = n + " digits";
+    if (bad) { txt += " – contains characters other than 1–6"; counterEl.className = "counter bad"; }
+    else if (n === 99) { txt += " – complete for 24 words"; counterEl.className = "counter ok"; }
+    else if (n === 50) { txt += " – complete for 12 words"; counterEl.className = "counter ok"; }
+    else if (n < 50) { txt += " – " + (50 - n) + " more for 12 words, " + (99 - n) + " more for 24 words"; counterEl.className = "counter"; }
+    else if (n < 99) { txt += " – " + (99 - n) + " more for 24 words"; counterEl.className = "counter"; }
+    else { txt += " – too many (max. 99)"; counterEl.className = "counter bad"; }
     counterEl.textContent = txt;
   }
   digitsEl.addEventListener("input", updateCounter);
@@ -458,28 +455,28 @@
       if (compared) {
         const d = devWords[i];
         if (d === w) div.classList.add("match");
-        else { div.classList.add("diff"); diffs++; const dv = document.createElement("span"); dv.className = "dev"; dv.textContent = "Gerät: " + (d || "(fehlt)"); div.appendChild(dv); }
+        else { div.classList.add("diff"); diffs++; const dv = document.createElement("span"); dv.className = "dev"; dv.textContent = "device: " + (d || "(missing)"); div.appendChild(dv); }
       }
       wordsEl.appendChild(div);
     });
     entropyEl.textContent = hex(entropy);
     if (!compared) {
       verdictEl.className = "verdict neutral";
-      verdictEl.textContent = words.length + " Wörter berechnet. Jetzt am SeedSigner Wort für Wort vergleichen – oder die Display-Wörter oben eintragen und erneut „Nachrechnen“ drücken.";
+      verdictEl.textContent = words.length + " words computed. Now compare word by word with the SeedSigner – or enter the display words above and press “Compute” again.";
     } else if (diffs === 0 && devWords.length === words.length) {
       verdictEl.className = "verdict ok";
-      verdictEl.textContent = "Bestanden: " + words.length + "/" + words.length + " Wörter identisch mit dem Display. Das Gerät hat korrekt gerechnet.";
+      verdictEl.textContent = "Passed: " + words.length + "/" + words.length + " words identical to the display. The device computed correctly.";
     } else {
       verdictEl.className = "verdict bad";
-      const extra = devWords.length !== words.length ? " (Display-Eingabe hat " + devWords.length + " Wörter, erwartet " + words.length + ")" : "";
-      verdictEl.textContent = "Abweichung: " + diffs + " Wort/Wörter unterscheiden sich" + extra + ". Ziffern gegen das Blatt und die Geräteeingabe prüfen, Durchlauf wiederholen. Diesen Seed nicht verwenden.";
+      const extra = devWords.length !== words.length ? " (display input has " + devWords.length + " words, expected " + words.length + ")" : "";
+      verdictEl.textContent = "Mismatch: " + diffs + " word(s) differ" + extra + ". Check the digits against your sheet and the device input, repeat the run. Do not use this seed.";
     }
     resultEl.style.display = "block";
     resultEl.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   btnCalc.addEventListener("click", async () => {
-    if (!ready) { alert("Selbsttest oder Wortlistenprüfung fehlgeschlagen – diese Datei nicht verwenden."); return; }
+    if (!ready) { alert("Self-test or word list check failed – do not use this file."); return; }
     try {
       const rolls = cleanDigits(digitsEl.value);
       const { words, entropy } = await diceToMnemonic(rolls);
@@ -497,41 +494,41 @@
   });
 
   async function selfTest() {
-    setPill("st-self", "", "Selbsttest: läuft …");
+    setPill("st-self", "", "Self-test: running …");
     try {
       const r24 = (await diceToMnemonic(DOC_ROLLS_99)).words.join(" ") === DOC_WORDS_99;
       const r12 = (await diceToMnemonic(DOC_ROLLS_50)).words.join(" ") === DOC_WORDS_50;
-      if (r24 && r12) { setPill("st-self", "ok", "Selbsttest: 24 + 12 Wörter OK"); return true; }
-      setPill("st-self", "bad", "Selbsttest FEHLGESCHLAGEN – Datei nicht verwenden"); return false;
-    } catch (e) { setPill("st-self", "bad", "Selbsttest: " + e.message); return false; }
+      if (r24 && r12) { setPill("st-self", "ok", "Self-test: 24 + 12 words OK"); return true; }
+      setPill("st-self", "bad", "Self-test FAILED – do not use this file"); return false;
+    } catch (e) { setPill("st-self", "bad", "Self-test: " + e.message); return false; }
   }
   $("btn-selftest").addEventListener("click", selfTest);
 
   async function init() {
-    /* Verbindung */
+    /* Connection */
     function net() {
       const file = location.protocol === "file:";
-      if (navigator.onLine === false) setPill("st-net", "ok", "Verbindung: offline" + (file ? ", lokale Datei" : ""));
-      else setPill("st-net", "warnp", "Verbindung: online" + (file ? ", lokale Datei" : "") + " – für ernsthafte Prüfungen Netz trennen");
+      if (navigator.onLine === false) setPill("st-net", "ok", "Connection: offline" + (file ? ", local file" : ""));
+      else setPill("st-net", "warnp", "Connection: online" + (file ? ", local file" : "") + " – disconnect for anything serious");
     }
     net(); window.addEventListener("online", net); window.addEventListener("offline", net);
 
-    /* Wortliste */
+    /* Word list */
     let wlOk = false;
     try {
-      if (WORDS.length !== 2048) throw new Error("Anzahl " + WORDS.length);
+      if (WORDS.length !== 2048) throw new Error("count " + WORDS.length);
       const h = hex(await sha256both(enc.encode(WORDS.join("\n") + "\n")));
       wlOk = (h === WORDLIST_SHA256);
-      setPill("st-wl", wlOk ? "ok" : "bad", wlOk ? "Wortliste: 2048 Wörter, Hash 2f5eed53… OK" : "Wortliste: HASH FALSCH – Datei nicht verwenden");
-    } catch (e) { setPill("st-wl", "bad", "Wortliste: " + e.message); }
+      setPill("st-wl", wlOk ? "ok" : "bad", wlOk ? "Word list: 2048 words, hash 2f5eed53… OK" : "Word list: WRONG HASH – do not use this file");
+    } catch (e) { setPill("st-wl", "bad", "Word list: " + e.message); }
 
-    /* SHA-256-Rechenwerke: bekannter Testwert ("abc") */
+    /* SHA-256 engines: known test value ("abc") */
     let shaOk = false;
     try {
       const h = hex(await sha256both(enc.encode("abc")));
       shaOk = (h === "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad");
       const two = !!(window.crypto && crypto.subtle);
-      setPill("st-sha", shaOk ? "ok" : "bad", shaOk ? ("SHA-256: " + (two ? "eigene Implementierung + WebCrypto stimmen überein" : "eigene Implementierung OK (WebCrypto hier nicht verfügbar)")) : "SHA-256: FEHLER");
+      setPill("st-sha", shaOk ? "ok" : "bad", shaOk ? ("SHA-256: " + (two ? "own implementation + WebCrypto agree" : "own implementation OK (WebCrypto not available here)")) : "SHA-256: ERROR");
     } catch (e) { setPill("st-sha", "bad", "SHA-256: " + e.message); }
 
     const selfOk = await selfTest();
