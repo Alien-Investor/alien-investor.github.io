@@ -7,6 +7,7 @@
        Verifiable in your browser's developer tools (F12 → Network: not a single request). -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; form-action 'none'; base-uri 'none'; connect-src 'none'">
   <meta name="referrer" content="no-referrer">
+  <link rel="icon" href="data:,">
   <title>Dice Check – verify a SeedSigner dice seed | Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Dice Check: recomputes offline whether the SeedSigner turned 50 or 99 dice rolls into the correct BIP39 words. One file, no server, no connection. Throwaway seeds only.">
@@ -255,7 +256,7 @@
   <div class="counter" id="counter">0 digits – expecting 50 (12 words) or 99 (24 words)</div>
 
   <h2>2. Words from the display <span class="small">(optional, for automatic comparison)</span></h2>
-  <label for="devwords">The words the SeedSigner showed you (Seed Words 1/6 to 6/6). Numbers, dots and line breaks are ignored:</label>
+  <label for="devwords">The words the SeedSigner showed you ("Seed Words: 1/6" to "6/6"). Numbers, dots and line breaks are ignored:</label>
   <textarea id="devwords" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-1p-ignore="true" placeholder="e.g. 1. eyebrow 2. obvious 3. such …"></textarea>
 
   <div class="btnrow">
@@ -280,7 +281,7 @@
       <li><strong>Two engines</strong>: SHA-256 is computed once with the browser's built-in WebCrypto and once with a small, readable JavaScript implementation. A result is only shown if both agree.</li>
       <li><strong>Word list verified</strong>: the 2048 words are embedded in this file. On load their SHA-256 is computed and compared with the known value of the official list (<code>2f5eed53…24dbda</code>, identical to <code>bip39_english.txt</code> in the workshop pack).</li>
       <li><strong>Self-test</strong>: on load, both examples from the SeedSigner documentation (<code>docs/dice_verification.md</code>) are computed. The self-test only turns green if both match.</li>
-      <li><strong>Nothing leaves the browser</strong>: the page carries a Content Security Policy that forbids every connection. Check for yourself: F12 → Network tab → not a single request appears, not even while computing.</li>
+      <li><strong>Nothing leaves the browser</strong>: the page carries a Content Security Policy that forbids every connection. Check for yourself: F12 → Network tab → apart from loading the page itself, no request appears, not even while computing.</li>
     </ul>
   </div>
 
@@ -291,7 +292,7 @@
   <div class="box">
     <ul>
       <li><strong>The script from the workshop pack</strong>: <code>verify_dice_seed.py</code> (Python standard library only, plus <code>bip39_english.txt</code>), run without arguments so it prompts for the digits. Works on Tails without network. The wrapper <code>dice-check.sh</code> checks both files against <code>SHA256SUMS</code> first.</li>
-      <li><strong>Ian Coleman's BIP39 tool</strong> (<code>bip39-standalone.html</code>, opened offline): "Show entropy details" → entropy type <strong>"Base 10"</strong>, then paste the digits. <strong>Never use the "Dice" mode</strong> – it turns every 6 into a 0 and produces different words while everything looks fine.</li>
+      <li><strong>Ian Coleman's BIP39 tool</strong> (<code>bip39-standalone.html</code>, opened offline): "Show entropy details" → actively click entropy type <strong>"Base 10"</strong>, set <strong>"Mnemonic Length" to "24 Words"</strong> (or "12 Words"), then paste the digits. If the default "Use Raw Entropy" stays selected, nothing is hashed and the words differ. <strong>Never use the "Dice" mode</strong> – it turns every 6 into a 0 and produces different words while everything looks fine.</li>
       <li>If two tools and the device agree, the method is proven. Then you roll the real seed – and never type it anywhere again.</li>
     </ul>
   </div>
@@ -300,8 +301,8 @@
     <summary>Verify the file: is this still the original?</summary>
     <p class="small">
       This file cannot contain its own hash. Instead, compare the SHA-256 of your downloaded file with the value on the <a href="https://alien-investor.org/en/wuerfel-check.html">download page</a> or in the book:
-      Linux/macOS <code>sha256sum dice-check.html</code>, Windows PowerShell <code>Get-FileHash dice-check.html</code>.
-      If the value differs, discard the file and download it again. If you can read code: right-click → View page source. The whole computation is in the <code>&lt;script&gt;</code> block at the end, about 150 lines.
+      Linux/macOS <code>sha256sum dice-check.html</code>, Windows PowerShell <code>Get-FileHash dice-check.html</code> (output is upper-case, case does not matter).
+      If the value differs, discard the file and download it again. If you can read code: right-click → View page source. The whole code is in the <code>&lt;script&gt;</code> block at the end, about 200 lines – roughly 70 of them for the actual computation (SHA-256 and word derivation), the rest is interface.
     </p>
   </details>
 

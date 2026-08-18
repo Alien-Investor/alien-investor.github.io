@@ -7,6 +7,7 @@
        Prüfbar in den Entwicklerwerkzeugen des Browsers (F12 → Netzwerk: keine Anfrage). -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; form-action 'none'; base-uri 'none'; connect-src 'none'">
   <meta name="referrer" content="no-referrer">
+  <link rel="icon" href="data:,">
   <title>Würfel-Check – SeedSigner-Würfelseed nachrechnen | Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Würfel-Check: rechnet offline nach, ob der SeedSigner aus 50 oder 99 Würfelziffern die richtigen BIP39-Wörter erzeugt hat. Eine Datei, kein Server, keine Verbindung. Nur für Wegwerf-Seeds.">
@@ -258,7 +259,7 @@
   <div class="counter" id="counter">0 Ziffern – erwartet 50 (12 Wörter) oder 99 (24 Wörter)</div>
 
   <h2>2. Wörter vom Display <span class="small">(optional, zum automatischen Vergleich)</span></h2>
-  <label for="devwords">Die Wörter, die der SeedSigner angezeigt hat (Seed Words 1/6 bis 6/6). Nummern, Punkte, Zeilenumbrüche stören nicht:</label>
+  <label for="devwords">Die Wörter, die der SeedSigner angezeigt hat („Seed Words: 1/6" bis „6/6"). Nummern, Punkte, Zeilenumbrüche stören nicht:</label>
   <textarea id="devwords" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-1p-ignore="true" placeholder="z. B. 1. eyebrow 2. obvious 3. such …"></textarea>
 
   <div class="btnrow">
@@ -283,7 +284,7 @@
       <li><strong>Zwei Rechenwerke</strong>: SHA-256 wird einmal mit der eingebauten WebCrypto-Funktion des Browsers und einmal mit einer eigenen, lesbaren JavaScript-Implementierung berechnet. Nur wenn beide übereinstimmen, wird ein Ergebnis angezeigt.</li>
       <li><strong>Wortliste geprüft</strong>: Die 2048 Wörter stecken in dieser Datei. Beim Laden wird ihre SHA-256 berechnet und mit dem bekannten Wert der offiziellen Liste verglichen (<code>2f5eed53…24dbda</code>, identisch mit <code>bip39_english.txt</code> aus dem Werkstatt-Paket).</li>
       <li><strong>Selbsttest</strong>: Beim Laden werden die beiden Beispiele aus der SeedSigner-Dokumentation (<code>docs/dice_verification.md</code>) durchgerechnet. Nur wenn beide stimmen, ist der Selbsttest grün.</li>
-      <li><strong>Nichts verlässt den Browser</strong>: Die Seite hat eine Content-Security-Policy, die jede Verbindung verbietet. Nachprüfen: F12 → Netzwerk-Tab → es erscheint keine einzige Anfrage, auch nicht beim Rechnen.</li>
+      <li><strong>Nichts verlässt den Browser</strong>: Die Seite hat eine Content-Security-Policy, die jede Verbindung verbietet. Nachprüfen: F12 → Netzwerk-Tab → außer dem Laden der Seite selbst erscheint keine Anfrage, auch nicht beim Rechnen.</li>
     </ul>
   </div>
 
@@ -294,7 +295,7 @@
   <div class="box">
     <ul>
       <li><strong>Prüfskript aus dem Werkstatt-Paket</strong>: <code>verify_dice_seed.py</code> (nur Python-Standardbibliothek plus <code>bip39_english.txt</code>), Aufruf ohne Argument, die Ziffern werden abgefragt. Läuft auch auf Tails ohne Netz. Der Wrapper <code>dice-check.sh</code> prüft vorher die Hashes beider Dateien gegen <code>SHA256SUMS</code>.</li>
-      <li><strong>Ian Colemans BIP39-Tool</strong> (<code>bip39-standalone.html</code>, offline geöffnet): „Show entropy details" → Entropie-Typ <strong>„Base 10"</strong> wählen und die Ziffern eintragen. <strong>Niemals den „Dice"-Modus</strong> – der macht aus jeder 6 eine 0 und liefert andere Wörter, obwohl alles richtig aussieht.</li>
+      <li><strong>Ian Colemans BIP39-Tool</strong> (<code>bip39-standalone.html</code>, offline geöffnet): „Show entropy details" → Entropie-Typ <strong>„Base 10"</strong> aktiv anklicken, <strong>„Mnemonic Length" auf „24 Words"</strong> (bzw. „12 Words") stellen, dann die Ziffern eintragen. Bleibt die Voreinstellung „Use Raw Entropy" stehen, wird nicht gehasht und die Wörter weichen ab. <strong>Niemals den „Dice"-Modus</strong> – der macht aus jeder 6 eine 0 und liefert andere Wörter, obwohl alles richtig aussieht.</li>
       <li>Stimmen zwei Werkzeuge und das Gerät überein, ist die Methode belegt. Dann würfelst du den echten Seed – und tippst ihn nirgendwo mehr ein.</li>
     </ul>
   </div>
@@ -303,8 +304,8 @@
     <summary>Datei prüfen: Ist das noch die Originalfassung?</summary>
     <p class="small">
       Diese Datei kann ihren eigenen Hash nicht enthalten. Vergleiche stattdessen die SHA-256 der heruntergeladenen Datei mit dem Wert auf der <a href="https://alien-investor.org/wuerfel-check.html">Download-Seite</a> bzw. im Buch:
-      Linux/macOS <code>sha256sum wuerfel-check.html</code>, Windows PowerShell <code>Get-FileHash wuerfel-check.html</code>.
-      Weicht der Wert ab, Datei verwerfen und neu laden. Wer Code lesen kann: Rechtsklick → Seitenquelltext anzeigen. Der ganze Rechenweg steht im <code>&lt;script&gt;</code>-Block am Ende, rund 150 Zeilen.
+      Linux/macOS <code>sha256sum wuerfel-check.html</code>, Windows PowerShell <code>Get-FileHash wuerfel-check.html</code> (Ausgabe in Großbuchstaben, Groß-/Kleinschreibung ist egal).
+      Weicht der Wert ab, Datei verwerfen und neu laden. Wer Code lesen kann: Rechtsklick → Seitenquelltext anzeigen. Der ganze Code steht im <code>&lt;script&gt;</code>-Block am Ende, rund 200 Zeilen – davon rund 70 für den eigentlichen Rechenweg (SHA-256 und Wortableitung), der Rest ist Oberfläche.
     </p>
   </details>
 

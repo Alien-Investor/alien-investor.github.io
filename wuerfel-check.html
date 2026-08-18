@@ -236,7 +236,7 @@
       <a class="btn" href="wuerfel-check-tool.html" download="wuerfel-check.html">↓ wuerfel-check.html speichern</a>
       <a class="btn" href="wuerfel-check-anleitung.pdf" download="wuerfel-check-anleitung.pdf">↓ Anleitung (PDF, 1 Seite)</a>
       <p style="margin-top:1.2em; margin-bottom:0.3em; color:#ccc;">SHA-256 der Datei <code>wuerfel-check.html</code> (v0.1, Stand 18.08.2026):</p>
-      <p style="margin:0;"><code>fe92e27fcbb66ad74ccc935f35d8f2642d8fc94e425c66d3577438e1f02b182f</code></p>
+      <p style="margin:0;"><code>1fc3c138577c886c4fbbd12c328144f8ef83e377229e1650e0644d4c92820b40</code></p>
       <p style="margin-top:0.8em; font-size:0.9em; color:#888;">
         Prüfen: Linux/macOS <code>sha256sum wuerfel-check.html</code> · Windows PowerShell <code>Get-FileHash wuerfel-check.html</code>.
         Weicht der Wert ab, Datei verwerfen und neu laden.
@@ -249,7 +249,7 @@
     <h2>Was er kann</h2>
     <div class="box">
       <ul>
-        <li><strong>Nachrechnen wie das Gerät</strong> — Ziffern eingeben (Leerzeichen erlaubt), „Nachrechnen", 12 oder 24 Wörter erscheinen nummeriert. Rechenweg wie in SeedSigner OS 0.8.7 (<code>helpers/mnemonic_generation.py</code>).</li>
+        <li><strong>Nachrechnen wie das Gerät</strong> — Ziffern eingeben (Leerzeichen erlaubt), „Nachrechnen", 12 oder 24 Wörter erscheinen nummeriert. Rechenweg wie in SeedSigner OS 0.8.7 (<code>src/seedsigner/helpers/mnemonic_generation.py</code>).</li>
         <li><strong>Automatischer Vergleich</strong> — trägst du zusätzlich die Wörter vom Display ein, markiert er jede Abweichung rot. „24/24 identisch" ist das Ziel.</li>
         <li><strong>Prüft sich beim Start selbst</strong> — Wortliste per Hash gegen die offizielle BIP39-Liste, SHA-256 mit zwei unabhängigen Rechenwerken (Browser-WebCrypto und eine eigene, lesbare Implementierung), Selbsttest gegen die beiden Beispiele aus der SeedSigner-Dokumentation. Erst wenn alles grün ist, lässt er dich rechnen.</li>
         <li><strong>Zeigt dir, ob du online bist</strong> — und rät dir, es nicht zu sein.</li>
@@ -262,9 +262,9 @@
       Ein Prüfwerkzeug für Seeds darf selbst keine Angriffsfläche sein. Deshalb steckt alles in einer Datei, die
       <strong>keine einzige Netz-Anfrage</strong> stellt: keine externen Skripte, keine Schriften, keine Bilder, keine Analyse-Tracker.
       Eine Content-Security-Policy im Kopf der Datei verbietet dem Browser das Nachladen und Senden ausdrücklich.
-      Wer es nachprüfen will: F12 → Netzwerk-Tab → es erscheint keine Anfrage, auch nicht beim Rechnen.
-      Und wer Code lesen kann: Rechtsklick → Seitenquelltext. Der ganze Rechenweg steht im <code>&lt;script&gt;</code>-Block
-      am Ende, rund 150 Zeilen, ohne Bibliotheken.
+      Wer es nachprüfen will: F12 → Netzwerk-Tab → außer dem Laden der Seite selbst erscheint keine Anfrage, auch nicht beim Rechnen.
+      Und wer Code lesen kann: Rechtsklick → Seitenquelltext. Der ganze Code steht im <code>&lt;script&gt;</code>-Block
+      am Ende, rund 200 Zeilen ohne Bibliotheken, davon rund 70 für den eigentlichen Rechenweg.
     </p>
 
     <h2>Nicht vertrauen, nachrechnen — auch dem Würfel-Check nicht</h2>
@@ -273,7 +273,7 @@
       <ul>
         <li><strong>Weg 1 — Würfel-Check</strong> (diese Datei, JavaScript im Browser, offline).</li>
         <li><strong>Weg 2 — Prüfskript im Terminal</strong>: <code>verify_dice_seed.py</code>, rund 90 Zeilen Python ohne Fremdbibliotheken, plus Wrapper, der vor jedem Start die Hashes prüft. Läuft auch auf Tails ohne Netz. Kommt mit dem vollständigen Werkstatt-Paket zum Buch.</li>
-        <li><strong>Weg 3 — Ian Colemans BIP39-Tool</strong> offline: „Show entropy details" → Typ <strong>„Base 10"</strong>. Niemals den „Dice"-Modus, der macht aus jeder 6 eine 0.</li>
+        <li><strong>Weg 3 — Ian Colemans BIP39-Tool</strong> offline: „Show entropy details" → Typ <strong>„Base 10"</strong> aktiv anklicken, <strong>„Mnemonic Length" auf „24 Words"</strong> (bzw. „12 Words") stellen, sonst bleibt „Use Raw Entropy" aktiv und die Wörter weichen ab. Niemals den „Dice"-Modus, der macht aus jeder 6 eine 0.</li>
       </ul>
       <p style="margin-bottom:0;">Was der Test beweist: dass das Gerät standardkonform rechnet. Was er nicht beweist: ob deine Würfel fair sind und ob dein Backup lesbar ist. Dafür gibt es Würfelbecher und Restore-Drill — beides Thema im Buch.</p>
     </div>

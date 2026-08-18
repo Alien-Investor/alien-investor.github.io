@@ -235,7 +235,7 @@
       <a class="btn" href="/en/dice-check-tool.html" download="dice-check.html">↓ save dice-check.html</a>
       <a class="btn" href="/wuerfel-check-anleitung.pdf" download="wuerfel-check-anleitung.pdf">↓ Instructions (PDF, German)</a>
       <p style="margin-top:1.2em; margin-bottom:0.3em; color:#ccc;">SHA-256 of the file <code>dice-check.html</code> (v0.1, as of 2026-08-18):</p>
-      <p style="margin:0;"><code>b19154b539058d94e5099600038eabbb50ba93cb6bef9b9794daaba1e944d4aa</code></p>
+      <p style="margin:0;"><code>df760d95298b1a48e4b2d7e873a724f33ff7005ed2cbdaa816e6143d2827ae07</code></p>
       <p style="margin-top:0.8em; font-size:0.9em; color:#888;">
         Verify: Linux/macOS <code>sha256sum dice-check.html</code> · Windows PowerShell <code>Get-FileHash dice-check.html</code>.
         If the value differs, discard the file and download it again. The English one-page instruction sheet follows with the English workshop pack.
@@ -248,7 +248,7 @@
     <h2>What it does</h2>
     <div class="box">
       <ul>
-        <li><strong>Computes like the device</strong> — enter the digits (spaces are fine), press "Compute", 12 or 24 numbered words appear. Same math as SeedSigner OS 0.8.7 (<code>helpers/mnemonic_generation.py</code>).</li>
+        <li><strong>Computes like the device</strong> — enter the digits (spaces are fine), press "Compute", 12 or 24 numbered words appear. Same math as SeedSigner OS 0.8.7 (<code>src/seedsigner/helpers/mnemonic_generation.py</code>).</li>
         <li><strong>Automatic comparison</strong> — if you also enter the words from the display, every mismatch is marked red. "24/24 identical" is the goal.</li>
         <li><strong>Checks itself on start</strong> — word list hashed against the official BIP39 list, SHA-256 with two independent engines (browser WebCrypto and a small readable implementation), self-test against the two examples from the SeedSigner documentation. Only when everything is green does it let you compute.</li>
         <li><strong>Tells you whether you are online</strong> — and advises you not to be.</li>
@@ -260,9 +260,9 @@
     <p>
       A verification tool for seeds must not be an attack surface itself. That is why everything is in one file that makes
       <strong>not a single network request</strong>: no external scripts, no fonts, no images, no analytics. A Content Security Policy
-      in the head of the file explicitly forbids the browser to load or send anything. Want to check? F12 → Network tab → no
-      request appears, not even while computing. And if you can read code: right-click → View page source. The whole computation
-      is in the <code>&lt;script&gt;</code> block at the end, about 150 lines, no libraries.
+      in the head of the file explicitly forbids the browser to load or send anything. Want to check? F12 → Network tab → apart from loading the page itself, no
+      request appears, not even while computing. And if you can read code: right-click → View page source. The whole code
+      is in the <code>&lt;script&gt;</code> block at the end, about 200 lines without libraries, roughly 70 of them for the actual computation.
     </p>
 
     <h2>Don't trust, verify — the Dice Check included</h2>
@@ -271,7 +271,7 @@
       <ul>
         <li><strong>Way 1 — Dice Check</strong> (this file, JavaScript in the browser, offline).</li>
         <li><strong>Way 2 — the terminal script</strong>: <code>verify_dice_seed.py</code>, about 90 lines of Python without third-party libraries, plus a wrapper that checks the hashes before every start. Runs on Tails without network. Ships with the full workshop pack for the book.</li>
-        <li><strong>Way 3 — Ian Coleman's BIP39 tool</strong> offline: "Show entropy details" → type <strong>"Base 10"</strong>. Never the "Dice" mode, it turns every 6 into a 0.</li>
+        <li><strong>Way 3 — Ian Coleman's BIP39 tool</strong> offline: "Show entropy details" → actively click type <strong>"Base 10"</strong>, set <strong>"Mnemonic Length" to "24 Words"</strong> (or "12 Words"), otherwise "Use Raw Entropy" stays active and the words differ. Never the "Dice" mode, it turns every 6 into a 0.</li>
       </ul>
       <p style="margin-bottom:0;">What the test proves: that the device computes to the standard. What it doesn't prove: whether your dice are fair and whether your backup is readable. That is what a dice cup and a restore drill are for — both covered in the book.</p>
     </div>
