@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Würfel-Check — SeedSigner-Würfelseed offline nachrechnen | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Würfel-Check: rechnet offline nach, ob der SeedSigner aus 50 oder 99 Würfelziffern die richtigen BIP39-Wörter erzeugt hat. Eine HTML-Datei, kein Server, keine Verbindung, Open Source (MIT). Kostenlos, mit Anleitung.">
+  <style>
+    body { background-color:#000; color:#fff; font-family:Arial,sans-serif; line-height:1.6; max-width:800px; margin:auto; padding:0 15px 20px 15px; }
+    h1,h2,h3 { color:#00ffcc; }
+    h1 { margin-top:40px; text-align:center; }
+    a { color:#00ffcc; text-decoration:none; transition:all 0.2s ease; }
+    a:hover { color:#fff; text-shadow:0 0 8px #00ffcc; }
+    code { background-color:#111; padding:0.2em 0.4em; border-radius:4px; color:#0f0; font-family:monospace; word-break:break-all; }
+    em { color:#ccc; }
+    .byline { margin-top:-0.8em; margin-bottom:2em; color:#ccc; font-style:italic; text-align:center; }
+    .box { border:1px solid #00ffcc; background:#050505; padding:1.5em; border-radius:8px; margin:2em 0; box-shadow:0 0 10px rgba(0,255,204,0.1); }
+    .box h3 { margin-top:0; }
+    .box ul { padding-left:1.2em; } .box li { margin-bottom:0.8em; }
+    .cta { margin:2em 0; padding:1.5em; border:1px dashed #00ffcc; border-radius:8px; text-align:center; background-color:#050505; }
+    .cta a.btn { display:inline-block; margin-top:0.5em; padding:0.7em 1.4em; border:1px solid #00ffcc; border-radius:8px; color:#00ffcc; font-weight:bold; }
+    .cta a.btn:hover { background:#00ffcc; color:#000; box-shadow:0 0 15px #00ffcc; }
+    .like-button { margin:3em 0; display:flex; align-items:center; justify-content:center; gap:1em; }
+    .like-button button { background:#000; color:#00ffcc; border:1px solid #00ffcc; padding:0.6em 1.2em; border-radius:8px; cursor:pointer; font-weight:bold; transition:all 0.2s ease; }
+    .like-button button:hover { background:#00ffcc; color:#000; box-shadow:0 0 15px #00ffcc; }
+    .like-button button:disabled { border-color:#444; color:#888; background:#111; cursor:default; }
+    .top-nav { padding:10px 0; font-size:0.9em; }
+    .back-links { margin-top:40px; text-align:center; display:flex; flex-direction:column; gap:10px; }
+    footer { margin-top:60px; padding:20px; font-size:0.85em; color:#666; border-top:1px solid #222; text-align:center; }
+
+    /* --- STERNENHIMMEL --- */
+    .stars-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: radial-gradient(ellipse at top, #0a0f1e 0%, #000 60%);
+      z-index: -2;
+    }
+    .stars-bg::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image:
+        radial-gradient(1px 1px at 10% 15%, #fff, transparent),
+        radial-gradient(1px 1px at 25% 40%, #fff, transparent),
+        radial-gradient(1px 1px at 40% 20%, #fff, transparent),
+        radial-gradient(2px 2px at 55% 60%, #00ffcc, transparent),
+        radial-gradient(1px 1px at 70% 35%, #fff, transparent),
+        radial-gradient(1px 1px at 85% 75%, #fff, transparent),
+        radial-gradient(1px 1px at 15% 80%, #fff, transparent),
+        radial-gradient(1px 1px at 35% 90%, #fff, transparent),
+        radial-gradient(1px 1px at 60% 10%, #fff, transparent),
+        radial-gradient(1px 1px at 90% 50%, #fff, transparent),
+        radial-gradient(1px 1px at 5% 55%, #fff, transparent),
+        radial-gradient(2px 2px at 75% 25%, #00ffcc, transparent);
+      animation: twinkle 6s ease-in-out infinite alternate;
+    }
+    @keyframes twinkle {
+      0% { opacity: 0.4; } 100% { opacity: 0.9; }
+    }
+
+    /* --- STERNENNEBEL --- */
+    .nebula {
+      position: fixed;
+      top: -10%; left: -10%;
+      width: 120%; height: 120%;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 900px 260px at 30% 35%, rgba(90, 30, 140, 0.22), transparent 60%),
+        radial-gradient(ellipse 1100px 200px at 70% 55%, rgba(0, 140, 180, 0.18), transparent 60%),
+        radial-gradient(ellipse 500px 180px at 50% 45%, rgba(180, 60, 140, 0.10), transparent 60%),
+        radial-gradient(circle 140px at 32% 36%, rgba(255, 255, 255, 0.10), transparent 70%),
+        radial-gradient(circle 120px at 68% 56%, rgba(0, 255, 204, 0.08), transparent 70%);
+      transform: rotate(-18deg);
+      filter: blur(30px);
+      opacity: 0.85;
+      animation: nebula-pulse 14s ease-in-out infinite alternate;
+      mix-blend-mode: screen;
+    }
+    @keyframes nebula-pulse {
+      0%   { opacity: 0.55; transform: rotate(-18deg) scale(1); }
+      50%  { opacity: 0.85; transform: rotate(-17deg) scale(1.04); }
+      100% { opacity: 0.65; transform: rotate(-19deg) scale(1.02); }
+    }
+
+    /* --- STERNSCHNUPPEN --- */
+    .shooting-star {
+      position: fixed;
+      width: 2px; height: 2px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.7);
+      z-index: -1;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .shooting-star::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 120px; height: 1px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.8), rgba(0,255,204,0.4), transparent);
+      transform: translateX(-120px);
+    }
+    .shooting-star.s1 { top: 12%; left: -5%; animation: shoot1 11s linear infinite; animation-delay: 3s; }
+    .shooting-star.s2 { top: 28%; left: -5%; animation: shoot2 17s linear infinite; animation-delay: 9s; }
+    .shooting-star.s3 { top: 50%; left: -5%; animation: shoot3 23s linear infinite; animation-delay: 15s; }
+    @keyframes shoot1 {
+      0%   { transform: translate(0, 0) rotate(15deg); opacity: 0; }
+      3%   { opacity: 1; }
+      8%   { transform: translate(110vw, 20vh) rotate(15deg); opacity: 0; }
+      100% { transform: translate(110vw, 20vh) rotate(15deg); opacity: 0; }
+    }
+    @keyframes shoot2 {
+      0%   { transform: translate(0, 0) rotate(22deg); opacity: 0; }
+      2%   { opacity: 1; }
+      7%   { transform: translate(115vw, 30vh) rotate(22deg); opacity: 0; }
+      100% { transform: translate(115vw, 30vh) rotate(22deg); opacity: 0; }
+    }
+    @keyframes shoot3 {
+      0%   { transform: translate(0, 0) rotate(10deg); opacity: 0; }
+      3%   { opacity: 1; }
+      9%   { transform: translate(115vw, 15vh) rotate(10deg); opacity: 0; }
+      100% { transform: translate(115vw, 15vh) rotate(10deg); opacity: 0; }
+    }
+
+    /* --- UFO --- */
+    .ufo {
+      position: fixed;
+      top: 38%;
+      right: -80px;
+      width: 72px; height: 36px;
+      z-index: -1;
+      filter: drop-shadow(0 0 8px rgba(0, 255, 204, 0.55));
+      animation: ufo-fly 55s linear infinite;
+      animation-delay: 25s;
+      pointer-events: none;
+      opacity: 0;
+    }
+    @keyframes ufo-fly {
+      0%   { transform: translate(0, 0);           opacity: 0; }
+      2%   {                                       opacity: 1; }
+      10%  { transform: translate(-30vw, -3vh); }
+      22%  { transform: translate(-70vw, 2vh); }
+      34%  { transform: translate(-110vw, -2vh);   opacity: 1; }
+      37%  { transform: translate(-120vw, -2vh);   opacity: 0; }
+      100% { transform: translate(-120vw, -2vh);   opacity: 0; }
+    }
+    .ufo-light { animation: ufo-blink 1.2s infinite; transform-origin: center; }
+    .ufo-light:nth-child(1) { animation-delay: 0.0s; }
+    .ufo-light:nth-child(2) { animation-delay: 0.15s; }
+    .ufo-light:nth-child(3) { animation-delay: 0.30s; }
+    .ufo-light:nth-child(4) { animation-delay: 0.45s; }
+    .ufo-light:nth-child(5) { animation-delay: 0.60s; }
+    .ufo-light:nth-child(6) { animation-delay: 0.75s; }
+    @keyframes ufo-blink {
+      0%, 100% { opacity: 1; }
+      50%      { opacity: 0.25; }
+    }
+    .warn { border:1px solid #ffb300; background:#0a0700; padding:1.2em 1.5em; border-radius:8px; margin:1.5em 0; box-shadow:0 0 10px rgba(255,179,0,0.12); }
+    .warn h3 { color:#ffb300; margin-top:0; }
+    .cta a.btn { margin-right:0.6em; }
+  </style>
+</head>
+<body>
+
+  <div class="stars-bg"></div>
+  <div class="nebula"></div>
+  <div class="shooting-star s1"></div>
+  <div class="shooting-star s2"></div>
+  <div class="shooting-star s3"></div>
+
+  <svg class="ufo" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <radialGradient id="ufo-dome" cx="50%" cy="80%" r="60%">
+        <stop offset="0%" stop-color="#5fffe0"/>
+        <stop offset="60%" stop-color="#1a3a38"/>
+        <stop offset="100%" stop-color="#0a1a1e"/>
+      </radialGradient>
+      <linearGradient id="ufo-body" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#4a5a5a"/>
+        <stop offset="50%" stop-color="#2a3638"/>
+        <stop offset="100%" stop-color="#101818"/>
+      </linearGradient>
+    </defs>
+    <path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/>
+    <ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body)" stroke="#00ffcc" stroke-width="0.4"/>
+    <ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/>
+    <ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/>
+    <circle class="ufo-light" cx="20" cy="20.5" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="27" cy="21.2" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="34" cy="21.6" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="41" cy="21.6" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="48" cy="21.2" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="55" cy="20.5" r="1.3" fill="#fff"/>
+  </svg>
+
+  <div class="top-nav">
+    <a href="index.html">← Zurück zur Zentrale</a>
+  </div>
+
+  <h1>Würfel-Check</h1>
+  <p class="byline"><em>Hat der SeedSigner richtig gerechnet? Würfelziffern rein, BIP39-Wörter raus — offline, in deiner Hand.</em></p>
+
+  <article id="content">
+
+    <p>
+      Wer seinen Seed selbst würfelt, tut das, um keinem Zufallsgenerator vertrauen zu müssen. Der SeedSigner macht
+      aus <strong>50 Würfen 12 Wörter</strong> oder aus <strong>99 Würfen 24 Wörter</strong> — nach einer offen dokumentierten
+      Rechnung: SHA-256 über die Ziffernfolge, daraus die Wörter nach BIP39. Aber woher weißt du, dass das Gerät
+      wirklich so rechnet? Indem du es einmal selbst nachrechnest. Der <strong>Würfel-Check</strong> ist eine einzige
+      HTML-Datei, die genau das tut: <strong>ohne Server, ohne Verbindung, ohne fremden Code</strong>. Kostenlos, quelloffen,
+      Teil des Werkstatt-Pakets zum kommenden Band 4 <em>„Die eigene Bank – Bitcoin meisterlich verwahren"</em>.
+    </p>
+
+    <div class="warn">
+      <h3>⚠ Nur mit einem Wegwerf-Seed</h3>
+      <p style="margin:0 0 0.6em 0;">
+        Die Ziffernfolge <strong>ist</strong> der Seed. Wer die 99 Ziffern kennt, kennt die Wallet. Deshalb prüfst du damit
+        die <strong>Methode</strong>, nie deinen echten Seed: Übungs-Seed würfeln, nachrechnen, verwerfen. Rechnet das Gerät
+        bei Übungsziffern richtig, rechnet es immer richtig. Der echte Seed entsteht danach am Gerät und verlässt es nie.
+      </p>
+      <p style="margin:0;">
+        Für alles, was über einen schnellen Blick hinausgeht: <strong>Datei speichern, Netz trennen, per Doppelklick öffnen.</strong>
+        Sie funktioniert genauso.
+      </p>
+    </div>
+
+    <div class="cta">
+      <h3 style="margin-top:0;">Datei holen und offline benutzen</h3>
+      <p>Rechtsklick → „Ziel speichern unter", Prüfsumme vergleichen, Netz trennen, öffnen.</p>
+      <a class="btn" href="wuerfel-check-tool.html" download="wuerfel-check.html">↓ wuerfel-check.html speichern</a>
+      <a class="btn" href="wuerfel-check-anleitung.pdf" download="wuerfel-check-anleitung.pdf">↓ Anleitung (PDF, 1 Seite)</a>
+      <p style="margin-top:1.2em; margin-bottom:0.3em; color:#ccc;">SHA-256 der Datei <code>wuerfel-check.html</code> (v0.1, Stand 18.08.2026):</p>
+      <p style="margin:0;"><code>af3565d00a37382f76abbbd9409b83c57d1699aba791ec499fa74e620bdc6f7c</code></p>
+      <p style="margin-top:0.8em; font-size:0.9em; color:#888;">
+        Prüfen: Linux/macOS <code>sha256sum wuerfel-check.html</code> · Windows PowerShell <code>Get-FileHash wuerfel-check.html</code>.
+        Weicht der Wert ab, Datei verwerfen und neu laden.
+      </p>
+      <p style="margin-top:1.4em;">
+        Nur zum Ansehen oder für einen Wegwerf-Seed geht es auch direkt: <a href="wuerfel-check-tool.html">→ Würfel-Check im Browser öffnen</a>
+      </p>
+    </div>
+
+    <h2>Was er kann</h2>
+    <div class="box">
+      <ul>
+        <li><strong>Nachrechnen wie das Gerät</strong> — Ziffern eingeben (Leerzeichen erlaubt), „Nachrechnen", 12 oder 24 Wörter erscheinen nummeriert. Rechenweg wie in SeedSigner OS 0.8.7 (<code>helpers/mnemonic_generation.py</code>).</li>
+        <li><strong>Automatischer Vergleich</strong> — trägst du zusätzlich die Wörter vom Display ein, markiert er jede Abweichung rot. „24/24 identisch" ist das Ziel.</li>
+        <li><strong>Prüft sich beim Start selbst</strong> — Wortliste per Hash gegen die offizielle BIP39-Liste, SHA-256 mit zwei unabhängigen Rechenwerken (Browser-WebCrypto und eine eigene, lesbare Implementierung), Selbsttest gegen die beiden Beispiele aus der SeedSigner-Dokumentation. Erst wenn alles grün ist, lässt er dich rechnen.</li>
+        <li><strong>Zeigt dir, ob du online bist</strong> — und rät dir, es nicht zu sein.</li>
+        <li><strong>„Alles löschen"</strong> — leert Eingaben und Ergebnis, danach Fenster schließen.</li>
+      </ul>
+    </div>
+
+    <h2>Warum offline, warum eine einzige Datei</h2>
+    <p>
+      Ein Prüfwerkzeug für Seeds darf selbst keine Angriffsfläche sein. Deshalb steckt alles in einer Datei, die
+      <strong>keine einzige Netz-Anfrage</strong> stellt: keine externen Skripte, keine Schriften, keine Bilder, keine Analyse-Tracker.
+      Eine Content-Security-Policy im Kopf der Datei verbietet dem Browser das Nachladen und Senden ausdrücklich.
+      Wer es nachprüfen will: F12 → Netzwerk-Tab → es erscheint keine Anfrage, auch nicht beim Rechnen.
+      Und wer Code lesen kann: Rechtsklick → Seitenquelltext. Der ganze Rechenweg steht im <code>&lt;script&gt;</code>-Block
+      am Ende, rund 150 Zeilen, ohne Bibliotheken.
+    </p>
+
+    <h2>Nicht vertrauen, nachrechnen — auch dem Würfel-Check nicht</h2>
+    <div class="box">
+      <p>Ein Werkzeug allein ist ein Indiz. Zwei unabhängige Codebasen, die auf dieselben Wörter kommen wie das Gerät, sind ein Beweis. Darum gibt es im Werkstatt-Paket drei Wege:</p>
+      <ul>
+        <li><strong>Weg 1 — Würfel-Check</strong> (diese Datei, JavaScript im Browser, offline).</li>
+        <li><strong>Weg 2 — Prüfskript im Terminal</strong>: <code>verify_dice_seed.py</code>, rund 90 Zeilen Python ohne Fremdbibliotheken, plus Wrapper, der vor jedem Start die Hashes prüft. Läuft auch auf Tails ohne Netz. Kommt mit dem vollständigen Werkstatt-Paket zum Buch.</li>
+        <li><strong>Weg 3 — Ian Colemans BIP39-Tool</strong> offline: „Show entropy details" → Typ <strong>„Base 10"</strong>. Niemals den „Dice"-Modus, der macht aus jeder 6 eine 0.</li>
+      </ul>
+      <p style="margin-bottom:0;">Was der Test beweist: dass das Gerät standardkonform rechnet. Was er nicht beweist: ob deine Würfel fair sind und ob dein Backup lesbar ist. Dafür gibt es Würfelbecher und Restore-Drill — beides Thema im Buch.</p>
+    </div>
+
+    <h2>Open Source</h2>
+    <p>
+      Der Würfel-Check steht unter <strong>MIT-Lizenz</strong>. Der Quelltext ist die Datei selbst — es gibt keinen Build-Schritt
+      und keine versteckten Teile. Die BIP39-Wortliste ist Teil des offenen Bitcoin-Standards (<code>SHA-256 2f5eed53a4727b4bf8880d8f3f199efc90e58503646d9ff8eff3a2ed3b24dbda</code>).
+      Fehler gefunden? <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>.
+    </p>
+
+    <p style="color:#ccc;">
+      Der Würfel-Check ist <strong>kostenlos</strong>. Wenn er dir hilft, freut sich das Mutterschiff über etwas Treibstoff — siehe unten.
+      Wer tiefer einsteigen will: Wie man einen Seed würfelt, warum, und was danach kommt (Passphrase, Stahl, Multisig, Vererben),
+      steht in Band 4 der Reihe <em>Digitale Souveränität</em> — in Arbeit, Ankündigung folgt auf <a href="buecher.html">der Bücherseite</a>.
+    </p>
+
+  </article>
+
+  <div class="back-links">
+    <a href="blog.html" style="font-size:1.1em;">← Zurück zur Blog-Übersicht</a>
+    <a href="index.html" style="font-size:1.1em;">← Zurück zur Zentrale</a>
+  </div>
+
+  <hr style="border-color:#222; margin:3em 0;">
+
+  <div style="margin-top:40px; margin-bottom:40px; text-align:center;">
+    <h3 style="margin-bottom:15px;">
+      <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energie" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Energie aufladen
+      <span style="font-size:0.6em; color:#888; font-weight:normal; vertical-align:middle;">(Spenden)</span>
+    </h3>
+    <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom:2px solid #00ffcc; padding-bottom:4px; display:inline-block;">
+      Treibstoff für das Mutterschiff senden
+    </a>
+  </div>
+
+  <footer>
+    <p><strong>Haftungsausschluss:</strong><br><br>
+      Dieser Artikel stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
+      Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
+      Investieren ist mit Risiken verbunden. Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
+    </p>
+  </footer>
+
+</body>
+</html>
