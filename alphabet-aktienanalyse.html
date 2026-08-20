@@ -2,9 +2,10 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Alphabet A (GOOGL) – Aktienanalyse für langfristige Eigentümer | Alien Investor</title>
+  <title>Alphabet A (GOOGL) – Die Cash-Maschine wettet auf sich selbst | Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Aktienanalyse Alphabet A (GOOGL) 2025 – Geschäftsmodell, Wettbewerb, Mitarbeiter-Check, Bewertung. Langfristige Einordnung aus Eigentümer-Perspektive.">
+  <meta name="description" content="Aktienanalyse Alphabet (GOOGL): 4-Billionen-Konzern zwischen Werbemonopol und KI-Wettrüsten. Kapitalerhöhung über 84,75 Mrd. USD, Cloud +82 %, Kartellurteile, verzerrtes KGV. Einordnung aus Eigentümer-Sicht.">
+  <link rel="alternate" hreflang="en" href="/en/alphabet-aktienanalyse.html">
   <style>
     body { background-color: #000; color: #fff; font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 0 15px 20px 15px; }
     h1, h2, h3 { color: #00ffcc; }
@@ -16,8 +17,6 @@
     .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
     blockquote { border-left: 3px solid #00ffcc; margin: 2em 0; padding: 0.5em 1em; color: #ddd; background: #050505; font-style: italic; }
     .box { border: 1px solid #00ffcc; background: #050505; padding: 1.5em; border-radius: 8px; margin: 2em 0; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
-    .recommendation-box { margin: 2em 0; padding: 1em; border: 1px dashed #00ffcc; border-radius: 8px; text-align: center; background-color: #050505; }
-    .recommendation-box h3 { margin-top: 0; font-size: 1.1em; color: #00ffcc; }
     .like-button { margin: 3em 0; display: flex; align-items: center; justify-content: center; gap: 1em; }
     .like-button button { background: #000; color: #00ffcc; border: 1px solid #00ffcc; padding: 0.6em 1.2em; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.2s ease; }
     .like-button button:hover { background: #00ffcc; color: #000; box-shadow: 0 0 15px #00ffcc; }
@@ -27,6 +26,47 @@
     footer { margin-top: 60px; padding: 20px; font-size: 0.85em; color: #666; border-top: 1px solid #222; text-align: center; }
     ul { padding-left: 1.2em; }
     li { margin-bottom: 0.5em; }
+
+    /* Analyzer Screenshot */
+    .analyzer-img { width: 100%; border-radius: 8px; border: 1px solid #1a1a1a; margin: 1.5em 0; display: block; cursor: zoom-in; transition: border-color 0.2s; }
+    .analyzer-img:hover { border-color: #00ffcc; }
+    .img-caption { font-size: 0.82em; color: #666; text-align: center; margin-top: -1em; margin-bottom: 1.5em; font-style: italic; }
+    .img-caption .zoom-hint { color: #00ffcc; opacity: 0.5; font-style: normal; font-size: 0.9em; }
+
+    /* Kennzahlen-Tabelle */
+    .kpi-table { width: 100%; border-collapse: collapse; margin: 1.5em 0; font-size: 0.95em; }
+    .kpi-table th { background: #050505; color: #00ffcc; border-bottom: 1px solid #00ffcc; padding: 8px 12px; text-align: left; }
+    .kpi-table td { padding: 7px 12px; border-bottom: 1px solid #111; }
+    .kpi-table tr:last-child td { border-bottom: none; }
+    .kpi-table .val { color: #00ffcc; font-weight: bold; font-family: monospace; }
+
+    /* Ampel Scorecard */
+    .ampel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 1.5em 0; }
+    @media (max-width: 480px) { .ampel-grid { grid-template-columns: 1fr; } }
+    .ampel-item { background: #050505; border: 1px solid #1a1a1a; border-radius: 6px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; }
+    .ampel-item .label { font-size: 0.88em; color: #ccc; }
+    .ampel-item .value { font-family: monospace; font-size: 0.9em; color: #fff; margin: 0 8px; }
+    .badge { font-size: 0.72em; font-weight: bold; padding: 2px 8px; border-radius: 4px; white-space: nowrap; }
+    .badge-gut      { background: #003d1a; color: #00cc66; border: 1px solid #00cc66; }
+    .badge-stark    { background: #003d1a; color: #00ff88; border: 1px solid #00ff88; }
+    .badge-negativ  { background: #3d0000; color: #ff4444; border: 1px solid #ff4444; }
+    .badge-teuer    { background: #3d2000; color: #ffaa00; border: 1px solid #ffaa00; }
+    .badge-gering   { background: #1a1a00; color: #cccc00; border: 1px solid #cccc00; }
+    .badge-rueck    { background: #001a3d; color: #44aaff; border: 1px solid #44aaff; }
+    .badge-na       { background: #1a1a1a; color: #888; border: 1px solid #444; }
+
+    /* Wettbewerber-Tabelle */
+    .comp-table { width: 100%; border-collapse: collapse; margin: 1.5em 0; font-size: 0.9em; }
+    .comp-table th { background: #050505; color: #00ffcc; border-bottom: 1px solid #00ffcc; padding: 8px 10px; text-align: left; font-size: 0.85em; }
+    .comp-table td { padding: 8px 10px; border-bottom: 1px solid #111; }
+    .comp-table .highlight { color: #00ffcc; font-weight: bold; }
+    .comp-table tr:last-child td { border-bottom: none; }
+
+    /* Chart Container */
+    .chart-wrap { background: #050505; border: 1px solid #1a1a1a; border-radius: 8px; padding: 1.5em 1em 1em 1em; margin: 1.5em 0; overflow-x: auto; }
+    .chart-title { font-size: 0.85em; color: #888; text-align: center; margin-bottom: 0.8em; font-family: monospace; letter-spacing: 1px; text-transform: uppercase; }
+    .chart-legend { display: flex; gap: 1.5em; justify-content: center; margin-top: 0.8em; font-size: 0.8em; color: #aaa; }
+    .legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: middle; }
   </style>
 </head>
 <body>
@@ -35,233 +75,474 @@
     <a href="index.html">← Zurück zur Zentrale</a>
   </div>
 
-  <h1><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-label="Aktienanalyse" role="img"><line x1="7" y1="3" x2="7" y2="7" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><rect x="4" y="7" width="6" height="9" rx="1" fill="#00ffcc"/><line x1="7" y1="16" x2="7" y2="21" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><line x1="16" y1="7" x2="16" y2="11" stroke="#00cc88" stroke-width="1.5" stroke-linecap="round"/><rect x="13" y="11" width="6" height="12" rx="1" fill="none" stroke="#00cc88" stroke-width="1.5"/><line x1="16" y1="23" x2="16" y2="27" stroke="#00cc88" stroke-width="1.5" stroke-linecap="round"/><line x1="25" y1="4" x2="25" y2="9" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><rect x="22" y="9" width="6" height="11" rx="1" fill="#00ffcc"/><line x1="25" y1="20" x2="25" y2="26" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/></svg> Alphabet A (GOOGL) – Aktienanalyse für langfristige Eigentümer</h1>
-  <p class="byline"><em>von Alien Investor – Stand: Ende 2025</em></p>
+  <h1>Alphabet A (GOOGL)<br><span style="font-size:0.6em; color:#aaa;">Die Cash-Maschine wettet auf sich selbst</span></h1>
+  <p class="byline"><em>von Alien Investor – Stand: August 2026 (ersetzt die Analyse von Ende 2025)</em></p>
 
   <article id="content">
+
     <p>
-      Alphabet ist die Mutter von Google und YouTube – eines der profitabelsten Digital-Unternehmen der Welt.
-      Diese Analyse schaut auf Geschäftsmodell, Wachstum, die Stimmung an Bord und die Risiken – mit dem Blick
-      eines langfristigen Mit-Eigentümers, nicht als Zocker auf dem Kurs-Ticker.
+      Alphabet hat im Juni 2026 etwas getan, das der Konzern zwei Jahrzehnte lang nie nötig hatte: die Aktionäre um Geld bitten. 84,75 Milliarden US-Dollar frisches Kapital für Rechenzentren und Chips — die größte Eigenkapitalaufnahme der Unternehmensgeschichte, mit Warren Buffetts Berkshire Hathaway als Ankerinvestor. Eine Gelddruckmaschine, die sich Geld leiht, um eine noch größere Maschine zu bauen. Genau an dieser Stelle entscheidet sich, was Alphabet für Eigentümer heute ist.
     </p>
 
     <blockquote>
-      „Vertrau niemandem – auch nicht mir. Schau dir die Zahlen an, denke selbst, und entscheide dann,
-      ob Alphabet in dein eigenes Freiheits-Setup passt.“ <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-4b817f)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg>
+      „Zwanzig Jahre lang hat diese Firma Geld an ihre Aktionäre zurückgegeben. Jetzt dreht sie den Strom um. Wer die Aktie kauft, kauft keine Suchmaschine — er finanziert ein Wettrüsten." <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-footer)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg>
     </blockquote>
 
+    <!-- ═══════════════════════════════════════════════ -->
     <h2>1) Kurzüberblick</h2>
+
+    <table class="kpi-table">
+      <thead><tr><th>Kennzahl</th><th>Wert</th></tr></thead>
+      <tbody>
+        <tr><td>Ticker</td><td class="val">GOOGL (NASDAQ, Class A)</td></tr>
+        <tr><td>Kurs (August 2026)</td><td class="val">340,67 USD</td></tr>
+        <tr><td>Marktkapitalisierung</td><td class="val">4,17 Bio. USD</td></tr>
+        <tr><td>KGV (trailing)</td><td class="val">17,1× — verzerrt, siehe Abschnitt 6</td></tr>
+        <tr><td>EPS (TTM)</td><td class="val">19,93 USD — inkl. Einmal-Bewertungsgewinne</td></tr>
+        <tr><td>KBV</td><td class="val">6,5</td></tr>
+        <tr><td>Dividendenrendite</td><td class="val">0,26 % (0,88 USD/Jahr, erste Dividende 2024)</td></tr>
+        <tr><td>Nettoliquidität (30.06.2026)</td><td class="val">~122 Mrd. USD</td></tr>
+        <tr><td>Sektor</td><td class="val">Communication Services / Internet</td></tr>
+      </tbody>
+    </table>
+
     <p>
-      <strong>Alphabet A (GOOGL)</strong> ist die Holding über Google, YouTube, Android und Google Cloud.
-      Es handelt sich um ein Technologie-Konglomerat, das im Kern eine Werbe- und Datenplattform ist.
+      Alphabet ist die Holding hinter Google: die weltweit dominante Suchmaschine, YouTube, Android, Chrome, Gmail und Maps — dazu Google Cloud als drittgrößter Cloud-Anbieter und Waymo als führender Robotaxi-Betreiber. Rund 90 % aller Suchanfragen weltweit laufen über Google (StatCounter). Der Konzern verdient sein Geld fast vollständig damit, Aufmerksamkeit in Werbeumsatz zu verwandeln.
     </p>
-    <ul>
-      <li><strong>Ticker:</strong> GOOGL (Class A, Stimmrecht) / GOOG (Class C, kein Stimmrecht)</li>
-      <li><strong>Branche:</strong> Internet, Software, Online-Werbung, Cloud, KI</li>
-      <li><strong>Marktstellung:</strong> Globales Duopol in der Online-Werbung (mit Meta) und dominanter Gatekeeper des Internets.</li>
-    </ul>
 
-    <h2>2) Geschäftsmodell & Segmente</h2>
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>2) Geschäftsmodell &amp; Segmente</h2>
+
     <p>
-      Das Unternehmen verdient sein Geld primär durch Aufmerksamkeit und Datenverarbeitung (Werbung), zunehmend aber auch durch Infrastruktur (Cloud).
+      Das Geschäftsmodell ist ein Kreislauf, keine Liste. Milliarden Menschen nutzen kostenlose Produkte und bezahlen mit Aufmerksamkeit und Daten. Diese Reichweite wird an Werbetreibende verkauft. Der Gewinn fließt in KI-Infrastruktur, die die Produkte besser macht — und nebenbei neue Standbeine aufbaut.
     </p>
+
+    <a href="img/googl/googl-diagramm-flywheel.png" target="_blank" title="Vollbild öffnen"><img src="img/googl/googl-diagramm-flywheel.png" alt="Diagramm: Die Alphabet-Maschine — Kreislauf aus Nutzern, Werbegeschäft, Cash und KI-Infrastruktur" class="analyzer-img"></a>
+    <p class="img-caption">Die Alphabet-Maschine als Kreislauf: Gratis-Produkte erzeugen Reichweite, Werbung erzeugt Cash, Cash erzeugt Infrastruktur — und die trägt die neuen Standbeine. <span class="zoom-hint">↗ Zum Vergrößern klicken</span></p>
+
+    <p>Die Zahlen dazu aus dem Geschäftsjahr 2025 (Gesamtumsatz 402,8 Mrd. USD, +15 %):</p>
     <ul>
-      <li>
-        <strong>Google Search & Werbung (Defensiv & Cash-Cow):</strong> Das Herzstück. Verdient an jeder Suche und über das AdSense-Netzwerk. Extrem hohe Margen.
-      </li>
-      <li>
-        <strong>YouTube (Plattform & Abo):</strong> Hybrid aus Werbung und Abonnements (YouTube Premium). Dominiert den weltweiten Videomarkt.
-      </li>
-      <li>
-        <strong>Google Cloud (Wachstum):</strong> Vermietung von Rechenleistung, Speicher und KI-Diensten an Unternehmen. Konkurriert direkt mit Amazon AWS und Microsoft Azure.
-      </li>
-      <li>
-        <strong>Google Other (Hardware & Play Store):</strong> Einnahmen aus App-Provisionen (Android) und Hardware-Verkäufen (Pixel-Phones).
-      </li>
-      <li>
-        <strong>Other Bets (Wette):</strong> Waymo (Robotaxis) und Forschungsprojekte. Verbrennen Geld, bieten aber Zukunftsoptionen.
-      </li>
+      <li><strong>Google Services — 342,7 Mrd. USD (85 % des Umsatzes):</strong> Suchwerbung 224,5 Mrd., YouTube-Werbung 40,4 Mrd., Werbenetzwerk 29,8 Mrd., dazu Abos, Plattformen und Geräte (YouTube Premium, Google One, Pixel, Play Store) mit 48,0 Mrd.</li>
+      <li><strong>Google Cloud — 58,7 Mrd. USD:</strong> Infrastruktur, KI-Plattform und Workspace. Das am schnellsten wachsende Segment — und seit der KI-Welle der zweite Wachstumsmotor.</li>
+      <li><strong>Other Bets — 1,5 Mrd. USD:</strong> Waymo (Robotaxis), Verily und weitere Langfrist-Wetten. Umsatzseitig winzig, strategisch eine Sammlung von Optionen.</li>
     </ul>
 
-    <h2>3) Wachstum & Entwicklung</h2>
     <p>
-      Alphabet zeigt trotz seiner gigantischen Größe noch immer Wachstumsraten, von denen Industriekonzerne nur träumen.
+      <strong>Der Burggraben:</strong> kein einzelner Graben, sondern ein System sich verstärkender Vorteile. Netzwerkeffekte (mehr Nutzer → bessere Daten → bessere Ergebnisse → mehr Nutzer), Wechselkosten im Ökosystem (Android, Chrome, Gmail, Fotos), Skaleneffekte bei Rechenzentren und eigenen TPU-Chips — und eine Vertriebsmacht, die Konkurrenten erst einmal replizieren müssten. Genau diese Verzahnung war Gegenstand zweier Kartellverfahren, dazu unten mehr.
     </p>
-    <ul>
-      <li>
-        <strong>Trend:</strong> Nach der Delle 2022 hat sich das Wachstum 2024/2025 wieder beschleunigt.
-      </li>
-      <li>
-        <strong>Aktuelle Zahlen (2025):</strong> Der Umsatz wuchs im letzten Quartal um ca. 16 % gegenüber dem Vorjahr.
-        Besonders die Cloud-Sparte wächst dynamisch (+30 % YoY) und ist mittlerweile profitabel.
-      </li>
-      <li>
-        <strong>Gewinn:</strong> Dank Kostendisziplin und Entlassungen wächst der Gewinn pro Aktie (EPS) schneller als der Umsatz (+33 % YoY).
-      </li>
-    </ul>
 
-    <h2>4) Profitabilität & Bilanz</h2>
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>3) Wachstum &amp; Entwicklung</h2>
+
+    <!-- SVG Chart: EPS Wachstum -->
+    <div class="chart-wrap">
+      <div class="chart-title">EPS 2021 – 2025 (USD pro Aktie, verwässert)</div>
+      <svg viewBox="0 0 720 260" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:720px; display:block; margin:0 auto;">
+        <!-- Grid lines -->
+        <line x1="55" y1="50"  x2="700" y2="50"  stroke="#1a1a1a" stroke-width="1"/>
+        <line x1="55" y1="82"  x2="700" y2="82"  stroke="#1a1a1a" stroke-width="1"/>
+        <line x1="55" y1="114" x2="700" y2="114" stroke="#1a1a1a" stroke-width="1"/>
+        <line x1="55" y1="146" x2="700" y2="146" stroke="#1a1a1a" stroke-width="1"/>
+        <line x1="55" y1="178" x2="700" y2="178" stroke="#1a1a1a" stroke-width="1"/>
+        <line x1="55" y1="210" x2="700" y2="210" stroke="#222"    stroke-width="1"/>
+
+        <!-- Y-Axis labels -->
+        <text x="50" y="213" text-anchor="end" fill="#444" font-size="11" font-family="monospace">0</text>
+        <text x="50" y="181" text-anchor="end" fill="#444" font-size="11" font-family="monospace">2</text>
+        <text x="50" y="149" text-anchor="end" fill="#444" font-size="11" font-family="monospace">4</text>
+        <text x="50" y="117" text-anchor="end" fill="#444" font-size="11" font-family="monospace">6</text>
+        <text x="50" y="85"  text-anchor="end" fill="#444" font-size="11" font-family="monospace">8</text>
+        <text x="50" y="53"  text-anchor="end" fill="#444" font-size="11" font-family="monospace">10</text>
+        <text x="18" y="130" text-anchor="middle" fill="#555" font-size="10" font-family="monospace" transform="rotate(-90 18 130)">EPS (USD)</text>
+
+        <!-- Bars: x centers at 116, 246, 376, 506, 636 | bar width 70 | 16px pro USD -->
+        <!-- 2021: 5,61 → h=90, y=120 -->
+        <rect x="81"  y="120" width="70" height="90"  fill="#00ffcc" opacity="0.25" rx="3"/>
+        <rect x="81"  y="120" width="70" height="90"  fill="none" stroke="#00ffcc" stroke-width="1" rx="3"/>
+        <text x="116" y="114" text-anchor="middle" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">5,61</text>
+        <text x="116" y="228" text-anchor="middle" fill="#666" font-size="12" font-family="monospace">2021</text>
+
+        <!-- 2022: 4,56 → h=73, y=137 (Delle) -->
+        <rect x="211" y="137" width="70" height="73"  fill="#ffaa00" opacity="0.2" rx="3"/>
+        <rect x="211" y="137" width="70" height="73"  fill="none" stroke="#ffaa00" stroke-width="1.5" rx="3"/>
+        <text x="246" y="131" text-anchor="middle" fill="#ffaa00" font-size="12" font-family="monospace" font-weight="bold">4,56</text>
+        <text x="246" y="228" text-anchor="middle" fill="#666" font-size="12" font-family="monospace">2022</text>
+        <text x="246" y="242" text-anchor="middle" fill="#ffaa00" font-size="9"  font-family="monospace">DELLE</text>
+
+        <!-- 2023: 5,80 → h=93, y=117 -->
+        <rect x="341" y="117" width="70" height="93"  fill="#00ffcc" opacity="0.25" rx="3"/>
+        <rect x="341" y="117" width="70" height="93"  fill="none" stroke="#00ffcc" stroke-width="1" rx="3"/>
+        <text x="376" y="111" text-anchor="middle" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">5,80</text>
+        <text x="376" y="228" text-anchor="middle" fill="#666" font-size="12" font-family="monospace">2023</text>
+
+        <!-- 2024: 8,04 → h=129, y=81 -->
+        <rect x="471" y="81"  width="70" height="129" fill="#00ffcc" opacity="0.3" rx="3"/>
+        <rect x="471" y="81"  width="70" height="129" fill="none" stroke="#00ffcc" stroke-width="1" rx="3"/>
+        <text x="506" y="75"  text-anchor="middle" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">8,04</text>
+        <text x="506" y="228" text-anchor="middle" fill="#666" font-size="12" font-family="monospace">2024</text>
+
+        <!-- 2025: 10,81 → h=173, y=37 -->
+        <rect x="601" y="37"  width="70" height="173" fill="#00ff88" opacity="0.25" rx="3"/>
+        <rect x="601" y="37"  width="70" height="173" fill="none" stroke="#00ff88" stroke-width="2" rx="3"/>
+        <text x="636" y="31"  text-anchor="middle" fill="#00ff88" font-size="12" font-family="monospace" font-weight="bold">10,81</text>
+        <text x="636" y="228" text-anchor="middle" fill="#666" font-size="12" font-family="monospace">2025</text>
+        <text x="636" y="242" text-anchor="middle" fill="#00cc88" font-size="9"  font-family="monospace">REKORD</text>
+      </svg>
+      <div class="chart-legend">
+        <span><span class="legend-dot" style="background:#ffaa00;"></span>Kostendisziplin-Jahr (Zinswende)</span>
+        <span><span class="legend-dot" style="background:#00ff88;"></span>Rekordjahr</span>
+        <span><span class="legend-dot" style="background:#00ffcc;"></span>Normaljahre</span>
+      </div>
+    </div>
+
+    <table class="kpi-table">
+      <thead><tr><th>Jahr</th><th>Umsatz</th><th>EPS</th><th>Op. Marge</th></tr></thead>
+      <tbody>
+        <tr><td>2021</td><td class="val">257,6 Mrd. USD</td><td class="val">5,61 USD</td><td class="val">30,6 %</td></tr>
+        <tr><td>2022</td><td class="val">282,8 Mrd. USD</td><td class="val">4,56 USD</td><td class="val">26,5 %</td></tr>
+        <tr><td>2023</td><td class="val">307,4 Mrd. USD</td><td class="val">5,80 USD</td><td class="val">27,4 %</td></tr>
+        <tr><td>2024</td><td class="val">350,0 Mrd. USD</td><td class="val">8,04 USD</td><td class="val">32,1 %</td></tr>
+        <tr><td>2025</td><td class="val">402,8 Mrd. USD</td><td class="val">10,81 USD</td><td class="val">32,0 %</td></tr>
+      </tbody>
+    </table>
+
     <p>
-      Finanziell ist Alphabet eine Festung.
+      Das Muster ist das Gegenteil eines Zyklikers: Der Umsatz ist in jedem einzelnen Jahr gewachsen, selbst in der Zinswende 2022, als der Gewinn kurz einknickte. Seit 2023 beschleunigt das Wachstum wieder — 2025 um 15 %, und die ersten beiden Quartale 2026 legten noch einmal nach: Q1 +22 %, Q2 +24 % im Jahresvergleich. Ein Konzern mit über 400 Milliarden Umsatz, der so wächst wie vor zehn Jahren, als er ein Viertel so groß war.
     </p>
-    <ul>
-      <li>
-        <strong>Margen:</strong> Die operative Marge liegt stabil bei über 30 %. Das ist für ein Unternehmen dieser Größe exzellent.
-      </li>
-      <li>
-        <strong>Cashflow:</strong> Der Free Cashflow sprudelt massiv und finanziert Aktienrückkäufe sowie die enormen KI-Investitionen aus eigener Kraft.
-      </li>
-      <li>
-        <strong>Bilanz (Panzer-Qualität):</strong> Alphabet sitzt auf knapp 100 Mrd. USD liquiden Mitteln. Die Verschuldung ist im Verhältnis zum Cash minimal.
-        Das Unternehmen ist „netto schuldenfrei“ und extrem krisenfest.
-      </li>
-    </ul>
+    <p>
+      Der eigentliche Treiber sitzt in der Cloud: +82 % im zweiten Quartal 2026, ein Auftragsbestand von über 460 Milliarden USD und eine Segmentmarge von inzwischen rund 36 %. Aus dem einstigen Zuschussgeschäft ist der zweite Gewinnpfeiler geworden.
+    </p>
 
-    <h2>5) Aktuelle strategische Themen</h2>
-    <ul>
-      <li>
-        <strong>KI-Investitionswelle (CapEx):</strong> Alphabet investiert aggressiv in Rechenzentren und eigene Chips (TPUs), um im KI-Rennen gegen OpenAI/Microsoft nicht zurückzufallen.
-      </li>
-      <li>
-        <strong>Integration von Gemini:</strong> Die KI wird tief in die Google-Suche („AI Overviews“) und Workspace integriert, um das Kernprodukt zu verteidigen.
-      </li>
-      <li>
-        <strong>Effizienz-Trimmen:</strong> Unter CFO Ruth Porat hat sich der Fokus verschoben: Weniger „Moonshots“, mehr Profitabilität.
-      </li>
-    </ul>
+    <a href="img/googl/googl-fairer-wert.png" target="_blank" title="Vollbild öffnen"><img src="img/googl/googl-fairer-wert.png" alt="Alien Analyzer: Fairer Wert — Kurs- und EPS-Verlauf GOOGL 10 Jahre" class="analyzer-img"></a>
+    <p class="img-caption">Alien Analyzer V2 — Fairer Wert Tab: Der Kurs ist den historischen Bewertungsbändern 2025/2026 nach oben davongelaufen — der Indikator meldet 34 % über Fair Value. Warum das KGV trotzdem „billig" aussieht, klärt Abschnitt 6. <span class="zoom-hint">↗ Zum Vergrößern klicken</span></p>
 
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>4) Profitabilität &amp; Bilanz</h2>
+
+    <a href="img/googl/googl-qualitaetscheck.png" target="_blank" title="Vollbild öffnen"><img src="img/googl/googl-qualitaetscheck.png" alt="Alien Analyzer: Qualitätscheck & Ampel-Bilanz GOOGL" class="analyzer-img"></a>
+    <p class="img-caption">Alien Analyzer V2 — Qualitätscheck: Ampelübersicht der wichtigsten Kennzahlen mit Kontext-Einordnung. <span class="zoom-hint">↗ Zum Vergrößern klicken</span></p>
+
+    <!-- Ampel Scorecard -->
+    <div class="ampel-grid">
+      <div class="ampel-item">
+        <span class="label">KGV (trailing)</span>
+        <span class="value">17,1×</span>
+        <span class="badge badge-teuer">VERZERRT</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">PEG-Ratio</span>
+        <span class="value">0,93</span>
+        <span class="badge badge-gut">GUT</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">KBV</span>
+        <span class="value">6,5</span>
+        <span class="badge badge-teuer">HOCH</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Dividendenrendite</span>
+        <span class="value">0,26 %</span>
+        <span class="badge badge-gering">GERING</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Debt / Equity</span>
+        <span class="value">0,19</span>
+        <span class="badge badge-gut">GUT</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Free Cashflow (2025)</span>
+        <span class="value">73,3 Mrd. USD</span>
+        <span class="badge badge-gut">POSITIV</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Eigenkapitalquote</span>
+        <span class="value">69,5 %</span>
+        <span class="badge badge-gut">GUT</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Gewinnwachstum 3J</span>
+        <span class="value">30,1 % p.a.</span>
+        <span class="badge badge-stark">STARK</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Return on Equity</span>
+        <span class="value">48,7 %</span>
+        <span class="badge badge-gut">GUT</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Aktienanzahl (3J)</span>
+        <span class="value">−5,9 %</span>
+        <span class="badge badge-rueck">RÜCKKÄUFE</span>
+      </div>
+    </div>
+
+    <p>
+      Auf den ersten Blick eine Bilderbuch-Bilanz: Eigenkapitalquote 69,5 %, Debt/Equity 0,19, Nettoliquidität rund 122 Milliarden USD selbst nach Abzug aller Schulden — dazu ein ROE von fast 49 %. Nach unserer strengen Definition ist das keine Panzer-Bilanz mehr (die Gesamtverschuldung hat sich 2025/2026 auf ~121 Mrd. USD vervierfacht), aber immer noch eine der solidesten Bilanzen unter den Megacaps.
+    </p>
+    <p>
+      <strong>Der Blick unter die Haube gehört aber in jede ehrliche Analyse:</strong> Das Geschäftsjahr 2025 lieferte 164,7 Mrd. USD operativen Cashflow und nach 91,4 Mrd. Capex noch 73,3 Mrd. Free Cashflow. 2026 kippt dieses Bild. Die Investitionen sind auf 132,4 Mrd. in den letzten zwölf Monaten explodiert, die Capex-Prognose für 2026 lautet 175–185 Mrd. USD — und im zweiten Quartal 2026 war der Free Cashflow erstmals <em>negativ</em> (−5,9 Mrd. USD). Gleichzeitig pausierten die Aktienrückkäufe im ersten Halbjahr 2026 vollständig. Die Maschine verdient weiter prächtig, aber sie behält ihr Geld gerade für sich.
+    </p>
+    <p>
+      <strong>Zur Dividende:</strong> Alphabet zahlt erst seit 2024 — gestartet mit 0,20 USD pro Quartal, im Juli 2026 auf 0,22 USD erhöht (0,88 USD/Jahr, Rendite 0,26 %). Symbolisch mehr als substanziell, aber ein Signal: Aus dem reinen Wachstumswert wird langsam ein Ausschütter. Der Weg, den Microsoft und Apple vorgezeichnet haben.
+    </p>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>5) Strategische Themen</h2>
+
+    <p>
+      <strong>Die Kapitalerhöhung — 84,75 Mrd. USD (Juni 2026):</strong> vier Bausteine. 18 Mrd. USD neue Stammaktien (Class A zu 355,20 USD platziert), 16,75 Mrd. Pflichtwandelanleihen mit 6,25 % Kupon und Zwangswandlung im Mai 2029, ein At-the-Market-Programm über bis zu 40 Mrd. (laut Prospekt primär für Steuerverpflichtungen aus Mitarbeiter-Aktienvergütung) — und eine Privatplatzierung über 10 Mrd. USD an Berkshire Hathaway. Gegen die Verwässerung aus der Wandlung hat sich Alphabet mit Capped Calls bis ~50 % über dem Emissionspreis abgesichert. Bemerkenswert ist weniger die Technik als die Botschaft: Selbst 73 Mrd. Free Cashflow pro Jahr reichen für dieses Wettrüsten nicht mehr aus.
+    </p>
+    <p>
+      <strong>Kartellverfahren, Teil 1 — die Suche:</strong> Im September 2025 entschied Richter Mehta die Abhilfen im Suchmaschinen-Monopolverfahren: kein Zwangsverkauf von Chrome oder Android, aber ein Verbot exklusiver Distributionsverträge (Search, Chrome, Assistant, Gemini) und die Pflicht, bestimmte Suchdaten mit qualifizierten Wettbewerbern zu teilen. Die Milliardenzahlungen an Apple bleiben erlaubt, solange sie nicht exklusiv sind. Seit Februar 2026 sind die Auflagen in Kraft — beide Seiten haben Berufung eingelegt.
+    </p>
+    <p>
+      <strong>Kartellverfahren, Teil 2 — Ad-Tech:</strong> Im April 2025 stellte Richterin Brinkema illegale Monopole bei Publisher-Ad-Servern und Ad-Exchanges fest. Die Entscheidung über die Abhilfen — bis hin zu einem möglichen Zwangsverkauf von Teilen des Werbetechnik-Geschäfts — steht im August 2026 weiterhin aus. Die Richterin zeigte sich in der Verhandlung skeptisch gegenüber einer Zerschlagung. Das bleibt der größte offene Rechtsposten.
+    </p>
+    <p>
+      <strong>KI-Offensive:</strong> Die Gemini-App überschritt im August 2026 offiziell eine Milliarde monatlich aktive Nutzer. Die 32-Mrd.-Übernahme des Cloud-Security-Anbieters Wiz wurde im März 2026 abgeschlossen. Waymo öffnete im August 2026 seine günstigere Robotaxi-Generation in San Francisco, Los Angeles und Phoenix für alle Fahrgäste — mit einem selbst entwickelten KI-Chip (über 1.000 TOPS), der die Abhängigkeit von Nvidia reduziert. Der Schatten dazu: Der Abgang von Chef-Wissenschaftler Jeff Dean nach 27 Jahren (August 2026) zeigt, wie hart der Kampf um KI-Talente selbst für Alphabet geworden ist.
+    </p>
+    <p>
+      <strong>Ausblick (Analystenkonsens, stockanalysis.com):</strong> Umsatz 2026E: 497,7 Mrd. USD (+24 %) | EPS 2026E: 20,58 USD | EPS 2027E: 14,77 USD. Der optische EPS-Rückgang 2027 ist keine Gewinnwarnung, sondern Normalisierung: 2026 ist durch einmalige Bewertungsgewinne auf Beteiligungen aufgebläht — dazu gleich mehr.
+    </p>
+
+    <!-- ═══════════════════════════════════════════════ -->
     <h2>6) Bewertung im Kontext</h2>
-    <p>
-      Basierend auf den vorliegenden Daten (Stand Ende 2025):
-    </p>
-    <ul>
-      <li>
-        <strong>KGV (P/E):</strong> Mit einem KGV im Bereich von ~30 ist die Aktie historisch gesehen kein Schnäppchen, aber auch nicht extrem überteuert im Vergleich zu anderen Tech-Giganten.
-      </li>
-      <li>
-        <strong>Einordnung:</strong> Man zahlt einen „Qualitätsaufschlag“ für die Bilanzsicherheit und den Moat.
-        Das Bewertungsniveau impliziert, dass der Markt an ein erfolgreiches Bestehen im KI-Zeitalter glaubt.
-      </li>
-    </ul>
 
-        <!-- ALIEN ANALYZER PROMO -->
+    <a href="img/googl/googl-multiples.png" target="_blank" title="Vollbild öffnen"><img src="img/googl/googl-multiples.png" alt="Alien Analyzer: Multiples KGV KBV KUV KCV GOOGL 10 Jahre" class="analyzer-img"></a>
+    <p class="img-caption">Alien Analyzer V2 — Multiples Tab: KGV 17,1 unter dem 10J-Schnitt von 19,6 — und die Warnung „Viele KGV-Ausreißer gefiltert, möglicherweise kein klassischer Value-Titel". Hinweis: Das angezeigte KUV (3,6) ist ein Datenfehler der Yahoo-Quelle, korrekt sind ~9,3. <span class="zoom-hint">↗ Zum Vergrößern klicken</span></p>
+
+    <!-- SVG Chart: Multiples Übersicht -->
+    <div class="chart-wrap">
+      <div class="chart-title">Multiples — Aktuell vs. 10J-Durchschnitt</div>
+      <svg viewBox="0 0 680 210" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:680px; display:block; margin:0 auto;">
+        <!-- Scale: 13px pro Einheit -->
+        <text x="10" y="45"  fill="#aaa" font-size="13" font-family="monospace">KGV</text>
+        <text x="10" y="95"  fill="#aaa" font-size="13" font-family="monospace">KBV</text>
+        <text x="10" y="145" fill="#aaa" font-size="13" font-family="monospace">KUV</text>
+        <text x="10" y="185" fill="#aaa" font-size="13" font-family="monospace">KCV</text>
+
+        <!-- Background bars (average): KGV ø19,6→255 | KBV ø3,9→51 -->
+        <rect x="55" y="30"  width="255" height="18" fill="#003333" rx="3"/>
+        <rect x="55" y="80"  width="51"  height="18" fill="#003333" rx="3"/>
+
+        <!-- Current bars: KGV 17,1→222 | KBV 6,5→85 | KUV 9,3→121 | KCV 23,9→311 -->
+        <rect x="55" y="30"  width="222" height="18" fill="#00ffcc" opacity="0.3" rx="3"/>
+        <rect x="55" y="80"  width="85"  height="18" fill="#00ffcc" opacity="0.3" rx="3"/>
+        <rect x="55" y="130" width="121" height="18" fill="#00ffcc" opacity="0.3" rx="3"/>
+        <rect x="55" y="170" width="311" height="18" fill="#00ffcc" opacity="0.3" rx="3"/>
+
+        <!-- Average line markers -->
+        <line x1="310" y1="27" x2="310" y2="51" stroke="#ffaa00" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <line x1="106" y1="77" x2="106" y2="101" stroke="#ffaa00" stroke-width="1.5" stroke-dasharray="3,2"/>
+
+        <!-- Value labels -->
+        <text x="283" y="44" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">17,1</text>
+        <text x="310" y="24" fill="#ffaa00" font-size="10" font-family="monospace" text-anchor="middle">Ø 19,6</text>
+        <text x="146" y="94" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">6,5</text>
+        <text x="106" y="74" fill="#ffaa00" font-size="10" font-family="monospace" text-anchor="middle">Ø 3,9</text>
+        <text x="182" y="144" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">9,3*</text>
+        <text x="372" y="184" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">23,9</text>
+      </svg>
+      <div class="chart-legend">
+        <span><span class="legend-dot" style="background:#00ffcc; opacity:0.5;"></span>Aktueller Wert</span>
+        <span><span class="legend-dot" style="background:#ffaa00;"></span>10J-Durchschnitt</span>
+      </div>
+      <p style="font-size:0.75em; color:#666; text-align:center; margin:0.6em 0 0 0;">* KUV gegen stockanalysis.com korrigiert (9,3) — die Yahoo-Datenbasis des Analyzers zeigt hier fälschlich 3,6.</p>
+    </div>
+
+    <p>
+      Hier steckt die wichtigste Lektion dieser Analyse. Das trailing KGV von 17 sieht aus wie ein Geschenk — ein Weltklasse-Konzern unter seinem eigenen Zehnjahresschnitt. Aber es ist eine optische Täuschung, nur in die andere Richtung als beim Zykliker: Im ersten Halbjahr 2026 hat Alphabet rund 136 Mrd. USD an <em>Bewertungsgewinnen</em> auf Beteiligungen verbucht (allein im zweiten Quartal +6,26 USD pro Aktie). Diese Gewinne sind real bilanziert, aber nicht wiederholbar — sie blähen das E im KGV auf.
+    </p>
+    <p>
+      Rechnet man mit dem normalisierten Analystenkonsens für 2027 (14,77 USD EPS), steht das KGV bei etwa 23 — <em>über</em> dem historischen Schnitt, nicht darunter. Der Fair-Value-Indikator des Analyzers (34 % über Fair Value) erzählt dieselbe Geschichte wie das KBV von 6,5 gegen einen Schnitt von 3,9: Der Markt bezahlt hier eine kräftige Qualitäts- und KI-Prämie. Das kann gerechtfertigt sein, wenn Cloud und Gemini liefern. Aber ein Schnäppchen ist diese Aktie im August 2026 nicht — egal was das trailing KGV flüstert.
+    </p>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- ALIEN ANALYZER PROMO -->
     <div class="box" style="border-color: #00ffcc; background: #020d0a;">
       <p style="margin: 0 0 0.5em 0; font-size: 0.8em; color: #00ffcc; font-family: monospace; letter-spacing: 1px; text-transform: uppercase;">Tool-Tipp</p>
       <p style="margin: 0 0 0.6em 0;"><strong>Die Kennzahlen in dieser Analyse stammen aus dem Alien Analyzer V2</strong> — dem eigenen Screening-Tool für Aktien. Fairer Wert, Multiples, Dividenden und Qualitätscheck auf einen Blick. Kostenlos, kein Login, kein Abo.</p>
       <p style="margin: 0; font-size: 0.95em;"><a href="alien-analyzer.html"><strong>alien-investor.org/alien-analyzer</strong></a> — Ticker eingeben, analysieren.</p>
     </div>
 
-<h2>7) Wettbewerbsumfeld & Konkurrenten</h2>
-    <p>
-      Alphabet operiert nicht im luftleeren Raum. Der Kampf um die digitale Vorherrschaft ist brutal:
-    </p>
-    <ul>
-      <li>
-        <strong>Microsoft (Der Erzrivale):</strong> Greift mit Bing + ChatGPT direkt das Suchmonopol an und konkurriert mit Azure hart im Cloud-Markt.
-      </li>
-      <li>
-        <strong>Amazon (Der Werbe-Jäger):</strong> Amazon wird im digitalen Werbemarkt immer stärker (Werbung direkt am Point-of-Sale) und ist Marktführer im Cloud-Bereich (AWS).
-      </li>
-      <li>
-        <strong>Meta (Social Ads):</strong> Konkurriert um dieselben Werbebudgets und Nutzeraufmerksamkeit (Instagram Reels vs. YouTube Shorts).
-      </li>
-      <li>
-        <strong>TikTok:</strong> Zieht besonders bei der jungen Zielgruppe (Gen Z) massiv Bildschirmzeit von YouTube ab.
-      </li>
-    </ul>
+    <h2>7) Wettbewerbsumfeld &amp; Moat</h2>
 
-    <h2>8) Kundenperspektive (Bewertungen)</h2>
-    <p>
-      Hier zeigt sich eine klare Spaltung, die für Tech-Monopole typisch ist:
-    </p>
-    <ul>
-      <li>
-        <strong>Positiv (Produkt):</strong> Die Produkte (Google Maps, Suche, Gmail) funktionieren technisch meist brillant und sind aus dem Alltag kaum wegzudenken. Die "Stickiness" ist extrem hoch.
-      </li>
-      <li>
-        <strong>Kritik (Support):</strong> Auf Plattformen wie Trustpilot hagelt es Kritik für den quasi nicht vorhandenen Kundensupport für Privatnutzer. Wer aus seinem Konto ausgesperrt wird, hat oft keine Chance auf Hilfe.
-      </li>
-      <li>
-        <strong>Warnsignal:</strong> Immer mehr Nutzer beschweren sich über die Zunahme von Werbung in der Suche und auf YouTube („Enshittification“), was die User Experience verschlechtert.
-      </li>
-    </ul>
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Unternehmen</th>
+          <th>Kampffeld</th>
+          <th>Position (Mitte 2026)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="highlight">Alphabet (GOOGL)</td>
+          <td>Suche, Werbung, Cloud, KI, Robotaxi</td>
+          <td class="highlight">Suche ~90 %, Cloud 15 %, Gemini 1 Mrd. MAU</td>
+        </tr>
+        <tr>
+          <td>OpenAI (privat)</td>
+          <td>KI-Assistenten / Suche der neuen Art</td>
+          <td>ChatGPT ~900 Mio. wöchentliche Nutzer</td>
+        </tr>
+        <tr>
+          <td>Microsoft (MSFT)</td>
+          <td>Cloud, KI, Suche (Bing)</td>
+          <td>Azure 20 % Cloud-Marktanteil</td>
+        </tr>
+        <tr>
+          <td>Amazon (AMZN)</td>
+          <td>Cloud, Werbung</td>
+          <td>AWS 28 % — Marktführer, aber Anteil sinkt</td>
+        </tr>
+        <tr>
+          <td>Meta (META)</td>
+          <td>Digitale Werbung, KI</td>
+          <td>Zweitgrößte Werbeplattform der Welt</td>
+        </tr>
+        <tr>
+          <td>Tesla (TSLA)</td>
+          <td>Autonomes Fahren</td>
+          <td>Robotaxi-Ambitionen, Waymo fährt voraus</td>
+        </tr>
+      </tbody>
+    </table>
 
-    <h2>9) Mitarbeiterperspektive (Zufriedenheit)</h2>
     <p>
-      Die Stimmung auf dem Mutterschiff hat sich gewandelt (Quellen: Glassdoor, Blind):
+      <strong>Die eigentliche Front verläuft nicht bei Bing.</strong> Microsofts Suchmaschine hat Google in fünfzehn Jahren keine zehn Prozentpunkte abgenommen. Die echte Bedrohung ist die Verhaltensänderung: Wer eine Antwort will, fragt zunehmend einen KI-Assistenten statt zehn blaue Links. ChatGPT kommt bereits auf rund 900 Millionen wöchentliche Nutzer. Alphabet kontert mit Gemini (1 Mrd. monatliche Nutzer) und KI-Antworten direkt in der Suche — verteidigt sein Monopol also, indem es das eigene Geschäftsmodell selbst kannibalisiert, bevor andere es tun. Bisher gelingt das Kunststück: Die Suchumsätze wachsen zweistellig weiter.
     </p>
-    <ul>
-      <li>
-        <strong>Vergangenheit:</strong> Google galt lange als der beste Arbeitgeber der Welt (kostenloses Essen, Spielwiesen, hohe Gehälter).
-      </li>
-      <li>
-        <strong>Gegenwart:</strong> Die Zufriedenheit ist immer noch überdurchschnittlich (oft > 4.0 Sterne), aber gesunken.
-      </li>
-      <li>
-        <strong>Kritikpunkte:</strong> Mitarbeiter beklagen zunehmende Bürokratie, langsamere Entscheidungsprozesse und die Entlassungswellen der letzten Jahre. Das Vertrauen in das Management („Googlegeist“-Umfragen) hat gelitten.
-      </li>
-      <li>
-        <strong>Fazit:</strong> Alphabet ist intern stabil, entwickelt sich aber von einem idealistischen Campus zu einem effizienzgetriebenen Konzern.
-      </li>
-    </ul>
+    <p>
+      <strong>In der Cloud dreht sich die Machtverteilung:</strong> AWS ist mit 28 % Marktführer, verliert aber Anteile — Google Cloud hat mit +82 % Wachstum im Q2 2026 einen Rekordanteil von 15 % erreicht (Synergy Research). Die eigene TPU-Chip-Familie ist dabei ein struktureller Vorteil: Alphabet ist der einzige Hyperscaler, der KI-Modelle, Chips und Rechenzentren komplett aus einer Hand baut.
+    </p>
 
-    <h2>10) Chancen & Risiken</h2>
-    <p><strong>Die Chancen:</strong></p>
-    <ul>
-      <li>Erfolgreiche Monetarisierung von KI in der Suche und Cloud (neue Umsatzströme).</li>
-      <li>YouTube Shorts gewinnt den Kampf gegen TikTok.</li>
-      <li>Massive Aktienrückkäufe stützen den Kurs dauerhaft.</li>
-      <li>Waymo (Robotaxis) wird als erstes Unternehmen profitabel skaliert.</li>
-    </ul>
-    <p><strong>Die Risiken:</strong></p>
-    <ul>
-      <li><strong>Regulierung:</strong> Zerschlagungsfantasien des US-Justizministeriums (DOJ) bezüglich Google Search und Chrome.</li>
-      <li><strong>KI-Disruption:</strong> Wenn Nutzer Antworten direkt von einer KI (wie ChatGPT) bekommen, klicken sie nicht mehr auf Werbelinks in der Google-Suche.</li>
-      <li><strong>Image-Schaden:</strong> Datenschutzskandale oder KI-Halluzinationen könnten das Vertrauen erodieren.</li>
-    </ul>
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>8) Kundenperspektive</h2>
 
-    <h2>11) Alien-Fazit <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-4b817f)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-4b817f)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg></h2>
     <p>
-      Alphabet ist ein <strong>Schwergewichts-Kreuzer</strong> im Depot. Die Qualität der Bilanz und die Marktstellung sind fast unerreicht („Panzer-Bilanz“).
+      Alphabets zahlende Kunden sind nicht die Milliarden Nutzer — es sind Werbetreibende und Cloud-Kunden. Für Werbetreibende ist Google-Suche schlicht der Ort, an dem Kaufabsicht entsteht: Es gibt keine zweite Plattform mit vergleichbarer Reichweite bei aktiv Suchenden. Diese Alternativlosigkeit ist der Kern der Preissetzungsmacht — und exakt der Punkt, den die Kartellgerichte als Monopolmissbrauch eingestuft haben.
     </p>
     <p>
-      Aber: Das Schiff ist unter Beschuss. Regulierer und KI-Konkurrenten testen den Rumpf auf Risse. Wer hier investiert, kauft keine explosive Wachstumsrakete mehr, sondern eine hochprofitable Cashflow-Maschine, die sich gerade neu erfinden muss. Für langfristige Eigentümer bleibt es ein Basis-Investment, solange der Burggraben der Suche hält.
+      Im Cloud-Geschäft sprechen der Auftragsbestand von über 460 Mrd. USD und Großkunden-Deals für sich. Öffentliche B2B-Zufriedenheitswerte im klassischen Sinn existieren für beide Kundengruppen nicht. [NICHT VERFÜGBAR]
     </p>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>9) Mitarbeiterperspektive</h2>
+
+    <p>
+      Alphabet gehört seit zwei Jahrzehnten zu den begehrtesten Arbeitgebern der Tech-Welt — hohe Vergütung, großzügige Aktienpakete (die inzwischen so groß sind, dass ein Teil des ATM-Programms ihre Steuerlast finanziert). Die KI-Ära hat aber eine neue Dynamik gebracht: Spitzenforscher sind das umkämpfteste Gut der Branche, und selbst Alphabet verliert prominente Köpfe an Startups — zuletzt Chef-Wissenschaftler Jeff Dean nach 27 Jahren. Systematische Arbeitgeber-Bewertungsdaten sind für diese Analyse nicht auswertbar. [NICHT VERFÜGBAR]
+    </p>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>10) Chancen &amp; Risiken</h2>
+
+    <!-- SVG Risk/Opportunity Visual -->
+    <div class="chart-wrap">
+      <div class="chart-title">Chancen &amp; Risiken im Überblick</div>
+      <svg viewBox="0 0 680 290" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:680px; display:block; margin:0 auto;">
+
+        <!-- Left: Chancen -->
+        <text x="160" y="22" text-anchor="middle" fill="#00cc66" font-size="12" font-family="monospace" letter-spacing="2">CHANCEN</text>
+        <line x1="20" y1="28" x2="300" y2="28" stroke="#00cc66" stroke-width="1" opacity="0.4"/>
+
+        <rect x="20"  y="38"  width="280" height="48" fill="#001a0d" rx="5" stroke="#00cc66" stroke-width="0.5" opacity="0.7"/>
+        <text x="32" y="57" fill="#00cc66" font-size="12" font-family="monospace" font-weight="bold">Cloud-Beschleunigung</text>
+        <text x="32" y="74" fill="#777" font-size="10" font-family="Arial">+82 % in Q2/2026, Backlog über 460 Mrd. USD</text>
+
+        <rect x="20"  y="95"  width="280" height="48" fill="#001a0d" rx="5" stroke="#00cc66" stroke-width="0.5" opacity="0.7"/>
+        <text x="32" y="114" fill="#00cc66" font-size="12" font-family="monospace" font-weight="bold">Gemini-Massenadoption</text>
+        <text x="32" y="131" fill="#777" font-size="10" font-family="Arial">1 Mrd. Nutzer/Monat, Enterprise-Integration</text>
+
+        <rect x="20"  y="152" width="280" height="48" fill="#001a0d" rx="5" stroke="#00cc66" stroke-width="0.5" opacity="0.7"/>
+        <text x="32" y="171" fill="#00cc66" font-size="12" font-family="monospace" font-weight="bold">Waymo-Optionalität</text>
+        <text x="32" y="188" fill="#777" font-size="10" font-family="Arial">Robotaxis offen für alle in 3 Metropolen</text>
+
+        <rect x="20"  y="209" width="280" height="48" fill="#001a0d" rx="5" stroke="#00cc66" stroke-width="0.5" opacity="0.7"/>
+        <text x="32" y="228" fill="#00cc66" font-size="12" font-family="monospace" font-weight="bold">Eigene TPU-Chips</text>
+        <text x="32" y="245" fill="#777" font-size="10" font-family="Arial">Volle KI-Wertschöpfung aus einer Hand</text>
+
+        <!-- Right: Risiken -->
+        <text x="520" y="22" text-anchor="middle" fill="#ff4444" font-size="12" font-family="monospace" letter-spacing="2">RISIKEN</text>
+        <line x1="380" y1="28" x2="660" y2="28" stroke="#ff4444" stroke-width="1" opacity="0.4"/>
+
+        <rect x="380" y="38"  width="280" height="48" fill="#1a0000" rx="5" stroke="#ff4444" stroke-width="0.5" opacity="0.7"/>
+        <text x="392" y="57" fill="#ff4444" font-size="12" font-family="monospace" font-weight="bold">Capex-Wette</text>
+        <text x="392" y="74" fill="#777" font-size="10" font-family="Arial">175–185 Mrd. USD 2026, FCF in Q2 negativ</text>
+
+        <rect x="380" y="95"  width="280" height="48" fill="#1a0000" rx="5" stroke="#ff4444" stroke-width="0.5" opacity="0.7"/>
+        <text x="392" y="114" fill="#ff4444" font-size="12" font-family="monospace" font-weight="bold">Verwässerung</text>
+        <text x="392" y="131" fill="#777" font-size="10" font-family="Arial">84,75-Mrd.-Kapitalerhöhung, Buybacks pausiert</text>
+
+        <rect x="380" y="152" width="280" height="48" fill="#1a0000" rx="5" stroke="#ff4444" stroke-width="0.5" opacity="0.7"/>
+        <text x="392" y="171" fill="#ff4444" font-size="12" font-family="monospace" font-weight="bold">Kartell-Risiko</text>
+        <text x="392" y="188" fill="#777" font-size="10" font-family="Arial">Ad-Tech-Abhilfen offen, Berufungen laufen</text>
+
+        <rect x="380" y="209" width="280" height="48" fill="#1a0000" rx="5" stroke="#ff4444" stroke-width="0.5" opacity="0.7"/>
+        <text x="392" y="228" fill="#ff4444" font-size="12" font-family="monospace" font-weight="bold">KI-Disruption der Suche</text>
+        <text x="392" y="245" fill="#777" font-size="10" font-family="Arial">ChatGPT ~900 Mio. Nutzer/Woche, Traffic-Wandel</text>
+      </svg>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>11) Alien-Fazit <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-googl" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-googl" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-googl)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-googl)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg></h2>
+
+    <a href="img/googl/googl-dividenden.png" target="_blank" title="Vollbild öffnen"><img src="img/googl/googl-dividenden.png" alt="Alien Analyzer: Dividenden-Tab GOOGL" class="analyzer-img"></a>
+    <p class="img-caption">Alien Analyzer V2 — Dividenden Tab: Die Historie beginnt erst 2024 — aus dem reinen Wachstumswert wird gerade ein junger Dividendenzahler. <span class="zoom-hint">↗ Zum Vergrößern klicken</span></p>
+
+    <p>
+      Alphabet ist eines der besten Geschäftsmodelle, das je gebaut wurde: ein sich selbst verstärkender Kreislauf aus Reichweite, Daten und Cash, geschützt von Netzwerkeffekten und einer Infrastruktur, die sich niemand zweites leisten kann. Das Kerngeschäft wächst mit über 20 %, die Cloud explodiert, und mit der ersten Dividende 2024 hat der Konzern den Weg eingeschlagen, den Microsoft und Apple vorgemacht haben — vom Wachstumswert zum Ausschütter.
+    </p>
+    <p>
+      Aber die Aktie von August 2026 ist eine andere Wette als noch vor zwei Jahren. Der Konzern investiert 175–185 Mrd. USD in einem einzigen Jahr, der Free Cashflow ist im Quartal erstmals negativ, die Rückkäufe pausieren, und zum ersten Mal seit den Anfangsjahren holt sich Alphabet in großem Stil frisches Eigenkapital — 84,75 Milliarden. Dass Buffett dabei 10 Milliarden mitnimmt, ist ein bemerkenswertes Gütesiegel. Es ändert nichts daran, dass hier Cashflow-Gegenwart gegen KI-Zukunft getauscht wird.
+    </p>
+    <p>
+      Und die Bewertung preist Erfolg bereits ein: Das optisch billige KGV von 17 ist durch Einmalgewinne verzerrt — normalisiert steht die Aktie bei etwa dem 23-Fachen des Gewinns und dem 6,5-Fachen des Buchwerts, deutlich über den eigenen historischen Schnitten. Wer hier kauft, kauft Qualität zur Qualitätsprämie und wettet darauf, dass sich das größte Investitionsprogramm der Unternehmensgeschichte verzinst. Für Eigentümer mit langem Atem ist das eine legitime Wette auf das vielleicht widerstandsfähigste Ökosystem der Welt. Ein Schnäppchen ist es nicht.
+    </p>
+
+    <blockquote>
+      „Die beste Maschine der Welt zu besitzen ist nur die halbe Kunst. Die andere Hälfte ist, was du dafür bezahlst — und gerade bezahlst du auch das Wettrüsten mit." <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-footer)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg>
+    </blockquote>
+
   </article>
 
+  <!-- Disclaimer -->
+  <div class="box" style="border-color: #333; border-style: dashed;">
+    <p style="font-size: 0.88em; color: #888; margin: 0;">
+      <strong style="color: #aaa;">Hinweis:</strong> Diese Analyse ist keine Finanz-, Steuer- oder Rechtsberatung — nur eine Einordnung der Zahlen aus Alien-Perspektive. Alle Angaben nach bestem Wissen, ohne Gewähr. Investitionsentscheidungen liegen in eigener Verantwortung.
+    </p>
+  </div>
+
+  <!-- Tools Box -->
   <div class="box">
     <h3>Tools für echte Eigentümer</h3>
     <p style="font-size:0.95em;">
-      Tools, die ich selbst nutze – für Bitcoin-Selbstverwahrung und digitale Souveränität:
+      Tools, die ich selbst nutze — für Bitcoin-Selbstverwahrung und digitale Souveränität:
     </p>
     <ul>
       <li>
         <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Blitz" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> <strong>Bitcoin kaufen in Europa – 21bitcoin:</strong><br>
-        Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges sats stapeln – ohne Shitcoins.<br>
-        Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du dauerhaft 0,2&nbsp;Prozentpunkte Gebührenreduktion
-        auf Sofort- und Sparplankäufe.<br>
+        Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges Sats stapeln — ohne Shitcoins.<br>
+        Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du dauerhaft 0,2 Prozentpunkte Gebührenreduktion auf Sofort- und Sparplankäufe.<br>
         <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
       </li>
       <li>
         ₿ <strong>Bitcoin in Selbstverwahrung:</strong><br>
-        Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox – es gibt die klassische BitBox02 und die neue
-        BitBox für iPhone (Nova).<br>
+        Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox — es gibt die klassische BitBox02 und die neue BitBox für iPhone (Nova).<br>
         <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
       </li>
       <li>
         <svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-label="Satellitenschüssel" role="img"><path d="M4 24 A16 16 0 0 1 20 8" fill="#00ffcc" fill-opacity="0.06" stroke="#00ffcc" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="8" r="2.8" fill="#00ffcc"/><line x1="20" y1="8" x2="28" y2="4" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><path d="M15 13 A6 6 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/><path d="M12 16 A9 9 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.45"/></svg> <strong>Privacy &amp; Mail:</strong><br>
-        Für E-Mail, VPN und Cloud nutze ich Proton – datensparsam und ohne Big-Tech-Abhängigkeit.<br>
+        Für E-Mail, VPN und Cloud nutze ich Proton — datensparsam und ohne Big-Tech-Abhängigkeit.<br>
         <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
       </li>
     </ul>
     <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">
-      Hinweis: Bei einigen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit,
-      ohne dass es dich mehr kostet. Danke! <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-aff" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-aff)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg>
+      Hinweis: Bei einigen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit, ohne dass es dich mehr kostet. Danke! <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-aff" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-aff)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg>
     </p>
   </div>
 
   <div class="like-button">
-    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-4b817f)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Gefällt mir</button>
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-footer)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Gefällt mir</button>
     <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
   </div>
 
@@ -284,6 +565,7 @@
     })();
   </script>
 
+
   <div class="back-links">
     <a href="aktien-analysen.html" style="font-size: 1.1em;"><svg style="width:0.9em;height:0.9em;vertical-align:-0.12em;filter:drop-shadow(0 0 2px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="7" y1="3" x2="7" y2="7" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><rect x="4" y="7" width="6" height="9" rx="1" fill="#00ffcc"/><line x1="7" y1="16" x2="7" y2="21" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><line x1="16" y1="7" x2="16" y2="11" stroke="#00cc88" stroke-width="1.5" stroke-linecap="round"/><rect x="13" y="11" width="6" height="12" rx="1" fill="none" stroke="#00cc88" stroke-width="1.5"/><line x1="16" y1="23" x2="16" y2="27" stroke="#00cc88" stroke-width="1.5" stroke-linecap="round"/><line x1="25" y1="4" x2="25" y2="9" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><rect x="22" y="9" width="6" height="11" rx="1" fill="#00ffcc"/><line x1="25" y1="20" x2="25" y2="26" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/></svg> Zurück zu den Aktienanalysen</a>
     <a href="blog.html" style="font-size: 1.1em;">← Zurück zum Blog</a>
@@ -297,21 +579,18 @@
         <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energie" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Energie aufladen
         <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
       </h3>
-      
       <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
         Treibstoff für das Mutterschiff senden
       </a>
-      
       <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
-        Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-4b817f" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-4b817f" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-4b817f)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-4b817f)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg>
+        Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-footer" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-footer" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-footer)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-footer)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg>
       </p>
   </div>
 
   <footer>
     <p><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Kontakt" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a> <span style="color:#666; font-size:0.85em;">·</span> <a href="/kontakt@alien-investor.org/pubkey.asc.key" download="kontakt-alien-investor-pubkey.asc" style="color:#555; font-size:0.8em; text-decoration:none;" title="PGP Public Key für verschlüsselte Nachrichten">PGP Key</a></p>
-    
     <p style="margin-top: 20px;">
-      <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-4b817f" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-4b817f)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <strong>Haftungsausschluss:</strong><br><br>
+      <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-footer" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-footer)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <strong>Haftungsausschluss:</strong><br><br>
       Dieser Artikel stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
       Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
       Investieren ist mit Risiken verbunden – du kannst Geld verlieren. Prüfe Informationen selbst
