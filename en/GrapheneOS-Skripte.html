@@ -295,12 +295,14 @@ printf "📦 Packing & encrypting → %s\n" "$OUT_FILE"
 
 # Archive + encrypt without plaintext intermediate file
 # S2K hardening: stronger key derivation against brute force
-tar -C "$(dirname "$SRC")" -cz "$BASE" \
+# --no-symkey-cache: passphrase is not cached in the GPG agent
+tar -C "$(dirname "$SRC")" -cz -- "$BASE" \
 | gpg --symmetric \
     --cipher-algo AES256 \
     --s2k-cipher-algo AES256 \
     --s2k-digest-algo SHA512 \
     --s2k-count 65011712 \
+    --no-symkey-cache \
     -o "$OUT_FILE" \
 || die "gpg failed"
 

@@ -292,12 +292,14 @@ printf "📦 Packe & verschlüssele → %s\n" "$OUT_FILE"
 
 # Archivieren + Verschlüsseln ohne Klartext-Zwischendatei
 # S2K-Härtung: stärkere Schlüsselableitung gegen Brute-Force
-tar -C "$(dirname "$SRC")" -cz "$BASE" \
+# --no-symkey-cache: Passwort wird nicht im GPG-Agenten zwischengespeichert
+tar -C "$(dirname "$SRC")" -cz -- "$BASE" \
 | gpg --symmetric \
     --cipher-algo AES256 \
     --s2k-cipher-algo AES256 \
     --s2k-digest-algo SHA512 \
     --s2k-count 65011712 \
+    --no-symkey-cache \
     -o "$OUT_FILE" \
 || die "gpg fehlgeschlagen"
 
