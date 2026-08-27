@@ -281,10 +281,10 @@
     <ul>
       <li><strong>Rechenweg wie im SeedSigner</strong> (SeedSigner OS 0.8.7, <code>src/seedsigner/helpers/mnemonic_generation.py</code>): Die Ziffern werden als Text genommen, <code>SHA-256</code> darüber gebildet. Bei 99 Würfen sind das 32 Byte = 256 Bit = 24 Wörter, bei 50 Würfen werden nur die ersten 16 Byte = 128 Bit = 12 Wörter benutzt.</li>
       <li><strong>BIP39</strong>: An die Entropie kommt eine Prüfsumme (die ersten 8 bzw. 4 Bit von SHA-256 der Entropie), dann wird alles in 11-Bit-Blöcke geschnitten. Jeder Block ist eine Zahl von 0 bis 2047 und zeigt auf ein Wort der offiziellen englischen Wortliste.</li>
-      <li><strong>Zwei Rechenwerke</strong>: SHA-256 wird einmal mit der eingebauten WebCrypto-Funktion des Browsers und einmal mit einer eigenen, lesbaren JavaScript-Implementierung berechnet. Nur wenn beide übereinstimmen, wird ein Ergebnis angezeigt.</li>
-      <li><strong>Wortliste geprüft</strong>: Die 2048 Wörter stecken in dieser Datei. Beim Laden wird ihre SHA-256 berechnet und mit dem bekannten Wert der offiziellen Liste verglichen (<code>2f5eed53…24dbda</code>, identisch mit <code>bip39_english.txt</code> aus dem Werkstatt-Paket).</li>
+      <li><strong>Zwei Rechenwerke</strong>: SHA-256 wird einmal mit der eingebauten WebCrypto-Funktion des Browsers und einmal mit einer eigenen, lesbaren JavaScript-Implementierung berechnet. Widersprechen sie sich, gibt es kein Ergebnis. Steht WebCrypto nicht zur Verfügung, rechnet nur ein Werk – die Anzeige oben sagt das dann in Gelb.</li>
+      <li><strong>Wortliste geprüft</strong>: Die 2048 Wörter stecken in dieser Datei. Beim Laden wird ihre SHA-256 berechnet und angezeigt; sie muss <code>2f5eed53…24dbda</code> lauten, den Wert der offiziellen Liste (identisch mit <code>bip39_english.txt</code> aus dem Werkstatt-Paket). Vergleiche ihn selbst – dieser Test allein beweist nichts, denn wer die Liste austauscht, kann den Vergleichswert mit austauschen. Die einzige echte Verankerung ist die Prüfsumme der ganzen Datei gegen die Download-Seite.</li>
       <li><strong>Selbsttest</strong>: Beim Laden werden die beiden Beispiele aus der SeedSigner-Dokumentation (<code>docs/dice_verification.md</code>) durchgerechnet. Nur wenn beide stimmen, ist der Selbsttest grün.</li>
-      <li><strong>Nichts verlässt den Browser</strong>: Die Seite hat eine Content-Security-Policy, die jede Verbindung verbietet. Nachprüfen: F12 → Netzwerk-Tab → außer dem Laden der Seite selbst erscheint keine Anfrage, auch nicht beim Rechnen.</li>
+      <li><strong>Nichts verlässt den Browser</strong>: Die Seite hat eine Content-Security-Policy, die jedes Nachladen und jedes Senden verbietet (nur die Links am Seitenende führen auf Wunsch nach außen). Nachprüfen: F12 → Netzwerk-Tab → außer dem Laden der Seite selbst erscheint keine Anfrage, auch nicht beim Rechnen.</li>
     </ul>
   </div>
 
@@ -445,8 +445,18 @@
   }
   digitsEl.addEventListener("input", updateCounter);
 
+  /* Nur echte Wortlisten-Wörter zählen. Kopiert jemand die Kopfzeile des
+     Geräts mit ("Seed Words: 1/6"), verschöbe sich sonst alles und das
+     Werkzeug meldete einen Fehlalarm. Die Kopfzeile fällt zuerst weg:
+     „words" steht nicht in der Wortliste, die Wortfolge kann also nie aus
+     echten Sicherungswörtern entstehen. */
+  const WORDSET = new Set(WORDS);
   function parseDeviceWords(s) {
-    return s.toLowerCase().replace(/[0-9.,;:()\[\]#-]/g, " ").split(/\s+/).filter(Boolean);
+    return s.toLowerCase()
+            .replace(/seed\s*words?\s*:?/g, " ")
+            .replace(/[0-9.,;:()\[\]#\/|-]/g, " ")
+            .split(/\s+/)
+            .filter(w => WORDSET.has(w));
   }
 
   function showResult(words, entropy, devWords) {
@@ -524,7 +534,8 @@
       if (WORDS.length !== 2048) throw new Error("Anzahl " + WORDS.length);
       const h = hex(await sha256both(enc.encode(WORDS.join("\n") + "\n")));
       wlOk = (h === WORDLIST_SHA256);
-      setPill("st-wl", wlOk ? "ok" : "bad", wlOk ? "Wortliste: 2048 Wörter, Hash 2f5eed53… OK" : "Wortliste: HASH FALSCH – Datei nicht verwenden");
+      setPill("st-wl", wlOk ? "ok" : "bad", wlOk ? ("Wortliste: 2048 Wörter, Hash " + h.slice(0, 8) + "… OK")
+                                                   : ("Wortliste: HASH FALSCH (" + h.slice(0, 8) + "…) – Datei nicht verwenden"));
     } catch (e) { setPill("st-wl", "bad", "Wortliste: " + e.message); }
 
     /* SHA-256-Rechenwerke: bekannter Testwert ("abc") */
@@ -533,7 +544,10 @@
       const h = hex(await sha256both(enc.encode("abc")));
       shaOk = (h === "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad");
       const two = !!(window.crypto && crypto.subtle);
-      setPill("st-sha", shaOk ? "ok" : "bad", shaOk ? ("SHA-256: " + (two ? "eigene Implementierung + WebCrypto stimmen überein" : "eigene Implementierung OK (WebCrypto hier nicht verfügbar)")) : "SHA-256: FEHLER");
+      setPill("st-sha", shaOk ? (two ? "ok" : "warnp") : "bad",
+        shaOk ? (two ? "SHA-256: eigene Implementierung + WebCrypto stimmen überein"
+                     : "SHA-256: nur eigene Implementierung – WebCrypto fehlt, keine Gegenrechnung. Datei lokal öffnen (file://)")
+              : "SHA-256: FEHLER");
     } catch (e) { setPill("st-sha", "bad", "SHA-256: " + e.message); }
 
     const selfOk = await selfTest();

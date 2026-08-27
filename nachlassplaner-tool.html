@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-kpqjjCNV6I4xxkHv3j5F9NT8jspyQY2y5ncpVeB6htg=' 'sha256-k/2745inZb5pK2GpO0OLg+f3m9rhczWpkCksGjatFNI='; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; font-src 'none'; form-action 'none'; base-uri 'none'">
 <title>Nachlassplaner — Vordruckgenerator</title>
 <style>
 :root{
@@ -109,18 +111,40 @@ main{max-width:860px;margin:0 auto;padding:0 20px 120px}
 
 /* ---------- Felder ---------- */
 .field{margin-bottom:18px}
-.field label{display:block;font-size:14px;font-weight:600;color:#C8D1DB;margin-bottom:5px}
+.field label{display:block;font-size:14px;font-weight:600;color:#C8D1DB;margin-bottom:0}
 .field .sub{display:block;font-weight:400;color:var(--muted);font-size:13px;margin-top:2px}
-.hilfe-knopf{display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;
-  margin-left:7px;border:1px solid var(--muted);border-radius:50%;background:none;color:var(--muted);
-  font-size:12px;font-weight:700;line-height:1;cursor:pointer;padding:0;vertical-align:middle}
-.hilfe-knopf:hover,.hilfe-knopf[aria-expanded="true"]{border-color:var(--neon,#4FD1C5);color:var(--neon,#4FD1C5)}
+/* Der Hilfe-Knopf steht NEBEN dem Label, nicht darin: alte Android-Browser
+   leiten einen Tipp aufs Label an das enthaltene Bedienelement weiter und
+   loesen den Knopf dabei doppelt oder gar nicht aus. */
+.feldkopf{display:flex;align-items:flex-start;gap:8px;margin-bottom:5px}
+.feldkopf label{flex:1 1 auto;min-width:0}
+.hilfe-knopf{display:inline-flex;align-items:center;justify-content:center;
+  flex:0 0 auto;width:30px;height:30px;margin:-4px -4px 0 0;
+  border:1px solid var(--muted);border-radius:50%;background:none;color:var(--muted);
+  font-size:15px;font-weight:700;line-height:1;cursor:pointer;padding:0;
+  -webkit-tap-highlight-color:rgba(0,255,204,.25);touch-action:manipulation}
+.hilfe-knopf:hover,.hilfe-knopf:active,.hilfe-knopf[aria-expanded="true"]{
+  border-color:var(--neon,#4FD1C5);color:var(--neon,#4FD1C5)}
 .hilfe-text{display:none;margin:6px 0 8px;padding:9px 12px;border-left:2px solid var(--neon,#4FD1C5);
   background:rgba(255,255,255,.04);font-size:13px;line-height:1.55;color:#C8D1DB;font-weight:400}
 .hilfe-text.auf{display:block}
 .hilfe-text b{color:#fff}
 .bsp-schalter{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--muted);margin-left:auto}
-@media print{.hilfe-text,.hilfe-knopf,.bsp-schalter{display:none!important}}
+/* Sprachumschaltung: reine Knöpfe, kein Nachladen, wirkt auch offline */
+.lang-toggle{display:flex;align-items:center;gap:4px;justify-content:flex-end;margin-bottom:6px;
+  font-family:var(--mono);font-size:12px;letter-spacing:.12em}
+.lang-toggle button{background:none;border:1px solid transparent;color:var(--muted);
+  padding:4px 9px;border-radius:3px;cursor:pointer;font-family:inherit;font-size:inherit;
+  letter-spacing:inherit;touch-action:manipulation}
+.lang-toggle button:hover{color:var(--neon)}
+.lang-toggle button.lang-cur{color:var(--neon);border-color:var(--neon)}
+.lang-toggle .lang-sep{color:var(--line)}
+.recht-badge{flex:0 0 auto;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:#E0A458;border:1px solid #E0A458;border-radius:2px;
+  padding:2px 6px;white-space:nowrap;align-self:flex-start}
+.recht-hinweis{color:#E0A458 !important}
+#ui-recht{margin-top:14px}
+@media print{.hilfe-text,.hilfe-knopf,.bsp-schalter{display:none!important}.feldkopf{display:block}}
 input[type=text],textarea,select{
   width:100%;padding:9px 11px;
   background:var(--slate-2);
@@ -260,12 +284,16 @@ dialog input[type=password],dialog input[type=file],dialog textarea{
 <div class="nebula"></div>
 
 <header class="masthead">
-  <p class="eyebrow">Vordruckgenerator · Fassung 0.9 · Prototyp</p>
-  <h1><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Nachlassplaner</h1>
-  <p>Dieses Werkzeug erzeugt <strong>leere Formularbögen</strong>. Öffentliche Angaben wie Fingerprints oder Descriptor druckt es mit. Alles, was Rückschlüsse auf Standorte oder Zugänge zulässt, wird als Linie gedruckt und von Hand ausgefüllt — offline, mit dokumentenechtem Stift.</p>
+  <div class="lang-toggle" role="group" aria-label="Sprache / Language">
+    <button type="button" data-lang="de" class="lang-cur">DE</button><span class="lang-sep">|</span><button type="button" data-lang="en">EN</button>
+  </div>
+  <p class="eyebrow" id="ui-eyebrow">Vordruckgenerator · Fassung 0.12 · Prototyp</p>
+  <h1><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <span id="ui-h1">Nachlassplaner</span></h1>
+  <p id="ui-intro">Dieses Werkzeug erzeugt <strong>leere Formularbögen</strong>. Öffentliche Angaben wie Fingerprints oder Descriptor druckt es mit. Alles, was Rückschlüsse auf Standorte oder Zugänge zulässt, wird als Linie gedruckt und von Hand ausgefüllt — offline, mit dokumentenechtem Stift.</p>
+  <p class="recht-hinweis" id="ui-recht" hidden></p>
 </header>
 
-<div class="volatile">
+<div class="volatile" id="ui-volatile">
   <strong>Nichts wird automatisch gespeichert.</strong> Kein Server, kein Browser-Speicher. Ein Neuladen der Seite löscht alle Eingaben. Auf Wunsch lässt sich der Stand unten als passwortverschlüsselte Datei exportieren — sie enthält nur die getippten öffentlichen Angaben, niemals das Handschriftliche.
 </div>
 
@@ -276,31 +304,31 @@ dialog input[type=password],dialog input[type=file],dialog textarea{
   <button id="save-btn">Verschlüsselt speichern</button>
   <button id="load-btn">Datei laden</button>
   <small id="count">— Blätter</small>
-  <label class="bsp-schalter"><input type="checkbox" id="bsp-an" checked> Beispiele im Feld anzeigen</label>
-  <a href="#" id="bug-link">🐛 Bug melden</a>
+  <label class="bsp-schalter"><input type="checkbox" id="bsp-an" checked> <span id="ui-bsp">Beispiele im Feld anzeigen</span></label>
+  <a href="#" id="bug-link">🐛 <span id="ui-bug">Bug melden</span></a>
 </div>
 
 <dialog id="sd-dlg">
-  <h3>Plan verschlüsselt speichern</h3>
-  <p>Erzeugt eine Datei mit den getippten Angaben — AES-256-verschlüsselt mit deinem Passwort. Handschriftliche Felder sind nie enthalten. Datei offline aufbewahren, nicht in die Cloud.</p>
-  <label>Passwort<input type="password" id="sd-pw" autocomplete="new-password"></label>
-  <label>Passwort wiederholen<input type="password" id="sd-pw2" autocomplete="new-password"></label>
+  <h3 id="ui-sd-titel">Plan verschlüsselt speichern</h3>
+  <p id="ui-sd-text">Erzeugt eine Datei mit den getippten Angaben — AES-256-verschlüsselt mit deinem Passwort. Handschriftliche Felder sind nie enthalten. Datei offline aufbewahren, nicht in die Cloud.</p>
+  <label><span id="ui-pw1">Passwort</span><input type="password" id="sd-pw" autocomplete="new-password"></label>
+  <label><span id="ui-pw2">Passwort wiederholen</span><input type="password" id="sd-pw2" autocomplete="new-password"></label>
   <p class="dlg-err" id="sd-err"></p>
   <div class="dlg-row"><button class="go" id="sd-ok">Speichern</button><button id="sd-abbr">Abbrechen</button></div>
 </dialog>
 
 <dialog id="bug-dlg">
-  <h3>Bug melden</h3>
-  <p>Öffnet eine E-Mail an kontakt@alien-investor.org (der Text wird zusätzlich in die Zwischenablage kopiert). Wichtig: Keine Inhalte aus deinem Plan mitschicken — nur beschreiben, was schiefgeht.</p>
-  <label>Was ist passiert?<textarea id="bug-desc" rows="4"></textarea></label>
+  <h3 id="ui-bug-titel">Bug melden</h3>
+  <p id="ui-bug-text">Öffnet eine E-Mail an kontakt@alien-investor.org (der Text wird zusätzlich in die Zwischenablage kopiert). Wichtig: Keine Inhalte aus deinem Plan mitschicken — nur beschreiben, was schiefgeht.</p>
+  <label><span id="ui-bug-frage">Was ist passiert?</span><textarea id="bug-desc" rows="4"></textarea></label>
   <div class="dlg-row"><button class="go" id="bug-ok">E-Mail öffnen</button><button id="bug-abbr">Abbrechen</button></div>
 </dialog>
 
 <dialog id="ld-dlg">
-  <h3>Gespeicherten Plan laden</h3>
-  <p>Lädt eine zuvor exportierte Datei und ersetzt die aktuellen Eingaben.</p>
-  <label>Datei<input type="file" id="ld-file" accept=".json,application/json"></label>
-  <label>Passwort<input type="password" id="ld-pw" autocomplete="current-password"></label>
+  <h3 id="ui-ld-titel">Gespeicherten Plan laden</h3>
+  <p id="ui-ld-text">Lädt eine zuvor exportierte Datei und ersetzt die aktuellen Eingaben.</p>
+  <label><span id="ui-datei">Datei</span><input type="file" id="ld-file" accept=".json,application/json"></label>
+  <label><span id="ui-ldpw">Passwort</span><input type="password" id="ld-pw" autocomplete="current-password"></label>
   <p class="dlg-err" id="ld-err"></p>
   <div class="dlg-row"><button class="go" id="ld-ok">Laden</button><button id="ld-abbr">Abbrechen</button></div>
 </dialog>
@@ -2620,6 +2648,252 @@ var qrcode = function() {
    hand     – wird NICHT getippt, druckt Handschriftlinien
    --------------------------------------------------------------- */
 
+/* ---------------------------------------------------------------
+   Englische Fassung, inhaltlich auf demselben Stand wie der deutsche
+   Text (Faktencheck 2026-08-28). Struktur und Bitcoin-Technik sind
+   vollständig übersetzt. Rechts- und Steuererläuterungen bleiben
+   DEUTSCH und tragen eine Kennzeichnung — sie beschreiben deutsches
+   Erbrecht, eine Übersetzung würde behaupten, sie gälten überall.
+   Fehlt hier ein Text, greift automatisch der deutsche.
+   Gespeichert wird immer der deutsche Auswahlwert, angezeigt die
+   Übersetzung: So überstehen Sprachwechsel und Export den Wechsel,
+   und die Bedingungslogik greift in beiden Sprachen.
+   --------------------------------------------------------------- */
+const EN = {
+ui:{
+  eyebrow:"Form generator · version 0.12 · prototype",
+  h1:"Estate Planner",
+  intro:"This tool produces <strong>blank forms</strong>. Public details such as fingerprints or a descriptor are printed with them. Anything that would point to a location or an access route is printed as a line and filled in by hand — offline, with a document-safe pen.",
+  volatile:"<strong>Nothing is saved automatically.</strong> No server, no browser storage. Reloading the page clears every entry. The state can be exported below as a password-encrypted file — it holds only the typed public details, never anything handwritten.",
+  recht:"<strong>This planner covers German inheritance law.</strong> Check your own jurisdiction. The legal and tax passages are kept in German on purpose and carry a badge.",
+  rechtBadge:"German law · kept in German",
+  print:"Print forms", save:"Save encrypted", load:"Load file", sheets:"sheets",
+  bspSchalter:"Show examples in empty fields", bug:"Report a bug",
+  waehlen:"— please choose —", hilfeTitel:"What belongs here",
+  handKopf:"By hand · %n lines",
+  handText:"Printed as a blank line. The generator never sees this entry.",
+  add:"Add %s", remove:"Remove",
+  sdTitel:"Save the plan encrypted",
+  sdText:"Creates a file with the typed entries — AES-256 encrypted with your password. Handwritten fields are never included. Keep the file offline, not in a cloud. The password is the only protection this file has: at least 20 characters, ideally five or six randomly rolled words.",
+  pw:"Password", pw2:"Repeat password", speichern:"Save", abbrechen:"Cancel",
+  ldTitel:"Load a saved plan",
+  ldText:"Loads a previously exported file and replaces the current entries.",
+  datei:"File", laden:"Load",
+  bugTitel:"Report a bug",
+  bugText:"Opens an e-mail to kontakt@alien-investor.org (the text is also copied to the clipboard, where it stays until something else is copied). Important: do not send anything from your plan — only describe what goes wrong.",
+  bugFrage:"What happened?", bugOk:"Open e-mail",
+  unvollstaendig:"The plan is incomplete:", trotzdem:"Print anyway?",
+  pwUngleich:"The two passwords do not match.", pwKurz:"At least 20 characters — five or six random words are better.",
+  keineDatei:"No file selected.", ladefehler:"Decryption failed — wrong password or damaged file."
+},
+pruef:{
+  name:"Header: the name of the author is missing.",
+  fassung:"Header: version number missing — without it nobody knows which copy is valid.",
+  desc:"Wallet %n: “Written on this sheet” is selected, but the descriptor field is empty — either fill it in or switch to “Kept as a printout with every backup”.",
+  fp:"Wallet %n: master fingerprint missing.",
+  typ:"Wallet %n: the type is still set to “please choose”.",
+  path:"Wallet %n: derivation path missing — with the right keys but the wrong path the heir rebuilds an empty wallet.",
+  adr:"Wallet %n: address type missing — it decides whether the restored wallet shows the balance.",
+  pwm2fa:"Further assets: a password manager is named, but the question about the second factor is unanswered — the master password alone gets nobody in when a code from an app is required.",
+  app:"Further assets: an authenticator app is selected, but not which one and on which device."
+},
+klassen:{
+  A:"Class A · proof of existence · may lie in the open",
+  B:"Class B · access instructions · confidential, store separately",
+  P:"Record"
+},
+klassenKurz:{A:"Proof of existence", B:"Access instructions", P:"Record"},
+kopfzeile:{name:"Name ______", fassung:"Version", ersetzt:"Replaces", blatt:"Sheet", von:"of", klasse:"Class"},
+regeln:[
+  "Take no hurried step in the first weeks. Bitcoin does not run away, mistakes are final.",
+  "Recovery words belong into the hardware device itself and nowhere else. Never into a computer, a phone, a website, a password manager or an AI chat.",
+  "Nobody can bring back lost seeds or stolen coins. Every offer of that kind is fraud, all the more so against advance payment.",
+  "Nobody is entitled to ask for recovery words. Not support, not a lawyer, not the tax office.",
+  "Look at the balance first, move it afterwards. Not the other way round."
+],
+druck:{
+  hinweisTitel:"Note",
+  hinweisText:"This estate includes digital assets that are lost for good without the matching access instructions. This sheet names neither amounts nor locations.",
+  aTitel:"Proof of existence",
+  aBlock:"Will and technical contact",
+  regelnTitel:"Rules of conduct for heirs",
+  warnTitel:"Before you act",
+  warnKopf:"Acting can cost more here than waiting",
+  reihenfolgeTitel:"Order of work",
+  reihenfolgeText:"Read first, then check deadlines, then bring in professionals, and only then move anything. The one exception is named on the time-critical sheet: Lightning channels and running contracts with a deadline.",
+  angaben:"Entries",
+  fassungBlock:"Version",
+  fassungText:"With the issue of this version every printout of an older version is to be destroyed.",
+  eiligTitel:"What is not urgent here",
+  eiligText:"The wallets on the previous sheets are not time-critical. A computer of your own that merely follows the blockchain and displays balances holds no assets and can move nothing — it is the view, not the key. If it fails, the heir connects with another program or a public service and sees the same balance. It is different when a Lightning node runs on the same machine: that one holds funds of its own and belongs on this sheet, not with the previous ones. Take the time you need for this part.",
+  eiligKeinLightning:"<b>There are no Lightning channels here. What remains on this sheet are the running contracts above. If they say “None”, there is nothing to do here.</b>",
+  descTitel:"Wallet configuration — look for this first",
+  descText:"This wallet comes with a printout showing a large square pattern and a long line of text underneath. Where it lies is named on this sheet in the line “Where the printout of the wallet configuration is kept”, otherwise with the backups whose locations the sheet “Physical locations” names. Without it the wallet cannot normally be restored: two of the three backups are enough to spend, but rebuilding the wallet then still lacks the third piece of information, and that cannot be calculated from the ones at hand. With the printout alone nobody can spend anything, it only shows the balance and the payment history. Find it before you try anything else, and give it to nobody who does not already have access to the backups.",
+  qrTitel:"Descriptor as a QR code",
+  qrText:"Scan it with a wallet application to set up a watch-only wallet (Sparrow, BlueWallet or Nunchuk, for example). It shows balances, it cannot send. Test the import once while you are alive. If an application refuses the code, the line of text below it carries the same information.",
+  qrLang:"Descriptor too long for a QR code — import it by typing it out or through the wallet file.",
+  rechtHinweis:"The explanations in this section describe German inheritance and tax law and are kept in German on purpose. Check the law of your own jurisdiction."
+},
+m:{
+kopf:{titel:"Version and record",
+  hinweis:"These entries appear in the header of every single sheet. Without a version number nobody knows which copy is the valid one.",
+  f:{
+    name:{l:"Name of the author", bsp:"First name Last name",
+      h:"Who drew up this plan. It stands in the header of every sheet so that with several versions, or several people in one household, it is clear whose plan you are holding."},
+    fassung:{l:"Version", s:"Recommended: year-month, so 2026-08"},
+    ersetzt:{l:"Replaces the version of", s:"Every older printout is to be destroyed", bsp:"2026-05",
+      h:"The version that this printout invalidates. Leave it empty the first time. <b>The sentence that matters:</b> two versions that both look valid, kept in two places, are more dangerous than none, because the heir can follow the wrong one."},
+    probe_datum:{l:"Last dry run on"},
+    probe_wer:{l:"Dry run carried out by", bsp:"alone / together with …",
+      h:"Who carried out the run. It says the most when done with the person who will one day need the plan — that is when it shows whether the instructions carry without prior knowledge."},
+    probe_ergebnis:{l:"Result of the dry run", s:"What did not work? A plan without this line is a guess."}
+  }},
+a:{titel:"Sheet A — Proof of existence",
+  hinweis:"May lie in the open, with the will or at a lawyer. Contains no amounts and no locations.",
+  f:{
+    testament_ort:{l:"Will deposited with", s:"For example: probate court, notary"},
+    testament_datum:{l:"Date of the will"},
+    vertrauen_name:{l:"Technical contact", bsp:"First name Last name",
+      h:"Someone who may help with understanding the technology. <b>This person receives no keys and no recovery words</b> — they explain, they do not hold. If there is no such person, leave the field empty, the plan works without one."},
+    vertrauen_kontakt:{l:"How to reach the technical contact", bsp:"e-mail or phone number"},
+    a_verweis:{l:"Where is sheet B?", s:"Only the pointer, never the content. Enter by hand."}
+  }},
+wallets:{titel:"Sheet B — Wallet inventory", gruppenname:"Wallet",
+  hinweis:"Besides the seeds, a multisig wallet needs its configuration: the output descriptor with every xpub, every path and the script type. With 2-of-3 the heir holds two backups, and the third public key cannot be calculated from two — without the descriptor the wallet therefore stays unrecoverable as a rule. It contains no keys, but it reveals every address, the entire balance and the complete payment history, which is why it belongs with the backups and not on a sheet that gets revised, reprinted and shown to others. The recommended form is the printout from the coordinator, kept with every backup.",
+  f:{
+    w_name:{l:"Name", bsp:"Wallet 1",
+      s:"Exactly the name under which the wallet runs in the coordinator and in the device registration, for example: Wallet 1. The heir compares it. No amounts in the name, the type goes in the field below.",
+      h:"The name under which this wallet is stored in the coordinator — with multisig often also the name the hardware device shows while signing. The heir compares it to be sure the right wallet is in front of them."},
+    w_typ:{l:"Type", opt:["Single-sig","2-of-3 multisig","3-of-5 multisig","Other quorum"],
+      h:"<b>Single-sig</b> means one key: one backup is enough to spend. <b>Multisig</b> means several keys, and spending needs a minimum number of them — with 2-of-3 that is two of the three. This threshold applies to spending only, the wallet can always receive."},
+    w_hw:{l:"Hardware models", s:"For example: BitBox02, Trezor Safe 3, SeedSigner", bsp:"BitBox02, Trezor Safe 3, SeedSigner",
+      h:"Which devices hold the keys. For the heir this is mostly a shopping list: if a device is lost, it can be replaced by the same model or a compatible one — <b>the assets hang on the backup, not on the device.</b>"},
+    w_fp:{l:"Master fingerprints", bsp:"1A2B3C4D, 5E6F7A8B, 9C0D1E2F",
+      h:"An eight-character identifier per key, such as <code>1A2B3C4D</code>. It gives away nothing secret, but it identifies a key reliably enough to recognise it — which is how you tell which backup belongs to which place in the wallet. Found in the coordinator at the respective cosigner and in the manufacturer’s app under device information. It stays the same as long as seed and passphrase stay the same — a different passphrase produces a different identifier even though the recovery words are unchanged."},
+    w_path:{l:"Derivation path", bsp:"m/48'/0'/0'/2'",
+      h:"The derivation path. Any number of keys can be derived from one seed — the path says which branch of them this wallet is. With the same keys but the wrong path, an empty wallet comes out. If instead a finished xpub is entered and only the path beside it is wrong, the wallet even shows the balance correctly and fails only when spending — which is why the path belongs here exactly as it stands in the coordinator. There it sits at the respective cosigner (in Sparrow on the keystore tab, once a source has been chosen). Typical: <code>m/48'/0'/0'/2'</code> for multisig, <code>m/84'/0'/0'</code> for single-sig."},
+    w_adr:{l:"Address type", opt:["Native SegWit (bc1q)","Taproot (bc1p)","Nested SegWit (3…)","Legacy (1…)"],
+      h:"The format of the receiving addresses. Native SegWit begins with <code>bc1q</code> — with multisig it is called P2WSH and begins the same way, told apart by length (42 characters with one key, 62 with multisig). Taproot begins with <code>bc1p</code>. A leading <code>3</code> is not necessarily old, it also covers nested SegWit; only the <code>1</code> is genuinely old. Part of the blueprint: with the wrong address type the restored wallet shows no balance."},
+    w_deschow:{l:"Wallet configuration (output descriptor)", opt:["Kept as a printout with every backup","Written on this sheet"],
+      s:"The recommended form is the printout from the coordinator (in Sparrow: Settings → Descriptor → QR symbol → “Save PDF…”, with QR code and text; when a multisig wallet is created Sparrow offers it by itself). It lies with every backup, and the printed sheet then only points to it."},
+    w_descort:{l:"Where the printout of the wallet configuration is kept", s:"Only the pointer to where it is found. By hand."},
+    w_desc:{l:"Output descriptor, complete",
+      s:"Insert it only by copying from the coordinator, do not type it out. The eight-character checksum behind the hash sign catches typing errors: if one character is wrong the wallet refuses the import instead of building a wrong wallet. Always carry the checksum along. The descriptor then stands in plain text on the sheet."},
+    w_pass:{l:"Passphrase in use", opt:["No","Yes"],
+      h:"A passphrase is an additional word or sentence of your own choosing — often called the “25th word”, although it is not a word from the recovery list. <b>It goes into the calculation of the key:</b> with the recovery words but without the right passphrase, a different wallet opens. Every passphrase leads to a valid wallet, only the right one to the wallet you are looking for. A visible balance is therefore no proof that the right wallet is in front of you — some deliberately keep a small amount in the wallet without a passphrase. Anyone entering “Yes” here must give the location in the line below, otherwise the rest of the plan is worthless."},
+    w_passort:{l:"Where the passphrase is kept", s:"Only the location. Never the passphrase itself."},
+    w_cosigner:{l:"Which key lies where (cosigners)", s:"A cosigner is one of the keys of this wallet. One line per key: which device, which backup (capsule or bag including its number), which location. What matters is the backup, not the device — devices can be replaced."}
+  }},
+orte:{titel:"Sheet B — Physical locations", gruppenname:"Location",
+  hinweis:"Handwritten throughout. The generator never learns these entries. One entry per location, even when several backups lie there — the kind is noted in the line below.",
+  f:{
+    o_ort:{l:"Location",
+      h:"Precise enough for someone without prior knowledge to find it: address, room, piece of furniture, compartment. “In the office” is not enough if the heir has never set foot in the office."},
+    o_zugang:{l:"How to get in", s:"Keys, where the safe code is kept, power of attorney for a safe deposit box"},
+    o_art:{l:"Kind of backup at this location", s:"Steel, paper or both. If paper still lies next to steel, ask whether it should be there at all."},
+    o_behaelter:{l:"Container and number of the tamper-evident bag",
+      h:"Tamper-evident bags carry a printed serial number, usually repeated on a detachable receipt stub. Note it here, separately from the bag — a comparison later shows whether the same bag is still there. A bag does not change its number, it simply cannot be closed again: after every legitimate opening the contents go into a new bag with a new number, and that number is entered here."}
+  }},
+software:{titel:"Sheet B — Software and order of work",
+  hinweis:"The heir needs more than access, they need the right order.",
+  f:{
+    s_koord:{l:"Coordinator software", s:"For example: Sparrow Wallet", bsp:"Sparrow Wallet",
+      h:"The program that manages the wallet and assembles payments. <b>It holds no key of its own</b> and can spend nothing by itself. With multisig it is the program that brings the devices together — note that the device manufacturer’s own app usually cannot do this."},
+    s_datei:{l:"Where the wallet file is kept",
+      h:"Convenience, not a backup. The coordinator’s wallet file saves the heir from setting everything up again and carries the labels you assigned, but balance and payment history can be restored without it. If it lies somewhere, the location belongs here — and a password that belongs to this file alone does <b>not</b> belong with the backups."},
+    s_watch:{l:"Viewing watch-only", s:"How does the heir see the plain balance without risking anything?"},
+    s_schritte:{l:"Steps for the heir", s:"Free of jargon. The reader does not know Bitcoin."}
+  }},
+zeit:{titel:"Sheet B — Time-critical matters",
+  hinweis:"Most of an estate is not urgent. The wallets on the previous sheets are not time-critical: a node of your own is only the lens through which you look at the blockchain, it holds no assets. If it fails, you see less, you lose nothing. Time-critical is above all whatever depends on a counterparty — Lightning channels and running contracts.",
+  f:{
+    z_node:{l:"Node", s:"For example: home server, used only for viewing", bsp:"home server, only for looking things up",
+      h:"A node is a computer of your own that keeps a copy of the blockchain. It holds <b>no</b> bitcoin and can move none. If it fails, the heir simply connects to another server or a public service and sees the same balance — that costs privacy, not money. If the node runs in pruned mode, where old blocks are deleted, it does not show the older payment history; a public server shows it in full."},
+    z_lightning:{l:"Lightning channels in use", opt:["No, does not apply","Yes, small amounts only","Yes, meaningful amounts"],
+      h:"Lightning is a fast payment network on top of Bitcoin. Funds sit there in channels with a counterparty and hang on a state that changes with every payment. <b>Only this part is time-critical.</b> Anyone not using Lightning leaves it at “No” — the sheet then says explicitly that there is nothing to do here."},
+    z_kanal:{l:"What to do about the channels", bsp:"These channels are pocket change. Write them off and deal with the wallets above.",
+      h:"With small amounts it is a legitimate instruction to write the channels off deliberately and do nothing. <b>That is a full instruction too</b>, and it spares the heir a specialist procedure that can cost more than the channel holds. It only has to be meant honestly: writing off does not mean the money turns up by itself later, it means it is most likely gone. Anyone who does not want that leaves behind the seed, the channel backup and the instruction to hire a professional. With meaningful amounts, name here who can help and where the node backup lies."},
+    z_frist:{l:"Deadline for the Lightning backup", s:"For example: within 14 days", bsp:"within 14 days",
+      h:"A channel does not close by itself. As long as no payment is in flight it can stay open for years even with the machine switched off — the counterparty does not know whether somebody will come back. The closure only becomes compulsory when a payment is under way: its deadline runs out and the counterparty must then bring the channel onto the blockchain. The funds are on the blockchain afterwards, but not in an ordinary wallet — collecting them needs the seed of the machine and usually a specialist tool. A channel backup makes it possible to prompt the counterparties into exactly that closure. It does <b>not</b> restore the machine, it is encrypted with a key derived from the seed and worthless on its own, and it only works while the counterparty is still reachable. An old channel state must never be replayed: the counterparty may treat it as an attempted fraud and take the entire channel balance."},
+    z_mining:{l:"Mining payouts and running contracts", bsp:"None.",
+      h:"Everything that depends on a counterparty with a deadline: payout thresholds at a mining pool, rented hash power, subscriptions, hosting. If there is nothing, write “None” here explicitly — it saves the heir the search."}
+  }},
+weiter:{titel:"Sheet B — Further assets",
+  hinweis:"Directly registered shares sit with the transfer agent. Without a custodian bank, heirs stand in front of a closed door there.",
+  f:{
+    v_depot:{l:"Brokerage accounts", s:"Broker, country, rough character of the position"},
+    v_drs:{l:"Direct registration and transfer agent"},
+    v_konten:{l:"Bank accounts"},
+    v_npub:{l:"Nostr npub", s:"Public, may be printed"},
+    v_nsec:{l:"Where the nsec is kept"},
+    v_pwm:{l:"Password manager", bsp:"KeePassXC, file on the computer",
+      h:"Which program keeps the credentials and where its file lies. For the heir the password manager is often the first door of all — behind it are accounts, brokerage logins and e-mail. With that door open, much of the rest follows by itself. Mind the difference: an online manager usually offers a recovery code and sometimes an emergency contact. With a local database such as KeePassXC there is no provider who can help — if the key file or the hardware key is missing, the database stays shut. Record where both of them lie."},
+    v_pwmort:{l:"Where the master password is kept", s:"Only the location, never the password itself"},
+    v_2fa:{l:"Second factor for these accounts", s:"Without this entry the master password can lead nowhere",
+      opt:["No, password only","Yes — authenticator app","Yes — hardware key","Yes — app and hardware key"],
+      h:"Many accounts ask for a second proof alongside the password: a code from an app, usually six digits (some services use seven or eight), or a key to plug in. <b>That often applies to the password manager itself.</b> Anyone leaving only the master password leaves a door with half a key — the heir stands in front of it and cannot get in despite holding the right entry. Found in the security settings of the respective service under “two-factor authentication”. Example: the password manager asks for the master password plus a code from Aegis Authenticator."},
+    v_2fa_app:{l:"Which app, on which device", bsp:"Aegis Authenticator on the phone",
+      h:"Name of the app and the device it runs on. Codes from an authenticator app are produced inside the device itself, they are not sent anywhere and cannot be requested from the provider. If the device is lost, what helps is the backup of the app, stored recovery codes or the provider’s recovery procedure. Codes by SMS or e-mail are a different thing, those are delivered."},
+    v_2fa_sicherung:{l:"Where the backup of the second factor is kept", s:"Encrypted export from the app or printed recovery codes",
+      h:"Some authenticator apps can export their entries into an encrypted file, Aegis for example. Others cannot: Google Authenticator only transfers by QR code to a new device, Microsoft Authenticator only backs up into its own cloud, and with the Yubico Authenticator the secrets sit unreadable on the key. Many services additionally hand out one-time recovery codes during setup, with some you have to generate them yourself. This backup decides whether the heir gets in when the phone is missing or locked. Only the <b>location</b> belongs here, never the content — the same rule as for the master password. With neither in place, only the provider’s recovery procedure is left, and that is slow and not offered everywhere."},
+    v_2fa_key:{l:"Where the hardware key is kept", s:"Note as well whether a second key exists",
+      h:"A plug-in key is an object, not a password. Once it is gone the access is gone, unless a second key is registered and recovery codes are kept. A second key only helps when it was registered with the same accounts. Synchronised passkeys from an account or a password manager are a different thing from the device-bound credentials on the plug-in key. Where both of them lie belongs here. A single key without a second route is the most common reason why a cleanly documented account stays locked all the same."},
+    v_einnahmen:{l:"Recurring income", s:"Royalties, domains, hosting, a channel — this is real estate value"}
+  }},
+metalle:{titel:"Sheet B — Precious metals, holdings", gruppenname:"Position",
+  hinweis:"Allocated means ownership of specific bars with serial numbers — they do not fall into the insolvency estate of the storage provider. Unallocated means nothing but a claim against them: in an insolvency you stand in line as an ordinary creditor and receive a quota at best. This distinction decides what is left of the holdings when it matters.",
+  f:{
+    m_metall:{l:"Metal", opt:["Gold","Silver","Platinum","Palladium"]},
+    m_form:{l:"Form", opt:["Bars","Bullion coins","Collector coins","Granules"]},
+    m_eigentum:{l:"Form of ownership", opt:["Allocated and segregated","Allocated, pooled storage","Unallocated — a claim only","Physically in own possession"]},
+    m_hersteller:{l:"Manufacturer or mint", s:"For example: Argor-Heraeus, Perth Mint"},
+    m_zertifikat:{l:"Type of certificate", s:"For example: LBMA Good Delivery, assay card"},
+    m_bestand:{l:"Count, weight, serial numbers", s:"Holdings by hand. This list is what makes the sheet worth anything."},
+    m_belege:{l:"Where the purchase receipts are kept", rechtDE:true}
+  }},
+lager:{titel:"Sheet B — Storage and bonded warehouses", gruppenname:"Storage location", rechtDE:true,
+  f:{
+    l_art:{l:"Kind of storage", opt:["Own possession","Bank safe deposit box","Warehouse inside Germany","Bonded warehouse Switzerland","Open customs warehouse","Warehouse elsewhere abroad"]},
+    l_anbieter:{l:"Provider or bank"},
+    l_land:{l:"Country"},
+    l_vertrag:{l:"Contract or customer number"},
+    l_ansprech:{l:"Contact person and details"},
+    l_vollmacht:{l:"Power of attorney beyond death", opt:["Yes, granted","No","Unclear"]},
+    l_versicherung:{l:"Insurance and sum insured"},
+    l_zugang:{l:"Way in and key custody"},
+    l_steuerhinweis:{l:"Tax note for heirs"}
+  }},
+auslandsdepot:{titel:"Sheet B — Foreign brokerage accounts", gruppenname:"Account", rechtDE:true,
+  f:{
+    d_broker:{l:"Broker or bank"},
+    d_land:{l:"Country of domicile"},
+    d_nummer:{l:"Account number"},
+    d_sprache:{l:"Language of correspondence"},
+    d_ussitus:{l:"Contains US situs assets", opt:["No","Yes","Unclear"]},
+    d_nachweis:{l:"What the custodian demands from heirs"},
+    d_zugang:{l:"Where the credentials are kept", s:"Only the location, never the credentials."}
+  }},
+drs:{titel:"Sheet B — Direct registration", gruppenname:"DRS position", rechtDE:true,
+  f:{
+    r_gesell:{l:"Company", s:"For example: Wheaton Precious Metals"},
+    r_agent:{l:"Transfer agent", s:"For example: Computershare, Odyssey Trust"},
+    r_land:{l:"Country of the agent"},
+    r_konto:{l:"Account number or holder ID"},
+    r_form:{l:"Form", opt:["Book entry","Paper certificate","Both"]},
+    r_zertort:{l:"Where paper certificates are kept"},
+    r_medallion:{l:"Established route to a signature guarantee"},
+    r_kontakt:{l:"Direct contact at the agent"}
+  }},
+steuer:{titel:"Sheet B — Tax", rechtDE:true,
+  f:{
+    t_fifo:{l:"Where the FIFO acquisition history is kept"},
+    t_berater:{l:"Tax adviser"},
+    t_kontakt:{l:"How to reach the tax adviser"},
+    t_nachweise:{l:"Where records for purchases without KYC are kept"}
+  }}
+}
+};
+
 const MODEL = [
 {
   id:"kopf", klasse:"P", klasseLabel:"Protokoll", titel:"Fassung und Protokoll",
@@ -2646,19 +2920,19 @@ const MODEL = [
 },
 {
   id:"wallets", klasse:"B", klasseLabel:"Zugangsanleitung", titel:"Blatt B — Wallet-Inventar",
-  hinweis:"Ein Multisig braucht neben den Seeds die Konfiguration: den Output-Descriptor mit allen XPUBs, Pfaden und dem Skripttyp. Bei unüblichen Einstellungen ist das Guthaben ohne ihn selbst mit allen Seeds praktisch nicht rekonstruierbar. Er enthält keine Schlüssel, verrät aber jede Adresse und den gesamten Bestand — deshalb gehört er zu den Backups und nicht auf ein Blatt, das überarbeitet, neu gedruckt und Dritten gezeigt wird. Empfohlen ist der Ausdruck aus dem Koordinator, der bei jedem Backup liegt.",
+  hinweis:"Ein Multisig braucht neben den Seeds die Konfiguration: den Output-Descriptor mit allen XPUBs, Pfaden und dem Skripttyp. Bei 2-von-3 hat der Erbe zwei Sicherungen in der Hand, und aus zweien lässt sich der dritte öffentliche Schlüssel nicht berechnen — ohne Descriptor bleibt die Wallet deshalb in aller Regel unrekonstruierbar. Er enthält keine Schlüssel, verrät aber jede Adresse, den gesamten Bestand und die komplette Zahlungsgeschichte — deshalb gehört er zu den Backups und nicht auf ein Blatt, das überarbeitet, neu gedruckt und Dritten gezeigt wird. Empfohlen ist der Ausdruck aus dem Koordinator, der bei jedem Backup liegt.",
   wiederholbar:true, proBlatt:true, gruppenname:"Wallet",
   felder:[
     {k:"w_name", t:"text", l:"Bezeichnung", bsp:"Wallet 1", h:"Der Name, unter dem diese Wallet im Koordinator gespeichert ist — bei Multisig oft auch der Name, den das Hardware-Gerät beim Signieren anzeigt. Der Erbe vergleicht ihn, um sicher zu sein, dass er die richtige Wallet vor sich hat.", s:"Genau der Name, unter dem die Wallet im Koordinator und in der Geräte-Registrierung läuft, etwa: Wallet 1. Der Erbe gleicht ihn ab. Keine Beträge im Namen, den Typ trägt das Feld darunter."},
     {k:"w_typ", t:"select", l:"Typ", rerender:true, h:"<b>Single-Sig</b> heißt: ein Schlüssel, eine Sicherung, ein Backup genügt zum Ausgeben. <b>Multisig</b> heißt: mehrere Schlüssel, und zum Ausgeben braucht es eine Mindestzahl davon — bei 2-of-3 also zwei der drei. Diese Schwelle gilt nur fürs Ausgeben, empfangen kann die Wallet immer.", opt:["Single-Sig","2-of-3 Multisig","3-of-5 Multisig","Andere Quorum-Struktur"]},
     {k:"w_hw", t:"text", l:"Hardware-Modelle", s:"Etwa: BitBox02, Trezor Safe 3, SeedSigner", bsp:"BitBox02, Trezor Safe 3, SeedSigner", h:"Welche Geräte die Schlüssel halten. Für den Erben ist das vor allem eine Einkaufsliste: Geht ein Gerät verloren, lässt es sich durch dasselbe oder ein kompatibles ersetzen — <b>das Vermögen hängt am Backup, nicht am Gerät.</b>"},
-    {k:"w_fp", t:"text", l:"Master-Fingerprints", bsp:"1A2B3C4D, 5E6F7A8B, 9C0D1E2F", h:"Eine achtstellige Kennung je Schlüssel, etwa <code>1A2B3C4D</code>. Sie verrät nichts Geheimes, identifiziert aber einen Schlüssel eindeutig — so erkennt man, welches Backup zu welchem Platz in der Wallet gehört. Zu finden im Koordinator beim jeweiligen Cosigner und auf dem Gerät selbst. Sie ändert sich nie, solange der Seed derselbe bleibt."},
-    {k:"w_path", t:"text", l:"Derivation Path", bsp:"m/48'/0'/0'/2'", h:"Der Ableitungspfad. Aus einem Seed lassen sich beliebig viele Schlüssel ableiten — der Pfad sagt, welcher Ast davon diese Wallet ist. Mit denselben Schlüsseln, aber falschem Pfad käme eine leere Wallet heraus. Im Koordinator steht er beim jeweiligen Cosigner (bei Sparrow im Keystore-Reiter, sichtbar erst nach dem Geräteimport). Typisch: <code>m/48'/0'/0'/2'</code> für Multisig, <code>m/84'/0'/0'</code> für Single-Sig."},
-    {k:"w_adr", t:"select", l:"Adresstyp", h:"Das Format der Empfangsadressen. Native SegWit beginnt mit <code>bc1q</code>, Taproot mit <code>bc1p</code>, ältere Formate mit <code>3</code> oder <code>1</code>. Gehört zur Bauanleitung: Falscher Adresstyp, und die wiederhergestellte Wallet zeigt keinen Bestand an.", opt:["Native SegWit (bc1q)","Taproot (bc1p)","Nested SegWit (3…)","Legacy (1…)"]},
-    {k:"w_deschow", t:"select", l:"Wallet-Konfiguration (Output-Descriptor)", vor:"Liegt als Ausdruck bei jedem Backup", rerender:true, nur:[{k:"w_typ", enthaelt:"Multisig"}], opt:["Liegt als Ausdruck bei jedem Backup","Steht auf diesem Bogen"], s:"Empfohlen ist der Ausdruck aus dem Koordinator (Sparrow: „Save PDF\" mit QR und Text). Er liegt bei jedem Backup, und der gedruckte Bogen verweist dann nur darauf."},
+    {k:"w_fp", t:"text", l:"Master-Fingerprints", bsp:"1A2B3C4D, 5E6F7A8B, 9C0D1E2F", h:"Eine achtstellige Kennung je Schlüssel, etwa <code>1A2B3C4D</code>. Sie verrät nichts Geheimes, identifiziert aber einen Schlüssel eindeutig — so erkennt man, welches Backup zu welchem Platz in der Wallet gehört. Zu finden im Koordinator beim jeweiligen Cosigner und in der App des Geräteherstellers unter den Geräteinformationen. Sie bleibt gleich, solange Seed und Passphrase dieselben sind — eine andere Passphrase ergibt eine andere Kennung, obwohl die Sicherungswörter unverändert sind."},
+    {k:"w_path", t:"text", l:"Derivation Path", bsp:"m/48'/0'/0'/2'", h:"Der Ableitungspfad. Aus einem Seed lassen sich beliebig viele Schlüssel ableiten — der Pfad sagt, welcher Ast davon diese Wallet ist. Mit denselben Schlüsseln, aber falschem Pfad käme eine leere Wallet heraus. Wird stattdessen ein fertiger xpub eingetragen und nur der Pfad daneben ist falsch, zeigt die Wallet den Bestand sogar richtig an und scheitert erst beim Ausgeben — deshalb gehört der Pfad genau so notiert, wie er im Koordinator steht. Dort steht er beim jeweiligen Cosigner (bei Sparrow im Keystore-Reiter, sobald eine Quelle gewählt ist). Typisch: <code>m/48'/0'/0'/2'</code> für Multisig, <code>m/84'/0'/0'</code> für Single-Sig."},
+    {k:"w_adr", t:"select", l:"Adresstyp", h:"Das Format der Empfangsadressen. Native SegWit beginnt mit <code>bc1q</code> — bei Multisig heißt es P2WSH und beginnt ebenfalls so, erkennbar an der Länge (42 Zeichen bei einem Schlüssel, 62 bei Multisig). Taproot beginnt mit <code>bc1p</code>. Eine <code>3</code> am Anfang ist nicht zwingend alt, sie umfasst auch verschachteltes SegWit; wirklich alt ist nur die <code>1</code>. Gehört zur Bauanleitung: Falscher Adresstyp, und die wiederhergestellte Wallet zeigt keinen Bestand an.", opt:["Native SegWit (bc1q)","Taproot (bc1p)","Nested SegWit (3…)","Legacy (1…)"]},
+    {k:"w_deschow", t:"select", l:"Wallet-Konfiguration (Output-Descriptor)", vor:"Liegt als Ausdruck bei jedem Backup", rerender:true, nur:[{k:"w_typ", enthaelt:"Multisig"}], opt:["Liegt als Ausdruck bei jedem Backup","Steht auf diesem Bogen"], s:"Empfohlen ist der Ausdruck aus dem Koordinator (Sparrow: Settings → Descriptor → QR-Symbol → „Save PDF…\", mit QR und Text; beim Anlegen einer Multisig-Wallet fragt Sparrow von sich aus danach). Er liegt bei jedem Backup, und der gedruckte Bogen verweist dann nur darauf."},
     {k:"w_descort", t:"hand", l:"Wo liegt der Ausdruck der Wallet-Konfiguration", s:"Nur der Hinweis, wo gesucht wird. Von Hand.", zeilen:2, nur:[{k:"w_typ", enthaelt:"Multisig"},{k:"w_deschow", ist:"Liegt als Ausdruck bei jedem Backup"}]},
-    {k:"w_desc", t:"area", l:"Output-Descriptor, vollständig", s:"Nur per Kopieren aus dem Koordinator einsetzen, niemals abtippen — ein falsches Zeichen macht ihn wertlos, ohne dass es auffällt. Er steht dann im Klartext auf dem Bogen.", nur:[{k:"w_typ", enthaelt:"Multisig"},{k:"w_deschow", ist:"Steht auf diesem Bogen"}]},
-    {k:"w_pass", t:"select", l:"Passphrase vorhanden", opt:["Nein","Ja"], h:"Eine Passphrase ist ein zusätzliches, frei gewähltes Wort oder ein Satz — oft „25. Wort\" genannt. <b>Sie ist Teil des Schlüssels:</b> Mit den Sicherungswörtern, aber ohne Passphrase öffnet sich eine andere, leere Wallet. Wer hier „Ja\" einträgt, muss unbedingt den Verwahrort in der Zeile darunter angeben — sonst ist der Rest des Plans wertlos."},
+    {k:"w_desc", t:"area", l:"Output-Descriptor, vollständig", s:"Nur per Kopieren aus dem Koordinator einsetzen, nicht abtippen. Die achtstellige Prüfsumme hinter dem Rautezeichen fängt Vertipper ab: Stimmt ein Zeichen nicht, verweigert die Wallet den Import, statt eine falsche Wallet aufzubauen. Übernimm die Prüfsumme deshalb immer mit. Der Descriptor steht danach im Klartext auf dem Bogen.", nur:[{k:"w_typ", enthaelt:"Multisig"},{k:"w_deschow", ist:"Steht auf diesem Bogen"}]},
+    {k:"w_pass", t:"select", l:"Passphrase vorhanden", opt:["Nein","Ja"], h:"Eine Passphrase ist ein zusätzliches, frei gewähltes Wort oder ein Satz — oft „25. Wort\" genannt, obwohl sie kein Wort aus der Sicherungsliste ist. <b>Sie geht in die Berechnung des Schlüssels ein:</b> Mit den Sicherungswörtern, aber ohne die richtige Passphrase öffnet sich eine andere Wallet. Jede Passphrase führt zu einer gültigen Wallet, nur die richtige zu der gesuchten. Ein sichtbarer Bestand ist deshalb kein Beweis, dass die richtige Wallet vorliegt — manche legen in der Wallet ohne Passphrase bewusst einen kleinen Betrag ab. Wer hier „Ja\" einträgt, muss unbedingt den Verwahrort in der Zeile darunter angeben, sonst ist der Rest des Plans wertlos."},
     {k:"w_passort", t:"hand", l:"Verwahrort der Passphrase", s:"Nur der Ort. Niemals die Passphrase selbst.", zeilen:2},
     {k:"w_cosigner", t:"hand", l:"Welcher Schlüssel liegt wo (Cosigner)", s:"Ein Cosigner ist einer der Schlüssel dieser Wallet. Je Schlüssel eine Zeile: welches Gerät, welches Backup (Kapsel oder Beutel samt Nummer), welcher Ort. Entscheidend ist das Backup, nicht das Gerät — Geräte sind ersetzbar.", zeilen:4}
   ]
@@ -2671,7 +2945,7 @@ const MODEL = [
     {k:"o_ort", t:"hand", l:"Ort", zeilen:2, h:"So genau, dass jemand ohne Vorwissen hinfindet: Adresse, Raum, Möbelstück, Fach. „Im Büro\" reicht nicht, wenn der Erbe das Büro noch nie betreten hat."},
     {k:"o_zugang", t:"hand", l:"Zugangsweg", s:"Schlüssel, Tresorcode-Verwahrung, Schließfachvollmacht", zeilen:3},
     {k:"o_art", t:"hand", l:"Art des Backups an diesem Ort", s:"Stahl, Papier oder beides. Liegt hier noch Papier neben Stahl, prüfen, ob es überhaupt bleiben soll.", zeilen:1},
-    {k:"o_behaelter", t:"hand", l:"Behälter und Nummer des Siegelbeutels", zeilen:2, h:"Manipulationssichere Beutel tragen eine aufgedruckte Nummer. Steht sie hier, lässt sich später erkennen, ob ein Beutel geöffnet und durch einen anderen ersetzt wurde. Nach jeder berechtigten Öffnung ändert sich die Nummer — dann gehört sie hier nachgetragen."}
+    {k:"o_behaelter", t:"hand", l:"Behälter und Nummer des Siegelbeutels", zeilen:2, h:"Manipulationssichere Beutel tragen eine aufgedruckte fortlaufende Nummer, meist zusätzlich auf einem abtrennbaren Quittungsabschnitt. Notiere sie hier, getrennt vom Beutel — ein Vergleich zeigt später, ob noch derselbe Beutel vorliegt. Ein Beutel ändert seine Nummer nicht, er lässt sich nur nicht wieder verschließen: Nach jeder berechtigten Öffnung kommt der Inhalt in einen neuen Beutel mit neuer Nummer, und die wird hier nachgetragen."}
   ]
 },
 {
@@ -2679,19 +2953,19 @@ const MODEL = [
   hinweis:"Der Erbe braucht nicht nur Zugang, sondern die richtige Reihenfolge.",
   felder:[
     {k:"s_koord", t:"text", l:"Koordinator-Software", s:"Etwa: Sparrow Wallet", bsp:"Sparrow Wallet", h:"Das Programm, das die Wallet verwaltet und Zahlungen zusammenstellt. <b>Es besitzt selbst keinen Schlüssel</b> und kann allein nichts ausgeben. Bei Multisig ist es das Programm, das die Geräte zusammenbringt — beachte: die App des Geräteherstellers kann das in der Regel nicht."},
-    {k:"s_datei", t:"hand", l:"Wo liegt die Wallet-Datei", zeilen:2, h:"Bequemlichkeit, kein Backup. Die Wallet-Datei des Koordinators spart dem Erben das Neuanlegen, aber wiederherstellen lässt sich alles auch ohne sie. Wenn sie irgendwo liegt, gehört der Ort hierher — und ein Passwort, das nur zu dieser Datei gehört, gehört <b>nicht</b> zu den Backups."},
+    {k:"s_datei", t:"hand", l:"Wo liegt die Wallet-Datei", zeilen:2, h:"Bequemlichkeit, kein Backup. Die Wallet-Datei des Koordinators spart dem Erben das Neuanlegen und enthält die vergebenen Bezeichnungen, aber Bestand und Zahlungsgeschichte lassen sich auch ohne sie wiederherstellen. Wenn sie irgendwo liegt, gehört der Ort hierher — und ein Passwort, das nur zu dieser Datei gehört, gehört <b>nicht</b> zu den Backups."},
     {k:"s_watch", t:"area", l:"Watch-only einsehen", s:"Wie kommt der Erbe an den reinen Kontostand, ohne etwas zu riskieren?"},
     {k:"s_schritte", t:"area", l:"Schrittfolge für den Erben", s:"Jargonfrei. Der Leser kennt Bitcoin nicht."}
   ]
 },
 {
   id:"zeit", klasse:"B", klasseLabel:"Zugangsanleitung", titel:"Blatt B — Zeitkritisches",
-  hinweis:"Das meiste im Nachlass eilt nicht. Die Wallets auf den vorigen Blättern sind nicht zeitkritisch: Ein eigener Node ist nur die Brille, durch die man auf die Blockchain schaut, er hält kein Vermögen. Fällt er aus, sieht man schlechter, verliert aber nichts. Zeitkritisch ist allein, was von einer Gegenstelle abhängt — Lightning-Kanäle und laufende Verträge.",
+  hinweis:"Das meiste im Nachlass eilt nicht. Die Wallets auf den vorigen Blättern sind nicht zeitkritisch: Ein eigener Node ist nur die Brille, durch die man auf die Blockchain schaut, er hält kein Vermögen. Fällt er aus, sieht man schlechter, verliert aber nichts. Zeitkritisch ist vor allem, was von einer Gegenstelle abhängt — Lightning-Kanäle und laufende Verträge.",
   felder:[
-    {k:"z_node", t:"text", l:"Node", s:"Etwa: Heimserver, dient nur der Ansicht", bsp:"Heimserver, nur zum Nachschauen", h:"Ein Node ist ein eigener Rechner, der eine vollständige Kopie der Blockchain führt. Er hält <b>keine</b> Bitcoin und kann keine bewegen. Fällt er aus, verbindet sich der Erbe einfach mit einem anderen Server oder einem öffentlichen Dienst und sieht denselben Bestand — das kostet Privatsphäre, kein Geld."},
+    {k:"z_node", t:"text", l:"Node", s:"Etwa: Heimserver, dient nur der Ansicht", bsp:"Heimserver, nur zum Nachschauen", h:"Ein Node ist ein eigener Rechner, der eine vollständige Kopie der Blockchain führt. Er hält <b>keine</b> Bitcoin und kann keine bewegen. Fällt er aus, verbindet sich der Erbe einfach mit einem anderen Server oder einem öffentlichen Dienst und sieht denselben Bestand — das kostet Privatsphäre, kein Geld. Läuft der Node im Sparmodus, in dem alte Blöcke gelöscht werden, zeigt er die ältere Zahlungsgeschichte nicht; ein öffentlicher Server zeigt sie vollständig."},
     {k:"z_lightning", t:"select", l:"Lightning-Kanäle vorhanden", vor:"Nein, trifft nicht zu", rerender:true, opt:["Nein, trifft nicht zu","Ja, nur Kleinbeträge","Ja, nennenswerte Beträge"], h:"Lightning ist ein Schnellzahlungsnetz über Bitcoin. Guthaben steckt dort in Kanälen mit einer Gegenstelle und hängt an einem Zustand, der sich mit jeder Zahlung ändert. <b>Nur dieser Teil ist zeitkritisch.</b> Wer kein Lightning nutzt, lässt es bei „Nein\" — dann erscheint auf dem Bogen ausdrücklich, dass hier nichts zu tun ist."},
-    {k:"z_kanal", t:"area", l:"Was mit den Kanälen zu tun ist", nur:[{k:"z_lightning", enthaelt:"Ja"}], bsp:"Diese Kanäle sind Kleingeld. Lasst sie verfallen und kümmert euch um die Wallets oben.", h:"Bei kleinen Beträgen ist die beste Anweisung, die Kanäle verfallen zu lassen — <b>auch das ist eine vollwertige Anweisung.</b> Ein Erbe, der sich an Kleingeld abarbeitet, verliert Zeit und Zutrauen für das, worauf es ankommt. Bei nennenswerten Beträgen gehört hier hin, wer helfen kann und wo die Node-Sicherung liegt."},
-    {k:"z_frist", t:"text", l:"Frist für die Lightning-Sicherung", s:"Etwa: innerhalb von 14 Tagen", nur:[{k:"z_lightning", ist:"Ja, nennenswerte Beträge"}], bsp:"innerhalb von 14 Tagen", h:"Steht der Node lange still, schließen die Gegenstellen die Kanäle früher oder später von sich aus, bei offenen Zahlungen sogar zwingend. Das Guthaben landet dann auf der Blockchain. Eine Kanalsicherung erlaubt es, die Gegenstellen zu genau diesem Schluss zu bewegen — sie stellt den Node <b>nicht</b> wieder her, und ein alter Kanalzustand darf niemals einfach zurückgespielt werden."},
+    {k:"z_kanal", t:"area", l:"Was mit den Kanälen zu tun ist", nur:[{k:"z_lightning", enthaelt:"Ja"}], bsp:"Diese Kanäle sind Kleingeld. Lasst sie verfallen und kümmert euch um die Wallets oben.", h:"Bei kleinen Beträgen ist es eine legitime Anweisung, die Kanäle bewusst abzuschreiben und nichts zu unternehmen. <b>Auch das ist eine vollwertige Anweisung</b>, und sie erspart dem Erben einen Fachvorgang, der mehr kosten kann als der Kanalinhalt. Sie muss nur ehrlich gemeint sein: Abschreiben heißt nicht, dass das Geld später von allein auftaucht, sondern dass es mit hoher Wahrscheinlichkeit verloren ist. Wer das nicht will, hinterlässt Seed und Kanalsicherung und die Anweisung, einen Fachmann zu beauftragen. Bei nennenswerten Beträgen gehört hierhin, wer helfen kann und wo die Node-Sicherung liegt."},
+    {k:"z_frist", t:"text", l:"Frist für die Lightning-Sicherung", s:"Etwa: innerhalb von 14 Tagen", nur:[{k:"z_lightning", ist:"Ja, nennenswerte Beträge"}], bsp:"innerhalb von 14 Tagen", h:"Ein Kanal schließt sich nicht von allein. Solange keine Zahlung offen ist, kann er auch bei einem abgeschalteten Rechner jahrelang offen bleiben — die Gegenstelle weiß nicht, ob jemand zurückkommt. Zwingend wird der Schluss nur, wenn eine Zahlung unterwegs ist: Deren Frist läuft ab, und die Gegenstelle muss den Kanal dann auf die Blockchain bringen. Das Guthaben liegt danach zwar in der Blockchain, aber nicht in einer normalen Wallet — zum Einsammeln braucht es den Seed des Rechners und meist ein Fachwerkzeug. Eine Kanalsicherung erlaubt es, die Gegenstellen zu genau diesem Schluss zu bewegen. Sie stellt den Rechner <b>nicht</b> wieder her, sie ist mit einem Schlüssel aus dem Seed verschlüsselt und allein wertlos, und sie wirkt nur, wenn die Gegenstelle noch erreichbar ist. Ein alter Kanalstand darf niemals zurückgespielt werden: Die Gegenstelle kann das als Betrugsversuch werten und das gesamte Kanalguthaben einziehen."},
     {k:"z_mining", t:"area", l:"Mining-Payouts und laufende Verträge", bsp:"Keine.", h:"Alles, was von einer Gegenstelle mit Frist abhängt: Auszahlungsschwellen bei einem Mining-Pool, gemietete Rechenleistung, Abonnements, Hosting. Gibt es nichts, hier ausdrücklich „Keine\" eintragen — das erspart dem Erben die Suche."}
   ]
 },
@@ -2704,8 +2978,21 @@ const MODEL = [
     {k:"v_konten", t:"area", l:"Bankkonten"},
     {k:"v_npub", t:"text", l:"Nostr npub", s:"Öffentlich, darf gedruckt werden"},
     {k:"v_nsec", t:"hand", l:"Verwahrort des nsec", zeilen:2},
-    {k:"v_pwm", t:"text", l:"Passwortmanager"},
-    {k:"v_pwmort", t:"hand", l:"Verwahrort des Masterpassworts", zeilen:2},
+    {k:"v_pwm", t:"text", l:"Passwortmanager", bsp:"KeePassXC, Datei auf dem Rechner", h:"Welches Programm die Zugangsdaten verwahrt und wo dessen Datei liegt. Der Passwortmanager ist für den Erben oft die erste Tür überhaupt — hinter ihr liegen Konten, Depotzugänge und E-Mail. Steht sie offen, geht vieles andere von selbst. Achte auf den Unterschied: Bei einem Online-Manager gibt es meist einen Wiederherstellungscode, teils auch einen Notfallkontakt. Bei einer lokalen Datenbank wie KeePassXC gibt es keinen Anbieter, der helfen kann — fehlt die Schlüsseldatei oder der Hardware-Schlüssel, bleibt die Datei zu. Halte dann unbedingt fest, wo beides liegt."},
+    {k:"v_pwmort", t:"hand", l:"Verwahrort des Masterpassworts", zeilen:2, s:"Nur der Ort, niemals das Passwort selbst"},
+    {k:"v_2fa", t:"select", l:"Zweiter Faktor für diese Zugänge", rerender:true,
+      opt:["Nein, nur Passwort","Ja — Authenticator-App","Ja — Hardware-Schlüssel","Ja — App und Hardware-Schlüssel"],
+      s:"Ohne diese Angabe kann das Masterpasswort ins Leere führen",
+      h:"Viele Zugänge verlangen neben dem Passwort einen zweiten Nachweis: einen meist sechsstelligen Code aus einer App (manche Dienste nutzen sieben oder acht Stellen) oder einen Schlüssel zum Anstecken. <b>Das gilt oft für den Passwortmanager selbst.</b> Wer nur das Masterpasswort hinterlässt, hinterlässt eine Tür mit dem halben Schlüssel — der Erbe steht davor und kommt trotz richtiger Angabe nicht hinein. Zu finden in den Sicherheitseinstellungen des jeweiligen Dienstes unter „Zwei-Faktor-Authentifizierung\". Beispiel: Der Passwortmanager verlangt das Masterpasswort und dazu einen Code aus Aegis Authenticator."},
+    {k:"v_2fa_app", t:"text", l:"Welche App, auf welchem Gerät", nur:[{k:"v_2fa", enthaelt:"App"}],
+      bsp:"Aegis Authenticator auf dem Telefon",
+      h:"Name der App und das Gerät, auf dem sie läuft. Codes aus einer Authenticator-App entstehen im Gerät selbst, sie werden nicht verschickt und lassen sich beim Anbieter nicht anfordern. Geht das Gerät verloren, helfen die Sicherung der App, hinterlegte Notfallcodes oder der Wiederherstellungsweg des Anbieters. Codes per SMS oder E-Mail sind etwas anderes, sie werden zugestellt. Beispiel: <code>Aegis Authenticator auf dem Telefon</code>."},
+    {k:"v_2fa_sicherung", t:"hand", l:"Verwahrort der Sicherung des zweiten Faktors", zeilen:2, nur:[{k:"v_2fa", enthaelt:"Ja"}],
+      s:"Verschlüsselter Export der App oder ausgedruckte Notfallcodes",
+      h:"Manche Authenticator-Apps können ihre Einträge verschlüsselt in eine Datei ausleiten, zum Beispiel Aegis. Andere können das nicht: Google Authenticator überträgt nur per QR-Code an ein neues Gerät, Microsoft Authenticator sichert nur in die eigene Cloud, beim Yubico Authenticator liegen die Geheimnisse unauslesbar auf dem Schlüssel. Viele Dienste geben beim Einrichten zusätzlich einmalige Notfallcodes aus, bei manchen muss man sie selbst erzeugen. Genau diese Sicherung entscheidet, ob der Erbe hineinkommt, wenn das Telefon fehlt oder gesperrt ist. Hierher gehört nur der <b>Ort</b>, nie der Inhalt — dieselbe Regel wie beim Masterpasswort. Fehlt beides, bleibt nur der Wiederherstellungsweg des Anbieters, und der ist langwierig und nicht überall vorgesehen."},
+    {k:"v_2fa_key", t:"hand", l:"Wo der Hardware-Schlüssel liegt", zeilen:2, nur:[{k:"v_2fa", enthaelt:"Hardware"}],
+      s:"Auch vermerken, ob es einen Zweitschlüssel gibt",
+      h:"Ein Steckschlüssel ist ein Gegenstand, kein Passwort. Ist er weg, ist der Zugang weg, sofern kein zweiter Schlüssel hinterlegt und keine Notfallcodes aufbewahrt sind. Ein Zweitschlüssel hilft nur, wenn er bei denselben Konten registriert wurde. Synchronisierte Passkeys aus einem Konto oder Passwortmanager sind etwas anderes als die gerätegebundenen Zugangsdaten auf dem Steckschlüssel. Hierher gehört, wo beide liegen. Ein einzelner Schlüssel ohne zweiten Weg ist der häufigste Grund, warum ein sauber dokumentierter Zugang trotzdem verschlossen bleibt."},
     {k:"v_einnahmen", t:"area", l:"Laufende Einnahmen", s:"Tantiemen, Domain, Hosting, Kanal — das ist echter Nachlasswert"}
   ]
 },
@@ -2788,6 +3075,121 @@ MODEL.forEach(s => { state[s.id] = s.wiederholbar ? [ {} ] : {}; });
    --------------------------------------------------------------- */
 
 const kl = { A:"k-a", B:"k-b", P:"k-p" };
+const FASSUNG = "0.12";
+
+/* Deutsche Zeichenketten. Gegenstück zu EN, gleiche Schlüssel. */
+const DE = {
+ui:{
+  eyebrow:"Vordruckgenerator · Fassung " + FASSUNG + " · Prototyp",
+  h1:"Nachlassplaner",
+  intro:"Dieses Werkzeug erzeugt <strong>leere Formularbögen</strong>. Öffentliche Angaben wie Fingerprints oder Descriptor druckt es mit. Alles, was Rückschlüsse auf Standorte oder Zugänge zulässt, wird als Linie gedruckt und von Hand ausgefüllt — offline, mit dokumentenechtem Stift.",
+  volatile:"<strong>Nichts wird automatisch gespeichert.</strong> Kein Server, kein Browser-Speicher. Ein Neuladen der Seite löscht alle Eingaben. Auf Wunsch lässt sich der Stand unten als passwortverschlüsselte Datei exportieren — sie enthält nur die getippten öffentlichen Angaben, niemals das Handschriftliche.",
+  recht:"", rechtBadge:"Deutsches Recht",
+  print:"Bögen drucken", save:"Verschlüsselt speichern", load:"Datei laden", sheets:"Blätter",
+  bspSchalter:"Beispiele im Feld anzeigen", bug:"Bug melden",
+  waehlen:"— bitte wählen —", hilfeTitel:"Was gehört hier hinein?",
+  handKopf:"Von Hand · %n Zeilen",
+  handText:"Wird als leere Linie gedruckt. Der Generator sieht diese Angabe nie.",
+  add:"%s hinzufügen", remove:"Entfernen",
+  sdTitel:"Plan verschlüsselt speichern",
+  sdText:"Erzeugt eine Datei mit den getippten Angaben — AES-256-verschlüsselt mit deinem Passwort. Handschriftliche Felder sind nie enthalten. Datei offline aufbewahren, nicht in die Cloud. Das Passwort ist der einzige Schutz dieser Datei: mindestens 20 Zeichen, am besten fünf oder sechs zufällig gewürfelte Wörter.",
+  pw:"Passwort", pw2:"Passwort wiederholen", speichern:"Speichern", abbrechen:"Abbrechen",
+  ldTitel:"Gespeicherten Plan laden",
+  ldText:"Lädt eine zuvor exportierte Datei und ersetzt die aktuellen Eingaben.",
+  datei:"Datei", laden:"Laden",
+  bugTitel:"Bug melden",
+  bugText:"Öffnet eine E-Mail an kontakt@alien-investor.org (der Text wird zusätzlich in die Zwischenablage kopiert und bleibt dort, bis etwas anderes kopiert wird). Wichtig: Keine Inhalte aus deinem Plan mitschicken — nur beschreiben, was schiefgeht.",
+  bugFrage:"Was ist passiert?", bugOk:"E-Mail öffnen",
+  unvollstaendig:"Der Plan ist unvollständig:", trotzdem:"Trotzdem drucken?",
+  pwKurz:"Mindestens 20 Zeichen — am besten fünf oder sechs zufällige Wörter.", pwUngleich:"Passwörter stimmen nicht überein.",
+  keineDatei:"Keine Datei gewählt.", ladefehler:"Laden fehlgeschlagen.", speicherfehler:"Speichern fehlgeschlagen."
+},
+pruef:{
+  name:"Kopf: Name des Erstellers fehlt.",
+  fassung:"Kopf: Fassungsnummer fehlt — ohne sie weiß niemand, welche Kopie gilt.",
+  desc:"Wallet %n: „Steht auf diesem Bogen\" gewählt, aber das Descriptor-Feld ist leer — entweder einsetzen oder auf „Liegt als Ausdruck bei jedem Backup\" umstellen.",
+  fp:"Wallet %n: Master-Fingerprint fehlt.",
+  typ:"Wallet %n: Der Typ steht noch auf „bitte wählen\".",
+  path:"Wallet %n: Ableitungspfad fehlt — mit den richtigen Schlüsseln, aber falschem Pfad baut der Erbe eine leere Wallet nach.",
+  adr:"Wallet %n: Adresstyp fehlt — er entscheidet mit darüber, ob die wiederhergestellte Wallet den Bestand zeigt.",
+  pwm2fa:"Weitere Vermögenswerte: Passwortmanager eingetragen, aber die Frage nach dem zweiten Faktor ist unbeantwortet — mit Masterpasswort allein kommt niemand hinein, wenn ein Code aus einer App verlangt wird.",
+  app:"Weitere Vermögenswerte: Authenticator-App angegeben, aber nicht welche und auf welchem Gerät."
+},
+klassen:{
+  A:"Klasse A · Existenzhinweis · darf offen liegen",
+  B:"Klasse B · Zugangsanleitung · vertraulich, getrennt verwahren",
+  P:"Protokoll"
+},
+klassenKurz:{A:"Existenzhinweis", B:"Zugangsanleitung", P:"Protokoll"},
+kopfzeile:{name:"Name ______", fassung:"Fassung", ersetzt:"Ersetzt", blatt:"Blatt", von:"von", klasse:"Klasse"},
+druck:{
+  hinweisTitel:"Hinweis",
+  hinweisText:"Zum Nachlass gehört digitales Vermögen, das ohne die zugehörige Zugangsanleitung dauerhaft verloren geht. Dieses Blatt nennt weder Beträge noch Standorte.",
+  aTitel:"Existenzhinweis",
+  aBlock:"Testament und Vertrauensmann",
+  regelnTitel:"Verhaltensregeln für Erben",
+  warnTitel:"Bevor du handelst",
+  warnKopf:"Handeln kann hier teurer sein als Abwarten",
+  reihenfolgeTitel:"Reihenfolge",
+  reihenfolgeText:"Erst lesen, dann Fristen prüfen, dann Fachleute einschalten, erst danach etwas bewegen. Die einzige Ausnahme steht auf dem Blatt Zeitkritisches: Lightning-Kanäle und laufende Verträge mit Frist.",
+  angaben:"Angaben",
+  protokollTitel:"Protokoll und Trockenübung",
+  fassungBlock:"Fassung",
+  vernichtungTitel:"Vernichtungsvermerk",
+  fassungText:"Mit Ausgabe dieser Fassung sind sämtliche Ausdrucke älterer Fassungen zu vernichten. Bestätigt am ______________ durch ______________________",
+  naechste:"Nächste Trockenübung geplant für",
+  eiligTitel:"Was hier nicht eilt",
+  eiligText:"Die Wallets auf den vorigen Blättern sind nicht zeitkritisch. Ein eigener Rechner, der nur die Blockchain mitführt und Bestände anzeigt, hält selbst kein Vermögen und kann nichts bewegen — er ist die Sicht, nicht der Schlüssel. Fällt er aus, verbindet sich der Erbe mit einem anderen Programm oder einem öffentlichen Dienst und sieht denselben Bestand. Anders liegt es, wenn auf demselben Gerät ein Lightning-Knoten läuft: Der hält eigenes Guthaben und gehört auf dieses Blatt, nicht zu den vorigen. Nehmt euch für diesen Teil die Zeit, die ihr braucht.",
+  eiligKeinLightning:"<b>Lightning-Kanäle gibt es hier nicht. Was auf diesem Blatt bleibt, sind die laufenden Verträge weiter oben. Steht dort „Keine\", ist hier nichts zu tun.</b>",
+  descTitel:"Wallet-Konfiguration — zuerst suchen",
+  descText:"Zu dieser Wallet gehört ein Ausdruck mit einem großen Quadratmuster und einer langen Textzeile darunter. Wo er liegt, steht auf diesem Bogen in der Zeile „Wo liegt der Ausdruck der Wallet-Konfiguration\", sonst bei den Backups, deren Orte das Blatt „Physische Standorte\" nennt. Ohne ihn ist die Wallet in aller Regel nicht wiederherzustellen: Zum Ausgeben genügen zwei der drei Sicherungen, zum Nachbauen der Wallet fehlt dann aber die dritte Angabe, und die lässt sich aus den vorhandenen nicht berechnen. Mit dem Ausdruck allein kann niemand etwas ausgeben, er zeigt nur Bestand und Zahlungsgeschichte. Suche ihn, bevor du irgendetwas anderes versuchst, und gib ihn niemandem, der nicht ohnehin Zugang zu den Backups hat.",
+  qrTitel:"Descriptor als QR",
+  qrText:"mit einer Wallet-App scannen, um ein Watch-only-Wallet einzurichten (etwa Sparrow, BlueWallet, Nunchuk). Damit sieht man Bestände, senden kann man nicht. Den Import einmal zu Lebzeiten testen. Nimmt eine App den Code nicht an, hilft die Textzeile darunter: Sie enthält dieselbe Information.",
+  qrLang:"Descriptor zu lang für einen QR-Code — Import per Abtippen oder Wallet-Datei.",
+  rechtHinweis:""
+}
+};
+
+/* Sprache. Gespeichert wird immer der deutsche Auswahlwert. */
+let LANG = "de";
+function istEN(){ return LANG === "en"; }
+function T(gruppe, key){
+  const q = istEN() ? EN : DE;
+  const g = q[gruppe] || {};
+  if(g[key] !== undefined && g[key] !== "") return g[key];
+  return (DE[gruppe] || {})[key];
+}
+function enSek(sid){ return (EN.m && EN.m[sid]) || null; }
+function enFeld(sid, k){ const e = enSek(sid); return (e && e.f && e.f[k]) || null; }
+function tS(sek, prop){
+  if(istEN()){ const e = enSek(sek.id); if(e && e[prop]) return e[prop]; }
+  return sek[prop];
+}
+function tF(sid, f, prop){
+  if(istEN()){ const e = enFeld(sid, f.k); if(e && e[prop]) return e[prop]; }
+  return f[prop];
+}
+/* Gespeicherter deutscher Wert -> Anzeige in der aktiven Sprache. */
+function tOpt(sid, f, v){
+  if(!istEN() || !v) return v;
+  const e = enFeld(sid, f.k);
+  if(!e || !e.opt || !f.opt) return v;
+  const i = f.opt.indexOf(v);
+  return i >= 0 ? e.opt[i] : v;
+}
+/* Trägt dieser Abschnitt oder dieses Feld deutschen Rechtstext? */
+function istRechtSektion(sid){
+  if(!istEN()) return false;
+  const e = enSek(sid);
+  return !!(e && e.rechtDE);
+}
+function istRechtFeld(sid, f){
+  if(!istEN()) return false;
+  const g = enFeld(sid, f.k);
+  return !!(g && g.rechtDE);
+}
+function rechtBadge(){ return `<span class="recht-badge">${T("ui","rechtBadge")}</span>`; }
+function regelnJetzt(){ return istEN() ? EN.regeln : REGELN; }
 
 /* Wert eines Feldes inklusive Vorauswahl (f.vor) — gilt für Formular und Druck. */
 function wert(f, obj){ return ((obj||{})[f.k] || f.vor || ""); }
@@ -2809,40 +3211,46 @@ function sichtbar(f, felder, obj){
 let zeigeBeispiele = true;
 let hilfeNr = 0;
 
-function hilfeHTML(f){
-  if(!f.h) return {knopf:"", block:""};
+function hilfeHTML(sid, f){
+  const txt = tF(sid, f, "h");
+  if(!txt) return {knopf:"", block:""};
   const id = "hilfe-" + (++hilfeNr);
   return {
-    knopf:`<button type="button" class="hilfe-knopf" data-hilfe="${id}" aria-expanded="false" title="Was gehört hier hinein?">?</button>`,
-    block:`<div class="hilfe-text" id="${id}">${f.h}</div>`
+    knopf:`<button type="button" class="hilfe-knopf" data-hilfe="${id}" aria-expanded="false" title="${T("ui","hilfeTitel")}">?</button>`,
+    block:`<div class="hilfe-text" id="${id}">${txt}</div>`
   };
 }
 
 function feldHTML(f, sid, idx){
   const val = (idx===null ? state[sid][f.k] : state[sid][idx][f.k]) || "";
-  const sub = f.s ? `<span class="sub">${f.s}</span>` : "";
+  const subTxt = tF(sid, f, "s");
+  const sub = subTxt ? `<span class="sub">${subTxt}</span>` : "";
   const path = `data-s="${sid}" data-k="${f.k}" data-i="${idx===null?"":idx}"`;
-  const hi = hilfeHTML(f);
-  const ph = (zeigeBeispiele && f.bsp) ? ` placeholder="${esc(f.bsp)}"` : "";
+  const hi = hilfeHTML(sid, f);
+  const bsp = tF(sid, f, "bsp");
+  const ph = (zeigeBeispiele && bsp) ? ` placeholder="${esc(bsp)}"` : "";
+  const marke = istRechtFeld(sid, f) ? rechtBadge() : "";
+  const kopf = `<div class="feldkopf"><label>${tF(sid,f,"l")}${sub}</label>${marke}${hi.knopf}</div>${hi.block}`;
 
   if(f.t === "hand"){
-    return `<div class="field"><label>${f.l}${hi.knopf}${sub}</label>${hi.block}
-      <div class="hand"><b>Von Hand · ${f.zeilen||2} Zeilen</b>
-      Wird als leere Linie gedruckt. Der Generator sieht diese Angabe nie.</div></div>`;
+    return `<div class="field">${kopf}
+      <div class="hand"><b>${T("ui","handKopf").replace("%n", f.zeilen||2)}</b>
+      ${T("ui","handText")}</div></div>`;
   }
   if(f.t === "area"){
-    return `<div class="field"><label>${f.l}${hi.knopf}${sub}</label>${hi.block}
+    return `<div class="field">${kopf}
       <textarea ${path}${ph}>${esc(val)}</textarea></div>`;
   }
   if(f.t === "select"){
     const v = val || f.vor || "";
-    const o = f.opt.map(x=>`<option${x===v?" selected":""}>${x}</option>`).join("");
-    const leer = f.vor ? "" : `<option value=""${v?"":" selected"}>— bitte wählen —</option>`;
+    /* value bleibt der deutsche Wert, sichtbar ist die Übersetzung */
+    const o = f.opt.map(x=>`<option value="${esc(x)}"${x===v?" selected":""}>${esc(tOpt(sid,f,x))}</option>`).join("");
+    const leer = f.vor ? "" : `<option value=""${v?"":" selected"}>${T("ui","waehlen")}</option>`;
     const rr = f.rerender ? ' data-rr="1"' : "";
-    return `<div class="field"><label>${f.l}${hi.knopf}${sub}</label>${hi.block}
+    return `<div class="field">${kopf}
       <select ${path}${rr}>${leer}${o}</select></div>`;
   }
-  return `<div class="field"><label>${f.l}${hi.knopf}${sub}</label>${hi.block}
+  return `<div class="field">${kopf}
     <input type="text" ${path}${ph} value="${esc(val)}"></div>`;
 }
 
@@ -2851,24 +3259,28 @@ function render(){
   document.getElementById("form").innerHTML = MODEL.map(s=>{
     let body;
     if(s.wiederholbar){
+      const gn = tS(s, "gruppenname");
       body = state[s.id].map((_,i)=>`
         <div class="group">
           <div class="group-head">
-            <span>${s.gruppenname} ${i+1}</span>
-            ${state[s.id].length>1?`<button class="rm" data-rm="${s.id}" data-i="${i}">Entfernen</button>`:""}
+            <span>${gn} ${i+1}</span>
+            ${state[s.id].length>1?`<button class="rm" data-rm="${s.id}" data-i="${i}">${T("ui","remove")}</button>`:""}
           </div>
           ${s.felder.filter(f=>sichtbar(f,s.felder,state[s.id][i])).map(f=>feldHTML(f,s.id,i)).join("")}
         </div>`).join("")
-        + `<button data-add="${s.id}">${s.gruppenname} hinzufügen</button>`;
+        + `<button data-add="${s.id}">${T("ui","add").replace("%s", gn)}</button>`;
     } else {
       body = s.felder.filter(f=>sichtbar(f,s.felder,state[s.id])).map(f=>feldHTML(f,s.id,null)).join("");
     }
+    const rechtS = istRechtSektion(s.id);
     return `<section class="section">
       <div class="section-head">
-        <span class="klasse ${kl[s.klasse]}">Klasse ${s.klasse} · ${s.klasseLabel}</span>
-        <h2>${s.titel}</h2>
+        <span class="klasse ${kl[s.klasse]}">${T("kopfzeile","klasse")} ${s.klasse} · ${T("klassenKurz", s.klasse)}</span>
+        ${rechtS ? rechtBadge() : ""}
+        <h2>${tS(s,"titel")}</h2>
       </div>
-      <p class="hint">${s.hinweis}</p>
+      <p class="hint">${tS(s,"hinweis")}</p>
+      ${rechtS ? `<p class="hint recht-hinweis">${T("druck","rechtHinweis")}</p>` : ""}
       ${body}
     </section>`;
   }).join("");
@@ -2889,17 +3301,81 @@ document.addEventListener("input", e=>{
 document.addEventListener("change", e=>{
   if(e.target.tagName === "SELECT") e.target.dispatchEvent(new Event("input",{bubbles:true}));
 });
+/* Feldhilfe: bewusst ohne dataset, ohne Rückgabewert von classList.toggle
+   und ohne closest — alte Android-Browser stolpern über jeden dieser Wege.
+   Ein Tipp wird zusätzlich über touchend bedient, weil manche alte WebViews
+   an kleinen Knöpfen kein click auslösen. Die Sperre verhindert, dass beide
+   Wege denselben Tipp doppelt zählen. */
+function hilfeKnopfVon(el){
+  while(el && el.nodeType === 1){
+    if(el.getAttribute && el.getAttribute("data-hilfe")) return el;
+    el = el.parentNode;
+  }
+  return null;
+}
+let hilfeSperre = 0;
+function hilfeSchalten(knopf){
+  const jetzt = +new Date();
+  if(jetzt - hilfeSperre < 400) return;
+  hilfeSperre = jetzt;
+  const box = document.getElementById(knopf.getAttribute("data-hilfe"));
+  if(!box) return;
+  const auf = box.className.indexOf("auf") < 0;
+  box.className = auf ? "hilfe-text auf" : "hilfe-text";
+  knopf.setAttribute("aria-expanded", auf ? "true" : "false");
+}
+let tippX = 0, tippY = 0;
+document.addEventListener("touchstart", e=>{
+  const t = e.touches && e.touches[0];
+  if(t){ tippX = t.clientX; tippY = t.clientY; }
+});
+document.addEventListener("touchend", e=>{
+  const k = hilfeKnopfVon(e.target);
+  if(!k) return;
+  const t = e.changedTouches && e.changedTouches[0];
+  if(t && (Math.abs(t.clientX - tippX) > 12 || Math.abs(t.clientY - tippY) > 12)) return;
+  e.preventDefault();
+  hilfeSchalten(k);
+});
+/* Setzt alle festen Beschriftungen. Wird beim Start und bei jedem
+   Sprachwechsel aufgerufen — nichts wird nachgeladen. */
+function setzeOberflaeche(){
+  document.documentElement.lang = LANG;
+  const txt = (id,key)=>{ const el=document.getElementById(id); if(el) el.textContent = T("ui",key); };
+  const html = (id,key)=>{ const el=document.getElementById(id); if(el) el.innerHTML = T("ui",key); };
+  txt("ui-eyebrow","eyebrow"); txt("ui-h1","h1");
+  html("ui-intro","intro"); html("ui-volatile","volatile");
+  const r = document.getElementById("ui-recht");
+  if(r){ r.innerHTML = T("ui","recht"); r.hidden = !istEN(); }
+  txt("print","print"); txt("save-btn","save"); txt("load-btn","load");
+  txt("ui-bsp","bspSchalter"); txt("ui-bug","bug");
+  txt("ui-sd-titel","sdTitel"); txt("ui-sd-text","sdText");
+  txt("ui-pw1","pw"); txt("ui-pw2","pw2"); txt("sd-ok","speichern"); txt("sd-abbr","abbrechen");
+  txt("ui-ld-titel","ldTitel"); txt("ui-ld-text","ldText");
+  txt("ui-datei","datei"); txt("ui-ldpw","pw"); txt("ld-ok","laden"); txt("ld-abbr","abbrechen");
+  txt("ui-bug-titel","bugTitel"); txt("ui-bug-text","bugText"); txt("ui-bug-frage","bugFrage");
+  txt("bug-ok","bugOk"); txt("bug-abbr","abbrechen");
+  const kn = document.querySelectorAll(".lang-toggle button");
+  for(let i=0;i<kn.length;i++){
+    const an = kn[i].getAttribute("data-lang") === LANG;
+    kn[i].className = an ? "lang-cur" : "";
+    kn[i].setAttribute("aria-pressed", an ? "true" : "false");
+  }
+}
+
 document.addEventListener("click", e=>{
-  const hid = e.target.dataset.hilfe;
-  if(hid){
-    const box = document.getElementById(hid);
-    const auf = box.classList.toggle("auf");
-    e.target.setAttribute("aria-expanded", auf ? "true" : "false");
+  const k = hilfeKnopfVon(e.target);
+  if(k){ hilfeSchalten(k); return; }
+  const spr = e.target.getAttribute && e.target.getAttribute("data-lang");
+  if(spr){
+    if(spr !== LANG){ LANG = spr; setzeOberflaeche(); render(); }
     return;
   }
-  const a = e.target.dataset.add, r = e.target.dataset.rm;
+  const t = e.target;
+  const a = t.getAttribute && t.getAttribute("data-add");
+  const r = t.getAttribute && t.getAttribute("data-rm");
   if(a){ state[a].push({}); render(); }
-  if(r){ state[r].splice(+e.target.dataset.i,1); render(); }
+  if(r){ state[r].splice(+t.getAttribute("data-i"),1); render(); }
 });
 
 /* ---------------------------------------------------------------
@@ -2908,7 +3384,7 @@ document.addEventListener("click", e=>{
 
 const REGELN = [
   "In den ersten Wochen nichts überstürzen. Bitcoin läuft nicht weg, Fehler sind endgültig.",
-  "Niemals Seedwörter in ein Gerät eintippen, das mit dem Internet verbunden ist.",
+  "Sicherungswörter gehören ausschließlich in das Hardware-Gerät selbst. Niemals in einen Computer, ein Telefon, eine Webseite, einen Passwortmanager oder einen KI-Chat.",
   "Niemand kann verlorene Seeds oder gestohlene Coins zurückholen. Jedes Angebot dieser Art ist Betrug — erst recht gegen Vorkasse.",
   "Niemand darf nach Seedwörtern fragen. Auch kein Support, kein Anwalt, kein Finanzamt.",
   "Erst den Kontostand ansehen, dann bewegen. Nicht umgekehrt."
@@ -2927,15 +3403,13 @@ const SACHWERT_WARNUNGEN = [
 
 function bogenKopf(k, titel, nr, ges){
   const b = {A:"band-a",B:"band-b",P:"band-p"}[k];
-  const label = {A:"Klasse A · Existenzhinweis · darf offen liegen",
-                 B:"Klasse B · Zugangsanleitung · vertraulich, getrennt verwahren",
-                 P:"Protokoll"}[k];
+  const label = T("klassen", k);
   return `<div class="band ${b}"><em>${label}</em></div>
-  <div class="sheet-head"><h3>${titel}</h3><div class="meta">
-    <span>${state.kopf.name||"Name ______"}</span>
-    <span>Fassung ${state.kopf.fassung||"______"}</span>
-    <span>Ersetzt ${state.kopf.ersetzt||"______"}</span>
-    <span>Blatt ${nr} von ${ges}</span>
+  <div class="sheet-head"><h3>${esc(titel)}</h3><div class="meta">
+    <span>${esc(state.kopf.name||T("kopfzeile","name"))}</span>
+    <span>${T("kopfzeile","fassung")} ${esc(state.kopf.fassung||"______")}</span>
+    <span>${T("kopfzeile","ersetzt")} ${esc(state.kopf.ersetzt||"______")}</span>
+    <span>${T("kopfzeile","blatt")} ${nr} ${T("kopfzeile","von")} ${ges}</span>
   </div></div>`;
 }
 
@@ -2943,13 +3417,14 @@ function zeilen(l, s, n){
   return `<div class="rule"><p><strong>${l}</strong>${s?" — "+s:""}</p>${"<i></i>".repeat(n||2)}</div>`;
 }
 
-function kvBlock(titel, felder, obj){
+function kvBlock(titel, felder, obj, sid){
   const sicht = felder.filter(f=>sichtbar(f,felder,obj));
   const rows = sicht.filter(f=>f.t!=="hand").map(f=>{
     const v = wert(f,obj);
-    return `<div class="kv"><dt>${f.l}</dt><dd class="${v?"":"empty"}">${v?esc(v):"—"}</dd></div>`;
+    const zeig = tOpt(sid, f, v);
+    return `<div class="kv"><dt>${tF(sid,f,"l")}</dt><dd class="${v?"":"empty"}">${v?esc(zeig):"—"}</dd></div>`;
   }).join("");
-  const hands = sicht.filter(f=>f.t==="hand").map(f=>zeilen(f.l,f.s,f.zeilen)).join("");
+  const hands = sicht.filter(f=>f.t==="hand").map(f=>zeilen(tF(sid,f,"l"), tF(sid,f,"s"), f.zeilen)).join("");
   return `<div class="blk"><h4>${titel}</h4><dl>${rows}</dl>${hands}</div>`;
 }
 
@@ -2958,66 +3433,62 @@ function baue(){
 
   // Blatt A
   const a = MODEL.find(m=>m.id==="a");
-  bogen.push({k:"A", titel:"Existenzhinweis", inhalt:
-    `<div class="blk"><h4>Hinweis</h4>
-      <p style="font-size:9.5pt;margin:0">Zum Nachlass gehört digitales Vermögen, das ohne die zugehörige
-      Zugangsanleitung dauerhaft verloren geht. Dieses Blatt nennt weder Beträge noch Standorte.</p></div>`
-    + kvBlock("Testament und Vertrauensmann", a.felder, state.a)
-    + `<div class="note"><strong>Verhaltensregeln für Erben</strong><ul>${REGELN.map(r=>`<li>${r}</li>`).join("")}</ul></div>`
+  bogen.push({k:"A", titel:T("druck","aTitel"), inhalt:
+    `<div class="blk"><h4>${T("druck","hinweisTitel")}</h4>
+      <p style="font-size:9.5pt;margin:0">${T("druck","hinweisText")}</p></div>`
+    + kvBlock(T("druck","aBlock"), a.felder, state.a, "a")
+    + `<div class="note"><strong>${T("druck","regelnTitel")}</strong><ul>${regelnJetzt().map(r=>`<li>${r}</li>`).join("")}</ul></div>`
   });
 
   // Warnblatt vor allen Zugangsangaben
-  bogen.push({k:"B", titel:"Bevor du handelst", inhalt:
-    `<div class="note"><strong>Handeln kann hier teurer sein als Abwarten</strong><ul>${
+  bogen.push({k:"B", titel:T("druck","warnTitel"), inhalt:
+    (istEN() ? `<div class="blk"><p style="font-size:9.5pt;margin:0"><b>${T("druck","rechtHinweis")}</b></p></div>` : "")
+    + `<div class="note"><strong>${T("druck","warnKopf")}</strong><ul>${
       SACHWERT_WARNUNGEN.map(r=>`<li>${r}</li>`).join("")}</ul></div>
-     <div class="blk"><h4>Reihenfolge</h4>
-     <p style="font-size:9.5pt;margin:0">Erst lesen, dann Fristen prüfen, dann Fachleute einschalten,
-     erst danach etwas bewegen. Die einzige Ausnahme ist der Node auf dem Blatt Zeitkritisches.</p></div>`});
+     <div class="blk"><h4>${T("druck","reihenfolgeTitel")}</h4>
+     <p style="font-size:9.5pt;margin:0">${T("druck","reihenfolgeText")}</p></div>`});
 
   // Blätter B aus dem Modell
   MODEL.filter(m=>m.klasse==="B").forEach(m=>{
-    const titel = m.titel.replace("Blatt B — ","");
+    const titel = tS(m,"titel").replace("Blatt B — ","").replace("Sheet B — ","");
+    const gn = tS(m,"gruppenname");
+    const recht = istRechtSektion(m.id)
+      ? `<div class="blk"><p style="font-size:9pt;margin:0"><b>${T("druck","rechtHinweis")}</b></p></div>` : "";
     if(!m.wiederholbar){
       let extra = "";
       if(m.id==="zeit"){
         const lg = wert(m.felder.find(f=>f.k==="z_lightning"), state.zeit);
-        extra = `<div class="note"><strong>Was hier nicht eilt</strong>
-          <p style="margin:0">Die Wallets auf den vorigen Blättern sind nicht zeitkritisch. Ein eigener
-          Rechner (Node) zeigt nur an, was auf der Blockchain steht — er hält kein Vermögen und kann
-          nichts bewegen. Ist er ausgefallen oder abgeschaltet, ändert das am Bestand nichts: Die Wallet
-          lässt sich jederzeit über ein anderes Programm oder einen öffentlichen Dienst wieder ansehen.
-          Nehmt euch für diesen Teil die Zeit, die ihr braucht.` +
-          (lg.indexOf("Ja") === 0 ? "" : ` <b>Lightning-Kanäle gibt es hier nicht — auf diesem Blatt ist
-          nichts zu tun.</b>`) + `</p></div>`;
+        extra = `<div class="note"><strong>${T("druck","eiligTitel")}</strong>
+          <p style="margin:0">${T("druck","eiligText")}` +
+          (lg.indexOf("Ja") === 0 ? "" : " " + T("druck","eiligKeinLightning")) + `</p></div>`;
       }
-      bogen.push({k:"B", titel, inhalt:kvBlock("Angaben", m.felder, state[m.id]) + extra});
+      bogen.push({k:"B", titel, inhalt:recht + kvBlock(T("druck","angaben"), m.felder, state[m.id], m.id) + extra});
       return;
     }
     if(m.proBlatt){
       state[m.id].forEach((g,i)=> bogen.push({
         k:"B", titel:`${titel} ${i+1}`,
-        inhalt:kvBlock(`${m.gruppenname} ${i+1}`, m.felder, g)
+        inhalt:recht + kvBlock(`${gn} ${i+1}`, m.felder, g, m.id)
           + (m.id==="wallets" && istMultisig(g) ? (descAufBogen(g) ? qrBlock(g.w_desc) : descAusdruckBlock()) : "")}));
     } else {
-      bogen.push({k:"B", titel, inhalt:
-        state[m.id].map((g,i)=>kvBlock(`${m.gruppenname} ${i+1}`, m.felder, g)).join("")});
+      bogen.push({k:"B", titel, inhalt: recht +
+        state[m.id].map((g,i)=>kvBlock(`${gn} ${i+1}`, m.felder, g, m.id)).join("")});
     }
   });
 
   // Protokoll
   const p = MODEL.find(x=>x.id==="kopf");
-  bogen.push({k:"P", titel:"Protokoll und Trockenübung", inhalt:
-    kvBlock("Fassung", p.felder, state.kopf)
-    + `<div class="note"><strong>Vernichtungsvermerk</strong>
-      <p style="margin:0">Mit Ausgabe dieser Fassung sind sämtliche Ausdrucke älterer Fassungen zu vernichten.
-      Bestätigt am ______________ durch ______________________</p></div>`
-    + zeilen("Nächste Trockenübung geplant für", "", 1)});
+  bogen.push({k:"P", titel:T("druck","protokollTitel"), inhalt:
+    kvBlock(T("druck","fassungBlock"), p.felder, state.kopf, "kopf")
+    + `<div class="note"><strong>${T("druck","vernichtungTitel")}</strong>
+      <p style="margin:0">${T("druck","fassungText")}</p></div>`
+    + zeilen(T("druck","naechste"), "", 1)});
 
   return bogen;
 }
 
 function zaehle(){
-  document.getElementById("count").textContent = baue().length + " Blätter";
+  document.getElementById("count").textContent = baue().length + " " + T("ui","sheets");
 }
 
 /* Steht der Descriptor auf dem Bogen selbst? Sonst gilt die Vorauswahl: Ausdruck beim Backup. */
@@ -3031,13 +3502,8 @@ function descAufBogen(g){
 
 /* Ersetzt die Leerstelle durch einen Wegweiser in Erben-Sprache. */
 function descAusdruckBlock(){
-  return `<div class="note"><strong>Wallet-Konfiguration — zuerst suchen</strong>
-    <p style="margin:0">Zu dieser Wallet gehört ein Ausdruck mit einem großen Quadratmuster
-    und einer langen Textzeile darunter. Er liegt bei jedem der Backups, deren Orte auf dem
-    Blatt „Physische Standorte" stehen. Ohne ihn lässt sich die Wallet nicht wiederherstellen,
-    auch nicht mit allen Sicherungswörtern. Mit ihm allein kann niemand etwas ausgeben —
-    er zeigt nur den Kontostand. Suche ihn, bevor du irgendetwas anderes versuchst,
-    und gib ihn niemandem, der nicht ohnehin Zugang zu den Backups hat.</p></div>`;
+  return `<div class="note"><strong>${T("druck","descTitel")}</strong>
+    <p style="margin:0">${T("druck","descText")}</p></div>`;
 }
 
 function qrBlock(desc){
@@ -3049,26 +3515,30 @@ function qrBlock(desc){
     qr.make();
     const svg = qr.createSvgTag({cellSize:2, margin:0});
     return `<div class="qrblk"><div class="qr">${svg}</div>
-      <p><strong>Descriptor als QR</strong> — mit einer Wallet-App scannen, um ein
-      Watch-only-Wallet einzurichten (etwa Sparrow, BlueWallet, Nunchuk). Damit sieht
-      man Bestände, senden kann man nicht. Den Import einmal zu Lebzeiten testen.</p></div>`;
+      <p><strong>${T("druck","qrTitel")}</strong> — ${T("druck","qrText")}</p></div>`;
   }catch(e){
-    return `<div class="blk"><h4>Descriptor als QR</h4>
-      <p style="font-size:8.5pt;margin:0">Descriptor zu lang für einen QR-Code — Import per Abtippen oder Wallet-Datei.</p></div>`;
+    return `<div class="blk"><h4>${T("druck","qrTitel")}</h4>
+      <p style="font-size:8.5pt;margin:0">${T("druck","qrLang")}</p></div>`;
   }
 }
 
 function pruefe(){
   const offen = [];
-  if(!(state.kopf.name||"").trim()) offen.push("Kopf: Name des Erstellers fehlt.");
-  if(!(state.kopf.fassung||"").trim()) offen.push("Kopf: Fassungsnummer fehlt — ohne sie weiß niemand, welche Kopie gilt.");
+  const P = (key, nr) => T("pruef", key).replace("%n", nr);
+  if(!(state.kopf.name||"").trim()) offen.push(T("pruef","name"));
+  if(!(state.kopf.fassung||"").trim()) offen.push(T("pruef","fassung"));
   state.wallets.forEach((g,i)=>{
     const befuellt = ((g.w_name||"")+(g.w_hw||"")+(g.w_fp||"")+(g.w_desc||"")+(g.w_path||"")).trim();
-    if(descAufBogen(g) && !(g.w_desc||"").trim())
-      offen.push(`Wallet ${i+1}: „Steht auf diesem Bogen" gewählt, aber das Descriptor-Feld ist leer — entweder einsetzen oder auf „Liegt als Ausdruck bei jedem Backup" umstellen.`);
-    if(befuellt && !(g.w_fp||"").trim())
-      offen.push(`Wallet ${i+1}: Master-Fingerprint fehlt.`);
+    if(descAufBogen(g) && !(g.w_desc||"").trim()) offen.push(P("desc", i+1));
+    if(befuellt && !(g.w_fp||"").trim())   offen.push(P("fp", i+1));
+    if(befuellt && !(g.w_typ||"").trim())  offen.push(P("typ", i+1));
+    if(befuellt && !(g.w_path||"").trim()) offen.push(P("path", i+1));
+    if(befuellt && !(g.w_adr||"").trim())  offen.push(P("adr", i+1));
   });
+  if((state.weiter.v_pwm||"").trim() && !(state.weiter.v_2fa||"").trim())
+    offen.push(T("pruef","pwm2fa"));
+  if(((state.weiter.v_2fa||"").indexOf("App") >= 0) && !(state.weiter.v_2fa_app||"").trim())
+    offen.push(T("pruef","app"));
   return offen;
 }
 
@@ -3079,16 +3549,20 @@ document.getElementById("bsp-an").addEventListener("change", e=>{
 
 document.getElementById("print").addEventListener("click", ()=>{
   const offen = pruefe();
-  if(offen.length && !window.confirm("Der Plan ist unvollständig:\n\n– " + offen.join("\n– ") + "\n\nTrotzdem drucken?")) return;
+  if(offen.length && !window.confirm(T("ui","unvollstaendig") + "\n\n– " + offen.join("\n– ") + "\n\n" + T("ui","trotzdem"))) return;
   const b = baue();
   document.getElementById("sheets").innerHTML = b.map((s,i)=>
     `<div class="sheet">${bogenKopf(s.k,s.titel,i+1,b.length)}${s.inhalt}
-      <div class="foot"><span>Klasse ${s.k}</span><span>${state.kopf.name||""}</span>
-      <span>Fassung ${state.kopf.fassung||"______"}</span><span>Blatt ${i+1}/${b.length}</span></div>
+      <div class="foot"><span>${T("kopfzeile","klasse")} ${s.k}</span><span>${esc(state.kopf.name||"")}</span>
+      <span>${T("kopfzeile","fassung")} ${esc(state.kopf.fassung||"______")}</span><span>${T("kopfzeile","blatt")} ${i+1}/${b.length}</span></div>
     </div>`).join("");
   window.print();
 });
+/* Der gefüllte Satz Bögen ist der kritischste Aufbau im Werkzeug —
+   nach dem Druck bleibt er nicht im Dokument stehen. */
+window.addEventListener("afterprint", ()=>{ document.getElementById("sheets").innerHTML = ""; });
 
+setzeOberflaeche();
 render();
 
 /* ---------------------------------------------------------------
@@ -3097,39 +3571,70 @@ render();
    existieren im Tool nicht als Daten.
    --------------------------------------------------------------- */
 
-const KDF_ITER = 600000;
+const KDF_ITER = 1000000;      /* Arbeitsfaktor für neue Dateien */
+const KDF_ITER_MIN = 600000;   /* darunter nimmt der Import nichts an */
+const PW_MIN = 20;             /* Zeichen; die Datei ist eine Langzeitablage */
 function b64(u8){ let t=""; u8.forEach(b=> t+=String.fromCharCode(b)); return btoa(t); }
 function unb64(t){ return Uint8Array.from(atob(t), c=>c.charCodeAt(0)); }
+/* Wirft bei allem, was nicht sauber base64 ist oder die falsche Länge hat. */
+function unb64Fest(t, laenge){
+  if(typeof t !== "string" || !/^[A-Za-z0-9+/]+={0,2}$/.test(t)) throw new Error("format");
+  let roh;
+  try{ roh = unb64(t); }catch(e){ throw new Error("format"); }
+  if(laenge && roh.length !== laenge) throw new Error("format");
+  return roh;
+}
 
-async function schluessel(pw, salt){
+async function schluessel(pw, salt, iter){
   const basis = await crypto.subtle.importKey("raw", new TextEncoder().encode(pw), "PBKDF2", false, ["deriveKey"]);
-  return crypto.subtle.deriveKey({name:"PBKDF2", salt, iterations:KDF_ITER, hash:"SHA-256"}, basis,
+  return crypto.subtle.deriveKey({name:"PBKDF2", salt, iterations:iter || KDF_ITER, hash:"SHA-256"}, basis,
     {name:"AES-GCM", length:256}, false, ["encrypt","decrypt"]);
+}
+
+/* Der Umschlagkopf geht als additionalData in die Authentifizierung ein:
+   Wer iter oder kdf in der Datei verändert, bekommt keinen Klartext mehr. */
+function kopfDaten(kdf, iter){
+  return new TextEncoder().encode(JSON.stringify({app:"nachlassplaner", v:1, kdf:kdf, iter:iter}));
 }
 
 async function exportiere(pw){
   const salt = crypto.getRandomValues(new Uint8Array(16));
   const iv = crypto.getRandomValues(new Uint8Array(12));
-  const key = await schluessel(pw, salt);
+  const key = await schluessel(pw, salt, KDF_ITER);
   const klar = new TextEncoder().encode(JSON.stringify(state));
-  const ct = new Uint8Array(await crypto.subtle.encrypt({name:"AES-GCM", iv}, key, klar));
+  const aad = kopfDaten("PBKDF2-SHA256", KDF_ITER);
+  const ct = new Uint8Array(await crypto.subtle.encrypt({name:"AES-GCM", iv, additionalData:aad}, key, klar));
   const datei = {app:"nachlassplaner", v:1, kdf:"PBKDF2-SHA256", iter:KDF_ITER, salt:b64(salt), iv:b64(iv), daten:b64(ct)};
   const blob = new Blob([JSON.stringify(datei)], {type:"application/json"});
   const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
+  const url = URL.createObjectURL(blob);
+  a.href = url;
   a.download = "nachlassplan-" + (state.kopf.fassung||"entwurf").replace(/[^\w.-]+/g,"_") + ".verschluesselt.json";
   a.click();
-  URL.revokeObjectURL(a.href);
+  /* Erst spät freigeben: manche Browser starten den Download verzögert. */
+  setTimeout(()=> URL.revokeObjectURL(url), 30000);
 }
 
 async function importiere(datei, pw){
   let env;
   try{ env = JSON.parse(await datei.text()); }catch(e){ throw new Error("Datei ist kein gültiges Export-Format."); }
   if(!env || env.app !== "nachlassplaner" || env.v !== 1) throw new Error("Datei ist kein gültiges Export-Format.");
-  const key = await schluessel(pw, unb64(env.salt));
+  /* Umschlag prüfen, bevor irgendetwas gerechnet wird. */
+  const iter = Number(env.iter);
+  if(env.kdf !== "PBKDF2-SHA256" || !Number.isFinite(iter) || iter < KDF_ITER_MIN || iter > 20000000)
+    throw new Error("Datei ist kein gültiges Export-Format.");
+  let salt, iv, ct;
+  try{ salt = unb64Fest(env.salt, 16); iv = unb64Fest(env.iv, 12); ct = unb64Fest(env.daten, 0); }
+  catch(e){ throw new Error("Datei ist kein gültiges Export-Format."); }
+  const key = await schluessel(pw, salt, iter);
+  const aad = kopfDaten(env.kdf, iter);
   let klar;
-  try{ klar = await crypto.subtle.decrypt({name:"AES-GCM", iv:unb64(env.iv)}, key, unb64(env.daten)); }
-  catch(e){ throw new Error("Entschlüsselung fehlgeschlagen — falsches Passwort oder beschädigte Datei."); }
+  try{ klar = await crypto.subtle.decrypt({name:"AES-GCM", iv, additionalData:aad}, key, ct); }
+  catch(e){
+    /* Dateien aus Fassungen vor 0.12 tragen den Kopf nicht in der Signatur. */
+    try{ klar = await crypto.subtle.decrypt({name:"AES-GCM", iv}, key, ct); }
+    catch(e2){ throw new Error("Entschlüsselung fehlgeschlagen — falsches Passwort oder beschädigte Datei."); }
+  }
   const roh = JSON.parse(new TextDecoder().decode(klar));
   MODEL.forEach(m=>{
     const tippbar = m.felder.filter(f=>f.t!=="hand").map(f=>f.k);
@@ -3150,8 +3655,7 @@ document.getElementById("bug-link").addEventListener("click", e=>{ e.preventDefa
 document.getElementById("bug-abbr").addEventListener("click", ()=> bugDlg.close());
 document.getElementById("bug-ok").addEventListener("click", ()=>{
   const txt = document.getElementById("bug-desc").value.trim() || "(keine Beschreibung)";
-  const fassung = (document.querySelector(".eyebrow").textContent.match(/Fassung [\d.]+/) || ["Fassung ?"])[0];
-  const body = "Version: Nachlassplaner " + fassung + "\n\nBeschreibung:\n" + txt;
+  const body = "Version: Nachlassplaner " + FASSUNG + " (" + LANG + ")\n\nBeschreibung:\n" + txt;
   if(navigator.clipboard) navigator.clipboard.writeText(body).catch(()=>{});
   location.href = "mailto:kontakt@alien-investor.org?subject=" + encodeURIComponent("[Nachlassplaner] Bug") + "&body=" + encodeURIComponent(body);
   bugDlg.close();
@@ -3160,28 +3664,36 @@ document.getElementById("save-btn").addEventListener("click", ()=>{ document.get
 document.getElementById("load-btn").addEventListener("click", ()=>{ document.getElementById("ld-err").textContent=""; ldDlg.showModal(); });
 document.getElementById("sd-abbr").addEventListener("click", ()=> sdDlg.close());
 document.getElementById("ld-abbr").addEventListener("click", ()=> ldDlg.close());
+/* Passwörter nie im DOM stehen lassen — auch nicht nach Abbruch, Esc oder Fehlversuch. */
+function pwLeeren(){
+  ["sd-pw","sd-pw2","ld-pw"].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=""; });
+}
+sdDlg.addEventListener("close", pwLeeren);
+ldDlg.addEventListener("close", pwLeeren);
 
 document.getElementById("sd-ok").addEventListener("click", async ()=>{
   const pw = document.getElementById("sd-pw").value, pw2 = document.getElementById("sd-pw2").value;
   const err = document.getElementById("sd-err");
-  if(pw.length < 10){ err.textContent = "Mindestens 10 Zeichen."; return; }
-  if(pw !== pw2){ err.textContent = "Passwörter stimmen nicht überein."; return; }
+  if(pw.length < PW_MIN){ err.textContent = T("ui","pwKurz"); return; }
+  if(pw !== pw2){ err.textContent = T("ui","pwUngleich"); return; }
   try{
     await exportiere(pw);
     document.getElementById("sd-pw").value = document.getElementById("sd-pw2").value = "";
     sdDlg.close();
-  }catch(e){ err.textContent = e.message || "Speichern fehlgeschlagen."; }
+  }catch(e){ err.textContent = e.message || T("ui","speicherfehler"); }
+  finally{ pwLeeren(); }
 });
 
 document.getElementById("ld-ok").addEventListener("click", async ()=>{
   const f = document.getElementById("ld-file").files[0], pw = document.getElementById("ld-pw").value;
   const err = document.getElementById("ld-err");
-  if(!f){ err.textContent = "Keine Datei gewählt."; return; }
+  if(!f){ err.textContent = T("ui","keineDatei"); return; }
   try{
     await importiere(f, pw);
     document.getElementById("ld-pw").value = "";
     ldDlg.close();
-  }catch(e){ err.textContent = e.message || "Laden fehlgeschlagen."; }
+  }catch(e){ err.textContent = e.message || T("ui","ladefehler"); }
+  finally{ pwLeeren(); }
 });
 </script>
 </body>
