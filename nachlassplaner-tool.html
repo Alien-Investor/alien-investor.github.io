@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:,">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-kpqjjCNV6I4xxkHv3j5F9NT8jspyQY2y5ncpVeB6htg=' 'sha256-aMnCHkDPYf27GViM3bkl/vUcrgjHo0fojWBcwWbaLlg='; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; font-src 'none'; form-action 'none'; base-uri 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-kpqjjCNV6I4xxkHv3j5F9NT8jspyQY2y5ncpVeB6htg=' 'sha256-RRaFChaDmrcZH/TObUDe9c1XdWOONlNEWb22SydDDe4='; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; font-src 'none'; form-action 'none'; base-uri 'none'">
 <title>Nachlassplaner — Vordruckgenerator</title>
 <style>
 :root{
@@ -3075,12 +3075,12 @@ MODEL.forEach(s => { state[s.id] = s.wiederholbar ? [ {} ] : {}; });
    --------------------------------------------------------------- */
 
 const kl = { A:"k-a", B:"k-b", P:"k-p" };
-const FASSUNG = "0.13";
+const FASSUNG = "1.0";
 
 /* Deutsche Zeichenketten. Gegenstück zu EN, gleiche Schlüssel. */
 const DE = {
 ui:{
-  eyebrow:"Vordruckgenerator · Fassung " + FASSUNG + " · Prototyp",
+  eyebrow:"Vordruckgenerator · Fassung " + FASSUNG,
   h1:"Nachlassplaner",
   intro:"Dieses Werkzeug erzeugt <strong>leere Formularbögen</strong>. Öffentliche Angaben wie Fingerprints oder Descriptor druckt es mit. Alles, was Rückschlüsse auf Standorte oder Zugänge zulässt, wird als Linie gedruckt und von Hand ausgefüllt — offline, mit dokumentenechtem Stift.",
   volatile:"<strong>Nichts wird automatisch gespeichert.</strong> Kein Server, kein Browser-Speicher. Ein Neuladen der Seite löscht alle Eingaben. Auf Wunsch lässt sich der Stand unten als passwortverschlüsselte Datei exportieren — sie enthält nur die getippten öffentlichen Angaben, niemals das Handschriftliche.",
