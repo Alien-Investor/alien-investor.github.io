@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:,">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-kpqjjCNV6I4xxkHv3j5F9NT8jspyQY2y5ncpVeB6htg=' 'sha256-k/2745inZb5pK2GpO0OLg+f3m9rhczWpkCksGjatFNI='; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; font-src 'none'; form-action 'none'; base-uri 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-kpqjjCNV6I4xxkHv3j5F9NT8jspyQY2y5ncpVeB6htg=' 'sha256-aMnCHkDPYf27GViM3bkl/vUcrgjHo0fojWBcwWbaLlg='; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; font-src 'none'; form-action 'none'; base-uri 'none'">
 <title>Nachlassplaner — Vordruckgenerator</title>
 <style>
 :root{
@@ -287,7 +287,7 @@ dialog input[type=password],dialog input[type=file],dialog textarea{
   <div class="lang-toggle" role="group" aria-label="Sprache / Language">
     <button type="button" data-lang="de" class="lang-cur">DE</button><span class="lang-sep">|</span><button type="button" data-lang="en">EN</button>
   </div>
-  <p class="eyebrow" id="ui-eyebrow">Vordruckgenerator · Fassung 0.12 · Prototyp</p>
+  <p class="eyebrow" id="ui-eyebrow">Vordruckgenerator · Fassung 1.0</p>
   <h1><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <span id="ui-h1">Nachlassplaner</span></h1>
   <p id="ui-intro">Dieses Werkzeug erzeugt <strong>leere Formularbögen</strong>. Öffentliche Angaben wie Fingerprints oder Descriptor druckt es mit. Alles, was Rückschlüsse auf Standorte oder Zugänge zulässt, wird als Linie gedruckt und von Hand ausgefüllt — offline, mit dokumentenechtem Stift.</p>
   <p class="recht-hinweis" id="ui-recht" hidden></p>
@@ -2661,7 +2661,7 @@ var qrcode = function() {
    --------------------------------------------------------------- */
 const EN = {
 ui:{
-  eyebrow:"Form generator · version 0.12 · prototype",
+  eyebrow:"Form generator · version 1.0",
   h1:"Estate Planner",
   intro:"This tool produces <strong>blank forms</strong>. Public details such as fingerprints or a descriptor are printed with them. Anything that would point to a location or an access route is printed as a line and filled in by hand — offline, with a document-safe pen.",
   volatile:"<strong>Nothing is saved automatically.</strong> No server, no browser storage. Reloading the page clears every entry. The state can be exported below as a password-encrypted file — it holds only the typed public details, never anything handwritten.",
@@ -2848,7 +2848,7 @@ metalle:{titel:"Sheet B — Precious metals, holdings", gruppenname:"Position",
     m_eigentum:{l:"Form of ownership", opt:["Allocated and segregated","Allocated, pooled storage","Unallocated — a claim only","Physically in own possession"]},
     m_hersteller:{l:"Manufacturer or mint", s:"For example: Argor-Heraeus, Perth Mint"},
     m_zertifikat:{l:"Type of certificate", s:"For example: LBMA Good Delivery, assay card"},
-    m_bestand:{l:"Count, weight, serial numbers", s:"Holdings by hand. This list is what makes the sheet worth anything."},
+    m_bestand:{l:"Count, weight, serial numbers", s:"Holdings by hand. This list is what makes the sheet worth anything. Or: the holdings list is attached as an annex (for example the estate appendix from the Sachwert-Tresor, with its version number); then only note the reference here."},
     m_belege:{l:"Where the purchase receipts are kept", rechtDE:true}
   }},
 lager:{titel:"Sheet B — Storage and bonded warehouses", gruppenname:"Storage location", rechtDE:true,
@@ -2886,7 +2886,7 @@ drs:{titel:"Sheet B — Direct registration", gruppenname:"DRS position", rechtD
   }},
 steuer:{titel:"Sheet B — Tax", rechtDE:true,
   f:{
-    t_fifo:{l:"Where the FIFO acquisition history is kept"},
+    t_fifo:{l:"Where the FIFO acquisition history is kept", s:"Acquisition data may be attached as an annex (export from the tax tool or the Sachwert-Tresor). Only note where it is."},
     t_berater:{l:"Tax adviser"},
     t_kontakt:{l:"How to reach the tax adviser"},
     t_nachweise:{l:"Where records for purchases without KYC are kept"}
@@ -3006,7 +3006,7 @@ const MODEL = [
     {k:"m_eigentum", t:"select", l:"Eigentumsform", opt:["Allokiert und segregiert","Allokiert, Sammelverwahrung","Unallokiert — nur Forderung","Physisch im Eigenbesitz"]},
     {k:"m_hersteller", t:"text", l:"Hersteller oder Prägestätte", s:"Etwa: Argor-Heraeus, Perth Mint"},
     {k:"m_zertifikat", t:"text", l:"Zertifikatsart", s:"Etwa: LBMA Good Delivery, Assay-Karte"},
-    {k:"m_bestand", t:"hand", l:"Stückzahl, Gewicht, Seriennummern", s:"Bestandsangaben von Hand. Diese Liste ist der eigentliche Wert des Blatts.", zeilen:6},
+    {k:"m_bestand", t:"hand", l:"Stückzahl, Gewicht, Seriennummern", s:"Bestandsangaben von Hand. Diese Liste ist der eigentliche Wert des Blatts. Oder: Die Bestandsliste liegt als Anhang bei (etwa der Nachlass-Anhang aus dem Sachwert-Tresor, mit Fassungsnummer), dann hier nur den Verweis eintragen.", zeilen:6},
     {k:"m_belege", t:"hand", l:"Wo liegen die Kaufbelege", s:"Belegen Anschaffung und Haltefrist (§23 EStG) sowie Bestand und Stückelung. Bewertet wird zum Marktwert am Todestag.", zeilen:2}
   ]
 },
@@ -3059,7 +3059,7 @@ const MODEL = [
   id:"steuer", klasse:"B", klasseLabel:"Zugangsanleitung", titel:"Blatt B — Steuer",
   hinweis:"Der meistvergessene Teil. Anzeige beim Finanzamt binnen drei Monaten nach Kenntnis, §30 ErbStG — auch mit gerichtlich eröffnetem Testament bleibt sie Pflicht, sobald Auslandsvermögen dazugehört. Bewertung zum Todestag.",
   felder:[
-    {k:"t_fifo", t:"hand", l:"Wo liegt die FIFO-Anschaffungshistorie", zeilen:2},
+    {k:"t_fifo", t:"hand", l:"Wo liegt die FIFO-Anschaffungshistorie", s:"Anschaffungsdaten können als Anhang beiliegen (Export aus dem Steuertool oder dem Sachwert-Tresor). Hier steht nur, wo.", zeilen:2},
     {k:"t_berater", t:"text", l:"Steuerberater"},
     {k:"t_kontakt", t:"text", l:"Kontakt des Steuerberaters"},
     {k:"t_nachweise", t:"hand", l:"Wo liegen Nachweise für Käufe ohne KYC", s:"Ohne diese Nachweise wird die Mittelherkunft zum Problem.", zeilen:2}
@@ -3075,7 +3075,7 @@ MODEL.forEach(s => { state[s.id] = s.wiederholbar ? [ {} ] : {}; });
    --------------------------------------------------------------- */
 
 const kl = { A:"k-a", B:"k-b", P:"k-p" };
-const FASSUNG = "0.12";
+const FASSUNG = "0.13";
 
 /* Deutsche Zeichenketten. Gegenstück zu EN, gleiche Schlüssel. */
 const DE = {
@@ -3398,7 +3398,8 @@ const SACHWERT_WARNUNGEN = [
   "Für den Übertrag verlangen US-Transferagenten meist eine Medallion Signature Guarantee. Die ist in Deutschland schwer zu bekommen. Früh mit dem Agenten klären, welche Alternative er akzeptiert.",
   "Auf US-Aktien fällt bei deutschem Wohnsitz ohne US-Pass dank Erbschaftsteuer-DBA keine US-Erbschaftsteuer an. Trotzdem frieren US-Verwahrer Konten Verstorbener ein und geben erst gegen ein Transfer Certificate der US-Steuerbehörde frei — über 60.000 Dollar Depotwert dauert das zwölf bis achtzehn Monate. Kein Notverkauf nötig, aber Geduld einplanen und nichts unterschreiben, was den DBA-Schutz nicht geltend macht.",
   "Ausländische Verwahrer erstatten keine Todesfall-Anzeige an das deutsche Finanzamt. Unsichtbar ist das Vermögen trotzdem nicht — über den automatischen Informationsaustausch fließen Kontodaten an die Behörden. Die Anzeige- und Erklärungspflicht der Erben besteht in jedem Fall.",
-  "Die Anzeige beim Finanzamt ist binnen drei Monaten nach Kenntnis fällig, §30 ErbStG. Bewertet wird zum Todestag, nicht zum Verkaufstag."
+  "Die Anzeige beim Finanzamt ist binnen drei Monaten nach Kenntnis fällig, §30 ErbStG. Bewertet wird zum Todestag, nicht zum Verkaufstag.",
+  "Liegt eine Bestandsliste als Anhang bei, ist sie eine Momentaufnahme vom Tag ihrer Fassung, kein Nachweis. Maßgeblich ist, was an den genannten Orten tatsächlich vorliegt."
 ];
 
 function bogenKopf(k, titel, nr, ges){
