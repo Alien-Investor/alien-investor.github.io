@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Werkstatt-Paket — Druckvorlagen zu „Die eigene Bank" | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Werkstatt-Paket zum Buch „Die eigene Bank: Bitcoin meisterlich verwahren": Würfelprotokolle, Passphrase-Blatt, Restore-Drill, SeedSigner- und Multisig-Anleitung, Erben-Paket, Prüfskript. Kostenlose PDFs zum Ausdrucken, mit Prüfsummen.">
+  <style>
+    body { background-color:#000; color:#fff; font-family:Arial,sans-serif; line-height:1.6; max-width:800px; margin:auto; padding:0 15px 20px 15px; }
+    h1,h2,h3 { color:#00ffcc; }
+    h1 { margin-top:40px; text-align:center; }
+    a { color:#00ffcc; text-decoration:none; transition:all 0.2s ease; }
+    a:hover { color:#fff; text-shadow:0 0 8px #00ffcc; }
+    code { background-color:#111; padding:0.2em 0.4em; border-radius:4px; color:#0f0; font-family:monospace; word-break:break-all; }
+    em { color:#ccc; }
+    .byline { margin-top:-0.8em; margin-bottom:2em; color:#ccc; font-style:italic; text-align:center; }
+    .box { border:1px solid #00ffcc; background:#050505; padding:1.5em; border-radius:8px; margin:2em 0; box-shadow:0 0 10px rgba(0,255,204,0.1); }
+    .box h3 { margin-top:0; }
+    .box ul { padding-left:1.2em; } .box li { margin-bottom:0.8em; }
+    .cta { margin:2em 0; padding:1.5em; border:1px dashed #00ffcc; border-radius:8px; text-align:center; background-color:#050505; }
+    .cta a.btn { display:inline-block; margin-top:0.5em; padding:0.7em 1.4em; border:1px solid #00ffcc; border-radius:8px; color:#00ffcc; font-weight:bold; }
+    .cta a.btn:hover { background:#00ffcc; color:#000; box-shadow:0 0 15px #00ffcc; }
+    .like-button { margin:3em 0; display:flex; align-items:center; justify-content:center; gap:1em; }
+    .like-button button { background:#000; color:#00ffcc; border:1px solid #00ffcc; padding:0.6em 1.2em; border-radius:8px; cursor:pointer; font-weight:bold; transition:all 0.2s ease; }
+    .like-button button:hover { background:#00ffcc; color:#000; box-shadow:0 0 15px #00ffcc; }
+    .like-button button:disabled { border-color:#444; color:#888; background:#111; cursor:default; }
+    .top-nav { padding:10px 0; font-size:0.9em; }
+    .back-links { margin-top:40px; text-align:center; display:flex; flex-direction:column; gap:10px; }
+    footer { margin-top:60px; padding:20px; font-size:0.85em; color:#666; border-top:1px solid #222; text-align:center; }
+
+    /* --- STERNENHIMMEL --- */
+    .stars-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: radial-gradient(ellipse at top, #0a0f1e 0%, #000 60%);
+      z-index: -2;
+    }
+    .stars-bg::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image:
+        radial-gradient(1px 1px at 10% 15%, #fff, transparent),
+        radial-gradient(1px 1px at 25% 40%, #fff, transparent),
+        radial-gradient(1px 1px at 40% 20%, #fff, transparent),
+        radial-gradient(2px 2px at 55% 60%, #00ffcc, transparent),
+        radial-gradient(1px 1px at 70% 35%, #fff, transparent),
+        radial-gradient(1px 1px at 85% 75%, #fff, transparent),
+        radial-gradient(1px 1px at 15% 80%, #fff, transparent),
+        radial-gradient(1px 1px at 35% 90%, #fff, transparent),
+        radial-gradient(1px 1px at 60% 10%, #fff, transparent),
+        radial-gradient(1px 1px at 90% 50%, #fff, transparent),
+        radial-gradient(1px 1px at 5% 55%, #fff, transparent),
+        radial-gradient(2px 2px at 75% 25%, #00ffcc, transparent);
+      animation: twinkle 6s ease-in-out infinite alternate;
+    }
+    @keyframes twinkle {
+      0% { opacity: 0.4; } 100% { opacity: 0.9; }
+    }
+
+    /* --- STERNENNEBEL --- */
+    .nebula {
+      position: fixed;
+      top: -10%; left: -10%;
+      width: 120%; height: 120%;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 900px 260px at 30% 35%, rgba(90, 30, 140, 0.22), transparent 60%),
+        radial-gradient(ellipse 1100px 200px at 70% 55%, rgba(0, 140, 180, 0.18), transparent 60%),
+        radial-gradient(ellipse 500px 180px at 50% 45%, rgba(180, 60, 140, 0.10), transparent 60%),
+        radial-gradient(circle 140px at 32% 36%, rgba(255, 255, 255, 0.10), transparent 70%),
+        radial-gradient(circle 120px at 68% 56%, rgba(0, 255, 204, 0.08), transparent 70%);
+      transform: rotate(-18deg);
+      filter: blur(30px);
+      opacity: 0.85;
+      animation: nebula-pulse 14s ease-in-out infinite alternate;
+      mix-blend-mode: screen;
+    }
+    @keyframes nebula-pulse {
+      0%   { opacity: 0.55; transform: rotate(-18deg) scale(1); }
+      50%  { opacity: 0.85; transform: rotate(-17deg) scale(1.04); }
+      100% { opacity: 0.65; transform: rotate(-19deg) scale(1.02); }
+    }
+
+    /* --- STERNSCHNUPPEN --- */
+    .shooting-star {
+      position: fixed;
+      width: 2px; height: 2px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.7);
+      z-index: -1;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .shooting-star::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 120px; height: 1px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.8), rgba(0,255,204,0.4), transparent);
+      transform: translateX(-120px);
+    }
+    .shooting-star.s1 { top: 12%; left: -5%; animation: shoot1 11s linear infinite; animation-delay: 3s; }
+    .shooting-star.s2 { top: 28%; left: -5%; animation: shoot2 17s linear infinite; animation-delay: 9s; }
+    .shooting-star.s3 { top: 50%; left: -5%; animation: shoot3 23s linear infinite; animation-delay: 15s; }
+    @keyframes shoot1 {
+      0%   { transform: translate(0, 0) rotate(15deg); opacity: 0; }
+      3%   { opacity: 1; }
+      8%   { transform: translate(110vw, 20vh) rotate(15deg); opacity: 0; }
+      100% { transform: translate(110vw, 20vh) rotate(15deg); opacity: 0; }
+    }
+    @keyframes shoot2 {
+      0%   { transform: translate(0, 0) rotate(22deg); opacity: 0; }
+      2%   { opacity: 1; }
+      7%   { transform: translate(115vw, 30vh) rotate(22deg); opacity: 0; }
+      100% { transform: translate(115vw, 30vh) rotate(22deg); opacity: 0; }
+    }
+    @keyframes shoot3 {
+      0%   { transform: translate(0, 0) rotate(10deg); opacity: 0; }
+      3%   { opacity: 1; }
+      9%   { transform: translate(115vw, 15vh) rotate(10deg); opacity: 0; }
+      100% { transform: translate(115vw, 15vh) rotate(10deg); opacity: 0; }
+    }
+
+    /* --- UFO --- */
+    .ufo {
+      position: fixed;
+      top: 38%;
+      right: -80px;
+      width: 72px; height: 36px;
+      z-index: -1;
+      filter: drop-shadow(0 0 8px rgba(0, 255, 204, 0.55));
+      animation: ufo-fly 55s linear infinite;
+      animation-delay: 25s;
+      pointer-events: none;
+      opacity: 0;
+    }
+    @keyframes ufo-fly {
+      0%   { transform: translate(0, 0);           opacity: 0; }
+      2%   {                                       opacity: 1; }
+      10%  { transform: translate(-30vw, -3vh); }
+      22%  { transform: translate(-70vw, 2vh); }
+      34%  { transform: translate(-110vw, -2vh);   opacity: 1; }
+      37%  { transform: translate(-120vw, -2vh);   opacity: 0; }
+      100% { transform: translate(-120vw, -2vh);   opacity: 0; }
+    }
+    .ufo-light { animation: ufo-blink 1.2s infinite; transform-origin: center; }
+    .ufo-light:nth-child(1) { animation-delay: 0.0s; }
+    .ufo-light:nth-child(2) { animation-delay: 0.15s; }
+    .ufo-light:nth-child(3) { animation-delay: 0.30s; }
+    .ufo-light:nth-child(4) { animation-delay: 0.45s; }
+    .ufo-light:nth-child(5) { animation-delay: 0.60s; }
+    .ufo-light:nth-child(6) { animation-delay: 0.75s; }
+    @keyframes ufo-blink {
+      0%, 100% { opacity: 1; }
+      50%      { opacity: 0.25; }
+    }
+    .warn { border:1px solid #ffb300; background:#0a0700; padding:1.2em 1.5em; border-radius:8px; margin:1.5em 0; box-shadow:0 0 10px rgba(255,179,0,0.12); }
+    .warn h3 { color:#ffb300; margin-top:0; }
+    .cta a.btn { margin-right:0.6em; }
+    table.dl { width:100%; border-collapse:collapse; margin:1.5em 0; font-size:0.95em; }
+    table.dl th, table.dl td { text-align:left; padding:0.6em 0.5em; border-bottom:1px solid #222; vertical-align:top; }
+    table.dl th { color:#00ffcc; font-weight:bold; }
+    table.dl code { font-size:0.8em; }
+    .kap { color:#888; white-space:nowrap; }
+  </style>
+</head>
+<body>
+
+  <div class="stars-bg"></div>
+  <div class="nebula"></div>
+  <div class="shooting-star s1"></div>
+  <div class="shooting-star s2"></div>
+  <div class="shooting-star s3"></div>
+
+  <svg class="ufo" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <radialGradient id="ufo-dome" cx="50%" cy="80%" r="60%">
+        <stop offset="0%" stop-color="#5fffe0"/>
+        <stop offset="60%" stop-color="#1a3a38"/>
+        <stop offset="100%" stop-color="#0a1a1e"/>
+      </radialGradient>
+      <linearGradient id="ufo-body" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#4a5a5a"/>
+        <stop offset="50%" stop-color="#2a3638"/>
+        <stop offset="100%" stop-color="#101818"/>
+      </linearGradient>
+    </defs>
+    <path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/>
+    <ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body)" stroke="#00ffcc" stroke-width="0.4"/>
+    <ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/>
+    <ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/>
+    <circle class="ufo-light" cx="20" cy="20.5" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="27" cy="21.2" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="34" cy="21.6" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="41" cy="21.6" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="48" cy="21.2" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="55" cy="20.5" r="1.3" fill="#fff"/>
+  </svg>
+
+  <div class="top-nav">
+    <a href="index.html">← Zurück zur Zentrale</a>
+  </div>
+
+  <h1>Werkstatt-Paket</h1>
+  <p class="byline"><em>Die Druckvorlagen aus den Selbstversuchen zu „Die eigene Bank: Bitcoin meisterlich verwahren" — so, wie sie auf meinem Tisch lagen.</em></p>
+
+  <article id="content">
+
+    <p>
+      Jede Technik in Band 4 der Reihe <em>Digitale Souveränität</em> wurde vor dem Schreiben selbst durchgeführt: Seed würfeln,
+      Passphrase bauen, Restore-Drill vom Stahl, 2-von-3-Multisig, Erben-Paket. Die Blätter, die dabei entstanden sind, gibt es hier
+      zum Ausdrucken. <strong>Kostenlos, ohne Anmeldung, mit Prüfsumme je Datei.</strong> Jedes Blatt nennt das Kapitel, zu dem es gehört.
+      Wer das Buch nicht hat, kann die Blätter trotzdem benutzen, die Begründungen stehen aber im Buch.
+    </p>
+
+    <div class="warn">
+      <h3>⚠ Auf keinem dieser Blätter steht je ein Seed</h3>
+      <p style="margin:0;">
+        Die Blätter tragen Würfelziffern, Fingerprints, Beschriftungen und Haken, aber keine Wiederherstellungswörter und keine Passphrase.
+        Die Würfelprotokolle sind die Ausnahme, die die Regel bestätigt: Die Ziffernfolge <strong>ist</strong> der Seed. Ein ausgefülltes
+        Würfelprotokoll behandelst du wie das Stahl-Backup, oder du vernichtest es, sobald das Backup geprüft ist.
+      </p>
+    </div>
+
+    <div class="cta">
+      <h3 style="margin-top:0;">Alles auf einmal</h3>
+      <p>Acht PDFs plus Prüfskript in einer ZIP-Datei. Rechtsklick → „Ziel speichern unter", Prüfsumme vergleichen, entpacken, drucken.</p>
+      <a class="btn" href="werkstatt-paket/werkstatt-paket.zip" download="werkstatt-paket.zip">↓ werkstatt-paket.zip (0,5 MB)</a>
+      <p style="margin-top:1.2em; margin-bottom:0.3em; color:#ccc;">SHA-256 der Datei <code>werkstatt-paket.zip</code> (Stand 29.08.2026):</p>
+      <p style="margin:0;"><code>e24d81c3446dd6d1d00aa24e9ccb700cf4609849e330a86ff98fc2eaa37ef5e1</code></p>
+      <p style="margin-top:0.8em; font-size:0.9em; color:#888;">
+        Prüfen: Linux/macOS <code>sha256sum werkstatt-paket.zip</code> · Windows PowerShell <code>Get-FileHash werkstatt-paket.zip</code>.
+        Weicht der Wert ab, Datei verwerfen und neu laden.
+      </p>
+    </div>
+
+    <h2>Die Blätter einzeln</h2>
+    <p>Alle einseitig A4 (das Passphrase-Blatt hat 15 Seiten, weil die Wortliste dazugehört). Kapitelangabe = Band 4.</p>
+    <table class="dl">
+      <thead><tr><th>Blatt</th><th>Kapitel</th><th>SHA-256</th></tr></thead>
+      <tbody>
+<tr><td><a href="werkstatt-paket/wuerfelprotokoll-1a-bitbox-diceware.pdf" download>Würfelprotokoll BitBox02 (Diceware, 24 Wörter)</a><br><span style="color:#aaa;font-size:0.9em;">Protokollblatt für den Diceware-Weg mit der gedruckten Wörtertabelle, inklusive Auswahl des 24. Worts.</span></td><td class="kap">Kap. 3</td><td><code>cf3acb0c5c0ea4e7d2c731d5e4064525454868dbc742f9c70a2a2ac6cdc8e783</code></td></tr>
+<tr><td><a href="werkstatt-paket/wuerfelprotokoll-1b-seedsigner-dice.pdf" download>Würfelprotokoll SeedSigner (99 Würfe)</a><br><span style="color:#aaa;font-size:0.9em;">20 Runden à 5 Würfel, die Ziffernfolge ist der Seed. Mit Verifikations-Checkliste.</span></td><td class="kap">Kap. 3</td><td><code>d1ed9f2c66327ef7f613730d83b063b16a9b9c8a40f59d45c9c77cde2ca9643b</code></td></tr>
+<tr><td><a href="werkstatt-paket/seedsigner-anleitung-1b-dice-modus.pdf" download>SeedSigner-Anleitung: Würfelmodus</a><br><span style="color:#aaa;font-size:0.9em;">Menüpfad SeedSigner OS 0.8.7 Schritt für Schritt, Felder für Beschriftungen und Fingerprint.</span></td><td class="kap">Kap. 3</td><td><code>51d5fc7c61006a35ee709e648518a028b117eb299f3f46fdf9803f2822c854b3</code></td></tr>
+<tr><td><a href="werkstatt-paket/wuerfel-check-anleitung.pdf" download>Würfel-Check: drei Prüfwege</a><br><span style="color:#aaa;font-size:0.9em;">Browser offline, Terminal mit Wrapper, Ian Coleman „Base 10“. Gehört zum <a href="wuerfel-check.html">Würfel-Check</a>.</span></td><td class="kap">Kap. 3</td><td><code>a9d8839a1e85c36cba67933d7f038e1678911beb34b45a064631c48af846a092</code></td></tr>
+<tr><td><a href="werkstatt-paket/passphrase-blatt-2-eff-diceware.pdf" download>Passphrase-Blatt mit EFF-Wortliste</a><br><span style="color:#aaa;font-size:0.9em;">15 Seiten: Anleitung, Zeichenzählung, die komplette EFF-Langliste zum Würfeln (CC BY).</span></td><td class="kap">Kap. 4</td><td><code>c9a851453c379d521f8cb81052a804f0cc5006ffcbc56932ca23d107b51f8be7</code></td></tr>
+<tr><td><a href="werkstatt-paket/restore-drill-3-stahl-backup.pdf" download>Restore-Drill vom Stahl-Backup</a><br><span style="color:#aaa;font-size:0.9em;">Vorbereitung, Ernstfall-Szenario, sieben Drill-Schritte, drei Beweise, Wiederholungstermin.</span></td><td class="kap">Kap. 6</td><td><code>b503188041d35ac8811e56520f3e111d191eed80ec0375dda395d71a3b93cb17</code></td></tr>
+<tr><td><a href="werkstatt-paket/multisig-anleitung-4-sparrow-2-von-3.pdf" download>2-von-3-Multisig in Sparrow</a><br><span style="color:#aaa;font-size:0.9em;">BitBox02, Trezor und SeedSigner: Wallet anlegen, Cosigner, Descriptor sichern, Adresse auf allen Geräten, Test-Ausgaben, Recovery-Probe.</span></td><td class="kap">Kap. 8</td><td><code>8bbe00b1d3dee8f9529fcda210708797f9cdc0619518b4cd4ea3cf7ecbb7555a</code></td></tr>
+<tr><td><a href="werkstatt-paket/erben-paket-anleitung-7-nachlassplaner.pdf" download>Erben-Paket mit dem Nachlassplaner</a><br><span style="color:#aaa;font-size:0.9em;">Bögen ausfüllen, prüfen, drucken, Trockenübung. Gehört zum <a href="nachlassplaner.html">Nachlassplaner</a>.</span></td><td class="kap">Kap. 9</td><td><code>d639a5dd7b703f27ce4a6230015dca54c9c75a8fea463f979013f7bc51d5b64f</code></td></tr>
+      </tbody>
+    </table>
+
+    <h2>Das Prüfskript</h2>
+    <div class="box">
+      <p>
+        Weg 2 aus der Würfel-Check-Anleitung: <code>verify_dice_seed.py</code> rechnet im Terminal aus 50 oder 99 Würfelziffern die
+        BIP39-Wörter, rund 90 Zeilen Python ohne Fremdbibliotheken, fragt die Ziffern ab (damit sie nicht in der Verlaufsdatei landen)
+        und läuft auch auf Tails ohne Netz. Der Wrapper <code>dice-check.sh</code> prüft vor jedem Start Skript und Wortliste gegen
+        die mitgelieferte Prüfsummenliste. <strong>Nur mit einem Wegwerf-Seed benutzen, nie mit dem echten.</strong>
+      </p>
+      <ul>
+        <li><a href="werkstatt-paket/verify_dice_seed.py" download>verify_dice_seed.py</a> · <code>96bcf6a2062f5035ff9a3f2eeda455122db7f899d77a7d461f2f78c5e81f9b27</code></li>
+        <li><a href="werkstatt-paket/dice-check.sh" download>dice-check.sh</a> · <code>742b6519e690113bd2b6dd339d9e8857a1b7a2618b8ceafbccf88c40e212c8e6</code></li>
+        <li><a href="werkstatt-paket/bip39_english.txt" download>bip39_english.txt</a> (offizielle BIP39-Wortliste) · <code>2f5eed53a4727b4bf8880d8f3f199efc90e58503646d9ff8eff3a2ed3b24dbda</code></li>
+        <li><a href="werkstatt-paket/SHA256SUMS-pruefskript" download>SHA256SUMS-pruefskript</a> (für den Wrapper, als <code>SHA256SUMS</code> neben die Dateien legen) · <code>7b816d67970afba7f8944c163daab6c0885ccbeb7d3dd1e45451aaea66228ad0</code></li>
+      </ul>
+      <p style="margin-bottom:0;">
+        Die Prüfsummen auf dieser Seite sind der zweite Kanal: Eine Datei, die ihren eigenen Vergleichswert mitbringt, prüft nichts.
+        Alle vier Dateien stecken auch in der ZIP.
+      </p>
+    </div>
+
+    <h2>Die Werkzeuge dazu</h2>
+    <p>
+      <a href="wuerfel-check.html">Würfel-Check</a> rechnet die SeedSigner-Würfe im Browser nach, offline, eine Datei.
+      <a href="nachlassplaner.html">Nachlassplaner</a> erzeugt die Bögen des Erben-Pakets, offline, ohne Seed und ohne Beträge.
+      Beide kostenlos, beide mit Prüfsumme auf ihrer Seite.
+    </p>
+
+    <h2>Lizenz und Quellen</h2>
+    <p>
+      Die Blätter dürfen für den eigenen Gebrauch beliebig ausgedruckt werden. Das Passphrase-Blatt enthält die
+      <a href="https://www.eff.org/dice">EFF Long Wordlist</a> (CC BY 3.0 US, Electronic Frontier Foundation). Die BitBox-Diceware-Methode auf
+      dem Würfelprotokoll 1a folgt der Anleitung von Shift Crypto, das Original samt Wörtertabelle liegt auf
+      <a href="https://bitbox.swiss">bitbox.swiss</a> (CC BY-SA 4.0), bitte immer die dortige aktuelle Fassung mitlesen, weil Firmware-Änderungen
+      den Ablauf verschieben können. Das Prüfskript steht unter MIT-Lizenz.
+      Fehler gefunden? <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>.
+    </p>
+
+    <p style="color:#ccc;">
+      Das Paket ist <strong>kostenlos</strong>. Wenn es dir hilft, freut sich das Mutterschiff über etwas Treibstoff — siehe unten.
+      Das Buch dazu: <em>Die eigene Bank: Bitcoin meisterlich verwahren</em>, Band 4 der Reihe <em>Digitale Souveränität</em>,
+      Ankündigung folgt auf <a href="buecher.html">der Bücherseite</a>.
+    </p>
+
+  </article>
+
+  <div class="back-links">
+    <a href="blog.html" style="font-size:1.1em;">← Zurück zur Blog-Übersicht</a>
+    <a href="index.html" style="font-size:1.1em;">← Zurück zur Zentrale</a>
+  </div>
+
+  <hr style="border-color:#222; margin:3em 0;">
+
+  <div style="margin-top:40px; margin-bottom:40px; text-align:center;">
+    <h3 style="margin-bottom:15px;">
+      <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energie" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Energie aufladen
+      <span style="font-size:0.6em; color:#888; font-weight:normal; vertical-align:middle;">(Spenden)</span>
+    </h3>
+    <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom:2px solid #00ffcc; padding-bottom:4px; display:inline-block;">
+      Treibstoff für das Mutterschiff senden
+    </a>
+  </div>
+
+  <footer>
+    <p><strong>Haftungsausschluss:</strong><br><br>
+      Dieser Artikel stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
+      Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
+      Investieren ist mit Risiken verbunden. Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
+    </p>
+  </footer>
+
+  <!-- kein lang-switcher: es gibt (noch) keine EN-Fassung dieser Seite; das englische Werkstatt-Paket kommt mit dem englischen Buch -->
+</body>
+</html>
