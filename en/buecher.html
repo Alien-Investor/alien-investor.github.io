@@ -397,6 +397,16 @@
       text-decoration: none;
       transition: all 0.2s ease;
     }
+    .cta-button.cta-disabled {
+      opacity: 0.45;
+      cursor: default;
+      pointer-events: none;
+    }
+    .cta-button.cta-disabled:hover {
+      background: transparent;
+      color: #00ffcc;
+      box-shadow: none;
+    }
     .cta-button:hover {
       background: #00ffcc;
       color: #000;
@@ -759,6 +769,114 @@
           </a>
           <a href="/buch-direkt.html#decentralized" class="cta-button" style="margin-top:0;">
             <svg style="width:1em;height:1em;vertical-align:-0.15em;" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="4" y="4" width="5" height="28" rx="1" fill="url(#bk-sp-bu)" stroke="#00ffcc" stroke-width="0.7"/><rect x="9" y="4" width="22" height="28" rx="1" fill="url(#bk-cv-bu)" stroke="#00ffcc" stroke-width="0.7"/><line x1="13" y1="12" x2="27" y2="12" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="16" x2="27" y2="16" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="20" x2="27" y2="20" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="24" x2="22" y2="24" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/></svg> DRM-free direct purchase
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- BAND 4 EN: Your Own Bank -->
+    <div class="book-card" id="band4-en">
+      <div class="book-cover">
+        <img src="/bitcoin-verwahrung-handbuch-cover-en.jpg"
+             alt="Cover: Your Own Bank — Master Bitcoin Self-Custody">
+      </div>
+      <div class="book-info">
+        <h2>Band 4: Your Own Bank <span style="font-size:0.65em; color:#aaa; font-weight:normal;">English Edition</span></h2>
+        <p class="subtitle">Master Bitcoin Self-Custody — your own seed, multisig, inheritance, insurance</p>
+
+        <p class="pitch">
+          <strong>On 30 July 2026, 1,196 hardware wallet addresses were emptied in 41 minutes. Their owners had done nothing wrong.</strong>
+          Their devices lay offline, their backups in steel, and none of it helped, because the flaw was already sitting in the seed
+          before the first backup was ever written. Anyone who had rolled their own seed with dice was spared. Book 4 turns you into
+          that owner: producing randomness yourself and checking it on the device, building a passphrase nobody guesses, backups in
+          steel at separate locations, practicing the recovery before it is needed, connecting several keys so that no single failure
+          costs everything, and laying an inheritance path that reaches your family and not an attacker. Every technique was carried
+          out for real before it was written down, and the logbook blocks show where the author stumbled. Not a device. A craft.
+        </p>
+
+        <p style="color:#aaa; font-size:0.95em;">12 chapters in three parts, plus FAQ, glossary and the "From my own workshop" appendix with the printable <a href="/en/werkstatt-paket.html" style="color:#00ffcc; text-decoration:none;">workshop package</a>:</p>
+        <ul>
+          <li>The Coldcard hack: anatomy of the incident, why the victims did nothing wrong and what it teaches</li>
+          <li>Your threat model: the honest loss statistics, attackers sorted by reach, and four amount levels</li>
+          <li>Entropy: rolling your own seed with the BitBox02 and the SeedSigner, and checking the calculation independently</li>
+          <li>The passphrase as the 25th word: Diceware, device limits and the trap of the silent typo</li>
+          <li>Backups in steel: center-punch plate or tiles, how many copies in how many places, the deadly sins</li>
+          <li>The emergency as a drill: restore drill, verifying firmware, changing devices and the end of a manufacturer's life</li>
+          <li>Understanding multisig: 2-of-3, xpubs, descriptors, coordinators and the forgotten backup</li>
+          <li>Setting up multisig: BitBox02, Trezor and SeedSigner in Sparrow, step by step out of the logbook</li>
+          <li>Inheriting Bitcoin: the inheritance path with a timelock in Liana and the heirs' package in two levels</li>
+          <li>Insuring sats: what Bitsurance covers in the BitBoxApp, what it does not, and what it learns about you</li>
+          <li>Custody in everyday life: watch-only, a node that may lie but must not steal, routines and keeping quiet</li>
+          <li>Your strategy: setup matrix, three reference systems, maintenance calendar and the ten golden rules</li>
+        </ul>
+
+        <p style="color:#aaa; font-size:0.9em; margin-top: 1.2em;">
+          A living handbook – devices, firmware and providers change, new editions follow and are free for direct buyers.<br>
+          <span style="color:#888; font-size:0.95em;">
+            Current edition: <strong style="color:#00ffcc;">v1.0</strong> · September 2026
+          </span>
+        </p>
+
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top: 1.5em;">
+          <span class="cta-button cta-disabled" aria-disabled="true" title="The Kindle edition follows once it is approved" style="margin-top:0;">
+             Coming soon on Amazon
+          </span>
+          <a href="/buch-direkt.html#own-bank" class="cta-button" style="margin-top:0;">
+             DRM-free direct purchase
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- BAND 4: Die eigene Bank -->
+    <div class="book-card" id="band4">
+      <div class="book-cover">
+        <img src="/bitcoin-verwahrung-handbuch-cover.jpg"
+             alt="Cover: Die eigene Bank – Bitcoin meisterlich verwahren">
+      </div>
+      <div class="book-info">
+        <h2>Band 4: Die eigene Bank</h2>
+        <p class="subtitle">Bitcoin meisterlich verwahren – eigener Seed, Multisig, Vererben, Versicherung</p>
+
+        <p class="pitch">
+          <strong>Am 30. Juli 2026 wurden in 41 Minuten 1.196 Hardware-Wallet-Adressen leergeräumt. Die Besitzer hatten nichts falsch gemacht.</strong>
+          Ihre Geräte lagen offline, ihre Backups in Stahl, und es half nichts, weil der Fehler schon im Seed steckte, bevor das erste
+          Backup geschrieben war. Verschont blieb, wer seinen Seed selbst gewürfelt hatte. Band 4 macht aus dir diesen Besitzer:
+          Zufall selbst erzeugen und am Gerät prüfen, eine Passphrase bauen, die niemand errät, Backups in Stahl an getrennten Orten,
+          die Wiederherstellung üben, bevor sie nötig ist, mehrere Schlüssel so verbinden, dass kein einzelner Fehler alles kostet,
+          und einen Erbpfad legen, der die Familie erreicht und Angreifer nicht. Jede Technik wurde vor dem Schreiben real durchgeführt,
+          die Logbuch-Blöcke zeigen, wo der Autor gestolpert ist. Nicht ein Gerät. Ein Handwerk.
+        </p>
+
+        <p style="color:#aaa; font-size:0.95em;">12 Kapitel in drei Teilen, dazu FAQ, Glossar und der Anhang „Aus der eigenen Werkstatt" mit dem <a href="/werkstatt-paket.html" style="color:#00ffcc; text-decoration:none;">Werkstatt-Paket</a> zum Ausdrucken:</p>
+        <ul>
+          <li>Der Coldcard-Hack: Anatomie des Vorfalls, warum die Opfer nichts falsch gemacht haben und was er lehrt</li>
+          <li>Dein Bedrohungsmodell: die ehrliche Verlust-Statistik, Angreifer nach Reichweite und vier Betragsstufen</li>
+          <li>Entropie: den eigenen Seed würfeln, mit BitBox02 und SeedSigner, und die Rechnung unabhängig prüfen</li>
+          <li>Die Passphrase als 25. Wort: Diceware, Gerätegrenzen und die Falle des stillen Tippfehlers</li>
+          <li>Backups aus Stahl: Körnerplatte oder Kacheln, wie viele Kopien an wie vielen Orten, die Todsünden</li>
+          <li>Der Ernstfall als Übung: Restore-Drill, Firmware prüfen, Gerätewechsel und das Lebensende eines Herstellers</li>
+          <li>Multisig verstehen: 2-von-3, xpubs, Descriptoren, Koordinatoren und das vergessene Backup</li>
+          <li>Multisig aufsetzen: BitBox02, Trezor und SeedSigner in Sparrow, Schritt für Schritt aus dem Logbuch</li>
+          <li>Bitcoin vererben: der Erbpfad mit Zeitschloss in Liana und das Erben-Paket in zwei Stufen</li>
+          <li>Sats versichern: was Bitsurance in der BitBoxApp deckt, was nicht, und was es über dich weiß</li>
+          <li>Verwahrung im Alltag: Watch-only, eine Node, die lügen, aber nicht stehlen darf, Routinen und Schweigsamkeit</li>
+          <li>Deine Strategie: Setup-Matrix, drei Referenz-Systeme, Wartungskalender und die zehn goldenen Regeln</li>
+        </ul>
+
+        <p style="color:#aaa; font-size:0.9em; margin-top: 1.2em;">
+          Ein lebendiges Handbuch – Geräte, Firmware und Anbieter ändern sich, neue Ausgaben folgen und sind für Direktkäufer kostenlos.<br>
+          <span style="color:#888; font-size:0.95em;">
+            Aktuelle Ausgabe: <strong style="color:#00ffcc;">v1.0</strong> · Stand September 2026
+          </span>
+        </p>
+
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top: 1.5em;">
+          <span class="cta-button cta-disabled" aria-disabled="true" title="Die Kindle-Ausgabe folgt, sobald die Freigabe vorliegt" style="margin-top:0;">
+             Bald bei Amazon
+          </span>
+          <a href="/buch-direkt.html#verwahrung" class="cta-button" style="margin-top:0;">
+             DRM-frei direkt kaufen
           </a>
         </div>
       </div>
