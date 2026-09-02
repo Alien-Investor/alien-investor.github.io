@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Workshop Packages — printable sheets for the books | Alien Investor</title>
+  <link rel="alternate" hreflang="de" href="/werkstatt.html">
+  <link rel="alternate" hreflang="en" href="/en/werkstatt.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Overview of the workshop packages: free printable sheets per book of the Digital Sovereignty series, with checksums.">
+  <style>
+    body { background-color:#000; color:#fff; font-family:Arial,sans-serif; line-height:1.6; max-width:800px; margin:auto; padding:0 15px 20px 15px; }
+    h1,h2,h3 { color:#00ffcc; }
+    h1 { margin-top:40px; text-align:center; }
+    a { color:#00ffcc; text-decoration:none; transition:all 0.2s ease; }
+    a:hover { color:#fff; text-shadow:0 0 8px #00ffcc; }
+    code { background-color:#111; padding:0.2em 0.4em; border-radius:4px; color:#0f0; font-family:monospace; word-break:break-all; }
+    em { color:#ccc; }
+    .byline { margin-top:-0.8em; margin-bottom:2em; color:#ccc; font-style:italic; text-align:center; }
+    .box { border:1px solid #00ffcc; background:#050505; padding:1.5em; border-radius:8px; margin:2em 0; box-shadow:0 0 10px rgba(0,255,204,0.1); }
+    .box h3 { margin-top:0; }
+    .box ul { padding-left:1.2em; } .box li { margin-bottom:0.8em; }
+    .cta { margin:2em 0; padding:1.5em; border:1px dashed #00ffcc; border-radius:8px; text-align:center; background-color:#050505; }
+    .cta a.btn { display:inline-block; margin-top:0.5em; padding:0.7em 1.4em; border:1px solid #00ffcc; border-radius:8px; color:#00ffcc; font-weight:bold; }
+    .cta a.btn:hover { background:#00ffcc; color:#000; box-shadow:0 0 15px #00ffcc; }
+    .like-button { margin:3em 0; display:flex; align-items:center; justify-content:center; gap:1em; }
+    .like-button button { background:#000; color:#00ffcc; border:1px solid #00ffcc; padding:0.6em 1.2em; border-radius:8px; cursor:pointer; font-weight:bold; transition:all 0.2s ease; }
+    .like-button button:hover { background:#00ffcc; color:#000; box-shadow:0 0 15px #00ffcc; }
+    .like-button button:disabled { border-color:#444; color:#888; background:#111; cursor:default; }
+    .top-nav { padding:10px 0; font-size:0.9em; }
+    .back-links { margin-top:40px; text-align:center; display:flex; flex-direction:column; gap:10px; }
+    footer { margin-top:60px; padding:20px; font-size:0.85em; color:#666; border-top:1px solid #222; text-align:center; }
+
+    /* --- STERNENHIMMEL --- */
+    .stars-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: radial-gradient(ellipse at top, #0a0f1e 0%, #000 60%);
+      z-index: -2;
+    }
+    .stars-bg::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image:
+        radial-gradient(1px 1px at 10% 15%, #fff, transparent),
+        radial-gradient(1px 1px at 25% 40%, #fff, transparent),
+        radial-gradient(1px 1px at 40% 20%, #fff, transparent),
+        radial-gradient(2px 2px at 55% 60%, #00ffcc, transparent),
+        radial-gradient(1px 1px at 70% 35%, #fff, transparent),
+        radial-gradient(1px 1px at 85% 75%, #fff, transparent),
+        radial-gradient(1px 1px at 15% 80%, #fff, transparent),
+        radial-gradient(1px 1px at 35% 90%, #fff, transparent),
+        radial-gradient(1px 1px at 60% 10%, #fff, transparent),
+        radial-gradient(1px 1px at 90% 50%, #fff, transparent),
+        radial-gradient(1px 1px at 5% 55%, #fff, transparent),
+        radial-gradient(2px 2px at 75% 25%, #00ffcc, transparent);
+      animation: twinkle 6s ease-in-out infinite alternate;
+    }
+    @keyframes twinkle {
+      0% { opacity: 0.4; } 100% { opacity: 0.9; }
+    }
+
+    /* --- STERNENNEBEL --- */
+    .nebula {
+      position: fixed;
+      top: -10%; left: -10%;
+      width: 120%; height: 120%;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 900px 260px at 30% 35%, rgba(90, 30, 140, 0.22), transparent 60%),
+        radial-gradient(ellipse 1100px 200px at 70% 55%, rgba(0, 140, 180, 0.18), transparent 60%),
+        radial-gradient(ellipse 500px 180px at 50% 45%, rgba(180, 60, 140, 0.10), transparent 60%),
+        radial-gradient(circle 140px at 32% 36%, rgba(255, 255, 255, 0.10), transparent 70%),
+        radial-gradient(circle 120px at 68% 56%, rgba(0, 255, 204, 0.08), transparent 70%);
+      transform: rotate(-18deg);
+      filter: blur(30px);
+      opacity: 0.85;
+      animation: nebula-pulse 14s ease-in-out infinite alternate;
+      mix-blend-mode: screen;
+    }
+    @keyframes nebula-pulse {
+      0%   { opacity: 0.55; transform: rotate(-18deg) scale(1); }
+      50%  { opacity: 0.85; transform: rotate(-17deg) scale(1.04); }
+      100% { opacity: 0.65; transform: rotate(-19deg) scale(1.02); }
+    }
+
+    /* --- STERNSCHNUPPEN --- */
+    .shooting-star {
+      position: fixed;
+      width: 2px; height: 2px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.7);
+      z-index: -1;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .shooting-star::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 120px; height: 1px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.8), rgba(0,255,204,0.4), transparent);
+      transform: translateX(-120px);
+    }
+    .shooting-star.s1 { top: 12%; left: -5%; animation: shoot1 11s linear infinite; animation-delay: 3s; }
+    .shooting-star.s2 { top: 28%; left: -5%; animation: shoot2 17s linear infinite; animation-delay: 9s; }
+    .shooting-star.s3 { top: 50%; left: -5%; animation: shoot3 23s linear infinite; animation-delay: 15s; }
+    @keyframes shoot1 {
+      0%   { transform: translate(0, 0) rotate(15deg); opacity: 0; }
+      3%   { opacity: 1; }
+      8%   { transform: translate(110vw, 20vh) rotate(15deg); opacity: 0; }
+      100% { transform: translate(110vw, 20vh) rotate(15deg); opacity: 0; }
+    }
+    @keyframes shoot2 {
+      0%   { transform: translate(0, 0) rotate(22deg); opacity: 0; }
+      2%   { opacity: 1; }
+      7%   { transform: translate(115vw, 30vh) rotate(22deg); opacity: 0; }
+      100% { transform: translate(115vw, 30vh) rotate(22deg); opacity: 0; }
+    }
+    @keyframes shoot3 {
+      0%   { transform: translate(0, 0) rotate(10deg); opacity: 0; }
+      3%   { opacity: 1; }
+      9%   { transform: translate(115vw, 15vh) rotate(10deg); opacity: 0; }
+      100% { transform: translate(115vw, 15vh) rotate(10deg); opacity: 0; }
+    }
+
+    /* --- UFO --- */
+    .ufo {
+      position: fixed;
+      top: 38%;
+      right: -80px;
+      width: 72px; height: 36px;
+      z-index: -1;
+      filter: drop-shadow(0 0 8px rgba(0, 255, 204, 0.55));
+      animation: ufo-fly 55s linear infinite;
+      animation-delay: 25s;
+      pointer-events: none;
+      opacity: 0;
+    }
+    @keyframes ufo-fly {
+      0%   { transform: translate(0, 0);           opacity: 0; }
+      2%   {                                       opacity: 1; }
+      10%  { transform: translate(-30vw, -3vh); }
+      22%  { transform: translate(-70vw, 2vh); }
+      34%  { transform: translate(-110vw, -2vh);   opacity: 1; }
+      37%  { transform: translate(-120vw, -2vh);   opacity: 0; }
+      100% { transform: translate(-120vw, -2vh);   opacity: 0; }
+    }
+    .ufo-light { animation: ufo-blink 1.2s infinite; transform-origin: center; }
+    .ufo-light:nth-child(1) { animation-delay: 0.0s; }
+    .ufo-light:nth-child(2) { animation-delay: 0.15s; }
+    .ufo-light:nth-child(3) { animation-delay: 0.30s; }
+    .ufo-light:nth-child(4) { animation-delay: 0.45s; }
+    .ufo-light:nth-child(5) { animation-delay: 0.60s; }
+    .ufo-light:nth-child(6) { animation-delay: 0.75s; }
+    @keyframes ufo-blink {
+      0%, 100% { opacity: 1; }
+      50%      { opacity: 0.25; }
+    }
+    .warn { border:1px solid #ffb300; background:#0a0700; padding:1.2em 1.5em; border-radius:8px; margin:1.5em 0; box-shadow:0 0 10px rgba(255,179,0,0.12); }
+    .warn h3 { color:#ffb300; margin-top:0; }
+    .cta a.btn { margin-right:0.6em; }
+    table.dl { width:100%; border-collapse:collapse; margin:1.5em 0; font-size:0.95em; }
+    table.dl th, table.dl td { text-align:left; padding:0.6em 0.5em; border-bottom:1px solid #222; vertical-align:top; }
+    table.dl th { color:#00ffcc; font-weight:bold; }
+    table.dl code { font-size:0.8em; }
+    .kap { color:#888; white-space:nowrap; }
+  </style>
+</head>
+<body>
+
+  <div class="stars-bg"></div>
+  <div class="nebula"></div>
+  <div class="shooting-star s1"></div>
+  <div class="shooting-star s2"></div>
+  <div class="shooting-star s3"></div>
+
+  <svg class="ufo" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <radialGradient id="ufo-dome" cx="50%" cy="80%" r="60%">
+        <stop offset="0%" stop-color="#5fffe0"/>
+        <stop offset="60%" stop-color="#1a3a38"/>
+        <stop offset="100%" stop-color="#0a1a1e"/>
+      </radialGradient>
+      <linearGradient id="ufo-body" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#4a5a5a"/>
+        <stop offset="50%" stop-color="#2a3638"/>
+        <stop offset="100%" stop-color="#101818"/>
+      </linearGradient>
+    </defs>
+    <path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/>
+    <ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body)" stroke="#00ffcc" stroke-width="0.4"/>
+    <ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/>
+    <ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/>
+    <circle class="ufo-light" cx="20" cy="20.5" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="27" cy="21.2" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="34" cy="21.6" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="41" cy="21.6" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="48" cy="21.2" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="55" cy="20.5" r="1.3" fill="#fff"/>
+  </svg>
+
+  <div class="top-nav">
+    <a href="/en/index.html">← Back to base</a>
+  </div>
+
+  <h1>Workshop Packages</h1>
+  <p class="byline"><em>Printable sheets for the books — each book has its own package.</em></p>
+
+  <article id="content">
+
+    <p>
+      The books of the <em>Digital Sovereignty</em> series come with sheets to print: checklists, fill-in forms, logs.
+      They are kept separate per book so you only download what belongs to yours. <strong>All free, no sign-up, with a checksum per file.</strong>
+      Pick your book:
+    </p>
+
+    <div class="box" style="display:flex; gap:1.5em; align-items:flex-start;">
+      <a href="/en/werkstatt-band1.html" style="flex:0 0 110px;"><img src="/grapheneos-handbook-cover-en.jpg" alt="Cover Book 1: GrapheneOS" style="width:110px; border:1px solid #333; border-radius:4px;"></a>
+      <div>
+        <h3><a href="/en/werkstatt-band1.html">Book 1 · GrapheneOS: Android in the Age of Surveillance</a></h3>
+        <p style="margin:0 0 0.6em 0;">Five principle sheets without menu paths: Installation Checklist, My App Strategy, User Profile Plan, Travel OpSec Checklist, Emergency Sheet "Phone Gone".</p>
+        <a class="btn" href="/en/werkstatt-band1.html" style="display:inline-block; padding:0.5em 1.1em; border:1px solid #00ffcc; border-radius:8px; font-weight:bold;">Book 1 package</a>
+      </div>
+    </div>
+
+    <div class="box" style="display:flex; gap:1.5em; align-items:flex-start;">
+      <a href="/en/werkstatt-paket.html" style="flex:0 0 110px;"><img src="/bitcoin-verwahrung-handbuch-cover-en.jpg" alt="Cover Book 4: Your Own Bank" style="width:110px; border:1px solid #333; border-radius:4px;"></a>
+      <div>
+        <h3><a href="/en/werkstatt-paket.html">Book 4 · Your Own Bank: Master Bitcoin Self-Custody</a></h3>
+        <p style="margin:0 0 0.6em 0;">Ten sheets plus two offline tools: dice logs, passphrase sheet, restore drill, signature anchor, multisig and heirs guides, check-day calendar.</p>
+        <a class="btn" href="/en/werkstatt-paket.html" style="display:inline-block; padding:0.5em 1.1em; border:1px solid #00ffcc; border-radius:8px; font-weight:bold;">Book 4 package</a>
+      </div>
+    </div>
+
+    <p style="color:#aaa; font-size:0.95em;">
+      Book 2 <em>Digital Sovereignty: The Complete System</em> and Book 3 <em>The Decentralized System</em> will get their packages later.
+      For custody, backups and inheritance, Book 3 points to the Book 4 package anyway.
+    </p>
+
+    <h2>What all packages share</h2>
+    <p>
+      Single-page A4, Alien Investor style, chapter reference on the sheet, license CC BY-SA 4.0. No sheet holds a secret:
+      no seeds, no passwords, no codes, locations as abbreviations only. Each package has a ZIP file with a checksum and a table
+      with the checksum per sheet. The books themselves are on <a href="/en/buecher.html">the books page</a>.
+    </p>
+
+  </article>
+
+  <div class="back-links">
+    <a href="/en/blog.html" style="font-size:1.1em;">← Back to the blog</a>
+    <a href="/en/index.html" style="font-size:1.1em;">← Back to base</a>
+  </div>
+
+  <hr style="border-color:#222; margin:3em 0;">
+
+  <div style="margin-top:40px; margin-bottom:40px; text-align:center;">
+    <h3 style="margin-bottom:15px;">
+      <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energy" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Charge energy
+      <span style="font-size:0.6em; color:#888; font-weight:normal; vertical-align:middle;">(Donate)</span>
+    </h3>
+    <a href="/en/spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom:2px solid #00ffcc; padding-bottom:4px; display:inline-block;">
+      Send fuel to the mothership
+    </a>
+  </div>
+
+  <footer>
+    <p><strong>Disclaimer:</strong><br><br>
+      This article is not financial, tax or legal advice.<br>
+      I share my personal alien opinion here – independent, rebellious and free.<br>
+      Investing carries risk. Think for yourself, trust no one, and act on your own responsibility.
+    </p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>
