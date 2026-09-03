@@ -100,6 +100,16 @@
     .ladebalken-box .track { width: 100%; height: 8px; background: #0a1a2e; border: 1px solid #2a6fd6; border-radius: 4px; overflow: hidden; }
     .ladebalken-box .fill { width: 68%; height: 100%; background: linear-gradient(90deg,#0a3a6e,#3d8bff); box-shadow: 0 0 8px #3d8bff; }
 
+    /* --- MIU: STATUS STRIP BELOW THE PORTRAIT --- */
+    .portrait-col { display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; }
+    .status-strip {
+      width: 128px; background: #000; border: 1px solid #2ecc71; border-radius: 6px;
+      padding: 6px 8px; display: flex; flex-direction: column; gap: 5px;
+    }
+    .status-strip .txt { font-family: 'Courier New', monospace; font-size: 0.58em; color: #4fd67a; text-align: center; line-height: 1.25; letter-spacing: 0.02em; }
+    .status-strip .track { width: 100%; height: 6px; background: #0a2e14; border: 1px solid #2ecc71; border-radius: 3px; overflow: hidden; }
+    .status-strip .fill { width: 92%; height: 100%; background: linear-gradient(90deg,#0a6e2e,#3dff8b); box-shadow: 0 0 6px #3dff8b; }
+
     /* --- WHY LIST --- */
     .why-list { margin: 1.4em 0; }
     .why-row { display: flex; gap: 1em; padding: 0.7em 0; border-bottom: 1px solid #1a1a1a; }
@@ -238,11 +248,18 @@
   </div>
 
   <div class="crew-card">
-    <img src="/miu-portrait.jpg" alt="Miu, the ship's cat">
+    <div class="portrait-col">
+      <img src="/miu-portrait.jpg" alt="Miu, the ship's cat">
+      <div class="status-strip">
+        <div class="txt">STATUS: SHIP'S CAT<br>REST MODE ENGAGED</div>
+        <div class="track"><div class="fill"></div></div>
+      </div>
+    </div>
     <div>
       <span class="role">Ship's Cat</span>
       <h3>Miu</h3>
-      <p>Grey-black tabby, white muzzle, green eyes. Sleeps through markets crashing or exploding outside — Miu has no opinion on it, and that's the whole point. Never speaks, never comments. The calm counterweight to every bit of market drama.</p>
+      <p>Grey-black tabby, white muzzle, green eyes. In a world full of doom-callers, panic and market drama, Miu just keeps sleeping — and on the rare occasion she's awake, she'd rather knock something off Kerstin's console than care about the markets. Never speaks, never comments.</p>
+      <p class="aside">Tolerates the alien — mostly. Favorite spot: the warmth of Kerstin's hologram projector.</p>
     </div>
   </div>
 
@@ -255,13 +272,14 @@
       <span class="role">Narrator</span>
       <h3>Thorsten</h3>
       <p>A pure voice — no face, no hologram, announced only by a blue loading bar. Carries the entire main segment: level-headed, precise, no opinions attached. Uses English technical terms only when necessary, and explains them in plain language the first time.</p>
+      <p class="aside">Two states, one bar: "loading …" at the start, "analysis complete" at the end — that's all the face he gets, and that's on purpose.</p>
     </div>
   </div>
 
   <h2>Why It's Like This</h2>
   <div class="why-list">
     <div class="why-row"><span class="q">Thorsten has no face</span><span class="a">The content is meant to be the star — not the narrator.</span></div>
-    <div class="why-row"><span class="q">Miu always sleeps</span><span class="a">A quiet statement against panic and hype.</span></div>
+    <div class="why-row"><span class="q">Miu (almost) always sleeps</span><span class="a">A quiet statement against panic and hype.</span></div>
     <div class="why-row"><span class="q">Kerstin can't speak English</span><span class="a">A limitation that became a trademark.</span></div>
     <div class="why-row"><span class="q">The alien wears a suit</span><span class="a">Rebellious in content, serious in appearance.</span></div>
     <div class="why-row"><span class="q">The spaceship setting</span><span class="a">Distance from Earth means distance from the system.</span></div>
