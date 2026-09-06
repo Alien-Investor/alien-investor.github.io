@@ -286,6 +286,19 @@
       font-size: 0.95em;
     }
     #buying-note strong { color: #00ffcc; }
+    .mail-btn {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 6px 16px;
+      border: 1px solid #00ffcc;
+      border-radius: 6px;
+      color: #00ffcc;
+      font-weight: bold;
+      font-size: 0.9em;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .mail-btn:hover { background: #00ffcc; color: #000; box-shadow: 0 0 12px #00ffcc; }
 
     /* --- ZAHLUNGS-BUTTONS --- */
     .btnrow {
@@ -505,7 +518,7 @@
         <p>Der komplette Guide – Pixel-Kauf, Installation, Apps ohne Google, SIM-Anonymität, VPN-Killswitch, Browser mit Tor, Proton-Ökosystem, Nutzerprofile, Termux-Verschlüsselung, Aegis 2FA, Reise-OpSec, Bitcoin-Verwahrung mit BitBox02 und mehr. 24 Kapitel, dazu die häufigsten Fragen und ein Quellen-Anhang zum Nachprüfen.</p>
         <div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px;">
           <span class="price">Richtpreis: 9,99 €</span>
-          <a class="buy-btn" href="#zahlung" data-lang="de" data-subject="Buch GrapheneOS DE" data-title="GrapheneOS: Android im Überwachungszeitalter" onclick="return buyBook(this)">Jetzt kaufen</a>
+          <a class="buy-btn" href="#zahlung" data-lang="de" data-price="9,99 €" data-subject="Buch GrapheneOS DE" data-title="GrapheneOS: Android im Überwachungszeitalter" onclick="return buyBook(this)">Jetzt kaufen</a>
           <span style="display:inline-block; padding: 6px 12px; border: 1px solid #555; border-radius: 6px; color: #aaa; font-size: 0.9em;">
             Aktuelle Ausgabe: <strong style="color:#00ffcc;">v2.9</strong> &middot; Stand 02.09.2026
           </span>
@@ -529,7 +542,7 @@
         <p>The complete guide – Pixel selection, installation, apps without Google, SIM privacy, VPN kill switch, Tor browser, Proton ecosystem, user profiles, Termux encryption, Aegis 2FA, travel OpSec, Bitcoin self-custody with BitBox02 and more. 24 chapters, plus the most common questions and a sources appendix for checking every claim.</p>
         <div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px;">
           <span class="price">Suggested price: $9.99</span>
-          <a class="buy-btn" href="#zahlung" data-lang="en" data-subject="Book GrapheneOS English" data-title="GrapheneOS: Android in the Age of Surveillance" onclick="return buyBook(this)">Buy now</a>
+          <a class="buy-btn" href="#zahlung" data-lang="en" data-price="$9.99" data-subject="Book GrapheneOS English" data-title="GrapheneOS: Android in the Age of Surveillance" onclick="return buyBook(this)">Buy now</a>
           <span style="display:inline-block; padding: 6px 12px; border: 1px solid #555; border-radius: 6px; color: #aaa; font-size: 0.9em;">
             Current edition: <strong style="color:#00ffcc;">v2.9</strong> &middot; September 2, 2026
           </span>
@@ -554,7 +567,7 @@
         <p>Bazzells „Extreme Privacy" auf deutsches und europäisches Recht adaptiert: Linux-Fundament, GrapheneOS, OPNsense-Netzwerk, DNS &amp; Browser, No-KYC-Kommunikation, Alias-Identität, Nostr, anonymes Eigentum (GmbH/UG), Data-Broker-Löschung, Offline-KI, Disaster Prep, Tails, Bitcoin-Privatsphäre, Monero und EU-Altersverifikation. 18 Kapitel, dazu die häufigsten Fragen, ein Quellen-Anhang zum Nachprüfen und vier <a href="werkstatt-band2.html" style="color:#00ffcc; text-decoration:none;">Werkstatt-Blätter</a> zum Ausdrucken.</p>
         <div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px;">
           <span class="price">Richtpreis: 9,99 €</span>
-          <a class="buy-btn" href="#zahlung" data-lang="de" data-subject="Buch Souveränität DE" data-title="Digitale Souveränität" onclick="return buyBook(this)">Jetzt kaufen</a>
+          <a class="buy-btn" href="#zahlung" data-lang="de" data-price="9,99 €" data-subject="Buch Souveränität DE" data-title="Digitale Souveränität" onclick="return buyBook(this)">Jetzt kaufen</a>
           <span style="display:inline-block; padding: 6px 12px; border: 1px solid #555; border-radius: 6px; color: #aaa; font-size: 0.9em;">
             Aktuelle Ausgabe: <strong style="color:#00ffcc;">v1.4</strong> &middot; Stand 02.09.2026
           </span>
@@ -579,7 +592,7 @@
         <p>Michael Bazzell's "Extreme Privacy" adapted to German and European law: Linux foundation, GrapheneOS, OPNsense network, DNS &amp; browser, No-KYC communication, alias identity, Nostr, anonymous ownership (GmbH/UG), data broker removal, offline AI, disaster prep, Tails, Bitcoin privacy, Monero and EU age verification. 18 chapters, plus the most common questions, a sources appendix for checking every claim and four printable <a href="en/werkstatt-band2.html" style="color:#00ffcc; text-decoration:none;">workshop sheets</a>.</p>
         <div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px;">
           <span class="price">Suggested price: $9.99</span>
-          <a class="buy-btn" href="#zahlung" data-lang="en" data-subject="Book Sovereignty English" data-title="Digital Sovereignty" onclick="return buyBook(this)">Buy now</a>
+          <a class="buy-btn" href="#zahlung" data-lang="en" data-price="$9.99" data-subject="Book Sovereignty English" data-title="Digital Sovereignty" onclick="return buyBook(this)">Buy now</a>
           <span style="display:inline-block; padding: 6px 12px; border: 1px solid #555; border-radius: 6px; color: #aaa; font-size: 0.9em;">
             Current edition: <strong style="color:#00ffcc;">v1.4</strong> &middot; September 2, 2026
           </span>
@@ -605,7 +618,7 @@
         <p>Die Finanz-Seite der Souveränität: Bitcoin kaufen mit und ohne KYC, Selbstverwahrung mit BitBox02 und eigener Node, Coin Control, Lightning, Vererben mit Totmannschalter, Monero als Zahlungswerkzeug, US-Aktien per Direct Registration, Schweizer Namensaktien, ETF-Kritik, Auslandsbroker, Edelmetalle, Steuern und Meldepflichten. 18 Kapitel plus FAQ, Glossar, Quellen-Anhang, der Anhang „Aus der eigenen Werkstatt" und vier <a href="werkstatt-band3.html" style="color:#00ffcc; text-decoration:none;">Werkstatt-Blätter</a> zum Ausdrucken.</p>
         <div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px;">
           <span class="price">Richtpreis: 9,99 €</span>
-          <a class="buy-btn" href="#zahlung" data-lang="de" data-subject="Buch Dezentrales System DE" data-title="Das dezentrale System" onclick="return buyBook(this)">Jetzt kaufen</a>
+          <a class="buy-btn" href="#zahlung" data-lang="de" data-price="9,99 €" data-subject="Buch Dezentrales System DE" data-title="Das dezentrale System" onclick="return buyBook(this)">Jetzt kaufen</a>
           <span style="display:inline-block; padding: 6px 12px; border: 1px solid #555; border-radius: 6px; color: #aaa; font-size: 0.9em;">
             Aktuelle Ausgabe: <strong style="color:#00ffcc;">v0.2</strong> &middot; Stand 03.09.2026
           </span>
@@ -630,7 +643,7 @@
         <p>The financial side of sovereignty: buying Bitcoin with and without KYC, self-custody with the BitBox02 and your own node, coin control, Lightning, inheritance with a dead man's switch, Monero as a payment tool, US stocks via Direct Registration, Swiss registered shares, the ETF trap, foreign brokers, precious metals, taxes and reporting duties. 18 chapters plus FAQ, glossary, sources appendix, the "From my own workshop" appendix and four printable <a href="en/werkstatt-band3.html" style="color:#00ffcc; text-decoration:none;">workshop sheets</a>.</p>
         <div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px;">
           <span class="price">Suggested price: $9.99</span>
-          <a class="buy-btn" href="#zahlung" data-lang="en" data-subject="Book Decentralized System English" data-title="The Decentralized System" onclick="return buyBook(this)">Buy now</a>
+          <a class="buy-btn" href="#zahlung" data-lang="en" data-price="$9.99" data-subject="Book Decentralized System English" data-title="The Decentralized System" onclick="return buyBook(this)">Buy now</a>
           <span style="display:inline-block; padding: 6px 12px; border: 1px solid #555; border-radius: 6px; color: #aaa; font-size: 0.9em;">
             Current edition: <strong style="color:#00ffcc;">v0.2</strong> &middot; September 3, 2026
           </span>
@@ -656,7 +669,7 @@
         <p>Am 30. Juli 2026 wurden in 41 Minuten 1.196 Hardware-Wallet-Adressen leergeräumt, und die Besitzer hatten nichts falsch gemacht. Verschont blieb, wer seinen Seed selbst gewürfelt hatte. Dieses Buch macht aus dir diesen Besitzer: eigener Seed per Würfel, Passphrase, Stahl-Backups, Restore-Drills, 2-von-3-Multisig mit BitBox02, Trezor und SeedSigner, Vererben mit Zeitschloss in Liana, Versicherung mit Bitsurance und eine Strategie nach Maß. Jede Technik wurde vor dem Schreiben real durchgeführt. 12 Kapitel plus FAQ, Glossar und der Anhang „Aus der eigenen Werkstatt" mit dem <a href="werkstatt-paket.html" style="color:#00ffcc; text-decoration:none;">Werkstatt-Paket</a> zum Ausdrucken. Zum Buch gehört ein kostenloses Werkstatt-Paket mit zehn Druckblättern und den Offline-Werkzeugen Würfel-Check und Nachlassplaner, per QR-Code im Buch erreichbar.</p>
         <div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px;">
           <span class="price">Richtpreis: 9,99 €</span>
-          <a class="buy-btn" href="#zahlung" data-lang="de" data-subject="Buch Eigene Bank DE" data-title="Die eigene Bank" onclick="return buyBook(this)">Jetzt kaufen</a>
+          <a class="buy-btn" href="#zahlung" data-lang="de" data-price="9,99 €" data-subject="Buch Eigene Bank DE" data-title="Die eigene Bank" onclick="return buyBook(this)">Jetzt kaufen</a>
           <span style="display:inline-block; padding: 6px 12px; border: 1px solid #555; border-radius: 6px; color: #aaa; font-size: 0.9em;">
             Aktuelle Ausgabe: <strong style="color:#00ffcc;">v1.1</strong> &middot; Stand September 2026
           </span>
@@ -681,7 +694,7 @@
         <p>On 30 July 2026, 1,196 hardware wallet addresses were emptied in 41 minutes, and their owners had done nothing wrong. Anyone who had rolled their own seed with dice was spared. This book turns you into that owner: your own seed from dice, passphrase, steel backups, restore drills, 2-of-3 multisig with BitBox02, Trezor and SeedSigner, inheritance with a timelock in Liana, insurance with Bitsurance and a strategy that fits. Every technique was carried out for real before it was written down. 12 chapters plus FAQ, glossary and the "From my own workshop" appendix with the printable <a href="en/werkstatt-paket.html" style="color:#00ffcc; text-decoration:none;">workshop package</a>. The book comes with a free workshop package of ten printable sheets and the offline tools Dice Check and Estate Planner, reachable via QR codes in the book.</p>
         <div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px;">
           <span class="price">Suggested price: $9.99</span>
-          <a class="buy-btn" href="#zahlung" data-lang="en" data-subject="Book Own Bank EN" data-title="Your Own Bank" onclick="return buyBook(this)">Buy now</a>
+          <a class="buy-btn" href="#zahlung" data-lang="en" data-price="$9.99" data-subject="Book Own Bank EN" data-title="Your Own Bank" onclick="return buyBook(this)">Buy now</a>
           <span style="display:inline-block; padding: 6px 12px; border: 1px solid #555; border-radius: 6px; color: #aaa; font-size: 0.9em;">
             Current edition: <strong style="color:#00ffcc;">v1.1</strong> &middot; September 2026
           </span>
@@ -796,9 +809,10 @@
           <li>
             <strong>Schicke eine E-Mail</strong> an <code>kontakt@alien-investor.org</code><br>
             <span style="color:#aaa; font-size:0.9em;">
-              Betreff: <strong id="subject-de">Buch GrapheneOS DE</strong><br>
+              Betreff: <strong id="subject-de">Buchtitel + Sprache, z.B. „Buch Eigene Bank DE"</strong><br>
               Inhalt: Zahlungsart + ungefähre Uhrzeit (bei Onchain gerne TxID).
-            </span>
+            </span><br>
+            <a id="mail-de" class="mail-btn" href="mailto:kontakt@alien-investor.org">E-Mail jetzt schreiben &rarr;</a>
           </li>
           <li>
             <strong>Bundle per Antwort:</strong> Du bekommst innerhalb von 24 Stunden einen
@@ -854,9 +868,10 @@
           <li>
             <strong>Send an email</strong> to <code>kontakt@alien-investor.org</code><br>
             <span style="color:#aaa; font-size:0.9em;">
-              Subject: <strong id="subject-en">Book GrapheneOS English</strong><br>
+              Subject: <strong id="subject-en">Book title + language, e.g. "Book Own Bank EN"</strong><br>
               Content: payment method + approximate time (for Onchain, the TxID is helpful).
-            </span>
+            </span><br>
+            <a id="mail-en" class="mail-btn" href="mailto:kontakt@alien-investor.org">Write the email now &rarr;</a>
           </li>
           <li>
             <strong>Bundle by reply:</strong> Within 24 hours you will receive a personal
@@ -966,6 +981,10 @@
       var t1 = document.createElement('strong'); t1.textContent = chosenBook.title; note.appendChild(t1);
       note.appendChild(document.createTextNode(en ? ' \u00b7 Email subject: ' : ' \u00b7 E-Mail-Betreff: '));
       var t2 = document.createElement('strong'); t2.textContent = chosenBook.subject; note.appendChild(t2);
+      if (chosenBook.price) {
+        note.appendChild(document.createTextNode(en ? ' \u00b7 Suggested price: ' : ' \u00b7 Richtpreis: '));
+        var t3 = document.createElement('strong'); t3.textContent = chosenBook.price; note.appendChild(t3);
+      }
       note.style.display = 'block';
     }
 
@@ -974,11 +993,16 @@
       chosenBook = {
         lang: lang,
         subject: el.getAttribute('data-subject') || '',
-        title: el.getAttribute('data-title') || ''
+        title: el.getAttribute('data-title') || '',
+        price: el.getAttribute('data-price') || ''
       };
       setLang(lang);
       var subj = document.getElementById('subject-' + lang);
       if (subj && chosenBook.subject) subj.textContent = chosenBook.subject;
+      var mail = document.getElementById('mail-' + lang);
+      if (mail && chosenBook.subject) {
+        mail.href = 'mailto:kontakt@alien-investor.org?subject=' + encodeURIComponent(chosenBook.subject);
+      }
       var target = document.getElementById('zahlung');
       if (target && target.scrollIntoView) {
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
