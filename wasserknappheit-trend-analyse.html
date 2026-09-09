@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Wasserknappheit 2026 – Physik oder Politik? | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Wasserknappheit als Aktien-Trend: Was messbar ist, was politisch ist, was in Wasser-ETFs tatsächlich steckt. Acht Firmen im Alien-Analyzer-Check: Xylem, Franklin Electric, Kurita, Energy Recovery, Lindsay, American Water Works, Veolia, Geberit.">
+  <link rel="canonical" href="/wasserknappheit-trend-analyse.html">
+  <link rel="alternate" hreflang="en" href="/en/wasserknappheit-trend-analyse.html">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.7;
+      max-width: 800px;
+      margin: auto;
+      padding: 0 15px 20px 15px;
+    }
+
+    h1, h2, h3 {
+      color: #00ffcc;
+    }
+    h1 {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc;
+    }
+
+    .byline {
+      font-size: 0.9em;
+      color: #bbb;
+      margin-bottom: 2em;
+      text-align: center;
+      font-style: italic;
+    }
+
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
+
+    ul { padding-left: 1.2em; }
+    li { margin-bottom: 0.5em; }
+    em { color: #ccc; }
+
+    .box {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      font-size: 0.95em;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .box h3 { margin-top: 0; }
+
+    .recommendation-box {
+      margin: 2em 0;
+      padding: 1em;
+      border: 1px dashed #00ffcc;
+      border-radius: 8px;
+      text-align: center;
+      background-color: #050505;
+    }
+    .recommendation-box h3 { margin-top: 0; font-size: 1.1em; color: #00ffcc; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5em 0;
+      font-size: 0.9em;
+    }
+    th {
+      background: #0a1a15;
+      color: #00ffcc;
+      padding: 0.6em 0.8em;
+      text-align: left;
+      border-bottom: 2px solid #00ffcc;
+    }
+    td {
+      padding: 0.5em 0.8em;
+      border-bottom: 1px solid #1a1a1a;
+      vertical-align: top;
+    }
+    tr:hover td { background: #0a0f0d; }
+    .table-wrap { overflow-x: auto; }
+
+    .badge-wahrscheinlich { color: #00ffcc; font-weight: bold; }
+    .badge-moeglich { color: #ffcc00; font-weight: bold; }
+    .badge-unwahrscheinlich { color: #ff4444; font-weight: bold; }
+
+    .analyzer-img { width: 100%; border-radius: 8px; border: 1px solid #1a1a1a; margin: 1.5em 0; display: block; cursor: zoom-in; transition: border-color 0.2s; }
+    .analyzer-img:hover { border-color: #00ffcc; }
+    .img-caption { font-size: 0.82em; color: #666; text-align: center; margin-top: -1em; margin-bottom: 1.5em; font-style: italic; }
+    .img-caption .zoom-hint { color: #00ffcc; opacity: 0.5; font-style: normal; font-size: 0.9em; }
+
+    .chart-wrap { background: #050505; border: 1px solid #1a1a1a; border-radius: 8px; padding: 1.5em 1em 1em 1em; margin: 1.5em 0; overflow-x: auto; }
+    .chart-title { font-size: 0.8em; color: #00ffcc; font-family: monospace; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.8em; }
+
+    .status-tag { font-size: 0.75em; color: #ffcc00; font-family: monospace; }
+
+    .like-button {
+      margin: 3em 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+      font-size: 1em;
+    }
+    .like-button button {
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+    .like-button button:hover,
+    .like-button button:active {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
+    }
+
+    .top-nav {
+      padding: 10px 0;
+      font-size: 0.9em;
+    }
+    .back-links {
+      margin-top: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
+    }
+
+    code {
+      background-color: #111;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      color: #0f0;
+      font-size: 0.95em;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="index.html">← Zurück zur Zentrale</a>
+  </div>
+
+  <h1>Wasserknappheit 2026 – Physik oder Politik?</h1>
+  <p class="byline">
+    Von Alien Investor – Stand: September 2026.
+  </p>
+
+  <p>
+    „Wasser ist das neue Öl." Der Satz steht auf ETF-Prospekten, in Nachhaltigkeitsberichten und in
+    jedem zweiten Megatrend-Report. Für den einen ist Wasserknappheit die größte Investmentchance des
+    Jahrhunderts, für den anderen ein weiteres grün angestrichenes Verkaufsargument, mit dem
+    Fondsgesellschaften 0,65 Prozent Gebühr pro Jahr rechtfertigen. Beide Seiten reden aneinander vorbei,
+    weil sie zwei Dinge vermischen: die Physik des Wassers und die Politik des Wasserpreises.
+  </p>
+  <p>
+    Diese Analyse trennt beides. Erst die messbaren Fakten, dann die Frage, wer daran überhaupt verdienen
+    kann. Danach acht Unternehmen im Alien Analyzer, ein Blick in den größten Wasser-ETF Europas und eine
+    Liste dessen, was man besser meidet. Mit dem Blick des langfristigen Mit-Eigentümers, nicht des
+    Trend-Surfers.
+  </p>
+
+  <blockquote>
+    „Wasser wird nicht verschifft wie Öl und nicht gehandelt wie Kupfer. Wer Wasserknappheit kaufen will,
+    kauft in Wahrheit Pumpen, Membranen und Zähler. Der Rest ist Politik." <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-3461a3)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg>
+  </blockquote>
+
+  <div class="box">
+    <h3>Das Alien-Fazit in einem Satz</h3>
+    <p style="font-size:0.95em;">
+      Die Knappheit ist real, aber regional; der Wasserpreis ist fast überall politisch; verdient wird
+      deshalb nicht am Wasser, sondern an den Stufen dazwischen: bei den Ausrüstern, die Pumpen, Zähler,
+      Membranen und Reinstwasseranlagen liefern. Versorger sind Anleihe-Ersatz, Mischkonzerne tragen ein
+      Etikett, und Wasserrechte sind Spekulation.
+    </p>
+  </div>
+
+  <h2>1) Die Physik: Wo Wasser messbar knapp ist</h2>
+
+  <p>
+    Zuerst das, was sich messen lässt. Das World Resources Institute (WRI) wertet mit seinem
+    Aqueduct-Atlas aus, wie viel des verfügbaren Süßwassers ein Land jedes Jahr verbraucht. Ergebnis der
+    Auswertung von 2023: 25 Länder, in denen ein Viertel der Weltbevölkerung lebt, nutzen mindestens
+    80 Prozent ihres verfügbaren Angebots. Das ist die Definition von „extrem hohem Wasserstress".
+    Rund vier Milliarden Menschen, also mindestens die Hälfte der Weltbevölkerung, erleben mindestens
+    einen Monat pro Jahr solche Bedingungen. Der globale Wasserbedarf hat sich seit 1960 mehr als
+    verdoppelt und soll bis 2050 um weitere 20 bis 25 Prozent steigen.
+  </p>
+  <p>
+    Der entscheidende Punkt steckt aber in der Verteilung: Im Nahen Osten und Nordafrika leben 83 Prozent
+    der Bevölkerung unter extrem hohem Stress, in Südasien 74 Prozent. In Mitteleuropa, Skandinavien
+    oder Kanada liegt der Wert nahe null. Wasser ist kein globaler Rohstoff wie Öl, das in Tankern um die
+    Welt fährt und in Rotterdam denselben Preis hat wie in Singapur. Wasser ist schwer, billig pro Liter
+    und lässt sich nicht wirtschaftlich über Kontinente transportieren. Knappheit ist deshalb immer lokal:
+    ein Flusssystem, ein Aquifer, eine Region.
+  </p>
+  <p>
+    <strong>Der stille Teil: Grundwasser.</strong> Die größte Studie zu diesem Thema (Jasechko et al.,
+    Nature, Januar 2024) hat rund 170.000 Messbrunnen in 1.693 Aquifersystemen in über 40 Ländern
+    ausgewertet. In 36 Prozent der Aquifere sinken die Pegel um mehr als zehn Zentimeter pro Jahr, und in
+    30 Prozent beschleunigt sich der Rückgang im 21. Jahrhundert, mehr als doppelt so oft, wie es der
+    Zufall erwarten ließe. Aber: In 16 Prozent der Systeme hat sich der Trend der 1980er und 1990er Jahre
+    umgekehrt. Tucson in Arizona füllt seinen Grundwasserspeicher gezielt mit Wasser aus dem Colorado River auf.
+    Das ist kein Naturgesetz, sondern Management. Wo gehandelt wird, geht die Kurve wieder hoch.
+  </p>
+  <p>
+    <strong>Wer verbraucht das Wasser?</strong> Laut FAO-Datenbank AQUASTAT (Ausgabe 2025) entfallen rund
+    72 Prozent der weltweiten Süßwasserentnahmen auf die Landwirtschaft. Industrie und Haushalte teilen
+    sich den Rest. Wer über Wasserknappheit spricht, spricht also zu drei Vierteln über Bewässerung. Eine
+    Anmerkung zur Ehrlichkeit: Ein 2025 erschienenes Paper weist darauf hin, dass diese viel zitierten
+    70 Prozent auf dünner empirischer Basis stehen und eher Konvention als Messung sind. Die Größenordnung
+    stimmt, die Nachkommastelle nicht.
+  </p>
+  <p>
+    <strong>Das Lehrstück Colorado River.</strong> Das US Bureau of Reclamation hat im August 2025 die
+    Betriebsbedingungen für 2026 festgelegt: Lake Mead wird zum 1. Januar 2026 bei rund 1.056 Fuß
+    erwartet, das ist die Stufe „Level 1 Shortage". Arizona muss 512.000 Acre-Feet abgeben (18 Prozent
+    seiner Zuteilung), Nevada 21.000 (7 Prozent), Mexiko 80.000 (5 Prozent). Lake Powell liegt 162 Fuß
+    unter Vollstau. Und die Regeln, nach denen das Wasser zwischen sieben US-Bundesstaaten und Mexiko
+    aufgeteilt wird, laufen Ende 2026 aus. Das Wasser wird nicht mehr, die Verhandlung darüber wird härter.
+  </p>
+
+  <h2>2) Die Politik: Warum Wasser keinen Preis hat</h2>
+
+  <p>
+    Hier beginnt der Teil, den die Prospekte weglassen. Öl hat einen Weltmarktpreis, Kupfer hat die LME,
+    Weizen hat Chicago. Wasser hat einen Gemeinderat. In fast allen Ländern der Welt wird der Preis für
+    Trinkwasser nicht am Markt gebildet, sondern von Kommunen, Regulierungsbehörden oder Ministerien
+    festgesetzt. Und dieser Preis deckt in der Regel nicht einmal die Kosten.
+  </p>
+  <p>
+    Die OECD hat das 2024 für die EU nachgerechnet: Im Durchschnitt decken die Wassertarife rund
+    70 Prozent der finanziellen Kosten der Wasserversorgung, die restlichen 30 Prozent kommen aus
+    öffentlichen Kassen. Nur ein Drittel der Mitgliedstaaten erreicht eine Kostendeckung von 100 Prozent
+    oder mehr, ein weiteres Drittel liegt unter 90 Prozent. Umwelt- und Ressourcenkosten, also der Preis
+    dafür, dass ein Aquifer leergepumpt wird, sind dabei noch gar nicht eingerechnet. In ihrer
+    Grundsatzstudie zur Wasserbepreisung schreibt die OECD, dass nur sehr wenige Länder überhaupt versucht
+    haben, die vollen wirtschaftlichen und ökologischen Kosten über den Preis abzubilden.
+  </p>
+  <p>
+    Für einen Kanal, der sich mit Bitcoin und Marktpreisen beschäftigt, ist das der Kern:
+    <strong>Ein Gut ohne Marktpreis sendet keine Knappheitssignale.</strong> Wenn der Liter Wasser in
+    der Wüste dasselbe kostet wie am Bodensee, gibt es keinen Anreiz, ihn dort zu sparen, wo er fehlt.
+    Die „Wasserkrise" ist zu einem großen Teil eine Preiskrise. Sie entsteht nicht, weil das Wasser
+    ausgeht, sondern weil es dort verschenkt wird, wo es knapp ist. Das ist keine linke und keine grüne
+    Erkenntnis, sondern schlichte Preistheorie.
+  </p>
+  <p>
+    Dass es anders geht, zeigt Australien. Im Murray-Darling-Becken werden Wasserrechte und jährliche
+    Zuteilungen seit Jahrzehnten gehandelt. Laut Murray-Darling Basin Authority werden dort jedes Jahr
+    Wasserrechte im Wert von rund 4 Milliarden australischen Dollar umgesetzt, 97 Prozent des gesamten
+    australischen Zuteilungshandels. Das Wasser fließt dorthin, wo es den höchsten Ertrag bringt: von
+    der Reisfarm zur Mandelplantage. Ein Marktpreis für Wasser ist also möglich. Er ist nur fast nirgends
+    politisch gewollt.
+  </p>
+  <p>
+    Was heißt das für den Investor? Wer eine Aktie kauft, weil „Wasser knapper wird", setzt darauf, dass
+    Knappheit sich in Preis übersetzt. Genau das tut sie beim Endprodukt Wasser fast nie. Sie übersetzt
+    sich in etwas anderes: in Kapitalausgaben. Wer weniger Wasser hat, muss es tiefer pumpen, besser
+    reinigen, genauer messen, wiederverwenden oder aus dem Meer holen. Das Geld fließt nicht zum
+    Wasser, sondern zur Technik.
+  </p>
+
+  <h2>3) Die echten Nachfrager: Rohre, Regulierung, Chips und Rechenzentren</h2>
+
+  <p>
+    Die interessante Nachfrage kommt nicht aus Klimakonferenzen, sondern aus vier Richtungen, die mit
+    Ideologie nichts zu tun haben. Sie haben eines gemeinsam: Jemand ist gezwungen, Geld auszugeben.
+  </p>
+  <p>
+    <strong>Marode Netze und Bleileitungen (USA).</strong> Die US-Umweltbehörde EPA hat im Oktober 2024
+    die „Lead and Copper Rule Improvements" verabschiedet: Alle Wasserversorger müssen ihre Bleileitungen
+    innerhalb von zehn Jahren austauschen. Die EPA beziffert die Kosten auf 1,47 bis 1,95 Milliarden
+    Dollar pro Jahr, davon allein 1,17 bis 1,64 Milliarden für den Leitungstausch, und den Nutzen auf bis
+    zu 25 Milliarden Dollar jährlich. 15 Milliarden Dollar aus dem Infrastrukturgesetz sind zweckgebunden
+    für genau diesen Austausch. Wie viele Leitungen es sind, ist bezeichnend unklar: Die EPA-Erhebung von
+    2023 kam auf 9,2 Millionen, das neue EPA-Dashboard vom November 2025 nur noch auf rund 4 Millionen,
+    dafür mit rund 24 Millionen Leitungen „unbekannten Materials". Egal welche Zahl stimmt: Jede dieser
+    Leitungen braucht Rohre, Armaturen, Zähler und Arbeitsstunden.
+  </p>
+  <p>
+    <strong>PFAS-Regulierung.</strong> Im April 2024 hat die EPA erstmals verbindliche Grenzwerte für
+    „Ewigkeitschemikalien" im Trinkwasser gesetzt: 4 Nanogramm pro Liter für PFOA und PFOS. Rund 66.000
+    Wassersysteme müssen überwachen, 4.100 bis 6.700 davon (6 bis 10 Prozent) werden Filteranlagen bauen
+    müssen. Kosten laut EPA: rund 1,5 Milliarden Dollar pro Jahr. Im Mai 2026 hat die EPA vorgeschlagen,
+    die Frist für PFOA und PFOS von 2029 auf 2031 zu verlängern. Verlängert, nicht abgeschafft. Filter, Aktivkohle, Membranen,
+    Analytik: alles Ausrüstergeschäft.
+  </p>
+  <p>
+    <strong>Chipfabriken.</strong> Eine moderne Halbleiterfabrik ist ein Wasserwerk mit angeschlossener
+    Lithografie. TSMC berichtet für 2024 einen Wasserverbrauch von 129 Millionen Kubikmetern (2023:
+    114 Millionen), rund 161 Liter pro Wafer-Schicht. Der Konzern hat in Tainan eigene Aufbereitungsanlagen
+    gebaut, die bis Ende 2024 über 19,65 Millionen Kubikmeter Rezyklat lieferten und dort 17 Prozent des
+    Frischwassers ersetzten. Den eigenen Standort in Arizona stuft TSMC im Wasserrisiko als „hoch" ein. Wer dort baut,
+    kauft Reinstwasseranlagen im dreistelligen Millionenbereich. Das ist der Grund, warum ein japanischer
+    Wasserchemie-Konzern wie Kurita inzwischen wie ein Halbleiter-Zulieferer gehandelt wird.
+  </p>
+  <p>
+    <strong>KI-Rechenzentren.</strong> Das Lawrence Berkeley National Laboratory hat im Dezember 2024 im
+    Auftrag des US-Energieministeriums nachgerechnet: Der direkte Wasserverbrauch der US-Rechenzentren
+    (vor allem Verdunstungskühlung) stieg von 21,2 Milliarden Litern 2014 auf 66 Milliarden Liter 2023.
+    Allein die Hyperscaler sollen 2028 zwischen 60 und 124 Milliarden Liter verbrauchen. Dazu kommt der
+    indirekte Verbrauch über die Stromerzeugung, rund 800 Milliarden Liter im Jahr 2023. Der Stromhunger
+    wächst von 176 Terawattstunden (4,4 Prozent des US-Verbrauchs) auf 325 bis 580 Terawattstunden 2028.
+    Xylem, Watts und Ecolab nennen Rechenzentren inzwischen ausdrücklich als Wachstumstreiber. Nur: Das ist
+    ein KI-Investment mit Wasseranschluss, kein Knappheitsinvestment.
+  </p>
+  <p>
+    <strong>Landwirtschaft.</strong> Drei Viertel des Wassers gehen aufs Feld. Wo Grundwasser sinkt und
+    Zuteilungen gekürzt werden, muss der Landwirt pro Liter mehr Ertrag holen: Kreisberegnung mit Sensorik
+    statt Flutbewässerung. Das ist der direkteste Knappheitsbezug im ganzen Universum. Und gleichzeitig der
+    zyklischste, denn der Landwirt kauft die Anlage nur, wenn der Weizenpreis und das Farmeinkommen stimmen.
+  </p>
+
+  <h2>4) Hype-Check: Was in einem Wasser-ETF tatsächlich steckt</h2>
+
+  <p>
+    Wer den Trend bequem kaufen will, greift zum ETF. Der größte in Europa ist der iShares Global Water
+    UCITS ETF auf den S&amp;P Global Water Index: rund 2,2 Milliarden US-Dollar Volumen, 66 Titel,
+    0,65 Prozent Gebühr pro Jahr (Factsheet Stand 31. August 2026). Ein Blick in die Zusammensetzung ist
+    ernüchternd.
+  </p>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Sektorgewichtung iShares Global Water UCITS ETF (Stand 30.07.2026)</div>
+    <svg viewBox="0 0 720 230" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:720px; display:block; margin:0 auto;">
+      <!-- bars scale: 1 % = 11 px, x0 = 200 -->
+      <text x="190" y="42" text-anchor="end" fill="#ccc" font-size="13" font-family="Arial">Versorger</text>
+      <rect x="200" y="28" width="500" height="22" fill="#ff4444" opacity="0.25" rx="3"/>
+      <rect x="200" y="28" width="500" height="22" fill="none" stroke="#ff4444" stroke-width="1" rx="3"/>
+      <text x="705" y="44" text-anchor="end" fill="#ff4444" font-size="13" font-family="monospace" font-weight="bold">45,5 %</text>
+
+      <text x="190" y="82" text-anchor="end" fill="#ccc" font-size="13" font-family="Arial">Industrie (Ausrüster)</text>
+      <rect x="200" y="68" width="390" height="22" fill="#00ffcc" opacity="0.25" rx="3"/>
+      <rect x="200" y="68" width="390" height="22" fill="none" stroke="#00ffcc" stroke-width="1" rx="3"/>
+      <text x="595" y="84" text-anchor="end" fill="#00ffcc" font-size="13" font-family="monospace" font-weight="bold">35,4 %</text>
+
+      <text x="190" y="122" text-anchor="end" fill="#ccc" font-size="13" font-family="Arial">Materialien (Chemie)</text>
+      <rect x="200" y="108" width="167" height="22" fill="#ffcc00" opacity="0.25" rx="3"/>
+      <rect x="200" y="108" width="167" height="22" fill="none" stroke="#ffcc00" stroke-width="1" rx="3"/>
+      <text x="372" y="124" text-anchor="start" fill="#ffcc00" font-size="13" font-family="monospace" font-weight="bold">15,2 %</text>
+
+      <text x="190" y="162" text-anchor="end" fill="#ccc" font-size="13" font-family="Arial">Energie</text>
+      <rect x="200" y="148" width="16" height="22" fill="#666" opacity="0.25" rx="3"/>
+      <rect x="200" y="148" width="16" height="22" fill="none" stroke="#666" stroke-width="1" rx="3"/>
+      <text x="222" y="164" text-anchor="start" fill="#888" font-size="13" font-family="monospace">1,4 %</text>
+
+      <text x="190" y="202" text-anchor="end" fill="#ccc" font-size="13" font-family="Arial">Sonstige</text>
+      <rect x="200" y="188" width="27" height="22" fill="#666" opacity="0.25" rx="3"/>
+      <rect x="200" y="188" width="27" height="22" fill="none" stroke="#666" stroke-width="1" rx="3"/>
+      <text x="233" y="204" text-anchor="start" fill="#888" font-size="13" font-family="monospace">2,5 %</text>
+    </svg>
+    <p style="font-size:0.8em; color:#666; margin: 0.8em 0 0 0; text-align:center;">Quelle: justETF (Sektoren, Stand 30.07.2026) und iShares-Factsheet (31.08.2026). Top 10 = 55,3 % des Fonds.</p>
+  </div>
+
+  <p>
+    Fast die Hälfte des „Wasser-Trends" besteht aus regulierten Versorgern: American Water Works
+    (8,2 Prozent), SABESP aus Brasilien (6,7 Prozent), Essential Utilities, United Utilities, Severn
+    Trent. Das sind Gebietsmonopole, deren Gewinn eine Behörde festlegt. Sie verdienen nicht mehr, wenn
+    Wasser knapper wird; sie verdienen eine genehmigte Rendite auf ihr investiertes Kapital. Ein Viertel
+    des Fonds hängt an Großbritannien und Brasilien, zwei Ländern, in denen die Wasserregulierung
+    gerade politisch heiß ist. Und der Rest? Xylem als reiner Ausrüster (7,8 Prozent), aber auch Veralto,
+    Ecolab, Geberit und Watts Water, bei denen entweder Wasser nur die Hälfte des Geschäfts ausmacht oder
+    der Bauzyklus die Nachfrage bestimmt, wie wir gleich sehen werden.
+  </p>
+  <p>
+    Kurz: Wer diesen ETF kauft, kauft zu 45 Prozent Anleihe-Ersatz mit Regulierungsrisiko, zu 35 Prozent
+    Industriewerte mit Bauzyklus und zu 15 Prozent Chemie. Das kann eine vernünftige defensive Beimischung
+    sein. Ein Hebel auf Wasserknappheit ist es nicht.
+  </p>
+
+  <h2>5) Die Wertschöpfungskette: Wo das Geld hängen bleibt</h2>
+
+  <p>
+    Um zu verstehen, wer profitiert, hilft ein Blick auf den Weg des Wassers von der Quelle bis zum
+    Abfluss. Auf jeder Stufe gilt ein anderes Preisregime.
+  </p>
+
+  <a href="img/wasser/wasser-diagramm-wertschoepfung.png" target="_blank" title="Vollbild öffnen"><img src="img/wasser/wasser-diagramm-wertschoepfung.png" alt="Wasser-Wertschöpfungskette: Quelle, Aufbereitung, Netz, Verbrauch, Abwasser mit Preisregime und Firmen je Stufe" class="analyzer-img"></a>
+  <p class="img-caption">Fünf Stufen, zwei Preisregime: An Quelle und Abfluss setzt die Politik den Preis, dazwischen verkaufen Ausrüster zu Marktpreisen. <span class="zoom-hint">↗ Zum Vergrößern klicken</span></p>
+
+  <p>
+    An der Quelle (Konzession, Wasserrecht) und am Abfluss (kommunale Gebühr) bestimmt der Staat den
+    Preis. In der Mitte, bei Aufbereitung, Netz und Verbrauchstechnik, herrscht Wettbewerb und
+    Marktpreis. Dort sitzen die Unternehmen mit Preissetzungsmacht, Ersatzteilgeschäft und Service-Verträgen.
+    Und dort ist die Nachfrage am wenigsten ideologisch: Eine PFAS-Filteranlage wird gebaut, weil ein
+    Grenzwert gilt, nicht weil jemand an den Klimawandel glaubt.
+  </p>
+
+  <div class="box">
+    <h3><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-label="Aktienanalyse" role="img"><line x1="7" y1="3" x2="7" y2="7" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><rect x="4" y="7" width="6" height="9" rx="1" fill="#00ffcc"/><line x1="7" y1="16" x2="7" y2="21" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><line x1="16" y1="7" x2="16" y2="11" stroke="#00cc88" stroke-width="1.5" stroke-linecap="round"/><rect x="13" y="11" width="6" height="12" rx="1" fill="none" stroke="#00cc88" stroke-width="1.5"/><line x1="16" y1="23" x2="16" y2="27" stroke="#00cc88" stroke-width="1.5" stroke-linecap="round"/><line x1="25" y1="4" x2="25" y2="9" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><rect x="22" y="9" width="6" height="11" rx="1" fill="#00ffcc"/><line x1="25" y1="20" x2="25" y2="26" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/></svg> Knappheits-Scorecard nach Kategorie</h3>
+    <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Kategorie</th>
+          <th>Hebel auf Knappheit</th>
+          <th>Kern-Argument</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Ausrüster</strong> (Pumpen, Zähler, Analytik)</td>
+          <td><span class="badge-wahrscheinlich">✅ Ja</span></td>
+          <td>Kapex-Zwang durch Regulierung und Netzalter, Marktpreise, Ersatzteil- und Servicegeschäft</td>
+        </tr>
+        <tr>
+          <td><strong>Reinstwasser / Industriewasser</strong></td>
+          <td><span class="badge-wahrscheinlich">✅ Ja, indirekt</span></td>
+          <td>Chipfabriken und Rechenzentren zahlen jeden Preis für Reinheit; Treiber ist aber der Chip-Zyklus</td>
+        </tr>
+        <tr>
+          <td><strong>Entsalzung</strong></td>
+          <td><span class="badge-moeglich">⚠️ Möglich</span></td>
+          <td>Technisch der direkteste Knappheits-Play, aber abhängig von wenigen staatlichen Großprojekten</td>
+        </tr>
+        <tr>
+          <td><strong>Bewässerung</strong></td>
+          <td><span class="badge-moeglich">⚠️ Möglich</span></td>
+          <td>72 Prozent des Wassers gehen aufs Feld, doch der Landwirt kauft nach Farmeinkommen, nicht nach Dürre</td>
+        </tr>
+        <tr>
+          <td><strong>Regulierte Versorger</strong></td>
+          <td><span class="badge-moeglich">⚠️ Kein Hebel</span></td>
+          <td>Genehmigte Rendite auf Rate Base; Knappheit senkt eher den Absatz (Sparauflagen); Anleihe-Ersatz</td>
+        </tr>
+        <tr>
+          <td><strong>Sanitär / Bautechnik</strong></td>
+          <td><span class="badge-unwahrscheinlich">❌ Etikett</span></td>
+          <td>Geberit, Watts, Advanced Drainage: Produkte führen Wasser, Nachfrage folgt dem Bauzyklus</td>
+        </tr>
+        <tr>
+          <td><strong>Mischkonzerne mit Wasser-Etikett</strong></td>
+          <td><span class="badge-unwahrscheinlich">❌ Etikett</span></td>
+          <td>Veolia 40 Prozent Wasser, Ecolab 50 Prozent, Valmont 21 Prozent: der Rest ist Abfall, Hygiene, Strommasten</td>
+        </tr>
+        <tr>
+          <td><strong>Wasserrechte</strong></td>
+          <td><span class="badge-unwahrscheinlich">❌ Spekulation</span></td>
+          <td>Cadiz: 30 Jahre Projekt, 712 Mio. USD kumulierter Verlust, Optionswert ohne Cashflow</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <h2>6) Die Ausrüster: Pumpen, Zähler, Netze</h2>
+
+  <p>
+    Das ist die Kategorie, in der die Analyse ankommt, wenn man die Etiketten abzieht. Die Firmen hier
+    verkaufen an Versorger, Industrie und Brunnenbauer zu Marktpreisen, haben installierte Basen und leben
+    vom Ersatz- und Servicegeschäft. Die Kehrseite: Der Markt weiß das und bezahlt dafür.
+  </p>
+
+  <h3>Xylem (XYL) – der reinste Wasser-Ausrüster der Welt</h3>
+  <p>
+    Xylem ist mit 9,0 Milliarden Dollar Umsatz (2025, plus 5,5 Prozent) der größte börsennotierte
+    Konzern, der ausschließlich Wassertechnik verkauft: Pumpen und Aufbereitung für Versorger (Water
+    Infrastructure, 2,6 Milliarden), Gebäude- und Industriepumpen (Applied Water, 1,8 Milliarden),
+    Zähler und Netzanalytik (Measurement &amp; Control, 2,1 Milliarden) und seit der Evoqua-Übernahme 2023
+    ein Dienstleistungsgeschäft mit mobiler Aufbereitung (Water Solutions &amp; Services, 2,5 Milliarden).
+    Alle vier Segmente sind Wasser. Einzige Unschärfe: Im Zählergeschäft stecken auch Gas- und
+    Stromzähler, deren Anteil nicht ausgewiesen wird.
+  </p>
+  <p>
+    Die aktuelle Lage ist weniger glänzend als die Story. Im zweiten Quartal 2026 wuchs der Umsatz nur um
+    2 Prozent (organisch 1 Prozent), das bereinigte Ergebnis je Aktie dagegen um 16 Prozent auf 1,46
+    Dollar. Der Konzern erwartet für 2026 rund 9,2 Milliarden Umsatz und 5,55 bis 5,70 Dollar Gewinn je
+    Aktie. Die Aktie hat vom Hoch rund ein Viertel verloren, das Wachstum wird also gerade neu bewertet.
+  </p>
+
+  <a href="img/wasser/xyl-qualitaetscheck.png" target="_blank" title="Vollbild öffnen"><img src="img/wasser/xyl-qualitaetscheck.png" alt="Alien Analyzer Qualitätscheck Xylem: KGV 25,9, Debt/Equity 0,29, Gewinnwachstum 39 Prozent, Aktienanzahl plus 35 Prozent in drei Jahren" class="analyzer-img"></a>
+  <p class="img-caption">Xylem im Alien Analyzer: solide Bilanz, starkes Gewinnwachstum, aber KGV 26 und die Aktienzahl ist in drei Jahren um 35 Prozent gestiegen. <span class="zoom-hint">↗ Zum Vergrößern klicken</span></p>
+
+  <p>
+    Zwei Dinge aus dem Qualitätscheck brauchen Einordnung. Erstens: Das historische Durchschnitts-KGV von
+    56 ist durch Sonderjahre mit gedrücktem Gewinn verzerrt; der ehrliche Vergleich ist das aktuelle KGV
+    von 26 gegen ein Wachstum von 5 Prozent organisch. Das ist eine Qualitätsprämie, keine
+    Sicherheitsmarge. Zweitens: Die Verwässerung um 35 Prozent stammt aus der Evoqua-Übernahme, die
+    vollständig in Aktien bezahlt wurde. Das war ein bewusster Tausch von Anteilen gegen Geschäft, kein
+    Kapitalbedarf, und seit dem Zusammenschluss kauft Xylem wieder zurück: per Juli 2026 waren es 233,5
+    Millionen Aktien statt 244 Millionen Ende 2025. Für den Eigentümer trotzdem relevant: Der Kuchen ist größer, das Stück ist kleiner.
+  </p>
+
+  <h3>Franklin Electric (FELE) – die Pumpe im Brunnen</h3>
+  <p>
+    Wenn Grundwasserpegel sinken, müssen Brunnen tiefer werden und Pumpen stärker. Franklin Electric aus
+    Indiana ist Weltmarktführer bei Tauchpumpen und Motoren für genau diese Brunnen: Haushalte,
+    Landwirtschaft, Kommunen. 2025 setzte der Konzern 2,13 Milliarden Dollar um (plus 5,4 Prozent),
+    davon 1,26 Milliarden im Segment Water Systems und 0,70 Milliarden über den eigenen
+    Brunnenbau-Großhandel (Distribution). Das dritte Segment, Kraftstoffpumpen für Tankstellen
+    (0,30 Milliarden), hat mit Wasser nichts zu tun; rund 85 Prozent des Geschäfts hängen aber am
+    Grundwasser.
+  </p>
+  <p>
+    Im zweiten Quartal 2026 wuchs der Umsatz um 6 Prozent auf 623 Millionen Dollar, das bereinigte
+    Ergebnis je Aktie um 18 Prozent auf 1,55 Dollar, und die Prognose für 2026 wurde auf 2,21 bis
+    2,29 Milliarden Umsatz angehoben. Die Bilanz ist fast schuldenfrei (Debt/Equity 0,22), die
+    Aktienzahl sinkt leicht.
+  </p>
+
+  <a href="img/wasser/fele-qualitaetscheck.png" target="_blank" title="Vollbild öffnen"><img src="img/wasser/fele-qualitaetscheck.png" alt="Alien Analyzer Qualitätscheck Franklin Electric: KGV 28,5, PEG 2,5, Debt/Equity 0,22, Eigenkapitalquote 65 Prozent" class="analyzer-img"></a>
+  <p class="img-caption">Franklin Electric: Bilanz wie aus dem Lehrbuch, aber das KGV von 28,5 liegt deutlich über dem eigenen Zehnjahresschnitt von 20. <span class="zoom-hint">↗ Zum Vergrößern klicken</span></p>
+
+  <p>
+    Der Haken ist der Zyklus. Die Nachfrage nach Brunnenpumpen hängt am US-Wohnungsbau und am Wetter,
+    beides steht in der Quartalsmitteilung ausdrücklich als Risiko. Das negative Dreijahres-Gewinnwachstum
+    im Analyzer ist zum Teil ein Einmaleffekt (Pensionsabwicklung 2025 mit 55 Millionen Dollar Aufwand),
+    aber organisch stagniert der Umsatz seit 2022. Wer hier kauft, kauft die These „tiefere Brunnen" zum
+    Preis eines Wachstumswerts.
+  </p>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Unternehmen</th><th>Ticker</th><th>Wasseranteil</th><th>Profil</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Xylem</strong></td>
+        <td>XYL / NYSE</td>
+        <td>~100 %</td>
+        <td>Größter reiner Wassertechnik-Konzern. KGV 26, Netto-Cash-nahe Bilanz. Organisch nur noch 1 bis 5 Prozent Wachstum.</td>
+      </tr>
+      <tr>
+        <td><strong>Franklin Electric</strong></td>
+        <td>FELE / Nasdaq</td>
+        <td>~85 %</td>
+        <td>Weltmarktführer Brunnenpumpen. Fast schuldenfrei. ⚠ Wohnungsbau- und Wetterzyklus.</td>
+      </tr>
+      <tr>
+        <td><strong>Badger Meter</strong></td>
+        <td>BMI / NYSE</td>
+        <td>~86 %</td>
+        <td>Wasserzähler plus Auslesesoftware, 33 Jahre Dividendensteigerung, faktisch schuldenfrei. ⚠ 2026 Umsatz „flach" bei KGV 30, Aktie minus 30 Prozent.</td>
+      </tr>
+      <tr>
+        <td><strong>Watts Water</strong></td>
+        <td>WTS / NYSE</td>
+        <td>~100 % Gebäude</td>
+        <td>Armaturen und Ventile für Gebäude, Q2 2026 plus 19 Prozent durch Rechenzentren. KGV 31,5: KI-Erwartung eingepreist.</td>
+      </tr>
+      <tr>
+        <td><strong>Advanced Drainage</strong></td>
+        <td>WMS / NYSE</td>
+        <td>100 % Regen/Abwasser</td>
+        <td>Kunststoffrohre als Betonersatz, 36 Prozent EBITDA-Marge. Profitiert von Starkregen, nicht von Dürre.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>7) Reinstwasser und Entsalzung: Wo Technik den Preis macht</h2>
+
+  <h3>Kurita Water Industries (6370) – der Wasserwerker der Chipindustrie</h3>
+  <p>
+    Kurita aus Tokio macht nichts anderes als Wasseraufbereitung: Chemie, Anlagen und
+    Betreiberverträge. Die Hälfte des Geschäfts ist klassisches Industriewasser (Kessel, Kühlung,
+    Abwasser), die andere Hälfte Reinstwasser für Halbleiterfabriken in Japan, Korea, Taiwan, den USA und
+    Europa. Im ersten Quartal des Geschäftsjahres (April bis Juni 2026) wuchs der Umsatz um 14 Prozent auf
+    99,9 Milliarden Yen, davon 45,9 Milliarden aus dem Elektroniksegment. Der Auftragseingang stieg um
+    77 Prozent auf 165,7 Milliarden Yen, getrieben von Großaufträgen in den USA und Taiwan. Für das
+    Gesamtjahr erwartet Kurita 425 Milliarden Yen Umsatz.
+  </p>
+
+  <a href="img/wasser/6370-t-qualitaetscheck.png" target="_blank" title="Vollbild öffnen"><img src="img/wasser/6370-t-qualitaetscheck.png" alt="Alien Analyzer Qualitätscheck Kurita: KGV 21, Debt/Equity 0,34, Eigenkapitalquote 60 Prozent, Aktienanzahl sinkt" class="analyzer-img"></a>
+  <p class="img-caption">Kurita: KGV 21 nahe am eigenen Schnitt, solide Bilanz, Rückkäufe. Werte in Yen. Das negative Dreijahres-Gewinnwachstum stammt aus Sondereffekten im Geschäftsjahr 2025/26. <span class="zoom-hint">↗ Zum Vergrößern klicken</span></p>
+
+  <p>
+    Kurita ist der Beweis für die These dieser Analyse: Der Preis für Wasser spielt hier keine Rolle, der
+    Preis für Reinheit schon. Eine Chipfabrik zahlt, was es kostet. Das Risiko liegt woanders: Die Marge
+    im Elektroniksegment fiel im Quartal auf 8,9 Prozent (Vorjahr 12,3), weil große Projekte Anlaufkosten
+    verursachen, und der Yen schwankt. Wer Kurita kauft, kauft den Halbleiter-Kapex-Zyklus mit
+    Wasseranschluss. Das ist eine gute Position, aber man sollte wissen, was man hält.
+  </p>
+
+  <h3>Energy Recovery (ERII) – die Entsalzung und ihr Preis</h3>
+  <p>
+    Wenn es einen reinen Knappheits-Play gibt, dann diesen. Energy Recovery aus Kalifornien baut
+    Druckaustauscher (PX Pressure Exchanger), die in Meerwasser-Entsalzungsanlagen laut
+    Unternehmensangabe bis zu 60 Prozent der Energie sparen. Ohne Entsalzung gäbe es in Saudi-Arabien und
+    den Emiraten kein Trinkwasser. Die Bruttomarge von 75 Prozent im letzten Quartal (rund 65 Prozent im Gesamtjahr 2025) zeigt, wie
+    stark die Technik ist.
+  </p>
+  <p>
+    Und trotzdem ist der Umsatz im zweiten Quartal 2026 um 57 Prozent auf 12,0 Millionen Dollar
+    eingebrochen: Die Megaprojekte im Golf wurden wegen des Iran-Konflikts und Finanzierungsproblemen
+    verschoben, das Geschäft mit Anlagenbauern fiel um über 80 Prozent. Der Konzern schrieb einen
+    Quartalsverlust von 3,2 Millionen Dollar und hat die Jahresprognose zurückgezogen. Die Aktie hat
+    binnen zwölf Monaten fast die Hälfte verloren. Das Unternehmen hat rund 98 Millionen Dollar Cash und keine Schulden,
+    wird also nicht verschwinden. Aber es lebt von wenigen staatlichen Großaufträgen.
+  </p>
+
+  <a href="img/wasser/erii-qualitaetscheck.png" target="_blank" title="Vollbild öffnen"><img src="img/wasser/erii-qualitaetscheck.png" alt="Alien Analyzer Qualitätscheck Energy Recovery: KGV 29,6, keine Dividende, Eigenkapitalquote 87 Prozent, Rückkäufe" class="analyzer-img"></a>
+  <p class="img-caption">Energy Recovery: Eigenkapitalquote 87 Prozent, Rückkäufe, aber negatives Gewinnwachstum. Das Debt/Equity von 4,8 ist ein Datenfehler bei Yahoo Finance; laut Bilanz hält die Firma Netto-Cash. <span class="zoom-hint">↗ Zum Vergrößern klicken</span></p>
+
+  <p>
+    Die Lehre ist unbequem: Genau dort, wo Wasser am knappsten ist, bezahlt der Staat die Anlagen. Und
+    Staaten bauen, wenn der Ölpreis und die Geopolitik es zulassen, nicht wenn der Aquifer es verlangt.
+    Der reinste Knappheits-Play ist damit der volatilste Titel der Liste.
+  </p>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Unternehmen</th><th>Ticker</th><th>Wasseranteil</th><th>Profil</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Kurita Water</strong></td>
+        <td>6370 / Tokio</td>
+        <td>100 %</td>
+        <td>Reinstwasser für Chipfabriken plus Industriewasser. Auftragseingang plus 77 Prozent. ⚠ Halbleiterzyklus, Yen, dünne Nettomarge.</td>
+      </tr>
+      <tr>
+        <td><strong>Energy Recovery</strong></td>
+        <td>ERII / Nasdaq</td>
+        <td>~100 %</td>
+        <td>Energierückgewinnung für Entsalzung, Bruttomarge 65 bis 75 Prozent, Netto-Cash. ⚠ Umsatz minus 57 Prozent, Klumpenrisiko Golfregion.</td>
+      </tr>
+      <tr>
+        <td><strong>Ecolab</strong></td>
+        <td>ECL / NYSE</td>
+        <td>~50 %</td>
+        <td>Industriewasser-Chemie ist die Hälfte, der Rest Hygiene, Schädlingsbekämpfung, Pharma. Zukäufe Ovivo (Reinstwasser) und CoolIT (Rechenzentrumskühlung). KGV 37.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>8) Bewässerung: Der direkteste Bezug, der zyklischste Absatz</h2>
+
+  <h3>Lindsay Corporation (LNN) – Kreisberegnung aus Nebraska</h3>
+  <p>
+    Lindsay baut Kreisberegnungsanlagen (Zimmatic) mit Fernsteuerung und Sensorik (FieldNET). Rund
+    83 Prozent des Umsatzes stammen aus Bewässerung, der Rest aus Straßensicherheitstechnik. Das ist
+    Wassereffizienz auf dem Feld, dort, wo drei Viertel des Wassers verbraucht werden. Es gibt weltweit nur
+    zwei große Anbieter dieser Technik, Lindsay und Valmont.
+  </p>
+  <p>
+    Das Geschäftsjahr zeigt den Zyklus in Reinform: Im dritten Quartal (bis Ende Mai 2026) fiel der
+    Umsatz um 5 Prozent auf 161 Millionen Dollar, Bewässerung in Nordamerika um 11 Prozent, weil schwache
+    Agrarpreise die Landwirte bremsen. Ein Großprojekt im Nahen Osten (rund 70 Millionen Dollar Umsatz im
+    Geschäftsjahr) läuft aus. Das Ergebnis je Aktie sank auf 1,53 Dollar (Vorjahr 1,78).
+  </p>
+
+  <a href="img/wasser/lnn-qualitaetscheck.png" target="_blank" title="Vollbild öffnen"><img src="img/wasser/lnn-qualitaetscheck.png" alt="Alien Analyzer Qualitätscheck Lindsay: KGV 23,6, PEG 5,6, Debt/Equity 0,28, Aktienanzahl 11 Millionen" class="analyzer-img"></a>
+  <p class="img-caption">Lindsay: gesunde Bilanz, nur 11 Millionen Aktien, aber KGV 24 bei 4 Prozent Gewinnwachstum. Der Markt bezahlt die Dürre-Story, die Landwirte bezahlen nach Weizenpreis. <span class="zoom-hint">↗ Zum Vergrößern klicken</span></p>
+
+  <p>
+    Das ist das Dilemma der Bewässerung: Der Knappheitsbezug ist so direkt wie nirgends sonst, aber der
+    Kunde kauft nach Farmeinkommen. Dürre erhöht den Bedarf und senkt gleichzeitig die Kaufkraft. Für den
+    langfristigen Eigentümer ist Lindsay ein solides Familienunternehmen mit kleinem Aktienbestand, das
+    man in Agrar-Tiefphasen anschaut, nicht in Dürre-Schlagzeilen.
+  </p>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Unternehmen</th><th>Ticker</th><th>Wasseranteil</th><th>Profil</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Lindsay</strong></td>
+        <td>LNN / NYSE</td>
+        <td>~83 %</td>
+        <td>Kreisberegnung plus Sensorik. Solide Bilanz, 11 Mio. Aktien. ⚠ Agrarzyklus, Projektklumpen Nahost.</td>
+      </tr>
+      <tr>
+        <td><strong>Valmont</strong></td>
+        <td>VMI / NYSE</td>
+        <td>~22 %</td>
+        <td>Der andere Beregnungsanbieter (Valley), aber 78 Prozent des Umsatzes sind Stahlmasten für Stromnetze. Ein Netzausbau-Titel mit Bewässerungsanhängsel.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>9) Regulierte Versorger: Anleihe-Ersatz, kein Hebel</h2>
+
+  <h3>American Water Works (AWK) – die Rate Base als Geschäftsmodell</h3>
+  <p>
+    American Water Works ist der größte börsennotierte Wasserversorger der USA: rund 14 Millionen
+    Menschen in 14 Bundesstaaten. 2025 stieg der Umsatz um 9,7 Prozent auf 5,14 Milliarden Dollar, der
+    Nettogewinn lag bei 1,11 Milliarden. Der Konzern investiert 2026 rund 3,7 Milliarden Dollar in Netze
+    und will Gewinn und Dividende langfristig um 7 bis 9 Prozent pro Jahr steigern. Die Fusion mit
+    Essential Utilities, im Oktober 2025 angekündigt und im Februar 2026 von den Aktionären gebilligt,
+    macht ihn noch größer.
+  </p>
+  <p>
+    Das Geschäftsmodell ist einfach und hat mit Knappheit nichts zu tun: Der Versorger investiert in Rohre,
+    die Regulierungsbehörde genehmigt eine Rendite auf dieses investierte Kapital (die „Rate Base"), und
+    die Kunden zahlen den Tarif. Mehr Investitionen bedeuten mehr genehmigten Gewinn. Weniger Wasser
+    bedeutet, wenn überhaupt, weniger Absatz, weil Sparauflagen greifen. Der Bleileitungstausch und die
+    PFAS-Regel aus Abschnitt 3 sind für AWK deshalb kein Kostenproblem, sondern Wachstum der Rate Base.
+  </p>
+
+  <a href="img/wasser/awk-qualitaetscheck.png" target="_blank" title="Vollbild öffnen"><img src="img/wasser/awk-qualitaetscheck.png" alt="Alien Analyzer Qualitätscheck American Water Works: KGV 24,3, Debt/Equity 1,38 strukturell, Free Cashflow minus 1,8 Milliarden, Verwässerung" class="analyzer-img"></a>
+  <p class="img-caption">AWK: negativer freier Cashflow, strukturelle Verschuldung, laufende Aktienemissionen. Für einen regulierten Versorger normal, für einen „Knappheits-Play" das falsche Werkzeug. <span class="zoom-hint">↗ Zum Vergrößern klicken</span></p>
+
+  <p>
+    Der Analyzer zeigt das ehrlich: Der freie Cashflow ist mit minus 1,8 Milliarden Dollar tief negativ,
+    weil jeder Dollar Gewinn und noch einer obendrauf in Rohre fließt; finanziert wird das über Schulden
+    (Nettoverschuldung rund das 5,5-Fache des EBITDA) und Aktienemissionen. Die Kapitalrendite liegt bei
+    rund 4,6 Prozent, also nur so hoch, wie die Behörde es erlaubt. Bei einem KGV von 24 und 2,5 Prozent
+    Dividendenrendite kauft man hier eine regulierte Anleihe mit Wachstumsklausel. Das kann sinnvoll sein.
+    Es ist nur kein Wasser-Investment im Sinne dieser Analyse, und im Zinsanstieg wird es teuer.
+  </p>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Unternehmen</th><th>Ticker</th><th>Wasseranteil</th><th>Profil</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>American Water Works</strong></td>
+        <td>AWK / NYSE</td>
+        <td>~100 % reguliert</td>
+        <td>Größter US-Wasserversorger, 7 bis 9 Prozent Zielwachstum, Fusion mit Essential Utilities. ⚠ Negativer FCF, Net Debt/EBITDA 5,5, Zinsrisiko.</td>
+      </tr>
+      <tr>
+        <td><strong>Severn Trent</strong></td>
+        <td>SVT / London</td>
+        <td>~93 % reguliert</td>
+        <td>Englische Midlands, 4,2 Prozent Dividende bei Ausschüttungsquote nahe 100 Prozent. ⚠ Bereinigte Nettoschulden 10 Mrd. Pfund, Regulierungsdruck der britischen Wasserbranche.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>10) Der Etiketten-Check: Veolia und Geberit</h2>
+
+  <p>
+    Zwei europäische Titel stehen in fast jedem Wasser-Fonds. Beide sind gute Unternehmen. Beide sind
+    keine Wasser-Investments.
+  </p>
+
+  <h3>Veolia (VIE) – 40 Prozent Wasser, 60 Prozent etwas anderes</h3>
+  <p>
+    Veolia ist nach dem Suez-Zusammenschluss von 2022 der größte Umweltdienstleister der Welt mit
+    44,4 Milliarden Euro Umsatz (2025) und über 200.000 Mitarbeitern. Das Wassergeschäft (Konzessionen,
+    Betrieb, Wassertechnik) bringt 17,7 Milliarden Euro, also 39,9 Prozent. Der Rest ist Abfall
+    (15,4 Milliarden, 34,8 Prozent) und Energie, vor allem Fernwärme (11,3 Milliarden, 25,4 Prozent).
+    Die jüngsten Zukäufe (Clean Earth, Sondermüll in den USA, rund 3 Milliarden Dollar) verschieben das
+    Gewicht weiter weg vom Wasser. Die Wassertechnik-Sparte schrumpfte im ersten Halbjahr 2026 sogar um
+    knapp 5 Prozent.
+  </p>
+
+  <a href="img/wasser/vie-pa-qualitaetscheck.png" target="_blank" title="Vollbild öffnen"><img src="img/wasser/vie-pa-qualitaetscheck.png" alt="Alien Analyzer Qualitätscheck Veolia: KGV 18,6, Dividendenrendite 4,7 Prozent, Debt/Equity 2,5, Eigenkapitalquote 14,6 Prozent" class="analyzer-img"></a>
+  <p class="img-caption">Veolia: 4,7 Prozent Dividende und faires KGV, dafür Eigenkapitalquote unter 15 Prozent und rund 19,7 Milliarden Euro Nettofinanzschulden. Ein Infrastruktur-Konglomerat, kein Wasserwert. <span class="zoom-hint">↗ Zum Vergrößern klicken</span></p>
+
+  <p>
+    Als Dividendentitel mit Konzessionen ist Veolia diskutabel, die Nettomarge liegt aber bei 2 bis
+    3 Prozent und die Dividende von 1,50 Euro verbraucht fast den gesamten berichteten Gewinn. Wer hier
+    „Wasser" kauft, bekommt zu 60 Prozent Müllwagen und Heizkraftwerke mitgeliefert.
+  </p>
+
+  <h3>Geberit (GEBN) – Schweizer Qualität, aber Bauzyklus</h3>
+  <p>
+    Geberit aus Rapperswil-Jona ist im Wasser-ETF mit gut 3 Prozent gewichtet, und auf den ersten Blick
+    passt es: Spülkästen, Vorwandinstallationen, Trinkwasser- und Abwasserrohre im Gebäude, alles führt
+    Wasser. Die Margen sind außergewöhnlich (EBITDA-Marge 30,9 Prozent im ersten Halbjahr 2026), der
+    Konzern hat Preissetzungsmacht und eine loyale Installateurbasis. Als Namenaktie an der SIX ist Geberit
+    zudem das, was dieser Kanal an Eigentum schätzt.
+  </p>
+  <p>
+    Nur: Die Nachfrage folgt dem europäischen Bauzyklus, nicht der Wasserknappheit. Der Umsatz lag 2021
+    bei 3,46 Milliarden Franken und 2025 bei 3,16 Milliarden, in Franken also fünf Jahre lang kein
+    Wachstum (in Lokalwährungen mehr, der starke Franken drückt). Wassersparen kommt allenfalls bei der
+    Spültechnik vor. Ein Bau-Qualitätstitel mit KGV 30 und 2,3 Prozent Dividende, der im Wasser-Index
+    steht, weil der Indexanbieter eine Kategorie brauchte.
+  </p>
+
+  <a href="img/wasser/gebn-sw-fairer-wert.png" target="_blank" title="Vollbild öffnen"><img src="img/wasser/gebn-sw-fairer-wert.png" alt="Alien Analyzer Fairer Wert Geberit: Kurs im Fair-Value-Band, KGV 29,4 gegen Zehnjahresschnitt 27,5, KBV 16" class="analyzer-img"></a>
+  <p class="img-caption">Geberit im Fair-Value-Tab: Der Kurs liegt im historischen Bewertungsband, das KGV von 29 nahe am eigenen Zehnjahresschnitt. Fair bewertet, für einen Bauzyklus-Titel. <span class="zoom-hint">↗ Zum Vergrößern klicken</span></p>
+
+  <div class="box" style="border-color: #00ffcc; background: #020d0a;">
+    <p style="margin: 0 0 0.5em 0; font-size: 0.8em; color: #00ffcc; font-family: monospace; letter-spacing: 1px; text-transform: uppercase;">Tool-Tipp</p>
+    <p style="margin: 0 0 0.6em 0;"><strong>Alle Kennzahlen-Screenshots in dieser Analyse stammen aus dem Alien Analyzer V2</strong>, dem eigenen Screening-Tool für Aktien. Fairer Wert, Multiples, Dividenden und Qualitätscheck auf einen Blick, für jeden Ticker. Kostenlos, kein Login, kein Abo.</p>
+    <p style="margin: 0; font-size: 0.95em;"><a href="alien-analyzer.html"><strong>alien-investor.org/alien-analyzer</strong></a> – Ticker eingeben, analysieren.</p>
+  </div>
+
+  <h2>11) Was man besser meidet</h2>
+
+  <h3>Wasserrechte-Spekulation: Cadiz (CDZI)</h3>
+  <p>
+    Cadiz besitzt rund 46.000 Acres Land über einem Aquifer in der Mojave-Wüste und ein genehmigtes
+    Wasserrecht über 2,5 Millionen Acre-Feet in 50 Jahren. Der Plan: eine 220 Meilen lange Pipeline zu den
+    Versorgern Südkaliforniens. Das klingt nach dem perfekten Knappheits-Play. Der Konzern versucht das
+    Projekt seit den 1990er Jahren.
+  </p>
+  <p>
+    Die Bilanz erzählt den Rest: kumuliertes Defizit von 712 Millionen Dollar, 5,3 Millionen Dollar Cash
+    zum 30. Juni 2026 bei rund 120 Millionen Schulden mit 15,4 Prozent effektivem Zins, und ein
+    Projekt-Kapitalbedarf, der zuletzt auf 1,25 bis
+    1,5 Milliarden Dollar geschätzt wurde. Der laufende Umsatz (Wasserfilter, Landwirtschaft) lag im
+    ersten Halbjahr 2026 bei 2,6 Millionen Dollar. Die Aktienzahl ist in drei Jahren um 49 Prozent
+    gestiegen.
+  </p>
+
+  <a href="img/wasser/cdzi-qualitaetscheck.png" target="_blank" title="Vollbild öffnen"><img src="img/wasser/cdzi-qualitaetscheck.png" alt="Alien Analyzer Qualitätscheck Cadiz: kein KGV, negativer Free Cashflow, Eigenkapitalquote 3,5 Prozent, Aktienanzahl plus 49 Prozent" class="analyzer-img"></a>
+  <p class="img-caption">Cadiz im Analyzer: kein Gewinn, negativer Cashflow, Eigenkapitalquote 3,5 Prozent, Verwässerung als Geschäftsmodell. Die Einordnung des Tools sagt es selbst: Kein Score der Welt bewertet das für dich. <span class="zoom-hint">↗ Zum Vergrößern klicken</span></p>
+
+  <p>
+    Cadiz ist keine Aktie, sondern eine Option auf kalifornische Wasserpolitik. Vielleicht kommt die
+    Pipeline. Vielleicht wird das Wasserrecht irgendwann Milliarden wert. Bis dahin finanziert der Aktionär
+    Zinsen von 15 Prozent und jährliche Verluste von 30 bis 40 Millionen Dollar. Das Wasserrecht selbst
+    zeigt das Problem aus Abschnitt 2 in Reinform: Es hat einen Wert, aber keinen Markt.
+  </p>
+
+  <h3>Etiketten und Zeitpunkte</h3>
+  <ul>
+    <li>
+      <strong>Mischkonzerne unter Wasser-Etikett:</strong> Veolia (40 Prozent Wasser), Ecolab
+      (50 Prozent), Valmont (21 Prozent). Wer diese Firmen mag, soll sie wegen des Gesamtgeschäfts kaufen,
+      nicht wegen der Wasserstory.
+    </li>
+    <li>
+      <strong>Bauzyklus-Titel als „Wasser":</strong> Geberit, Watts, Advanced Drainage. Gute
+      Unternehmen, falsche Schublade.
+    </li>
+    <li>
+      <strong>Ausrüster nach der Dürre-Schlagzeile:</strong> Badger Meter (KGV 30 bei Nullwachstum
+      2026), Watts (KGV 31,5 nach plus 29 Prozent Kurs) und Ecolab (KGV 37 bei 2 Prozent Umsatzwachstum)
+      zeigen, was passiert, wenn der Markt die Story vor den Zahlen kauft. Die These stimmt, der Preis
+      nicht.
+    </li>
+    <li>
+      <strong>Versorger als Zins-Wette:</strong> Wer AWK oder Severn Trent kauft, wettet auf sinkende
+      Zinsen und milde Regulierer, nicht auf Wasser.
+    </li>
+  </ul>
+
+  <h2>12) Wie man positioniert – ein Denkrahmen</h2>
+
+  <p>
+    Aus Sicht des langfristigen Mit-Eigentümers ergibt sich aus dieser Analyse keine Kaufliste, sondern
+    eine Reihenfolge, in der man denken sollte:
+  </p>
+
+  <ul>
+    <li>
+      <strong>Zuerst die Frage nach dem Preisregime.</strong> Verkauft das Unternehmen zu Marktpreisen
+      (Ausrüster, Chemie, Technik) oder zu genehmigten Preisen (Versorger)? Nur die erste Gruppe kann von
+      Knappheit profitieren, die zweite lebt von der Behörde.
+    </li>
+    <li>
+      <strong>Dann der Wasseranteil.</strong> Unter 80 Prozent Umsatz aus Wasser ist es kein
+      Wasser-Investment. Xylem, Badger Meter, Kurita, Energy Recovery und Lindsay bestehen diesen Test,
+      Franklin Electric knapp. Veolia, Ecolab und Valmont fallen durch.
+    </li>
+    <li>
+      <strong>Dann der Zyklus hinter dem Trend.</strong> Franklin und Lindsay hängen am Wohnungsbau und
+      Farmeinkommen, Kurita am Chip-Kapex, Energy Recovery an Golfstaaten-Budgets. Der Wassertrend ist
+      langsam und strukturell, die Umsätze dieser Firmen sind es nicht. Das ist die Chance: Man kann
+      strukturelle Nachfrage in zyklischen Tiefs kaufen.
+    </li>
+    <li>
+      <strong>Zuletzt der Preis.</strong> Fast das gesamte Ausrüster-Universum handelt zwischen KGV 24 und
+      31. Das ist die Prämie, die der Markt für eine bekannte Story verlangt. Sicherheitsmarge gibt es
+      derzeit nur dort, wo ein Zyklus gerade dreht (Energy Recovery nach dem Einbruch, Badger Meter nach
+      minus 30 Prozent, Lindsay im Agrartief), und dort mit dem Risiko, das der Kurs schon anzeigt.
+    </li>
+    <li>
+      <strong>Eigentum statt Fonds.</strong> Wer den Trend über einen ETF kauft, hält zu 45 Prozent
+      Versorger und zahlt 0,65 Prozent im Jahr dafür. Wer stattdessen zwei oder drei Ausrüster direkt
+      hält, kann US-Aktien wie Xylem, Franklin Electric oder Lindsay per DRS auf den eigenen Namen
+      eintragen lassen und Schweizer Namenaktien wie Geberit ins Aktienregister nehmen. Echtes Eigentum
+      statt Fondsanteil, wie in
+      <a href="buecher.html">„Das dezentrale System"</a> beschrieben.
+    </li>
+  </ul>
+
+  <div class="recommendation-box">
+    <h3>Weiterführender Research</h3>
+    <p>
+      Die Trend-Analyse zum Rohstoff-Superzyklus arbeitet mit derselben Frage: Knappheit oder Hype?<br>
+      <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="rohstoff-superzyklus-analyse.html">Rohstoff-Superzyklus 2026 – Selektiv, strukturell, substanziell</a>
+    </p>
+  </div>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Chancen &amp; Risiken im Überblick</div>
+    <svg viewBox="0 0 680 290" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:680px; display:block; margin:0 auto;">
+      <text x="160" y="22" text-anchor="middle" fill="#00cc66" font-size="12" font-family="monospace" letter-spacing="2">CHANCEN</text>
+      <line x1="20" y1="28" x2="300" y2="28" stroke="#00cc66" stroke-width="1" opacity="0.4"/>
+
+      <rect x="20" y="38" width="280" height="48" fill="#001a0d" rx="5" stroke="#00cc66" stroke-width="0.5" opacity="0.7"/>
+      <text x="32" y="57" fill="#00cc66" font-size="12" font-family="monospace" font-weight="bold">Kapex-Zwang durch Regulierung</text>
+      <text x="32" y="74" fill="#777" font-size="10" font-family="Arial">Blei-Austausch 10 Jahre, PFAS-Grenzwerte bis 2031</text>
+
+      <rect x="20" y="95" width="280" height="48" fill="#001a0d" rx="5" stroke="#00cc66" stroke-width="0.5" opacity="0.7"/>
+      <text x="32" y="114" fill="#00cc66" font-size="12" font-family="monospace" font-weight="bold">Chips und Rechenzentren</text>
+      <text x="32" y="131" fill="#777" font-size="10" font-family="Arial">Reinstwasser, Kühlung: 66 Mrd. Liter (2023) und steigend</text>
+
+      <rect x="20" y="152" width="280" height="48" fill="#001a0d" rx="5" stroke="#00cc66" stroke-width="0.5" opacity="0.7"/>
+      <text x="32" y="171" fill="#00cc66" font-size="12" font-family="monospace" font-weight="bold">Sinkende Grundwasserpegel</text>
+      <text x="32" y="188" fill="#777" font-size="10" font-family="Arial">36 % der Aquifere fallen über 10 cm/Jahr: tiefere Brunnen</text>
+
+      <rect x="20" y="209" width="280" height="48" fill="#001a0d" rx="5" stroke="#00cc66" stroke-width="0.5" opacity="0.7"/>
+      <text x="32" y="228" fill="#00cc66" font-size="12" font-family="monospace" font-weight="bold">Zyklische Einstiege</text>
+      <text x="32" y="245" fill="#777" font-size="10" font-family="Arial">Strukturelle Nachfrage, zyklische Kurse (ERII, BMI, LNN)</text>
+
+      <text x="520" y="22" text-anchor="middle" fill="#ff4444" font-size="12" font-family="monospace" letter-spacing="2">RISIKEN</text>
+      <line x1="380" y1="28" x2="660" y2="28" stroke="#ff4444" stroke-width="1" opacity="0.4"/>
+
+      <rect x="380" y="38" width="280" height="48" fill="#1a0808" rx="5" stroke="#ff4444" stroke-width="0.5" opacity="0.7"/>
+      <text x="392" y="57" fill="#ff4444" font-size="12" font-family="monospace" font-weight="bold">Bewertungsprämie</text>
+      <text x="392" y="74" fill="#777" font-size="10" font-family="Arial">Ausrüster mit KGV 24 bis 31 bei 1 bis 6 % Wachstum</text>
+
+      <rect x="380" y="95" width="280" height="48" fill="#1a0808" rx="5" stroke="#ff4444" stroke-width="0.5" opacity="0.7"/>
+      <text x="392" y="114" fill="#ff4444" font-size="12" font-family="monospace" font-weight="bold">Politischer Preis</text>
+      <text x="392" y="131" fill="#777" font-size="10" font-family="Arial">Tarife decken nur 70 % der Kosten, Regulierer entscheiden</text>
+
+      <rect x="380" y="152" width="280" height="48" fill="#1a0808" rx="5" stroke="#ff4444" stroke-width="0.5" opacity="0.7"/>
+      <text x="392" y="171" fill="#ff4444" font-size="12" font-family="monospace" font-weight="bold">Projekt- und Agrarzyklen</text>
+      <text x="392" y="188" fill="#777" font-size="10" font-family="Arial">Golf-Megaprojekte, Farmeinkommen, Wohnungsbau, Chip-Kapex</text>
+
+      <rect x="380" y="209" width="280" height="48" fill="#1a0808" rx="5" stroke="#ff4444" stroke-width="0.5" opacity="0.7"/>
+      <text x="392" y="228" fill="#ff4444" font-size="12" font-family="monospace" font-weight="bold">Etiketten-Falle</text>
+      <text x="392" y="245" fill="#777" font-size="10" font-family="Arial">ETF = 45 % Versorger; Veolia, Ecolab, Valmont nur teilweise Wasser</text>
+    </svg>
+  </div>
+
+  <h2>13) Alien-Fazit <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-3461a3)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-3461a3)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg></h2>
+
+  <p>
+    Ist an dem Trend etwas dran? Ja, und zwar an einem anderen Ende als dem, das verkauft wird. Die
+    Knappheit ist messbar, aber sie ist regional und sie ist zu einem großen Teil eine Folge davon, dass
+    Wasser fast nirgends einen Preis hat. Wer auf „das neue Öl" setzt, setzt auf einen Markt, den es
+    nicht gibt.
+  </p>
+  <p>
+    Was es gibt, ist Kapitalzwang. Bleileitungen, PFAS-Grenzwerte, Chipfabriken, Rechenzentren und sinkende
+    Grundwasserpegel zwingen Versorger, Industrie und Landwirte zu Investitionen, unabhängig davon, was
+    sie vom Klimawandel halten. Dieses Geld landet bei den Ausrüstern: Xylem, Franklin Electric, Badger
+    Meter, Kurita, Energy Recovery, Lindsay. Das ist die Substanz hinter dem Trend, und sie ist nicht
+    grün, sondern aus Edelstahl.
+  </p>
+  <p>
+    Die heiße Luft steckt woanders: in Fonds, die zu 45 Prozent regulierte Versorger halten und das als
+    Wasserknappheit verkaufen, in Mischkonzernen, die ein Wasser-Etikett tragen, und in Wasserrechten
+    ohne Markt. Und sie steckt in den Bewertungen: Der Markt kennt die Ausrüster-Story und verlangt KGVs
+    zwischen 24 und 31 für Firmen, die organisch einstellig wachsen. Die These ist richtig. Der Preis ist
+    es meistens nicht. Der geduldige Eigentümer wartet auf den Zyklus, der bei jedem dieser Titel
+    irgendwann dreht, und kauft dann Substanz, nicht Schlagzeile.
+  </p>
+
+  <blockquote>
+    „Knappheit ohne Preis ist kein Markt, sondern ein Verteilungskampf. Investiere in die, die das
+    Werkzeug dafür liefern, nicht in die, die um das Wasser streiten." <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-3461a3)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg>
+  </blockquote>
+
+  <div class="box" style="border-style: dashed; border-color: #333;">
+    <h3>Disclaimer</h3>
+    <p style="font-size:0.95em; color: #ccc;">
+      Diese Analyse ist keine Anlageberatung und enthält keine Kursziele. Alle Kennzahlen sind
+      Momentaufnahmen vom September 2026 aus dem Alien Analyzer V2 (Datenbasis Yahoo Finance) und aus
+      Unternehmensmitteilungen; einzelne Analyzer-Werte können durch Datenlücken verzerrt sein und sind im
+      Text entsprechend eingeordnet. Ich halte zum Zeitpunkt der Veröffentlichung keine der genannten
+      Aktien. Prüfe alles selbst.
+    </p>
+  </div>
+
+  <div class="box">
+    <h3>Tools für echte Eigentümer</h3>
+    <p style="font-size:0.95em;">
+      Wenn du Aktien und Bitcoin möglichst eigenverantwortlich halten willst, nutze nicht nur dein Bankdepot:
+    </p>
+    <ul>
+      <li>
+        <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Blitz" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> <strong>Bitcoin kaufen in Europa – 21bitcoin:</strong><br>
+        Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges Sats stapeln – ohne Shitcoins.<br>
+        Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du dauerhaft 0,2&nbsp;Prozentpunkte Gebührenreduktion
+        auf Sofort- und Sparplankäufe.<br>
+        <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a>
+      </li>
+      <li>
+        ₿ <strong>Bitcoin in Selbstverwahrung:</strong><br>
+        Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox – klassische BitBox02 und die neue
+        BitBox für iPhone (Nova).<br>
+        <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a>
+      </li>
+      <li>
+        <svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-label="Satellitenschüssel" role="img"><path d="M4 24 A16 16 0 0 1 20 8" fill="#00ffcc" fill-opacity="0.06" stroke="#00ffcc" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="8" r="2.8" fill="#00ffcc"/><line x1="20" y1="8" x2="28" y2="4" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><path d="M15 13 A6 6 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/><path d="M12 16 A9 9 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.45"/></svg> <strong>Privacy &amp; Mail:</strong><br>
+        Für E-Mail, VPN und Cloud nutze ich Proton – datensparsam und ohne Big-Tech-Abhängigkeit.<br>
+        <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a>
+      </li>
+    </ul>
+    <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">
+      Hinweis: Bei einigen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, unterstützt du meine Arbeit,
+      ohne dass es dich mehr kostet. Danke! <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-aff" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-aff)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg>
+    </p>
+  </div>
+
+  <div class="box" style="border-style: dashed; border-color: #333;">
+    <h3>Quellen (Auswahl)</h3>
+    <p style="font-size:0.95em; color: #ccc;">
+      World Resources Institute, Aqueduct Water Risk Atlas (2023); FAO AQUASTAT (2025); Jasechko et al.,
+      „Rapid groundwater decline and some cases of recovery in aquifers globally", Nature (2024); US Bureau
+      of Reclamation, August 2025 24-Month Study; OECD, „Cost recovery for water services under the Water
+      Framework Directive" (2024) und „Pricing Water Resources and Water and Sanitation Services" (2010);
+      Murray-Darling Basin Authority und ABARES (Wassermärkte); US EPA, Lead and Copper Rule Improvements
+      (2024) und PFAS National Primary Drinking Water Regulation (2024/2026); Lawrence Berkeley National
+      Laboratory, „2024 United States Data Center Energy Usage Report"; TSMC Annual Report 2024; iShares
+      und justETF (Fondsdaten, Stand 30.07.2026); Quartals- und Jahresberichte der genannten Unternehmen
+      (Xylem, Franklin Electric, Kurita, Energy Recovery, Lindsay, American Water Works, Veolia, Geberit,
+      Cadiz, Badger Meter, Severn Trent, Ecolab, Valmont, Watts, Advanced Drainage Systems); Alien Analyzer
+      V2 (Kennzahlen, Datenbasis Yahoo Finance). Stand: 9. September 2026.
+    </p>
+  </div>
+
+  <div class="like-button">
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-3461a3)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Gefällt mir</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+
+  <script>
+    (function() {
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      const btn = document.getElementById('likeButton');
+      const msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
+        btn.disabled = true;
+        btn.textContent = '✓ Danke!';
+        msg.textContent = 'Freut mich, dass dir der Artikel gefallen hat.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '✓ Danke!';
+        msg.textContent = 'Freut mich, dass dir der Artikel gefallen hat.';
+      });
+    })();
+  </script>
+
+  <div class="back-links">
+    <a href="aktien-analysen.html" style="font-size: 1.1em;"><svg style="width:0.9em;height:0.9em;vertical-align:-0.12em;filter:drop-shadow(0 0 2px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="7" y1="3" x2="7" y2="7" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><rect x="4" y="7" width="6" height="9" rx="1" fill="#00ffcc"/><line x1="7" y1="16" x2="7" y2="21" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><line x1="16" y1="7" x2="16" y2="11" stroke="#00cc88" stroke-width="1.5" stroke-linecap="round"/><rect x="13" y="11" width="6" height="12" rx="1" fill="none" stroke="#00cc88" stroke-width="1.5"/><line x1="16" y1="23" x2="16" y2="27" stroke="#00cc88" stroke-width="1.5" stroke-linecap="round"/><line x1="25" y1="4" x2="25" y2="9" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><rect x="22" y="9" width="6" height="11" rx="1" fill="#00ffcc"/><line x1="25" y1="20" x2="25" y2="26" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/></svg> Zurück zu den Aktienanalysen</a>
+    <a href="blog.html" style="font-size: 1.1em;">← Zurück zum Blog</a>
+    <a href="index.html" style="font-size: 1.1em;">← Zurück zur Zentrale</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+    <h3 style="margin-bottom: 15px;">
+      <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energie" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Energie aufladen
+      <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
+    </h3>
+    <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+      Treibstoff für das Mutterschiff senden
+    </a>
+    <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+      Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-3461a3" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-3461a3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-3461a3)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-3461a3)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg>
+    </p>
+  </div>
+
+  <footer>
+    <p><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Kontakt" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> Kontakt:
+      <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a> <span style="color:#666; font-size:0.85em;">·</span> <a href="/kontakt@alien-investor.org/pubkey.asc.key" download="kontakt-alien-investor-pubkey.asc" style="color:#555; font-size:0.8em; text-decoration:none;" title="PGP Public Key für verschlüsselte Nachrichten">PGP Key</a>
+    </p>
+    <p style="margin-top: 20px;">
+      <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-3461a3" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-3461a3)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <strong>Haftungsausschluss:</strong><br><br>
+      Dieser Artikel stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
+      Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
+      Investieren ist mit Risiken verbunden – du kannst Geld verlieren. Prüfe Informationen selbst
+      und handle eigenverantwortlich.
+    </p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>
