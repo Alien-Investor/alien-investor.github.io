@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Alien Pass — offline password manager for GrapheneOS | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Alien Pass: a local, encrypted password manager for Android and GrapheneOS. Fully offline, zero permissions, Argon2id + AES-256-GCM, import from Proton Pass, KeePassXC and Bitwarden. Open source, free.">
+  <link rel="canonical" href="/en/alien-pass.html">
+  <link rel="alternate" hreflang="de" href="/alien-pass.html">
+  <link rel="alternate" hreflang="en" href="/en/alien-pass.html">
+  <style>
+    body { background-color:#000; color:#fff; font-family:Arial,sans-serif; line-height:1.6; max-width:800px; margin:auto; padding:0 15px 20px 15px; }
+    h1,h2,h3 { color:#00ffcc; }
+    h1 { margin-top:40px; text-align:center; }
+    a { color:#00ffcc; text-decoration:none; transition:all 0.2s ease; }
+    a:hover { color:#fff; text-shadow:0 0 8px #00ffcc; }
+    code { background-color:#111; padding:0.2em 0.4em; border-radius:4px; color:#0f0; font-family:monospace; word-break:break-all; }
+    em { color:#ccc; }
+    .byline { margin-top:-0.8em; margin-bottom:2em; color:#ccc; font-style:italic; text-align:center; }
+    .box { border:1px solid #00ffcc; background:#050505; padding:1.5em; border-radius:8px; margin:2em 0; box-shadow:0 0 10px rgba(0,255,204,0.1); }
+    .box h3 { margin-top:0; }
+    .box ul { padding-left:1.2em; } .box li { margin-bottom:0.8em; }
+    .cta { margin:2em 0; padding:1.5em; border:1px dashed #00ffcc; border-radius:8px; text-align:center; background-color:#050505; }
+    .cta a.btn { display:inline-block; margin-top:0.5em; padding:0.7em 1.4em; border:1px solid #00ffcc; border-radius:8px; color:#00ffcc; font-weight:bold; }
+    .cta a.btn:hover { background:#00ffcc; color:#000; box-shadow:0 0 15px #00ffcc; }
+    .like-button { margin:3em 0; display:flex; align-items:center; justify-content:center; gap:1em; }
+    .like-button button { background:#000; color:#00ffcc; border:1px solid #00ffcc; padding:0.6em 1.2em; border-radius:8px; cursor:pointer; font-weight:bold; transition:all 0.2s ease; }
+    .like-button button:hover { background:#00ffcc; color:#000; box-shadow:0 0 15px #00ffcc; }
+    .like-button button:disabled { border-color:#444; color:#888; background:#111; cursor:default; }
+    .top-nav { padding:10px 0; font-size:0.9em; }
+    .back-links { margin-top:40px; text-align:center; display:flex; flex-direction:column; gap:10px; }
+    footer { margin-top:60px; padding:20px; font-size:0.85em; color:#666; border-top:1px solid #222; text-align:center; }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="/en/index.html">← Back to base</a>
+  </div>
+
+  <h1>Alien Pass</h1>
+  <p class="byline"><em>Your passwords — offline, encrypted, without a single permission.</em></p>
+
+  <article id="content">
+
+    <p>
+      A password manager is the master key to your digital life. The big providers put it in their cloud,
+      sync through their servers and want an account. <strong>Alien Pass</strong> does the opposite: a local,
+      encrypted vault for your passwords — fully <strong>offline</strong>, no account, no server, no telemetry.
+      The app does <strong>not even have an internet permission</strong>. What is inside never leaves your device in plaintext.
+    </p>
+
+    <h2>What it does</h2>
+    <div class="box">
+      <ul>
+        <li><strong>Entries</strong> — title, username, password, URL, notes, optional TOTP code, favourites. Search across everything.</li>
+        <li><strong>Password generator</strong> — character passwords (8–64) or <strong>dice words</strong> from the EFF list (six words ≈ 77 bits). Entropy is shown.</li>
+        <li><strong>TOTP per entry</strong> — 2FA codes right at the login entry (RFC 6238, SHA-1/256/512). For critical accounts the app still recommends Aegis.</li>
+        <li><strong>Password health</strong> — flags reused, short and old passwords. Purely local, no breach lookup.</li>
+        <li><strong>Clipboard auto-clear</strong> — 15, 30 or 60 seconds; additionally when you return to the app and when it locks.</li>
+        <li><strong>Auto-lock</strong> — after inactivity and in the background (immediately up to 5 minutes).</li>
+        <li><strong>Encrypted backup &amp; sync</strong> — the <code>.vault</code> file is fully encrypted. Two devices are synced via export and import, e.g. through Syncthing: per entry the newer change wins, deletions are carried over.</li>
+        <li><strong>Migration</strong> — CSV import from <strong>Proton Pass</strong>, <strong>KeePassXC</strong> and <strong>Bitwarden</strong>, detected automatically.</li>
+        <li><strong>Bilingual</strong> — German and English, manual inside the app.</li>
+      </ul>
+    </div>
+
+    <h2>Why offline?</h2>
+    <p>
+      Cloud sync is convenient — and turns the provider into a target. Alien Pass makes <strong>not a single network request</strong>:
+      no sync servers, no trackers, no external scripts, no check against breach databases. Whatever you want to sync
+      between devices you carry over yourself as an encrypted file. Less convenient than an account — but nobody but you holds the key.
+    </p>
+
+    <h2>Security — and verifiable</h2>
+    <div class="box">
+      <ul>
+        <li><strong>Argon2id</strong> derives the key from your passphrase (default 64 MiB, selectable 32/64/128) — memory-hard, so expensive for GPU attacks on a stolen file.</li>
+        <li><strong>AES-256-GCM</strong> via native WebCrypto. A random data key encrypts the vault; the passphrase only wraps that key. The file header is authenticated too — tampering is detected.</li>
+        <li><strong>Import limits.</strong> A foreign backup file cannot force arbitrary Argon2 parameters; all content passes a field whitelist — including your own vault on unlock.</li>
+        <li><strong>No reset, no backdoor.</strong> Forget the passphrase and the data is gone — but nobody else can get in either.</li>
+        <li><strong>Open source.</strong> The full client code is public; the bundled third-party code (Argon2 library, EFF word list) is hash-checked in the build.</li>
+      </ul>
+    </div>
+
+    <h2>How to get it</h2>
+    <p>
+      <strong>As an app (Android / GrapheneOS):</strong> deliberately not on the Google Play Store, but via
+      signed releases. Easiest through <a href="https://github.com/ImranR98/Obtainium" target="_blank" rel="noopener">Obtainium</a>:
+      add the repo URL as a source and it will notify you of every update automatically.
+      Or install the <a href="https://codeberg.org/Alien-Investor/alien-pass/releases/latest" target="_blank" rel="noopener">latest APK</a> directly.
+      Or straight from the <a href="https://zapstore.dev/apps/org.alieninvestor.pass" target="_blank" rel="noopener">Zap Store</a>, the app store on Nostr.
+    </p>
+    <p><strong>Signature fingerprint</strong> to verify authenticity (identical across all versions):</p>
+    <p><code>SHA-256: 73c717d8056c6a02b08babba241817f393e46dea0319d4fa26b8c3d8e1f93c95</code></p>
+
+    <div class="box">
+      <h3 style="margin-top:0;">Hardened at the operating-system level</h3>
+      <ul>
+        <li><strong>No Android permission.</strong> Not even internet — the network right is stripped from the Android manifest entirely; the manifest only carries an AndroidX-generated signature permission that grants nothing. "No telemetry" is verifiable, not just promised.</li>
+        <li><strong>FLAG_SECURE.</strong> No screenshots, no screen recording, no password preview in the app switcher.</li>
+        <li><strong>No cloud, ADB or device-to-device backup.</strong> The vault lands in no automatic backup (backup rules exclude D2D transfer too) — you make backups yourself via the encrypted <code>.vault</code> file.</li>
+        <li><strong>Limits, stated honestly:</strong> no autofill and no biometrics in version 1 (deliberately no native code). Android shows a system preview of the clipboard when copying.</li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <h3>Open source on Codeberg</h3>
+      <p>
+        The client code is open source (MIT license) and free. Build and signing internals stay private;
+        the verifiable part — the app itself — is open. No accounts, no server dependency.
+      </p>
+      <p>🔗 <a href="https://codeberg.org/Alien-Investor/alien-pass" target="_blank" rel="noopener">codeberg.org/Alien-Investor/alien-pass</a></p>
+    </div>
+
+    <p style="color:#ccc;">
+      Alien Pass is <strong>free</strong>. If it helps you, the mothership appreciates some fuel — see below.
+      Sister app: the <a href="/en/sachwert-tresor.html">Sachwert-Tresor</a> for Bitcoin, gold and silver holdings — same architecture, same hardening.
+    </p>
+
+  </article>
+
+  <div class="like-button">
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><radialGradient id="ai-head-apen" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-apen)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Like</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+  <script>
+    (function() {
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      const btn = document.getElementById('likeButton');
+      const msg = document.getElementById('likeMsg');
+      function done(){ btn.disabled = true; btn.textContent = '✓ Thanks!'; msg.textContent = 'Glad you like the tool.'; }
+      if (localStorage.getItem(key)) done();
+      btn.addEventListener('click', function(){ localStorage.setItem(key, '1'); done(); });
+    })();
+  </script>
+
+  <div class="back-links">
+    <a href="/en/blog.html" style="font-size:1.1em;">← Back to the blog</a>
+    <a href="/en/index.html" style="font-size:1.1em;">← Back to base</a>
+  </div>
+
+  <hr style="border-color:#222; margin:3em 0;">
+
+  <div style="margin-top:40px; margin-bottom:40px; text-align:center;">
+    <h3 style="margin-bottom:15px;">
+      <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energy" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Charge energy
+      <span style="font-size:0.6em; color:#888; font-weight:normal; vertical-align:middle;">(Donate)</span>
+    </h3>
+    <a href="/en/spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom:2px solid #00ffcc; padding-bottom:4px; display:inline-block;">
+      Send fuel to the mothership
+    </a>
+  </div>
+
+  <footer>
+    <p><strong>Disclaimer:</strong><br><br>
+      This article is not financial, tax or legal advice.<br>
+      I share my personal alien opinion here – independent, rebellious and free.<br>
+      Investing carries risk. Think for yourself, trust no one, and act on your own responsibility.
+    </p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>
