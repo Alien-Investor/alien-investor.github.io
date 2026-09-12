@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Alien Pass — offline password manager for GrapheneOS | Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Alien Pass: a local, encrypted password manager for Android and GrapheneOS. Fully offline, zero permissions, Argon2id + AES-256-GCM, import from Proton Pass, KeePassXC and Bitwarden. Open source, free.">
+  <meta name="description" content="Alien Pass: a local, encrypted password manager for Android and GrapheneOS. Fully offline, zero permissions, Argon2id + AES-256-GCM, logins, notes and cards in categories, import straight from the PGP-encrypted Proton Pass export. Open source, free.">
   <link rel="canonical" href="/en/alien-pass.html">
   <link rel="alternate" hreflang="de" href="/alien-pass.html">
   <link rel="alternate" hreflang="en" href="/en/alien-pass.html">
@@ -50,17 +50,26 @@
       The app does <strong>not even have an internet permission</strong>. What is inside never leaves your device in plaintext.
     </p>
 
+    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:1.5em 0;">
+      <img src="/img/alien-pass/list-en.png" alt="Alien Pass: entries with categories" style="width:31%;min-width:160px;border:1px solid #00ffcc;border-radius:8px;">
+      <img src="/img/alien-pass/detail-en.png" alt="Alien Pass: entry detail with masked password" style="width:31%;min-width:160px;border:1px solid #00ffcc;border-radius:8px;">
+      <img src="/img/alien-pass/import-en.png" alt="Alien Pass: Proton import and backup" style="width:31%;min-width:160px;border:1px solid #00ffcc;border-radius:8px;">
+    </div>
+    <p style="text-align:center;color:#888;font-size:0.85em;margin-top:-0.5em;">Screenshots with demo data (v1.1).</p>
+
     <h2>What it does</h2>
     <div class="box">
       <ul>
-        <li><strong>Entries</strong> — title, username, password, URL, notes, optional TOTP code, favourites. Search across everything.</li>
+        <li><strong>Three entry types</strong> — logins (title, username, password, URL, notes, optional TOTP), encrypted notes and cards (holder, number, expiry, CVV, PIN — masked, copyable). Favourites, search across everything.</li>
+        <li><strong>Categories</strong> — like folders: type one freely, filter chips above the list. On Proton import the vaults become categories.</li>
         <li><strong>Password generator</strong> — character passwords (8–64) or <strong>dice words</strong> from the EFF list (six words ≈ 77 bits). Entropy is shown.</li>
         <li><strong>TOTP per entry</strong> — 2FA codes right at the login entry (RFC 6238, SHA-1/256/512). For critical accounts the app still recommends Aegis.</li>
         <li><strong>Password health</strong> — flags reused, short and old passwords. Purely local, no breach lookup.</li>
-        <li><strong>Clipboard auto-clear</strong> — 15, 30 or 60 seconds; additionally when you return to the app and when it locks.</li>
+        <li><strong>Clipboard auto-clear</strong> — 15, 30 or 60 seconds, also in the background as long as Android has not frozen the app; copied content is flagged sensitive so the system preview hides it (Android 13+).</li>
         <li><strong>Auto-lock</strong> — after inactivity and in the background (immediately up to 5 minutes).</li>
         <li><strong>Encrypted backup &amp; sync</strong> — the <code>.vault</code> file is fully encrypted. Two devices are synced via export and import, e.g. through Syncthing: per entry the newer change wins, deletions are carried over.</li>
-        <li><strong>Migration</strong> — CSV import from <strong>Proton Pass</strong>, <strong>KeePassXC</strong> and <strong>Bitwarden</strong>, detected automatically.</li>
+        <li><strong>Migration from Proton Pass</strong> — straight from the export, preferably the <strong>PGP-encrypted</strong> one: the file travels to the phone encrypted and is only decrypted inside the app. Logins with TOTP, notes, credit cards, aliases, Wi-Fi and identities come along. Plus CSV import from <strong>KeePassXC</strong> and <strong>Bitwarden</strong>.</li>
+        <li><strong>Aegis hurdle</strong> — an optional TOTP code on unlock. Honestly named a hurdle against someone who peeked at your passphrase, not a second factor: the key lives inside the vault itself.</li>
         <li><strong>Bilingual</strong> — German and English, manual inside the app.</li>
       </ul>
     </div>
@@ -79,7 +88,8 @@
         <li><strong>AES-256-GCM</strong> via native WebCrypto. A random data key encrypts the vault; the passphrase only wraps that key. The file header is authenticated too — tampering is detected.</li>
         <li><strong>Import limits.</strong> A foreign backup file cannot force arbitrary Argon2 parameters; all content passes a field whitelist — including your own vault on unlock.</li>
         <li><strong>No reset, no backdoor.</strong> Forget the passphrase and the data is gone — but nobody else can get in either.</li>
-        <li><strong>Open source.</strong> The full client code is public; the bundled third-party code (Argon2 library, EFF word list) is hash-checked in the build.</li>
+        <li><strong>Open source.</strong> The full client code is public; the bundled third-party code (Argon2 library, EFF word list) is hash-checked in the build. The OpenPGP reader for Proton exports is our own, deliberately small code.</li>
+        <li><strong>Two security audits</strong> before v1.0 and before v1.1, every finding fixed and covered by tests. The reports ship with the repo.</li>
       </ul>
     </div>
 
@@ -100,7 +110,7 @@
         <li><strong>No Android permission.</strong> Not even internet — the network right is stripped from the Android manifest entirely; the manifest only carries an AndroidX-generated signature permission that grants nothing. "No telemetry" is verifiable, not just promised.</li>
         <li><strong>FLAG_SECURE.</strong> No screenshots, no screen recording, no password preview in the app switcher.</li>
         <li><strong>No cloud, ADB or device-to-device backup.</strong> The vault lands in no automatic backup (backup rules exclude D2D transfer too) — you make backups yourself via the encrypted <code>.vault</code> file.</li>
-        <li><strong>Limits, stated honestly:</strong> no autofill and no biometrics in version 1 (deliberately no native code). Android shows a system preview of the clipboard when copying.</li>
+        <li><strong>Limits, stated honestly:</strong> no autofill; fingerprint unlock is planned. Native code is limited to three small, reviewable pieces: FLAG_SECURE, backup exclusion and the clipboard plugin.</li>
       </ul>
     </div>
 

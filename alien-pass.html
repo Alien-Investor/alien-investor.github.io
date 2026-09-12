@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Alien Pass — Offline-Passwort-Manager für GrapheneOS | Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Alien Pass: ein lokaler, verschlüsselter Passwort-Manager für Android und GrapheneOS. Komplett offline, keine einzige Berechtigung, Argon2id + AES-256-GCM, Import aus Proton Pass, KeePassXC und Bitwarden. Open Source, kostenlos.">
+  <meta name="description" content="Alien Pass: ein lokaler, verschlüsselter Passwort-Manager für Android und GrapheneOS. Komplett offline, keine einzige Berechtigung, Argon2id + AES-256-GCM, Logins, Notizen und Karten in Kategorien, Import direkt aus dem PGP-verschlüsselten Proton-Pass-Export. Open Source, kostenlos.">
   <style>
     body { background-color:#000; color:#fff; font-family:Arial,sans-serif; line-height:1.6; max-width:800px; margin:auto; padding:0 15px 20px 15px; }
     h1,h2,h3 { color:#00ffcc; }
@@ -211,17 +211,26 @@
       Was drin ist, verlässt dein Gerät nie im Klartext.
     </p>
 
+    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:1.5em 0;">
+      <img src="img/alien-pass/liste-de.png" alt="Alien Pass: Einträge mit Kategorien" style="width:31%;min-width:160px;border:1px solid #00ffcc;border-radius:8px;">
+      <img src="img/alien-pass/karte-de.png" alt="Alien Pass: Karten-Eintrag mit maskierter Nummer" style="width:31%;min-width:160px;border:1px solid #00ffcc;border-radius:8px;">
+      <img src="img/alien-pass/import-de.png" alt="Alien Pass: Proton-Import und Backup" style="width:31%;min-width:160px;border:1px solid #00ffcc;border-radius:8px;">
+    </div>
+    <p style="text-align:center;color:#888;font-size:0.85em;margin-top:-0.5em;">Screenshots mit Demo-Daten (v1.1).</p>
+
     <h2>Was er kann</h2>
     <div class="box">
       <ul>
-        <li><strong>Einträge</strong> — Titel, Nutzername, Passwort, URL, Notizen, optional TOTP-Code, Favoriten. Suche über alles.</li>
+        <li><strong>Drei Eintragstypen</strong> — Logins (Titel, Nutzername, Passwort, URL, Notizen, optional TOTP), verschlüsselte Notizen und Karten (Inhaber, Nummer, Ablauf, CVV, PIN — maskiert, kopierbar). Favoriten, Suche über alles.</li>
+        <li><strong>Kategorien</strong> — wie Ordner: frei eintippen, Filter-Chips über der Liste. Beim Proton-Import werden die Tresore zu Kategorien.</li>
         <li><strong>Passwort-Generator</strong> — Zeichen-Passwörter (8–64 Zeichen) oder <strong>Würfelwörter</strong> aus der EFF-Liste (sechs Wörter ≈ 77 Bit). Entropie wird angezeigt.</li>
         <li><strong>TOTP pro Eintrag</strong> — 2FA-Codes direkt beim Login-Eintrag (RFC 6238, SHA-1/256/512). Für kritische Konten empfiehlt die App trotzdem Aegis.</li>
         <li><strong>Passwort-Gesundheit</strong> — markiert wiederverwendete, kurze und alte Passwörter. Rein lokal, keine Leak-Abfrage.</li>
-        <li><strong>Zwischenablage mit Auto-Löschen</strong> — 15, 30 oder 60 Sekunden; zusätzlich beim Zurückkehren in die App und beim Sperren.</li>
+        <li><strong>Zwischenablage mit Auto-Löschen</strong> — 15, 30 oder 60 Sekunden, auch im Hintergrund, solange Android die App nicht eingefroren hat; Kopiertes ist als sensibel markiert, die System-Vorschau zeigt den Inhalt nicht (Android 13+).</li>
         <li><strong>Auto-Sperre</strong> — nach Inaktivität und im Hintergrund (sofort bis 5 Minuten).</li>
         <li><strong>Verschlüsseltes Backup &amp; Sync</strong> — die <code>.vault</code>-Datei ist vollständig verschlüsselt. Zwei Geräte gleichst du über Export und Import ab, z.B. per Syncthing: je Eintrag gewinnt die neuere Änderung, Löschungen werden mitgenommen.</li>
-        <li><strong>Umzug</strong> — CSV-Import aus <strong>Proton Pass</strong>, <strong>KeePassXC</strong> und <strong>Bitwarden</strong>, automatisch erkannt.</li>
+        <li><strong>Umzug aus Proton Pass</strong> — direkt aus dem Export, am besten der <strong>PGP-verschlüsselten</strong> Variante: Die Datei wandert verschlüsselt aufs Handy und wird erst in der App entschlüsselt. Logins mit TOTP, Notizen, Kreditkarten, Aliase, WLAN und Identitäten kommen mit. Dazu CSV-Import aus <strong>KeePassXC</strong> und <strong>Bitwarden</strong>.</li>
+        <li><strong>Aegis-Hürde</strong> — optional ein TOTP-Code beim Entsperren. Ehrlich benannt als Hürde gegen jemanden, der die Passphrase abgeschaut hat, nicht als zweiter Faktor: Der Schlüssel liegt im Tresor selbst.</li>
         <li><strong>Zweisprachig</strong> — Deutsch und Englisch, Handbuch in der App.</li>
       </ul>
     </div>
@@ -241,7 +250,8 @@
         <li><strong>AES-256-GCM</strong> über die native WebCrypto. Ein zufälliger Datenschlüssel verschlüsselt den Tresor, die Passphrase verpackt nur diesen Schlüssel. Die Kopfdaten der Datei sind mitauthentisiert — Manipulation fällt auf.</li>
         <li><strong>Import-Grenzen.</strong> Eine fremde Backup-Datei darf keine beliebigen Argon2-Parameter erzwingen; alle Inhalte laufen durch eine Feld-Whitelist — auch der eigene Tresor beim Entsperren.</li>
         <li><strong>Kein Reset, kein Backdoor.</strong> Wer die Passphrase vergisst, verliert die Daten — dafür kann auch niemand sonst ran.</li>
-        <li><strong>Open Source.</strong> Der komplette Client-Code ist öffentlich, der Fremdcode (Argon2-Bibliothek, EFF-Wortliste) ist gebündelt und wird im Build per Hash geprüft.</li>
+        <li><strong>Open Source.</strong> Der komplette Client-Code ist öffentlich, der Fremdcode (Argon2-Bibliothek, EFF-Wortliste) ist gebündelt und wird im Build per Hash geprüft. Der OpenPGP-Leser für Proton-Exporte ist eigener, bewusst kleiner Code.</li>
+        <li><strong>Zwei Security-Audits</strong> vor v1.0 und vor v1.1, alle Funde behoben und mit Tests abgesichert. Die Berichte liegen dem Repo bei.</li>
       </ul>
     </div>
 
@@ -262,7 +272,7 @@
         <li><strong>Keine Android-Berechtigung.</strong> Auch kein Internet — der App ist das Netz-Recht im Android-Manifest komplett entzogen; im Manifest steht nur eine von AndroidX erzeugte Signatur-Berechtigung, die nichts freigibt. „Keine Telemetrie“ ist damit nachprüfbar, nicht nur versprochen.</li>
         <li><strong>FLAG_SECURE.</strong> Keine Screenshots, kein Screen-Recording, keine Passwort-Vorschau im App-Switcher.</li>
         <li><strong>Kein Cloud-, ADB- oder Gerät-zu-Gerät-Backup.</strong> Der Tresor landet in keinem automatischen Backup (Backup-Regeln schließen auch den D2D-Transfer aus) — Sicherungen machst nur du selbst über die verschlüsselte <code>.vault</code>-Datei.</li>
-        <li><strong>Grenzen, ehrlich benannt:</strong> kein Autofill und keine Biometrie in Version 1 (bewusst kein nativer Code). Android zeigt beim Kopieren eine System-Vorschau der Zwischenablage.</li>
+        <li><strong>Grenzen, ehrlich benannt:</strong> kein Autofill, Fingerabdruck-Entsperren ist geplant. Nativer Code beschränkt sich auf drei kleine, einsehbare Stücke: FLAG_SECURE, Backup-Ausschluss und das Zwischenablage-Plugin.</li>
       </ul>
     </div>
 
