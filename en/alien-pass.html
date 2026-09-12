@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Alien Pass — offline password manager for GrapheneOS | Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Alien Pass: a local, encrypted password manager for Android and GrapheneOS. Fully offline, zero permissions, Argon2id + AES-256-GCM, logins, notes and cards in categories, import straight from the PGP-encrypted Proton Pass export. Open source, free.">
+  <meta name="description" content="Alien Pass: a local, encrypted password manager for Android and GrapheneOS. Fully offline, no internet permission, Argon2id + AES-256-GCM, logins, notes and cards in categories, import straight from the PGP-encrypted Proton Pass export. Open source, free.">
   <link rel="canonical" href="/en/alien-pass.html">
   <link rel="alternate" hreflang="de" href="/alien-pass.html">
   <link rel="alternate" hreflang="en" href="/en/alien-pass.html">
@@ -39,7 +39,7 @@
   </div>
 
   <h1>Alien Pass</h1>
-  <p class="byline"><em>Your passwords — offline, encrypted, without a single permission.</em></p>
+  <p class="byline"><em>Your passwords — offline, encrypted, without an internet permission.</em></p>
 
   <article id="content">
 
@@ -70,6 +70,7 @@
         <li><strong>Encrypted backup &amp; sync</strong> — the <code>.vault</code> file is fully encrypted. Two devices are synced via export and import, e.g. through Syncthing: per entry the newer change wins, deletions are carried over.</li>
         <li><strong>Migration from Proton Pass</strong> — straight from the export, preferably the <strong>PGP-encrypted</strong> one: the file travels to the phone encrypted and is only decrypted inside the app. Logins with TOTP, notes, credit cards, aliases, Wi-Fi and identities come along. Plus CSV import from <strong>KeePassXC</strong> and <strong>Bitwarden</strong>.</li>
         <li><strong>Aegis hurdle</strong> — an optional TOTP code on unlock. Honestly named a hurdle against someone who peeked at your passphrase, not a second factor: the key lives inside the vault itself.</li>
+        <li><strong>Fingerprint unlock</strong> (since v1.2, optional) — the data key is additionally wrapped under a random key that the Android keystore releases only after a strong biometric; none of it enters backups. The passphrase stays the real protection: it is required after every restart, after a passphrase change and when a new fingerprint is enrolled — and <strong>"Lock now"</strong> is the deliberate bolt for a border or handing the phone over: afterwards only the passphrase opens the vault. Honestly: Android binds the key to every strong biometric of the device; where a strong face unlock is enrolled, it counts too (with a confirmation tap).</li>
         <li><strong>Bilingual</strong> — German and English, manual inside the app.</li>
       </ul>
     </div>
@@ -88,8 +89,8 @@
         <li><strong>AES-256-GCM</strong> via native WebCrypto. A random data key encrypts the vault; the passphrase only wraps that key. The file header is authenticated too — tampering is detected.</li>
         <li><strong>Import limits.</strong> A foreign backup file cannot force arbitrary Argon2 parameters; all content passes a field whitelist — including your own vault on unlock.</li>
         <li><strong>No reset, no backdoor.</strong> Forget the passphrase and the data is gone — but nobody else can get in either.</li>
-        <li><strong>Open source.</strong> The full client code is public; the bundled third-party code (Argon2 library, EFF word list) is hash-checked in the build. The OpenPGP reader for Proton exports is our own, deliberately small code.</li>
-        <li><strong>Two security audits</strong> before v1.0 and before v1.1, every finding fixed and covered by tests. The reports ship with the repo.</li>
+        <li><strong>Open source.</strong> The full client code is public; the bundled third-party code (Argon2 library, EFF word list) is hash-checked in the build. The OpenPGP reader for Proton exports is our own, deliberately small code, including its own AES block cipher, which the test suite checks against FIPS-197 vectors and WebCrypto. The native Android code (FLAG_SECURE, backup rules, clipboard and fingerprint plugin) is in the repo in plaintext as well.</li>
+        <li><strong>Three security audits</strong> before v1.0, v1.1 and v1.2, every finding fixed and covered by tests. The fixed items are documented in the repo's changelog.</li>
       </ul>
     </div>
 
@@ -107,10 +108,10 @@
     <div class="box">
       <h3 style="margin-top:0;">Hardened at the operating-system level</h3>
       <ul>
-        <li><strong>No Android permission.</strong> Not even internet — the network right is stripped from the Android manifest entirely; the manifest only carries an AndroidX-generated signature permission that grants nothing. "No telemetry" is verifiable, not just promised.</li>
+        <li><strong>No internet permission.</strong> The network right is stripped from the Android manifest entirely; "no telemetry" is verifiable, not just promised. The only permissions are the two normal ones for the fingerprint sensor (USE_BIOMETRIC, USE_FINGERPRINT up to Android 8.1) — plus an AndroidX-generated signature permission that grants nothing. The build aborts as soon as any other one appears.</li>
         <li><strong>FLAG_SECURE.</strong> No screenshots, no screen recording, no password preview in the app switcher.</li>
         <li><strong>No cloud, ADB or device-to-device backup.</strong> The vault lands in no automatic backup (backup rules exclude D2D transfer too) — you make backups yourself via the encrypted <code>.vault</code> file.</li>
-        <li><strong>Limits, stated honestly:</strong> no autofill; fingerprint unlock is planned. Native code is limited to three small, reviewable pieces: FLAG_SECURE, backup exclusion and the clipboard plugin.</li>
+        <li><strong>Limits, stated honestly:</strong> no autofill — deliberately, because an autofill service would have to read the vault outside the app and keep the key in the background. Native code is limited to four small pieces, readable in the repo: FLAG_SECURE, backup exclusion, the clipboard and the fingerprint plugin.</li>
       </ul>
     </div>
 

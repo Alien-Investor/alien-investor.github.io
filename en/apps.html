@@ -614,7 +614,7 @@
       </div>
       <div class="app-info">
         <h2>Alien Pass</h2>
-        <p class="subtitle">Offline password manager without Android permissions</p>
+        <p class="subtitle">Offline password manager without internet permission</p>
 
         <p class="pitch">
           <strong>The master key stays with you.</strong>
@@ -629,9 +629,10 @@
           <li>Clipboard auto-clear, flagged sensitive, auto-lock also in the background</li>
           <li>Encrypted backup and merge between devices (Syncthing)</li>
           <li>Migration from Proton Pass straight from the PGP-encrypted export, CSV from KeePassXC and Bitwarden</li>
+          <li>Since v1.2: optional fingerprint unlock via the Android keystore — passphrase required after every restart, "Lock now" as the deliberate bolt</li>
         </ul>
 
-        <p style="color:#00ffcc; font-size:0.92em;"><strong>App only, deliberately no web version:</strong> zero permissions, FLAG_SECURE, no cloud backup – hardening at the operating-system level. Details on the <a href="/en/alien-pass.html">Alien Pass page</a>.</p>
+        <p style="color:#00ffcc; font-size:0.92em;"><strong>App only, deliberately no web version:</strong> no internet permission (only the fingerprint sensor), FLAG_SECURE, no cloud backup – hardening at the operating-system level. Details on the <a href="/en/alien-pass.html">Alien Pass page</a>.</p>
 
         <p class="app-meta">Android / GrapheneOS · open source (MIT) · no account, no server</p>
 

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Alien Pass — Offline-Passwort-Manager für GrapheneOS | Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Alien Pass: ein lokaler, verschlüsselter Passwort-Manager für Android und GrapheneOS. Komplett offline, keine einzige Berechtigung, Argon2id + AES-256-GCM, Logins, Notizen und Karten in Kategorien, Import direkt aus dem PGP-verschlüsselten Proton-Pass-Export. Open Source, kostenlos.">
+  <meta name="description" content="Alien Pass: ein lokaler, verschlüsselter Passwort-Manager für Android und GrapheneOS. Komplett offline, keine Internet-Berechtigung, Argon2id + AES-256-GCM, Logins, Notizen und Karten in Kategorien, Import direkt aus dem PGP-verschlüsselten Proton-Pass-Export. Open Source, kostenlos.">
   <style>
     body { background-color:#000; color:#fff; font-family:Arial,sans-serif; line-height:1.6; max-width:800px; margin:auto; padding:0 15px 20px 15px; }
     h1,h2,h3 { color:#00ffcc; }
@@ -199,7 +199,7 @@
   </div>
 
   <h1>Alien Pass</h1>
-  <p class="byline"><em>Deine Passwörter — offline, verschlüsselt, ohne eine einzige Berechtigung.</em></p>
+  <p class="byline"><em>Deine Passwörter — offline, verschlüsselt, ohne Internet-Berechtigung.</em></p>
 
   <article id="content">
 
@@ -231,6 +231,7 @@
         <li><strong>Verschlüsseltes Backup &amp; Sync</strong> — die <code>.vault</code>-Datei ist vollständig verschlüsselt. Zwei Geräte gleichst du über Export und Import ab, z.B. per Syncthing: je Eintrag gewinnt die neuere Änderung, Löschungen werden mitgenommen.</li>
         <li><strong>Umzug aus Proton Pass</strong> — direkt aus dem Export, am besten der <strong>PGP-verschlüsselten</strong> Variante: Die Datei wandert verschlüsselt aufs Handy und wird erst in der App entschlüsselt. Logins mit TOTP, Notizen, Kreditkarten, Aliase, WLAN und Identitäten kommen mit. Dazu CSV-Import aus <strong>KeePassXC</strong> und <strong>Bitwarden</strong>.</li>
         <li><strong>Aegis-Hürde</strong> — optional ein TOTP-Code beim Entsperren. Ehrlich benannt als Hürde gegen jemanden, der die Passphrase abgeschaut hat, nicht als zweiter Faktor: Der Schlüssel liegt im Tresor selbst.</li>
+        <li><strong>Fingerabdruck-Entsperren</strong> (seit v1.2, optional) — der Datenschlüssel wird zusätzlich unter einem Zufallsschlüssel verpackt, den der Android-Keystore nur nach starker Biometrie herausgibt; nichts davon gelangt in Backups. Die Passphrase bleibt der eigentliche Schutz: Sie ist nach jedem Neustart, nach einem Passphrase-Wechsel und bei neuem Fingerabdruck im System nötig — und <strong>„Jetzt sperren“</strong> ist der bewusste Riegel für Grenze oder Weitergeben des Handys: danach öffnet nur die Passphrase. Ehrlich dazu: Android bindet den Schlüssel an jede starke Biometrie des Geräts; wo eine starke Gesichtserkennung eingerichtet ist, gilt auch sie (mit Bestätigungs-Tipp).</li>
         <li><strong>Zweisprachig</strong> — Deutsch und Englisch, Handbuch in der App.</li>
       </ul>
     </div>
@@ -250,8 +251,8 @@
         <li><strong>AES-256-GCM</strong> über die native WebCrypto. Ein zufälliger Datenschlüssel verschlüsselt den Tresor, die Passphrase verpackt nur diesen Schlüssel. Die Kopfdaten der Datei sind mitauthentisiert — Manipulation fällt auf.</li>
         <li><strong>Import-Grenzen.</strong> Eine fremde Backup-Datei darf keine beliebigen Argon2-Parameter erzwingen; alle Inhalte laufen durch eine Feld-Whitelist — auch der eigene Tresor beim Entsperren.</li>
         <li><strong>Kein Reset, kein Backdoor.</strong> Wer die Passphrase vergisst, verliert die Daten — dafür kann auch niemand sonst ran.</li>
-        <li><strong>Open Source.</strong> Der komplette Client-Code ist öffentlich, der Fremdcode (Argon2-Bibliothek, EFF-Wortliste) ist gebündelt und wird im Build per Hash geprüft. Der OpenPGP-Leser für Proton-Exporte ist eigener, bewusst kleiner Code.</li>
-        <li><strong>Zwei Security-Audits</strong> vor v1.0 und vor v1.1, alle Funde behoben und mit Tests abgesichert. Die Berichte liegen dem Repo bei.</li>
+        <li><strong>Open Source.</strong> Der komplette Client-Code ist öffentlich, der Fremdcode (Argon2-Bibliothek, EFF-Wortliste) ist gebündelt und wird im Build per Hash geprüft. Der OpenPGP-Leser für Proton-Exporte ist eigener, bewusst kleiner Code, samt eigener AES-Blockchiffre, die die Testsuite gegen FIPS-197-Vektoren und WebCrypto prüft. Auch der native Android-Code (FLAG_SECURE, Backup-Regeln, Zwischenablage- und Fingerabdruck-Plugin) liegt im Klartext im Repo.</li>
+        <li><strong>Drei Security-Audits</strong> vor v1.0, v1.1 und v1.2, alle Funde behoben und mit Tests abgesichert. Die behobenen Punkte sind im Changelog des Repos dokumentiert.</li>
       </ul>
     </div>
 
@@ -269,10 +270,10 @@
     <div class="box">
       <h3 style="margin-top:0;">Gehärtet auf Betriebssystem-Ebene</h3>
       <ul>
-        <li><strong>Keine Android-Berechtigung.</strong> Auch kein Internet — der App ist das Netz-Recht im Android-Manifest komplett entzogen; im Manifest steht nur eine von AndroidX erzeugte Signatur-Berechtigung, die nichts freigibt. „Keine Telemetrie“ ist damit nachprüfbar, nicht nur versprochen.</li>
+        <li><strong>Keine Internet-Berechtigung.</strong> Der App ist das Netz-Recht im Android-Manifest komplett entzogen; „keine Telemetrie“ ist damit nachprüfbar, nicht nur versprochen. Die einzigen Berechtigungen sind die zwei normalen für den Fingerabdrucksensor (USE_BIOMETRIC, USE_FINGERPRINT bis Android 8.1) — dazu eine von AndroidX erzeugte Signatur-Berechtigung, die nichts freigibt. Der Build bricht ab, sobald eine andere auftaucht.</li>
         <li><strong>FLAG_SECURE.</strong> Keine Screenshots, kein Screen-Recording, keine Passwort-Vorschau im App-Switcher.</li>
         <li><strong>Kein Cloud-, ADB- oder Gerät-zu-Gerät-Backup.</strong> Der Tresor landet in keinem automatischen Backup (Backup-Regeln schließen auch den D2D-Transfer aus) — Sicherungen machst nur du selbst über die verschlüsselte <code>.vault</code>-Datei.</li>
-        <li><strong>Grenzen, ehrlich benannt:</strong> kein Autofill, Fingerabdruck-Entsperren ist geplant. Nativer Code beschränkt sich auf drei kleine, einsehbare Stücke: FLAG_SECURE, Backup-Ausschluss und das Zwischenablage-Plugin.</li>
+        <li><strong>Grenzen, ehrlich benannt:</strong> kein Autofill — bewusst, weil ein Autofill-Dienst den Tresor außerhalb der App lesen und den Schlüssel im Hintergrund halten müsste. Nativer Code beschränkt sich auf vier kleine, im Repo einsehbare Stücke: FLAG_SECURE, Backup-Ausschluss, das Zwischenablage- und das Fingerabdruck-Plugin.</li>
       </ul>
     </div>
 
