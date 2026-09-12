@@ -60,11 +60,11 @@
     <h2>What it does</h2>
     <div class="box">
       <ul>
-        <li><strong>Three entry types</strong> — logins (title, username, password, URL, notes, optional TOTP), encrypted notes and cards (holder, number, expiry, CVV, PIN — masked, copyable). Favourites, search across everything.</li>
+        <li><strong>Four entry types</strong> — logins (title, username, password, URL, notes, optional TOTP), encrypted notes, cards (holder, number, expiry, CVV, PIN — masked, copyable) and, since v1.3, accounts (holder, IBAN, BIC, bank, PIN — the list shows the IBAN masked, the PIN only on request). Favourites, search across everything.</li>
         <li><strong>Categories</strong> — like folders: type one freely, filter chips above the list. On Proton import the vaults become categories.</li>
-        <li><strong>Password generator</strong> — character passwords (8–64) or <strong>dice words</strong> from the EFF list (six words ≈ 77 bits). Entropy is shown.</li>
+        <li><strong>Password generator</strong> — character passwords (8–64) or <strong>dice words</strong> from the EFF list (six words ≈ 77 bits). Entropy is shown, honestly corrected in character mode for the rule “every chosen set appears”.</li>
         <li><strong>TOTP per entry</strong> — 2FA codes right at the login entry (RFC 6238, SHA-1/256/512). For critical accounts the app still recommends Aegis.</li>
-        <li><strong>Password health</strong> — flags reused, short and old passwords. Purely local, no breach lookup.</li>
+        <li><strong>Password health</strong> — flags reused and short passwords. Deliberately not age: a strong random password does not weaken with time, forced rotation is an anti-pattern (NIST SP 800-63B) — change it when it may have leaked. Purely local, no breach lookup.</li>
         <li><strong>Clipboard auto-clear</strong> — 15, 30 or 60 seconds, also in the background as long as Android has not frozen the app; copied content is flagged sensitive so the system preview hides it (Android 13+).</li>
         <li><strong>Auto-lock</strong> — after inactivity and in the background (immediately up to 5 minutes).</li>
         <li><strong>Encrypted backup &amp; sync</strong> — the <code>.vault</code> file is fully encrypted. Two devices are synced via export and import, e.g. through Syncthing: per entry the newer change wins, deletions are carried over.</li>

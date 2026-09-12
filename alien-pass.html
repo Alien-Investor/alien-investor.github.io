@@ -221,11 +221,11 @@
     <h2>Was er kann</h2>
     <div class="box">
       <ul>
-        <li><strong>Drei Eintragstypen</strong> — Logins (Titel, Nutzername, Passwort, URL, Notizen, optional TOTP), verschlüsselte Notizen und Karten (Inhaber, Nummer, Ablauf, CVV, PIN — maskiert, kopierbar). Favoriten, Suche über alles.</li>
+        <li><strong>Vier Eintragstypen</strong> — Logins (Titel, Nutzername, Passwort, URL, Notizen, optional TOTP), verschlüsselte Notizen, Karten (Inhaber, Nummer, Ablauf, CVV, PIN — maskiert, kopierbar) und seit v1.3 Konten (Inhaber, IBAN, BIC, Bank, PIN — die Liste zeigt die IBAN nur maskiert, die PIN erscheint nur auf Anfrage). Favoriten, Suche über alles.</li>
         <li><strong>Kategorien</strong> — wie Ordner: frei eintippen, Filter-Chips über der Liste. Beim Proton-Import werden die Tresore zu Kategorien.</li>
-        <li><strong>Passwort-Generator</strong> — Zeichen-Passwörter (8–64 Zeichen) oder <strong>Würfelwörter</strong> aus der EFF-Liste (sechs Wörter ≈ 77 Bit). Entropie wird angezeigt.</li>
+        <li><strong>Passwort-Generator</strong> — Zeichen-Passwörter (8–64 Zeichen) oder <strong>Würfelwörter</strong> aus der EFF-Liste (sechs Wörter ≈ 77 Bit). Entropie wird angezeigt, im Zeichen-Modus ehrlich um die Vorgabe „jeder Zeichensatz kommt vor“ bereinigt.</li>
         <li><strong>TOTP pro Eintrag</strong> — 2FA-Codes direkt beim Login-Eintrag (RFC 6238, SHA-1/256/512). Für kritische Konten empfiehlt die App trotzdem Aegis.</li>
-        <li><strong>Passwort-Gesundheit</strong> — markiert wiederverwendete, kurze und alte Passwörter. Rein lokal, keine Leak-Abfrage.</li>
+        <li><strong>Passwort-Gesundheit</strong> — markiert wiederverwendete und kurze Passwörter. Das Alter bewusst nicht: Ein starkes Zufallspasswort wird mit der Zeit nicht schwächer, Zwangsrotation ist ein Anti-Muster (NIST SP 800-63B) — gewechselt wird bei Leak-Verdacht. Rein lokal, keine Leak-Abfrage.</li>
         <li><strong>Zwischenablage mit Auto-Löschen</strong> — 15, 30 oder 60 Sekunden, auch im Hintergrund, solange Android die App nicht eingefroren hat; Kopiertes ist als sensibel markiert, die System-Vorschau zeigt den Inhalt nicht (Android 13+).</li>
         <li><strong>Auto-Sperre</strong> — nach Inaktivität und im Hintergrund (sofort bis 5 Minuten).</li>
         <li><strong>Verschlüsseltes Backup &amp; Sync</strong> — die <code>.vault</code>-Datei ist vollständig verschlüsselt. Zwei Geräte gleichst du über Export und Import ab, z.B. per Syncthing: je Eintrag gewinnt die neuere Änderung, Löschungen werden mitgenommen.</li>
