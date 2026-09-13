@@ -216,14 +216,15 @@
       <img src="img/alien-pass/karte-de.png" alt="Alien Pass: Karten-Eintrag mit maskierter Nummer" style="width:31%;min-width:160px;border:1px solid #00ffcc;border-radius:8px;">
       <img src="img/alien-pass/import-de.png" alt="Alien Pass: Proton-Import und Backup" style="width:31%;min-width:160px;border:1px solid #00ffcc;border-radius:8px;">
     </div>
-    <p style="text-align:center;color:#888;font-size:0.85em;margin-top:-0.5em;">Screenshots mit Demo-Daten (v1.1).</p>
+    <p style="text-align:center;color:#888;font-size:0.85em;margin-top:-0.5em;">Screenshots mit Demo-Daten (v1.4).</p>
 
     <h2>Was er kann</h2>
     <div class="box">
       <ul>
-        <li><strong>Vier Eintragstypen</strong> — Logins (Titel, Nutzername, Passwort, URL, Notizen, optional TOTP), verschlüsselte Notizen, Karten (Inhaber, Nummer, Ablauf, CVV, PIN — maskiert, kopierbar) und seit v1.3 Konten (Inhaber, IBAN, BIC, Bank, PIN — die Liste zeigt die IBAN nur maskiert, die PIN erscheint nur auf Anfrage). Favoriten, Suche über alles.</li>
+        <li><strong>Vier Eintragstypen</strong> — Logins (Titel, Nutzername, seit v1.4 optional eine zweite E-Mail-Adresse, Passwort, URL, Notizen, optional TOTP), verschlüsselte Notizen, Karten (Inhaber, Nummer, Ablauf, CVV, PIN — maskiert, kopierbar) und seit v1.3 Konten (Inhaber, IBAN, BIC, Bank, PIN — die Liste zeigt die IBAN nur maskiert, die PIN erscheint nur auf Anfrage). Favoriten, Suche über alles.</li>
         <li><strong>Kategorien</strong> — wie Ordner: frei eintippen, Filter-Chips über der Liste. Beim Proton-Import werden die Tresore zu Kategorien.</li>
-        <li><strong>Passwort-Generator</strong> — Zeichen-Passwörter (8–64 Zeichen) oder <strong>Würfelwörter</strong> aus der EFF-Liste (sechs Wörter ≈ 77 Bit). Entropie wird angezeigt, im Zeichen-Modus ehrlich um die Vorgabe „jeder Zeichensatz kommt vor“ bereinigt.</li>
+        <li><strong>Zusatzfelder, immer geheim</strong> (seit v1.4) — bis zu acht frei benannte Felder je Eintrag, bei jedem Typ: App-PIN, Telefon-Kennwort, Sicherheitsfrage, Auszahlungs-PIN. Der Wert erscheint nur auf Anfrage und hat einen eigenen Kopier-Button; die Bezeichnung ist durchsuchbar, der Wert nie. So muss nichts davon im Klartext in die Notizen. Versteckte Felder aus Proton Pass landen beim Import direkt hier.</li>
+        <li><strong>Passwort-Generator</strong> — Zeichen-Passwörter (8–64 Zeichen) oder <strong>Würfelwörter</strong> aus der EFF-Liste (sechs Wörter ≈ 77 Bit). Entropie wird angezeigt, im Zeichen-Modus ehrlich um die Vorgabe „jeder Zeichensatz kommt vor“ bereinigt. Seit v1.4 auch direkt im Eintragsformular: „Generieren“ klappt ein Panel mit Modus, Länge und Zeichensätzen auf, jede Änderung erzeugt sofort neu.</li>
         <li><strong>TOTP pro Eintrag</strong> — 2FA-Codes direkt beim Login-Eintrag (RFC 6238, SHA-1/256/512). Für kritische Konten empfiehlt die App trotzdem Aegis.</li>
         <li><strong>Passwort-Gesundheit</strong> — markiert wiederverwendete und kurze Passwörter. Das Alter bewusst nicht: Ein starkes Zufallspasswort wird mit der Zeit nicht schwächer, Zwangsrotation ist ein Anti-Muster (NIST SP 800-63B) — gewechselt wird bei Leak-Verdacht. Rein lokal, keine Leak-Abfrage.</li>
         <li><strong>Zwischenablage mit Auto-Löschen</strong> — 15, 30 oder 60 Sekunden, auch im Hintergrund, solange Android die App nicht eingefroren hat; Kopiertes ist als sensibel markiert, die System-Vorschau zeigt den Inhalt nicht (Android 13+).</li>
@@ -252,7 +253,7 @@
         <li><strong>Import-Grenzen.</strong> Eine fremde Backup-Datei darf keine beliebigen Argon2-Parameter erzwingen; alle Inhalte laufen durch eine Feld-Whitelist — auch der eigene Tresor beim Entsperren.</li>
         <li><strong>Kein Reset, kein Backdoor.</strong> Wer die Passphrase vergisst, verliert die Daten — dafür kann auch niemand sonst ran.</li>
         <li><strong>Open Source.</strong> Der komplette Client-Code ist öffentlich, der Fremdcode (Argon2-Bibliothek, EFF-Wortliste) ist gebündelt und wird im Build per Hash geprüft. Der OpenPGP-Leser für Proton-Exporte ist eigener, bewusst kleiner Code, samt eigener AES-Blockchiffre, die die Testsuite gegen FIPS-197-Vektoren und WebCrypto prüft. Auch der native Android-Code (FLAG_SECURE, Backup-Regeln, Zwischenablage- und Fingerabdruck-Plugin) liegt im Klartext im Repo.</li>
-        <li><strong>Drei Security-Audits</strong> vor v1.0, v1.1 und v1.2, alle Funde behoben und mit Tests abgesichert. Die behobenen Punkte sind im Changelog des Repos dokumentiert.</li>
+        <li><strong>Drei Security-Audits</strong> vor v1.0, v1.1 und v1.2 sowie eine gezielte Durchsicht der Änderungen vor v1.4, alle Funde behoben und mit Tests abgesichert. Die behobenen Punkte sind im Changelog des Repos dokumentiert.</li>
       </ul>
     </div>
 
