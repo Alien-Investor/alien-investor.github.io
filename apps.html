@@ -364,6 +364,30 @@
       margin-top: 1.2em;
     }
     .app-meta strong { color: #00ffcc; }
+    .app-fp {
+      margin-top: 0.6em;
+      font-size: 0.8em;
+      color: #888;
+      text-align: left;
+    }
+    .app-fp code {
+      display: block;
+      margin: 0.35em 0;
+      padding: 0.5em 0.6em;
+      background: #050505;
+      border: 1px solid #1f3a38;
+      border-radius: 6px;
+      color: #00ffcc;
+      font-family: monospace;
+      font-size: 0.98em;
+      word-break: break-all;
+    }
+    .app-fp-hex {
+      display: block;
+      font-family: monospace;
+      color: #666;
+      word-break: break-all;
+    }
 
     /* --- CTA-BUTTONS --- */
     .cta-row {
@@ -523,6 +547,11 @@
         <p style="color:#00ffcc; font-size:0.92em;"><strong>Volle Härtung nur in der App (v2.0):</strong> keine INTERNET-Berechtigung, FLAG_SECURE, kein Cloud-Backup – Schutz auf Betriebssystem-Ebene, den die <a href="sachwert-tresor.html">Web-Version</a> so nicht bieten kann.</p>
 
         <p class="app-meta">Android / GrapheneOS · Open Source (MIT) · auch als <a href="sachwert-tresor.html">Web-Version</a></p>
+        <div class="app-fp">
+          Signatur-Fingerprint (SHA-256), über alle Versionen gleich:
+          <code>66:0F:21:0C:7A:28:9F:38:8B:B4:81:2C:23:82:5A:77:F1:FC:84:E6:A7:EE:58:D6:42:81:B6:BF:5C:D8:79:88</code>
+          <span class="app-fp-hex">apksigner: 660f210c7a289f388bb4812c23825a77f1fc84e6a7ee58d64281b6bf5cd87988</span>
+        </div>
 
         <div class="cta-row">
           <a href="https://zapstore.dev/apps/org.alieninvestor.tresor" class="cta-button" target="_blank" rel="noopener">
@@ -565,6 +594,11 @@
         </ul>
 
         <p class="app-meta">Android / GrapheneOS · Open Source</p>
+        <div class="app-fp">
+          Signatur-Fingerprint (SHA-256), über alle Versionen gleich:
+          <code>DB:C5:08:71:53:B4:59:21:82:DD:13:1A:73:0C:11:A0:F7:12:4E:34:42:6C:54:2B:4B:A6:88:5A:B1:CC:01:0E</code>
+          <span class="app-fp-hex">apksigner: dbc5087153b4592182dd131a730c11a0f7124e34426c542b4ba6885ab1cc010e</span>
+        </div>
 
         <div class="cta-row">
           <a href="https://zapstore.dev/apps/org.alieninvestor.ausgaben" class="cta-button" target="_blank" rel="noopener">
@@ -607,6 +641,11 @@
         </ul>
 
         <p class="app-meta">Android / GrapheneOS · Open Source · kein Konto, kein Server, keine Internet-Berechtigung</p>
+        <div class="app-fp">
+          Signatur-Fingerprint (SHA-256), über alle Versionen gleich:
+          <code>85:9E:88:B7:43:5F:84:1D:8B:C1:CF:F1:FE:A9:12:56:A6:33:DE:A5:59:D9:5A:91:02:4B:22:53:A2:AD:13:26</code>
+          <span class="app-fp-hex">apksigner: 859e88b7435f841d8bc1cff1fea91256a633dea559d95a91024b2253a2ad1326</span>
+        </div>
 
         <div class="cta-row">
           <a href="https://zapstore.dev/apps/org.alieninvestor.fitness" class="cta-button" target="_blank" rel="noopener">
@@ -653,6 +692,11 @@
         <p style="color:#00ffcc; font-size:0.92em;"><strong>Nur als App, bewusst ohne Web-Version:</strong> keine Internet-Berechtigung (nur der Fingerabdrucksensor), FLAG_SECURE, kein Cloud-Backup – Härtung auf Betriebssystem-Ebene. Details auf der <a href="alien-pass.html">Alien-Pass-Seite</a>.</p>
 
         <p class="app-meta">Android / GrapheneOS · Open Source (MIT) · kein Konto, kein Server</p>
+        <div class="app-fp">
+          Signatur-Fingerprint (SHA-256), über alle Versionen gleich:
+          <code>73:C7:17:D8:05:6C:6A:02:B0:8B:AB:BA:24:18:17:F3:93:E4:6D:EA:03:19:D4:FA:26:B8:C3:D8:E1:F9:3C:95</code>
+          <span class="app-fp-hex">apksigner: 73c717d8056c6a02b08babba241817f393e46dea0319d4fa26b8c3d8e1f93c95</span>
+        </div>
 
         <div class="cta-row">
           <a href="https://zapstore.dev/apps/org.alieninvestor.pass" class="cta-button" target="_blank" rel="noopener">
@@ -673,6 +717,12 @@
       <a href="Obtainium.html">Obtainium</a> direkt von Codeberg – beides ganz ohne Google-Konto.
       Mehr dazu: <a href="grapheneos-app-stores.html">App-Stores auf GrapheneOS</a> und
       <a href="Zapstore.html">der Nostr Zap Store erklärt</a>.
+      <p style="margin:0.8em 0 0 0;">
+        <strong>Echtheit prüfen:</strong> Öffne die installierte App in
+        <a href="https://github.com/soupslurpr/AppVerifier" target="_blank" rel="noopener">AppVerifier</a>
+        und vergleiche den angezeigten Wert mit dem Signatur-Fingerprint auf der jeweiligen App-Karte –
+        er ist über alle Versionen gleich. Mehr dazu in der <a href="Obtainium.html">Obtainium-Anleitung</a>.
+      </p>
       <p style="margin:0.8em 0 0 0;">
         Alle hier gelisteten Apps sind <strong>meine eigenen Open-Source-Werke</strong>.
         Sie laufen offline, sammeln keine Daten und sind quelloffen einsehbar.
