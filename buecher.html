@@ -8,6 +8,7 @@
   <style>
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: Arial, sans-serif;
@@ -298,6 +299,7 @@
 
     /* --- BUCH-KARTE --- */
     .book-card {
+      scroll-margin-top: 20px;
       display: flex;
       gap: 30px;
       align-items: flex-start;
@@ -383,6 +385,91 @@
     }
     .book-info li { margin-bottom: 0.5em; }
 
+    /* --- KAPITELLISTE (einklappbar) --- */
+    .book-info details.contents { margin: 0.6em 0 0; }
+    .book-info details.contents summary {
+      display: inline-block;
+      cursor: pointer;
+      list-style: none;
+      color: #00ffcc;
+      font-size: 0.92em;
+      font-weight: bold;
+      padding: 6px 14px;
+      border: 1px solid rgba(0, 255, 204, 0.25);
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+    .book-info details.contents summary::-webkit-details-marker { display: none; }
+    .book-info details.contents summary::after {
+      content: "\25B8";
+      display: inline-block;
+      margin-left: 8px;
+      transition: transform 0.2s ease;
+    }
+    .book-info details.contents[open] summary::after { transform: rotate(90deg); }
+    .book-info details.contents summary:hover {
+      border-color: #00ffcc;
+      box-shadow: 0 0 12px rgba(0, 255, 204, 0.25);
+    }
+    .book-info details.contents ul { margin-top: 1em; }
+
+    /* --- BUCH-ÜBERSICHT (Kacheln mit Sprungmarken) --- */
+    .book-overview {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin: 0 0 20px 0;
+    }
+    .overview-tile {
+      background: linear-gradient(135deg, rgba(0, 20, 20, 0.6), rgba(0, 8, 15, 0.85));
+      border: 1px solid rgba(0, 255, 204, 0.35);
+      border-radius: 10px;
+      padding: 12px 10px 10px;
+      text-align: center;
+      box-shadow: 0 0 18px rgba(0, 255, 204, 0.08);
+    }
+    .overview-tile .ov-label {
+      display: block;
+      font-size: 0.72em;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .overview-tile .ov-title {
+      display: block;
+      color: #00ffcc;
+      font-weight: bold;
+      font-size: 0.88em;
+      line-height: 1.25;
+      min-height: 2.5em;
+      margin: 2px 0 10px;
+    }
+    .ov-covers {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    .ov-covers a {
+      flex: 0 1 62px;
+      color: #aaa;
+      font-size: 0.72em;
+      font-weight: bold;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .ov-covers img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 3px;
+      margin-bottom: 6px;
+      box-shadow: 0 0 14px rgba(0, 255, 204, 0.35), 0 8px 12px rgba(0, 0, 0, 0.6);
+      animation: float 6s ease-in-out infinite;
+    }
+    .ov-covers a + a img { animation-delay: -3s; }
+    .ov-covers a:hover { color: #00ffcc; }
+    .ov-covers a:hover img { box-shadow: 0 0 22px rgba(0, 255, 204, 0.7), 0 8px 12px rgba(0, 0, 0, 0.6); }
+
     /* --- CTA-BUTTON --- */
     .cta-button {
       display: inline-block;
@@ -448,6 +535,9 @@
       }
       .book-info h2 { text-align: center; }
       .book-info .subtitle { text-align: center; }
+      .book-info details.contents { text-align: center; }
+      .book-info details.contents ul { text-align: left; }
+      .book-overview { grid-template-columns: repeat(2, 1fr); gap: 10px; }
       h1 { font-size: 1.6em; }
     }
   </style>
@@ -499,6 +589,42 @@
       <span class="tagline">Bitcoin · Privacy · Digitale Souveränität</span>
     </p>
 
+    <!-- ÜBERSICHT: Sprungmarken zu den Buchkarten -->
+    <nav class="book-overview" aria-label="Bücherübersicht">
+      <div class="overview-tile">
+        <span class="ov-label">Band 1</span>
+        <span class="ov-title">GrapheneOS</span>
+        <div class="ov-covers">
+          <a href="#band1"><img src="grapheneos-handbuch-cover.jpg" alt="" loading="lazy">DE</a>
+          <a href="#band1-en"><img src="grapheneos-handbook-cover-en.jpg" alt="" loading="lazy">EN</a>
+        </div>
+      </div>
+      <div class="overview-tile">
+        <span class="ov-label">Band 2</span>
+        <span class="ov-title">Digitale Souveränität</span>
+        <div class="ov-covers">
+          <a href="#band2"><img src="souveraenitaet-handbuch-cover.jpg" alt="" loading="lazy">DE</a>
+          <a href="#band2-en"><img src="souveraenitaet-handbuch-cover-en.jpg" alt="" loading="lazy">EN</a>
+        </div>
+      </div>
+      <div class="overview-tile">
+        <span class="ov-label">Band 3</span>
+        <span class="ov-title">Das dezentrale System</span>
+        <div class="ov-covers">
+          <a href="#band3"><img src="dezentrales-system-handbuch-cover.jpg" alt="" loading="lazy">DE</a>
+          <a href="#band3-en"><img src="dezentrales-system-handbuch-cover-en.jpg" alt="" loading="lazy">EN</a>
+        </div>
+      </div>
+      <div class="overview-tile">
+        <span class="ov-label">Band 4</span>
+        <span class="ov-title">Die eigene Bank</span>
+        <div class="ov-covers">
+          <a href="#band4"><img src="bitcoin-verwahrung-handbuch-cover.jpg" alt="" loading="lazy">DE</a>
+          <a href="#band4-en"><img src="bitcoin-verwahrung-handbuch-cover-en.jpg" alt="" loading="lazy">EN</a>
+        </div>
+      </div>
+    </nav>
+
     <!-- BAND 1: GrapheneOS -->
     <div class="book-card" id="band1">
       <div class="book-cover">
@@ -521,27 +647,30 @@
         </p>
 
         <p style="color:#aaa; font-size:0.95em;">24 Kapitel – von der Installation bis zur Bitcoin-Verwahrung, dazu die häufigsten Fragen, ein Quellen-Anhang zum Nachprüfen und die <a href="werkstatt-band1.html" style="color:#00ffcc; text-decoration:none;">Werkstatt-Blätter</a> zum Ausdrucken:</p>
-        <ul>
-          <li>Das richtige Pixel auswählen: Titan M2, Hardware Memory Tagging, Support-Horizont, neu vs. gebraucht – und wie du anonym und bar einkaufst</li>
-          <li>Installation über den offiziellen Web Installer – kein Terminal, keine Vorkenntnisse nötig</li>
-          <li>Die 7 wichtigsten Einstellungen: Auto-Reboot, Duress-Passwort, VPN-Killswitch, verschlüsseltes Backup und mehr</li>
-          <li>SIM-Karte &amp; Mobilfunk-Anonymität: IMEI, IMSI, IMSI-Catcher, LTE-only, Baseband-Isolation</li>
-          <li>VPN, Kill Switch und Private DNS: der technische Konflikt, der stille Datenlecks erzeugt – und wie du ihn löst</li>
-          <li>Berechtigungen verstehen und App-Sandbox gezielt einsetzen</li>
-          <li>Apps ohne Google Play: Obtainium mit GPG- und Signaturprüfung, Zap Store, Accrescent</li>
-          <li>Browser: Vanadium als gehärteter Alltagsbrowser, Tor Browser für anonymes Surfen, Orbot als systemweiter Proxy</li>
-          <li>Messenger ohne Telefonnummer: White Noise auf Nostr, SimpleX ohne jede Nutzerkennung und mit Tor über Orbot, Threema Libre für den Alltag</li>
-          <li>Google-Ersatz aus der Schweiz: das Proton-Ökosystem mit Mail, Drive, Pass, VPN, Bitcoin-Wallet und KI</li>
-          <li>Digitale Trennung: User Profiles, Private Space und Shelter – Arbeit, Privat und Banking sauber getrennt</li>
-          <li>Dateiverschlüsselung mit Termux: AES-256 und S2K-Härtung, direkt auf dem Smartphone, eigene Custom Skripte</li>
-          <li>Zweifaktor-Authentifizierung mit Aegis: verschlüsselter TOTP-Tresor, Backup, Migration</li>
-          <li>Banking auf GrapheneOS: welche deutschen Banken funktionieren, NFC ohne Google Pay, Hardware-TAN</li>
-          <li>Kontakte und Kalender ohne Google: DAVx5 mit Nextcloud oder Infomaniak – eigene Daten, eigene Server</li>
-          <li>Kamera ohne Metadaten: GrapheneOS Camera entfernt GPS-Koordinaten und EXIF-Daten vor dem Speichern</li>
-          <li>Reise-OpSec: Grenzübergänge, Duress-PIN, Reise-Profil, USB-Schutz – vorbereitet statt überrascht</li>
-          <li>Bitcoin in Selbstverwahrung: die BitBox02 in einem isolierten Profil mit Tor-Proxy und optionaler eigener Full-Node – kein Drittserver kennt deinen Kontostand</li>
-          <li>Zurück auf Stock: Garantie und Gewährleistung, Bootloader wieder sperren, das Pixel spurlos in den Auslieferungszustand zurückversetzen – für Reparatur, Garantiefall oder Wiederverkauf</li>
-        </ul>
+        <details class="contents">
+          <summary>Alle Inhalte anzeigen</summary>
+          <ul>
+            <li>Das richtige Pixel auswählen: Titan M2, Hardware Memory Tagging, Support-Horizont, neu vs. gebraucht – und wie du anonym und bar einkaufst</li>
+            <li>Installation über den offiziellen Web Installer – kein Terminal, keine Vorkenntnisse nötig</li>
+            <li>Die 7 wichtigsten Einstellungen: Auto-Reboot, Duress-Passwort, VPN-Killswitch, verschlüsseltes Backup und mehr</li>
+            <li>SIM-Karte &amp; Mobilfunk-Anonymität: IMEI, IMSI, IMSI-Catcher, LTE-only, Baseband-Isolation</li>
+            <li>VPN, Kill Switch und Private DNS: der technische Konflikt, der stille Datenlecks erzeugt – und wie du ihn löst</li>
+            <li>Berechtigungen verstehen und App-Sandbox gezielt einsetzen</li>
+            <li>Apps ohne Google Play: Obtainium mit GPG- und Signaturprüfung, Zap Store, Accrescent</li>
+            <li>Browser: Vanadium als gehärteter Alltagsbrowser, Tor Browser für anonymes Surfen, Orbot als systemweiter Proxy</li>
+            <li>Messenger ohne Telefonnummer: White Noise auf Nostr, SimpleX ohne jede Nutzerkennung und mit Tor über Orbot, Threema Libre für den Alltag</li>
+            <li>Google-Ersatz aus der Schweiz: das Proton-Ökosystem mit Mail, Drive, Pass, VPN, Bitcoin-Wallet und KI</li>
+            <li>Digitale Trennung: User Profiles, Private Space und Shelter – Arbeit, Privat und Banking sauber getrennt</li>
+            <li>Dateiverschlüsselung mit Termux: AES-256 und S2K-Härtung, direkt auf dem Smartphone, eigene Custom Skripte</li>
+            <li>Zweifaktor-Authentifizierung mit Aegis: verschlüsselter TOTP-Tresor, Backup, Migration</li>
+            <li>Banking auf GrapheneOS: welche deutschen Banken funktionieren, NFC ohne Google Pay, Hardware-TAN</li>
+            <li>Kontakte und Kalender ohne Google: DAVx5 mit Nextcloud oder Infomaniak – eigene Daten, eigene Server</li>
+            <li>Kamera ohne Metadaten: GrapheneOS Camera entfernt GPS-Koordinaten und EXIF-Daten vor dem Speichern</li>
+            <li>Reise-OpSec: Grenzübergänge, Duress-PIN, Reise-Profil, USB-Schutz – vorbereitet statt überrascht</li>
+            <li>Bitcoin in Selbstverwahrung: die BitBox02 in einem isolierten Profil mit Tor-Proxy und optionaler eigener Full-Node – kein Drittserver kennt deinen Kontostand</li>
+            <li>Zurück auf Stock: Garantie und Gewährleistung, Bootloader wieder sperren, das Pixel spurlos in den Auslieferungszustand zurückversetzen – für Reparatur, Garantiefall oder Wiederverkauf</li>
+          </ul>
+        </details>
 
         <p style="color:#aaa; font-size:0.9em; margin-top: 1.2em;">
           Ein lebendiges Handbuch – neue Ausgaben folgen, wenn sich das Ökosystem ändert.<br>
@@ -583,27 +712,30 @@
         </p>
 
         <p style="color:#aaa; font-size:0.95em;">24 chapters — from installation to Bitcoin self-custody, plus the printable <a href="en/werkstatt-band1.html" style="color:#00ffcc; text-decoration:none;">workshop sheets</a>:</p>
-        <ul>
-          <li>Choosing the right Pixel: Titan M2, Hardware Memory Tagging, support horizon, new vs. used, and how to buy anonymously with cash</li>
-          <li>Installation via the official Web Installer: no terminal, no prior knowledge needed</li>
-          <li>The 7 most important settings: auto-reboot, duress password, VPN kill switch, encrypted backup and more</li>
-          <li>SIM card &amp; cellular privacy: IMEI, IMSI, IMSI catchers, LTE-only mode, baseband isolation</li>
-          <li>VPN, Kill Switch and Private DNS: the technical conflict that creates silent data leaks, and how to resolve it</li>
-          <li>Understanding permissions and using the app sandbox deliberately</li>
-          <li>Apps without Google Play: Obtainium with GPG and signature verification, Zap Store, Accrescent</li>
-          <li>Browser: Vanadium as a hardened everyday browser, Tor Browser for anonymous browsing, Orbot as a system-wide proxy</li>
-          <li>Messengers without a phone number: White Noise on Nostr, SimpleX with no user identifier at all and Tor via Orbot, Threema Libre for everyday use</li>
-          <li>Swiss-made Google replacement: the Proton ecosystem with Mail, Drive, Pass, VPN, Bitcoin wallet and AI</li>
-          <li>Digital separation: User Profiles, Private Space and Shelter, with work, personal life, and banking cleanly separated</li>
-          <li>File encryption with Termux: AES-256 with S2K hardening, directly on your smartphone, using custom scripts</li>
-          <li>Two-factor authentication with Aegis: encrypted TOTP vault, backup, migration</li>
-          <li>Banking on GrapheneOS: which banks work, NFC without Google Pay, hardware TAN devices</li>
-          <li>Contacts and calendar without Google: DAVx5 with Nextcloud or Infomaniak, your data on your servers</li>
-          <li>Camera without metadata: GrapheneOS Camera removes GPS coordinates and EXIF data before saving</li>
-          <li>Travel OpSec: border crossings, duress PIN, travel profile, USB protection, prepared instead of caught off guard</li>
-          <li>Bitcoin self-custody: the BitBox02 in an isolated profile with Tor proxy and optional self-hosted full node: no third-party server ever knows your balance</li>
-          <li>Back to stock: warranty and statutory rights, relocking the bootloader, restoring the Pixel to factory state without a trace, for repair, warranty claims or resale</li>
-        </ul>
+        <details class="contents">
+          <summary>Show all contents</summary>
+          <ul>
+            <li>Choosing the right Pixel: Titan M2, Hardware Memory Tagging, support horizon, new vs. used, and how to buy anonymously with cash</li>
+            <li>Installation via the official Web Installer: no terminal, no prior knowledge needed</li>
+            <li>The 7 most important settings: auto-reboot, duress password, VPN kill switch, encrypted backup and more</li>
+            <li>SIM card &amp; cellular privacy: IMEI, IMSI, IMSI catchers, LTE-only mode, baseband isolation</li>
+            <li>VPN, Kill Switch and Private DNS: the technical conflict that creates silent data leaks, and how to resolve it</li>
+            <li>Understanding permissions and using the app sandbox deliberately</li>
+            <li>Apps without Google Play: Obtainium with GPG and signature verification, Zap Store, Accrescent</li>
+            <li>Browser: Vanadium as a hardened everyday browser, Tor Browser for anonymous browsing, Orbot as a system-wide proxy</li>
+            <li>Messengers without a phone number: White Noise on Nostr, SimpleX with no user identifier at all and Tor via Orbot, Threema Libre for everyday use</li>
+            <li>Swiss-made Google replacement: the Proton ecosystem with Mail, Drive, Pass, VPN, Bitcoin wallet and AI</li>
+            <li>Digital separation: User Profiles, Private Space and Shelter, with work, personal life, and banking cleanly separated</li>
+            <li>File encryption with Termux: AES-256 with S2K hardening, directly on your smartphone, using custom scripts</li>
+            <li>Two-factor authentication with Aegis: encrypted TOTP vault, backup, migration</li>
+            <li>Banking on GrapheneOS: which banks work, NFC without Google Pay, hardware TAN devices</li>
+            <li>Contacts and calendar without Google: DAVx5 with Nextcloud or Infomaniak, your data on your servers</li>
+            <li>Camera without metadata: GrapheneOS Camera removes GPS coordinates and EXIF data before saving</li>
+            <li>Travel OpSec: border crossings, duress PIN, travel profile, USB protection, prepared instead of caught off guard</li>
+            <li>Bitcoin self-custody: the BitBox02 in an isolated profile with Tor proxy and optional self-hosted full node: no third-party server ever knows your balance</li>
+            <li>Back to stock: warranty and statutory rights, relocking the bootloader, restoring the Pixel to factory state without a trace, for repair, warranty claims or resale</li>
+          </ul>
+        </details>
 
         <p style="color:#aaa; font-size:0.9em; margin-top: 1.2em;">
           A living handbook – new editions follow when the ecosystem changes.<br>
@@ -646,21 +778,24 @@
         </p>
 
         <p style="color:#aaa; font-size:0.95em;">18 Kapitel – von der Linux-Basis bis zum Notfallplan, dazu die häufigsten Fragen, ein Quellen-Anhang zum Nachprüfen und die <a href="werkstatt-band2.html" style="color:#00ffcc; text-decoration:none;">Werkstatt-Blätter</a> zum Ausdrucken:</p>
-        <ul>
-          <li>Linux als Fundament: Pop!_OS und TUXEDO OS statt Windows, das Proton-Ökosystem statt Google</li>
-          <li>GrapheneOS als Antwort fürs Smartphone – das Destillat aus Band 1</li>
-          <li>Netzwerk-Souveränität mit OPNsense, VLAN-Zonen und Kill-Switch auf Firewall-Ebene, dazu dezentrale Mesh-VPNs für den Fall, dass VPNs selbst verboten werden</li>
-          <li>DNS unter eigener Kontrolle und der richtige Browser gegen Fingerprinting</li>
-          <li>VoIP &amp; Kommunikation entkoppeln: No-KYC-eSIM, IMSI-Catcher, Baseband, Threema</li>
-          <li>Identität &amp; Alias-Strategien nach deutschem Recht: eIDAS 2.0, DSA, Namensrecht, Hide-my-email</li>
-          <li>Nostr: eine zensurresistente digitale Identität über einen kryptografischen Schlüssel – keine Plattform kann sie löschen</li>
-          <li>Anonymes Eigentum: GmbH und UG statt US-LLC, nach der GbR-Reform durch das MoPeG 2024</li>
-          <li>Data-Broker-Löschung mit dem DSGVO-Widerspruchsrecht, Melderegister-Sperren und ePA-Widerspruch</li>
-          <li>Offline-KI, Dead Man's Switch mit 3-2-1-Backup und Tails als anonymes Live-System auf dem USB-Stick</li>
-          <li>Bitcoin-Privatsphäre: ohne KYC kaufen über Bisq, CoinJoin auf Tails, und Monero ohne Fiat-Umweg</li>
-          <li>EU-Altersverifikation: warum die geplante Geräte-Attestierung GrapheneOS und Linux aussperrt – und welche Auswege bleiben</li>
-          <li>Goldene Regeln der Sicherheitshygiene: lange Passphrasen, Passwortmanager und sicheres Verhalten bei Tor und Tails</li>
-        </ul>
+        <details class="contents">
+          <summary>Alle Inhalte anzeigen</summary>
+          <ul>
+            <li>Linux als Fundament: Pop!_OS und TUXEDO OS statt Windows, das Proton-Ökosystem statt Google</li>
+            <li>GrapheneOS als Antwort fürs Smartphone – das Destillat aus Band 1</li>
+            <li>Netzwerk-Souveränität mit OPNsense, VLAN-Zonen und Kill-Switch auf Firewall-Ebene, dazu dezentrale Mesh-VPNs für den Fall, dass VPNs selbst verboten werden</li>
+            <li>DNS unter eigener Kontrolle und der richtige Browser gegen Fingerprinting</li>
+            <li>VoIP &amp; Kommunikation entkoppeln: No-KYC-eSIM, IMSI-Catcher, Baseband, Threema</li>
+            <li>Identität &amp; Alias-Strategien nach deutschem Recht: eIDAS 2.0, DSA, Namensrecht, Hide-my-email</li>
+            <li>Nostr: eine zensurresistente digitale Identität über einen kryptografischen Schlüssel – keine Plattform kann sie löschen</li>
+            <li>Anonymes Eigentum: GmbH und UG statt US-LLC, nach der GbR-Reform durch das MoPeG 2024</li>
+            <li>Data-Broker-Löschung mit dem DSGVO-Widerspruchsrecht, Melderegister-Sperren und ePA-Widerspruch</li>
+            <li>Offline-KI, Dead Man's Switch mit 3-2-1-Backup und Tails als anonymes Live-System auf dem USB-Stick</li>
+            <li>Bitcoin-Privatsphäre: ohne KYC kaufen über Bisq, CoinJoin auf Tails, und Monero ohne Fiat-Umweg</li>
+            <li>EU-Altersverifikation: warum die geplante Geräte-Attestierung GrapheneOS und Linux aussperrt – und welche Auswege bleiben</li>
+            <li>Goldene Regeln der Sicherheitshygiene: lange Passphrasen, Passwortmanager und sicheres Verhalten bei Tor und Tails</li>
+          </ul>
+        </details>
 
         <p style="color:#aaa; font-size:0.9em; margin-top: 1.2em;">
           Adaptiert nach dem Vorbild von Michael Bazzells „Extreme Privacy", konsequent auf die deutsche und europäische Realität übertragen.<br>
@@ -703,21 +838,24 @@
         </p>
 
         <p style="color:#aaa; font-size:0.95em;">18 chapters – from the Linux base to the emergency plan, plus the most common questions, a sources appendix for checking every claim and the printable <a href="en/werkstatt-band2.html" style="color:#00ffcc; text-decoration:none;">workshop sheets</a>:</p>
-        <ul>
-          <li>Linux as the foundation: Pop!_OS and TUXEDO OS instead of Windows, the Proton ecosystem instead of Google</li>
-          <li>GrapheneOS as the answer for the smartphone – the distillate of Volume 1</li>
-          <li>Network sovereignty with OPNsense, VLAN zones and a kill switch at the firewall level, plus decentralized mesh VPNs for when VPNs themselves get banned</li>
-          <li>DNS under your own control and the right browser against fingerprinting</li>
-          <li>Decoupling VoIP &amp; communication: No-KYC eSIM, IMSI catchers, baseband, Threema</li>
-          <li>Identity &amp; alias strategies under German law: eIDAS 2.0, DSA, naming law, Hide-my-email</li>
-          <li>Nostr: a censorship-resistant digital identity built on a cryptographic key – no platform can delete it</li>
-          <li>Anonymous ownership: GmbH and UG instead of a US LLC, after the GbR reform through MoPeG 2024</li>
-          <li>Data broker removal with the GDPR right to object, residents'-register blocks and ePA opt-out</li>
-          <li>Offline AI, a dead man's switch with 3-2-1 backups and Tails as an anonymous live system on a USB stick</li>
-          <li>Bitcoin privacy: buying without KYC via Bisq, CoinJoin on Tails, and Monero without the fiat detour</li>
-          <li>EU age verification: why the planned device attestation locks out GrapheneOS and Linux – and which ways around it remain</li>
-          <li>Golden rules of security hygiene: long passphrases, password managers and safe behavior with Tor and Tails</li>
-        </ul>
+        <details class="contents">
+          <summary>Show all contents</summary>
+          <ul>
+            <li>Linux as the foundation: Pop!_OS and TUXEDO OS instead of Windows, the Proton ecosystem instead of Google</li>
+            <li>GrapheneOS as the answer for the smartphone – the distillate of Volume 1</li>
+            <li>Network sovereignty with OPNsense, VLAN zones and a kill switch at the firewall level, plus decentralized mesh VPNs for when VPNs themselves get banned</li>
+            <li>DNS under your own control and the right browser against fingerprinting</li>
+            <li>Decoupling VoIP &amp; communication: No-KYC eSIM, IMSI catchers, baseband, Threema</li>
+            <li>Identity &amp; alias strategies under German law: eIDAS 2.0, DSA, naming law, Hide-my-email</li>
+            <li>Nostr: a censorship-resistant digital identity built on a cryptographic key – no platform can delete it</li>
+            <li>Anonymous ownership: GmbH and UG instead of a US LLC, after the GbR reform through MoPeG 2024</li>
+            <li>Data broker removal with the GDPR right to object, residents'-register blocks and ePA opt-out</li>
+            <li>Offline AI, a dead man's switch with 3-2-1 backups and Tails as an anonymous live system on a USB stick</li>
+            <li>Bitcoin privacy: buying without KYC via Bisq, CoinJoin on Tails, and Monero without the fiat detour</li>
+            <li>EU age verification: why the planned device attestation locks out GrapheneOS and Linux – and which ways around it remain</li>
+            <li>Golden rules of security hygiene: long passphrases, password managers and safe behavior with Tor and Tails</li>
+          </ul>
+        </details>
 
         <p style="color:#aaa; font-size:0.9em; margin-top: 1.2em;">
           Adapted from the model of Michael Bazzell's "Extreme Privacy", consistently transferred to German and European reality.<br>
@@ -760,19 +898,22 @@
         </p>
 
         <p style="color:#aaa; font-size:0.95em;">18 Kapitel in vier Teilen, dazu FAQ, Glossar, ein Quellen-Anhang zum Nachprüfen, der Anhang „Aus der eigenen Werkstatt" mit allen Tools des Kanals und vier <a href="werkstatt-band3.html" style="color:#00ffcc; text-decoration:none;">Werkstatt-Blätter</a> zum Ausdrucken:</p>
-        <ul>
-          <li>Warum Konto und Depot nur Forderungen sind: Geldsystem, Inflation, CBDC</li>
-          <li>Bitcoin kaufen mit KYC (fünf Anbieter im Vergleich) und ohne KYC über Bisq und P2P</li>
-          <li>Self-Custody mit BitBox02: Seed, Stahl-Backup, optionale Passphrase und das Vault-Prinzip</li>
-          <li>Eigene Full Node, Coin Control und On-Chain-Privatsphäre, Lightning für den Alltag</li>
-          <li>Bitcoin vererben mit Totmannschalter auf der Blockchain, Monero als Zahlungswerkzeug</li>
-          <li>Aktien wie ein Mit-Eigentümer: Aktionärsschule, Sechs-Schritte-Analyse und Mungers Prinzipien</li>
-          <li>Die ETF-Falle: Sammelverwahrung, Wertpapierleihe, Stimmrechte und die Amerika-Frage hinter dem S&amp;P 500</li>
-          <li>US-Aktien per Direct Registration auf den eigenen Namen, Schweizer Namensaktien im Aktienregister</li>
-          <li>Auslandsbroker und geografische Streuung: Swissquote und Interactive Brokers in der Praxis</li>
-          <li>Gold und Silber: Tafelgeschäft, Lagerung, Steuern und die Superzyklus-Frage</li>
-          <li>Steuern und Meldepflichten: von § 23 EStG bis CRS und DAC8, mit hartem Disclaimer statt Steuertricks</li>
-        </ul>
+        <details class="contents">
+          <summary>Alle Inhalte anzeigen</summary>
+          <ul>
+            <li>Warum Konto und Depot nur Forderungen sind: Geldsystem, Inflation, CBDC</li>
+            <li>Bitcoin kaufen mit KYC (fünf Anbieter im Vergleich) und ohne KYC über Bisq und P2P</li>
+            <li>Self-Custody mit BitBox02: Seed, Stahl-Backup, optionale Passphrase und das Vault-Prinzip</li>
+            <li>Eigene Full Node, Coin Control und On-Chain-Privatsphäre, Lightning für den Alltag</li>
+            <li>Bitcoin vererben mit Totmannschalter auf der Blockchain, Monero als Zahlungswerkzeug</li>
+            <li>Aktien wie ein Mit-Eigentümer: Aktionärsschule, Sechs-Schritte-Analyse und Mungers Prinzipien</li>
+            <li>Die ETF-Falle: Sammelverwahrung, Wertpapierleihe, Stimmrechte und die Amerika-Frage hinter dem S&amp;P 500</li>
+            <li>US-Aktien per Direct Registration auf den eigenen Namen, Schweizer Namensaktien im Aktienregister</li>
+            <li>Auslandsbroker und geografische Streuung: Swissquote und Interactive Brokers in der Praxis</li>
+            <li>Gold und Silber: Tafelgeschäft, Lagerung, Steuern und die Superzyklus-Frage</li>
+            <li>Steuern und Meldepflichten: von § 23 EStG bis CRS und DAC8, mit hartem Disclaimer statt Steuertricks</li>
+          </ul>
+        </details>
 
         <p style="color:#aaa; font-size:0.9em; margin-top: 1.2em;">
           Ein lebendiges Handbuch – Anbieter, Gebühren und Gesetze ändern sich, neue Ausgaben folgen und sind für Direktkäufer kostenlos.<br>
@@ -815,19 +956,22 @@
         </p>
 
         <p style="color:#aaa; font-size:0.95em;">18 chapters in four parts, plus FAQ, glossary, a sources appendix for checking every claim, the "From my own workshop" appendix with all the channel's tools and four printable <a href="en/werkstatt-band3.html" style="color:#00ffcc; text-decoration:none;">workshop sheets</a>:</p>
-        <ul>
-          <li>Why bank and brokerage accounts are only claims: the monetary system, inflation, CBDC</li>
-          <li>Buying Bitcoin with KYC (five providers compared) and without KYC via Bisq and P2P</li>
-          <li>Self-custody with the BitBox02: seed, steel backup, optional passphrase and the vault principle</li>
-          <li>Your own full node, coin control and on-chain privacy, Lightning for everyday payments</li>
-          <li>Inheriting Bitcoin with a dead man's switch on the blockchain, Monero as a payment tool</li>
-          <li>Stocks as a co-owner: the shareholder school, a six-step analysis framework and Munger's principles</li>
-          <li>The ETF trap: pooled custody, securities lending, voting rights and the America question behind the S&amp;P 500</li>
-          <li>US stocks in your own name via Direct Registration, Swiss registered shares in the share register</li>
-          <li>Foreign brokers and geographic diversification: Swissquote and Interactive Brokers in practice</li>
-          <li>Gold and silver: over-the-counter cash purchases, storage, taxes and the supercycle question</li>
-          <li>Taxes and reporting duties: from German capital gains rules to CRS and DAC8, with a hard disclaimer instead of tax tricks</li>
-        </ul>
+        <details class="contents">
+          <summary>Show all contents</summary>
+          <ul>
+            <li>Why bank and brokerage accounts are only claims: the monetary system, inflation, CBDC</li>
+            <li>Buying Bitcoin with KYC (five providers compared) and without KYC via Bisq and P2P</li>
+            <li>Self-custody with the BitBox02: seed, steel backup, optional passphrase and the vault principle</li>
+            <li>Your own full node, coin control and on-chain privacy, Lightning for everyday payments</li>
+            <li>Inheriting Bitcoin with a dead man's switch on the blockchain, Monero as a payment tool</li>
+            <li>Stocks as a co-owner: the shareholder school, a six-step analysis framework and Munger's principles</li>
+            <li>The ETF trap: pooled custody, securities lending, voting rights and the America question behind the S&amp;P 500</li>
+            <li>US stocks in your own name via Direct Registration, Swiss registered shares in the share register</li>
+            <li>Foreign brokers and geographic diversification: Swissquote and Interactive Brokers in practice</li>
+            <li>Gold and silver: over-the-counter cash purchases, storage, taxes and the supercycle question</li>
+            <li>Taxes and reporting duties: from German capital gains rules to CRS and DAC8, with a hard disclaimer instead of tax tricks</li>
+          </ul>
+        </details>
 
         <p style="color:#aaa; font-size:0.9em; margin-top: 1.2em;">
           A living handbook – providers, fees and laws change, new editions follow and are free for direct buyers.<br>
@@ -880,20 +1024,23 @@
         </p>
 
         <p style="color:#aaa; font-size:0.95em;">12 Kapitel in drei Teilen, dazu FAQ, Glossar und der Anhang „Aus der eigenen Werkstatt" mit dem <a href="werkstatt-paket.html" style="color:#00ffcc; text-decoration:none;">Werkstatt-Paket</a> zum Ausdrucken:</p>
-        <ul>
-          <li>Der Coldcard-Hack: Anatomie des Vorfalls, warum die Opfer nichts falsch gemacht haben und was er lehrt</li>
-          <li>Dein Bedrohungsmodell: die ehrliche Verlust-Statistik, Angreifer nach Reichweite und vier Betragsstufen</li>
-          <li>Entropie: den eigenen Seed würfeln, mit BitBox02 und SeedSigner, und die Rechnung unabhängig prüfen</li>
-          <li>Die Passphrase als 25. Wort: Diceware, Gerätegrenzen und die Falle des stillen Tippfehlers</li>
-          <li>Backups aus Stahl: Körnerplatte oder Kacheln, wie viele Kopien an wie vielen Orten, die Todsünden</li>
-          <li>Der Ernstfall als Übung: Restore-Drill, Firmware prüfen, Gerätewechsel und das Lebensende eines Herstellers</li>
-          <li>Multisig verstehen: 2-von-3, xpubs, Descriptoren, Koordinatoren und das vergessene Backup</li>
-          <li>Multisig aufsetzen: BitBox02, Trezor und SeedSigner in Sparrow, Schritt für Schritt aus dem Logbuch</li>
-          <li>Bitcoin vererben: der Erbpfad mit Zeitschloss in Liana und das Erben-Paket in zwei Stufen</li>
-          <li>Sats versichern: was Bitsurance in der BitBoxApp deckt, was nicht, und was es über dich weiß</li>
-          <li>Verwahrung im Alltag: Watch-only, eine Node, die lügen, aber nicht stehlen darf, Routinen und Schweigsamkeit</li>
-          <li>Deine Strategie: Setup-Matrix, drei Referenz-Systeme, Wartungskalender und die zehn goldenen Regeln</li>
-        </ul>
+        <details class="contents">
+          <summary>Alle Inhalte anzeigen</summary>
+          <ul>
+            <li>Der Coldcard-Hack: Anatomie des Vorfalls, warum die Opfer nichts falsch gemacht haben und was er lehrt</li>
+            <li>Dein Bedrohungsmodell: die ehrliche Verlust-Statistik, Angreifer nach Reichweite und vier Betragsstufen</li>
+            <li>Entropie: den eigenen Seed würfeln, mit BitBox02 und SeedSigner, und die Rechnung unabhängig prüfen</li>
+            <li>Die Passphrase als 25. Wort: Diceware, Gerätegrenzen und die Falle des stillen Tippfehlers</li>
+            <li>Backups aus Stahl: Körnerplatte oder Kacheln, wie viele Kopien an wie vielen Orten, die Todsünden</li>
+            <li>Der Ernstfall als Übung: Restore-Drill, Firmware prüfen, Gerätewechsel und das Lebensende eines Herstellers</li>
+            <li>Multisig verstehen: 2-von-3, xpubs, Descriptoren, Koordinatoren und das vergessene Backup</li>
+            <li>Multisig aufsetzen: BitBox02, Trezor und SeedSigner in Sparrow, Schritt für Schritt aus dem Logbuch</li>
+            <li>Bitcoin vererben: der Erbpfad mit Zeitschloss in Liana und das Erben-Paket in zwei Stufen</li>
+            <li>Sats versichern: was Bitsurance in der BitBoxApp deckt, was nicht, und was es über dich weiß</li>
+            <li>Verwahrung im Alltag: Watch-only, eine Node, die lügen, aber nicht stehlen darf, Routinen und Schweigsamkeit</li>
+            <li>Deine Strategie: Setup-Matrix, drei Referenz-Systeme, Wartungskalender und die zehn goldenen Regeln</li>
+          </ul>
+        </details>
 
         <p style="color:#aaa; font-size:0.9em; margin-top: 1.2em;">
           Ein lebendiges Handbuch – Geräte, Firmware und Anbieter ändern sich, neue Ausgaben folgen und sind für Direktkäufer kostenlos.<br>
@@ -946,20 +1093,23 @@
         </p>
 
         <p style="color:#aaa; font-size:0.95em;">12 chapters in three parts, plus FAQ, glossary and the "From my own workshop" appendix with the printable <a href="en/werkstatt-paket.html" style="color:#00ffcc; text-decoration:none;">workshop package</a>:</p>
-        <ul>
-          <li>The Coldcard hack: anatomy of the incident, why the victims did nothing wrong and what it teaches</li>
-          <li>Your threat model: the honest loss statistics, attackers sorted by reach, and four amount levels</li>
-          <li>Entropy: rolling your own seed with the BitBox02 and the SeedSigner, and checking the calculation independently</li>
-          <li>The passphrase as the 25th word: Diceware, device limits and the trap of the silent typo</li>
-          <li>Backups in steel: center-punch plate or tiles, how many copies in how many places, the deadly sins</li>
-          <li>The emergency as a drill: restore drill, verifying firmware, changing devices and the end of a manufacturer's life</li>
-          <li>Understanding multisig: 2-of-3, xpubs, descriptors, coordinators and the forgotten backup</li>
-          <li>Setting up multisig: BitBox02, Trezor and SeedSigner in Sparrow, step by step out of the logbook</li>
-          <li>Inheriting Bitcoin: the inheritance path with a timelock in Liana and the heirs' package in two levels</li>
-          <li>Insuring sats: what Bitsurance covers in the BitBoxApp, what it does not, and what it learns about you</li>
-          <li>Custody in everyday life: watch-only, a node that may lie but must not steal, routines and keeping quiet</li>
-          <li>Your strategy: setup matrix, three reference systems, maintenance calendar and the ten golden rules</li>
-        </ul>
+        <details class="contents">
+          <summary>Show all contents</summary>
+          <ul>
+            <li>The Coldcard hack: anatomy of the incident, why the victims did nothing wrong and what it teaches</li>
+            <li>Your threat model: the honest loss statistics, attackers sorted by reach, and four amount levels</li>
+            <li>Entropy: rolling your own seed with the BitBox02 and the SeedSigner, and checking the calculation independently</li>
+            <li>The passphrase as the 25th word: Diceware, device limits and the trap of the silent typo</li>
+            <li>Backups in steel: center-punch plate or tiles, how many copies in how many places, the deadly sins</li>
+            <li>The emergency as a drill: restore drill, verifying firmware, changing devices and the end of a manufacturer's life</li>
+            <li>Understanding multisig: 2-of-3, xpubs, descriptors, coordinators and the forgotten backup</li>
+            <li>Setting up multisig: BitBox02, Trezor and SeedSigner in Sparrow, step by step out of the logbook</li>
+            <li>Inheriting Bitcoin: the inheritance path with a timelock in Liana and the heirs' package in two levels</li>
+            <li>Insuring sats: what Bitsurance covers in the BitBoxApp, what it does not, and what it learns about you</li>
+            <li>Custody in everyday life: watch-only, a node that may lie but must not steal, routines and keeping quiet</li>
+            <li>Your strategy: setup matrix, three reference systems, maintenance calendar and the ten golden rules</li>
+          </ul>
+        </details>
 
         <p style="color:#aaa; font-size:0.9em; margin-top: 1.2em;">
           A living handbook – devices, firmware and providers change, new editions follow and are free for direct buyers.<br>

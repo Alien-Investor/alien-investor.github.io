@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Alien-Investor-Bücher DRM-frei direkt kaufen – GrapheneOS-Handbuch, Digitale Souveränität, Das dezentrale System und Die eigene Bank als EPUB/MOBI/AZW3/PDF-Bundle. Bezahlung via Lightning, Onchain-Bitcoin, Banküberweisung oder Ko-fi.">
   <style>
+    html { scroll-behavior: smooth; }
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
 
@@ -214,6 +215,7 @@
 
     /* --- COVER + PITCH --- */
     .hero {
+      scroll-margin-top: 20px;
       display: flex;
       gap: 25px;
       align-items: center;
@@ -252,6 +254,55 @@
       font-weight: bold;
       font-size: 0.95em;
     }
+
+    /* --- BUCH-ÜBERSICHT (Kacheln mit Sprungmarken) --- */
+    .book-overview {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin: 0 0 20px 0;
+    }
+    .overview-tile {
+      background: linear-gradient(135deg, rgba(0, 20, 20, 0.6), rgba(0, 8, 15, 0.85));
+      border: 1px solid rgba(0, 255, 204, 0.35);
+      border-radius: 10px;
+      padding: 12px 10px 10px;
+      text-align: center;
+      box-shadow: 0 0 18px rgba(0, 255, 204, 0.08);
+    }
+    .overview-tile .ov-label {
+      display: block;
+      font-size: 0.72em;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+    .ov-covers {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    .ov-covers a {
+      flex: 0 1 62px;
+      color: #aaa;
+      font-size: 0.72em;
+      font-weight: bold;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .ov-covers img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 3px;
+      margin-bottom: 6px;
+      box-shadow: 0 0 14px rgba(0, 255, 204, 0.35), 0 8px 12px rgba(0, 0, 0, 0.6);
+      animation: float 6s ease-in-out infinite;
+    }
+    .ov-covers a + a img { animation-delay: -3s; }
+    .ov-covers a:hover { color: #00ffcc; }
+    .ov-covers a:hover img { box-shadow: 0 0 22px rgba(0, 255, 204, 0.7), 0 8px 12px rgba(0, 0, 0, 0.6); }
 
     /* --- KAUFEN-BUTTON (Buchkarte) --- */
     .buy-btn {
@@ -463,6 +514,7 @@
       .hero img { width: 140px; flex: 0 0 auto; }
       h1 { font-size: 1.4em; }
       .buy-btn { width: 100%; box-sizing: border-box; text-align: center; }
+      .book-overview { grid-template-columns: repeat(2, 1fr); gap: 10px; }
     }
   </style>
 </head>
@@ -511,7 +563,39 @@
       <span style="color:#888;">EPUB + MOBI + AZW3 + PDF als Bundle – auf allen Geräten deiner Wahl.</span>
     </p>
 
-    <div class="hero">
+    <!-- ÜBERSICHT: Sprungmarken zu den Buchblöcken -->
+    <nav class="book-overview" aria-label="Bücherübersicht / Book overview">
+      <div class="overview-tile">
+        <span class="ov-label">Band 1 · Vol. 1</span>
+        <div class="ov-covers">
+          <a href="#grapheneos"><img src="grapheneos-handbuch-cover.jpg" alt="" loading="lazy">DE</a>
+          <a href="#grapheneos-en"><img src="grapheneos-handbook-cover-en.jpg" alt="" loading="lazy">EN</a>
+        </div>
+      </div>
+      <div class="overview-tile">
+        <span class="ov-label">Band 2 · Vol. 2</span>
+        <div class="ov-covers">
+          <a href="#souveraenitaet"><img src="souveraenitaet-handbuch-cover.jpg" alt="" loading="lazy">DE</a>
+          <a href="#sovereignty"><img src="souveraenitaet-handbuch-cover-en.jpg" alt="" loading="lazy">EN</a>
+        </div>
+      </div>
+      <div class="overview-tile">
+        <span class="ov-label">Band 3 · Vol. 3</span>
+        <div class="ov-covers">
+          <a href="#dezentral"><img src="dezentrales-system-handbuch-cover.jpg" alt="" loading="lazy">DE</a>
+          <a href="#decentralized"><img src="dezentrales-system-handbuch-cover-en.jpg" alt="" loading="lazy">EN</a>
+        </div>
+      </div>
+      <div class="overview-tile">
+        <span class="ov-label">Band 4 · Vol. 4</span>
+        <div class="ov-covers">
+          <a href="#verwahrung"><img src="bitcoin-verwahrung-handbuch-cover.jpg" alt="" loading="lazy">DE</a>
+          <a href="#own-bank"><img src="bitcoin-verwahrung-handbuch-cover-en.jpg" alt="" loading="lazy">EN</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="hero" id="grapheneos">
       <img src="grapheneos-handbuch-cover.jpg" alt="Cover GrapheneOS-Handbuch">
       <div class="hero-text">
         <h3>GrapheneOS: Android im Überwachungszeitalter</h3>
@@ -535,7 +619,7 @@
       <h2 style="margin-top:0;">English Edition</h2>
     </div>
 
-    <div class="hero">
+    <div class="hero" id="grapheneos-en">
       <img src="grapheneos-handbook-cover-en.jpg" alt="Cover GrapheneOS Handbook English">
       <div class="hero-text">
         <h3>GrapheneOS: Android in the Age of Surveillance</h3>
