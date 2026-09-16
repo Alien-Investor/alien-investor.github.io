@@ -1144,9 +1144,20 @@
       var kofiWarning = document.getElementById('kofi-warning');
       if (kofiWarning) kofiWarning.textContent = t['kofi-warning'];
       renderBuyingNote();
+      // oberen DE|EN-Schalter (lang-switcher.js) neu zeichnen
+      window.dispatchEvent(new HashChangeEvent('hashchange'));
     }
 
     if (window.location.hash === '#en') setLang('en');
+
+    // Oberer DE|EN-Schalter: direkt umschalten statt über die Weiterleitung
+    // /en/buch-direkt.html neu zu laden (die blitzte kurz weiß auf)
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('.lang-toggle a');
+      if (!a) return;
+      e.preventDefault();
+      setLang(a.textContent.trim() === 'EN' ? 'en' : 'de');
+    });
 
     function toggleBankPanel(id) {
       ['santander', 'wise'].forEach(function(pid) {
