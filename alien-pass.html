@@ -254,7 +254,7 @@
         <li><strong>Import-Grenzen.</strong> Eine fremde Backup-Datei darf keine beliebigen Argon2-Parameter erzwingen; alle Inhalte laufen durch eine Feld-Whitelist — auch der eigene Tresor beim Entsperren.</li>
         <li><strong>Kein Reset, kein Backdoor.</strong> Wer die Passphrase vergisst, verliert die Daten — dafür kann auch niemand sonst ran.</li>
         <li><strong>Open Source.</strong> Der komplette Client-Code ist öffentlich, der Fremdcode (Argon2-Bibliothek, EFF-Wortliste) ist gebündelt und wird im Build per Hash geprüft. Der OpenPGP-Leser für Proton-Exporte ist eigener, bewusst kleiner Code, samt eigener AES-Blockchiffre, die die Testsuite gegen FIPS-197-Vektoren und WebCrypto prüft. Auch der native Android-Code (FLAG_SECURE, Backup-Regeln, Zwischenablage- und Fingerabdruck-Plugin) liegt im Klartext im Repo.</li>
-        <li><strong>Vier Security-Audits</strong> vor v1.0, v1.1, v1.2 und v1.5 sowie eine gezielte Durchsicht der Änderungen vor v1.4, alle Audit-Funde behoben und mit Tests abgesichert. Die behobenen Punkte sind im Changelog des Repos dokumentiert.</li>
+        <li><strong>Vier interne Security-Audits</strong> vor v1.0, v1.1, v1.2 und v1.5 sowie eine gezielte Durchsicht der Änderungen vor v1.4, alle Audit-Funde behoben und mit Tests abgesichert. Die behobenen Punkte sind im Changelog des Repos dokumentiert.</li>
       </ul>
     </div>
 

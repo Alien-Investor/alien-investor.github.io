@@ -92,7 +92,7 @@
         <li><strong>Import limits.</strong> A foreign backup file cannot force arbitrary Argon2 parameters; all content passes a field whitelist — including your own vault on unlock.</li>
         <li><strong>No reset, no backdoor.</strong> Forget the passphrase and the data is gone — but nobody else can get in either.</li>
         <li><strong>Open source.</strong> The full client code is public; the bundled third-party code (Argon2 library, EFF word list) is hash-checked in the build. The OpenPGP reader for Proton exports is our own, deliberately small code, including its own AES block cipher, which the test suite checks against FIPS-197 vectors and WebCrypto. The native Android code (FLAG_SECURE, backup rules, clipboard and fingerprint plugin) is in the repo in plaintext as well.</li>
-        <li><strong>Four security audits</strong> before v1.0, v1.1, v1.2 and v1.5 plus a targeted review of the changes before v1.4, every audit finding fixed and covered by tests. The fixed items are documented in the repo's changelog.</li>
+        <li><strong>Four internal security audits</strong> before v1.0, v1.1, v1.2 and v1.5 plus a targeted review of the changes before v1.4, every audit finding fixed and covered by tests. The fixed items are documented in the repo's changelog.</li>
       </ul>
     </div>
 
