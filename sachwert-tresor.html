@@ -243,8 +243,10 @@
     <h2>Sicherheit — und selbst prüfbar</h2>
     <div class="box">
       <ul>
-        <li>Verschlüsselung mit <strong>AES-256-GCM</strong>, Schlüssel aus deiner Passphrase via <strong>PBKDF2-SHA256 (600.000 Iterationen)</strong> — alles über die native <strong>WebCrypto</strong> des Browsers, kein Fremd-Krypto-Code.</li>
+        <li>Verschlüsselung mit <strong>AES-256-GCM</strong> über die native <strong>WebCrypto</strong> des Browsers. Den Schlüssel leitet seit v3.0 <strong>Argon2id</strong> aus deiner Passphrase ab (64 MiB Speicher, 3 Durchgänge): Jeder Rateversuch kostet Arbeitsspeicher, das macht Durchprobieren auf Grafikkarten und Spezialchips deutlich teurer als mit dem früheren PBKDF2. Argon2id stammt aus der quelloffenen Bibliothek hash-wasm (MIT), fest eingebunden und beim Build per SHA-256 geprüft.</li>
+        <li><strong>Alte Tresore und Backups öffnen weiter.</strong> Ein Tresor aus einer älteren Version wird beim ersten Entsperren automatisch umgestellt — geschrieben wird erst, nachdem die neue Datei zur Probe entschlüsselt wurde.</li>
         <li>Optionaler <strong>2FA-Zweitfaktor</strong> (Aegis / TOTP, RFC 6238) beim Entsperren.</li>
+        <li><strong>Fehlversuchs-Bremse</strong> (seit v3.0) — nach 3 falschen Versuchen wächst eine Wartezeit bis 30 Sekunden. Ein Riegel gegen Durchprobieren am Gerät, kein Krypto-Schutz.</li>
         <li><strong>Kein Reset, kein Backdoor.</strong> Wer die Passphrase vergisst, verliert die Daten — dafür kann auch niemand sonst ran.</li>
         <li><strong>Open Source.</strong> Der komplette Client-Code ist öffentlich — du musst nicht vertrauen, du kannst nachsehen, dass nichts nach Hause telefoniert.</li>
       </ul>
@@ -270,9 +272,10 @@
         auf Betriebssystem-Ebene härter abgeriegelt. Das kann eine Website technisch nicht leisten:
       </p>
       <ul>
-        <li><strong>Keine INTERNET-Berechtigung.</strong> Der App ist das Netz-Recht im Android-Manifest komplett entzogen — sie <em>kann</em> gar keine Verbindung aufbauen. „Keine Telemetrie“ ist damit nachprüfbar, nicht nur versprochen.</li>
+        <li><strong>Keine INTERNET-Berechtigung.</strong> Der App ist das Netz-Recht im Android-Manifest komplett entzogen — sie <em>kann</em> gar keine Verbindung aufbauen. „Keine Telemetrie“ ist damit nachprüfbar, nicht nur versprochen. Ihre <strong>einzige System-Berechtigung</strong> ist seit v3.0 <code>USE_BIOMETRIC</code> für das optionale Fingerabdruck-Entsperren, dazu <code>USE_FINGERPRINT</code>, das androidx.biometric mitbringt und die App auf Android bis 8.1 beschränkt. Die im Manifest zusätzlich gelistete <code>…DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION</code> ist eine app-interne Signatur-Berechtigung von AndroidX ohne Systemzugriff. Der Build bricht ab, sobald die fertige APK eine andere Berechtigung anfordert.</li>
         <li><strong>FLAG_SECURE.</strong> Keine Screenshots, kein Screen-Recording, keine Bestands-Vorschau im App-Switcher.</li>
-        <li><strong>Kein Cloud-/ADB-Backup.</strong> Deine Tresor-Daten landen in keinem automatischen Backup — Sicherungen machst nur du selbst über die verschlüsselte <code>.vault</code>-Datei.</li>
+        <li><strong>Kein Cloud-/ADB-Backup, keine Übertragung beim Handywechsel.</strong> Deine Tresor-Daten landen in keinem automatischen Backup und werden beim Gerätewechsel nicht mitkopiert (seit v3.0) — Sicherungen machst nur du selbst über die verschlüsselte <code>.vault</code>-Datei.</li>
+        <li><strong>Fingerabdruck (optional, seit v3.0).</strong> Ein vom Android-Keystore verwahrter Zufallsschlüssel schließt den Datenschlüssel auf, freigegeben nur nach starker Biometrie. Ehrlich eingeordnet: bequem, aber erzwingbar, und kein zusätzlicher Faktor. Die Passphrase bleibt Pflicht nach jedem Neustart, nach einem Passphrase-Wechsel (danach ist der Fingerabdruck aus und muss neu aktiviert werden), nach „Jetzt sperren“ und sobald in Android ein neuer Fingerabdruck registriert wird — dann schaltet die App den Fingerabdruck ab und warnt. Die Neustart-Regel ist Programmcode, keine kryptografische Garantie.</li>
       </ul>
       <p>Für den <strong>vollen Schutz</strong> also die APK. Die Web-Version bleibt der schnellste Weg zum Ausprobieren.</p>
     </div>

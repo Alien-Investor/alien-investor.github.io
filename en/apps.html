@@ -538,8 +538,9 @@
         </p>
 
         <ul>
-          <li>AES-256-GCM encryption, protected by your master password</li>
+          <li>AES-256-GCM encryption, key derived from your passphrase with Argon2id (since v3.0) – makes brute-forcing costly</li>
           <li>Optional two-factor authentication (TOTP)</li>
+          <li>Optional fingerprint unlock (app, since v3.0) – after every restart the passphrase first, and it switches itself off when a new finger is enrolled</li>
           <li>Precious metals as count × unit size – bars and coins tracked cleanly</li>
           <li>Manual price entry: no data leaking to external price services</li>
           <li>Wealth over time: every price you enter is remembered with its date, the history tab shows value next to cost basis – still no price lookups</li>
@@ -548,7 +549,7 @@
           <li>Estate appendix: one sheet with your net holdings for the heir package, quantities only</li>
         </ul>
 
-        <p style="color:#00ffcc; font-size:0.92em;"><strong>Full hardening only in the app (v2.0):</strong> no INTERNET permission, FLAG_SECURE, no cloud backup – operating-system-level protection the <a href="/en/sachwert-tresor.html">web version</a> cannot offer.</p>
+        <p style="color:#00ffcc; font-size:0.92em;"><strong>Full hardening only in the app:</strong> no INTERNET permission (only system permission: fingerprint), FLAG_SECURE, no cloud backup and no transfer when switching phones – operating-system-level protection the <a href="/en/sachwert-tresor.html">web version</a> cannot offer.</p>
 
         <p class="app-meta">Android / GrapheneOS · open source (MIT) · also as a <a href="/en/sachwert-tresor.html">web version</a></p>
         <div class="app-fp">
