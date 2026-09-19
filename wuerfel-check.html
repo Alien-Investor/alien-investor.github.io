@@ -214,7 +214,7 @@
       Rechnung: SHA-256 über die Ziffernfolge, daraus die Wörter nach BIP39. Aber woher weißt du, dass das Gerät
       wirklich so rechnet? Indem du es einmal selbst nachrechnest. Der <strong>Würfel-Check</strong> ist eine einzige
       HTML-Datei, die genau das tut: <strong>ohne Server, ohne Verbindung, ohne fremden Code</strong>. Kostenlos, quelloffen,
-      Teil des Werkstatt-Pakets zum kommenden Band 4 <em>„Die eigene Bank – Bitcoin meisterlich verwahren"</em>.
+      Teil des Werkstatt-Pakets zu Band 4 <em>„Die eigene Bank – Bitcoin meisterlich verwahren"</em>.
     </p>
 
     <div class="warn">
@@ -222,7 +222,9 @@
       <p style="margin:0 0 0.6em 0;">
         Die Ziffernfolge <strong>ist</strong> der Seed. Wer die 99 Ziffern kennt, kennt die Wallet. Deshalb prüfst du damit
         die <strong>Methode</strong>, nie deinen echten Seed: Übungs-Seed würfeln, nachrechnen, verwerfen. Rechnet das Gerät
-        bei Übungsziffern richtig, rechnet es immer richtig. Der echte Seed entsteht danach am Gerät und verlässt es nie.
+        bei Übungsziffern richtig, ist das Verfahren belegt. Beweisen lässt sich das für jeden künftigen Seed nicht,
+        denn eine böswillige Firmware könnte den nächsten anders erzeugen. Genau dafür gibt es Multisig. Der echte Seed entsteht
+        danach am Gerät und verlässt es nie.
       </p>
       <p style="margin:0;">
         Für alles, was über einen schnellen Blick hinausgeht: <strong>Datei speichern, Netz trennen, per Doppelklick öffnen.</strong>
@@ -269,7 +271,7 @@
 
     <h2>Nicht vertrauen, nachrechnen — auch dem Würfel-Check nicht</h2>
     <div class="box">
-      <p>Ein Werkzeug allein ist ein Indiz. Zwei unabhängige Codebasen, die auf dieselben Wörter kommen wie das Gerät, sind ein Beweis. Darum gibt es im Werkstatt-Paket drei Wege:</p>
+      <p>Ein Werkzeug allein ist ein Indiz. Zwei unabhängige Codebasen, die auf dieselben Wörter kommen wie das Gerät, sind ein starker Beleg. Darum gibt es im Werkstatt-Paket drei Wege:</p>
       <ul>
         <li><strong>Weg 1 — Würfel-Check</strong> (diese Datei, JavaScript im Browser, offline).</li>
         <li><strong>Weg 2 — Prüfskript im Terminal</strong>: <code>verify_dice_seed.py</code>, rund 90 Zeilen Python ohne Fremdbibliotheken, plus Wrapper, der vor jedem Start die Hashes prüft. Läuft auch auf Tails ohne Netz. Kommt mit dem vollständigen Werkstatt-Paket zum Buch.</li>
@@ -288,7 +290,7 @@
     <p style="color:#ccc;">
       Der Würfel-Check ist <strong>kostenlos</strong>. Wenn er dir hilft, freut sich das Mutterschiff über etwas Treibstoff — siehe unten.
       Wer tiefer einsteigen will: Wie man einen Seed würfelt, warum, und was danach kommt (Passphrase, Stahl, Multisig, Vererben),
-      steht in Band 4 der Reihe <em>Digitale Souveränität</em> — in Arbeit, Ankündigung folgt auf <a href="buecher.html">der Bücherseite</a>.
+      steht in Band 4 der Reihe <em>Digitale Souveränität</em> — als E-Book auf Amazon Kindle und direkt auf <a href="buecher.html#band4">der Bücherseite</a>.
     </p>
 
   </article>

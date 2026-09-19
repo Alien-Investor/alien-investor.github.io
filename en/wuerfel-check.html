@@ -214,7 +214,7 @@
       documented computation: SHA-256 over the string of digits, then the BIP39 word list. But how do you know the device
       really computes it that way? By doing the math yourself, once. The <strong>Dice Check</strong> is a single HTML file that
       does exactly that: <strong>no server, no connection, no third-party code</strong>. Free, open source, part of the workshop
-      pack for the upcoming volume 4 <em>"Die eigene Bank – Bitcoin meisterlich verwahren"</em> (German first, English edition to follow).
+      pack for volume 4 <em>"Your Own Bank"</em> (German original: <em>"Die eigene Bank"</em>).
     </p>
 
     <div class="warn">
@@ -222,7 +222,9 @@
       <p style="margin:0 0 0.6em 0;">
         The string of digits <strong>is</strong> the seed. Whoever knows the 99 digits owns the wallet. So you use this to test
         the <strong>method</strong>, never your real seed: roll a practice seed, recompute it, discard it. If the device gets the
-        practice digits right, it gets everything right. Your real seed is created on the device afterwards and never leaves it.
+        practice digits right, the method is confirmed. That does not prove it for every future seed, because
+        malicious firmware could create the next one differently. That is what multisig is for. Your real seed is created on
+        the device afterwards and never leaves it.
       </p>
       <p style="margin:0;">
         For anything beyond a quick look: <strong>save the file, disconnect, open it with a double-click.</strong> It works exactly the same.
@@ -267,7 +269,7 @@
 
     <h2>Don't trust, verify — the Dice Check included</h2>
     <div class="box">
-      <p>One tool alone is a hint. Two independent code bases arriving at the same words as the device are proof. That is why the workshop pack offers three ways:</p>
+      <p>One tool alone is a hint. Two independent code bases arriving at the same words as the device are strong evidence. That is why the workshop pack offers three ways:</p>
       <ul>
         <li><strong>Way 1 — Dice Check</strong> (this file, JavaScript in the browser, offline).</li>
         <li><strong>Way 2 — the terminal script</strong>: <code>verify_dice_seed.py</code>, about 90 lines of Python without third-party libraries, plus a wrapper that checks the hashes before every start. Runs on Tails without network. Ships with the full workshop pack for the book.</li>
@@ -286,7 +288,7 @@
     <p style="color:#ccc;">
       The Dice Check is <strong>free</strong>. If it helps you, the mothership is happy about some fuel — see below.
       Want to go deeper? How to roll a seed, why, and what comes next (passphrase, steel, multisig, inheritance) is the subject of
-      volume 4 of the series <em>Digital Sovereignty</em> — in progress, announcement to follow on <a href="/en/buecher.html">the books page</a>.
+      volume 4 of the series <em>Digital Sovereignty</em> — available as an e-book on Amazon Kindle and directly on <a href="/en/buecher.html#band4-en">the books page</a>.
     </p>
 
   </article>
