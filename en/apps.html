@@ -690,13 +690,14 @@
           <li>Clipboard auto-clear, flagged sensitive, auto-lock also in the background</li>
           <li>Encrypted backup and merge between devices (Syncthing)</li>
           <li>Migration from Proton Pass straight from the PGP-encrypted export, CSV from KeePassXC and Bitwarden</li>
-          <li>Since v1.2: optional fingerprint unlock via the Android keystore — passphrase required after every restart, "Lock now" as the deliberate bolt</li>
+          <li>Since v1.2: optional fingerprint unlock via the Android keystore — passphrase required after every restart (optional since v1.8), "Lock now" as the deliberate bolt</li>
           <li>Since v1.3: account entry type; no more age warning for passwords (forced rotation is an anti-pattern)</li>
           <li>Since v1.4: up to eight freely named, always-secret extra fields per entry (app PIN, phone password …), e-mail field next to the username, generator right inside the entry form</li>
           <li>Since v1.5: trash – deleted entries stay restorable for 30 days (up to 200 entries, only on the device where they were deleted), pickers in the app's own style</li>
           <li>Since v1.6: a more honest strength meter – spots predictable patterns such as years, keyboard runs and common words (also <code>P4ssw0rd</code>), flags them in the list and asks before accepting a weak vault passphrase</li>
           <li>Since v1.6.1: a warning when a fingerprint was newly enrolled in Android – even across a restart – and the failed-attempt brake keeps counting across app restarts</li>
           <li>Since v1.7: also for the <strong>Linux desktop</strong> – a Flatpak without network permission and without file access, with a GPG-signed checksum, backups interchangeable between phone and desktop</li>
+          <li>Since v1.8: Android – "fingerprint also after a restart" box (off by default); desktop – quick unlock with a PIN after a lock (in memory only, at most 24 hours, honestly assessed); a third internal audit of the desktop branch</li>
         </ul>
 
         <p style="color:#00ffcc; font-size:0.92em;"><strong>App only, deliberately no web version:</strong> on Android no internet permission (only the fingerprint sensor), FLAG_SECURE, no cloud backup – hardening at the operating-system level; on the Linux desktop a Flatpak without network. Details on the <a href="/en/alien-pass.html">Alien Pass page</a>.</p>
