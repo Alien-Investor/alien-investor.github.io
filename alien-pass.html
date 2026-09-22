@@ -209,6 +209,7 @@
       Gegenteil: ein lokaler, verschlüsselter Tresor für deine Passwörter — komplett <strong>offline</strong>,
       ohne Konto, ohne Server, ohne Telemetrie. Die App hat <strong>nicht einmal eine Internet-Berechtigung</strong>.
       Was drin ist, verlässt dein Gerät nie im Klartext.
+      Seit v1.7 gibt es ihn auch für den <a href="#desktop">Linux-Desktop</a> — als Flatpak ohne Netzwerk-Berechtigung.
     </p>
 
     <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:1.5em 0;">
@@ -254,7 +255,7 @@
         <li><strong>Import-Grenzen.</strong> Eine fremde Backup-Datei darf keine beliebigen Argon2-Parameter erzwingen; alle Inhalte laufen durch eine Feld-Whitelist — auch der eigene Tresor beim Entsperren.</li>
         <li><strong>Kein Reset, kein Backdoor.</strong> Wer die Passphrase vergisst, verliert die Daten — dafür kann auch niemand sonst ran.</li>
         <li><strong>Open Source.</strong> Der komplette Client-Code ist öffentlich, der Fremdcode (Argon2-Bibliothek, EFF-Wortliste) ist gebündelt und wird im Build per Hash geprüft. Der OpenPGP-Leser für Proton-Exporte ist eigener, bewusst kleiner Code, samt eigener AES-Blockchiffre, die die Testsuite gegen FIPS-197-Vektoren und WebCrypto prüft. Auch der native Android-Code (FLAG_SECURE, Backup-Regeln, Zwischenablage- und Fingerabdruck-Plugin) liegt im Klartext im Repo.</li>
-        <li><strong>Vier interne Security-Audits</strong> vor v1.0, v1.1, v1.2 und v1.5 sowie eine gezielte Durchsicht der Änderungen vor v1.4; v1.6.1 übernimmt zwei Funde aus dem internen Audit der Schwester-App Sachwert-Tresor, deren Fingerabdruck-Code aus Alien Pass stammt. Alle Audit-Funde behoben und mit Tests abgesichert. Die behobenen Punkte sind im Changelog des Repos dokumentiert.</li>
+        <li><strong>Vier interne Security-Audits</strong> vor v1.0, v1.1, v1.2 und v1.5 sowie eine gezielte Durchsicht der Änderungen vor v1.4; v1.6.1 übernimmt zwei Funde aus dem internen Audit der Schwester-App Sachwert-Tresor, deren Fingerabdruck-Code aus Alien Pass stammt. Vor v1.7 zwei interne Audits der neuen Desktop-Hülle. Alle Audit-Funde behoben und mit Tests abgesichert. Die behobenen Punkte sind im Changelog des Repos dokumentiert.</li>
       </ul>
     </div>
 
@@ -277,6 +278,28 @@
         <li><strong>FLAG_SECURE.</strong> Keine Screenshots, kein Screen-Recording, keine Passwort-Vorschau im App-Switcher.</li>
         <li><strong>Kein Cloud-, ADB- oder Gerät-zu-Gerät-Backup.</strong> Der Tresor landet in keinem automatischen Backup (Backup-Regeln schließen auch den D2D-Transfer aus) — Sicherungen machst nur du selbst über die verschlüsselte <code>.vault</code>-Datei.</li>
         <li><strong>Grenzen, ehrlich benannt:</strong> kein Autofill — bewusst, weil ein Autofill-Dienst den Tresor außerhalb der App lesen und den Schlüssel im Hintergrund halten müsste. Nativer Code beschränkt sich auf vier kleine, im Repo einsehbare Stücke: FLAG_SECURE, Backup-Ausschluss, das Zwischenablage- und das Fingerabdruck-Plugin.</li>
+      </ul>
+    </div>
+
+    <h3 id="desktop">Für den Linux-Desktop (seit v1.7)</h3>
+    <p>
+      Derselbe Code wie auf dem Handy, verpackt als <strong>Flatpak</strong> (x86_64). Das Tresor-Format ist identisch: Ein Backup vom Handy
+      importierst du am Desktop und umgekehrt, zum Beispiel über Syncthing. Die Datei liegt im
+      <a href="https://codeberg.org/Alien-Investor/alien-pass/releases" target="_blank" rel="noopener">Codeberg-Release</a>, zusammen mit
+      <code>SHA256SUMS</code> und der Signatur <code>SHA256SUMS.asc</code>. Nicht auf Flathub, kein automatisches Update.
+      Installation und Update Schritt für Schritt stehen im
+      <a href="https://codeberg.org/Alien-Investor/alien-pass" target="_blank" rel="noopener">README</a>.
+    </p>
+    <p><strong>GPG-Release-Schlüssel</strong> für die Desktop-Pakete: <a href="alien-investor-release-key.asc">alien-investor-release-key.asc</a> — Fingerabdruck:</p>
+    <p><code style="display:block; margin:0.35em 0; padding:0.5em 0.6em; font-size:0.8em;">100F 9E25 BFAE A807 DBC3  57D7 50C0 D785 83BF CB81</code></p>
+
+    <div class="box">
+      <h3 style="margin-top:0;">Desktop-Fassung, ehrlich eingeordnet</h3>
+      <ul>
+        <li><strong>Kein Netz, vom System erzwungen.</strong> Das Flatpak hat keine Netzwerk-Berechtigung und keinen Zugriff auf deine Dateien. Backup und Import laufen über den Dateidialog des Systems, der nur die gewählte Datei freigibt. Nachprüfbar mit <code>flatpak info --show-permissions org.alieninvestor.pass</code>.</li>
+        <li><strong>Zwischenablage.</strong> Kopiertes ist für KDE als Passwort markiert, Klipper übernimmt es nicht in den Verlauf (unter Plasma geprüft). Die App löscht ihre Kopie nach der eingestellten Zeit, beim Sperren und beim Beenden — auch nach Strg+C, Strg+X und bei Text, den du nur mit der Maus markierst.</li>
+        <li><strong>Eigene Browser-Engine.</strong> Die Desktop-App bringt Electron selbst mit. Sicherheits-Updates dafür kommen nur mit einer neuen App-Version, nicht über das System.</li>
+        <li><strong>Grenzen:</strong> kein Schutz vor Bildschirmfotos (Linux kennt kein Gegenstück zu FLAG_SECURE). Unter X11 kann jedes laufende Programm Tastatur und Zwischenablage mitlesen — das gilt für jeden Passwort-Manager, Wayland trennt Programme besser. Bei Bildschirmsperre und Ruhezustand sperrt die App nicht von selbst: Systemsperre nutzen (vor allem beim Ruhezustand), dazu eine kurze Inaktivitäts-Sperre; Strg+L sperrt sofort. Kein Fingerabdruck.</li>
       </ul>
     </div>
 

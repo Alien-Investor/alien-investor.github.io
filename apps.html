@@ -693,15 +693,17 @@
           <li>Seit v1.5: Papierkorb – Gelöschtes bleibt 30 Tage wiederherstellbar (bis zu 200 Einträge, nur auf dem Gerät, auf dem gelöscht wurde), Auswahlfelder im Stil der App</li>
           <li>Seit v1.6: ehrlichere Stärke-Anzeige – erkennt vorhersagbare Muster wie Jahreszahlen, Tastaturfolgen und häufige Wörter (auch <code>P4ssw0rt</code>), markiert sie in der Liste und fragt bei einer schwachen Tresor-Passphrase nach</li>
           <li>Seit v1.6.1: Warnung, wenn in Android ein Fingerabdruck neu registriert wurde – auch über einen Neustart hinweg, und die Fehlversuchs-Bremse zählt über App-Neustarts weiter</li>
+          <li>Seit v1.7: auch für den <strong>Linux-Desktop</strong> – als Flatpak ohne Netzwerk-Berechtigung und ohne Dateizugriff, mit GPG-signierter Prüfsumme, Backups zwischen Handy und Desktop austauschbar</li>
         </ul>
 
-        <p style="color:#00ffcc; font-size:0.92em;"><strong>Nur als App, bewusst ohne Web-Version:</strong> keine Internet-Berechtigung (nur der Fingerabdrucksensor), FLAG_SECURE, kein Cloud-Backup – Härtung auf Betriebssystem-Ebene. Details auf der <a href="alien-pass.html">Alien-Pass-Seite</a>.</p>
+        <p style="color:#00ffcc; font-size:0.92em;"><strong>Nur als App, bewusst ohne Web-Version:</strong> auf Android keine Internet-Berechtigung (nur der Fingerabdrucksensor), FLAG_SECURE, kein Cloud-Backup – Härtung auf Betriebssystem-Ebene; am Linux-Desktop ein Flatpak ohne Netz. Details auf der <a href="alien-pass.html">Alien-Pass-Seite</a>.</p>
 
-        <p class="app-meta">Android / GrapheneOS · Open Source (MIT) · kein Konto, kein Server</p>
+        <p class="app-meta">Android / GrapheneOS · Linux (Flatpak) · Open Source (MIT) · kein Konto, kein Server</p>
         <div class="app-fp">
           Signatur-Fingerprint (SHA-256), über alle Versionen gleich:
           <code>73:C7:17:D8:05:6C:6A:02:B0:8B:AB:BA:24:18:17:F3:93:E4:6D:EA:03:19:D4:FA:26:B8:C3:D8:E1:F9:3C:95</code>
           <span class="app-fp-hex">apksigner: 73c717d8056c6a02b08babba241817f393e46dea0319d4fa26b8c3d8e1f93c95</span>
+          <span class="app-fp-hex">Linux-Desktop, GPG-Release-Schlüssel: 100F 9E25 BFAE A807 DBC3 57D7 50C0 D785 83BF CB81</span>
         </div>
 
         <div class="cta-row">
@@ -711,6 +713,7 @@
           <a href="https://codeberg.org/Alien-Investor/alien-pass" class="cta-button secondary" target="_blank" rel="noopener">
             <svg style="width:1em;height:1em;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2 L21 19 H3 Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 8 L16.5 16 H7.5 Z" fill="currentColor" opacity="0.7"/></svg> Quellcode (Codeberg)
           </a>
+          <a href="alien-pass.html#desktop" class="cta-button secondary">Linux-Desktop</a>
         </div>
       </div>
     </div>

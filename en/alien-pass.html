@@ -48,6 +48,7 @@
       sync through their servers and want an account. <strong>Alien Pass</strong> does the opposite: a local,
       encrypted vault for your passwords — fully <strong>offline</strong>, no account, no server, no telemetry.
       The app does <strong>not even have an internet permission</strong>. What is inside never leaves your device in plaintext.
+      Since v1.7 it is also available for the <a href="#desktop">Linux desktop</a> — as a Flatpak without network permission.
     </p>
 
     <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:1.5em 0;">
@@ -92,7 +93,7 @@
         <li><strong>Import limits.</strong> A foreign backup file cannot force arbitrary Argon2 parameters; all content passes a field whitelist — including your own vault on unlock.</li>
         <li><strong>No reset, no backdoor.</strong> Forget the passphrase and the data is gone — but nobody else can get in either.</li>
         <li><strong>Open source.</strong> The full client code is public; the bundled third-party code (Argon2 library, EFF word list) is hash-checked in the build. The OpenPGP reader for Proton exports is our own, deliberately small code, including its own AES block cipher, which the test suite checks against FIPS-197 vectors and WebCrypto. The native Android code (FLAG_SECURE, backup rules, clipboard and fingerprint plugin) is in the repo in plaintext as well.</li>
-        <li><strong>Four internal security audits</strong> before v1.0, v1.1, v1.2 and v1.5 plus a targeted review of the changes before v1.4; v1.6.1 adopts two findings from the internal audit of the sister app Sachwert-Tresor, whose fingerprint code comes from Alien Pass. Every audit finding fixed and covered by tests. The fixed items are documented in the repo's changelog.</li>
+        <li><strong>Four internal security audits</strong> before v1.0, v1.1, v1.2 and v1.5 plus a targeted review of the changes before v1.4; v1.6.1 adopts two findings from the internal audit of the sister app Sachwert-Tresor, whose fingerprint code comes from Alien Pass. Before v1.7, two internal audits of the new desktop shell. Every audit finding fixed and covered by tests. The fixed items are documented in the repo's changelog.</li>
       </ul>
     </div>
 
@@ -115,6 +116,28 @@
         <li><strong>FLAG_SECURE.</strong> No screenshots, no screen recording, no password preview in the app switcher.</li>
         <li><strong>No cloud, ADB or device-to-device backup.</strong> The vault lands in no automatic backup (backup rules exclude D2D transfer too) — you make backups yourself via the encrypted <code>.vault</code> file.</li>
         <li><strong>Limits, stated honestly:</strong> no autofill — deliberately, because an autofill service would have to read the vault outside the app and keep the key in the background. Native code is limited to four small pieces, readable in the repo: FLAG_SECURE, backup exclusion, the clipboard and the fingerprint plugin.</li>
+      </ul>
+    </div>
+
+    <h3 id="desktop">For the Linux desktop (since v1.7)</h3>
+    <p>
+      The same code as on the phone, packaged as a <strong>Flatpak</strong> (x86_64). The vault format is identical: import a backup from
+      the phone on the desktop and vice versa, for example via Syncthing. The file is in the
+      <a href="https://codeberg.org/Alien-Investor/alien-pass/releases" target="_blank" rel="noopener">Codeberg release</a>, together with
+      <code>SHA256SUMS</code> and the signature <code>SHA256SUMS.asc</code>. Not on Flathub, no automatic updates.
+      Step-by-step install and update instructions are in the
+      <a href="https://codeberg.org/Alien-Investor/alien-pass" target="_blank" rel="noopener">README</a> (German).
+    </p>
+    <p><strong>GPG release key</strong> for the desktop packages: <a href="/alien-investor-release-key.asc">alien-investor-release-key.asc</a> — fingerprint:</p>
+    <p><code style="display:block; margin:0.35em 0; padding:0.5em 0.6em; font-size:0.8em;">100F 9E25 BFAE A807 DBC3  57D7 50C0 D785 83BF CB81</code></p>
+
+    <div class="box">
+      <h3 style="margin-top:0;">The desktop version, honestly assessed</h3>
+      <ul>
+        <li><strong>No network, enforced by the system.</strong> The Flatpak has no network permission and no access to your files. Backup and import go through the system file dialog, which only grants the chosen file. Verifiable with <code>flatpak info --show-permissions org.alieninvestor.pass</code>.</li>
+        <li><strong>Clipboard.</strong> Copied items are marked as a password for KDE, so Klipper keeps them out of its history (tested under Plasma). The app clears its copy after the set time, on lock and on quit — also after Ctrl+C, Ctrl+X and for text you only select with the mouse.</li>
+        <li><strong>Its own browser engine.</strong> The desktop app ships Electron itself. Security updates for it only arrive with a new app version, not through the system.</li>
+        <li><strong>Limits:</strong> no protection against screenshots (Linux has no counterpart to FLAG_SECURE). Under X11 every running program can read keyboard and clipboard — this applies to every password manager; Wayland separates programs better. On screen lock and suspend the app does not lock by itself: use the system lock (especially for suspend) plus a short inactivity lock; Ctrl+L locks immediately. No fingerprint.</li>
       </ul>
     </div>
 
