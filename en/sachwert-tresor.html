@@ -101,6 +101,7 @@
       Or install the <a href="https://codeberg.org/Alien-Investor/sachwert-tresor/releases/latest" target="_blank" rel="noopener">latest APK</a> directly.
       Or straight from the <a href="https://zapstore.dev/apps/org.alieninvestor.tresor" target="_blank" rel="noopener">Zap Store</a>, the app store on Nostr.
     </p>
+    <p><strong>As a Linux desktop app (Flatpak, since v3.3):</strong> see <a href="#desktop">below</a>.</p>
     <p><strong>Signature fingerprint (SHA-256)</strong> to verify authenticity with <a href="https://github.com/soupslurpr/AppVerifier" target="_blank" rel="noopener">AppVerifier</a>, identical across all versions:</p>
     <p><code style="display:block; margin:0.35em 0; padding:0.5em 0.6em; font-size:0.8em;">66:0F:21:0C:7A:28:9F:38:8B:B4:81:2C:23:82:5A:77:F1:FC:84:E6:A7:EE:58:D6:42:81:B6:BF:5C:D8:79:88</code>
     <span style="font-family:monospace; font-size:0.85em; color:#888; word-break:break-all;">apksigner: 660f210c7a289f388bb4812c23825a77f1fc84e6a7ee58d64281b6bf5cd87988</span></p>
@@ -118,6 +119,30 @@
         <li><strong>Fingerprint (optional, since v3.0).</strong> A random key held by the Android Keystore unlocks the data key, released only after strong biometrics. Honestly: convenient, but it can be forced, and it is no extra factor. The passphrase stays mandatory after every restart (optional since v3.2: "also after a restart" box when enabling, off by default — the choice lives in the fingerprint slot and is authenticated there), after a passphrase change (fingerprint unlock is then off and must be re-enabled), after "Lock now" and as soon as a new fingerprint is enrolled in Android — the app then switches fingerprint unlock off and warns you. The restart rule is program code, not a cryptographic guarantee.</li>
       </ul>
       <p>For <strong>full protection</strong> use the APK. The web version stays the fastest way to try it out.</p>
+    </div>
+
+    <h3 id="desktop">For the Linux desktop (since v3.3)</h3>
+    <p>
+      The same code as in the browser and on the phone, packaged as a <strong>Flatpak</strong> (x86_64). The vault format is identical: import a backup from
+      the phone on the desktop and vice versa, for example via Syncthing. The file is in the
+      <a href="https://codeberg.org/Alien-Investor/sachwert-tresor/releases" target="_blank" rel="noopener">Codeberg release</a>, together with
+      <code>SHA256SUMS</code> and the signature <code>SHA256SUMS.asc</code>. Not on Flathub, no automatic updates.
+      Step-by-step install and update instructions are in the
+      <a href="https://codeberg.org/Alien-Investor/sachwert-tresor" target="_blank" rel="noopener">README</a> (German).
+    </p>
+    <p><strong>GPG release key</strong> for the desktop packages (the same as for Alien Pass): <a href="/alien-investor-release-key.asc">alien-investor-release-key.asc</a> — fingerprint:</p>
+    <p><code style="display:block; margin:0.35em 0; padding:0.5em 0.6em; font-size:0.8em;">100F 9E25 BFAE A807 DBC3  57D7 50C0 D785 83BF CB81</code></p>
+
+    <div class="box">
+      <h3 style="margin-top:0;">The desktop version, honestly assessed</h3>
+      <ul>
+        <li><strong>No network, enforced by the system.</strong> The Flatpak has no network permission and no access to your files. Backup, import, CSV export and the estate sheet go through the system file dialog, which only grants the chosen file. Verifiable with <code>flatpak info --show-permissions org.alieninvestor.tresor</code>.</li>
+        <li><strong>Estate sheet as PDF.</strong> There is no printer inside the sandbox — the desktop version saves the sheet as a PDF via the save dialog. Like CSV exports this is plain text: delete it after use.</li>
+        <li><strong>Clipboard.</strong> The copied 2FA key is marked as a password for KDE, so Klipper keeps it out of its history (tested under Plasma); the app clears its copy on lock and on quit. Only the copy button sets that mark, Ctrl+C on selected text does not. Unlike Alien Pass the vault does not track what you select with the mouse — it shows no passwords.</li>
+        <li><strong>Its own browser engine.</strong> The desktop app ships Electron itself. Security updates for it only arrive with a new app version, not through the system.</li>
+        <li><strong>Limits:</strong> no protection against screenshots (Linux has no counterpart to FLAG_SECURE). Under X11 every running program can read keyboard and clipboard; Wayland separates programs better. On screen lock and suspend the app does not lock by itself: use the system lock (especially for suspend) plus a short inactivity lock; Ctrl+L locks immediately. On the desktop "background" means minimised or hidden — switching windows does not lock, but it clears typed passphrases. No fingerprint.</li>
+        <li><strong>Origin:</strong> shell and hardening are the port from <a href="/en/alien-pass.html#desktop">Alien Pass</a> (three internal audits there); the vault itself was tested with the real shell, no separate audit.</li>
+      </ul>
     </div>
 
     <div class="box">

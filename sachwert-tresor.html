@@ -261,6 +261,7 @@
       Oder die <a href="https://codeberg.org/Alien-Investor/sachwert-tresor/releases/latest" target="_blank" rel="noopener">neueste APK</a> direkt installieren.
       Oder direkt aus dem <a href="https://zapstore.dev/apps/org.alieninvestor.tresor" target="_blank" rel="noopener">Zap Store</a>, dem App-Store auf Nostr.
     </p>
+    <p><strong>Als Linux-Desktop-App (Flatpak, seit v3.3):</strong> siehe <a href="#desktop">unten</a>.</p>
     <p><strong>Signatur-Fingerprint (SHA-256)</strong> zum Prüfen der Echtheit mit <a href="https://github.com/soupslurpr/AppVerifier" target="_blank" rel="noopener">AppVerifier</a>, über alle Versionen gleich:</p>
     <p><code style="display:block; margin:0.35em 0; padding:0.5em 0.6em; font-size:0.8em;">66:0F:21:0C:7A:28:9F:38:8B:B4:81:2C:23:82:5A:77:F1:FC:84:E6:A7:EE:58:D6:42:81:B6:BF:5C:D8:79:88</code>
     <span style="font-family:monospace; font-size:0.85em; color:#888; word-break:break-all;">apksigner: 660f210c7a289f388bb4812c23825a77f1fc84e6a7ee58d64281b6bf5cd87988</span></p>
@@ -278,6 +279,30 @@
         <li><strong>Fingerabdruck (optional, seit v3.0).</strong> Ein vom Android-Keystore verwahrter Zufallsschlüssel schließt den Datenschlüssel auf, freigegeben nur nach starker Biometrie. Ehrlich eingeordnet: bequem, aber erzwingbar, und kein zusätzlicher Faktor. Die Passphrase bleibt Pflicht nach jedem Neustart (seit v3.2 abwählbar: Haken „auch nach Neustart“ beim Aktivieren, ab Werk aus — die Wahl steckt im Fingerabdruck-Slot und ist dort mitauthentisiert), nach einem Passphrase-Wechsel (danach ist der Fingerabdruck aus und muss neu aktiviert werden), nach „Jetzt sperren“ und sobald in Android ein neuer Fingerabdruck registriert wird — dann schaltet die App den Fingerabdruck ab und warnt. Die Neustart-Regel ist Programmcode, keine kryptografische Garantie.</li>
       </ul>
       <p>Für den <strong>vollen Schutz</strong> also die APK. Die Web-Version bleibt der schnellste Weg zum Ausprobieren.</p>
+    </div>
+
+    <h3 id="desktop">Für den Linux-Desktop (seit v3.3)</h3>
+    <p>
+      Derselbe Code wie im Browser und auf dem Handy, verpackt als <strong>Flatpak</strong> (x86_64). Das Tresor-Format ist identisch: Ein Backup vom Handy
+      importierst du am Desktop und umgekehrt, zum Beispiel über Syncthing. Die Datei liegt im
+      <a href="https://codeberg.org/Alien-Investor/sachwert-tresor/releases" target="_blank" rel="noopener">Codeberg-Release</a>, zusammen mit
+      <code>SHA256SUMS</code> und der Signatur <code>SHA256SUMS.asc</code>. Nicht auf Flathub, kein automatisches Update.
+      Installation und Update Schritt für Schritt stehen im
+      <a href="https://codeberg.org/Alien-Investor/sachwert-tresor" target="_blank" rel="noopener">README</a>.
+    </p>
+    <p><strong>GPG-Release-Schlüssel</strong> für die Desktop-Pakete (derselbe wie bei Alien Pass): <a href="alien-investor-release-key.asc">alien-investor-release-key.asc</a> — Fingerabdruck:</p>
+    <p><code style="display:block; margin:0.35em 0; padding:0.5em 0.6em; font-size:0.8em;">100F 9E25 BFAE A807 DBC3  57D7 50C0 D785 83BF CB81</code></p>
+
+    <div class="box">
+      <h3 style="margin-top:0;">Desktop-Fassung, ehrlich eingeordnet</h3>
+      <ul>
+        <li><strong>Kein Netz, vom System erzwungen.</strong> Das Flatpak hat keine Netzwerk-Berechtigung und keinen Zugriff auf deine Dateien. Backup, Import, CSV-Export und Nachlass-Anhang laufen über den Dateidialog des Systems, der nur die gewählte Datei freigibt. Nachprüfbar mit <code>flatpak info --show-permissions org.alieninvestor.tresor</code>.</li>
+        <li><strong>Nachlass-Anhang als PDF.</strong> Im Käfig gibt es keinen Drucker — die Desktop-Fassung speichert das Blatt als PDF über den Speichern-Dialog. Wie CSV-Exporte ist das Klartext: nach Gebrauch löschen.</li>
+        <li><strong>Zwischenablage.</strong> Der kopierte 2FA-Schlüssel ist für KDE als Passwort markiert, Klipper übernimmt ihn nicht in den Verlauf (unter Plasma geprüft); die App löscht ihre Kopie beim Sperren und beim Beenden. Nur der Kopieren-Knopf setzt die Markierung, Strg+C auf markiertem Text nicht. Anders als Alien Pass überwacht der Tresor nicht, was du mit der Maus markierst — er zeigt keine Passwörter.</li>
+        <li><strong>Eigene Browser-Engine.</strong> Die Desktop-App bringt Electron selbst mit. Sicherheits-Updates dafür kommen nur mit einer neuen App-Version, nicht über das System.</li>
+        <li><strong>Grenzen:</strong> kein Schutz vor Bildschirmfotos (Linux kennt kein Gegenstück zu FLAG_SECURE). Unter X11 kann jedes laufende Programm Tastatur und Zwischenablage mitlesen, Wayland trennt Programme besser. Bei Bildschirmsperre und Ruhezustand sperrt die App nicht von selbst: Systemsperre nutzen (vor allem beim Ruhezustand), dazu eine kurze Inaktivitäts-Sperre; Strg+L sperrt sofort. „Hintergrund“ heißt am Desktop minimiert oder versteckt — ein Fensterwechsel sperrt nicht, leert aber getippte Passphrasen. Kein Fingerabdruck.</li>
+        <li><strong>Herkunft:</strong> Hülle und Härtung sind der Port aus <a href="alien-pass.html#desktop">Alien Pass</a> (dort drei interne Audits); für den Tresor selbst gab es Tests mit der echten Hülle, kein eigenes Audit.</li>
+      </ul>
     </div>
 
     <div class="box">
