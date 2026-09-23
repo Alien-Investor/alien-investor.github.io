@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Alien-Apps am Linux-Desktop: Flatpak installieren und prüfen | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Alien Pass und Sachwert-Tresor als Flatpak auf Linux: Datei laden, GPG-signierte Prüfsumme prüfen, installieren, updaten und selbst nachsehen, dass die App kein Netz hat.">
+  <link rel="canonical" href="/flatpak.html">
+  <link rel="alternate" hreflang="en" href="/en/flatpak.html">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 0 15px 20px 15px; /* Mobile-Optimierung */
+    }
+
+    /* --- TYPOGRAFIE --- */
+    h1, h2, h3 {
+      color: #00ffcc;
+    }
+    h1 {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    /* --- LINKS (Neon-Glow) --- */
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #00ffcc; /* Der Alien-Effekt */
+    }
+
+    /* --- STANDARD ELEMENTE --- */
+    code {
+      background-color: #111;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      color: #0f0;
+      font-family: monospace;
+    }
+    em { color: #ccc; }
+    pre { background:#111; border:1px solid #1e1e1e; border-radius:6px; padding:0.8em 1em; overflow-x:auto; font-size:0.9em; }
+    pre code { background:none; padding:0; }
+
+    .byline {
+      margin-top: -0.8em;
+      margin-bottom: 2em;
+      color: #ccc;
+      font-style: italic;
+      text-align: center;
+    }
+
+    blockquote {
+      border-left: 3px solid #00ffcc;
+      margin: 2em 0;
+      padding: 0.5em 1em;
+      color: #ddd;
+      background: #050505;
+      font-style: italic;
+    }
+
+    /* --- BOXEN --- */
+    .box {
+      border: 1px solid #00ffcc;
+      background: #050505;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+    }
+    .box h3 { margin-top: 0; }
+    .box ul { padding-left: 1.2em; }
+    .box li { margin-bottom: 1em; }
+
+    .recommendation-box {
+      margin: 2em 0;
+      padding: 1em;
+      border: 1px dashed #00ffcc;
+      border-radius: 8px;
+      text-align: center;
+      background-color: #050505;
+    }
+    .recommendation-box h3 {
+      margin-top: 0;
+      font-size: 1.1em;
+      color: #00ffcc;
+    }
+
+    /* --- LIKE BUTTON --- */
+    .like-button {
+      margin: 3em 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+    }
+    .like-button button {
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+    .like-button button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .like-button button:disabled {
+      border-color: #444;
+      color: #888;
+      background: #111;
+      cursor: default;
+    }
+
+    /* --- NAVIGATION --- */
+    .top-nav {
+      padding: 10px 0;
+      font-size: 0.9em;
+    }
+    .back-links {
+      margin-top: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #222;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="index.html">← Zurück zur Zentrale</a>
+  </div>
+
+  <h1>Alien-Apps am Linux-Desktop: Flatpak installieren und prüfen</h1>
+  <p class="byline"><em>von Alien Investor</em></p>
+
+  <article id="content">
+    <p>
+      Zwei meiner Apps gibt es seit September 2026 auch für den <strong>Linux-Desktop</strong>: <a href="alien-pass.html#desktop">Alien Pass</a>
+      (seit v1.7) und der <a href="sachwert-tresor.html#desktop">Sachwert-Tresor</a> (seit v3.3). Beide laufen als <strong>Flatpak</strong> (x86_64)
+      mit derselben Hülle: kein Netz, kein Dateizugriff, Dateien nur über den Dialog des Systems. Sie liegen bewusst <strong>nicht auf Flathub</strong>
+      und aktualisieren sich nicht von selbst — du lädst die Datei aus dem Codeberg-Release, prüfst die Signatur und installierst sie selbst.
+      Diese Seite zeigt den Weg einmal für beide Apps.
+    </p>
+
+    <h2>1. Voraussetzung: Flatpak mit Flathub</h2>
+    <p>
+      Die Apps brauchen die Laufzeit <code>org.freedesktop.Platform</code> 25.08, die Flatpak beim Installieren von Flathub nachlädt. Einmalig als Nutzer
+      (kein Root, kein <code>sudo</code>):
+    </p>
+    <pre><code>flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo</code></pre>
+
+    <h2>2. Drei Dateien aus dem Release laden</h2>
+    <p>Aus dem jeweils neuesten Release auf Codeberg brauchst du das Bundle, die Prüfsummen-Datei und deren Signatur:</p>
+    <ul>
+      <li><a href="https://codeberg.org/Alien-Investor/alien-pass/releases" target="_blank" rel="noopener">Alien Pass</a>:
+        <code>alien-pass-X.Y-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code></li>
+      <li><a href="https://codeberg.org/Alien-Investor/sachwert-tresor/releases" target="_blank" rel="noopener">Sachwert-Tresor</a>:
+        <code>sachwert-tresor-X.Y-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code></li>
+    </ul>
+    <p style="font-size:0.9em; color:#aaa;">Ein <code>-rN</code> im Dateinamen (etwa <code>alien-pass-1.8-r2-…</code>) ist ein Neubau der Hülle bei unveränderter App.</p>
+
+    <h2>3. Echtheit prüfen: GPG-signierte Prüfsumme</h2>
+    <p>
+      Die Datei <code>SHA256SUMS</code> ist mit dem GPG-Release-Schlüssel von Alien Investor signiert — derselbe Schlüssel für beide Apps.
+      Den öffentlichen Teil gibt es hier auf der Website (<a href="alien-investor-release-key.asc">alien-investor-release-key.asc</a>) und in beiden
+      Repos. Vergleiche den Fingerabdruck über einen zweiten Weg, bevor du dem Schlüssel traust:
+    </p>
+    <pre><code>100F 9E25 BFAE A807 DBC3  57D7 50C0 D785 83BF CB81</code></pre>
+    <pre><code>gpg --show-keys alien-investor-release-key.asc   # zeigt den Fingerabdruck — mit der Zeile oben vergleichen
+gpg --import alien-investor-release-key.asc
+gpg --verify SHA256SUMS.asc SHA256SUMS      # erwartet: Korrekte Signatur von „Alien Investor (Release-Signatur) …“
+sha256sum -c SHA256SUMS                     # erwartet: …flatpak: OK</code></pre>
+    <p>
+      Signiert ist die Prüfsumme, nicht das Bundle selbst — deshalb beide Befehle: <code>gpg --verify</code> belegt, dass die Prüfsumme von mir stammt,
+      <code>sha256sum -c</code> belegt, dass das Bundle zu dieser Prüfsumme passt. Schlägt einer der beiden fehl, nicht installieren.
+    </p>
+
+    <h2>4. Installieren und starten</h2>
+    <pre><code>flatpak install --user alien-pass-X.Y-linux-x86_64.flatpak
+flatpak run org.alieninvestor.pass</code></pre>
+    <pre><code>flatpak install --user sachwert-tresor-X.Y-linux-x86_64.flatpak
+flatpak run org.alieninvestor.tresor</code></pre>
+    <p>Danach stehen die Apps im Anwendungsmenü. Ein Backup vom Handy (<code>.vault</code>) importierst du über den Dateidialog — das Format ist identisch.</p>
+
+    <h2>5. Update: deinstallieren, neu installieren</h2>
+    <p>
+      Flatpak (Stand 1.14) legt kein neues Bundle über eine bestehende Installation. Neue Version laden und prüfen (Schritt 2 und 3), dann:
+    </p>
+    <pre><code>flatpak uninstall --user org.alieninvestor.pass       # löscht KEINE Daten (ohne --delete-data)
+flatpak install --user alien-pass-X.Y-linux-x86_64.flatpak</code></pre>
+    <p>Für den Tresor entsprechend mit <code>org.alieninvestor.tresor</code>. Die Daten bleiben dabei erhalten:</p>
+    <ul>
+      <li>Alien Pass: <code>~/.var/app/org.alieninvestor.pass/data/alien-pass/vault.aipv</code></li>
+      <li>Sachwert-Tresor: <code>~/.var/app/org.alieninvestor.tresor/data/sachwert-tresor/vault.aisv</code></li>
+    </ul>
+    <p>Vor jedem Update trotzdem ein Backup anlegen. Ein laufendes Fenster vorher schließen — sonst läuft die alte Fassung weiter.</p>
+
+    <h2>6. Selbst prüfen, dass die App kein Netz hat</h2>
+    <pre><code>flatpak info --user --show-permissions org.alieninvestor.pass</code></pre>
+    <p>Erwartet genau diese Ausgabe (beim Tresor identisch):</p>
+    <pre><code>[Context]
+shared=ipc;
+sockets=wayland;fallback-x11;
+devices=dri;</code></pre>
+    <p>
+      Kein <code>network</code>, kein <code>filesystem</code>. Das ist keine Einstellung in der App, sondern das System selbst: Im Flatpak-Käfig gibt es
+      ohne Netzwerk-Berechtigung kein Netz, und Dateien erreicht die App nur, wenn du sie im Dialog auswählst.
+    </p>
+
+    <div class="box">
+      <h3>Was die Desktop-Fassung kann — und wo ihre Grenzen liegen</h3>
+      <ul>
+        <li><strong>Kein Netz, vom System erzwungen.</strong> Backup, Import und Exporte laufen über den Dateidialog, der nur die gewählte Datei freigibt.</li>
+        <li><strong>Eigene Browser-Engine.</strong> Die Apps bringen Electron selbst mit. Sicherheits-Updates dafür kommen nur mit einer neuen App-Version, nicht über das System.</li>
+        <li><strong>Kein Schutz vor Bildschirmfotos</strong> (Linux kennt kein Gegenstück zu FLAG_SECURE). Unter X11 kann jedes laufende Programm Tastatur und Zwischenablage mitlesen, Wayland trennt Programme besser.</li>
+        <li><strong>Bei Bildschirmsperre und Ruhezustand sperren die Apps nicht von selbst.</strong> Systemsperre nutzen, dazu eine kurze Inaktivitäts-Sperre; Strg+L sperrt sofort. Minimiert oder versteckt gilt als Hintergrund, ein Fensterwechsel leert nur getippte Passphrasen.</li>
+        <li><strong>Kein Fingerabdruck.</strong> Die Passphrase bleibt der Schlüssel; Alien Pass bietet am Desktop optional ein Schnell-Entsperren per PIN, der Tresor nicht.</li>
+      </ul>
+      <p>Die Einzelheiten je App: <a href="alien-pass.html#desktop">Alien Pass am Desktop</a> · <a href="sachwert-tresor.html#desktop">Sachwert-Tresor am Desktop</a>.</p>
+    </div>
+
+  </article>
+
+  <div class="like-button">
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-afa42c)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Gefällt mir</button>
+    <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
+  </div>
+
+  <script>
+    (function() {
+      const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
+      const btn = document.getElementById('likeButton');
+      const msg = document.getElementById('likeMsg');
+      if (localStorage.getItem(key)) {
+        btn.disabled = true;
+        btn.textContent = '✓ Danke!';
+        msg.textContent = 'Freut mich, dass dir der Artikel gefallen hat.';
+      }
+      btn.addEventListener('click', function() {
+        localStorage.setItem(key, '1');
+        btn.disabled = true;
+        btn.textContent = '✓ Danke!';
+        msg.textContent = 'Freut mich, dass dir der Artikel gefallen hat.';
+      });
+    })();
+  </script>
+
+  <div class="box" style="border-style: dashed; border-color: #333;">
+    <h3>Quellen & Links</h3>
+    <ul style="padding-left: 1.2em;">
+      <li>Releases: <a href="https://codeberg.org/Alien-Investor/alien-pass/releases" target="_blank" rel="noopener">Alien Pass</a> · <a href="https://codeberg.org/Alien-Investor/sachwert-tresor/releases" target="_blank" rel="noopener">Sachwert-Tresor</a> (jeweils mit README zur Desktop-Fassung)</li>
+      <li>GPG-Release-Schlüssel: <a href="alien-investor-release-key.asc">alien-investor-release-key.asc</a></li>
+      <li>Flatpak-Dokumentation: <a href="https://docs.flatpak.org/" target="_blank" rel="noopener">docs.flatpak.org</a></li>
+    </ul>
+  </div>
+
+  <div class="recommendation-box">
+    <h3>Weiterführend</h3>
+    <p>
+      Am Handy laufen dieselben Apps ohne Google Play: <a href="Obtainium.html">Obtainium</a> zieht Updates direkt von Codeberg, der <a href="Zapstore.html">Zap Store</a> verteilt sie über Nostr. Übersicht aller Apps: <a href="apps.html">Apps</a>.
+    </p>
+  </div>
+
+  <div class="back-links">
+    <a href="apps.html" style="font-size: 1.1em;">← Zurück zu den Apps</a>
+    <a href="index.html" style="font-size: 1.1em;">← Zurück zur Zentrale</a>
+  </div>
+
+  <hr style="border-color: #222; margin: 3em 0;">
+
+  <div style="margin-top: 40px; margin-bottom: 40px; text-align: center;">
+      <h3 style="margin-bottom: 15px;">
+        <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energie" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Energie aufladen
+        <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
+      </h3>
+      
+      <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
+        Treibstoff für das Mutterschiff senden
+      </a>
+      
+      <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-afa42c" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-afa42c" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-afa42c)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-afa42c)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg>
+      </p>
+  </div>
+
+  <footer>
+    <p><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Kontakt" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a> <span style="color:#666; font-size:0.85em;">·</span> <a href="/kontakt@alien-investor.org/pubkey.asc.key" download="kontakt-alien-investor-pubkey.asc" style="color:#555; font-size:0.8em; text-decoration:none;" title="PGP Public Key für verschlüsselte Nachrichten">PGP Key</a></p>
+    
+    <p style="margin-top: 20px;">
+      <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-afa42c" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-afa42c)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <strong>Haftungsausschluss:</strong><br><br>
+      Dieser Artikel stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
+      Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
+      Investieren ist mit Risiken verbunden. Denke selbst, vertraue niemandem und handle auf eigene Verantwortung.
+    </p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>

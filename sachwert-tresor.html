@@ -212,9 +212,9 @@
     </p>
 
     <div class="cta">
-      <h3 style="margin-top:0;">Direkt im Browser ausprobieren</h3>
-      <p>Kein Download, kein Konto — die Web-Version läuft sofort, alles bleibt in deinem Browser.</p>
-      <a class="btn" href="https://api.alien-investor.org/tresor/" target="_blank" rel="noopener">→ Sachwert-Tresor öffnen</a>
+      <h3 style="margin-top:0;">Als App, nicht als Website</h3>
+      <p>Für Android / GrapheneOS als signierte APK, für den Linux-Desktop als Flatpak — beide ohne Netz, beide mit demselben Tresor-Format.</p>
+      <a class="btn" href="#bekommen">→ So bekommst du ihn</a>
     </div>
 
     <h2>Was er kann</h2>
@@ -252,8 +252,7 @@
       </ul>
     </div>
 
-    <h2>So bekommst du ihn</h2>
-    <p><strong>Im Browser (Desktop & Handy):</strong> einfach <a href="https://api.alien-investor.org/tresor/" target="_blank" rel="noopener">api.alien-investor.org/tresor/</a> öffnen.</p>
+    <h2 id="bekommen">So bekommst du ihn</h2>
     <p>
       <strong>Als App (Android / GrapheneOS):</strong> bewusst nicht im Google Play Store, sondern über
       signierte Releases. Am einfachsten über <a href="https://github.com/ImranR98/Obtainium" target="_blank" rel="noopener">Obtainium</a>:
@@ -267,10 +266,10 @@
     <span style="font-family:monospace; font-size:0.85em; color:#888; word-break:break-all;">apksigner: 660f210c7a289f388bb4812c23825a77f1fc84e6a7ee58d64281b6bf5cd87988</span></p>
 
     <div class="box">
-      <h3 style="margin-top:0;">Warum die App mehr schützt als der Browser</h3>
+      <h3 style="margin-top:0;">Warum die Android-App mehr schützt als eine Website</h3>
       <p>
-        Web-Version und App teilen denselben Code — aber die native App (seit <strong>v2.0</strong>) ist
-        auf Betriebssystem-Ebene härter abgeriegelt. Das kann eine Website technisch nicht leisten:
+        Der Tresor ist bewusst keine Website: Die native App (seit <strong>v2.0</strong>) ist auf Betriebssystem-Ebene
+        abgeriegelt, was eine Seite im Browser technisch nicht leisten kann:
       </p>
       <ul>
         <li><strong>Keine INTERNET-Berechtigung.</strong> Der App ist das Netz-Recht im Android-Manifest komplett entzogen — sie <em>kann</em> gar keine Verbindung aufbauen. „Keine Telemetrie“ ist damit nachprüfbar, nicht nur versprochen. Ihre <strong>einzige System-Berechtigung</strong> ist seit v3.0 <code>USE_BIOMETRIC</code> für das optionale Fingerabdruck-Entsperren, dazu <code>USE_FINGERPRINT</code>, das androidx.biometric mitbringt und die App auf Android bis 8.1 beschränkt. Die im Manifest zusätzlich gelistete <code>…DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION</code> ist eine app-interne Signatur-Berechtigung von AndroidX ohne Systemzugriff. Der Build bricht ab, sobald die fertige APK eine andere Berechtigung anfordert.</li>
@@ -278,16 +277,16 @@
         <li><strong>Kein Cloud-/ADB-Backup, keine Übertragung beim Handywechsel.</strong> Deine Tresor-Daten landen in keinem automatischen Backup und werden beim Gerätewechsel nicht mitkopiert (seit v3.0) — Sicherungen machst nur du selbst über die verschlüsselte <code>.vault</code>-Datei.</li>
         <li><strong>Fingerabdruck (optional, seit v3.0).</strong> Ein vom Android-Keystore verwahrter Zufallsschlüssel schließt den Datenschlüssel auf, freigegeben nur nach starker Biometrie. Ehrlich eingeordnet: bequem, aber erzwingbar, und kein zusätzlicher Faktor. Die Passphrase bleibt Pflicht nach jedem Neustart (seit v3.2 abwählbar: Haken „auch nach Neustart“ beim Aktivieren, ab Werk aus — die Wahl steckt im Fingerabdruck-Slot und ist dort mitauthentisiert), nach einem Passphrase-Wechsel (danach ist der Fingerabdruck aus und muss neu aktiviert werden), nach „Jetzt sperren“ und sobald in Android ein neuer Fingerabdruck registriert wird — dann schaltet die App den Fingerabdruck ab und warnt. Die Neustart-Regel ist Programmcode, keine kryptografische Garantie.</li>
       </ul>
-      <p>Für den <strong>vollen Schutz</strong> also die APK. Die Web-Version bleibt der schnellste Weg zum Ausprobieren.</p>
+      <p>Am Handy also die APK — am Linux-Desktop das Flatpak, dessen Härtung im nächsten Abschnitt steht.</p>
     </div>
 
     <h3 id="desktop">Für den Linux-Desktop (seit v3.3)</h3>
     <p>
-      Derselbe Code wie im Browser und auf dem Handy, verpackt als <strong>Flatpak</strong> (x86_64). Das Tresor-Format ist identisch: Ein Backup vom Handy
+      Derselbe Code wie auf dem Handy, verpackt als <strong>Flatpak</strong> (x86_64). Das Tresor-Format ist identisch: Ein Backup vom Handy
       importierst du am Desktop und umgekehrt, zum Beispiel über Syncthing. Die Datei liegt im
       <a href="https://codeberg.org/Alien-Investor/sachwert-tresor/releases" target="_blank" rel="noopener">Codeberg-Release</a>, zusammen mit
       <code>SHA256SUMS</code> und der Signatur <code>SHA256SUMS.asc</code>. Nicht auf Flathub, kein automatisches Update.
-      Installation und Update Schritt für Schritt stehen im
+      Installation und Update Schritt für Schritt: <a href="flatpak.html">Anleitung Flatpak</a> (für beide Apps) oder das
       <a href="https://codeberg.org/Alien-Investor/sachwert-tresor" target="_blank" rel="noopener">README</a>.
     </p>
     <p><strong>GPG-Release-Schlüssel</strong> für die Desktop-Pakete (derselbe wie bei Alien Pass): <a href="alien-investor-release-key.asc">alien-investor-release-key.asc</a> — Fingerabdruck:</p>
