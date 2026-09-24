@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Alien-Apps am Linux-Desktop: Flatpak installieren und prüfen | Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Alien Pass und Sachwert-Tresor als Flatpak auf Linux: Datei laden, GPG-signierte Prüfsumme prüfen, installieren, updaten und selbst nachsehen, dass die App kein Netz hat.">
+  <meta name="description" content="Alien Pass, Sachwert-Tresor und Alien Notes als Flatpak auf Linux: Datei laden, GPG-signierte Prüfsumme prüfen, installieren, updaten und selbst nachsehen, dass die App kein Netz hat.">
   <link rel="canonical" href="/flatpak.html">
   <link rel="alternate" hreflang="en" href="/en/flatpak.html">
   <style>
@@ -159,11 +159,12 @@
 
   <article id="content">
     <p>
-      Zwei meiner Apps gibt es seit September 2026 auch für den <strong>Linux-Desktop</strong>: <a href="alien-pass.html#desktop">Alien Pass</a>
-      (seit v1.7) und der <a href="sachwert-tresor.html#desktop">Sachwert-Tresor</a> (seit v3.3). Beide laufen als <strong>Flatpak</strong> (x86_64)
+      Drei meiner Apps gibt es seit September 2026 auch für den <strong>Linux-Desktop</strong>: <a href="alien-pass.html#desktop">Alien Pass</a>
+      (seit v1.7), der <a href="sachwert-tresor.html#desktop">Sachwert-Tresor</a> (seit v3.3) und <a href="alien-notes.html#desktop">Alien Notes</a>
+      (seit v0.1). Alle drei laufen als <strong>Flatpak</strong> (x86_64)
       mit derselben Hülle: kein Netz, kein Dateizugriff, Dateien nur über den Dialog des Systems. Sie liegen bewusst <strong>nicht auf Flathub</strong>
       und aktualisieren sich nicht von selbst — du lädst die Datei aus dem Codeberg-Release, prüfst die Signatur und installierst sie selbst.
-      Diese Seite zeigt den Weg einmal für beide Apps.
+      Diese Seite zeigt den Weg einmal für alle drei Apps.
     </p>
 
     <h2>1. Voraussetzung: Flatpak mit Flathub</h2>
@@ -180,13 +181,15 @@
         <code>alien-pass-X.Y-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code></li>
       <li><a href="https://codeberg.org/Alien-Investor/sachwert-tresor/releases" target="_blank" rel="noopener">Sachwert-Tresor</a>:
         <code>sachwert-tresor-X.Y-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code></li>
+      <li><a href="https://codeberg.org/Alien-Investor/alien-notes/releases" target="_blank" rel="noopener">Alien Notes</a>:
+        <code>alien-notes-X.Y-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code></li>
     </ul>
     <p style="font-size:0.9em; color:#aaa;">Ein <code>-rN</code> im Dateinamen (etwa <code>alien-pass-1.8-r2-…</code>) ist ein Neubau der Hülle bei unveränderter App.</p>
 
     <h2>3. Echtheit prüfen: GPG-signierte Prüfsumme</h2>
     <p>
-      Die Datei <code>SHA256SUMS</code> ist mit dem GPG-Release-Schlüssel von Alien Investor signiert — derselbe Schlüssel für beide Apps.
-      Den öffentlichen Teil gibt es hier auf der Website (<a href="alien-investor-release-key.asc">alien-investor-release-key.asc</a>) und in beiden
+      Die Datei <code>SHA256SUMS</code> ist mit dem GPG-Release-Schlüssel von Alien Investor signiert — derselbe Schlüssel für alle Desktop-Apps.
+      Den öffentlichen Teil gibt es hier auf der Website (<a href="alien-investor-release-key.asc">alien-investor-release-key.asc</a>) und in allen drei
       Repos. Vergleiche den Fingerabdruck über einen zweiten Weg, bevor du dem Schlüssel traust:
     </p>
     <pre><code>100F 9E25 BFAE A807 DBC3  57D7 50C0 D785 83BF CB81</code></pre>
@@ -204,7 +207,9 @@ sha256sum -c SHA256SUMS                     # erwartet: …flatpak: OK</code></p
 flatpak run org.alieninvestor.pass</code></pre>
     <pre><code>flatpak install --user sachwert-tresor-X.Y-linux-x86_64.flatpak
 flatpak run org.alieninvestor.tresor</code></pre>
-    <p>Danach stehen die Apps im Anwendungsmenü. Ein Backup vom Handy (<code>.vault</code>) importierst du über den Dateidialog — das Format ist identisch.</p>
+    <pre><code>flatpak install --user alien-notes-X.Y-linux-x86_64.flatpak
+flatpak run org.alieninvestor.notes</code></pre>
+    <p>Danach stehen die Apps im Anwendungsmenü. Ein Backup vom Handy (<code>.vault</code>, bei Alien Notes <code>.notes</code>) importierst du über den Dateidialog — das Format ist identisch.</p>
 
     <h2>5. Update: deinstallieren, neu installieren</h2>
     <p>
@@ -212,16 +217,17 @@ flatpak run org.alieninvestor.tresor</code></pre>
     </p>
     <pre><code>flatpak uninstall --user org.alieninvestor.pass       # löscht KEINE Daten (ohne --delete-data)
 flatpak install --user alien-pass-X.Y-linux-x86_64.flatpak</code></pre>
-    <p>Für den Tresor entsprechend mit <code>org.alieninvestor.tresor</code>. Die Daten bleiben dabei erhalten:</p>
+    <p>Für den Tresor entsprechend mit <code>org.alieninvestor.tresor</code>, für Alien Notes mit <code>org.alieninvestor.notes</code>. Die Daten bleiben dabei erhalten:</p>
     <ul>
       <li>Alien Pass: <code>~/.var/app/org.alieninvestor.pass/data/alien-pass/vault.aipv</code></li>
       <li>Sachwert-Tresor: <code>~/.var/app/org.alieninvestor.tresor/data/sachwert-tresor/vault.aisv</code></li>
+      <li>Alien Notes: <code>~/.var/app/org.alieninvestor.notes/data/alien-notes/notes.ainv</code></li>
     </ul>
     <p>Vor jedem Update trotzdem ein Backup anlegen. Ein laufendes Fenster vorher schließen — sonst läuft die alte Fassung weiter.</p>
 
     <h2>6. Selbst prüfen, dass die App kein Netz hat</h2>
     <pre><code>flatpak info --user --show-permissions org.alieninvestor.pass</code></pre>
-    <p>Erwartet genau diese Ausgabe (beim Tresor identisch):</p>
+    <p>Erwartet genau diese Ausgabe (beim Tresor und bei Alien Notes identisch):</p>
     <pre><code>[Context]
 shared=ipc;
 sockets=wayland;fallback-x11;
@@ -238,9 +244,9 @@ devices=dri;</code></pre>
         <li><strong>Eigene Browser-Engine.</strong> Die Apps bringen Electron selbst mit. Sicherheits-Updates dafür kommen nur mit einer neuen App-Version, nicht über das System.</li>
         <li><strong>Kein Schutz vor Bildschirmfotos</strong> (Linux kennt kein Gegenstück zu FLAG_SECURE). Unter X11 kann jedes laufende Programm Tastatur und Zwischenablage mitlesen, Wayland trennt Programme besser.</li>
         <li><strong>Bei Bildschirmsperre und Ruhezustand sperren die Apps nicht von selbst.</strong> Systemsperre nutzen, dazu eine kurze Inaktivitäts-Sperre; Strg+L sperrt sofort. Minimiert oder versteckt gilt als Hintergrund, ein Fensterwechsel leert nur getippte Passphrasen.</li>
-        <li><strong>Kein Fingerabdruck.</strong> Die Passphrase bleibt der Schlüssel; Alien Pass bietet am Desktop optional ein Schnell-Entsperren per PIN, der Tresor nicht.</li>
+        <li><strong>Kein Fingerabdruck.</strong> Die Passphrase bleibt der Schlüssel; Alien Pass und Alien Notes bieten am Desktop optional ein Schnell-Entsperren per PIN, der Tresor nicht.</li>
       </ul>
-      <p>Die Einzelheiten je App: <a href="alien-pass.html#desktop">Alien Pass am Desktop</a> · <a href="sachwert-tresor.html#desktop">Sachwert-Tresor am Desktop</a>.</p>
+      <p>Die Einzelheiten je App: <a href="alien-pass.html#desktop">Alien Pass am Desktop</a> · <a href="sachwert-tresor.html#desktop">Sachwert-Tresor am Desktop</a> · <a href="alien-notes.html#desktop">Alien Notes am Desktop</a>.</p>
     </div>
 
   </article>
@@ -272,7 +278,7 @@ devices=dri;</code></pre>
   <div class="box" style="border-style: dashed; border-color: #333;">
     <h3>Quellen & Links</h3>
     <ul style="padding-left: 1.2em;">
-      <li>Releases: <a href="https://codeberg.org/Alien-Investor/alien-pass/releases" target="_blank" rel="noopener">Alien Pass</a> · <a href="https://codeberg.org/Alien-Investor/sachwert-tresor/releases" target="_blank" rel="noopener">Sachwert-Tresor</a> (jeweils mit README zur Desktop-Fassung)</li>
+      <li>Releases: <a href="https://codeberg.org/Alien-Investor/alien-pass/releases" target="_blank" rel="noopener">Alien Pass</a> · <a href="https://codeberg.org/Alien-Investor/sachwert-tresor/releases" target="_blank" rel="noopener">Sachwert-Tresor</a> · <a href="https://codeberg.org/Alien-Investor/alien-notes/releases" target="_blank" rel="noopener">Alien Notes</a> (jeweils mit README zur Desktop-Fassung)</li>
       <li>GPG-Release-Schlüssel: <a href="alien-investor-release-key.asc">alien-investor-release-key.asc</a></li>
       <li>Flatpak-Dokumentation: <a href="https://docs.flatpak.org/" target="_blank" rel="noopener">docs.flatpak.org</a></li>
     </ul>
