@@ -78,7 +78,9 @@
         <li><strong>Notes and checklists</strong> — a note is free text (up to 100,000 characters), a checklist has up to 200 entries with boxes, "done to the bottom" and "clear ticks". Switch a note between the two: lines become entries and back, with a warning whenever something would be shortened.</li>
         <li><strong>No save button</strong> — the app saves as you type (after 1.5 s) and when you leave the note, encrypted, the whole file every time. The title may stay empty; the first line then serves as the title.</li>
         <li><strong>Markdown preview per note</strong> (switch, off by default) — headings (<code>#</code> to <code>###</code>), bold, italic, lists, boxes (<code>- [ ]</code>, <code>- [x]</code>), code, rules. A small own subset, no third-party renderer, no HTML, links deliberately stay plain text — the app has no network anyway. A cheat sheet in the editor shows "type this → looks like this" and inserts an example note on request.</li>
-        <li><strong>Categories</strong> like folders (type freely, suggestions from existing ones, filter chips above the list), <strong>favourites</strong>, <strong>pinned</strong> notes at the top, search across title, text, checklist entries and category. "Insert date" puts date and time at the cursor.</li>
+        <li><strong>Categories</strong> like folders (type freely, suggestions from existing ones, filter chips above the list, rename a category with all its notes), <strong>favourites</strong>, <strong>pinned</strong> notes at the top, an "Open" chip for checklists with unfinished entries, search across title, text, checklist entries and category. "Insert date" puts date and time at the cursor.</li>
+        <li><strong>Moving from Standard Notes</strong> (since 1.1) — reads a decrypted Standard Notes backup, the downloaded ZIP directly or the text file inside. Plain, Markdown, code, rich-text and Super notes become notes, checklists become checklists, the first tag becomes the category. Authenticator (2FA) entries, spreadsheets and files are never imported; a second import creates no duplicates.</li>
+        <li><strong>Several at once</strong> (since 1.1) — pick notes and move them to the trash together (one "Undo" for all, at most 200 at once), set a category or the favourite mark. Plus "Undo" after moving to the trash (six seconds), "no preview" per note, three font sizes — and every confirmation is an in-app dialog, because the Android system dialog does not inherit the screenshot protection.</li>
         <li><strong>Copy with auto-clear</strong> — "Copy" puts the whole note into the clipboard; the app clears it after the set time (15/30/60 s, default 30 s, can be switched off) and on lock. In the Android app copied content is flagged sensitive so the system preview hides it (Android 13+).</li>
         <li><strong>Locking, more relaxed than a password manager</strong> — by default no lock after inactivity and in the background only after 30 minutes, both adjustable up to "never" / "immediately". The background lock applies when you return after the chosen time; until then the key stays in memory. "Lock now" clears the key and everything on screen at once. The file on the device is always encrypted.</li>
         <li><strong>Trash</strong> — deleted notes stay restorable for <strong>30 days</strong>, up to <strong>200 notes</strong> at a time; it shows only title, type and date, never the content. It is device-local: when merging, a deletion travels to your other devices, the content does not.</li>
@@ -99,7 +101,7 @@
         <li><strong>No internet permission.</strong> Only USE_BIOMETRIC and USE_FINGERPRINT (up to Android 8.1) for the fingerprint sensor, plus the AndroidX-generated signature permission that grants nothing. Strict CSP: <code>connect-src 'none'</code>, no inline script.</li>
         <li><strong>No cloud, ADB or device-to-device backup.</strong> allowBackup=false plus data extraction rules — you make backups yourself via the encrypted <code>.notes</code> file.</li>
         <li><strong>Notes file in the private app folder</strong>, written atomically (temp file, fsync, rename) — never a half-written file. The 20 MB file limit is enforced on save as well; an oversized file still opens so you can tidy up.</li>
-        <li><strong>Internal security audit</strong> of the surface that is new compared to Alien Pass, before release (no independent audit): seven low-severity findings and one note, all fixed; a follow-up covered the file store and the 20 MB write limit added afterwards (one finding, also fixed before release). Bundled Argon2 library (hash-wasm) hash-checked in the build.</li>
+        <li><strong>Internal security audit</strong> of the surface that is new compared to Alien Pass, before release (no independent audit): seven low-severity findings and one note, all fixed; a follow-up covered the file store and the 20 MB write limit added afterwards (one finding, also fixed before release). A second internal audit (25–26 September 2026, before 1.1) took apart the Standard Notes import including the ZIP reader, the confirmation dialog, undo and multi-select: no path from a foreign backup into markup or script; five findings without an outside attacker (among them a race on saving on Android, present since 0.1, that could silently drop a change), all fixed before release and covered by regression tests. Bundled Argon2 library (hash-wasm) hash-checked in the build.</li>
       </ul>
     </div>
 
@@ -125,7 +127,7 @@
     </p>
     <p><strong>Prerequisite:</strong> Flatpak with the Flathub remote (for the runtime <code>org.freedesktop.Platform</code> 25.08, which Flatpak fetches during installation):</p>
     <pre><code>flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo</code></pre>
-    <p><strong>1. Download three files from the release:</strong> <code>alien-notes-0.1-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code>.</p>
+    <p><strong>1. Download three files from the release:</strong> <code>alien-notes-1.1-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code>.</p>
     <p><strong>2. Verify the signature.</strong> The checksum is signed with the Alien Investor GPG release key — the same key as for Alien Pass and Sachwert-Tresor:
       <a href="/alien-investor-release-key.asc">alien-investor-release-key.asc</a>. Compare the fingerprint through a second channel:</p>
     <p><code style="display:block; margin:0.35em 0; padding:0.5em 0.6em; font-size:0.8em;">100F 9E25 BFAE A807 DBC3  57D7 50C0 D785 83BF CB81</code></p>
@@ -133,7 +135,7 @@
 gpg --verify SHA256SUMS.asc SHA256SUMS      # expected: Good signature from "Alien Investor (Release-Signatur) …"
 sha256sum -c SHA256SUMS                     # expected: …flatpak: OK</code></pre>
     <p><strong>3. Install and run:</strong></p>
-    <pre><code>flatpak install --user alien-notes-0.1-linux-x86_64.flatpak
+    <pre><code>flatpak install --user alien-notes-1.1-linux-x86_64.flatpak
 flatpak run org.alieninvestor.notes</code></pre>
     <p>Alien Notes then appears in the application menu.</p>
     <p><strong>Update:</strong> Flatpak (as of 1.14) does not install a new bundle over an existing installation. Download and verify the new version (steps 1–2), then:</p>
@@ -175,7 +177,7 @@ devices=dri;</code></pre>
     </div>
 
     <p style="color:#ccc;">
-      <strong>Version 0.1 (24 September 2026), first release.</strong>
+      <strong>Version 1.1 (26 September 2026):</strong> moving from Standard Notes, multi-select, "Undo" after deleting, rename categories, "Open" chip, "no preview", three font sizes, confirmations as in-app dialogs; plus the findings of the second internal audit fixed. First release 0.1 on 24 September 2026.
       Alien Notes is <strong>free</strong>. If it helps you, the mothership appreciates some fuel — see below.
       Sister apps: <a href="/en/alien-pass.html">Alien Pass</a> for passwords and the <a href="/en/sachwert-tresor.html">Sachwert-Tresor</a> for Bitcoin, gold and silver holdings.
     </p>

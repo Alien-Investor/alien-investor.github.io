@@ -748,7 +748,8 @@
           <li>Notes (free text up to 100,000 characters) and checklists (up to 200 entries, "done to the bottom", "clear ticks") – switch a note between the two, lines become entries and back</li>
           <li>No save button: the app saves as you type (after 1.5 s) and when you leave the note – encrypted, the whole file every time</li>
           <li>Markdown preview per note (off by default): a small own subset, no third-party renderer, no HTML, links stay plain text; cheat sheet in the editor</li>
-          <li>Categories like folders, favourites, pinned notes at the top, search across title, text, checklist entries and category</li>
+          <li>Categories like folders (rename them, too), favourites, pinned notes at the top, an "Open" chip for checklists with unfinished entries, search across title, text, checklist entries and category</li>
+          <li><strong>Since 1.1:</strong> moving from Standard Notes (decrypted backup as ZIP or text file, 2FA entries are never imported), several notes at once to the trash, into a category or as favourites, "Undo" after deleting, "no preview" per note, three font sizes, confirmations as in-app dialogs instead of system dialogs</li>
           <li>Clipboard auto-clear (30 s by default, can be switched off) and on lock, flagged sensitive on Android</li>
           <li>Locking more relaxed than a password manager: by default no lock after inactivity, in the background after 30 minutes – both adjustable up to "never" / "immediately"</li>
           <li>Trash: deleted notes stay restorable for 30 days, up to 200 at a time, showing only title, type and date</li>
@@ -756,7 +757,7 @@
           <li>Aegis hurdle, fingerprint unlock (Android) and quick unlock by PIN (desktop) – optional, taken over from Alien Pass (Aegis without QR)</li>
           <li>Screenshots and app-switcher preview blocked by default (FLAG_SECURE), can be switched off in Settings – notes are not always secret</li>
           <li>Also for the <strong>Linux desktop</strong> – a Flatpak without network permission and without file access, with a GPG-signed checksum</li>
-          <li>Internal security audit of the surface that is new compared to Alien Pass before release, with a follow-up on the file store – all findings fixed (no independent audit)</li>
+          <li>Two internal security audits (0.1: the surface new compared to Alien Pass plus the file store; 1.1: Standard Notes import, dialog, undo, multi-select) – all findings fixed before release (no independent audit)</li>
         </ul>
 
         <p style="color:#00ffcc; font-size:0.92em;"><strong>App only, deliberately no web version:</strong> on Android no internet permission (only the fingerprint sensor), FLAG_SECURE, no cloud backup – hardening at the operating-system level; on the Linux desktop a Flatpak without network. Details on the <a href="/en/alien-notes.html">Alien Notes page</a>.</p>
