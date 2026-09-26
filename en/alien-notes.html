@@ -82,7 +82,7 @@
         <li><strong>Moving from Standard Notes</strong> (since 1.1) — reads a decrypted Standard Notes backup, the downloaded ZIP directly or the text file inside. Plain, Markdown, code, rich-text and Super notes become notes, checklists become checklists, the first tag becomes the category. Authenticator (2FA) entries, spreadsheets and files are never imported; a second import creates no duplicates.</li>
         <li><strong>Several at once</strong> (since 1.1) — pick notes and move them to the trash together (one "Undo" for all, at most 200 at once), set a category or the favourite mark. Plus "Undo" after moving to the trash (six seconds), "no preview" per note, three font sizes — and every confirmation is an in-app dialog, because the Android system dialog does not inherit the screenshot protection.</li>
         <li><strong>Copy with auto-clear</strong> — "Copy" puts the whole note into the clipboard; the app clears it after the set time (15/30/60 s, default 30 s, can be switched off) and on lock. In the Android app copied content is flagged sensitive so the system preview hides it (Android 13+).</li>
-        <li><strong>Locking, more relaxed than a password manager</strong> — by default no lock after inactivity and in the background only after 30 minutes, both adjustable up to "never" / "immediately". The background lock applies when you return after the chosen time; until then the key stays in memory. "Lock now" clears the key and everything on screen at once. The file on the device is always encrypted.</li>
+        <li><strong>Locking, more relaxed than a password manager</strong> — by default no lock after inactivity and in the background only after 30 minutes, both adjustable up to "never" / "immediately". The background lock applies when you return after the chosen time; until then the key stays in memory. "Lock now" clears the key and everything on screen at once. The file on the device is always encrypted. With "immediately" the Android app also locks while the file picker is open; unlock within five minutes and the import continues with the chosen file (since 1.2).</li>
         <li><strong>Trash</strong> — deleted notes stay restorable for <strong>30 days</strong>, up to <strong>200 notes</strong> at a time; it shows only title, type and date, never the content. It is device-local: when merging, a deletion travels to your other devices, the content does not.</li>
         <li><strong>Encrypted backup &amp; merge</strong> — the <code>.notes</code> file is fully encrypted. Per note the newer change wins, deletions are carried for a year. Sync e.g. via Syncthing, also between phone and Linux desktop.</li>
         <li><strong>Aegis hurdle</strong> (optional) — an extra TOTP code from Aegis on unlock; key or otpauth link to copy, no QR. Honestly documented as a hurdle, not a second factor.</li>
@@ -127,7 +127,7 @@
     </p>
     <p><strong>Prerequisite:</strong> Flatpak with the Flathub remote (for the runtime <code>org.freedesktop.Platform</code> 25.08, which Flatpak fetches during installation):</p>
     <pre><code>flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo</code></pre>
-    <p><strong>1. Download three files from the release:</strong> <code>alien-notes-1.1-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code>.</p>
+    <p><strong>1. Download three files from the release:</strong> <code>alien-notes-1.2-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code>.</p>
     <p><strong>2. Verify the signature.</strong> The checksum is signed with the Alien Investor GPG release key — the same key as for Alien Pass and Sachwert-Tresor:
       <a href="/alien-investor-release-key.asc">alien-investor-release-key.asc</a>. Compare the fingerprint through a second channel:</p>
     <p><code style="display:block; margin:0.35em 0; padding:0.5em 0.6em; font-size:0.8em;">100F 9E25 BFAE A807 DBC3  57D7 50C0 D785 83BF CB81</code></p>
@@ -135,7 +135,7 @@
 gpg --verify SHA256SUMS.asc SHA256SUMS      # expected: Good signature from "Alien Investor (Release-Signatur) …"
 sha256sum -c SHA256SUMS                     # expected: …flatpak: OK</code></pre>
     <p><strong>3. Install and run:</strong></p>
-    <pre><code>flatpak install --user alien-notes-1.1-linux-x86_64.flatpak
+    <pre><code>flatpak install --user alien-notes-1.2-linux-x86_64.flatpak
 flatpak run org.alieninvestor.notes</code></pre>
     <p>Alien Notes then appears in the application menu.</p>
     <p><strong>Update:</strong> Flatpak (as of 1.14) does not install a new bundle over an existing installation. Download and verify the new version (steps 1–2), then:</p>
@@ -177,7 +177,7 @@ devices=dri;</code></pre>
     </div>
 
     <p style="color:#ccc;">
-      <strong>Version 1.1 (26 September 2026):</strong> moving from Standard Notes, multi-select, "Undo" after deleting, rename categories, "Open" chip, "no preview", three font sizes, confirmations as in-app dialogs; plus the findings of the second internal audit fixed. First release 0.1 on 24 September 2026.
+      <strong>Version 1.2 (26 September 2026):</strong> import resumed after unlocking — with "Lock in background: immediately" the file chosen in the picker used to be lost (finding from the Alien Pass device test). <strong>Version 1.1 (26 September 2026):</strong> moving from Standard Notes, multi-select, "Undo" after deleting, rename categories, "Open" chip, "no preview", three font sizes, confirmations as in-app dialogs; plus the findings of the second internal audit fixed. First release 0.1 on 24 September 2026.
       Alien Notes is <strong>free</strong>. If it helps you, the mothership appreciates some fuel — see below.
       Sister apps: <a href="/en/alien-pass.html">Alien Pass</a> for passwords and the <a href="/en/sachwert-tresor.html">Sachwert-Tresor</a> for Bitcoin, gold and silver holdings.
     </p>
