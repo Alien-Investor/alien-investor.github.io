@@ -88,6 +88,7 @@
         <li><strong>Aegis hurdle</strong> (optional) — an extra TOTP code from Aegis on unlock; key or otpauth link to copy, no QR. Honestly documented as a hurdle, not a second factor.</li>
         <li><strong>Fingerprint unlock</strong> (optional, Android) as in Alien Pass, with the passphrase required after every restart unless "also after a restart" is ticked when enabling (off by default). <strong>Quick unlock by PIN</strong> (optional, desktop only) after a lock.</li>
         <li><strong>Screenshots and app-switcher preview</strong> (Android) — blocked by default (FLAG_SECURE), can be switched off in Settings, because notes are not always secret. Locked and during setup the protection is always on.</li>
+        <li><strong>No Android autofill, not even third-party</strong> (since 1.4) — the app keeps its WebView out of the Android autofill framework. A password manager set up as the autofill service never sees the passphrase fields and cannot offer to save them. The HTML attribute <code>autocomplete="off"</code> alone does not stop this, hence natively.</li>
         <li><strong>Bilingual</strong> — German and English, offline manual inside the app.</li>
       </ul>
     </div>
@@ -127,7 +128,7 @@
     </p>
     <p><strong>Prerequisite:</strong> Flatpak with the Flathub remote (for the runtime <code>org.freedesktop.Platform</code> 25.08, which Flatpak fetches during installation):</p>
     <pre><code>flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo</code></pre>
-    <p><strong>1. Download three files from the release:</strong> <code>alien-notes-1.3-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code>.</p>
+    <p><strong>1. Download three files from the release:</strong> <code>alien-notes-1.4-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code>.</p>
     <p><strong>2. Verify the signature.</strong> The checksum is signed with the Alien Investor GPG release key — the same key as for Alien Pass and Sachwert-Tresor:
       <a href="/alien-investor-release-key.asc">alien-investor-release-key.asc</a>. Compare the fingerprint through a second channel:</p>
     <p><code style="display:block; margin:0.35em 0; padding:0.5em 0.6em; font-size:0.8em;">100F 9E25 BFAE A807 DBC3  57D7 50C0 D785 83BF CB81</code></p>
@@ -135,7 +136,7 @@
 gpg --verify SHA256SUMS.asc SHA256SUMS      # expected: Good signature from "Alien Investor (Release-Signatur) …"
 sha256sum -c SHA256SUMS                     # expected: …flatpak: OK</code></pre>
     <p><strong>3. Install and run:</strong></p>
-    <pre><code>flatpak install --user alien-notes-1.3-linux-x86_64.flatpak
+    <pre><code>flatpak install --user alien-notes-1.4-linux-x86_64.flatpak
 flatpak run org.alieninvestor.notes</code></pre>
     <p>Alien Notes then appears in the application menu.</p>
     <p><strong>Update:</strong> Flatpak (as of 1.14) does not install a new bundle over an existing installation. Download and verify the new version (steps 1–2), then:</p>
@@ -177,7 +178,7 @@ devices=dri;</code></pre>
     </div>
 
     <p style="color:#ccc;">
-      <strong>Version 1.3 (26 September 2026):</strong> with "Lock in background: immediately" the copied note stays until the chosen time runs out and can still be pasted into another app (finding from the Alien Pass device test); the remembered import file reference also expires when the clock was set back. <strong>Version 1.2 (26 September 2026):</strong> import resumed after unlocking — with "Lock in background: immediately" the file chosen in the picker used to be lost (finding from the Alien Pass device test). <strong>Version 1.1 (26 September 2026):</strong> moving from Standard Notes, multi-select, "Undo" after deleting, rename categories, "Open" chip, "no preview", three font sizes, confirmations as in-app dialogs; plus the findings of the second internal audit fixed. First release 0.1 on 24 September 2026.
+      <strong>Version 1.4 (26 September 2026):</strong> the app keeps its fields out of the Android autofill framework — a third-party password manager set up as the autofill service used to offer itself in the passphrase fields (finding from the Alien Pass device test). <strong>Version 1.3 (26 September 2026):</strong> with "Lock in background: immediately" the copied note stays until the chosen time runs out and can still be pasted into another app (finding from the Alien Pass device test); the remembered import file reference also expires when the clock was set back. <strong>Version 1.2 (26 September 2026):</strong> import resumed after unlocking — with "Lock in background: immediately" the file chosen in the picker used to be lost (finding from the Alien Pass device test). <strong>Version 1.1 (26 September 2026):</strong> moving from Standard Notes, multi-select, "Undo" after deleting, rename categories, "Open" chip, "no preview", three font sizes, confirmations as in-app dialogs; plus the findings of the second internal audit fixed. First release 0.1 on 24 September 2026.
       Alien Notes is <strong>free</strong>. If it helps you, the mothership appreciates some fuel — see below.
       Sister apps: <a href="/en/alien-pass.html">Alien Pass</a> for passwords and the <a href="/en/sachwert-tresor.html">Sachwert-Tresor</a> for Bitcoin, gold and silver holdings.
     </p>

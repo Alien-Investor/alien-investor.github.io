@@ -760,6 +760,7 @@
           <li>Encrypted backup (<code>.notes</code>) and merge between devices, also between phone and Linux desktop (e.g. via Syncthing)</li>
           <li>Aegis hurdle, fingerprint unlock (Android) and quick unlock by PIN (desktop) – optional, taken over from Alien Pass (Aegis without QR)</li>
           <li>Screenshots and app-switcher preview blocked by default (FLAG_SECURE), can be switched off in Settings – notes are not always secret</li>
+          <li>No Android autofill, not even third-party (since 1.4): the app keeps its WebView out of the autofill framework – a password manager set up as the autofill service never sees the passphrase fields and cannot offer to save them</li>
           <li>Also for the <strong>Linux desktop</strong> – a Flatpak without network permission and without file access, with a GPG-signed checksum</li>
           <li>Two internal security audits (0.1: the surface new compared to Alien Pass plus the file store; 1.1: Standard Notes import, dialog, undo, multi-select) – all findings fixed before release (no independent audit)</li>
         </ul>

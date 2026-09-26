@@ -248,6 +248,7 @@
         <li><strong>Aegis-Hürde</strong> (optional) — nach der Passphrase zusätzlich ein TOTP-Code aus Aegis; Schlüssel oder otpauth-Link zum Kopieren, kein QR. Ehrlich benannt als Hürde, nicht als zweiter Faktor.</li>
         <li><strong>Fingerabdruck-Entsperren</strong> (optional, Android) wie bei Alien Pass, mit Passphrase-Pflicht nach jedem Neustart, sofern beim Aktivieren nicht „auch nach Neustart“ angekreuzt wird (ab Werk aus). <strong>Schnell-Entsperren mit PIN</strong> (optional, nur Desktop) nach einer Sperre.</li>
         <li><strong>Screenshots und App-Umschalter</strong> (Android) — ab Werk gesperrt (FLAG_SECURE), in den Einstellungen abschaltbar, denn Notizen sind nicht immer geheim. Gesperrt und beim Einrichten ist der Schutz immer an.</li>
+        <li><strong>Kein Android-Autofill, auch kein fremdes</strong> (seit 1.4) — die App nimmt ihre WebView vom Android-Autofill-Framework aus. Ein Passwort-Manager, der als Autofill-Dienst eingerichtet ist, sieht die Passphrase-Felder nicht und kann nicht anbieten, sie zu speichern. Das HTML-Attribut <code>autocomplete="off"</code> allein hält das nicht auf, darum nativ.</li>
         <li><strong>Zweisprachig</strong> — Deutsch und Englisch, Handbuch in der App (<code>?</code>-Button), zwei Farbschemata.</li>
       </ul>
     </div>
@@ -288,7 +289,7 @@
     </p>
     <p><strong>Voraussetzung:</strong> Flatpak mit dem Flathub-Remote (für die Laufzeit <code>org.freedesktop.Platform</code> 25.08, die Flatpak beim Installieren nachlädt):</p>
     <pre><code>flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo</code></pre>
-    <p><strong>1. Drei Dateien aus dem Release laden:</strong> <code>alien-notes-1.3-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code>.</p>
+    <p><strong>1. Drei Dateien aus dem Release laden:</strong> <code>alien-notes-1.4-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code>.</p>
     <p><strong>2. Signatur prüfen.</strong> Die Prüfsumme ist mit dem GPG-Release-Schlüssel von Alien Investor signiert — derselbe Schlüssel wie bei Alien Pass und Sachwert-Tresor:
       <a href="alien-investor-release-key.asc">alien-investor-release-key.asc</a>. Den Fingerabdruck über einen zweiten Weg vergleichen:</p>
     <p><code style="display:block; margin:0.35em 0; padding:0.5em 0.6em; font-size:0.8em;">100F 9E25 BFAE A807 DBC3  57D7 50C0 D785 83BF CB81</code></p>
@@ -296,7 +297,7 @@
 gpg --verify SHA256SUMS.asc SHA256SUMS      # „Korrekte Signatur von "Alien Investor (Release-Signatur) …"“
 sha256sum -c SHA256SUMS                     # „…flatpak: OK“</code></pre>
     <p><strong>3. Installieren und starten:</strong></p>
-    <pre><code>flatpak install --user alien-notes-1.3-linux-x86_64.flatpak
+    <pre><code>flatpak install --user alien-notes-1.4-linux-x86_64.flatpak
 flatpak run org.alieninvestor.notes</code></pre>
     <p>Danach steht Alien Notes im Anwendungsmenü.</p>
     <p><strong>Update:</strong> Eine neue Bündel-Datei lässt sich (Flatpak 1.14) nicht über die installierte legen. Neue Version laden und prüfen (Schritt 1–2), dann:</p>
@@ -340,7 +341,7 @@ devices=dri;</code></pre>
     </div>
 
     <p style="color:#ccc;">
-      <strong>Version 1.3 (26.09.2026):</strong> Bei „Sperren im Hintergrund: sofort“ bleibt Kopiertes bis zum Ablauf der Zeit stehen und lässt sich noch in eine andere App einfügen (Fund aus dem Alien-Pass-Gerätetest); der gemerkte Import-Dateiverweis verfällt auch bei zurückgestellter Uhr. <strong>Version 1.2 (26.09.2026):</strong> Import nach dem Entsperren nachgeholt — bei „Sperren im Hintergrund: sofort“ ging die im Datei-Picker gewählte Datei bisher verloren (Fund aus dem Alien-Pass-Gerätetest). <strong>Version 1.1 (26.09.2026):</strong> Umzug von Standard Notes, Mehrfachauswahl, „Rückgängig“ nach dem Löschen, Kategorie umbenennen, Chip „Offen“, „Keine Vorschau“, drei Schriftgrößen, Rückfragen als App-Dialog; dazu die Funde des zweiten internen Audits behoben. Erstes Release 0.1 am 24.09.2026.
+      <strong>Version 1.4 (26.09.2026):</strong> Die App nimmt ihre Felder vom Android-Autofill-Framework aus — ein fremder Passwort-Manager als Autofill-Dienst bot sich bisher in den Passphrase-Feldern an (Fund aus dem Alien-Pass-Gerätetest). <strong>Version 1.3 (26.09.2026):</strong> Bei „Sperren im Hintergrund: sofort“ bleibt Kopiertes bis zum Ablauf der Zeit stehen und lässt sich noch in eine andere App einfügen (Fund aus dem Alien-Pass-Gerätetest); der gemerkte Import-Dateiverweis verfällt auch bei zurückgestellter Uhr. <strong>Version 1.2 (26.09.2026):</strong> Import nach dem Entsperren nachgeholt — bei „Sperren im Hintergrund: sofort“ ging die im Datei-Picker gewählte Datei bisher verloren (Fund aus dem Alien-Pass-Gerätetest). <strong>Version 1.1 (26.09.2026):</strong> Umzug von Standard Notes, Mehrfachauswahl, „Rückgängig“ nach dem Löschen, Kategorie umbenennen, Chip „Offen“, „Keine Vorschau“, drei Schriftgrößen, Rückfragen als App-Dialog; dazu die Funde des zweiten internen Audits behoben. Erstes Release 0.1 am 24.09.2026.
       Alien Notes ist <strong>kostenlos</strong>. Wenn sie dir hilft, freut sich das Mutterschiff über etwas Treibstoff — siehe unten.
       Schwester-Apps: <a href="alien-pass.html">Alien Pass</a> für Passwörter und der <a href="sachwert-tresor.html">Sachwert-Tresor</a> für Bitcoin-, Gold- und Silberbestände.
     </p>

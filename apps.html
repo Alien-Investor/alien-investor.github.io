@@ -757,6 +757,7 @@
           <li>Verschlüsseltes Backup (<code>.notes</code>) und Zusammenführen zwischen Geräten, auch zwischen Handy und Linux-Desktop (z.B. über Syncthing)</li>
           <li>Aegis-Hürde, Fingerabdruck-Entsperren (Android) und Schnell-Entsperren per PIN (Desktop) – optional, aus Alien Pass übernommen (Aegis ohne QR)</li>
           <li>Screenshots und App-Umschalter ab Werk gesperrt (FLAG_SECURE), in den Einstellungen abschaltbar – Notizen sind nicht immer geheim</li>
+          <li>Kein Android-Autofill, auch kein fremdes (seit 1.4): Die App nimmt ihre WebView vom Autofill-Framework aus – ein Passwort-Manager als Autofill-Dienst sieht die Passphrase-Felder nicht und kann nicht anbieten, sie zu speichern</li>
           <li>Auch für den <strong>Linux-Desktop</strong> – als Flatpak ohne Netzwerk-Berechtigung und ohne Dateizugriff, mit GPG-signierter Prüfsumme</li>
           <li>Zwei interne Sicherheits-Audits (0.1: neue Fläche gegenüber Alien Pass plus Dateispeicher; 1.1: Standard-Notes-Import, Dialog, Rückgängig, Mehrfachauswahl) – alle Funde vor dem Release behoben (kein unabhängiges Audit)</li>
         </ul>
