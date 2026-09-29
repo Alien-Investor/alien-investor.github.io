@@ -264,10 +264,14 @@
     <p>
       <strong>Als App (Android / GrapheneOS):</strong> bewusst nicht im Google Play Store, sondern über
       signierte Releases. Am einfachsten über <a href="https://github.com/ImranR98/Obtainium" target="_blank" rel="noopener">Obtainium</a>:
-      dort die Repo-URL als Quelle eintragen, dann meldet Obtainium jedes Update automatisch.
-      Oder die <a href="https://codeberg.org/Alien-Investor/alien-pass/releases/latest" target="_blank" rel="noopener">neueste APK</a> direkt installieren.
+      dort <code>https://github.com/Alien-Investor/alien-pass</code> als Quelle eintragen, dann meldet Obtainium jedes Update automatisch.
+      Oder die <a href="https://github.com/Alien-Investor/alien-pass/releases/latest" target="_blank" rel="noopener">neueste APK</a> direkt installieren.
       Oder direkt aus dem <a href="https://zapstore.dev/apps/org.alieninvestor.pass" target="_blank" rel="noopener">Zap Store</a>, dem App-Store auf Nostr.
     </p>
+    <p><strong>Umgezogen (seit v1.16):</strong> Die Releases liegen jetzt auf GitHub statt auf Codeberg. Im Zap Store ändert sich nichts.
+      In Obtainium lässt sich die Quelle einer App nicht bearbeiten, deshalb einmalig: vorher ein <code>.vault</code>-Backup anlegen, den Eintrag
+      „Alien Pass“ entfernen und im Dialog nur <strong>„Aus Obtainium entfernen“</strong> eingeschaltet lassen (<em>„Vom Gerät deinstallieren“ aus</em>, das löscht App und Daten),
+      dann die GitHub-Adresse neu hinzufügen. Obtainium erkennt die installierte App, Signatur und Paket-ID bleiben gleich.</p>
     <p><strong>Signatur-Fingerprint (SHA-256)</strong> zum Prüfen der Echtheit mit <a href="https://github.com/soupslurpr/AppVerifier" target="_blank" rel="noopener">AppVerifier</a>, über alle Versionen gleich:</p>
     <p><code style="display:block; margin:0.35em 0; padding:0.5em 0.6em; font-size:0.8em;">73:C7:17:D8:05:6C:6A:02:B0:8B:AB:BA:24:18:17:F3:93:E4:6D:EA:03:19:D4:FA:26:B8:C3:D8:E1:F9:3C:95</code>
     <span style="font-family:monospace; font-size:0.85em; color:#888; word-break:break-all;">apksigner: 73c717d8056c6a02b08babba241817f393e46dea0319d4fa26b8c3d8e1f93c95</span></p>
@@ -286,10 +290,10 @@
     <p>
       Derselbe Code wie auf dem Handy, verpackt als <strong>Flatpak</strong> (x86_64). Das Tresor-Format ist identisch: Ein Backup vom Handy
       importierst du am Desktop und umgekehrt, zum Beispiel über Syncthing. Die Datei liegt im
-      <a href="https://codeberg.org/Alien-Investor/alien-pass/releases" target="_blank" rel="noopener">Codeberg-Release</a>, zusammen mit
+      <a href="https://github.com/Alien-Investor/alien-pass/releases" target="_blank" rel="noopener">GitHub-Release</a>, zusammen mit
       <code>SHA256SUMS</code> und der Signatur <code>SHA256SUMS.asc</code>. Nicht auf Flathub, kein automatisches Update.
       Installation und Update Schritt für Schritt: <a href="flatpak.html">Anleitung Flatpak</a> (für alle Desktop-Apps) oder das
-      <a href="https://codeberg.org/Alien-Investor/alien-pass" target="_blank" rel="noopener">README</a>.
+      <a href="https://github.com/Alien-Investor/alien-pass" target="_blank" rel="noopener">README</a>.
     </p>
     <p><strong>GPG-Release-Schlüssel</strong> für die Desktop-Pakete: <a href="alien-investor-release-key.asc">alien-investor-release-key.asc</a> — Fingerabdruck:</p>
     <p><code style="display:block; margin:0.35em 0; padding:0.5em 0.6em; font-size:0.8em;">100F 9E25 BFAE A807 DBC3  57D7 50C0 D785 83BF CB81</code></p>
@@ -306,12 +310,12 @@
     </div>
 
     <div class="box">
-      <h3>Open Source auf Codeberg</h3>
+      <h3>Open Source auf GitHub</h3>
       <p>
         Der Client-Code ist quelloffen (MIT-Lizenz) und kostenlos. Build- und Signatur-Interna bleiben privat,
         der prüfbare Teil — die App selbst — ist offen. Keine Konten, keine Server-Abhängigkeit.
       </p>
-      <p>🔗 <a href="https://codeberg.org/Alien-Investor/alien-pass" target="_blank" rel="noopener">codeberg.org/Alien-Investor/alien-pass</a></p>
+      <p>🔗 <a href="https://github.com/Alien-Investor/alien-pass" target="_blank" rel="noopener">github.com/Alien-Investor/alien-pass</a></p>
     </div>
 
     <p style="color:#ccc;">
