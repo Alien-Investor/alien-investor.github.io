@@ -96,10 +96,14 @@
     <p>
       <strong>As an app (Android / GrapheneOS):</strong> deliberately not on the Google Play Store, but via
       signed releases. Easiest through <a href="https://github.com/ImranR98/Obtainium" target="_blank" rel="noopener">Obtainium</a>:
-      add the repo URL as a source and it will notify you of every update automatically.
-      Or install the <a href="https://codeberg.org/Alien-Investor/sachwert-tresor/releases/latest" target="_blank" rel="noopener">latest APK</a> directly.
+      add <code>https://github.com/Alien-Investor/sachwert-tresor</code> as a source and it will notify you of every update automatically.
+      Or install the <a href="https://github.com/Alien-Investor/sachwert-tresor/releases/latest" target="_blank" rel="noopener">latest APK</a> directly.
       Or straight from the <a href="https://zapstore.dev/apps/org.alieninvestor.tresor" target="_blank" rel="noopener">Zap Store</a>, the app store on Nostr.
     </p>
+    <p><strong>Moved (since v3.6.3):</strong> releases now live on GitHub instead of Codeberg. Nothing changes in the Zap Store.
+      Obtainium cannot edit an app's source, so once: make a <code>.vault</code> backup first, remove the “Sachwert-Tresor” entry and in the dialog
+      keep only <strong>“Remove from Obtainium”</strong> switched on (<em>“Uninstall from device” off</em>, it deletes the app and its data), then add the GitHub
+      address again. Obtainium detects the installed app; signing key and package ID stay the same.</p>
     <p><strong>As a Linux desktop app (Flatpak, since v3.3):</strong> see <a href="#desktop">below</a>.</p>
     <p><strong>Signature fingerprint (SHA-256)</strong> to verify authenticity with <a href="https://github.com/soupslurpr/AppVerifier" target="_blank" rel="noopener">AppVerifier</a>, identical across all versions:</p>
     <p><code style="display:block; margin:0.35em 0; padding:0.5em 0.6em; font-size:0.8em;">66:0F:21:0C:7A:28:9F:38:8B:B4:81:2C:23:82:5A:77:F1:FC:84:E6:A7:EE:58:D6:42:81:B6:BF:5C:D8:79:88</code>
@@ -126,10 +130,10 @@
     <p>
       The same code as on the phone, packaged as a <strong>Flatpak</strong> (x86_64). The vault format is identical: import a backup from
       the phone on the desktop and vice versa, for example via Syncthing. The file is in the
-      <a href="https://codeberg.org/Alien-Investor/sachwert-tresor/releases" target="_blank" rel="noopener">Codeberg release</a>, together with
+      <a href="https://github.com/Alien-Investor/sachwert-tresor/releases" target="_blank" rel="noopener">GitHub release</a>, together with
       <code>SHA256SUMS</code> and the signature <code>SHA256SUMS.asc</code>. Not on Flathub, no automatic updates.
       Step-by-step install and update instructions: <a href="/en/flatpak.html">Flatpak guide</a> (for all desktop apps) or the
-      <a href="https://codeberg.org/Alien-Investor/sachwert-tresor" target="_blank" rel="noopener">README</a> (German).
+      <a href="https://github.com/Alien-Investor/sachwert-tresor" target="_blank" rel="noopener">README</a> (German).
     </p>
     <p><strong>GPG release key</strong> for the desktop packages (the same as for Alien Pass): <a href="/alien-investor-release-key.asc">alien-investor-release-key.asc</a> — fingerprint:</p>
     <p><code style="display:block; margin:0.35em 0; padding:0.5em 0.6em; font-size:0.8em;">100F 9E25 BFAE A807 DBC3  57D7 50C0 D785 83BF CB81</code></p>
@@ -147,12 +151,12 @@
     </div>
 
     <div class="box">
-      <h3>Open source on Codeberg</h3>
+      <h3>Open source on GitHub</h3>
       <p>
         The client code is open source (MIT license) and free. Build, signing and server internals stay
         private; the verifiable part — the app itself — is open. No accounts, no server dependency.
       </p>
-      <p>🔗 <a href="https://codeberg.org/Alien-Investor/sachwert-tresor" target="_blank" rel="noopener">codeberg.org/Alien-Investor/sachwert-tresor</a></p>
+      <p>🔗 <a href="https://github.com/Alien-Investor/sachwert-tresor" target="_blank" rel="noopener">github.com/Alien-Investor/sachwert-tresor</a></p>
     </div>
 
     <p style="color:#ccc;">
