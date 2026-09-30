@@ -58,11 +58,38 @@
     <h2>How to get it</h2>
     <p>
       <strong>As an app (Android / GrapheneOS):</strong> deliberately not on the Google Play Store, but via
-      signed releases. Easiest through <a href="https://github.com/ImranR98/Obtainium" target="_blank" rel="noopener">Obtainium</a>:
-      "Add app", enter the repo URL <code>https://codeberg.org/Alien-Investor/alien-notes</code>, and it will notify you of every update automatically.
-      Or install the <a href="https://codeberg.org/Alien-Investor/alien-notes/releases/latest" target="_blank" rel="noopener">latest APK</a> directly.
-      Or straight from the <a href="https://zapstore.dev/apps/org.alieninvestor.notes" target="_blank" rel="noopener">Zap Store</a>, the app store on Nostr.
+      signed releases from our own download address
+      <a href="https://api.alien-investor.org/downloads/alien-notes/" target="_blank" rel="noopener">api.alien-investor.org/downloads/alien-notes/</a>.
+      Easiest through <a href="https://github.com/ImranR98/Obtainium" target="_blank" rel="noopener">Obtainium</a>, which notifies you of every update automatically
+      (setup in the sheet below), or from the <a href="https://zapstore.dev/apps/org.alieninvestor.notes" target="_blank" rel="noopener">Zap Store</a>, the app store on Nostr.
+      Without either: download the latest APK from the <a href="https://api.alien-investor.org/downloads/alien-notes/" target="_blank" rel="noopener">download page</a> and install it.
+      Every release is also mirrored on <a href="https://github.com/Alien-Investor/alien-notes/releases" target="_blank" rel="noopener">GitHub</a>.
     </p>
+
+    <details class="ob-sheet" id="obtainium">
+      <summary>Set up Obtainium (values to copy)</summary>
+      <div class="ob-body">
+        <p>On a phone with Obtainium installed it takes one tap; all settings are prefilled and Obtainium asks before adding:<br>
+          <a class="ob-open" href="obtainium://app/%7B%22id%22%3A%22org.alieninvestor.notes%22%2C%22url%22%3A%22https%3A%2F%2Fapi.alien-investor.org%2Fdownloads%2Falien-notes%2F%22%2C%22author%22%3A%22Alien%20Investor%22%2C%22name%22%3A%22Alien%20Notes%22%2C%22additionalSettings%22%3A%22%7B%5C%22versionExtractionRegEx%5C%22%3A%5C%22alien-notes-(%5B0-9%5D%2B(%5C%5C%5C%5C.%5B0-9%5D%2B)%2B)%5C%5C%5C%5C.apk%24%5C%22%2C%5C%22matchGroupToUse%5C%22%3A%5C%22%241%5C%22%2C%5C%22allowedSigningCertHashes%5C%22%3A%5C%22F3%3A68%3AF9%3A0B%3AF8%3ADF%3A8C%3A55%3ABB%3A6C%3A28%3A6D%3A32%3A25%3ABA%3A8A%3AF4%3A45%3A22%3A7B%3AA6%3A9B%3A36%3A00%3ADF%3ABB%3AF6%3AA1%3A44%3A09%3ABA%3A7C%5C%22%7D%22%7D">Open in Obtainium</a></p>
+        <p>Or by hand, in Obtainium <span class="ob-menu">“Add app”</span>:</p>
+        <ol>
+          <li><span class="ob-menu">“App source URL”</span>
+            <code data-copy>https://api.alien-investor.org/downloads/alien-notes/</code></li>
+          <li>Under <span class="ob-menu">“Additional options for HTML”</span>: <span class="ob-menu">“Version string extraction RegEx”</span>
+            <code data-copy>alien-notes-([0-9]+(\.[0-9]+)+)\.apk$</code></li>
+          <li><span class="ob-menu">“Match group to use for version string extraction RegEx”</span>
+            <code data-copy>$1</code></li>
+          <li><span class="ob-menu">“Expected signing certificate hashes”</span>
+            <code data-copy>F3:68:F9:0B:F8:DF:8C:55:BB:6C:28:6D:32:25:BA:8A:F4:45:22:7B:A6:9B:36:00:DF:BB:F6:A1:44:09:BA:7C</code></li>
+          <li>Tap the <span class="ob-menu">“+”</span> to add. Obtainium downloads the APK once to recognise the app. If Alien Notes is already installed, it stays as it is.</li>
+        </ol>
+        <p class="ob-note">Why the RegEx? On a download page Obtainium reads the version number from the file name only with it. Without it, Obtainium only has a
+          substitute identifier and cannot compare against the installed version. The certificate hash is a hard lock: Obtainium will not install an APK signed with a different key.</p>
+        <p class="ob-note"><strong>Still on the Codeberg address?</strong> No new releases appear there. Once: make a <code>.notes</code> backup first, remove the “Alien Notes” entry and in the dialog
+          keep only <strong>“Remove from Obtainium”</strong> switched on (<em>“Uninstall from device” off</em>, it deletes the app and your notes), then add it again as above.
+          Obtainium detects the installed app; signing key and package ID stay the same.</p>
+      </div>
+    </details>
     <p><strong>Signature fingerprint (SHA-256)</strong> to verify authenticity with <a href="https://github.com/soupslurpr/AppVerifier" target="_blank" rel="noopener">AppVerifier</a>, identical across all versions:</p>
     <p><code style="display:block; margin:0.35em 0; padding:0.5em 0.6em; font-size:0.8em;">F3:68:F9:0B:F8:DF:8C:55:BB:6C:28:6D:32:25:BA:8A:F4:45:22:7B:A6:9B:36:00:DF:BB:F6:A1:44:09:BA:7C</code>
     <span style="font-family:monospace; font-size:0.85em; color:#888; word-break:break-all;">apksigner: f368f90bf8df8c55bb6c286d3225ba8af445227ba69b3600dfbbf6a14409ba7c</span></p>
@@ -121,10 +148,11 @@
     <p>
       The same code as on the phone, packaged with Electron as a <strong>Flatpak</strong> (x86_64). The file format is identical: import a backup from
       the phone on the desktop and vice versa. The file is in the
-      <a href="https://codeberg.org/Alien-Investor/alien-notes/releases" target="_blank" rel="noopener">Codeberg release</a>, together with
-      <code>SHA256SUMS</code> and the signature <code>SHA256SUMS.asc</code>. Not on Flathub, no automatic updates.
+      <a href="https://github.com/Alien-Investor/alien-notes/releases" target="_blank" rel="noopener">GitHub release</a>, together with
+      <code>SHA256SUMS</code> and the signature <code>SHA256SUMS.asc</code>. The same three files are also on our own download address
+      at <code>api.alien-investor.org/downloads/alien-notes/</code> (file names in the German README). Not on Flathub, no automatic updates.
       Step-by-step install and update instructions: <a href="/en/flatpak.html">Flatpak guide</a> (for all desktop apps) or the
-      <a href="https://codeberg.org/Alien-Investor/alien-notes" target="_blank" rel="noopener">README</a> (German).
+      <a href="https://github.com/Alien-Investor/alien-notes" target="_blank" rel="noopener">README</a> (German).
     </p>
     <p><strong>Prerequisite:</strong> Flatpak with the Flathub remote (for the runtime <code>org.freedesktop.Platform</code> 25.08, which Flatpak fetches during installation):</p>
     <pre><code>flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo</code></pre>
@@ -170,11 +198,11 @@ devices=dri;</code></pre>
     </p>
 
     <div class="box">
-      <h3>Open source on Codeberg</h3>
+      <h3>Open source on GitHub</h3>
       <p>
         The client code is open source (MIT license) and free, the desktop shell is fully in the repo. No accounts, no server dependency.
       </p>
-      <p>🔗 <a href="https://codeberg.org/Alien-Investor/alien-notes" target="_blank" rel="noopener">codeberg.org/Alien-Investor/alien-notes</a></p>
+      <p>🔗 <a href="https://github.com/Alien-Investor/alien-notes" target="_blank" rel="noopener">github.com/Alien-Investor/alien-notes</a></p>
     </div>
 
     <p style="color:#ccc;">
@@ -226,5 +254,6 @@ devices=dri;</code></pre>
   </footer>
 
   <script src="/lang-switcher.js"></script>
+  <script src="/obtainium-sheet.js" defer></script>
 </body>
 </html>

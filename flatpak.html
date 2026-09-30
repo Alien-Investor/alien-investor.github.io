@@ -163,7 +163,7 @@
       (seit v1.7), der <a href="sachwert-tresor.html#desktop">Sachwert-Tresor</a> (seit v3.3) und <a href="alien-notes.html#desktop">Alien Notes</a>
       (seit v0.1). Alle drei laufen als <strong>Flatpak</strong> (x86_64)
       mit derselben Hülle: kein Netz, kein Dateizugriff, Dateien nur über den Dialog des Systems. Sie liegen bewusst <strong>nicht auf Flathub</strong>
-      und aktualisieren sich nicht von selbst — du lädst die Datei aus dem Release (GitHub, bei Alien Notes noch Codeberg), prüfst die Signatur und installierst sie selbst.
+      und aktualisieren sich nicht von selbst — du lädst die Datei aus dem Release (GitHub oder die eigene Download-Adresse), prüfst die Signatur und installierst sie selbst.
       Diese Seite zeigt den Weg einmal für alle drei Apps.
     </p>
 
@@ -181,9 +181,11 @@
         <code>alien-pass-X.Y-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code></li>
       <li><a href="https://github.com/Alien-Investor/sachwert-tresor/releases" target="_blank" rel="noopener">Sachwert-Tresor</a>:
         <code>sachwert-tresor-X.Y-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code></li>
-      <li><a href="https://codeberg.org/Alien-Investor/alien-notes/releases" target="_blank" rel="noopener">Alien Notes</a>:
+      <li><a href="https://github.com/Alien-Investor/alien-notes/releases" target="_blank" rel="noopener">Alien Notes</a>:
         <code>alien-notes-X.Y-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code></li>
     </ul>
+    <p>Dieselben Dateien liegen auch auf der eigenen Download-Adresse unter <code>api.alien-investor.org/downloads/&lt;app&gt;/</code>
+      (<code>alien-pass</code>, <code>sachwert-tresor</code>, <code>alien-notes</code>); den Namen des Bundles nennt die Datei <code>SHA256SUMS</code>.</p>
     <p style="font-size:0.9em; color:#aaa;">Ein <code>-rN</code> im Dateinamen (etwa <code>alien-pass-1.8-r2-…</code>) ist ein Neubau der Hülle bei unveränderter App.</p>
 
     <h2>3. Echtheit prüfen: GPG-signierte Prüfsumme</h2>
@@ -278,7 +280,7 @@ devices=dri;</code></pre>
   <div class="box" style="border-style: dashed; border-color: #333;">
     <h3>Quellen & Links</h3>
     <ul style="padding-left: 1.2em;">
-      <li>Releases: <a href="https://github.com/Alien-Investor/alien-pass/releases" target="_blank" rel="noopener">Alien Pass</a> · <a href="https://github.com/Alien-Investor/sachwert-tresor/releases" target="_blank" rel="noopener">Sachwert-Tresor</a> · <a href="https://codeberg.org/Alien-Investor/alien-notes/releases" target="_blank" rel="noopener">Alien Notes</a> (jeweils mit README zur Desktop-Fassung)</li>
+      <li>Releases: <a href="https://github.com/Alien-Investor/alien-pass/releases" target="_blank" rel="noopener">Alien Pass</a> · <a href="https://github.com/Alien-Investor/sachwert-tresor/releases" target="_blank" rel="noopener">Sachwert-Tresor</a> · <a href="https://github.com/Alien-Investor/alien-notes/releases" target="_blank" rel="noopener">Alien Notes</a> (jeweils mit README zur Desktop-Fassung)</li>
       <li>GPG-Release-Schlüssel: <a href="alien-investor-release-key.asc">alien-investor-release-key.asc</a></li>
       <li>Flatpak-Dokumentation: <a href="https://docs.flatpak.org/" target="_blank" rel="noopener">docs.flatpak.org</a></li>
     </ul>
@@ -287,7 +289,7 @@ devices=dri;</code></pre>
   <div class="recommendation-box">
     <h3>Weiterführend</h3>
     <p>
-      Am Handy laufen dieselben Apps ohne Google Play: <a href="Obtainium.html">Obtainium</a> zieht Updates direkt von GitHub bzw. Codeberg, der <a href="Zapstore.html">Zap Store</a> verteilt sie über Nostr. Übersicht aller Apps: <a href="apps.html">Apps</a>.
+      Am Handy laufen dieselben Apps ohne Google Play: <a href="Obtainium.html">Obtainium</a> zieht Updates direkt von der eigenen Download-Adresse, der <a href="Zapstore.html">Zap Store</a> verteilt sie über Nostr. Übersicht aller Apps: <a href="apps.html">Apps</a>.
     </p>
   </div>
 
