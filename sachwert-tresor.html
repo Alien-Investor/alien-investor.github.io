@@ -255,15 +255,39 @@
     <h2 id="bekommen">So bekommst du ihn</h2>
     <p>
       <strong>Als App (Android / GrapheneOS):</strong> bewusst nicht im Google Play Store, sondern über
-      signierte Releases. Am einfachsten über <a href="https://github.com/ImranR98/Obtainium" target="_blank" rel="noopener">Obtainium</a>:
-      dort <code>https://github.com/Alien-Investor/sachwert-tresor</code> als Quelle eintragen, dann meldet Obtainium jedes Update automatisch.
-      Oder die <a href="https://github.com/Alien-Investor/sachwert-tresor/releases/latest" target="_blank" rel="noopener">neueste APK</a> direkt installieren.
-      Oder direkt aus dem <a href="https://zapstore.dev/apps/org.alieninvestor.tresor" target="_blank" rel="noopener">Zap Store</a>, dem App-Store auf Nostr.
+      signierte Releases von der eigenen Download-Adresse
+      <a href="https://api.alien-investor.org/downloads/sachwert-tresor/" target="_blank" rel="noopener">api.alien-investor.org/downloads/sachwert-tresor/</a>.
+      Am einfachsten über <a href="https://github.com/ImranR98/Obtainium" target="_blank" rel="noopener">Obtainium</a>, das jedes Update automatisch meldet
+      (Einrichtung im Blatt unten), oder aus dem <a href="https://zapstore.dev/apps/org.alieninvestor.tresor" target="_blank" rel="noopener">Zap Store</a>, dem App-Store auf Nostr.
+      Ohne beides: die neueste APK von der <a href="https://api.alien-investor.org/downloads/sachwert-tresor/" target="_blank" rel="noopener">Download-Seite</a> laden und installieren.
+      Jedes Release liegt zusätzlich als Spiegel auf <a href="https://github.com/Alien-Investor/sachwert-tresor/releases" target="_blank" rel="noopener">GitHub</a>.
     </p>
-    <p><strong>Umgezogen (seit v3.6.3):</strong> Die Releases liegen jetzt auf GitHub statt auf Codeberg. Im Zap Store ändert sich nichts.
-      In Obtainium lässt sich die Quelle einer App nicht bearbeiten, deshalb einmalig: vorher ein <code>.vault</code>-Backup anlegen, den Eintrag
-      „Sachwert-Tresor“ entfernen und im Dialog nur <strong>„Aus Obtainium entfernen“</strong> eingeschaltet lassen (<em>„Vom Gerät deinstallieren“ aus</em>, das löscht App und Daten),
-      dann die GitHub-Adresse neu hinzufügen. Obtainium erkennt die installierte App, Signatur und Paket-ID bleiben gleich.</p>
+
+    <details class="ob-sheet" id="obtainium">
+      <summary>Obtainium einrichten (Werte zum Kopieren)</summary>
+      <div class="ob-body">
+        <p>Auf dem Handy mit installiertem Obtainium geht es mit einem Tipp, alle Einstellungen sind dann vorbelegt und Obtainium fragt vor dem Hinzufügen nach:<br>
+          <a class="ob-open" href="obtainium://app/%7B%22id%22%3A%22org.alieninvestor.tresor%22%2C%22url%22%3A%22https%3A%2F%2Fapi.alien-investor.org%2Fdownloads%2Fsachwert-tresor%2F%22%2C%22author%22%3A%22Alien%20Investor%22%2C%22name%22%3A%22Sachwert-Tresor%22%2C%22additionalSettings%22%3A%22%7B%5C%22versionExtractionRegEx%5C%22%3A%5C%22sachwert-tresor-(%5B0-9%5D%2B(%5C%5C%5C%5C.%5B0-9%5D%2B)%2B)%5C%5C%5C%5C.apk%24%5C%22%2C%5C%22matchGroupToUse%5C%22%3A%5C%22%241%5C%22%2C%5C%22allowedSigningCertHashes%5C%22%3A%5C%2266%3A0F%3A21%3A0C%3A7A%3A28%3A9F%3A38%3A8B%3AB4%3A81%3A2C%3A23%3A82%3A5A%3A77%3AF1%3AFC%3A84%3AE6%3AA7%3AEE%3A58%3AD6%3A42%3A81%3AB6%3ABF%3A5C%3AD8%3A79%3A88%5C%22%7D%22%7D">In Obtainium öffnen</a></p>
+        <p>Oder von Hand, in Obtainium <span class="ob-menu">„App hinzufügen“</span>:</p>
+        <ol>
+          <li><span class="ob-menu">„Quell-URL der App“</span>
+            <code data-copy>https://api.alien-investor.org/downloads/sachwert-tresor/</code></li>
+          <li>Unter <span class="ob-menu">„Zusatzoptionen für HTML“</span>: <span class="ob-menu">„Versionsextraktion per RegEx“</span>
+            <code data-copy>sachwert-tresor-([0-9]+(\.[0-9]+)+)\.apk$</code></li>
+          <li><span class="ob-menu">„Zu verwendende Gruppe abgleichen“</span>
+            <code data-copy>$1</code></li>
+          <li><span class="ob-menu">„Expected signing certificate hashes“</span> (so heißt es auch in der deutschen Obtainium-Fassung)
+            <code data-copy>66:0F:21:0C:7A:28:9F:38:8B:B4:81:2C:23:82:5A:77:F1:FC:84:E6:A7:EE:58:D6:42:81:B6:BF:5C:D8:79:88</code></li>
+          <li>Mit dem <span class="ob-menu">„+“</span> hinzufügen. Obtainium lädt die APK einmal, um die App zu erkennen. Ist der Sachwert-Tresor schon installiert, bleibt er, wie er ist.</li>
+        </ol>
+        <p class="ob-note">Warum die RegEx? Auf einer Download-Seite liest Obtainium die Versionsnummer nur mit ihr aus dem Dateinamen. Ohne sie kennt es nur eine
+          Ersatz-Kennung und kann die installierte Version nicht vergleichen. Der Zertifikats-Hash ist eine harte Sperre: Eine APK mit anderem Signaturschlüssel installiert Obtainium gar nicht.</p>
+        <p class="ob-note"><strong>Schon über GitHub eingerichtet?</strong> Dann musst du nichts ändern. GitHub bekommt jedes Release weiter als Spiegel, deine Updates kommen wie bisher.
+          <strong>Noch mit einer Codeberg-Adresse?</strong> Dort erscheinen keine Releases mehr. Einmalig: vorher ein <code>.vault</code>-Backup anlegen, den Eintrag „Sachwert-Tresor“
+          entfernen und im Dialog nur <strong>„Aus Obtainium entfernen“</strong> eingeschaltet lassen (<em>„Vom Gerät deinstallieren“ aus</em>, das löscht App und Daten),
+          dann wie oben neu hinzufügen. Obtainium erkennt die installierte App, Signatur und Paket-ID bleiben gleich.</p>
+      </div>
+    </details>
     <p><strong>Als Linux-Desktop-App (Flatpak, seit v3.3):</strong> siehe <a href="#desktop">unten</a>.</p>
     <p><strong>Signatur-Fingerprint (SHA-256)</strong> zum Prüfen der Echtheit mit <a href="https://github.com/soupslurpr/AppVerifier" target="_blank" rel="noopener">AppVerifier</a>, über alle Versionen gleich:</p>
     <p><code style="display:block; margin:0.35em 0; padding:0.5em 0.6em; font-size:0.8em;">66:0F:21:0C:7A:28:9F:38:8B:B4:81:2C:23:82:5A:77:F1:FC:84:E6:A7:EE:58:D6:42:81:B6:BF:5C:D8:79:88</code>
@@ -368,5 +392,6 @@
   </footer>
 
   <script src="/lang-switcher.js"></script>
+  <script src="/obtainium-sheet.js" defer></script>
 </body>
 </html>

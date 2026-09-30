@@ -95,15 +95,39 @@
     <h2 id="get">How to get it</h2>
     <p>
       <strong>As an app (Android / GrapheneOS):</strong> deliberately not on the Google Play Store, but via
-      signed releases. Easiest through <a href="https://github.com/ImranR98/Obtainium" target="_blank" rel="noopener">Obtainium</a>:
-      add <code>https://github.com/Alien-Investor/sachwert-tresor</code> as a source and it will notify you of every update automatically.
-      Or install the <a href="https://github.com/Alien-Investor/sachwert-tresor/releases/latest" target="_blank" rel="noopener">latest APK</a> directly.
-      Or straight from the <a href="https://zapstore.dev/apps/org.alieninvestor.tresor" target="_blank" rel="noopener">Zap Store</a>, the app store on Nostr.
+      signed releases from our own download address
+      <a href="https://api.alien-investor.org/downloads/sachwert-tresor/" target="_blank" rel="noopener">api.alien-investor.org/downloads/sachwert-tresor/</a>.
+      Easiest through <a href="https://github.com/ImranR98/Obtainium" target="_blank" rel="noopener">Obtainium</a>, which notifies you of every update automatically
+      (setup in the sheet below), or from the <a href="https://zapstore.dev/apps/org.alieninvestor.tresor" target="_blank" rel="noopener">Zap Store</a>, the app store on Nostr.
+      Without either: download the latest APK from the <a href="https://api.alien-investor.org/downloads/sachwert-tresor/" target="_blank" rel="noopener">download page</a> and install it.
+      Every release is also mirrored on <a href="https://github.com/Alien-Investor/sachwert-tresor/releases" target="_blank" rel="noopener">GitHub</a>.
     </p>
-    <p><strong>Moved (since v3.6.3):</strong> releases now live on GitHub instead of Codeberg. Nothing changes in the Zap Store.
-      Obtainium cannot edit an app's source, so once: make a <code>.vault</code> backup first, remove the “Sachwert-Tresor” entry and in the dialog
-      keep only <strong>“Remove from Obtainium”</strong> switched on (<em>“Uninstall from device” off</em>, it deletes the app and its data), then add the GitHub
-      address again. Obtainium detects the installed app; signing key and package ID stay the same.</p>
+
+    <details class="ob-sheet" id="obtainium">
+      <summary>Set up Obtainium (values to copy)</summary>
+      <div class="ob-body">
+        <p>On a phone with Obtainium installed it takes one tap; all settings are prefilled and Obtainium asks before adding:<br>
+          <a class="ob-open" href="obtainium://app/%7B%22id%22%3A%22org.alieninvestor.tresor%22%2C%22url%22%3A%22https%3A%2F%2Fapi.alien-investor.org%2Fdownloads%2Fsachwert-tresor%2F%22%2C%22author%22%3A%22Alien%20Investor%22%2C%22name%22%3A%22Sachwert-Tresor%22%2C%22additionalSettings%22%3A%22%7B%5C%22versionExtractionRegEx%5C%22%3A%5C%22sachwert-tresor-(%5B0-9%5D%2B(%5C%5C%5C%5C.%5B0-9%5D%2B)%2B)%5C%5C%5C%5C.apk%24%5C%22%2C%5C%22matchGroupToUse%5C%22%3A%5C%22%241%5C%22%2C%5C%22allowedSigningCertHashes%5C%22%3A%5C%2266%3A0F%3A21%3A0C%3A7A%3A28%3A9F%3A38%3A8B%3AB4%3A81%3A2C%3A23%3A82%3A5A%3A77%3AF1%3AFC%3A84%3AE6%3AA7%3AEE%3A58%3AD6%3A42%3A81%3AB6%3ABF%3A5C%3AD8%3A79%3A88%5C%22%7D%22%7D">Open in Obtainium</a></p>
+        <p>Or by hand, in Obtainium <span class="ob-menu">“Add app”</span>:</p>
+        <ol>
+          <li><span class="ob-menu">“App source URL”</span>
+            <code data-copy>https://api.alien-investor.org/downloads/sachwert-tresor/</code></li>
+          <li>Under <span class="ob-menu">“Additional options for HTML”</span>: <span class="ob-menu">“Version string extraction RegEx”</span>
+            <code data-copy>sachwert-tresor-([0-9]+(\.[0-9]+)+)\.apk$</code></li>
+          <li><span class="ob-menu">“Match group to use for version string extraction RegEx”</span>
+            <code data-copy>$1</code></li>
+          <li><span class="ob-menu">“Expected signing certificate hashes”</span>
+            <code data-copy>66:0F:21:0C:7A:28:9F:38:8B:B4:81:2C:23:82:5A:77:F1:FC:84:E6:A7:EE:58:D6:42:81:B6:BF:5C:D8:79:88</code></li>
+          <li>Tap the <span class="ob-menu">“+”</span> to add. Obtainium downloads the APK once to recognise the app. If Sachwert-Tresor is already installed, it stays as it is.</li>
+        </ol>
+        <p class="ob-note">Why the RegEx? On a download page Obtainium reads the version number from the file name only with it. Without it, Obtainium only has a
+          substitute identifier and cannot compare against the installed version. The certificate hash is a hard lock: Obtainium will not install an APK signed with a different key.</p>
+        <p class="ob-note"><strong>Already set up via GitHub?</strong> Then you don't need to change anything. GitHub keeps receiving every release as a mirror, your updates arrive as before.
+          <strong>Still on a Codeberg address?</strong> No new releases appear there. Once: make a <code>.vault</code> backup first, remove the “Sachwert-Tresor” entry and in the dialog
+          keep only <strong>“Remove from Obtainium”</strong> switched on (<em>“Uninstall from device” off</em>, it deletes the app and its data), then add it again as above.
+          Obtainium detects the installed app; signing key and package ID stay the same.</p>
+      </div>
+    </details>
     <p><strong>As a Linux desktop app (Flatpak, since v3.3):</strong> see <a href="#desktop">below</a>.</p>
     <p><strong>Signature fingerprint (SHA-256)</strong> to verify authenticity with <a href="https://github.com/soupslurpr/AppVerifier" target="_blank" rel="noopener">AppVerifier</a>, identical across all versions:</p>
     <p><code style="display:block; margin:0.35em 0; padding:0.5em 0.6em; font-size:0.8em;">66:0F:21:0C:7A:28:9F:38:8B:B4:81:2C:23:82:5A:77:F1:FC:84:E6:A7:EE:58:D6:42:81:B6:BF:5C:D8:79:88</code>
@@ -208,5 +232,6 @@
   </footer>
 
   <script src="/lang-switcher.js"></script>
+  <script src="/obtainium-sheet.js" defer></script>
 </body>
 </html>
