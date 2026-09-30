@@ -658,12 +658,42 @@
           <span class="app-fp-hex">apksigner: 859e88b7435f841d8bc1cff1fea91256a633dea559d95a91024b2253a2ad1326</span>
         </div>
 
+        <details class="ob-sheet" id="obtainium-fitness">
+          <summary>Obtainium einrichten (Werte zum Kopieren)</summary>
+          <div class="ob-body">
+            <p>Signierte Releases liegen auf der eigenen Download-Adresse
+              <a href="https://api.alien-investor.org/downloads/alien-fitness/" target="_blank" rel="noopener">api.alien-investor.org/downloads/alien-fitness/</a>, jedes Release zusätzlich als Spiegel auf
+              <a href="https://github.com/Alien-Investor/alien-fitness/releases" target="_blank" rel="noopener">GitHub</a>.
+              Ohne Obtainium: die neueste APK von der <a href="https://api.alien-investor.org/downloads/alien-fitness/" target="_blank" rel="noopener">Download-Seite</a> laden und installieren.</p>
+            <p>Auf dem Handy mit installiertem Obtainium geht es mit einem Tipp, alle Einstellungen sind dann vorbelegt und Obtainium fragt vor dem Hinzufügen nach:<br>
+              <a class="ob-open" href="obtainium://app/%7B%22id%22%3A%22org.alieninvestor.fitness%22%2C%22url%22%3A%22https%3A%2F%2Fapi.alien-investor.org%2Fdownloads%2Falien-fitness%2F%22%2C%22author%22%3A%22Alien%20Investor%22%2C%22name%22%3A%22Alien%20Fitness%22%2C%22additionalSettings%22%3A%22%7B%5C%22versionExtractionRegEx%5C%22%3A%5C%22alien-fitness-(%5B0-9%5D%2B(%5C%5C%5C%5C.%5B0-9%5D%2B)%2B)%5C%5C%5C%5C.apk%24%5C%22%2C%5C%22matchGroupToUse%5C%22%3A%5C%22%241%5C%22%2C%5C%22allowedSigningCertHashes%5C%22%3A%5C%2285%3A9E%3A88%3AB7%3A43%3A5F%3A84%3A1D%3A8B%3AC1%3ACF%3AF1%3AFE%3AA9%3A12%3A56%3AA6%3A33%3ADE%3AA5%3A59%3AD9%3A5A%3A91%3A02%3A4B%3A22%3A53%3AA2%3AAD%3A13%3A26%5C%22%7D%22%7D">In Obtainium öffnen</a></p>
+            <p>Oder von Hand, in Obtainium <span class="ob-menu">„App hinzufügen“</span>:</p>
+            <ol>
+              <li><span class="ob-menu">„Quell-URL der App“</span>
+                <code data-copy>https://api.alien-investor.org/downloads/alien-fitness/</code></li>
+              <li>Unter <span class="ob-menu">„Zusatzoptionen für HTML“</span>: <span class="ob-menu">„Versionsextraktion per RegEx“</span>
+                <code data-copy>alien-fitness-([0-9]+(\.[0-9]+)+)\.apk$</code></li>
+              <li><span class="ob-menu">„Zu verwendende Gruppe abgleichen“</span>
+                <code data-copy>$1</code></li>
+              <li><span class="ob-menu">„Expected signing certificate hashes“</span> (so heißt es auch in der deutschen Obtainium-Fassung)
+                <code data-copy>85:9E:88:B7:43:5F:84:1D:8B:C1:CF:F1:FE:A9:12:56:A6:33:DE:A5:59:D9:5A:91:02:4B:22:53:A2:AD:13:26</code></li>
+              <li>Mit dem <span class="ob-menu">„+“</span> hinzufügen. Obtainium lädt die APK einmal, um die App zu erkennen. Ist Alien Fitness schon installiert, bleibt die App, wie sie ist.</li>
+            </ol>
+            <p class="ob-note">Warum die RegEx? Auf einer Download-Seite liest Obtainium die Versionsnummer nur mit ihr aus dem Dateinamen. Ohne sie kennt es nur eine
+              Ersatz-Kennung und kann die installierte Version nicht vergleichen. Der Zertifikats-Hash ist eine harte Sperre: Eine APK mit anderem Signaturschlüssel installiert Obtainium gar nicht.</p>
+            <p class="ob-note"><strong>Noch mit der Codeberg-Adresse eingerichtet?</strong> Dort erscheinen keine Releases mehr. Einmalig: vorher in der Historie ein JSON-Backup exportieren, den Eintrag „Alien Fitness“
+              entfernen und im Dialog nur <strong>„Aus Obtainium entfernen“</strong> eingeschaltet lassen (<em>„Vom Gerät deinstallieren“ aus</em>, das löscht App und Trainingsverlauf),
+              dann wie oben neu hinzufügen. Obtainium erkennt die installierte App, Signatur und Paket-ID bleiben gleich.</p>
+          </div>
+        </details>
+
         <div class="cta-row">
           <a href="https://zapstore.dev/apps/org.alieninvestor.fitness" class="cta-button" target="_blank" rel="noopener">
             <svg style="width:1em;height:1em;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M13 2 L4 14 h6 l-1 8 9-12 h-6 z" fill="currentColor"/></svg> Im Zap Store
           </a>
-          <a href="https://codeberg.org/Alien-Investor/alien-fitness" class="cta-button secondary" target="_blank" rel="noopener">
-            <svg style="width:1em;height:1em;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2 L21 19 H3 Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 8 L16.5 16 H7.5 Z" fill="currentColor" opacity="0.7"/></svg> Quellcode (Codeberg)
+          <a href="#obtainium-fitness" class="cta-button secondary">Obtainium / APK</a>
+          <a href="https://github.com/Alien-Investor/alien-fitness" class="cta-button secondary" target="_blank" rel="noopener">
+            <svg style="width:1em;height:1em;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M8 6 L2 12 L8 18 M16 6 L22 12 L16 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Quellcode (GitHub)
           </a>
         </div>
       </div>
@@ -794,7 +824,7 @@
       Am einfachsten über den <a href="https://zapstore.dev/" target="_blank" rel="noopener">Nostr Zap Store</a>
       (kryptografisch verifizierte Installation, Updates über dein soziales Netz) oder per
       <a href="Obtainium.html">Obtainium</a> direkt von Codeberg oder von der eigenen Download-Adresse
-      (Sachwert-Tresor, Alien Pass, Alien Notes; Einrichtung: <a href="sachwert-tresor.html#obtainium">Tresor</a>, <a href="alien-pass.html#obtainium">Alien Pass</a>, <a href="alien-notes.html#obtainium">Alien Notes</a>) – beides ganz ohne Google-Konto.
+      (Sachwert-Tresor, Alien Pass, Alien Notes, Alien Fitness; Einrichtung: <a href="sachwert-tresor.html#obtainium">Tresor</a>, <a href="alien-pass.html#obtainium">Alien Pass</a>, <a href="alien-notes.html#obtainium">Alien Notes</a>, <a href="#obtainium-fitness">Alien Fitness</a>) – beides ganz ohne Google-Konto.
       Mehr dazu: <a href="grapheneos-app-stores.html">App-Stores auf GrapheneOS</a> und
       <a href="Zapstore.html">der Nostr Zap Store erklärt</a>.
       <p style="margin:0.8em 0 0 0;">
@@ -833,5 +863,6 @@
   </footer>
 
   <script src="/lang-switcher.js"></script>
+  <script src="/obtainium-sheet.js" defer></script>
 </body>
 </html>
