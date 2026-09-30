@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Apps – Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Eigene Apps des Alien Investor: minimalistisch, vollständig offline, ohne Google. Open Source auf Codeberg und GitHub, signiert verteilt über den Nostr Zap Store.">
+  <meta name="description" content="Eigene Apps des Alien Investor: minimalistisch, vollständig offline, ohne Google. Open Source auf GitHub, signiert verteilt über den Nostr Zap Store.">
   <style>
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
@@ -511,7 +511,7 @@
     <p class="intro">
       Eigene Apps – minimalistisch, vollständig <strong style="color:#00ffcc;">offline</strong>, ohne Google.<br>
       Kein Konto, kein Server, keine Telemetrie. Deine Daten bleiben auf deinem Gerät.
-      <span class="tagline">Open Source auf Codeberg und GitHub · signiert verteilt über den Nostr Zap Store</span>
+      <span class="tagline">Open Source auf GitHub · signiert verteilt über den Nostr Zap Store</span>
     </p>
 
     <!-- APP 1: Sachwert-Tresor -->
@@ -611,12 +611,42 @@
           <span class="app-fp-hex">apksigner: dbc5087153b4592182dd131a730c11a0f7124e34426c542b4ba6885ab1cc010e</span>
         </div>
 
+        <details class="ob-sheet" id="obtainium-ausgaben">
+          <summary>Obtainium einrichten (Werte zum Kopieren)</summary>
+          <div class="ob-body">
+            <p>Signierte Releases liegen auf der eigenen Download-Adresse
+              <a href="https://api.alien-investor.org/downloads/ausgaben-tracker/" target="_blank" rel="noopener">api.alien-investor.org/downloads/ausgaben-tracker/</a>, jedes Release zusätzlich als Spiegel auf
+              <a href="https://github.com/Alien-Investor/ausgaben-tracker-app/releases" target="_blank" rel="noopener">GitHub</a>.
+              Ohne Obtainium: die neueste APK von der <a href="https://api.alien-investor.org/downloads/ausgaben-tracker/" target="_blank" rel="noopener">Download-Seite</a> laden und installieren.</p>
+            <p>Auf dem Handy mit installiertem Obtainium geht es mit einem Tipp, alle Einstellungen sind dann vorbelegt und Obtainium fragt vor dem Hinzufügen nach:<br>
+              <a class="ob-open" href="obtainium://app/%7B%22id%22%3A%22org.alieninvestor.ausgaben%22%2C%22url%22%3A%22https%3A%2F%2Fapi.alien-investor.org%2Fdownloads%2Fausgaben-tracker%2F%22%2C%22author%22%3A%22Alien%20Investor%22%2C%22name%22%3A%22Ausgaben-Tracker%22%2C%22additionalSettings%22%3A%22%7B%5C%22versionExtractionRegEx%5C%22%3A%5C%22ausgaben-tracker-(%5B0-9%5D%2B(%5C%5C%5C%5C.%5B0-9%5D%2B)%2B)%5C%5C%5C%5C.apk%24%5C%22%2C%5C%22matchGroupToUse%5C%22%3A%5C%22%241%5C%22%2C%5C%22allowedSigningCertHashes%5C%22%3A%5C%22DB%3AC5%3A08%3A71%3A53%3AB4%3A59%3A21%3A82%3ADD%3A13%3A1A%3A73%3A0C%3A11%3AA0%3AF7%3A12%3A4E%3A34%3A42%3A6C%3A54%3A2B%3A4B%3AA6%3A88%3A5A%3AB1%3ACC%3A01%3A0E%5C%22%7D%22%7D">In Obtainium öffnen</a></p>
+            <p>Oder von Hand, in Obtainium <span class="ob-menu">„App hinzufügen“</span>:</p>
+            <ol>
+              <li><span class="ob-menu">„Quell-URL der App“</span>
+                <code data-copy>https://api.alien-investor.org/downloads/ausgaben-tracker/</code></li>
+              <li>Unter <span class="ob-menu">„Zusatzoptionen für HTML“</span>: <span class="ob-menu">„Versionsextraktion per RegEx“</span>
+                <code data-copy>ausgaben-tracker-([0-9]+(\.[0-9]+)+)\.apk$</code></li>
+              <li><span class="ob-menu">„Zu verwendende Gruppe abgleichen“</span>
+                <code data-copy>$1</code></li>
+              <li><span class="ob-menu">„Expected signing certificate hashes“</span> (so heißt es auch in der deutschen Obtainium-Fassung)
+                <code data-copy>DB:C5:08:71:53:B4:59:21:82:DD:13:1A:73:0C:11:A0:F7:12:4E:34:42:6C:54:2B:4B:A6:88:5A:B1:CC:01:0E</code></li>
+              <li>Mit dem <span class="ob-menu">„+“</span> hinzufügen. Obtainium lädt die APK einmal, um die App zu erkennen. Ist der Ausgaben-Tracker schon installiert, bleibt die App, wie sie ist.</li>
+            </ol>
+            <p class="ob-note">Warum die RegEx? Auf einer Download-Seite liest Obtainium die Versionsnummer nur mit ihr aus dem Dateinamen. Ohne sie kennt es nur eine
+              Ersatz-Kennung und kann die installierte Version nicht vergleichen. Der Zertifikats-Hash ist eine harte Sperre: Eine APK mit anderem Signaturschlüssel installiert Obtainium gar nicht.</p>
+            <p class="ob-note"><strong>Noch mit der Codeberg-Adresse eingerichtet?</strong> Dort erscheinen keine Releases mehr. Einmalig: vorher im Tab „Export“ ein verschlüsseltes .vault-Backup anlegen, den Eintrag „Ausgaben-Tracker“
+              entfernen und im Dialog nur <strong>„Aus Obtainium entfernen“</strong> eingeschaltet lassen (<em>„Vom Gerät deinstallieren“ aus</em>, das löscht App und Daten),
+              dann wie oben neu hinzufügen. Obtainium erkennt die installierte App, Signatur und Paket-ID bleiben gleich.</p>
+          </div>
+        </details>
+
         <div class="cta-row">
           <a href="https://zapstore.dev/apps/org.alieninvestor.ausgaben" class="cta-button" target="_blank" rel="noopener">
             <svg style="width:1em;height:1em;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M13 2 L4 14 h6 l-1 8 9-12 h-6 z" fill="currentColor"/></svg> Im Zap Store
           </a>
-          <a href="https://codeberg.org/Alien-Investor/ausgaben-tracker" class="cta-button secondary" target="_blank" rel="noopener">
-            <svg style="width:1em;height:1em;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2 L21 19 H3 Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 8 L16.5 16 H7.5 Z" fill="currentColor" opacity="0.7"/></svg> Quellcode (Codeberg)
+          <a href="#obtainium-ausgaben" class="cta-button secondary">Obtainium / APK</a>
+          <a href="https://github.com/Alien-Investor/ausgaben-tracker-app" class="cta-button secondary" target="_blank" rel="noopener">
+            <svg style="width:1em;height:1em;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M8 6 L2 12 L8 18 M16 6 L22 12 L16 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Quellcode (GitHub)
           </a>
         </div>
       </div>
@@ -823,8 +853,8 @@
       Alle Apps werden als <strong>entwicklersignierte Releases</strong> verteilt – nicht über den Google Play Store.
       Am einfachsten über den <a href="https://zapstore.dev/" target="_blank" rel="noopener">Nostr Zap Store</a>
       (kryptografisch verifizierte Installation, Updates über dein soziales Netz) oder per
-      <a href="Obtainium.html">Obtainium</a> direkt von Codeberg oder von der eigenen Download-Adresse
-      (Sachwert-Tresor, Alien Pass, Alien Notes, Alien Fitness; Einrichtung: <a href="sachwert-tresor.html#obtainium">Tresor</a>, <a href="alien-pass.html#obtainium">Alien Pass</a>, <a href="alien-notes.html#obtainium">Alien Notes</a>, <a href="#obtainium-fitness">Alien Fitness</a>) – beides ganz ohne Google-Konto.
+      <a href="Obtainium.html">Obtainium</a> direkt von der eigenen Download-Adresse
+      (Einrichtung: <a href="sachwert-tresor.html#obtainium">Tresor</a>, <a href="alien-pass.html#obtainium">Alien Pass</a>, <a href="alien-notes.html#obtainium">Alien Notes</a>, <a href="#obtainium-fitness">Alien Fitness</a>, <a href="#obtainium-ausgaben">Ausgaben-Tracker</a>) – beides ganz ohne Google-Konto.
       Mehr dazu: <a href="grapheneos-app-stores.html">App-Stores auf GrapheneOS</a> und
       <a href="Zapstore.html">der Nostr Zap Store erklärt</a>.
       <p style="margin:0.8em 0 0 0;">
