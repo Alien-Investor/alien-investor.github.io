@@ -57,9 +57,7 @@
   <div class="cta-box">
     <p style="margin:0 0 0.8em 0;">Du willst direkt loslegen?</p>
     <p style="margin:0;">
-      <a href="https://api.alien-investor.org/books/steuertool-demo/" target="_blank" rel="noopener"><strong>→ Demo öffnen</strong></a> (kostenlos, mit Beispieldaten)
-      &nbsp;·&nbsp;
-      <a href="steuertool-zahlung.html"><strong>→ Zugang holen — 29 €</strong></a>
+      <a href="https://api.alien-investor.org/steuertool/" target="_blank" rel="noopener"><strong>→ Web-Version öffnen</strong></a> (kostenlos, Beispieldaten zum Ausprobieren liegen bei)
     </p>
   </div>
 
@@ -89,7 +87,7 @@
 
   <h2>Schritt 1: Dateien laden</h2>
   <p>
-    Öffne deinen Zugangslink. Ziehe alle CSV-Dateien gleichzeitig in die gestrichelte Zone —
+    Öffne <a href="https://api.alien-investor.org/steuertool/" target="_blank" rel="noopener">api.alien-investor.org/steuertool/</a>. Ziehe alle CSV-Dateien gleichzeitig in die gestrichelte Zone —
     oder klicke sie an und wähle die Dateien aus. Die Reihenfolge ist egal, Dateinamen sind egal:
     Die App erkennt jeden Broker automatisch am Inhalt der Datei.
   </p>
@@ -184,9 +182,10 @@
   <h2>Häufige Fragen</h2>
   <h3>Was ist mit Käufen in CHF oder USD (Swissquote, Pocket)?</h3>
   <p>
-    Die App rechnet sie automatisch mit dem historischen Tageskurs in EUR um. Dafür fragt dein
-    Browser (nur falls nötig) die offene Kurs-API frankfurter.dev an — Datum und Währung ja,
-    Beträge und Mengen nein. Wer ausschließlich in Euro gekauft hat, löst gar keine Anfrage aus.
+    Die App rechnet sie automatisch mit dem EZB-Referenzkurs des Kauftags in EUR um. Die
+    Kurstabelle (seit 2010) liegt gebündelt in der App — es wird kein Kursdienst angefragt, auch
+    nicht für Datum oder Währung. Liegt ein Kauf nach dem Datenstand der Tabelle, bricht die App
+    mit einer Erklärung ab statt einen alten Kurs zu nehmen.
   </p>
   <h3>Was passiert mit Überträgen zwischen meinen Wallets — und deren Gebühren?</h3>
   <p>
@@ -214,21 +213,24 @@
     <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a> schicken —
     neue Parser sind meist in wenigen Tagen drin.
   </p>
-  <h3>Ist die Demo dasselbe wie die Vollversion?</h3>
+  <h3>Kann ich das Tool erst mit Beispieldaten ausprobieren?</h3>
   <p>
-    Ja — gleicher Rechenkern, gleiche Oberfläche. In der Demo kannst du die <strong>Beispieldaten
-    als ZIP herunterladen</strong> und selbst per Drag &amp; Drop reinziehen — genau wie später mit
-    deinen echten Dateien. Oder du nimmst den 1-Klick-Button „Demo-Daten laden". Eigene Dateien
-    nimmt erst die Vollversion mit Zugangslink an:
+    Ja. In der Dropzone kannst du die <strong>Beispieldaten als ZIP herunterladen</strong> und
+    selbst per Drag &amp; Drop reinziehen — genau wie mit deinen echten Dateien. Oder du nimmst den
+    1-Klick-Button „Mit Beispieldaten testen". Die Beispieldaten sind fiktiv und decken alle
+    unterstützten Broker ab.
   </p>
-  <img src="steuertool-guide-demo-cta.png" alt="Demo-Version mit Beispieldaten-ZIP und Zugangshinweis" class="screenshot">
-  <p class="screenshot-caption">Die Demo: Beispieldaten ziehen wie in der Vollversion — eigene Dateien brauchen den Zugangslink.</p>
+  <h3>Was kostet die Web-Version?</h3>
+  <p>
+    Nichts. Seit dem 2. Oktober 2026 gibt es keinen Bezahlzugang mehr — die Web-Version ist wie das
+    CLI frei. Der eine Unterschied: die Web-Version lädt ihren Code bei jedem Aufruf vom Server.
+    Wer maximale Kontrolle will, nimmt das CLI aus dem Repo, das nach dem Klonen vollständig offline läuft.
+  </p>
 
   <div class="cta-box">
     <h3 style="margin-top:0;">Bereit?</h3>
     <p>
-      <a href="https://api.alien-investor.org/books/steuertool-demo/" target="_blank" rel="noopener"><strong>→ Demo ausprobieren</strong></a><br>
-      <a href="steuertool-zahlung.html"><strong>→ Zugang holen — 29 €, 30 Tage, alle Steuerjahre</strong></a> (Lightning, On-Chain, Fiat)<br>
+      <a href="https://api.alien-investor.org/steuertool/" target="_blank" rel="noopener"><strong>→ Web-Version öffnen</strong></a> (kostenlos)<br>
       <a href="btc-steuertool.html">→ Hintergrund-Artikel: FiFo, Haltefrist &amp; Steuerrecht</a>
     </p>
   </div>

@@ -59,9 +59,10 @@
     </blockquote>
 
     <div class="box" id="web-version" style="box-shadow: 0 0 20px rgba(0, 255, 204, 0.25);">
-      <h3 style="margin-top:0;">🛸 NEU: Die Web-Version — CSV reinziehen, Report bekommen</h3>
+      <h3 style="margin-top:0;">🛸 Die Web-Version — CSV reinziehen, Report bekommen. Kostenlos.</h3>
       <p>
-        Kein Python, kein Terminal, keine Installation: Das Steuertool gibt es jetzt als Web-App.
+        Kein Python, kein Terminal, keine Installation: Das Steuertool gibt es auch als Web-App —
+        kostenlos, ohne Zugangslink, ohne Account.
         Du ziehst deine CSV-Exporte in den Browser, die App erkennt jeden Broker automatisch am
         Dateiformat und berechnet alle Steuerjahre auf einmal — Steuerreport, formaler Nachweis
         fürs Finanzamt und Excel-Exporte zum Download.
@@ -77,12 +78,12 @@
       <ul>
         <li>Alle unterstützten Quellen: BitBox, 21bitcoin, Bison, Swissquote, Strike, Pocket, Bisq + manuelle Käufe/Verkäufe</li>
         <li>noKYC-Bestände strikt getrennt — wie im CLI-Tool</li>
-        <li>30 Tage Zugang, unbegrenzte Berechnungen, alle Updates inklusive</li>
+        <li>Kostenlos und ohne Anmeldung — ein neuer Broker-Parser ist sofort für alle da</li>
       </ul>
       <p style="margin-top:1.5em;">
-        <a href="https://api.alien-investor.org/books/steuertool-demo/" target="_blank" rel="noopener"><strong>→ Demo kostenlos ausprobieren</strong></a> (mit fiktiven Beispieldaten)<br>
+        <a href="https://api.alien-investor.org/steuertool/" target="_blank" rel="noopener"><strong>→ Web-Version öffnen</strong></a> (fiktive Beispieldaten zum Ausprobieren liegen bei)<br>
         <a href="steuertool-guide.html"><svg style="width:1em;height:0.88em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="book-bg-art" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0d2a28"/><stop offset="100%" stop-color="#060e12"/></linearGradient></defs><path d="M18 7 C14.5 3.8, 9 3, 4 4.5 L4 26 C9 24.5, 14.5 25.2, 18 28 C21.5 25.2, 27 24.5, 32 26 L32 4.5 C27 3, 21.5 3.8, 18 7 Z" fill="url(#book-bg-art)" stroke="#00ffcc" stroke-width="1.4" stroke-linejoin="round"/><line x1="18" y1="7" x2="18" y2="28" stroke="#00ffcc" stroke-width="1" opacity="0.8"/><line x1="7.5" y1="10" x2="14.5" y2="9.2" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.6"/><line x1="7.5" y1="14" x2="14.5" y2="13.2" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.6"/><line x1="7.5" y1="18" x2="14.5" y2="17.2" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.6"/><line x1="21.5" y1="9.2" x2="28.5" y2="10" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.6"/><line x1="21.5" y1="13.2" x2="28.5" y2="14" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.6"/><line x1="21.5" y1="17.2" x2="28.5" y2="18" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.6"/></svg> <strong>→ Die Anleitung</strong></a> — Schritt für Schritt mit Screenshots<br>
-        <a href="steuertool-zahlung.html"><strong>→ Zugang holen — 29 €, 30 Tage</strong></a> (<a href="#zugang">wie funktioniert's?</a>)
+        <a href="#zugang"><strong>→ Web-Version oder CLI — was passt zu dir?</strong></a>
       </p>
     </div>
 
@@ -354,34 +355,33 @@ mkdir Broker</pre>
       Cloud-App vertrauen zu lassen die du nicht kontrollierst.
     </p>
 
-    <h2 id="zugang">Zugang zur Web-Version</h2>
+    <h2 id="zugang">Web-Version oder CLI — was passt zu dir?</h2>
     <p>
-      Die Web-Version kostet <strong>29 € einmalig</strong> — dafür bekommst du einen persönlichen
-      Zugangslink, <strong>30 Tage gültig</strong>, mit unbegrenzten Berechnungen für alle deine
-      Steuerjahre. Kommt während deiner Zugangszeit ein neuer Broker-Parser dazu, hast du ihn
-      automatisch. Kein Abo, keine automatische Verlängerung.
+      Die Web-Version ist <strong>kostenlos</strong>: kein Zugangslink, kein Account, keine
+      Bezahlschranke. Öffne <a href="https://api.alien-investor.org/steuertool/" target="_blank" rel="noopener">api.alien-investor.org/steuertool/</a>,
+      zieh deine CSV-Exporte hinein, fertig. Zum Ausprobieren liegen fiktive Beispieldaten bei.
+      Seit dem 2. Oktober 2026 gibt es keinen Bezahlzugang mehr — das Tool ist in jeder Form frei.
     </p>
-    <p><strong>So funktioniert es</strong> — wie bei allen Alien-Investor-Services:</p>
-    <ol>
-      <li><strong>Zahlen:</strong> 29 € über die <a href="steuertool-zahlung.html">Service-Zahlungsseite</a> — Bitcoin (Lightning oder On-Chain), Banküberweisung oder Karte via Ko-fi. In den Verwendungszweck bzw. die Notiz: <code>Steuertool Web-Zugang</code>.</li>
-      <li><strong>Bestell-Mail schicken:</strong> Über den Button unten — der Text ist vorbereitet, du ergänzt nur deinen Zahlungsweg.</li>
-      <li><strong>Zugang erhalten:</strong> Dein persönlicher Link kommt per Mail — in der Regel innerhalb von 24 Stunden.</li>
-    </ol>
+    <p>
+      <strong>Offen gesagt:</strong> Die Web-Version lädt ihren Code bei jedem Aufruf von meinem Server.
+      Du musst mir also vertrauen, dass dort genau der veröffentlichte Code liegt — prüfen kannst du
+      das, bequem ist es nicht. Wer maximale Kontrolle will, nimmt das
+      <a href="https://github.com/Alien-Investor/btc-steuertool" target="_blank" rel="noopener">CLI aus dem Repo</a>:
+      einmal geklont läuft es vollständig offline, mit gebündelten Kurstabellen und ohne eine einzige
+      Netzverbindung. Beides rechnet mit demselben Code.
+    </p>
     <p style="text-align:center; margin: 2em 0;">
-      <a href="steuertool-zahlung.html"
+      <a href="https://api.alien-investor.org/steuertool/" target="_blank" rel="noopener"
          style="display:inline-block; background:#000; color:#00ffcc; border:1px solid #00ffcc; padding:0.8em 1.6em; border-radius:8px; font-weight:bold; margin: 0 0.5em 0.8em 0;">
-        ⚡ 1. Jetzt zahlen — 29 €
+        ⚡ Web-Version öffnen
       </a>
-      <a href="mailto:kontakt@alien-investor.org?subject=Bestellung%20BTC%20Steuertool%20Web-Zugang&body=Hiermit%20bestelle%20ich%20den%20BTC%20Steuertool%20Web-Zugang%20(30%20Tage)%20f%C3%BCr%2029%20Euro.%0A%0AIch%20habe%20soeben%20gezahlt%20via%20(Lightning%20%2F%20On-Chain%20%2F%20Fiat)%3A%20%0A%0AIch%20stimme%20ausdr%C3%BCcklich%20zu%2C%20dass%20ihr%20vor%20Ablauf%20der%20Widerrufsfrist%20mit%20der%20Ausf%C3%BChrung%20des%20Vertrags%20beginnt%20(Zusendung%20des%20Zugangslinks)%2C%20und%20best%C3%A4tige%20meine%20Kenntnis%2C%20dass%20ich%20dadurch%20mein%20Widerrufsrecht%20verliere.%20Die%20AGB%20(alien-investor.org%2Fsteuertool-rechtliches.html)%20habe%20ich%20gelesen%20und%20akzeptiere%20sie."
-         style="display:inline-block; background:#000; color:#00ffcc; border:1px solid #00ffcc; padding:0.8em 1.6em; border-radius:8px; font-weight:bold; margin: 0 0 0.8em 0;">
-        📨 2. Bestell-Mail senden
+      <a href="steuertool-guide.html"
+         style="display:inline-block; background:#000; color:#00ffcc; border:1px solid #00ffcc; padding:0.8em 1.6em; border-radius:8px; font-weight:bold; margin: 0 0.5em 0.8em 0;">
+        📖 Anleitung
       </a>
     </p>
     <p style="color:#aaa; font-size:0.9em;">
-      Die Bestell-Mail enthält deine Zustimmung zur sofortigen Bereitstellung (dadurch erlischt
-      das Widerrufsrecht mit Zusendung des Links — so verlangt es das Gesetz bei digitalen Inhalten).
-      Alle Details: <a href="steuertool-rechtliches.html">AGB, Widerrufsbelehrung &amp; Datenschutz</a>.
-      Gemäß § 19 UStG wird keine Umsatzsteuer ausgewiesen.
+      Was der Server beim Aufruf sieht — und was nicht: <a href="steuertool-rechtliches.html#datenschutz">Datenschutzhinweise zur App</a>.
     </p>
     <div class="box" style="border-color:#ffaa00; background:#0a0800;">
       <p style="margin:0; color:#ddd;">

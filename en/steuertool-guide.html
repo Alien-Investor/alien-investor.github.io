@@ -66,9 +66,7 @@
   <div class="cta-box">
     <p style="margin:0 0 0.8em 0;">Want to dive right in?</p>
     <p style="margin:0;">
-      <a href="https://api.alien-investor.org/books/steuertool-demo/" target="_blank" rel="noopener"><strong>→ Open the demo</strong></a> (free, with sample data)
-      &nbsp;·&nbsp;
-      <a href="/en/steuertool-zahlung.html"><strong>→ Get access — €29</strong></a>
+      <a href="https://api.alien-investor.org/steuertool/" target="_blank" rel="noopener"><strong>→ Open the web version</strong></a> (free, sample data included to try it out)
     </p>
   </div>
 
@@ -96,7 +94,7 @@
 
   <h2>Step 1: Load your files</h2>
   <p>
-    Open your access link. Drag all CSV files into the dashed zone at once — or click it and select
+    Open <a href="https://api.alien-investor.org/steuertool/" target="_blank" rel="noopener">api.alien-investor.org/steuertool/</a>. Drag all CSV files into the dashed zone at once — or click it and select
     the files. Order does not matter, file names do not matter: the app detects every broker
     automatically from the file contents.
   </p>
@@ -189,9 +187,10 @@
   <h2>Frequently asked questions</h2>
   <h3>What about purchases in CHF or USD (Swissquote, Pocket)?</h3>
   <p>
-    The app converts them automatically using the historical daily rate. For that, your browser
-    (only if needed) queries the open exchange-rate API frankfurter.dev — date and currency yes,
-    amounts and quantities no. Anyone who bought exclusively in euros triggers no request at all.
+    The app converts them automatically using the ECB reference rate of the purchase day. The rate
+    table (since 2010) is bundled with the app — no exchange-rate service is queried, not even for
+    date or currency. If a purchase lies after the table's last date, the app stops with an
+    explanation instead of using a stale rate.
   </p>
   <h3>What happens to transfers between my wallets — and their fees?</h3>
   <p>
@@ -219,21 +218,23 @@
     <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a> — new parsers usually
     land within days.
   </p>
-  <h3>Is the demo the same as the full version?</h3>
+  <h3>Can I try the tool with sample data first?</h3>
   <p>
-    Yes — same calculation engine, same interface. In the demo you can <strong>download the sample
-    data as a ZIP</strong> and drag the files in yourself — exactly like you will later with your
-    real files. Or use the one-click "Demo-Daten laden" button. Your own files are only accepted
-    by the full version with an access link:
+    Yes. In the drop zone you can <strong>download the sample data as a ZIP</strong> and drag the
+    files in yourself — exactly like with your real files. Or use the one-click "Try with sample
+    data" button. The sample data is fictional and covers every supported broker.
   </p>
-  <img src="/steuertool-guide-demo-cta.png" alt="Demo version with sample data ZIP and access hint" class="screenshot">
-  <p class="screenshot-caption">The demo: drag the sample data just like in the full version — your own files need the access link.</p>
+  <h3>What does the web version cost?</h3>
+  <p>
+    Nothing. Since 2 October 2026 there is no paid access any more — the web version is free, just
+    like the CLI. The one difference: the web version fetches its code from the server on every
+    visit. If you want maximum control, use the CLI from the repo, which runs fully offline once cloned.
+  </p>
 
   <div class="cta-box">
     <h3 style="margin-top:0;">Ready?</h3>
     <p>
-      <a href="https://api.alien-investor.org/books/steuertool-demo/" target="_blank" rel="noopener"><strong>→ Try the demo</strong></a><br>
-      <a href="/en/steuertool-zahlung.html"><strong>→ Get access — €29, 30 days, all tax years</strong></a> (Lightning, on-chain, fiat)<br>
+      <a href="https://api.alien-investor.org/steuertool/" target="_blank" rel="noopener"><strong>→ Open the web version</strong></a> (free)<br>
       <a href="/en/btc-steuertool.html">→ Background article: FiFo, holding period &amp; German tax law</a>
     </p>
   </div>
