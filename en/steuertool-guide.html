@@ -52,9 +52,9 @@
 
   <div class="box">
     <p style="margin:0;">
-      <strong>Note:</strong> The app interface is currently <strong>German only</strong> — it computes
-    reports for the German tax system (§ 23 EStG, FiFo method, one-year holding period). This guide
-    walks you through every step so the German UI is no obstacle.</p>
+      <strong>Note:</strong> The interface is available in English: switch with the <strong>EN</strong> button
+    at the top right (or open the tool with <code>?lang=en</code>). The reports themselves stay in German, because they are
+    documents for the German tax office (§ 23 EStG, FiFo method, one-year holding period).</p>
   </div>
 
   <div class="video-wrapper">
@@ -62,11 +62,15 @@
       <iframe src="https://www.youtube.com/embed/2K05yeEaBSE" title="Bitcoin tax report with the BTC Steuertool Web" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
   </div>
+  <p class="screenshot-caption">The video shows the state of June 2026 with the German interface. Today the tool is completely free, with no access link, and it is also available as an app for Android and Linux. The images on this page show the current version.</p>
 
   <div class="cta-box">
     <p style="margin:0 0 0.8em 0;">Want to dive right in?</p>
     <p style="margin:0;">
-      <a href="https://api.alien-investor.org/steuertool/" target="_blank" rel="noopener"><strong>→ Open the web version</strong></a> (free, sample data included to try it out)
+      <a href="https://api.alien-investor.org/steuertool/?lang=en" target="_blank" rel="noopener"><strong>→ Open the web version</strong></a> (free, sample data included to try it out)
+    </p>
+    <p style="margin:0.6em 0 0 0;">
+      <a href="/en/btc-steuertool.html#app"><strong>→ As an app for Android and Linux</strong></a> (same calculation core, offline)
     </p>
   </div>
 
@@ -84,7 +88,7 @@
       <tr><td>Swissquote</td><td>Web → Account → Transactions → CSV export</td></tr>
       <tr><td>Strike</td><td>App/Web → Activity → Generate report</td></tr>
       <tr><td>Pocket</td><td>Web → History → Download CSV</td></tr>
-      <tr><td>Bisq</td><td>Portfolio → History → Export</td></tr>
+      <tr><td>Bisq</td><td>Bisq Classic with the interface set to German: Portfolio → Verlauf (History) → Als CSV exportieren (Export to CSV). The tool reads the German column headers.</td></tr>
     </tbody>
   </table>
   <p>
@@ -94,11 +98,11 @@
 
   <h2>Step 1: Load your files</h2>
   <p>
-    Open <a href="https://api.alien-investor.org/steuertool/" target="_blank" rel="noopener">api.alien-investor.org/steuertool/</a>. Drag all CSV files into the dashed zone at once — or click it and select
+    Open <a href="https://api.alien-investor.org/steuertool/?lang=en" target="_blank" rel="noopener">api.alien-investor.org/steuertool/</a>. Drag all CSV files into the dashed zone at once — or click it and select
     the files. Order does not matter, file names do not matter: the app detects every broker
     automatically from the file contents.
   </p>
-  <img src="/steuertool-guide-start.png" alt="BTC Tax Tool start view with drop zone" class="screenshot">
+  <img src="/steuertool-guide-start-en.png" alt="BTC Tax Tool start view with drop zone" class="screenshot">
   <p class="screenshot-caption">The start view: simply drag your CSV files into the dashed zone.</p>
 
   <h2>Step 2: Check detection — and mark noKYC wallets</h2>
@@ -106,32 +110,32 @@
     After loading, the table shows each file with its detected type. Entries marked orange are
     noKYC sources — they stay strictly separated from the tax office report:
   </p>
-  <img src="/steuertool-guide-dateien.png" alt="File table with automatically detected broker types and noKYC hint" class="screenshot">
-  <p class="screenshot-caption">All files detected — Bisq and manual purchases automatically flagged as noKYC (orange).</p>
+  <img src="/steuertool-guide-dateien-en.png" alt="File table with automatically detected broker types and noKYC hint" class="screenshot">
+  <p class="screenshot-caption">All files detected — Bisq and manual purchases automatically flagged as noKYC (orange). The noKYC wallet of the sample data is already marked via its folder; with your own files you switch it yourself.</p>
   <div class="warn-box">
     <h3>⚠ The one manual step</h3>
     <p style="margin-bottom:0;">
       A BitBox CSV cannot reveal whether the wallet holds KYC or noKYC coins — only you know that.
       If you run a dedicated noKYC wallet (e.g. for Bisq deposits), switch it to
-      <strong>"BitBox-Wallet (noKYC)"</strong> in the dropdown. Otherwise it will appear in the
+      <strong>"BitBox wallet (noKYC)"</strong> in the dropdown. Otherwise it will appear in the
       official report. The orange hint box reminds you as long as BitBox wallets are classified as KYC.
     </p>
   </div>
   <p>
     If a file is not recognized, the calculation stays locked until you pick a type manually or set
-    the file to "Ignorieren" (ignore) — so an incomplete report can never happen silently. Your broker
+    the file to "Ignore" — so an incomplete report can never happen silently. Your broker
     missing entirely? Send the CSV header line (no real data) to
     <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a> — parsers are added
-    continuously, and as a customer you get new brokers instantly, nothing to install.
+    continuously. In the web version new brokers are available instantly, nothing to install, in the apps with the next update.
   </p>
 
   <h2>Step 3: Compute the report</h2>
   <p>
-    One click on <strong>"Report berechnen"</strong> (compute report). On the very first run the app
+    One click on <strong>"Calculate report"</strong>. On the very first run the app
     loads its Python environment into the browser — that takes a few seconds once, afterwards it is
     fast. The system log shows every step:
   </p>
-  <img src="/steuertool-guide-log.png" alt="System log during calculation" class="screenshot">
+  <img src="/steuertool-guide-log-en.png" alt="System log during calculation" class="screenshot">
   <p class="screenshot-caption">The system log: every file, every transaction, full transparency.</p>
   <div class="box">
     <p style="margin:0;">
@@ -145,15 +149,15 @@
   <p>
     For every tax year you get several documents, switchable via tabs:
   </p>
-  <img src="/steuertool-guide-report.png" alt="Results view with year tabs and tax report" class="screenshot">
+  <img src="/steuertool-guide-report-en.png" alt="Results view with year tabs and tax report" class="screenshot">
   <p class="screenshot-caption">Year tabs on top, document tabs below — here the 2024 tax report.</p>
   <table>
     <thead><tr><th>Document</th><th>Contents</th><th>For the tax office?</th></tr></thead>
     <tbody>
-      <tr><td><strong>Steuerreport</strong></td><td>Readable annual report: purchases, disposals with FiFo matching, holding periods, summary with exemption-limit check</td><td>✅ yes</td></tr>
-      <tr><td><strong>Steuernachweis</strong></td><td>Formal, print-ready statement for your tax return or tax advisor</td><td>✅ yes</td></tr>
-      <tr><td><strong>Käufe / Verkäufe (CSV)</strong></td><td>Tables for Excel/LibreOffice</td><td>optional</td></tr>
-      <tr><td><strong>⚠ noKYC intern</strong></td><td>Your private overview of noKYC holdings</td><td>❌ never</td></tr>
+      <tr><td><strong>Tax report</strong> (<code>steuerreport_YEAR.txt</code>)</td><td>Readable annual report: purchases, disposals with FiFo matching, holding periods, summary with exemption-limit check</td><td>✅ yes</td></tr>
+      <tr><td><strong>Tax evidence</strong> (<code>steuernachweis_YEAR.txt</code>)</td><td>Formal, print-ready statement for your tax return or tax advisor</td><td>✅ yes</td></tr>
+      <tr><td><strong>Buys / Sells (CSV)</strong></td><td>Tables for Excel/LibreOffice</td><td>optional</td></tr>
+      <tr><td><strong>⚠ noKYC internal</strong></td><td>Your private overview of noKYC holdings</td><td>❌ never</td></tr>
     </tbody>
   </table>
 
@@ -162,7 +166,7 @@
     Bisq purchases, manual P2P purchases and noKYC wallets end up in a separate internal document
     with its own FiFo pool. It starts with an unmissable warning:
   </p>
-  <img src="/steuertool-guide-nokyc.png" alt="noKYC internal report with red warning banner" class="screenshot">
+  <img src="/steuertool-guide-nokyc-en.png" alt="noKYC internal report with red warning banner" class="screenshot">
   <p class="screenshot-caption">The red banner says it all: this file is for your own bookkeeping only.</p>
   <p>
     Important: the separation serves your privacy and clean internal bookkeeping — gains from noKYC
@@ -176,7 +180,7 @@
     <strong>two things</strong> with the tax office:
   </p>
   <ul>
-    <li>the <strong>Steuernachweis</strong> (<code>steuernachweis_YEAR.txt</code>), and</li>
+    <li>the <strong>tax evidence</strong> (<code>steuernachweis_YEAR.txt</code>), and</li>
     <li>your brokers' <strong>original CSVs</strong> as proof the purchases are real.</li>
   </ul>
   <p>
@@ -234,7 +238,7 @@
   <div class="cta-box">
     <h3 style="margin-top:0;">Ready?</h3>
     <p>
-      <a href="https://api.alien-investor.org/steuertool/" target="_blank" rel="noopener"><strong>→ Open the web version</strong></a> (free)<br>
+      <a href="https://api.alien-investor.org/steuertool/?lang=en" target="_blank" rel="noopener"><strong>→ Open the web version</strong></a> (free)<br>
       <a href="/en/btc-steuertool.html">→ Background article: FiFo, holding period &amp; German tax law</a>
     </p>
   </div>
@@ -248,7 +252,7 @@
     <p>Contact: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
     <p style="margin-top: 20px;"><strong>Disclaimer:</strong><br><br>
     This guide is not tax advice — it is a technical manual. You remain responsible for your own
-    tax return. <a href="/en/steuertool-rechtliches.html">Terms, withdrawal &amp; privacy</a></p>
+    tax return. <a href="/en/steuertool-rechtliches.html">Privacy</a></p>
   </footer>
 
   <script src="/lang-switcher.js"></script>
