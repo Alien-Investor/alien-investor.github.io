@@ -52,8 +52,8 @@
     <p>
       For exactly this problem there is the <strong>BTC Tax Tool</strong> — an open-source tool I
       developed myself for my own tax return (CLI, web version and app). It reads your CSV exports from BitBox,
-      21bitcoin, Bison, Swissquote, Strike, Pocket and Bisq and automatically calculates what
-      has to go to the tax office and what remains tax-free.
+      21bitcoin, Bison, Swissquote, Strike, Pocket and Bisq (other exchanges via a CoinTracking or Blockpit export) and automatically
+      calculates what has to go to the tax office and what remains tax-free.
     </p>
 
     <blockquote>
@@ -241,7 +241,12 @@ mkdir Broker</pre>
         <tr>
           <td>Bisq (noKYC)</td>
           <td><code>Broker/</code></td>
-          <td>must start with <code>bisq</code>: Bisq saves as <code>tradeHistory.csv</code>, rename it e.g. to <code>bisq.csv</code>. Export with Bisq set to German</td>
+          <td>must start with <code>bisq</code>: Bisq saves as <code>tradeHistory.csv</code>, rename it e.g. to <code>bisq.csv</code>. Export with Bisq set to German or English (since v1.3)</td>
+        </tr>
+        <tr>
+          <td>CoinTracking / Blockpit (aggregate import)</td>
+          <td><code>Broker/</code></td>
+          <td>must start with <code>cointracking</code>, <code>blockpit</code> or <code>sammelimport</code>; with <code>nokyc</code> in the file name everything in it counts as noKYC. Every account in the file becomes a wallet of its own, and the account name appears as the source in the tax evidence – so name it neutrally. Format derived from the documentation, not yet confirmed against real exports – the report warns, please check amounts, fees and time zone</td>
         </tr>
         <tr>
           <td>noKYC purchases without CSV (Robosats, P2P, cash)</td>
@@ -292,6 +297,18 @@ mkdir Broker</pre>
     </p>
 
     <div class="box" style="border-color: #ffaa00; background: #0a0800;">
+      <h3 style="color: #ffaa00; margin-top: 0;">⚡ Update October 2026 (v1.3): Hardened Parsers, Bisq in English, Aggregate Import</h3>
+      <p>An audit of the CSV parsers found a silent failure: a renamed column or a byte-order mark at the start of the file (as Excel writes it when saving as "CSV UTF-8") turned a column into an unnoticed blank – whole Pocket, Bison or Swissquote files dropped out of the calculation without a word, Strike purchases showed up with 0 BTC. Since version 1.3 such a mark is skipped, and the tool checks every file for its required columns before reading: if one is missing, it stops with file, line and column instead of quietly carrying on.</p>
+      <ul>
+        <li><strong>Loud instead of quiet:</strong> rows with the wrong number of fields, an unclosed quotation mark (which used to swallow the rest of the file), timestamps without a time zone, ambiguous numbers such as "2,500", negative transfer amounts and empty currency columns are now hard errors with a clear message.</li>
+        <li><strong>Bisq in German or English:</strong> the Bisq export is read in both interface languages, including the date forms of the common English regional settings (UK, US, Canada, Australia, India, New Zealand, Denmark, Finland and others); an unknown form stops with a message instead of being misread. Trades on altcoin markets (XMR/BTC for instance) are reported as a disposal or acquisition of BTC (without valuing them) instead of merely being counted as skipped.</li>
+        <li><strong>Aggregate import from CoinTracking/Blockpit:</strong> if you already keep your exchanges there, load an export; every account in it becomes a wallet of its own. The formats come from the documentation and published sample files, not from real exports – the report shows a warning. Swaps into other cryptocurrencies, inflows (mining, rewards, staking) and payments are only taken over with a euro value from the export; if it is missing, the tool reports them instead of estimating. Gifted coins are always reported, because the donor's acquisition data applies to them.</li>
+        <li><strong>Byte-identical:</strong> the CSV files from the app and the web version are now identical to those of the command line.</li>
+      </ul>
+      <p style="color:#aaa; font-size:0.9em;">Your broker is missing? Send the header line of the export plus one row of made-up values to <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a> – a real export is the release criterion for every new parser.</p>
+    </div>
+
+    <div class="box" style="border-color: #ffaa00; background: #0a0800;">
       <h3 style="color: #ffaa00; margin-top: 0;">⚡ Update October 2026: FiFo per Wallet — as the BMF Circular Requires</h3>
       <p>The German Federal Ministry of Finance circular of 6 March 2025 states in para. 62: a wallet-based view applies. So FiFo does not run across all holdings together, but per wallet. Until now the tool calculated one pooled holding across all sources. Since version 1.2 every BitBox wallet is a FiFo holding of its own, and the tool treats every broker account as a wallet of its own as well (paras. 20 and 90 name the trading platform as a separate unit) — the only method used in the official documents, no toggle.</p>
       <ul>
@@ -318,7 +335,7 @@ mkdir Broker</pre>
 
     <div class="box" style="border-color: #ffaa00; background: #0a0800;">
       <h3 style="color: #ffaa00; margin-top: 0;">⚡ Update June 2026: Bisq Direct Import + Strict noKYC Separation</h3>
-      <p>The tool now supports direct import of the Bisq trade history CSV. Simply place the export from Bisq Classic ("Portfolio → History → Export to CSV", with Bisq set to German, as the parser reads the German column headers) as <code>bisq.csv</code> in the <code>Broker/</code> folder — the tool automatically recognises all completed purchases.</p>
+      <p>The tool now supports direct import of the Bisq trade history CSV. Simply place the export from Bisq Classic ("Portfolio → History → Export to CSV"; since v1.3 with Bisq set to German or English) as <code>bisq.csv</code> in the <code>Broker/</code> folder — the tool automatically recognises all completed purchases.</p>
       <ul>
         <li><strong>Bisq direct import:</strong> No more manual entry. The parser reads price, BTC amount, EUR amount and fees directly from the Bisq export.</li>
         <li><strong>Dedicated noKYC file:</strong> noKYC purchases do not appear in any tax-office document. They go into a separate file <code>nokyc_intern_YEAR.txt</code> — with a clear warning header at the top so it can never accidentally be handed in along with the official documents.</li>
@@ -433,7 +450,7 @@ mkdir Broker</pre>
     </p>
     <p><strong>Requirement:</strong> Flatpak with the Flathub remote (for the runtime <code>org.freedesktop.Platform</code> 25.08, which Flatpak fetches during installation):</p>
     <pre><code>flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo</code></pre>
-    <p><strong>1. Download three files:</strong> <code>btc-steuertool-1.1-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code>.</p>
+    <p><strong>1. Download three files:</strong> <code>btc-steuertool-1.3-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code>.</p>
     <p><strong>2. Check the signature.</strong> The checksum file is signed with the Alien Investor GPG release key — the same key as for Alien Pass, Sachwert-Tresor and Alien Notes:
       <a href="../alien-investor-release-key.asc">alien-investor-release-key.asc</a>. Compare the fingerprint through a second channel:</p>
     <p><code style="display:block; margin:0.35em 0; padding:0.5em 0.6em; font-size:0.8em;">100F 9E25 BFAE A807 DBC3  57D7 50C0 D785 83BF CB81</code></p>
@@ -441,7 +458,7 @@ mkdir Broker</pre>
 gpg --verify SHA256SUMS.asc SHA256SUMS      # "Good signature from "Alien Investor (Release-Signatur) …""
 sha256sum -c SHA256SUMS                     # "…flatpak: OK"</code></pre>
     <p><strong>3. Install and start:</strong></p>
-    <pre><code>flatpak install --user btc-steuertool-1.1-linux-x86_64.flatpak
+    <pre><code>flatpak install --user btc-steuertool-1.3-linux-x86_64.flatpak
 flatpak run org.alieninvestor.steuertool</code></pre>
     <p><strong>Update:</strong> a new bundle cannot be installed over the existing one (Flatpak 1.14). Download and check the new version, then
       <code>flatpak uninstall --user org.alieninvestor.steuertool</code> and install again. The app stores no tax data, only language and theme.</p>
