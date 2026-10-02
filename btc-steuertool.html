@@ -415,7 +415,7 @@ mkdir Broker</pre>
     </p>
     <p><strong>Voraussetzung:</strong> Flatpak mit dem Flathub-Remote (für die Laufzeit <code>org.freedesktop.Platform</code> 25.08, die Flatpak beim Installieren nachlädt):</p>
     <pre><code>flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo</code></pre>
-    <p><strong>1. Drei Dateien laden:</strong> <code>btc-steuertool-1.0-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code>.</p>
+    <p><strong>1. Drei Dateien laden:</strong> <code>btc-steuertool-1.1-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code>.</p>
     <p><strong>2. Signatur prüfen.</strong> Die Prüfsumme ist mit dem GPG-Release-Schlüssel von Alien Investor signiert — derselbe Schlüssel wie bei Alien Pass, Sachwert-Tresor und Alien Notes:
       <a href="alien-investor-release-key.asc">alien-investor-release-key.asc</a>. Den Fingerabdruck über einen zweiten Weg vergleichen:</p>
     <p><code style="display:block; margin:0.35em 0; padding:0.5em 0.6em; font-size:0.8em;">100F 9E25 BFAE A807 DBC3  57D7 50C0 D785 83BF CB81</code></p>
@@ -423,7 +423,7 @@ mkdir Broker</pre>
 gpg --verify SHA256SUMS.asc SHA256SUMS      # „Korrekte Signatur von "Alien Investor (Release-Signatur) …"“
 sha256sum -c SHA256SUMS                     # „…flatpak: OK“</code></pre>
     <p><strong>3. Installieren und starten:</strong></p>
-    <pre><code>flatpak install --user btc-steuertool-1.0-linux-x86_64.flatpak
+    <pre><code>flatpak install --user btc-steuertool-1.1-linux-x86_64.flatpak
 flatpak run org.alieninvestor.steuertool</code></pre>
     <p><strong>Update:</strong> Eine neue Bündel-Datei lässt sich (Flatpak 1.14) nicht über die installierte legen. Neue Version laden und prüfen, dann
       <code>flatpak uninstall --user org.alieninvestor.steuertool</code> und neu installieren. Die App speichert keine Steuerdaten, nur Sprache und Darstellung.</p>
@@ -441,7 +441,7 @@ devices=dri;</code></pre>
       <ul>
         <li><strong>Interne Prüfung, kein unabhängiges Audit.</strong> Vor dem Release lief ein interner Security-Audit über die App-Hüllen und die jüngsten Änderungen am Rechenkern; alle Funde wurden vor der Veröffentlichung behoben.</li>
         <li><strong>Am Desktop kein Schutz vor Bildschirmfotos</strong> — nur die Android-App sperrt Screenshots.</li>
-        <li><strong>Kurstabellen haben einen Datenstand.</strong> Liegt ein Kauf oder Verkauf in USD/CHF nach dem Ende der eingebauten EZB-Tabelle, bricht die Berechnung mit einer Erklärung ab, statt einen alten Kurs zu nehmen. Für in Bitcoin gezahlte Gebühren nach dem Ende der BTC-Kurstabelle (in v1.0: 14.08.2026) weist der Report den Gewinn als „nicht ermittelt“ aus und warnt. Neue Kurse kommen mit einem App-Update, spätestens im Januar für das abgelaufene Jahr.</li>
+        <li><strong>Kurstabellen haben einen Datenstand.</strong> Liegt ein Kauf oder Verkauf in USD/CHF nach dem Ende der eingebauten EZB-Tabelle, bricht die Berechnung mit einer Erklärung ab, statt einen alten Kurs zu nehmen. Für in Bitcoin gezahlte Gebühren nach dem Ende der BTC-Kurstabelle (Stand v1.1: 14.08.2026) weist der Report den Gewinn als „nicht ermittelt“ aus und warnt. Neue Kurse kommen mit einem App-Update, spätestens im Januar für das abgelaufene Jahr.</li>
         <li><strong>Keine Steuerberatung.</strong> Die App rechnet, die Verantwortung für die Erklärung bleibt bei dir.</li>
       </ul>
     </div>
