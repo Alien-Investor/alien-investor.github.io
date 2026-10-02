@@ -127,7 +127,9 @@
     <p>
       The method is called <strong>FiFo</strong> — First In, First Out. That means: what you buy first,
       you also sell first. Sounds simple, but gets complicated quickly when you buy from five brokers
-      and your BTC moves between multiple wallets.
+      and your BTC moves between multiple wallets. On top of that, the German Federal Ministry of Finance
+      circular of 6 March 2025 requires in para. 62 a <strong>wallet-based view</strong> — FiFo applies per wallet,
+      not across everything at once. Since October 2026 the tool calculates exactly that way and also treats every exchange account as a wallet of its own.
     </p>
 
     <div class="box" style="border-color: #ff3b3b; box-shadow: 0 0 10px rgba(255, 59, 59, 0.15);">
@@ -290,6 +292,19 @@ mkdir Broker</pre>
     </p>
 
     <div class="box" style="border-color: #ffaa00; background: #0a0800;">
+      <h3 style="color: #ffaa00; margin-top: 0;">⚡ Update October 2026: FiFo per Wallet — as the BMF Circular Requires</h3>
+      <p>The German Federal Ministry of Finance circular of 6 March 2025 states in para. 62: a wallet-based view applies. So FiFo does not run across all holdings together, but per wallet. Until now the tool calculated one pooled holding across all sources. Since version 1.2 every BitBox wallet is a FiFo holding of its own, and the tool treats every broker account as a wallet of its own as well (paras. 20 and 90 name the trading platform as a separate unit) — the only method used in the official documents, no toggle.</p>
+      <ul>
+        <li><strong>Transfers carry their history:</strong> on a transfer between your own wallets, the sending wallet gives up its oldest units; purchase date and cost travel into the receiving wallet and are sorted in there by purchase date. The transfer itself remains a non-disposal.</li>
+        <li><strong>Automatic matching:</strong> outgoing and incoming transfers are linked by transaction ID, otherwise by amount (with or without fee) and time within 48 hours. Ambiguous cases are not linked but reported; special cases such as pooled withdrawals are solved with the optional file <code>transfer_zuordnung.csv</code>.</li>
+        <li><strong>Nothing silently becomes a sale:</strong> an outgoing transfer without a matching incoming one counts as a transfer to one of your wallets that was not loaded, and is reported. So: load the exports of all your wallets.</li>
+        <li><strong>The reports explain the method:</strong> tax report and tax evidence state the method as FiFo per wallet under paras. 61 f. and list the transfers between your own wallets; the tax report additionally shows the holdings per wallet at year end. Your BitBox wallets appear there only as "BitBox-Wallet", with several wallets "BitBox-Wallet 1", "BitBox-Wallet 2" … — file names and real labels appear solely in the new internal file <code>wallet_abgleich_intern_YEAR.txt</code>, together with the comparison to the former pooled calculation.</li>
+        <li><strong>What may change:</strong> depending on which units sat in which wallet, a sale may now be matched to a different purchase than before — with a different holding period and gain. With my own data the differences were single-digit euro amounts per year; yours may look different. The internal comparison file shows the difference per year.</li>
+      </ul>
+      <p style="color:#aaa; font-size:0.9em;">How acquisition data travels on a transfer is not spelled out in the BMF circular. The tool chooses the obvious reading — the sending wallet gives up units by FiFo, purchase date and cost are preserved — and discloses it in the evidence document. No tax advice.</p>
+    </div>
+
+    <div class="box" style="border-color: #ffaa00; background: #0a0800;">
       <h3 style="color: #ffaa00; margin-top: 0;">⚡ Update August 2026: Fees Paid in Bitcoin and Gifts Are Now Included</h3>
       <p>Until now the tool treated transfers between your own wallets as tax-neutral, full stop. That is true for the transferred holdings — but not for the <strong>network fee</strong> you pay in bitcoin along the way. You hand it over in exchange for a service, and under the logic of the German Federal Ministry of Finance circular of 6 March 2025 (paras. 33, 54, 60) that is a small disposal of the fee portion. The tool now books it — which also means the reported holdings finally match your wallet.</p>
       <ul>
@@ -444,7 +459,7 @@ devices=dri;</code></pre>
       <ul>
         <li><strong>Internal review, not an independent audit.</strong> Before the release an internal security audit covered the app shells and the latest changes to the calculation core; all findings were fixed before publication.</li>
         <li><strong>No screenshot protection on the desktop</strong> — only the Android app blocks screenshots.</li>
-        <li><strong>Rate tables have a cut-off date.</strong> If a purchase or sale in USD/CHF lies after the end of the built-in ECB table, the calculation stops with an explanation instead of using an old rate. For fees paid in bitcoin after the end of the BTC price table (as of v1.1: 14 August 2026) the report marks the gain as “not determined” and warns. New rates come with an app update, at the latest in January for the past year.</li>
+        <li><strong>Rate tables have a cut-off date.</strong> If a purchase or sale in USD/CHF lies after the end of the built-in ECB table, the calculation stops with an explanation instead of using an old rate. For fees paid in bitcoin after the end of the BTC price table (as of v1.2: 14 August 2026) the report marks the gain as “not determined” and warns. New rates come with an app update, at the latest in January for the past year.</li>
         <li><strong>No tax advice.</strong> The app calculates; responsibility for the tax return stays with you.</li>
       </ul>
     </div>

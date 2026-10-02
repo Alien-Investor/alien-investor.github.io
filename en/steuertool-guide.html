@@ -198,7 +198,11 @@
   </p>
   <h3>What happens to transfers between my wallets — and their fees?</h3>
   <p>
-    The transferred holdings stay tax-neutral and keep their purchase date. The <strong>network
+    The transferred holdings stay tax-neutral and keep their purchase date. Since version 1.2 (October 2026)
+    the app applies FiFo per wallet (BMF circular of 6 March 2025, para. 62): the sending wallet gives up its
+    oldest units, and purchase date and cost travel into the receiving wallet. The app matches transfers by
+    transaction ID, otherwise by amount and time; an outgoing transfer without a matching incoming one is
+    reported, never silently booked as a sale — so load the exports of all your wallets. The <strong>network
     or withdrawal fee paid in bitcoin</strong>, however, is booked by the app since August 2026 as
     a small disposal of the fee portion (BMF circular of 6 March 2025, paras. 54, 60): FiFo
     matching, valuation at the daily closing price, its own section "GEBÜHREN IN BITCOIN" in the

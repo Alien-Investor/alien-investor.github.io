@@ -133,7 +133,9 @@
     <p>
       Die Methode heißt <strong>FiFo</strong> — First In, First Out. Das bedeutet: was man zuerst kauft,
       verkauft man auch zuerst. Klingt simpel, wird aber schnell komplex wenn du bei fünf Brokern kaufst
-      und deine BTC zwischen mehreren Wallets wandern.
+      und deine BTC zwischen mehreren Wallets wandern. Dazu kommt: Das BMF-Schreiben vom 06.03.2025 verlangt
+      in Rn. 62 eine <strong>walletbezogene Betrachtung</strong> — FiFo gilt je Wallet, nicht über alles zusammen. Das Tool
+      rechnet seit Oktober 2026 genau so und behandelt dabei auch jedes Börsenkonto als eigene Wallet.
     </p>
 
     <div class="box" style="border-color: #ff3b3b; box-shadow: 0 0 10px rgba(255, 59, 59, 0.15);">
@@ -297,6 +299,19 @@ mkdir Broker</pre>
     </p>
 
     <div class="box" style="border-color: #ffaa00; background: #0a0800;">
+      <h3 style="color: #ffaa00; margin-top: 0;">⚡ Update Oktober 2026: FiFo walletbezogen — so, wie das BMF-Schreiben es vorgibt</h3>
+      <p>Das BMF-Schreiben vom 06.03.2025 sagt in Rn. 62: „Es gilt eine walletbezogene Betrachtung.“ FiFo läuft also nicht über alle Bestände zusammen, sondern je Wallet. Bisher rechnete das Tool einen gemeinsamen Bestand über alle Quellen. Seit Version 1.2 ist jede BitBox-Wallet ein eigener FiFo-Bestand, und jedes Broker-Konto behandelt das Tool ebenfalls als eigene Wallet (Rn. 20, 90 nennen die Handelsplattform als eigene Einheit) — als einzige Methode der offiziellen Dokumente, ohne Umschalter.</p>
+      <ul>
+        <li><strong>Überträge wandern mit Historie:</strong> Bei einem Übertrag zwischen eigenen Wallets gibt die abgebende Wallet ihre ältesten Einheiten ab; Anschaffungsdatum und -kosten gehen mit in die empfangende Wallet und werden dort nach dem Anschaffungsdatum einsortiert. Der Übertrag selbst bleibt keine Veräußerung.</li>
+        <li><strong>Automatische Zuordnung:</strong> Abgang und Eingang werden über die Transaktions-ID verbunden, sonst über Betrag (mit oder ohne Gebühr) und Zeit innerhalb von 48 Stunden. Mehrdeutige Fälle verbindet das Tool nicht, sondern warnt; Sonderfälle wie Sammelauszahlungen löst die optionale Datei <code>transfer_zuordnung.csv</code>.</li>
+        <li><strong>Nichts wird still zum Verkauf:</strong> Ein Abgang ohne passenden Eingang gilt als Übertrag in eine nicht eingelesene eigene Wallet und wird gemeldet. Deshalb: Exporte aller Wallets laden.</li>
+        <li><strong>Reports erklären die Methode:</strong> Steuerreport und Steuernachweis weisen die Methode als FiFo, walletbezogen nach Rn. 61 f. aus und listen die Umbuchungen zwischen eigenen Wallets; der Steuerreport zeigt zusätzlich den Bestand je Wallet zum Jahresende. Deine BitBox-Wallets heißen dort nur „BitBox-Wallet“, bei mehreren „BitBox-Wallet 1“, „BitBox-Wallet 2“ … — Dateinamen und echte Bezeichnungen stehen allein in der neuen internen Datei <code>wallet_abgleich_intern_JAHR.txt</code>, zusammen mit dem Vergleich zur bisherigen gemeinsamen Rechnung.</li>
+        <li><strong>Was sich ändern kann:</strong> Je nachdem, welche Einheiten in welcher Wallet lagen, ist ein Verkauf jetzt eventuell einem anderen Kauf zugeordnet als bisher — mit anderer Haltefrist und anderem Gewinn. Bei meinen eigenen Daten waren das je Jahr einstellige Euro-Beträge; bei dir kann es anders aussehen. Die interne Vergleichsdatei zeigt die Differenz je Jahr.</li>
+      </ul>
+      <p style="color:#aaa; font-size:0.9em;">Wie Anschaffungsdaten beim Übertrag genau wandern, regelt das BMF-Schreiben nicht ausdrücklich. Das Tool wählt die naheliegende Auslegung — die abgebende Wallet gibt nach FiFo ab, Anschaffungsdatum und -kosten bleiben erhalten — und legt sie im Nachweis offen. Keine Steuerberatung.</p>
+    </div>
+
+    <div class="box" style="border-color: #ffaa00; background: #0a0800;">
       <h3 style="color: #ffaa00; margin-top: 0;">⚡ Update August 2026: Gebühren in Bitcoin und Schenkungen werden mitgerechnet</h3>
       <p>Bisher galt im Tool: Überträge zwischen eigenen Wallets sind steuerneutral — Punkt. Das stimmt für den übertragenen Bestand, aber nicht für die <strong>Netzwerkgebühr</strong>, die du dabei in Bitcoin bezahlst. Die gibst du im Tausch für eine Dienstleistung her, und das ist nach der Systematik des BMF-Schreibens vom 06.03.2025 (Rn. 33, 54, 60) eine kleine Veräußerung des Gebührenanteils. Das Tool bucht sie jetzt — und damit stimmt der ausgewiesene Bestand endlich mit deiner Wallet überein.</p>
       <ul>
@@ -451,7 +466,7 @@ devices=dri;</code></pre>
       <ul>
         <li><strong>Interne Prüfung, kein unabhängiges Audit.</strong> Vor dem Release lief ein interner Security-Audit über die App-Hüllen und die jüngsten Änderungen am Rechenkern; alle Funde wurden vor der Veröffentlichung behoben.</li>
         <li><strong>Am Desktop kein Schutz vor Bildschirmfotos</strong> — nur die Android-App sperrt Screenshots.</li>
-        <li><strong>Kurstabellen haben einen Datenstand.</strong> Liegt ein Kauf oder Verkauf in USD/CHF nach dem Ende der eingebauten EZB-Tabelle, bricht die Berechnung mit einer Erklärung ab, statt einen alten Kurs zu nehmen. Für in Bitcoin gezahlte Gebühren nach dem Ende der BTC-Kurstabelle (Stand v1.1: 14.08.2026) weist der Report den Gewinn als „nicht ermittelt“ aus und warnt. Neue Kurse kommen mit einem App-Update, spätestens im Januar für das abgelaufene Jahr.</li>
+        <li><strong>Kurstabellen haben einen Datenstand.</strong> Liegt ein Kauf oder Verkauf in USD/CHF nach dem Ende der eingebauten EZB-Tabelle, bricht die Berechnung mit einer Erklärung ab, statt einen alten Kurs zu nehmen. Für in Bitcoin gezahlte Gebühren nach dem Ende der BTC-Kurstabelle (Stand v1.2: 14.08.2026) weist der Report den Gewinn als „nicht ermittelt“ aus und warnt. Neue Kurse kommen mit einem App-Update, spätestens im Januar für das abgelaufene Jahr.</li>
         <li><strong>Keine Steuerberatung.</strong> Die App rechnet, die Verantwortung für die Erklärung bleibt bei dir.</li>
       </ul>
     </div>
