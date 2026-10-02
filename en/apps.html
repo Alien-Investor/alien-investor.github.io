@@ -851,17 +851,66 @@
       </div>
     </div>
 
+    <div class="app-card">
+      <div class="app-icon">
+        <img src="/app-icon-steuertool.png" alt="App icon: BTC Steuertool">
+      </div>
+      <div class="app-info">
+        <h2>BTC Steuertool</h2>
+        <p class="subtitle">Bitcoin tax report for the German tax office – no internet permission, your data stays with you</p>
+
+        <p class="pitch">
+          <strong>Your tax data does not end up on someone else's server.</strong>
+          CSV exports from BitBox and brokers in, annual report under § 23 EStG out – calculated entirely on your device.
+          No account, no upload, no telemetry. The same open-source calculation core as the CLI tool and the web version.
+        </p>
+
+        <ul>
+          <li>FiFo with the one-year holding period counted by calendar date (§§ 187, 188 BGB) and the exemption limit (600 EUR up to 2023, 1,000 EUR from 2024)</li>
+          <li>BitBox, 21bitcoin, Bison, Swissquote, Strike, Pocket, Bisq plus manual buys and sells – brokers are detected from the file contents, ZIPs are unpacked; unknown files block the calculation instead of silently missing</li>
+          <li>Fees paid in bitcoin (network, withdrawal, Bisq trading fee) treated as a disposal of the fee amount, gifts and donations as a reduction of holdings</li>
+          <li>noKYC kept strictly apart: its own FiFo pool and its own internal report, never part of the documents for the tax office</li>
+          <li>Tax report, formal tax evidence, buys and sells as CSV – saved through the save dialog</li>
+          <li>ECB exchange rates and BTC daily closing prices built in – the app downloads nothing after installation</li>
+          <li>Android: no internet permission, screenshots blocked (FLAG_SECURE), no backup of app data</li>
+          <li>Also for the <strong>Linux desktop</strong> – as a Flatpak without network permission and without file access, with a GPG-signed checksum</li>
+          <li>In-app guide (German/English); internal security audit before the release, all findings fixed (no independent audit)</li>
+        </ul>
+
+        <p style="color:#00ffcc; font-size:0.92em;"><strong>Also in the browser and as a CLI:</strong> the <a href="https://api.alien-investor.org/steuertool/" target="_blank" rel="noopener">web version</a> fetches its code from the server on every visit, the CLI runs from the repo. Everything on the <a href="/en/btc-steuertool.html">tax tool page</a>. Reports are in German, they are meant for the German tax office. No tax advice – a calculation aid.</p>
+
+        <p class="app-meta">Android / GrapheneOS · Linux (Flatpak) · open source (MIT) · no account, no server</p>
+        <div class="app-fp">
+          Signing fingerprint of the Android APK (SHA-256), identical for every version — the APK from the Zap Store carries it too:
+          <code>26:C5:E0:94:A8:B7:65:0C:A6:65:01:4D:0C:3A:8B:A6:82:B1:7C:05:F5:3C:6C:DE:F0:55:D0:7C:E9:84:BF:0B</code>
+          <span class="app-fp-hex">apksigner: 26c5e094a8b7650ca665014d0c3a8ba682b17c05f53c6cdef055d07ce984bf0b</span>
+          <span class="app-fp-hex">Linux desktop: <a href="/alien-investor-release-key.asc">GPG release key</a> for the checksum (all desktop apps): 100F 9E25 BFAE A807 DBC3 57D7 50C0 D785 83BF CB81 · <a href="/en/flatpak.html">guide</a></span>
+        </div>
+
+        <div class="cta-row">
+          <a href="https://zapstore.dev/apps/org.alieninvestor.steuertool" class="cta-button" target="_blank" rel="noopener">
+            <svg style="width:1em;height:1em;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M13 2 L4 14 h6 l-1 8 9-12 h-6 z" fill="currentColor"/></svg> On the Zap Store
+          </a>
+          <a href="/en/btc-steuertool.html#obtainium" class="cta-button secondary">Obtainium / APK</a>
+          <a href="https://github.com/Alien-Investor/btc-steuertool" class="cta-button secondary" target="_blank" rel="noopener">
+            <svg style="width:1em;height:1em;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M8 6 L2 12 L8 18 M16 6 L22 12 L16 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Source (GitHub)
+          </a>
+          <a href="/en/btc-steuertool.html#desktop" class="cta-button secondary">Linux desktop</a>
+        </div>
+      </div>
+    </div>
+
     <div class="notice">
       <h3>How to install the apps – without Google Play</h3>
       All apps are distributed as <strong>developer-signed releases</strong> – not through the Google Play Store.
       Easiest via the <a href="https://zapstore.dev/" target="_blank" rel="noopener">Nostr Zap Store</a>
       (cryptographically verified installs, updates through your social graph) or via
       <a href="/en/Obtainium.html">Obtainium</a> directly from our own download address
-      (setup: <a href="/en/sachwert-tresor.html#obtainium">vault</a>, <a href="/en/alien-pass.html#obtainium">Alien Pass</a>, <a href="/en/alien-notes.html#obtainium">Alien Notes</a>, <a href="#obtainium-fitness">Alien Fitness</a>, <a href="#obtainium-ausgaben">Ausgaben-Tracker</a>) – both entirely without a Google account.
+      (setup: <a href="/en/sachwert-tresor.html#obtainium">vault</a>, <a href="/en/alien-pass.html#obtainium">Alien Pass</a>, <a href="/en/alien-notes.html#obtainium">Alien Notes</a>, <a href="/en/btc-steuertool.html#obtainium">BTC Steuertool</a>, <a href="#obtainium-fitness">Alien Fitness</a>, <a href="#obtainium-ausgaben">Ausgaben-Tracker</a>) – both entirely without a Google account.
       Learn more: <a href="/en/grapheneos-app-stores.html">app stores on GrapheneOS</a> and
       <a href="/en/Zapstore.html">the Nostr Zap Store explained</a>.
       <p style="margin:0.8em 0 0 0;">
-        <strong>Linux desktop:</strong> Alien Pass, Sachwert-Tresor and Alien Notes are also available as a Flatpak — download, verify the GPG-signed checksum,
+        <strong>Linux desktop:</strong> Alien Pass, Sachwert-Tresor, Alien Notes and the BTC Steuertool are also available as a Flatpak — download, verify the GPG-signed checksum,
         install. Step by step in the <a href="/en/flatpak.html">Flatpak guide</a>.
       </p>
       <p style="margin:0.8em 0 0 0;">

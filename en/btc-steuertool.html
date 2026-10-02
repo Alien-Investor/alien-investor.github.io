@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Calculate Bitcoin Taxes Yourself: FiFo, Holding Period & the Open-Source Tool for Your Tax Return</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Bitcoin taxes without clueless accountants: An open-source CLI tool automatically calculates FiFo, holding periods and taxable gains from your broker CSVs.">
+  <meta name="description" content="Bitcoin taxes without clueless accountants: An open-source tool (CLI, web version, Android app, Linux Flatpak) calculates FiFo, holding periods and taxable gains locally from your broker CSVs.">
   <link rel="canonical" href="/en/btc-steuertool.html">
   <link rel="alternate" hreflang="de" href="/btc-steuertool.html">
   <link rel="alternate" hreflang="en" href="/en/btc-steuertool.html">
@@ -50,8 +50,8 @@
       and exactly how high your taxable gain is.
     </p>
     <p>
-      For exactly this problem there is the <strong>BTC Tax Tool</strong> — an open-source CLI tool I
-      developed myself for my own tax return. It reads your CSV exports from BitBox,
+      For exactly this problem there is the <strong>BTC Tax Tool</strong> — an open-source tool I
+      developed myself for my own tax return (CLI, web version and app). It reads your CSV exports from BitBox,
       21bitcoin, Bison, Swissquote, Strike and Pocket and automatically calculates what
       has to go to the tax office and what remains tax-free.
     </p>
@@ -77,7 +77,8 @@
       <p>
         <a href="https://api.alien-investor.org/steuertool/" target="_blank" rel="noopener"><strong>→ Open the web version</strong></a> (fictional sample data included to try it out)<br>
         <a href="/en/steuertool-guide.html"><strong>→ The guide</strong></a> — step by step with screenshots<br>
-        <a href="#access"><strong>→ Web version or CLI — which fits you?</strong></a>
+        <a href="#app"><strong>→ As an app for Android and Linux desktop</strong></a><br>
+        <a href="#access"><strong>→ Web version, app or CLI — which fits you?</strong></a>
       </p>
     </div>
 
@@ -133,7 +134,7 @@
       <h3 style="color: #ff3b3b;">The Exemption Threshold Is a Trap</h3>
       <p>
         Many people think: "I'm under 1,000 EUR, so it's irrelevant." Wrong.
-        The exemption threshold is not a tax allowance. If you exceed it, the <em>entire</em> taxable
+        The exemption threshold is not a tax allowance. If your gain reaches or exceeds it, the <em>entire</em> taxable
         profit becomes taxable — not just the part above it. A profit of 1,001 EUR is therefore fully
         taxable — not just that one euro.
       </p>
@@ -160,8 +161,8 @@
       <p style="margin-bottom:0;">
         Sections 3–5 below describe the <strong>free CLI tool from GitHub</strong> — for everyone
         who likes working in a terminal.<br><br>
-        <strong>Using the <a href="#web-version">web version</a>? Then there is nothing to
-        install.</strong> No Python, no download, no setup — open your browser, drop your CSVs,
+        <strong>Using the <a href="#web-version">web version</a> or the <a href="#app">app</a>? Then you
+        need none of this.</strong> No Python, no terminal — drop or pick your CSVs,
         done. Skip straight to <a href="#finanzamt">section 6: What you submit to the tax office</a>.
       </p>
     </div>
@@ -322,7 +323,7 @@ mkdir Broker</pre>
       formal proof of calculation and optionally CSV tables for Excel.
     </p>
 
-    <h2 id="finanzamt">6. What You Submit to the Tax Office (Web &amp; CLI)</h2>
+    <h2 id="finanzamt">6. What You Submit to the Tax Office (Web, App &amp; CLI)</h2>
     <p>
       The proof alone is not enough. The tax office wants to know that the purchase data is genuine.
       So always submit two parts:
@@ -347,7 +348,97 @@ mkdir Broker</pre>
       cloud app you don't control.
     </p>
 
-    <h2 id="access">Web version or CLI — which fits you?</h2>
+    <h2 id="app">As an app: Android and Linux desktop</h2>
+    <p>
+      Since version 1.0 (2 October 2026) the tax tool is also available as an <strong>app for Android</strong> (GrapheneOS) and as a
+      <strong>Flatpak for the Linux desktop</strong> — free and open source like everything else. Interface and calculation core are the same as in the
+      web version, with one difference: after installation the app <strong>downloads nothing</strong>. Pyodide, the calculation core, the
+      ECB exchange rates and the BTC daily closing prices are built in. The reports are byte-identical to those of the CLI tool.
+    </p>
+    <ul>
+      <li><strong>Android:</strong> no internet permission (the only permission in the manifest is the AndroidX-generated signature permission of the app itself, which grants nothing),
+        screenshots and app switcher blocked (FLAG_SECURE), no backup of app data. You pick CSVs and ZIPs with the file picker and save reports through the Android save dialog.</li>
+      <li><strong>Linux desktop:</strong> Flatpak without network permission and without file-system access — files come in through the file dialog or drag &amp; drop and go out through the save dialog.</li>
+      <li>In-app guide behind the “?” button (German and English). The reports stay in German, they are meant for the German tax office.</li>
+    </ul>
+
+    <h3>Android: how to get it</h3>
+    <p>
+      Deliberately not on the Google Play Store, but as signed releases from our own download address
+      <a href="https://api.alien-investor.org/downloads/steuertool/" target="_blank" rel="noopener">api.alien-investor.org/downloads/steuertool/</a>.
+      Easiest via <a href="https://github.com/ImranR98/Obtainium" target="_blank" rel="noopener">Obtainium</a>, which reports every update automatically
+      (setup in the sheet below), or from the <a href="https://zapstore.dev/apps/org.alieninvestor.steuertool" target="_blank" rel="noopener">Zap Store</a>, the app store on Nostr.
+      Without either: download the APK from the <a href="https://api.alien-investor.org/downloads/steuertool/" target="_blank" rel="noopener">download page</a> and install it.
+      Every release is mirrored on <a href="https://github.com/Alien-Investor/btc-steuertool/releases" target="_blank" rel="noopener">GitHub</a>.
+    </p>
+
+    <details class="ob-sheet" id="obtainium">
+      <summary>Set up Obtainium (values to copy)</summary>
+      <div class="ob-body">
+        <p>On a phone with Obtainium installed it takes one tap; all settings are prefilled and Obtainium asks before adding:<br>
+          <a class="ob-open" href="obtainium://app/%7B%22id%22%3A%22org.alieninvestor.steuertool%22%2C%22url%22%3A%22https%3A%2F%2Fapi.alien-investor.org%2Fdownloads%2Fsteuertool%2F%22%2C%22author%22%3A%22Alien%20Investor%22%2C%22name%22%3A%22BTC%20Steuertool%22%2C%22additionalSettings%22%3A%22%7B%5C%22versionExtractionRegEx%5C%22%3A%5C%22btc-steuertool-(%5B0-9%5D%2B(%5C%5C%5C%5C.%5B0-9%5D%2B)%2B)%5C%5C%5C%5C.apk%24%5C%22%2C%5C%22matchGroupToUse%5C%22%3A%5C%22%241%5C%22%2C%5C%22allowedSigningCertHashes%5C%22%3A%5C%2226%3AC5%3AE0%3A94%3AA8%3AB7%3A65%3A0C%3AA6%3A65%3A01%3A4D%3A0C%3A3A%3A8B%3AA6%3A82%3AB1%3A7C%3A05%3AF5%3A3C%3A6C%3ADE%3AF0%3A55%3AD0%3A7C%3AE9%3A84%3ABF%3A0B%5C%22%7D%22%7D">Open in Obtainium</a></p>
+        <p>Or by hand, in Obtainium <span class="ob-menu">“Add app”</span>:</p>
+        <ol>
+          <li><span class="ob-menu">“App source URL”</span>
+            <code data-copy>https://api.alien-investor.org/downloads/steuertool/</code></li>
+          <li>Under <span class="ob-menu">“Additional options for HTML”</span>: <span class="ob-menu">“Version string extraction RegEx”</span>
+            <code data-copy>btc-steuertool-([0-9]+(\.[0-9]+)+)\.apk$</code></li>
+          <li><span class="ob-menu">“Match group to use for version string extraction RegEx”</span>
+            <code data-copy>$1</code></li>
+          <li><span class="ob-menu">“Expected signing certificate hashes”</span>
+            <code data-copy>26:C5:E0:94:A8:B7:65:0C:A6:65:01:4D:0C:3A:8B:A6:82:B1:7C:05:F5:3C:6C:DE:F0:55:D0:7C:E9:84:BF:0B</code></li>
+          <li>Tap the <span class="ob-menu">“+”</span> to add, then install. Obtainium reports updates automatically.</li>
+        </ol>
+        <p class="ob-note">Why the RegEx? On a download page Obtainium reads the version number from the file name only with it. Without it, Obtainium only has a
+          substitute identifier and cannot compare against the installed version. The certificate hash is a hard lock: Obtainium will not install an APK signed with a different key.</p>
+      </div>
+    </details>
+    <p><strong>Signing fingerprint (SHA-256)</strong> to verify authenticity with <a href="https://github.com/soupslurpr/AppVerifier" target="_blank" rel="noopener">AppVerifier</a>, identical for every version:</p>
+    <p><code style="display:block; margin:0.35em 0; padding:0.5em 0.6em; font-size:0.8em; word-break:break-all;">26:C5:E0:94:A8:B7:65:0C:A6:65:01:4D:0C:3A:8B:A6:82:B1:7C:05:F5:3C:6C:DE:F0:55:D0:7C:E9:84:BF:0B</code>
+    <span style="font-family:monospace; font-size:0.85em; color:#888; word-break:break-all;">apksigner: 26c5e094a8b7650ca665014d0c3a8ba682b17c05f53c6cdef055d07ce984bf0b</span></p>
+
+    <h3 id="desktop">For the Linux desktop</h3>
+    <p>
+      The same interface, packaged with Electron as a <strong>Flatpak</strong> (x86_64). The file is in the
+      <a href="https://github.com/Alien-Investor/btc-steuertool/releases" target="_blank" rel="noopener">GitHub release</a>, together with
+      <code>SHA256SUMS</code> and the signature <code>SHA256SUMS.asc</code>. The same three files are on our
+      <a href="https://api.alien-investor.org/downloads/steuertool/" target="_blank" rel="noopener">own download address</a>.
+      Not on Flathub, no automatic update. Step by step: <a href="flatpak.html">Flatpak guide</a> (for all desktop apps).
+    </p>
+    <p><strong>Requirement:</strong> Flatpak with the Flathub remote (for the runtime <code>org.freedesktop.Platform</code> 25.08, which Flatpak fetches during installation):</p>
+    <pre><code>flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo</code></pre>
+    <p><strong>1. Download three files:</strong> <code>btc-steuertool-1.0-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code>.</p>
+    <p><strong>2. Check the signature.</strong> The checksum file is signed with the Alien Investor GPG release key — the same key as for Alien Pass, Sachwert-Tresor and Alien Notes:
+      <a href="../alien-investor-release-key.asc">alien-investor-release-key.asc</a>. Compare the fingerprint through a second channel:</p>
+    <p><code style="display:block; margin:0.35em 0; padding:0.5em 0.6em; font-size:0.8em;">100F 9E25 BFAE A807 DBC3  57D7 50C0 D785 83BF CB81</code></p>
+    <pre><code>gpg --import alien-investor-release-key.asc
+gpg --verify SHA256SUMS.asc SHA256SUMS      # "Good signature from "Alien Investor (Release-Signatur) …""
+sha256sum -c SHA256SUMS                     # "…flatpak: OK"</code></pre>
+    <p><strong>3. Install and start:</strong></p>
+    <pre><code>flatpak install --user btc-steuertool-1.0-linux-x86_64.flatpak
+flatpak run org.alieninvestor.steuertool</code></pre>
+    <p><strong>Update:</strong> a new bundle cannot be installed over the existing one (Flatpak 1.14). Download and check the new version, then
+      <code>flatpak uninstall --user org.alieninvestor.steuertool</code> and install again. The app stores no tax data, only language and theme.</p>
+    <p><strong>Check for yourself that the app has no network:</strong></p>
+    <pre><code>flatpak info --user --show-permissions org.alieninvestor.steuertool</code></pre>
+    <p>Expected, exactly:</p>
+    <pre><code>[Context]
+shared=ipc;
+sockets=wayland;fallback-x11;
+devices=dri;</code></pre>
+    <p>No <code>network</code>, no <code>filesystem</code>.</p>
+
+    <div class="box">
+      <h3 style="margin-top:0;">Limits, stated honestly</h3>
+      <ul>
+        <li><strong>Internal review, not an independent audit.</strong> Before the release an internal security audit covered the app shells and the latest changes to the calculation core; all findings were fixed before publication.</li>
+        <li><strong>No screenshot protection on the desktop</strong> — only the Android app blocks screenshots.</li>
+        <li><strong>Rate tables have a cut-off date.</strong> If a purchase or sale in USD/CHF lies after the end of the built-in ECB table, the calculation stops with an explanation instead of using an old rate. For fees paid in bitcoin after the end of the BTC price table (v1.0: 14 August 2026) the report marks the gain as “not determined” and warns. New rates come with an app update, at the latest in January for the past year.</li>
+        <li><strong>No tax advice.</strong> The app calculates; responsibility for the tax return stays with you.</li>
+      </ul>
+    </div>
+
+    <h2 id="access">Web version, app or CLI — which fits you?</h2>
     <p>
       The web version is <strong>free</strong>: no access link, no account, no paywall. Open
       <a href="https://api.alien-investor.org/steuertool/" target="_blank" rel="noopener">api.alien-investor.org/steuertool/</a>, drop your
@@ -360,7 +451,8 @@ mkdir Broker</pre>
       not convenient. If you want maximum control, use the
       <a href="https://github.com/Alien-Investor/btc-steuertool" target="_blank" rel="noopener">CLI from the repo</a>:
       once cloned it runs fully offline, with bundled exchange-rate tables and not a single network
-      connection. Both run the same code.
+      connection. In between sit the <a href="#app">apps for Android and the Linux desktop</a>: installed and verified once
+      (signing fingerprint or GPG-signed checksum), then offline. All three run the same code.
     </p>
     <p style="text-align:center; margin: 2em 0;">
       <a href="https://api.alien-investor.org/steuertool/" target="_blank" rel="noopener"
@@ -466,5 +558,6 @@ mkdir Broker</pre>
   </footer>
 
   <script src="/lang-switcher.js"></script>
+  <script src="/obtainium-sheet.js" defer></script>
 </body>
 </html>

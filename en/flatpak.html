@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Alien apps on the Linux desktop: install and verify the Flatpak | Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Alien Pass, Sachwert-Tresor and Alien Notes as a Flatpak on Linux: download, verify the GPG-signed checksum, install, update and check for yourself that the app has no network.">
+  <meta name="description" content="Alien Pass, Sachwert-Tresor, Alien Notes and BTC Steuertool as a Flatpak on Linux: download, verify the GPG-signed checksum, install, update and check for yourself that the app has no network.">
   <link rel="canonical" href="/en/flatpak.html">
   <link rel="alternate" hreflang="de" href="/flatpak.html">
   <style>
@@ -160,12 +160,12 @@
 
   <article id="content">
     <p>
-      Three of my apps have been available for the <strong>Linux desktop</strong> since September 2026: <a href="/en/alien-pass.html#desktop">Alien Pass</a>
-      (since v1.7), the <a href="/en/sachwert-tresor.html#desktop">Sachwert-Tresor</a> (since v3.3) and <a href="/en/alien-notes.html#desktop">Alien Notes</a>
-      (since v0.1). All three run as a <strong>Flatpak</strong> (x86_64)
+      Four of my apps are available for the <strong>Linux desktop</strong>: <a href="/en/alien-pass.html#desktop">Alien Pass</a>
+      (since v1.7), the <a href="/en/sachwert-tresor.html#desktop">Sachwert-Tresor</a> (since v3.3), <a href="/en/alien-notes.html#desktop">Alien Notes</a>
+      (since v0.1) and the <a href="/en/btc-steuertool.html#desktop">BTC Steuertool</a> (since v1.0, October 2026). All four run as a <strong>Flatpak</strong> (x86_64)
       with the same shell: no network, no file access, files only through the system dialog. They are deliberately <strong>not on Flathub</strong>
       and do not update themselves — you download the file from the release (GitHub or our own download address), verify the signature and install it yourself.
-      This page shows the way once for all three apps.
+      This page shows the way once for all four apps.
     </p>
 
     <h2>1. Prerequisite: Flatpak with Flathub</h2>
@@ -184,15 +184,17 @@
         <code>sachwert-tresor-X.Y-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code></li>
       <li><a href="https://github.com/Alien-Investor/alien-notes/releases" target="_blank" rel="noopener">Alien Notes</a>:
         <code>alien-notes-X.Y-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code></li>
+      <li><a href="https://github.com/Alien-Investor/btc-steuertool/releases" target="_blank" rel="noopener">BTC Steuertool</a>:
+        <code>btc-steuertool-X.Y-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code></li>
     </ul>
     <p>The same files are also on our own download address at <code>api.alien-investor.org/downloads/&lt;app&gt;/</code>
-      (<code>alien-pass</code>, <code>sachwert-tresor</code>, <code>alien-notes</code>); the bundle's name is listed in the <code>SHA256SUMS</code> file.</p>
+      (<code>alien-pass</code>, <code>sachwert-tresor</code>, <code>alien-notes</code>, <code>steuertool</code>); the bundle's name is listed in the <code>SHA256SUMS</code> file.</p>
     <p style="font-size:0.9em; color:#aaa;">An <code>-rN</code> in the file name (such as <code>alien-pass-1.8-r2-…</code>) is a rebuild of the shell with the app unchanged.</p>
 
     <h2>3. Verify authenticity: GPG-signed checksum</h2>
     <p>
       The file <code>SHA256SUMS</code> is signed with the Alien Investor GPG release key — the same key for all desktop apps.
-      The public part is here on the website (<a href="/alien-investor-release-key.asc">alien-investor-release-key.asc</a>) and in all three repos.
+      The public part is here on the website (<a href="/alien-investor-release-key.asc">alien-investor-release-key.asc</a>) and in all repos.
       Compare the fingerprint through a second channel before trusting the key:
     </p>
     <pre><code>100F 9E25 BFAE A807 DBC3  57D7 50C0 D785 83BF CB81</code></pre>
@@ -212,7 +214,9 @@ flatpak run org.alieninvestor.pass</code></pre>
 flatpak run org.alieninvestor.tresor</code></pre>
     <pre><code>flatpak install --user alien-notes-X.Y-linux-x86_64.flatpak
 flatpak run org.alieninvestor.notes</code></pre>
-    <p>The apps then appear in the application menu. A backup from the phone (<code>.vault</code>, for Alien Notes <code>.notes</code>) is imported through the file dialog — the format is identical.</p>
+    <pre><code>flatpak install --user btc-steuertool-X.Y-linux-x86_64.flatpak
+flatpak run org.alieninvestor.steuertool</code></pre>
+    <p>The apps then appear in the application menu. A backup from the phone (<code>.vault</code>, for Alien Notes <code>.notes</code>) is imported through the file dialog — the format is identical (the tax tool has no backup, it only reads your CSVs).</p>
 
     <h2>5. Update: uninstall, reinstall</h2>
     <p>
@@ -220,17 +224,18 @@ flatpak run org.alieninvestor.notes</code></pre>
     </p>
     <pre><code>flatpak uninstall --user org.alieninvestor.pass       # deletes NO data (without --delete-data)
 flatpak install --user alien-pass-X.Y-linux-x86_64.flatpak</code></pre>
-    <p>For the vault the same with <code>org.alieninvestor.tresor</code>, for Alien Notes with <code>org.alieninvestor.notes</code>. Your data stays in place:</p>
+    <p>For the vault the same with <code>org.alieninvestor.tresor</code>, for Alien Notes with <code>org.alieninvestor.notes</code>, for the BTC Steuertool with <code>org.alieninvestor.steuertool</code>. Your data stays in place:</p>
     <ul>
       <li>Alien Pass: <code>~/.var/app/org.alieninvestor.pass/data/alien-pass/vault.aipv</code></li>
       <li>Sachwert-Tresor: <code>~/.var/app/org.alieninvestor.tresor/data/sachwert-tresor/vault.aisv</code></li>
       <li>Alien Notes: <code>~/.var/app/org.alieninvestor.notes/data/alien-notes/notes.ainv</code></li>
+      <li>BTC Steuertool: stores no tax data (only language and theme) — CSVs and reports stay wherever you saved them.</li>
     </ul>
     <p>Still make a backup before every update. Close a running window first — otherwise the old version keeps running.</p>
 
     <h2>6. Check for yourself that the app has no network</h2>
     <pre><code>flatpak info --user --show-permissions org.alieninvestor.pass</code></pre>
-    <p>Expected exactly this output (identical for the vault and for Alien Notes):</p>
+    <p>Expected exactly this output (identical for the vault, Alien Notes and the BTC Steuertool):</p>
     <pre><code>[Context]
 shared=ipc;
 sockets=wayland;fallback-x11;
@@ -249,7 +254,8 @@ devices=dri;</code></pre>
         <li><strong>On screen lock and suspend the apps do not lock by themselves.</strong> Use the system lock plus a short inactivity lock; Ctrl+L locks immediately. Minimised or hidden counts as background, switching windows only clears typed passphrases.</li>
         <li><strong>No fingerprint.</strong> The passphrase remains the key; on the desktop Alien Pass and Alien Notes optionally offer quick unlock with a PIN, the vault does not.</li>
       </ul>
-      <p>Details per app: <a href="/en/alien-pass.html#desktop">Alien Pass on the desktop</a> · <a href="/en/sachwert-tresor.html#desktop">Sachwert-Tresor on the desktop</a> · <a href="/en/alien-notes.html#desktop">Alien Notes on the desktop</a>.</p>
+      <p>Details per app: <a href="/en/alien-pass.html#desktop">Alien Pass on the desktop</a> · <a href="/en/sachwert-tresor.html#desktop">Sachwert-Tresor on the desktop</a> · <a href="/en/alien-notes.html#desktop">Alien Notes on the desktop</a> · <a href="/en/btc-steuertool.html#desktop">BTC Steuertool on the desktop</a>.
+        The tax tool has no passphrase and no lock: it stores no tax data, so the points on locking and fingerprint do not apply to it.</p>
     </div>
 
   </article>
@@ -281,7 +287,7 @@ devices=dri;</code></pre>
   <div class="box" style="border-style: dashed; border-color: #333;">
     <h3>Sources & links</h3>
     <ul style="padding-left: 1.2em;">
-      <li>Releases: <a href="https://github.com/Alien-Investor/alien-pass/releases" target="_blank" rel="noopener">Alien Pass</a> · <a href="https://github.com/Alien-Investor/sachwert-tresor/releases" target="_blank" rel="noopener">Sachwert-Tresor</a> · <a href="https://github.com/Alien-Investor/alien-notes/releases" target="_blank" rel="noopener">Alien Notes</a> (each with a README on the desktop version, German)</li>
+      <li>Releases: <a href="https://github.com/Alien-Investor/alien-pass/releases" target="_blank" rel="noopener">Alien Pass</a> · <a href="https://github.com/Alien-Investor/sachwert-tresor/releases" target="_blank" rel="noopener">Sachwert-Tresor</a> · <a href="https://github.com/Alien-Investor/alien-notes/releases" target="_blank" rel="noopener">Alien Notes</a> · <a href="https://github.com/Alien-Investor/btc-steuertool/releases" target="_blank" rel="noopener">BTC Steuertool</a> (each with a README on the desktop version, German)</li>
       <li>GPG release key: <a href="/alien-investor-release-key.asc">alien-investor-release-key.asc</a></li>
       <li>Flatpak documentation: <a href="https://docs.flatpak.org/" target="_blank" rel="noopener">docs.flatpak.org</a></li>
     </ul>

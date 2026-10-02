@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Bitcoin-Steuer selbst berechnen: FiFo, Haltefrist & das Open-Source Tool fürs Finanzamt</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Bitcoin versteuern ohne Steuerberater-Ahnungslosigkeit: Ein Open-Source CLI-Tool berechnet FiFo, Haltefrist und steuerpflichtige Gewinne automatisch aus deinen Broker-CSVs.">
+  <meta name="description" content="Bitcoin versteuern ohne Steuerberater-Ahnungslosigkeit: Ein Open-Source-Tool (CLI, Web-Version, Android-App, Linux-Flatpak) berechnet FiFo, Haltefrist und steuerpflichtige Gewinne lokal aus deinen Broker-CSVs.">
   <style>
     body { background-color: #000; color: #fff; font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 0 15px 20px 15px; }
     h1, h2, h3 { color: #00ffcc; }
@@ -47,8 +47,8 @@
       und wie hoch dein steuerpflichtiger Gewinn exakt ist.
     </p>
     <p>
-      Für genau dieses Problem gibt es das <strong>BTC Steuertool</strong> — ein Open-Source CLI-Tool das ich
-      selbst für meine eigene Steuererklärung entwickelt habe. Es liest deine CSV-Exporte von BitBox,
+      Für genau dieses Problem gibt es das <strong>BTC Steuertool</strong> — ein Open-Source-Tool, das ich
+      selbst für meine eigene Steuererklärung entwickelt habe (CLI, Web-Version und App). Es liest deine CSV-Exporte von BitBox,
       21bitcoin, Bison, Swissquote, Strike und Pocket und berechnet daraus automatisch, was ans Finanzamt
       muss und was steuerfrei bleibt.
     </p>
@@ -83,7 +83,8 @@
       <p style="margin-top:1.5em;">
         <a href="https://api.alien-investor.org/steuertool/" target="_blank" rel="noopener"><strong>→ Web-Version öffnen</strong></a> (fiktive Beispieldaten zum Ausprobieren liegen bei)<br>
         <a href="steuertool-guide.html"><svg style="width:1em;height:0.88em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="book-bg-art" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0d2a28"/><stop offset="100%" stop-color="#060e12"/></linearGradient></defs><path d="M18 7 C14.5 3.8, 9 3, 4 4.5 L4 26 C9 24.5, 14.5 25.2, 18 28 C21.5 25.2, 27 24.5, 32 26 L32 4.5 C27 3, 21.5 3.8, 18 7 Z" fill="url(#book-bg-art)" stroke="#00ffcc" stroke-width="1.4" stroke-linejoin="round"/><line x1="18" y1="7" x2="18" y2="28" stroke="#00ffcc" stroke-width="1" opacity="0.8"/><line x1="7.5" y1="10" x2="14.5" y2="9.2" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.6"/><line x1="7.5" y1="14" x2="14.5" y2="13.2" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.6"/><line x1="7.5" y1="18" x2="14.5" y2="17.2" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.6"/><line x1="21.5" y1="9.2" x2="28.5" y2="10" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.6"/><line x1="21.5" y1="13.2" x2="28.5" y2="14" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.6"/><line x1="21.5" y1="17.2" x2="28.5" y2="18" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.6"/></svg> <strong>→ Die Anleitung</strong></a> — Schritt für Schritt mit Screenshots<br>
-        <a href="#zugang"><strong>→ Web-Version oder CLI — was passt zu dir?</strong></a>
+        <a href="#app"><strong>→ Als App für Android und Linux-Desktop</strong></a><br>
+        <a href="#zugang"><strong>→ Web-Version, App oder CLI — was passt zu dir?</strong></a>
       </p>
     </div>
 
@@ -139,7 +140,7 @@
       <h3 style="color: #ff3b3b;">Die Freigrenze ist eine Falle</h3>
       <p>
         Viele denken: „Ich bin unter 1.000 EUR, also irrelevant." Falsch.
-        Die Freigrenze ist kein Freibetrag. Bei Überschreitung wird der <em>gesamte</em> steuerpflichtige
+        Die Freigrenze ist kein Freibetrag. Erreicht oder überschreitet der Gewinn die Grenze, wird der <em>gesamte</em> steuerpflichtige
         Gewinn versteuert, nicht nur der Teil darüber. Ein Gewinn von 1.001 EUR ist damit vollständig
         steuerpflichtig — nicht nur der eine Euro.
       </p>
@@ -166,9 +167,9 @@
       <p style="margin-bottom:0;">
         Die folgenden Abschnitte 3–5 beschreiben das <strong>kostenlose CLI-Tool von GitHub</strong> —
         für alle, die gern im Terminal arbeiten.<br><br>
-        <strong>Nutzt du die <a href="#web-version">Web-Version</a>? Dann gibt es nichts zu
-        installieren.</strong> Kein Python, kein Download, kein Setup — Browser öffnen, CSVs
-        reinziehen, fertig. Spring direkt zu <a href="#finanzamt">Abschnitt 6: Was du dem
+        <strong>Nutzt du die <a href="#web-version">Web-Version</a> oder die <a href="#app">App</a>? Dann brauchst du
+        das alles nicht.</strong> Kein Python, kein Terminal — CSVs
+        hineinziehen oder auswählen, fertig. Spring direkt zu <a href="#finanzamt">Abschnitt 6: Was du dem
         Finanzamt gibst</a>.
       </p>
     </div>
@@ -330,7 +331,7 @@ mkdir Broker</pre>
       formaler Nachweis und optional CSV-Tabellen für Excel.
     </p>
 
-    <h2 id="finanzamt">6. Was du dem Finanzamt gibst (Web &amp; CLI)</h2>
+    <h2 id="finanzamt">6. Was du dem Finanzamt gibst (Web, App &amp; CLI)</h2>
     <p>
       Der Nachweis allein reicht nicht. Das Finanzamt will wissen, dass die Kaufdaten echt sind.
       Deshalb immer zwei Teile einreichen:
@@ -355,7 +356,97 @@ mkdir Broker</pre>
       Cloud-App vertrauen zu lassen die du nicht kontrollierst.
     </p>
 
-    <h2 id="zugang">Web-Version oder CLI — was passt zu dir?</h2>
+    <h2 id="app">Als App: Android und Linux-Desktop</h2>
+    <p>
+      Seit Version 1.0 (2. Oktober 2026) gibt es das Steuertool auch als <strong>App für Android</strong> (GrapheneOS) und als
+      <strong>Flatpak für den Linux-Desktop</strong> — kostenlos und quelloffen wie alles andere. Oberfläche und Rechenkern sind dieselben wie in der
+      Web-Version, mit einem Unterschied: Die App lädt nach der Installation <strong>nichts mehr nach</strong>. Pyodide, der Rechenkern, die
+      EZB-Wechselkurse und die BTC-Tagesschlusskurse sind eingebaut. Die Reports sind byte-gleich zu denen des CLI-Tools.
+    </p>
+    <ul>
+      <li><strong>Android:</strong> keine Internet-Berechtigung (im Manifest steht nur die von AndroidX erzeugte app-eigene Signatur-Berechtigung, die nichts freigibt),
+        Screenshots und App-Umschalter gesperrt (FLAG_SECURE), kein Backup der App-Daten. CSVs und ZIPs wählst du über die Dateiauswahl, Reports speicherst du über den Android-Speichern-Dialog.</li>
+      <li><strong>Linux-Desktop:</strong> Flatpak ohne Netz-Recht und ohne Dateisystem-Zugriff — Dateien kommen über den Datei-Dialog oder per Drag&amp;Drop herein und über den Speichern-Dialog hinaus.</li>
+      <li>Handbuch in der App über den „?“-Knopf (Deutsch und Englisch). Die Reports bleiben deutsch, sie sind fürs Finanzamt.</li>
+    </ul>
+
+    <h3>Android: so bekommst du sie</h3>
+    <p>
+      Bewusst nicht im Google Play Store, sondern über signierte Releases von der eigenen Download-Adresse
+      <a href="https://api.alien-investor.org/downloads/steuertool/" target="_blank" rel="noopener">api.alien-investor.org/downloads/steuertool/</a>.
+      Am einfachsten über <a href="https://github.com/ImranR98/Obtainium" target="_blank" rel="noopener">Obtainium</a>, das jedes Update automatisch meldet
+      (Einrichtung im Blatt unten), oder aus dem <a href="https://zapstore.dev/apps/org.alieninvestor.steuertool" target="_blank" rel="noopener">Zap Store</a>, dem App-Store auf Nostr.
+      Ohne beides: die APK von der <a href="https://api.alien-investor.org/downloads/steuertool/" target="_blank" rel="noopener">Download-Seite</a> laden und installieren.
+      Jedes Release liegt zusätzlich als Spiegel auf <a href="https://github.com/Alien-Investor/btc-steuertool/releases" target="_blank" rel="noopener">GitHub</a>.
+    </p>
+
+    <details class="ob-sheet" id="obtainium">
+      <summary>Obtainium einrichten (Werte zum Kopieren)</summary>
+      <div class="ob-body">
+        <p>Auf dem Handy mit installiertem Obtainium geht es mit einem Tipp, alle Einstellungen sind dann vorbelegt und Obtainium fragt vor dem Hinzufügen nach:<br>
+          <a class="ob-open" href="obtainium://app/%7B%22id%22%3A%22org.alieninvestor.steuertool%22%2C%22url%22%3A%22https%3A%2F%2Fapi.alien-investor.org%2Fdownloads%2Fsteuertool%2F%22%2C%22author%22%3A%22Alien%20Investor%22%2C%22name%22%3A%22BTC%20Steuertool%22%2C%22additionalSettings%22%3A%22%7B%5C%22versionExtractionRegEx%5C%22%3A%5C%22btc-steuertool-(%5B0-9%5D%2B(%5C%5C%5C%5C.%5B0-9%5D%2B)%2B)%5C%5C%5C%5C.apk%24%5C%22%2C%5C%22matchGroupToUse%5C%22%3A%5C%22%241%5C%22%2C%5C%22allowedSigningCertHashes%5C%22%3A%5C%2226%3AC5%3AE0%3A94%3AA8%3AB7%3A65%3A0C%3AA6%3A65%3A01%3A4D%3A0C%3A3A%3A8B%3AA6%3A82%3AB1%3A7C%3A05%3AF5%3A3C%3A6C%3ADE%3AF0%3A55%3AD0%3A7C%3AE9%3A84%3ABF%3A0B%5C%22%7D%22%7D">In Obtainium öffnen</a></p>
+        <p>Oder von Hand, in Obtainium <span class="ob-menu">„App hinzufügen“</span>:</p>
+        <ol>
+          <li><span class="ob-menu">„Quell-URL der App“</span>
+            <code data-copy>https://api.alien-investor.org/downloads/steuertool/</code></li>
+          <li>Unter <span class="ob-menu">„Zusatzoptionen für HTML“</span>: <span class="ob-menu">„Versionsextraktion per RegEx“</span>
+            <code data-copy>btc-steuertool-([0-9]+(\.[0-9]+)+)\.apk$</code></li>
+          <li><span class="ob-menu">„Zu verwendende Gruppe abgleichen“</span>
+            <code data-copy>$1</code></li>
+          <li><span class="ob-menu">„Expected signing certificate hashes“</span> (so heißt es auch in der deutschen Obtainium-Fassung)
+            <code data-copy>26:C5:E0:94:A8:B7:65:0C:A6:65:01:4D:0C:3A:8B:A6:82:B1:7C:05:F5:3C:6C:DE:F0:55:D0:7C:E9:84:BF:0B</code></li>
+          <li>Mit dem <span class="ob-menu">„+“</span> hinzufügen, dann installieren. Updates meldet Obtainium automatisch.</li>
+        </ol>
+        <p class="ob-note">Warum die RegEx? Auf einer Download-Seite liest Obtainium die Versionsnummer nur mit ihr aus dem Dateinamen. Ohne sie kennt es nur eine
+          Ersatz-Kennung und kann die installierte Version nicht vergleichen. Der Zertifikats-Hash ist eine harte Sperre: Eine APK mit anderem Signaturschlüssel installiert Obtainium gar nicht.</p>
+      </div>
+    </details>
+    <p><strong>Signatur-Fingerprint (SHA-256)</strong> zum Prüfen der Echtheit mit <a href="https://github.com/soupslurpr/AppVerifier" target="_blank" rel="noopener">AppVerifier</a>, über alle Versionen gleich:</p>
+    <p><code style="display:block; margin:0.35em 0; padding:0.5em 0.6em; font-size:0.8em; word-break:break-all;">26:C5:E0:94:A8:B7:65:0C:A6:65:01:4D:0C:3A:8B:A6:82:B1:7C:05:F5:3C:6C:DE:F0:55:D0:7C:E9:84:BF:0B</code>
+    <span style="font-family:monospace; font-size:0.85em; color:#888; word-break:break-all;">apksigner: 26c5e094a8b7650ca665014d0c3a8ba682b17c05f53c6cdef055d07ce984bf0b</span></p>
+
+    <h3 id="desktop">Für den Linux-Desktop</h3>
+    <p>
+      Dieselbe Oberfläche, verpackt mit Electron als <strong>Flatpak</strong> (x86_64). Die Datei liegt im
+      <a href="https://github.com/Alien-Investor/btc-steuertool/releases" target="_blank" rel="noopener">GitHub-Release</a>, zusammen mit
+      <code>SHA256SUMS</code> und der Signatur <code>SHA256SUMS.asc</code>. Dieselben drei Dateien liegen auch auf der
+      <a href="https://api.alien-investor.org/downloads/steuertool/" target="_blank" rel="noopener">eigenen Download-Adresse</a>.
+      Nicht auf Flathub, kein automatisches Update. Schritt für Schritt: <a href="flatpak.html">Anleitung Flatpak</a> (für alle Desktop-Apps).
+    </p>
+    <p><strong>Voraussetzung:</strong> Flatpak mit dem Flathub-Remote (für die Laufzeit <code>org.freedesktop.Platform</code> 25.08, die Flatpak beim Installieren nachlädt):</p>
+    <pre><code>flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo</code></pre>
+    <p><strong>1. Drei Dateien laden:</strong> <code>btc-steuertool-1.0-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code>.</p>
+    <p><strong>2. Signatur prüfen.</strong> Die Prüfsumme ist mit dem GPG-Release-Schlüssel von Alien Investor signiert — derselbe Schlüssel wie bei Alien Pass, Sachwert-Tresor und Alien Notes:
+      <a href="alien-investor-release-key.asc">alien-investor-release-key.asc</a>. Den Fingerabdruck über einen zweiten Weg vergleichen:</p>
+    <p><code style="display:block; margin:0.35em 0; padding:0.5em 0.6em; font-size:0.8em;">100F 9E25 BFAE A807 DBC3  57D7 50C0 D785 83BF CB81</code></p>
+    <pre><code>gpg --import alien-investor-release-key.asc
+gpg --verify SHA256SUMS.asc SHA256SUMS      # „Korrekte Signatur von "Alien Investor (Release-Signatur) …"“
+sha256sum -c SHA256SUMS                     # „…flatpak: OK“</code></pre>
+    <p><strong>3. Installieren und starten:</strong></p>
+    <pre><code>flatpak install --user btc-steuertool-1.0-linux-x86_64.flatpak
+flatpak run org.alieninvestor.steuertool</code></pre>
+    <p><strong>Update:</strong> Eine neue Bündel-Datei lässt sich (Flatpak 1.14) nicht über die installierte legen. Neue Version laden und prüfen, dann
+      <code>flatpak uninstall --user org.alieninvestor.steuertool</code> und neu installieren. Die App speichert keine Steuerdaten, nur Sprache und Darstellung.</p>
+    <p><strong>Selbst prüfen, dass die App kein Netz hat:</strong></p>
+    <pre><code>flatpak info --user --show-permissions org.alieninvestor.steuertool</code></pre>
+    <p>Erwartet genau:</p>
+    <pre><code>[Context]
+shared=ipc;
+sockets=wayland;fallback-x11;
+devices=dri;</code></pre>
+    <p>Kein <code>network</code>, kein <code>filesystem</code>.</p>
+
+    <div class="box">
+      <h3 style="margin-top:0;">Grenzen, ehrlich benannt</h3>
+      <ul>
+        <li><strong>Interne Prüfung, kein unabhängiges Audit.</strong> Vor dem Release lief ein interner Security-Audit über die App-Hüllen und die jüngsten Änderungen am Rechenkern; alle Funde wurden vor der Veröffentlichung behoben.</li>
+        <li><strong>Am Desktop kein Schutz vor Bildschirmfotos</strong> — nur die Android-App sperrt Screenshots.</li>
+        <li><strong>Kurstabellen haben einen Datenstand.</strong> Liegt ein Kauf oder Verkauf in USD/CHF nach dem Ende der eingebauten EZB-Tabelle, bricht die Berechnung mit einer Erklärung ab, statt einen alten Kurs zu nehmen. Für in Bitcoin gezahlte Gebühren nach dem Ende der BTC-Kurstabelle (in v1.0: 14.08.2026) weist der Report den Gewinn als „nicht ermittelt“ aus und warnt. Neue Kurse kommen mit einem App-Update, spätestens im Januar für das abgelaufene Jahr.</li>
+        <li><strong>Keine Steuerberatung.</strong> Die App rechnet, die Verantwortung für die Erklärung bleibt bei dir.</li>
+      </ul>
+    </div>
+
+    <h2 id="zugang">Web-Version, App oder CLI — was passt zu dir?</h2>
     <p>
       Die Web-Version ist <strong>kostenlos</strong>: kein Zugangslink, kein Account, keine
       Bezahlschranke. Öffne <a href="https://api.alien-investor.org/steuertool/" target="_blank" rel="noopener">api.alien-investor.org/steuertool/</a>,
@@ -368,7 +459,8 @@ mkdir Broker</pre>
       das, bequem ist es nicht. Wer maximale Kontrolle will, nimmt das
       <a href="https://github.com/Alien-Investor/btc-steuertool" target="_blank" rel="noopener">CLI aus dem Repo</a>:
       einmal geklont läuft es vollständig offline, mit gebündelten Kurstabellen und ohne eine einzige
-      Netzverbindung. Beides rechnet mit demselben Code.
+      Netzverbindung. Dazwischen liegen die <a href="#app">Apps für Android und den Linux-Desktop</a>: einmal installiert und geprüft
+      (Signatur-Fingerprint bzw. GPG-signierte Prüfsumme), danach ohne Netz. Alle drei rechnen mit demselben Code.
     </p>
     <p style="text-align:center; margin: 2em 0;">
       <a href="https://api.alien-investor.org/steuertool/" target="_blank" rel="noopener"
@@ -483,5 +575,6 @@ mkdir Broker</pre>
   </footer>
 
   <script src="/lang-switcher.js"></script>
+  <script src="/obtainium-sheet.js" defer></script>
 </body>
 </html>

@@ -848,17 +848,66 @@
       </div>
     </div>
 
+    <div class="app-card">
+      <div class="app-icon">
+        <img src="app-icon-steuertool.png" alt="App-Icon: BTC Steuertool">
+      </div>
+      <div class="app-info">
+        <h2>BTC Steuertool</h2>
+        <p class="subtitle">Bitcoin-Steuerreport fürs Finanzamt – ohne Internet-Berechtigung, die Daten bleiben bei dir</p>
+
+        <p class="pitch">
+          <strong>Deine Steuerdaten landen nicht auf fremden Servern.</strong>
+          CSV-Exporte von BitBox und Brokern rein, Jahresreport nach § 23 EStG raus – berechnet komplett auf deinem Gerät.
+          Kein Konto, kein Upload, keine Telemetrie. Derselbe quelloffene Rechenkern wie das CLI-Tool und die Web-Version.
+        </p>
+
+        <ul>
+          <li>FiFo mit Jahresfrist nach Kalenderdatum (§§ 187, 188 BGB) und Freigrenze (600 EUR bis 2023, 1.000 EUR ab 2024)</li>
+          <li>BitBox, 21bitcoin, Bison, Swissquote, Strike, Pocket, Bisq sowie manuelle Käufe und Verkäufe – Broker werden am Dateiinhalt erkannt, ZIPs entpackt; unbekannte Dateien sperren die Berechnung, statt still zu fehlen</li>
+          <li>In Bitcoin gezahlte Gebühren (Netzwerk-, Auszahlungs-, Bisq-Handelsgebühr) als Veräußerung des Gebührenanteils, Schenkungen und Spenden als Bestandsabgang</li>
+          <li>noKYC strikt getrennt: eigener FiFo-Bestand und eigener interner Report, nie Teil der Unterlagen fürs Finanzamt</li>
+          <li>Steuerreport, formaler Steuernachweis, Käufe und Verkäufe als CSV – gespeichert über den Speichern-Dialog</li>
+          <li>EZB-Wechselkurse und BTC-Tagesschlusskurse eingebaut – die App lädt nach der Installation nichts nach</li>
+          <li>Android: keine Internet-Berechtigung, Screenshots gesperrt (FLAG_SECURE), kein Backup der App-Daten</li>
+          <li>Auch für den <strong>Linux-Desktop</strong> – als Flatpak ohne Netzwerk-Berechtigung und ohne Dateizugriff, mit GPG-signierter Prüfsumme</li>
+          <li>Handbuch in der App (Deutsch/Englisch); interner Security-Audit vor dem Release, alle Funde behoben (kein unabhängiges Audit)</li>
+        </ul>
+
+        <p style="color:#00ffcc; font-size:0.92em;"><strong>Auch im Browser und als CLI:</strong> Die <a href="https://api.alien-investor.org/steuertool/" target="_blank" rel="noopener">Web-Version</a> lädt ihren Code bei jedem Aufruf vom Server, das CLI läuft aus dem Repo. Alles dazu auf der <a href="btc-steuertool.html">Steuertool-Seite</a>. Keine Steuerberatung – eine Rechenhilfe.</p>
+
+        <p class="app-meta">Android / GrapheneOS · Linux (Flatpak) · Open Source (MIT) · kein Konto, kein Server</p>
+        <div class="app-fp">
+          Signatur-Fingerprint der Android-APK (SHA-256), über alle Versionen gleich — auch die APK aus dem Zap Store trägt ihn:
+          <code>26:C5:E0:94:A8:B7:65:0C:A6:65:01:4D:0C:3A:8B:A6:82:B1:7C:05:F5:3C:6C:DE:F0:55:D0:7C:E9:84:BF:0B</code>
+          <span class="app-fp-hex">apksigner: 26c5e094a8b7650ca665014d0c3a8ba682b17c05f53c6cdef055d07ce984bf0b</span>
+          <span class="app-fp-hex">Linux-Desktop: <a href="alien-investor-release-key.asc">GPG-Release-Schlüssel</a> für die Prüfsumme (alle Desktop-Apps): 100F 9E25 BFAE A807 DBC3 57D7 50C0 D785 83BF CB81 · <a href="flatpak.html">Anleitung</a></span>
+        </div>
+
+        <div class="cta-row">
+          <a href="https://zapstore.dev/apps/org.alieninvestor.steuertool" class="cta-button" target="_blank" rel="noopener">
+            <svg style="width:1em;height:1em;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M13 2 L4 14 h6 l-1 8 9-12 h-6 z" fill="currentColor"/></svg> Im Zap Store
+          </a>
+          <a href="btc-steuertool.html#obtainium" class="cta-button secondary">Obtainium / APK</a>
+          <a href="https://github.com/Alien-Investor/btc-steuertool" class="cta-button secondary" target="_blank" rel="noopener">
+            <svg style="width:1em;height:1em;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M8 6 L2 12 L8 18 M16 6 L22 12 L16 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Quellcode (GitHub)
+          </a>
+          <a href="btc-steuertool.html#desktop" class="cta-button secondary">Linux-Desktop</a>
+        </div>
+      </div>
+    </div>
+
     <div class="notice">
       <h3>So installierst du die Apps – ohne Google Play</h3>
       Alle Apps werden als <strong>entwicklersignierte Releases</strong> verteilt – nicht über den Google Play Store.
       Am einfachsten über den <a href="https://zapstore.dev/" target="_blank" rel="noopener">Nostr Zap Store</a>
       (kryptografisch verifizierte Installation, Updates über dein soziales Netz) oder per
       <a href="Obtainium.html">Obtainium</a> direkt von der eigenen Download-Adresse
-      (Einrichtung: <a href="sachwert-tresor.html#obtainium">Tresor</a>, <a href="alien-pass.html#obtainium">Alien Pass</a>, <a href="alien-notes.html#obtainium">Alien Notes</a>, <a href="#obtainium-fitness">Alien Fitness</a>, <a href="#obtainium-ausgaben">Ausgaben-Tracker</a>) – beides ganz ohne Google-Konto.
+      (Einrichtung: <a href="sachwert-tresor.html#obtainium">Tresor</a>, <a href="alien-pass.html#obtainium">Alien Pass</a>, <a href="alien-notes.html#obtainium">Alien Notes</a>, <a href="btc-steuertool.html#obtainium">BTC Steuertool</a>, <a href="#obtainium-fitness">Alien Fitness</a>, <a href="#obtainium-ausgaben">Ausgaben-Tracker</a>) – beides ganz ohne Google-Konto.
       Mehr dazu: <a href="grapheneos-app-stores.html">App-Stores auf GrapheneOS</a> und
       <a href="Zapstore.html">der Nostr Zap Store erklärt</a>.
       <p style="margin:0.8em 0 0 0;">
-        <strong>Linux-Desktop:</strong> Alien Pass, Sachwert-Tresor und Alien Notes gibt es auch als Flatpak — Datei laden, GPG-signierte Prüfsumme prüfen,
+        <strong>Linux-Desktop:</strong> Alien Pass, Sachwert-Tresor, Alien Notes und das BTC Steuertool gibt es auch als Flatpak — Datei laden, GPG-signierte Prüfsumme prüfen,
         installieren. Schritt für Schritt in der <a href="flatpak.html">Flatpak-Anleitung</a>.
       </p>
       <p style="margin:0.8em 0 0 0;">
