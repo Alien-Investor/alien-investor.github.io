@@ -389,6 +389,91 @@
       word-break: break-all;
     }
 
+    /* --- APP-ÜBERSICHT (Kacheln mit Sprungmarken) --- */
+    .app-overview {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 10px 0 20px 0;
+    }
+    .app-overview a {
+      display: block;
+      background: linear-gradient(135deg, rgba(0, 20, 20, 0.6), rgba(0, 8, 15, 0.85));
+      border: 1px solid rgba(0, 255, 204, 0.35);
+      border-radius: 10px;
+      padding: 22px 10px 12px;
+      text-align: center;
+      text-decoration: none;
+      box-shadow: 0 0 18px rgba(0, 255, 204, 0.08);
+      transition: all 0.2s ease;
+    }
+    .app-overview a:hover {
+      border-color: #00ffcc;
+      box-shadow: 0 0 18px rgba(0, 255, 204, 0.3);
+      text-shadow: none;
+    }
+    .app-overview img {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      box-shadow: 0 0 14px rgba(0, 255, 204, 0.35);
+      animation: float 6s ease-in-out infinite;
+      display: block;
+      margin: 0 auto 10px;
+    }
+    .app-overview a:nth-child(even) img { animation-duration: 7s; animation-delay: -2s; }
+    .app-overview .ov-name {
+      display: block;
+      color: #00ffcc;
+      font-weight: bold;
+      font-size: 0.92em;
+      line-height: 1.25;
+    }
+    .app-overview .ov-sub {
+      display: block;
+      color: #bbb;
+      font-size: 0.8em;
+      margin-top: 3px;
+    }
+    .app-overview .ov-plat {
+      display: block;
+      color: #777;
+      font-size: 0.72em;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 6px;
+    }
+    .app-card { scroll-margin-top: 16px; }
+
+    /* --- KLAPPFELDER (Versionen, Fingerprint) --- */
+    .app-info details.more { margin: 0.8em 0 0; }
+    .app-info details.more summary {
+      display: inline-block;
+      cursor: pointer;
+      list-style: none;
+      color: #00ffcc;
+      font-size: 0.92em;
+      font-weight: bold;
+      padding: 6px 14px;
+      border: 1px solid rgba(0, 255, 204, 0.25);
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+    .app-info details.more summary::-webkit-details-marker { display: none; }
+    .app-info details.more summary::after {
+      content: "\25B8";
+      display: inline-block;
+      margin-left: 8px;
+      transition: transform 0.2s ease;
+    }
+    .app-info details.more[open] summary::after { transform: rotate(90deg); }
+    .app-info details.more summary:hover {
+      border-color: #00ffcc;
+      box-shadow: 0 0 12px rgba(0, 255, 204, 0.25);
+    }
+    .app-info details.more ul { margin-top: 1em; }
+    .app-info details.fp summary { font-size: 0.85em; }
+
     /* --- CTA-BUTTONS --- */
     .cta-row {
       display: flex;
@@ -463,6 +548,9 @@
       .app-info .subtitle { text-align: center; }
       .app-info ul { text-align: left; }
       .cta-row { justify-content: center; }
+      .app-overview { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .app-info details.more { text-align: center; }
+      .app-info details.more ul, .app-info details.more .app-fp { text-align: left; }
       h1 { font-size: 1.6em; }
     }
   </style>
@@ -517,8 +605,48 @@
       Alle sechs Apps gibt es auch fertig eingerichtet: auf dem <a href="/grapheneos-flash-service.html" style="color:#00ffcc;">Alien Phone</a> ab der Stufe Digital Bunker vorinstalliert, mit Obtainium für Updates.
     </p>
 
+    <!-- ÜBERSICHT: Sprungmarken zu den App-Karten -->
+    <nav class="app-overview" aria-label="App-Übersicht">
+      <a href="#tresor">
+        <img src="app-icon-tresor.png" alt="" loading="lazy">
+        <span class="ov-name">Sachwert-Tresor</span>
+        <span class="ov-sub">Vermögens-Tresor</span>
+        <span class="ov-plat">Android · Linux</span>
+      </a>
+      <a href="#ausgaben">
+        <img src="app-icon-ausgaben.png" alt="" loading="lazy">
+        <span class="ov-name">Ausgaben-Tracker</span>
+        <span class="ov-sub">Haushaltsbuch</span>
+        <span class="ov-plat">Android</span>
+      </a>
+      <a href="#fitness">
+        <img src="app-icon-fitness.png" alt="" loading="lazy">
+        <span class="ov-name">Alien Fitness</span>
+        <span class="ov-sub">Trainings-Tracker</span>
+        <span class="ov-plat">Android</span>
+      </a>
+      <a href="#pass">
+        <img src="app-icon-pass.png" alt="" loading="lazy">
+        <span class="ov-name">Alien Pass</span>
+        <span class="ov-sub">Passwort-Manager</span>
+        <span class="ov-plat">Android · Linux</span>
+      </a>
+      <a href="#notes">
+        <img src="app-icon-notes.png" alt="" loading="lazy">
+        <span class="ov-name">Alien Notes</span>
+        <span class="ov-sub">Notizen &amp; Checklisten</span>
+        <span class="ov-plat">Android · Linux</span>
+      </a>
+      <a href="#steuertool">
+        <img src="app-icon-steuertool.png" alt="" loading="lazy">
+        <span class="ov-name">BTC Steuertool</span>
+        <span class="ov-sub">Steuerreport</span>
+        <span class="ov-plat">Android · Linux</span>
+      </a>
+    </nav>
+
     <!-- APP 1: Sachwert-Tresor -->
-    <div class="app-card">
+    <div class="app-card" id="tresor">
       <div class="app-icon">
         <img src="app-icon-tresor.png" alt="App-Icon: Sachwert-Tresor">
       </div>
@@ -548,19 +676,28 @@
           <li>Buchungen in EUR, USD oder CHF, Anzeige in BTC oder Sats – ohne Kursabfrage</li>
           <li>Nachlass-Anhang: ein Blatt mit den Netto-Beständen fürs Erben-Paket, nur Mengen</li>
           <li>Seit v3.3: auch für den <strong>Linux-Desktop</strong> – als Flatpak ohne Netzwerk-Berechtigung und ohne Dateizugriff, mit GPG-signierter Prüfsumme, Backups zwischen Handy und Desktop austauschbar</li>
-          <li>Seit v3.5: Rückfragen als eigene Dialoge in der App statt Android-Systemdialog (der erbte den Screenshot-Schutz nicht), „Rückgängig“ nach dem Löschen einer Buchung</li>
-          <li>Seit v3.6: Sperrt die App, während der Datei-Picker offen ist, geht die gewählte Datei nicht verloren – nach dem Entsperren läuft der Import weiter (<code>.vault</code> und CSV)</li>
         </ul>
+
+        <details class="more">
+          <summary>Neu in den letzten Versionen</summary>
+          <ul>
+            <li>Seit v3.6: Sperrt die App, während der Datei-Picker offen ist, geht die gewählte Datei nicht verloren – nach dem Entsperren läuft der Import weiter (<code>.vault</code> und CSV)</li>
+            <li>Seit v3.5: Rückfragen als eigene Dialoge in der App statt Android-Systemdialog (der erbte den Screenshot-Schutz nicht), „Rückgängig“ nach dem Löschen einer Buchung</li>
+          </ul>
+        </details>
 
         <p style="color:#00ffcc; font-size:0.92em;"><strong>Nur als App, bewusst ohne Web-Version – volle Härtung in der Android-App:</strong> keine INTERNET-Berechtigung (einzige System-Berechtigung: Fingerabdruck), FLAG_SECURE, kein Cloud-Backup und keine Übertragung beim Handywechsel – Schutz auf Betriebssystem-Ebene, den eine Website nicht bieten kann. Am Linux-Desktop: Flatpak ohne Netz und ohne Dateizugriff, Grenzen auf der <a href="sachwert-tresor.html#desktop">Tresor-Seite</a>.</p>
 
         <p class="app-meta">Android / GrapheneOS · Linux (Flatpak) · Open Source (MIT) · kein Konto, kein Server</p>
-        <div class="app-fp">
-          Signatur-Fingerprint der Android-APK (SHA-256), über alle Versionen gleich — auch die APK aus dem Zap Store trägt ihn:
-          <code>66:0F:21:0C:7A:28:9F:38:8B:B4:81:2C:23:82:5A:77:F1:FC:84:E6:A7:EE:58:D6:42:81:B6:BF:5C:D8:79:88</code>
-          <span class="app-fp-hex">apksigner: 660f210c7a289f388bb4812c23825a77f1fc84e6a7ee58d64281b6bf5cd87988</span>
-          <span class="app-fp-hex">Linux-Desktop: <a href="alien-investor-release-key.asc">GPG-Release-Schlüssel</a> für die Prüfsumme (alle Desktop-Apps): 100F 9E25 BFAE A807 DBC3 57D7 50C0 D785 83BF CB81 · <a href="flatpak.html">Anleitung</a></span>
-        </div>
+        <details class="more fp">
+          <summary>Echtheit prüfen (Signatur-Fingerprint)</summary>
+          <div class="app-fp">
+            Signatur-Fingerprint der Android-APK (SHA-256), über alle Versionen gleich — auch die APK aus dem Zap Store trägt ihn:
+            <code>66:0F:21:0C:7A:28:9F:38:8B:B4:81:2C:23:82:5A:77:F1:FC:84:E6:A7:EE:58:D6:42:81:B6:BF:5C:D8:79:88</code>
+            <span class="app-fp-hex">apksigner: 660f210c7a289f388bb4812c23825a77f1fc84e6a7ee58d64281b6bf5cd87988</span>
+            <span class="app-fp-hex">Linux-Desktop: <a href="alien-investor-release-key.asc">GPG-Release-Schlüssel</a> für die Prüfsumme (alle Desktop-Apps): 100F 9E25 BFAE A807 DBC3 57D7 50C0 D785 83BF CB81 · <a href="flatpak.html">Anleitung</a></span>
+          </div>
+        </details>
 
         <div class="cta-row">
           <a href="https://zapstore.dev/apps/org.alieninvestor.tresor" class="cta-button" target="_blank" rel="noopener">
@@ -576,7 +713,7 @@
     </div>
 
     <!-- APP 2: Ausgaben-Tracker -->
-    <div class="app-card">
+    <div class="app-card" id="ausgaben">
       <div class="app-icon">
         <img src="app-icon-ausgaben.png" alt="App-Icon: Ausgaben-Tracker">
       </div>
@@ -608,11 +745,14 @@
         </ul>
 
         <p class="app-meta">Android / GrapheneOS · Open Source</p>
-        <div class="app-fp">
-          Signatur-Fingerprint der Android-APK (SHA-256), über alle Versionen gleich — auch die APK aus dem Zap Store trägt ihn:
-          <code>DB:C5:08:71:53:B4:59:21:82:DD:13:1A:73:0C:11:A0:F7:12:4E:34:42:6C:54:2B:4B:A6:88:5A:B1:CC:01:0E</code>
-          <span class="app-fp-hex">apksigner: dbc5087153b4592182dd131a730c11a0f7124e34426c542b4ba6885ab1cc010e</span>
-        </div>
+        <details class="more fp">
+          <summary>Echtheit prüfen (Signatur-Fingerprint)</summary>
+          <div class="app-fp">
+            Signatur-Fingerprint der Android-APK (SHA-256), über alle Versionen gleich — auch die APK aus dem Zap Store trägt ihn:
+            <code>DB:C5:08:71:53:B4:59:21:82:DD:13:1A:73:0C:11:A0:F7:12:4E:34:42:6C:54:2B:4B:A6:88:5A:B1:CC:01:0E</code>
+            <span class="app-fp-hex">apksigner: dbc5087153b4592182dd131a730c11a0f7124e34426c542b4ba6885ab1cc010e</span>
+          </div>
+        </details>
 
         <details class="ob-sheet" id="obtainium-ausgaben">
           <summary>Obtainium einrichten (Werte zum Kopieren)</summary>
@@ -656,7 +796,7 @@
     </div>
 
     <!-- APP 3: Alien Fitness -->
-    <div class="app-card">
+    <div class="app-card" id="fitness">
       <div class="app-icon">
         <img src="app-icon-fitness.png" alt="App-Icon: Alien Fitness">
       </div>
@@ -685,11 +825,14 @@
         </ul>
 
         <p class="app-meta">Android / GrapheneOS · Open Source · kein Konto, kein Server, keine Internet-Berechtigung</p>
-        <div class="app-fp">
-          Signatur-Fingerprint der Android-APK (SHA-256), über alle Versionen gleich — auch die APK aus dem Zap Store trägt ihn:
-          <code>85:9E:88:B7:43:5F:84:1D:8B:C1:CF:F1:FE:A9:12:56:A6:33:DE:A5:59:D9:5A:91:02:4B:22:53:A2:AD:13:26</code>
-          <span class="app-fp-hex">apksigner: 859e88b7435f841d8bc1cff1fea91256a633dea559d95a91024b2253a2ad1326</span>
-        </div>
+        <details class="more fp">
+          <summary>Echtheit prüfen (Signatur-Fingerprint)</summary>
+          <div class="app-fp">
+            Signatur-Fingerprint der Android-APK (SHA-256), über alle Versionen gleich — auch die APK aus dem Zap Store trägt ihn:
+            <code>85:9E:88:B7:43:5F:84:1D:8B:C1:CF:F1:FE:A9:12:56:A6:33:DE:A5:59:D9:5A:91:02:4B:22:53:A2:AD:13:26</code>
+            <span class="app-fp-hex">apksigner: 859e88b7435f841d8bc1cff1fea91256a633dea559d95a91024b2253a2ad1326</span>
+          </div>
+        </details>
 
         <details class="ob-sheet" id="obtainium-fitness">
           <summary>Obtainium einrichten (Werte zum Kopieren)</summary>
@@ -733,7 +876,7 @@
     </div>
 
     <!-- APP 4: Alien Pass -->
-    <div class="app-card">
+    <div class="app-card" id="pass">
       <div class="app-icon">
         <img src="app-icon-pass.png" alt="App-Icon: Alien Pass">
       </div>
@@ -758,26 +901,35 @@
           <li>Zwischenablage mit Auto-Löschen, sensibel markiert, Auto-Sperre auch im Hintergrund</li>
           <li>Verschlüsseltes Backup und Zusammenführen zwischen Geräten (Syncthing)</li>
           <li>Umzug aus Proton Pass direkt aus dem PGP-verschlüsselten Export; CSV aus Google Passwortmanager/Chrome, Apple Passwörter, Firefox, KeePassXC, Bitwarden, LastPass, 1Password und NordPass (seit v1.10 am Format erkannt, Ordner und Tags werden zu Kategorien)</li>
-          <li>Seit v1.2: Fingerabdruck-Entsperren über den Android-Keystore, optional — Passphrase-Pflicht nach jedem Neustart (seit v1.8 abwählbar), „Jetzt sperren“ als bewusster Riegel</li>
-          <li>Seit v1.3: Eintragstyp Konto; keine Alters-Warnung mehr für Passwörter (Zwangsrotation ist ein Anti-Muster)</li>
-          <li>Seit v1.4: bis zu acht frei benannte, immer geheime Zusatzfelder je Eintrag (App-PIN, Telefon-Kennwort …), E-Mail-Feld neben dem Nutzernamen, Generator direkt im Eintragsformular</li>
-          <li>Seit v1.5: Papierkorb – Gelöschtes bleibt 30 Tage wiederherstellbar (bis zu 200 Einträge, nur auf dem Gerät, auf dem gelöscht wurde), Auswahlfelder im Stil der App</li>
-          <li>Seit v1.6: ehrlichere Stärke-Anzeige – erkennt vorhersagbare Muster wie Jahreszahlen, Tastaturfolgen und häufige Wörter (auch <code>P4ssw0rt</code>), markiert sie in der Liste und fragt bei einer schwachen Tresor-Passphrase nach</li>
-          <li>Seit v1.6.1: Warnung, wenn in Android ein Fingerabdruck neu registriert wurde – auch über einen Neustart hinweg, und die Fehlversuchs-Bremse zählt über App-Neustarts weiter</li>
           <li>Seit v1.7: auch für den <strong>Linux-Desktop</strong> – als Flatpak ohne Netzwerk-Berechtigung und ohne Dateizugriff, mit GPG-signierter Prüfsumme, Backups zwischen Handy und Desktop austauschbar</li>
-          <li>Seit v1.8: Android – Haken „Fingerabdruck auch nach Neustart“ (ab Werk aus); Desktop – Schnell-Entsperren mit PIN nach einer Sperre (nur im Arbeitsspeicher, höchstens 24 Stunden, ehrlich eingeordnet); drittes internes Audit am Desktop-Zweig</li>
-          <li>Seit v1.9: Rückfragen als eigene Dialoge in der App statt Android-Systemdialog (der erbte den Screenshot-Schutz nicht), „Rückgängig“ nach dem Löschen, Mehrfachauswahl – mehrere Einträge auf einmal in den Papierkorb, in eine Kategorie oder als Favorit</li>
         </ul>
+
+        <details class="more">
+          <summary>Neu in den letzten Versionen</summary>
+          <ul>
+            <li>Seit v1.9: Rückfragen als eigene Dialoge in der App statt Android-Systemdialog (der erbte den Screenshot-Schutz nicht), „Rückgängig“ nach dem Löschen, Mehrfachauswahl – mehrere Einträge auf einmal in den Papierkorb, in eine Kategorie oder als Favorit</li>
+            <li>Seit v1.8: Android – Haken „Fingerabdruck auch nach Neustart“ (ab Werk aus); Desktop – Schnell-Entsperren mit PIN nach einer Sperre (nur im Arbeitsspeicher, höchstens 24 Stunden, ehrlich eingeordnet); drittes internes Audit am Desktop-Zweig</li>
+            <li>Seit v1.6.1: Warnung, wenn in Android ein Fingerabdruck neu registriert wurde – auch über einen Neustart hinweg, und die Fehlversuchs-Bremse zählt über App-Neustarts weiter</li>
+            <li>Seit v1.6: ehrlichere Stärke-Anzeige – erkennt vorhersagbare Muster wie Jahreszahlen, Tastaturfolgen und häufige Wörter (auch <code>P4ssw0rt</code>), markiert sie in der Liste und fragt bei einer schwachen Tresor-Passphrase nach</li>
+            <li>Seit v1.5: Papierkorb – Gelöschtes bleibt 30 Tage wiederherstellbar (bis zu 200 Einträge, nur auf dem Gerät, auf dem gelöscht wurde), Auswahlfelder im Stil der App</li>
+            <li>Seit v1.4: bis zu acht frei benannte, immer geheime Zusatzfelder je Eintrag (App-PIN, Telefon-Kennwort …), E-Mail-Feld neben dem Nutzernamen, Generator direkt im Eintragsformular</li>
+            <li>Seit v1.3: Eintragstyp Konto; keine Alters-Warnung mehr für Passwörter (Zwangsrotation ist ein Anti-Muster)</li>
+            <li>Seit v1.2: Fingerabdruck-Entsperren über den Android-Keystore, optional — Passphrase-Pflicht nach jedem Neustart (seit v1.8 abwählbar), „Jetzt sperren“ als bewusster Riegel</li>
+          </ul>
+        </details>
 
         <p style="color:#00ffcc; font-size:0.92em;"><strong>Nur als App, bewusst ohne Web-Version:</strong> auf Android keine Internet-Berechtigung (nur der Fingerabdrucksensor), FLAG_SECURE, kein Cloud-Backup – Härtung auf Betriebssystem-Ebene; am Linux-Desktop ein Flatpak ohne Netz. Details auf der <a href="alien-pass.html">Alien-Pass-Seite</a>.</p>
 
         <p class="app-meta">Android / GrapheneOS · Linux (Flatpak) · Open Source (MIT) · kein Konto, kein Server</p>
-        <div class="app-fp">
-          Signatur-Fingerprint der Android-APK (SHA-256), über alle Versionen gleich — auch die APK aus dem Zap Store trägt ihn:
-          <code>73:C7:17:D8:05:6C:6A:02:B0:8B:AB:BA:24:18:17:F3:93:E4:6D:EA:03:19:D4:FA:26:B8:C3:D8:E1:F9:3C:95</code>
-          <span class="app-fp-hex">apksigner: 73c717d8056c6a02b08babba241817f393e46dea0319d4fa26b8c3d8e1f93c95</span>
-          <span class="app-fp-hex">Linux-Desktop: <a href="alien-investor-release-key.asc">GPG-Release-Schlüssel</a> für die Prüfsumme (alle Desktop-Apps): 100F 9E25 BFAE A807 DBC3 57D7 50C0 D785 83BF CB81 · <a href="flatpak.html">Anleitung</a></span>
-        </div>
+        <details class="more fp">
+          <summary>Echtheit prüfen (Signatur-Fingerprint)</summary>
+          <div class="app-fp">
+            Signatur-Fingerprint der Android-APK (SHA-256), über alle Versionen gleich — auch die APK aus dem Zap Store trägt ihn:
+            <code>73:C7:17:D8:05:6C:6A:02:B0:8B:AB:BA:24:18:17:F3:93:E4:6D:EA:03:19:D4:FA:26:B8:C3:D8:E1:F9:3C:95</code>
+            <span class="app-fp-hex">apksigner: 73c717d8056c6a02b08babba241817f393e46dea0319d4fa26b8c3d8e1f93c95</span>
+            <span class="app-fp-hex">Linux-Desktop: <a href="alien-investor-release-key.asc">GPG-Release-Schlüssel</a> für die Prüfsumme (alle Desktop-Apps): 100F 9E25 BFAE A807 DBC3 57D7 50C0 D785 83BF CB81 · <a href="flatpak.html">Anleitung</a></span>
+          </div>
+        </details>
 
         <div class="cta-row">
           <a href="https://zapstore.dev/apps/org.alieninvestor.pass" class="cta-button" target="_blank" rel="noopener">
@@ -793,7 +945,7 @@
     </div>
 
     <!-- APP 5: Alien Notes -->
-    <div class="app-card">
+    <div class="app-card" id="notes">
       <div class="app-icon">
         <img src="app-icon-notes.png" alt="App-Icon: Alien Notes">
       </div>
@@ -816,7 +968,6 @@
           <li>Kein Speichern-Knopf: die App speichert beim Tippen (nach 1,5 s Ruhe) und beim Verlassen der Notiz – verschlüsselt, jedes Mal die ganze Datei</li>
           <li>Markdown-Ansicht je Notiz (ab Werk aus): eigene kleine Untermenge, kein Fremd-Renderer, kein HTML, Links bleiben reiner Text; Spickzettel im Editor</li>
           <li>Kategorien wie Ordner (auch umbenennen), Favoriten, angeheftete Notizen ganz oben, Chip „Offen“ für Checklisten mit unerledigten Einträgen, Suche über Titel, Text, Checklisten-Einträge und Kategorie</li>
-          <li><strong>Seit 1.1:</strong> Umzug von Standard Notes (entschlüsseltes Backup als ZIP oder Textdatei, 2FA-Einträge werden nie übernommen), mehrere Notizen auf einmal in den Papierkorb, in eine Kategorie oder als Favorit, „Rückgängig“ nach dem Löschen, „Keine Vorschau“ je Notiz, drei Schriftgrößen, Rückfragen als App-Dialog statt Systemdialog</li>
           <li>Zwischenablage mit Auto-Löschen (ab Werk 30 s, abschaltbar) und beim Sperren, auf Android sensibel markiert. Bei „Sperren im Hintergrund: sofort“ bleibt das Kopierte bis zum Ablauf der Zeit stehen, damit es sich noch in eine andere App einfügen lässt (seit 1.3).</li>
           <li>Sperre lockerer als beim Passwort-Manager: ab Werk keine Sperre nach Inaktivität, im Hintergrund nach 30 Minuten – beides einstellbar bis „nie“ bzw. „sofort“. Bei „sofort“ sperrt die Android-App auch, während der Datei-Picker offen ist; entsperrst du innerhalb von fünf Minuten, läuft der Import mit der gewählten Datei weiter (seit 1.2).</li>
           <li>Papierkorb: Gelöschtes bleibt 30 Tage wiederherstellbar, höchstens 200 Notizen, nur Titel, Typ und Datum sichtbar</li>
@@ -828,15 +979,25 @@
           <li>Zwei interne Sicherheits-Audits (0.1: neue Fläche gegenüber Alien Pass plus Dateispeicher; 1.1: Standard-Notes-Import, Dialog, Rückgängig, Mehrfachauswahl) – alle Funde vor dem Release behoben (kein unabhängiges Audit)</li>
         </ul>
 
+        <details class="more">
+          <summary>Neu in den letzten Versionen</summary>
+          <ul>
+            <li><strong>Seit 1.1:</strong> Umzug von Standard Notes (entschlüsseltes Backup als ZIP oder Textdatei, 2FA-Einträge werden nie übernommen), mehrere Notizen auf einmal in den Papierkorb, in eine Kategorie oder als Favorit, „Rückgängig“ nach dem Löschen, „Keine Vorschau“ je Notiz, drei Schriftgrößen, Rückfragen als App-Dialog statt Systemdialog</li>
+          </ul>
+        </details>
+
         <p style="color:#00ffcc; font-size:0.92em;"><strong>Nur als App, bewusst ohne Web-Version:</strong> auf Android keine Internet-Berechtigung (nur der Fingerabdrucksensor), FLAG_SECURE, kein Cloud-Backup – Härtung auf Betriebssystem-Ebene; am Linux-Desktop ein Flatpak ohne Netz. Details auf der <a href="alien-notes.html">Alien-Notes-Seite</a>.</p>
 
         <p class="app-meta">Android / GrapheneOS · Linux (Flatpak) · Open Source (MIT) · kein Konto, kein Server</p>
-        <div class="app-fp">
-          Signatur-Fingerprint der Android-APK (SHA-256), über alle Versionen gleich — auch die APK aus dem Zap Store trägt ihn:
-          <code>F3:68:F9:0B:F8:DF:8C:55:BB:6C:28:6D:32:25:BA:8A:F4:45:22:7B:A6:9B:36:00:DF:BB:F6:A1:44:09:BA:7C</code>
-          <span class="app-fp-hex">apksigner: f368f90bf8df8c55bb6c286d3225ba8af445227ba69b3600dfbbf6a14409ba7c</span>
-          <span class="app-fp-hex">Linux-Desktop: <a href="alien-investor-release-key.asc">GPG-Release-Schlüssel</a> für die Prüfsumme (alle Desktop-Apps): 100F 9E25 BFAE A807 DBC3 57D7 50C0 D785 83BF CB81 · <a href="flatpak.html">Anleitung</a></span>
-        </div>
+        <details class="more fp">
+          <summary>Echtheit prüfen (Signatur-Fingerprint)</summary>
+          <div class="app-fp">
+            Signatur-Fingerprint der Android-APK (SHA-256), über alle Versionen gleich — auch die APK aus dem Zap Store trägt ihn:
+            <code>F3:68:F9:0B:F8:DF:8C:55:BB:6C:28:6D:32:25:BA:8A:F4:45:22:7B:A6:9B:36:00:DF:BB:F6:A1:44:09:BA:7C</code>
+            <span class="app-fp-hex">apksigner: f368f90bf8df8c55bb6c286d3225ba8af445227ba69b3600dfbbf6a14409ba7c</span>
+            <span class="app-fp-hex">Linux-Desktop: <a href="alien-investor-release-key.asc">GPG-Release-Schlüssel</a> für die Prüfsumme (alle Desktop-Apps): 100F 9E25 BFAE A807 DBC3 57D7 50C0 D785 83BF CB81 · <a href="flatpak.html">Anleitung</a></span>
+          </div>
+        </details>
 
         <div class="cta-row">
           <a href="https://zapstore.dev/apps/org.alieninvestor.notes" class="cta-button" target="_blank" rel="noopener">
@@ -851,7 +1012,7 @@
       </div>
     </div>
 
-    <div class="app-card">
+    <div class="app-card" id="steuertool">
       <div class="app-icon">
         <img src="app-icon-steuertool.png" alt="App-Icon: BTC Steuertool">
       </div>
@@ -872,7 +1033,6 @@
         <ul>
           <li>FiFo je Wallet (BMF-Schreiben vom 06.03.2025, Rn. 62), jedes Börsenkonto zählt dabei als eigene Wallet – bei Überträgen zwischen eigenen Wallets wandern Kaufdatum und Einstand mit (Auslegung, im Steuernachweis offengelegt); Jahresfrist nach Kalenderdatum (§§ 187, 188 BGB) und Freigrenze (600 EUR bis 2023, 1.000 EUR ab 2024)</li>
           <li>BitBox, 21bitcoin, Bison, Swissquote, Strike, Pocket, Bisq 1 (deutsche oder englische Oberfläche) sowie manuelle Käufe und Verkäufe; weitere Börsen über einen CoinTracking- oder Blockpit-Export (Format noch nicht an echten Exporten bestätigt, der Report warnt) – Broker werden am Dateiinhalt erkannt, ZIPs entpackt; unbekannte Dateien sperren die Berechnung, statt still zu fehlen</li>
-          <li>Seit v1.3: jede Datei wird vor dem Lesen auf ihre Pflichtspalten geprüft – eine umbenannte Spalte stoppt den Lauf mit Datei, Zeile und Spalte, statt Daten still zu verlieren; eine Byte-Order-Markierung (etwa nach Speichern in Excel als „CSV UTF-8“) wird jetzt korrekt gelesen</li>
           <li>In Bitcoin gezahlte Gebühren (Netzwerk-, Auszahlungs-, Bisq-Handelsgebühr) als Veräußerung des Gebührenanteils, Schenkungen und Spenden als Bestandsabgang</li>
           <li>noKYC strikt getrennt: eigener FiFo-Bestand und eigener interner Report, nie Teil der Unterlagen fürs Finanzamt</li>
           <li>Steuerreport, formaler Steuernachweis, Käufe und Verkäufe als CSV – gespeichert über den Speichern-Dialog</li>
@@ -882,15 +1042,25 @@
           <li>Handbuch in der App (Deutsch/Englisch); interner Security-Audit vor dem Release, alle Funde behoben (kein unabhängiges Audit)</li>
         </ul>
 
+        <details class="more">
+          <summary>Neu in den letzten Versionen</summary>
+          <ul>
+            <li>Seit v1.3: jede Datei wird vor dem Lesen auf ihre Pflichtspalten geprüft – eine umbenannte Spalte stoppt den Lauf mit Datei, Zeile und Spalte, statt Daten still zu verlieren; eine Byte-Order-Markierung (etwa nach Speichern in Excel als „CSV UTF-8“) wird jetzt korrekt gelesen</li>
+          </ul>
+        </details>
+
         <p style="color:#00ffcc; font-size:0.92em;"><strong>Auch im Browser und als CLI:</strong> Die <a href="https://api.alien-investor.org/steuertool/" target="_blank" rel="noopener">Web-Version</a> lädt ihren Code bei jedem Aufruf vom Server, das CLI läuft aus dem Repo. Alles dazu auf der <a href="btc-steuertool.html">Steuertool-Seite</a>. Keine Steuerberatung – eine Rechenhilfe.</p>
 
         <p class="app-meta">Android / GrapheneOS · Linux (Flatpak) · Open Source (MIT) · kein Konto, kein Server</p>
-        <div class="app-fp">
-          Signatur-Fingerprint der Android-APK (SHA-256), über alle Versionen gleich — auch die APK aus dem Zap Store trägt ihn:
-          <code>26:C5:E0:94:A8:B7:65:0C:A6:65:01:4D:0C:3A:8B:A6:82:B1:7C:05:F5:3C:6C:DE:F0:55:D0:7C:E9:84:BF:0B</code>
-          <span class="app-fp-hex">apksigner: 26c5e094a8b7650ca665014d0c3a8ba682b17c05f53c6cdef055d07ce984bf0b</span>
-          <span class="app-fp-hex">Linux-Desktop: <a href="alien-investor-release-key.asc">GPG-Release-Schlüssel</a> für die Prüfsumme (alle Desktop-Apps): 100F 9E25 BFAE A807 DBC3 57D7 50C0 D785 83BF CB81 · <a href="flatpak.html">Anleitung</a></span>
-        </div>
+        <details class="more fp">
+          <summary>Echtheit prüfen (Signatur-Fingerprint)</summary>
+          <div class="app-fp">
+            Signatur-Fingerprint der Android-APK (SHA-256), über alle Versionen gleich — auch die APK aus dem Zap Store trägt ihn:
+            <code>26:C5:E0:94:A8:B7:65:0C:A6:65:01:4D:0C:3A:8B:A6:82:B1:7C:05:F5:3C:6C:DE:F0:55:D0:7C:E9:84:BF:0B</code>
+            <span class="app-fp-hex">apksigner: 26c5e094a8b7650ca665014d0c3a8ba682b17c05f53c6cdef055d07ce984bf0b</span>
+            <span class="app-fp-hex">Linux-Desktop: <a href="alien-investor-release-key.asc">GPG-Release-Schlüssel</a> für die Prüfsumme (alle Desktop-Apps): 100F 9E25 BFAE A807 DBC3 57D7 50C0 D785 83BF CB81 · <a href="flatpak.html">Anleitung</a></span>
+          </div>
+        </details>
 
         <div class="cta-row">
           <a href="https://zapstore.dev/apps/org.alieninvestor.steuertool" class="cta-button" target="_blank" rel="noopener">
@@ -921,7 +1091,7 @@
       <p style="margin:0.8em 0 0 0;">
         <strong>Echtheit prüfen:</strong> Öffne die installierte App in
         <a href="https://github.com/soupslurpr/AppVerifier" target="_blank" rel="noopener">AppVerifier</a>
-        und vergleiche den angezeigten Wert mit dem Signatur-Fingerprint auf der jeweiligen App-Karte –
+        und vergleiche den angezeigten Wert mit dem Signatur-Fingerprint auf der jeweiligen App-Karte (Feld „Echtheit prüfen“ aufklappen) –
         er ist über alle Versionen gleich. Mehr dazu in der <a href="Obtainium.html">Obtainium-Anleitung</a>.
       </p>
       <p style="margin:0.8em 0 0 0;">
