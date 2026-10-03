@@ -49,7 +49,7 @@
     <p>
       Für genau dieses Problem gibt es das <strong>BTC Steuertool</strong> — ein Open-Source-Tool, das ich
       selbst für meine eigene Steuererklärung entwickelt habe (CLI, Web-Version und App). Es liest deine CSV-Exporte von BitBox,
-      21bitcoin, Bison, Swissquote, Strike, Pocket und Bisq (weitere Börsen über einen CoinTracking- oder Blockpit-Export) und berechnet
+      Sparrow, Electrum, Trezor Suite, Ledger Wallet, 21bitcoin, Bison, Swissquote, Strike, Pocket und Bisq (weitere Börsen über einen CoinTracking- oder Blockpit-Export) und berechnet
       daraus automatisch, was ans Finanzamt muss und was steuerfrei bleibt.
     </p>
 
@@ -76,7 +76,7 @@
         dass das stimmt.
       </p>
       <ul>
-        <li>Alle unterstützten Quellen: BitBox, 21bitcoin, Bison, Swissquote, Strike, Pocket, Bisq + manuelle Käufe/Verkäufe; andere Börsen über einen CoinTracking- oder Blockpit-Export (noch nicht an echten Exporten bestätigt, der Report warnt)</li>
+        <li>Alle unterstützten Quellen: BitBox, Sparrow, Electrum, Trezor Suite, Ledger Wallet (seit v1.4, noch nicht an echten Exporten bestätigt), 21bitcoin, Bison, Swissquote, Strike, Pocket, Bisq + manuelle Käufe/Verkäufe; andere Börsen über einen CoinTracking- oder Blockpit-Export (noch nicht an echten Exporten bestätigt, der Report warnt)</li>
         <li>noKYC-Bestände strikt getrennt — wie im CLI-Tool</li>
         <li>Kostenlos und ohne Anmeldung — ein neuer Broker-Parser ist sofort für alle da</li>
       </ul>
@@ -221,6 +221,11 @@ mkdir Broker</pre>
           <td>beliebig, alle <code>*.csv</code> werden geladen</td>
         </tr>
         <tr>
+          <td>Sparrow, Electrum, Trezor Suite, Ledger Wallet (seit v1.4)</td>
+          <td><code>wallets/</code> (noKYC: <code>wallets/nokyc/</code>)</td>
+          <td>beliebig, das Programm wird am Inhalt erkannt; der Dateiname wird zum Namen der Wallet (bei Ledger zählen die Kontonamen, jedes Konto ist eine eigene Wallet). Format aus dem Quellcode der Programme abgeleitet, noch nicht an echten Exporten bestätigt – der Report warnt</td>
+        </tr>
+        <tr>
           <td>21bitcoin</td>
           <td><code>Broker/</code></td>
           <td>muss mit <code>21bitcoin</code> beginnen</td>
@@ -302,6 +307,16 @@ mkdir Broker</pre>
       Transaktions-Hashes und Bestände anfordern (BMF-Schreiben vom 06.03.2025, Rn. 101, 104). Bewahre deine
       Belege deshalb auf, auch für P2P-Käufe.
     </p>
+
+    <div class="box" style="border-color: #ffaa00; background: #0a0800;">
+      <h3 style="color: #ffaa00; margin-top: 0;">⚡ Update Oktober 2026 (v1.4): Sparrow, Electrum, Trezor, Ledger – und Fehlermeldungen, die ankommen</h3>
+      <ul>
+        <li><strong>Wallet-Exporte aus Sparrow, Electrum, Trezor Suite und Ledger Wallet (früher Ledger Live):</strong> Das Tool erkennt das Programm an der Kopfzeile, auch bei älteren Versionen. Jede Wallet ist ein eigener Bestand, bei Ledger jedes Konto; Überträge werden über die Transaktions-ID verbunden. In den Finanzamt-Dokumenten heißen sie nur „Sparrow-Wallet“, „Trezor-Wallet 1“ usw. Die Formate stammen aus dem Quellcode der Programme, nicht aus echten Exporten – der Steuerreport weist je Datei darauf hin. Andere Hardware-Wallets (z.&nbsp;B. Coldcard, Jade, SeedSigner) bindest du in Sparrow ein und exportierst dort.</li>
+        <li><strong>Fehlermeldungen kommen an:</strong> Seit Version 1.2 zeigten Web-Version und Apps bei jedem Abbruch nur „Dateien oder Einstufung wurden während der Berechnung geändert“. Jetzt erscheint die eigentliche Meldung.</li>
+        <li><strong>noKYC-Trennung verschärft:</strong> Kommen noKYC-Coins in einer KYC-Wallet an, bricht die Berechnung in weiteren Fällen ab (Gebühr fehlt im Export, gleich benannte Wallets, Sammelauszahlung, Schenkung an die eigene Wallet). Ein Jahr nur mit noKYC-Vorgängen erzeugt keinen leeren Steuerreport mehr. Doppelt geladene Wallets (Jahres- und Gesamtexport, dieselbe Wallet in BitBoxApp und Sparrow) werden erkannt (bei gemeinsamem Abgang Abbruch, sonst Hinweis).</li>
+        <li><strong>Diagnose für Bug-Reports:</strong> Im Dialog „Bug melden“ erstellt die App auf Wunsch eine Diagnose – erkannte Dateitypen, Aufbau der ersten Zeile nicht erkannter Dateien und die Meldungen der letzten Berechnung, ohne Dateinamen, Beträge, Tagesdaten, Adressen und Wallet-Namen (Jahreszahlen und Zeilennummern bleiben). Du siehst sie vor dem Senden vollständig.</li>
+      </ul>
+    </div>
 
     <div class="box" style="border-color: #ffaa00; background: #0a0800;">
       <h3 style="color: #ffaa00; margin-top: 0;">⚡ Update Oktober 2026 (v1.3): Härtung der Parser, Bisq auf Englisch, Sammelimport</h3>
@@ -457,7 +472,7 @@ mkdir Broker</pre>
     </p>
     <p><strong>Voraussetzung:</strong> Flatpak mit dem Flathub-Remote (für die Laufzeit <code>org.freedesktop.Platform</code> 25.08, die Flatpak beim Installieren nachlädt):</p>
     <pre><code>flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo</code></pre>
-    <p><strong>1. Drei Dateien laden:</strong> <code>btc-steuertool-1.3-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code>.</p>
+    <p><strong>1. Drei Dateien laden:</strong> <code>btc-steuertool-1.4-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code>.</p>
     <p><strong>2. Signatur prüfen.</strong> Die Prüfsumme ist mit dem GPG-Release-Schlüssel von Alien Investor signiert — derselbe Schlüssel wie bei Alien Pass, Sachwert-Tresor und Alien Notes:
       <a href="alien-investor-release-key.asc">alien-investor-release-key.asc</a>. Den Fingerabdruck über einen zweiten Weg vergleichen:</p>
     <p><code style="display:block; margin:0.35em 0; padding:0.5em 0.6em; font-size:0.8em;">100F 9E25 BFAE A807 DBC3  57D7 50C0 D785 83BF CB81</code></p>
@@ -465,7 +480,7 @@ mkdir Broker</pre>
 gpg --verify SHA256SUMS.asc SHA256SUMS      # „Korrekte Signatur von "Alien Investor (Release-Signatur) …"“
 sha256sum -c SHA256SUMS                     # „…flatpak: OK“</code></pre>
     <p><strong>3. Installieren und starten:</strong></p>
-    <pre><code>flatpak install --user btc-steuertool-1.3-linux-x86_64.flatpak
+    <pre><code>flatpak install --user btc-steuertool-1.4-linux-x86_64.flatpak
 flatpak run org.alieninvestor.steuertool</code></pre>
     <p><strong>Update:</strong> Eine neue Bündel-Datei lässt sich (Flatpak 1.14) nicht über die installierte legen. Neue Version laden und prüfen, dann
       <code>flatpak uninstall --user org.alieninvestor.steuertool</code> und neu installieren. Die App speichert keine Steuerdaten, nur Sprache und Darstellung.</p>

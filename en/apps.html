@@ -1036,7 +1036,7 @@
 
         <ul>
           <li>FiFo per wallet (German Federal Ministry of Finance circular of 6 March 2025, para. 62), every exchange account counting as a wallet of its own – on transfers between your own wallets, purchase date and cost travel along (a reading disclosed in the evidence document); one-year holding period counted by calendar date (§§ 187, 188 BGB) and the exemption limit (600 EUR up to 2023, 1,000 EUR from 2024)</li>
-          <li>BitBox, 21bitcoin, Bison, Swissquote, Strike, Pocket, Bisq 1 (German or English interface) plus manual buys and sells; other exchanges via a CoinTracking or Blockpit export (format not yet confirmed against real exports, the report warns) – brokers are detected from the file contents, ZIPs are unpacked; unknown files block the calculation instead of silently missing</li>
+          <li>BitBox, Sparrow, Electrum, Trezor Suite, Ledger Wallet (since v1.4, not yet confirmed against real exports), 21bitcoin, Bison, Swissquote, Strike, Pocket, Bisq 1 (German or English interface) plus manual buys and sells; other exchanges via a CoinTracking or Blockpit export (format not yet confirmed against real exports, the report warns) – brokers are detected from the file contents, ZIPs are unpacked; unknown files block the calculation instead of silently missing</li>
           <li>Fees paid in bitcoin (network, withdrawal, Bisq trading fee) treated as a disposal of the fee amount, gifts and donations as a reduction of holdings</li>
           <li>noKYC kept strictly apart: its own FiFo pool and its own internal report, never part of the documents for the tax office</li>
           <li>Tax report, formal tax evidence, buys and sells as CSV – saved through the save dialog</li>
@@ -1049,6 +1049,7 @@
         <details class="more">
           <summary>New in recent versions</summary>
           <ul>
+            <li>Since v1.4: wallet exports from Sparrow, Electrum, Trezor Suite and Ledger Wallet; error messages get through again (since v1.2 every abort showed only "Files or classification changed during the calculation"); stricter noKYC separation; diagnosis for bug reports without file names, amounts or wallet names</li>
             <li>Since v1.3: every file is checked for its required columns before reading – a renamed column stops the run with file, line and column instead of silently dropping data; a byte-order mark (e.g. after saving in Excel as "CSV UTF-8") is now read correctly</li>
           </ul>
         </details>

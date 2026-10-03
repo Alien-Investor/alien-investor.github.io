@@ -52,7 +52,7 @@
     <p>
       For exactly this problem there is the <strong>BTC Tax Tool</strong> — an open-source tool I
       developed myself for my own tax return (CLI, web version and app). It reads your CSV exports from BitBox,
-      21bitcoin, Bison, Swissquote, Strike, Pocket and Bisq (other exchanges via a CoinTracking or Blockpit export) and automatically
+      Sparrow, Electrum, Trezor Suite, Ledger Wallet, 21bitcoin, Bison, Swissquote, Strike, Pocket and Bisq (other exchanges via a CoinTracking or Blockpit export) and automatically
       calculates what has to go to the tax office and what remains tax-free.
     </p>
 
@@ -214,6 +214,11 @@ mkdir Broker</pre>
           <td>any name, all <code>*.csv</code> files are loaded</td>
         </tr>
         <tr>
+          <td>Sparrow, Electrum, Trezor Suite, Ledger Wallet (since v1.4)</td>
+          <td><code>wallets/</code> (noKYC: <code>wallets/nokyc/</code>)</td>
+          <td>any name, the program is detected from the contents; the file name becomes the wallet's name (for Ledger the account names count, every account is a wallet of its own). Format derived from the programs' source code, not yet confirmed against real exports – the report warns</td>
+        </tr>
+        <tr>
           <td>21bitcoin</td>
           <td><code>Broker/</code></td>
           <td>must start with <code>21bitcoin</code></td>
@@ -295,6 +300,16 @@ mkdir Broker</pre>
       addresses, transaction hashes and holdings (BMF letter of 06.03.2025, para. 101, 104). So keep your
       records, including for P2P purchases.
     </p>
+
+    <div class="box" style="border-color: #ffaa00; background: #0a0800;">
+      <h3 style="color: #ffaa00; margin-top: 0;">⚡ Update October 2026 (v1.4): Sparrow, Electrum, Trezor, Ledger – and error messages that get through</h3>
+      <ul>
+        <li><strong>Wallet exports from Sparrow, Electrum, Trezor Suite and Ledger Wallet (formerly Ledger Live):</strong> the tool detects the program from the header line, older versions included. Every wallet is a holding of its own, in Ledger every account; transfers are matched by transaction ID. In the documents for the tax office they are only called "Sparrow-Wallet", "Trezor-Wallet 1" and so on. The formats are derived from the programs' source code, not from real exports – the tax report says so for every file. Other hardware wallets (e.g. Coldcard, Jade, SeedSigner) are added to Sparrow and exported there.</li>
+        <li><strong>Error messages get through:</strong> since version 1.2, the web version and the apps showed only "Files or classification changed during the calculation" on every abort. Now the actual message appears.</li>
+        <li><strong>Stricter noKYC separation:</strong> if noKYC coins arrive in a KYC wallet, the calculation now stops in more cases (fee missing in the export, wallets with the same name, pooled withdrawal, gift to your own wallet). A year with noKYC activity only no longer produces an empty tax report. Wallets loaded twice (yearly and full export, the same wallet in the BitBoxApp and Sparrow) are detected (abort if they share an outgoing transaction, otherwise a notice).</li>
+        <li><strong>Diagnosis for bug reports:</strong> in the "Report a bug" dialog the app can create a diagnosis – detected file types, the structure of the first line of unrecognized files and the messages of the last calculation, without file names, amounts, exact dates, addresses or wallet names (years and line numbers remain). You see all of it before sending.</li>
+      </ul>
+    </div>
 
     <div class="box" style="border-color: #ffaa00; background: #0a0800;">
       <h3 style="color: #ffaa00; margin-top: 0;">⚡ Update October 2026 (v1.3): Hardened Parsers, Bisq in English, Aggregate Import</h3>
@@ -450,7 +465,7 @@ mkdir Broker</pre>
     </p>
     <p><strong>Requirement:</strong> Flatpak with the Flathub remote (for the runtime <code>org.freedesktop.Platform</code> 25.08, which Flatpak fetches during installation):</p>
     <pre><code>flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo</code></pre>
-    <p><strong>1. Download three files:</strong> <code>btc-steuertool-1.3-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code>.</p>
+    <p><strong>1. Download three files:</strong> <code>btc-steuertool-1.4-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code>.</p>
     <p><strong>2. Check the signature.</strong> The checksum file is signed with the Alien Investor GPG release key — the same key as for Alien Pass, Sachwert-Tresor and Alien Notes:
       <a href="../alien-investor-release-key.asc">alien-investor-release-key.asc</a>. Compare the fingerprint through a second channel:</p>
     <p><code style="display:block; margin:0.35em 0; padding:0.5em 0.6em; font-size:0.8em;">100F 9E25 BFAE A807 DBC3  57D7 50C0 D785 83BF CB81</code></p>
@@ -458,7 +473,7 @@ mkdir Broker</pre>
 gpg --verify SHA256SUMS.asc SHA256SUMS      # "Good signature from "Alien Investor (Release-Signatur) …""
 sha256sum -c SHA256SUMS                     # "…flatpak: OK"</code></pre>
     <p><strong>3. Install and start:</strong></p>
-    <pre><code>flatpak install --user btc-steuertool-1.3-linux-x86_64.flatpak
+    <pre><code>flatpak install --user btc-steuertool-1.4-linux-x86_64.flatpak
 flatpak run org.alieninvestor.steuertool</code></pre>
     <p><strong>Update:</strong> a new bundle cannot be installed over the existing one (Flatpak 1.14). Download and check the new version, then
       <code>flatpak uninstall --user org.alieninvestor.steuertool</code> and install again. The app stores no tax data, only language and theme.</p>
