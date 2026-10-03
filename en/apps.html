@@ -911,6 +911,14 @@
         <details class="more">
           <summary>New in recent versions</summary>
           <ul>
+            <li>Since v1.19: on the Linux desktop a copied password is also removed from the middle-click selection when the time runs out, on lock and on quit (Klipper can put copies there as well); selected passwords are cleared as intended in more cases, e.g. on “Lock now” right after selecting</li>
+            <li>Since v1.18: on the Linux desktop the donation link opens the default browser, a password selected by Tab, mouse or Ctrl+A is cleared from the middle-click selection with the copy timer or on lock, scrollbars in the neon look</li>
+            <li>Since v1.17: on the Linux desktop the cursor stays in place when clicking the eye in a password field; browser engine Electron 44.5.1</li>
+            <li>Since v1.16: on the Linux desktop the open entry stays in place while the list scrolls; manual on backup &amp; sync with Syncthing and on changing a password without risk</li>
+            <li>Since v1.15: an import during which the app was locked is dropped instead of running into the next session; Android: fixed a crash on closing when another app had launched Alien Pass with certain extras</li>
+            <li>Since v1.13 (first attempt in v1.12): on Android other password managers no longer offer themselves via autofill in Alien Pass fields</li>
+            <li>Since v1.11: with "Lock in background: immediately" a copied password stays pasteable until the set time runs out</li>
+            <li>Since v1.10: CSV import recognises six more managers by their header (nine in total); import also works with "Lock in background: immediately" – the chosen file is imported after unlocking</li>
             <li>Since v1.9: confirmations as in-app dialogs instead of the Android system dialog (which did not inherit the screenshot protection), "Undo" after deleting, multi-select – several entries at once to the trash, into a category or as favourites</li>
             <li>Since v1.8: Android – "fingerprint also after a restart" box (off by default); desktop – quick unlock with a PIN after a lock (in memory only, at most 24 hours, honestly assessed); a third internal audit of the desktop branch</li>
             <li>Since v1.6.1: a warning when a fingerprint was newly enrolled in Android – even across a restart – and the failed-attempt brake keeps counting across app restarts</li>
