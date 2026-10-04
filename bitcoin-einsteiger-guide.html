@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Bitcoin Einsteiger-Guide — Von Null zur Self-Custody | Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Bitcoin Einsteiger-Guide: 7 Kapitel von Null zur Self-Custody. Bitcoin kaufen, BitBox02 einrichten, Seed sichern, erste Transaktion, Steuern. Kein Vorwissen nötig. Festpreis 20 €.">
+  <meta name="description" content="Bitcoin Einsteiger-Guide: 8 Kapitel von Null zur Self-Custody. Bitcoin kaufen, BitBox02 einrichten, Seed sichern, erste Transaktion, Steuern, Betrugsmaschen. Kein Vorwissen nötig. Kostenloses PDF, Teilen erwünscht.">
   <link rel="canonical" href="/bitcoin-einsteiger-guide.html">
   <link rel="alternate" hreflang="en" href="/en/bitcoin-einsteiger-guide.html">
   <style>
@@ -132,6 +132,8 @@
       border-bottom: 1px solid #111;
     }
     .chapters li:last-child { border-bottom: none; }
+    .chapters li.extra { counter-increment: none; }
+    .chapters li.extra::before { content: "+"; }
     .chapters li::before {
       content: counter(ch-counter, decimal-leading-zero);
       flex: 0 0 28px;
@@ -231,7 +233,7 @@
 
     <p class="lead">
       Von Null zur eigenen Self-Custody — Schritt für Schritt.<br>
-      Kein Vorwissen nötig. Kein Bullshit.
+      Kein Vorwissen nötig. Kein Bullshit. <strong style="color:#00ffcc;">Kostenlos.</strong>
     </p>
 
     <!-- Für wen -->
@@ -288,45 +290,84 @@
           <span>§23 EStG, BTC Steuertool, eigene Full Node, Lightning-Einführung</span>
         </div>
       </li>
+      <li>
+        <div>
+          <strong>Betrugsmaschen erkennen und abwehren</strong>
+          <span>Gefälschter Support, Phishing, manipulierte Geräte: woran du sie erkennst</span>
+        </div>
+      </li>
+      <li class="extra">
+        <div>
+          <strong>Abschluss-Checkliste, Bonus und Glossar</strong>
+          <span>Zehn Punkte bis zur echten Self-Custody, dazu „Wie frei du wirklich bist" und die wichtigsten Begriffe</span>
+        </div>
+      </li>
     </ul>
 
     <!-- Format -->
     <h2>Format</h2>
     <p style="color:#aaa;">
-      PDF-Guide — zum Lesen, Ausdrucken, Abhaken.<br>
-      Kein Abo, keine Login-Pflicht. Einmal kaufen, für immer haben.<br>
-      Nach dem Kauf: E-Mail für Rückfragen inklusive.
+      PDF im A4-Format, 53 Seiten. Zum Lesen am Bildschirm, zum Ausdrucken und Abhaken.<br>
+      Kein Konto, keine Anmeldung, keine E-Mail-Adresse nötig. Einfach herunterladen.<br>
+      <strong style="color:#ccc;">Teilen ist ausdrücklich erwünscht:</strong> Gib den Guide weiter, am besten unverändert, dann weiß jeder, woher er stammt.
     </p>
 
-    <!-- Preis -->
-    <h2>Preis</h2>
+    <!-- Download -->
+    <h2>Download</h2>
     <div class="price-box">
-      <div class="price">20 €</div>
-      <div class="price-sub">DRM-frei · einmal kaufen · für immer haben<br>Bitcoin · Lightning · Banküberweisung<br>Verfügbar auf Deutsch und Englisch</div>
+      <div class="price">Kostenlos</div>
+      <div class="price-sub">DRM-frei · ohne Anmeldung · Ausgabe Oktober 2026<br>Deutsch und Englisch</div>
     </div>
 
-    <!-- CTA -->
     <div class="cta-wrap">
-      <p style="color:#aaa; font-size:0.9em; text-align:center; margin:0 0 14px 0;">Welche Version möchtest du?</p>
       <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
-        <a class="cta-btn" href="zahlung.html" style="flex:1; min-width:150px; text-align:center;">
-          🇩🇪 Deutsch — 20 €
+        <a class="cta-btn" href="einsteiger-guide/bitcoin-einsteiger-guide.pdf" download style="flex:1; min-width:150px; text-align:center;">
+          🇩🇪 Deutsch — PDF (2,3 MB)
         </a>
-        <a class="cta-btn" href="en/zahlung.html" style="flex:1; min-width:150px; text-align:center; background:transparent; border-color:rgba(0,255,204,0.5); color:#00ffcc;">
-          🇬🇧 English — €20
+        <a class="cta-btn" href="einsteiger-guide/bitcoin-beginner-guide.pdf" download style="flex:1; min-width:150px; text-align:center; background:transparent; border-color:rgba(0,255,204,0.5); color:#00ffcc;">
+          🇬🇧 English — PDF (2,3 MB)
         </a>
       </div>
-      <p class="cta-sub" style="margin-top:16px; color:#555; font-size:0.9em;">
-        Wähle auf der Zahlungsseite deine Zahlungsart (Lightning, Onchain, Banküberweisung). Schreib im Verwendungszweck oder Notizfeld: <strong style="color:#888;">Bitcoin Guide DE</strong> oder <strong style="color:#888;">Bitcoin Guide EN</strong>. Du bekommst deinen persönlichen Download-Link innerhalb von 24 Stunden.
+      <p class="cta-sub" style="margin-top:16px; color:#888; font-size:0.9em; text-align:center;">
+        Dazu als druckbares Werkstatt-Blatt, eine A4-Seite zum Abhaken:
+        <a href="einsteiger-guide/abschluss-checkliste.pdf" download style="color:#00ffcc;">Meine Abschluss-Checkliste</a> ·
+        <a href="einsteiger-guide/abschluss-checkliste-en.pdf" download style="color:#00ffcc;">My Final Checklist (EN)</a>
       </p>
     </div>
+
+    <h3>Echtheit prüfen</h3>
+    <p style="color:#aaa; font-size:0.9em;">
+      Den Guide veröffentliche ich nur hier. Wer ihn weitergereicht bekommt, kann mit der Prüfsumme sehen, ob die Datei unverändert ist.
+      Prüfen: Linux/macOS <code>sha256sum datei.pdf</code> · Windows PowerShell <code>Get-FileHash datei.pdf</code>. Alle Werte auch als
+      <a href="einsteiger-guide/SHA256SUMS" style="color:#00ffcc;">SHA256SUMS</a>.
+    </p>
+    <table style="width:100%; border-collapse:collapse; font-size:0.8em; color:#aaa;">
+      <tr><td style="padding:4px 8px 4px 0;">bitcoin-einsteiger-guide.pdf</td><td style="word-break:break-all;"><code>ac6ef713a9e6d57174f418e004f39023e444057577a678c03bd2df344434a075</code></td></tr>
+      <tr><td style="padding:4px 8px 4px 0;">bitcoin-beginner-guide.pdf</td><td style="word-break:break-all;"><code>856174f3f52113289e5281b0f97eea52a5dde381674d9fa1af048dbdeeda0292</code></td></tr>
+      <tr><td style="padding:4px 8px 4px 0;">abschluss-checkliste.pdf</td><td style="word-break:break-all;"><code>d4629fbd8aa712b47057f937cf736effeddb175b4db9a45e30bb1e6e49f8b64a</code></td></tr>
+      <tr><td style="padding:4px 8px 4px 0;">abschluss-checkliste-en.pdf</td><td style="word-break:break-all;"><code>ce9ec34ea261c6f16b46a21a0dcb6f9defbcc2c01a15240fb59a881c06c1a9a1</code></td></tr>
+    </table>
+
+    <h3>Neue Ausgaben mitbekommen</h3>
+    <p style="color:#aaa;">
+      Freiwillig: Wer erfahren will, wenn eine neue Ausgabe erscheint, trägt sich in den
+      <a href="newsletter.html" style="color:#00ffcc;">Newsletter</a> ein. Für den Download brauchst du ihn nicht.
+    </p>
+
+    <h3>Fragen</h3>
+    <p style="color:#aaa;">
+      Schreib gern an <a href="mailto:kontakt@alien-investor.org" style="color:#00ffcc;">kontakt@alien-investor.org</a>, Betreff „Bitcoin Guide Frage".
+      Ich antworte, sobald ich kann, eine feste Antwortzeit gibt es beim kostenlosen Guide nicht.
+      Wer eine gründliche Prüfung seines ganzen Setups will, nimmt das <a href="setup-review.html" style="color:#00ffcc;">Setup Review</a>.
+    </p>
 
     <hr style="border-color:#1a1a1a; margin: 2em 0;">
 
     <div style="text-align:center; color:#555; font-size:0.85em; margin: 20px 0;">
-      Mehr Services:
+      Weiter geht es mit:
+      <a href="buecher.html" style="color:#555;">den Büchern der Reihe</a> ·
+      <a href="apps.html" style="color:#555;">unseren Apps (kostenlos)</a> ·
       <a href="setup-review.html" style="color:#555;">Setup Review (49 €)</a> ·
-      <a href="FAQ.html" style="color:#555;">Wunsch-Aktienanalyse (49 €)</a> ·
       <a href="grapheneos-flash-service.html" style="color:#555;">Alien Phone Service</a>
     </div>
 

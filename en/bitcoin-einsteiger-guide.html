@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Bitcoin Beginner's Guide — From Zero to Self-Custody | Alien Investor</title>
+  <title>Bitcoin Beginner Guide — From Zero to Self-Custody | Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Bitcoin Beginner Guide: 7 chapters from zero to self-custody. Buy Bitcoin, set up BitBox02, secure your seed, first transaction, taxes. No prior knowledge needed. Fixed price 20 €.">
+  <meta name="description" content="Bitcoin Beginner Guide: 8 chapters from zero to self-custody. Buy Bitcoin, set up BitBox02, secure your seed, first transaction, taxes, scams. No prior knowledge needed. Free PDF, sharing welcome.">
   <link rel="canonical" href="/en/bitcoin-einsteiger-guide.html">
   <link rel="alternate" hreflang="de" href="/bitcoin-einsteiger-guide.html">
   <style>
@@ -132,6 +132,8 @@
       border-bottom: 1px solid #111;
     }
     .chapters li:last-child { border-bottom: none; }
+    .chapters li.extra { counter-increment: none; }
+    .chapters li.extra::before { content: "+"; }
     .chapters li::before {
       content: counter(ch-counter, decimal-leading-zero);
       flex: 0 0 28px;
@@ -226,12 +228,12 @@
         <circle cx="14" cy="13" r="2.5" fill="none" stroke="#000" stroke-width="1"/>
         <path d="M10,28 Q11,36 14,37 Q17,36 18,28 Z" fill="#00ffcc" opacity="0.55"/>
       </svg>
-      Bitcoin Beginner's Guide
+      Bitcoin Beginner Guide
     </h1>
 
     <p class="lead">
       From zero to your own self-custody — step by step.<br>
-      No prior knowledge needed. No bullshit.
+      No prior knowledge needed. No bullshit. <strong style="color:#00ffcc;">Free.</strong>
     </p>
 
     <!-- For whom -->
@@ -288,45 +290,84 @@
           <span>Tax rules (Germany/EU), BTC tax tool, running your own full node, Lightning intro</span>
         </div>
       </li>
+      <li>
+        <div>
+          <strong>Recognizing and avoiding scams</strong>
+          <span>Fake support, phishing, tampered devices: how to spot them</span>
+        </div>
+      </li>
+      <li class="extra">
+        <div>
+          <strong>Final checklist, bonus and glossary</strong>
+          <span>Ten points to genuine self-custody, plus "How free you really are" and the key terms</span>
+        </div>
+      </li>
     </ul>
 
     <!-- Format -->
     <h2>Format</h2>
     <p style="color:#aaa;">
-      PDF guide — read it, print it, check it off.<br>
-      No subscription, no login required. Buy once, own forever.<br>
-      Includes email support for follow-up questions after purchase.
+      A4 PDF, 50 pages. Read it on screen, print it, check it off.<br>
+      No account, no sign-up, no email address needed. Just download it.<br>
+      <strong style="color:#ccc;">Sharing is explicitly welcome:</strong> pass it on, ideally unchanged, so everyone knows where it comes from.
     </p>
 
-    <!-- Price -->
-    <h2>Price</h2>
+    <!-- Download -->
+    <h2>Download</h2>
     <div class="price-box">
-      <div class="price">20 €</div>
-      <div class="price-sub">DRM-free · buy once · keep forever<br>Bitcoin · Lightning · Bank transfer<br>Available in German and English</div>
+      <div class="price">Free</div>
+      <div class="price-sub">DRM-free · no sign-up · October 2026 edition<br>English and German</div>
     </div>
 
-    <!-- CTA -->
     <div class="cta-wrap">
-      <p style="color:#aaa; font-size:0.9em; text-align:center; margin:0 0 14px 0;">Which version do you want?</p>
       <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
-        <a class="cta-btn" href="/en/zahlung.html" style="flex:1; min-width:150px; text-align:center; background:transparent; border-color:rgba(0,255,204,0.5); color:#00ffcc;">
-          🇬🇧 English — €20
+        <a class="cta-btn" href="/einsteiger-guide/bitcoin-beginner-guide.pdf" download style="flex:1; min-width:150px; text-align:center;">
+          🇬🇧 English — PDF (2.3 MB)
         </a>
-        <a class="cta-btn" href="/zahlung.html" style="flex:1; min-width:150px; text-align:center; background:transparent; border-color:rgba(0,255,204,0.5); color:#00ffcc;">
-          🇩🇪 Deutsch — €20
+        <a class="cta-btn" href="/einsteiger-guide/bitcoin-einsteiger-guide.pdf" download style="flex:1; min-width:150px; text-align:center; background:transparent; border-color:rgba(0,255,204,0.5); color:#00ffcc;">
+          🇩🇪 Deutsch — PDF (2.3 MB)
         </a>
       </div>
-      <p class="cta-sub" style="margin-top:16px; color:#555; font-size:0.9em;">
-        Choose your payment method on the next page (Lightning, Onchain, bank transfer). In the payment note or reference field write: <strong style="color:#888;">Bitcoin Guide EN</strong> or <strong style="color:#888;">Bitcoin Guide DE</strong>. You will receive your personal download link within 24 hours.
+      <p class="cta-sub" style="margin-top:16px; color:#888; font-size:0.9em; text-align:center;">
+        Also available as a printable workshop sheet, one A4 page to tick off:
+        <a href="/einsteiger-guide/abschluss-checkliste-en.pdf" download style="color:#00ffcc;">My Final Checklist</a> ·
+        <a href="/einsteiger-guide/abschluss-checkliste.pdf" download style="color:#00ffcc;">Meine Abschluss-Checkliste (DE)</a>
       </p>
     </div>
+
+    <h3>Verify authenticity</h3>
+    <p style="color:#aaa; font-size:0.9em;">
+      The guide is only published here. If someone passes it on to you, the checksum shows whether the file is unchanged.
+      Verify: Linux/macOS <code>sha256sum file.pdf</code> · Windows PowerShell <code>Get-FileHash file.pdf</code>. All values also as
+      <a href="/einsteiger-guide/SHA256SUMS" style="color:#00ffcc;">SHA256SUMS</a>.
+    </p>
+    <table style="width:100%; border-collapse:collapse; font-size:0.8em; color:#aaa;">
+      <tr><td style="padding:4px 8px 4px 0;">bitcoin-beginner-guide.pdf</td><td style="word-break:break-all;"><code>856174f3f52113289e5281b0f97eea52a5dde381674d9fa1af048dbdeeda0292</code></td></tr>
+      <tr><td style="padding:4px 8px 4px 0;">bitcoin-einsteiger-guide.pdf</td><td style="word-break:break-all;"><code>ac6ef713a9e6d57174f418e004f39023e444057577a678c03bd2df344434a075</code></td></tr>
+      <tr><td style="padding:4px 8px 4px 0;">abschluss-checkliste-en.pdf</td><td style="word-break:break-all;"><code>ce9ec34ea261c6f16b46a21a0dcb6f9defbcc2c01a15240fb59a881c06c1a9a1</code></td></tr>
+      <tr><td style="padding:4px 8px 4px 0;">abschluss-checkliste.pdf</td><td style="word-break:break-all;"><code>d4629fbd8aa712b47057f937cf736effeddb175b4db9a45e30bb1e6e49f8b64a</code></td></tr>
+    </table>
+
+    <h3>Hear about new editions</h3>
+    <p style="color:#aaa;">
+      Optional: if you want to know when a new edition comes out, sign up for the
+      <a href="/en/newsletter.html" style="color:#00ffcc;">newsletter</a>. You do not need it for the download.
+    </p>
+
+    <h3>Questions</h3>
+    <p style="color:#aaa;">
+      Feel free to write to <a href="mailto:kontakt@alien-investor.org" style="color:#00ffcc;">kontakt@alien-investor.org</a>, subject "Bitcoin Guide Question".
+      I will answer as soon as I can, but there is no fixed response time for the free guide.
+      If you want a thorough review of your whole setup, the <a href="/en/setup-review.html" style="color:#00ffcc;">Setup Review</a> is the right place.
+    </p>
 
     <hr style="border-color:#1a1a1a; margin: 2em 0;">
 
     <div style="text-align:center; color:#555; font-size:0.85em; margin: 20px 0;">
-      More services:
-      <a href="/en/setup-review.html" style="color:#555;">Setup Review (49 €)</a> ·
-      <a href="/en/FAQ.html" style="color:#555;">Custom Stock Analysis (49 €)</a> ·
+      Where to go next:
+      <a href="/en/buecher.html" style="color:#555;">the books in the series</a> ·
+      <a href="/en/apps.html" style="color:#555;">our apps (free)</a> ·
+      <a href="/en/setup-review.html" style="color:#555;">Setup Review (€49)</a> ·
       <a href="/en/grapheneos-flash-service.html" style="color:#555;">Alien Phone Service</a>
     </div>
 
