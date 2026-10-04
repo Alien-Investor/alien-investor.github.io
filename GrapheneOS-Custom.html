@@ -173,13 +173,13 @@
     <h2>2. Die nukleare Option: Duress-Passwort (Zwangspasswort)</h2>
     <h3>Das Konzept</h3>
     <p>Verschlüsselung schützt dich vor Mathematik. Sie schützt dich nicht vor einem Schraubenschlüssel („Rubber-Hose Cryptanalysis“).</p>
-    <p>Wenn du unter Androhung von Gewalt oder an einer Grenzkontrolle gezwungen wirst, dein Telefon zu entsperren, hilft dir eine normale PIN nicht weiter. Hier kommt das <strong>Duress-Passwort</strong> ins Spiel. Es ist ein spezielles, alternatives Passwort. Gibst du es ein, wird das Gerät nicht entsperrt, sondern <strong>unwiderruflich gelöscht</strong> (inklusive installierter eSIMs). Die kryptografischen Schlüssel werden vernichtet.</p>
+    <p>Wenn du unter Androhung von Gewalt oder an einer Grenzkontrolle gezwungen wirst, dein Telefon zu entsperren, hilft dir eine normale PIN nicht weiter. Hier kommt das <strong>Duress-Passwort</strong> ins Spiel. GrapheneOS verlangt dafür eine zweite PIN und ein zweites Passwort. Gibst du eines davon ein, wird das Gerät nicht entsperrt, sondern <strong>unwiderruflich gelöscht</strong>: Alle Daten werden dauerhaft unlesbar, installierte eSIMs werden gelöscht, danach schaltet sich das Gerät aus.</p>
 
     <h3>Die Konfiguration</h3>
-    <p>Dies ist deine letzte Verteidigungslinie. Nutze sie nur, wenn physischer Zwang Teil deines Bedrohungsmodells ist. Das Ergebnis ist ein „sauberes“ Gerät im Werkszustand.</p>
+    <p>Dies ist deine letzte Verteidigungslinie. Nutze sie nur, wenn physischer Zwang Teil deines Bedrohungsmodells ist. GrapheneOS selbst bleibt installiert, deine Daten sind unwiederbringlich weg.</p>
     <ul>
-      <li><strong>Pfad:</strong> <code>Einstellungen</code> → <code>Sicherheit & Datenschutz</code> → <code>Geräteentsperrung</code> → <code>Duress password</code> (manchmal als Zwangspasswort übersetzt)</li>
-      <li><strong>Aktion:</strong> Definiere eine PIN oder ein Passwort, das beim Eingeben das gesamte Gerät löscht.</li>
+      <li><strong>Pfad:</strong> <code>Einstellungen</code> → <code>Datenschutz & Sicherheit</code> → <code>Geräteentsperrung</code> → <code>Duress password</code> (manchmal als Zwangspasswort übersetzt)</li>
+      <li><strong>Aktion:</strong> Lege eine Duress-PIN und ein Duress-Passwort fest, die sich klar von deinem echten Code unterscheiden. Einrichten lässt sich das nur im Hauptprofil, wirksam ist es aber in jeder Code-Abfrage.</li>
     </ul>
 
     <h2>3. Netzwerk-Hygiene: Privates DNS & VPN-Killswitch</h2>
@@ -187,10 +187,10 @@
     <p>Dein Mobilfunkanbieter oder ISP sieht jede Domain, die du aufrufst. Diese Metadaten sind oft wertvoller als der Inhalt der Verbindung. Außerdem: Wenn deine VPN-Verbindung auch nur für eine Sekunde abbricht, können Daten über deine normale Leitung „leaken“.</p>
 
     <h3>Die Konfiguration</h3>
-    <p>Du musst deine DNS-Anfragen verschlüsseln (z. B. via NextDNS oder Quad9) und sicherstellen, dass kein Datenpaket das Gerät ohne VPN-Tunnel verlässt.</p>
+    <p>Du musst sicherstellen, dass kein Datenpaket das Gerät ohne VPN-Tunnel verlässt, auch keine DNS-Anfrage. Die DNS-Auflösung übernimmt dann das VPN durch seinen eigenen Tunnel.</p>
     <ul>
-      <li><strong>Privates DNS:</strong> <code>Einstellungen</code> → <code>Netzwerk & Internet</code> → <code>Privates DNS</code> → <em>Hostname des Anbieters eingeben</em>.</li>
-      <li><strong>VPN-Killswitch:</strong> <code>Einstellungen</code> → <code>Netzwerk & Internet</code> → <code>VPN</code> → (Zahnrad-Icon beim Anbieter) → Aktiviere <strong>„Durchgehend aktives VPN“</strong> UND <strong>„Verbindungen ohne VPN blockieren“</strong>.</li>
+      <li><strong>Privates DNS:</strong> <code>Einstellungen</code> → <code>Netzwerk & Internet</code> → <code>Privates DNS</code> → <em>Aus</em>. Mit dem Kill Switch verträgt es sich nicht, DNS-Filter übernimmt die VPN-App selbst (z. B. Proton NetShield oder Mullvads DNS-Inhaltsfilter), oder du nimmst eine VPN-App mit eigenem Filter wie RethinkDNS. Privates DNS gilt für alle Profile und lässt sich nur im Hauptprofil umstellen.</li>
+      <li><strong>VPN-Killswitch:</strong> <code>Einstellungen</code> → <code>Netzwerk & Internet</code> → <code>VPN</code> → (Zahnrad-Icon beim Anbieter) → Aktiviere <strong>„Durchgehend aktives VPN“</strong> UND <strong>„Verbindungen ohne VPN blockieren“</strong>. Das gilt je Profil, jedes Nutzerprofil braucht seine eigene VPN-App und beide Schalter.</li>
     </ul>
 
     <h2>4. Abschottung: Nutzerprofile (User Profiles)</h2>

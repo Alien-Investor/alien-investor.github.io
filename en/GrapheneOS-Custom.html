@@ -175,13 +175,13 @@
     <h2>2. The Nuclear Option: Duress Password</h2>
     <h3>The Concept</h3>
     <p>Encryption protects you from mathematics. It does not protect you from a wrench ("Rubber-Hose Cryptanalysis").</p>
-    <p>If you're forced to unlock your phone under threat of violence or at a border crossing, a normal PIN won't save you. That's where the <strong>Duress Password</strong> comes in. It's a special, alternative password. Enter it, and the device doesn't unlock — it gets <strong>irreversibly wiped</strong> (including installed eSIMs). The cryptographic keys are destroyed.</p>
+    <p>If you're forced to unlock your phone under threat of violence or at a border crossing, a normal PIN won't save you. That's where the <strong>Duress Password</strong> comes in. GrapheneOS requires a second PIN and a second password for it. Enter either one, and the device doesn't unlock, it gets <strong>irreversibly wiped</strong>: all data becomes permanently unreadable, installed eSIMs are deleted, then the device powers off.</p>
 
     <h3>The Configuration</h3>
-    <p>This is your last line of defense. Only use it if physical coercion is part of your threat model. The result is a "clean" factory-reset device.</p>
+    <p>This is your last line of defense. Only use it if physical coercion is part of your threat model. GrapheneOS itself stays installed, your data is gone for good.</p>
     <ul>
-      <li><strong>Path:</strong> <code>Settings</code> → <code>Security &amp; Privacy</code> → <code>Device Unlock</code> → <code>Duress password</code></li>
-      <li><strong>Action:</strong> Define a PIN or password that wipes the entire device when entered.</li>
+      <li><strong>Path:</strong> <code>Settings</code> → <code>Security &amp; privacy</code> → <code>Device unlock</code> → <code>Duress password</code></li>
+      <li><strong>Action:</strong> Set a duress PIN and a duress password that are clearly different from your real code. You can only set this up in the owner profile, but it works at every code prompt.</li>
     </ul>
 
     <h2>3. Network Hygiene: Private DNS &amp; VPN Kill Switch</h2>
@@ -189,10 +189,10 @@
     <p>Your mobile carrier or ISP sees every domain you visit. This metadata is often more valuable than the content of the connection itself. And: if your VPN connection drops for even a second, data can "leak" over your regular line.</p>
 
     <h3>The Configuration</h3>
-    <p>You need to encrypt your DNS queries (e.g. via NextDNS or Quad9) and make sure no data packet leaves the device without going through the VPN tunnel.</p>
+    <p>You need to make sure no data packet leaves the device without going through the VPN tunnel, not even a DNS query. The VPN then handles DNS resolution through its own tunnel.</p>
     <ul>
-      <li><strong>Private DNS:</strong> <code>Settings</code> → <code>Network &amp; Internet</code> → <code>Private DNS</code> → <em>Enter the provider's hostname</em>.</li>
-      <li><strong>VPN Kill Switch:</strong> <code>Settings</code> → <code>Network &amp; Internet</code> → <code>VPN</code> → (gear icon next to provider) → Enable <strong>"Always-on VPN"</strong> AND <strong>"Block connections without VPN"</strong>.</li>
+      <li><strong>Private DNS:</strong> <code>Settings</code> → <code>Network &amp; internet</code> → <code>Private DNS</code> → <em>Off</em>. It does not work with the kill switch, so DNS filtering is handled by the VPN app itself (e.g. Proton NetShield or Mullvad's DNS content blockers), or use a VPN app with its own filter such as RethinkDNS. Private DNS applies to all profiles and can only be changed in the owner profile.</li>
+      <li><strong>VPN Kill Switch:</strong> <code>Settings</code> → <code>Network &amp; internet</code> → <code>VPN</code> → (gear icon next to provider) → Enable <strong>"Always-on VPN"</strong> AND <strong>"Block connections without VPN"</strong>. This applies per profile, every user profile needs its own VPN app and both toggles.</li>
     </ul>
 
     <h2>4. Isolation: User Profiles</h2>

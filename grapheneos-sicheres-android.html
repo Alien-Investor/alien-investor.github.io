@@ -274,8 +274,8 @@
       vorsorglich zugemacht – ohne dir das Gerät unbrauchbar zu machen.
     </p>
     <ul>
-      <li>USB ist im gesperrten Zustand komplett tot – kein Datenzugriff, keine „Forensik“ per Kabel.</li>
-      <li>NFC/Bluetooth sind nicht permanent aktiv, sondern werden restriktiver gehandhabt.</li>
+      <li>USB-C nimmt im gesperrten Zustand keine neuen Verbindungen an, die Datenleitungen sind abgeschaltet: kein Datenzugriff, keine „Forensik“ per Kabel. Laden geht weiter.</li>
+      <li>NFC und Bluetooth sind ab Werk aus. Kontaktloses Bezahlen per NFC funktioniert nur bei entsperrtem Gerät.</li>
       <li>Debugging-Schnittstellen und unnötige Systemdienste sind standardmäßig deaktiviert.</li>
     </ul>
     <p>
@@ -293,11 +293,13 @@
         Shoulder-Surfer und Kameras können so viel schwerer Muster erkennen.
       </li>
       <li>
-        <strong>Duress-Passwort:</strong> Du kannst ein spezielles „Notfall-Passwort“ setzen. Gibst du es ein,
-        werden deine Daten gelöscht, statt das Gerät zu entsperren – etwa, wenn du unter Zwang bist.
+        <strong>Duress-PIN und Duress-Passwort:</strong> Zusätzlich zu deinem echten Code legst du eine Notfall-PIN
+        und ein Notfall-Passwort fest. Gibst du eines davon ein, entsperrt sich das Gerät nicht: Alle Daten werden
+        dauerhaft unlesbar, installierte eSIMs gelöscht, danach schaltet sich das Gerät aus. Gedacht für Situationen,
+        in denen du unter Zwang stehst.
       </li>
       <li>
-        <strong>Lange Passwörter:</strong> GrapheneOS erlaubt absurd lange Passwörter (64+ Zeichen) und
+        <strong>Lange Passwörter:</strong> GrapheneOS erlaubt PINs und Passwörter mit bis zu 128 Zeichen und
         kombiniert Fingerabdruck optional mit zusätzlicher PIN. Brute-Force wird damit praktisch sinnlos.
       </li>
     </ul>

@@ -276,8 +276,8 @@
       get locked down preemptively — without making the device unusable.
     </p>
     <ul>
-      <li>USB is completely dead when locked — no data access, no "forensics" via cable.</li>
-      <li>NFC/Bluetooth are not permanently active, but handled more restrictively.</li>
+      <li>When locked, the USB-C port accepts no new connections and the data lines are switched off: no data access, no "forensics" via cable. Charging continues.</li>
+      <li>NFC and Bluetooth are off by default. Contactless payment via NFC only works on an unlocked device.</li>
       <li>Debugging interfaces and unnecessary system services are disabled by default.</li>
     </ul>
     <p>
@@ -295,11 +295,12 @@
         Shoulder surfers and cameras have a much harder time picking up patterns.
       </li>
       <li>
-        <strong>Duress password:</strong> You can set a special "emergency password." Enter it and your data
-        gets wiped instead of unlocking the device — useful if you're under coercion.
+        <strong>Duress PIN and duress password:</strong> In addition to your real code, you set an emergency PIN
+        and an emergency password. Enter either one and the device doesn't unlock: all data becomes permanently
+        unreadable, installed eSIMs are deleted, then the device powers off. Meant for situations where you're under coercion.
       </li>
       <li>
-        <strong>Long passphrases:</strong> GrapheneOS supports absurdly long passwords (64+ characters) and
+        <strong>Long passphrases:</strong> GrapheneOS supports PINs and passwords of up to 128 characters and
         optionally combines fingerprint with an additional PIN. Brute-force becomes practically pointless.
       </li>
     </ul>
