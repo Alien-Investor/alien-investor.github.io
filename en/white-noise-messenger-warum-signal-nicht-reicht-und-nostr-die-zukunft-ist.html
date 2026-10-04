@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>White Noise Messenger – Why Signal Isn't Enough and Nostr Is the Future | Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="White Noise Messenger analysis: how Nostr, MLS and NIP-EE solve the metadata problem and enable real digital sovereignty against chat surveillance.">
+  <meta name="description" content="White Noise Messenger analysis: how Nostr, MLS and the Marmot Protocol solve the metadata problem and enable real digital sovereignty against chat surveillance.">
   <link rel="canonical" href="https://alien-investor.org/en/white-noise-messenger-warum-signal-nicht-reicht-und-nostr-die-zukunft-ist.html">
   <link rel="alternate" hreflang="de" href="https://alien-investor.org/white-noise-messenger-warum-signal-nicht-reicht-und-nostr-die-zukunft-ist.html">
   <link rel="alternate" hreflang="en" href="https://alien-investor.org/en/white-noise-messenger-warum-signal-nicht-reicht-und-nostr-die-zukunft-ist.html">
@@ -47,7 +47,7 @@
   </div>
 
   <h1>White Noise Messenger – Why Signal Isn't Enough and Nostr Is the Future</h1>
-  <p class="byline"><em>by Alien Investor</em></p>
+  <p class="byline"><em>by Alien Investor · updated October 2026</em></p>
 
   <article id="content">
     <p>
@@ -70,10 +70,10 @@
     </p>
 
     <p>
-      For a long time, Signal was considered the gold standard. But Signal has a problem: it is centralized and knows your phone number. It knows <em>who</em> is talking to <em>whom</em>. In an era where metadata can be more dangerous than the content itself, that is no longer enough.
+      For a long time, Signal was considered the gold standard. But Signal has a problem: it is centralized and knows your phone number. It sees your number and your IP address and could infer <em>who</em> is talking to <em>whom</em>. In an era where metadata can be more dangerous than the content itself, that is no longer enough.
     </p>
     <p>
-      Enter <strong>White Noise</strong>. A messenger built on the Nostr protocol, funded without venture capital, and engineered so that surveillance becomes mathematically impossible.
+      Enter <strong>White Noise</strong>. A messenger built on the Nostr protocol, published by a nonprofit organization and built so that relays learn as little about you as possible.
     </p>
 
     <h2>1. The Problem: Walled Gardens and the Metadata Trap</h2>
@@ -88,67 +88,74 @@
 
     <h2>2. The Solution: White Noise &amp; Nostr</h2>
     <p>
-      White Noise is not a company — it's software that uses a protocol: <strong>Nostr</strong> (Notes and Other Stuff Transmitted by Relays).
+      White Noise is not a corporate platform. It is software that uses a protocol: <strong>Nostr</strong> (Notes and Other Stuff Transmitted by Relays).
     </p>
     <ul>
       <li><strong>No phone number:</strong> Your identity is a cryptographic key pair. Nobody knows who is behind the key.</li>
       <li><strong>No central server:</strong> Messages travel through "dumb" relays. If one relay blocks you, you simply use another. There is no kill switch.</li>
-      <li><strong>Freedom tech:</strong> The project is backed by cypherpunks — not investors who want to sell your data.</li>
+      <li><strong>Freedom tech:</strong> The project is published by a nonprofit organization, not by investors who want to sell your data.</li>
     </ul>
 
     <blockquote>
       "White Noise is a technical attempt to shift the power balance between state and individual back in favour of the individual."
     </blockquote>
 
-    <h2>3. The Technical Magic: MLS and NIP-EE</h2>
+    <h2>3. The Technical Foundation: MLS and the Marmot Protocol</h2>
     <p>
-      Nostr was originally not built for private chats. White Noise changes that radically by implementing <strong>MLS (Messaging Layer Security)</strong> via the new standard <strong>NIP-EE</strong>.
+      Nostr was originally not built for private chats. White Noise changes that with <strong>MLS (Messaging Layer Security)</strong>, integrated via the <strong>Marmot Protocol</strong>. In its early form the standard was called NIP-EE. In the official Nostr registry, NIP-EE has been marked "unrecommended" since December 2025 and points to Marmot, while the Marmot specification itself carries the status "adopted."
     </p>
-
     <h3>Why MLS Changes Everything</h3>
     <p>
       In conventional messengers, group communication is inefficient. White Noise uses MLS (IETF RFC 9420). Participants are organized like leaves on a tree.
     </p>
     <ul>
-      <li><strong>Scalability:</strong> Encrypted groups with thousands of participants become highly efficient.</li>
+      <li><strong>Scalability:</strong> Even groups with thousands of participants can be encrypted efficiently.</li>
       <li><strong>Forward secrecy:</strong> Even if your key is stolen today, old messages cannot be decrypted.</li>
       <li><strong>Post-compromise security:</strong> The system "heals" itself through automatic key renewal.</li>
     </ul>
-
-    <h3>Cloak for Metadata: Sealed Sender</h3>
+    <h3>Cloak for Metadata: One-Time Keys and Gift Wraps</h3>
     <p>
-      To prevent the relay server from seeing who is talking to whom, White Noise uses "Gift Wraps" (NIP-59). To the relay, everything looks like white noise. It forwards data without knowing who the actual sender or recipient is.
+      So that the relay cannot see who is talking to whom, White Noise signs every chat message with a fresh one-time key, never with your Nostr identity. Even a one-on-one conversation is technically a group in Marmot. The relay sees a random group ID, a timestamp and encrypted content. Who wrote the message and who reads along is not part of it.
     </p>
-
+    <p>
+      Invitations to a group travel as a "Gift Wrap" (NIP-59). The wrapping hides the sender and the content, and only the invitee's inbox is addressed. To the relay, the traffic therefore looks largely like white noise. One gap remains, though: your IP address.
+    </p>
     <h2>4. Infrastructure: Tor &amp; Blossom</h2>
     <p>
       Even the best app is useless if the server can see your IP address.
     </p>
     <ul>
-      <li><strong>Tor integration:</strong> White Noise is designed to run over the Tor network. This decouples your IP from your Nostr identity.</li>
-      <li><strong>Blossom server (media):</strong> Images and voice messages are encrypted <em>before</em> upload. The server hosts only data noise.</li>
+      <li><strong>Tor via Orbot:</strong> White Noise has no built-in Tor feature. The project's FAQ states openly that a relay operator can see connection information such as your IP address. If you want to separate your IP from your Nostr identity, route the app through Orbot in VPN mode and select White Noise under "Choose Apps." VPN mode does occupy the only VPN slot, so no other VPN, such as Mullvad, can run at the same time.</li>
+      <li><strong>Blossom server (media):</strong> Images and voice messages are encrypted <em>before</em> upload. The server hosts only scrambled data. For now the app decides which Blossom servers it uses. The Android app has no setting for your own server yet, only the relays are freely configurable.</li>
+      <li><strong>Notifications:</strong> Real push notifications on Android run through Google's push service, relayed by a service of the publisher, and on GrapheneOS they only work with Sandboxed Google Play. If it is installed, White Noise turns this route on at first launch, and you can switch it off at any time. Without Google Play, the app instead keeps a persistent connection to the relays and announces new messages locally, with no Google involved. Telemetry is off by default.</li>
     </ul>
-
-    <h2>5. Censorship Resistance: The Zap Store</h2>
+    <h2>5. Where to Get It: Zap Store and GitHub</h2>
     <p>
-      White Noise strategically relies on the <strong>Zap Store</strong>. This is a decentralized app store built on Nostr. As long as at least one relay hosts the manifest, you can install the app — bypassing the gatekeepers in Silicon Valley.
+      White Noise was rebuilt from the ground up in 2026. Instead of the earlier Flutter app, there have been native apps for Android and iOS since September 2026, both still in beta. The publisher is the Internet Privacy Foundation (IPF).
     </p>
-
+    <p>
+      The project publishes the Android app in the <strong>Zap Store</strong> itself, with its own Nostr key. The app page therefore marks it as "Published by Developer", and the publisher is the White Noise Nostr profile. As long as at least one relay hosts the manifest, you can install the app, past the gatekeepers in Silicon Valley. The finished APKs are also available from the project's GitHub releases, and Obtainium keeps the app up to date from there. White Noise is offered on Google Play as well, but on GrapheneOS you do not need that route. On the iPhone, White Noise is so far only available through TestFlight.
+    </p>
+    <p>
+      <strong>⚠ Switching from the old app:</strong> The new app has a new package name (<code>dev.ipf.whitenoise.android</code> instead of <code>org.parres.whitenoise</code>). The old app will not receive any more updates, and the new one carries over neither chats nor groups. Back up your private key (nsec) before switching, unless it already lives in Amber. Install the new app alongside the old one, and remove the old one only once everything works.
+    </p>
     <div class="box">
       <h3>Get Started: Downloads &amp; Links</h3>
       <ul>
         <li>
-          <strong>White Noise App:</strong> Download for iOS &amp; Android. <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://www.whitenoise.chat/download" target="_blank" rel="noopener">whitenoise.chat/download</a>
+          <strong>White Noise App:</strong> Download for Android (Zap Store, GitHub) and iOS (TestFlight). <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://www.whitenoise.chat/download" target="_blank" rel="noopener">whitenoise.chat/download</a>
         </li>
         <li>
-          <strong>Zap Store:</strong> Decentralized Nostr app store. <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://nostrapps.com/" target="_blank" rel="noopener">nostrapps.com</a>
+          <strong>Zap Store:</strong> White Noise in the decentralized Nostr app store. <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://zapstore.dev/apps/dev.ipf.whitenoise.android" target="_blank" rel="noopener">zapstore.dev</a>
+        </li>
+        <li>
+          <strong>GitHub releases:</strong> Source for Obtainium. <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://github.com/marmot-protocol/whitenoise-android/releases" target="_blank" rel="noopener">marmot-protocol/whitenoise-android</a>
         </li>
       </ul>
     </div>
-
     <h2>6. Alien Verdict: Sovereignty Is Not a Feature — It's Work</h2>
     <p>
-      White Noise is currently the most robust answer to the surveillance state. If the EU rolls out chat control, White Noise is technically incapable of complying. There is no server to seize and no CEO to arrest.
+      White Noise is currently one of the strongest answers to the surveillance state. If the EU rolls out chat control, White Noise cannot comply by design. There is no central server that messages depend on, and no executive who could hand over chats.
     </p>
 
     <div class="recommendation-box">
@@ -177,7 +184,7 @@
   <div class="box" style="border-style: dashed; border-color: #333;">
     <h3>Resources &amp; Sources</h3>
     <p style="font-size:0.95em; color: #ccc;">
-      Based on documentation for the <a href="https://www.whitenoise.chat/" target="_blank">White Noise project</a>, the <a href="https://datatracker.ietf.org/doc/rfc9420/" target="_blank">MLS specification (RFC 9420)</a> and the <a href="https://github.com/nostr-protocol/nips" target="_blank">Nostr protocol</a>.
+      Based on documentation for the <a href="https://www.whitenoise.chat/" target="_blank">White Noise project</a>, the <a href="https://datatracker.ietf.org/doc/rfc9420/" target="_blank">MLS specification (RFC 9420)</a> and the <a href="https://github.com/nostr-protocol/nips" target="_blank">Nostr protocol</a>, plus the <a href="https://github.com/marmot-protocol/marmot" target="_blank">Marmot specification</a>, the White Noise <a href="https://www.whitenoise.chat/faq" target="_blank">FAQ</a> and <a href="https://github.com/marmot-protocol/whitenoise-android/releases" target="_blank">release notes</a> (as of October 2026).
     </p>
   </div>
 
