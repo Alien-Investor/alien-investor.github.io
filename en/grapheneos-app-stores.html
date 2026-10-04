@@ -137,13 +137,13 @@
     </p>
     <p>Characteristics:</p>
     <ul>
-      <li>Focus on reproducible builds</li>
+      <li>Pinned signing keys, even the first install is verified</li>
       <li>Strict signature verification</li>
       <li>No intermediaries</li>
       <li>No mass distribution</li>
     </ul>
     <p>
-      Typical example: App Verifier.<br><br>
+      Typical example: AppVerifier.<br><br>
       Accrescent only offers a handful of apps — and that's precisely the point.
       No app zoo. No gimmicks. Only verifiable code.
     </p>
@@ -171,7 +171,21 @@
       Whoever uses it takes full responsibility for the source.
     </blockquote>
 
-    <h3>4. F-Droid – Situationally Useful, but with Limitations</h3>
+    <h3>4. Zap Store – the Convenient Update Path</h3>
+    <p>
+      The Zap Store is an app store built on Nostr, with no central company and no account. For most apps it fetches exactly the file Obtainium would fetch, straight from the developer's release and with the developer's original signature. Before every installation it checks the hash and the signature. The difference is convenience: no regex, no architecture question, just search and install.
+    </p>
+    <ul>
+      <li>Original signature of the developer</li>
+      <li>Hash and certificate check before every installation</li>
+      <li>Shows whether the developer published the app ("Published by") or the Zap Store only mirrors it</li>
+      <li>No account, payments via Lightning, for self-published apps directly to the developer</li>
+    </ul>
+    <p>
+      Important: most apps there are not listed by the developer but by the Zap Store's indexer, which mirrors them from the developer's release. The signature remains the developer's. Get familiar with the Zap Store before you hand it your updates: install one or two apps through it first and check on the app page who published them. After that, for most users it is the most convenient update path for everything that is not in the GrapheneOS App Store or in Accrescent. More in my dedicated article, the links are further down.
+    </p>
+
+    <h3>5. F-Droid – Situationally Useful, but with Limitations</h3>
     <p>
       F-Droid is often broadly perceived as "safe." That's an oversimplification.
     </p>
@@ -264,45 +278,10 @@
     <ul>
       <li>Is the app in the GrapheneOS App Store? → use it</li>
       <li>Is it in Accrescent? → use it</li>
-      <li>Official source + Obtainium? → only if you understand what you're doing</li>
+      <li>On the Zap Store, or official source + Obtainium? → Zap Store for convenient updates (after one or two trial installs), Obtainium for everything missing there. Check the signature on first install</li>
       <li>Only available on F-Droid? → weigh your options</li>
       <li>Aurora necessary? → look for alternatives</li>
     </ul>
-
-    <h2>Zap Store – a New, Experimental Ecosystem</h2>
-    <p>
-      Alongside the classic app sources, a completely new model is emerging: the Zap Store.
-      The Zap Store comes from the Nostr community and takes a fundamentally different approach than Google Play or the Apple App Store.
-    </p>
-    <p><strong>Core ideas:</strong></p>
-    <ul>
-      <li>Developers publish their apps themselves</li>
-      <li>Identity is based on cryptographic keys (Nostr keys)</li>
-      <li>Trust is established not by a central authority, but through signatures and reputation</li>
-      <li>No control by Google or Apple</li>
-    </ul>
-    <p>The Zap Store is:</p>
-    <ul>
-      <li>Still young</li>
-      <li>Under construction technically and organizationally</li>
-    </ul>
-    <p>
-      It's not a complete replacement yet, but a solid start and very promising.
-    </p>
-    <ul>
-      <li>It is an excellent radar for new, freedom-oriented and experimental apps</li>
-      <li>It shows where alternative ecosystems can evolve</li>
-      <li>It is especially interesting for users who consciously want to operate outside centralized platforms</li>
-    </ul>
-    <p><strong>Important:</strong></p>
-    <ul>
-      <li>Zap Store relies more heavily on trust and personal responsibility</li>
-      <li>It is clearly aimed at informed users.</li>
-    </ul>
-    <p>
-      I've written a dedicated article on this, as it would go beyond the scope here.
-      All links are below, in the further reading box.
-    </p>
 
     <h2>Conclusion</h2>
     <p>

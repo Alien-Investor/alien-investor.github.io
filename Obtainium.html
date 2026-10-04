@@ -236,15 +236,18 @@
       </li>
     </ul>
 
-    <h3>Trust On First Use (TOFU) & AppVerifier</h3>
+    <h3>Trust On First Use (TOFU): AppVerifier, Verified Apps und das Hash-Feld</h3>
     <p>
       Das Risiko besteht bei der <em>allerersten</em> Installation. Woher weißt du, dass die erste Datei sauber ist?
-      Hier integriert sich Obtainium mit dem Tool <strong>AppVerifier</strong>.
+      Dafür gibt es drei Wege, den Fingerabdruck des Signatur-Zertifikats vorher zu prüfen:
     </p>
+    <ul>
+      <li><strong>Automatisch beim Erstinstall:</strong> Der Obtainium-Schalter „Neue Apps mit ‚Verified Apps‘ teilen (falls verfügbar)“ unter Einstellungen → Aktualisierungen ist ab Werk an. Ist <strong>Verified Apps</strong> (Privacy Guides) oder der Original-<strong>AppVerifier</strong> installiert, reicht Obtainium die heruntergeladene APK vor der Installation dorthin weiter. Obtainium selbst wertet das Ergebnis nicht aus, bei einer Abweichung brichst du im Android-Dialog ab.</li>
+      <li><strong>Manuell mit AppVerifier:</strong> Fingerabdruck von der Webseite des Entwicklers kopieren, in AppVerifier „Verify APK File“ und dann „Verify from clipboard“. Diesen Vergleich kann nur das Original, Verified Apps prüft ausschließlich gegen seine eigene Datenbank.</li>
+      <li><strong>Direkt in Obtainium (ab Version 1.6.16):</strong> Im Feld „Expected signing certificate hashes“ einer App den Fingerabdruck eintragen. Dann installiert Obtainium nur APKs mit genau diesem Signaturschlüssel, auch beim ersten Mal.</li>
+    </ul>
     <p>
-      AppVerifier vergleicht den Fingerabdruck der App mit einer Datenbank bekannter Open-Source-Projekte oder erlaubt dir,
-      den Hash manuell mit der Webseite des Entwicklers abzugleichen. Ist die erste Installation verifiziert,
-      übernimmt Android den Rest.
+      AppVerifier ist das Open-Source-Projekt eines Entwicklers aus dem GrapheneOS-Team, aber kein offizielles GrapheneOS-Projekt. Am besten installierst du es aus Accrescent, das selbst im GrapheneOS App Store liegt. Ist die erste Installation verifiziert, übernimmt Android den Rest.
     </p>
 
     <h2>4. Der strategische Vergleich: Wo stehst du?</h2>
