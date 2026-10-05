@@ -140,18 +140,18 @@
     <h2>Orbot: Tor for Android Apps</h2>
 
     <p>
-      Orbot is not a browser. It is a system-level proxy for Android —
+      Orbot is not a browser. It provides other apps with access to the Tor network, either as a VPN or as a local proxy —
       built by the Guardian Project together with the Tor Project.
       It routes other apps' traffic through the Tor network.
       Not just browsing. Any app you choose.
     </p>
 
-    <h3>VPN Mode vs. Proxy Mode</h3>
+    <h3>VPN Mode vs. Power User Mode</h3>
 
     <div class="table-scroll" style="overflow-x:auto">
     <table>
       <thead>
-        <tr><th></th><th>VPN Mode</th><th>Proxy Mode</th></tr>
+        <tr><th></th><th>VPN Mode</th><th>Power User Mode</th></tr>
       </thead>
       <tbody>
         <tr><td><strong>Technology</strong></td><td>Android VpnService API</td><td>Local SOCKS5 + HTTP proxy</td></tr>
@@ -167,10 +167,10 @@
     <p>
       <strong>VPN mode</strong> is the simpler path: Orbot creates a local VPN at the system level,
       intercepts traffic from selected apps, and routes everything through Tor.
-      No app configuration needed — just use "Choose Apps" in Orbot's settings.
+      No app configuration needed — just mark the desired apps under "Choose apps".
     </p>
     <p>
-      <strong>Proxy mode</strong> (Power User Mode) leaves the VPN slot free.
+      <strong>Power User Mode</strong> (More → Orbot Settings → General) leaves the VPN slot free. Orbot then only provides local proxies (SOCKS on port 9050), which an app has to support itself.
       This lets Orbot run simultaneously with Mullvad or ProtonVPN.
       The result is "Tor over VPN": your ISP only sees the VPN connection,
       the VPN provider only sees Tor traffic — no single point knows both.
@@ -187,18 +187,19 @@
     <p>Recommended settings after installation:</p>
     <ol>
       <li>Enable VPN mode</li>
-      <li>Open "Choose Apps" → select only the apps you want routed through Tor (e.g. wallet, messenger)</li>
-      <li>For maximum leak protection: Android Settings → VPN → Orbot → enable "Block connections without VPN"
-        <br><em>(Note: this disables split-tunneling — everything then routes through Tor)</em></li>
+      <li>Open "Choose apps" → select only the apps you want routed through Tor (e.g. wallet, messenger)</li>
+      <li>For maximum leak protection: Settings → Network &amp; internet → VPN → gear icon next to Orbot → enable "Always-on VPN" and "Block connections without VPN"
+        <br><em>(Note: apps you did not select then have no network at all. They do not go through Tor, they are blocked. Another VPN such as Mullvad cannot run in this profile at the same time.)</em></li>
       <li>Enable Bridges if Tor is blocked on your network</li>
     </ol>
 
     <h3>BitBox and Other Apps Through Tor</h3>
 
     <p>
-      The easiest approach: start Orbot in VPN mode, mark the BitBox app
-      (or any other wallet app) under "Choose Apps" — done. All network traffic from that app
-      now flows through the Tor network without any configuration inside the app itself.
+      For the BitBox app, the cleanest approach is Power User Mode: Orbot runs without a VPN, and in the BitBox app
+      you enter <code>127.0.0.1:9050</code> under Settings → Advanced settings → "Enable tor proxy".
+      The VPN slot stays free, and Mullvad can keep running alongside. Wallets without their own proxy setting
+      can be marked in VPN mode under "Choose apps", and then all their network traffic runs through Tor.
     </p>
     <p>
       Your wallet communicates with the node without your ISP being able to trace the connection back to you.
@@ -235,7 +236,7 @@
 
     <p>
       <strong>In Tor Browser:</strong> Settings → Connection → Bridges → select a built-in bridge<br>
-      <strong>In Orbot:</strong> Main screen → enable "Use Bridges"
+      <strong>In Orbot:</strong> "Choose How To Connect" → pick Snowflake or a bridge
     </p>
 
     <h2>Tor Browser vs. Orbot: When to Use Which?</h2>
@@ -249,8 +250,9 @@
         <tr><td>Anonymous web browsing</td><td>Tor Browser</td></tr>
         <tr><td>Visiting .onion services</td><td>Tor Browser</td></tr>
         <tr><td>High-risk research (journalism, activism)</td><td>Tor Browser + Safest</td></tr>
-        <tr><td>Route wallet / app through Tor</td><td>Orbot VPN mode</td></tr>
-        <tr><td>Anonymous messenger (Telegram, Molly, SimpleX)</td><td>Orbot Proxy mode</td></tr>
+        <tr><td>Wallet with a Tor setting (BitBox)</td><td>Orbot Power User Mode</td></tr>
+        <tr><td>Wallet / app without a proxy setting</td><td>Orbot VPN mode</td></tr>
+        <tr><td>Anonymous messenger (Telegram, Molly, SimpleX)</td><td>Orbot Power User Mode</td></tr>
         <tr><td>Everyday browsing on GrapheneOS</td><td>Vanadium (not Tor — too slow)</td></tr>
       </tbody>
     </table>

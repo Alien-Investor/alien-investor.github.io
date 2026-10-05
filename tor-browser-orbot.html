@@ -140,18 +140,18 @@
     <h2>Orbot: Tor für Android-Apps</h2>
 
     <p>
-      Orbot ist kein Browser. Er ist ein System-Proxy für Android —
+      Orbot ist kein Browser. Er stellt anderen Apps einen Zugang zum Tor-Netzwerk bereit, wahlweise als VPN oder als lokaler Proxy —
       entwickelt vom Guardian Project zusammen mit dem Tor Project.
       Er leitet den Traffic anderer Apps durch das Tor-Netzwerk.
       Nicht nur das Surfen. Jede App, die du auswählst.
     </p>
 
-    <h3>VPN-Modus vs. Proxy-Modus</h3>
+    <h3>VPN-Modus vs. Power-User-Modus</h3>
 
     <div class="table-scroll" style="overflow-x:auto">
     <table>
       <thead>
-        <tr><th></th><th>VPN-Modus</th><th>Proxy-Modus</th></tr>
+        <tr><th></th><th>VPN-Modus</th><th>Power-User-Modus</th></tr>
       </thead>
       <tbody>
         <tr><td><strong>Technik</strong></td><td>Android VpnService API</td><td>SOCKS5 + HTTP-Proxy lokal</td></tr>
@@ -167,10 +167,10 @@
     <p>
       <strong>VPN-Modus</strong> ist der einfachere Weg: Orbot erstellt ein lokales VPN auf Systemebene,
       fängt den Traffic der ausgewählten Apps ab und leitet alles durch Tor.
-      Keine App-Konfiguration nötig — einfach "Choose Apps" in den Orbot-Einstellungen nutzen.
+      Keine App-Konfiguration nötig — einfach unter „Anwendungen auswählen“ die gewünschten Apps markieren.
     </p>
     <p>
-      <strong>Proxy-Modus</strong> (Power User Mode) belässt den VPN-Slot frei.
+      <strong>Power-User-Modus</strong> (Mehr → Orbot-Einstellungen → Allgemein) belässt den VPN-Slot frei. Orbot stellt dann nur lokale Proxys bereit (SOCKS auf Port 9050), die eine App selbst unterstützen muss.
       Dadurch kann Orbot gleichzeitig mit Mullvad oder ProtonVPN laufen.
       Das ergibt "Tor over VPN": Der ISP sieht nur die VPN-Verbindung,
       der VPN-Anbieter sieht nur Tor-Traffic, kein einzelner Punkt kennt beides.
@@ -187,18 +187,19 @@
     <p>Empfohlene Einstellungen nach Installation:</p>
     <ol>
       <li>VPN-Modus aktivieren</li>
-      <li>"Choose Apps" öffnen → nur gewünschte Apps auswählen (z.B. Wallet, Messenger)</li>
-      <li>Für maximalen Leak-Schutz: Android Einstellungen → VPN → Orbot → "Verbindungen ohne VPN blockieren" aktivieren
-        <br><em>(Achtung: deaktiviert das Split-Tunneling — dann läuft alles über Tor)</em></li>
+      <li>„Anwendungen auswählen“ öffnen → nur gewünschte Apps auswählen (z.B. Wallet, Messenger)</li>
+      <li>Für maximalen Leak-Schutz: Einstellungen → Netzwerk &amp; Internet → VPN → Zahnrad bei Orbot → „Durchgehend aktives VPN“ und „Verbindungen ohne VPN blockieren“ aktivieren
+        <br><em>(Achtung: Apps, die du nicht ausgewählt hast, haben dann gar kein Netz mehr. Sie laufen nicht über Tor, sie werden blockiert. Ein anderes VPN wie Mullvad läuft in diesem Profil nicht gleichzeitig.)</em></li>
       <li>Bridges aktivieren wenn Tor im Netzwerk blockiert wird</li>
     </ol>
 
     <h3>BitBox und andere Apps über Tor</h3>
 
     <p>
-      Der einfachste Weg: Orbot im VPN-Modus starten, unter "Choose Apps" die BitBox-App
-      (oder eine andere Wallet-App) markieren — fertig. Der gesamte Netzwerkverkehr dieser App
-      läuft ab sofort über das Tor-Netzwerk, ohne dass die App selbst etwas konfigurieren muss.
+      Für die BitBox-App ist der sauberste Weg der Power-User-Modus: Orbot läuft ohne VPN, und in der BitBox-App
+      wird unter Einstellungen → Erweiterte Einstellungen → „Tor Proxy aktivieren“ die Adresse <code>127.0.0.1:9050</code> eingetragen.
+      Der VPN-Slot bleibt frei, Mullvad kann daneben weiterlaufen. Wallets ohne eigene Proxy-Einstellung
+      markierst du im VPN-Modus unter „Anwendungen auswählen“, dann läuft ihr gesamter Netzwerkverkehr über Tor.
     </p>
     <p>
       So kommuniziert deine Wallet mit dem Node ohne dass dein ISP die Verbindung zurückverfolgen kann.
@@ -235,7 +236,7 @@
 
     <p>
       <strong>Im Tor Browser:</strong> Einstellungen → Connection → Bridges → Built-in Bridge auswählen<br>
-      <strong>In Orbot:</strong> Hauptbildschirm → "Use Bridges" aktivieren
+      <strong>In Orbot:</strong> „Wähle die Art der Verbindung“ → Snowflake oder eine Brücke wählen
     </p>
 
     <h2>Tor Browser vs. Orbot: Wann was?</h2>
@@ -249,8 +250,9 @@
         <tr><td>Anonym im Web surfen</td><td>Tor Browser</td></tr>
         <tr><td>.onion-Dienste besuchen</td><td>Tor Browser</td></tr>
         <tr><td>Recherche mit hohem Schutzbedarf</td><td>Tor Browser + Safest</td></tr>
-        <tr><td>Wallet / App über Tor leiten</td><td>Orbot VPN-Modus</td></tr>
-        <tr><td>Messenger anonym (Telegram, Molly, SimpleX)</td><td>Orbot Proxy-Modus</td></tr>
+        <tr><td>Wallet mit Tor-Einstellung (BitBox)</td><td>Orbot Power-User-Modus</td></tr>
+        <tr><td>Wallet / App ohne Proxy-Einstellung</td><td>Orbot VPN-Modus</td></tr>
+        <tr><td>Messenger anonym (Telegram, Molly, SimpleX)</td><td>Orbot Power-User-Modus</td></tr>
         <tr><td>Normales Surfen auf GrapheneOS</td><td>Vanadium (nicht Tor — zu langsam)</td></tr>
       </tbody>
     </table>
