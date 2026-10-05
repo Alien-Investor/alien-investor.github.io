@@ -114,9 +114,10 @@
     <h2>Voraussetzungen</h2>
     <ul>
       <li>Ein unterstütztes <strong>Google Pixel</strong>.</li>
-      <li>PC/Laptop (Windows, macOS, Linux) mit installierten <a href="https://developer.android.com/tools/releases/platform-tools?hl=de" target="_blank">Android Platform Tools</a>, um die Kommunikation mit dem Pixel zu gewährleisten.</li>
+      <li>PC/Laptop mit Windows, macOS, Linux oder ChromeOS, alternativ ein zweites Android-Gerät (Android 14 bis 17 mit Play-Protect-Zertifizierung oder GrapheneOS). <strong>Keine Android Platform Tools nötig:</strong> Der Web-Installer spricht das Gerät über WebUSB an. Nur unter Linux braucht es einmalig die udev-Regeln (<code>android-sdk-platform-tools-common</code> bzw. <code>android-udev</code>).</li>
+      <li>Mindestens <strong>2 GB freier Arbeitsspeicher</strong> und <strong>32 GB freier Speicherplatz</strong>.</li>
       <li>Ein zuverlässiges <strong>Original-USB-C-Kabel</strong>.</li>
-      <li>Einen Chromium-basierten Browser (z.B. Brave, Chromium, Vanadium).</li>
+      <li>Einen Chromium-basierten Browser: Chromium, Brave (nur mit abgeschalteten Shields), Google Chrome, Microsoft Edge oder Vanadium. Keine Snap- oder Flatpak-Versionen, unter Ubuntu fällt damit das mitgelieferte Chromium weg.</li>
     </ul>
 
     <h2>1. Vorbereitung auf dem Pixel (Settings)</h2>
@@ -148,7 +149,7 @@
 
     <h3>A) Verbindung & Unlock</h3>
     <p>
-      Klicke im Browser auf den blauen Button <strong>„Unlock Bootloader“</strong>.
+      Klicke im Browser auf den blauen Button <strong>„Unlock bootloader“</strong>.
     </p>
     <p>
       Daraufhin öffnet sich meist das Auswahl-Fenster für USB-Geräte:
@@ -162,23 +163,22 @@
 
     <h3>B) Download & Flash</h3>
     <p>
-      Jetzt klickst du im Browser auf <strong>„Download Release“</strong>. Das System lädt das Image herunter.
+      Jetzt klickst du im Browser auf <strong>„Download release“</strong>. Das System lädt das Image herunter.
     </p>
     
     <div class="box" style="border-color: #ff3333;">
       <h3>Troubleshooting-Tipp</h3>
       <p>
-        Falls du eine Fehlermeldung wie <code>Error: storage quota has been exceeded</code> bekommst, ist dein Browser-Speicher voll.
+        Warnt der Installer vor einem knappen Speicherkontingent („browser is reporting a low storage quota“) oder bricht der Download mit einer Meldung wie <code>storage quota has been exceeded</code> ab, gesteht der Browser der Seite zu wenig Speicher zu.
       </p>
       <p>
-        <strong>Lösung:</strong> Installiere dir einen sauberen Chromium-Browser (ohne Extensions) nur für diesen Zweck.<br><br>
-        ⚠️ <strong>Wichtig:</strong> Nutze <strong>keinen Inkognito-Modus</strong>! Dieser begrenzt den temporären Speicher so stark,
-        dass der Download des großen Image-Files fast immer fehlschlägt.
+        <strong>Lösung:</strong> Normales Fenster statt privatem Modus, bei Brave die Shields abschalten, mindestens 32 GB frei machen. Hilft das nicht, einen anderen Browser aus der Liste oben nehmen.<br><br>
+        ⚠️ <strong>Wichtig:</strong> Nutze <strong>keinen Inkognito-Modus</strong>. Dort fehlt dem Installer meist der Speicherplatz, um das heruntergeladene Systemabbild zu entpacken.
       </p>
     </div>
 
     <p>
-      Ist der Download fertig? Dann klicke auf <strong>„Flash Release“</strong>.
+      Ist der Download fertig? Dann klicke auf <strong>„Flash release“</strong>.
     </p>
     <p>
       <strong>Nicht wundern:</strong> Das Telefon wird während dieses Prozesses mehrmals neu starten.
@@ -190,7 +190,7 @@
       Dieser Schritt ist essenziell für die Sicherheit!
     </p>
     <ol>
-      <li>Klicke im Browser auf <strong>„Lock Bootloader“</strong>.</li>
+      <li>Klicke im Browser auf <strong>„Lock bootloader“</strong>.</li>
       <li>Auf dem Handy erscheint wieder ein Menü. Nutze die <strong>Lautstärke-Tasten</strong>, um die Option zum Schließen (Lock) auszuwählen.</li>
       <li>Bestätige mit der <strong>Power-Taste</strong>.</li>
     </ol>
@@ -234,7 +234,7 @@
   <p style="font-size:0.95em; color: #ccc;">
     Zum offiziellen GrapheneOS Web-Installer:<br>
     <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://grapheneos.org/install/web" target="_blank">grapheneos.org/install/web</a><br><br>
-    Android Plattform Tools (Kommunikation):<br>
+    Android Platform Tools (nur für die Installation per Kommandozeile):<br>
     <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://developer.android.com/tools/releases/platform-tools?hl=de" target="_blank">developer.android.com/platform-tools</a><br><br>
     Unterstütze das Projekt (Spendenlink):<br>
     <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://grapheneos.org/donate" target="_blank">grapheneos.org/donate</a><br><br>

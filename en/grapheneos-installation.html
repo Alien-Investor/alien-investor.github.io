@@ -116,9 +116,10 @@
     <h2>Prerequisites</h2>
     <ul>
       <li>A supported <strong>Google Pixel</strong>.</li>
-      <li>PC/laptop (Windows, macOS, Linux) with <a href="https://developer.android.com/tools/releases/platform-tools" target="_blank">Android Platform Tools</a> installed to communicate with the Pixel.</li>
+      <li>PC/laptop running Windows, macOS, Linux, or ChromeOS, or alternatively a second Android device (Android 14 to 17 with Play Protect certification, or GrapheneOS). <strong>No Android Platform Tools needed:</strong> the web installer talks to the device via WebUSB. Only on Linux do you need the udev rules once (<code>android-sdk-platform-tools-common</code> or <code>android-udev</code>).</li>
+      <li>At least <strong>2 GB of free memory</strong> and <strong>32 GB of free storage space</strong>.</li>
       <li>A reliable <strong>original USB-C cable</strong>.</li>
-      <li>A Chromium-based browser (e.g. Brave, Chromium, Vanadium).</li>
+      <li>A Chromium-based browser: Chromium, Brave (only with Brave Shields disabled), Google Chrome, Microsoft Edge, or Vanadium. No Snap or Flatpak versions, which rules out the Chromium shipped with Ubuntu.</li>
     </ul>
 
     <h2>1. Prepare Your Pixel (Settings)</h2>
@@ -150,7 +151,7 @@
 
     <h3>A) Connect &amp; Unlock</h3>
     <p>
-      Click the blue <strong>"Unlock Bootloader"</strong> button in your browser.
+      Click the blue <strong>"Unlock bootloader"</strong> button in your browser.
     </p>
     <p>
       A USB device selection window will usually appear:
@@ -164,23 +165,22 @@
 
     <h3>B) Download &amp; Flash</h3>
     <p>
-      Now click <strong>"Download Release"</strong> in your browser. The system downloads the image.
+      Now click <strong>"Download release"</strong> in your browser. The system downloads the image.
     </p>
 
     <div class="box" style="border-color: #ff3333;">
       <h3>Troubleshooting Tip</h3>
       <p>
-        If you get an error like <code>Error: storage quota has been exceeded</code>, your browser storage is full.
+        If the installer warns about a low storage quota ("browser is reporting a low storage quota") or the download aborts with a message like <code>storage quota has been exceeded</code>, the browser grants the page too little storage.
       </p>
       <p>
-        <strong>Fix:</strong> Install a clean Chromium browser (no extensions) dedicated solely to this task.<br><br>
-        ⚠️ <strong>Important:</strong> Do <strong>not use Incognito mode</strong>! It limits temporary storage so severely
-        that downloading the large image file will almost always fail.
+        <strong>Fix:</strong> Use a normal window instead of private mode, disable Brave Shields if you use Brave, and free up at least 32 GB. If that does not help, use another browser from the list above.<br><br>
+        ⚠️ <strong>Important:</strong> Do <strong>not use Incognito mode</strong>. In private mode the installer usually lacks the storage space to extract the downloaded system image.
       </p>
     </div>
 
     <p>
-      Download complete? Then click <strong>"Flash Release"</strong>.
+      Download complete? Then click <strong>"Flash release"</strong>.
     </p>
     <p>
       <strong>Don't panic:</strong> The phone will reboot several times during this process.
@@ -192,7 +192,7 @@
       This step is essential for security!
     </p>
     <ol>
-      <li>Click <strong>"Lock Bootloader"</strong> in your browser.</li>
+      <li>Click <strong>"Lock bootloader"</strong> in your browser.</li>
       <li>A menu appears on the phone again. Use the <strong>volume buttons</strong> to select the lock option.</li>
       <li>Confirm with the <strong>Power button</strong>.</li>
     </ol>
@@ -236,7 +236,7 @@
   <p style="font-size:0.95em; color: #ccc;">
     Official GrapheneOS web installer:<br>
     <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://grapheneos.org/install/web" target="_blank">grapheneos.org/install/web</a><br><br>
-    Android Platform Tools (communication):<br>
+    Android Platform Tools (only for the command-line installation):<br>
     <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://developer.android.com/tools/releases/platform-tools" target="_blank">developer.android.com/platform-tools</a><br><br>
     Support the project (donation link):<br>
     <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://grapheneos.org/donate" target="_blank">grapheneos.org/donate</a><br><br>

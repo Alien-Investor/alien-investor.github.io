@@ -310,14 +310,15 @@
     <h3>Android: Der „Happy Path“</h3>
     <p>
       Auf Android funktioniert der Zap Store bereits heute erstaunlich gut. Du musst einmalig das Installieren aus „unbekannten Quellen“ erlauben.
-      Danach fühlt es sich an wie ein F-Droid Store mit Social-Features. Updates können automatisch und signiert rein kommen.
-      Tools wie das <strong>zapstore-cli</strong> erlauben Entwicklern, Updates direkt aus ihrer Programmierumgebung (z. B. CI-Pipelines wie GitHub Actions)
+      Danach fühlt es sich an wie ein F-Droid Store mit Social-Features. Seit Version 1.1 lassen sich automatische Updates im Hintergrund einschalten (Profil → „Data Management“ → „Background auto-updates“). Sie laufen nur in nicht getakteten Netzen und bei ausreichend geladenem Akku, Hash und Signatur werden geprüft. Ohne Nachfrage installiert der Zap Store nur Apps, die er selbst installiert hat.
+      Das Werkzeug <strong>zsp</strong> erlaubt Entwicklern, Updates direkt aus ihrer Programmierumgebung (z. B. CI-Pipelines wie GitHub Actions)
       in die Welt zu pushen – ohne Wartezeit, ohne Review.
     </p>
 
     <h3>iOS: Souveränität verweigert</h3>
     <p>
-      Auf dem iPhone bleibt der Zap Store vorerst Theorie – außerhalb der EU (und Japan) erlaubt Apple weiterhin kein echtes Sideloading.
+      Eine iOS-Version gibt es bisher nicht. Angekündigt war sie für das dritte Quartal 2026, Anfang Oktober 2026 war sie nicht erschienen. Linux und macOS hat das Projekt mit Version 1.1 als Plattformen aufgegeben.
+      Außerhalb der EU (und Japan) erlaubt Apple ohnehin kein echtes Sideloading.
       In der EU (und Japan) erlaubt Apple zwar alternative App-Marktplätze und Web-Distribution, aber nur unter strengen Apple-Regeln; echtes, freies Sideloading bleibt stark eingeschränkt.
       Das zeigt deutlich:
       Wer digitale Freiheit will, stößt bei Apple an eine harte Grenze.

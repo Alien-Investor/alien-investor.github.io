@@ -84,13 +84,13 @@
     </ul>
     <p>
       The second role is the critical one. Even if you never open Vanadium directly,
-      its security architecture protects your entire system —
-      every app that loads a webpage, shows an OAuth login, or opens a link runs through Vanadium.
+      every app that loads a webpage, shows an OAuth login, or opens a link benefits from its hardening.
+      Only from part of it, though: the WebView has no site isolation, and all its instances run in a shared sandbox.
     </p>
     <p>
       Fully de-Googled: Vanadium connects only to GrapheneOS servers by default.
-      Exactly two background services run — certificate updates and DNS-over-HTTPS connectivity checks,
-      both through GrapheneOS infrastructure.
+      In the background, only component updates such as certificate and revocation list updates run, plus DNS-over-HTTPS
+      connectivity checks if DNS-over-HTTPS is enabled, both through GrapheneOS infrastructure.
       No telemetry. No Safe Browsing reporting. No Google.
     </p>
 
@@ -115,17 +115,17 @@
       but can be disabled globally or per app.
     </p>
 
-    <h3>Memory Hardening: MTE + hardened_malloc</h3>
+    <h3>Memory Hardening: MTE</h3>
     <p>
-      Vanadium uses GrapheneOS's own <strong>hardened_malloc</strong> — a security-focused
-      memory allocator that isolates heap metadata, making heap spraying and use-after-free attacks significantly harder.
-      Combined with <strong>Hardware Memory Tagging (MTE)</strong>, memory corruption attacks
-      are caught at the hardware level — before they can cause damage.
+      Vanadium enables <strong>Hardware Memory Tagging (MTE)</strong> for its main memory allocator.
+      This lets the hardware catch many memory corruption attacks such as use-after-free.
+      On top of that come compile-time hardening measures: type-based control-flow integrity, a stronger stack protector,
+      and automatically zero-initialized variables.
     </p>
 
     <h3>Strict Site Isolation</h3>
     <p>
-      Every website and iframe runs in its own process.
+      Every website runs in its own isolated process, including embedded content from other sites (iframes).
       This prevents side-channel attacks like Spectre and blocks cross-site data access —
       no tab can read the session tokens or cookies of another.
     </p>
@@ -195,21 +195,21 @@
 
     <h2>Recommended Settings</h2>
 
-    <h3>Privacy &amp; Security</h3>
+    <h3>Privacy and security</h3>
     <ul>
       <li>
         <strong>Safe Browsing → leave on "No protection" (default).</strong>
-        The "Standard" and "Enhanced" options send visited URLs and page content to Google servers.
+        The "Standard protection" and "Enhanced protection" options check visited sites against Google's servers, with enhanced protection also using full addresses.
         Vanadium's structural hardening protects far more effectively than a Google URL lookup ever could.
       </li>
       <li>
-        <strong>Open external links in Incognito → enable.</strong>
+        <strong>"Open external links in incognito" → enable.</strong>
         Links from other apps (email clients, messengers) open in isolation —
         your main browser session stays untouched.
       </li>
       <li>
-        <strong>Close tabs on exit → enable.</strong>
-        Session data is cleared when the browser is closed.
+        <strong>"Close tabs on exit" → enable.</strong>
+        Open tabs are not saved when the browser is closed.
       </li>
       <li>
         <strong>Improve search suggestions → disable.</strong>
@@ -279,7 +279,7 @@
         <tr><td>Engine</td><td>Chromium</td><td>Chromium</td><td>Gecko</td><td>Chromium</td></tr>
         <tr><td>OS hardening</td><td>✓ (GrapheneOS)</td><td>—</td><td>—</td><td>—</td></tr>
         <tr><td>JIT-less by default</td><td>✓</td><td>—</td><td>—</td><td>—</td></tr>
-        <tr><td>MTE + hardened_malloc</td><td>✓</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>MTE in the browser</td><td>✓</td><td>—</td><td>—</td><td>—</td></tr>
         <tr><td>De-Googled</td><td>fully</td><td>mostly</td><td>✓</td><td>—</td></tr>
         <tr><td>Strict site isolation</td><td>✓</td><td>✓</td><td>limited</td><td>✓</td></tr>
         <tr><td>Extensions</td><td>— (deliberate)</td><td>✓</td><td>✓</td><td>✓</td></tr>
@@ -309,7 +309,7 @@
         <tr><td>Unknown or suspicious links</td><td>Vanadium — JIT-less + MTE = hardest possible exploit conditions</td></tr>
         <tr><td>Social media, news without login</td><td>Vanadium Incognito — or Tor Browser for maximum anonymity</td></tr>
         <tr><td>Web app instead of native app</td><td>Vanadium — PWA runs in sandbox, no system access</td></tr>
-        <tr><td>General browsing</td><td>Vanadium as WebView protects all apps anyway</td></tr>
+        <tr><td>General browsing</td><td>Vanadium, as WebView it also hardens web content in apps</td></tr>
       </tbody>
     </table>
     </div>
@@ -319,7 +319,7 @@
     <p>
       Vanadium is the most secure mobile browser in existence.
       But only on GrapheneOS — because without OS integration
-      (MTE, hardened_malloc, system-wide hardening architecture), it would be just a harder Chromium.
+      (MTE, hardened system base, sandbox architecture), it would be just a harder Chromium.
     </p>
     <p>
       The most important takeaway: default settings are the best settings.
@@ -328,7 +328,7 @@
     </p>
     <p>
       And remember: Vanadium does not only protect while browsing.
-      It is the system WebView — and therefore protects the entire ecosystem of your phone.
+      It is the system WebView — and therefore also hardens the web content of other apps, though not to the full extent.
     </p>
 
     <blockquote>
