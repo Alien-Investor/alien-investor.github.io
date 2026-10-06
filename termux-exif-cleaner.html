@@ -153,7 +153,7 @@
     <p>Bestätige den Dialog ("Zulassen"). Dann Python und die Bibliothek Pillow installieren:</p>
     <pre><code>pkg update && pkg upgrade</code></pre>
     <pre><code>pkg install python</code></pre>
-    <pre><code>pip install pillow</code></pre>
+    <pre><code>pkg install python-pillow</code></pre>
     <p>Skript-Ordner anlegen:</p>
     <pre><code>mkdir -p ~/Skripte</code></pre>
 
@@ -181,6 +181,8 @@ def clean_image(src_path, dst_path):
     with Image.open(src_path) as img:
         data = img.tobytes()
         clean = Image.frombytes(img.mode, img.size, data)
+        if img.mode == "P":
+            clean.putpalette(img.getpalette())
         clean.save(dst_path)
 
 def main():
@@ -222,7 +224,7 @@ def main():
             fehler += 1
 
     print("\n" + "-" * 40)
-    print(f"{ok} Bilder bereinigt -> {dst_dir}")
+    print(f"{ok} Bilder bereinigt -&gt; {dst_dir}")
     if fehler:
         print(f"{fehler} Fehler")
 

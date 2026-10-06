@@ -163,19 +163,17 @@ set -o pipefail
 
 DOWNLOAD_DIR="$HOME/storage/downloads"
 
-# Checks
 if [ ! -d "$DOWNLOAD_DIR" ]; then
-    echo "Error: Downloads folder not found. Did you run 'termux-setup-storage'?"
+    echo "Error: Downloads folder not found. Run 'termux-setup-storage'."
     exit 1
 fi
 
-command -v unzip >/dev/null || { echo "Error: unzip missing. Install with: pkg install unzip"; exit 1; }
+command -v unzip &gt;/dev/null || { echo "Error: unzip missing. Run: pkg install unzip"; exit 1; }
 
 cd "$DOWNLOAD_DIR" || exit 1
 
 echo "--- Searching for ZIP archives in $DOWNLOAD_DIR ---"
 
-# Nullglob: prevents literal '*.zip' when no files present
 shopt -s nullglob
 zips=(*.zip)
 
@@ -185,18 +183,15 @@ if [ ${#zips[@]} -eq 0 ]; then
 fi
 
 echo "Found: ${#zips[@]} ZIP file(s)."
-echo "Starting extraction..."
 
 for zipfile in "${zips[@]}"; do
     echo "Processing: $zipfile"
     foldername="${zipfile%.zip}"
     mkdir -p "$foldername"
-
-    # Source: $zipfile (archive), target: $foldername (folder)
     if unzip -q "$zipfile" -d "$foldername"; then
-        echo "  -> Successfully extracted to: $foldername/"
+        echo "  -&gt; Extracted to: $foldername/"
     else
-        echo "  -> ERROR extracting $zipfile"
+        echo "  -&gt; ERROR: $zipfile"
     fi
 done
 

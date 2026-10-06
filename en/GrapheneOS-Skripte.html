@@ -185,7 +185,7 @@
 
     <h2>1. Preparation: Getting Termux Ready</h2>
     <p>
-      On GrapheneOS, the best way to install Termux is via <strong>F-Droid</strong> (not the Play Store — that version is outdated).<br>
+      On GrapheneOS, install Termux via <strong>F-Droid</strong>, not via the Play Store and not via the Zap Store. According to the Termux project, the GitHub build, which the Zap Store merely mirrors, is signed with a publicly known test key. The Play Store version is, according to the project, an experimental branch with missing features.<br>
       Once you have the black terminal in front of you, update the packages and install the necessary tools. This is the foundation.
     </p>
     <p>Type the following commands one after another:</p>
@@ -222,26 +222,26 @@ pkg install termux-tools tar gnupg</code></pre>
 
     <p>Paste this code:</p>
     <pre><code>#!/usr/bin/env bash
-# encrypt-folder.sh — Pack folder losslessly and encrypt symmetrically (AES-256),
-# without a plaintext intermediate file. Also generates a .sha256.
+# encrypt-folder.sh — losslessly pack a folder and encrypt symmetrically (AES-256),
+# without a plaintext intermediate file. Also generates a .sha256 checksum.
 # Phone (GrapheneOS/Termux): output to ~/storage/downloads
-# PC (TUXEDO OS): output to $HOME
+# PC (Linux): output to $HOME
 #
 # S2K hardening: SHA512 + AES256 + maximum iterations (65011712)
-# → Brute-force attacks on the password become 100x more expensive.
+# → every guess costs the maximum computation everywhere.
 
 set -Eeuo pipefail
 umask 077
 
 # -------------------- Helpers --------------------
-die() { printf "❌ %s\n" "$*" >&2; exit 1; }
-need() { command -v "$1" >/dev/null 2>&1 || die "Required program missing: $1"; }
+die() { printf "❌ %s\n" "$*" &gt;&amp;2; exit 1; }
+need() { command -v "$1" &gt;/dev/null 2&gt;&amp;1 || die "Required tool missing: $1"; }
 
 need tar
 need gpg
 need sha256sum
 
-# Determine output destination based on system
+# Determine output directory based on system
 OUT_DIR="$HOME"
 if [ -d "$HOME/storage/downloads" ]; then
   OUT_DIR="$HOME/storage/downloads"
@@ -256,58 +256,53 @@ fi
 
 [ -n "$INPUT" ] || die "No name entered."
 
-# Normalize path:
-# Allowed: SAP | storage/downloads/SAP | ~/storage/downloads/SAP
-#          /sdcard/Download/SAP | /storage/emulated/0/Download/SAP | /full/path/SAP
+# Normalize path
 case "$INPUT" in
-  ~/*) SRC="$HOME/${INPUT#~/}" ;;
-  storage/*) SRC="$HOME/$INPUT" ;;  # Termux symlink
+  \~/*) SRC="$HOME/${INPUT#\~/}" ;;
+  storage/*) SRC="$HOME/$INPUT" ;;
   /sdcard/Download/*)
-      SRC="$HOME/storage/downloads/${INPUT#/sdcard/Download/}" ;;
+    SRC="$HOME/storage/downloads/${INPUT#/sdcard/Download/}" ;;
   /storage/emulated/0/Download/*)
-      SRC="$HOME/storage/downloads/${INPUT#/storage/emulated/0/Download/}" ;;
+    SRC="$HOME/storage/downloads/${INPUT#/storage/emulated/0/Download/}" ;;
   /*) SRC="$INPUT" ;;
   *)
-      if [ -d "$HOME/storage/downloads/$INPUT" ]; then
-        SRC="$HOME/storage/downloads/$INPUT"
-      else
-        SRC="$HOME/$INPUT"
-      fi
-      ;;
+    if [ -d "$HOME/storage/downloads/$INPUT" ]; then
+      SRC="$HOME/storage/downloads/$INPUT"
+    else
+      SRC="$HOME/$INPUT"
+    fi
+    ;;
 esac
 
 [ -e "$SRC" ] || die "Path not found: $SRC"
-[ -d "$SRC" ] || die "This is not a directory: $SRC"
+[ -d "$SRC" ] || die "Not a directory: $SRC"
 
 BASE="$(basename "$SRC")"
-
-# Optional: replace spaces in name with underscore (for the output file only)
 BASE_SAFE="${BASE// /_}"
-
 OUT_FILE="$OUT_DIR/Encrypted_${BASE_SAFE}.tar.gz.gpg"
 
-# Avoid collisions
+# Avoid collision
 if [ -e "$OUT_FILE" ]; then
   OUT_FILE="$OUT_DIR/Encrypted_${BASE_SAFE}_$(date +%Y-%m-%d_%H-%M-%S).tar.gz.gpg"
 fi
 
-printf "📦 Packing & encrypting → %s\n" "$OUT_FILE"
+printf "📦 Packing &amp; encrypting → %s\n" "$OUT_FILE"
 
 # Archive + encrypt without plaintext intermediate file
-# S2K hardening: stronger key derivation against brute force
+# S2K hardening: stronger key derivation against brute-force
 # --no-symkey-cache: passphrase is not cached in the GPG agent
 tar -C "$(dirname "$SRC")" -cz -- "$BASE" \
-| gpg --symmetric \
-    --cipher-algo AES256 \
-    --s2k-cipher-algo AES256 \
-    --s2k-digest-algo SHA512 \
-    --s2k-count 65011712 \
-    --no-symkey-cache \
-    -o "$OUT_FILE" \
-|| die "gpg failed"
+  | gpg --symmetric \
+      --cipher-algo AES256 \
+      --s2k-cipher-algo AES256 \
+      --s2k-digest-algo SHA512 \
+      --s2k-count 65011712 \
+      --no-symkey-cache \
+      -o "$OUT_FILE" \
+  || die "gpg failed"
 
 # Write checksum
-sha256sum "$OUT_FILE" > "${OUT_FILE}.sha256"
+sha256sum "$OUT_FILE" &gt; "${OUT_FILE}.sha256"
 
 printf "✅ Done:\n   %s\n   %s\n   Location: %s\n" \
   "$(basename "$OUT_FILE")" "$(basename "${OUT_FILE}.sha256")" "$OUT_DIR"</code></pre>
@@ -326,27 +321,22 @@ printf "✅ Done:\n   %s\n   %s\n   Location: %s\n" \
     <p>Paste this code:</p>
     <pre><code>#!/usr/bin/env bash
 # decrypt-folder.sh (Cloud Edition)
-# - Finds .gpg AND .pgp (double extension from cloud/download)
-# - Smart SHA check (also handles the extra .pgp extension)
+# Finds .gpg AND .pgp, checks SHA256, decrypts
 
 set -Eeuo pipefail
 umask 077
 
-export GPG_TTY="${GPG_TTY:-$(tty 2>/dev/null || true)}"
-
+export GPG_TTY="${GPG_TTY:-$(tty 2&gt;/dev/null || true)}"
 DL_DIR="$HOME/storage/downloads"
 
-die(){ printf "❌ %s\n" "$*" >&2; exit 1; }
+die(){ printf "❌ %s\n" "$*" &gt;&amp;2; exit 1; }
 
-# --- 1. Automatic file selection (GPG & PGP) ---
+# Automatic file selection
 NAME="${1-}"
 INPUT=""
 
 if [ -z "$NAME" ]; then
-  # Search for .gpg OR .pgp, sorted by time (newest first)
-  # 2>/dev/null suppresses errors if one type is absent
-  LATEST="$(ls -t "$DL_DIR"/*.gpg "$DL_DIR"/*.pgp 2>/dev/null | head -n1 || true)"
-
+  LATEST="$(ls -t "$DL_DIR"/*.gpg "$DL_DIR"/*.pgp 2&gt;/dev/null | head -n1 || true)"
   if [ -n "$LATEST" ]; then
     INPUT="$LATEST"
     printf "🤖 File found: %s\n" "$(basename "$INPUT")"
@@ -359,73 +349,53 @@ fi
 
 # Fallback: manual path search
 if [ -z "$INPUT" ]; then
-    # Try various variants
-    VARIANTS=(
-      "${NAME}"
-      "${NAME}.gpg"
-      "${NAME}.pgp"
-      "${NAME}.gpg.pgp"
-      "Encrypted_${NAME}.gpg"
-    )
-
-    for v in "${VARIANTS[@]}"; do
-        # Check in PWD and Downloads
-        if [ -f "$PWD/$v" ]; then INPUT="$PWD/$v"; break; fi
-        if [ -f "$DL_DIR/$v" ]; then INPUT="$DL_DIR/$v"; break; fi
-    done
+  VARIANTS=("${NAME}" "${NAME}.gpg" "${NAME}.pgp" "${NAME}.gpg.pgp" "Encrypted_${NAME}.gpg" "Encrypted_${NAME}.tar.gz.gpg")
+  for v in "${VARIANTS[@]}"; do
+    if [ -f "$PWD/$v" ]; then INPUT="$PWD/$v"; break; fi
+    if [ -f "$DL_DIR/$v" ]; then INPUT="$DL_DIR/$v"; break; fi
+  done
 fi
 
 [ -n "$INPUT" ] || die "Source file not found."
 
-# --- 2. Smart SHA256 check ---
-# Case A: standard (File.gpg.sha256)
+# Check SHA256
 SHA_CANDIDATE_1="${INPUT}.sha256"
-
-# Case B: cloud error (File.gpg.pgp -> File.gpg.sha256)
 SHA_CANDIDATE_2="${INPUT%.pgp}.sha256"
-
 SHA_FILE=""
 
 if [ -f "$SHA_CANDIDATE_1" ]; then
-    SHA_FILE="$SHA_CANDIDATE_1"
+  SHA_FILE="$SHA_CANDIDATE_1"
 elif [ -f "$SHA_CANDIDATE_2" ]; then
-    SHA_FILE="$SHA_CANDIDATE_2"
-    echo "ℹ️  Correcting SHA path (ignoring .pgp extension)..."
+  SHA_FILE="$SHA_CANDIDATE_2"
+  echo "ℹ️  Correcting SHA path..."
 fi
 
 if [ -n "$SHA_FILE" ]; then
-    printf "🔎 Checking integrity (SHA256)..."
-    EXPECTED=$(awk '{print $1}' "$SHA_FILE")
-    ACTUAL=$(sha256sum "$INPUT" | awk '{print $1}')
-
-    if [ "$EXPECTED" = "$ACTUAL" ]; then
-        echo " ✅ OK."
-    else
-        echo " ❌ ERROR!"
-        echo "   WARNING: Checksums do not match!"
-        echo "   File may be corrupted."
-        printf "   Continue anyway? (y/N) "
-        read -r -n 1 REPLY
-        echo
-        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-            die "Aborted."
-        fi
-    fi
+  printf "🔎 Checking integrity (SHA256)..."
+  EXPECTED=$(awk '{print $1}' "$SHA_FILE")
+  ACTUAL=$(sha256sum "$INPUT" | awk '{print $1}')
+  if [ "$EXPECTED" = "$ACTUAL" ]; then
+    echo " ✅ OK."
+  else
+    echo " ❌ ERROR — checksums do not match!"
+    printf "Continue anyway? (y/N) "
+    read -r -n 1 REPLY; echo
+    [[ $REPLY =~ ^[Yy]$ ]] || die "Aborted."
+  fi
 else
-    echo "ℹ️  No .sha256 file found (check skipped)."
+  echo "ℹ️  No .sha256 found (check skipped)."
 fi
 
-# --- 3. Decrypt & unpack ---
-printf "🔓 Decrypting & unpacking..."
-
-if gpg --quiet --decrypt "$INPUT" | tar -xz; then
-    echo " ✅ Done."
-    echo "📂 Folder is in: $PWD"
-elif gpg --quiet --pinentry-mode loopback --decrypt "$INPUT" | tar -xz; then
-    echo " ✅ Done."
-    echo "📂 Folder is in: $PWD"
+# Decrypt and unpack
+printf "🔓 Decrypting &amp; unpacking..."
+if gpg --quiet --no-symkey-cache --decrypt "$INPUT" | tar -xz; then
+  echo " ✅ Done."
+  echo "📂 Folder is in: $PWD"
+elif gpg --quiet --no-symkey-cache --pinentry-mode loopback --decrypt "$INPUT" | tar -xz; then
+  echo " ✅ Done."
+  echo "📂 Folder is in: $PWD"
 else
-    die "Error."
+  die "Error during decryption."
 fi</code></pre>
 
     <p>Make both scripts executable:</p>
