@@ -154,12 +154,21 @@
   <p class="byline"><em>von Alien Investor</em></p>
 
   <article id="content">
+    <div class="box">
+      <p><strong>Nachtrag Oktober 2026:</strong> Dieser Artikel gibt den Stand vom April 2026 wieder. Inzwischen hat Google
+      die Einzelheiten festgelegt. Seit dem 30. September 2026 gilt die Entwicklerprüfung in Brasilien, Indonesien, Singapur
+      und Thailand, vorerst nur für Apps aus sieben großen Stores. Ab 2027 will Google sie weltweit auf alle Apps ausdehnen,
+      ein Datum nennt Google nicht. Apps nicht geprüfter Entwickler bleiben installierbar: Den Advanced Flow richtest du
+      einmal ein, mit einem Tag Wartezeit, danach gilt er wahlweise für sieben Tage oder unbefristet. Technisch ist das kein
+      Verbot, für viele Nutzer aber eine spürbare Hürde. GrapheneOS setzt die Prüfung nicht durch. Den aktuellen Stand
+      beschreibt das GrapheneOS-Handbuch in Kapitel 1.</p>
+    </div>
     <p>
       Android war einmal das „offene“ System. Wer eine App wollte, lud die APK herunter, aktivierte
       „Unbekannte Apps installieren“ und war drin. Das ist vorbei.
       Google baut im Hintergrund an einer fundamentalen Architekturänderung, die das freie Installieren von Software
-      zwar nicht technisch unmöglich macht, aber durch so viele Hürden und Warnungen erstickt, dass es für
-      Normalnutzer faktisch stirbt.
+      zwar nicht technisch unmöglich macht, aber mit so vielen Hürden und Warnungen versieht, dass viele
+      Normalnutzer davor zurückschrecken dürften.
     </p>
     <p>
       Der Codename dieser Operation könnte „Die Große Schließung“ lauten. Das Werkzeug dafür:
@@ -185,8 +194,8 @@
     </ul>
     <p>
       Wer sich diesem Regime komplett entzieht (z. B. pseudonyme Cypherpunks oder Entwickler, die nicht registrieren wollen), dessen App
-      gilt als „unregistriert“. Und unregistrierte Apps werden auf zertifizierten Geräten künftig standardmäßig blockiert
-      oder in einen Hochrisiko-Installationspfad gedrückt.
+      gilt als „unregistriert“. Und unregistrierte Apps lassen sich auf zertifizierten Geräten künftig nur noch über einen eigenen,
+      umständlichen Installationsweg installieren, den Advanced Flow, oder per adb vom Computer aus.
     </p>
 
     <h2>2. „Advanced Flow“ – Die Waffe heißt UX</h2>
@@ -232,7 +241,7 @@
     <ul>
       <li>Der Installer braucht die Berechtigung <code>REQUEST_INSTALL_PACKAGES</code>.</li>
       <li>Google kann Installer, die ständig „unregistrierte“ APKs laden, heuristisch als Dropper (Malware-Verteiler) einstufen.</li>
-      <li>Updates werden zur Hölle: Wenn für jedes Update der Advanced Flow durchlaufen werden muss, stirbt die Bequemlichkeit.</li>
+      <li>Updates kommen nur, solange der Advanced Flow eingeschaltet bleibt. Wer ihn wieder abschaltet, bekommt für unregistrierte Apps keine Updates mehr.</li>
     </ul>
 
     <h2>4. Die Festung GrapheneOS: Der einzige Ausweg?</h2>

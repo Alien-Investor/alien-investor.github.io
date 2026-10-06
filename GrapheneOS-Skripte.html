@@ -224,11 +224,13 @@ pkg install termux-tools tar gnupg</code></pre>
 # Phone (GrapheneOS/Termux): Ausgabe nach ~/storage/downloads
 # PC (Linux): Ausgabe nach $HOME
 #
-# S2K-Härtung: SHA512 + AES256 + maximale Iterationen (65011712)
-# → jeder Rateversuch kostet überall die maximale Rechenzeit.
+# S2K-Härtung: SHA512 + AES256 + höchster Hash-Aufwand (65011712 Bytes)
+# → jeder Rateversuch ist auf jedem Gerät gleich teuer, mit dem höchsten S2K-Aufwand, den OpenPGP zulässt.
 
 set -Eeuo pipefail
 umask 077
+
+export GPG_TTY="${GPG_TTY:-$(tty 2&gt;/dev/null || true)}"
 
 # -------------------- Helpers --------------------
 die() { printf "❌ %s\n" "$*" &gt;&amp;2; exit 1; }

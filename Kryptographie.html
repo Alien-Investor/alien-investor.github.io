@@ -223,8 +223,8 @@
 # 🔒 Vereinheitlichtes Verschlüsselungs-Skript (TUXEDO + Termux)
 # Ausgabe: ~/Verschlüsselt_&lt;Ordner&gt;.tar.gz.gpg (+ .sha256)
 #
-# S2K-Härtung: SHA512 + AES256 + maximale Iterationen (65011712)
-# → Brute-Force-Angriffe auf das Passwort werden 100x teurer.
+# S2K-Härtung: SHA512 + AES256 + höchster Hash-Aufwand (65011712 Bytes)
+# → jeder Rateversuch kostet überall die maximale Rechenzeit.
 
 set -Eeuo pipefail
 umask 077
@@ -259,9 +259,9 @@ echo "📦 Packe &amp; verschlüssele → $ZIEL"
 
 # Packen und verschlüsseln im Stream (kein Klartext-Zwischenschritt)
 # S2K-Härtung:
-#   --s2k-cipher-algo AES256   → Schlüsselableitung mit AES256
-#   --s2k-digest-algo SHA512   → SHA512 als Hash (stärker als Standard SHA1)
-#   --s2k-count 65011712       → Maximale Iterationen → Brute-Force 100x teurer
+#   --s2k-cipher-algo AES256   → Verschlüsselung mit AES256 (Rückfallwert, falls --cipher-algo fehlt)
+#   --s2k-digest-algo SHA512   → SHA512 als Hash (stärker als der ältere Standard SHA1)
+#   --s2k-count 65011712       → Höchstwert: 65.011.712 Bytes werden gehasht
 #   --no-symkey-cache          → Passwort wird nicht im GPG-Agenten gecacht
 tar -C "$HOME" -cf - -- "$ORDNERNAME" \
   | gzip -9 \
@@ -355,20 +355,20 @@ MODE=${MODE:-T}
 
 # Helfer-Funktionen (mit Loopback-Fallback)
 decrypt_to_tar() {
-  gpg --decrypt "$INPUT" | tar -xz -C "$RESTORE" && return 0
+  gpg --no-symkey-cache --decrypt "$INPUT" | tar -xz -C "$RESTORE" && return 0
   echo "⚠️  Versuch mit loopback …"
-  gpg --pinentry-mode loopback --decrypt "$INPUT" | tar -xz -C "$RESTORE"
+  gpg --no-symkey-cache --pinentry-mode loopback --decrypt "$INPUT" | tar -xz -C "$RESTORE"
 }
 decrypt_to_file() {
-  gpg --output "$OUT_TAR" --decrypt "$INPUT" && return 0
+  gpg --no-symkey-cache --output "$OUT_TAR" --decrypt "$INPUT" && return 0
   echo "⚠️  Versuch mit loopback …"
-  gpg --pinentry-mode loopback --output "$OUT_TAR" --decrypt "$INPUT"
+  gpg --no-symkey-cache --pinentry-mode loopback --output "$OUT_TAR" --decrypt "$INPUT"
 }
 
 case "$MODE" in
   L|l)
-    gpg --decrypt "$INPUT" | tar -tz || \
-    gpg --pinentry-mode loopback --decrypt "$INPUT" | tar -tz
+    gpg --no-symkey-cache --decrypt "$INPUT" | tar -tz || \
+    gpg --no-symkey-cache --pinentry-mode loopback --decrypt "$INPUT" | tar -tz
     ;;
   E|e)
     mkdir -p "$RESTORE"

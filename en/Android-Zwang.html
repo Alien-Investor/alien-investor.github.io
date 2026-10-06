@@ -156,12 +156,21 @@
   <p class="byline"><em>by Alien Investor</em></p>
 
   <article id="content">
+    <div class="box">
+      <p><strong>Update October 2026:</strong> This article reflects the state of April 2026. Google has since settled the
+      details. Since September 30, 2026, developer verification applies in Brazil, Indonesia, Singapore and Thailand, for now
+      only to apps from seven major stores. From 2027, Google wants to extend it worldwide to all apps, without naming a date.
+      Apps from unverified developers remain installable: you set up the Advanced Flow once, with a one-day wait, after which
+      it applies for either seven days or indefinitely. Technically this is not a ban, but for many users it is a noticeable
+      hurdle. GrapheneOS does not enforce the verification. The current state is covered in Chapter 1 of the GrapheneOS
+      handbook.</p>
+    </div>
     <p>
       Android was once the "open" system. If you wanted an app, you downloaded the APK, toggled
       "Install unknown apps" and you were in. That era is over.
       Google is quietly building a fundamental architectural shift that doesn't make free software installation
-      technically impossible — it just buries it under so many warnings and friction points that it
-      effectively dies for normal users.
+      technically impossible — it just adds so many hurdles and warnings that many
+      normal users will likely shy away from it.
     </p>
     <p>
       The codename for this operation could be "The Great Lockdown". The weapons:
@@ -187,8 +196,8 @@
     </ul>
     <p>
       Anyone who opts out of this regime entirely — pseudonymous cypherpunks, developers who refuse to register — will have their app
-      classified as "unregistered". And on certified devices, unregistered apps will be blocked by default
-      or funneled into a high-risk installation gauntlet.
+      classified as "unregistered". And on certified devices, unregistered apps will only be installable through a separate,
+      cumbersome installation path, the Advanced Flow, or via adb from a computer.
     </p>
 
     <h2>2. "Advanced Flow" — The Weapon Is UX</h2>
@@ -234,7 +243,7 @@
     <ul>
       <li>The installer needs the <code>REQUEST_INSTALL_PACKAGES</code> permission.</li>
       <li>Google can heuristically classify installers that repeatedly load "unregistered" APKs as droppers (malware distributors).</li>
-      <li>Updates become hell: if every update requires running the Advanced Flow, convenience dies.</li>
+      <li>Updates keep coming only as long as the Advanced Flow stays enabled. Turn it off, and unregistered apps no longer get updates.</li>
     </ul>
 
     <h2>4. The Fortress GrapheneOS: The Only Way Out?</h2>

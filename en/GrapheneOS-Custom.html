@@ -160,7 +160,7 @@
     <p>But: right out of the box, GrapheneOS still has to make trade-offs between maximum security and convenience. To truly rely on a device in a hostile environment, you need to configure it.</p>
     <p>We're not just changing a few ringtones here. We're massively reducing the attack surface. Here are six critical configurations that turn your phone into a hardened node.</p>
 
-    <h2>1. The Kill Switch: Automatic Reboot (Auto Reboot)</h2>
+    <h2>1. The Emergency Brake: Automatic Reboot (Auto Reboot)</h2>
     <h3>The Concept</h3>
     <p>Once your phone is switched on and has been unlocked at least once, the encryption keys are held in RAM (state: <em>After First Unlock</em>). If a capable attacker seizes your phone in this state, they have a larger time window to extract data.</p>
     <p>When the phone reboots, it transitions to the <em>Before First Unlock</em> (BFU) state. The keys are wiped from memory. The device is encrypted "at rest". It is effectively a brick.</p>
@@ -214,7 +214,7 @@
 
     <h3>The Configuration</h3>
     <ul>
-      <li><strong>Camera &amp; Microphone:</strong> Add the "Camera access" and "Microphone access" tiles to your Quick Settings. Toggling these off blocks access system-wide at the hardware level.</li>
+      <li><strong>Camera &amp; Microphone:</strong> Add the "Camera access" and "Microphone access" tiles to your Quick Settings. Toggling these off makes the operating system block the camera and microphone system-wide, and no app can activate them until you lift the block.</li>
       <li><strong>Sensors:</strong> GrapheneOS also lets you deny apps access to sensors (accelerometers, etc.) by default.</li>
       <li><strong>Fingerprint:</strong> When crossing borders or in critical situations, temporarily disable biometric unlock. Rely on a strong alphanumeric passphrase instead.</li>
     </ul>

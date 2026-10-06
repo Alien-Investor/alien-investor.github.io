@@ -227,11 +227,13 @@ pkg install termux-tools tar gnupg</code></pre>
 # Phone (GrapheneOS/Termux): output to ~/storage/downloads
 # PC (Linux): output to $HOME
 #
-# S2K hardening: SHA512 + AES256 + maximum iterations (65011712)
-# → every guess costs the maximum computation everywhere.
+# S2K hardening: SHA512 + AES256 + maximum hash effort (65011712 bytes)
+# → every guess costs the same on every device, at the highest S2K effort OpenPGP allows.
 
 set -Eeuo pipefail
 umask 077
+
+export GPG_TTY="${GPG_TTY:-$(tty 2&gt;/dev/null || true)}"
 
 # -------------------- Helpers --------------------
 die() { printf "❌ %s\n" "$*" &gt;&amp;2; exit 1; }

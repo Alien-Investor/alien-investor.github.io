@@ -225,8 +225,8 @@
 # 🔒 Unified encryption script (TUXEDO + Termux)
 # Output: ~/Encrypted_&lt;folder&gt;.tar.gz.gpg (+ .sha256)
 #
-# S2K hardening: SHA512 + AES256 + maximum iterations (65011712)
-# → brute-force attacks on the password become 100x more expensive.
+# S2K hardening: SHA512 + AES256 + maximum hash effort (65011712 bytes)
+# → every guess costs the maximum computation everywhere.
 
 set -Eeuo pipefail
 umask 077
@@ -261,9 +261,9 @@ echo "📦 Packing &amp; encrypting → $ZIEL"
 
 # Pack and encrypt in a stream (no plaintext intermediate step)
 # S2K hardening:
-#   --s2k-cipher-algo AES256   → key derivation with AES256
-#   --s2k-digest-algo SHA512   → SHA512 as hash (stronger than default SHA1)
-#   --s2k-count 65011712       → maximum iterations → brute force 100x more expensive
+#   --s2k-cipher-algo AES256   → encryption with AES256 (fallback if --cipher-algo is not set)
+#   --s2k-digest-algo SHA512   → SHA512 as hash (stronger than the older default SHA1)
+#   --s2k-count 65011712       → maximum: 65,011,712 bytes are hashed
 #   --no-symkey-cache          → password is not cached in the GPG agent
 tar -C "$HOME" -cf - -- "$ORDNERNAME" \
   | gzip -9 \
@@ -357,20 +357,20 @@ MODE=${MODE:-T}
 
 # Helper functions (with loopback fallback)
 decrypt_to_tar() {
-  gpg --decrypt "$INPUT" | tar -xz -C "$RESTORE" && return 0
+  gpg --no-symkey-cache --decrypt "$INPUT" | tar -xz -C "$RESTORE" && return 0
   echo "⚠️  Trying loopback …"
-  gpg --pinentry-mode loopback --decrypt "$INPUT" | tar -xz -C "$RESTORE"
+  gpg --no-symkey-cache --pinentry-mode loopback --decrypt "$INPUT" | tar -xz -C "$RESTORE"
 }
 decrypt_to_file() {
-  gpg --output "$OUT_TAR" --decrypt "$INPUT" && return 0
+  gpg --no-symkey-cache --output "$OUT_TAR" --decrypt "$INPUT" && return 0
   echo "⚠️  Trying loopback …"
-  gpg --pinentry-mode loopback --output "$OUT_TAR" --decrypt "$INPUT"
+  gpg --no-symkey-cache --pinentry-mode loopback --output "$OUT_TAR" --decrypt "$INPUT"
 }
 
 case "$MODE" in
   L|l)
-    gpg --decrypt "$INPUT" | tar -tz || \
-    gpg --pinentry-mode loopback --decrypt "$INPUT" | tar -tz
+    gpg --no-symkey-cache --decrypt "$INPUT" | tar -tz || \
+    gpg --no-symkey-cache --pinentry-mode loopback --decrypt "$INPUT" | tar -tz
     ;;
   E|e)
     mkdir -p "$RESTORE"

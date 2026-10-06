@@ -158,7 +158,7 @@
     <p>Aber: Direkt „out of the box“ muss auch GrapheneOS Kompromisse zwischen maximaler Sicherheit und Bequemlichkeit eingehen. Um sich in einer feindlichen Umgebung wirklich auf ein Gerät verlassen zu können, musst du es konfigurieren.</p>
     <p>Wir ändern hier nicht einfach nur ein paar Klingeltöne. Wir reduzieren die Angriffsfläche massiv. Hier sind sechs kritische Konfigurationen, die dein Telefon in einen gehärteten Knotenpunkt verwandeln.</p>
 
-    <h2>1. Der Kill-Switch: Automatischer Neustart (Auto Reboot)</h2>
+    <h2>1. Die Notbremse: Automatischer Neustart (Auto Reboot)</h2>
     <h3>Das Konzept</h3>
     <p>Sobald dein Telefon eingeschaltet und mindestens einmal entsperrt wurde, befinden sich die Verschlüsselungs-Keys im Arbeitsspeicher (Status: <em>After First Unlock</em>). Wenn ein fähiger Angreifer dein Telefon in diesem Zustand beschlagnahmt, hat er ein größeres Zeitfenster, um Daten zu extrahieren.</p>
     <p>Startet das Telefon neu, wechselt es in den Zustand <em>Before First Unlock</em> (BFU). Die Keys werden aus dem Speicher geworfen. Das Gerät ist „at rest“ verschlüsselt. Es ist effektiv ein Ziegelstein.</p>
@@ -212,7 +212,7 @@
 
     <h3>Die Konfiguration</h3>
     <ul>
-      <li><strong>Kamera & Mikrofon:</strong> Füge die Kacheln „Kamerazugriff“ und „Mikrofonzugriff“ zu deinen Schnelleinstellungen (Quick Settings) hinzu. Wenn du diese ausschaltest, wird der Zugriff systemweit auf Hardware-Ebene blockiert.</li>
+      <li><strong>Kamera & Mikrofon:</strong> Füge die Kacheln „Kamerazugriff“ und „Mikrofonzugriff“ zu deinen Schnelleinstellungen (Quick Settings) hinzu. Wenn du diese ausschaltest, sperrt das Betriebssystem Kamera und Mikrofon systemweit, und keine App kann sie aktivieren, bis du die Sperre aufhebst.</li>
       <li><strong>Sensoren:</strong> GrapheneOS erlaubt es zudem, Apps standardmäßig den Zugriff auf Sensoren (Beschleunigungsmesser etc.) zu verwehren.</li>
       <li><strong>Fingerabdruck:</strong> Wenn du Grenzen überschreitest oder dich in kritischen Situationen befindest, deaktiviere die biometrische Entsperrung vorübergehend. Verlasse dich auf eine starke alphanumerische Passphrase.</li>
     </ul>
