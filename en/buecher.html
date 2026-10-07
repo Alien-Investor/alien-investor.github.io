@@ -652,24 +652,25 @@
         <details class="contents">
           <summary>Show all contents</summary>
           <ul>
+            <li>What GrapheneOS does under the hood: hardened kernel and memory allocator, Verified Boot, sandboxed Google Play without special privileges</li>
             <li>Choosing the right Pixel: Titan M2, Hardware Memory Tagging, support horizon, new vs. used, and how to buy anonymously with cash</li>
             <li>Installation via the official Web Installer: no terminal, no prior knowledge needed</li>
-            <li>The 7 most important settings: auto-reboot, duress password, VPN kill switch, encrypted backup and more</li>
+            <li>The 7 most important settings: auto reboot, duress PIN and password, VPN kill switch, encrypted backup and more</li>
             <li>SIM card &amp; cellular privacy: IMEI, IMSI, IMSI catchers, LTE-only mode, baseband isolation</li>
             <li>VPN, Kill Switch and Private DNS: the technical conflict that creates silent data leaks, and how to resolve it</li>
             <li>Understanding permissions and using the app sandbox deliberately</li>
-            <li>Apps without Google Play: Obtainium with GPG and signature verification, Zap Store, Accrescent</li>
-            <li>Browser: Vanadium as a hardened everyday browser, Tor Browser for anonymous browsing, Orbot as a system-wide proxy</li>
+            <li>Apps without Google Play: Obtainium with signature verification, Zap Store, Accrescent</li>
+            <li>Browser: Vanadium as a hardened everyday browser, Tor Browser for anonymous browsing, Orbot to route selected apps through Tor</li>
             <li>Messengers without a phone number: White Noise on Nostr, SimpleX with no user identifier at all and Tor via Orbot, Threema Libre for everyday use</li>
-            <li>Swiss-made Google replacement: the Proton ecosystem with Mail, Drive, Pass, VPN, Bitcoin wallet and AI</li>
+            <li>Swiss-made Google replacement: the Proton ecosystem with Mail, Drive, Pass, VPN, Authenticator, Meet, Bitcoin wallet and AI</li>
             <li>Digital separation: User Profiles, Private Space and Shelter, with work, personal life, and banking cleanly separated</li>
             <li>File encryption with Termux: AES-256 with S2K hardening, directly on your smartphone, using custom scripts</li>
             <li>Two-factor authentication with Aegis: encrypted TOTP vault, backup, migration</li>
-            <li>Banking on GrapheneOS: which banks work, NFC without Google Pay, hardware TAN devices</li>
-            <li>Contacts and calendar without Google: DAVx5 with Nextcloud or Infomaniak, your data on your servers</li>
+            <li>Banking on GrapheneOS: which German banks work, NFC without Google Pay, hardware TAN devices</li>
+            <li>Contacts and calendar without Google: DAVx⁵ with Nextcloud, self-hosted or managed, and why Proton does not sync here</li>
             <li>Camera without metadata: GrapheneOS Camera removes GPS coordinates and EXIF data before saving</li>
-            <li>Travel OpSec: border crossings, duress PIN, travel profile, USB protection, prepared instead of caught off guard</li>
-            <li>Bitcoin self-custody: the BitBox02 in an isolated profile with Tor proxy and optional self-hosted full node: no third-party server ever knows your balance</li>
+            <li>Travel OpSec: border crossings, travel profile, USB protection and the legal situation in the EU, the USA, the UK and Canada, prepared instead of caught off guard</li>
+            <li>Bitcoin self-custody: the BitBox02 in an isolated profile with Tor proxy and optional self-hosted full node, so no third-party server knows your balance</li>
             <li>Back to stock: warranty and statutory rights, relocking the bootloader, restoring the Pixel to factory state without a trace, for repair, warranty claims or resale</li>
           </ul>
         </details>
@@ -677,7 +678,7 @@
         <p style="color:#aaa; font-size:0.9em; margin-top: 1.2em;">
           A living handbook – new editions follow when the ecosystem changes.<br>
           <span style="color:#888; font-size:0.95em;">
-            Current edition: <strong style="color:#00ffcc;">v2.9</strong> · September 2, 2026
+            Current edition: <strong style="color:#00ffcc;">v2.10</strong> · October 7, 2026
           </span>
         </p>
 
@@ -708,7 +709,7 @@
 
         <p class="pitch">
           <strong>Dein Smartphone gehört dir – oder Google.</strong>
-          Android 2026 macht Sideloading zur Ausnahme. GrapheneOS ist die Antwort:
+          Ab 2027 bindet Google jede App auf zertifizierten Android-Geräten an einen bei Google verifizierten Entwickler. GrapheneOS ist die Antwort:
           kein Root, kein Bastelkram – sondern ein gehärtetes Android, das echte Kontrolle auf Systemebene zurückgibt.
           Für alle, die ihr Gerät wirklich besitzen wollen – ohne Vorerfahrung, ohne Programmierkenntnisse.
         </p>
@@ -717,32 +718,33 @@
         <details class="contents">
           <summary>Alle Inhalte anzeigen</summary>
           <ul>
-            <li>Das richtige Pixel auswählen: Titan M2, Hardware Memory Tagging, Support-Horizont, neu vs. gebraucht – und wie du anonym und bar einkaufst</li>
-            <li>Installation über den offiziellen Web Installer – kein Terminal, keine Vorkenntnisse nötig</li>
-            <li>Die 7 wichtigsten Einstellungen: Auto-Reboot, Duress-Passwort, VPN-Killswitch, verschlüsseltes Backup und mehr</li>
+            <li>Was GrapheneOS technisch leistet: gehärteter Kernel und Speichermanager, Verified Boot, Sandboxed Google Play ohne Sonderrechte</li>
+            <li>Das richtige Pixel auswählen: Titan M2, Hardware Memory Tagging, Support-Horizont, neu vs. gebraucht, und wie du anonym und bar einkaufst</li>
+            <li>Installation über den offiziellen Web Installer: kein Terminal, keine Vorkenntnisse nötig</li>
+            <li>Die 7 wichtigsten Einstellungen: Auto reboot, Duress-PIN und -Passwort, VPN-Killswitch, verschlüsseltes Backup und mehr</li>
             <li>SIM-Karte &amp; Mobilfunk-Anonymität: IMEI, IMSI, IMSI-Catcher, LTE-only, Baseband-Isolation</li>
-            <li>VPN, Kill Switch und Private DNS: der technische Konflikt, der stille Datenlecks erzeugt – und wie du ihn löst</li>
+            <li>VPN, Kill Switch und Privates DNS: der technische Konflikt, der stille Datenlecks erzeugt, und wie du ihn löst</li>
             <li>Berechtigungen verstehen und App-Sandbox gezielt einsetzen</li>
-            <li>Apps ohne Google Play: Obtainium mit GPG- und Signaturprüfung, Zap Store, Accrescent</li>
-            <li>Browser: Vanadium als gehärteter Alltagsbrowser, Tor Browser für anonymes Surfen, Orbot als systemweiter Proxy</li>
+            <li>Apps ohne Google Play: Obtainium mit Signaturprüfung, Zap Store, Accrescent</li>
+            <li>Browser: Vanadium als gehärteter Alltagsbrowser, Tor Browser für anonymes Surfen, Orbot, um ausgewählte Apps durch Tor zu leiten</li>
             <li>Messenger ohne Telefonnummer: White Noise auf Nostr, SimpleX ohne jede Nutzerkennung und mit Tor über Orbot, Threema Libre für den Alltag</li>
-            <li>Google-Ersatz aus der Schweiz: das Proton-Ökosystem mit Mail, Drive, Pass, VPN, Bitcoin-Wallet und KI</li>
-            <li>Digitale Trennung: User Profiles, Private Space und Shelter – Arbeit, Privat und Banking sauber getrennt</li>
+            <li>Google-Ersatz aus der Schweiz: das Proton-Ökosystem mit Mail, Drive, Pass, VPN, Authenticator, Meet, Bitcoin-Wallet und KI</li>
+            <li>Digitale Trennung: User Profiles, Private Space und Shelter, mit Arbeit, Privat und Banking sauber getrennt</li>
             <li>Dateiverschlüsselung mit Termux: AES-256 und S2K-Härtung, direkt auf dem Smartphone, eigene Custom Skripte</li>
             <li>Zweifaktor-Authentifizierung mit Aegis: verschlüsselter TOTP-Tresor, Backup, Migration</li>
             <li>Banking auf GrapheneOS: welche deutschen Banken funktionieren, NFC ohne Google Pay, Hardware-TAN</li>
-            <li>Kontakte und Kalender ohne Google: DAVx5 mit Nextcloud oder Infomaniak – eigene Daten, eigene Server</li>
+            <li>Kontakte und Kalender ohne Google: DAVx⁵ mit Nextcloud, selbst betrieben oder gehostet, und warum Proton hier nicht synchronisiert</li>
             <li>Kamera ohne Metadaten: GrapheneOS Camera entfernt GPS-Koordinaten und EXIF-Daten vor dem Speichern</li>
-            <li>Reise-OpSec: Grenzübergänge, Duress-PIN, Reise-Profil, USB-Schutz – vorbereitet statt überrascht</li>
-            <li>Bitcoin in Selbstverwahrung: die BitBox02 in einem isolierten Profil mit Tor-Proxy und optionaler eigener Full-Node – kein Drittserver kennt deinen Kontostand</li>
-            <li>Zurück auf Stock: Garantie und Gewährleistung, Bootloader wieder sperren, das Pixel spurlos in den Auslieferungszustand zurückversetzen – für Reparatur, Garantiefall oder Wiederverkauf</li>
+            <li>Reise-OpSec: Grenzübergänge, Reiseprofil, USB-Schutz und die Rechtslage in der EU, den USA, Großbritannien und Kanada, vorbereitet statt überrascht</li>
+            <li>Bitcoin in Selbstverwahrung: die BitBox02 in einem isolierten Profil mit Tor-Proxy und optionaler eigener Full-Node, damit kein Drittserver deinen Kontostand kennt</li>
+            <li>Zurück auf Stock: Garantie und Gewährleistung, Bootloader wieder sperren, das Pixel rückstandslos in den Auslieferungszustand versetzen, sei es für Reparatur, Garantiefall oder Wiederverkauf</li>
           </ul>
         </details>
 
         <p style="color:#aaa; font-size:0.9em; margin-top: 1.2em;">
           Ein lebendiges Handbuch – neue Ausgaben folgen, wenn sich das Ökosystem ändert.<br>
           <span style="color:#888; font-size:0.95em;">
-            Aktuelle Ausgabe: <strong style="color:#00ffcc;">v2.9</strong> · Stand 02.09.2026
+            Aktuelle Ausgabe: <strong style="color:#00ffcc;">v2.10</strong> · Stand 07.10.2026
           </span>
         </p>
 
