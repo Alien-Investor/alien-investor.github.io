@@ -61,7 +61,7 @@
     <div class="box">
       <ul>
         <li><strong>Bitcoin, gold & silver</strong> — record buys, sells and withdrawals. Metals by count × denomination (coin/bar, fineness, dealer).</li>
-        <li><strong>Net holdings & value</strong> — what you actually hold, plus invested cost. You enter current prices yourself (deliberately no network lookup) → value and profit/loss from that.</li>
+        <li><strong>Net holdings & value</strong> — what you actually hold, plus invested cost. You enter current prices yourself (deliberately no network lookup) or, since v3.9, paste the price line from <a href="https://api.alien-investor.org/mission-control-v2.html?lang=en">Mission Control</a> → value and profit/loss from that.</li>
         <li><strong>EUR, USD or CHF</strong> — record each entry in its own currency (since v2.1). Totals stay separate per currency, nothing is converted — the app never fetches exchange rates. Optionally add the EUR equivalent from the transaction date so the tax-tool export stays complete.</li>
         <li><strong>KYC separation</strong> — broker buys (KYC) and private/P2P (noKYC) stay cleanly separated.</li>
         <li><strong>Tax-tool export</strong> — exports <code>manual_buys.csv</code> / <code>manual_sales.csv</code> straight into the format of the <a href="/en/btc-steuertool.html">BTC tax tool</a>.</li>
@@ -77,7 +77,10 @@
       A holdings tracker is a map of your wealth. That does not belong on someone else's server.
       The Sachwert-Tresor makes <strong>not a single network request</strong> — no price APIs, no trackers,
       no external scripts. You enter Bitcoin and metal prices manually. That is less convenient than a
-      live ticker, but it is the price for nobody listening in.
+      live ticker, but it is the price for nobody listening in. Since v3.9 it is quicker: in Mission Control
+      you copy one line with current prices (Bitcoin in euros, gold and silver already converted to euros
+      per ounce) and paste it into the vault. The vault shows you the values before applying them and
+      itself stays without network access – the prices only reach it through the clipboard.
     </p>
 
     <h2>Security — and verifiable</h2>

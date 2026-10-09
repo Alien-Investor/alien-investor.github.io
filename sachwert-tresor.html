@@ -221,7 +221,7 @@
     <div class="box">
       <ul>
         <li><strong>Bitcoin, Gold & Silber</strong> — Käufe, Verkäufe und Entnahmen erfassen. Edelmetalle nach Stückzahl × Stückelung (Münze/Barren, Feinheit, Händler).</li>
-        <li><strong>Netto-Bestand & Wert</strong> — was du wirklich hältst, plus investierter Einstand. Aktuelle Preise trägst du selbst ein (bewusst keine Netz-Abfrage) → daraus Wert und Gewinn/Verlust.</li>
+        <li><strong>Netto-Bestand & Wert</strong> — was du wirklich hältst, plus investierter Einstand. Aktuelle Preise trägst du selbst ein (bewusst keine Netz-Abfrage) oder fügst seit v3.9 die Kurszeile aus <a href="https://api.alien-investor.org/mission-control-v2.html">Mission Control</a> ein → daraus Wert und Gewinn/Verlust.</li>
         <li><strong>EUR, USD oder CHF</strong> — jede Buchung in ihrer Währung erfassen (seit v2.1). Summen bleiben je Währung getrennt, umgerechnet wird nichts — die App fragt keine Kurse ab. Optional mit EUR-Gegenwert vom Buchungstag, damit der Steuertool-Export vollständig bleibt.</li>
         <li><strong>KYC-Trennung</strong> — Käufe über Broker (KYC) und privat/P2P (noKYC) bleiben sauber getrennt.</li>
         <li><strong>Steuertool-Export</strong> — exportiert <code>manual_buys.csv</code> / <code>manual_sales.csv</code> direkt im Format des <a href="btc-steuertool.html">BTC-Steuertools</a>.</li>
@@ -238,6 +238,10 @@
       fremden Server. Der Sachwert-Tresor macht <strong>keine einzige Netz-Abfrage</strong> — keine Kurs-APIs,
       keine Tracker, keine externen Skripte. Auch Edelmetall- und Bitcoin-Kurse trägst du manuell ein.
       Das ist unbequemer als ein Live-Ticker, aber es ist der Preis dafür, dass niemand mitliest.
+      Seit v3.9 geht es schneller: In Mission Control kopierst du eine Zeile mit den aktuellen Kursen
+      (Bitcoin in Euro, Gold und Silber schon in Euro je Unze umgerechnet) und fügst sie im Tresor ein.
+      Der Tresor zeigt dir die Werte vor der Übernahme und bleibt selbst ohne Netz – die Kurse kommen nur
+      über die Zwischenablage zu ihm.
     </p>
 
     <h2>Sicherheit — und selbst prüfbar</h2>
