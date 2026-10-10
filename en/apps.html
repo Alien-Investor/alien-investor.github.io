@@ -1011,12 +1011,13 @@
           <li>Screenshots and app-switcher preview blocked by default (FLAG_SECURE), can be switched off in Settings – notes are not always secret</li>
           <li>No Android autofill, not even third-party (since 1.4): the app keeps its WebView out of the autofill framework – a password manager set up as the autofill service never sees the passphrase fields and cannot offer to save them</li>
           <li>Also for the <strong>Linux desktop</strong> – a Flatpak without network permission and without file access, with a GPG-signed checksum</li>
-          <li>Internal security audits (no independent audit): two large ones before 0.1 (the surface new compared to Alien Pass plus the file store) and 1.1 (Standard Notes import, dialog, undo, multi-select), targeted reviews before 1.2 and 1.5 and release audits of the changes before 1.6, 1.7, 1.8, 1.9 and 1.10 – findings fixed before release or deliberately left open and documented</li>
+          <li>Internal security audits (no independent audit): two large ones before 0.1 (the surface new compared to Alien Pass plus the file store) and 1.1 (Standard Notes import, dialog, undo, multi-select), targeted reviews before 1.2 and 1.5 and release audits of the changes before 1.6, 1.7, 1.8, 1.9, 1.10 and 1.11 – findings fixed before release or deliberately left open and documented</li>
         </ul>
 
         <details class="more">
           <summary>New in recent versions</summary>
           <ul>
+            <li><strong>Since 1.11:</strong> on the Linux desktop Ctrl+A only selects the content of a filled-in field, or the open note in the Markdown view, instead of the whole page; selections spanning buttons or fields are also cleared from the middle-click selection when the time runs out and on lock</li>
             <li><strong>Since 1.10:</strong> undo ↶ and redo ↷ in the editor – up to 50 steps per open note, kept only in memory, also brings back a checklist entry removed with ✕; with a keyboard Ctrl+Z, Ctrl+Shift+Z and Ctrl+Y</li>
             <li><strong>Since 1.9:</strong> long checklist entries wrap, Enter splits an entry, pasted text with several lines becomes several entries; "Category…" in multi-select shows the existing categories right away as a list; on the Linux desktop browser engine Electron 44.7.0</li>
             <li><strong>Since 1.8:</strong> on the Linux desktop a copied note is also cleared from the middle-click selection when Klipper mirrors it there; a selected passphrase disappears when you switch to another window; a frozen third-party program no longer holds up the clearing, not even on quit (at most about 5 seconds)</li>

@@ -1008,12 +1008,13 @@
           <li>Screenshots und App-Umschalter ab Werk gesperrt (FLAG_SECURE), in den Einstellungen abschaltbar – Notizen sind nicht immer geheim</li>
           <li>Kein Android-Autofill, auch kein fremdes (seit 1.4): Die App nimmt ihre WebView vom Autofill-Framework aus – ein Passwort-Manager als Autofill-Dienst sieht die Passphrase-Felder nicht und kann nicht anbieten, sie zu speichern</li>
           <li>Auch für den <strong>Linux-Desktop</strong> – als Flatpak ohne Netzwerk-Berechtigung und ohne Dateizugriff, mit GPG-signierter Prüfsumme</li>
-          <li>Interne Sicherheits-Audits (kein unabhängiges Audit): zwei große vor 0.1 (neue Fläche gegenüber Alien Pass plus Dateispeicher) und 1.1 (Standard-Notes-Import, Dialog, Rückgängig, Mehrfachauswahl), gezielte Durchsichten vor 1.2 und 1.5 und Release-Audits über die Änderungen vor 1.6, 1.7, 1.8, 1.9 und 1.10 – Funde vor dem Release behoben oder bewusst offen gelassen und dokumentiert</li>
+          <li>Interne Sicherheits-Audits (kein unabhängiges Audit): zwei große vor 0.1 (neue Fläche gegenüber Alien Pass plus Dateispeicher) und 1.1 (Standard-Notes-Import, Dialog, Rückgängig, Mehrfachauswahl), gezielte Durchsichten vor 1.2 und 1.5 und Release-Audits über die Änderungen vor 1.6, 1.7, 1.8, 1.9, 1.10 und 1.11 – Funde vor dem Release behoben oder bewusst offen gelassen und dokumentiert</li>
         </ul>
 
         <details class="more">
           <summary>Neu in den letzten Versionen</summary>
           <ul>
+            <li><strong>Seit 1.11:</strong> am Linux-Desktop markiert Strg+A nur noch den Inhalt eines gefüllten Feldes bzw. in der Markdown-Ansicht die offene Notiz statt der ganzen Seite; auch Markierungen über Knöpfe oder Felder hinweg werden nach Ablauf der Zeit und beim Sperren aus der Mittelklick-Auswahl gelöscht</li>
             <li><strong>Seit 1.10:</strong> Rückgängig ↶ und Wiederholen ↷ im Editor – bis zu 50 Schritte je offener Notiz, nur im Arbeitsspeicher, holt auch einen mit ✕ entfernten Checklisten-Eintrag zurück; mit Tastatur Strg+Z, Strg+Umschalt+Z und Strg+Y</li>
             <li><strong>Seit 1.9:</strong> lange Checklisten-Einträge brechen um, Enter teilt einen Eintrag, eingefügter Text mit mehreren Zeilen wird zu mehreren Einträgen; „Kategorie…“ in der Mehrfachauswahl zeigt die vorhandenen Kategorien gleich als Liste; am Linux-Desktop Browser-Engine Electron 44.7.0</li>
             <li><strong>Seit 1.8:</strong> am Linux-Desktop wird eine kopierte Notiz auch aus der Mittelklick-Auswahl gelöscht, wenn Klipper sie dorthin spiegelt; eine markierte Passphrase verschwindet beim Wechsel in ein anderes Fenster; ein hängendes fremdes Programm hält das Löschen nicht mehr auf, auch nicht beim Beenden (höchstens etwa 5 Sekunden)</li>
