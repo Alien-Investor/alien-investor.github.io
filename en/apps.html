@@ -999,7 +999,7 @@
 
         <ul>
           <li>Notes (free text up to 100,000 characters) and checklists (up to 200 entries, "done to the bottom", "clear ticks") – switch a note between the two, lines become entries and back</li>
-          <li>No save button: the app saves as you type (after 1.5 s) and when you leave the note – encrypted, the whole file every time</li>
+          <li>No save button: the app saves as you type (after 1.5 s) and when you leave the note – encrypted, the whole file every time; ↶ and ↷ in the editor take back changes to the open note and bring them back</li>
           <li>Markdown preview per note (off by default): a small own subset, no third-party renderer, no HTML, links stay plain text; cheat sheet in the editor</li>
           <li>Categories like folders (rename them, too), favourites, pinned notes at the top, an "Open" chip for checklists with unfinished entries, search across title, text, checklist entries and category</li>
           <li>Clipboard auto-clear (30 s by default, can be switched off) and on lock, flagged sensitive on Android. With "Lock in background: immediately" the copied note stays until the chosen time runs out so it can still be pasted into another app (since 1.3).</li>
@@ -1010,12 +1010,13 @@
           <li>Screenshots and app-switcher preview blocked by default (FLAG_SECURE), can be switched off in Settings – notes are not always secret</li>
           <li>No Android autofill, not even third-party (since 1.4): the app keeps its WebView out of the autofill framework – a password manager set up as the autofill service never sees the passphrase fields and cannot offer to save them</li>
           <li>Also for the <strong>Linux desktop</strong> – a Flatpak without network permission and without file access, with a GPG-signed checksum</li>
-          <li>Internal security audits (no independent audit): two large ones before 0.1 (the surface new compared to Alien Pass plus the file store) and 1.1 (Standard Notes import, dialog, undo, multi-select), targeted reviews before 1.2 and 1.5 and release audits of the changes before 1.6, 1.7, 1.8 and 1.9 – findings fixed before release or deliberately left open and documented</li>
+          <li>Internal security audits (no independent audit): two large ones before 0.1 (the surface new compared to Alien Pass plus the file store) and 1.1 (Standard Notes import, dialog, undo, multi-select), targeted reviews before 1.2 and 1.5 and release audits of the changes before 1.6, 1.7, 1.8, 1.9 and 1.10 – findings fixed before release or deliberately left open and documented</li>
         </ul>
 
         <details class="more">
           <summary>New in recent versions</summary>
           <ul>
+            <li><strong>Since 1.10:</strong> undo ↶ and redo ↷ in the editor – up to 50 steps per open note, kept only in memory, also brings back a checklist entry removed with ✕; with a keyboard Ctrl+Z, Ctrl+Shift+Z and Ctrl+Y</li>
             <li><strong>Since 1.9:</strong> long checklist entries wrap, Enter splits an entry, pasted text with several lines becomes several entries; "Category…" in multi-select shows the existing categories right away as a list; on the Linux desktop browser engine Electron 44.7.0</li>
             <li><strong>Since 1.8:</strong> on the Linux desktop a copied note is also cleared from the middle-click selection when Klipper mirrors it there; a selected passphrase disappears when you switch to another window; a frozen third-party program no longer holds up the clearing, not even on quit (at most about 5 seconds)</li>
             <li><strong>Since 1.7:</strong> on the Linux desktop a passphrase selected with Tab, or followed by a click elsewhere, is now cleared from the middle-click selection when the copy timer runs out or on locking; long notes (over 20,000 characters) can be copied</li>

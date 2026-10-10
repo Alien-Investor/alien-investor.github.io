@@ -996,7 +996,7 @@
 
         <ul>
           <li>Notizen (freier Text bis 100.000 Zeichen) und Checklisten (bis zu 200 Einträge, „Erledigte nach unten“, „Haken zurücksetzen“) – der Typ lässt sich umschalten, Zeilen werden Einträge und umgekehrt</li>
-          <li>Kein Speichern-Knopf: die App speichert beim Tippen (nach 1,5 s Ruhe) und beim Verlassen der Notiz – verschlüsselt, jedes Mal die ganze Datei</li>
+          <li>Kein Speichern-Knopf: die App speichert beim Tippen (nach 1,5 s Ruhe) und beim Verlassen der Notiz – verschlüsselt, jedes Mal die ganze Datei; ↶ und ↷ im Editor nehmen Änderungen der offenen Notiz zurück und holen sie wieder</li>
           <li>Markdown-Ansicht je Notiz (ab Werk aus): eigene kleine Untermenge, kein Fremd-Renderer, kein HTML, Links bleiben reiner Text; Spickzettel im Editor</li>
           <li>Kategorien wie Ordner (auch umbenennen), Favoriten, angeheftete Notizen ganz oben, Chip „Offen“ für Checklisten mit unerledigten Einträgen, Suche über Titel, Text, Checklisten-Einträge und Kategorie</li>
           <li>Zwischenablage mit Auto-Löschen (ab Werk 30 s, abschaltbar) und beim Sperren, auf Android sensibel markiert. Bei „Sperren im Hintergrund: sofort“ bleibt das Kopierte bis zum Ablauf der Zeit stehen, damit es sich noch in eine andere App einfügen lässt (seit 1.3).</li>
@@ -1007,12 +1007,13 @@
           <li>Screenshots und App-Umschalter ab Werk gesperrt (FLAG_SECURE), in den Einstellungen abschaltbar – Notizen sind nicht immer geheim</li>
           <li>Kein Android-Autofill, auch kein fremdes (seit 1.4): Die App nimmt ihre WebView vom Autofill-Framework aus – ein Passwort-Manager als Autofill-Dienst sieht die Passphrase-Felder nicht und kann nicht anbieten, sie zu speichern</li>
           <li>Auch für den <strong>Linux-Desktop</strong> – als Flatpak ohne Netzwerk-Berechtigung und ohne Dateizugriff, mit GPG-signierter Prüfsumme</li>
-          <li>Interne Sicherheits-Audits (kein unabhängiges Audit): zwei große vor 0.1 (neue Fläche gegenüber Alien Pass plus Dateispeicher) und 1.1 (Standard-Notes-Import, Dialog, Rückgängig, Mehrfachauswahl), gezielte Durchsichten vor 1.2 und 1.5 und Release-Audits über die Änderungen vor 1.6, 1.7, 1.8 und 1.9 – Funde vor dem Release behoben oder bewusst offen gelassen und dokumentiert</li>
+          <li>Interne Sicherheits-Audits (kein unabhängiges Audit): zwei große vor 0.1 (neue Fläche gegenüber Alien Pass plus Dateispeicher) und 1.1 (Standard-Notes-Import, Dialog, Rückgängig, Mehrfachauswahl), gezielte Durchsichten vor 1.2 und 1.5 und Release-Audits über die Änderungen vor 1.6, 1.7, 1.8, 1.9 und 1.10 – Funde vor dem Release behoben oder bewusst offen gelassen und dokumentiert</li>
         </ul>
 
         <details class="more">
           <summary>Neu in den letzten Versionen</summary>
           <ul>
+            <li><strong>Seit 1.10:</strong> Rückgängig ↶ und Wiederholen ↷ im Editor – bis zu 50 Schritte je offener Notiz, nur im Arbeitsspeicher, holt auch einen mit ✕ entfernten Checklisten-Eintrag zurück; mit Tastatur Strg+Z, Strg+Umschalt+Z und Strg+Y</li>
             <li><strong>Seit 1.9:</strong> lange Checklisten-Einträge brechen um, Enter teilt einen Eintrag, eingefügter Text mit mehreren Zeilen wird zu mehreren Einträgen; „Kategorie…“ in der Mehrfachauswahl zeigt die vorhandenen Kategorien gleich als Liste; am Linux-Desktop Browser-Engine Electron 44.7.0</li>
             <li><strong>Seit 1.8:</strong> am Linux-Desktop wird eine kopierte Notiz auch aus der Mittelklick-Auswahl gelöscht, wenn Klipper sie dorthin spiegelt; eine markierte Passphrase verschwindet beim Wechsel in ein anderes Fenster; ein hängendes fremdes Programm hält das Löschen nicht mehr auf, auch nicht beim Beenden (höchstens etwa 5 Sekunden)</li>
             <li><strong>Seit 1.7:</strong> am Linux-Desktop wird eine per Tab markierte Passphrase oder eine, neben die man danach klickt, wie vorgesehen mit der Kopier-Frist bzw. beim Sperren aus der Mittelklick-Auswahl gelöscht; lange Notizen (über 20.000 Zeichen) lassen sich kopieren</li>
