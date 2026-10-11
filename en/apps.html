@@ -685,6 +685,7 @@
         <details class="more">
           <summary>New in recent versions</summary>
           <ul>
+            <li>Since v3.10.1: amounts typed with a thousands separator, such as “2.500”, are rejected instead of being booked silently as €2.50; the same goes for sats and counts with a separator. Prices with a thousands separator are not applied, the previous price stays. Typing sats in the form and switching the display to BTC before saving now books the right amount</li>
             <li>Since v3.10: on the Linux desktop Ctrl+A only selects the content of a filled-in text or number field instead of the whole page; selections spanning buttons, fields and the chart (except across the date field) as well as selected amounts and quantities are also cleared from the middle-click selection after 30 seconds and on lock; browser engine Electron 44.7.0</li>
             <li>Since v3.9: take prices from <a href="https://api.alien-investor.org/mission-control-v2.html?lang=en">Mission Control</a> – tap “Copy Prices” there, paste the line into the vault, check it, apply. Gold and silver arrive already converted to euros; the vault itself stays without network access</li>
             <li>Since v3.8: on the Linux desktop the app clears its copies and selections from the clipboard more reliably, even when another program hangs; a selected passphrase (passphrase change, backup import) now also leaves the middle-click selection when you switch to another window; number-field arrows and calendar icon in the neon look</li>
