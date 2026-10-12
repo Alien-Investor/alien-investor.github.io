@@ -167,7 +167,7 @@
     <p>„Komplexität ist der Feind der Sicherheit.“ Aber Reibung ist der Feind der Anwendung.</p>
     
     <p>
-      Wenn der Schutz deiner Daten sich wie lästige Arbeit anfühlt – weil du jedes Mal lange Pfade wie <code>~/Scripts/encrypt-folder.sh</code> eintippen musst
+      Wenn der Schutz deiner Daten sich wie lästige Arbeit anfühlt – weil du jedes Mal lange Pfade wie <code>~/Skripte/encrypt-folder.sh</code> eintippen musst
       – wirst du es „nur dieses eine Mal“ sein lassen. Und genau in dem Moment machst du dich angreifbar.
     </p>
     
@@ -197,16 +197,16 @@
     <p>Auf Termux oder Standard Ubuntu/Debian (Bash):</p>
     <pre><code>nano ~/.bashrc</code></pre>
 
-    <p>Scrolle ganz nach unten und füge die folgenden Zeilen ein (vorausgesetzt, du hast deine Skripte wie empfohlen im Ordner „Scripts“ gespeichert):</p>
+    <p>Scrolle ganz nach unten und füge die folgenden Zeilen ein (vorausgesetzt, du hast deine Skripte wie empfohlen im Ordner „Skripte“ gespeichert):</p>
 
     <pre><code># --- Alien Investor Security Aliases ---
-alias encrypt="~/Scripts/encrypt-folder.sh"
-alias decrypt="~/Scripts/decrypt-folder.sh"</code></pre>
+alias encrypt="~/Skripte/encrypt-folder.sh"
+alias decrypt="~/Skripte/decrypt-folder.sh"</code></pre>
 
     <p><em>Hinweis: Das <code>#</code> am Anfang markiert einen Kommentar, damit du später noch weißt, was diese Zeilen tun.</em></p>
 
     <p>Stelle sicher, dass die Skripte auch ausführbar sind (falls du das noch nicht erledigt hast):</p>
-    <pre><code>chmod +x ~/Scripts/encrypt-folder.sh ~/Scripts/decrypt-folder.sh</code></pre>
+    <pre><code>chmod +x ~/Skripte/encrypt-folder.sh ~/Skripte/decrypt-folder.sh</code></pre>
 
     <p>Speichere die Datei (<code>STRG+O</code>, Enter) und beende den Editor (<code>STRG+X</code>).</p>
 
