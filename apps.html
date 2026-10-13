@@ -995,7 +995,8 @@
         </div>
 
         <p class="pitch">
-          <strong>Deine Notizen verlassen das Gerät nie im Klartext.</strong>
+          <strong>Deine Notizen liegen verschlüsselt auf dem Gerät.</strong> Die App selbst schickt nie etwas weg; Klartext gibt sie nur heraus,
+          wenn du es auslöst – etwa beim Kopieren oder mit „Als Datei“.
           Lokale, verschlüsselte Notizen- und Checklisten-App – komplett offline. Kein Konto, kein Server,
           keine Telemetrie. Schwester-App von Alien Pass mit gleicher Architektur und gleicher Härtung.
         </p>
@@ -1005,20 +1006,22 @@
           <li>Kein Speichern-Knopf: die App speichert beim Tippen (nach 1,5 s Ruhe) und beim Verlassen der Notiz – verschlüsselt, jedes Mal die ganze Datei; ↶ und ↷ im Editor nehmen Änderungen der offenen Notiz zurück und holen sie wieder</li>
           <li>Markdown-Ansicht je Notiz (ab Werk aus): eigene kleine Untermenge, kein Fremd-Renderer, kein HTML, Links bleiben reiner Text; Spickzettel im Editor</li>
           <li>Kategorien wie Ordner (auch umbenennen), Favoriten, angeheftete Notizen ganz oben, Chip „Offen“ für Checklisten mit unerledigten Einträgen, Suche über Titel, Text, Checklisten-Einträge und Kategorie</li>
-          <li>Zwischenablage mit Auto-Löschen (ab Werk 30 s, abschaltbar) und beim Sperren, auf Android sensibel markiert. Bei „Sperren im Hintergrund: sofort“ bleibt das Kopierte bis zum Ablauf der Zeit stehen, damit es sich noch in eine andere App einfügen lässt (seit 1.3).</li>
+          <li>Kopieren mit Auto-Löschen der Zwischenablage (ab Werk 30 s, abschaltbar) und beim Sperren, auf Android sensibel markiert. Bei „Sperren im Hintergrund: sofort“ bleibt das Kopierte bis zum Ablauf der Zeit stehen, damit es sich noch in eine andere App einfügen lässt (seit 1.3).</li>
           <li>Sperre lockerer als beim Passwort-Manager: ab Werk keine Sperre nach Inaktivität, im Hintergrund nach 30 Minuten – beides einstellbar bis „nie“ bzw. „sofort“. Bei „sofort“ sperrt die Android-App auch, während der Datei-Picker offen ist; entsperrst du innerhalb von fünf Minuten, läuft der Import mit der gewählten Datei weiter (seit 1.2).</li>
+          <li>„Als Datei“: eine Notiz als Markdown-Datei (<code>.md</code>) speichern, auf Android über den Teilen-Dialog – unverschlüsselt, deshalb mit Rückfrage; der Dateiname nennt nur Datum und Uhrzeit, nie den Titel</li>
           <li>Papierkorb: Gelöschtes bleibt 30 Tage wiederherstellbar, höchstens 200 Notizen, nur Titel, Typ und Datum sichtbar</li>
           <li>Verschlüsseltes Backup (<code>.notes</code>) und Zusammenführen zwischen Geräten, auch zwischen Handy und Linux-Desktop (z.B. über Syncthing)</li>
           <li>Aegis-Hürde, Fingerabdruck-Entsperren (Android) und Schnell-Entsperren per PIN (Desktop) – optional, aus Alien Pass übernommen (Aegis ohne QR)</li>
           <li>Screenshots und App-Umschalter ab Werk gesperrt (FLAG_SECURE), in den Einstellungen abschaltbar – Notizen sind nicht immer geheim</li>
           <li>Kein Android-Autofill, auch kein fremdes (seit 1.4): Die App nimmt ihre WebView vom Autofill-Framework aus – ein Passwort-Manager als Autofill-Dienst sieht die Passphrase-Felder nicht und kann nicht anbieten, sie zu speichern</li>
           <li>Auch für den <strong>Linux-Desktop</strong> – als Flatpak ohne Netzwerk-Berechtigung und ohne Dateizugriff, mit GPG-signierter Prüfsumme</li>
-          <li>Interne Sicherheits-Audits (kein unabhängiges Audit): zwei große vor 0.1 (neue Fläche gegenüber Alien Pass plus Dateispeicher) und 1.1 (Standard-Notes-Import, Dialog, Rückgängig, Mehrfachauswahl), gezielte Durchsichten vor 1.2 und 1.5 und Release-Audits über die Änderungen vor 1.6, 1.7, 1.8, 1.9, 1.10 und 1.11 – Funde vor dem Release behoben oder bewusst offen gelassen und dokumentiert</li>
+          <li>Interne Sicherheits-Audits (kein unabhängiges Audit): zwei große vor 0.1 (neue Fläche gegenüber Alien Pass plus Dateispeicher) und 1.1 (Standard-Notes-Import, Dialog, Rückgängig, Mehrfachauswahl), gezielte Durchsichten vor 1.2 und 1.5 und Release-Audits über die Änderungen vor 1.6, 1.7, 1.8, 1.9, 1.10, 1.11 und 1.12 – Funde vor dem Release behoben oder bewusst offen gelassen und dokumentiert</li>
         </ul>
 
         <details class="more">
           <summary>Neu in den letzten Versionen</summary>
           <ul>
+            <li><strong>Seit 1.12:</strong> „Als Datei“ speichert die offene Notiz als Markdown-Datei (am Desktop über den Speichern-Dialog, auf Android über den Teilen-Dialog); beim Sperren leert die App auch eine interne Stelle der JavaScript-Engine, an der noch eine Notizzeile stehen konnte</li>
             <li><strong>Seit 1.11:</strong> am Linux-Desktop markiert Strg+A nur noch den Inhalt eines gefüllten Feldes bzw. in der Markdown-Ansicht die offene Notiz statt der ganzen Seite; auch Markierungen über Knöpfe oder Felder hinweg werden nach Ablauf der Zeit und beim Sperren aus der Mittelklick-Auswahl gelöscht</li>
             <li><strong>Seit 1.10:</strong> Rückgängig ↶ und Wiederholen ↷ im Editor – bis zu 50 Schritte je offener Notiz, nur im Arbeitsspeicher, holt auch einen mit ✕ entfernten Checklisten-Eintrag zurück; mit Tastatur Strg+Z, Strg+Umschalt+Z und Strg+Y</li>
             <li><strong>Seit 1.9:</strong> lange Checklisten-Einträge brechen um, Enter teilt einen Eintrag, eingefügter Text mit mehreren Zeilen wird zu mehreren Einträgen; „Kategorie…“ in der Mehrfachauswahl zeigt die vorhandenen Kategorien gleich als Liste; am Linux-Desktop Browser-Engine Electron 44.7.0</li>
