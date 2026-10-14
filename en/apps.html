@@ -1018,12 +1018,13 @@
           <li>Screenshots and app-switcher preview blocked by default (FLAG_SECURE), can be switched off in Settings – notes are not always secret</li>
           <li>No Android autofill, not even third-party (since 1.4): the app keeps its WebView out of the autofill framework – a password manager set up as the autofill service never sees the passphrase fields and cannot offer to save them</li>
           <li>Also for the <strong>Linux desktop</strong> – a Flatpak without network permission and without file access, with a GPG-signed checksum</li>
-          <li>Internal security audits (no independent audit): two large ones before 0.1 (the surface new compared to Alien Pass plus the file store) and 1.1 (Standard Notes import, dialog, undo, multi-select), targeted reviews before 1.2 and 1.5 and release audits of the changes before 1.6, 1.7, 1.8, 1.9, 1.10, 1.11 and 1.12 – findings fixed before release or deliberately left open and documented</li>
+          <li>Internal security audits (no independent audit): two large ones before 0.1 (the surface new compared to Alien Pass plus the file store) and 1.1 (Standard Notes import, dialog, undo, multi-select), targeted reviews before 1.2 and 1.5 and release audits of the changes before 1.6, 1.7, 1.8, 1.9, 1.10, 1.11, 1.12 and 1.13 – findings fixed before release or deliberately left open and documented</li>
         </ul>
 
         <details class="more">
           <summary>New in recent versions</summary>
           <ul>
+            <li><strong>Since 1.13:</strong> on Android the app also handles copy and cut via Android's selection bar (flagged sensitive, cleared after the set time and on lock) and asks the keyboard not to learn from what you type (Gboard then shows its incognito icon); on the Linux desktop safer temporary files when saving</li>
             <li><strong>Since 1.12:</strong> "As file" saves the open note as a Markdown file (on the desktop via the save dialog, on Android via the share sheet); on lock the app also clears an internal spot of the JavaScript engine where a line of a note could still sit</li>
             <li><strong>Since 1.11:</strong> on the Linux desktop Ctrl+A only selects the content of a filled-in field, or the open note in the Markdown view, instead of the whole page; selections spanning buttons or fields are also cleared from the middle-click selection when the time runs out and on lock</li>
             <li><strong>Since 1.10:</strong> undo ↶ and redo ↷ in the editor – up to 50 steps per open note, kept only in memory, also brings back a checklist entry removed with ✕; with a keyboard Ctrl+Z, Ctrl+Shift+Z and Ctrl+Y</li>
