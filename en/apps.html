@@ -638,7 +638,7 @@
       <a href="#notes">
         <img src="/app-icon-notes.png" alt="" loading="lazy">
         <span class="ov-name">Alien Notes</span>
-        <span class="ov-sub">Notes &amp; checklists</span>
+        <span class="ov-sub">Notes, checklists &amp; sketches</span>
         <span class="ov-plat">Android · Linux</span>
       </a>
       <a href="#steuertool">
@@ -993,7 +993,7 @@
       </div>
       <div class="app-info">
         <h2>Alien Notes</h2>
-        <p class="subtitle">Encrypted offline notes and checklists without internet permission</p>
+        <p class="subtitle">Encrypted offline notes, checklists and sketches without internet permission</p>
 
         <div style="position:relative; padding-bottom:56.25%; height:0; margin:1em 0 1.4em; border-radius:8px; overflow:hidden; border:1px solid rgba(0,255,204,0.25); background:#000;">
           <iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;" src="https://www.youtube-nocookie.com/embed/q0OyQhbHkbo" title="App trailer: Alien Notes – encrypted offline notes for GrapheneOS and Linux" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -1002,12 +1002,13 @@
         <p class="pitch">
           <strong>Your notes are stored encrypted on the device.</strong> The app itself never sends anything; it only hands out plaintext
           when you trigger it – for example by copying or with "As file".
-          A local, encrypted notes and checklist app – fully offline. No account, no server,
+          A local, encrypted app for notes, checklists and sketches – fully offline. No account, no server,
           no telemetry. Sister app of Alien Pass with the same architecture and the same hardening.
         </p>
 
         <ul>
           <li>Notes (free text up to 100,000 characters) and checklists (up to 200 entries, "done to the bottom", "clear ticks") – switch a note between the two, lines become entries and back</li>
+          <li>Sketches: draw with a finger, on the desktop with the mouse – freehand, line, arrow, rectangle, ellipse, triangle, hexagon, three stroke widths, dashed, four colours, a stroke eraser, a grid with snapping; stored as lines in the encrypted file, not as images</li>
           <li>No save button: the app saves as you type (after 1.5 s) and when you leave the note – encrypted, the whole file every time; ↶ and ↷ in the editor take back changes to the open note and bring them back</li>
           <li>Markdown preview per note (off by default): a small own subset, no third-party renderer, no HTML, links stay plain text; cheat sheet in the editor</li>
           <li>Categories like folders (rename them, too), favourites, pinned notes at the top, an "Open" chip for checklists with unfinished entries, search across title, text, checklist entries and category</li>
@@ -1020,12 +1021,13 @@
           <li>Screenshots and app-switcher preview blocked by default (FLAG_SECURE), can be switched off in Settings – notes are not always secret</li>
           <li>No Android autofill, not even third-party (since 1.4): the app keeps its WebView out of the autofill framework – a password manager set up as the autofill service never sees the passphrase fields and cannot offer to save them</li>
           <li>Also for the <strong>Linux desktop</strong> – a Flatpak without network permission and without file access, with a GPG-signed checksum</li>
-          <li>Internal security audits (no independent audit): two large ones before 0.1 (the surface new compared to Alien Pass plus the file store) and 1.1 (Standard Notes import, dialog, undo, multi-select), targeted reviews before 1.2 and 1.5 and release audits of the changes before 1.6, 1.7, 1.8, 1.9, 1.10, 1.11, 1.12 and 1.13 – findings fixed before release or deliberately left open and documented</li>
+          <li>Internal security audits (no independent audit): two large ones before 0.1 (the surface new compared to Alien Pass plus the file store) and 1.1 (Standard Notes import, dialog, undo, multi-select), targeted reviews before 1.2 and 1.5 and release audits of the changes before 1.6 to 1.14 (before 1.14 in four rounds) – findings fixed before release or deliberately left open and documented</li>
         </ul>
 
         <details class="more">
           <summary>New in recent versions</summary>
           <ul>
+            <li><strong>Since 1.14:</strong> new note type "Sketch"; the file carries version 2 – older versions no longer open it, so update phone and desktop together; if the correct passphrase opens a file with altered or invalid content, this no longer counts as a failed attempt and discards neither fingerprint nor PIN; on the Linux desktop a selection dragged up to the edge, or one still held when the app locks, no longer stays in the middle-click selection; Electron 44.7.2</li>
             <li><strong>Since 1.13:</strong> on Android the app also handles copy and cut via Android's selection bar (flagged sensitive, cleared after the set time and on lock) and asks the keyboard not to learn from what you type (Gboard then shows its incognito icon); on the Linux desktop safer temporary files when saving</li>
             <li><strong>Since 1.12:</strong> "As file" saves the open note as a Markdown file (on the desktop via the save dialog, on Android via the share sheet); on lock the app also clears an internal spot of the JavaScript engine where a line of a note could still sit</li>
             <li><strong>Since 1.11:</strong> on the Linux desktop Ctrl+A only selects the content of a filled-in field, or the open note in the Markdown view, instead of the whole page; selections spanning buttons or fields are also cleared from the middle-click selection when the time runs out and on lock</li>

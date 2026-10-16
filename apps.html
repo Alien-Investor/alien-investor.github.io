@@ -635,7 +635,7 @@
       <a href="#notes">
         <img src="app-icon-notes.png" alt="" loading="lazy">
         <span class="ov-name">Alien Notes</span>
-        <span class="ov-sub">Notizen &amp; Checklisten</span>
+        <span class="ov-sub">Notizen, Checklisten &amp; Skizzen</span>
         <span class="ov-plat">Android · Linux</span>
       </a>
       <a href="#steuertool">
@@ -990,7 +990,7 @@
       </div>
       <div class="app-info">
         <h2>Alien Notes</h2>
-        <p class="subtitle">Verschlüsselte Offline-Notizen und Checklisten ohne Internet-Berechtigung</p>
+        <p class="subtitle">Verschlüsselte Offline-Notizen, Checklisten und Skizzen ohne Internet-Berechtigung</p>
 
         <div style="position:relative; padding-bottom:56.25%; height:0; margin:1em 0 1.4em; border-radius:8px; overflow:hidden; border:1px solid rgba(0,255,204,0.25); background:#000;">
           <iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;" src="https://www.youtube-nocookie.com/embed/2fN9PTMsK8U" title="App-Trailer: Alien Notes – Verschlüsselte Offline-Notizen für GrapheneOS und Linux" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -999,12 +999,13 @@
         <p class="pitch">
           <strong>Deine Notizen liegen verschlüsselt auf dem Gerät.</strong> Die App selbst schickt nie etwas weg; Klartext gibt sie nur heraus,
           wenn du es auslöst – etwa beim Kopieren oder mit „Als Datei“.
-          Lokale, verschlüsselte Notizen- und Checklisten-App – komplett offline. Kein Konto, kein Server,
+          Lokale, verschlüsselte App für Notizen, Checklisten und Skizzen – komplett offline. Kein Konto, kein Server,
           keine Telemetrie. Schwester-App von Alien Pass mit gleicher Architektur und gleicher Härtung.
         </p>
 
         <ul>
           <li>Notizen (freier Text bis 100.000 Zeichen) und Checklisten (bis zu 200 Einträge, „Erledigte nach unten“, „Haken zurücksetzen“) – der Typ lässt sich umschalten, Zeilen werden Einträge und umgekehrt</li>
+          <li>Skizzen: mit dem Finger zeichnen, am Desktop mit der Maus – Freihand, Linie, Pfeil, Rechteck, Ellipse, Dreieck, Sechseck, drei Strichstärken, gestrichelt, vier Farben, Strich-Radierer, Gitter mit Einrasten; gespeichert als Linien in der verschlüsselten Datei, keine Bilder</li>
           <li>Kein Speichern-Knopf: die App speichert beim Tippen (nach 1,5 s Ruhe) und beim Verlassen der Notiz – verschlüsselt, jedes Mal die ganze Datei; ↶ und ↷ im Editor nehmen Änderungen der offenen Notiz zurück und holen sie wieder</li>
           <li>Markdown-Ansicht je Notiz (ab Werk aus): eigene kleine Untermenge, kein Fremd-Renderer, kein HTML, Links bleiben reiner Text; Spickzettel im Editor</li>
           <li>Kategorien wie Ordner (auch umbenennen), Favoriten, angeheftete Notizen ganz oben, Chip „Offen“ für Checklisten mit unerledigten Einträgen, Suche über Titel, Text, Checklisten-Einträge und Kategorie</li>
@@ -1017,12 +1018,13 @@
           <li>Screenshots und App-Umschalter ab Werk gesperrt (FLAG_SECURE), in den Einstellungen abschaltbar – Notizen sind nicht immer geheim</li>
           <li>Kein Android-Autofill, auch kein fremdes (seit 1.4): Die App nimmt ihre WebView vom Autofill-Framework aus – ein Passwort-Manager als Autofill-Dienst sieht die Passphrase-Felder nicht und kann nicht anbieten, sie zu speichern</li>
           <li>Auch für den <strong>Linux-Desktop</strong> – als Flatpak ohne Netzwerk-Berechtigung und ohne Dateizugriff, mit GPG-signierter Prüfsumme</li>
-          <li>Interne Sicherheits-Audits (kein unabhängiges Audit): zwei große vor 0.1 (neue Fläche gegenüber Alien Pass plus Dateispeicher) und 1.1 (Standard-Notes-Import, Dialog, Rückgängig, Mehrfachauswahl), gezielte Durchsichten vor 1.2 und 1.5 und Release-Audits über die Änderungen vor 1.6, 1.7, 1.8, 1.9, 1.10, 1.11, 1.12 und 1.13 – Funde vor dem Release behoben oder bewusst offen gelassen und dokumentiert</li>
+          <li>Interne Sicherheits-Audits (kein unabhängiges Audit): zwei große vor 0.1 (neue Fläche gegenüber Alien Pass plus Dateispeicher) und 1.1 (Standard-Notes-Import, Dialog, Rückgängig, Mehrfachauswahl), gezielte Durchsichten vor 1.2 und 1.5 und Release-Audits über die Änderungen vor 1.6 bis 1.14 (vor 1.14 in vier Runden) – Funde vor dem Release behoben oder bewusst offen gelassen und dokumentiert</li>
         </ul>
 
         <details class="more">
           <summary>Neu in den letzten Versionen</summary>
           <ul>
+            <li><strong>Seit 1.14:</strong> neuer Notiztyp „Skizze“; die Datei trägt Version 2 – ältere Versionen öffnen sie nicht mehr, Handy und Desktop deshalb gemeinsam aktualisieren; öffnet die richtige Passphrase eine Datei mit verändertem oder ungültigem Inhalt, zählt das nicht als Fehlversuch und verwirft weder Fingerabdruck noch PIN; am Linux-Desktop bleibt eine bis an den Rand gezogene Markierung oder eine beim Sperren noch gehaltene nicht mehr in der Mittelklick-Auswahl; Electron 44.7.2</li>
             <li><strong>Seit 1.13:</strong> auf Android übernimmt die App auch das Kopieren und Ausschneiden über die Leiste von Android (sensibel markiert, Leeren nach Zeit und beim Sperren) und bittet die Tastatur, nichts zu lernen (Gboard zeigt dann sein Inkognito-Symbol); am Linux-Desktop sicherere Temp-Dateien beim Speichern</li>
             <li><strong>Seit 1.12:</strong> „Als Datei“ speichert die offene Notiz als Markdown-Datei (am Desktop über den Speichern-Dialog, auf Android über den Teilen-Dialog); beim Sperren leert die App auch eine interne Stelle der JavaScript-Engine, an der noch eine Notizzeile stehen konnte</li>
             <li><strong>Seit 1.11:</strong> am Linux-Desktop markiert Strg+A nur noch den Inhalt eines gefüllten Feldes bzw. in der Markdown-Ansicht die offene Notiz statt der ganzen Seite; auch Markierungen über Knöpfe oder Felder hinweg werden nach Ablauf der Zeit und beim Sperren aus der Mittelklick-Auswahl gelöscht</li>
