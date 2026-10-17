@@ -302,6 +302,18 @@ mkdir Broker</pre>
     </p>
 
     <div class="box" style="border-color: #ffaa00; background: #0a0800;">
+      <h3 style="color: #ffaa00; margin-top: 0;">⚡ Update October 2026 (v1.5): maintenance release</h3>
+      <ul>
+        <li><strong>Desktop: browser engine updated</strong> to Electron 44.7.2 (Chromium 152) – with the fixes backported since 44.5.1 from Chromium and its components (including V8, ANGLE, Skia, PDFium, WebRTC). The app still has no network access.</li>
+        <li><strong>Android:</strong> menus and dialogs show Android's slim scrollbar instead of a fixed neon bar; the neon bar now appears only with a mouse or trackpad.</li>
+        <li><strong>Version number</strong> in small print at the bottom of the app; the web version shows the date of its current state.</li>
+        <li><strong>Desktop:</strong> links (donations, online guide, bug report by e-mail) stay clickable even after the system clock has been set back.</li>
+        <li><strong>Bug report:</strong> long file type names wrap in the selection menu on narrow screens.</li>
+        <li><strong>Check before upload:</strong> the release script only uploads the APK and the Flatpak if their source files match the published Git tag, both are unchanged since the final check, and the APK is signed with the release certificate and the Flatpak checksum with the GPG release key.</li>
+      </ul>
+    </div>
+
+    <div class="box" style="border-color: #ffaa00; background: #0a0800;">
       <h3 style="color: #ffaa00; margin-top: 0;">⚡ Update October 2026 (v1.4): Sparrow, Electrum, Trezor, Ledger – and error messages that get through</h3>
       <ul>
         <li><strong>Wallet exports from Sparrow, Electrum, Trezor Suite and Ledger Wallet (formerly Ledger Live):</strong> the tool detects the program from the header line, older versions included. Every wallet is a holding of its own, in Ledger every account; transfers are matched by transaction ID. In the documents for the tax office they are only called "Sparrow-Wallet", "Trezor-Wallet 1" and so on. The formats are derived from the programs' source code, not from real exports – the tax report says so for every file. Other hardware wallets (e.g. Coldcard, Jade, SeedSigner) are added to Sparrow and exported there.</li>
@@ -465,7 +477,7 @@ mkdir Broker</pre>
     </p>
     <p><strong>Requirement:</strong> Flatpak with the Flathub remote (for the runtime <code>org.freedesktop.Platform</code> 25.08, which Flatpak fetches during installation):</p>
     <pre><code>flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo</code></pre>
-    <p><strong>1. Download three files:</strong> <code>btc-steuertool-1.4-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code>.</p>
+    <p><strong>1. Download three files:</strong> <code>btc-steuertool-1.5-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code>.</p>
     <p><strong>2. Check the signature.</strong> The checksum file is signed with the Alien Investor GPG release key — the same key as for Alien Pass, Sachwert-Tresor and Alien Notes:
       <a href="../alien-investor-release-key.asc">alien-investor-release-key.asc</a>. Compare the fingerprint through a second channel:</p>
     <p><code style="display:block; margin:0.35em 0; padding:0.5em 0.6em; font-size:0.8em;">100F 9E25 BFAE A807 DBC3  57D7 50C0 D785 83BF CB81</code></p>
@@ -473,7 +485,7 @@ mkdir Broker</pre>
 gpg --verify SHA256SUMS.asc SHA256SUMS      # "Good signature from "Alien Investor (Release-Signatur) …""
 sha256sum -c SHA256SUMS                     # "…flatpak: OK"</code></pre>
     <p><strong>3. Install and start:</strong></p>
-    <pre><code>flatpak install --user btc-steuertool-1.4-linux-x86_64.flatpak
+    <pre><code>flatpak install --user btc-steuertool-1.5-linux-x86_64.flatpak
 flatpak run org.alieninvestor.steuertool</code></pre>
     <p><strong>Update:</strong> a new bundle cannot be installed over the existing one (Flatpak 1.14). Download and check the new version, then
       <code>flatpak uninstall --user org.alieninvestor.steuertool</code> and install again. The app stores no tax data, only language and theme.</p>

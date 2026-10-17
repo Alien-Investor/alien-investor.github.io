@@ -309,6 +309,18 @@ mkdir Broker</pre>
     </p>
 
     <div class="box" style="border-color: #ffaa00; background: #0a0800;">
+      <h3 style="color: #ffaa00; margin-top: 0;">⚡ Update Oktober 2026 (v1.5): Pflege-Release</h3>
+      <ul>
+        <li><strong>Desktop: Browser-Engine aktualisiert</strong> auf Electron 44.7.2 (Chromium 152) – mit den seit 44.5.1 übernommenen Fehlerkorrekturen aus Chromium und seinen Bausteinen (u. a. V8, ANGLE, Skia, PDFium, WebRTC). Die App hat weiterhin keinen Netzzugriff.</li>
+        <li><strong>Android:</strong> In Menüs und Dialogen erscheint der schmale Scrollbalken von Android statt eines festen Neon-Balkens; den Neon-Balken gibt es nur noch mit Maus oder Trackpad.</li>
+        <li><strong>Versionsnummer</strong> klein im Fuß der App; die Web-Version zeigt das Datum ihres Stands.</li>
+        <li><strong>Desktop:</strong> Links (Spenden, Online-Anleitung, Bug-Report per Mail) bleiben klickbar, auch nachdem die Systemuhr zurückgestellt wurde.</li>
+        <li><strong>Bug-Report:</strong> Lange Dateityp-Namen brechen im Auswahlmenü auf schmalen Bildschirmen um.</li>
+        <li><strong>Kontrolle vor dem Hochladen:</strong> Das Release-Skript lädt APK und Flatpak nur hoch, wenn ihre Quelldateien dem veröffentlichten Git-Tag entsprechen, beide seit der Endkontrolle unverändert sind und die APK mit dem Release-Zertifikat sowie die Prüfsumme des Flatpaks mit dem GPG-Release-Schlüssel signiert sind.</li>
+      </ul>
+    </div>
+
+    <div class="box" style="border-color: #ffaa00; background: #0a0800;">
       <h3 style="color: #ffaa00; margin-top: 0;">⚡ Update Oktober 2026 (v1.4): Sparrow, Electrum, Trezor, Ledger – und Fehlermeldungen, die ankommen</h3>
       <ul>
         <li><strong>Wallet-Exporte aus Sparrow, Electrum, Trezor Suite und Ledger Wallet (früher Ledger Live):</strong> Das Tool erkennt das Programm an der Kopfzeile, auch bei älteren Versionen. Jede Wallet ist ein eigener Bestand, bei Ledger jedes Konto; Überträge werden über die Transaktions-ID verbunden. In den Finanzamt-Dokumenten heißen sie nur „Sparrow-Wallet“, „Trezor-Wallet 1“ usw. Die Formate stammen aus dem Quellcode der Programme, nicht aus echten Exporten – der Steuerreport weist je Datei darauf hin. Andere Hardware-Wallets (z.&nbsp;B. Coldcard, Jade, SeedSigner) bindest du in Sparrow ein und exportierst dort.</li>
@@ -472,7 +484,7 @@ mkdir Broker</pre>
     </p>
     <p><strong>Voraussetzung:</strong> Flatpak mit dem Flathub-Remote (für die Laufzeit <code>org.freedesktop.Platform</code> 25.08, die Flatpak beim Installieren nachlädt):</p>
     <pre><code>flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo</code></pre>
-    <p><strong>1. Drei Dateien laden:</strong> <code>btc-steuertool-1.4-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code>.</p>
+    <p><strong>1. Drei Dateien laden:</strong> <code>btc-steuertool-1.5-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code>.</p>
     <p><strong>2. Signatur prüfen.</strong> Die Prüfsumme ist mit dem GPG-Release-Schlüssel von Alien Investor signiert — derselbe Schlüssel wie bei Alien Pass, Sachwert-Tresor und Alien Notes:
       <a href="alien-investor-release-key.asc">alien-investor-release-key.asc</a>. Den Fingerabdruck über einen zweiten Weg vergleichen:</p>
     <p><code style="display:block; margin:0.35em 0; padding:0.5em 0.6em; font-size:0.8em;">100F 9E25 BFAE A807 DBC3  57D7 50C0 D785 83BF CB81</code></p>
@@ -480,7 +492,7 @@ mkdir Broker</pre>
 gpg --verify SHA256SUMS.asc SHA256SUMS      # „Korrekte Signatur von "Alien Investor (Release-Signatur) …"“
 sha256sum -c SHA256SUMS                     # „…flatpak: OK“</code></pre>
     <p><strong>3. Installieren und starten:</strong></p>
-    <pre><code>flatpak install --user btc-steuertool-1.4-linux-x86_64.flatpak
+    <pre><code>flatpak install --user btc-steuertool-1.5-linux-x86_64.flatpak
 flatpak run org.alieninvestor.steuertool</code></pre>
     <p><strong>Update:</strong> Eine neue Bündel-Datei lässt sich (Flatpak 1.14) nicht über die installierte legen. Neue Version laden und prüfen, dann
       <code>flatpak uninstall --user org.alieninvestor.steuertool</code> und neu installieren. Die App speichert keine Steuerdaten, nur Sprache und Darstellung.</p>
