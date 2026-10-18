@@ -113,6 +113,12 @@
     }
     .check-item span { color: #888; font-size: 0.85em; }
 
+    /* Warning box (as in wuerfel-check.html) */
+    .warn { border:1px solid #ffb300; background:#0a0700; padding:1.2em 1.5em; border-radius:8px; margin:1.5em 0; box-shadow:0 0 10px rgba(255,179,0,0.12); }
+    .warn h3 { color:#ffb300; margin-top:0; }
+    .warn p { margin:0; }
+    .warn a { color:#ffb300; }
+
     .steps {
       counter-reset: step-counter;
       list-style: none;
@@ -246,6 +252,13 @@
         </strong>
         <span>Something specific on your mind? I'll look at it closely.</span>
       </div>
+    </div>
+
+    <div class="warn">
+      <h3>⚠ I will never ask for your seed</h3>
+      <p>For the review I need no seed words, no passphrase, no private keys and no xpub. Never send them to anyone.
+        Anyone posing as Alien Investor in comments or direct messages and asking for them is a scammer.
+        Requests only go through the payment page or <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a>.</p>
     </div>
 
     <h2>How does it work?</h2>
