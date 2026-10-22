@@ -1,0 +1,12 @@
+Schriften in diesem Ordner (lateinische Teilmenge, wie von Google Fonts ausgeliefert).
+Beide sind lizenziert unter der SIL Open Font License, Version 1.1. Vollständiger Lizenztext
+mit Copyright-Zeile je Schrift: OFL-orbitron.txt und OFL-share-tech-mono.txt (aus dem
+Google-Fonts-Repository). FAQ: https://openfontlicense.org
+
+orbitron.woff2
+  Copyright 2018 The Orbitron Project Authors (https://github.com/theleagueof/orbitron),
+  with Reserved Font Name: "Orbitron"
+
+share-tech-mono.woff2
+  Copyright (c) 2012, Carrois Type Design, Ralph du Carrois (post@carrois.com www.carrois.com),
+  with Reserved Font Name 'Share'

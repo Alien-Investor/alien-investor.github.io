@@ -20,6 +20,13 @@ import sys
 REPO = os.path.dirname(os.path.abspath(__file__))
 DRY_RUN = "--write" not in sys.argv
 
+# Stillgelegt am 22.10.2026: Die Vorlage unten stammt vom April 2026 und kennt weder den PGP-Link noch den
+# Impressum-Link noch den Affiliate-Hinweis. Ein Lauf würde sie auf allen Artikeln löschen und dazu die
+# Tool-Kopien mit veröffentlichtem SHA-256 verändern. Footer neuer Artikel aus der Referenzdatei
+# (digitaler-euro-cbdc-kontrolle.html) übernehmen, Pflichtangaben mit ~/Skripte/website-recht/recht_einbauen.py prüfen.
+if "--trotzdem" not in sys.argv:
+    sys.exit("inject-footer.py ist stillgelegt (veraltete Vorlage, siehe Kommentar im Skript).")
+
 SKIP = {
     "index.html", "blog.html", "buecher.html", "buch-direkt.html",
     "aktien-analysen.html", "bitcoin-analysen.html", "alien-head-test.html",
