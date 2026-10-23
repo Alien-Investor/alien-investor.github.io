@@ -53,7 +53,7 @@
 
     <p>
       The <strong>EU Digital Identity Wallet (EUDIW)</strong> is the centerpiece of the revised eIDAS regulation (eIDAS 2.0, EU 2024/1183).
-      Every EU member state must provide its citizens with at least one such wallet app within 24 months of the EU's implementing acts being adopted — likely 2026 or 2027, depending on when the Commission finalizes those acts.
+      Every EU member state must provide its citizens with at least one such wallet app within 24 months of the EU's implementing acts being adopted — by the end of 2026, since the implementing acts have been in force since December 2024. Germany's wallet is called d-you and is due to launch on 2 January 2027.
       It stores verified identity data: national ID, driver's license, educational credentials, bank account details.
     </p>
     <p>
@@ -103,10 +103,10 @@
 
     <p>
       The Commission's reference wallet contains <strong>no</strong> Play Integrity check. It uses a Google Play services component for one single feature only, passing credentials to websites and other apps. But the final call belongs to member states and app developers.
-      If they go with Google Play Integrity — as banking apps already do today — the app will be blocked on GrapheneOS.
+      If they go with Google Play Integrity — as banking apps already do today — the app will be blocked on GrapheneOS. Even with hardware attestation, it only works if the provider accepts GrapheneOS's signing keys.
     </p>
     <p>
-      What that means in practice: services required under the Digital Services Act (DSA) to perform age verification will become inaccessible to GrapheneOS users without a compatible wallet app.
+      What that means in practice: services required under the Digital Services Act (DSA) to perform age verification can become inaccessible to GrapheneOS users without a compatible wallet app.
       Primarily affected are age-restricted online services, certain government processes, and banking apps handling eKYC via the wallet.
     </p>
     <p>
@@ -125,10 +125,10 @@
     <p>
       A VPN hides your IP address. Tor anonymizes your network traffic.
       But EU age verification does <strong>not</strong> work via IP addresses.
-      It's based on cryptographic signatures — issued by an official civil registry, stored in your wallet, verified against the EU trust list.
+      It's based on cryptographic signatures — issued by a state issuing authority, stored in your wallet, verified against the EU trust list.
     </p>
     <p>
-      No VPN in the world can forge a valid cryptographic signature from a German or Austrian civil registry.
+      No VPN in the world can forge a valid cryptographic signature from a German or Austrian issuing authority.
       When a platform demands a verified proof of age, network anonymization simply doesn't help.
     </p>
 
@@ -138,7 +138,7 @@
       This is one of the defining differences between the old internet and the new one.
     </p>
     <p>
-      The Digital Services Act (DSA) applies to platforms with more than 45 million active EU users — so-called Very Large Online Platforms (VLOPs).
+      The Digital Services Act (DSA) obliges all online platforms accessible to minors to take protective measures (Art. 28), and very large platforms with more than 45 million active EU users, so-called Very Large Online Platforms (VLOPs), to meet further obligations.
       YouTube, Meta, X — all affected. Centralized services with a single point of contact that can be handed obligations.
     </p>
     <p>

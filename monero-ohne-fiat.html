@@ -246,7 +246,7 @@
       keine Firma, kein Marketing-Budget. Nur Code und Konsens.
     </blockquote>
 
-    <h2>Die Privacy-Technik: Vier Schichten, ein Ziel</h2>
+    <h2>Die Privacy-Technik: Fünf Schichten, ein Ziel</h2>
 
     <p>
       Moneros Privatsphäre ist kein einzelner Trick, sondern ein Stapel von
@@ -337,14 +337,17 @@
         Der direkteste Weg: ein kryptographisch abgesicherter Tausch BTC gegen XMR,
         ohne Mittelsmann, ohne Schlichter, ohne Registrierung. Technisch arbeiten
         die Swaps mit Adaptor Signatures und einer 2-of-2-Multisig-Adresse mit
-        Timelock auf der Bitcoin-Seite: Beansprucht der Käufer die BTC, gibt die
-        Mathematik dem Verkäufer automatisch den Schlüssel zu den XMR frei.
-        Bricht eine Seite ab, greift der Timelock und beide erhalten ihre Coins zurück.
-        Niemand kann mit dem Geld des anderen verschwinden.
+        Timelock auf der Bitcoin-Seite: Holt sich der Verkäufer der XMR die BTC, legt er dabei
+        zwangsläufig den fehlenden Schlüsselteil offen, mit dem der Käufer die XMR abholt.
+        Niemand kann mit dem Geld des anderen verschwinden. Kommt der Tausch nicht zustande,
+        greift der Timelock, und der Käufer holt seine BTC per Rückerstattung zurück. Dafür muss
+        seine Wallet rechtzeitig laufen: Wer nach einem Abbruch zu lange offline bleibt, kann die
+        hinterlegten Bitcoin verlieren. Manche Maker verlangen außerdem eine kleine
+        Anti-Spam-Kaution, die sie bei einer Rückerstattung zurückhalten können.
       </p>
       <p>
         Die Software heißt seit dem Rebrand <strong>eigenwallet</strong>.
-        Die Richtung BTC zu XMR ist die gut unterstützte. Einschränkungen:
+        Die App tauscht nur in eine Richtung, von BTC zu XMR. Einschränkungen:
         Die Technik ist jung, die Maker-Liquidität begrenzt. Erst mit kleinen
         Beträgen testen, dann steigern.
       </p>
@@ -378,9 +381,9 @@
         (arXiv 2505.02392) zeigt, dass sich bestimmte Haveno-Trades anhand von
         beobachtbarem Timing, Transaktionsstruktur und Gebühren über beide
         Blockchains hinweg verknüpfen lassen. Im Streitfall sieht der
-        Arbitrator zwingend die Details des Trades. Und im Mai 2026 nutzten
-        Angreifer eine Lücke im Haveno-Handelsprotokoll aus, betroffene Händler
-        verloren Geld. Bis das aufgearbeitet ist, meidest du RetoSwap besser.
+        Arbitrator zwingend die Details des Trades. Und im Mai und Juni 2026 nutzten
+        Angreifer zweimal Lücken im Haveno-Handelsprotokoll aus, betroffene Händler
+        verloren Geld. Ob die Betroffenen entschädigt wurden, ist nicht belegt. Bis das aufgearbeitet ist, meidest du RetoSwap besser.
       </p>
     </div>
 
@@ -390,7 +393,8 @@
         Moneros Mining-Algorithmus <strong>RandomX</strong> ist bewusst
         ASIC-resistent und für gewöhnliche CPUs optimiert. Über den dezentralen
         <strong>P2Pool</strong> lässt sich ohne Anmeldung und ohne Pool-Betreiber
-        minen. Die so erzeugten XMR stammen direkt aus dem Protokoll und haben
+        minen. Weil P2Pool die Mining-Adressen öffentlich zeigt, lässt du die Erträge in eine eigene,
+        neue Wallet laufen. Die so erzeugten XMR stammen direkt aus dem Protokoll und haben
         keinerlei Vorgeschichte. Der Preis dafür ist Geduld: Mining ist kein Weg,
         um schnell Bestände umzuschichten, sondern ein langsamer Zufluss,
         abhängig von CPU-Leistung und Strompreis.
@@ -440,18 +444,18 @@
         <h3>Das passt</h3>
         <ul>
           <li>8 GB RAM reichen für monerod neben den Bitcoin-Apps</li>
-          <li>Pruned Node: nur rund 100 GB statt rund 250 GB (Full)</li>
+          <li>Pruned Node: nur rund 110 GB statt rund 280 GB (Full, Stand Oktober 2026)</li>
           <li>Pruning entfernt 7/8 der prunebaren Ring-Daten, ohne Sicherheits- oder Privacy-Verlust</li>
-          <li>Wachstum: rund 20 GB pro Jahr</li>
+          <li>Wachstum: zuletzt rund 30 GB pro Jahr</li>
           <li>Tor-Zugriff von unterwegs ist bei Umbrel eingebaut</li>
         </ul>
       </div>
       <div class="col-schlecht">
         <h3>Darauf achten</h3>
         <ul>
-          <li>Die Bitcoin-Blockchain liegt inzwischen bei rund 750 GB</li>
+          <li>Die Bitcoin-Blockchain liegt inzwischen bei fast 780 GB</li>
           <li>Electrs braucht eine ungeprunte Bitcoin-Node</li>
-          <li>Mit 1-TB-SSD bleibt für Monero nur die Pruned-Variante, sonst 2-TB-NVMe einplanen</li>
+          <li>Neben Bitcoin reicht eine 1-TB-SSD nicht mehr. Die Umbrel-App lädt ab Werk die volle Kette und bietet keinen Pruning-Schalter, für beide Ketten eine 4-TB-NVMe einplanen</li>
           <li>Initial-Sync ist CPU-lastig: aktive Kühlung ist Pflicht</li>
         </ul>
       </div>
@@ -461,13 +465,14 @@
       <h3>Wallet mit der eigenen Node verbinden</h3>
       <ul>
         <li><strong>Im Heimnetz:</strong> In Cake Wallet, Monerujo oder Feather als Node die
-        lokale IP der Umbrel eintragen, Port <code>18081</code>. SSL deaktivieren,
+        lokale IP der Umbrel eintragen, Port <code>18081</code>, dazu Benutzername und Passwort aus dem
+        Verbindungsfenster der Monero-App. SSL deaktivieren,
         lokale Verbindungen laufen unverschlüsselt im eigenen Netz.</li>
         <li><strong>Unterwegs via Tor:</strong> Die .onion-Adresse aus der Monero-App in Umbrel
-        kopieren und mit Port <code>18081</code> in der Wallet eintragen. Feather unterstützt
+        kopieren und mit Port <code>18081</code> und denselben Zugangsdaten in der Wallet eintragen. Feather unterstützt
         Tor nativ, Monerujo nutzt Orbot. Keine Portfreigabe am Router nötig.</li>
         <li>Die Wallet scannt die Blockchain dann ausschließlich über die eigene Hardware.
-        Kein fremder Node-Betreiber sieht View Keys, Abfragen oder IP.</li>
+        Kein fremder Node-Betreiber sieht Abfragen oder IP.</li>
       </ul>
     </div>
 

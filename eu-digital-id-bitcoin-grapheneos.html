@@ -51,7 +51,7 @@
 
     <p>
       Die <strong>EU Digital Identity Wallet (EUDIW)</strong> ist das Kernstück der überarbeiteten eIDAS-Verordnung (eIDAS 2.0, EU 2024/1183).
-      Jeder EU-Mitgliedsstaat muss seinen Bürgern innerhalb von 24 Monaten nach Erlass der EU-Durchführungsrechtsakte mindestens eine solche Wallet-App bereitstellen — voraussichtlich 2026 oder 2027, je nachdem wann die Kommission die nötigen Durchführungsrechtsakte verabschiedet.
+      Jeder EU-Mitgliedsstaat muss seinen Bürgern innerhalb von 24 Monaten nach Erlass der EU-Durchführungsrechtsakte mindestens eine solche Wallet-App bereitstellen — bis Ende 2026, denn die Durchführungsrechtsakte sind seit Dezember 2024 in Kraft. Die deutsche Wallet heißt d-you und soll am 2. Januar 2027 starten.
       Darin lassen sich verifizierte Identitätsdaten speichern: Personalausweis, Führerschein, Ausbildungsnachweise, Bankverbindungen.
     </p>
     <p>
@@ -101,10 +101,10 @@
 
     <p>
       Die Referenz-Wallet der Kommission enthält <strong>keine</strong> Play-Integrity-Prüfung. Einen Baustein der Google-Play-Dienste nutzt sie nur für eine einzige Funktion, die Weitergabe von Nachweisen an Webseiten und andere Apps. Aber die finale Entscheidung liegt bei den Mitgliedstaaten und App-Entwicklern.
-      Setzen sie auf Google Play Integrity — wie es Banking-Apps heute schon oft tun — wird die App auf GrapheneOS blockiert.
+      Setzen sie auf Google Play Integrity — wie es Banking-Apps heute schon oft tun — wird die App auf GrapheneOS blockiert. Auch mit Hardware-Attestierung klappt es nur, wenn der Anbieter die Signaturschlüssel von GrapheneOS zulässt.
     </p>
     <p>
-      Was das konkret bedeutet: Dienste, die nach dem Digital Services Act (DSA) eine Altersverifikation verlangen, werden für GrapheneOS-Nutzer ohne kompatible Wallet-App unzugänglich.
+      Was das konkret bedeutet: Dienste, die nach dem Digital Services Act (DSA) eine Altersverifikation verlangen, können für GrapheneOS-Nutzer ohne kompatible Wallet-App unzugänglich werden.
       Betroffen sind vor allem altersbeschränkte Online-Dienste, bestimmte Behördengänge und Banking-Apps, die eKYC über die Wallet abwickeln.
     </p>
     <p>
@@ -123,10 +123,10 @@
     <p>
       Ein VPN verbirgt deine IP-Adresse. Tor anonymisiert deinen Netzwerkverkehr.
       Die EU-Altersverifikation funktioniert aber <strong>nicht über IP-Adressen</strong>.
-      Sie basiert auf kryptografischen Signaturen — ausgestellt von einem amtlichen Einwohnermeldeamt, gespeichert in deiner Wallet, verifiziert durch die EU-Vertrauensliste.
+      Sie basiert auf kryptografischen Signaturen — ausgestellt von einer staatlichen Ausgabestelle, gespeichert in deiner Wallet, verifiziert durch die EU-Vertrauensliste.
     </p>
     <p>
-      Kein VPN dieser Welt kann eine gültige kryptografische Signatur eines deutschen oder österreichischen Einwohnermeldeamts fälschen.
+      Kein VPN dieser Welt kann eine gültige kryptografische Signatur einer deutschen oder österreichischen Ausgabestelle fälschen.
       Wenn eine Plattform einen verifizierten Altersnachweis fordert, bringt Netzwerk-Anonymisierung schlicht nichts.
     </p>
 
@@ -136,7 +136,7 @@
       Hier liegt einer der entscheidenden Unterschiede zwischen dem alten und dem neuen Internet.
     </p>
     <p>
-      Der Digital Services Act (DSA) greift bei Plattformen mit über 45 Millionen aktiven EU-Nutzern — sogenannten Very Large Online Platforms (VLOPs).
+      Der Digital Services Act (DSA) verpflichtet alle Online-Plattformen, die Minderjährigen offenstehen, zu Schutzmaßnahmen (Art. 28) und sehr große Plattformen mit über 45 Millionen aktiven EU-Nutzern, sogenannte Very Large Online Platforms (VLOPs), zu weiteren Pflichten.
       YouTube, Meta, X — alle betroffen. Zentralisierte Dienste mit einem Ansprechpartner, dem man eine Pflicht auferlegen kann.
     </p>
     <p>

@@ -70,7 +70,7 @@
     </p>
 
     <p>
-      For a long time, Signal was considered the gold standard. But Signal has a problem: it is centralized and knows your phone number. It sees your number and your IP address and could infer <em>who</em> is talking to <em>whom</em>. In an era where metadata can be more dangerous than the content itself, that is no longer enough.
+      For a long time, Signal was considered the gold standard. But Signal has a problem: it is centralized and knows your phone number in the normal case. It sees your number and your IP address and could infer <em>who</em> is talking to <em>whom</em>. In an era where metadata can be more dangerous than the content itself, that is no longer enough.
     </p>
     <p>
       Enter <strong>White Noise</strong>. A messenger built on the Nostr protocol, published by a nonprofit organization and built so that relays learn as little about you as possible.
@@ -82,7 +82,7 @@
     </p>
     <ul>
       <li><strong>The server sees everything:</strong> Even if Signal can't read the content, the server sees the "social graph". It knows you're messaging an investigative journalist at 2 a.m. That metadata is often more valuable to intelligence agencies than the text itself.</li>
-      <li><strong>Identity coercion:</strong> You need a phone number. That irreversibly ties your digital identity to your physical person (SIM registration, KYC).</li>
+      <li><strong>Identity coercion:</strong> Normally you need a phone number, which ties your digital identity to your SIM registration. Signing up without a number has only existed since October 2026, as a paid beta on Android, paid through Google Play.</li>
       <li><strong>Censorship risk:</strong> A central server can be shut down or blocked. An app in the Apple App Store can be removed under government pressure.</li>
     </ul>
 
@@ -91,7 +91,7 @@
       White Noise is not a corporate platform. It is software that uses a protocol: <strong>Nostr</strong> (Notes and Other Stuff Transmitted by Relays).
     </p>
     <ul>
-      <li><strong>No phone number:</strong> Your identity is a cryptographic key pair. Nobody knows who is behind the key.</li>
+      <li><strong>No phone number:</strong> Your identity is a cryptographic key pair. Without a number or email the key is not tied to your person, but that does not make you anonymous, because relays see your IP address.</li>
       <li><strong>No central server:</strong> Messages travel through "dumb" relays. If one relay blocks you, you simply use another. There is no kill switch.</li>
       <li><strong>Freedom tech:</strong> The project is published by a nonprofit organization, not by investors who want to sell your data.</li>
     </ul>
@@ -143,7 +143,7 @@
       <h3>Get Started: Downloads &amp; Links</h3>
       <ul>
         <li>
-          <strong>White Noise App:</strong> Download for Android (Zap Store, GitHub) and iOS (TestFlight). <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://www.whitenoise.chat/download" target="_blank" rel="noopener">whitenoise.chat/download</a>
+          <strong>White Noise App:</strong> Download for Android (Zap Store, Google Play, GitHub) and iOS (TestFlight). <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://www.whitenoise.chat/download" target="_blank" rel="noopener">whitenoise.chat/download</a>
         </li>
         <li>
           <strong>Zap Store:</strong> White Noise in the decentralized Nostr app store. <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://zapstore.dev/apps/dev.ipf.whitenoise.android" target="_blank" rel="noopener">zapstore.dev</a>

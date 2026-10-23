@@ -210,7 +210,7 @@
       <h3>OPSEC-Hinweis</h3>
       <p>
         Diese Skripte nutzen symmetrische Verschlüsselung. Die Sicherheit hängt vollständig von der Stärke deines Passworts ab.
-        Nutze ein langes Passwort mit hoher Entropie (Zufälligkeit), das du nirgendwo sonst verwendest.
+        Nutze eine lange, zufällige Passphrase, die du nirgendwo sonst verwendest, etwa sechs oder mehr Würfelwörter aus der EFF-Liste oder mindestens 20 zufällige Zeichen.
       </p>
     </div>
 
@@ -295,6 +295,7 @@ echo "🧩 SHA256-Datei: $(basename "$ZIEL").sha256"
       <li><strong>[E] Entpacken:</strong> Entschlüsselt und entpackt direkt in <code>~/Restore/</code>.</li>
       <li><strong>[L] Liste:</strong> Zeigt den Inhalt des Archivs an, ohne etwas zu schreiben.</li>
     </ul>
+    <p>Vorher prüft das Skript die Prüfsumme. Stimmt sie nicht, fragt es nach und bricht ab, wenn du nicht ausdrücklich mit <code>j</code> bestätigst. Die Passphrase wird dabei nicht im GPG-Agenten zwischengespeichert.</p>
     <p>Speichere diesen Code als Datei namens <code>decrypt-folder.sh</code>.</p>
 
 <pre><code>#!/usr/bin/env bash
@@ -344,7 +345,19 @@ if [ -f "${INPUT}.sha256" ]; then
   if [ "$exp" = "$act" ]; then
     echo "✅ SHA256 OK"
   else
-    echo "⚠️  SHA256 Mismatch! Weiter mit Vorsicht."
+    echo "❌ SHA256 MISMATCH!"
+    echo "   Erwartet:  $exp"
+    echo "   Berechnet: $act"
+    echo "   Die Datei weicht von ihrer Prüfsumme ab — beschädigt oder verändert."
+    echo "   Hinweis: die .sha256 liegt daneben und ist kein Echtheitsnachweis;"
+    echo "   sie fängt Transportfehler ab, keinen gezielten Austausch."
+    printf "   Trotzdem fortfahren? [j/N] "
+    read -r antwort &lt;/dev/tty || antwort=""
+    if [[ "$antwort" =~ ^[jJyY]$ ]]; then
+      echo "   ⚠️  Fortsetzung auf ausdrücklichen Wunsch."
+    else
+      die "Abgebrochen wegen SHA256-Mismatch."
+    fi
   fi
 fi
 

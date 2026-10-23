@@ -212,7 +212,7 @@
       <h3>OpSec Note</h3>
       <p>
         These scripts use symmetric encryption. Security depends entirely on the strength of your passphrase.
-        Use a long passphrase with high entropy (randomness) that you don't use anywhere else.
+        Use a long random passphrase that you don't use anywhere else, for example six or more dice words from the EFF list or at least 20 random characters.
       </p>
     </div>
 
@@ -297,6 +297,7 @@ echo "🧩 SHA256 file: $(basename "$ZIEL").sha256"
       <li><strong>[E] Extract:</strong> Decrypts and extracts directly into <code>~/Restore/</code>.</li>
       <li><strong>[L] List:</strong> Shows the contents of the archive without writing anything.</li>
     </ul>
+    <p>Before that, the script checks the checksum. If it doesn't match, the script asks and aborts unless you explicitly confirm with <code>y</code>. The passphrase is not cached in the GPG agent.</p>
     <p>Save this code as a file named <code>decrypt-folder.sh</code>.</p>
 
 <pre><code>#!/usr/bin/env bash
@@ -346,7 +347,19 @@ if [ -f "${INPUT}.sha256" ]; then
   if [ "$exp" = "$act" ]; then
     echo "✅ SHA256 OK"
   else
-    echo "⚠️  SHA256 mismatch! Proceeding with caution."
+    echo "❌ SHA256 MISMATCH!"
+    echo "   Expected:   $exp"
+    echo "   Calculated: $act"
+    echo "   The file differs from its checksum — damaged or altered."
+    echo "   Note: the .sha256 sits next to it and is no proof of authenticity;"
+    echo "   it catches transfer errors, not a deliberate swap."
+    printf "   Continue anyway? [y/N] "
+    read -r answer &lt;/dev/tty || answer=""
+    if [[ "$answer" =~ ^[yYjJ]$ ]]; then
+      echo "   ⚠️  Continuing at your explicit request."
+    else
+      die "Aborted because of SHA256 mismatch."
+    fi
   fi
 fi
 
