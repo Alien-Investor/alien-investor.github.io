@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>So entstehen meine Analysen – Methodik | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Wie die Aktienanalysen, die Bitcoin-Analysen und der Alien Analyzer arbeiten: Quellen, Tatsachen und Meinung, Fair Value, Power Law, Interessenkonflikte.">
+  <link rel="canonical" href="https://alien-investor.org/analyse-methodik.html">
+  <link rel="alternate" hreflang="de" href="https://alien-investor.org/analyse-methodik.html">
+  <link rel="alternate" hreflang="en" href="https://alien-investor.org/en/analyse-methodik.html">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 0 15px 20px 15px;
+    }
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
+    h2 { margin-top: 2.5em; border-bottom: 1px solid #1a3a33; padding-bottom: 8px; }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+    .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
+    .box { border-left: 3px solid #00ffcc; background: #050505; padding: 0.8em 1.2em; margin: 1.5em 0; color: #ddd; }
+    code { color: #ccc; overflow-wrap: anywhere; }
+    li { margin-bottom: 0.4em; }
+    table { width: 100%; border-collapse: collapse; margin: 1em 0; font-size: 0.92em; }
+    th, td { border: 1px solid #1a3a33; padding: 6px 10px; text-align: left; vertical-align: top; }
+    th { color: #00ffcc; background: #050f0d; }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    .back-links { margin-top: 40px; text-align: center; display: flex; flex-direction: column; gap: 10px; }
+    footer { margin-top: 60px; padding: 20px; font-size: 0.85em; color: #666; border-top: 1px solid #222; text-align: center; }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="index.html">← Zurück zur Zentrale</a>
+  </div>
+
+  <h1>So entstehen meine Analysen</h1>
+  <p class="byline">von Alien Investor · Stand 23.10.2026</p>
+
+  <article id="content">
+
+    <p>
+      Hier steht, wie meine Aktienanalysen, meine Bitcoin-Analysen und der Alien Analyzer arbeiten:
+      woher die Zahlen kommen, was Tatsache ist und was meine Einschätzung, welche Annahmen hinter einem
+      Fair Value stecken und wo ich selbst Interessen habe. Jede Analyse verweist auf diese Seite.
+    </p>
+
+    <h2 id="was">Was eine Analyse ist und was nicht</h2>
+    <ul>
+      <li>Eine Analyse ist meine persönliche Einschätzung eines Unternehmens oder von Bitcoin auf Basis öffentlich
+        zugänglicher Daten.</li>
+      <li>Sie ist <strong>keine Anlageberatung</strong>. Ich kenne deine finanzielle Lage, deine Ziele und deine
+        Risikobereitschaft nicht und berücksichtige sie nicht. Keine Analyse sagt, dass eine Aktie oder Bitcoin zu
+        dir passt.</li>
+      <li>Analysen werden nicht laufend aktualisiert. Es gilt der Stand, der in der Analyse steht. Kurse, Kennzahlen
+        und meine Einschätzung können sich danach ändern.</li>
+      <li>Aktien und Bitcoin können stark schwanken. Verluste bis zum Totalverlust sind möglich.</li>
+    </ul>
+
+    <h2 id="tatsachen">Tatsachen, Schätzungen, Meinung</h2>
+    <p>In jeder Analyse stecken drei Arten von Aussagen. Ich halte sie auseinander:</p>
+    <div class="table-scroll" style="overflow-x:auto">
+    <table>
+      <thead><tr><th>Art</th><th>Beispiele</th><th>Wie gekennzeichnet</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Tatsachen</strong></td><td>Umsatz, Gewinn, Verschuldung, Dividenden, Segmentzahlen</td><td>aus Geschäftsberichten und Pflichtmitteilungen, mit Datenstand</td></tr>
+        <tr><td><strong>Schätzungen</strong></td><td>Fair Value, Kursszenarien, Prognosen, Analystenerwartungen</td><td>als Modellrechnung oder Schätzung bezeichnet, mit den Annahmen; fremde Prognosen mit Quelle</td></tr>
+        <tr><td><strong>Meinung</strong></td><td>Burggraben, Management, Risiken, das Alien-Fazit</td><td>als meine Einordnung formuliert</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>
+      Werte, die ich nicht aus einer Quelle belegen kann, markiere ich als Schätzung oder als nicht verfügbar,
+      statt eine Zahl zu erfinden.
+    </p>
+
+    <h2 id="quellen">Quellen</h2>
+    <ul>
+      <li><strong>Primärquellen:</strong> Geschäftsberichte, Jahres- und Quartalsberichte und andere Pflichtmitteilungen
+        (bei US-Werten über SEC EDGAR), Investor-Relations-Seiten der Unternehmen, offizielle Statistiken.</li>
+      <li><strong>Kennzahlen und Kursverläufe:</strong> mein eigener <a href="#analyzer">Alien Analyzer V2</a>, der
+        Daten von Yahoo Finance verarbeitet. Diese Daten können Fehler enthalten, etwa durch Sondereffekte in der
+        Bilanzierung oder Finanzdaten in einer anderen Währung als der Kurs. Auffällige Werte gleiche ich mit den
+        Geschäftsberichten ab und weise im Text darauf hin, wenn Zweifel bleiben.</li>
+      <li><strong>Recherche:</strong> Recherchewerkzeuge, auch KI-gestützte, helfen beim Sammeln und Ordnen.
+        Maßgeblich sind die Primärquellen: Zahlen und Sachaussagen werden vor der Veröffentlichung gegen sie
+        geprüft.</li>
+      <li>Blogartikel und Foren sind keine Quelle für Zahlen.</li>
+    </ul>
+
+    <h2 id="bewertung">Wie ich bewerte</h2>
+    <h3>Fair Value</h3>
+    <p>
+      Der Fair Value in meinen Analysen ist eine <strong>Modellrechnung</strong>, kein Kursziel. Grundlage ist der
+      Fair-Value-Indikator des Alien Analyzers:
+    </p>
+    <div class="box">
+      Fair Value = aktueller Gewinn je Aktie × Median des historischen KGV im gewählten Zeitraum, ohne Ausreißer (Standard: 10 Jahre)
+    </div>
+    <p>Die Annahmen dahinter:</p>
+    <ul>
+      <li>Der Markt bewertet das Unternehmen künftig ähnlich wie im Mittel der Vergangenheit.</li>
+      <li>Der aktuelle Gewinn ist repräsentativ für die Ertragskraft.</li>
+    </ul>
+    <p>
+      Beides kann falsch sein: bei Zyklikern am Gewinnhoch oder -tief, nach Sondereffekten, bei einem Bruch im
+      Wachstum oder wenn sich das Zinsumfeld ändert. Deshalb prüfe ich den Indikator in jeder Analyse gegen den
+      KGV-Verlauf der letzten Jahre und ordne ihn im Text ein, statt ihn ungeprüft zu übernehmen. Nennt eine Analyse
+      ein Kursszenario, stehen die Annahmen dazu im Text.
+    </p>
+    <h3>Kennzahlen und Qualitätscheck</h3>
+    <p>
+      Zur Einordnung nutze ich historische Bewertungskennzahlen (KGV, KCV, KUV, KBV), die Dividendenhistorie und
+      einen Qualitätscheck mit Eigenkapitalrendite, Verschuldung, freiem Cashflow, Eigenkapitalquote,
+      Gewinnwachstum, Dividendenrendite und der Entwicklung der Aktienanzahl. Die Ampelfarben im Analyzer folgen
+      festen Regeln: meist feste Schwellenwerte, beim KGV der Vergleich mit dem eigenen Schnitt und dem
+      Branchen-KGV, für einige Branchen Sonderregeln. Für Banken,
+      Versicherer, REITs, Rohstoffunternehmen und andere Sonderfälle passen einige Kennzahlen nicht. Das steht dann
+      in der Analyse.
+    </p>
+
+    <h2 id="bitcoin">Bitcoin-Analysen</h2>
+    <p>
+      Bitcoin ist keine Aktie. Es gibt keinen Gewinn und kein KGV. Meine Bitcoin-Analysen stützen sich auf den
+      Kursverlauf, auf das <strong>Power-Law-Modell</strong> und auf öffentlich verfügbare Marktdaten.
+    </p>
+    <ul>
+      <li>Trend: Kurs in USD = 1,0117 × 10<sup>-17</sup> × (Tage seit dem 3. Januar 2009)<sup>5,82</sup>
+        (Power-Law-Modell nach Giovanni Santostasi in einer verbreiteten Kalibrierung; neuere Schätzungen ergeben
+        einen etwas kleineren Exponenten).</li>
+      <li>Support: 0,42 × Trend (Untergrenze aus derselben Kalibrierung). Zwischen Support und Trend liegt der
+        Korridor, in dem sich der Kurs bisher oft bewegt hat.</li>
+      <li>Das Modell beschreibt die Vergangenheit. Kein Mechanismus garantiert, dass es weiter gilt. Kursszenarien
+        aus dem Modell sind Schätzungen.</li>
+    </ul>
+    <p>Ich halte Bitcoin. Das steht auch in jeder Bitcoin-Analyse.</p>
+
+    <h2 id="interessen">Interessenkonflikte</h2>
+    <ul>
+      <li>Jede Analyse hat einen <strong>Offenlegungsblock</strong> mit Datum: ob ich oder mir nahestehende
+        Personen Aktien des Unternehmens halten und ob ich eine geschäftliche Beziehung zum Unternehmen habe.</li>
+      <li>Von den analysierten Unternehmen erhalte ich kein Geld. Einzige Ausnahme ist Amazon: Ich bekomme Tantiemen
+        für meine Bücher über Kindle Direct Publishing. Das steht in der Amazon-Analyse.</li>
+      <li>Meine Einnahmen: Bücher (Amazon und Direktverkauf), Affiliate-Links (mit * gekennzeichnet), Spenden
+        und Dienstleistungen. Der YouTube-Kanal ist nicht monetarisiert.</li>
+      <li><strong>Wunsch-Analysen:</strong> Ein Leser zahlt für eine Analyse zu einer Aktie seiner Wahl. Er wählt
+        nur das Unternehmen. Auf Inhalt und Ergebnis hat er keinen Einfluss, und seine persönliche Situation spielt
+        keine Rolle. Eine bezahlte Analyse ist in der Offenlegung als solche gekennzeichnet.</li>
+    </ul>
+
+    <h2 id="datum">Datum und Aktualität</h2>
+    <p>
+      Oben in jeder Analyse steht ihr Stand. Kurse und Kennzahlen beziehen sich auf diesen Zeitpunkt. Der
+      Offenlegungsblock trägt ein eigenes Datum. Überarbeite ich eine Analyse, steht das neue Datum in der Analyse.
+    </p>
+
+    <h2 id="analyzer">Alien Analyzer</h2>
+    <p>
+      Der <a href="https://api.alien-investor.org/alien-analyzer-v2.html?lang=de">Alien Analyzer V2</a> rechnet
+      automatisch für jeden Ticker, den du eingibst. Er kennt weder dich noch deine Ziele.
+    </p>
+    <ul>
+      <li><strong>Daten:</strong> Yahoo Finance, abgerufen über meinen eigenen Server. Dein Browser fragt keine
+        fremden Datendienste ab.</li>
+      <li><strong>Fair-Value-Indikator:</strong> Formel wie oben. Liegt der Kurs mehr als 15 % über oder unter dem
+        Fair Value, zeigt der Analyzer „über“ bzw. „unter Fair Value“, sonst „fair bewertet“. Der KGV-Fächer zeigt
+        zum Vergleich den Gewinn je Aktie mal 10, 15, 20, 25 und 30. Bei REITs sowie Bergbau- und Metallwerten zeigt
+        er keinen Fair Value, weil das KGV dort wenig aussagekräftig ist.</li>
+      <li><strong>Alien-Einordnung:</strong> regelbasierte Textbausteine je nach Branche, Sonderfall und
+        Kennzahlenlage. Sie beschreiben, wo die Kennzahlen im historischen Vergleich stehen und worauf es in der
+        Branche ankommt. Sie sind keine Kauf- oder Verkaufsempfehlung und keine Prüfung des Einzelfalls.</li>
+      <li>Die Daten können falsch oder unvollständig sein. Der Analyzer zeigt bei bekannten Datenproblemen einen
+        Hinweis, erkennt aber nicht jeden Fehler.</li>
+    </ul>
+
+  </article>
+
+  <div class="back-links">
+    <a href="aktien-analysen.html" style="font-size: 1.1em;">← Zu den Aktienanalysen</a>
+    <a href="bitcoin-analysen.html" style="font-size: 1.1em;">← Zu den Bitcoin-Kursanalysen</a>
+    <a href="index.html" style="font-size: 1.1em;">← Zurück zur Zentrale</a>
+  </div>
+
+  <footer>
+    <p>Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a> <span style="color:#666; font-size:0.85em;">·</span> <a href="/kontakt@alien-investor.org/pubkey.asc.key" download="kontakt-alien-investor-pubkey.asc" style="color:#555; font-size:0.8em; text-decoration:none;" title="PGP Public Key für verschlüsselte Nachrichten">PGP Key</a> · <a href="https://www.mein.online-impressum.de/alien-investor/" target="_blank" rel="noopener" style="color:#555; font-size:0.8em; text-decoration:none;">Impressum</a></p>
+    <p style="margin-top: 20px;">
+      <strong>Haftungsausschluss:</strong><br><br>
+      Keine Finanz-, Steuer- oder Rechtsberatung. Nur persönliche Meinung. Denke selbst.
+    </p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>How my analyses are made – Methodology | Alien Investor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="How the stock analyses, the Bitcoin analyses and the Alien Analyzer work: sources, facts and opinion, fair value, power law, conflicts of interest.">
+  <link rel="canonical" href="https://alien-investor.org/en/analyse-methodik.html">
+  <link rel="alternate" hreflang="de" href="https://alien-investor.org/analyse-methodik.html">
+  <link rel="alternate" hreflang="en" href="https://alien-investor.org/en/analyse-methodik.html">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      padding: 0 15px 20px 15px;
+    }
+    h1, h2, h3 { color: #00ffcc; }
+    h1 { margin-top: 40px; text-align: center; }
+    h2 { margin-top: 2.5em; border-bottom: 1px solid #1a3a33; padding-bottom: 8px; }
+    a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
+    a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
+    .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
+    .box { border-left: 3px solid #00ffcc; background: #050505; padding: 0.8em 1.2em; margin: 1.5em 0; color: #ddd; }
+    code { color: #ccc; overflow-wrap: anywhere; }
+    li { margin-bottom: 0.4em; }
+    table { width: 100%; border-collapse: collapse; margin: 1em 0; font-size: 0.92em; }
+    th, td { border: 1px solid #1a3a33; padding: 6px 10px; text-align: left; vertical-align: top; }
+    th { color: #00ffcc; background: #050f0d; }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
+    .back-links { margin-top: 40px; text-align: center; display: flex; flex-direction: column; gap: 10px; }
+    footer { margin-top: 60px; padding: 20px; font-size: 0.85em; color: #666; border-top: 1px solid #222; text-align: center; }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="/en/index.html">← Back to HQ</a>
+  </div>
+
+  <h1>How my analyses are made</h1>
+  <p class="byline">by Alien Investor · as of 23 Oct 2026</p>
+
+  <article id="content">
+
+    <p>
+      This page explains how my stock analyses, my Bitcoin analyses and the Alien Analyzer work: where the numbers
+      come from, what is fact and what is my assessment, which assumptions sit behind a fair value, and where I have
+      interests of my own. Every analysis links to this page.
+    </p>
+
+    <h2 id="was">What an analysis is and what it is not</h2>
+    <ul>
+      <li>An analysis is my personal assessment of a company or of Bitcoin, based on publicly available data.</li>
+      <li>It is <strong>not investment advice</strong>. I do not know your financial situation, your goals or your
+        risk tolerance, and I do not take them into account. No analysis says that a stock or Bitcoin suits you.</li>
+      <li>Analyses are not updated continuously. The date stated in the analysis applies. Prices, metrics and my
+        assessment may change afterwards.</li>
+      <li>Stocks and Bitcoin can fluctuate sharply. Losses up to a total loss are possible.</li>
+    </ul>
+
+    <h2 id="tatsachen">Facts, estimates, opinion</h2>
+    <p>Every analysis contains three kinds of statements. I keep them apart:</p>
+    <div class="table-scroll" style="overflow-x:auto">
+    <table>
+      <thead><tr><th>Kind</th><th>Examples</th><th>How it is marked</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Facts</strong></td><td>Revenue, earnings, debt, dividends, segment figures</td><td>from annual reports and mandatory filings, with the data date</td></tr>
+        <tr><td><strong>Estimates</strong></td><td>Fair value, price scenarios, forecasts, analyst expectations</td><td>labelled as a model calculation or estimate, with the assumptions; third-party forecasts with source</td></tr>
+        <tr><td><strong>Opinion</strong></td><td>Moat, management, risks, the Alien verdict</td><td>worded as my assessment</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>
+      Values I cannot back up with a source are marked as an estimate or as not available, instead of inventing a
+      number.
+    </p>
+
+    <h2 id="quellen">Sources</h2>
+    <ul>
+      <li><strong>Primary sources:</strong> annual reports, annual and quarterly filings and other mandatory
+        disclosures (for US companies via SEC EDGAR), the companies' investor relations pages, official statistics.</li>
+      <li><strong>Metrics and price history:</strong> my own <a href="#analyzer">Alien Analyzer V2</a>, which
+        processes data from Yahoo Finance. This data can contain errors, for example from one-off accounting effects
+        or financial data in a different currency than the share price. I check conspicuous values against the
+        annual reports and say so in the text when doubts remain.</li>
+      <li><strong>Research:</strong> research tools, including AI-assisted ones, help with collecting and sorting.
+        The primary sources are what counts: numbers and factual statements are checked against them before
+        publication.</li>
+      <li>Blog posts and forums are not a source for numbers.</li>
+    </ul>
+
+    <h2 id="bewertung">How I value</h2>
+    <h3>Fair value</h3>
+    <p>
+      The fair value in my analyses is a <strong>model calculation</strong>, not a price target. It is based on the
+      fair value indicator of the Alien Analyzer:
+    </p>
+    <div class="box">
+      Fair value = current earnings per share × median of the historical P/E ratio in the selected period, excluding outliers (default: 10 years)
+    </div>
+    <p>The assumptions behind it:</p>
+    <ul>
+      <li>The market will value the company in the future roughly as it did on average in the past.</li>
+      <li>Current earnings are representative of the company's earning power.</li>
+    </ul>
+    <p>
+      Both can be wrong: for cyclicals at an earnings peak or trough, after one-off effects, when growth breaks or
+      when the interest rate environment changes. That is why I check the indicator in every analysis against the
+      P/E history of recent years and put it into context in the text instead of taking it over unchecked. When an
+      analysis names a price scenario, its assumptions are stated in the text.
+    </p>
+    <h3>Metrics and quality check</h3>
+    <p>
+      For context I use historical valuation multiples (P/E, P/CF, P/S, P/B), the dividend history and a quality
+      check covering return on equity, debt, free cash flow, equity ratio, earnings growth, dividend yield and the
+      change in share count. The traffic-light colours in the analyzer follow fixed rules: mostly fixed thresholds,
+      for P/E a comparison with the stock's own average and the sector P/E, and special rules for some sectors.
+      For banks, insurers, REITs,
+      commodity companies and other special cases, some metrics do not fit. The analysis says so.
+    </p>
+
+    <h2 id="bitcoin">Bitcoin analyses</h2>
+    <p>
+      Bitcoin is not a stock. There are no earnings and no P/E ratio. My Bitcoin analyses are based on the price
+      history, on the <strong>power law model</strong> and on publicly available market data.
+    </p>
+    <ul>
+      <li>Trend: price in USD = 1.0117 × 10<sup>-17</sup> × (days since 3 January 2009)<sup>5.82</sup>
+        (power law model after Giovanni Santostasi, in a widely used calibration; newer estimates give a slightly
+        lower exponent).</li>
+      <li>Support: 0.42 × trend (floor from the same calibration). Between support and trend lies the corridor in
+        which the price has often moved so far.</li>
+      <li>The model describes the past. No mechanism guarantees that it will keep holding. Price scenarios from the
+        model are estimates.</li>
+    </ul>
+    <p>I hold Bitcoin. Every Bitcoin analysis says so as well.</p>
+
+    <h2 id="interessen">Conflicts of interest</h2>
+    <ul>
+      <li>Every analysis has a dated <strong>disclosure block</strong>: whether I or persons closely associated with
+        me hold shares of the company, and whether I have a business relationship with it.</li>
+      <li>I receive no money from the companies I analyse. The only exception is Amazon: I receive royalties for my
+        books through Kindle Direct Publishing. The Amazon analysis says so.</li>
+      <li>My income: books (Amazon and direct sales), affiliate links (marked with *), donations and services. The
+        YouTube channel is not monetised.</li>
+      <li><strong>Requested analyses:</strong> A reader pays for an analysis of a stock of his choice. He only chooses
+        the company. He has no influence on content or result, and his personal situation plays no role. A paid analysis is marked as such in the disclosure.</li>
+    </ul>
+
+    <h2 id="datum">Date and timeliness</h2>
+    <p>
+      The top of every analysis states its date. Prices and metrics refer to that point in time. The disclosure
+      block carries its own date. When I revise an analysis, the new date appears in the analysis.
+    </p>
+
+    <h2 id="analyzer">Alien Analyzer</h2>
+    <p>
+      The <a href="https://api.alien-investor.org/alien-analyzer-v2.html?lang=en">Alien Analyzer V2</a> calculates
+      automatically for every ticker you enter. It knows neither you nor your goals.
+    </p>
+    <ul>
+      <li><strong>Data:</strong> Yahoo Finance, fetched through my own server. Your browser does not query any
+        third-party data services.</li>
+      <li><strong>Fair value indicator:</strong> formula as above. If the price is more than 15% above or below fair
+        value, the analyzer shows "above" or "below fair value", otherwise "fairly valued". For comparison, the P/E
+        fan shows earnings per share times 10, 15, 20, 25 and 30. For REITs and mining and metals companies it shows no
+        fair value, because the P/E ratio is of little use there.</li>
+      <li><strong>Alien assessment:</strong> rule-based text modules depending on sector, special case and metrics.
+        They describe where the metrics stand against their history and what matters in the sector. They are not a
+        recommendation to buy or sell and not a review of the individual case.</li>
+      <li>The data can be wrong or incomplete. The analyzer shows a notice for known data problems, but it does not
+        catch every error.</li>
+    </ul>
+
+  </article>
+
+  <div class="back-links">
+    <a href="/en/aktien-analysen.html" style="font-size: 1.1em;">← To the stock analyses</a>
+    <a href="/en/bitcoin-analysen.html" style="font-size: 1.1em;">← To the Bitcoin price analyses</a>
+    <a href="/en/index.html" style="font-size: 1.1em;">← Back to HQ</a>
+  </div>
+
+  <footer>
+    <p>Contact: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a> <span style="color:#666; font-size:0.85em;">·</span> <a href="/kontakt@alien-investor.org/pubkey.asc.key" download="kontakt-alien-investor-pubkey.asc" style="color:#555; font-size:0.8em; text-decoration:none;" title="PGP public key for encrypted messages">PGP Key</a> · <a href="https://www.mein.online-impressum.de/alien-investor/" target="_blank" rel="noopener" style="color:#555; font-size:0.8em; text-decoration:none;">Legal Notice</a></p>
+    <p style="margin-top: 20px;">
+      <strong>Disclaimer:</strong><br><br>
+      No financial, tax or legal advice. Personal opinion only. Think for yourself.
+    </p>
+  </footer>
+
+  <script src="/lang-switcher.js"></script>
+</body>
+</html>
