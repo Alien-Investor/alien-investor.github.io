@@ -53,7 +53,7 @@
       without JavaScript tracking, without storing anything on your device.
     </p>
     <p>
-      Incognito mode doesn't help against this. A VPN doesn't either.
+      Incognito mode barely helps against this: it forgets cookies and history, but most of these traits stay the same. A VPN doesn't either.
       What you need is a browser that fundamentally alters or conceals this fingerprint.
     </p>
 
@@ -300,7 +300,7 @@
     <h2>First Steps — Regardless of Which Browser</h2>
 
     <ul>
-      <li><strong>Install uBlock Origin</strong> (except Mullvad — already included). No other blocker.</li>
+      <li><strong>Install uBlock Origin only on a plain Firefox.</strong> LibreWolf and Mullvad Browser ship it, Brave doesn't need it, and add nothing to Tor Browser.</li>
       <li><strong>Enable DNS-over-HTTPS</strong> — prevents your ISP from reading your DNS queries. Use NextDNS or Quad9, in Brave and Firefox as a custom provider with <code>https://dns.quad9.net/dns-query</code>. Mullvad's public DNS service ends on November 2, 2026.</li>
       <li><strong>Test your fingerprint:</strong> <a href="https://coveryourtracks.eff.org" target="_blank" rel="noopener">coveryourtracks.eff.org</a> by the EFF shows how unique your browser looks to trackers.</li>
     </ul>

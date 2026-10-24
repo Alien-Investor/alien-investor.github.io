@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- CSP: kein Netz, kein fremder Code. Stil und Skript nur per Hash (build_quiz.py), Schriften vom eigenen Server. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'none'; style-src 'self' 'sha256-IKSAzT28SOhcZcxDtnNQ0dF0sTn2O156pc8D3wJyHo8='; font-src 'self'; img-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Quiz zu den Büchern | Alien Investor</title>
+<meta name="description" content="Zu jedem Band der Reihe ein Quiz: Fragen mit Erklärung und Fundstelle im Buch. Kostenlos, ohne Anmeldung, die Seiten speichern nichts.">
+<link rel="canonical" href="/quiz.html">
+<link rel="alternate" hreflang="de" href="/quiz.html">
+<link rel="alternate" hreflang="en" href="/en/quiz.html">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>/* quiz.css — Quiz zu den Büchern im App-Look der Alien-Investor-Apps.
+   Farben und Bausteine aus dem App-Design-Kit (~/.claude/skills/app-design/kit/app-theme.css, Stand 15.10.2026),
+   auf das Nötige gekürzt. Farben nur über Variablen, damit „Neon“ und „Soft“ mitziehen.
+   build_quiz.py setzt diese Datei als <style> in die Seite und trägt ihren Hash in die CSP ein. */
+
+:root{
+  --neon:#00ffcc; --neon-dim:rgba(0,255,204,.15); --neon-mid:rgba(0,255,204,.4);
+  --red:#ff4466; --red-dim:rgba(255,68,102,.12);
+  --orange:#ff8844;
+  --bg:#000; --card-bg:#050f0d; --border:rgba(0,255,204,.2);
+  --text:#cfeee6; --text-dim:#4a7a6d; --text-mid:#7ab8a8;
+}
+[data-theme="soft"]{
+  --neon:#00c8a0; --neon-dim:rgba(0,200,160,.15); --neon-mid:rgba(0,200,160,.35);
+  --bg:#0d1a2b; --card-bg:#0f2535; --border:rgba(0,200,160,.18);
+  --text:#d2ebe5; --text-dim:#5d8f82; --text-mid:#8ac8b8; --red:#e03355; --red-dim:rgba(224,51,85,.14);
+}
+[data-theme="soft"] body::after{opacity:.35;}
+
+/* ===== Grundlage: Sternenhimmel + Scanlines ===== */
+*{margin:0;padding:0;box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{background:var(--bg);color:var(--text);font-family:'Share Tech Mono',monospace;min-height:100vh;overflow-x:hidden;position:relative;line-height:1.55;}
+body::before{content:'';position:fixed;inset:0;background-image:
+ radial-gradient(1px 1px at 10% 15%,rgba(0,255,204,.4) 0%,transparent 100%),
+ radial-gradient(1px 1px at 30% 40%,rgba(0,255,204,.25) 0%,transparent 100%),
+ radial-gradient(1px 1px at 55% 20%,rgba(0,255,204,.35) 0%,transparent 100%),
+ radial-gradient(1px 1px at 70% 60%,rgba(0,255,204,.2) 0%,transparent 100%),
+ radial-gradient(1px 1px at 85% 30%,rgba(0,255,204,.3) 0%,transparent 100%),
+ radial-gradient(1px 1px at 20% 75%,rgba(0,255,204,.2) 0%,transparent 100%),
+ radial-gradient(1px 1px at 45% 85%,rgba(0,255,204,.3) 0%,transparent 100%),
+ radial-gradient(1px 1px at 90% 80%,rgba(0,255,204,.25) 0%,transparent 100%);
+ pointer-events:none;z-index:0;}
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.15) 2px,rgba(0,0,0,.15) 4px);pointer-events:none;z-index:1;}
+@media (hover:hover) and (pointer:fine){
+::-webkit-scrollbar{width:10px;height:10px;}
+::-webkit-scrollbar-track{background:rgba(0,255,204,.04);}
+::-webkit-scrollbar-thumb{background:var(--neon-mid);border:2px solid transparent;background-clip:padding-box;border-radius:6px;}
+::-webkit-scrollbar-thumb:hover{background:var(--neon);background-clip:padding-box;}
+::-webkit-scrollbar-button{display:none;}
+}
+@supports not selector(::-webkit-scrollbar){html{scrollbar-color:var(--neon-mid) transparent;scrollbar-width:thin;}}
+.container{position:relative;z-index:2;max-width:760px;margin:0 auto;padding:14px 16px 48px;}
+a{color:var(--neon);text-decoration:none;}
+a:hover{text-shadow:0 0 8px var(--neon-mid);}
+.hidden{display:none!important;}
+.center{text-align:center;}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+.nojs .needs-js{display:none!important;}
+.sperre a,.sperre button{pointer-events:none;}   /* kurz nach Ansichtswechsel, siehe sperren() in quiz.js */
+:focus-visible{outline:2px solid var(--neon);outline-offset:2px;}
+
+/* ===== Leiste oben ===== */
+.topbar{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.78rem;letter-spacing:1px;margin-bottom:22px;}
+.topbar a{color:var(--text-mid);}
+.topbar a:hover{color:var(--neon);}
+
+/* ===== Kopf: Logo, Tagline, Sprach- und Darstellungs-Knopf ===== */
+.app-head{text-align:center;position:relative;margin-bottom:24px;}
+.header-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(400px,100%);height:100px;background:radial-gradient(ellipse,rgba(0,255,204,.08) 0%,transparent 70%);pointer-events:none;}
+.logo{font-family:'Orbitron',sans-serif;font-size:clamp(1.3rem,4vw,1.9rem);font-weight:900;letter-spacing:4px;text-transform:uppercase;color:var(--neon);text-shadow:0 0 20px rgba(0,255,204,.7),0 0 40px rgba(0,255,204,.3);
+ padding:0 52px;min-height:36px;display:flex;align-items:center;justify-content:center;}
+@media(max-width:520px){.logo{letter-spacing:2px;font-size:clamp(1rem,5vw,1.5rem);}}
+.tagline{font-size:.72rem;letter-spacing:3px;color:var(--text-dim);text-transform:uppercase;margin-top:6px;}
+.lang-btn,.theme-btn{position:absolute;top:0;height:36px;border:1px solid var(--neon-mid);background:var(--neon-dim);color:var(--neon);font-family:'Orbitron',sans-serif;font-weight:700;cursor:pointer;z-index:5;display:flex;align-items:center;justify-content:center;}
+.lang-btn{left:0;padding:0 10px;border-radius:18px;font-size:.7rem;letter-spacing:1px;}
+.theme-btn{right:0;width:36px;border-radius:50%;}
+.theme-btn .ic{width:18px;height:18px;}
+.lang-btn:hover,.theme-btn:hover{box-shadow:0 0 12px rgba(0,255,204,.45);text-shadow:none;}
+
+/* ===== Karten, Hinweise ===== */
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:4px;padding:18px;margin-bottom:16px;}
+.card p+p{margin-top:10px;}
+.card h2{font-family:'Orbitron',sans-serif;font-size:.85rem;letter-spacing:2px;text-transform:uppercase;color:var(--neon);margin-bottom:12px;font-weight:700;}
+.card p,.card li{overflow-wrap:break-word;}
+.muted{color:var(--text-dim);font-size:.8rem;line-height:1.5;}
+.warn{border:1px solid rgba(255,136,68,.4);border-radius:4px;background:rgba(255,136,68,.06);padding:12px;color:var(--orange);font-size:.85rem;line-height:1.5;margin-bottom:16px;}
+.ok{border:1px solid var(--neon-mid);border-radius:4px;background:var(--neon-dim);padding:12px;color:var(--neon);font-size:.85rem;line-height:1.5;}
+.ok .ic{margin-right:6px;}
+.ic{width:1.1em;height:1.1em;vertical-align:-0.18em;display:inline-block;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 3px rgba(0,255,204,.45));}
+
+/* ===== Knöpfe ===== */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--neon-dim);border:1px solid var(--neon-mid);border-radius:4px;color:var(--neon);font-family:'Orbitron',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:2px;padding:11px 18px;cursor:pointer;text-transform:uppercase;transition:all .2s;text-decoration:none;}
+.btn:hover{background:rgba(0,255,204,.2);box-shadow:0 0 14px rgba(0,255,204,.4);text-shadow:none;}
+.btn.ghost{background:none;border-color:var(--border);color:var(--text-mid);}
+.btn.ghost:hover{border-color:var(--neon-mid);color:var(--neon);box-shadow:none;}
+.btn.sm{padding:7px 12px;font-size:.66rem;}
+.btn .ic{stroke-width:1.9;flex-shrink:0;}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;}
+.actions.center{justify-content:center;}
+
+/* ===== Startseite: Runden ===== */
+.rounds{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:0 14px;}
+.round{display:flex;flex-direction:column;}
+.round .count{font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:900;color:var(--neon);text-shadow:0 0 14px rgba(0,255,204,.5);line-height:1.1;}
+.round .count small{font-size:.7rem;letter-spacing:2px;color:var(--text-mid);font-weight:700;margin-left:6px;text-transform:uppercase;text-shadow:none;}
+.round p{flex:1;margin:8px 0 14px;font-size:.85rem;color:var(--text-mid);}
+.book{display:flex;gap:16px;align-items:center;}
+.book img{width:84px;height:auto;border:1px solid var(--border);border-radius:3px;flex:none;}
+.book p{font-size:.85rem;}
+
+/* ===== Frage ===== */
+.qhead{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-mid);margin-bottom:8px;}
+.qhead #q-runde{color:var(--neon);}
+.bar{height:4px;background:var(--neon-dim);border-radius:2px;overflow:hidden;margin-bottom:16px;}
+.bar>div{height:100%;width:0;background:var(--neon);box-shadow:0 0 10px var(--neon-mid);transition:width .3s;}
+.card .qtext{font-family:'Share Tech Mono',monospace;font-size:1.08rem;letter-spacing:0;text-transform:none;color:var(--text);line-height:1.5;margin-bottom:16px;font-weight:400;}
+.qtext:focus{outline:none;}
+.answers{display:grid;gap:10px;}
+.ans{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;background:rgba(0,0,0,.35);border:1px solid var(--border);border-radius:4px;color:var(--text);font-family:'Share Tech Mono',monospace;font-size:.95rem;line-height:1.45;padding:12px 14px;cursor:pointer;transition:border-color .15s,background .15s,box-shadow .15s;}
+.ans:hover:not(:disabled){border-color:var(--neon-mid);background:var(--neon-dim);}
+.ans:disabled{cursor:default;}
+.ans-key{flex:none;width:26px;height:26px;border:1px solid var(--neon-mid);border-radius:3px;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-weight:700;font-size:.72rem;color:var(--neon);margin-top:-2px;}
+.ans-text{flex:1;min-width:0;overflow-wrap:break-word;}
+.ans.right{border-color:var(--neon);background:var(--neon-dim);box-shadow:0 0 12px var(--neon-mid);}
+.ans.right .ans-key{background:var(--neon);color:var(--bg);border-color:var(--neon);}
+.ans.wrong{border-color:var(--red);background:var(--red-dim);}
+.ans.wrong .ans-key{background:var(--red);color:var(--bg);border-color:var(--red);}
+.ans.dim{opacity:.45;}
+.feedback{margin-top:16px;border-radius:4px;padding:14px;font-size:.9rem;line-height:1.55;}
+.feedback.is-right{border:1px solid var(--neon-mid);background:var(--neon-dim);}
+.feedback.is-wrong{border:1px solid rgba(255,68,102,.45);background:var(--red-dim);}
+.fb-head{font-family:'Orbitron',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
+.is-right .fb-head{color:var(--neon);}
+.is-wrong .fb-head{color:var(--red);}
+.fb-where{margin-top:8px;color:var(--text-mid);font-size:.82rem;}
+.fb-where b{color:var(--neon);font-weight:400;letter-spacing:1px;}
+.keys{margin-top:14px;}
+
+/* ===== Auswertung ===== */
+.score{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(2rem,9vw,3rem);color:var(--neon);text-shadow:0 0 20px rgba(0,255,204,.6);text-align:center;margin:6px 0 10px;}
+.result p#e-text{text-align:center;}
+.misses{padding-left:1.4em;display:grid;gap:12px;font-size:.88rem;}
+.misses li::marker{color:var(--neon);}
+.misses span{display:block;color:var(--text-mid);font-size:.8rem;margin-top:2px;}
+
+/* ===== Fuß ===== */
+.foot{text-align:center;color:var(--text-dim);font-size:.72rem;letter-spacing:.5px;margin-top:34px;line-height:1.8;}
+.foot a{color:var(--text-mid);}
+.foot a:hover{color:var(--neon);}
+.foot p+p{margin-top:8px;}
+
+/* ===== Übersicht aller Bände ===== */
+.bands{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0 14px;}
+.band{display:flex;gap:14px;align-items:flex-start;}
+.band img{width:72px;height:auto;border:1px solid var(--border);border-radius:3px;flex:none;}
+.band .vol{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-mid);}
+.band>div{min-width:0;}
+.band h2{margin:4px 0 8px;font-size:.8rem;line-height:1.4;overflow-wrap:break-word;hyphens:manual;}
+.band.soon img{opacity:.45;filter:grayscale(.6);}
+.band.soon h2{color:var(--text-mid);}
+
+@media(max-width:420px){
+  .card{padding:15px;}
+  .ans{padding:11px 12px;font-size:.92rem;}
+  .book{flex-direction:column;align-items:flex-start;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+<div class="container">
+  <nav class="topbar"><a href="/index.html">← Zentrale</a><a href="/buecher.html">Bücher</a><a href="/werkstatt.html">Werkstatt-Pakete</a></nav>
+  <header class="app-head">
+    <div class="header-glow"></div>
+    <a class="lang-btn" href="/en/quiz.html" hreflang="en" lang="en" title="English version">EN</a>
+    <h1 class="logo">Quiz</h1>
+    <p class="tagline">Zu jedem Band ein Quiz</p>
+  </header>
+  <main>
+    <div class="card">
+      <h2>Die eigenen Bücher vertiefen</h2>
+      <p>Zu jedem Band gibt es ein Quiz zum Festigen: Fragen mit vier Antworten, nach jeder Antwort die Erklärung und die Stelle im Buch zum Nachlesen. Kostenlos, ohne Anmeldung, und die Seiten speichern nichts.</p>
+    </div>
+    <div class="bands">
+      <div class="card band soon">
+        <img src="/grapheneos-handbuch-cover.jpg" alt="" width="72" height="94" loading="lazy">
+        <div>
+          <div class="vol">Band 1</div>
+          <h2>GrapheneOS: Android im Überwachungs­zeitalter</h2>
+          <p class="muted">In Vorbereitung</p>
+        </div>
+      </div>
+      <div class="card band">
+        <img src="/souveraenitaet-handbuch-cover.jpg" alt="" width="72" height="94" loading="lazy">
+        <div>
+          <div class="vol">Band 2</div>
+          <h2>Digitale Souveränität: Das vollständige System</h2>
+          <p class="muted">30 Fragen in zwei Runden</p>
+          <div class="actions"><a class="btn" href="/quiz-band2.html">Zum Quiz</a></div>
+        </div>
+      </div>
+      <div class="card band soon">
+        <img src="/dezentrales-system-handbuch-cover.jpg" alt="" width="72" height="94" loading="lazy">
+        <div>
+          <div class="vol">Band 3</div>
+          <h2>Das dezentrale System: Bitcoin. Aktien. Echtes Eigentum.</h2>
+          <p class="muted">In Vorbereitung</p>
+        </div>
+      </div>
+      <div class="card band soon">
+        <img src="/bitcoin-verwahrung-handbuch-cover.jpg" alt="" width="72" height="94" loading="lazy">
+        <div>
+          <div class="vol">Band 4</div>
+          <h2>Die eigene Bank: Bitcoin meisterlich verwahren</h2>
+          <p class="muted">In Vorbereitung</p>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="foot">
+    <p class="impressum-link"><a href="/werkstatt.html">Werkstatt-Pakete</a> · <a href="/buecher.html">Bücher</a> · <a href="/spenden.html">Spenden</a> · <a href="https://www.mein.online-impressum.de/alien-investor/" target="_blank" rel="noopener noreferrer">Impressum</a></p>
+  </footer>
+</div>
+</body>
+</html>

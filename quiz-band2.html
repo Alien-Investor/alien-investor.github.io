@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="de" class="nojs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- CSP: kein Netz, kein fremder Code. Stil und Skript nur per Hash (build_quiz.py), Schriften vom eigenen Server. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-dkvA4V2ckU9V2tZQyRa5iJnr78fcCSk9IwqzglReF/U='; style-src 'self' 'sha256-IKSAzT28SOhcZcxDtnNQ0dF0sTn2O156pc8D3wJyHo8='; font-src 'self'; img-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Quiz Band 2: Digitale Souveränität | Alien Investor</title>
+<meta name="description" content="30 Fragen zum Buch „Digitale Souveränität: Das vollständige System“ in zwei Runden, jede mit Erklärung und Fundstelle im Buch. Kostenlos, ohne Anmeldung, die Seite speichert nichts.">
+<link rel="canonical" href="/quiz-band2.html">
+<link rel="alternate" hreflang="de" href="/quiz-band2.html">
+<link rel="alternate" hreflang="en" href="/en/quiz-band2.html">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>/* quiz.css — Quiz zu den Büchern im App-Look der Alien-Investor-Apps.
+   Farben und Bausteine aus dem App-Design-Kit (~/.claude/skills/app-design/kit/app-theme.css, Stand 15.10.2026),
+   auf das Nötige gekürzt. Farben nur über Variablen, damit „Neon“ und „Soft“ mitziehen.
+   build_quiz.py setzt diese Datei als <style> in die Seite und trägt ihren Hash in die CSP ein. */
+
+:root{
+  --neon:#00ffcc; --neon-dim:rgba(0,255,204,.15); --neon-mid:rgba(0,255,204,.4);
+  --red:#ff4466; --red-dim:rgba(255,68,102,.12);
+  --orange:#ff8844;
+  --bg:#000; --card-bg:#050f0d; --border:rgba(0,255,204,.2);
+  --text:#cfeee6; --text-dim:#4a7a6d; --text-mid:#7ab8a8;
+}
+[data-theme="soft"]{
+  --neon:#00c8a0; --neon-dim:rgba(0,200,160,.15); --neon-mid:rgba(0,200,160,.35);
+  --bg:#0d1a2b; --card-bg:#0f2535; --border:rgba(0,200,160,.18);
+  --text:#d2ebe5; --text-dim:#5d8f82; --text-mid:#8ac8b8; --red:#e03355; --red-dim:rgba(224,51,85,.14);
+}
+[data-theme="soft"] body::after{opacity:.35;}
+
+/* ===== Grundlage: Sternenhimmel + Scanlines ===== */
+*{margin:0;padding:0;box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{background:var(--bg);color:var(--text);font-family:'Share Tech Mono',monospace;min-height:100vh;overflow-x:hidden;position:relative;line-height:1.55;}
+body::before{content:'';position:fixed;inset:0;background-image:
+ radial-gradient(1px 1px at 10% 15%,rgba(0,255,204,.4) 0%,transparent 100%),
+ radial-gradient(1px 1px at 30% 40%,rgba(0,255,204,.25) 0%,transparent 100%),
+ radial-gradient(1px 1px at 55% 20%,rgba(0,255,204,.35) 0%,transparent 100%),
+ radial-gradient(1px 1px at 70% 60%,rgba(0,255,204,.2) 0%,transparent 100%),
+ radial-gradient(1px 1px at 85% 30%,rgba(0,255,204,.3) 0%,transparent 100%),
+ radial-gradient(1px 1px at 20% 75%,rgba(0,255,204,.2) 0%,transparent 100%),
+ radial-gradient(1px 1px at 45% 85%,rgba(0,255,204,.3) 0%,transparent 100%),
+ radial-gradient(1px 1px at 90% 80%,rgba(0,255,204,.25) 0%,transparent 100%);
+ pointer-events:none;z-index:0;}
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.15) 2px,rgba(0,0,0,.15) 4px);pointer-events:none;z-index:1;}
+@media (hover:hover) and (pointer:fine){
+::-webkit-scrollbar{width:10px;height:10px;}
+::-webkit-scrollbar-track{background:rgba(0,255,204,.04);}
+::-webkit-scrollbar-thumb{background:var(--neon-mid);border:2px solid transparent;background-clip:padding-box;border-radius:6px;}
+::-webkit-scrollbar-thumb:hover{background:var(--neon);background-clip:padding-box;}
+::-webkit-scrollbar-button{display:none;}
+}
+@supports not selector(::-webkit-scrollbar){html{scrollbar-color:var(--neon-mid) transparent;scrollbar-width:thin;}}
+.container{position:relative;z-index:2;max-width:760px;margin:0 auto;padding:14px 16px 48px;}
+a{color:var(--neon);text-decoration:none;}
+a:hover{text-shadow:0 0 8px var(--neon-mid);}
+.hidden{display:none!important;}
+.center{text-align:center;}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+.nojs .needs-js{display:none!important;}
+.sperre a,.sperre button{pointer-events:none;}   /* kurz nach Ansichtswechsel, siehe sperren() in quiz.js */
+:focus-visible{outline:2px solid var(--neon);outline-offset:2px;}
+
+/* ===== Leiste oben ===== */
+.topbar{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.78rem;letter-spacing:1px;margin-bottom:22px;}
+.topbar a{color:var(--text-mid);}
+.topbar a:hover{color:var(--neon);}
+
+/* ===== Kopf: Logo, Tagline, Sprach- und Darstellungs-Knopf ===== */
+.app-head{text-align:center;position:relative;margin-bottom:24px;}
+.header-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(400px,100%);height:100px;background:radial-gradient(ellipse,rgba(0,255,204,.08) 0%,transparent 70%);pointer-events:none;}
+.logo{font-family:'Orbitron',sans-serif;font-size:clamp(1.3rem,4vw,1.9rem);font-weight:900;letter-spacing:4px;text-transform:uppercase;color:var(--neon);text-shadow:0 0 20px rgba(0,255,204,.7),0 0 40px rgba(0,255,204,.3);
+ padding:0 52px;min-height:36px;display:flex;align-items:center;justify-content:center;}
+@media(max-width:520px){.logo{letter-spacing:2px;font-size:clamp(1rem,5vw,1.5rem);}}
+.tagline{font-size:.72rem;letter-spacing:3px;color:var(--text-dim);text-transform:uppercase;margin-top:6px;}
+.lang-btn,.theme-btn{position:absolute;top:0;height:36px;border:1px solid var(--neon-mid);background:var(--neon-dim);color:var(--neon);font-family:'Orbitron',sans-serif;font-weight:700;cursor:pointer;z-index:5;display:flex;align-items:center;justify-content:center;}
+.lang-btn{left:0;padding:0 10px;border-radius:18px;font-size:.7rem;letter-spacing:1px;}
+.theme-btn{right:0;width:36px;border-radius:50%;}
+.theme-btn .ic{width:18px;height:18px;}
+.lang-btn:hover,.theme-btn:hover{box-shadow:0 0 12px rgba(0,255,204,.45);text-shadow:none;}
+
+/* ===== Karten, Hinweise ===== */
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:4px;padding:18px;margin-bottom:16px;}
+.card p+p{margin-top:10px;}
+.card h2{font-family:'Orbitron',sans-serif;font-size:.85rem;letter-spacing:2px;text-transform:uppercase;color:var(--neon);margin-bottom:12px;font-weight:700;}
+.card p,.card li{overflow-wrap:break-word;}
+.muted{color:var(--text-dim);font-size:.8rem;line-height:1.5;}
+.warn{border:1px solid rgba(255,136,68,.4);border-radius:4px;background:rgba(255,136,68,.06);padding:12px;color:var(--orange);font-size:.85rem;line-height:1.5;margin-bottom:16px;}
+.ok{border:1px solid var(--neon-mid);border-radius:4px;background:var(--neon-dim);padding:12px;color:var(--neon);font-size:.85rem;line-height:1.5;}
+.ok .ic{margin-right:6px;}
+.ic{width:1.1em;height:1.1em;vertical-align:-0.18em;display:inline-block;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 3px rgba(0,255,204,.45));}
+
+/* ===== Knöpfe ===== */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--neon-dim);border:1px solid var(--neon-mid);border-radius:4px;color:var(--neon);font-family:'Orbitron',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:2px;padding:11px 18px;cursor:pointer;text-transform:uppercase;transition:all .2s;text-decoration:none;}
+.btn:hover{background:rgba(0,255,204,.2);box-shadow:0 0 14px rgba(0,255,204,.4);text-shadow:none;}
+.btn.ghost{background:none;border-color:var(--border);color:var(--text-mid);}
+.btn.ghost:hover{border-color:var(--neon-mid);color:var(--neon);box-shadow:none;}
+.btn.sm{padding:7px 12px;font-size:.66rem;}
+.btn .ic{stroke-width:1.9;flex-shrink:0;}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;}
+.actions.center{justify-content:center;}
+
+/* ===== Startseite: Runden ===== */
+.rounds{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:0 14px;}
+.round{display:flex;flex-direction:column;}
+.round .count{font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:900;color:var(--neon);text-shadow:0 0 14px rgba(0,255,204,.5);line-height:1.1;}
+.round .count small{font-size:.7rem;letter-spacing:2px;color:var(--text-mid);font-weight:700;margin-left:6px;text-transform:uppercase;text-shadow:none;}
+.round p{flex:1;margin:8px 0 14px;font-size:.85rem;color:var(--text-mid);}
+.book{display:flex;gap:16px;align-items:center;}
+.book img{width:84px;height:auto;border:1px solid var(--border);border-radius:3px;flex:none;}
+.book p{font-size:.85rem;}
+
+/* ===== Frage ===== */
+.qhead{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-mid);margin-bottom:8px;}
+.qhead #q-runde{color:var(--neon);}
+.bar{height:4px;background:var(--neon-dim);border-radius:2px;overflow:hidden;margin-bottom:16px;}
+.bar>div{height:100%;width:0;background:var(--neon);box-shadow:0 0 10px var(--neon-mid);transition:width .3s;}
+.card .qtext{font-family:'Share Tech Mono',monospace;font-size:1.08rem;letter-spacing:0;text-transform:none;color:var(--text);line-height:1.5;margin-bottom:16px;font-weight:400;}
+.qtext:focus{outline:none;}
+.answers{display:grid;gap:10px;}
+.ans{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;background:rgba(0,0,0,.35);border:1px solid var(--border);border-radius:4px;color:var(--text);font-family:'Share Tech Mono',monospace;font-size:.95rem;line-height:1.45;padding:12px 14px;cursor:pointer;transition:border-color .15s,background .15s,box-shadow .15s;}
+.ans:hover:not(:disabled){border-color:var(--neon-mid);background:var(--neon-dim);}
+.ans:disabled{cursor:default;}
+.ans-key{flex:none;width:26px;height:26px;border:1px solid var(--neon-mid);border-radius:3px;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-weight:700;font-size:.72rem;color:var(--neon);margin-top:-2px;}
+.ans-text{flex:1;min-width:0;overflow-wrap:break-word;}
+.ans.right{border-color:var(--neon);background:var(--neon-dim);box-shadow:0 0 12px var(--neon-mid);}
+.ans.right .ans-key{background:var(--neon);color:var(--bg);border-color:var(--neon);}
+.ans.wrong{border-color:var(--red);background:var(--red-dim);}
+.ans.wrong .ans-key{background:var(--red);color:var(--bg);border-color:var(--red);}
+.ans.dim{opacity:.45;}
+.feedback{margin-top:16px;border-radius:4px;padding:14px;font-size:.9rem;line-height:1.55;}
+.feedback.is-right{border:1px solid var(--neon-mid);background:var(--neon-dim);}
+.feedback.is-wrong{border:1px solid rgba(255,68,102,.45);background:var(--red-dim);}
+.fb-head{font-family:'Orbitron',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
+.is-right .fb-head{color:var(--neon);}
+.is-wrong .fb-head{color:var(--red);}
+.fb-where{margin-top:8px;color:var(--text-mid);font-size:.82rem;}
+.fb-where b{color:var(--neon);font-weight:400;letter-spacing:1px;}
+.keys{margin-top:14px;}
+
+/* ===== Auswertung ===== */
+.score{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(2rem,9vw,3rem);color:var(--neon);text-shadow:0 0 20px rgba(0,255,204,.6);text-align:center;margin:6px 0 10px;}
+.result p#e-text{text-align:center;}
+.misses{padding-left:1.4em;display:grid;gap:12px;font-size:.88rem;}
+.misses li::marker{color:var(--neon);}
+.misses span{display:block;color:var(--text-mid);font-size:.8rem;margin-top:2px;}
+
+/* ===== Fuß ===== */
+.foot{text-align:center;color:var(--text-dim);font-size:.72rem;letter-spacing:.5px;margin-top:34px;line-height:1.8;}
+.foot a{color:var(--text-mid);}
+.foot a:hover{color:var(--neon);}
+.foot p+p{margin-top:8px;}
+
+/* ===== Übersicht aller Bände ===== */
+.bands{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0 14px;}
+.band{display:flex;gap:14px;align-items:flex-start;}
+.band img{width:72px;height:auto;border:1px solid var(--border);border-radius:3px;flex:none;}
+.band .vol{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-mid);}
+.band>div{min-width:0;}
+.band h2{margin:4px 0 8px;font-size:.8rem;line-height:1.4;overflow-wrap:break-word;hyphens:manual;}
+.band.soon img{opacity:.45;filter:grayscale(.6);}
+.band.soon h2{color:var(--text-mid);}
+
+@media(max-width:420px){
+  .card{padding:15px;}
+  .ans{padding:11px 12px;font-size:.92rem;}
+  .book{flex-direction:column;align-items:flex-start;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+<div class="container">
+  <nav class="topbar"><a href="/index.html">← Zentrale</a><a href="/quiz.html">Alle Quizze</a><a href="/buecher.html#band2">Bücher</a><a href="/werkstatt-band2.html">Werkstatt-Blätter</a></nav>
+  <header class="app-head">
+    <div class="header-glow"></div>
+    <a class="lang-btn" href="/en/quiz-band2.html" hreflang="en" lang="en" title="English version">EN</a>
+    <button class="theme-btn needs-js" id="theme-btn" type="button" data-action="theme" aria-pressed="false" title="Darstellung wechseln (Neon oder Soft)" aria-label="Darstellung wechseln (Neon oder Soft)"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/></svg></button>
+    <h1 class="logo">Quiz Band 2</h1>
+    <p class="tagline">Digitale Souveränität · 30 Fragen</p>
+  </header>
+  <main>
+    <section id="v-start">
+      <div class="card">
+      <h2>Wie gut kennst du das System?</h2>
+      <p>30 Fragen zu Band 2, vom Betriebssystem bis zur Notfallplanung. Nach jeder Antwort erklärt dir die Seite, warum sie stimmt, und nennt die Stelle im Buch zum Nachlesen.</p>
+      <p>Wähle eine Runde. Die Antworten werden jedes Mal neu gemischt. Am Rechner wählst du auch mit den Tasten 1 bis 4.</p>
+      <p class="ok"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 9.5-4-1.2-7-5-7-9.5V6z"/><path d="M8.5 12l2.5 2.5 4.5-4.5"/></svg>Diese Seite speichert nichts, nicht einmal deinen Punktestand. Kein Konto, kein Cookie, kein Tracker, und sie lädt nichts von fremden Servern nach. Das Quiz läuft vollständig in deinem Browser.</p>
+      </div>
+      <noscript><p class="warn">Das Quiz braucht JavaScript. Es läuft vollständig in deinem Browser und sendet nichts. Ohne JavaScript bleibt die Seite leer, die Themen stehen alle im Buch.</p></noscript>
+      <div class="rounds">
+      <div class="card round">
+        <h2>Einstieg</h2>
+        <div class="count">15<small>Fragen</small></div>
+        <p>Die Grundgedanken des Buches, quer durch alle Schichten.</p>
+        <div><button class="btn needs-js" type="button" data-action="start" data-arg="einstieg">Runde starten</button></div>
+      </div>
+      <div class="card round">
+        <h2>Praxis</h2>
+        <div class="count">15<small>Fragen</small></div>
+        <p>Konkrete Handgriffe, Werkzeuge und die typischen Fehler.</p>
+        <div><button class="btn needs-js" type="button" data-action="start" data-arg="praxis">Runde starten</button></div>
+      </div>
+      <div class="card round">
+        <h2>Alles</h2>
+        <div class="count">30<small>Fragen</small></div>
+        <p>Beide Runden am Stück.</p>
+        <div><button class="btn needs-js" type="button" data-action="start" data-arg="alle">Runde starten</button></div>
+      </div>
+      </div>
+      <div class="card book">
+        <img src="/souveraenitaet-handbuch-cover.jpg" alt="Cover von „Digitale Souveränität: Das vollständige System“" width="84" height="110" loading="lazy">
+        <p>Das Buch dazu: <em>Digitale Souveränität: Das vollständige System</em>, Band 2 der Reihe. Bei Amazon oder direkt und DRM-frei, beides auf der <a href="/buecher.html#band2">Bücherseite</a>.</p>
+      </div>
+    </section>
+
+    <section id="v-frage" class="hidden" aria-labelledby="q-text">
+      <div class="qhead"><span id="q-runde"></span><span id="q-pos"></span><span id="q-score"></span></div>
+      <div class="bar" id="q-bar-wrap" role="progressbar" aria-valuemin="0" aria-valuenow="0" aria-valuemax="30"><div id="q-bar"></div></div>
+      <div class="card">
+        <h2 id="q-text" class="qtext" tabindex="-1"></h2>
+        <div id="q-antworten" class="answers"></div>
+        <div id="q-feedback" class="feedback hidden">
+          <p id="fb-head" class="fb-head"></p>
+          <p id="fb-why"></p>
+          <p class="fb-where"><b>Nachlesen:</b> <span id="fb-where"></span></p>
+        </div>
+        <div class="actions"><button id="q-weiter" class="btn hidden" type="button" data-action="next"></button></div>
+      </div>
+      <p class="sr" id="q-live" aria-live="polite"></p>
+      <p class="center"><button class="btn ghost sm" type="button" data-action="home">Runde abbrechen</button></p>
+    </section>
+
+    <section id="v-ende" class="hidden">
+      <div class="card result">
+        <h2>Kerstin — Auswertung</h2>
+        <p id="e-score" class="score" tabindex="-1"></p>
+        <p id="e-text"></p>
+      </div>
+      <div id="e-miss" class="card">
+        <h2>Zum Nachlesen</h2>
+        <ol id="e-liste" class="misses"></ol>
+      </div>
+      <div class="actions center">
+        <button id="e-again" class="btn" type="button" data-action="start" data-arg="">Runde wiederholen</button>
+        <button class="btn ghost" type="button" data-action="home">Andere Runde</button>
+      </div>
+    </section>
+  </main>
+  <footer class="foot">
+    <p>Fragen zu Band 2, Stand Oktober 2026, geprüft gegen die Buchfassung v1.5 und die Primärquellen. Fehler gefunden? <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    <p>Das Quiz ersetzt keine Rechts-, Steuer- oder Finanzberatung.</p>
+    <p class="impressum-link"><a href="/werkstatt-band2.html">Werkstatt-Blätter Band 2</a> · <a href="/buecher.html">Bücher</a> · <a href="/spenden.html">Spenden</a> · <a href="https://www.mein.online-impressum.de/alien-investor/" target="_blank" rel="noopener noreferrer">Impressum</a></p>
+  </footer>
+</div>
+<script type="application/json" id="quiz-daten">{"ui":{"pos":"Frage {n} von {total}","score":"{n} richtig","right":"Richtig.","wrong":"Nicht ganz.","solution":"Richtig ist: {a}","next":"Weiter","finish":"Zur Auswertung","result":"{n} von {total}","r3":"Stark. Du kennst das System, den Rest erledigt die Praxis.","r2":"Solide. Die Fundstellen unten schließen die letzten Lücken.","r1":"Ein guter Anlass, die Kapitel unten noch einmal zu lesen. Danach sitzt es.","reread":"Nachlesen:","allName":"Alles"},"runden":[{"id":"einstieg","name":"Einstieg","text":"Die Grundgedanken des Buches, quer durch alle Schichten.","fragen":[{"id":"e01","q":"Was meint das Buch mit „Privatsphäre ist Architektur“?","right":"Schutz entsteht aus Schichten, die aufeinander aufbauen.","wrong":["Ein gutes VPN deckt die meisten Risiken bereits ab, der Rest ist Feinschliff.","Wer seine Daten verschlüsselt, muss auf sein Verhalten nicht mehr achten.","Privatsphäre ist ein Produkt, das man bei einem guten Anbieter kauft."],"why":"Kein Werkzeug kann etwas leisten, wenn die Schicht darunter kompromittiert ist. Deshalb baut das Buch die Schichten vom Betriebssystem bis zur Notfallplanung auf.","where":"Einleitung, „Kein Werkzeug. Eine Architektur.“, und Kapitel 1 (Einstieg)"},{"id":"e02","q":"Dein Laptop wird gestohlen. Warum schützt das Anmeldepasswort deine Daten nicht?","right":"Wer die Festplatte ausbaut und woanders einliest, umgeht den Login einfach.","wrong":["Es schützt sie doch, denn ohne das Passwort startet der Rechner überhaupt nicht.","Linux legt das Anmeldepasswort im Klartext auf der Festplatte ab.","Der Passwortschutz schaltet sich nach jedem Neustart von selbst ab."],"why":"Das Anmeldepasswort schützt nur den Login, nicht die Daten auf der Platte. LUKS verwandelt den Inhalt in Zeichensalat, den nur die richtige Passphrase beim Einschalten öffnet.","where":"Kapitel 2, „Erst ausprobieren, dann installieren“ (Erklärbox LUKS)"},{"id":"e03","q":"Wann richtest du die Festplattenverschlüsselung LUKS am einfachsten ein?","right":"Gleich bei der Installation des Systems.","wrong":["Nachträglich mit einem Klick in den Einstellungen.","Nach dem ersten großen Systemupdate.","Gar nicht, Linux verschlüsselt jede Festplatte automatisch."],"why":"LUKS wird bei der Installation aktiviert. Nachträglich geht es nur mit großem Aufwand oder einer Neuinstallation. Bei Pop!_OS ist es im Installer schon vorausgewählt.","where":"Kapitel 2, „Erst ausprobieren, dann installieren“ (Erklärbox LUKS)"},{"id":"e04","q":"Wie viele zufällige Würfelwörter empfiehlt das Buch mindestens für eine starke, merkbare Passphrase?","right":"Sechs","wrong":["Drei","Vier","Fünf"],"why":"Sechs zufällige Wörter aus der Wortliste der EFF ergeben rund 77 Bit Entropie. Wer lieber Zeichen nimmt, braucht laut Kapitel 2 mindestens 20 zufällige.","where":"Kapitel 18, „Regel 2: Starke, einzigartige Passwörter – und warum deins unter Linux der Generalschlüssel ist“, und Kapitel 2, „Nach der Installation: Das System bereinigen“"},{"id":"e05","q":"Was sieht dein Internetanbieter, wenn deine DNS-Anfragen unverschlüsselt laufen?","right":"Jede Domain, die du aufrufst, aber nicht den Inhalt der Seiten.","wrong":["Nur die Menge der übertragenen Daten, nicht wohin sie gehen.","Nichts, denn DNS-Anfragen sind von Haus aus immer verschlüsselt.","Den vollständigen Inhalt jeder Seite, auch bei HTTPS."],"why":"Standard-DNS ist unverschlüsselt. Der Anbieter kann jeden Namen protokollieren, auswerten, verkaufen oder auf staatliche Anfrage herausgeben.","where":"Kapitel 5, „Was DNS ist und warum du es kontrollieren musst“"},{"id":"e06","q":"Mit welchen zwei Strategien wehren sich Privacy-Browser gegen Fingerprinting?","right":"Uniformität und Randomisierung.","wrong":["Inkognito-Modus und Cookie-Löschung.","VPN und Proxy-Server.","Werbeblocker und Dark Mode."],"why":"Bei Uniformität sehen alle Nutzer gleich aus, so arbeiten Mullvad Browser und Tor Browser, LibreWolf nutzt ab Werk denselben Firefox-Schutz resistFingerprinting. Bei Randomisierung wird der Fingerprint leicht verändert, bei Brave heißt das „Farbling“. Ein VPN ändert am Fingerprint nichts, und auch ein Inkognito-Fenster macht dich nicht unkenntlich.","where":"Kapitel 6, „Die Kernentscheidung: Firefox-Basis vs. Chromium-Basis“"},{"id":"e07","q":"Warum hilft ein SIM-Wechsel allein nicht gegen Tracking im Mobilfunknetz?","right":"Die IMEI des Geräts bleibt gleich und verknüpft alte und neue SIM.","wrong":["Jede neue SIM übernimmt automatisch die alte Rufnummer.","Das VPN gibt die Kennung der SIM an jede besuchte Webseite weiter.","GrapheneOS erzeugt die IMEI bei jedem Neustart neu."],"why":"Die IMEI ist an die Hardware gebunden. Wer eine anonyme eSIM in ein Gerät lädt, das vorher mit der Klarnamen-SIM lief, verknüpft beide. Für echte Trennung braucht es ein eigenes Gerät.","where":"Kapitel 7, „Das Netz sieht mehr als deine Nummer“"},{"id":"e08","q":"Welcher Messenger ist die Alltagsempfehlung des Buches, kommt ohne Telefonnummer und E-Mail-Adresse aus und hat seinen Sitz in der Schweiz?","right":"Threema","wrong":["Signal","WhatsApp","Telegram"],"why":"Deine Identität ist bei Threema eine zufällige ID, mehr nicht. Signal bleibt die Brücke zur Masse, weil die meisten Menschen Threema noch nicht haben.","where":"Kapitel 7, „Messenger: Der ehrliche Vergleich“"},{"id":"e09","q":"Was bringt dir eine eigene E-Mail-Adresse für jeden Dienst?","right":"Ein Leck ist sofort zuzuordnen, die Adresse einzeln abschaltbar.","wrong":["Deine Mails kommen dadurch schneller und zuverlässiger beim Empfänger an.","Der Dienst darf deine Daten danach rechtlich nicht mehr weitergeben.","Du brauchst für diese Dienste kein eigenes Passwort mehr."],"why":"Bekommt eine Adresse plötzlich Spam, weißt du, wer deine Daten verkauft oder verloren hat. Du deaktivierst sie per Knopfdruck, ohne den Dienst zu wechseln.","where":"Kapitel 8, „E-Mail: Eine Adresse pro Dienst“"},{"id":"e10","q":"Was ist bei Nostr dein Account?","right":"Ein kryptografisches Schlüsselpaar aus npub und nsec.","wrong":["Ein Eintrag in der Datenbank des Relays, auf dem du dich registrierst.","Eine bestätigte Telefonnummer, verknüpft mit einem Benutzernamen.","Ein Konto bei der App, mit der du dich anmeldest."],"why":"Wer den Schlüssel besitzt, ist die Identität. Der npub ist deine Adresse, die jeder sehen darf, der nsec ist dein Geheimnis.","where":"Kapitel 9, „Was Nostr anders macht“ und „Wie Nostr funktioniert“"},{"id":"e11","q":"Was unterscheidet lokale KI grundsätzlich von Cloud-KI?","right":"Lokale KI behält jeden Prompt auf deinem Gerät.","wrong":["Lokale KI ist immer klüger als Cloud-Modelle.","Lokale KI braucht ein Konto beim Hersteller.","Lokale KI lernt laufend aus den Eingaben aller Nutzer."],"why":"Keine Nutzungsbedingungen erlauben das Training auf deinen Daten, kein US Cloud Act greift. Der Schutz ist eine technische Tatsache, kein Versprechen.","where":"Kapitel 12, „Das Problem mit Cloud-KI“"},{"id":"e12","q":"Was bedeutet die Backup-Regel 3-2-1?","right":"Mindestens drei Kopien, zwei Medientypen, eine Kopie außer Haus.","wrong":["Drei Passwörter, zwei Faktoren, ein Tresor.","Alle drei Tage sichern, zwei Wochen aufheben, einmal im Monat prüfen.","Drei Cloud-Anbieter in zwei Ländern, verwaltet über ein Konto."],"why":"Die Live-Daten auf dem Rechner zählen als erste Kopie. Was das Haus verlässt, wird vorher lokal verschlüsselt, dann speichert der Anbieter nur Ciphertext.","where":"Kapitel 13, „Die Backup-Strategie: 3-2-1, verschlüsselt“"},{"id":"e13","q":"Was hinterlässt Tails nach dem Herunterfahren auf dem benutzten Rechner?","right":"Keine Spur, Bleibendes liegt nur verschlüsselt auf dem Stick.","wrong":["Einen Browserverlauf, den Tor beim nächsten Start wieder löscht.","Eine verschlüsselte Kopie aller Dateien auf der internen Festplatte.","Die WLAN-Passwörter, gespeichert in den Einstellungen des Rechners."],"why":"Tails startet nur vom USB-Stick und ist amnesisch. Persistent Storage ist eine mit LUKS2 verschlüsselte Partition auf dem Stick, nicht auf dem Rechner.","where":"Kapitel 14, „Was Tails ist“ und „Persistent Storage – was zwischen den Starts überlebt“"},{"id":"e14","q":"Was ist am EU-Altersnachweis gut, und wo liegt sein Problem?","right":"Der Beweis ist datensparsam, die Geräteprüfung davor kann freie Systeme aussperren.","wrong":["Der Beweis verrät das Geburtsdatum, steht dafür aber jedem Betriebssystem offen.","Der Nachweis kommt ohne jede Prüfung aus, legt aber eine Kopie des Ausweises in der Cloud ab.","Gut ist nichts daran, denn der Nachweis übermittelt Name und Ausweisnummer an jede Seite."],"why":"Per Zero-Knowledge-Beweis erfährt die Webseite nur Ja oder Nein. Verlangt ein Anbieter aber Play Integrity, scheitern GrapheneOS und Custom-ROMs, bevor der Beweis überhaupt entsteht.","where":"Kapitel 17, „Die gute Hälfte: der Beweis ist datensparsam“ und „Die schlechte Hälfte: das Tor, nicht der Beweis“"},{"id":"e15","q":"Warum ist dein Benutzerpasswort unter Linux so kritisch?","right":"Es ist zugleich das sudo-Passwort, also der Generalschlüssel des Systems.","wrong":["Linux übermittelt es regelmäßig verschlüsselt an den Hersteller zur Sicherung.","Es dient unter Linux zugleich als Schlüssel für das WLAN.","Es ersetzt die Verschlüsselung der Festplatte vollständig."],"why":"Wer es errät, kann Software installieren, Schutzmechanismen abschalten und auf alles zugreifen. Es muss so stark sein wie das Wertvollste, das es schützt.","where":"Kapitel 18, „Regel 2: Starke, einzigartige Passwörter – und warum deins unter Linux der Generalschlüssel ist“"}]},{"id":"praxis","name":"Praxis","text":"Konkrete Handgriffe, Werkzeuge und die typischen Fehler.","fragen":[{"id":"p01","q":"Das Entschlüsselungsskript aus dem digitalen Bunker findet eine falsche Prüfsumme. Was tut es?","right":"Es warnt und bricht ab, außer du bestätigst ausdrücklich mit „j“.","wrong":["Es entschlüsselt weiter und schreibt nur eine Warnung ins Protokoll.","Es löscht die beschädigte Datei, damit sie keinen Schaden anrichtet.","Es repariert die Datei automatisch anhand der Prüfsumme."],"why":"Eine abweichende SHA256-Prüfsumme heißt: Die Datei ist beschädigt oder verändert. Ohne ausdrückliches Ja endet das Skript mit „Abbruch.“","where":"Kapitel 2, „Der digitale Bunker: Dateien verschlüsseln per Skript“"},{"id":"p02","q":"Was fehlt einem normalen Router wie Fritzbox oder Speedport laut Buch?","right":"Echte Zonentrennung und ein Kill-Switch auf Firewall-Ebene.","wrong":["Ein einfaches Gastnetz für Besucher und deren Geräte.","Eine Weboberfläche, über die du alle Einstellungen im Browser änderst.","Die automatische Vergabe von IP-Adressen an alle Geräte im Heimnetz."],"why":"Consumer-Router bieten kaum Zonentrennung, meist nur ein Gastnetz. Bricht das VPN, fließt der Verkehr ungeschützt weiter. Diese Lücken schließt eine eigene Firewall mit OPNsense.","where":"Kapitel 4, „Was ein normaler Router nicht kann“"},{"id":"p03","q":"Was ist CNAME Cloaking?","right":"Ein Tracker tarnt sich per DNS-Eintrag als Subdomain der besuchten Seite.","wrong":["Die Verschlüsselung von DNS-Anfragen über HTTPS, damit der Anbieter nichts sieht.","Ein Trick des Browsers, der Werbebanner vor dem Laden ausblendet.","Eine Funktion von NextDNS, die deine IP-Adresse vor Webseiten verbirgt."],"why":"Der Browser hält die Subdomain für einen Teil der Seite, die Anfrage landet aber beim Tracker. uBlock Origin unter Firefox und Brave im Modus „Aggressiv“ lösen die Weiterleitung selbst auf, Erweiterungen in Chrome können das nicht. Ein DNS-Resolver wie NextDNS blockiert bekannte Tracker-Domains schon auf DNS-Ebene, für jedes Gerät, das ihn nutzt.","where":"Kapitel 5, „CNAME Cloaking: Tracking das dein Browser nicht sieht“"},{"id":"p04","q":"Was unterscheidet SimpleX von den anderen verbreiteten Messengern?","right":"Es hat auf Protokollebene keine Nutzerkennung, nicht einmal eine zufällige ID.","wrong":["Es ist der einzige Messenger, der Nachrichten Ende-zu-Ende verschlüsselt.","Es speichert deine Kontaktliste verschlüsselt auf einem zentralen Server in der Schweiz.","Es funktioniert nur mit einer Telefonnummer aus einem Land der EU."],"why":"Jede Verbindung läuft über zwei einseitige Nachrichten-Warteschlangen. Der Kontaktgraph liegt nirgendwo zentral, sondern nur auf deinem Gerät. Freiwillige öffentliche Namen gibt es nur für Kanäle, Geschäfte und öffentliche Personen.","where":"Kapitel 7, „SimpleX: Der Messenger ohne Identität“"},{"id":"p05","q":"Warum sind Plus-Adressen wie name+shop@proton.me kein Privacy-Werkzeug?","right":"Der Teil vor dem Pluszeichen verrät die Hauptadresse.","wrong":["Proton unterstützt Plus-Adressen gar nicht.","Mails an Plus-Adressen kommen unverschlüsselt im Postfach an.","Plus-Adressen verfallen nach 30 Tagen automatisch."],"why":"Zum Sortieren sind Plus-Adressen praktisch. Zum Trennen von Identitäten taugen echte Aliasse wie bei hide-my-email.","where":"Kapitel 8, „Hide-my-email: Protons Alias-System im Detail“"},{"id":"p06","q":"Was macht Protons Key Transparency prüfbar?","right":"Ob der Server den echten Schlüssel eines Proton-Kontakts ausliefert.","wrong":["Ob der Empfänger deine Mail geöffnet und gelesen hat.","Ob der PGP-Schlüssel eines Kontakts außerhalb von Proton echt ist.","Ob dein Passwort in einem bekannten Datenleck aufgetaucht ist."],"why":"Jeder ausgegebene Schlüssel landet als Prüfwert in einem nachprüfbaren Verzeichnis, ein untergeschobener Schlüssel fiele auf. Für Adressen außerhalb von Proton greift die Prüfung nicht, dort bleibt der Fingerabdruckvergleich von Hand.","where":"Kapitel 8, „Proton Mail härten: die Einstellungen, die zählen“"},{"id":"p07","q":"Wohin gehört dein privater Nostr-Schlüssel (nsec)?","right":"In einen eigenen Signer wie Amber, nie in die Zwischenablage.","wrong":["Direkt in die Login-Maske der Nostr-App, dort ist er geschützt.","In eine Notiz-App, damit er bei Bedarf griffbereit ist.","Als Sicherung auf ein öffentliches Relay, damit er nie verloren geht."],"why":"Schadsoftware durchsucht die Zwischenablage nach Zeichenketten wie nsec1. Amber gibt den Schlüssel nie heraus, die App erfährt nur deinen npub.","where":"Kapitel 9, „Die harte Wahrheit über den Schlüssel“"},{"id":"p08","q":"Warum taugt die GbR seit dem MoPeG (1. Januar 2024) nicht mehr als diskrete Hülle für Immobilien?","right":"Für Immobilien muss sie als eGbR ins öffentliche Gesellschaftsregister.","wrong":["Das MoPeG hat die GbR vollständig abgeschafft.","Eine GbR darf seit 2024 keine Bankkonten mehr eröffnen.","Das Grundbuch ist seit 2024 für jeden frei einsehbar, ohne ein berechtigtes Interesse darzulegen."],"why":"Im Register stehen Name, Vorname, Geburtsdatum und Wohnort aller Gesellschafter. Die nicht eingetragene GbR bleibt möglich, kann aber keine Immobilien erwerben. Das Buch empfiehlt GmbH oder UG.","where":"Kapitel 10, „Was nach 2024 nicht mehr funktioniert: Die GbR“"},{"id":"p09","q":"Welcher DSGVO-Artikel ist laut Buch der eigentliche Hebel gegen Data Broker?","right":"Art. 21, das Widerspruchsrecht","wrong":["Art. 15, das Auskunftsrecht","Art. 20, das Recht auf Datenübertragbarkeit","Art. 6, die Rechtmäßigkeit der Verarbeitung"],"why":"Die meisten Marketingdaten-Broker stützen sich auf berechtigtes Interesse. Gegen Direktwerbung ist der Widerspruch absolut, danach folgt die Löschpflicht nach Art. 17.","where":"Kapitel 11, „Der eigentliche Hebel: Art. 21 Widerspruch“"},{"id":"p10","q":"Wer darf über die einfache Melderegisterauskunft (§ 44 BMG) deine aktuelle Meldeadresse abfragen?","right":"Grundsätzlich jeder, ohne ein berechtigtes Interesse zu belegen.","wrong":["Behörden und Gerichte, Privatleute bekommen keine Auskunft.","Nur wer eine schriftliche Einwilligung von dir vorlegen kann.","Nur Anwälte mit einem Aktenzeichen und einem berechtigten Interesse."],"why":"Wer gefährdet ist, kann die Auskunftssperre nach § 51 BMG beantragen. Unabhängig vom Register rät das Buch für den Alltag zu einer Postfach- oder c/o-Adresse, damit die Wohnadresse nur bei Behörden, Bank und Arbeitgeber liegt.","where":"Kapitel 11, „Das amtliche Register: Melderegister-Sperren“"},{"id":"p11","q":"Du nutzt das Werkstatt-Blatt „Antrag: Melderegister-Sperren“. Was schickst du an die Meldebehörde?","right":"Seite 2, den Brief in schlichter Briefform.","wrong":["Seite 1, das ausgefüllte Arbeitsblatt mit deinen Notizen.","Alle drei Seiten zusammen.","Seite 3, den Brief an die Krankenkasse."],"why":"Seite 1 ist dein Arbeitsblatt. Seite 2 geht an die Meldebehörde, Seite 3 mit dem ePA-Widerspruch an die Krankenkasse.","where":"Kapitel 11, „Gesundheitsdaten: Die elektronische Patientenakte“ (Hinweis auf das Werkstatt-Blatt)"},{"id":"p12","q":"Wohin gehört die Sicherung deines Bitcoin-Seeds?","right":"Nur analog, handschriftlich und in Metall, nie digital.","wrong":["In einen gut verschlüsselten VeraCrypt-Container auf einem Offline-Rechner.","In den Passwortmanager, dort liegt er ohnehin verschlüsselt.","Als Foto auf einen USB-Stick, der nie mit dem Internet verbunden war."],"why":"Auch verschlüsselt und offline gehört der Seed auf kein digitales Medium. Eine optionale Passphrase verwahrst du getrennt an einem anderen Ort.","where":"Kapitel 13, „Bitcoin-Nachlass: Die härteste Nuss“"},{"id":"p13","q":"Du stellst eine Wasabi-Wallet wieder her und tippst die Passphrase falsch. Was passiert?","right":"Du siehst eine andere, leere Wallet, ohne jede Fehlermeldung.","wrong":["Wasabi meldet „Passphrase falsch“ und fragt erneut nach.","Die Wallet wird nach drei Fehlversuchen für 24 Stunden gesperrt.","Wasabi stellt trotzdem die richtige Wallet her, die Passphrase schützt nur die lokale Datei."],"why":"Die Passphrase ist ein Schlüsselbestandteil nach BIP39. Seed und Passphrase ergeben nur zusammen den Zugang, deshalb beide getrennt auf Papier sichern.","where":"Kapitel 15, „Schritt 3: Der Mix in der Praxis – Wasabi auf Tails“"},{"id":"p14","q":"Welcher Fehler nach dem CoinJoin ist laut Buch der häufigste und teuerste?","right":"Die frisch gemischten Coins direkt an eine KYC-Börse schicken.","wrong":["Für jeden Zahlungseingang eine neue, unbenutzte Adresse verwenden.","Die gemischten Coins vor dem Ausgeben eine Weile liegen lassen.","Die Wallet ausschließlich über das Tor-Netzwerk verbinden."],"why":"Die Börse verknüpft die Coins mit deinem Konto und damit mit deiner Identität. Ebenso schädlich: gemischte und ungemischte Coins in einer Transaktion zusammen ausgeben.","where":"Kapitel 15, „Nach dem Mix: die Regeln, die alles entscheiden“"},{"id":"p15","q":"Welche Monero-Technik verbirgt den Betrag einer Transaktion?","right":"RingCT","wrong":["Ring Signatures","Stealth Addresses","Dandelion++"],"why":"RingCT verbirgt Beträge mit Pedersen Commitments. Ring Signatures verbergen den Sender, Stealth Addresses den Empfänger, Dandelion++ die IP-Adresse.","where":"Kapitel 16, „Die Privacy-Technik: Fünf Schichten, ein Ziel“"}]}]}</script>
+<script>/* Quiz zu den Büchern: läuft vollständig im Browser, sendet nichts und speichert nichts
+   (kein Cookie, kein localStorage, kein Netz). Fragen und Texte stehen im JSON-Block #quiz-daten.
+   build_quiz.py setzt dieses Skript in die Seite und trägt seinen Hash in die CSP ein. */
+(function () {
+  'use strict';
+  var D = JSON.parse(document.getElementById('quiz-daten').textContent);
+  var T = D.ui;
+  var S = null;   // laufende Runde: {rid, qs, i, score, miss, done}
+
+  function $(id) { return document.getElementById(id); }
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+  function fill(tpl, p) {
+    return tpl.replace(/\{(\w+)\}/g, function (m, k) { return p[k] != null ? String(p[k]) : m; });
+  }
+  function mix(a) {
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1)), t = a[i];
+      a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  function view(name) {
+    ['start', 'frage', 'ende'].forEach(function (v) { $('v-' + v).classList.toggle('hidden', v !== name); });
+    window.scrollTo(0, 0);
+  }
+
+  function questions(rid) {
+    if (rid === 'alle') return D.runden.reduce(function (acc, r) { return acc.concat(r.fragen); }, []);
+    for (var i = 0; i < D.runden.length; i++) if (D.runden[i].id === rid) return D.runden[i].fragen.slice();
+    return [];
+  }
+  function roundName(rid) {
+    if (rid === 'alle') return T.allName;
+    for (var i = 0; i < D.runden.length; i++) if (D.runden[i].id === rid) return D.runden[i].name;
+    return '';
+  }
+
+  // Nach einem Wechsel der Ansicht kurz keine Klicks: der zweite Klick eines Doppelklicks landete sonst
+  // auf dem Element, das nach dem Umbau an derselben Stelle liegt (Antwort, Link). Audit 24.10.2026.
+  function sperren() {
+    var r = document.documentElement;
+    r.classList.add('sperre');
+    setTimeout(function () { r.classList.remove('sperre'); }, 350);
+  }
+
+  function start(rid) {
+    var qs = questions(rid);
+    if (!qs.length) return;
+    sperren();
+    S = { rid: rid, qs: qs, i: 0, score: 0, miss: [], done: false };
+    $('q-runde').textContent = roundName(rid);
+    view('frage');
+    render();
+  }
+
+  function render() {
+    var q = S.qs[S.i], n = S.qs.length;
+    S.done = false;
+    $('q-pos').textContent = fill(T.pos, { n: S.i + 1, total: n });
+    $('q-score').textContent = fill(T.score, { n: S.score });
+    $('q-bar').style.width = (S.i / n * 100) + '%';
+    $('q-bar-wrap').setAttribute('aria-valuenow', String(S.i));
+    $('q-bar-wrap').setAttribute('aria-valuemax', String(n));
+    $('q-text').textContent = q.q;
+    var box = $('q-antworten');
+    box.textContent = '';
+    var opts = mix([{ t: q.right, ok: true }].concat(q.wrong.map(function (w) { return { t: w, ok: false }; })));
+    opts.forEach(function (o, k) {
+      var b = el('button', 'ans');
+      b.type = 'button';
+      b.setAttribute('data-action', 'pick');
+      b.setAttribute('data-ok', o.ok ? '1' : '0');
+      b.appendChild(el('span', 'ans-key', 'ABCD'.charAt(k)));
+      b.appendChild(el('span', 'ans-text', o.t));
+      box.appendChild(b);
+    });
+    $('q-feedback').classList.add('hidden');
+    $('q-weiter').classList.add('hidden');
+    $('q-live').textContent = '';
+    $('q-text').focus({ preventScroll: true });
+  }
+
+  function pick(b) {
+    if (!S || S.done) return;
+    S.done = true;
+    var q = S.qs[S.i], ok = b.getAttribute('data-ok') === '1';
+    var all = $('q-antworten').querySelectorAll('.ans');
+    for (var i = 0; i < all.length; i++) {
+      var a = all[i];
+      a.disabled = true;
+      if (a.getAttribute('data-ok') === '1') a.classList.add('right');
+      else if (a === b) a.classList.add('wrong');
+      else a.classList.add('dim');
+    }
+    if (ok) S.score++; else S.miss.push(q);
+    var fb = $('q-feedback');
+    fb.className = 'feedback ' + (ok ? 'is-right' : 'is-wrong');
+    $('fb-head').textContent = ok ? T.right : T.wrong;
+    $('fb-why').textContent = q.why;
+    $('fb-where').textContent = q.where;
+    $('q-score').textContent = fill(T.score, { n: S.score });
+    $('q-bar').style.width = ((S.i + 1) / S.qs.length * 100) + '%';
+    var sol = /[.?“”"]$/.test(q.right) ? q.right : q.right + '.';
+    $('q-live').textContent = (ok ? T.right : T.wrong + ' ' + fill(T.solution, { a: sol })) + ' ' + q.why;
+    var w = $('q-weiter');
+    w.textContent = S.i + 1 < S.qs.length ? T.next : T.finish;
+    w.classList.remove('hidden');
+    w.focus({ preventScroll: true });
+  }
+
+  function next() {
+    if (!S || !S.done) return;
+    sperren();
+    S.i++;
+    if (S.i >= S.qs.length) end(); else render();
+  }
+
+  function end() {
+    var n = S.qs.length, p = S.score / n;
+    view('ende');
+    $('e-score').textContent = fill(T.result, { n: S.score, total: n });
+    $('e-text').textContent = p >= 0.9 ? T.r3 : (p >= 0.6 ? T.r2 : T.r1);
+    var list = $('e-liste');
+    list.textContent = '';
+    S.miss.forEach(function (q) {
+      var li = el('li', null, q.q);
+      li.appendChild(el('span', null, T.reread + ' ' + q.where));
+      list.appendChild(li);
+    });
+    $('e-miss').classList.toggle('hidden', S.miss.length === 0);
+    $('e-again').setAttribute('data-arg', S.rid);
+    $('e-score').focus({ preventScroll: true });
+  }
+
+  function home() {
+    S = null;
+    view('start');
+  }
+
+  function theme() {
+    var r = document.documentElement, soft = r.getAttribute('data-theme') === 'soft';
+    if (soft) r.removeAttribute('data-theme'); else r.setAttribute('data-theme', 'soft');
+    $('theme-btn').setAttribute('aria-pressed', soft ? 'false' : 'true');
+  }
+
+  document.addEventListener('click', function (ev) {
+    var t = ev.target.closest('[data-action]');
+    if (!t) return;
+    var a = t.getAttribute('data-action');
+    if (a === 'start') start(t.getAttribute('data-arg'));
+    else if (a === 'pick') pick(t);
+    else if (a === 'next') next();
+    else if (a === 'home') home();
+    else if (a === 'theme') theme();
+  });
+
+  // Tasten 1 bis 4 oder A bis D wählen eine Antwort, solange eine Frage offen ist.
+  document.addEventListener('keydown', function (ev) {
+    if (!S || ev.altKey || ev.ctrlKey || ev.metaKey) return;
+    if ($('v-frage').classList.contains('hidden')) return;
+    if (S.done) {
+      // Enter führt weiter, auch wenn der Fokus nach einem Klick auf eine gesperrte Antwort auf <body> liegt
+      var f = document.activeElement;
+      if (ev.key === 'Enter' && (!f || f === document.body || f.classList.contains('ans'))) { ev.preventDefault(); next(); }
+      return;
+    }
+    var k = String(ev.key).toLowerCase(), idx = '1234'.indexOf(k);
+    if (idx < 0) idx = 'abcd'.indexOf(k);
+    if (idx < 0 || k.length !== 1) return;
+    var bs = $('q-antworten').querySelectorAll('.ans');
+    if (bs[idx]) { ev.preventDefault(); pick(bs[idx]); }
+  });
+
+  document.documentElement.classList.remove('nojs');
+})();
+</script>
+</body>
+</html>
