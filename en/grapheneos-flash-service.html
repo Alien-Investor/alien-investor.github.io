@@ -641,7 +641,7 @@
           <li><span class="chk">✓</span> GrapheneOS (current, stable)</li>
           <li><span class="chk">✓</span> Bootloader locked</li>
           <li><span class="chk">✓</span> Auditor verification</li>
-          <li><span class="chk">✓</span> OEM unlock disabled</li>
+          <li><span class="chk">✓</span> OEM unlocking disabled</li>
           <li><span class="chk">✓</span> Device bought with cash</li>
           <li><span class="dim">–</span> No pre-configuration</li>
           <li><span class="dim">–</span> No ebook</li>
@@ -837,7 +837,7 @@
     </div>
 
     <div class="info-box">
-      <p><strong>Not included — you configure yourself:</strong> VPN, Private DNS, user profile passwords, SeedVault backup destination, Bitcoin wallet, 2FA codes. Those are your keys — they belong in your hands, not mine.</p>
+      <p><strong>Not included — you configure yourself:</strong> VPN, Private DNS, user profile passwords, Seedvault backup destination, Bitcoin wallet, 2FA codes. Those are your keys — they belong in your hands, not mine.</p>
     </div>
     </details>
 
@@ -912,11 +912,11 @@
       </details>
       <details class="faq-acc">
         <summary>What is Auditor verification? <span class="faq-arrow">▶</span></summary>
-        <p class="faq-body">The Auditor app uses the Pixel's <strong>Titan M2 security chip</strong> to cryptographically prove: (1) The device is running genuine, unmodified GrapheneOS. (2) The bootloader is actually locked. (3) In later checks with the same pairing, Auditor reports if any of this has changed. This is a <strong>hardware-backed attestation</strong>. I run the verification before shipping and include the result. It applies to my pairing, so you cannot recompute it yourself. You can verify it yourself with your own Auditor device or via attestation.app. That creates your own pairing with its own fingerprint, which differs from the one in my proof.</p>
+        <p class="faq-body">The Auditor app uses the Pixel's <strong>Titan M2 security chip</strong> to cryptographically prove: (1) The device is a genuine Pixel running unmodified GrapheneOS. (2) The bootloader is actually locked. (3) In later checks with the same pairing, Auditor reports if any of this has changed. This is a <strong>hardware-backed attestation</strong>. I run the verification before shipping and include the result. It applies to my pairing, so you cannot recompute it yourself. You can run your own check with a second Android device running Android 13 or later with the Auditor app, or via attestation.app. That creates your own pairing with its own fingerprint, which differs from the one in my proof.</p>
       </details>
       <details class="faq-acc">
-        <summary>What does "OEM unlock disabled" mean? <span class="faq-arrow">▶</span></summary>
-        <p class="faq-body">Installing GrapheneOS requires briefly unlocking the bootloader — that's technically unavoidable. After installation it is <strong>immediately re-locked</strong>, and additionally the "OEM unlocking" toggle in Developer Options is disabled. This prevents anyone with physical access to your device from unlocking the bootloader again and flashing a compromised system. On every boot, the Titan chip verifies that GrapheneOS is unmodified (<strong>Verified Boot</strong>). If something doesn't match: the device won't start — no exceptions.</p>
+        <summary>What does "OEM unlocking disabled" mean? <span class="faq-arrow">▶</span></summary>
+        <p class="faq-body">Installing GrapheneOS requires briefly unlocking the bootloader, which is technically unavoidable. After installation it is <strong>immediately re-locked</strong>, and additionally the "OEM unlocking" toggle in Developer options is disabled. This means the bootloader can't simply be unlocked again over a cable. Allowing it is only possible from within the running system, and every unlock wipes all data. On every boot, <strong>Verified Boot</strong> checks that GrapheneOS is unmodified. A tampered system is caught.</p>
       </details>
       <details class="faq-acc">
         <summary>Where do the installed apps come from? <span class="faq-arrow">▶</span></summary>

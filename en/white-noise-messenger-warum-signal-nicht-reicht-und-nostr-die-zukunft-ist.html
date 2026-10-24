@@ -70,7 +70,7 @@
     </p>
 
     <p>
-      For a long time, Signal was considered the gold standard. But Signal has a problem: it is centralized and knows your phone number in the normal case. It sees your number and your IP address and could infer <em>who</em> is talking to <em>whom</em>. In an era where metadata can be more dangerous than the content itself, that is no longer enough.
+      For a long time, Signal was considered the gold standard. But Signal has a problem: it is centralized and normally knows your phone number. It sees your IP address and could infer <em>who</em> is talking to <em>whom</em>. In an era where metadata can be more dangerous than the content itself, that is no longer enough.
     </p>
     <p>
       Enter <strong>White Noise</strong>. A messenger built on the Nostr protocol, published by a nonprofit organization and built so that relays learn as little about you as possible.
@@ -81,8 +81,8 @@
       Even with WhatsApp or Signal, your messages are "end-to-end encrypted" (E2EE). That's good, but not enough.
     </p>
     <ul>
-      <li><strong>The server sees everything:</strong> Even if Signal can't read the content, the server sees the "social graph". It knows you're messaging an investigative journalist at 2 a.m. That metadata is often more valuable to intelligence agencies than the text itself.</li>
-      <li><strong>Identity coercion:</strong> Normally you need a phone number, which ties your digital identity to your SIM registration. Signing up without a number has only existed since October 2026, as a paid beta on Android, paid through Google Play.</li>
+      <li><strong>The server sees more than it should:</strong> Even if Signal can't read the content, there is still a central server that sees your IP address and usually knows your phone number as well. Signal technically hides the sender ("sealed sender"), but whoever monitors the server could infer from IP addresses and timing that you're messaging an investigative journalist at 2 a.m. That metadata is often more valuable to intelligence agencies than the text itself.</li>
+      <li><strong>Identity coercion:</strong> Normally you need a phone number, which ties your digital identity to your SIM registration. Since October 2026, the Android app has let new accounts sign up without a number, a feature Signal still describes as a beta. The small one-time fee for it can so far only be paid through Google Play.</li>
       <li><strong>Censorship risk:</strong> A central server can be shut down or blocked. An app in the Apple App Store can be removed under government pressure.</li>
     </ul>
 

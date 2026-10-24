@@ -239,13 +239,13 @@
     <ul>
       <li><strong>Integrity:</strong> Change a single bit in the file and the hash changes. Tampering is immediately obvious.</li>
       <li><strong>Censorship resistance:</strong> Since a file is only retrieved by its hash, it can be mirrored across many servers.
-      If one server deletes it, your phone simply fetches it from somewhere else.</li>
+      For apps that only the Zap Store's indexer has listed, however, the file comes from the developer's download address.</li>
     </ul>
 
     <h3>Cryptographic Identity</h3>
     <p>
       In the Zap Store there are no accounts with email addresses. Developers identify themselves via their <strong>public key</strong>.
-      Release and update metadata are signed with the private key. Your phone checks: "Does this update really come from the same developer as before?" Many apps, however, are listed by the Zap Store indexer, which mirrors them from GitHub for example. Then the signature comes from the indexer, not from the developer. Who stands behind a key is only proven by an identity proof.
+      Release and update metadata are signed with the private key. Your phone checks: "Does this update really come from the same developer as before?" Many apps, however, are listed by the Zap Store indexer, which points to the release on GitHub, for example. Then the indexer signs the Nostr entry, not the developer. The APK itself still carries the developer's signature. Who stands behind a key is only proven by an identity proof.
       That's supply-chain security at Linux level, made usable for end users.
     </p>
 

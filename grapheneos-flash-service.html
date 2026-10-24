@@ -813,7 +813,7 @@
     <details class="acc-section">
     <summary><h2><svg style="width:0.85em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M18 2 L5 9 L5 20 C5 28.5 10.5 34 18 36 C25.5 34 31 28.5 31 20 L31 9 Z" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.9"/><polyline points="11,19 16,25 26,12" fill="none" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Digital Bunker — was eingerichtet wird</h2><span class="acc-arrow">▶</span></summary>
     <p style="color:#aaa; font-size:0.91em; margin-bottom:14px; margin-top:14px;">
-      Alles was ohne deine Zugangsdaten und ohne SIM-Karte konfiguriert werden kann. VPN, DNS, Nutzerprofile-Passwörter, SeedVault-Backup-Ziel und Wallets bleiben bewusst außen vor — das sind deine Schlüssel.
+      Alles was ohne deine Zugangsdaten und ohne SIM-Karte konfiguriert werden kann. VPN, DNS, Nutzerprofile-Passwörter, Seedvault-Backup-Ziel und Wallets bleiben bewusst außen vor — das sind deine Schlüssel.
     </p>
 
     <div class="config-grid">
@@ -890,7 +890,7 @@
     </div>
 
     <div class="info-box">
-      <p><strong>Nicht enthalten — Kunde richtet selbst ein:</strong> VPN, Private DNS, Nutzerprofile-Passwörter, SeedVault-Backup-Ziel, Bitcoin-Wallet, 2FA-Codes. Das sind deine Schlüssel — die gehören in deine Hände, nicht in meine.</p>
+      <p><strong>Nicht enthalten — Kunde richtet selbst ein:</strong> VPN, Private DNS, Nutzerprofile-Passwörter, Seedvault-Backup-Ziel, Bitcoin-Wallet, 2FA-Codes. Das sind deine Schlüssel — die gehören in deine Hände, nicht in meine.</p>
     </div>
     </details>
 
@@ -964,11 +964,11 @@
       </details>
       <details class="faq-acc">
         <summary>Was ist die Auditor-Verifikation? <span class="faq-arrow">▶</span></summary>
-        <p class="faq-body">Die Auditor-App nutzt den <strong>Titan-M2-Sicherheitschip</strong> des Pixels, um kryptografisch zu beweisen: (1) Das Gerät läuft auf echtem, unverändertem GrapheneOS. (2) Der Bootloader ist tatsächlich gesperrt. (3) Bei späteren Prüfungen mit derselben Paarung meldet Auditor, wenn sich daran etwas geändert hat. Das ist eine <strong>hardwarebasierte Attestierung</strong>. Ich führe die Verifikation vor dem Versand durch und lege das Ergebnis bei. Es gilt für meine Paarung, selbst nachrechnen kannst du es nicht. Selbst prüfen kannst du mit einem eigenen Auditor-Gerät oder über attestation.app. Dabei entsteht eine eigene Paarung mit eigenem Fingerprint, der sich von meinem Nachweis unterscheidet.</p>
+        <p class="faq-body">Die Auditor-App nutzt den <strong>Titan-M2-Sicherheitschip</strong> des Pixels, um kryptografisch zu beweisen: (1) Das Gerät ist ein echtes Pixel und läuft auf unverändertem GrapheneOS. (2) Der Bootloader ist tatsächlich gesperrt. (3) Bei späteren Prüfungen mit derselben Paarung meldet Auditor, wenn sich daran etwas geändert hat. Das ist eine <strong>hardwarebasierte Attestierung</strong>. Ich führe die Verifikation vor dem Versand durch und lege das Ergebnis bei. Es gilt für meine Paarung, selbst nachrechnen kannst du es nicht. Selbst prüfen kannst du mit einem zweiten Android-Gerät ab Android 13 mit der Auditor-App oder über attestation.app. Dabei entsteht eine eigene Paarung mit eigenem Fingerprint, der sich von dem in meinem Nachweis unterscheidet.</p>
       </details>
       <details class="faq-acc">
         <summary>Was bedeutet „OEM-Entsperrung deaktiviert"? <span class="faq-arrow">▶</span></summary>
-        <p class="faq-body">Für die Installation von GrapheneOS muss der Bootloader kurz entsperrt werden — das ist technisch notwendig. Nach der Installation wird er <strong>sofort wieder gesperrt</strong> und zusätzlich die „OEM-Entsperrung" in den Entwickleroptionen deaktiviert. So kann niemand mit physischem Zugriff auf dein Gerät den Bootloader erneut öffnen und ein manipuliertes System aufspielen. Bei jedem Start prüft der Titan-Chip, ob GrapheneOS unverändert ist (<strong>Verified Boot</strong>). Stimmt etwas nicht: Das Gerät startet nicht — ohne Ausnahme.</p>
+        <p class="faq-body">Für die Installation von GrapheneOS muss der Bootloader kurz entsperrt werden, das ist technisch notwendig. Nach der Installation wird er <strong>sofort wieder gesperrt</strong> und zusätzlich die „OEM-Entsperrung" in den Entwickleroptionen deaktiviert. So lässt sich der Bootloader nicht einfach per Kabel wieder öffnen. Die Freigabe dafür gibt es nur im laufenden System, und jedes Entsperren löscht alle Daten. Bei jedem Start prüft <strong>Verified Boot</strong>, ob GrapheneOS unverändert ist. Ein manipuliertes System fliegt auf.</p>
       </details>
       <details class="faq-acc">
         <summary>Woher kommen die installierten Apps? <span class="faq-arrow">▶</span></summary>

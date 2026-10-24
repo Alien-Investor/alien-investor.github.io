@@ -236,13 +236,13 @@
     <ul>
       <li><strong>Integrität:</strong> Ändert sich ein Bit an der Datei, ändert sich der Hash. Manipulation fällt sofort auf.</li>
       <li><strong>Zensurresistenz:</strong> Da die Datei nur über den Hash abgerufen wird, kann sie auf vielen Servern gespiegelt werden.
-      Löscht ein Server sie, holt sich dein Handy die Datei einfach woanders.</li>
+      Bei Apps, die nur der Indexer des Zap Store eingetragen hat, kommt die Datei dagegen von der Download-Adresse des Entwicklers.</li>
     </ul>
 
     <h3>Kryptografische Identität</h3>
     <p>
       Im Zap Store gibt es keine Accounts mit E-Mail-Adresse. Entwickler identifizieren sich über ihren <strong>Public Key</strong>.
-      Release- und Update-Metadaten werden mit dem privaten Schlüssel signiert. Dein Handy prüft: „Kommt dieses Update wirklich vom gleichen Entwickler wie vorher?“ Viele Apps stellt allerdings der Indexer des Zap Store ein, der sie etwa von GitHub spiegelt. Dann stammt die Signatur vom Indexer, nicht vom Entwickler. Wer hinter einem Schlüssel steht, beweist erst ein Identity-Proof.
+      Release- und Update-Metadaten werden mit dem privaten Schlüssel signiert. Dein Handy prüft: „Kommt dieses Update wirklich vom gleichen Entwickler wie vorher?“ Viele Apps stellt allerdings der Indexer des Zap Store ein und verweist dabei etwa auf das Release bei GitHub. Dann signiert der Indexer den Nostr-Eintrag, nicht der Entwickler. Die APK selbst trägt weiter die Signatur des Entwicklers. Wer hinter einem Schlüssel steht, beweist erst ein Identity-Proof.
       Das ist Supply-Chain-Security auf Linux-Niveau, aber nutzbar gemacht für Endanwender.
     </p>
 

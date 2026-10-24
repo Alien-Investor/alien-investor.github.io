@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en" class="nojs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- CSP: kein Netz, kein fremder Code. Stil und Skript nur per Hash (build_quiz.py), Schriften vom eigenen Server. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-dkvA4V2ckU9V2tZQyRa5iJnr78fcCSk9IwqzglReF/U='; style-src 'self' 'sha256-IKSAzT28SOhcZcxDtnNQ0dF0sTn2O156pc8D3wJyHo8='; font-src 'self'; img-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Quiz Volume 1: GrapheneOS | Alien Investor</title>
+<meta name="description" content="30 questions on the book “GrapheneOS: Android in the Age of Surveillance” in two rounds, each with an explanation and the place in the book. Free, no sign-up, the page stores nothing.">
+<link rel="canonical" href="/en/quiz-band1.html">
+<link rel="alternate" hreflang="de" href="/quiz-band1.html">
+<link rel="alternate" hreflang="en" href="/en/quiz-band1.html">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>/* quiz.css — Quiz zu den Büchern im App-Look der Alien-Investor-Apps.
+   Farben und Bausteine aus dem App-Design-Kit (~/.claude/skills/app-design/kit/app-theme.css, Stand 15.10.2026),
+   auf das Nötige gekürzt. Farben nur über Variablen, damit „Neon“ und „Soft“ mitziehen.
+   build_quiz.py setzt diese Datei als <style> in die Seite und trägt ihren Hash in die CSP ein. */
+
+:root{
+  --neon:#00ffcc; --neon-dim:rgba(0,255,204,.15); --neon-mid:rgba(0,255,204,.4);
+  --red:#ff4466; --red-dim:rgba(255,68,102,.12);
+  --orange:#ff8844;
+  --bg:#000; --card-bg:#050f0d; --border:rgba(0,255,204,.2);
+  --text:#cfeee6; --text-dim:#4a7a6d; --text-mid:#7ab8a8;
+}
+[data-theme="soft"]{
+  --neon:#00c8a0; --neon-dim:rgba(0,200,160,.15); --neon-mid:rgba(0,200,160,.35);
+  --bg:#0d1a2b; --card-bg:#0f2535; --border:rgba(0,200,160,.18);
+  --text:#d2ebe5; --text-dim:#5d8f82; --text-mid:#8ac8b8; --red:#e03355; --red-dim:rgba(224,51,85,.14);
+}
+[data-theme="soft"] body::after{opacity:.35;}
+
+/* ===== Grundlage: Sternenhimmel + Scanlines ===== */
+*{margin:0;padding:0;box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{background:var(--bg);color:var(--text);font-family:'Share Tech Mono',monospace;min-height:100vh;overflow-x:hidden;position:relative;line-height:1.55;}
+body::before{content:'';position:fixed;inset:0;background-image:
+ radial-gradient(1px 1px at 10% 15%,rgba(0,255,204,.4) 0%,transparent 100%),
+ radial-gradient(1px 1px at 30% 40%,rgba(0,255,204,.25) 0%,transparent 100%),
+ radial-gradient(1px 1px at 55% 20%,rgba(0,255,204,.35) 0%,transparent 100%),
+ radial-gradient(1px 1px at 70% 60%,rgba(0,255,204,.2) 0%,transparent 100%),
+ radial-gradient(1px 1px at 85% 30%,rgba(0,255,204,.3) 0%,transparent 100%),
+ radial-gradient(1px 1px at 20% 75%,rgba(0,255,204,.2) 0%,transparent 100%),
+ radial-gradient(1px 1px at 45% 85%,rgba(0,255,204,.3) 0%,transparent 100%),
+ radial-gradient(1px 1px at 90% 80%,rgba(0,255,204,.25) 0%,transparent 100%);
+ pointer-events:none;z-index:0;}
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.15) 2px,rgba(0,0,0,.15) 4px);pointer-events:none;z-index:1;}
+@media (hover:hover) and (pointer:fine){
+::-webkit-scrollbar{width:10px;height:10px;}
+::-webkit-scrollbar-track{background:rgba(0,255,204,.04);}
+::-webkit-scrollbar-thumb{background:var(--neon-mid);border:2px solid transparent;background-clip:padding-box;border-radius:6px;}
+::-webkit-scrollbar-thumb:hover{background:var(--neon);background-clip:padding-box;}
+::-webkit-scrollbar-button{display:none;}
+}
+@supports not selector(::-webkit-scrollbar){html{scrollbar-color:var(--neon-mid) transparent;scrollbar-width:thin;}}
+.container{position:relative;z-index:2;max-width:760px;margin:0 auto;padding:14px 16px 48px;}
+a{color:var(--neon);text-decoration:none;}
+a:hover{text-shadow:0 0 8px var(--neon-mid);}
+.hidden{display:none!important;}
+.center{text-align:center;}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+.nojs .needs-js{display:none!important;}
+.sperre a,.sperre button{pointer-events:none;}   /* kurz nach Ansichtswechsel, siehe sperren() in quiz.js */
+:focus-visible{outline:2px solid var(--neon);outline-offset:2px;}
+
+/* ===== Leiste oben ===== */
+.topbar{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.78rem;letter-spacing:1px;margin-bottom:22px;}
+.topbar a{color:var(--text-mid);}
+.topbar a:hover{color:var(--neon);}
+
+/* ===== Kopf: Logo, Tagline, Sprach- und Darstellungs-Knopf ===== */
+.app-head{text-align:center;position:relative;margin-bottom:24px;}
+.header-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(400px,100%);height:100px;background:radial-gradient(ellipse,rgba(0,255,204,.08) 0%,transparent 70%);pointer-events:none;}
+.logo{font-family:'Orbitron',sans-serif;font-size:clamp(1.3rem,4vw,1.9rem);font-weight:900;letter-spacing:4px;text-transform:uppercase;color:var(--neon);text-shadow:0 0 20px rgba(0,255,204,.7),0 0 40px rgba(0,255,204,.3);
+ padding:0 52px;min-height:36px;display:flex;align-items:center;justify-content:center;}
+@media(max-width:520px){.logo{letter-spacing:2px;font-size:clamp(1rem,5vw,1.5rem);}}
+.tagline{font-size:.72rem;letter-spacing:3px;color:var(--text-dim);text-transform:uppercase;margin-top:6px;}
+.lang-btn,.theme-btn{position:absolute;top:0;height:36px;border:1px solid var(--neon-mid);background:var(--neon-dim);color:var(--neon);font-family:'Orbitron',sans-serif;font-weight:700;cursor:pointer;z-index:5;display:flex;align-items:center;justify-content:center;}
+.lang-btn{left:0;padding:0 10px;border-radius:18px;font-size:.7rem;letter-spacing:1px;}
+.theme-btn{right:0;width:36px;border-radius:50%;}
+.theme-btn .ic{width:18px;height:18px;}
+.lang-btn:hover,.theme-btn:hover{box-shadow:0 0 12px rgba(0,255,204,.45);text-shadow:none;}
+
+/* ===== Karten, Hinweise ===== */
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:4px;padding:18px;margin-bottom:16px;}
+.card p+p{margin-top:10px;}
+.card h2{font-family:'Orbitron',sans-serif;font-size:.85rem;letter-spacing:2px;text-transform:uppercase;color:var(--neon);margin-bottom:12px;font-weight:700;}
+.card p,.card li{overflow-wrap:break-word;}
+.muted{color:var(--text-dim);font-size:.8rem;line-height:1.5;}
+.warn{border:1px solid rgba(255,136,68,.4);border-radius:4px;background:rgba(255,136,68,.06);padding:12px;color:var(--orange);font-size:.85rem;line-height:1.5;margin-bottom:16px;}
+.ok{border:1px solid var(--neon-mid);border-radius:4px;background:var(--neon-dim);padding:12px;color:var(--neon);font-size:.85rem;line-height:1.5;}
+.ok .ic{margin-right:6px;}
+.ic{width:1.1em;height:1.1em;vertical-align:-0.18em;display:inline-block;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 3px rgba(0,255,204,.45));}
+
+/* ===== Knöpfe ===== */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--neon-dim);border:1px solid var(--neon-mid);border-radius:4px;color:var(--neon);font-family:'Orbitron',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:2px;padding:11px 18px;cursor:pointer;text-transform:uppercase;transition:all .2s;text-decoration:none;}
+.btn:hover{background:rgba(0,255,204,.2);box-shadow:0 0 14px rgba(0,255,204,.4);text-shadow:none;}
+.btn.ghost{background:none;border-color:var(--border);color:var(--text-mid);}
+.btn.ghost:hover{border-color:var(--neon-mid);color:var(--neon);box-shadow:none;}
+.btn.sm{padding:7px 12px;font-size:.66rem;}
+.btn .ic{stroke-width:1.9;flex-shrink:0;}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;}
+.actions.center{justify-content:center;}
+
+/* ===== Startseite: Runden ===== */
+.rounds{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:0 14px;}
+.round{display:flex;flex-direction:column;}
+.round .count{font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:900;color:var(--neon);text-shadow:0 0 14px rgba(0,255,204,.5);line-height:1.1;}
+.round .count small{font-size:.7rem;letter-spacing:2px;color:var(--text-mid);font-weight:700;margin-left:6px;text-transform:uppercase;text-shadow:none;}
+.round p{flex:1;margin:8px 0 14px;font-size:.85rem;color:var(--text-mid);}
+.book{display:flex;gap:16px;align-items:center;}
+.book img{width:84px;height:auto;border:1px solid var(--border);border-radius:3px;flex:none;}
+.book p{font-size:.85rem;}
+
+/* ===== Frage ===== */
+.qhead{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-mid);margin-bottom:8px;}
+.qhead #q-runde{color:var(--neon);}
+.bar{height:4px;background:var(--neon-dim);border-radius:2px;overflow:hidden;margin-bottom:16px;}
+.bar>div{height:100%;width:0;background:var(--neon);box-shadow:0 0 10px var(--neon-mid);transition:width .3s;}
+.card .qtext{font-family:'Share Tech Mono',monospace;font-size:1.08rem;letter-spacing:0;text-transform:none;color:var(--text);line-height:1.5;margin-bottom:16px;font-weight:400;}
+.qtext:focus{outline:none;}
+.answers{display:grid;gap:10px;}
+.ans{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;background:rgba(0,0,0,.35);border:1px solid var(--border);border-radius:4px;color:var(--text);font-family:'Share Tech Mono',monospace;font-size:.95rem;line-height:1.45;padding:12px 14px;cursor:pointer;transition:border-color .15s,background .15s,box-shadow .15s;}
+.ans:hover:not(:disabled){border-color:var(--neon-mid);background:var(--neon-dim);}
+.ans:disabled{cursor:default;}
+.ans-key{flex:none;width:26px;height:26px;border:1px solid var(--neon-mid);border-radius:3px;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-weight:700;font-size:.72rem;color:var(--neon);margin-top:-2px;}
+.ans-text{flex:1;min-width:0;overflow-wrap:break-word;}
+.ans.right{border-color:var(--neon);background:var(--neon-dim);box-shadow:0 0 12px var(--neon-mid);}
+.ans.right .ans-key{background:var(--neon);color:var(--bg);border-color:var(--neon);}
+.ans.wrong{border-color:var(--red);background:var(--red-dim);}
+.ans.wrong .ans-key{background:var(--red);color:var(--bg);border-color:var(--red);}
+.ans.dim{opacity:.45;}
+.feedback{margin-top:16px;border-radius:4px;padding:14px;font-size:.9rem;line-height:1.55;}
+.feedback.is-right{border:1px solid var(--neon-mid);background:var(--neon-dim);}
+.feedback.is-wrong{border:1px solid rgba(255,68,102,.45);background:var(--red-dim);}
+.fb-head{font-family:'Orbitron',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
+.is-right .fb-head{color:var(--neon);}
+.is-wrong .fb-head{color:var(--red);}
+.fb-where{margin-top:8px;color:var(--text-mid);font-size:.82rem;}
+.fb-where b{color:var(--neon);font-weight:400;letter-spacing:1px;}
+.keys{margin-top:14px;}
+
+/* ===== Auswertung ===== */
+.score{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(2rem,9vw,3rem);color:var(--neon);text-shadow:0 0 20px rgba(0,255,204,.6);text-align:center;margin:6px 0 10px;}
+.result p#e-text{text-align:center;}
+.misses{padding-left:1.4em;display:grid;gap:12px;font-size:.88rem;}
+.misses li::marker{color:var(--neon);}
+.misses span{display:block;color:var(--text-mid);font-size:.8rem;margin-top:2px;}
+
+/* ===== Fuß ===== */
+.foot{text-align:center;color:var(--text-dim);font-size:.72rem;letter-spacing:.5px;margin-top:34px;line-height:1.8;}
+.foot a{color:var(--text-mid);}
+.foot a:hover{color:var(--neon);}
+.foot p+p{margin-top:8px;}
+
+/* ===== Übersicht aller Bände ===== */
+.bands{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0 14px;}
+.band{display:flex;gap:14px;align-items:flex-start;}
+.band img{width:72px;height:auto;border:1px solid var(--border);border-radius:3px;flex:none;}
+.band .vol{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-mid);}
+.band>div{min-width:0;}
+.band h2{margin:4px 0 8px;font-size:.8rem;line-height:1.4;overflow-wrap:break-word;hyphens:manual;}
+.band.soon img{opacity:.45;filter:grayscale(.6);}
+.band.soon h2{color:var(--text-mid);}
+
+@media(max-width:420px){
+  .card{padding:15px;}
+  .ans{padding:11px 12px;font-size:.92rem;}
+  .book{flex-direction:column;align-items:flex-start;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+<div class="container">
+  <nav class="topbar"><a href="/en/index.html">← Home</a><a href="/en/quiz.html">All quizzes</a><a href="/en/buecher.html#band1-en">Books</a><a href="/en/werkstatt-band1.html">Workshop sheets</a></nav>
+  <header class="app-head">
+    <div class="header-glow"></div>
+    <a class="lang-btn" href="/quiz-band1.html" hreflang="de" lang="de" title="Deutsche Fassung">DE</a>
+    <button class="theme-btn needs-js" id="theme-btn" type="button" data-action="theme" aria-pressed="false" title="Switch theme (Neon or Soft)" aria-label="Switch theme (Neon or Soft)"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/></svg></button>
+    <h1 class="logo">Quiz Vol. 1</h1>
+    <p class="tagline">GrapheneOS · 30 questions</p>
+  </header>
+  <main>
+    <section id="v-start">
+      <div class="card">
+      <h2>How well do you know your GrapheneOS?</h2>
+      <p>30 questions on Volume 1, from buying the device to crossing a border. After each answer the page explains why it is right and names the place in the book to read up on.</p>
+      <p>Pick a round. The answers are shuffled every time. On a computer you can also choose with the keys 1 to 4.</p>
+      <p class="ok"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 9.5-4-1.2-7-5-7-9.5V6z"/><path d="M8.5 12l2.5 2.5 4.5-4.5"/></svg>This page stores nothing, not even your score. No account, no cookie, no tracker, and it loads nothing from third-party servers. The quiz runs entirely in your browser.</p>
+      </div>
+      <noscript><p class="warn">The quiz needs JavaScript. It runs entirely in your browser and sends nothing. Without JavaScript the page stays empty, all topics are in the book.</p></noscript>
+      <div class="rounds">
+      <div class="card round">
+        <h2>Basics</h2>
+        <div class="count">15<small>questions</small></div>
+        <p>The core ideas of the book, from the device to the sandbox.</p>
+        <div><button class="btn needs-js" type="button" data-action="start" data-arg="einstieg">Start round</button></div>
+      </div>
+      <div class="card round">
+        <h2>Practice</h2>
+        <div class="count">15<small>questions</small></div>
+        <p>Concrete settings, tools and the typical mistakes.</p>
+        <div><button class="btn needs-js" type="button" data-action="start" data-arg="praxis">Start round</button></div>
+      </div>
+      <div class="card round">
+        <h2>Everything</h2>
+        <div class="count">30<small>questions</small></div>
+        <p>Both rounds in one go.</p>
+        <div><button class="btn needs-js" type="button" data-action="start" data-arg="alle">Start round</button></div>
+      </div>
+      </div>
+      <div class="card book">
+        <img src="/grapheneos-handbook-cover-en.jpg" alt="Cover of “GrapheneOS: Android in the Age of Surveillance”" width="84" height="110" loading="lazy">
+        <p>The book behind it: <em>GrapheneOS: Android in the Age of Surveillance</em>, Volume 1 of the series. On Amazon or direct and DRM-free, both on the <a href="/en/buecher.html#band1-en">books page</a>.</p>
+      </div>
+    </section>
+
+    <section id="v-frage" class="hidden" aria-labelledby="q-text">
+      <div class="qhead"><span id="q-runde"></span><span id="q-pos"></span><span id="q-score"></span></div>
+      <div class="bar" id="q-bar-wrap" role="progressbar" aria-valuemin="0" aria-valuenow="0" aria-valuemax="30"><div id="q-bar"></div></div>
+      <div class="card">
+        <h2 id="q-text" class="qtext" tabindex="-1"></h2>
+        <div id="q-antworten" class="answers"></div>
+        <div id="q-feedback" class="feedback hidden">
+          <p id="fb-head" class="fb-head"></p>
+          <p id="fb-why"></p>
+          <p class="fb-where"><b>Read up:</b> <span id="fb-where"></span></p>
+        </div>
+        <div class="actions"><button id="q-weiter" class="btn hidden" type="button" data-action="next"></button></div>
+      </div>
+      <p class="sr" id="q-live" aria-live="polite"></p>
+      <p class="center"><button class="btn ghost sm" type="button" data-action="home">Cancel round</button></p>
+    </section>
+
+    <section id="v-ende" class="hidden">
+      <div class="card result">
+        <h2>Kerstin — Evaluation</h2>
+        <p id="e-score" class="score" tabindex="-1"></p>
+        <p id="e-text"></p>
+      </div>
+      <div id="e-miss" class="card">
+        <h2>To read up on</h2>
+        <ol id="e-liste" class="misses"></ol>
+      </div>
+      <div class="actions center">
+        <button id="e-again" class="btn" type="button" data-action="start" data-arg="">Repeat round</button>
+        <button class="btn ghost" type="button" data-action="home">Other round</button>
+      </div>
+    </section>
+  </main>
+  <footer class="foot">
+    <p>Questions on Volume 1, as of October 2026, checked against book edition v2.11 and the primary sources. Found an error? <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    <p>This quiz is no substitute for legal, tax or financial advice.</p>
+    <p class="impressum-link"><a href="/en/werkstatt-band1.html">Workshop sheets Vol. 1</a> · <a href="/en/buecher.html">Books</a> · <a href="/en/spenden.html">Donate</a> · <a href="https://www.mein.online-impressum.de/alien-investor/" target="_blank" rel="noopener noreferrer">Legal Notice</a></p>
+  </footer>
+</div>
+<script type="application/json" id="quiz-daten">{"ui":{"pos":"Question {n} of {total}","score":"{n} correct","right":"Correct.","wrong":"Not quite.","solution":"The right answer: {a}","next":"Next","finish":"See results","result":"{n} of {total}","r3":"Strong. You know the system, practice does the rest.","r2":"Solid. The references below close the last gaps.","r1":"A good reason to reread the chapters below. After that it will stick.","reread":"Read up:","allName":"Everything"},"runden":[{"id":"einstieg","name":"Basics","text":"The core ideas of the book, from the device to the sandbox.","fragen":[{"id":"e01","q":"Who is behind GrapheneOS today?","right":"A non-profit foundation in Canada, funded by donations.","wrong":["Google, as an especially secure offshoot of Android for Pixel devices.","A venture-backed start-up that plans to sell licenses later.","An alliance of European mobile network operators."],"why":"In March 2023 the team founded the GrapheneOS Foundation, a non-profit organization in Canada. No investors, no shareholders, and decisions follow security, not an advertising partner.","where":"Introduction, “The Project Today: A Non-Profit Foundation, Not a Company”"},{"id":"e02","q":"What does Google's developer verification change once it applies on certified Android devices?","right":"Apps from unverified developers stay installable, but only via a cumbersome detour.","wrong":["It bans every installation outside the Play Store, including by cable and adb.","It only affects paid apps that sell subscriptions or in-app purchases.","Users must upload an ID document before they are allowed to install any apps at all."],"why":"Google does not ban sideloading. Anyone who wants to install an app from an unverified developer sets up a separate path once, with a waiting period and a confirmation, and every installation shows a warning afterwards. Not a ban, but a noticeable hurdle that Google is introducing country by country.","where":"Chapter 1, “Hurdles Instead of a Ban”"},{"id":"e03","q":"You lock the Private Space. What happens to the apps inside it?","right":"They stop immediately and disappear from the app drawer.","wrong":["They keep running, only their notifications are muted.","Android uninstalls them, but their data stays stored.","They move to the main profile until you unlock it again."],"why":"When locked, the Private Space stops everything inside it: no background tracking, no notifications. It is only hidden superficially, though, and by default it shares the clipboard with the main profile.","where":"Chapter 15, “The Three Isolation Layers”, and “Private Space: What It's Best For”"},{"id":"e04","q":"How does Google Play run on GrapheneOS if you install it?","right":"As a regular app in the sandbox, without special privileges.","wrong":["As a system service with full privileges, as on any other Android.","Inside a virtual machine that is cut off from the internet.","Not at all, GrapheneOS blocks all Google services permanently."],"why":"Sandboxed Google Play sees exactly as much as any other app, no more. Push notifications and most Google-dependent apps still work.","where":"Chapter 2, “Sandboxed Google Play: When You Need Google Apps”, and Chapter 7, “Google Play Services in the Sandbox”"},{"id":"e05","q":"Why must the bootloader be locked again after the installation?","right":"Only then does Verified Boot protect the system against tampering.","wrong":["Otherwise the device can only ever boot into safe mode from then on.","Otherwise you can no longer insert a SIM card.","It is not required, just good for battery life."],"why":"At startup, Verified Boot checks whether the system is unchanged and only lets signed code run. With an unlocked bootloader that is no longer guaranteed. Phase D of the web installer is therefore not optional.","where":"Chapter 4, “Step 3: Installation with the Web Installer” (Phase D), and Chapter 2, “Hardening Under the Hood” (Verified Boot and Tamper Protection)"},{"id":"e06","q":"Why does an automatic reboot protect your data?","right":"Afterwards the keys are no longer in memory.","wrong":["It resets all app permissions to “Don't allow” along the way.","It deletes photos and messages older than one day.","The device then registers on the network with a new IMEI."],"why":"After the first unlock, the keys sit in memory (“After First Unlock”). A reboot throws them out, and the device is fully encrypted again (“Before First Unlock”). The book recommends 12 hours or less.","where":"Chapter 5, “1. The Emergency Brake: Automatic Reboot”"},{"id":"e07","q":"A calculator app asks for internet access. What does GrapheneOS offer you?","right":"A toggle that removes its network access completely.","wrong":["Only the choice to uninstall it or use it with network access.","A firewall app that you first have to get from the Play Store.","A filter that blocks ads but lets everything else through."],"why":"A calculator needs no internet, so the request is a red flag. GrapheneOS removes an app's network access for all networks, with a toggle and without uninstalling.","where":"Chapter 7, “Permissions in Detail” (Network access)"},{"id":"e08","q":"An app update suddenly carries a foreign signature. What does Android do?","right":"It refuses the installation, the update counts as foreign.","wrong":["It installs the update and shows a notice afterwards.","It asks the Play Store whether the new signature is valid.","It accepts the new signature if the version number is higher."],"why":"The app signature is the developer's identity. If it changes without being vouched for by the old key, either the developer lost the key or someone else is shipping code. Both are a problem.","where":"Chapter 8, “How Trust Is Built Under GrapheneOS”"},{"id":"e09","q":"Why does the book advise against changing Vanadium's default settings where possible?","right":"Every deviation makes your browser distinguishable.","wrong":["Changed settings are lost with the next update anyway.","Vanadium locks itself once too many toggles are flipped.","The defaults are already tuned for maximum speed."],"why":"Vanadium relies on crowd blending: ideally all users look the same on the web, so the individual disappears in the crowd. Anyone who deviates becomes more unique, not more anonymous.","where":"Chapter 9, “Fingerprinting Protection Through Crowd Blending”"},{"id":"e10","q":"Which open standard encrypts conversations in White Noise, even in large groups?","right":"MLS, integrated through the Marmot protocol","wrong":["The Signal protocol, as in Signal and WhatsApp","PGP, as in encrypted email","TLS, as on every HTTPS website"],"why":"MLS is an IETF standard (RFC 9420). It stays efficient even in large groups and provides forward secrecy and post-compromise security. With Marmot, even a one-to-one chat is technically a group.","where":"Chapter 10, “3. The Technical Foundation: MLS and the Marmot Protocol”"},{"id":"e11","q":"Two identities on one device should know nothing about each other. What is the stronger choice?","right":"A separate user profile for each one","wrong":["A Shelter work profile in the main profile","Two browsers with separate bookmarks","A second Google account in the same profile"],"why":"Shelter uses a work profile that is tied to the main profile and starts with it. A user profile is a session of its own that you unlock separately and can end. For simple isolation the book now recommends the Private Space, for separate identities their own user profiles.","where":"Chapter 14, “Shelter vs. User Profiles: Which One When?”, and Chapter 15, “Shelter: Still Worth It?”"},{"id":"e12","q":"What does an authenticator app like Aegis compute the one-time code from?","right":"From a shared secret and the current time","wrong":["From a message the service sends with every login","From your phone number and the device serial number","From a list of fixed codes the service issues once"],"why":"During setup the service hands the app a secret key, usually as a QR code. From that key and the current time, both sides compute the same code in fixed steps, usually 30 seconds, without any internet connection.","where":"Chapter 17, “The Principle: TOTP”"},{"id":"e13","q":"Why do some banking apps refuse to work on GrapheneOS?","right":"Through Play Integrity they demand a system certified by Google.","wrong":["GrapheneOS lacks the encryption that banks require for account data.","Banks deliberately block every device that contains a Titan chip.","The apps need a SIM card from the bank's own network operator."],"why":"The middle tier of the Play Integrity API requires a certified manufacturer system, and GrapheneOS only reaches the lowest tier. Whether an app runs is the bank's decision. GrapheneOS fakes nothing and promotes hardware-backed key attestation instead.","where":"Chapter 18, “1. Why Some Apps Have Problems on GrapheneOS”"},{"id":"e14","q":"What happens to the EXIF metadata when you take a photo with GrapheneOS Camera?","right":"It is removed before saving, out of the box.","wrong":["It stays fully in the image until you delete it yourself.","It is encrypted and only removed when you share the photo.","A server cleans it up as soon as the photo is uploaded."],"why":"The option is active out of the box: no device model and no timestamp in the photo, and location tagging is off by default anyway. The app has no network permission at all.","where":"Chapter 22, “What GrapheneOS Camera Does Differently”"},{"id":"e15","q":"You buy the Pixel new from a retailer in Germany. Who owes you the statutory warranty for a hardware defect?","right":"The seller, for two years, whatever system is running.","wrong":["Google as the manufacturer, but only as long as stock Android runs.","No one, once a different system has been installed.","The network operator that provides your SIM card."],"why":"Under German law the statutory warranty (Gewährleistung) is an obligation of the seller (sections 434 ff. BGB). It covers defects present at handover, for new goods for two years, and does not depend on the operating system. The guarantee, by contrast, is a voluntary commitment by the manufacturer on its own terms.","where":"Chapter 24, “A Guarantee Is Not a Statutory Warranty”"}]},{"id":"praxis","name":"Practice","text":"Concrete settings, tools and the typical mistakes.","fragen":[{"id":"p01","q":"You are buying a used Pixel. What do you check before paying?","right":"Whether the “OEM unlocking” toggle is available and not grayed out.","wrong":["Whether the seller explicitly offers it as “unlocked” and carrier-free.","Whether the original box and all seals are still present.","Whether the latest Android from Google is already installed."],"why":"On resale platforms, “unlocked” usually only means SIM-free. On some carrier devices the bootloader stays locked permanently. The device needs internet for the check, otherwise the toggle is gray on some models even when bought unlocked.","where":"Chapter 3, “5. New vs. Used: What You Need to Know”"},{"id":"p02","q":"According to the book, what situation are the duress PIN and duress password meant for?","right":"Coercion by criminals, for example during a robbery","wrong":["An inspection by border officers when entering a country","A search of your home by the police","For a device left lying unused for days"],"why":"Entering one makes all data unreadable, deletes the eSIMs and powers the device off. At borders and during searches, triggering it can itself be a criminal offense.","where":"Chapter 2, “Device Lock: Three Features That Make a Difference”, and Chapter 19, “GrapheneOS Features for Border Crossings”"},{"id":"p03","q":"Which preferred network type does the book recommend against an IMSI catcher's 2G downgrade?","right":"“LTE only”","wrong":["“5G (recommended)”","“LTE” without a suffix","Whatever the carrier set as default"],"why":"Only the modes with “only” switch off old radio standards. “LTE only” shuts down 2G, 3G and the new 5G code as well, and the “2G network protection” toggle complements it. Neither helps against IMSI catchers that speak LTE.","where":"Chapter 6, “4. IMSI Catchers: Fake Cell Towers in the Real Network”"},{"id":"p04","q":"A photo app wants access to all storage but only needs images. What does GrapheneOS offer?","right":"Storage Scopes: the app only sees what you grant it.","wrong":["Nothing, storage access on Android always covers everything.","A toggle that automatically encrypts photos before they are opened.","Contact Scopes: the app only sees images you grant it."],"why":"The rule of thumb is: always granular. With Storage Scopes the app believes it sees everything, but it only sees its own files and what you show it. For the address book the same principle exists as Contact Scopes.","where":"Chapter 7, “Permissions in Detail” (Files and Storage), and Chapter 2, “Privacy by Design: Control at the App Level”"},{"id":"p05","q":"You route Vanadium through Tor with Orbot. Are you as anonymous as with Tor Browser?","right":"No. Your IP is hidden, but your browser still stands out.","wrong":["Yes, both use the same Tor network and are therefore equivalent.","Yes, as soon as you open an incognito tab in Vanadium.","No, because Orbot forwards the traffic unencrypted."],"why":"Network anonymity is not browser anonymity. Tor Browser makes its users look as alike as possible, but Vanadium over Orbot does not. For real anonymity while browsing, use Tor Browser directly.","where":"Chapter 9, “Tor Browser, For Maximum Anonymity”"},{"id":"p06","q":"When does comparing an app's signing certificate fingerprint matter most?","right":"At the very first installation","wrong":["At every single update of the app","After every reboot of the device","Before you delete the app again"],"why":"Android itself checks updates against the signature of the installed app. Only the first download is unprotected. A comparison with AppVerifier, Verified Apps or the hash field in Obtainium closes that gap.","where":"Chapter 11, “Security: Don't Trust, Verify”"},{"id":"p07","q":"In the Zap Store, an app only shows a source such as github.com, no profile. What does that mean?","right":"The Zap Store indexer listed it, not the developer.","wrong":["The developer published it personally with their own Nostr key.","The Zap Store team reviewed the code and approved it.","The app is a fake and cannot be installed."],"why":"With “Published by” the developer published the app personally, with “Claimed by” they bound the signing key to their profile. Without either, the Zap Store only points to the developer's own download, and you trust that source just as with Obtainium.","where":"Chapter 13, “Security in the Decentralized Model”"},{"id":"p08","q":"Why should the main profile hold no personal data before a trip?","right":"After every reboot, the main profile must be unlocked first.","wrong":["The main profile is the only profile that is not encrypted.","Every system update resets the main profile to factory state.","Border officers may only search the main profile."],"why":"A travel profile only protects you if the main profile holds no personal data (Setup 4 in Chapter 15). Private data belongs in a secondary profile, which stays encrypted after a reboot until you unlock it yourself.","where":"Chapter 19, “Before the Trip: Preparation”, and Chapter 15, “Four Setups for Practice”"},{"id":"p09","q":"Through which source does the book have you install Termux?","right":"Through F-Droid","wrong":["Through the Zap Store","Through the Play Store","As an APK from GitHub"],"why":"The GitHub build, which the Zap Store only points to, is signed with a publicly known test key. Anyone can use it to build a forged update. According to the project, the Play Store version is an experimental branch.","where":"Chapter 16, “Setup: Configuring Termux”"},{"id":"p10","q":"Why should the second factor for important accounts not live in your password manager?","right":"Password and code would then sit in the same vault.","wrong":["Password managers cannot generate TOTP codes at all.","Services generally reject codes from password managers.","The password manager sends every code to its server."],"why":"Whoever opens the vault then has both. That is why the second factor belongs in a separate app like Aegis, with an encrypted backup in more than one place.","where":"Chapter 17, “Why Not Google Authenticator or Authy”"},{"id":"p11","q":"What role does the book give Proton Wallet?","right":"A checking account for everyday amounts, larger sums go to cold storage.","wrong":["A vault for savings, because only you hold the keys.","A full replacement for a hardware wallet, thanks to end-to-end encryption.","Just a display, Proton holds the bitcoin itself for you."],"why":"Proton Wallet is a hot wallet: only you can decrypt the keys, but they are used on devices connected to the internet. For life savings, a hardware wallet like the BitBox remains the safe.","where":"Chapter 12, “Deep Dive: Proton Wallet and ‘Bitcoin via Email’” (Hot Wallet: Please Do Not Confuse)"},{"id":"p12","q":"You use a VPN with a kill switch. How do you set “Private DNS”?","right":"To “Off”, the VPN takes over name resolution.","wrong":["Per profile to its own server, matching the VPN.","To a filtering server such as adblock.dns.mullvad.net.","To the DNS server of your internet provider."],"why":"Private DNS takes precedence over the VPN's DNS and applies to all profiles, the VPN only to its own. GrapheneOS advises against a configured server when using a VPN, so the book sets it fully to “Off”. Filters belong in the VPN app.","where":"Chapter 20, “The Conflict with Private DNS”, and Chapter 5, “3. Network Hygiene: VPN Kill Switch and DNS”"},{"id":"p13","q":"DAVx⁵ syncs contacts and calendars only unreliably. What is the most common cause?","right":"The app's battery usage is not set to “Unrestricted”.","wrong":["DAVx⁵ needs Sandboxed Google Play for syncing.","The calendar server must be reachable on port 853 for DAVx⁵.","Syncing only works with a Proton account."],"why":"Android restricts background apps to save battery and can stop the sync service in the process. The fix: App battery usage → Allow background usage → Unrestricted, in every profile with DAVx⁵.","where":"Chapter 21, “Battery Optimization: The Most Common Setup Mistake”"},{"id":"p14","q":"The BitBox app runs over Tor, but without your own node. What does the Shift Crypto server still see?","right":"All queried addresses, with balance and history","wrong":["Nothing, Tor hides the IP and the wallet data alike","Only your IP address, but not a single wallet address","Your seed words, as soon as you sign a payment"],"why":"Tor protects the IP, not the wallet data. To show balances, the app queries the server for all receive and change addresses. Your own full node with an Electrum server such as Electrs closes the gap once the default servers are removed from the list.","where":"Chapter 23, “6. What the Server Sees Without a Self-Hosted Node”, and “7. Connecting a Self-Hosted Full Node (Optional)”"},{"id":"p15","q":"You are returning the Pixel to stock Android. Which mistake can leave it unable to boot?","right":"Erasing the key and relocking while GrapheneOS is still on it","wrong":["Flashing the Google image while the bootloader is still unlocked","Turning OEM unlocking off again at the very end","Backing up all photos to a USB stick or PC before flashing back"],"why":"The bootloader then no longer trusts the installed system. The right order: with the bootloader unlocked, erase the GrapheneOS key, flash the Google image, and only then lock.","where":"Chapter 24, “SOP: Returning the Pixel to Stock Android”"}]}]}</script>
+<script>/* Quiz zu den Büchern: läuft vollständig im Browser, sendet nichts und speichert nichts
+   (kein Cookie, kein localStorage, kein Netz). Fragen und Texte stehen im JSON-Block #quiz-daten.
+   build_quiz.py setzt dieses Skript in die Seite und trägt seinen Hash in die CSP ein. */
+(function () {
+  'use strict';
+  var D = JSON.parse(document.getElementById('quiz-daten').textContent);
+  var T = D.ui;
+  var S = null;   // laufende Runde: {rid, qs, i, score, miss, done}
+
+  function $(id) { return document.getElementById(id); }
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+  function fill(tpl, p) {
+    return tpl.replace(/\{(\w+)\}/g, function (m, k) { return p[k] != null ? String(p[k]) : m; });
+  }
+  function mix(a) {
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1)), t = a[i];
+      a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  function view(name) {
+    ['start', 'frage', 'ende'].forEach(function (v) { $('v-' + v).classList.toggle('hidden', v !== name); });
+    window.scrollTo(0, 0);
+  }
+
+  function questions(rid) {
+    if (rid === 'alle') return D.runden.reduce(function (acc, r) { return acc.concat(r.fragen); }, []);
+    for (var i = 0; i < D.runden.length; i++) if (D.runden[i].id === rid) return D.runden[i].fragen.slice();
+    return [];
+  }
+  function roundName(rid) {
+    if (rid === 'alle') return T.allName;
+    for (var i = 0; i < D.runden.length; i++) if (D.runden[i].id === rid) return D.runden[i].name;
+    return '';
+  }
+
+  // Nach einem Wechsel der Ansicht kurz keine Klicks: der zweite Klick eines Doppelklicks landete sonst
+  // auf dem Element, das nach dem Umbau an derselben Stelle liegt (Antwort, Link). Audit 24.10.2026.
+  function sperren() {
+    var r = document.documentElement;
+    r.classList.add('sperre');
+    setTimeout(function () { r.classList.remove('sperre'); }, 350);
+  }
+
+  function start(rid) {
+    var qs = questions(rid);
+    if (!qs.length) return;
+    sperren();
+    S = { rid: rid, qs: qs, i: 0, score: 0, miss: [], done: false };
+    $('q-runde').textContent = roundName(rid);
+    view('frage');
+    render();
+  }
+
+  function render() {
+    var q = S.qs[S.i], n = S.qs.length;
+    S.done = false;
+    $('q-pos').textContent = fill(T.pos, { n: S.i + 1, total: n });
+    $('q-score').textContent = fill(T.score, { n: S.score });
+    $('q-bar').style.width = (S.i / n * 100) + '%';
+    $('q-bar-wrap').setAttribute('aria-valuenow', String(S.i));
+    $('q-bar-wrap').setAttribute('aria-valuemax', String(n));
+    $('q-text').textContent = q.q;
+    var box = $('q-antworten');
+    box.textContent = '';
+    var opts = mix([{ t: q.right, ok: true }].concat(q.wrong.map(function (w) { return { t: w, ok: false }; })));
+    opts.forEach(function (o, k) {
+      var b = el('button', 'ans');
+      b.type = 'button';
+      b.setAttribute('data-action', 'pick');
+      b.setAttribute('data-ok', o.ok ? '1' : '0');
+      b.appendChild(el('span', 'ans-key', 'ABCD'.charAt(k)));
+      b.appendChild(el('span', 'ans-text', o.t));
+      box.appendChild(b);
+    });
+    $('q-feedback').classList.add('hidden');
+    $('q-weiter').classList.add('hidden');
+    $('q-live').textContent = '';
+    $('q-text').focus({ preventScroll: true });
+  }
+
+  function pick(b) {
+    if (!S || S.done) return;
+    S.done = true;
+    var q = S.qs[S.i], ok = b.getAttribute('data-ok') === '1';
+    var all = $('q-antworten').querySelectorAll('.ans');
+    for (var i = 0; i < all.length; i++) {
+      var a = all[i];
+      a.disabled = true;
+      if (a.getAttribute('data-ok') === '1') a.classList.add('right');
+      else if (a === b) a.classList.add('wrong');
+      else a.classList.add('dim');
+    }
+    if (ok) S.score++; else S.miss.push(q);
+    var fb = $('q-feedback');
+    fb.className = 'feedback ' + (ok ? 'is-right' : 'is-wrong');
+    $('fb-head').textContent = ok ? T.right : T.wrong;
+    $('fb-why').textContent = q.why;
+    $('fb-where').textContent = q.where;
+    $('q-score').textContent = fill(T.score, { n: S.score });
+    $('q-bar').style.width = ((S.i + 1) / S.qs.length * 100) + '%';
+    var sol = /[.?“”"]$/.test(q.right) ? q.right : q.right + '.';
+    $('q-live').textContent = (ok ? T.right : T.wrong + ' ' + fill(T.solution, { a: sol })) + ' ' + q.why;
+    var w = $('q-weiter');
+    w.textContent = S.i + 1 < S.qs.length ? T.next : T.finish;
+    w.classList.remove('hidden');
+    w.focus({ preventScroll: true });
+  }
+
+  function next() {
+    if (!S || !S.done) return;
+    sperren();
+    S.i++;
+    if (S.i >= S.qs.length) end(); else render();
+  }
+
+  function end() {
+    var n = S.qs.length, p = S.score / n;
+    view('ende');
+    $('e-score').textContent = fill(T.result, { n: S.score, total: n });
+    $('e-text').textContent = p >= 0.9 ? T.r3 : (p >= 0.6 ? T.r2 : T.r1);
+    var list = $('e-liste');
+    list.textContent = '';
+    S.miss.forEach(function (q) {
+      var li = el('li', null, q.q);
+      li.appendChild(el('span', null, T.reread + ' ' + q.where));
+      list.appendChild(li);
+    });
+    $('e-miss').classList.toggle('hidden', S.miss.length === 0);
+    $('e-again').setAttribute('data-arg', S.rid);
+    $('e-score').focus({ preventScroll: true });
+  }
+
+  function home() {
+    S = null;
+    view('start');
+  }
+
+  function theme() {
+    var r = document.documentElement, soft = r.getAttribute('data-theme') === 'soft';
+    if (soft) r.removeAttribute('data-theme'); else r.setAttribute('data-theme', 'soft');
+    $('theme-btn').setAttribute('aria-pressed', soft ? 'false' : 'true');
+  }
+
+  document.addEventListener('click', function (ev) {
+    var t = ev.target.closest('[data-action]');
+    if (!t) return;
+    var a = t.getAttribute('data-action');
+    if (a === 'start') start(t.getAttribute('data-arg'));
+    else if (a === 'pick') pick(t);
+    else if (a === 'next') next();
+    else if (a === 'home') home();
+    else if (a === 'theme') theme();
+  });
+
+  // Tasten 1 bis 4 oder A bis D wählen eine Antwort, solange eine Frage offen ist.
+  document.addEventListener('keydown', function (ev) {
+    if (!S || ev.altKey || ev.ctrlKey || ev.metaKey) return;
+    if ($('v-frage').classList.contains('hidden')) return;
+    if (S.done) {
+      // Enter führt weiter, auch wenn der Fokus nach einem Klick auf eine gesperrte Antwort auf <body> liegt
+      var f = document.activeElement;
+      if (ev.key === 'Enter' && (!f || f === document.body || f.classList.contains('ans'))) { ev.preventDefault(); next(); }
+      return;
+    }
+    var k = String(ev.key).toLowerCase(), idx = '1234'.indexOf(k);
+    if (idx < 0) idx = 'abcd'.indexOf(k);
+    if (idx < 0 || k.length !== 1) return;
+    var bs = $('q-antworten').querySelectorAll('.ans');
+    if (bs[idx]) { ev.preventDefault(); pick(bs[idx]); }
+  });
+
+  document.documentElement.classList.remove('nojs');
+})();
+</script>
+</body>
+</html>

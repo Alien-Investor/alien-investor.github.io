@@ -95,6 +95,7 @@
       <li>Every app is signed with a cryptographic key</li>
       <li>Every update must carry the exact same signature</li>
       <li>If the signature changes, the update is treated as foreign</li>
+      <li>Exception: a planned key change that the old key itself vouches for (APK Signature Scheme v3)</li>
     </ul>
     <p>
       If this chain is broken, there are only two possibilities:
@@ -178,11 +179,11 @@
     <ul>
       <li>Original signature of the developer</li>
       <li>Hash and certificate check before every installation</li>
-      <li>Shows whether the developer published the app ("Published by") or the Zap Store only mirrors it</li>
+      <li>Shows whether the developer published the app ("Published by") or the Zap Store merely points to the developer's own file</li>
       <li>No account, payments via Lightning, for self-published apps directly to the developer</li>
     </ul>
     <p>
-      Important: most apps there are not listed by the developer but by the Zap Store's indexer, which mirrors them from the developer's release. The signature remains the developer's. Get familiar with the Zap Store before you hand it your updates: install one or two apps through it first and check on the app page who published them. After that, for most users it is the most convenient update path for everything that is not in the GrapheneOS App Store or in Accrescent. More in my dedicated article, the links are further down.
+      Important: most apps there are not listed by the developer but by the Zap Store's indexer, which points to the file in the developer's release. The signature remains the developer's. Get familiar with the Zap Store before you hand it your updates: install one or two apps through it first and check on the app page who published them. After that, for most users it is the most convenient update path for everything that is not in the GrapheneOS App Store or in Accrescent. More in my dedicated article, the links are further down.
     </p>
 
     <h3>5. F-Droid – Situationally Useful, but with Limitations</h3>
@@ -257,11 +258,11 @@
 
     <h3>Work Profile with Shelter – Targeted Isolation</h3>
     <p>
-      Shelter allows creating a work profile within a user profile.
+      Shelter creates a work profile that is tied to your main profile.
     </p>
     <p>Key properties:</p>
     <ul>
-      <li>Logical separation of apps</li>
+      <li>Separate app data</li>
       <li>No mutual visibility</li>
       <li>Notifications work reliably</li>
     </ul>

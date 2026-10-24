@@ -93,6 +93,7 @@
       <li>Jede App wird mit einem kryptografischen Schlüssel signiert</li>
       <li>Jedes Update muss exakt dieselbe Signatur tragen</li>
       <li>Ändert sich die Signatur, gilt das Update als fremd</li>
+      <li>Ausnahme: ein geplanter Schlüsselwechsel, den der alte Schlüssel selbst beglaubigt (APK Signature Scheme v3)</li>
     </ul>
     <p>
       Wird diese Kette gebrochen, gibt es nur zwei Möglichkeiten:
@@ -176,11 +177,11 @@
     <ul>
       <li>Original-Signatur des Entwicklers</li>
       <li>Hash- und Zertifikatsprüfung vor jeder Installation</li>
-      <li>Zeigt an, ob der Entwickler selbst veröffentlicht hat („Published by“) oder der Zap Store die App nur spiegelt</li>
+      <li>Zeigt an, ob der Entwickler selbst veröffentlicht hat („Published by“) oder der Zap Store nur auf die Datei beim Entwickler verweist</li>
       <li>Kein Konto, Zahlungen über Lightning, bei selbst veröffentlichten Apps direkt an den Entwickler</li>
     </ul>
     <p>
-      Wichtig: Die meisten Apps dort stellt nicht der Entwickler ein, sondern der Indexer des Zap Store, der sie aus dem Release des Entwicklers spiegelt. Die Signatur bleibt dabei die des Entwicklers. Mach dich mit dem Zap Store vertraut, bevor du ihm deine Updates überlässt: Installiere zuerst ein oder zwei Apps darüber und schau dir auf der App-Seite an, wer sie veröffentlicht hat. Danach ist er für die meisten Nutzer der bequemste Update-Weg für alles, was nicht im GrapheneOS App Store oder in Accrescent liegt. Mehr dazu in meinem eigenen Artikel, die Links stehen weiter unten.
+      Wichtig: Die meisten Apps dort stellt nicht der Entwickler ein, sondern der Indexer des Zap Store, der auf die Datei im Release des Entwicklers verweist. Die Signatur bleibt dabei die des Entwicklers. Mach dich mit dem Zap Store vertraut, bevor du ihm deine Updates überlässt: Installiere zuerst ein oder zwei Apps darüber und schau dir auf der App-Seite an, wer sie veröffentlicht hat. Danach ist er für die meisten Nutzer der bequemste Update-Weg für alles, was nicht im GrapheneOS App Store oder in Accrescent liegt. Mehr dazu in meinem eigenen Artikel, die Links stehen weiter unten.
     </p>
 
     <h3>5. F-Droid – situativ nutzbar, aber mit Einschränkungen</h3>
@@ -255,11 +256,11 @@
 
     <h3>Arbeitsprofil mit Shelter – gezielte Isolation</h3>
     <p>
-      Shelter ermöglicht das Anlegen eines Arbeitsprofils innerhalb eines Benutzerprofils.
+      Shelter legt ein Arbeitsprofil an, das an dein Hauptprofil gekoppelt ist.
     </p>
     <p>Wichtige Eigenschaften:</p>
     <ul>
-      <li>Logische Trennung von Apps</li>
+      <li>Getrennte App-Daten</li>
       <li>Keine gegenseitige Einsicht</li>
       <li>Benachrichtigungen funktionieren zuverlässig</li>
     </ul>
