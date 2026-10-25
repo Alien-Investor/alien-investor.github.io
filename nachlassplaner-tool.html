@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:,">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-kpqjjCNV6I4xxkHv3j5F9NT8jspyQY2y5ncpVeB6htg=' 'sha256-RRaFChaDmrcZH/TObUDe9c1XdWOONlNEWb22SydDDe4='; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; font-src 'none'; form-action 'none'; base-uri 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-kpqjjCNV6I4xxkHv3j5F9NT8jspyQY2y5ncpVeB6htg=' 'sha256-KGGqkN+qKUIuYRay1p/uM9+1suEuJ1EtBoYabzMSLEg='; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; font-src 'none'; form-action 'none'; base-uri 'none'">
 <title>Nachlassplaner — Vordruckgenerator</title>
 <style>
 :root{
@@ -197,6 +197,10 @@ button:hover{background:rgba(0,255,204,.1);box-shadow:0 0 8px rgba(0,255,204,.25
 .bar small{color:var(--muted);font-size:12px}
 .bar a{color:var(--muted);font-size:12px;text-decoration:none;font-family:var(--mono)}
 .bar a:hover{color:var(--neon)}
+#bug-link{white-space:nowrap}
+/* Käfer als data:-Maske statt 🐛 (System-Emojis sehen je Gerät anders aus; Kit app-design .sym-bug) */
+.sym-bug::before{content:'';display:inline-block;width:1em;height:1em;margin-right:.4em;vertical-align:-.15em;
+  background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7.5 14.5a4.5 5.5 0 1 0 9 0a4.5 5.5 0 1 0-9 0zM9.7 6.8a2.3 2.3 0 1 0 4.6 0a2.3 2.3 0 1 0-4.6 0zM12 9.5V20M7.5 12H4M7.5 15.5H3.5M8.2 18.6l-2.4 2M16.5 12H20M16.5 15.5h4M15.8 18.6l2.4 2M10.7 4.9 9.4 2.8M13.3 4.9l1.3-2.1'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7.5 14.5a4.5 5.5 0 1 0 9 0a4.5 5.5 0 1 0-9 0zM9.7 6.8a2.3 2.3 0 1 0 4.6 0a2.3 2.3 0 1 0-4.6 0zM12 9.5V20M7.5 12H4M7.5 15.5H3.5M8.2 18.6l-2.4 2M16.5 12H20M16.5 15.5h4M15.8 18.6l2.4 2M10.7 4.9 9.4 2.8M13.3 4.9l1.3-2.1'/%3E%3C/svg%3E") center/contain no-repeat}
 
 /* ---------- Dialoge ---------- */
 dialog{
@@ -287,7 +291,7 @@ dialog input[type=password],dialog input[type=file],dialog textarea{
   <div class="lang-toggle" role="group" aria-label="Sprache / Language">
     <button type="button" data-lang="de" class="lang-cur">DE</button><span class="lang-sep">|</span><button type="button" data-lang="en">EN</button>
   </div>
-  <p class="eyebrow" id="ui-eyebrow">Vordruckgenerator · Fassung 1.0</p>
+  <p class="eyebrow" id="ui-eyebrow">Vordruckgenerator · Fassung 1.1</p>
   <h1><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <span id="ui-h1">Nachlassplaner</span></h1>
   <p id="ui-intro">Dieses Werkzeug erzeugt <strong>leere Formularbögen</strong>. Öffentliche Angaben wie Fingerprints oder Descriptor druckt es mit. Alles, was Rückschlüsse auf Standorte oder Zugänge zulässt, wird als Linie gedruckt und von Hand ausgefüllt — offline, mit dokumentenechtem Stift.</p>
   <p class="recht-hinweis" id="ui-recht" hidden></p>
@@ -305,7 +309,7 @@ dialog input[type=password],dialog input[type=file],dialog textarea{
   <button id="load-btn">Datei laden</button>
   <small id="count">— Blätter</small>
   <label class="bsp-schalter"><input type="checkbox" id="bsp-an" checked> <span id="ui-bsp">Beispiele im Feld anzeigen</span></label>
-  <a href="#" id="bug-link">🐛 <span id="ui-bug">Bug melden</span></a>
+  <a href="#" id="bug-link" class="sym-bug"><span id="ui-bug">Bug melden</span></a>
 </div>
 
 <dialog id="sd-dlg">
@@ -318,7 +322,7 @@ dialog input[type=password],dialog input[type=file],dialog textarea{
 </dialog>
 
 <dialog id="bug-dlg">
-  <h3 id="ui-bug-titel">Bug melden</h3>
+  <h3 id="ui-bug-titel" class="sym-bug">Bug melden</h3>
   <p id="ui-bug-text">Öffnet eine E-Mail an kontakt@alien-investor.org (der Text wird zusätzlich in die Zwischenablage kopiert). Wichtig: Keine Inhalte aus deinem Plan mitschicken — nur beschreiben, was schiefgeht.</p>
   <label><span id="ui-bug-frage">Was ist passiert?</span><textarea id="bug-desc" rows="4"></textarea></label>
   <div class="dlg-row"><button class="go" id="bug-ok">E-Mail öffnen</button><button id="bug-abbr">Abbrechen</button></div>
@@ -2661,7 +2665,7 @@ var qrcode = function() {
    --------------------------------------------------------------- */
 const EN = {
 ui:{
-  eyebrow:"Form generator · version 1.0",
+  eyebrow:"Form generator · version 1.1",
   h1:"Estate Planner",
   intro:"This tool produces <strong>blank forms</strong>. Public details such as fingerprints or a descriptor are printed with them. Anything that would point to a location or an access route is printed as a line and filled in by hand — offline, with a document-safe pen.",
   volatile:"<strong>Nothing is saved automatically.</strong> No server, no browser storage. Reloading the page clears every entry. The state can be exported below as a password-encrypted file — it holds only the typed public details, never anything handwritten.",
@@ -2694,6 +2698,7 @@ pruef:{
   typ:"Wallet %n: the type is still set to “please choose”.",
   path:"Wallet %n: derivation path missing — with the right keys but the wrong path the heir rebuilds an empty wallet.",
   adr:"Wallet %n: address type missing — it decides whether the restored wallet shows the balance.",
+  datum:"Wallet %n: approximate creation date missing — month and year are enough. If unsure, pick an earlier date.",
   pwm2fa:"Further assets: a password manager is named, but the question about the second factor is unanswered — the master password alone gets nobody in when a code from an app is required.",
   app:"Further assets: an authenticator app is selected, but not which one and on which device."
 },
@@ -2774,6 +2779,8 @@ wallets:{titel:"Sheet B — Wallet inventory", gruppenname:"Wallet",
       h:"The derivation path. Any number of keys can be derived from one seed — the path says which branch of them this wallet is. With the same keys but the wrong path, an empty wallet comes out. If instead a finished xpub is entered and only the path beside it is wrong, the wallet even shows the balance correctly and fails only when spending — which is why the path belongs here exactly as it stands in the coordinator. There it sits at the respective cosigner (in Sparrow on the keystore tab, once a source has been chosen). Typical: <code>m/48'/0'/0'/2'</code> for multisig, <code>m/84'/0'/0'</code> for single-sig."},
     w_adr:{l:"Address type", opt:["Native SegWit (bc1q)","Taproot (bc1p)","Nested SegWit (3…)","Legacy (1…)"],
       h:"The format of the receiving addresses. Native SegWit begins with <code>bc1q</code> — with multisig it is called P2WSH and begins the same way, told apart by length (42 characters with one key, 62 with multisig). Taproot begins with <code>bc1p</code>. A leading <code>3</code> is not necessarily old, it also covers nested SegWit; only the <code>1</code> is genuinely old. Part of the blueprint: with the wrong address type the restored wallet shows no balance."},
+    w_datum:{l:"Approximate creation date", s:"Month and year are enough. If unsure, pick an earlier date.", bsp:"March 2024",
+      h:"When this wallet was first created, not when the device was bought or the wallet was later restored. Some programs ask for it when a wallet is restored and search the blockchain for payments only from this point on. A date that is too early only makes the search take longer. One that is too late misses older payments, and the balance shows up too small. If you no longer know it, take the month of the oldest entry in the wallet’s payment history."},
     w_deschow:{l:"Wallet configuration (output descriptor)", opt:["Kept as a printout with every backup","Written on this sheet"],
       s:"The recommended form is the printout from the coordinator (in Sparrow: Settings → Descriptor → QR symbol → “Save PDF…”, with QR code and text; when a multisig wallet is created Sparrow offers it by itself). It lies with every backup, and the printed sheet then only points to it."},
     w_descort:{l:"Where the printout of the wallet configuration is kept", s:"Only the pointer to where it is found. By hand."},
@@ -2929,6 +2936,7 @@ const MODEL = [
     {k:"w_fp", t:"text", l:"Master-Fingerprints", bsp:"1A2B3C4D, 5E6F7A8B, 9C0D1E2F", h:"Eine achtstellige Kennung je Schlüssel, etwa <code>1A2B3C4D</code>. Sie verrät nichts Geheimes, identifiziert aber einen Schlüssel eindeutig — so erkennt man, welches Backup zu welchem Platz in der Wallet gehört. Zu finden im Koordinator beim jeweiligen Cosigner und in der App des Geräteherstellers unter den Geräteinformationen. Sie bleibt gleich, solange Seed und Passphrase dieselben sind — eine andere Passphrase ergibt eine andere Kennung, obwohl die Sicherungswörter unverändert sind."},
     {k:"w_path", t:"text", l:"Derivation Path", bsp:"m/48'/0'/0'/2'", h:"Der Ableitungspfad. Aus einem Seed lassen sich beliebig viele Schlüssel ableiten — der Pfad sagt, welcher Ast davon diese Wallet ist. Mit denselben Schlüsseln, aber falschem Pfad käme eine leere Wallet heraus. Wird stattdessen ein fertiger xpub eingetragen und nur der Pfad daneben ist falsch, zeigt die Wallet den Bestand sogar richtig an und scheitert erst beim Ausgeben — deshalb gehört der Pfad genau so notiert, wie er im Koordinator steht. Dort steht er beim jeweiligen Cosigner (bei Sparrow im Keystore-Reiter, sobald eine Quelle gewählt ist). Typisch: <code>m/48'/0'/0'/2'</code> für Multisig, <code>m/84'/0'/0'</code> für Single-Sig."},
     {k:"w_adr", t:"select", l:"Adresstyp", h:"Das Format der Empfangsadressen. Native SegWit beginnt mit <code>bc1q</code> — bei Multisig heißt es P2WSH und beginnt ebenfalls so, erkennbar an der Länge (42 Zeichen bei einem Schlüssel, 62 bei Multisig). Taproot beginnt mit <code>bc1p</code>. Eine <code>3</code> am Anfang ist nicht zwingend alt, sie umfasst auch verschachteltes SegWit; wirklich alt ist nur die <code>1</code>. Gehört zur Bauanleitung: Falscher Adresstyp, und die wiederhergestellte Wallet zeigt keinen Bestand an.", opt:["Native SegWit (bc1q)","Taproot (bc1p)","Nested SegWit (3…)","Legacy (1…)"]},
+    {k:"w_datum", t:"text", l:"Wallet angelegt (ungefähr)", s:"Monat und Jahr genügen. Im Zweifel lieber zu früh als zu spät.", bsp:"März 2024", h:"Wann diese Wallet zum ersten Mal angelegt wurde, nicht wann das Gerät gekauft oder die Wallet später wiederhergestellt wurde. Manche Programme fragen beim Wiederherstellen einer Wallet danach und durchsuchen die Blockchain erst ab diesem Zeitpunkt nach Zahlungen. Ein zu frühes Datum macht die Suche nur länger. Ein zu spätes übersieht ältere Zahlungen, und der Bestand erscheint zu klein. Wer es nicht mehr weiß, nimmt den Monat des ältesten Eintrags in der Zahlungsgeschichte der Wallet."},
     {k:"w_deschow", t:"select", l:"Wallet-Konfiguration (Output-Descriptor)", vor:"Liegt als Ausdruck bei jedem Backup", rerender:true, nur:[{k:"w_typ", enthaelt:"Multisig"}], opt:["Liegt als Ausdruck bei jedem Backup","Steht auf diesem Bogen"], s:"Empfohlen ist der Ausdruck aus dem Koordinator (Sparrow: Settings → Descriptor → QR-Symbol → „Save PDF…\", mit QR und Text; beim Anlegen einer Multisig-Wallet fragt Sparrow von sich aus danach). Er liegt bei jedem Backup, und der gedruckte Bogen verweist dann nur darauf."},
     {k:"w_descort", t:"hand", l:"Wo liegt der Ausdruck der Wallet-Konfiguration", s:"Nur der Hinweis, wo gesucht wird. Von Hand.", zeilen:2, nur:[{k:"w_typ", enthaelt:"Multisig"},{k:"w_deschow", ist:"Liegt als Ausdruck bei jedem Backup"}]},
     {k:"w_desc", t:"area", l:"Output-Descriptor, vollständig", s:"Nur per Kopieren aus dem Koordinator einsetzen, nicht abtippen. Die achtstellige Prüfsumme hinter dem Rautezeichen fängt Vertipper ab: Stimmt ein Zeichen nicht, verweigert die Wallet den Import, statt eine falsche Wallet aufzubauen. Übernimm die Prüfsumme deshalb immer mit. Der Descriptor steht danach im Klartext auf dem Bogen.", nur:[{k:"w_typ", enthaelt:"Multisig"},{k:"w_deschow", ist:"Steht auf diesem Bogen"}]},
@@ -3075,7 +3083,7 @@ MODEL.forEach(s => { state[s.id] = s.wiederholbar ? [ {} ] : {}; });
    --------------------------------------------------------------- */
 
 const kl = { A:"k-a", B:"k-b", P:"k-p" };
-const FASSUNG = "1.0";
+const FASSUNG = "1.1";
 
 /* Deutsche Zeichenketten. Gegenstück zu EN, gleiche Schlüssel. */
 const DE = {
@@ -3112,6 +3120,7 @@ pruef:{
   typ:"Wallet %n: Der Typ steht noch auf „bitte wählen\".",
   path:"Wallet %n: Ableitungspfad fehlt — mit den richtigen Schlüsseln, aber falschem Pfad baut der Erbe eine leere Wallet nach.",
   adr:"Wallet %n: Adresstyp fehlt — er entscheidet mit darüber, ob die wiederhergestellte Wallet den Bestand zeigt.",
+  datum:"Wallet %n: Es fehlt, wann die Wallet ungefähr angelegt wurde — Monat und Jahr genügen, im Zweifel lieber zu früh.",
   pwm2fa:"Weitere Vermögenswerte: Passwortmanager eingetragen, aber die Frage nach dem zweiten Faktor ist unbeantwortet — mit Masterpasswort allein kommt niemand hinein, wenn ein Code aus einer App verlangt wird.",
   app:"Weitere Vermögenswerte: Authenticator-App angegeben, aber nicht welche und auf welchem Gerät."
 },
@@ -3529,12 +3538,13 @@ function pruefe(){
   if(!(state.kopf.name||"").trim()) offen.push(T("pruef","name"));
   if(!(state.kopf.fassung||"").trim()) offen.push(T("pruef","fassung"));
   state.wallets.forEach((g,i)=>{
-    const befuellt = ((g.w_name||"")+(g.w_hw||"")+(g.w_fp||"")+(g.w_desc||"")+(g.w_path||"")).trim();
+    const befuellt = ((g.w_name||"")+(g.w_hw||"")+(g.w_fp||"")+(g.w_desc||"")+(g.w_path||"")+(g.w_datum||"")).trim();
     if(descAufBogen(g) && !(g.w_desc||"").trim()) offen.push(P("desc", i+1));
     if(befuellt && !(g.w_fp||"").trim())   offen.push(P("fp", i+1));
     if(befuellt && !(g.w_typ||"").trim())  offen.push(P("typ", i+1));
     if(befuellt && !(g.w_path||"").trim()) offen.push(P("path", i+1));
     if(befuellt && !(g.w_adr||"").trim())  offen.push(P("adr", i+1));
+    if(befuellt && !(g.w_datum||"").trim()) offen.push(P("datum", i+1));
   });
   if((state.weiter.v_pwm||"").trim() && !(state.weiter.v_2fa||"").trim())
     offen.push(T("pruef","pwm2fa"));
