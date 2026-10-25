@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="de" class="nojs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- CSP: kein Netz, kein fremder Code. Stil und Skript nur per Hash (build_quiz.py), Schriften vom eigenen Server. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-dkvA4V2ckU9V2tZQyRa5iJnr78fcCSk9IwqzglReF/U='; style-src 'self' 'sha256-IKSAzT28SOhcZcxDtnNQ0dF0sTn2O156pc8D3wJyHo8='; font-src 'self'; img-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Quiz Band 4: Die eigene Bank | Alien Investor</title>
+<meta name="description" content="30 Fragen zum Buch „Die eigene Bank: Bitcoin meisterlich verwahren“ in zwei Runden, jede mit Erklärung und Fundstelle im Buch. Kostenlos, ohne Anmeldung, die Seite speichert nichts.">
+<link rel="canonical" href="/quiz-band4.html">
+<link rel="alternate" hreflang="de" href="/quiz-band4.html">
+<link rel="alternate" hreflang="en" href="/en/quiz-band4.html">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>/* quiz.css — Quiz zu den Büchern im App-Look der Alien-Investor-Apps.
+   Farben und Bausteine aus dem App-Design-Kit (~/.claude/skills/app-design/kit/app-theme.css, Stand 15.10.2026),
+   auf das Nötige gekürzt. Farben nur über Variablen, damit „Neon“ und „Soft“ mitziehen.
+   build_quiz.py setzt diese Datei als <style> in die Seite und trägt ihren Hash in die CSP ein. */
+
+:root{
+  --neon:#00ffcc; --neon-dim:rgba(0,255,204,.15); --neon-mid:rgba(0,255,204,.4);
+  --red:#ff4466; --red-dim:rgba(255,68,102,.12);
+  --orange:#ff8844;
+  --bg:#000; --card-bg:#050f0d; --border:rgba(0,255,204,.2);
+  --text:#cfeee6; --text-dim:#4a7a6d; --text-mid:#7ab8a8;
+}
+[data-theme="soft"]{
+  --neon:#00c8a0; --neon-dim:rgba(0,200,160,.15); --neon-mid:rgba(0,200,160,.35);
+  --bg:#0d1a2b; --card-bg:#0f2535; --border:rgba(0,200,160,.18);
+  --text:#d2ebe5; --text-dim:#5d8f82; --text-mid:#8ac8b8; --red:#e03355; --red-dim:rgba(224,51,85,.14);
+}
+[data-theme="soft"] body::after{opacity:.35;}
+
+/* ===== Grundlage: Sternenhimmel + Scanlines ===== */
+*{margin:0;padding:0;box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{background:var(--bg);color:var(--text);font-family:'Share Tech Mono',monospace;min-height:100vh;overflow-x:hidden;position:relative;line-height:1.55;}
+body::before{content:'';position:fixed;inset:0;background-image:
+ radial-gradient(1px 1px at 10% 15%,rgba(0,255,204,.4) 0%,transparent 100%),
+ radial-gradient(1px 1px at 30% 40%,rgba(0,255,204,.25) 0%,transparent 100%),
+ radial-gradient(1px 1px at 55% 20%,rgba(0,255,204,.35) 0%,transparent 100%),
+ radial-gradient(1px 1px at 70% 60%,rgba(0,255,204,.2) 0%,transparent 100%),
+ radial-gradient(1px 1px at 85% 30%,rgba(0,255,204,.3) 0%,transparent 100%),
+ radial-gradient(1px 1px at 20% 75%,rgba(0,255,204,.2) 0%,transparent 100%),
+ radial-gradient(1px 1px at 45% 85%,rgba(0,255,204,.3) 0%,transparent 100%),
+ radial-gradient(1px 1px at 90% 80%,rgba(0,255,204,.25) 0%,transparent 100%);
+ pointer-events:none;z-index:0;}
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.15) 2px,rgba(0,0,0,.15) 4px);pointer-events:none;z-index:1;}
+@media (hover:hover) and (pointer:fine){
+::-webkit-scrollbar{width:10px;height:10px;}
+::-webkit-scrollbar-track{background:rgba(0,255,204,.04);}
+::-webkit-scrollbar-thumb{background:var(--neon-mid);border:2px solid transparent;background-clip:padding-box;border-radius:6px;}
+::-webkit-scrollbar-thumb:hover{background:var(--neon);background-clip:padding-box;}
+::-webkit-scrollbar-button{display:none;}
+}
+@supports not selector(::-webkit-scrollbar){html{scrollbar-color:var(--neon-mid) transparent;scrollbar-width:thin;}}
+.container{position:relative;z-index:2;max-width:760px;margin:0 auto;padding:14px 16px 48px;}
+a{color:var(--neon);text-decoration:none;}
+a:hover{text-shadow:0 0 8px var(--neon-mid);}
+.hidden{display:none!important;}
+.center{text-align:center;}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+.nojs .needs-js{display:none!important;}
+.sperre a,.sperre button{pointer-events:none;}   /* kurz nach Ansichtswechsel, siehe sperren() in quiz.js */
+:focus-visible{outline:2px solid var(--neon);outline-offset:2px;}
+
+/* ===== Leiste oben ===== */
+.topbar{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.78rem;letter-spacing:1px;margin-bottom:22px;}
+.topbar a{color:var(--text-mid);}
+.topbar a:hover{color:var(--neon);}
+
+/* ===== Kopf: Logo, Tagline, Sprach- und Darstellungs-Knopf ===== */
+.app-head{text-align:center;position:relative;margin-bottom:24px;}
+.header-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(400px,100%);height:100px;background:radial-gradient(ellipse,rgba(0,255,204,.08) 0%,transparent 70%);pointer-events:none;}
+.logo{font-family:'Orbitron',sans-serif;font-size:clamp(1.3rem,4vw,1.9rem);font-weight:900;letter-spacing:4px;text-transform:uppercase;color:var(--neon);text-shadow:0 0 20px rgba(0,255,204,.7),0 0 40px rgba(0,255,204,.3);
+ padding:0 52px;min-height:36px;display:flex;align-items:center;justify-content:center;}
+@media(max-width:520px){.logo{letter-spacing:2px;font-size:clamp(1rem,5vw,1.5rem);}}
+.tagline{font-size:.72rem;letter-spacing:3px;color:var(--text-dim);text-transform:uppercase;margin-top:6px;}
+.lang-btn,.theme-btn{position:absolute;top:0;height:36px;border:1px solid var(--neon-mid);background:var(--neon-dim);color:var(--neon);font-family:'Orbitron',sans-serif;font-weight:700;cursor:pointer;z-index:5;display:flex;align-items:center;justify-content:center;}
+.lang-btn{left:0;padding:0 10px;border-radius:18px;font-size:.7rem;letter-spacing:1px;}
+.theme-btn{right:0;width:36px;border-radius:50%;}
+.theme-btn .ic{width:18px;height:18px;}
+.lang-btn:hover,.theme-btn:hover{box-shadow:0 0 12px rgba(0,255,204,.45);text-shadow:none;}
+
+/* ===== Karten, Hinweise ===== */
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:4px;padding:18px;margin-bottom:16px;}
+.card p+p{margin-top:10px;}
+.card h2{font-family:'Orbitron',sans-serif;font-size:.85rem;letter-spacing:2px;text-transform:uppercase;color:var(--neon);margin-bottom:12px;font-weight:700;}
+.card p,.card li{overflow-wrap:break-word;}
+.muted{color:var(--text-dim);font-size:.8rem;line-height:1.5;}
+.warn{border:1px solid rgba(255,136,68,.4);border-radius:4px;background:rgba(255,136,68,.06);padding:12px;color:var(--orange);font-size:.85rem;line-height:1.5;margin-bottom:16px;}
+.ok{border:1px solid var(--neon-mid);border-radius:4px;background:var(--neon-dim);padding:12px;color:var(--neon);font-size:.85rem;line-height:1.5;}
+.ok .ic{margin-right:6px;}
+.ic{width:1.1em;height:1.1em;vertical-align:-0.18em;display:inline-block;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 3px rgba(0,255,204,.45));}
+
+/* ===== Knöpfe ===== */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--neon-dim);border:1px solid var(--neon-mid);border-radius:4px;color:var(--neon);font-family:'Orbitron',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:2px;padding:11px 18px;cursor:pointer;text-transform:uppercase;transition:all .2s;text-decoration:none;}
+.btn:hover{background:rgba(0,255,204,.2);box-shadow:0 0 14px rgba(0,255,204,.4);text-shadow:none;}
+.btn.ghost{background:none;border-color:var(--border);color:var(--text-mid);}
+.btn.ghost:hover{border-color:var(--neon-mid);color:var(--neon);box-shadow:none;}
+.btn.sm{padding:7px 12px;font-size:.66rem;}
+.btn .ic{stroke-width:1.9;flex-shrink:0;}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;}
+.actions.center{justify-content:center;}
+
+/* ===== Startseite: Runden ===== */
+.rounds{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:0 14px;}
+.round{display:flex;flex-direction:column;}
+.round .count{font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:900;color:var(--neon);text-shadow:0 0 14px rgba(0,255,204,.5);line-height:1.1;}
+.round .count small{font-size:.7rem;letter-spacing:2px;color:var(--text-mid);font-weight:700;margin-left:6px;text-transform:uppercase;text-shadow:none;}
+.round p{flex:1;margin:8px 0 14px;font-size:.85rem;color:var(--text-mid);}
+.book{display:flex;gap:16px;align-items:center;}
+.book img{width:84px;height:auto;border:1px solid var(--border);border-radius:3px;flex:none;}
+.book p{font-size:.85rem;}
+
+/* ===== Frage ===== */
+.qhead{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-mid);margin-bottom:8px;}
+.qhead #q-runde{color:var(--neon);}
+.bar{height:4px;background:var(--neon-dim);border-radius:2px;overflow:hidden;margin-bottom:16px;}
+.bar>div{height:100%;width:0;background:var(--neon);box-shadow:0 0 10px var(--neon-mid);transition:width .3s;}
+.card .qtext{font-family:'Share Tech Mono',monospace;font-size:1.08rem;letter-spacing:0;text-transform:none;color:var(--text);line-height:1.5;margin-bottom:16px;font-weight:400;}
+.qtext:focus{outline:none;}
+.answers{display:grid;gap:10px;}
+.ans{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;background:rgba(0,0,0,.35);border:1px solid var(--border);border-radius:4px;color:var(--text);font-family:'Share Tech Mono',monospace;font-size:.95rem;line-height:1.45;padding:12px 14px;cursor:pointer;transition:border-color .15s,background .15s,box-shadow .15s;}
+.ans:hover:not(:disabled){border-color:var(--neon-mid);background:var(--neon-dim);}
+.ans:disabled{cursor:default;}
+.ans-key{flex:none;width:26px;height:26px;border:1px solid var(--neon-mid);border-radius:3px;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-weight:700;font-size:.72rem;color:var(--neon);margin-top:-2px;}
+.ans-text{flex:1;min-width:0;overflow-wrap:break-word;}
+.ans.right{border-color:var(--neon);background:var(--neon-dim);box-shadow:0 0 12px var(--neon-mid);}
+.ans.right .ans-key{background:var(--neon);color:var(--bg);border-color:var(--neon);}
+.ans.wrong{border-color:var(--red);background:var(--red-dim);}
+.ans.wrong .ans-key{background:var(--red);color:var(--bg);border-color:var(--red);}
+.ans.dim{opacity:.45;}
+.feedback{margin-top:16px;border-radius:4px;padding:14px;font-size:.9rem;line-height:1.55;}
+.feedback.is-right{border:1px solid var(--neon-mid);background:var(--neon-dim);}
+.feedback.is-wrong{border:1px solid rgba(255,68,102,.45);background:var(--red-dim);}
+.fb-head{font-family:'Orbitron',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
+.is-right .fb-head{color:var(--neon);}
+.is-wrong .fb-head{color:var(--red);}
+.fb-where{margin-top:8px;color:var(--text-mid);font-size:.82rem;}
+.fb-where b{color:var(--neon);font-weight:400;letter-spacing:1px;}
+.keys{margin-top:14px;}
+
+/* ===== Auswertung ===== */
+.score{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(2rem,9vw,3rem);color:var(--neon);text-shadow:0 0 20px rgba(0,255,204,.6);text-align:center;margin:6px 0 10px;}
+.result p#e-text{text-align:center;}
+.misses{padding-left:1.4em;display:grid;gap:12px;font-size:.88rem;}
+.misses li::marker{color:var(--neon);}
+.misses span{display:block;color:var(--text-mid);font-size:.8rem;margin-top:2px;}
+
+/* ===== Fuß ===== */
+.foot{text-align:center;color:var(--text-dim);font-size:.72rem;letter-spacing:.5px;margin-top:34px;line-height:1.8;}
+.foot a{color:var(--text-mid);}
+.foot a:hover{color:var(--neon);}
+.foot p+p{margin-top:8px;}
+
+/* ===== Übersicht aller Bände ===== */
+.bands{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0 14px;}
+.band{display:flex;gap:14px;align-items:flex-start;}
+.band img{width:72px;height:auto;border:1px solid var(--border);border-radius:3px;flex:none;}
+.band .vol{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-mid);}
+.band>div{min-width:0;}
+.band h2{margin:4px 0 8px;font-size:.8rem;line-height:1.4;overflow-wrap:break-word;hyphens:manual;}
+.band.soon img{opacity:.45;filter:grayscale(.6);}
+.band.soon h2{color:var(--text-mid);}
+
+@media(max-width:420px){
+  .card{padding:15px;}
+  .ans{padding:11px 12px;font-size:.92rem;}
+  .book{flex-direction:column;align-items:flex-start;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+<div class="container">
+  <nav class="topbar"><a href="/index.html">← Zentrale</a><a href="/quiz.html">Alle Quizze</a><a href="/buecher.html#band4">Bücher</a><a href="/werkstatt-paket.html">Werkstatt-Blätter</a></nav>
+  <header class="app-head">
+    <div class="header-glow"></div>
+    <a class="lang-btn" href="/en/quiz-band4.html" hreflang="en" lang="en" title="English version">EN</a>
+    <button class="theme-btn needs-js" id="theme-btn" type="button" data-action="theme" aria-pressed="false" title="Darstellung wechseln (Neon oder Soft)" aria-label="Darstellung wechseln (Neon oder Soft)"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/></svg></button>
+    <h1 class="logo">Quiz Band 4</h1>
+    <p class="tagline">Die eigene Bank · 30 Fragen</p>
+  </header>
+  <main>
+    <section id="v-start">
+      <div class="card">
+      <h2>Wie gut kennst du deine eigene Bank?</h2>
+      <p>30 Fragen zu Band 4, vom eigenen Zufall bis zur eigenen Strategie. Nach jeder Antwort erklärt dir die Seite, warum sie stimmt, und nennt die Stelle im Buch zum Nachlesen.</p>
+      <p>Wähle eine Runde. Die Antworten werden jedes Mal neu gemischt. Am Rechner wählst du auch mit den Tasten 1 bis 4.</p>
+      <p class="ok"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 9.5-4-1.2-7-5-7-9.5V6z"/><path d="M8.5 12l2.5 2.5 4.5-4.5"/></svg>Diese Seite speichert nichts, nicht einmal deinen Punktestand. Kein Konto, kein Cookie, kein Tracker, und sie lädt nichts von fremden Servern nach. Das Quiz läuft vollständig in deinem Browser.</p>
+      </div>
+      <noscript><p class="warn">Das Quiz braucht JavaScript. Es läuft vollständig in deinem Browser und sendet nichts. Ohne JavaScript bleibt die Seite leer, die Themen stehen alle im Buch.</p></noscript>
+      <div class="rounds">
+      <div class="card round">
+        <h2>Einstieg</h2>
+        <div class="count">15<small>Fragen</small></div>
+        <p>Die Grundgedanken des Buches, vom eigenen Zufall bis zur eigenen Strategie.</p>
+        <div><button class="btn needs-js" type="button" data-action="start" data-arg="einstieg">Runde starten</button></div>
+      </div>
+      <div class="card round">
+        <h2>Praxis</h2>
+        <div class="count">15<small>Fragen</small></div>
+        <p>Konkrete Handgriffe und die typischen Fehler.</p>
+        <div><button class="btn needs-js" type="button" data-action="start" data-arg="praxis">Runde starten</button></div>
+      </div>
+      <div class="card round">
+        <h2>Alles</h2>
+        <div class="count">30<small>Fragen</small></div>
+        <p>Beide Runden am Stück.</p>
+        <div><button class="btn needs-js" type="button" data-action="start" data-arg="alle">Runde starten</button></div>
+      </div>
+      </div>
+      <div class="card book">
+        <img src="/bitcoin-verwahrung-handbuch-cover.jpg" alt="Cover von „Die eigene Bank: Bitcoin meisterlich verwahren“" width="84" height="110" loading="lazy">
+        <p>Das Buch dazu: <em>Die eigene Bank: Bitcoin meisterlich verwahren</em>, Band 4 der Reihe. Bei Amazon oder direkt und DRM-frei, beides auf der <a href="/buecher.html#band4">Bücherseite</a>.</p>
+      </div>
+    </section>
+
+    <section id="v-frage" class="hidden" aria-labelledby="q-text">
+      <div class="qhead"><span id="q-runde"></span><span id="q-pos"></span><span id="q-score"></span></div>
+      <div class="bar" id="q-bar-wrap" role="progressbar" aria-valuemin="0" aria-valuenow="0" aria-valuemax="30"><div id="q-bar"></div></div>
+      <div class="card">
+        <h2 id="q-text" class="qtext" tabindex="-1"></h2>
+        <div id="q-antworten" class="answers"></div>
+        <div id="q-feedback" class="feedback hidden">
+          <p id="fb-head" class="fb-head"></p>
+          <p id="fb-why"></p>
+          <p class="fb-where"><b>Nachlesen:</b> <span id="fb-where"></span></p>
+        </div>
+        <div class="actions"><button id="q-weiter" class="btn hidden" type="button" data-action="next"></button></div>
+      </div>
+      <p class="sr" id="q-live" aria-live="polite"></p>
+      <p class="center"><button class="btn ghost sm" type="button" data-action="home">Runde abbrechen</button></p>
+    </section>
+
+    <section id="v-ende" class="hidden">
+      <div class="card result">
+        <h2>Kerstin — Auswertung</h2>
+        <p id="e-score" class="score" tabindex="-1"></p>
+        <p id="e-text"></p>
+      </div>
+      <div id="e-miss" class="card">
+        <h2>Zum Nachlesen</h2>
+        <ol id="e-liste" class="misses"></ol>
+      </div>
+      <div class="actions center">
+        <button id="e-again" class="btn" type="button" data-action="start" data-arg="">Runde wiederholen</button>
+        <button class="btn ghost" type="button" data-action="home">Andere Runde</button>
+      </div>
+    </section>
+  </main>
+  <footer class="foot">
+    <p>Fragen zu Band 4, Stand Oktober 2026, geprüft gegen die Buchfassung v1.4 und die Primärquellen. Fehler gefunden? <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    <p>Das Quiz ersetzt keine Rechts-, Steuer- oder Finanzberatung.</p>
+    <p class="impressum-link"><a href="/werkstatt-paket.html">Werkstatt-Blätter Band 4</a> · <a href="/buecher.html">Bücher</a> · <a href="/spenden.html">Spenden</a> · <a href="https://www.mein.online-impressum.de/alien-investor/" target="_blank" rel="noopener noreferrer">Impressum</a></p>
+  </footer>
+</div>
+<script type="application/json" id="quiz-daten">{"ui":{"pos":"Frage {n} von {total}","score":"{n} richtig","right":"Richtig.","wrong":"Nicht ganz.","solution":"Richtig ist: {a}","next":"Weiter","finish":"Zur Auswertung","result":"{n} von {total}","r3":"Stark. Du kennst das System, den Rest erledigt die Praxis.","r2":"Solide. Die Fundstellen unten schließen die letzten Lücken.","r1":"Ein guter Anlass, die Kapitel unten noch einmal zu lesen. Danach sitzt es.","reread":"Nachlesen:","allName":"Alles"},"runden":[{"id":"einstieg","name":"Einstieg","text":"Die Grundgedanken des Buches, vom eigenen Zufall bis zur eigenen Strategie.","fragen":[{"id":"e01","q":"Warum konnten die Opfer des Coldcard-Vorfalls den Fehler an ihrem Seed nicht erkennen?","right":"Ein schwacher Seed sieht genauso aus wie ein guter.","wrong":["Coinkite hatte die Warnhinweise im Gerätemenü absichtlich versteckt.","Die betroffenen Geräte zeigten den Seed beim Einrichten gar nicht an.","Der Fehler kam erst mit einem Firmware-Update kurz vor dem Angriff."],"why":"Auf dem Display sah ein kompromittierter Seed aus wie ein sicherer: vierundzwanzig unauffällige Wörter. Einem fertigen Seed sieht man seine Herkunft nicht an, deshalb haben die Opfer nichts falsch gemacht.","where":"Kapitel 1, „Warum die Opfer nichts falsch gemacht haben“"},{"id":"e02","q":"Welche Coldcard-Seeds waren vom Fehler im Zufallsgenerator nicht gefährdet?","right":"Seeds mit mindestens 50 eigenen, privaten Würfelwürfen.","wrong":["Seeds, die später auf ein anderes, gesundes Gerät umgezogen sind.","Seeds, deren Gerät nach dem Vorfall ein Firmware-Update bekam.","Jeder Seed mit vierundzwanzig statt zwölf Wörtern."],"why":"Fünfzig echte Würfe tragen für sich schon mindestens 128 Bit Entropie bei, und die Firmware verrechnete den Gerätezufall mit jedem Wurf. Umzug oder Update machen einen betroffenen Seed dagegen nicht sicher.","where":"Kapitel 1, „Die Ausnahme, die dieses Buch begründet“"},{"id":"e03","q":"Was vernichtet laut Buch die meisten Bitcoin endgültig?","right":"Verlorene Schlüssel, etwa verlegte Zettel oder nie getestete Backups.","wrong":["Gezielte Hackerangriffe auf Hardware-Wallets, die über das Internet laufen.","Einbrecher, die Geräte und Backups aus Wohnungen stehlen.","Staatliche Beschlagnahmen bei Hausdurchsuchungen."],"why":"Eigenfehler und verlorene Schlüssel vernichten mehr Bitcoin als alle Angreifer zusammen. Jede neue Schutzmaßnahme muss deshalb zuerst zeigen, dass sie diesen häufigsten Fall nicht wahrscheinlicher macht.","where":"Kapitel 2, „Die ehrliche Verlust-Statistik“, und „Der Angreifer im Spiegel“"},{"id":"e04","q":"Wovor schützt dich selbst gewürfelte Entropie nicht?","right":"Vor einem bösartigen Gerät, das den eingetippten Seed kennt.","wrong":["Vor einem Zufallsgenerator im Gerät, der zu wenig Zufall liefert.","Vor einem Firmware-Fehler wie dem im Coldcard-Vorfall.","Vor einem Angreifer, der alle Seeds eines schwachen Generators vorausberechnet."],"why":"Würfeln beantwortet die Frage, ob der Zufall taugt, nicht ob das Gerät ehrlich ist. Sobald du die Wörter eintippst, kennt die Firmware deinen Seed, egal woher er stammt.","where":"Kapitel 3, „Die Handarbeit“"},{"id":"e05","q":"Warum haben alle gewürfelten Seeds in diesem Buch vierundzwanzig Wörter?","right":"Weil 256 Bit mehr Reserve lassen, falls beim Würfeln etwas schiefgeht.","wrong":["Weil 256 Bit in der Praxis deutlich sicherer sind als die 128 Bit eines kurzen Seeds.","Weil viele Hardware-Wallets zwölf Wörter nicht mehr annehmen.","Weil sich zwölf Wörter nicht lesbar in Stahl schlagen lassen."],"why":"Sicherer sind 256 Bit praktisch nicht, die Kurve von Bitcoin bietet selbst nur rund 128 Bit. Die Gründe sind praktisch: mehr Reserve bei Würfelfehlern, und auf dem Weg über die BitBox02 lässt sich nur der 24-Wort-Seed vor deinen Augen prüfen.","where":"Kapitel 3, „Was ein Würfel liefert“ (Der Mythos der vierundzwanzig Wörter)"},{"id":"e06","q":"Du gibst deine Passphrase mit einem Tippfehler ein. Was passiert?","right":"Es öffnet sich eine andere, leere Wallet.","wrong":["Das Gerät meldet eine falsche Passphrase und lässt dich neu eingeben.","Nach drei Fehlversuchen setzt sich das Gerät von selbst zurück.","Die Wallet bleibt gesperrt, bis du den Seed neu eingibst."],"why":"Jede Zeichenkette ist eine gültige Eingabe, nirgends liegt ein Prüfwert. Deshalb gibt es keine Fehlermeldung, sondern eine andere, voll funktionsfähige Wallet.","where":"Kapitel 4, „Was technisch wirklich passiert“"},{"id":"e07","q":"Warum darf das Gerätepasswort kurz sein, die Passphrase aber nicht?","right":"Beim Gerätepasswort zählt ein Chip die Fehlversuche, bei der Passphrase niemand.","wrong":["Das Gerätepasswort wird stärker verschlüsselt als die Passphrase.","Die Passphrase wird im Klartext auf dem Gerät gespeichert.","Das Gerätepasswort wird zusätzlich als zweiter Faktor für jede einzelne Transaktion abgefragt."],"why":"Das Gerät löscht sich nach wenigen Fehlversuchen, ein Dieb hat also kaum Versuche. Wer deinen Seed besitzt, probiert Passphrasen dagegen auf gemieteten Rechnern durch, ohne dass ein Zähler mitläuft.","where":"Kapitel 4, „Das Gerätepasswort ist keine Passphrase“"},{"id":"e08","q":"Ab wann ist ein Backup laut Buch wirklich ein Backup?","right":"Wenn eine Wiederherstellung daraus bewiesen hat, dass es funktioniert.","wrong":["Sobald die Wörter in Stahl geschlagen und versiegelt sind.","Sobald es an zwei getrennten Orten liegt.","Wenn das Gerät die Wörter beim Einrichten einmal abgefragt und bestätigt hat."],"why":"Ein ungetestetes Backup ist eine Hoffnung. Erst der volle Drill beweist, dass aus dem Stahl wieder eine ausgabefähige Wallet wird.","where":"Kapitel 6, „Warum üben und nicht nur besitzen“"},{"id":"e09","q":"Was beweist die Signatur einer heruntergeladenen Wallet-Software, was die Prüfsumme allein nicht beweist?","right":"Dass die Datei wirklich vom Hersteller stammt.","wrong":["Dass die Datei beim Herunterladen nicht beschädigt wurde.","Dass die Software frei von Sicherheitslücken ist.","Dass es sich um die neueste verfügbare Version handelt."],"why":"Die Prüfsumme zeigt nur, dass die Datei unverändert ist, und kann vom selben Angreifer stammen wie die Datei. Die Signatur, geprüft gegen den vorab notierten Fingerabdruck des Herstellers, beweist die Herkunft.","where":"Kapitel 6, „Updates: dieselbe Prüflogik, andere Richtung“"},{"id":"e10","q":"Was brauchst du, um ein 2-von-3-Multisig wiederherzustellen?","right":"Zwei der drei Seeds und den Descriptor mit den öffentlichen Schlüsseln aller drei.","wrong":["Zwei der drei Seeds genügen, die Software errechnet den dritten Schlüssel daraus selbst.","Alle drei Seeds, denn ohne den dritten lässt sich keine einzige Adresse berechnen.","Einen Seed und das Wallet-Passwort aus Sparrow."],"why":"Jede Adresse entsteht aus den öffentlichen Schlüsseln aller drei Geräte. Deshalb gehört der Descriptor zu jedem Backup, sonst sind die Coins auch mit zwei Seeds unerreichbar.","where":"Kapitel 7, „Die Bausteine“"},{"id":"e11","q":"Warum braucht ein 2-von-3-Multisig mindestens ein Gerät, das die Wallet registriert?","right":"Es prüft Adressen gegen die gemerkten xpubs, statt dem Rechner zu glauben.","wrong":["Ohne Registrierung kann kein Gerät eine Multisig-Transaktion unterschreiben.","Die Registrierung ersetzt das Backup des Descriptors.","Nur ein registrierendes Gerät kann Empfangsadressen überhaupt berechnen."],"why":"Ein kompromittierter Koordinator kann xpubs austauschen oder eine fremde Adresse zeigen. Nur ein Gerät, das sich die drei xpubs merkt, erkennt das unabhängig vom Rechner. Der Trezor kann es nicht, der SeedSigner nur in der Sitzung mit gezeigtem Descriptor.","where":"Kapitel 7, „Wem du beim Anzeigen der Adresse glaubst“"},{"id":"e12","q":"Die Frist im Liana-Erbpfad ist abgelaufen. Was passiert mit deinen Coins?","right":"Nichts bewegt sich, nur darf jetzt auch der Erbenschlüssel ausgeben.","wrong":["Sie wandern automatisch und ohne weiteres Zutun an die Adresse des Erben.","Sie bleiben gesperrt, bis ein Notar die Freigabe erteilt.","Der Primärschlüssel verliert seine Gültigkeit für immer."],"why":"Die Frist ist eine Zahl von Blöcken und läuft pro Coin. Nach ihrem Ablauf ändert sich nur, wer ausgeben darf, der Primärschlüssel gilt weiter.","where":"Kapitel 9, „Wie das Zeitschloss wirklich funktioniert“"},{"id":"e13","q":"Wann ersetzt dir die über Bitsurance vermittelte Versicherung deine Bitcoin?","right":"Wenn Brand, Einbruch oder Raub den Zugang endgültig nimmt.","wrong":["Sobald das Gerät gestohlen wurde, auch wenn ein Backup existiert.","Wenn du deinen Seed verlegt hast und ihn nicht mehr findest.","Bei jedem Verlust durch Betrug oder eine Phishing-Mail."],"why":"Versichert sind physische Gefahren am Versicherungsort wie Brand, Einbruch oder Raub, dazu die erzwungene Überweisung unter Gewaltandrohung in der eigenen Wohnung. Solange ein Backup an einem zweiten Ort existiert, ist der Zugang nicht verloren, und Seed-Verlust, Betrug oder Bedienfehler sind nicht gedeckt.","where":"Kapitel 10, „Was sich an Bitcoin überhaupt versichern lässt“, und „Was die Police nicht deckt“"},{"id":"e14","q":"Wo prüfst du vor dem Senden die Zieladresse?","right":"Vollständig am Display der Hardware-Wallet.","wrong":["Am Rechner, dort ist die Schrift größer und besser lesbar.","In der Wallet-Software, dort reichen die ersten und letzten vier Zeichen.","Gar nicht, die Wallet-Software prüft Adressen selbst auf Fehler."],"why":"Der Bildschirm des Rechners behauptet, das Display des Geräts beweist. Schadsoftware kann eine Adresse in der Zwischenablage oder in der Software austauschen, das Gerät zeigt, was es wirklich unterschreibt.","where":"Kapitel 11, „Empfangen und Senden als Routine“, und Kapitel 12, „Die goldenen Regeln“"},{"id":"e15","q":"Welches Setup hält das Buch für die meisten Menschen für die richtige Wahl?","right":"Eine Hardware-Wallet mit gewürfeltem Seed und getrennt gesicherter Passphrase.","wrong":["Ein 2-von-3-Multisig mit drei Herstellern, sobald überhaupt Bitcoin im Spiel sind.","Eine große Börse, weil sie sich professionell um die Sicherheit kümmert.","Ein Erbpfad mit Zeitschloss, der ein eigenes Backup überflüssig macht."],"why":"Die Fehlerpfade des Einzelschlüssels hängen an der eigenen Disziplin und bleiben verstehbar. Ein halb verstandenes Multisig sperrt seinen Besitzer häufiger aus als einen Angreifer.","where":"Kapitel 12, „Die ehrlichste Frage zuerst“"}]},{"id":"praxis","name":"Praxis","text":"Konkrete Handgriffe und die typischen Fehler.","fragen":[{"id":"p01","q":"Du hast für deinen Seed gewürfelt und die Zahlen notiert. Was ist dieser Zettel jetzt?","right":"Der Seed selbst, er wird vernichtet oder wie ein Backup gelagert.","wrong":["Ein harmloser Zwischenschritt, der nach dem Einrichten in den Papiermüll kann.","Eine Prüfliste, die gut sichtbar neben das Gerät gehört.","Ein Beleg, den du für den Support des Herstellers aufhebst."],"why":"Aus den Würfen lässt sich der Seed jederzeit neu berechnen. Deshalb ist das Würfelprotokoll genauso wertvoll wie das fertige Backup.","where":"Kapitel 3, „Die Handarbeit“"},{"id":"p02","q":"Du willst nachrechnen, ob dein Gerät aus deinen Würfen die richtigen Wörter macht. Womit prüfst du?","right":"Mit einem Wegwerf-Seed, auf den nie Coins kommen.","wrong":["Mit deinem echten Seed in einem Online-Rechner.","Mit einem Foto deines Würfelprotokolls, das ein Prüfprogramm ausliest.","Mit deinem echten Seed, nachdem der erste Testbetrag angekommen ist."],"why":"Man prüft die Methode, nicht den echten Seed. Stimmt das Verfahren beim Wegwerf-Seed, reicht das in der Praxis auch für den echten, ohne dass dessen Würfe je einen Rechner sehen. Einen Beweis gibt es nicht, deshalb steht am Ende des Buches Multisig.","where":"Kapitel 3, „Nachrechnen statt vertrauen“"},{"id":"p03","q":"Wo bewahrst du das Backup deiner Passphrase auf?","right":"An einem anderen Ort als das Seed-Backup.","wrong":["Im selben versiegelten Beutel wie der Seed, damit nichts fehlt.","Nur im Gedächtnis, damit es niemand finden kann.","Auf der Rückseite der Stahlplatte, in die der Seed geschlagen ist."],"why":"Liegen Seed und Passphrase zusammen, hast du nur die Sicherheit des Seeds allein. Das Gedächtnis allein ist über Jahre eine dokumentierte Verlustursache.","where":"Kapitel 4, „Wo die Passphrase hingehört“"},{"id":"p04","q":"Woran erkennst du nach der Eingabe der Passphrase, dass die richtige Wallet offen ist?","right":"Am Fingerprint, den du beim Einrichten notiert hast.","wrong":["An einer Meldung des Geräts, dass die Passphrase stimmt.","Daran, dass das Gerät nach der Eingabe keine Fehlermeldung zeigt.","An der Zahl der Zeichen, die das Display anzeigt."],"why":"Eine falsche Passphrase öffnet ohne Meldung eine andere Wallet. Der achtstellige Fingerprint ändert sich mit jeder Passphrase und ist deshalb die Kontrolle.","where":"Kapitel 4, „Die einzige Kontrolle, die du hast“"},{"id":"p05","q":"Die Wörter sind in den Stahl geschlagen. Was kommt vor dem Versiegeln?","right":"Die Wörter nur vom Stahl ablesen und per Fingerprint-Probe bestätigen.","wrong":["Ein Foto der Platte als Sicherheitskopie für den Notfall.","Die Wörter zur Kontrolle noch einmal am Rechner eintippen und vergleichen.","Nichts, ein zweiter Blick würde den Stahl nur zerkratzen."],"why":"Geprüft wird, was wirklich im Metall steht, nicht der Zettel davor. Fotos und Tastaturen sind für den Seed tabu.","where":"Kapitel 5, „Prüfen, bevor versiegelt wird“"},{"id":"p06","q":"Warum teilst du deinen Seed nicht in zwölf Wörter hier und zwölf dort auf?","right":"Jede Hälfte wird zum Fehlerpunkt, ohne sie ist die Wallet weg.","wrong":["Weil Hardware-Wallets einen geteilten Seed beim Wiederherstellen grundsätzlich ablehnen.","Weil schon eine gefundene Hälfte reicht, um die Wallet sofort zu leeren.","Der BIP39-Standard verbietet das Aufteilen ausdrücklich."],"why":"Brennt eine Hälfte ab, ist die Wallet verloren, obwohl die andere intakt ist. Saubere Wege, einen Fund harmlos zu machen, sind SLIP39 oder Multisig.","where":"Kapitel 5, „Die Todsünde, die sich tarnt: den Seed teilen“"},{"id":"p07","q":"Welche Rolle hat das microSD-Backup der BitBox02?","right":"Eine unverschlüsselte Komfortkopie, die du wie Papier behandelst.","wrong":["Ein verschlüsseltes Backup, das ohne Gerätepasswort wertlos ist.","Ein vollwertiger Ersatz für das Stahl-Backup, gebaut für Jahrzehnte im Schrank.","Eine Lizenzdatei für das Gerät, auf der kein Seed liegt."],"why":"Wer die Karte hat, kann die Wallet wiederherstellen. Flash-Speicher ist außerdem nicht für jahrzehntelanges Liegen gebaut, das Backup für Jahrzehnte ist der Stahl.","where":"Kapitel 5, „Die microSD-Karte und die Backup-Karte“"},{"id":"p08","q":"Was sieht der Prüfrhythmus des Buches jährlich für ein fertiges Einzelschlüssel-Setup vor?","right":"Die Siegel ansehen, ohne ein Backup zu öffnen.","wrong":["Den Seed vom Stahl einmal in ein Gerät eingeben und prüfen.","Alle Backups öffnen und die Wörter neu abschreiben.","Den Seed auf ein neues Gerät umziehen, damit die Firmware frisch bleibt."],"why":"Der Stahl verändert sich nicht, und jede Seed-Eingabe ist ein Risiko, falls das Gerät kompromittiert ist. Den vollen Drill gibt es beim Aufbau und nach jeder grundsätzlichen Änderung, die Wörter prüfst du nur bei Anlass am SeedSigner ohne Internet.","where":"Kapitel 6, „Der volle Drill, Schritt für Schritt“, und Kapitel 12, „Der Wartungskalender“"},{"id":"p09","q":"Du wechselst das Gerät. Wann darf der alte Seed einfach auf das neue Gerät umziehen?","right":"Wenn seine Herkunft vertrauenswürdig ist, er nie digital war und nie in fremden Händen.","wrong":["Immer, denn der BIP39-Standard ist genau für den Umzug zwischen Geräten gemacht.","Nur wenn das alte und das neue Gerät vom selben Hersteller stammen.","Wenn das alte Gerät nach einem Vorfall ein Firmware-Update bekommen hat und seither wieder als sicher gilt."],"why":"Ein Seed aus eigenen Würfeln, der nie digital außerhalb eines Signiergeräts lag und nie in fremde Hände kam, darf umziehen. In allen anderen Fällen zieht das Geld auf einen neuen Seed.","where":"Kapitel 6, „Das Gerät wechseln: Zieht der Seed um oder das Geld“"},{"id":"p10","q":"Bekommen die drei Seeds deines 2-von-3-Multisig je eine Passphrase?","right":"Nein, das Quorum schützt schon vor einem gefundenen Seed.","wrong":["Ja, sonst ist ein einzelner gefundener Seed sofort gefährlich.","Ja, für alle drei dieselbe, damit der Erbe sie leicht findet.","Nur der SeedSigner, weil er sich den Seed sonst merken würde."],"why":"Ein gefundener Seed ist einer von dreien und damit wertlos. Eine vergessene Passphrase würde dagegen aus 2-von-3 faktisch 2-von-2 machen, ohne jede Reserve.","where":"Kapitel 7, „Keine Passphrase auf den Schlüsseln“"},{"id":"p11","q":"Die Trezor Suite schlägt beim Einrichten ein eigenes Backup-Format vor. Wie bekommt der Trezor im Buch-Setup seinen Seed?","right":"Extern gewürfelt und über die Wiederherstellung am Gerät als 24-Wort-Seed eingespielt.","wrong":["Über das Shamir-Format mit zwanzig Wörtern, das die Suite beim Erstellen einer neuen Wallet vorschlägt.","Der Trezor erzeugt ihn selbst mit Würfeln direkt am Gerät.","Als Kopie des BitBox-Seeds, damit nur ein Backup nötig ist."],"why":"Der dritte Seed kommt aus dem Würfelmodus des SeedSigners und wird am Trezor über die Wiederherstellung eingespielt. Das Shamir-Format der Suite lässt sich nicht von Hand aus Würfen berechnen, und der SeedSigner versteht es nicht. So haben alle drei Schlüssel 24 Wörter aus eigenem Zufall im selben Standard.","where":"Kapitel 8, „Der Trezor bekommt seinen Seed“"},{"id":"p12","q":"Wann darf dein neues Multisig echte Beträge tragen?","right":"Erst nach Adressprüfung, Ausgabe je Paar und Wiederherstellung aus dem Descriptor.","wrong":["Sobald Sparrow die Wallet angelegt und die erste Adresse angezeigt hat.","Wenn der erste Testbetrag angekommen ist, weitere Schritte braucht es dann nicht mehr.","Sobald alle drei Seeds in Stahl gesichert und versiegelt sind."],"why":"Alle drei Geräte müssen dieselbe Adresse zeigen, jede Zweierkombination muss einmal ausgegeben haben, und die Wallet muss einmal aus dem Descriptor entstanden sein. Fehlt einer dieser Beweise, ist das Setup eine Vermutung.","where":"Kapitel 8, „Teil E: Ein Testbetrag und drei Ausgaben“, und „Teil F: Die Wiederherstellung aus dem Papier“"},{"id":"p13","q":"Was verhindert, dass der Erbpfad deiner Liana-Wallet zu Lebzeiten aufgeht?","right":"Der Refresh, eine Überweisung an dich selbst vor Ablauf der Frist.","wrong":["Ein Schalter in Liana, der die Frist jedes Jahr automatisch verlängert.","Das Testament, in dem der Ort des Erbenschlüssels steht.","Ein Passwort, das nur der Erbe kennt."],"why":"Der Refresh stellt die Uhr jedes Coins auf Anfang. Er gehört als fester Termin in den Wartungskalender, unabhängig von der Anzeige in der Software.","where":"Kapitel 9, „Die Auffrisch-Routine“"},{"id":"p14","q":"Du willst Bitcoin über die BitBoxApp versichern. Welches Konto gibst du dafür frei?","right":"Ein eigenes Konto nur für die versicherte Summe, mit frischem xpub.","wrong":["Deine Hauptwallet, damit der ganze Bestand gedeckt ist.","Das Konto mit dem größten Verlauf, damit der Versicherer dir vertraut.","Gar keins, die Police braucht stattdessen deine Wiederherstellungswörter."],"why":"Wer den xpub hat, sieht jede Adresse und jede Bewegung des Kontos, auch künftig. Ein eigenes Konto zeigt dem Versicherer nur, was er versichert, und Wörter verlangt kein seriöser Versicherer.","where":"Kapitel 10, „Die Privatsphäre-Abwägung“"},{"id":"p15","q":"Ein KI-Assistent nennt dir die Prüfsumme zu deiner Wallet-Datei. Wie gehst du mit der Antwort um?","right":"Den Wert selbst an der Herstellerquelle nachlesen.","wrong":["Übernehmen, denn KI-Assistenten lesen Prüfsummen live beim Hersteller ab.","Übernehmen, wenn der Assistent sie als Tabelle mit Quellenangabe liefert.","Den Seed zur Kontrolle mitschicken, damit die Antwort genauer wird."],"why":"Ein Sprachmodell erzeugt plausible Antworten, und die gefährlichsten Fehler sind die plausiblen. KI-Assistenten dürfen Wege zeigen, aber keine Werte liefern.","where":"Kapitel 11, „KI-Assistenten an der Verwahrung“"}]}]}</script>
+<script>/* Quiz zu den Büchern: läuft vollständig im Browser, sendet nichts und speichert nichts
+   (kein Cookie, kein localStorage, kein Netz). Fragen und Texte stehen im JSON-Block #quiz-daten.
+   build_quiz.py setzt dieses Skript in die Seite und trägt seinen Hash in die CSP ein. */
+(function () {
+  'use strict';
+  var D = JSON.parse(document.getElementById('quiz-daten').textContent);
+  var T = D.ui;
+  var S = null;   // laufende Runde: {rid, qs, i, score, miss, done}
+
+  function $(id) { return document.getElementById(id); }
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+  function fill(tpl, p) {
+    return tpl.replace(/\{(\w+)\}/g, function (m, k) { return p[k] != null ? String(p[k]) : m; });
+  }
+  function mix(a) {
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1)), t = a[i];
+      a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  function view(name) {
+    ['start', 'frage', 'ende'].forEach(function (v) { $('v-' + v).classList.toggle('hidden', v !== name); });
+    window.scrollTo(0, 0);
+  }
+
+  function questions(rid) {
+    if (rid === 'alle') return D.runden.reduce(function (acc, r) { return acc.concat(r.fragen); }, []);
+    for (var i = 0; i < D.runden.length; i++) if (D.runden[i].id === rid) return D.runden[i].fragen.slice();
+    return [];
+  }
+  function roundName(rid) {
+    if (rid === 'alle') return T.allName;
+    for (var i = 0; i < D.runden.length; i++) if (D.runden[i].id === rid) return D.runden[i].name;
+    return '';
+  }
+
+  // Nach einem Wechsel der Ansicht kurz keine Klicks: der zweite Klick eines Doppelklicks landete sonst
+  // auf dem Element, das nach dem Umbau an derselben Stelle liegt (Antwort, Link). Audit 24.10.2026.
+  function sperren() {
+    var r = document.documentElement;
+    r.classList.add('sperre');
+    setTimeout(function () { r.classList.remove('sperre'); }, 350);
+  }
+
+  function start(rid) {
+    var qs = questions(rid);
+    if (!qs.length) return;
+    sperren();
+    S = { rid: rid, qs: qs, i: 0, score: 0, miss: [], done: false };
+    $('q-runde').textContent = roundName(rid);
+    view('frage');
+    render();
+  }
+
+  function render() {
+    var q = S.qs[S.i], n = S.qs.length;
+    S.done = false;
+    $('q-pos').textContent = fill(T.pos, { n: S.i + 1, total: n });
+    $('q-score').textContent = fill(T.score, { n: S.score });
+    $('q-bar').style.width = (S.i / n * 100) + '%';
+    $('q-bar-wrap').setAttribute('aria-valuenow', String(S.i));
+    $('q-bar-wrap').setAttribute('aria-valuemax', String(n));
+    $('q-text').textContent = q.q;
+    var box = $('q-antworten');
+    box.textContent = '';
+    var opts = mix([{ t: q.right, ok: true }].concat(q.wrong.map(function (w) { return { t: w, ok: false }; })));
+    opts.forEach(function (o, k) {
+      var b = el('button', 'ans');
+      b.type = 'button';
+      b.setAttribute('data-action', 'pick');
+      b.setAttribute('data-ok', o.ok ? '1' : '0');
+      b.appendChild(el('span', 'ans-key', 'ABCD'.charAt(k)));
+      b.appendChild(el('span', 'ans-text', o.t));
+      box.appendChild(b);
+    });
+    $('q-feedback').classList.add('hidden');
+    $('q-weiter').classList.add('hidden');
+    $('q-live').textContent = '';
+    $('q-text').focus({ preventScroll: true });
+  }
+
+  function pick(b) {
+    if (!S || S.done) return;
+    S.done = true;
+    var q = S.qs[S.i], ok = b.getAttribute('data-ok') === '1';
+    var all = $('q-antworten').querySelectorAll('.ans');
+    for (var i = 0; i < all.length; i++) {
+      var a = all[i];
+      a.disabled = true;
+      if (a.getAttribute('data-ok') === '1') a.classList.add('right');
+      else if (a === b) a.classList.add('wrong');
+      else a.classList.add('dim');
+    }
+    if (ok) S.score++; else S.miss.push(q);
+    var fb = $('q-feedback');
+    fb.className = 'feedback ' + (ok ? 'is-right' : 'is-wrong');
+    $('fb-head').textContent = ok ? T.right : T.wrong;
+    $('fb-why').textContent = q.why;
+    $('fb-where').textContent = q.where;
+    $('q-score').textContent = fill(T.score, { n: S.score });
+    $('q-bar').style.width = ((S.i + 1) / S.qs.length * 100) + '%';
+    var sol = /[.?“”"]$/.test(q.right) ? q.right : q.right + '.';
+    $('q-live').textContent = (ok ? T.right : T.wrong + ' ' + fill(T.solution, { a: sol })) + ' ' + q.why;
+    var w = $('q-weiter');
+    w.textContent = S.i + 1 < S.qs.length ? T.next : T.finish;
+    w.classList.remove('hidden');
+    w.focus({ preventScroll: true });
+  }
+
+  function next() {
+    if (!S || !S.done) return;
+    sperren();
+    S.i++;
+    if (S.i >= S.qs.length) end(); else render();
+  }
+
+  function end() {
+    var n = S.qs.length, p = S.score / n;
+    view('ende');
+    $('e-score').textContent = fill(T.result, { n: S.score, total: n });
+    $('e-text').textContent = p >= 0.9 ? T.r3 : (p >= 0.6 ? T.r2 : T.r1);
+    var list = $('e-liste');
+    list.textContent = '';
+    S.miss.forEach(function (q) {
+      var li = el('li', null, q.q);
+      li.appendChild(el('span', null, T.reread + ' ' + q.where));
+      list.appendChild(li);
+    });
+    $('e-miss').classList.toggle('hidden', S.miss.length === 0);
+    $('e-again').setAttribute('data-arg', S.rid);
+    $('e-score').focus({ preventScroll: true });
+  }
+
+  function home() {
+    S = null;
+    view('start');
+  }
+
+  function theme() {
+    var r = document.documentElement, soft = r.getAttribute('data-theme') === 'soft';
+    if (soft) r.removeAttribute('data-theme'); else r.setAttribute('data-theme', 'soft');
+    $('theme-btn').setAttribute('aria-pressed', soft ? 'false' : 'true');
+  }
+
+  document.addEventListener('click', function (ev) {
+    var t = ev.target.closest('[data-action]');
+    if (!t) return;
+    var a = t.getAttribute('data-action');
+    if (a === 'start') start(t.getAttribute('data-arg'));
+    else if (a === 'pick') pick(t);
+    else if (a === 'next') next();
+    else if (a === 'home') home();
+    else if (a === 'theme') theme();
+  });
+
+  // Tasten 1 bis 4 oder A bis D wählen eine Antwort, solange eine Frage offen ist.
+  document.addEventListener('keydown', function (ev) {
+    if (!S || ev.altKey || ev.ctrlKey || ev.metaKey) return;
+    if ($('v-frage').classList.contains('hidden')) return;
+    if (S.done) {
+      // Enter führt weiter, auch wenn der Fokus nach einem Klick auf eine gesperrte Antwort auf <body> liegt
+      var f = document.activeElement;
+      if (ev.key === 'Enter' && (!f || f === document.body || f.classList.contains('ans'))) { ev.preventDefault(); next(); }
+      return;
+    }
+    var k = String(ev.key).toLowerCase(), idx = '1234'.indexOf(k);
+    if (idx < 0) idx = 'abcd'.indexOf(k);
+    if (idx < 0 || k.length !== 1) return;
+    var bs = $('q-antworten').querySelectorAll('.ans');
+    if (bs[idx]) { ev.preventDefault(); pick(bs[idx]); }
+  });
+
+  document.documentElement.classList.remove('nojs');
+})();
+</script>
+</body>
+</html>
