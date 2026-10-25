@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Nostr Zap Store: The Attack on Apple & Google's App Store Monopoly | Alien Investor</title>
+  <title>Nostr Zapstore: The Attack on Apple & Google's App Store Monopoly | Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="The Nostr Zap Store breaks open the Apple and Google duopoly. Censorship-resistant app distribution, Value4Value, and real digital sovereignty. An analysis.">
+  <meta name="description" content="The Nostr Zapstore breaks open the Apple and Google duopoly. Censorship-resistant app distribution, Value4Value, and real digital sovereignty. An analysis.">
   <link rel="canonical" href="/en/Zapstore.html">
   <link rel="alternate" hreflang="de" href="/Zapstore.html">
   <link rel="alternate" hreflang="en" href="/en/Zapstore.html">
@@ -171,7 +171,7 @@
     <a href="/en/index.html">← Back to HQ</a>
   </div>
 
-  <h1>Nostr Zap Store: The Attack on Apple & Google's App Store Monopoly</h1>
+  <h1>Nostr Zapstore: The Attack on Apple & Google's App Store Monopoly</h1>
   <p class="byline"><em>by Alien Investor</em></p>
 
   <article id="content">
@@ -183,7 +183,7 @@
     <p>
       They decide what gets censored, they take up to 30 percent as "taxes" on innovation, and they dictate what digital sovereignty
       is allowed to mean. But resistance is stirring. The <strong>Nostr protocol</strong>, originally launched as a Twitter alternative,
-      has built a weapon against this monopoly: the <strong>Nostr Zap Store</strong>.
+      has built a weapon against this monopoly: the <strong>Nostr Zapstore</strong>.
     </p>
     <p>
       We're going to look at how this system works, why Apple is afraid of it, and whether it's actually secure.
@@ -191,7 +191,7 @@
 
     <h2>1. The Architecture of Control: Why We Need an Alternative</h2>
     <p>
-      To understand why the Zap Store matters, we need to name the problem. The power of Apple and Google
+      To understand why the Zapstore matters, we need to name the problem. The power of Apple and Google
       rests on three pillars: gatekeeping, economic extraction, and data centralization.
     </p>
 
@@ -217,9 +217,9 @@
       but was quietly passing user data to third parties in the background. When the guardian is corrupt or gets hacked, all users are affected simultaneously.
     </p>
 
-    <h2>2. The Nostr Zap Store: A Technical Breakdown</h2>
+    <h2>2. The Nostr Zapstore: A Technical Breakdown</h2>
     <p>
-      The "Zap Store" is not a central company and not a central server. It's a protocol. It's built on several Nostr standards (NIPs)
+      The "Zapstore" is not a central company and not a central server. It's a protocol. It's built on several Nostr standards (NIPs)
       that together form a decentralized infrastructure.
     </p>
 
@@ -239,13 +239,13 @@
     <ul>
       <li><strong>Integrity:</strong> Change a single bit in the file and the hash changes. Tampering is immediately obvious.</li>
       <li><strong>Censorship resistance:</strong> Since a file is only retrieved by its hash, it can be mirrored across many servers.
-      For apps that only the Zap Store's indexer has listed, however, the file comes from the developer's download address.</li>
+      For apps that only the Zapstore's indexer has listed, however, the file comes from the developer's download address.</li>
     </ul>
 
     <h3>Cryptographic Identity</h3>
     <p>
-      In the Zap Store there are no accounts with email addresses. Developers identify themselves via their <strong>public key</strong>.
-      Release and update metadata are signed with the private key. Your phone checks: "Does this update really come from the same developer as before?" Many apps, however, are listed by the Zap Store indexer, which points to the release on GitHub, for example. Then the indexer signs the Nostr entry, not the developer. The APK itself still carries the developer's signature. Who stands behind a key is only proven by an identity proof.
+      In the Zapstore there are no accounts with email addresses. Developers identify themselves via their <strong>public key</strong>.
+      Release and update metadata are signed with the private key. Your phone checks: "Does this update really come from the same developer as before?" Many apps, however, are listed by the Zapstore indexer, which points to the release on GitHub, for example. Then the indexer signs the Nostr entry, not the developer. The APK itself still carries the developer's signature. Who stands behind a key is only proven by an identity proof.
       That's supply-chain security at Linux level, made usable for end users.
     </p>
 
@@ -256,7 +256,7 @@
 
     <h3>Value4Value (V4V) Instead of a 30% Tax</h3>
     <p>
-      In the Zap Store there is no central platform fee. When you buy an app or send money to a developer, it happens via
+      In the Zapstore there is no central platform fee. When you buy an app or send money to a developer, it happens via
       <strong>Bitcoin Lightning</strong>. The money flows directly from you to the developer.
       This enables microtransactions (e.g. 10 cents for a feature) that were impossible in the old system due to fees.
     </p>
@@ -264,13 +264,13 @@
     <h3>Web of Trust Instead of Algorithm</h3>
     <p>
       In Google's Play Store you see what spends the most on ads.
-      In the Zap Store you see what your network recommends. If a security researcher you trust "zaps" or recommends an app,
+      In the Zapstore you see what your network recommends. If a security researcher you trust "zaps" or recommends an app,
       that carries more weight than anonymous 5-star reviews that are often bought by bots.
     </p>
 
     <h2>4. Decentralization vs. Security: A Critical Look</h2>
     <p>
-      Without a gatekeeper, anyone can upload apps — including malware. How does the Zap Store protect us?
+      Without a gatekeeper, anyone can upload apps — including malware. How does the Zapstore protect us?
     </p>
 
     <div style="overflow-x: auto;">
@@ -279,7 +279,7 @@
           <tr>
             <th>Feature</th>
             <th>Apple / Google (Centralized)</th>
-            <th>Nostr Zap Store (Decentralized)</th>
+            <th>Nostr Zapstore (Decentralized)</th>
           </tr>
         </thead>
         <tbody>
@@ -303,8 +303,8 @@
     </div>
 
     <p>
-      Protection in the Zap Store is based on transparency and reputation. An app from an unknown key is marked as "unverified."
-      Also: on Android, apps run in a <strong>sandbox</strong>. Even a malicious app from the Zap Store cannot access
+      Protection in the Zapstore is based on transparency and reputation. An app from an unknown key is marked as "unverified."
+      Also: on Android, apps run in a <strong>sandbox</strong>. Even a malicious app from the Zapstore cannot access
       your contacts or location data without the corresponding permissions. The operating system's security is the last line of defense.
     </p>
 
@@ -312,8 +312,8 @@
 
     <h3>Android: The Happy Path</h3>
     <p>
-      On Android, the Zap Store already works surprisingly well today. You just need to allow installation from "unknown sources" once.
-      After that it feels like an F-Droid store with social features. Since version 1.1, automatic background updates can be turned on (profile → "Data Management" → "Background auto-updates"). They only run on unmetered networks and with sufficient battery charge, and hash and signature are checked. Without asking, the Zap Store only installs apps it installed itself.
+      On Android, the Zapstore already works surprisingly well today. You just need to allow installation from "unknown sources" once.
+      After that it feels like an F-Droid store with social features. Since version 1.1, automatic background updates can be turned on (profile → "Data Management" → "Background auto-updates"). They only run on unmetered networks and with sufficient battery charge, and hash and signature are checked. Without asking, the Zapstore only installs apps it installed itself.
       The <strong>zsp</strong> tool lets developers push updates directly from their development environment (e.g. CI pipelines like GitHub Actions)
       to the world — no waiting, no review.
     </p>
@@ -329,7 +329,7 @@
 
     <h2>6. Alien Verdict: A Crack in the Wall</h2>
     <p>
-      The Nostr Zap Store isn't ready for mass adoption yet. It doesn't pass the "grandma test."
+      The Nostr Zapstore isn't ready for mass adoption yet. It doesn't pass the "grandma test."
       But it's proof that it's technically possible to distribute software globally without asking a corporation for permission
       and without paying up to 30 percent protection money.
     </p>
@@ -374,7 +374,7 @@
     </div>
 
     <div class="box">
-      <h3>Launch Pad: Install the Zap Store</h3>
+      <h3>Launch Pad: Install the Zapstore</h3>
       <p style="font-size:0.95em;">
         Ready to run the experiment? Here's direct access to the app and the web catalog.
       </p>
@@ -421,7 +421,7 @@
     <p style="font-size:0.95em; color: #ccc;">
       This analysis is based on the technical specifications of the Nostr protocol (including NIP-51, NIP-82, NIP-94, Blossom),
       research into the Damus vs. Apple case, and documentation on sideloading security architectures (Android Sandbox).
-      Additional data points include developer documentation for the Zap Store CLI and analyses of censorship resistance in decentralized networks.
+      Additional data points include developer documentation for the Zapstore CLI and analyses of censorship resistance in decentralized networks.
     </p>
   </div>
 

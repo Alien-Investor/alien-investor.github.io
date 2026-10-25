@@ -130,12 +130,12 @@
       <li><strong>Benachrichtigungen:</strong> Echte Push-Nachrichten laufen auf Android über Googles Push-Dienst, vermittelt über einen Dienst des Herausgebers, und funktionieren auf GrapheneOS nur mit Sandboxed Google Play. Ist es installiert, schaltet White Noise diesen Weg beim ersten Start ein, abschalten lässt er sich jederzeit. Ohne Google Play hält die App stattdessen eine dauerhafte Verbindung zu den Relays und meldet neue Nachrichten lokal, ganz ohne Google. Telemetrie ist standardmäßig ausgeschaltet.</li>
     </ul>
 
-    <h2>5. Bezugsweg: Zap Store und GitHub</h2>
+    <h2>5. Bezugsweg: Zapstore und GitHub</h2>
     <p>
       White Noise wurde 2026 von Grund auf neu gebaut. Statt der früheren Flutter-App gibt es seit September 2026 native Apps für Android und iOS, beide noch als Beta. Herausgeber ist die Internet Privacy Foundation (IPF).
     </p>
     <p>
-      Die Android-App veröffentlicht das Projekt im <strong>Zap Store</strong> selbst, mit eigenem Nostr-Schlüssel. Die App-Seite weist sie deshalb als „Published by Developer“ aus, Herausgeber ist das Nostr-Profil von White Noise. Solange auch nur ein Relay das Manifest hostet, kannst du die App installieren, vorbei an den Torwächtern im Silicon Valley. Die fertigen APKs liegen auch unter den GitHub-Releases des Projekts, und mit Obtainium bleibt die App von dort aus aktuell. Google Play bietet White Noise ebenfalls an, auf GrapheneOS ist dieser Weg aber nicht nötig. Auf dem iPhone gibt es White Noise bisher nur über TestFlight.
+      Die Android-App veröffentlicht das Projekt im <strong>Zapstore</strong> selbst, mit eigenem Nostr-Schlüssel. Die App-Seite weist sie deshalb als „Published by Developer“ aus, Herausgeber ist das Nostr-Profil von White Noise. Solange auch nur ein Relay das Manifest hostet, kannst du die App installieren, vorbei an den Torwächtern im Silicon Valley. Die fertigen APKs liegen auch unter den GitHub-Releases des Projekts, und mit Obtainium bleibt die App von dort aus aktuell. Google Play bietet White Noise ebenfalls an, auf GrapheneOS ist dieser Weg aber nicht nötig. Auf dem iPhone gibt es White Noise bisher nur über TestFlight.
     </p>
     <p>
       <strong>⚠ Umstieg von der alten App:</strong> Die neue App hat einen neuen Paketnamen (<code>dev.ipf.whitenoise.android</code> statt <code>org.parres.whitenoise</code>). Die alte App bekommt kein Update mehr, und die neue übernimmt weder Chats noch Gruppen. Sichere vor dem Umstieg deinen privaten Schlüssel (nsec), sofern er nicht ohnehin in Amber liegt. Installiere die neue App daneben und entferne die alte erst, wenn alles läuft.
@@ -145,10 +145,10 @@
       <h3>Direkt loslegen: Downloads &amp; Links</h3>
       <ul>
         <li>
-          <strong>White Noise App:</strong> Download für Android (Zap Store, Google Play, GitHub) und iOS (TestFlight). <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://www.whitenoise.chat/download" target="_blank" rel="noopener">whitenoise.chat/download</a>
+          <strong>White Noise App:</strong> Download für Android (Zapstore, Google Play, GitHub) und iOS (TestFlight). <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://www.whitenoise.chat/download" target="_blank" rel="noopener">whitenoise.chat/download</a>
         </li>
         <li>
-          <strong>Zap Store:</strong> White Noise im dezentralen Nostr-App-Store. <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://zapstore.dev/apps/dev.ipf.whitenoise.android" target="_blank" rel="noopener">zapstore.dev</a>
+          <strong>Zapstore:</strong> White Noise im dezentralen Nostr-App-Store. <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://zapstore.dev/apps/dev.ipf.whitenoise.android" target="_blank" rel="noopener">zapstore.dev</a>
         </li>
         <li>
           <strong>GitHub-Releases:</strong> Quelle für Obtainium. <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://github.com/marmot-protocol/whitenoise-android/releases" target="_blank" rel="noopener">marmot-protocol/whitenoise-android</a>
