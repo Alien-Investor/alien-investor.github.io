@@ -316,8 +316,8 @@
       Proofs): Statt eines Rings aus 16 Outputs beweist eine Transaktion künftig nur
       noch, dass ihr Input <em>irgendwo</em> in der gesamten Output-Historie der
       Blockchain existiert. Das Anonymity Set springt damit von 16 auf über
-      hundert Millionen. Stand Juni 2026 ist FCMP++ in Entwicklung und
-      durchläuft Audits, im Mainnet aktiviert ist es noch nicht. Wer den Status
+      hundert Millionen. Stand Oktober 2026 läuft FCMP++ erst in einem
+      öffentlichen Testnetz, im Mainnet ist es nicht aktiv, einen offiziellen Termin dafür gibt es noch nicht. Wer den Status
       verfolgen will, schaut auf die offiziellen Ankündigungen unter getmonero.org.
     </p>
 
@@ -360,6 +360,10 @@
         das Paar BTC/XMR mit ordentlicher Liquidität. Beide Parteien hinterlegen
         eine Sicherheitsleistung in einem 2-of-2-Bitcoin-Multisig, der XMR-Transfer
         läuft direkt von Wallet zu Wallet, bei Streit greift ein Mediationsverfahren.
+        Ein Sicherheitsvorfall bei Bisq im Mai 2026 traf nur Trades gegen andere Kryptowährungen,
+        also genau den Bereich, in dem auch XMR gehandelt wird. Mit Version 1.10.0 hat Bisq die
+        automatische Bestätigung von XMR-Zahlungen vorsorglich abgeschaltet: Den Eingang prüfst du
+        in deiner Monero-Wallet selbst und bestätigst ihn von Hand.
         Der Haken für Privacy-Puristen: Escrow und Deposits liegen auf der
         transparenten Bitcoin-Blockchain und sind damit für Chain-Analyse
         (Adress-Clustering) sichtbar. Details zur Anonymität der einzelnen Wege:
