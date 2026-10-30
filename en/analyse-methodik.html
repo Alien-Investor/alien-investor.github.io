@@ -42,7 +42,7 @@
   </div>
 
   <h1>How my analyses are made</h1>
-  <p class="byline">by Alien Investor · as of 23 Oct 2026</p>
+  <p class="byline">by Alien Investor · as of 30 Oct 2026</p>
 
   <article id="content">
 
@@ -165,11 +165,25 @@
     </p>
     <ul>
       <li><strong>Data:</strong> Yahoo Finance, fetched through my own server. Your browser does not query any
-        third-party data services.</li>
+        third-party data services. The quality check states the date of the balance sheet behind the equity ratio
+        and P/B. It can be older than the earnings data.</li>
       <li><strong>Fair value indicator:</strong> formula as above. If the price is more than 15% above or below fair
         value, the analyzer shows "above" or "below fair value", otherwise "fairly valued". For comparison, the P/E
         fan shows earnings per share times 10, 15, 20, 25 and 30. For REITs and mining and metals companies it shows no
         fair value, because the P/E ratio is of little use there.</li>
+      <li><strong>Earnings quality:</strong> If a large part of earnings does not come from operations, for example
+        from investments, interest or asset sales, P/E, return on equity, PEG and fair value look too favourable. The
+        analyzer measures what share of pre-tax income over the last twelve months is not part of operating income
+        according to Yahoo Finance. Above 25%, it marks the P/E and a high return on equity as "distorted", shows no
+        PEG, the fair value indicator states the share instead of "fairly valued" or "below fair value", and the
+        assessment says so unless a sector text takes precedence. Whatever already looks expensive on full earnings
+        stays marked as expensive. For orientation it usually shows an operating P/E and an operating return on
+        equity, both rough approximations. The rule does not apply to banks, insurers and other financial companies,
+        to conglomerates or to Strategy (MSTR), where investment income cannot be cleanly separated from the
+        business. Berkshire Hathaway is the exception: its earnings have included unrealized gains and losses on the
+        stock portfolio since 2018, so the analyzer always treats them as distorted.</li>
+      <li><strong>PEG:</strong> P/E divided by the company's own earnings growth over recent years (annual rate,
+        capped at 40%). The analyzer does not use analyst estimates for it.</li>
       <li><strong>Alien assessment:</strong> rule-based text modules depending on sector, special case and metrics.
         They describe where the metrics stand against their history and what matters in the sector. They are not a
         recommendation to buy or sell and not a review of the individual case.</li>

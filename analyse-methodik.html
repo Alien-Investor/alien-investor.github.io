@@ -42,7 +42,7 @@
   </div>
 
   <h1>So entstehen meine Analysen</h1>
-  <p class="byline">von Alien Investor · Stand 23.10.2026</p>
+  <p class="byline">von Alien Investor · Stand 30.10.2026</p>
 
   <article id="content">
 
@@ -169,11 +169,26 @@
     </p>
     <ul>
       <li><strong>Daten:</strong> Yahoo Finance, abgerufen über meinen eigenen Server. Dein Browser fragt keine
-        fremden Datendienste ab.</li>
+        fremden Datendienste ab. Der Qualitätscheck nennt den Stichtag der Bilanz, aus der Eigenkapitalquote und KBV
+        stammen. Er kann älter sein als die Gewinnzahlen.</li>
       <li><strong>Fair-Value-Indikator:</strong> Formel wie oben. Liegt der Kurs mehr als 15 % über oder unter dem
         Fair Value, zeigt der Analyzer „über“ bzw. „unter Fair Value“, sonst „fair bewertet“. Der KGV-Fächer zeigt
         zum Vergleich den Gewinn je Aktie mal 10, 15, 20, 25 und 30. Bei REITs sowie Bergbau- und Metallwerten zeigt
         er keinen Fair Value, weil das KGV dort wenig aussagekräftig ist.</li>
+      <li><strong>Gewinnqualität:</strong> Stammt ein großer Teil des Gewinns nicht aus dem operativen Geschäft,
+        etwa aus Beteiligungen, Zinsen oder Verkäufen, wirken KGV, Eigenkapitalrendite, PEG und Fair Value zu
+        günstig. Der Analyzer misst, welcher Anteil des Vorsteuergewinns der letzten zwölf Monate laut Yahoo Finance
+        nicht im operativen Ergebnis steckt. Liegt er über 25 %, markiert er das KGV und eine hohe
+        Eigenkapitalrendite als „verzerrt“, zeigt kein PEG, der Fair-Value-Indikator nennt statt „fair bewertet“
+        oder „unter Fair Value“ den Anteil, und die Einordnung sagt es, sofern kein Branchentext Vorrang hat. Was
+        schon mit dem vollen Gewinn teuer wirkt, bleibt als teuer markiert. Zur Orientierung nennt er meist ein
+        operatives KGV und eine operative Eigenkapitalrendite, beides grobe Näherungen. Für Banken, Versicherer und
+        andere Finanzwerte, für Konglomerate und für Strategy (MSTR) gilt die Regel nicht, dort lassen sich
+        Kapitalerträge nicht sauber vom Geschäft trennen. Ausnahme ist Berkshire Hathaway: Dort enthält der Gewinn
+        seit 2018 auch die nicht realisierten Kursgewinne und -verluste des Aktienportfolios, der Analyzer behandelt
+        ihn deshalb immer als verzerrt.</li>
+      <li><strong>PEG:</strong> KGV geteilt durch das eigene Gewinnwachstum der letzten Jahre (jährliche Rate,
+        höchstens 40 %). Analystenschätzungen nutzt der Analyzer dafür nicht.</li>
       <li><strong>Alien-Einordnung:</strong> regelbasierte Textbausteine je nach Branche, Sonderfall und
         Kennzahlenlage. Sie beschreiben, wo die Kennzahlen im historischen Vergleich stehen und worauf es in der
         Branche ankommt. Sie sind keine Kauf- oder Verkaufsempfehlung und keine Prüfung des Einzelfalls.</li>
