@@ -170,7 +170,10 @@
     <ul>
       <li><strong>Daten:</strong> Yahoo Finance, abgerufen über meinen eigenen Server. Dein Browser fragt keine
         fremden Datendienste ab. Der Qualitätscheck nennt den Stichtag der Bilanz, aus der Eigenkapitalquote und KBV
-        stammen. Er kann älter sein als die Gewinnzahlen.</li>
+        stammen. Er kann älter sein als die Gewinnzahlen. Berichtet ein Unternehmen in einer anderen Währung als der
+        Kurs, etwa chinesische ADRs in Renminbi oder Novo Nordisk in dänischen Kronen, rechnet der Analyzer Gewinn je
+        Aktie, Buchwert, Umsatz und Cashflow mit Devisenkursen von Yahoo Finance in die Kurswährung um, den Verlauf
+        mit dem Kurs des jeweiligen Monats. Beim Free Cashflow steht die Ausgangswährung dabei.</li>
       <li><strong>Fair-Value-Indikator:</strong> Formel wie oben. Liegt der Kurs mehr als 15 % über oder unter dem
         Fair Value, zeigt der Analyzer „über“ bzw. „unter Fair Value“, sonst „fair bewertet“. Der KGV-Fächer zeigt
         zum Vergleich den Gewinn je Aktie mal 10, 15, 20, 25 und 30. Bei REITs sowie Bergbau- und Metallwerten zeigt

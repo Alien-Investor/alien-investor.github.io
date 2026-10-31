@@ -166,7 +166,10 @@
     <ul>
       <li><strong>Data:</strong> Yahoo Finance, fetched through my own server. Your browser does not query any
         third-party data services. The quality check states the date of the balance sheet behind the equity ratio
-        and P/B. It can be older than the earnings data.</li>
+        and P/B. It can be older than the earnings data. If a company reports in a different currency than its share
+        price, such as Chinese ADRs in renminbi or Novo Nordisk in Danish kroner, the analyzer converts earnings per
+        share, book value, revenue and cash flow into the price currency using exchange rates from Yahoo Finance, the
+        history at the rate of each month. The free cash flow row names the original currency.</li>
       <li><strong>Fair value indicator:</strong> formula as above. If the price is more than 15% above or below fair
         value, the analyzer shows "above" or "below fair value", otherwise "fairly valued". For comparison, the P/E
         fan shows earnings per share times 10, 15, 20, 25 and 30. For REITs and mining and metals companies it shows no
