@@ -185,10 +185,12 @@
       <li><strong>KGV-Median:</strong> Für jeden Monat teilt der Analyzer den Kurs durch den Gewinn je Aktie. In den
         Median gehen nur Monatswerte über 7 ein und keine Ausreißer nach oben: Die Grenze liegt beim 2,5-Fachen des
         Medians, mindestens bei 50. Yahoo Finance liefert rund vier Jahre Jahresgewinne. Für die Zeit davor rechnet der
-        Analyzer den Gewinn mit dem bisherigen Gewinnwachstum zurück, in der Regel mit höchstens 7 % pro Jahr. Im
-        Standardzeitraum betrifft das meist sechs bis sieben der zehn Jahre. Im Analyzer steht der Median als „Ø“.
-        Liegt er über 60, zeigt auch die KGV-Zeile im Qualitätscheck (immer zehn Jahre) keinen Schnitt, die KGV-Ampel
-        folgt dann dem Branchen-KGV.</li>
+        Analyzer den Gewinn in der Regel mit dem bisherigen Gewinnwachstum zurück, also der jährlichen Rate zwischen dem
+        ersten und dem letzten Jahreswert, höchstens 7 % pro Jahr. Ist der Gewinn über diese Jahre gesunken, hält
+        er ihn davor konstant und zeigt keinen Fair Value. Im Standardzeitraum betrifft die Rückrechnung meist sechs bis
+        sieben der zehn Jahre. Im Analyzer steht der Median als „Ø“. Liegt er über 60, zeigt auch die KGV-Zeile im
+        Qualitätscheck (immer zehn Jahre) keinen Schnitt, die KGV-Ampel folgt dann dem Branchen-KGV. Auch bei KBV und
+        KUV steht „Ø“ für den Median der Monatswerte.</li>
       <li><strong>Gewinnqualität:</strong> Stammt ein großer Teil des Gewinns nicht aus dem operativen Geschäft,
         etwa aus Beteiligungen, Zinsen oder Verkäufen, wirken KGV, Eigenkapitalrendite, PEG und Fair Value zu
         günstig. Der Analyzer misst, welcher Anteil des Vorsteuergewinns der letzten zwölf Monate laut Yahoo Finance

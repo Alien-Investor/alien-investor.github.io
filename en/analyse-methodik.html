@@ -182,11 +182,13 @@
         60.</li>
       <li><strong>P/E median:</strong> For each month the analyzer divides the price by earnings per share. Only monthly
         values above 7 enter the median, and no upward outliers: the limit is 2.5 times the median, at least 50. Yahoo
-        Finance provides about four years of annual earnings. For the years before that, the analyzer calculates
-        earnings backwards using past earnings growth, as a rule at most 7% per year. In the default period this usually
-        affects six to seven of the ten years. In the analyzer the median is shown as "Ø" or "avg.". If it is above 60,
-        the P/E row in the quality check (always ten years) shows no average either, and the P/E light then follows the
-        sector P/E.</li>
+        Finance provides about four years of annual earnings. For the years before that, the analyzer usually calculates
+        earnings backwards using past earnings growth, i.e. the annual rate between the first and the last annual
+        figure, at most 7% per year. If earnings declined over these years, it holds them constant before
+        that and shows no fair value. In the default period the back-calculation usually affects six to seven of the ten
+        years. In the analyzer the median is shown as "Ø" or "avg.". If it is above 60, the P/E row in the quality check
+        (always ten years) shows no average either, and the P/E light then follows the sector P/E. For P/B and P/S,
+        too, "Ø" or "avg." stands for the median of the monthly values.</li>
       <li><strong>Earnings quality:</strong> If a large part of earnings does not come from operations, for example
         from investments, interest or asset sales, P/E, return on equity, PEG and fair value look too favourable. The
         analyzer measures what share of pre-tax income over the last twelve months is not part of operating income
