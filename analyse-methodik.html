@@ -102,7 +102,7 @@
       Fair-Value-Indikator des Alien Analyzers:
     </p>
     <div class="box">
-      Fair Value = aktueller Gewinn je Aktie × Median des historischen KGV im gewählten Zeitraum, ohne Ausreißer (Standard: 10 Jahre)
+      Fair Value = aktueller Gewinn je Aktie × Median des historischen KGV im gewählten Zeitraum (Standard: 10 Jahre)
     </div>
     <p>Die Annahmen dahinter:</p>
     <ul>
@@ -182,6 +182,13 @@
         zeigt zum Vergleich den Gewinn je Aktie mal 10, 15, 20, 25 und 30. Bei REITs sowie Bergbau- und Metallwerten
         zeigt der Analyzer keinen Fair Value, weil das KGV dort wenig aussagekräftig ist, ebenso wenn der Median des
         historischen KGV über 60 liegt.</li>
+      <li><strong>KGV-Median:</strong> Für jeden Monat teilt der Analyzer den Kurs durch den Gewinn je Aktie. In den
+        Median gehen nur Monatswerte über 7 ein und keine Ausreißer nach oben: Die Grenze liegt beim 2,5-Fachen des
+        Medians, mindestens bei 50. Yahoo Finance liefert rund vier Jahre Jahresgewinne. Für die Zeit davor rechnet der
+        Analyzer den Gewinn mit dem bisherigen Gewinnwachstum zurück, in der Regel mit höchstens 7 % pro Jahr. Im
+        Standardzeitraum betrifft das meist sechs bis sieben der zehn Jahre. Im Analyzer steht der Median als „Ø“.
+        Liegt er über 60, zeigt auch die KGV-Zeile im Qualitätscheck (immer zehn Jahre) keinen Schnitt, die KGV-Ampel
+        folgt dann dem Branchen-KGV.</li>
       <li><strong>Gewinnqualität:</strong> Stammt ein großer Teil des Gewinns nicht aus dem operativen Geschäft,
         etwa aus Beteiligungen, Zinsen oder Verkäufen, wirken KGV, Eigenkapitalrendite, PEG und Fair Value zu
         günstig. Der Analyzer misst, welcher Anteil des Vorsteuergewinns der letzten zwölf Monate laut Yahoo Finance

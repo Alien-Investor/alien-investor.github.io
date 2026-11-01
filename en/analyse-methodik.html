@@ -100,7 +100,7 @@
       fair value indicator of the Alien Analyzer:
     </p>
     <div class="box">
-      Fair value = current earnings per share × median of the historical P/E ratio in the selected period, excluding outliers (default: 10 years)
+      Fair value = current earnings per share × median of the historical P/E ratio in the selected period (default: 10 years)
     </div>
     <p>The assumptions behind it:</p>
     <ul>
@@ -180,6 +180,13 @@
         fan shows earnings per share times 10, 15, 20, 25 and 30. For REITs and mining and metals companies the analyzer
         shows no fair value, because the P/E ratio is of little use there, nor when the median historical P/E is above
         60.</li>
+      <li><strong>P/E median:</strong> For each month the analyzer divides the price by earnings per share. Only monthly
+        values above 7 enter the median, and no upward outliers: the limit is 2.5 times the median, at least 50. Yahoo
+        Finance provides about four years of annual earnings. For the years before that, the analyzer calculates
+        earnings backwards using past earnings growth, as a rule at most 7% per year. In the default period this usually
+        affects six to seven of the ten years. In the analyzer the median is shown as "Ø" or "avg.". If it is above 60,
+        the P/E row in the quality check (always ten years) shows no average either, and the P/E light then follows the
+        sector P/E.</li>
       <li><strong>Earnings quality:</strong> If a large part of earnings does not come from operations, for example
         from investments, interest or asset sales, P/E, return on equity, PEG and fair value look too favourable. The
         analyzer measures what share of pre-tax income over the last twelve months is not part of operating income
