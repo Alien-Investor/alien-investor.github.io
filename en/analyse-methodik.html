@@ -100,7 +100,7 @@
       fair value indicator of the Alien Analyzer:
     </p>
     <div class="box">
-      Fair value = current earnings per share × median of the historical P/E ratio in the selected period (default: 10 years)
+      Fair value = current earnings per share × median P/E ratio over the months with actual earnings figures (about four years at Yahoo Finance)
     </div>
     <p>The assumptions behind it:</p>
     <ul>
@@ -178,17 +178,31 @@
         with a growth rate but connects it to this twelve-month figure. If the price is more than 15% above or below fair
         value, the analyzer shows "above" or "below fair value", otherwise "fairly valued". For comparison, the P/E
         fan shows earnings per share times 10, 15, 20, 25 and 30. For REITs and mining and metals companies the analyzer
-        shows no fair value, because the P/E ratio is of little use there, nor when the median historical P/E is above
-        60.</li>
-      <li><strong>P/E median:</strong> For each month the analyzer divides the price by earnings per share. Only monthly
-        values above 7 enter the median, and no upward outliers: the limit is 2.5 times the median, at least 50. Yahoo
-        Finance provides about four years of annual earnings. For the years before that, the analyzer usually calculates
-        earnings backwards using past earnings growth, i.e. the annual rate between the first and the last annual
-        figure, at most 7% per year. If earnings declined over these years, it holds them constant before
-        that and shows no fair value. In the default period the back-calculation usually affects six to seven of the ten
-        years. In the analyzer the median is shown as "Ø" or "avg.". If it is above 60, the P/E row in the quality check
-        (always ten years) shows no average either, and the P/E light then follows the sector P/E. For P/B and P/S,
-        too, "Ø" or "avg." stands for the median of the monthly values.</li>
+        shows no fair value, because the P/E ratio is of little use there, nor when the median P/E is above 60, when
+        Yahoo Finance provides fewer than three positive annual earnings figures or when the company made a loss over
+        the last twelve months.</li>
+      <li><strong>P/E median:</strong> For each month the analyzer divides the price by earnings per share. Yahoo
+        Finance provides about four years of annual earnings. The median only covers the months from the first of these
+        annual figures on; in between, the analyzer connects the annual figures in a straight line. It does not
+        calculate earnings backwards for the time before that. Since the shortest period is five years, the selected
+        period therefore usually only changes the visible price history, not the median. Only monthly values above 7
+        enter the median, and no upward outliers: the limit is 2.5 times the median, at least 50. In the analyzer the
+        median is shown as "Ø" or "avg.", in the sidebar and in the tooltip of the fair value line together with the
+        month it starts from. If Yahoo Finance provides fewer than three positive annual earnings figures or the median
+        is above 60, the P/E row in the quality check shows no average either, and the P/E light then follows the
+        sector P/E; for royalty companies it stays yellow. Until 1 November 2026 the analyzer usually calculated
+        earnings before the first annual figure backwards using past earnings growth (at most 7% per year) and, in the
+        default period, took the median over ten years. Older analyses state fair values based on that earlier
+        calculation.</li>
+      <li><strong>P/CF, P/B and P/S:</strong> P/CF works like P/E: the median covers the months from the first annual
+        figure of Yahoo Finance's cash flow series on (also about four years) and only appears with at least three years
+        of positive operating cash flow. It only includes monthly values above 2 and below an upper limit between 20 and
+        30. If operating cash flow over the last twelve months is more than four times that of the last fiscal year or
+        less than a quarter of it, for example because Yahoo Finance delivers the annual series in a different
+        currency, the analyzer only uses the twelve-month figure and shows no average. For P/B and P/S, "Ø" or "avg." stands for the median of the monthly values over the selected period, in the
+        sidebar over ten years. Book value and revenue per share are only available at the balance sheet dates of
+        roughly the last one and a half years; for the time before that, the analyzer uses the oldest of these
+        values.</li>
       <li><strong>Earnings quality:</strong> If a large part of earnings does not come from operations, for example
         from investments, interest or asset sales, P/E, return on equity, PEG and fair value look too favourable. The
         analyzer measures what share of pre-tax income over the last twelve months is not part of operating income

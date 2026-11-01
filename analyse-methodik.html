@@ -102,7 +102,7 @@
       Fair-Value-Indikator des Alien Analyzers:
     </p>
     <div class="box">
-      Fair Value = aktueller Gewinn je Aktie × Median des historischen KGV im gewählten Zeitraum (Standard: 10 Jahre)
+      Fair Value = aktueller Gewinn je Aktie × Median des KGV in den Monaten mit echten Gewinnzahlen (bei Yahoo Finance rund vier Jahre)
     </div>
     <p>Die Annahmen dahinter:</p>
     <ul>
@@ -181,16 +181,28 @@
         unter dem Fair Value, zeigt der Analyzer „über“ bzw. „unter Fair Value“, sonst „fair bewertet“. Der KGV-Fächer
         zeigt zum Vergleich den Gewinn je Aktie mal 10, 15, 20, 25 und 30. Bei REITs sowie Bergbau- und Metallwerten
         zeigt der Analyzer keinen Fair Value, weil das KGV dort wenig aussagekräftig ist, ebenso wenn der Median des
-        historischen KGV über 60 liegt.</li>
-      <li><strong>KGV-Median:</strong> Für jeden Monat teilt der Analyzer den Kurs durch den Gewinn je Aktie. In den
-        Median gehen nur Monatswerte über 7 ein und keine Ausreißer nach oben: Die Grenze liegt beim 2,5-Fachen des
-        Medians, mindestens bei 50. Yahoo Finance liefert rund vier Jahre Jahresgewinne. Für die Zeit davor rechnet der
-        Analyzer den Gewinn in der Regel mit dem bisherigen Gewinnwachstum zurück, also der jährlichen Rate zwischen dem
-        ersten und dem letzten Jahreswert, höchstens 7 % pro Jahr. Ist der Gewinn über diese Jahre gesunken, hält
-        er ihn davor konstant und zeigt keinen Fair Value. Im Standardzeitraum betrifft die Rückrechnung meist sechs bis
-        sieben der zehn Jahre. Im Analyzer steht der Median als „Ø“. Liegt er über 60, zeigt auch die KGV-Zeile im
-        Qualitätscheck (immer zehn Jahre) keinen Schnitt, die KGV-Ampel folgt dann dem Branchen-KGV. Auch bei KBV und
-        KUV steht „Ø“ für den Median der Monatswerte.</li>
+        KGV über 60 liegt, wenn Yahoo Finance weniger als drei positive Jahresgewinne liefert oder wenn das Unternehmen
+        in den letzten zwölf Monaten Verlust gemacht hat.</li>
+      <li><strong>KGV-Median:</strong> Für jeden Monat teilt der Analyzer den Kurs durch den Gewinn je Aktie. Yahoo
+        Finance liefert rund vier Jahre Jahresgewinne. Der Median läuft nur über die Monate ab dem ersten dieser
+        Jahresgewinne, dazwischen verbindet der Analyzer die Jahreswerte geradlinig. Für die Zeit davor rechnet er keinen
+        Gewinn zurück. Der gewählte Zeitraum (fünf Jahre und mehr) ändert deshalb in der Regel nur den sichtbaren
+        Kursverlauf, nicht den Median. In den Median gehen nur Monatswerte über 7 ein und keine Ausreißer nach oben: Die
+        Grenze liegt beim 2,5-Fachen des Medians, mindestens bei 50. Im Analyzer steht der Median als „Ø“, in der
+        Seitenleiste und beim Antippen der Fair-Value-Linie mit dem Monat, ab dem er gilt. Liefert Yahoo Finance weniger
+        als drei positive Jahresgewinne oder liegt der Median über 60, zeigt auch die KGV-Zeile im Qualitätscheck keinen
+        Schnitt, die KGV-Ampel folgt dann dem Branchen-KGV, bei Royalty-Gesellschaften bleibt sie gelb. Bis zum
+        1. November 2026 rechnete der Analyzer den Gewinn vor dem ersten Jahreswert in der Regel mit dem bisherigen
+        Gewinnwachstum zurück (höchstens 7 % pro Jahr) und bildete den Median im Standardzeitraum über zehn Jahre. Ältere
+        Analysen nennen Fair Values nach der damaligen Rechnung.</li>
+      <li><strong>KCV, KBV und KUV:</strong> Beim KCV gilt dasselbe wie beim KGV: Der Median läuft über die Monate ab
+        dem ersten Jahreswert der Cashflow-Reihe von Yahoo Finance (ebenfalls rund vier Jahre) und erscheint erst ab drei
+        Jahren mit positivem operativem Cashflow. Er enthält nur Monatswerte über 2 und unter einer Obergrenze zwischen
+        20 und 30. Ist der operative Cashflow der letzten zwölf Monate mehr als viermal so hoch wie im letzten
+        Geschäftsjahr oder kleiner als ein Viertel davon, etwa weil Yahoo Finance die Jahresreihe in einer anderen
+        Währung liefert, nutzt der Analyzer nur den Zwölfmonatswert und zeigt keinen Schnitt. Bei KBV und KUV steht „Ø“ für den Median der Monatswerte über den gewählten Zeitraum, in der
+        Seitenleiste über zehn Jahre. Buchwert und Umsatz je Aktie liegen dafür nur zu den Bilanzstichtagen der letzten
+        rund anderthalb Jahre vor; für die Zeit davor setzt der Analyzer den ältesten dieser Werte an.</li>
       <li><strong>Gewinnqualität:</strong> Stammt ein großer Teil des Gewinns nicht aus dem operativen Geschäft,
         etwa aus Beteiligungen, Zinsen oder Verkäufen, wirken KGV, Eigenkapitalrendite, PEG und Fair Value zu
         günstig. Der Analyzer misst, welcher Anteil des Vorsteuergewinns der letzten zwölf Monate laut Yahoo Finance
