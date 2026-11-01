@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en" class="nojs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- CSP: kein Netz, kein fremder Code. Stil und Skript nur per Hash (build_quiz.py), Schriften vom eigenen Server. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-dkvA4V2ckU9V2tZQyRa5iJnr78fcCSk9IwqzglReF/U='; style-src 'self' 'sha256-IKSAzT28SOhcZcxDtnNQ0dF0sTn2O156pc8D3wJyHo8='; font-src 'self'; img-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Quiz Volume 3: The Decentralized System | Alien Investor</title>
+<meta name="description" content="30 questions on the book “The Decentralized System: Bitcoin. Stocks. True Ownership.” in two rounds, each with an explanation and the place in the book. Free, no sign-up, the quiz stores nothing.">
+<link rel="canonical" href="/en/quiz-band3.html">
+<link rel="alternate" hreflang="de" href="/quiz-band3.html">
+<link rel="alternate" hreflang="en" href="/en/quiz-band3.html">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>/* quiz.css — Quiz zu den Büchern im App-Look der Alien-Investor-Apps.
+   Farben und Bausteine aus dem App-Design-Kit (~/.claude/skills/app-design/kit/app-theme.css, Stand 15.10.2026),
+   auf das Nötige gekürzt. Farben nur über Variablen, damit „Neon“ und „Soft“ mitziehen.
+   build_quiz.py setzt diese Datei als <style> in die Seite und trägt ihren Hash in die CSP ein. */
+
+:root{
+  --neon:#00ffcc; --neon-dim:rgba(0,255,204,.15); --neon-mid:rgba(0,255,204,.4);
+  --red:#ff4466; --red-dim:rgba(255,68,102,.12);
+  --orange:#ff8844;
+  --bg:#000; --card-bg:#050f0d; --border:rgba(0,255,204,.2);
+  --text:#cfeee6; --text-dim:#4a7a6d; --text-mid:#7ab8a8;
+}
+[data-theme="soft"]{
+  --neon:#00c8a0; --neon-dim:rgba(0,200,160,.15); --neon-mid:rgba(0,200,160,.35);
+  --bg:#0d1a2b; --card-bg:#0f2535; --border:rgba(0,200,160,.18);
+  --text:#d2ebe5; --text-dim:#5d8f82; --text-mid:#8ac8b8; --red:#e03355; --red-dim:rgba(224,51,85,.14);
+}
+[data-theme="soft"] body::after{opacity:.35;}
+
+/* ===== Grundlage: Sternenhimmel + Scanlines ===== */
+*{margin:0;padding:0;box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{background:var(--bg);color:var(--text);font-family:'Share Tech Mono',monospace;min-height:100vh;overflow-x:hidden;position:relative;line-height:1.55;}
+body::before{content:'';position:fixed;inset:0;background-image:
+ radial-gradient(1px 1px at 10% 15%,rgba(0,255,204,.4) 0%,transparent 100%),
+ radial-gradient(1px 1px at 30% 40%,rgba(0,255,204,.25) 0%,transparent 100%),
+ radial-gradient(1px 1px at 55% 20%,rgba(0,255,204,.35) 0%,transparent 100%),
+ radial-gradient(1px 1px at 70% 60%,rgba(0,255,204,.2) 0%,transparent 100%),
+ radial-gradient(1px 1px at 85% 30%,rgba(0,255,204,.3) 0%,transparent 100%),
+ radial-gradient(1px 1px at 20% 75%,rgba(0,255,204,.2) 0%,transparent 100%),
+ radial-gradient(1px 1px at 45% 85%,rgba(0,255,204,.3) 0%,transparent 100%),
+ radial-gradient(1px 1px at 90% 80%,rgba(0,255,204,.25) 0%,transparent 100%);
+ pointer-events:none;z-index:0;}
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.15) 2px,rgba(0,0,0,.15) 4px);pointer-events:none;z-index:1;}
+@media (hover:hover) and (pointer:fine){
+::-webkit-scrollbar{width:10px;height:10px;}
+::-webkit-scrollbar-track{background:rgba(0,255,204,.04);}
+::-webkit-scrollbar-thumb{background:var(--neon-mid);border:2px solid transparent;background-clip:padding-box;border-radius:6px;}
+::-webkit-scrollbar-thumb:hover{background:var(--neon);background-clip:padding-box;}
+::-webkit-scrollbar-button{display:none;}
+}
+@supports not selector(::-webkit-scrollbar){html{scrollbar-color:var(--neon-mid) transparent;scrollbar-width:thin;}}
+.container{position:relative;z-index:2;max-width:760px;margin:0 auto;padding:14px 16px 48px;}
+a{color:var(--neon);text-decoration:none;}
+a:hover{text-shadow:0 0 8px var(--neon-mid);}
+.hidden{display:none!important;}
+.center{text-align:center;}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+.nojs .needs-js{display:none!important;}
+.sperre a,.sperre button{pointer-events:none;}   /* kurz nach Ansichtswechsel, siehe sperren() in quiz.js */
+:focus-visible{outline:2px solid var(--neon);outline-offset:2px;}
+
+/* ===== Leiste oben ===== */
+.topbar{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.78rem;letter-spacing:1px;margin-bottom:22px;}
+.topbar a{color:var(--text-mid);}
+.topbar a:hover{color:var(--neon);}
+
+/* ===== Kopf: Logo, Tagline, Sprach- und Darstellungs-Knopf ===== */
+.app-head{text-align:center;position:relative;margin-bottom:24px;}
+.header-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(400px,100%);height:100px;background:radial-gradient(ellipse,rgba(0,255,204,.08) 0%,transparent 70%);pointer-events:none;}
+.logo{font-family:'Orbitron',sans-serif;font-size:clamp(1.3rem,4vw,1.9rem);font-weight:900;letter-spacing:4px;text-transform:uppercase;color:var(--neon);text-shadow:0 0 20px rgba(0,255,204,.7),0 0 40px rgba(0,255,204,.3);
+ padding:0 52px;min-height:36px;display:flex;align-items:center;justify-content:center;}
+@media(max-width:520px){.logo{letter-spacing:2px;font-size:clamp(1rem,5vw,1.5rem);}}
+.tagline{font-size:.72rem;letter-spacing:3px;color:var(--text-dim);text-transform:uppercase;margin-top:6px;}
+.lang-btn,.theme-btn{position:absolute;top:0;height:36px;border:1px solid var(--neon-mid);background:var(--neon-dim);color:var(--neon);font-family:'Orbitron',sans-serif;font-weight:700;cursor:pointer;z-index:5;display:flex;align-items:center;justify-content:center;}
+.lang-btn{left:0;padding:0 10px;border-radius:18px;font-size:.7rem;letter-spacing:1px;}
+.theme-btn{right:0;width:36px;border-radius:50%;}
+.theme-btn .ic{width:18px;height:18px;}
+.lang-btn:hover,.theme-btn:hover{box-shadow:0 0 12px rgba(0,255,204,.45);text-shadow:none;}
+
+/* ===== Karten, Hinweise ===== */
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:4px;padding:18px;margin-bottom:16px;}
+.card p+p{margin-top:10px;}
+.card h2{font-family:'Orbitron',sans-serif;font-size:.85rem;letter-spacing:2px;text-transform:uppercase;color:var(--neon);margin-bottom:12px;font-weight:700;}
+.card p,.card li{overflow-wrap:break-word;}
+.muted{color:var(--text-dim);font-size:.8rem;line-height:1.5;}
+.warn{border:1px solid rgba(255,136,68,.4);border-radius:4px;background:rgba(255,136,68,.06);padding:12px;color:var(--orange);font-size:.85rem;line-height:1.5;margin-bottom:16px;}
+.ok{border:1px solid var(--neon-mid);border-radius:4px;background:var(--neon-dim);padding:12px;color:var(--neon);font-size:.85rem;line-height:1.5;}
+.ok .ic{margin-right:6px;}
+.ic{width:1.1em;height:1.1em;vertical-align:-0.18em;display:inline-block;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 3px rgba(0,255,204,.45));}
+
+/* ===== Knöpfe ===== */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--neon-dim);border:1px solid var(--neon-mid);border-radius:4px;color:var(--neon);font-family:'Orbitron',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:2px;padding:11px 18px;cursor:pointer;text-transform:uppercase;transition:all .2s;text-decoration:none;}
+.btn:hover{background:rgba(0,255,204,.2);box-shadow:0 0 14px rgba(0,255,204,.4);text-shadow:none;}
+.btn.ghost{background:none;border-color:var(--border);color:var(--text-mid);}
+.btn.ghost:hover{border-color:var(--neon-mid);color:var(--neon);box-shadow:none;}
+.btn.sm{padding:7px 12px;font-size:.66rem;}
+.btn .ic{stroke-width:1.9;flex-shrink:0;}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;}
+.actions.center{justify-content:center;}
+
+/* ===== Startseite: Runden ===== */
+.rounds{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:0 14px;}
+.round{display:flex;flex-direction:column;}
+.round .count{font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:900;color:var(--neon);text-shadow:0 0 14px rgba(0,255,204,.5);line-height:1.1;}
+.round .count small{font-size:.7rem;letter-spacing:2px;color:var(--text-mid);font-weight:700;margin-left:6px;text-transform:uppercase;text-shadow:none;}
+.round p{flex:1;margin:8px 0 14px;font-size:.85rem;color:var(--text-mid);}
+.book{display:flex;gap:16px;align-items:center;}
+.book img{width:84px;height:auto;border:1px solid var(--border);border-radius:3px;flex:none;}
+.book p{font-size:.85rem;}
+
+/* ===== Frage ===== */
+.qhead{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-mid);margin-bottom:8px;}
+.qhead #q-runde{color:var(--neon);}
+.bar{height:4px;background:var(--neon-dim);border-radius:2px;overflow:hidden;margin-bottom:16px;}
+.bar>div{height:100%;width:0;background:var(--neon);box-shadow:0 0 10px var(--neon-mid);transition:width .3s;}
+.card .qtext{font-family:'Share Tech Mono',monospace;font-size:1.08rem;letter-spacing:0;text-transform:none;color:var(--text);line-height:1.5;margin-bottom:16px;font-weight:400;}
+.qtext:focus{outline:none;}
+.answers{display:grid;gap:10px;}
+.ans{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;background:rgba(0,0,0,.35);border:1px solid var(--border);border-radius:4px;color:var(--text);font-family:'Share Tech Mono',monospace;font-size:.95rem;line-height:1.45;padding:12px 14px;cursor:pointer;transition:border-color .15s,background .15s,box-shadow .15s;}
+.ans:hover:not(:disabled){border-color:var(--neon-mid);background:var(--neon-dim);}
+.ans:disabled{cursor:default;}
+.ans-key{flex:none;width:26px;height:26px;border:1px solid var(--neon-mid);border-radius:3px;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-weight:700;font-size:.72rem;color:var(--neon);margin-top:-2px;}
+.ans-text{flex:1;min-width:0;overflow-wrap:break-word;}
+.ans.right{border-color:var(--neon);background:var(--neon-dim);box-shadow:0 0 12px var(--neon-mid);}
+.ans.right .ans-key{background:var(--neon);color:var(--bg);border-color:var(--neon);}
+.ans.wrong{border-color:var(--red);background:var(--red-dim);}
+.ans.wrong .ans-key{background:var(--red);color:var(--bg);border-color:var(--red);}
+.ans.dim{opacity:.45;}
+.feedback{margin-top:16px;border-radius:4px;padding:14px;font-size:.9rem;line-height:1.55;}
+.feedback.is-right{border:1px solid var(--neon-mid);background:var(--neon-dim);}
+.feedback.is-wrong{border:1px solid rgba(255,68,102,.45);background:var(--red-dim);}
+.fb-head{font-family:'Orbitron',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
+.is-right .fb-head{color:var(--neon);}
+.is-wrong .fb-head{color:var(--red);}
+.fb-where{margin-top:8px;color:var(--text-mid);font-size:.82rem;}
+.fb-where b{color:var(--neon);font-weight:400;letter-spacing:1px;}
+.keys{margin-top:14px;}
+
+/* ===== Auswertung ===== */
+.score{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(2rem,9vw,3rem);color:var(--neon);text-shadow:0 0 20px rgba(0,255,204,.6);text-align:center;margin:6px 0 10px;}
+.result p#e-text{text-align:center;}
+.misses{padding-left:1.4em;display:grid;gap:12px;font-size:.88rem;}
+.misses li::marker{color:var(--neon);}
+.misses span{display:block;color:var(--text-mid);font-size:.8rem;margin-top:2px;}
+
+/* ===== Fuß ===== */
+.foot{text-align:center;color:var(--text-dim);font-size:.72rem;letter-spacing:.5px;margin-top:34px;line-height:1.8;}
+.foot a{color:var(--text-mid);}
+.foot a:hover{color:var(--neon);}
+.foot p+p{margin-top:8px;}
+
+/* ===== Übersicht aller Bände ===== */
+.bands{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0 14px;}
+.band{display:flex;gap:14px;align-items:flex-start;}
+.band img{width:72px;height:auto;border:1px solid var(--border);border-radius:3px;flex:none;}
+.band .vol{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-mid);}
+.band>div{min-width:0;}
+.band h2{margin:4px 0 8px;font-size:.8rem;line-height:1.4;overflow-wrap:break-word;hyphens:manual;}
+.band.soon img{opacity:.45;filter:grayscale(.6);}
+.band.soon h2{color:var(--text-mid);}
+
+@media(max-width:420px){
+  .card{padding:15px;}
+  .ans{padding:11px 12px;font-size:.92rem;}
+  .book{flex-direction:column;align-items:flex-start;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+<div class="container">
+  <nav class="topbar"><a href="/en/index.html">← Home</a><a href="/en/quiz.html">All quizzes</a><a href="/en/buecher.html#band3-en">Books</a><a href="/en/werkstatt-band3.html">Workshop sheets</a></nav>
+  <header class="app-head">
+    <div class="header-glow"></div>
+    <a class="lang-btn" href="/quiz-band3.html" hreflang="de" lang="de" title="Deutsche Fassung">DE</a>
+    <button class="theme-btn needs-js" id="theme-btn" type="button" data-action="theme" aria-pressed="false" title="Switch theme (Neon or Soft)" aria-label="Switch theme (Neon or Soft)"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/></svg></button>
+    <h1 class="logo">Quiz Vol. 3</h1>
+    <p class="tagline">The Decentralized System · 30 questions</p>
+  </header>
+  <main>
+    <section id="v-start">
+      <div class="card">
+      <h2>How well do you know your decentralized system?</h2>
+      <p>30 questions on Volume 3, from paper ownership to true ownership. After each answer the page explains why it is right and names the place in the book to read up on.</p>
+      <p>Pick a round. The answers are shuffled every time. On a computer you can also choose with the keys 1 to 4.</p>
+      <p class="ok"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 9.5-4-1.2-7-5-7-9.5V6z"/><path d="M8.5 12l2.5 2.5 4.5-4.5"/></svg>The quiz stores nothing, not even your score. No account, no cookie, no tracker, and the page loads nothing from third-party servers. The quiz runs entirely in your browser.</p>
+      </div>
+      <noscript><p class="warn">The quiz needs JavaScript. It runs entirely in your browser and sends nothing. Without JavaScript the page stays empty, all topics are in the book.</p></noscript>
+      <div class="rounds">
+      <div class="card round">
+        <h2>Basics</h2>
+        <div class="count">15<small>questions</small></div>
+        <p>The core ideas of the book, from paper ownership to true ownership.</p>
+        <div><button class="btn needs-js" type="button" data-action="start" data-arg="einstieg">Start round</button></div>
+      </div>
+      <div class="card round">
+        <h2>Practice</h2>
+        <div class="count">15<small>questions</small></div>
+        <p>Concrete steps and the typical mistakes.</p>
+        <div><button class="btn needs-js" type="button" data-action="start" data-arg="praxis">Start round</button></div>
+      </div>
+      <div class="card round">
+        <h2>Everything</h2>
+        <div class="count">30<small>questions</small></div>
+        <p>Both rounds in one go.</p>
+        <div><button class="btn needs-js" type="button" data-action="start" data-arg="alle">Start round</button></div>
+      </div>
+      </div>
+      <div class="card book">
+        <img src="/dezentrales-system-handbuch-cover-en.jpg" alt="Cover of “The Decentralized System: Bitcoin. Stocks. True Ownership.”" width="84" height="110" loading="lazy">
+        <p>The book behind it: <em>The Decentralized System: Bitcoin. Stocks. True Ownership.</em>, Volume 3 of the series. On Amazon or direct and DRM-free, both on the <a href="/en/buecher.html#band3-en">books page</a>.</p>
+      </div>
+    </section>
+
+    <section id="v-frage" class="hidden" aria-labelledby="q-text">
+      <div class="qhead"><span id="q-runde"></span><span id="q-pos"></span><span id="q-score"></span></div>
+      <div class="bar" id="q-bar-wrap" role="progressbar" aria-valuemin="0" aria-valuenow="0" aria-valuemax="30"><div id="q-bar"></div></div>
+      <div class="card">
+        <h2 id="q-text" class="qtext" tabindex="-1"></h2>
+        <div id="q-antworten" class="answers"></div>
+        <div id="q-feedback" class="feedback hidden">
+          <p id="fb-head" class="fb-head"></p>
+          <p id="fb-why"></p>
+          <p class="fb-where"><b>Read up:</b> <span id="fb-where"></span></p>
+        </div>
+        <div class="actions"><button id="q-weiter" class="btn hidden" type="button" data-action="next"></button></div>
+      </div>
+      <p class="sr" id="q-live" aria-live="polite"></p>
+      <p class="center"><button class="btn ghost sm" type="button" data-action="home">Cancel round</button></p>
+    </section>
+
+    <section id="v-ende" class="hidden">
+      <div class="card result">
+        <h2>Kerstin — Evaluation</h2>
+        <p id="e-score" class="score" tabindex="-1"></p>
+        <p id="e-text"></p>
+      </div>
+      <div id="e-miss" class="card">
+        <h2>To read up on</h2>
+        <ol id="e-liste" class="misses"></ol>
+      </div>
+      <div class="actions center">
+        <button id="e-again" class="btn" type="button" data-action="start" data-arg="">Repeat round</button>
+        <button class="btn ghost" type="button" data-action="home">Other round</button>
+      </div>
+    </section>
+  </main>
+  <footer class="foot">
+    <p>Questions on Volume 3, as of October 2026, checked against book edition v1.0 and the primary sources. Found an error? <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a></p>
+    <p>This quiz is no substitute for legal, tax or financial advice.</p>
+    <p class="impressum-link"><a href="/en/werkstatt-band3.html">Workshop sheets Vol. 3</a> · <a href="/en/buecher.html">Books</a> · <a href="/en/spenden.html">Donate</a> · <a href="https://www.mein.online-impressum.de/alien-investor/" target="_blank" rel="noopener noreferrer">Legal Notice</a></p>
+  </footer>
+</div>
+<script type="application/json" id="quiz-daten">{"ui":{"pos":"Question {n} of {total}","score":"{n} correct","right":"Correct.","wrong":"Not quite.","solution":"The right answer: {a}","next":"Next","finish":"See results","result":"{n} of {total}","r3":"Strong. You know the system, practice does the rest.","r2":"Solid. The references below close the last gaps.","r1":"A good reason to reread the chapters below. After that it will stick.","reread":"Read up:","allName":"Everything"},"runden":[{"id":"einstieg","name":"Basics","text":"The core ideas of the book, from paper ownership to true ownership.","fragen":[{"id":"e01","q":"What is the balance in your bank account in legal terms?","right":"A claim against the bank, not ownership of money.","wrong":["Your property, which the bank merely keeps safe for you.","A share in the bank's equity, similar to a stock.","Central bank money that the state guarantees in full."],"why":"Once deposited, the money belongs to the bank, and you only hold a claim to repayment. Above the deposit guarantee of €100,000, a bail-in can therefore cut this claim.","where":"Chapter 1, “Your account: a claim, not a safe”"},{"id":"e02","q":"What does the Cantillon effect describe?","right":"New money benefits those who receive it first.","wrong":["Inflation hits all households equally at the same time.","Central banks cut interest rates as soon as prices fall.","Savers benefit most from a growing money supply."],"why":"Whoever sits close to the source spends new money before prices rise. Whoever gets it last is already paying the higher prices.","where":"Chapter 1, “Whoever sits closest to the money wins”"},{"id":"e03","q":"What lesson does the book draw from the e-gold case?","right":"A central operator can be indicted and shut down.","wrong":["Gold-backed digital money fails simply because the metal must be stored.","Digital money never catches on with users without a state license.","Without price swings, a digital currency finds no buyers."],"why":"e-gold had a company the authorities could raid and a founder they could indict. Bitcoin has no operator, and the ledger is kept by thousands of nodes.","where":"Chapter 2, “A closer look: e-gold, or why Bitcoin has no operator”"},{"id":"e04","q":"In Bitcoin, what decides who can spend a balance?","right":"Control over the private key needed for the signature.","wrong":["The entry in the customer register of a regulated exchange.","A purchase receipt with date, amount and full name.","Registering the wallet with its manufacturer."],"why":"A transaction is valid if it is signed with the matching private key. Nobody checks who you are.","where":"Chapter 3, “Keys are ownership”"},{"id":"e05","q":"Where is the cap of 21 million Bitcoin laid down?","right":"In the consensus rules that every node enforces.","wrong":["In a contract between the large mining companies.","In an EU regulation on crypto assets.","In the terms and conditions of the Bitcoin exchanges."],"why":"The limit is not written in terms that a board could change. Every node rejects blocks that create more Bitcoin than the rules allow, your own node included.","where":"Chapter 3, “Why 21 million”"},{"id":"e06","q":"When does a purchase from a KYC provider become true ownership?","right":"When the coins are paid out to your own wallet.","wrong":["As soon as the purchase is booked to the customer account.","As soon as the provider stores the coins in a cold wallet.","After the one-year holding period has passed."],"why":"As long as the coins sit with the provider, it holds the keys, and you only have a claim against it. Regulation lowers the risk of a collapse but does not eliminate it.","where":"Chapter 4, “The payout is part of the purchase”"},{"id":"e07","q":"What remains after a KYC purchase, even after the payout?","right":"The link between your identity and the coins you bought.","wrong":["A lock that forbids reselling for one year.","A claim to compensation for price losses.","Your right to a discount on further purchases from the same provider."],"why":"The provider stores your identity record together with every purchase. This trail follows the coins, even after the payout.","where":"Chapter 4, “Why KYC sats are marked”"},{"id":"e08","q":"Why can an authority not simply shut Bisq down?","right":"There is no company and there are no central servers.","wrong":["Its seat is in a country without financial supervision.","The developers hold a license as a crypto-asset service provider.","All trades are encrypted with a key held by the developers."],"why":"The network runs on its users' computers and communicates over Tor. There is no operator who could give in to a request from the authorities.","where":"Chapter 5, “Bisq: The Marketplace No One Can Shut Down”"},{"id":"e09","q":"According to the book, when does a seed backup become a real safeguard?","right":"After a successful test restore from that backup.","wrong":["As soon as all 24 words are written down on paper.","As soon as the microSD card is locked away in a safe.","After the wallet's first incoming payment."],"why":"A backup you have never checked is not a safeguard but a hope. Only the restore shows that it really leads back to your wallet.","where":"Chapter 6, “The Test That Decides Everything”"},{"id":"e10","q":"What does a third-party Electrum server learn when your wallet queries it for your balance?","right":"All addresses of your wallet along with their history.","wrong":["Only your IP address, but no addresses of the wallet.","Your seed, as long as the wallet is not encrypted.","Nothing, because all queries are anonymized automatically."],"why":"To show your balance, the app has to reveal all addresses to the server. Tor hides only the IP address, while your own node answers the queries locally.","where":"Chapter 7, “The server problem: what strangers know about your wallet”"},{"id":"e11","q":"How does Bitcoin manage a balance?","right":"As individual coins, the UTXOs, each with its own origin.","wrong":["As one balance per wallet that the network keeps centrally.","As an anonymous sum that no longer knows any origin.","As a balance with the miner who found the last block."],"why":"Every coin carries its history with it. That is exactly what chain analysis exploits, and exactly where Coin Control comes in.","where":"Chapter 8, “Bitcoin thinks in coins, not in accounts”"},{"id":"e12","q":"What role does Monero play in the system of this book?","right":"A tool for payments, while Bitcoin carries the wealth.","wrong":["A second investment next to Bitcoin, with higher return potential.","A replacement for Bitcoin as soon as its price drops sharply.","A hedge against a split of the Bitcoin blockchain."],"why":"Monero can do what Bitcoin by design cannot: payments without a public trail. As a store of value it remains second choice, hence the clear division of labor.","where":"Chapter 10, “Why no other coin”"},{"id":"e13","q":"Why, according to the book, do stocks belong next to Bitcoin?","right":"Companies generate earnings, while Bitcoin preserves value.","wrong":["Stocks fluctuate less and therefore replace the Bitcoin reserve.","Bitcoin is too young to carry wealth over the long term.","Dividends, unlike Bitcoin gains, are tax-free in Germany."],"why":"Bitcoin produces nothing, and that is its job. A company generates profits and free cash flow, and part of it flows to the owners as dividends.","where":"Chapter 12, “Hard money and productive capital are two different things”"},{"id":"e14","q":"What do you give up with an ETF?","right":"The owner's role with a vote and the general meeting.","wrong":["The protection as segregated assets if the provider goes bust.","Broad diversification across many companies.","A share in the price gains of the companies."],"why":"You are economically invested but not a shareholder: no invitation, no right to ask questions, no voting card. The book still uses the ETF as a foundation and builds true ownership next to it.","where":"Chapter 13, “The price: what stands between you and the companies”"},{"id":"e15","q":"What does registration via DRS not protect you against?","right":"The bankruptcy of the company itself.","wrong":["The bankruptcy of your broker.","Your broker lending out your shares.","Your shares being pledged within the custody chain."],"why":"DRS removes the custody risk, not the company risk. If the company goes under, registered shares are just as worthless as custodied ones.","where":"Chapter 14, “The Direct Registration System”"}]},{"id":"praxis","name":"Practice","text":"Concrete steps and the typical mistakes.","fragen":[{"id":"p01","q":"You pay for a Bisq trade by SEPA transfer. What goes into the reference field?","right":"Nothing at all, or at most a plain hyphen.","wrong":["The trade ID, so the seller can match the payment.","\"Bitcoin purchase,\" so the bank knows the purpose.","Your wallet address, so the coins arrive."],"why":"Words like \"Bitcoin,\" \"BTC,\" \"Bisq\" or a trade ID can trigger the banks' automated money-laundering filters. The seller can match the payment by the exact amount and your name as the sender.","where":"Chapter 5, “How a Purchase Works in Practice”"},{"id":"p02","q":"Which way of backing up the 24 seed words does this book rule out?","right":"A photo or a note in a password manager.","wrong":["A stainless steel plate in a separate place.","A paper note as an interim step before the steel.","A sealed backup card in a second location."],"why":"Whoever knows the words controls your wealth. So never capture them digitally: no photo, no cloud note, no password manager, no typing on an internet-connected device.","where":"Chapter 6, “The Setup: Clean From the First Minute”"},{"id":"p03","q":"The BitBoxApp is connected to your own node and loads your accounts. What is the last step?","right":"Remove the Shift Crypto default servers.","wrong":["Fully resync the node once a month.","Reset the BitBox to factory settings.","Add a second public server as a fallback."],"why":"As long as the default servers remain listed, the app can keep sending requests to third-party servers. Only once they are removed is your privacy complete.","where":"Chapter 7, “Connecting the BitBox to your own node”"},{"id":"p04","q":"What happens if you spend a coin with KYC origin and one without in the same transaction?","right":"The analysis attributes both to the same person, you.","wrong":["Nothing, because the origin of individual coins cannot be traced.","The network rejects the transaction.","The KYC coin loses its identity trail as a result."],"why":"The common-input-ownership heuristic assumes that all inputs of a transaction belong to the same person. A single such transaction welds both histories together.","where":"Chapter 8, “How chain analysis reads your trail”"},{"id":"p05","q":"According to the book, what do you record in the label of a newly received coin?","right":"Who knows that this coin is yours.","wrong":["The number of confirmations on arrival.","Which wallet app you received it with.","The seed words of the wallet it belongs to."],"why":"The label later answers the crucial question: which observers do you link when you spend this coin together with others? It stays local in your wallet.","where":"Chapter 8, “Coin Control: you decide which coin speaks”"},{"id":"p06","q":"Following the book's rule of thumb, how much belongs on Lightning?","right":"Pocket money for spending over the coming weeks.","wrong":["Your entire holdings, because Lightning is cheaper.","Everything you hold for longer than a year.","Half of your holdings as an emergency reserve."],"why":"Lightning holds what you plan to spend soon and whose loss would annoy you but not hurt you. Everything else belongs on the base layer, behind the hardware wallet.","where":"Chapter 9, “When Lightning, when on-chain”"},{"id":"p07","q":"What belongs in your will regarding Bitcoin?","right":"That Bitcoin exists and where the documents lie.","wrong":["The 24 seed words, so the heir can find them safely.","Only the passphrase, while the seed lies with the notary.","A printout of the seed as a QR code in the appendix of the will."],"why":"A will is not a secret document: in the event of inheritance it is opened and visible to everyone involved. Whoever reads the seed can move the coins before any court has ruled on the succession.","where":"Chapter 11, “Why the obvious solutions fail”"},{"id":"p08","q":"What do you have to do once a year with Liana so that the heir's key stays invalid?","right":"Move all coins to yourself with a refresh.","wrong":["Send a single small payment from the wallet.","Switch on and unlock the hardware wallet.","Confirm the heir by email to Liana support."],"why":"The timer runs separately for each coin. Only a coin you move restarts its timer, which is why the yearly refresh moves all coins.","where":"Chapter 11, “Liana: the dead man's switch on the blockchain”"},{"id":"p09","q":"Who keeps the register you are entered in via DRS?","right":"The company's transfer agent.","wrong":["Your broker, in a separate sub-account.","Cede & Co. as the investors' trustee.","The U.S. securities regulator, the SEC."],"why":"Instead of Cede & Co., your name then stands in the share register, kept by the registrar the company appoints. A broker failure does not touch this entry.","where":"Chapter 14, “The Direct Registration System”"},{"id":"p10","q":"You buy a Swiss registered share but submit no entry request. What do you then have?","right":"A dispo share with a dormant voting right.","wrong":["A bearer share with full voting rights.","Nothing, because the purchase is canceled after 30 days.","A participation certificate without a dividend."],"why":"You have bought the share, but the company does not know you. Only the entry in the share register brings the invitation and the vote.","where":"Chapter 15, “Dispo shares: bought, but not reported”"},{"id":"p11","q":"What is the W-8BEN form for when you hold U.S. stocks?","right":"It cuts the U.S. deduction on dividends to the treaty rate.","wrong":["It registers your U.S. stocks with the German tax office.","It enters you directly in the company's share register.","It exempts price gains from German flat-rate withholding tax."],"why":"Without the form, the U.S. withholds 30 percent. With W-8BEN, the rate from the double taxation treaty applies, and it is credited against your German tax.","where":"Chapter 16, “Withholding taxes: W-8BEN and the Swiss withholding tax”"},{"id":"p12","q":"According to the book, what fundamentally sets silver apart from gold?","right":"Silver draws more than half its demand from industry.","wrong":["Silver is the core monetary metal of central banks.","Silver is exempt from value-added tax in Germany.","Silver is not subject to the one-year period of § 23 EStG, gold is."],"why":"More than half of silver demand comes from industry, which is why silver fluctuates more. With gold, industry plays only a minor role.","where":"Chapter 17, “Gold or silver”"},{"id":"p13","q":"According to this book, where does the core reserve in gold belong?","right":"In your own hands, properly insured.","wrong":["In a bonded warehouse abroad.","In a gold ETC at your house bank.","In a bank safe deposit box with extra insurance."],"why":"The core reserve is meant to work without a counterparty. A safe deposit box or a warehouse brings back a bank or a custodian and is suitable at most for surplus holdings.","where":"Chapter 17, “Storing: access beats convenience”"},{"id":"p14","q":"You move Bitcoin from the exchange to your own hardware wallet. What is that for tax purposes?","right":"Not a disposal, just a tax-neutral move.","wrong":["A sale that restarts the holding period.","A gift to yourself that you have to report.","An exchange of coins that the platform taxes automatically."],"why":"The transfer between your own wallets and accounts is tax-neutral. Only a network or withdrawal fee paid in Bitcoin can count as a small disposal.","where":"Chapter 18, “Bitcoin: the one-year period and its traps”"},{"id":"p15","q":"Your old exchange no longer exists, and the exports are missing. What follows, according to the book?","right":"The tax office may estimate, and the risk is yours.","wrong":["The tax office has to believe your purchase prices.","The exchange's insolvency administrator must supply the records.","The gains count as tax-free for lack of evidence."],"why":"Missing records count against you, even if the exchange has shut down. If you cannot deliver, the tax office estimates.","where":"Chapter 18, “Bitcoin: the one-year period and its traps”"}]}]}</script>
+<script>/* Quiz zu den Büchern: läuft vollständig im Browser, sendet nichts und speichert nichts
+   (kein Cookie, kein localStorage, kein Netz). Fragen und Texte stehen im JSON-Block #quiz-daten.
+   build_quiz.py setzt dieses Skript in die Seite und trägt seinen Hash in die CSP ein. */
+(function () {
+  'use strict';
+  var D = JSON.parse(document.getElementById('quiz-daten').textContent);
+  var T = D.ui;
+  var S = null;   // laufende Runde: {rid, qs, i, score, miss, done}
+
+  function $(id) { return document.getElementById(id); }
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+  function fill(tpl, p) {
+    return tpl.replace(/\{(\w+)\}/g, function (m, k) { return p[k] != null ? String(p[k]) : m; });
+  }
+  function mix(a) {
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1)), t = a[i];
+      a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  function view(name) {
+    ['start', 'frage', 'ende'].forEach(function (v) { $('v-' + v).classList.toggle('hidden', v !== name); });
+    window.scrollTo(0, 0);
+  }
+
+  function questions(rid) {
+    if (rid === 'alle') return D.runden.reduce(function (acc, r) { return acc.concat(r.fragen); }, []);
+    for (var i = 0; i < D.runden.length; i++) if (D.runden[i].id === rid) return D.runden[i].fragen.slice();
+    return [];
+  }
+  function roundName(rid) {
+    if (rid === 'alle') return T.allName;
+    for (var i = 0; i < D.runden.length; i++) if (D.runden[i].id === rid) return D.runden[i].name;
+    return '';
+  }
+
+  // Nach einem Wechsel der Ansicht kurz keine Klicks: der zweite Klick eines Doppelklicks landete sonst
+  // auf dem Element, das nach dem Umbau an derselben Stelle liegt (Antwort, Link). Audit 24.10.2026.
+  function sperren() {
+    var r = document.documentElement;
+    r.classList.add('sperre');
+    setTimeout(function () { r.classList.remove('sperre'); }, 350);
+  }
+
+  function start(rid) {
+    var qs = questions(rid);
+    if (!qs.length) return;
+    sperren();
+    S = { rid: rid, qs: qs, i: 0, score: 0, miss: [], done: false };
+    $('q-runde').textContent = roundName(rid);
+    view('frage');
+    render();
+  }
+
+  function render() {
+    var q = S.qs[S.i], n = S.qs.length;
+    S.done = false;
+    $('q-pos').textContent = fill(T.pos, { n: S.i + 1, total: n });
+    $('q-score').textContent = fill(T.score, { n: S.score });
+    $('q-bar').style.width = (S.i / n * 100) + '%';
+    $('q-bar-wrap').setAttribute('aria-valuenow', String(S.i));
+    $('q-bar-wrap').setAttribute('aria-valuemax', String(n));
+    $('q-text').textContent = q.q;
+    var box = $('q-antworten');
+    box.textContent = '';
+    var opts = mix([{ t: q.right, ok: true }].concat(q.wrong.map(function (w) { return { t: w, ok: false }; })));
+    opts.forEach(function (o, k) {
+      var b = el('button', 'ans');
+      b.type = 'button';
+      b.setAttribute('data-action', 'pick');
+      b.setAttribute('data-ok', o.ok ? '1' : '0');
+      b.appendChild(el('span', 'ans-key', 'ABCD'.charAt(k)));
+      b.appendChild(el('span', 'ans-text', o.t));
+      box.appendChild(b);
+    });
+    $('q-feedback').classList.add('hidden');
+    $('q-weiter').classList.add('hidden');
+    $('q-live').textContent = '';
+    $('q-text').focus({ preventScroll: true });
+  }
+
+  function pick(b) {
+    if (!S || S.done) return;
+    S.done = true;
+    var q = S.qs[S.i], ok = b.getAttribute('data-ok') === '1';
+    var all = $('q-antworten').querySelectorAll('.ans');
+    for (var i = 0; i < all.length; i++) {
+      var a = all[i];
+      a.disabled = true;
+      if (a.getAttribute('data-ok') === '1') a.classList.add('right');
+      else if (a === b) a.classList.add('wrong');
+      else a.classList.add('dim');
+    }
+    if (ok) S.score++; else S.miss.push(q);
+    var fb = $('q-feedback');
+    fb.className = 'feedback ' + (ok ? 'is-right' : 'is-wrong');
+    $('fb-head').textContent = ok ? T.right : T.wrong;
+    $('fb-why').textContent = q.why;
+    $('fb-where').textContent = q.where;
+    $('q-score').textContent = fill(T.score, { n: S.score });
+    $('q-bar').style.width = ((S.i + 1) / S.qs.length * 100) + '%';
+    var sol = /[.?“”"]$/.test(q.right) ? q.right : q.right + '.';
+    $('q-live').textContent = (ok ? T.right : T.wrong + ' ' + fill(T.solution, { a: sol })) + ' ' + q.why;
+    var w = $('q-weiter');
+    w.textContent = S.i + 1 < S.qs.length ? T.next : T.finish;
+    w.classList.remove('hidden');
+    w.focus({ preventScroll: true });
+  }
+
+  function next() {
+    if (!S || !S.done) return;
+    sperren();
+    S.i++;
+    if (S.i >= S.qs.length) end(); else render();
+  }
+
+  function end() {
+    var n = S.qs.length, p = S.score / n;
+    view('ende');
+    $('e-score').textContent = fill(T.result, { n: S.score, total: n });
+    $('e-text').textContent = p >= 0.9 ? T.r3 : (p >= 0.6 ? T.r2 : T.r1);
+    var list = $('e-liste');
+    list.textContent = '';
+    S.miss.forEach(function (q) {
+      var li = el('li', null, q.q);
+      li.appendChild(el('span', null, T.reread + ' ' + q.where));
+      list.appendChild(li);
+    });
+    $('e-miss').classList.toggle('hidden', S.miss.length === 0);
+    $('e-again').setAttribute('data-arg', S.rid);
+    $('e-score').focus({ preventScroll: true });
+  }
+
+  function home() {
+    S = null;
+    view('start');
+  }
+
+  function theme() {
+    var r = document.documentElement, soft = r.getAttribute('data-theme') === 'soft';
+    if (soft) r.removeAttribute('data-theme'); else r.setAttribute('data-theme', 'soft');
+    $('theme-btn').setAttribute('aria-pressed', soft ? 'false' : 'true');
+  }
+
+  document.addEventListener('click', function (ev) {
+    var t = ev.target.closest('[data-action]');
+    if (!t) return;
+    var a = t.getAttribute('data-action');
+    if (a === 'start') start(t.getAttribute('data-arg'));
+    else if (a === 'pick') pick(t);
+    else if (a === 'next') next();
+    else if (a === 'home') home();
+    else if (a === 'theme') theme();
+  });
+
+  // Tasten 1 bis 4 oder A bis D wählen eine Antwort, solange eine Frage offen ist.
+  document.addEventListener('keydown', function (ev) {
+    if (!S || ev.altKey || ev.ctrlKey || ev.metaKey) return;
+    if ($('v-frage').classList.contains('hidden')) return;
+    if (S.done) {
+      // Enter führt weiter, auch wenn der Fokus nach einem Klick auf eine gesperrte Antwort auf <body> liegt
+      var f = document.activeElement;
+      if (ev.key === 'Enter' && (!f || f === document.body || f.classList.contains('ans'))) { ev.preventDefault(); next(); }
+      return;
+    }
+    var k = String(ev.key).toLowerCase(), idx = '1234'.indexOf(k);
+    if (idx < 0) idx = 'abcd'.indexOf(k);
+    if (idx < 0 || k.length !== 1) return;
+    var bs = $('q-antworten').querySelectorAll('.ans');
+    if (bs[idx]) { ev.preventDefault(); pick(bs[idx]); }
+  });
+
+  document.documentElement.classList.remove('nojs');
+})();
+</script>
+</body>
+</html>
