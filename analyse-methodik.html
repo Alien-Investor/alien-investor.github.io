@@ -174,10 +174,13 @@
         Kurs, etwa chinesische ADRs in Renminbi oder Novo Nordisk in dänischen Kronen, rechnet der Analyzer Gewinn je
         Aktie, Buchwert, Umsatz und Cashflow mit Devisenkursen von Yahoo Finance in die Kurswährung um, den Verlauf
         mit dem Kurs des jeweiligen Monats. Beim Free Cashflow steht die Ausgangswährung dabei.</li>
-      <li><strong>Fair-Value-Indikator:</strong> Formel wie oben. Liegt der Kurs mehr als 15 % über oder unter dem
-        Fair Value, zeigt der Analyzer „über“ bzw. „unter Fair Value“, sonst „fair bewertet“. Der KGV-Fächer zeigt
-        zum Vergleich den Gewinn je Aktie mal 10, 15, 20, 25 und 30. Bei REITs sowie Bergbau- und Metallwerten zeigt
-        er keinen Fair Value, weil das KGV dort wenig aussagekräftig ist.</li>
+      <li><strong>Fair-Value-Indikator:</strong> Formel wie oben. Der aktuelle Gewinn je Aktie ist der Gewinn der
+        letzten zwölf Monate laut Yahoo Finance. Nach dem letzten Jahresabschluss rechnet der Analyzer nicht mit einer
+        Wachstumsrate weiter, sondern verbindet ihn mit diesem Zwölfmonatswert. Liegt der Kurs mehr als 15 % über oder
+        unter dem Fair Value, zeigt der Analyzer „über“ bzw. „unter Fair Value“, sonst „fair bewertet“. Der KGV-Fächer
+        zeigt zum Vergleich den Gewinn je Aktie mal 10, 15, 20, 25 und 30. Bei REITs sowie Bergbau- und Metallwerten
+        zeigt der Analyzer keinen Fair Value, weil das KGV dort wenig aussagekräftig ist, ebenso wenn der Median des
+        historischen KGV über 60 liegt.</li>
       <li><strong>Gewinnqualität:</strong> Stammt ein großer Teil des Gewinns nicht aus dem operativen Geschäft,
         etwa aus Beteiligungen, Zinsen oder Verkäufen, wirken KGV, Eigenkapitalrendite, PEG und Fair Value zu
         günstig. Der Analyzer misst, welcher Anteil des Vorsteuergewinns der letzten zwölf Monate laut Yahoo Finance
