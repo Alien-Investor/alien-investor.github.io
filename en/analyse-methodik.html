@@ -172,7 +172,11 @@
         and P/B. It can be older than the earnings data. If a company reports in a different currency than its share
         price, such as Chinese ADRs in renminbi or Novo Nordisk in Danish kroner, the analyzer converts earnings per
         share, book value, revenue and cash flow into the price currency using exchange rates from Yahoo Finance, the
-        history at the rate of each month. The free cash flow row names the original currency.</li>
+        history at the rate of each month. The free cash flow row names the original currency. If Yahoo Finance
+        delivers part of the financial figures in a different currency than the rest, the analyzer first converts these
+        values into the currency of the other figures at the exchange rate of the respective reporting date. For
+        Petrobras this affects balance sheet and cash flow, for Vale also earnings: they come in US dollars, the rest in
+        reais.</li>
       <li><strong>Fair value indicator:</strong> formula as above. Current earnings per share are the earnings of the
         last twelve months according to Yahoo Finance. After the last annual report, the analyzer does not extrapolate
         with a growth rate but connects it to this twelve-month figure. If the price is more than 15% above or below fair
@@ -185,21 +189,21 @@
         Finance provides about four years of annual earnings. The median only covers the months from the first of these
         annual figures on; in between, the analyzer connects the annual figures in a straight line. It does not
         calculate earnings backwards for the time before that. Since the shortest period is five years, the selected
-        period therefore usually only changes the visible price history, not the median. Only monthly values above 7
+        period therefore usually only changes the visible price history, not the median. Only monthly values above 3
         enter the median, and no upward outliers: the limit is 2.5 times the median, at least 50. In the analyzer the
         median is shown as "Ø" or "avg.", in the sidebar and in the tooltip of the fair value line together with the
         month it starts from. If Yahoo Finance provides fewer than three positive annual earnings figures or the median
         is above 60, the P/E row in the quality check shows no average either, and the P/E light then follows the
         sector P/E; for royalty companies it stays yellow. Until 1 November 2026 the analyzer usually calculated
         earnings before the first annual figure backwards using past earnings growth (at most 7% per year) and, in the
-        default period, took the median over ten years. Older analyses state fair values based on that earlier
-        calculation.</li>
+        default period, took the median over ten years, using only monthly values above 7. Older analyses state fair
+        values based on that earlier calculation.</li>
       <li><strong>P/CF, P/B and P/S:</strong> P/CF works like P/E: the median covers the months from the first annual
         figure of Yahoo Finance's cash flow series on (also about four years) and only appears with at least three years
         of positive operating cash flow. It only includes monthly values above 2 and below an upper limit between 20 and
-        30. If operating cash flow over the last twelve months is more than four times that of the last fiscal year or
-        less than a quarter of it, for example because Yahoo Finance delivers the annual series in a different
-        currency, the analyzer only uses the twelve-month figure and shows no average. For P/B and P/S, "Ø" or "avg." stands for the median of the monthly values over the selected period, in the
+        30. If operating cash flow over the last twelve months is positive but more than four times that of the last
+        fiscal year with positive cash flow, or less than a quarter of it, for example at some banks, the analyzer only
+        uses the twelve-month figure and shows no average. For P/B and P/S, "Ø" or "avg." stands for the median of the monthly values over the selected period, in the
         sidebar over ten years. Book value and revenue per share are only available at the balance sheet dates of
         roughly the last one and a half years; for the time before that, the analyzer uses the oldest of these
         values.</li>

@@ -174,7 +174,10 @@
         stammen. Er kann älter sein als die Gewinnzahlen. Berichtet ein Unternehmen in einer anderen Währung als der
         Kurs, etwa chinesische ADRs in Renminbi oder Novo Nordisk in dänischen Kronen, rechnet der Analyzer Gewinn je
         Aktie, Buchwert, Umsatz und Cashflow mit Devisenkursen von Yahoo Finance in die Kurswährung um, den Verlauf
-        mit dem Kurs des jeweiligen Monats. Beim Free Cashflow steht die Ausgangswährung dabei.</li>
+        mit dem Kurs des jeweiligen Monats. Beim Free Cashflow steht die Ausgangswährung dabei. Liefert Yahoo Finance
+        einen Teil der Abschlusszahlen in einer anderen Währung als die übrigen, rechnet der Analyzer diese Werte zuerst
+        mit dem Devisenkurs zum jeweiligen Stichtag in die Währung der übrigen um. Bei Petrobras betrifft das Bilanz und
+        Cashflow, bei Vale auch die Gewinne: Sie kommen in US-Dollar, der Rest in Real.</li>
       <li><strong>Fair-Value-Indikator:</strong> Formel wie oben. Der aktuelle Gewinn je Aktie ist der Gewinn der
         letzten zwölf Monate laut Yahoo Finance. Nach dem letzten Jahresabschluss rechnet der Analyzer nicht mit einer
         Wachstumsrate weiter, sondern verbindet ihn mit diesem Zwölfmonatswert. Liegt der Kurs mehr als 15 % über oder
@@ -187,20 +190,20 @@
         Finance liefert rund vier Jahre Jahresgewinne. Der Median läuft nur über die Monate ab dem ersten dieser
         Jahresgewinne, dazwischen verbindet der Analyzer die Jahreswerte geradlinig. Für die Zeit davor rechnet er keinen
         Gewinn zurück. Der gewählte Zeitraum (fünf Jahre und mehr) ändert deshalb in der Regel nur den sichtbaren
-        Kursverlauf, nicht den Median. In den Median gehen nur Monatswerte über 7 ein und keine Ausreißer nach oben: Die
+        Kursverlauf, nicht den Median. In den Median gehen nur Monatswerte über 3 ein und keine Ausreißer nach oben: Die
         Grenze liegt beim 2,5-Fachen des Medians, mindestens bei 50. Im Analyzer steht der Median als „Ø“, in der
         Seitenleiste und beim Antippen der Fair-Value-Linie mit dem Monat, ab dem er gilt. Liefert Yahoo Finance weniger
         als drei positive Jahresgewinne oder liegt der Median über 60, zeigt auch die KGV-Zeile im Qualitätscheck keinen
         Schnitt, die KGV-Ampel folgt dann dem Branchen-KGV, bei Royalty-Gesellschaften bleibt sie gelb. Bis zum
         1. November 2026 rechnete der Analyzer den Gewinn vor dem ersten Jahreswert in der Regel mit dem bisherigen
-        Gewinnwachstum zurück (höchstens 7 % pro Jahr) und bildete den Median im Standardzeitraum über zehn Jahre. Ältere
-        Analysen nennen Fair Values nach der damaligen Rechnung.</li>
+        Gewinnwachstum zurück (höchstens 7 % pro Jahr) und bildete den Median im Standardzeitraum über zehn Jahre, nur
+        aus Monatswerten über 7. Ältere Analysen nennen Fair Values nach der damaligen Rechnung.</li>
       <li><strong>KCV, KBV und KUV:</strong> Beim KCV gilt dasselbe wie beim KGV: Der Median läuft über die Monate ab
         dem ersten Jahreswert der Cashflow-Reihe von Yahoo Finance (ebenfalls rund vier Jahre) und erscheint erst ab drei
         Jahren mit positivem operativem Cashflow. Er enthält nur Monatswerte über 2 und unter einer Obergrenze zwischen
-        20 und 30. Ist der operative Cashflow der letzten zwölf Monate mehr als viermal so hoch wie im letzten
-        Geschäftsjahr oder kleiner als ein Viertel davon, etwa weil Yahoo Finance die Jahresreihe in einer anderen
-        Währung liefert, nutzt der Analyzer nur den Zwölfmonatswert und zeigt keinen Schnitt. Bei KBV und KUV steht „Ø“ für den Median der Monatswerte über den gewählten Zeitraum, in der
+        20 und 30. Ist der operative Cashflow der letzten zwölf Monate positiv, aber mehr als viermal so hoch wie im
+        letzten Geschäftsjahr mit positivem Cashflow oder kleiner als ein Viertel davon, etwa bei manchen Banken, nutzt
+        der Analyzer nur den Zwölfmonatswert und zeigt keinen Schnitt. Bei KBV und KUV steht „Ø“ für den Median der Monatswerte über den gewählten Zeitraum, in der
         Seitenleiste über zehn Jahre. Buchwert und Umsatz je Aktie liegen dafür nur zu den Bilanzstichtagen der letzten
         rund anderthalb Jahre vor; für die Zeit davor setzt der Analyzer den ältesten dieser Werte an.</li>
       <li><strong>Gewinnqualität:</strong> Stammt ein großer Teil des Gewinns nicht aus dem operativen Geschäft,
