@@ -171,7 +171,7 @@
     </p>
     <p>
       Die Daten kommen von Yahoo Finance über einen eigenen Proxy. Kein API-Key erforderlich.
-      Das Tool läuft komplett im Browser – eine einzige HTML-Datei, kein Framework, kein Build-Step.
+      Das Tool läuft komplett im Browser – eine HTML-Seite ohne Framework und ohne Build-Step, Schriften und Diagramm-Bibliothek kommen vom eigenen Server.
       Hier ist, was die vier Tabs zeigen.
     </p>
 
@@ -180,12 +180,12 @@
     <p>
       Der wichtigste Tab für Value-Investoren. Du siehst den historischen Kursverlauf –
       und darüber einen <strong>KGV-Fächer</strong>: mehrere Linien, berechnet aus dem EPS-Verlauf
-      multipliziert mit festen KGV-Werten von 10, 15, 20, 25 und 30. Dazu kommt die Fair-Value-Linie mit dem Median-KGV des gewählten Zeitraums (<a href="/analyse-methodik.html#analyzer">so rechnet der Analyzer</a>).
+      multipliziert mit festen KGV-Werten von 10, 15, 20, 25 und 30. Dazu kommt die Fair-Value-Linie mit dem Median-KGV seit dem ersten Jahresgewinn, den Yahoo Finance liefert, meist rund vier Jahre (<a href="/analyse-methodik.html#analyzer">so rechnet der Analyzer</a>).
     </p>
     <p>
-      Liegt der aktuelle Kurs deutlich über dem Fächer? Historisch teuer.
-      Liegt er darunter oder am unteren Rand? Potenzielle Unterbewertung.
-      Die Sidebar liefert dir direkt den Fair-Value-Indikator als kompaktes Urteil.
+      Liegt der Kurs über der Fair-Value-Linie, ist die Aktie höher bewertet als im eigenen KGV-Median, liegt er darunter, niedriger.
+      Der Fächer zeigt, bei welchem KGV der Kurs gerade steht.
+      Die Sidebar fasst die Lage im Fair-Value-Indikator zusammen.
     </p>
     <img src="aa2-tab1-screenshot.png" alt="Fairer Wert – NVIDIA" class="screenshot">
     <p class="screenshot-caption">NVIDIA im Fairer-Wert-Tab – KGV-Fächer zeigt historische Bewertungskorridore</p>
@@ -194,12 +194,13 @@
     <img src="aa2-tab2-titel.png" alt="Tab 2 – Multiples" class="tab-title-img">
     <p>
       Ein einzelner Stichtagswert sagt wenig. Entscheidend ist, wie er sich zur eigenen Geschichte verhält.
-      Tab 2 zeigt <strong>KGV, KCV, KUV und KBV</strong> historisch als Linien – über bis zu 20 Jahre.
+      Tab 2 zeigt <strong>KGV, KCV, KUV und KBV</strong> historisch als Linien – über fünf oder zehn Jahre oder den ganzen geladenen Kursverlauf (bis 20 Jahre).
+      KGV und KCV reichen nur so weit zurück wie die Jahresabschlüsse bei Yahoo Finance, meist rund vier Jahre.
     </p>
     <p>
       So erkennst du auf einen Blick, ob das aktuelle Niveau historisch hoch oder moderat ist.
-      Ein GAAP-Filter markiert Ausreißer durch Sondereffekte – damit einmalige Abschreibungen
-      das Bild nicht verzerren.
+      KGV-Monatswerte von 3 oder darunter und Ausreißer nach oben (Grenze beim 2,5-Fachen des Medians, mindestens 50)
+      blendet der Analyzer aus, etwa nach einmaligen Abschreibungen. Fällt ein großer Teil heraus, zeigt der Tab einen Hinweis.
     </p>
     <img src="aa2-tab2-screenshot.png" alt="Multiples – Newmont" class="screenshot">
     <p class="screenshot-caption">Newmont im Multiples-Tab – KGV, KBV, KUV und KCV im historischen Verlauf</p>
@@ -207,10 +208,9 @@
     <h2>Tab 3 – Dividenden</h2>
     <img src="aa2-tab3-titel.png" alt="Tab 3 – Dividenden" class="tab-title-img">
     <p>
-      Für Dividendeninvestoren der relevanteste Tab. Die <strong>Dividendenrendite</strong> wird
-      historisch als Balkendiagramm dargestellt, ergänzt um eine geglättete Rendite-Linie
-      und einen farblich markierten Rendite-Korridor – der zeigt, wo die Rendite historisch
-      als attraktiv oder überteuert galt.
+      Für Dividendeninvestoren der relevanteste Tab. Die Balken zeigen die gezahlten Dividenden je Aktie,
+      die Linie die <strong>Dividendenrendite</strong> aus der zuletzt gezahlten Jahresdividende.
+      Ein farbiges Band zeigt, wie stark die Rendite im Jahr davor um ihren Mittelwert schwankte.
     </p>
     <p>
       Die Sidebar ergänzt das <strong>Dividendenwachstum (DPS)</strong> über 12 Monate, 2, 5 und 10 Jahre.

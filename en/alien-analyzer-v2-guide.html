@@ -174,7 +174,7 @@
     </p>
     <p>
       Data comes from Yahoo Finance via a dedicated proxy. No API key required.
-      The tool runs entirely in the browser – a single HTML file, no framework, no build step.
+      The tool runs entirely in the browser – one HTML page without a framework or build step; fonts and the chart library come from our own server.
       Here is what the four tabs show.
     </p>
 
@@ -183,12 +183,12 @@
     <p>
       The most important tab for value investors. You see the historical price chart –
       and above it a <strong>P/E ratio fan</strong>: several lines, calculated from the EPS history
-      multiplied by fixed P/E values of 10, 15, 20, 25 and 30, plus the fair value line at the median P/E of the selected period (<a href="/en/analyse-methodik.html#analyzer">how the analyzer calculates</a>).
+      multiplied by fixed P/E values of 10, 15, 20, 25 and 30, plus the fair value line at the median P/E since the first annual earnings figure Yahoo Finance provides, usually about four years (<a href="/en/analyse-methodik.html#analyzer">how the analyzer calculates</a>).
     </p>
     <p>
-      Is the current price well above the fan? Historically expensive.
-      Is it below or at the lower edge? Potential undervaluation.
-      The sidebar gives you the Fair Value Indicator as a compact verdict.
+      If the price is above the fair value line, the stock is valued higher than its own median P/E; below it, lower.
+      The fan shows which P/E the price currently reflects.
+      The sidebar sums this up in the Fair Value Indicator.
     </p>
     <img src="/aa2-tab1-screenshot.png" alt="Fair Value – NVIDIA" class="screenshot">
     <p class="screenshot-caption">NVIDIA in the Fair Value tab – P/E fan showing historical valuation corridors</p>
@@ -197,12 +197,13 @@
     <img src="/aa2-tab2-titel.png" alt="Tab 2 – Multiples" class="tab-title-img">
     <p>
       A single snapshot figure says little. What matters is how it compares to its own history.
-      Tab 2 shows <strong>P/E, P/CF, P/S, and P/B</strong> historically as lines – over up to 20 years.
+      Tab 2 shows <strong>P/E, P/CF, P/S, and P/B</strong> historically as lines – over five or ten years or the full loaded price history (up to 20 years).
+      P/E and P/CF only go back as far as the annual reports on Yahoo Finance, usually about four years.
     </p>
     <p>
       This lets you see at a glance whether the current level is historically high or moderate.
-      A GAAP filter marks outliers caused by one-time effects – so that exceptional write-downs
-      do not distort the picture.
+      Monthly P/E values of 3 or below and upside outliers (cut-off at 2.5 times the median, at least 50)
+      are left out, for example after one-time write-downs. If a large share drops out, the tab shows a notice.
     </p>
     <img src="/aa2-tab2-screenshot.png" alt="Multiples – Newmont" class="screenshot">
     <p class="screenshot-caption">Newmont in the Multiples tab – P/E, P/B, P/S, and P/CF over time</p>
@@ -210,10 +211,9 @@
     <h2>Tab 3 – Dividends</h2>
     <img src="/aa2-tab3-titel.png" alt="Tab 3 – Dividends" class="tab-title-img">
     <p>
-      The most relevant tab for dividend investors. The <strong>dividend yield</strong> is displayed
-      historically as a bar chart, supplemented by a smoothed yield line
-      and a color-coded yield corridor – showing where the yield was historically
-      considered attractive or expensive.
+      The most relevant tab for dividend investors. The bars show the dividends paid per share,
+      the line the <strong>dividend yield</strong> based on the latest annual dividend.
+      A shaded band shows how much the yield fluctuated around its average over the preceding year.
     </p>
     <p>
       The sidebar adds <strong>dividend growth (DPS)</strong> over 12 months, 2, 5, and 10 years.
