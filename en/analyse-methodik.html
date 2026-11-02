@@ -186,7 +186,12 @@
         Yahoo Finance provides fewer than three positive annual earnings figures or when the company made a loss over
         the last twelve months.</li>
       <li><strong>P/E median:</strong> For each month the analyzer divides the price by earnings per share. Yahoo
-        Finance provides about four years of annual earnings. The median only covers the months from the first of these
+        Finance provides about four years of annual earnings. For each fiscal year the analyzer uses diluted earnings per
+        share according to Yahoo Finance, i.e. earnings divided by that year's share count. If that figure is missing for a
+        fiscal year, it falls back on Yahoo Finance's other data. Until 2 November 2026 it divided earlier years' annual
+        earnings by today's share count: for companies buying back shares, earnings per share of earlier years came out too
+        high and the P/E median too low; for companies issuing new shares, the other way round. The median only covers the
+        months from the first of these
         annual figures on; in between, the analyzer connects the annual figures in a straight line. It does not
         calculate earnings backwards for the time before that. Since the shortest period is five years, the selected
         period therefore usually only changes the visible price history, not the median. Only monthly values above 3

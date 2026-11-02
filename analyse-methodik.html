@@ -187,7 +187,12 @@
         KGV über 60 liegt, wenn Yahoo Finance weniger als drei positive Jahresgewinne liefert oder wenn das Unternehmen
         in den letzten zwölf Monaten Verlust gemacht hat.</li>
       <li><strong>KGV-Median:</strong> Für jeden Monat teilt der Analyzer den Kurs durch den Gewinn je Aktie. Yahoo
-        Finance liefert rund vier Jahre Jahresgewinne. Der Median läuft nur über die Monate ab dem ersten dieser
+        Finance liefert rund vier Jahre Jahresgewinne. Als Gewinn je Aktie eines Geschäftsjahres nimmt der Analyzer den
+        verwässerten Gewinn je Aktie laut Yahoo Finance, also den Gewinn geteilt durch die Aktienzahl dieses Jahres. Fehlt
+        dieser Wert für ein Geschäftsjahr, rechnet er ersatzweise mit Yahoos übrigen Angaben. Bis zum 2. November 2026 teilte
+        er für frühere Jahre den Jahresgewinn durch die heutige Aktienzahl: Bei Unternehmen, die eigene Aktien zurückkaufen,
+        lag der Gewinn je Aktie früherer Jahre damit zu hoch und der KGV-Median zu niedrig, bei Unternehmen, die neue Aktien
+        ausgeben, umgekehrt. Der Median läuft nur über die Monate ab dem ersten dieser
         Jahresgewinne, dazwischen verbindet der Analyzer die Jahreswerte geradlinig. Für die Zeit davor rechnet er keinen
         Gewinn zurück. Der gewählte Zeitraum (fünf Jahre und mehr) ändert deshalb in der Regel nur den sichtbaren
         Kursverlauf, nicht den Median. In den Median gehen nur Monatswerte über 3 ein und keine Ausreißer nach oben: Die
