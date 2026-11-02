@@ -172,7 +172,7 @@
       <li><strong>Daten:</strong> Yahoo Finance, abgerufen über meinen eigenen Server. Bei Unternehmen, die bei der
         US-Börsenaufsicht SEC Jahresberichte einreichen (US-Werte, ADRs und einige Heimatbörsen solcher Unternehmen wie
         SAP.DE, ASML.AS oder 6758.T), zieht der Server zusätzlich die XBRL-Daten aus diesen Berichten heran (siehe
-        KGV-Median sowie KBV und KUV). Dein Browser fragt keine fremden Datendienste ab. Der Qualitätscheck nennt den Stichtag der Bilanz, aus der Eigenkapitalquote und KBV
+        KGV-Median sowie KCV, KBV und KUV). Dein Browser fragt keine fremden Datendienste ab. Der Qualitätscheck nennt den Stichtag der Bilanz, aus der Eigenkapitalquote und KBV
         stammen. Er kann älter sein als die Gewinnzahlen. Berichtet ein Unternehmen in einer anderen Währung als der
         Kurs, etwa chinesische ADRs in Renminbi oder Novo Nordisk in dänischen Kronen, rechnet der Analyzer Gewinn je
         Aktie, Buchwert, Umsatz und Cashflow mit Devisenkursen von Yahoo Finance in die Kurswährung um, den Verlauf
@@ -201,7 +201,7 @@
         Die SEC-Werte nutzt der Analyzer nur, wenn sie in mindestens zwei und mindestens der Hälfte der gemeinsamen Jahre
         auf 1 % mit Yahoo Finance übereinstimmen. Gibt es nur ein gemeinsames Jahr, genügt dieses, wenn es übereinstimmt und die
         Aktienzahl dieses Jahres das Verhältnis zwischen beiden Werten bestätigt (Toyota-ADR). In den KGV-Median fließt ihre längere
-        Historie bisher nicht ein, in KBV und KUV schon. Bis zum 2. November 2026 teilte
+        Historie bisher nicht ein, in KCV, KBV und KUV schon. Bis zum 2. November 2026 teilte
         er für frühere Jahre den Jahresgewinn durch die heutige Aktienzahl: Bei Unternehmen, die eigene Aktien zurückkaufen,
         lag der Gewinn je Aktie früherer Jahre damit zu hoch und der KGV-Median zu niedrig, bei Unternehmen, die neue Aktien
         ausgeben, umgekehrt. Der Median läuft nur über die Monate ab dem ersten dieser
@@ -216,27 +216,34 @@
         1. November 2026 rechnete der Analyzer den Gewinn vor dem ersten Jahreswert in der Regel mit dem bisherigen
         Gewinnwachstum zurück (höchstens 7 % pro Jahr) und bildete den Median im Standardzeitraum über zehn Jahre, nur
         aus Monatswerten über 7. Ältere Analysen nennen Fair Values nach der damaligen Rechnung.</li>
-      <li><strong>KCV, KBV und KUV:</strong> Beim KCV gilt dasselbe wie beim KGV: Der Median läuft über die Monate ab
-        dem ersten Jahreswert der Cashflow-Reihe von Yahoo Finance (ebenfalls rund vier Jahre) und erscheint erst ab drei
-        Jahren mit positivem operativem Cashflow. Er enthält nur Monatswerte über 2 und unter einer Obergrenze zwischen
-        20 und 30. Ist der operative Cashflow der letzten zwölf Monate positiv, aber mehr als viermal so hoch wie im
-        letzten Geschäftsjahr mit positivem Cashflow oder kleiner als ein Viertel davon, etwa bei manchen Banken, nutzt
-        der Analyzer nur den Zwölfmonatswert und zeigt keinen Schnitt. Bei KBV und KUV steht „Ø“ für den Median der Monatswerte über den gewählten Zeitraum, in der
-        Seitenleiste über zehn Jahre. Buchwert und Umsatz je Aktie rechnet der Analyzer für jedes Geschäftsjahr mit der
-        Aktienzahl dieses Jahres und verbindet die Jahreswerte geradlinig. Danach folgen die jüngsten Quartalsbilanzen und
-        der Umsatz der letzten zwölf Monate, beide geteilt durch die heutige Aktienzahl. Für die Zeit vor dem ersten
-        Jahreswert rechnet er nichts zurück. Eigenkapital und Umsatz der letzten rund vier Geschäftsjahre nimmt er von
-        Yahoo Finance, frühere aus den Jahresberichten bei der SEC, wenn sie in mindestens zwei und mindestens der
-        Hälfte der gemeinsamen Jahre auf 1 % mit Yahoo Finance übereinstimmen. Beim Umsatz ist das
+      <li><strong>KCV, KBV und KUV:</strong> „Ø“ steht für den Median der Monatswerte über den gewählten Zeitraum, bei KBV
+        und KUV in der Seitenleiste über zehn Jahre. Buchwert, Umsatz und operativen Cashflow je Aktie rechnet der Analyzer
+        für jedes Geschäftsjahr mit der Aktienzahl dieses Jahres und verbindet die Jahreswerte geradlinig. Danach folgen
+        die jüngsten Quartalsbilanzen sowie Umsatz und operativer Cashflow der letzten zwölf Monate, jeweils geteilt durch
+        die heutige Aktienzahl. Für die Zeit vor dem ersten Jahreswert rechnet er nichts zurück. Eigenkapital, Umsatz und
+        operativen Cashflow der letzten rund vier Geschäftsjahre nimmt er von Yahoo Finance, frühere aus den
+        Jahresberichten bei der SEC, wenn es mindestens zwei gemeinsame Jahre gibt und davon mindestens die Hälfte auf 1 %
+        mit Yahoo Finance übereinstimmt. Beim Umsatz ist das
         etwa bei Öl- und Gaskonzernen, Banken, Brokern und Versorgern oft nicht der Fall, weil die SEC-Zahlen den Umsatz
-        anders abgrenzen. Ohne SEC-Zahlen beginnt der Schnitt deshalb meist erst 2023. Beginnt er später als vor zehn
-        Jahren, nennt die Seitenleiste den Monat, ab dem er gilt. Einen Schnitt zeigt der Analyzer erst ab drei Geschäftsjahren, beim KBV nur, wenn das
-        Eigenkapital heute positiv ist, und keinen, wenn sich die heutige Aktienzahl von der des letzten Geschäftsjahres
-        um mehr als den Faktor zwei unterscheidet (etwa bei Interactive Brokers, dessen börsennotierte Aktien nur gut ein Viertel des Unternehmens abbilden). Das
-        aktuelle KUV ist der Kurs geteilt durch den Umsatz der letzten zwölf Monate je Aktie. Bis zum 2. November 2026
+        anders abgrenzen. Ohne SEC-Zahlen beginnt der Schnitt deshalb meist erst 2023. Beginnt er beim KBV oder KUV später
+        als vor zehn Jahren, nennt die Seitenleiste den Monat, ab dem er gilt. Einen Schnitt zeigt der Analyzer erst ab
+        drei Geschäftsjahren (beim KCV mit positivem operativem Cashflow), beim KBV nur, wenn das Eigenkapital heute
+        positiv ist, und keinen, wenn sich die heutige Aktienzahl von der des letzten Geschäftsjahres um mehr als den
+        Faktor zwei unterscheidet (etwa bei Interactive Brokers, dessen börsennotierte Aktien nur gut ein Viertel des
+        Unternehmens abbilden). Bestätigt in diesem Fall die jüngste Bilanz die Aktienzahl des letzten Geschäftsjahres,
+        teilt er das Eigenkapital für das aktuelle KBV durch die Aktienzahl dieser Bilanz statt durch die heutige.
+        Zwischen einem Geschäftsjahr mit negativem operativem Cashflow und seinen Nachbarjahren gibt es kein KCV. In den
+        KCV-Schnitt gehen alle positiven Monatswerte ein. Bei Banken zeigt der Analyzer keinen, denn ihr operativer Cashflow
+        schwankt mit Bilanzposten wie Handelsbeständen, Krediten und Einlagen. Liegt der Median über 100, zeigt er
+        ebenfalls keinen. Das aktuelle KUV ist der Kurs geteilt durch den Umsatz der letzten zwölf Monate je Aktie, das aktuelle
+        KCV der Kurs geteilt durch den operativen Cashflow der letzten zwölf Monate je Aktie (liefert Yahoo Finance keinen
+        neueren Zwölfmonatswert, der des letzten Geschäftsjahres, beide zur heutigen Aktienzahl). Bis zum 2. November 2026
         lagen Buchwert und Umsatz je Aktie nur zu den Bilanzstichtagen der letzten rund anderthalb Jahre vor; für die Zeit
         davor setzte der Analyzer den ältesten dieser Werte an. Der Schnitt folgte damit vor allem dem Kurs und lag meist
-        zu niedrig. Ein aktuelles KUV über dem 2,5-Fachen des Schnitts ersetzte er durch den Schnitt.</li>
+        zu niedrig. Ein aktuelles KUV über dem 2,5-Fachen des Schnitts ersetzte er durch den Schnitt. Der KCV-Schnitt lief
+        bis dahin nur über die rund vier Geschäftsjahre von Yahoo Finance, geteilt durch die heutige Aktienzahl, und
+        enthielt nur Monatswerte über 2 und unter einer Obergrenze zwischen 20 und 30. Bei hoch bewerteten Aktien lag er
+        damit zu niedrig (Hermès) oder fehlte ganz (Nvidia, Tesla, Eli Lilly).</li>
       <li><strong>Gewinnqualität:</strong> Stammt ein großer Teil des Gewinns nicht aus dem operativen Geschäft,
         etwa aus Beteiligungen, Zinsen oder Verkäufen, wirken KGV, Eigenkapitalrendite, PEG und Fair Value zu
         günstig. Der Analyzer misst, welcher Anteil des Vorsteuergewinns der letzten zwölf Monate laut Yahoo Finance

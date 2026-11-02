@@ -170,7 +170,7 @@
       <li><strong>Data:</strong> Yahoo Finance, fetched through my own server. For companies that file annual reports
         with the US Securities and Exchange Commission (SEC), i.e. US stocks, ADRs and some home listings of such
         companies such as SAP.DE, ASML.AS or 6758.T, the server also uses the XBRL data from these reports (see P/E
-        median as well as P/B and P/S). Your browser does not query any third-party data services. The quality check states the date of the balance sheet behind the equity ratio
+        median as well as P/CF, P/B and P/S). Your browser does not query any third-party data services. The quality check states the date of the balance sheet behind the equity ratio
         and P/B. It can be older than the earnings data. If a company reports in a different currency than its share
         price, such as Chinese ADRs in renminbi or Novo Nordisk in Danish kroner, the analyzer converts earnings per
         share, book value, revenue and cash flow into the price currency using exchange rates from Yahoo Finance, the
@@ -200,7 +200,7 @@
         Yahoo Finance to within 1% in at least two and at least half of the years covered by both. If only one year is
         covered by both, that year is enough if it agrees and its share count confirms the ratio between the two figures
         (Toyota ADR). Their
-        longer history does not feed into the P/E median yet, but it does feed into P/B and P/S. Until 2 November 2026 it divided earlier years' annual
+        longer history does not feed into the P/E median yet, but it does feed into P/CF, P/B and P/S. Until 2 November 2026 it divided earlier years' annual
         earnings by today's share count: for companies buying back shares, earnings per share of earlier years came out too
         high and the P/E median too low; for companies issuing new shares, the other way round. The median only covers the
         months from the first of these
@@ -216,27 +216,33 @@
         earnings before the first annual figure backwards using past earnings growth (at most 7% per year) and, in the
         default period, took the median over ten years, using only monthly values above 7. Older analyses state fair
         values based on that earlier calculation.</li>
-      <li><strong>P/CF, P/B and P/S:</strong> P/CF works like P/E: the median covers the months from the first annual
-        figure of Yahoo Finance's cash flow series on (also about four years) and only appears with at least three years
-        of positive operating cash flow. It only includes monthly values above 2 and below an upper limit between 20 and
-        30. If operating cash flow over the last twelve months is positive but more than four times that of the last
-        fiscal year with positive cash flow, or less than a quarter of it, for example at some banks, the analyzer only
-        uses the twelve-month figure and shows no average. For P/B and P/S, "Ø" or "avg." stands for the median of the monthly values over the selected period, in the
-        sidebar over ten years. The analyzer calculates book value and revenue per share for each fiscal year using that
-        year's share count and connects the annual figures in a straight line. After that come the latest quarterly
-        balance sheets and revenue over the last twelve months, both divided by today's share count. It does not
-        calculate anything backwards for the time before the first annual figure. It takes equity and revenue for the last four
-        or so fiscal years from Yahoo Finance, earlier ones from the annual reports filed with the SEC, if they agree
-        with Yahoo Finance to within 1% in at least two and at least half of the years covered by both. For revenue this is often not the case, for example at oil and gas companies, banks, brokers and utilities,
+      <li><strong>P/CF, P/B and P/S:</strong> "Ø" or "avg." stands for the median of the monthly values over the selected
+        period, for P/B and P/S in the sidebar over ten years. The analyzer calculates book value, revenue and operating
+        cash flow per share for each fiscal year using that year's share count and connects the annual figures in a
+        straight line. After that come the latest quarterly balance sheets as well as revenue and operating cash flow over
+        the last twelve months, each divided by today's share count. It does not calculate anything backwards for the time
+        before the first annual figure. It takes equity, revenue and operating cash flow for the last four or so fiscal
+        years from Yahoo Finance, earlier ones from the annual reports filed with the SEC, if at least two years are covered
+        by both and at least half of them agree with Yahoo Finance to within 1%. For revenue this is often not the case, for example at oil and gas companies, banks, brokers and utilities,
         because revenue is defined differently in the SEC data. Without SEC figures the average therefore usually only
-        starts in 2023. If it starts later than ten years ago, the sidebar states the month from which it applies. The analyzer only shows an average from three fiscal years
-        on, for P/B only if equity is positive today, and none if today's share count differs from that of the last
-        fiscal year by more than a factor of two (for example at Interactive Brokers, whose listed shares represent only about a quarter of the business).
-        The current P/S is the price divided by revenue per share over the last twelve months. Until 2 November 2026,
+        starts in 2023. If it starts later than ten years ago for P/B or P/S, the sidebar states the month from which it
+        applies. The analyzer only shows an average from three fiscal years on (for P/CF with positive operating cash
+        flow), for P/B only if equity is positive today, and none if today's share count differs from that of the last
+        fiscal year by more than a factor of two (for example at Interactive Brokers, whose listed shares represent just over a quarter of the business). If in that case the latest balance sheet confirms the share count of the last
+        fiscal year, it divides equity for the current P/B by the share count of that balance sheet instead of today's. There is
+        no P/CF between a fiscal year with negative operating cash flow and the adjacent years. The P/CF average
+        includes all positive monthly values. For banks the analyzer shows none, since their operating cash flow moves
+        with balance sheet items such as trading assets, loans and deposits. If the median is above 100, it shows none
+        either. The
+        current P/S is the price divided by revenue per share over the last twelve months, the current P/CF the price
+        divided by operating cash flow per share over the last twelve months (or of the last fiscal year if Yahoo Finance
+        has no more recent twelve-month figure, both at today's share count). Until 2 November 2026,
         book value and revenue per share were only available at the balance sheet dates of roughly the last one and a
         half years; for the time before that, the analyzer used the oldest of these values. The average thus mainly
         followed the share price and was usually too low. A current P/S above 2.5 times the average was replaced by the
-        average.</li>
+        average. Until then the P/CF average only covered Yahoo Finance's four or so fiscal years, divided by today's
+        share count, and only included monthly values above 2 and below an upper limit between 20 and 30. For highly
+        valued stocks it was therefore too low (Hermès) or missing entirely (Nvidia, Tesla, Eli Lilly).</li>
       <li><strong>Earnings quality:</strong> If a large part of earnings does not come from operations, for example
         from investments, interest or asset sales, P/E, return on equity, PEG and fair value look too favourable. The
         analyzer measures what share of pre-tax income over the last twelve months is not part of operating income
