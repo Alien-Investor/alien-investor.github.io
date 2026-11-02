@@ -1,0 +1,10 @@
+{
+  "tag": "payRequest",
+  "callback": "https://api.alien-investor.org/lnurlp/callback",
+  "minSendable": 1000,
+  "maxSendable": 2000000000,
+  "metadata": "[[\"text/plain\",\"Alien Investor · Buchkauf? Buch, Sprache und Mail oder npub als Kommentar. Book purchase? Add book, language and email or npub as comment.\"],[\"text/identifier\",\"alien-investor@alien-investor.org\"]]",
+  "commentAllowed": 200,
+  "allowsNostr": true,
+  "nostrPubkey": "2b1eb0ed8257f1a6f01fbd45e4dfbb8ea4b6d8a5b363504ca2bb6223e818a3ec"
+}
