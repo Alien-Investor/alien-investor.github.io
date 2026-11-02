@@ -169,8 +169,10 @@
       automatisch für jeden Ticker, den du eingibst. Er kennt weder dich noch deine Ziele.
     </p>
     <ul>
-      <li><strong>Daten:</strong> Yahoo Finance, abgerufen über meinen eigenen Server. Dein Browser fragt keine
-        fremden Datendienste ab. Der Qualitätscheck nennt den Stichtag der Bilanz, aus der Eigenkapitalquote und KBV
+      <li><strong>Daten:</strong> Yahoo Finance, abgerufen über meinen eigenen Server. Bei Unternehmen, die bei der
+        US-Börsenaufsicht SEC Jahresberichte einreichen (US-Werte, ADRs und einige Heimatbörsen solcher Unternehmen wie
+        SAP.DE, ASML.AS oder 6758.T), zieht der Server zusätzlich die XBRL-Daten aus diesen Berichten heran (siehe
+        KGV-Median). Dein Browser fragt keine fremden Datendienste ab. Der Qualitätscheck nennt den Stichtag der Bilanz, aus der Eigenkapitalquote und KBV
         stammen. Er kann älter sein als die Gewinnzahlen. Berichtet ein Unternehmen in einer anderen Währung als der
         Kurs, etwa chinesische ADRs in Renminbi oder Novo Nordisk in dänischen Kronen, rechnet der Analyzer Gewinn je
         Aktie, Buchwert, Umsatz und Cashflow mit Devisenkursen von Yahoo Finance in die Kurswährung um, den Verlauf
@@ -189,7 +191,14 @@
       <li><strong>KGV-Median:</strong> Für jeden Monat teilt der Analyzer den Kurs durch den Gewinn je Aktie. Yahoo
         Finance liefert rund vier Jahre Jahresgewinne. Als Gewinn je Aktie eines Geschäftsjahres nimmt der Analyzer den
         verwässerten Gewinn je Aktie laut Yahoo Finance, also den Gewinn geteilt durch die Aktienzahl dieses Jahres. Fehlt
-        dieser Wert für ein Geschäftsjahr, rechnet er ersatzweise mit Yahoos übrigen Angaben. Bis zum 2. November 2026 teilte
+        dieser Wert für ein Geschäftsjahr, rechnet er ersatzweise mit Yahoos übrigen Angaben. Bei Unternehmen mit
+        Jahresberichten bei der SEC gleicht er den Wert seit dem 2. November 2026 mit dem verwässerten Gewinn je Aktie aus
+        dem jüngsten dort eingereichten Jahresbericht ab, der das Jahr enthält, je gehandelter Aktie bzw. je ADR. Weichen
+        beide um mehr als 2 % ab, gilt der Wert der SEC, sofern er zu den dort gemeldeten Werten für Gewinn und Aktienzahl
+        passt. So kommen nachträgliche Anpassungen an, die Yahoo Finance nicht übernommen hat, etwa nach der Einführung des
+        Rechnungslegungsstandards IFRS 17 (Lloyds und HSBC 2022).
+        Die SEC-Werte nutzt der Analyzer nur, wenn sie in mindestens zwei und mindestens der Hälfte der gemeinsamen Jahre
+        auf 1 % mit Yahoo Finance übereinstimmen. Ihre längere Historie fließt bisher nicht ein. Bis zum 2. November 2026 teilte
         er für frühere Jahre den Jahresgewinn durch die heutige Aktienzahl: Bei Unternehmen, die eigene Aktien zurückkaufen,
         lag der Gewinn je Aktie früherer Jahre damit zu hoch und der KGV-Median zu niedrig, bei Unternehmen, die neue Aktien
         ausgeben, umgekehrt. Der Median läuft nur über die Monate ab dem ersten dieser

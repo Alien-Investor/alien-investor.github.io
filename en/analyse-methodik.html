@@ -167,8 +167,10 @@
       automatically for every ticker you enter. It knows neither you nor your goals.
     </p>
     <ul>
-      <li><strong>Data:</strong> Yahoo Finance, fetched through my own server. Your browser does not query any
-        third-party data services. The quality check states the date of the balance sheet behind the equity ratio
+      <li><strong>Data:</strong> Yahoo Finance, fetched through my own server. For companies that file annual reports
+        with the US Securities and Exchange Commission (SEC), i.e. US stocks, ADRs and some home listings of such
+        companies such as SAP.DE, ASML.AS or 6758.T, the server also uses the XBRL data from these reports (see P/E
+        median). Your browser does not query any third-party data services. The quality check states the date of the balance sheet behind the equity ratio
         and P/B. It can be older than the earnings data. If a company reports in a different currency than its share
         price, such as Chinese ADRs in renminbi or Novo Nordisk in Danish kroner, the analyzer converts earnings per
         share, book value, revenue and cash flow into the price currency using exchange rates from Yahoo Finance, the
@@ -188,7 +190,14 @@
       <li><strong>P/E median:</strong> For each month the analyzer divides the price by earnings per share. Yahoo
         Finance provides about four years of annual earnings. For each fiscal year the analyzer uses diluted earnings per
         share according to Yahoo Finance, i.e. earnings divided by that year's share count. If that figure is missing for a
-        fiscal year, it falls back on Yahoo Finance's other data. Until 2 November 2026 it divided earlier years' annual
+        fiscal year, it falls back on Yahoo Finance's other data. For companies filing annual reports with the SEC, it has
+        checked this figure since 2 November 2026 against diluted earnings per share from the most recent annual report
+        filed there that covers the year, per traded share or per ADR. If the two differ by more than 2%, the SEC figure
+        applies, provided it matches the earnings and share count filed there. This picks up later restatements that Yahoo
+        Finance has not adopted, for example after the introduction of the accounting standard IFRS 17 (Lloyds and HSBC
+        2022). The analyzer only uses the SEC figures if they agree with
+        Yahoo Finance to within 1% in at least two and at least half of the years covered by both. Their longer history
+        is not used yet. Until 2 November 2026 it divided earlier years' annual
         earnings by today's share count: for companies buying back shares, earnings per share of earlier years came out too
         high and the P/E median too low; for companies issuing new shares, the other way round. The median only covers the
         months from the first of these
