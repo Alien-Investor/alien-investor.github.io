@@ -246,6 +246,31 @@
         damit zu niedrig (Hermès) oder fehlte ganz (Nvidia, Tesla, Eli Lilly). Bis zum 3. November 2026 begrenzte der
         Analyzer beim KBV und KUV jeden Monatswert und das aktuelle KBV auf 50. Lag mehr als die Hälfte der Monate darüber,
         stand als Schnitt 50,0 (Home Depot beim KBV über zehn Jahre statt 63,6).</li>
+      <li><strong>Dividendenrendite:</strong> Der Analyzer teilt die Dividenden der letzten zwölf Monate durch den aktuellen
+        Kurs, für die Renditelinie die Dividenden der zwölf Monate bis zum Ende jedes Monats durch dessen Kurs. Es zählt der
+        Ex-Tag. Damit eine Zahlung, die sich um einige Tage verschiebt, nicht aus dem Fenster fällt, reicht es um ein Viertel
+        des üblichen Abstands zwischen zwei Zahlungen weiter zurück (Median der letzten drei Jahre). Folgt im Fenster auf eine
+        Zahlung rund ein Jahr später eine weitere, zählt nur die jüngere: Ein Quartalszahler kommt so auf vier Zahlungen, nicht
+        auf fünf. Sonderdividenden zählen mit. Die Beträge sind brutto, also vor Quellensteuer und Gebühren der Depotbank.
+        Gab es in den letzten zwölf Monaten keine Zahlung, zeigt der Analyzer die Rendite, die Yahoo Finance selbst meldet,
+        sonst „–“. Im Qualitätscheck steht die Ampel ab 3 % auf „stark“, ab 1 % auf „mittel“, darunter auf „gering“. Das
+        Dividendenwachstum vergleicht die Zwölfmonatssumme von heute mit der vor einem, zwei, fünf und zehn Jahren, über
+        mehrere Jahre als Rate pro Jahr. Eine Sonderdividende in einem der beiden Zeiträume schlägt dabei voll durch (Costco, Ex-Tag
+        27. Dezember 2023: 15 US-Dollar), ohne Zahlung in einem der Zeiträume steht „–“.
+        Für die in den USA gehandelten Papiere von 14 Unternehmen aus dem Ausland (Petrobras, Vale, SAP, ASML, Novo Nordisk,
+        Sony, Toyota, Alibaba, TSMC, Tencent, Equinor, Franco-Nevada, OR Royalties, Wheaton Precious Metals) rechnet er die
+        Dividenden der Heimatbörse um: Betrag je Aktie mal Aktien je US-Papier mal Devisenkurs am Ex-Tag. Der Dividenden-Tab
+        nennt dann die Heimatbörse. Grund sind Lücken in den US-Reihen bei Yahoo Finance: Bei Petrobras fehlen einzelne Raten
+        und die Ausschüttung vom Dezember 2025, bei den ADRs von Sony und Toyota alle Zahlungen seit April 2025, bei
+        Franco-Nevada, OR Royalties und Wheaton zwei Quartale 2025. Beim Tencent-ADR stehen zudem die Sachausschüttungen von
+        JD.com- und Meituan-Aktien (2022 und 2023) als Bardividende. Liegt der Kurs des US-Papiers nicht zwischen zwei Dritteln
+        und dem Anderthalbfachen des umgerechneten Heimatkurses, etwa nach einer Änderung des ADR-Verhältnisses, bleibt es bei
+        der US-Reihe. Bis zum 3. November 2026 summierte der Analyzer die jüngsten Zahlungen; wie viele (eine, zwei, vier oder
+        zwölf), leitete er aus dem mittleren Abstand der letzten acht Zahlungen ab. Bei unregelmäßigen Zahlern lag die Rendite
+        damit daneben (Stand 2. November 2026: Vale 15,6 statt 9,0 %, Volkswagen Vorzüge 16,5 statt 7,5 %, Tencent-ADR 2,5
+        statt 1,3 %), und bei Stellantis stand nach der letzten Zahlung im April 2025 weiter 16,2 %. Dazu fragte er die
+        Dividenden in Monatsschritten ab, dabei fehlten bei Yahoo Finance die Zahlungen ganzer Jahre. Beides zusammen: Main
+        Street Capital 1,8 statt 7,7 %, Itaú-ADR 1,2 statt 7,9 %. Das Petrobras-ADR kam auf 4,9 statt 6,7 %.</li>
       <li><strong>Gewinnqualität:</strong> Stammt ein großer Teil des Gewinns nicht aus dem operativen Geschäft,
         etwa aus Beteiligungen, Zinsen oder Verkäufen, wirken KGV, Eigenkapitalrendite, PEG und Fair Value zu
         günstig. Der Analyzer misst, welcher Anteil des Vorsteuergewinns der letzten zwölf Monate laut Yahoo Finance
