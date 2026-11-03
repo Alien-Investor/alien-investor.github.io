@@ -806,7 +806,7 @@
 
     <div id="ln" class="panel">
       <div class="card">
-        <div class="title"><svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Lightning (eigene Node)</div>
+        <div class="title"><svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> <span id="ln-title">Lightning (eigene Node)</span></div>
         <img class="qr" src="lightning.png" alt="Lightning QR-Code">
         <code id="lnText">alien-investor@alien-investor.org</code>
         <br>
@@ -1033,6 +1033,7 @@
         'h1-text':    'DRM-frei direkt kaufen',
         'lead-p':     'Keine Plattform dazwischen. Kein Konto-Zwang. Kein Vendor-Lock-in.<br><span style="color:#888;">EPUB + MOBI + AZW3 + PDF als Bundle – auf allen Geräten deiner Wahl.</span>',
         'pay-desc':     'Wähle Lightning für schnelle, private Energie. Onchain für große Tanks.',
+        'ln-title':     'Lightning (eigene Node)',
         'copy-ln':      'Adresse kopieren',
         'copy-btc':     'Adresse kopieren',
         'kofi-link':    'Karte via Ko-fi',
@@ -1046,6 +1047,7 @@
         'h1-text':    'Buy DRM-free directly',
         'lead-p':     'No platform in between. No account required. No vendor lock-in.<br><span style="color:#888;">EPUB + MOBI + AZW3 + PDF as a bundle – on all devices of your choice.</span>',
         'pay-desc':     'Choose Lightning for fast, private energy. Onchain for larger amounts.',
+        'ln-title':     'Lightning (own node)',
         'copy-ln':      'Copy address',
         'copy-btc':     'Copy address',
         'kofi-link':    'Card via Ko-fi',
@@ -1137,6 +1139,8 @@
       if (leadP) leadP.innerHTML = t['lead-p'];
       var payDesc = document.getElementById('pay-desc');
       if (payDesc) payDesc.textContent = t['pay-desc'];
+      var lnTitle = document.getElementById('ln-title');
+      if (lnTitle) lnTitle.textContent = t['ln-title'];
       var copyLn = document.getElementById('copy-ln');
       if (copyLn) copyLn.textContent = t['copy-ln'];
       var copyBtc = document.getElementById('copy-btc');
