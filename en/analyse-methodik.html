@@ -222,18 +222,18 @@
         straight line. After that come the latest quarterly balance sheets as well as revenue and operating cash flow over
         the last twelve months, each divided by today's share count. It does not calculate anything backwards for the time
         before the first annual figure. It takes equity, revenue and operating cash flow for the last four or so fiscal
-        years from Yahoo Finance, earlier ones from the annual reports filed with the SEC, if at least two years are covered
-        by both and at least half of them agree with Yahoo Finance to within 1%. For revenue this is often not the case, for example at oil and gas companies, banks, brokers and utilities,
+        years from Yahoo Finance, earlier ones from the annual reports filed with the SEC, if they agree with Yahoo Finance
+        to within 1% in at least two and at least half of the years covered by both. For revenue this is often not the case, for example at oil and gas companies, banks, brokers and utilities,
         because revenue is defined differently in the SEC data. Without SEC figures the average therefore usually only
         starts in 2023. If it starts later than ten years ago for P/B or P/S, the sidebar states the month from which it
         applies. The analyzer only shows an average from three fiscal years on (for P/CF with positive operating cash
         flow), for P/B only if equity is positive today, and none if today's share count differs from that of the last
         fiscal year by more than a factor of two (for example at Interactive Brokers, whose listed shares represent just over a quarter of the business). If in that case the latest balance sheet confirms the share count of the last
         fiscal year, it divides equity for the current P/B by the share count of that balance sheet instead of today's. There is
-        no P/CF between a fiscal year with negative operating cash flow and the adjacent years. The P/CF average
-        includes all positive monthly values. For banks the analyzer shows none, since their operating cash flow moves
-        with balance sheet items such as trading assets, loans and deposits. If the median is above 100, it shows none
-        either. The
+        no P/CF between a fiscal year with negative operating cash flow and the adjacent years. For all three ratios the
+        average includes all positive monthly values. If the median is above 100, the analyzer shows none. For P/CF it
+        also shows none for banks, since their operating cash flow moves with balance sheet items such as trading assets,
+        loans and deposits. The
         current P/S is the price divided by revenue per share over the last twelve months, the current P/CF the price
         divided by operating cash flow per share over the last twelve months (or of the last fiscal year if Yahoo Finance
         has no more recent twelve-month figure, both at today's share count). Until 2 November 2026,
@@ -242,7 +242,9 @@
         followed the share price and was usually too low. A current P/S above 2.5 times the average was replaced by the
         average. Until then the P/CF average only covered Yahoo Finance's four or so fiscal years, divided by today's
         share count, and only included monthly values above 2 and below an upper limit between 20 and 30. For highly
-        valued stocks it was therefore too low (Hermès) or missing entirely (Nvidia, Tesla, Eli Lilly).</li>
+        valued stocks it was therefore too low (Hermès) or missing entirely (Nvidia, Tesla, Eli Lilly). Until 3 November
+        2026 the analyzer capped every monthly P/B and P/S value as well as the current P/B at 50. If more than half of the
+        months were above that, the average showed 50.0 (Home Depot's P/B over ten years instead of 63.6).</li>
       <li><strong>Earnings quality:</strong> If a large part of earnings does not come from operations, for example
         from investments, interest or asset sales, P/E, return on equity, PEG and fair value look too favourable. The
         analyzer measures what share of pre-tax income over the last twelve months is not part of operating income

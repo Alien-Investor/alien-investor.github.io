@@ -222,8 +222,8 @@
         die jüngsten Quartalsbilanzen sowie Umsatz und operativer Cashflow der letzten zwölf Monate, jeweils geteilt durch
         die heutige Aktienzahl. Für die Zeit vor dem ersten Jahreswert rechnet er nichts zurück. Eigenkapital, Umsatz und
         operativen Cashflow der letzten rund vier Geschäftsjahre nimmt er von Yahoo Finance, frühere aus den
-        Jahresberichten bei der SEC, wenn es mindestens zwei gemeinsame Jahre gibt und davon mindestens die Hälfte auf 1 %
-        mit Yahoo Finance übereinstimmt. Beim Umsatz ist das
+        Jahresberichten bei der SEC, wenn sie in mindestens zwei und mindestens der Hälfte der gemeinsamen Jahre auf 1 %
+        mit Yahoo Finance übereinstimmen. Beim Umsatz ist das
         etwa bei Öl- und Gaskonzernen, Banken, Brokern und Versorgern oft nicht der Fall, weil die SEC-Zahlen den Umsatz
         anders abgrenzen. Ohne SEC-Zahlen beginnt der Schnitt deshalb meist erst 2023. Beginnt er beim KBV oder KUV später
         als vor zehn Jahren, nennt die Seitenleiste den Monat, ab dem er gilt. Einen Schnitt zeigt der Analyzer erst ab
@@ -233,9 +233,9 @@
         Unternehmens abbilden). Bestätigt in diesem Fall die jüngste Bilanz die Aktienzahl des letzten Geschäftsjahres,
         teilt er das Eigenkapital für das aktuelle KBV durch die Aktienzahl dieser Bilanz statt durch die heutige.
         Zwischen einem Geschäftsjahr mit negativem operativem Cashflow und seinen Nachbarjahren gibt es kein KCV. In den
-        KCV-Schnitt gehen alle positiven Monatswerte ein. Bei Banken zeigt der Analyzer keinen, denn ihr operativer Cashflow
-        schwankt mit Bilanzposten wie Handelsbeständen, Krediten und Einlagen. Liegt der Median über 100, zeigt er
-        ebenfalls keinen. Das aktuelle KUV ist der Kurs geteilt durch den Umsatz der letzten zwölf Monate je Aktie, das aktuelle
+        Schnitt gehen bei allen drei Kennzahlen alle positiven Monatswerte ein. Liegt der Median über 100, zeigt der
+        Analyzer keinen. Beim KCV zeigt er auch bei Banken keinen, denn ihr operativer Cashflow schwankt mit Bilanzposten
+        wie Handelsbeständen, Krediten und Einlagen. Das aktuelle KUV ist der Kurs geteilt durch den Umsatz der letzten zwölf Monate je Aktie, das aktuelle
         KCV der Kurs geteilt durch den operativen Cashflow der letzten zwölf Monate je Aktie (liefert Yahoo Finance keinen
         neueren Zwölfmonatswert, der des letzten Geschäftsjahres, beide zur heutigen Aktienzahl). Bis zum 2. November 2026
         lagen Buchwert und Umsatz je Aktie nur zu den Bilanzstichtagen der letzten rund anderthalb Jahre vor; für die Zeit
@@ -243,7 +243,9 @@
         zu niedrig. Ein aktuelles KUV über dem 2,5-Fachen des Schnitts ersetzte er durch den Schnitt. Der KCV-Schnitt lief
         bis dahin nur über die rund vier Geschäftsjahre von Yahoo Finance, geteilt durch die heutige Aktienzahl, und
         enthielt nur Monatswerte über 2 und unter einer Obergrenze zwischen 20 und 30. Bei hoch bewerteten Aktien lag er
-        damit zu niedrig (Hermès) oder fehlte ganz (Nvidia, Tesla, Eli Lilly).</li>
+        damit zu niedrig (Hermès) oder fehlte ganz (Nvidia, Tesla, Eli Lilly). Bis zum 3. November 2026 begrenzte der
+        Analyzer beim KBV und KUV jeden Monatswert und das aktuelle KBV auf 50. Lag mehr als die Hälfte der Monate darüber,
+        stand als Schnitt 50,0 (Home Depot beim KBV über zehn Jahre statt 63,6).</li>
       <li><strong>Gewinnqualität:</strong> Stammt ein großer Teil des Gewinns nicht aus dem operativen Geschäft,
         etwa aus Beteiligungen, Zinsen oder Verkäufen, wirken KGV, Eigenkapitalrendite, PEG und Fair Value zu
         günstig. Der Analyzer misst, welcher Anteil des Vorsteuergewinns der letzten zwölf Monate laut Yahoo Finance
