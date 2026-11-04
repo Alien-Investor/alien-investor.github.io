@@ -186,36 +186,43 @@
         unter dem Fair Value, zeigt der Analyzer „über“ bzw. „unter Fair Value“, sonst „fair bewertet“. Der KGV-Fächer
         zeigt zum Vergleich den Gewinn je Aktie mal 10, 15, 20, 25 und 30. Bei REITs sowie Bergbau- und Metallwerten
         zeigt der Analyzer keinen Fair Value, weil das KGV dort wenig aussagekräftig ist, ebenso wenn der Median des
-        KGV über 60 liegt, wenn Yahoo Finance weniger als drei positive Jahresgewinne liefert oder wenn das Unternehmen
+        KGV über 60 liegt, wenn es weniger als drei Jahresgewinne in Folge gibt (siehe KGV-Median) oder wenn das Unternehmen
         in den letzten zwölf Monaten Verlust gemacht hat.</li>
-      <li><strong>KGV-Median:</strong> Für jeden Monat teilt der Analyzer den Kurs durch den Gewinn je Aktie. Yahoo
-        Finance liefert rund vier Jahre Jahresgewinne. Als Gewinn je Aktie eines Geschäftsjahres nimmt der Analyzer den
-        verwässerten Gewinn je Aktie laut Yahoo Finance, also den Gewinn geteilt durch die Aktienzahl dieses Jahres. Fehlt
-        dieser Wert für ein Geschäftsjahr, nimmt er den Wert aus dem Jahresbericht bei der SEC, sonst rechnet er ersatzweise
-        mit Yahoos übrigen Angaben. Bei Unternehmen mit
-        Jahresberichten bei der SEC gleicht er den Wert seit dem 2. November 2026 mit dem verwässerten Gewinn je Aktie aus
-        dem jüngsten dort eingereichten Jahresbericht ab, der das Jahr enthält, je gehandelter Aktie bzw. je ADR. Weichen
-        beide um mehr als 2 % ab, gilt der Wert der SEC, sofern er zu den dort gemeldeten Werten für Gewinn und Aktienzahl
-        passt. So kommen nachträgliche Anpassungen an, die Yahoo Finance nicht übernommen hat, etwa nach der Einführung des
-        Rechnungslegungsstandards IFRS 17 (Lloyds und HSBC 2022).
-        Die SEC-Werte nutzt der Analyzer nur, wenn sie in mindestens zwei und mindestens der Hälfte der gemeinsamen Jahre
-        auf 1 % mit Yahoo Finance übereinstimmen. Gibt es nur ein gemeinsames Jahr, genügt dieses, wenn es übereinstimmt und die
-        Aktienzahl dieses Jahres das Verhältnis zwischen beiden Werten bestätigt (Toyota-ADR). In den KGV-Median fließt ihre längere
-        Historie bisher nicht ein, in KCV, KBV und KUV schon. Bis zum 2. November 2026 teilte
-        er für frühere Jahre den Jahresgewinn durch die heutige Aktienzahl: Bei Unternehmen, die eigene Aktien zurückkaufen,
-        lag der Gewinn je Aktie früherer Jahre damit zu hoch und der KGV-Median zu niedrig, bei Unternehmen, die neue Aktien
-        ausgeben, umgekehrt. Der Median läuft nur über die Monate ab dem ersten dieser
-        Jahresgewinne, dazwischen verbindet der Analyzer die Jahreswerte geradlinig. Für die Zeit davor rechnet er keinen
-        Gewinn zurück. Der gewählte Zeitraum (fünf Jahre und mehr) ändert deshalb in der Regel nur den sichtbaren
-        Kursverlauf, nicht den Median. In den Median gehen nur Monatswerte über 3 ein und keine Ausreißer nach oben: Die
-        Grenze liegt beim 2,5-Fachen des Medians, mindestens bei 50. Im Analyzer steht der Median als „Ø“, in der
-        Seitenleiste und beim Antippen der Fair-Value-Linie mit dem Monat, ab dem er gilt. Liefert Yahoo Finance weniger
-        als drei positive Jahresgewinne oder liegt der Median über 60, zeigt auch die KGV-Zeile im Qualitätscheck keinen
-        Schnitt, die KGV-Ampel folgt dann dem Branchen-KGV. Bei Royalty-Gesellschaften passt das Branchen-KGV nicht, dort
-        steht sie dann grau auf „N/A“. Bis zum
-        1. November 2026 rechnete der Analyzer den Gewinn vor dem ersten Jahreswert in der Regel mit dem bisherigen
-        Gewinnwachstum zurück (höchstens 7 % pro Jahr) und bildete den Median im Standardzeitraum über zehn Jahre, nur
-        aus Monatswerten über 7. Ältere Analysen nennen Fair Values nach der damaligen Rechnung.</li>
+      <li><strong>KGV-Median:</strong> Für jeden Monat teilt der Analyzer den Kurs durch den Gewinn je Aktie. Als Gewinn je
+        Aktie eines Geschäftsjahres nimmt er den verwässerten Gewinn je Aktie laut Yahoo Finance, also den Gewinn geteilt
+        durch die Aktienzahl dieses Jahres. Yahoo Finance liefert rund vier Jahre. Fehlt dieser Wert für ein Geschäftsjahr,
+        nimmt er den Wert aus dem Jahresbericht bei der SEC, sonst rechnet er ersatzweise mit Yahoos übrigen Angaben. Bei
+        Unternehmen mit Jahresberichten bei der SEC gleicht er den Wert seit dem 2. November 2026 mit dem verwässerten Gewinn
+        je Aktie aus dem jüngsten dort eingereichten Jahresbericht ab, der das Jahr enthält, je gehandelter Aktie bzw. je
+        ADR. Weichen beide um mehr als 2 % ab, gilt der Wert der SEC, sofern er zu den dort gemeldeten Werten für Gewinn und
+        Aktienzahl passt. So kommen nachträgliche Anpassungen an, die Yahoo Finance nicht übernommen hat, etwa nach der
+        Einführung des Rechnungslegungsstandards IFRS 17 (Lloyds und HSBC 2022). Die SEC-Werte nutzt der Analyzer nur, wenn
+        sie in mindestens zwei und mindestens der Hälfte der gemeinsamen Jahre auf 1 % mit Yahoo Finance übereinstimmen.
+        Gibt es nur ein gemeinsames Jahr, genügt dieses, wenn es übereinstimmt und die Aktienzahl dieses Jahres das
+        Verhältnis zwischen beiden Werten bestätigt (Toyota-ADR).
+        Seit dem 4. November 2026 reicht die Reihe bei diesen Unternehmen weiter zurück: Vor die Jahre von Yahoo Finance
+        stellt der Analyzer die älteren Geschäftsjahre aus den SEC-Berichten, Jahr für Jahr rückwärts, bis eines fehlt
+        oder seine Zahlen nicht zusammenpassen. Zusammenpassen heißt: Der gemeldete Gewinn je Aktie liegt höchstens 2 % oder nur um seine Rundung neben dem Gewinn geteilt durch die Aktienzahl bzw. neben dem Verhältnis, das
+        das Unternehmen sonst meldet (Ford meldete für 2019 0,01 US-Dollar,
+        gerechnet 0,0117). Meldet ein Unternehmen den Gewinn je Aktie in Cent, rechnet der Analyzer ihn um (Rio Tinto 2015
+        bis 2017). Bei einem Verlustjahr reicht es, dass Gewinn und Gewinn je Aktie negativ sind, ein KGV gibt es dort
+        ohnehin nicht. Ohne Jahresberichte bei der SEC bleibt es bei rund vier Jahren (etwa Nestlé, LVMH, Siemens), ebenso wenn die SEC-Werte fehlen oder den Abgleich nicht bestehen (TSMC).
+        Zwischen zwei Jahresgewinnen verbindet der Analyzer die Werte geradlinig, auch über ein einzelnes Verlust- oder fehlendes Jahr hinweg. Liegen zwei oder mehr solcher Jahre dazwischen, gibt
+        es dort keinen Monatswert, und für die Mindestzahl von drei Jahresgewinnen (siehe unten) zählen nur die Jahre danach. Für die Zeit vor dem ersten Jahresgewinn rechnet er keinen
+        Gewinn zurück. Für Fair Value, Seitenleiste und Qualitätscheck läuft der Median immer über die letzten zehn Jahre, der gewählte
+        Zeitraum ändert dort nur den sichtbaren Kursverlauf; im Reiter Multiples gilt wie bei KCV, KBV und KUV der gewählte
+        Zeitraum. In den Median gehen nur Monatswerte über 3 ein und keine Ausreißer nach oben: Die Grenze liegt beim
+        2,5-Fachen des Medians, mindestens bei 50. Im Analyzer steht der Median als „Ø“, in der Seitenleiste und beim
+        Antippen der Fair-Value-Linie mit dem Monat, ab dem er gilt. Gibt es weniger als drei Jahresgewinne in Folge oder
+        liegt der Median über 60, zeigt auch die KGV-Zeile im Qualitätscheck keinen Schnitt, die KGV-Ampel folgt dann dem
+        Branchen-KGV. Bei Royalty-Gesellschaften passt das Branchen-KGV nicht, dort steht sie dann grau auf „N/A“.
+        Bis zum 4. November 2026 lief der Median auch bei Unternehmen mit SEC-Berichten nur über die Jahre von Yahoo Finance, bei SAP etwa 38,2 statt 29,7, bei AT&amp;T 11,2 statt 9,1 (Stand 4. November 2026). Bis zum
+        2. November 2026 teilte er für frühere Jahre den Jahresgewinn durch die heutige Aktienzahl: Bei Unternehmen, die
+        eigene Aktien zurückkaufen, lag der Gewinn je Aktie früherer Jahre damit zu hoch und der KGV-Median zu niedrig, bei
+        Unternehmen, die neue Aktien ausgeben, umgekehrt. Bis zum 1. November 2026 rechnete der Analyzer den Gewinn vor dem
+        ersten Jahreswert in der Regel mit dem bisherigen Gewinnwachstum zurück (höchstens 7 % pro Jahr) und bildete den
+        Median im Standardzeitraum über zehn Jahre, nur aus Monatswerten über 7. Ältere Analysen nennen Fair Values nach
+        der damaligen Rechnung.</li>
       <li><strong>KCV, KBV und KUV:</strong> „Ø“ steht für den Median der Monatswerte über den gewählten Zeitraum, bei KBV
         und KUV in der Seitenleiste über zehn Jahre. Buchwert, Umsatz und operativen Cashflow je Aktie rechnet der Analyzer
         für jedes Geschäftsjahr mit der Aktienzahl dieses Jahres und verbindet die Jahreswerte geradlinig. Danach folgen

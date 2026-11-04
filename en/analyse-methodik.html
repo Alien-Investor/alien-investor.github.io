@@ -185,37 +185,43 @@
         value, the analyzer shows "above" or "below fair value", otherwise "fairly valued". For comparison, the P/E
         fan shows earnings per share times 10, 15, 20, 25 and 30. For REITs and mining and metals companies the analyzer
         shows no fair value, because the P/E ratio is of little use there, nor when the median P/E is above 60, when
-        Yahoo Finance provides fewer than three positive annual earnings figures or when the company made a loss over
+        there are fewer than three consecutive annual earnings figures (see P/E median) or when the company made a loss over
         the last twelve months.</li>
-      <li><strong>P/E median:</strong> For each month the analyzer divides the price by earnings per share. Yahoo
-        Finance provides about four years of annual earnings. For each fiscal year the analyzer uses diluted earnings per
-        share according to Yahoo Finance, i.e. earnings divided by that year's share count. If that figure is missing for a
-        fiscal year, it uses the figure from the annual report filed with the SEC, otherwise it falls back on Yahoo
-        Finance's other data. For companies filing annual reports with the SEC, it has
-        checked this figure since 2 November 2026 against diluted earnings per share from the most recent annual report
-        filed there that covers the year, per traded share or per ADR. If the two differ by more than 2%, the SEC figure
-        applies, provided it matches the earnings and share count filed there. This picks up later restatements that Yahoo
-        Finance has not adopted, for example after the introduction of the accounting standard IFRS 17 (Lloyds and HSBC
-        2022). The analyzer only uses the SEC figures if they agree with
-        Yahoo Finance to within 1% in at least two and at least half of the years covered by both. If only one year is
-        covered by both, that year is enough if it agrees and its share count confirms the ratio between the two figures
-        (Toyota ADR). Their
-        longer history does not feed into the P/E median yet, but it does feed into P/CF, P/B and P/S. Until 2 November 2026 it divided earlier years' annual
-        earnings by today's share count: for companies buying back shares, earnings per share of earlier years came out too
-        high and the P/E median too low; for companies issuing new shares, the other way round. The median only covers the
-        months from the first of these
-        annual figures on; in between, the analyzer connects the annual figures in a straight line. It does not
-        calculate earnings backwards for the time before that. Since the shortest period is five years, the selected
-        period therefore usually only changes the visible price history, not the median. Only monthly values above 3
-        enter the median, and no upward outliers: the limit is 2.5 times the median, at least 50. In the analyzer the
-        median is shown as "Ø" or "avg.", in the sidebar and in the tooltip of the fair value line together with the
-        month it starts from. If Yahoo Finance provides fewer than three positive annual earnings figures or the median
-        is above 60, the P/E row in the quality check shows no average either, and the P/E light then follows the
-        sector P/E. For royalty companies the sector P/E does not fit, so the light then shows a gray "N/A". Until
-        1 November 2026 the analyzer usually calculated
-        earnings before the first annual figure backwards using past earnings growth (at most 7% per year) and, in the
-        default period, took the median over ten years, using only monthly values above 7. Older analyses state fair
-        values based on that earlier calculation.</li>
+      <li><strong>P/E median:</strong> For each month the analyzer divides the price by earnings per share. For each
+        fiscal year it uses diluted earnings per share according to Yahoo Finance, i.e. earnings divided by that year's
+        share count. Yahoo Finance provides about four years. If that figure is missing for a fiscal year, it uses the
+        figure from the annual report filed with the SEC, otherwise it falls back on Yahoo Finance's other data. For
+        companies filing annual reports with the SEC, it has checked this figure since 2 November 2026 against diluted
+        earnings per share from the most recent annual report filed there that covers the year, per traded share or per
+        ADR. If the two differ by more than 2%, the SEC figure applies, provided it matches the earnings and share count
+        filed there. This picks up later restatements that Yahoo Finance has not adopted, for example after the
+        introduction of the accounting standard IFRS 17 (Lloyds and HSBC 2022). The analyzer only uses the SEC figures if
+        they agree with Yahoo Finance to within 1% in at least two and at least half of the years covered by both. If only
+        one year is covered by both, that year is enough if it agrees and its share count confirms the ratio between the
+        two figures (Toyota ADR).
+        Since 4 November 2026 the series reaches further back for these companies: before the Yahoo Finance years, the
+        analyzer adds the earlier fiscal years from the SEC filings, going back year by year until one is missing or its
+        figures do not fit together. Fitting together means that reported earnings per share are within 2% of earnings divided by the share count (or of the company's usual ratio between the two), or differ
+        from it only by their rounding (Ford reported USD 0.01 for 2019, calculated
+        0.0117). If a company reports earnings per share in cents, the analyzer converts them (Rio Tinto 2015 to 2017).
+        For a loss year it is enough that earnings and earnings per share are negative; there is no P/E there anyway.
+        Without annual reports filed with the SEC the series stays at about four years (for example Nestlé, LVMH, Siemens),
+        and the same applies if the SEC figures are missing or fail the check (TSMC).
+        Between two annual earnings figures the analyzer connects the values in a straight line, including across a single loss or missing year. If two or more such years lie in between, there is no monthly value
+        there, and only the years after that gap count towards the minimum of three annual earnings figures (see below). It does not calculate earnings backwards for
+        the time before the first annual earnings figure. For fair value, sidebar and quality check the median always covers the last ten years, and the selected period only
+        changes the visible price history there; in the Multiples tab, as for P/CF, P/B and P/S, the selected period applies. Only monthly values above 3 enter the median, and no upward
+        outliers: the limit is 2.5 times the median, at least 50. In the analyzer the median is shown as "Ø" or "avg.",
+        in the sidebar and in the tooltip of the fair value line together with the month it starts from. If there are
+        fewer than three consecutive annual earnings figures or the median is above 60, the P/E row in the quality check
+        shows no average either, and the P/E light then follows the sector P/E. For royalty companies the sector P/E does
+        not fit, so the light then shows a gray "N/A".
+        Until 4 November 2026 the median only covered the Yahoo Finance years, even for companies filing with the SEC: for SAP 38.2 instead of 29.7, for AT&amp;T 11.2 instead of 9.1 (as of 4 November 2026). Until 2 November 2026
+        it divided earlier years' annual earnings by today's share count: for companies buying back shares, earnings per
+        share of earlier years came out too high and the P/E median too low; for companies issuing new shares, the other
+        way round. Until 1 November 2026 the analyzer usually calculated earnings before the first annual figure backwards
+        using past earnings growth (at most 7% per year) and, in the default period, took the median over ten years, using
+        only monthly values above 7. Older analyses state fair values based on that earlier calculation.</li>
       <li><strong>P/CF, P/B and P/S:</strong> "Ø" or "avg." stands for the median of the monthly values over the selected
         period, for P/B and P/S in the sidebar over ten years. The analyzer calculates book value, revenue and operating
         cash flow per share for each fiscal year using that year's share count and connects the annual figures in a
