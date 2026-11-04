@@ -4,95 +4,437 @@
   <meta charset="UTF-8">
   <title>👽 Alien Analyzer V2 – Aktienanalyse in 4 Tabs erklärt | Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Der Alien Analyzer V2 analysiert Aktien ohne Abo und ohne Login – direkt im Browser. Eine Einführung in die vier Tabs: Fairer Wert, Multiples, Dividenden und Qualitätscheck.">
+  <meta name="description" content="Der Alien Analyzer V2 analysiert Aktien ohne Abo und ohne Login direkt im Browser. Der Guide erklärt Fairen Wert, Multiples, Dividenden, Qualitätscheck und Alien-Einordnung Schritt für Schritt.">
+  <link rel="canonical" href="https://alien-investor.org/alien-analyzer-v2-guide.html">
+  <link rel="alternate" hreflang="de" href="https://alien-investor.org/alien-analyzer-v2-guide.html">
+  <link rel="alternate" hreflang="en" href="https://alien-investor.org/en/alien-analyzer-v2-guide.html">
+  <link rel="stylesheet" href="/fonts/fonts.css">
   <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { margin: 0; padding: 0; overflow-x: hidden; }
+
     body {
-      background-color: #000;
-      color: #fff;
+      background: #000;
+      color: #e8f0ee;
       font-family: Arial, sans-serif;
-      line-height: 1.6;
-      max-width: 800px;
+      line-height: 1.65;
+      max-width: 820px;
       margin: auto;
-      padding: 0 15px 20px 15px;
+      padding: 0 16px 20px 16px;
+      position: relative;
+      min-height: 100vh;
     }
 
+    /* --- STERNENHIMMEL (wie blog.html) --- */
+    .stars-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: radial-gradient(ellipse at top, #0a0f1e 0%, #000 60%);
+      z-index: -2;
+    }
+    .stars-bg::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image:
+        radial-gradient(1px 1px at 10% 15%, #fff, transparent),
+        radial-gradient(1px 1px at 25% 40%, #fff, transparent),
+        radial-gradient(1px 1px at 40% 20%, #fff, transparent),
+        radial-gradient(2px 2px at 55% 60%, #00ffcc, transparent),
+        radial-gradient(1px 1px at 70% 35%, #fff, transparent),
+        radial-gradient(1px 1px at 85% 75%, #fff, transparent),
+        radial-gradient(1px 1px at 15% 80%, #fff, transparent),
+        radial-gradient(1px 1px at 35% 90%, #fff, transparent),
+        radial-gradient(1px 1px at 60% 10%, #fff, transparent),
+        radial-gradient(1px 1px at 90% 50%, #fff, transparent),
+        radial-gradient(1px 1px at 5% 55%, #fff, transparent),
+        radial-gradient(2px 2px at 75% 25%, #00ffcc, transparent);
+      animation: twinkle 6s ease-in-out infinite alternate;
+    }
+    @keyframes twinkle {
+      0% { opacity: 0.4; } 100% { opacity: 0.9; }
+    }
+
+    /* --- STERNENNEBEL --- */
+    .nebula {
+      position: fixed;
+      top: -10%;
+      left: -10%;
+      width: 120%;
+      height: 120%;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 900px 260px at 30% 35%, rgba(90, 30, 140, 0.22), transparent 60%),
+        radial-gradient(ellipse 1100px 200px at 70% 55%, rgba(0, 140, 180, 0.18), transparent 60%),
+        radial-gradient(ellipse 500px 180px at 50% 45%, rgba(180, 60, 140, 0.10), transparent 60%),
+        radial-gradient(circle 140px at 32% 36%, rgba(255, 255, 255, 0.10), transparent 70%),
+        radial-gradient(circle 120px at 68% 56%, rgba(0, 255, 204, 0.08), transparent 70%);
+      transform: rotate(-18deg);
+      filter: blur(30px);
+      opacity: 0.85;
+      animation: nebula-pulse 14s ease-in-out infinite alternate;
+      mix-blend-mode: screen;
+    }
+    @keyframes nebula-pulse {
+      0%   { opacity: 0.55; transform: rotate(-18deg) scale(1); }
+      50%  { opacity: 0.85; transform: rotate(-17deg) scale(1.04); }
+      100% { opacity: 0.65; transform: rotate(-19deg) scale(1.02); }
+    }
+
+    /* --- STERNSCHNUPPEN --- */
+    .shooting-star {
+      position: fixed;
+      width: 2px; height: 2px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.7);
+      z-index: -1;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .shooting-star::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 120px; height: 1px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.8), rgba(0,255,204,0.4), transparent);
+      transform: translateX(-120px);
+    }
+    .shooting-star.s1 { top: 12%; left: -5%; animation: shoot1 11s linear infinite; animation-delay: 3s; }
+    .shooting-star.s2 { top: 28%; left: -5%; animation: shoot2 17s linear infinite; animation-delay: 9s; }
+    .shooting-star.s3 { top: 50%; left: -5%; animation: shoot3 23s linear infinite; animation-delay: 15s; }
+    @keyframes shoot1 {
+      0%   { transform: translate(0, 0) rotate(15deg); opacity: 0; }
+      6%   { opacity: 1; }
+      16%  { transform: translate(110vw, 20vh) rotate(15deg); opacity: 0; }
+      100% { transform: translate(110vw, 20vh) rotate(15deg); opacity: 0; }
+    }
+    @keyframes shoot2 {
+      0%   { transform: translate(0, 0) rotate(22deg); opacity: 0; }
+      4%   { opacity: 1; }
+      14%  { transform: translate(115vw, 30vh) rotate(22deg); opacity: 0; }
+      100% { transform: translate(115vw, 30vh) rotate(22deg); opacity: 0; }
+    }
+    @keyframes shoot3 {
+      0%   { transform: translate(0, 0) rotate(10deg); opacity: 0; }
+      6%   { opacity: 1; }
+      18%  { transform: translate(115vw, 15vh) rotate(10deg); opacity: 0; }
+      100% { transform: translate(115vw, 15vh) rotate(10deg); opacity: 0; }
+    }
+
+    /* --- UFO --- */
+    .ufo {
+      position: fixed;
+      top: 38%;
+      right: -80px;
+      width: 72px; height: 36px;
+      z-index: -1;
+      filter: drop-shadow(0 0 8px rgba(0, 255, 204, 0.55));
+      animation: ufo-fly 55s linear infinite;
+      animation-delay: 25s;
+      pointer-events: none;
+      opacity: 0;
+    }
+    @keyframes ufo-fly {
+      0%   { transform: translate(0, 0);           opacity: 0; }
+      2%   {                                       opacity: 1; }
+      10%  { transform: translate(-30vw, -3vh); }
+      22%  { transform: translate(-70vw, 2vh); }
+      34%  { transform: translate(-110vw, -2vh);   opacity: 1; }
+      37%  { transform: translate(-120vw, -2vh);   opacity: 0; }
+      100% { transform: translate(-120vw, -2vh);   opacity: 0; }
+    }
+    .ufo-light { animation: ufo-blink 1.2s infinite; transform-origin: center; }
+    .ufo-light:nth-child(1) { animation-delay: 0.0s; }
+    .ufo-light:nth-child(2) { animation-delay: 0.15s; }
+    .ufo-light:nth-child(3) { animation-delay: 0.30s; }
+    .ufo-light:nth-child(4) { animation-delay: 0.45s; }
+    .ufo-light:nth-child(5) { animation-delay: 0.60s; }
+    .ufo-light:nth-child(6) { animation-delay: 0.75s; }
+    @keyframes ufo-blink {
+      0%, 100% { opacity: 1; }
+      50%      { opacity: 0.25; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .stars-bg::before, .nebula, .shooting-star, .ufo, .ufo-light { animation: none; }
+      .shooting-star, .ufo { display: none; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* --- TYPOGRAFIE --- */
     h1, h2, h3 { color: #00ffcc; }
-    h1 { margin-top: 40px; text-align: center; }
-    h2 { margin-top: 2.5em; border-bottom: 1px solid #1a3a33; padding-bottom: 8px; }
+    h1 {
+      font-family: 'Orbitron', Arial, sans-serif;
+      font-weight: 700;
+      font-size: 1.75em;
+      line-height: 1.3;
+      letter-spacing: 0.5px;
+      margin-top: 36px;
+      text-align: center;
+      text-shadow: 0 0 18px rgba(0, 255, 204, 0.35);
+    }
+    h2 {
+      font-family: 'Orbitron', Arial, sans-serif;
+      font-weight: 600;
+      font-size: 1.3em;
+      letter-spacing: 1px;
+      margin-top: 2.6em;
+      border-bottom: 1px solid #1a3a33;
+      padding-bottom: 8px;
+      scroll-margin-top: 16px;
+    }
+    h3 { font-size: 1.05em; margin: 1.8em 0 0.6em 0; }
+    p { margin: 0 0 1em 0; }
+    strong { color: #fff; }
+    code {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.95em;
+      color: #9fffe6;
+      background: rgba(0, 255, 204, 0.06);
+      border: 1px solid rgba(0, 255, 204, 0.15);
+      border-radius: 3px;
+      padding: 0 4px;
+      overflow-wrap: anywhere;
+    }
 
     a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
     a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
 
-    em { color: #ccc; }
+    .top-nav { padding: 10px 0; font-size: 0.9em; }
 
     .byline {
-      margin-top: -0.8em;
+      margin-top: -0.6em;
       margin-bottom: 2em;
-      color: #ccc;
+      color: #9aa9a5;
       font-style: italic;
       text-align: center;
     }
+
+    .lead { font-size: 1.08em; color: #f2f7f5; }
+
+    /* --- VIDEO --- */
+    .video-wrapper { display: flex; justify-content: center; margin: 2em 0; }
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 640px;
+      padding-bottom: 56.25%;
+      height: 0;
+      border: 1px solid #00ffcc;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 0 18px rgba(0, 255, 204, 0.12);
+    }
+    @media (min-width: 700px) { .video-container { padding-bottom: 360px; } }
+    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
+    /* --- SCHNELLSTART --- */
+    .karte {
+      border: 1px solid rgba(0, 255, 204, 0.35);
+      background: rgba(0, 20, 16, 0.6);
+      border-radius: 10px;
+      padding: 1.2em 1.4em;
+      margin: 2em 0;
+      box-shadow: 0 0 16px rgba(0, 255, 204, 0.07);
+    }
+    .karte-titel {
+      font-family: 'Orbitron', Arial, sans-serif;
+      font-size: 0.85em;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #00ffcc;
+      margin: 0 0 0.9em 0;
+    }
+    ol.schritte { list-style: none; counter-reset: schritt; margin: 0; padding: 0; }
+    ol.schritte li {
+      counter-increment: schritt;
+      position: relative;
+      padding: 0 0 0.9em 2.6em;
+    }
+    ol.schritte li::before {
+      content: counter(schritt);
+      position: absolute;
+      left: 0; top: 0;
+      width: 1.8em; height: 1.8em;
+      border: 1px solid #00ffcc;
+      border-radius: 50%;
+      color: #00ffcc;
+      font-family: 'Orbitron', Arial, sans-serif;
+      font-size: 0.85em;
+      line-height: 1.8em;
+      text-align: center;
+    }
+    ol.schritte li:last-child { padding-bottom: 0; }
+
+    /* --- SPRUNGLEISTE --- */
+    nav.sprung {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin: 2.2em 0 1em 0;
+    }
+    nav.sprung a {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.92em;
+      letter-spacing: 1px;
+      border: 1px solid rgba(0, 255, 204, 0.35);
+      border-radius: 999px;
+      padding: 5px 14px;
+      background: rgba(0, 255, 204, 0.04);
+    }
+    nav.sprung a:hover { background: rgba(0, 255, 204, 0.12); text-shadow: none; }
+
+    /* --- BILDER --- */
+    .tab-title-img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 12 / 5;
+      object-fit: cover;
+      object-position: 50% 36%;
+      border-radius: 6px;
+      margin: 0.6em 0 1em 0;
+      display: block;
+    }
+    figure.shot { margin: 1.4em 0 1em 0; }
+    figure.shot a { display: block; }
+    figure.shot img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 1px solid #1f4a40;
+      border-radius: 6px;
+      box-shadow: 0 0 22px rgba(0, 255, 204, 0.08);
+    }
+    figure.shot figcaption {
+      text-align: center;
+      font-size: 0.85em;
+      color: #8fa39e;
+      margin-top: 0.6em;
+    }
+
+    /* --- MARKEN-LEGENDE (Nummern wie im Bild) --- */
+    ol.marken { list-style: none; counter-reset: marke; margin: 0.4em 0 1.4em 0; padding: 0; }
+    ol.marken li {
+      counter-increment: marke;
+      position: relative;
+      padding: 0.15em 0 0.75em 2.4em;
+    }
+    ol.marken li::before {
+      content: counter(marke);
+      position: absolute;
+      left: 0; top: 0.1em;
+      width: 1.65em; height: 1.65em;
+      border-radius: 50%;
+      background: #00ffcc;
+      color: #00140f;
+      font-weight: 700;
+      font-size: 0.9em;
+      line-height: 1.65em;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.45);
+    }
+
+    /* --- FORMEL, KÄSTEN --- */
+    .formel {
+      font-family: 'Share Tech Mono', monospace;
+      text-align: center;
+      font-size: 1.02em;
+      color: #c8fff2;
+      border: 1px dashed rgba(0, 255, 204, 0.45);
+      border-radius: 8px;
+      padding: 0.9em 1em;
+      margin: 1.2em 0;
+      background: rgba(0, 255, 204, 0.04);
+    }
+    .tipp {
+      border-left: 3px solid #00ffcc;
+      background: rgba(0, 255, 204, 0.05);
+      border-radius: 0 8px 8px 0;
+      padding: 0.9em 1.1em;
+      margin: 1.4em 0;
+    }
+    .tipp-titel {
+      font-family: 'Orbitron', Arial, sans-serif;
+      font-size: 0.78em;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #00ffcc;
+      margin-bottom: 0.4em;
+    }
+    .tipp p:last-child, .tipp ul:last-child { margin-bottom: 0; }
+    ul.zust { margin: 0.4em 0 1em 0; padding-left: 1.2em; }
+    ul.zust li { margin-bottom: 0.45em; }
+
+    /* --- TABELLE --- */
+    .table-scroll { overflow-x: auto; margin: 1em 0 1.4em 0; }
+    table.kennzahlen { border-collapse: collapse; width: 100%; font-size: 0.93em; }
+    table.kennzahlen th, table.kennzahlen td {
+      text-align: left;
+      vertical-align: top;
+      padding: 0.55em 0.7em;
+      border-bottom: 1px solid #1a3a33;
+    }
+    table.kennzahlen th {
+      font-family: 'Share Tech Mono', monospace;
+      letter-spacing: 1px;
+      color: #00ffcc;
+      font-weight: normal;
+    }
+    table.kennzahlen td:first-child { white-space: nowrap; color: #fff; }
+    .ampel { display: inline-block; width: 0.8em; height: 0.8em; border-radius: 50%; vertical-align: -0.05em; margin-right: 0.3em; }
+    .a-gruen { background: #00ffcc; } .a-gelb { background: #ffcc44; } .a-rot { background: #ff4466; } .a-grau { background: #6b7d78; }
+
+    /* --- FAQ --- */
+    details.faq {
+      border: 1px solid #1a3a33;
+      border-radius: 8px;
+      margin: 0.7em 0;
+      background: rgba(0, 20, 16, 0.45);
+    }
+    details.faq summary {
+      cursor: pointer;
+      padding: 0.8em 1em;
+      color: #fff;
+      font-weight: bold;
+      list-style: none;
+      position: relative;
+      padding-right: 2.4em;
+    }
+    details.faq summary::-webkit-details-marker { display: none; }
+    details.faq summary::after {
+      content: "+";
+      position: absolute;
+      right: 1em; top: 0.65em;
+      color: #00ffcc;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 1.2em;
+    }
+    details.faq[open] summary::after { content: "–"; }
+    details.faq[open] summary { border-bottom: 1px solid #1a3a33; }
+    details.faq .antwort { padding: 0.8em 1em 0.2em 1em; }
 
     blockquote {
       border-left: 3px solid #00ffcc;
       margin: 2em 0;
       padding: 0.5em 1em;
       color: #ddd;
-      background: #050505;
+      background: rgba(5, 5, 5, 0.7);
       font-style: italic;
-    }
-
-    .video-wrapper {
-      display: flex;
-      justify-content: center;
-      margin: 2em 0;
-    }
-    .video-container {
-      position: relative;
-      width: 100%;
-      max-width: 560px;
-      padding-bottom: 31.25%;
-      height: 0;
-      border: 1px solid #00ffcc;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 0 15px rgba(0, 255, 204, 0.1);
-    }
-    @media (max-width: 600px) {
-      .video-container { padding-bottom: 56.25%; }
-    }
-    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-
-    .tab-title-img {
-      width: 100%;
-      height: auto;
-      border-radius: 4px;
-      margin: 1em 0 0.8em 0;
-    }
-
-    .screenshot {
-      width: 100%;
-      height: auto;
-      border-radius: 4px;
-      border: 1px solid #1a3a33;
-      margin: 0.8em 0 0.4em 0;
-    }
-
-    .screenshot-caption {
-      text-align: center;
-      font-size: 0.8em;
-      color: #555;
-      margin-bottom: 1.5em;
     }
 
     .cta-box {
       border: 1px solid #00ffcc;
-      background: #050505;
+      background: rgba(0, 20, 16, 0.6);
       padding: 1.5em;
       border-radius: 8px;
       margin: 2em 0;
       text-align: center;
-      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+      box-shadow: 0 0 14px rgba(0, 255, 204, 0.12);
     }
     .cta-box p { margin: 0 0 1em 0; color: #bbb; }
     .cta-box a { font-size: 1.2em; font-weight: bold; border-bottom: 2px solid #00ffcc; padding-bottom: 3px; }
@@ -103,6 +445,7 @@
       align-items: center;
       justify-content: center;
       gap: 1em;
+      flex-wrap: wrap;
     }
     .like-button button {
       background: #000;
@@ -126,8 +469,6 @@
       cursor: default;
     }
 
-    .top-nav { padding: 10px 0; font-size: 0.9em; }
-
     .back-links {
       margin-top: 40px;
       text-align: center;
@@ -140,20 +481,57 @@
       margin-top: 60px;
       padding: 20px;
       font-size: 0.85em;
-      color: #666;
+      color: #777;
       border-top: 1px solid #222;
       text-align: center;
+    }
+
+    @media (max-width: 520px) {
+      h1 { font-size: 1.35em; }
+      h2 { font-size: 1.12em; }
+      .karte { padding: 1em 1em; }
+      .formel { font-size: 0.92em; }
     }
   </style>
 </head>
 <body>
+  <div class="stars-bg"></div>
+  <div class="nebula"></div>
+  <div class="shooting-star s1"></div>
+  <div class="shooting-star s2"></div>
+  <div class="shooting-star s3"></div>
+
+  <svg class="ufo" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <radialGradient id="ufo-dome" cx="50%" cy="80%" r="60%">
+        <stop offset="0%" stop-color="#5fffe0"/>
+        <stop offset="60%" stop-color="#1a3a38"/>
+        <stop offset="100%" stop-color="#0a1a1e"/>
+      </radialGradient>
+      <linearGradient id="ufo-body" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#4a5a5a"/>
+        <stop offset="50%" stop-color="#2a3638"/>
+        <stop offset="100%" stop-color="#101818"/>
+      </linearGradient>
+    </defs>
+    <path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/>
+    <ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body)" stroke="#00ffcc" stroke-width="0.4"/>
+    <ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/>
+    <ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/>
+    <circle class="ufo-light" cx="20" cy="20.5" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="27" cy="21.2" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="34" cy="21.6" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="41" cy="21.6" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="48" cy="21.2" r="1.3" fill="#fff"/>
+    <circle class="ufo-light" cx="55" cy="20.5" r="1.3" fill="#fff"/>
+  </svg>
 
   <div class="top-nav">
     <a href="index.html">← Zurück zur Zentrale</a>
   </div>
 
   <h1><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-625b08)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Alien Analyzer V2 – Aktienanalyse in 4 Tabs erklärt</h1>
-  <p class="byline"><em>von Alien Investor</em></p>
+  <p class="byline"><em>von Alien Investor · Stand: 4. November 2026</em></p>
 
   <div class="video-wrapper">
     <div class="video-container">
@@ -163,92 +541,370 @@
 
   <article id="content">
 
-    <p>
-      Kein Bloomberg-Terminal, kein teures Abo, kein Login. Der <strong>Alien Analyzer V2</strong> ist ein
-      browserbasiertes Value-Investing-Tool – kostenlos, direkt auf alien-investor.org.
-      Ticker eingeben, Enter – und du bekommst in Sekunden eine strukturierte Übersicht
-      über Bewertung, Kennzahlen und Qualität einer Aktie.
+    <p class="lead">
+      Kein Bloomberg-Terminal, kein Abo, kein Login. Der <strong>Alien Analyzer V2</strong> ist ein kostenloses
+      Value-Investing-Tool direkt im Browser. Ticker eingeben, und du siehst in Sekunden, wie eine Aktie im Vergleich
+      zu ihrer eigenen Geschichte bewertet ist, was sie ausschüttet und wie solide die Zahlen dahinter sind.
     </p>
     <p>
-      Die Daten kommen von Yahoo Finance über einen eigenen Proxy. Kein API-Key erforderlich.
-      Das Tool läuft komplett im Browser – eine HTML-Seite ohne Framework und ohne Build-Step, Schriften und Diagramm-Bibliothek kommen vom eigenen Server.
-      Hier ist, was die vier Tabs zeigen.
+      Kurse und Kennzahlen kommen von Yahoo Finance. Bei Unternehmen, die Jahresberichte bei der US-Börsenaufsicht SEC
+      einreichen, nutzt der Analyzer zusätzlich die Zahlen aus diesen Berichten. Dann reicht die Geschichte oft zehn Jahre
+      zurück statt rund vier. Beides holt mein eigener Server ab: Dein Browser fragt keinen fremden Datendienst an, auch
+      Schriften und Diagramm-Bibliothek kommen vom selben Server.
     </p>
 
-    <h2>Tab 1 – Fairer Wert</h2>
-    <img src="aa2-tab1-titel.png" alt="Tab 1 – Fairer Wert" class="tab-title-img">
-    <p>
-      Der wichtigste Tab für Value-Investoren. Du siehst den historischen Kursverlauf –
-      und darüber einen <strong>KGV-Fächer</strong>: mehrere Linien, berechnet aus dem EPS-Verlauf
-      multipliziert mit festen KGV-Werten von 10, 15, 20, 25 und 30. Dazu kommt die Fair-Value-Linie mit dem Median-KGV seit dem ersten Jahresgewinn, den Yahoo Finance liefert, meist rund vier Jahre (<a href="/analyse-methodik.html#analyzer">so rechnet der Analyzer</a>).
-    </p>
-    <p>
-      Liegt der Kurs über der Fair-Value-Linie, ist die Aktie höher bewertet als im eigenen KGV-Median, liegt er darunter, niedriger.
-      Der Fächer zeigt, bei welchem KGV der Kurs gerade steht.
-      Die Sidebar fasst die Lage im Fair-Value-Indikator zusammen.
-    </p>
-    <img src="aa2-tab1-screenshot.png" alt="Fairer Wert – NVIDIA" class="screenshot">
-    <p class="screenshot-caption">NVIDIA im Fairer-Wert-Tab – KGV-Fächer zeigt historische Bewertungskorridore</p>
+    <div class="karte">
+      <p class="karte-titel">Schnellstart</p>
+      <ol class="schritte">
+        <li><strong>Aktie suchen:</strong> Ticker oder Firmennamen eintippen, etwa <code>SAP</code>, <code>ALV.DE</code>
+          oder <code>NESN.SW</code>. Beim Tippen erscheinen Vorschläge. Enter oder „Analysieren“ startet die Analyse.</li>
+        <li><strong>Kopfzeile lesen:</strong> Kurs mit Veränderung zum Vormonat (1M), Marktkapitalisierung, KGV und
+          Gewinn je Aktie der letzten zwölf Monate.</li>
+        <li><strong>Tabs durchklicken:</strong> Fairer Wert, Multiples, Dividenden, Qualitätscheck. Das kleine
+          <strong>?</strong> in jedem Tab springt direkt zum passenden Abschnitt dieses Guides.</li>
+      </ol>
+    </div>
 
-    <h2>Tab 2 – Multiples</h2>
-    <img src="aa2-tab2-titel.png" alt="Tab 2 – Multiples" class="tab-title-img">
+    <figure class="shot">
+      <a href="aa2-guide-start-de.webp"><img src="aa2-guide-start-de.webp" width="1600" height="598" loading="lazy" alt="Alien Analyzer mit Suchfeld, Kopfzeile für SAP und Schaltern für Sprache und Darstellung"></a>
+      <figcaption>Suchfeld und Kopfzeile, hier SAP</figcaption>
+    </figure>
+    <ol class="marken">
+      <li><strong>Suchfeld:</strong> Ticker oder Name, Vorschläge erscheinen beim Tippen.</li>
+      <li><strong>Kopfzeile:</strong> Kurs und Veränderung zum Vormonat, Marktkapitalisierung, KGV (trailing) und Gewinn
+        je Aktie der letzten zwölf Monate (EPS ttm).</li>
+      <li><strong>Sprache und Darstellung:</strong> DE/EN schaltet die Sprache um, DARK/SOFT wechselt zwischen schwarzem
+        und dunkelblauem Hintergrund.</li>
+    </ol>
     <p>
-      Ein einzelner Stichtagswert sagt wenig. Entscheidend ist, wie er sich zur eigenen Geschichte verhält.
-      Tab 2 zeigt <strong>KGV, KCV, KUV und KBV</strong> historisch als Linien – über fünf oder zehn Jahre oder den ganzen geladenen Kursverlauf (bis 20 Jahre).
-      KGV und KCV reichen nur so weit zurück wie die Jahresabschlüsse bei Yahoo Finance, meist rund vier Jahre.
+      Eine Analyse lässt sich direkt verlinken: <code>api.alien-investor.org/alien-analyzer-v2.html?ticker=SAP</code>
+      öffnet sie sofort, mit <code>&amp;lang=en</code> auf Englisch.
     </p>
-    <p>
-      So erkennst du auf einen Blick, ob das aktuelle Niveau historisch hoch oder moderat ist.
-      KGV-Monatswerte von 3 oder darunter und Ausreißer nach oben (Grenze beim 2,5-Fachen des Medians, mindestens 50)
-      blendet der Analyzer aus, etwa nach einmaligen Abschreibungen. Fällt ein großer Teil heraus, zeigt der Tab einen Hinweis.
-    </p>
-    <img src="aa2-tab2-screenshot.png" alt="Multiples – Newmont" class="screenshot">
-    <p class="screenshot-caption">Newmont im Multiples-Tab – KGV, KBV, KUV und KCV im historischen Verlauf</p>
 
-    <h2>Tab 3 – Dividenden</h2>
-    <img src="aa2-tab3-titel.png" alt="Tab 3 – Dividenden" class="tab-title-img">
-    <p>
-      Für Dividendeninvestoren der relevanteste Tab. Die Balken zeigen die gezahlten Dividenden je Aktie,
-      die Linie die <strong>Dividendenrendite</strong> aus der zuletzt gezahlten Jahresdividende.
-      Ein farbiges Band zeigt, wie stark die Rendite im Jahr davor um ihren Mittelwert schwankte.
-    </p>
-    <p>
-      Die Sidebar ergänzt das <strong>Dividendenwachstum (DPS)</strong> über 12 Monate, 2, 5 und 10 Jahre.
-      So siehst du nicht nur die aktuelle Rendite, sondern ob das Unternehmen sie auch
-      konsistent wachsen lässt.
-    </p>
-    <img src="aa2-tab3-screenshot.png" alt="Dividenden – Exxon Mobil" class="screenshot">
-    <p class="screenshot-caption">Exxon Mobil im Dividenden-Tab – Rendite-Verlauf und Dividendenwachstum</p>
+    <nav class="sprung" aria-label="Abschnitte">
+      <a href="#fairer-wert">Fairer Wert</a>
+      <a href="#multiples">Multiples</a>
+      <a href="#dividenden">Dividenden</a>
+      <a href="#qualitaetscheck">Qualitätscheck</a>
+      <a href="#einordnung">Alien-Einordnung</a>
+      <a href="#fragen">Häufige Fragen</a>
+    </nav>
 
-    <h2>Tab 4 – Qualitätscheck &amp; Alien-Einordnung</h2>
-    <img src="aa2-tab4-titel.png" alt="Tab 4 – Qualitätscheck &amp; Alien-Einordnung" class="tab-title-img">
+    <h2 id="fairer-wert">Tab 1 – Fairer Wert</h2>
+    <img src="aa2-tab1-titel.webp" width="1200" height="670" loading="lazy" alt="Tab 1 – Fairer Wert" class="tab-title-img">
     <p>
-      Zahlen allein reichen nicht. Tab 4 sortiert die wichtigsten Fundamentaldaten in eine
-      <strong>Ampeltabelle</strong>: ROE, Debt/Equity, Free Cashflow, Eigenkapitalquote,
-      Gewinnwachstum, Aktienrückkäufe – jede Kennzahl mit einem klaren Signal:
-      GUT, STARK, TEUER, HOCH, GERING oder STABIL.
+      Der wichtigste Tab für Value-Investoren. Er beantwortet eine Frage: Wo stünde der Kurs, wenn der Markt die Aktie
+      heute so bewertet wie im Mittel der letzten zehn Jahre?
+    </p>
+    <div class="formel">Fair Value = Gewinn je Aktie (letzte zwölf Monate) × Median-KGV (letzte zehn Jahre)</div>
+
+    <figure class="shot">
+      <a href="aa2-guide-fairer-wert-de.webp"><img src="aa2-guide-fairer-wert-de.webp" width="1600" height="736" loading="lazy" alt="Tab Fairer Wert für SAP mit Kurs, Fair-Value-Linie, KGV-Fächer und Seitenleiste, Markierungen 1 bis 6"></a>
+      <figcaption>SAP im Tab Fairer Wert, Stand 4. November 2026</figcaption>
+    </figure>
+    <ol class="marken">
+      <li><strong>Zeitraum:</strong> 5, 8, 10, 15 oder 20 Jahre oder der ganze Verlauf. Die Knöpfe ändern nur den
+        sichtbaren Ausschnitt. Der Fair Value rechnet immer über die letzten zehn Jahre, damit sein Ergebnis nicht vom
+        gewählten Knopf abhängt.</li>
+      <li><strong>Kurs:</strong> die weiße Linie, ein Wert je Monat.</li>
+      <li><strong>Fair-Value-Linie:</strong> gestrichelt in Orange, der Gewinn je Aktie des jeweiligen Monats mal
+        Median-KGV. Wer die Linie antippt, sieht den Median und den Monat, ab dem er gilt.</li>
+      <li><strong>KGV-Fächer:</strong> der Gewinn je Aktie mal 10, 15, 20, 25 und 30, von Grün nach Rot. Daran liest du
+        ab, bei welchem KGV der Kurs gerade steht.</li>
+      <li><strong>Seitenleiste:</strong> KGV, KBV und KUV, jeweils „Ø“ (der Median) und „Akt.“ (der aktuelle Wert). „KGV-Ø seit
+        12/2016“ nennt den ersten Monat, der in den Median eingeht.</li>
+      <li><strong>Fair-Value-Indikator:</strong> das Ergebnis in einer Zeile.</li>
+    </ol>
+
+    <p>
+      <strong>Woher der Gewinn je Aktie kommt.</strong> Für jedes Geschäftsjahr nimmt der Analyzer den verwässerten Gewinn
+      je Aktie aus dem Jahresabschluss und verbindet die Jahre geradlinig. Nach dem letzten Abschluss führt die Linie zum
+      Gewinn der letzten zwölf Monate. Für jeden Monat teilt er den Kurs durch diesen Gewinn, der Median dieser
+      Monatswerte ist das „Ø“. Yahoo Finance liefert rund vier Geschäftsjahre. Bei Unternehmen mit Jahresberichten bei
+      der SEC (US-Werte, ADRs und einige Heimatbörsen wie <code>SAP.DE</code>) stellt der Analyzer die älteren Jahre aus
+      diesen Berichten davor, dann reicht die Reihe meist über die vollen zehn Jahre.
+    </p>
+
+    <h3>Was der Fair-Value-Indikator anzeigen kann</h3>
+    <ul class="zust">
+      <li><strong>▲ … % über Fair Value</strong> oder <strong>▼ … % unter Fair Value:</strong> Der Kurs liegt mehr als
+        15 % über oder unter dem Fair Value.</li>
+      <li><strong>≈ fair bewertet:</strong> Kurs und Fair Value liegen höchstens 15 % auseinander.</li>
+      <li><strong>Kein KGV-Modell:</strong> bei REITs (dort zählt der FFO) und Rohstoffminern (dort KBV und Förderkosten),
+        weil das KGV bei ihnen wenig aussagt.</li>
+      <li><strong>Verzerrt:</strong> Mehr als ein Viertel des Gewinns vor Steuern stammt nicht aus dem operativen Geschäft,
+        etwa aus einem Beteiligungsverkauf. „Fair“ oder „unter Fair Value“ wäre dann zu günstig gerechnet. „Über Fair
+        Value“ bleibt stehen.</li>
+      <li><strong>Kein fairer Wert:</strong> etwa bei Verlust in den letzten zwölf Monaten, bei weniger als drei
+        Jahresgewinnen in Folge oder wenn der KGV-Median über 60 liegt. Der Grund steht dahinter.</li>
+    </ul>
+
+    <div class="tipp">
+      <p class="tipp-titel">Gut zu wissen</p>
+      <p>
+        <strong>Verlustjahre:</strong> Ein einzelnes Verlust- oder fehlendes Jahr überbrückt der Analyzer. Liegen zwei
+        oder mehr dazwischen, gibt es dort keinen KGV-Wert, und einen Fair Value zeigt er erst, wenn danach wieder drei
+        Jahresgewinne in Folge vorliegen. Für die Zeit vor dem ersten Jahresgewinn rechnet er nichts zurück.
+      </p>
+    </div>
+
+    <h2 id="multiples">Tab 2 – Multiples</h2>
+    <img src="aa2-tab2-titel.webp" width="1200" height="670" loading="lazy" alt="Tab 2 – Multiples" class="tab-title-img">
+    <p>
+      Ein einzelner Stichtagswert sagt wenig. Entscheidend ist, wie er sich zur eigenen Geschichte verhält. Der Tab zeigt
+      vier Bewertungskennzahlen als Linien: <strong>KGV</strong> (Kurs ÷ Gewinn je Aktie), <strong>KBV</strong>
+      (Kurs ÷ Buchwert je Aktie), <strong>KUV</strong> (Kurs ÷ Umsatz je Aktie) und <strong>KCV</strong> (Kurs ÷
+      operativer Cashflow je Aktie).
+    </p>
+
+    <figure class="shot">
+      <a href="aa2-guide-multiples-de.webp"><img src="aa2-guide-multiples-de.webp" width="1600" height="778" loading="lazy" alt="Tab Multiples für ExxonMobil mit KGV, KBV, KUV und KCV als Linien und gestrichelten Schnittlinien, Markierungen 1 bis 5"></a>
+      <figcaption>ExxonMobil im Tab Multiples, Stand 4. November 2026</figcaption>
+    </figure>
+    <ol class="marken">
+      <li><strong>Zeitraum:</strong> 5 oder 10 Jahre oder der ganze Verlauf. Hier ändert der Knopf auch den Ø.</li>
+      <li><strong>Legende:</strong> aktueller Wert und in Klammern der Ø (Median) im gewählten Zeitraum.</li>
+      <li><strong>Linie:</strong> der Monatswert der Kennzahl, hier das KGV.</li>
+      <li><strong>Gestrichelte Linie:</strong> der Ø in derselben Farbe.</li>
+      <li><strong>Späterer Beginn:</strong> Das KUV von Exxon beginnt erst 2023. Für ältere Jahre passten die
+        Umsatzzahlen aus den SEC-Berichten nicht zu denen von Yahoo Finance, das ist bei Öl- und Gaskonzernen häufig.
+        Dann rechnet der Analyzer dort nichts.</li>
+    </ol>
+
+    <p>
+      <strong>So rechnet der Analyzer.</strong> Gewinn, Buchwert, Umsatz und operativen Cashflow je Aktie bildet er für
+      jedes Geschäftsjahr mit der Aktienzahl dieses Jahres, nicht mit der heutigen. Sonst sähen Unternehmen, die eigene
+      Aktien zurückkaufen, in der Vergangenheit billiger aus, als sie waren. Nach dem letzten Abschluss folgen die
+      jüngsten Quartalsbilanzen sowie Umsatz und Cashflow der letzten zwölf Monate.
     </p>
     <p>
-      Am Ende des Tabs erscheint die <strong>Alien-Einordnung</strong> – ein automatisch generierter
-      Freitext-Kommentar, der Besonderheiten der jeweiligen Aktie erklärt.
-      Bei einem REIT zum Beispiel: warum KGV hier irrelevant ist und FFO der entscheidende Maßstab.
-      Bei einem Rohstoffunternehmen: warum zyklische Gewinneinbrüche die Multiples strukturell verzerren.
-      Das Tool erkennt solche Sonderfälle und gibt Kontext statt nackter Zahlen.
+      „Ø“ ist überall der Median der Monatswerte, nicht der Mittelwert: Ein paar Ausreißer verschieben ihn kaum. Beim KGV
+      zählen nur Monatswerte über 3, Ausreißer nach oben (über dem 2,5-Fachen des Medians, mindestens 50) fallen heraus.
+      Liegt der Median von KBV, KUV oder KCV über 100, zeigt der Analyzer keinen Ø.
     </p>
-    <img src="aa2-tab4-screenshot.png" alt="Qualitätscheck – Realty Income" class="screenshot">
-    <p class="screenshot-caption">Realty Income im Qualitätscheck – Ampeltabelle und Alien-Einordnung</p>
+
+    <div class="tipp">
+      <p class="tipp-titel">Gut zu wissen</p>
+      <p>
+        Fällt ein großer Teil der KGV-Werte heraus, etwa nach hohen Abschreibungen, zeigt der Tab einen gelben Hinweis.
+        Die Aktie passt dann möglicherweise schlecht in ein reines KGV-Raster. Bei Banken zeigt der Analyzer keinen KCV-Ø: Ihr operativer
+        Cashflow schwankt vor allem mit den Handelsbeständen.
+      </p>
+    </div>
+
+    <h2 id="dividenden">Tab 3 – Dividenden</h2>
+    <img src="aa2-tab3-titel.webp" width="1200" height="670" loading="lazy" alt="Tab 3 – Dividenden" class="tab-title-img">
+    <p>
+      Für Dividendeninvestoren der wichtigste Tab: Was zahlt das Unternehmen, wie hoch ist die Rendite im Vergleich zu
+      früher, und wächst die Dividende?
+    </p>
+
+    <figure class="shot">
+      <a href="aa2-guide-dividenden-de.webp"><img src="aa2-guide-dividenden-de.webp" width="1600" height="736" loading="lazy" alt="Tab Dividenden für Realty Income mit Balken, Renditelinie, Korridor und Seitenleiste, Markierungen 1 bis 6"></a>
+      <figcaption>Realty Income im Tab Dividenden, Stand 4. November 2026</figcaption>
+    </figure>
+    <ol class="marken">
+      <li><strong>Zeitraum:</strong> 5, 10 oder 20 Jahre.</li>
+      <li><strong>Balken:</strong> die Dividende je Aktie im Monat des Ex-Tags (rechte Achse).</li>
+      <li><strong>Rendite:</strong> die Dividenden der letzten zwölf Monate geteilt durch den Kurs des Monats (linke Achse).</li>
+      <li><strong>Korridor:</strong> Das blaue Band zeigt, wie stark die Rendite im Jahr davor um ihren Mittelwert
+        schwankte (Mittelwert ± eine Standardabweichung).</li>
+      <li><strong>Aktuelle Rendite:</strong> die Zahlungen der letzten zwölf Monate geteilt durch den aktuellen Kurs.</li>
+      <li><strong>Dividendenwachstum:</strong> wie sich diese Zwölfmonatssumme verändert hat, gegenüber vor zwölf Monaten
+        und als jährliche Rate über 2, 5 und 10 Jahre.</li>
+    </ol>
+
+    <div class="tipp">
+      <p class="tipp-titel">Gut zu wissen</p>
+      <p>
+        <strong>Zwölf Monate statt „letzte Jahresdividende“:</strong> Der Analyzer zählt alle Zahlungen, deren Ex-Tag in
+        den letzten zwölf Monaten liegt, mit etwas Spielraum für verschobene Termine. Liegt derselbe Zahlungstermin
+        dadurch zweimal im Fenster, zählt nur der jüngere. Ohne Zahlung in zwölf Monaten zeigt die Linie keine Rendite, etwa
+        wenn ein Unternehmen die Dividende ausgesetzt hat.
+      </p>
+      <p>
+        <strong>Lücke und doppelter Balken:</strong> Bei Realty Income lag ein Ex-Tag am 1. November 2021 statt Ende
+        Oktober. Der Oktober bleibt deshalb leer, der November zeigt zwei Zahlungen.
+      </p>
+      <p>
+        <strong>ADRs:</strong> Für einige US-Listings ausländischer Unternehmen, deren Dividendenreihe bei Yahoo Finance
+        Lücken hat, rechnet der Analyzer die Zahlungen der Heimatbörse mit dem Devisenkurs am Ex-Tag und der Zahl der
+        Aktien je ADR um. In der Seitenleiste steht dann „Dividenden aus … umgerechnet“.
+      </p>
+    </div>
+
+    <h2 id="qualitaetscheck">Tab 4 – Qualitätscheck</h2>
+    <img src="aa2-tab4-titel.webp" width="1200" height="670" loading="lazy" alt="Tab 4 – Qualitätscheck und Alien-Einordnung" class="tab-title-img">
+    <p>
+      Zahlen allein reichen nicht. Der Qualitätscheck sortiert zehn Kennzahlen in eine Ampeltabelle, jede mit einem klaren
+      Signal.
+    </p>
+
+    <figure class="shot">
+      <a href="aa2-guide-qualitaetscheck-de.webp"><img src="aa2-guide-qualitaetscheck-de.webp" width="1600" height="1109" loading="lazy" alt="Qualitätscheck für Realty Income mit Ampeltabelle und Alien-Einordnung, Markierungen 1 bis 6"></a>
+      <figcaption>Realty Income im Qualitätscheck, Stand 4. November 2026</figcaption>
+    </figure>
+    <ol class="marken">
+      <li><strong>Vergleich:</strong> woran der Wert gemessen wird, beim KGV der eigene Ø und das Branchen-KGV („S“).</li>
+      <li><strong>Signal:</strong> die Ampel nach festen Schwellen je Kennzahl. Grün ist das bessere Ende der Skala, Rot
+        das schlechtere, Gelb liegt dazwischen oder markiert einen Sonderfall. „N/A“ heißt: Die Kennzahl passt hier nicht
+        oder es fehlen Daten.</li>
+      <li><strong>Kontext:</strong> ein kurzer Satz zum Signal.</li>
+      <li><strong>Bilanzstand:</strong> der Stichtag der Bilanz, aus der Eigenkapitalquote und KBV stammen. Er kann älter
+        sein als die Gewinnzahlen.</li>
+      <li><strong>Alien-Einordnung:</strong> der Text zur Aktie, siehe nächster Abschnitt.</li>
+      <li><strong>Hinweis:</strong> „Automatische Einordnung nach festen Regeln, keine Kauf- oder Verkaufsempfehlung“, mit
+        Link zu allen Regeln.</li>
+    </ol>
+
+    <div class="table-scroll" style="overflow-x:auto">
+      <table class="kennzahlen">
+        <thead>
+          <tr><th>Kennzahl</th><th>Was sie zeigt</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>KGV (trailing)</td><td>Kurs ÷ Gewinn je Aktie der letzten zwölf Monate, verglichen mit dem eigenen Ø und dem Branchen-KGV.</td></tr>
+          <tr><td>PEG-Ratio</td><td>KGV ÷ jährliches Gewinnwachstum. Ohne Wachstum kein Wert.</td></tr>
+          <tr><td>KBV</td><td>Kurs ÷ Buchwert je Aktie.</td></tr>
+          <tr><td>Dividendenrendite</td><td>Zahlungen der letzten zwölf Monate ÷ Kurs, wie im Tab Dividenden.</td></tr>
+          <tr><td>Debt/Equity</td><td>Schulden im Verhältnis zum Eigenkapital.</td></tr>
+          <tr><td>Free Cashflow</td><td>Operativer Cashflow minus Investitionen, meist der letzten zwölf Monate (Stand unter „Vergleich“). Bei Banken und BDCs „N/A“.</td></tr>
+          <tr><td>Eigenkapitalquote</td><td>Eigenkapital ÷ Bilanzsumme.</td></tr>
+          <tr><td>Gewinnwachstum 3J</td><td>Jährliches Wachstum des Gewinns je Aktie über die letzten Geschäftsjahre.</td></tr>
+          <tr><td>Return on Equity</td><td>Gewinn ÷ Eigenkapital.</td></tr>
+          <tr><td>Aktienanzahl</td><td>Veränderung der Aktienzahl, der Zeitraum steht unter „Vergleich“:
+            <span class="ampel a-gruen"></span>Rückkäufe ab 5 % weniger,
+            <span class="ampel a-gelb"></span>stabil oder Verwässerung bis 20 %,
+            <span class="ampel a-rot"></span>starke Verwässerung über 20 %.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tipp">
+      <p class="tipp-titel">Gut zu wissen</p>
+      <p>
+        Bläht ein Sondereffekt den Gewinn auf, steht beim KGV und bei einer hohen Eigenkapitalrendite „VERZERRT“. Ein
+        „TEUER“ beim KGV bleibt stehen. Bei Banken bewertet der Qualitätscheck den freien Cashflow nicht („N/A (BANK)“), ebenso bei
+        BDCs, die den Kauf ihrer Anlagen im operativen Cashflow verbuchen.
+      </p>
+    </div>
+
+    <h2 id="einordnung">Alien-Einordnung</h2>
+    <p>
+      Unter der Ampeltabelle steht die <strong>Alien-Einordnung</strong>: ein automatisch erzeugter Text, der beschreibt,
+      wo die Aktie im historischen Vergleich steht und was bei diesem Unternehmen anders zu lesen ist. Dafür erkennt der
+      Analyzer Sonderfälle in einer festen Reihenfolge, spezielle vor allgemeinen, zum Beispiel:
+    </p>
+    <ul class="zust">
+      <li><strong>REITs:</strong> Das KGV ist verzerrt durch Abschreibungen, Maßstab ist der FFO.</li>
+      <li><strong>Banken:</strong> niedrige Eigenkapitalquote ohne Warnsignal, dazu bankeigene Kennzahlen wie Zinsmarge und
+        Kernkapitalquote.</li>
+      <li><strong>BDCs:</strong> Nettoinventarwert (NAV) und wie gut der Nettoanlageertrag (NII) die Dividende deckt.</li>
+      <li><strong>Rohstoffunternehmen und Düngemittelhersteller:</strong> Zyklische Gewinne verzerren die Multiples.</li>
+      <li><strong>Royalty-Gesellschaften, Pipelines, Luxusmarken:</strong> Geschäftsmodelle mit eigener Bewertungslogik.</li>
+      <li><strong>Bitcoin-Vehikel wie Strategy (MSTR):</strong> kein klassisches Unternehmen, der Maßstab ist der Abstand
+        zum Bitcoin-Bestand.</li>
+    </ul>
+    <p>
+      Die Einordnung beschreibt, sie empfiehlt nicht. Sie kennt weder dich noch deine Ziele. Alle Regeln und Schwellen
+      stehen auf der Methodenseite: <a href="/analyse-methodik.html#analyzer">So rechnet der Analyzer</a>.
+    </p>
+
+    <h2 id="fragen">Häufige Fragen</h2>
+
+    <details class="faq">
+      <summary>Welche Aktien kann ich analysieren?</summary>
+      <div class="antwort">
+        <p>
+          Alles mit einem Ticker bei Yahoo Finance: US-Aktien direkt (<code>AAPL</code>), andere Börsen mit Kürzel,
+          etwa <code>.DE</code> für Xetra, <code>.SW</code> für Zürich, <code>.L</code> für London, <code>.PA</code> für
+          Paris, <code>.AS</code> für Amsterdam oder <code>.T</code> für Tokio. Bei einigen Zweitlistings mit lückenhaften
+          Daten weist ein Fenster auf das Hauptlisting hin.
+        </p>
+      </div>
+    </details>
+
+    <details class="faq">
+      <summary>Warum weicht der KGV-Schnitt von anderen Seiten ab?</summary>
+      <div class="antwort">
+        <p>
+          Andere Seiten nehmen oft den Mittelwert statt des Medians, einen anderen Zeitraum, den unverwässerten Gewinn
+          oder einen Gewinn ohne Sondereffekte. Ohne SEC-Berichte reicht die Reihe im Analyzer außerdem nur rund vier
+          Jahre zurück. Der Schnitt bildet dann oft nur einen Teil eines Zyklus ab.
+        </p>
+      </div>
+    </details>
+
+    <details class="faq">
+      <summary>Was bedeutet „KGV-Ø seit 01/2023“?</summary>
+      <div class="antwort">
+        <p>
+          Ab diesem Monat gibt es echte Gewinnzahlen, davor rechnet der Analyzer keinen Gewinn zurück. Liegt der Monat
+          deutlich später als vor zehn Jahren, stützt sich der Ø auf entsprechend weniger Jahre, meist weil es keine
+          SEC-Berichte gibt (etwa bei Nestlé oder LVMH).
+        </p>
+      </div>
+    </details>
+
+    <details class="faq">
+      <summary>Warum ändert sich der Fair Value nicht, wenn ich den Zeitraum wechsle?</summary>
+      <div class="antwort">
+        <p>
+          Das ist Absicht. Der Fair Value rechnet immer über die letzten zehn Jahre, die Knöpfe ändern nur den sichtbaren
+          Ausschnitt. So hängt das Ergebnis nicht davon ab, welchen Knopf du zuletzt gedrückt hast. Im Tab Multiples
+          dagegen folgt der Ø dem gewählten Zeitraum.
+        </p>
+      </div>
+    </details>
+
+    <details class="faq">
+      <summary>Warum zeigt der Analyzer keinen Fair Value?</summary>
+      <div class="antwort">
+        <p>
+          Bei REITs und Rohstoffminern sagt das KGV wenig, dort gibt es kein KGV-Modell. Sonst fehlt der Fair Value etwa bei
+          Verlust in den letzten zwölf Monaten, bei weniger als drei Jahresgewinnen in Folge oder wenn der KGV-Median
+          über 60 liegt. Der Fair-Value-Indikator nennt jeweils den Grund.
+        </p>
+      </div>
+    </details>
+
+    <details class="faq">
+      <summary>Wer sieht, welche Aktien ich mir ansehe?</summary>
+      <div class="antwort">
+        <p>
+          Es gibt kein Konto und keine Anmeldung. Dein Browser lädt Seite, Schriften und Daten nur von meinem Server.
+          Welche Ticker abgerufen werden, sieht also mein Server; Yahoo Finance und die SEC bekommen nur seine Abrufe,
+          nicht deine. Sprache und Darstellung speichert dein Browser lokal.
+        </p>
+      </div>
+    </details>
+
+    <details class="faq">
+      <summary>Ist das eine Anlageempfehlung?</summary>
+      <div class="antwort">
+        <p>
+          Nein. Der Analyzer rechnet nach festen Regeln und beschreibt, wo Kennzahlen im historischen Vergleich stehen.
+          Er kennt deine Situation nicht, und Daten können fehlerhaft sein. Er ist ein Scan-Tool für den ersten Blick,
+          kein Ersatz für eigene Recherche.
+        </p>
+      </div>
+    </details>
+
+    <details class="faq">
+      <summary>Ich habe einen Fehler gefunden. Was tun?</summary>
+      <div class="antwort">
+        <p>
+          Unten im Analyzer steht „Bug melden“. Das öffnet ein kleines Formular mit dem Ticker, „Senden“ macht daraus eine
+          vorbereitete E-Mail an mich. Ein Satz, was dir aufgefallen ist, genügt.
+        </p>
+      </div>
+    </details>
 
     <h2>Fazit</h2>
     <p>
-      Der Alien Analyzer V2 ist kein Ersatz für eigene Recherche und kein Handelssignal.
-      Er ist ein Scan-Tool – schnell, kostenlos, ohne Registrierung.
-      Ticker eingeben, vier Tabs durchklicken: du hast mehr Kontext als die meisten Privatanleger,
-      die sich nur den aktuellen Kurs anschauen.
-    </p>
-    <p>
-      Welche Aktien werden unterstützt? Grundsätzlich alles mit einem Yahoo-Finance-Ticker –
-      also US-Aktien, deutsche Titel (z.B. <code>ALV.DE</code>), Schweizer Titel (<code>NESN.SW</code>)
-      und viele weitere internationale Werte.
+      Der Alien Analyzer V2 ist kein Ersatz für eigene Recherche und kein Handelssignal. Er ist ein Scan-Tool: schnell,
+      kostenlos, ohne Registrierung. Ticker eingeben, vier Tabs durchklicken, und du weißt, wo eine Aktie gegenüber ihrer
+      eigenen Geschichte steht, bevor du tiefer recherchierst.
     </p>
 
     <blockquote>
@@ -256,7 +912,7 @@
     </blockquote>
 
     <div class="cta-box">
-      <p>Das Tool ist kostenlos und direkt im Browser nutzbar – kein Login, kein Abo:</p>
+      <p>Das Tool ist kostenlos und direkt im Browser nutzbar, ohne Login und ohne Abo:</p>
       <a href="https://api.alien-investor.org/alien-analyzer-v2.html?lang=de"><svg style="width:0.75em;height:0.95em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-625b08)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Zum Alien Analyzer V2 →</a>
     </div>
 
@@ -272,13 +928,15 @@
       const key = 'liked_' + window.location.pathname.replace(/[^a-z0-9]/gi, '_');
       const btn = document.getElementById('likeButton');
       const msg = document.getElementById('likeMsg');
-      if (localStorage.getItem(key)) {
+      let gemerkt = false;
+      try { gemerkt = !!localStorage.getItem(key); } catch (e) {}
+      if (gemerkt) {
         btn.disabled = true;
         btn.textContent = '✓ Danke!';
         msg.textContent = 'Freut mich, dass dir der Artikel gefallen hat.';
       }
       btn.addEventListener('click', function() {
-        localStorage.setItem(key, '1');
+        try { localStorage.setItem(key, '1'); } catch (e) {}
         btn.disabled = true;
         btn.textContent = '✓ Danke!';
         msg.textContent = 'Freut mich, dass dir der Artikel gefallen hat.';
