@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Rollins Inc. (ROL) – Pest Control as a Defensive Growth Business | Alien Investor</title>
+  <title>Rollins Inc. (ROL) – When AI Picks the Exterminator | Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Stock analysis of Rollins Inc. (ROL) – business model, growth, profitability, valuation, opportunities &amp; risks. Long-term assessment from an owner's perspective. Not financial advice.">
+  <meta name="description" content="Stock analysis Rollins (ROL) after Q3 2026 results: 100 consecutive quarters of revenue growth, yet about 40% below the high. AI search slows customer acquisition, guidance cut twice, the family buys more. An owner's view.">
   <link rel="canonical" href="/en/rollins-inc-aktienanalyse.html">
   <link rel="alternate" hreflang="de" href="/rollins-inc-aktienanalyse.html">
   <style>
     body { background-color: #000; color: #fff; font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 0 15px 20px 15px; }
     h1, h2, h3 { color: #00ffcc; }
-    h1 { margin-top: 40px; text-align: center; }
+    h1 { margin-top: 40px; text-align: center; overflow-wrap: break-word; hyphens: auto; }
     a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
     a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
     code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; font-family: monospace; }
@@ -18,8 +18,6 @@
     .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
     blockquote { border-left: 3px solid #00ffcc; margin: 2em 0; padding: 0.5em 1em; color: #ddd; background: #050505; font-style: italic; }
     .box { border: 1px solid #00ffcc; background: #050505; padding: 1.5em; border-radius: 8px; margin: 2em 0; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
-    .recommendation-box { margin: 2em 0; padding: 1em; border: 1px dashed #00ffcc; border-radius: 8px; text-align: center; background-color: #050505; }
-    .recommendation-box h3 { margin-top: 0; font-size: 1.1em; color: #00ffcc; }
     .like-button { margin: 3em 0; display: flex; align-items: center; justify-content: center; gap: 1em; }
     .like-button button { background: #000; color: #00ffcc; border: 1px solid #00ffcc; padding: 0.6em 1.2em; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.2s ease; }
     .like-button button:hover { background: #00ffcc; color: #000; box-shadow: 0 0 15px #00ffcc; }
@@ -29,442 +27,628 @@
     footer { margin-top: 60px; padding: 20px; font-size: 0.85em; color: #666; border-top: 1px solid #222; text-align: center; }
     ul { padding-left: 1.2em; }
     li { margin-bottom: 0.5em; }
+
+    /* Analyzer Screenshot */
+    .analyzer-img { width: 100%; border-radius: 8px; border: 1px solid #1a1a1a; margin: 1.5em 0; display: block; cursor: zoom-in; transition: border-color 0.2s; }
+    .analyzer-img:hover { border-color: #00ffcc; }
+    .img-caption { font-size: 0.82em; color: #666; text-align: center; margin-top: -1em; margin-bottom: 1.5em; font-style: italic; }
+    .img-caption .zoom-hint { color: #00ffcc; opacity: 0.5; font-style: normal; font-size: 0.9em; }
+
+    /* Key Metrics Table */
+    .kpi-table { width: 100%; border-collapse: collapse; margin: 1.5em 0; font-size: 0.95em; }
+    .kpi-table th { background: #050505; color: #00ffcc; border-bottom: 1px solid #00ffcc; padding: 8px 12px; text-align: left; }
+    .kpi-table td { padding: 7px 12px; border-bottom: 1px solid #111; }
+    .kpi-table tr:last-child td { border-bottom: none; }
+    .kpi-table .val { color: #00ffcc; font-weight: bold; font-family: monospace; }
+
+    /* Traffic Light Scorecard */
+    .ampel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 1.5em 0; }
+    @media (max-width: 480px) { .ampel-grid { grid-template-columns: 1fr; } }
+    .ampel-item { background: #050505; border: 1px solid #1a1a1a; border-radius: 6px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; }
+    .ampel-item .label { font-size: 0.88em; color: #ccc; }
+    .ampel-item .value { font-family: monospace; font-size: 0.9em; color: #fff; margin: 0 8px; }
+    .badge { font-size: 0.72em; font-weight: bold; padding: 2px 8px; border-radius: 4px; white-space: nowrap; }
+    .badge-gut      { background: #003d1a; color: #00cc66; border: 1px solid #00cc66; }
+    .badge-stark    { background: #003d1a; color: #00ff88; border: 1px solid #00ff88; }
+    .badge-negativ  { background: #3d0000; color: #ff4444; border: 1px solid #ff4444; }
+    .badge-teuer    { background: #3d2000; color: #ffaa00; border: 1px solid #ffaa00; }
+    .badge-gering   { background: #1a1a00; color: #cccc00; border: 1px solid #cccc00; }
+    .badge-rueck    { background: #001a3d; color: #44aaff; border: 1px solid #44aaff; }
+    .badge-na       { background: #1a1a1a; color: #888; border: 1px solid #444; }
+
+    /* Competitor Table */
+    .comp-table { width: 100%; border-collapse: collapse; margin: 1.5em 0; font-size: 0.9em; }
+    .comp-table th { background: #050505; color: #00ffcc; border-bottom: 1px solid #00ffcc; padding: 8px 10px; text-align: left; font-size: 0.85em; }
+    .comp-table td { padding: 8px 10px; border-bottom: 1px solid #111; }
+    .comp-table .highlight { color: #00ffcc; font-weight: bold; }
+    .comp-table tr:last-child td { border-bottom: none; }
+
+    /* Chart Container */
+    .chart-wrap { background: #050505; border: 1px solid #1a1a1a; border-radius: 8px; padding: 1.5em 1em 1em 1em; margin: 1.5em 0; overflow-x: auto; }
+    .chart-title { font-size: 0.85em; color: #888; text-align: center; margin-bottom: 0.8em; font-family: monospace; letter-spacing: 1px; text-transform: uppercase; }
+    .chart-legend { display: flex; gap: 1.5em; justify-content: center; margin-top: 0.8em; font-size: 0.8em; color: #aaa; }
+    .legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: middle; }
   </style>
 </head>
 <body>
 
   <div class="top-nav">
-    <a href="/en/index.html">← Back to HQ</a>
+    <a href="/en/index.html">&#8592; Back to HQ</a>
   </div>
 
-  <h1>Rollins Inc. (ROL) – Pest Control as a Defensive Growth Business</h1>
-  <p class="byline"><em>by Alien Investor – as of late November 2025</em></p>
+  <h1>Rollins Inc. (ROL)<br><span style="font-size:0.6em; color:#aaa;">When AI Picks the Exterminator</span></h1>
+  <p class="byline"><em>by Alien Investor &ndash; November 5, 2026, after the third-quarter results (replaces the November 2025 analysis)</em></p>
 
   <article id="content">
+
     <p>
-      Rollins Inc. is one of those unremarkable service companies that almost nobody notices in daily life –
-      yet quietly generates extremely stable cash flows in the background. Pest control doesn't sound sexy,
-      but it's essential: for private households, restaurants, hotels, logistics, food production.
-      That's exactly where Rollins has been making money for decades – through recurring service contracts.
+      On October 21, 2026, Rollins reported its 100th consecutive quarter of revenue growth. The milestone was easy to miss, because the next morning the company behind Orkin cut its growth guidance for the second time in three months. At its low in early October the stock was almost 55% below its record close from February ($65.60); today the gap is 41.5%. There are no fewer pests. What changed, according to management, is something else: how homeowners find an exterminator. This analysis replaces the November 2025 version and sorts out what hits the business and what only hits the valuation.
     </p>
 
     <blockquote>
-      "As long as cockroaches, termites, and rats don't disappear, neither does the demand for Rollins.
-      The only question is: at what price do you buy into this business model as a co-owner?" <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-8436cb)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg>
+      &ldquo;Pests don&rsquo;t disappear because an AI answers. But whoever isn&rsquo;t in the answer doesn&rsquo;t get the call.&rdquo; <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-footer)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg>
     </blockquote>
 
+    <!-- ═══════════════════════════════════════════════ -->
     <h2>1) Quick Overview</h2>
-    <p>
-      <strong>Rollins Inc. (NYSE: ROL)</strong> is a globally operating service provider for pest control
-      and pest prevention. Through brands like Orkin, HomeTeam, and other subsidiaries, the company
-      serves residential and commercial customers across North America and internationally.
-    </p>
-    <ul>
-      <li><strong>Ticker:</strong> ROL</li>
-      <li><strong>Exchange:</strong> NYSE, USA</li>
-      <li><strong>Sector:</strong> Consumer Services / Pest Control</li>
-      <li><strong>Business type:</strong> defensive service with recurring revenue</li>
-      <li><strong>Current share price (approximate range):</strong> ~$62 per share</li>
-      <li><strong>Market capitalization:</strong> approximately $30 billion USD</li>
-      <li><strong>P/E ratio (TTM):</strong> approximately 57.5 – well above the S&amp;P 500 average (~31)</li>
-    </ul>
-    <p>
-      In short: the market treats Rollins as a high-quality, defensive growth stock with a significant valuation premium.
-    </p>
 
-    <h2>2) Business Model &amp; Segments</h2>
-    <p>
-      Rollins earns its money from pest control and pest prevention services.
-      The business model is remarkably resilient: pests don't care about economic cycles,
-      and many contracts run long-term with regular inspections.
-    </p>
-    <ul>
-      <li>
-        <strong>Residential:</strong> Home visits for private customers – for insects,
-        rodents, or termites. Mostly ongoing service plans rather than one-off call-outs.
-      </li>
-      <li>
-        <strong>Commercial:</strong> Services for restaurants, hotels, supermarkets, warehouses, industry,
-        etc. Here, reliability, documentation, and regulatory compliance are especially critical.
-      </li>
-      <li>
-        <strong>Termite Services:</strong> Specialized services for detecting and treating termites,
-        often with more complex contracts and higher value per customer.
-      </li>
-    </ul>
-    <p>
-      Rollins operates over 900 locations worldwide, including franchises. The majority of
-      revenue comes from North America, with roughly 7% from international markets (Europe, Asia,
-      Australia). The business model is clearly <strong>defensive</strong>: pest protection is a
-      basic service that rarely gets cut entirely even during weaker economic periods.
-    </p>
-    <p>
-      Key characteristics:
-    </p>
-    <ul>
-      <li>High share of recurring revenue through service plans and long-term contracts</li>
-      <li>Price increases and cross-selling as core growth drivers</li>
-      <li>Economies of scale through dense service networks and centralized procurement</li>
-    </ul>
-
-    <h2>3) Growth &amp; Development (2023–2024 and Q3 2025)</h2>
-    <p>
-      Rollins has grown reliably for years, both organically and through acquisitions:
-    </p>
-    <ul>
-      <li>
-        <strong>Revenue 2023:</strong> approximately $3.07 billion USD
-      </li>
-      <li>
-        <strong>Revenue 2024:</strong> approximately $3.39 billion USD – up roughly 10% year-over-year
-      </li>
-      <li>
-        <strong>Net income 2023:</strong> approximately $435 million USD</li>
-      <li>
-        <strong>Net income 2024:</strong> approximately $466 million USD – up roughly +7% vs. 2023
-      </li>
-    </ul>
-    <p>
-      In the current fiscal year, the trend continues:
-    </p>
-    <ul>
-      <li>
-        <strong>Q3 2025 Revenue:</strong> approximately $1.03 billion USD (+12% vs. Q3 2024)
-      </li>
-      <li>
-        <strong>Q3 2025 Net income:</strong> approximately $164 million USD (+19% YoY)
-      </li>
-      <li>
-        <strong>Q3 2025 EPS:</strong> $0.34 per share (+21.4% YoY)
-      </li>
-    </ul>
-    <p>
-      The picture: double-digit revenue growth, with earnings growing slightly faster than revenue –
-      a sign of operating leverage and efficiency gains. Part of the growth comes from acquisitions;
-      the organic component sits in the mid-single-digit range.
-    </p>
-
-    <h2>4) Profitability &amp; Balance Sheet</h2>
-    <p>
-      Rollins is very profitable for a service business and, at the same time, not particularly capital-intensive.
-    </p>
-
-    <h3>Margins</h3>
-    <ul>
-      <li>
-        <strong>Gross margin:</strong> around 53–54% (e.g. 52.7% in 2024, 54.4% in Q3 2025)
-      </li>
-      <li>
-        <strong>Operating margin:</strong> just under 20% for full-year 2024 (19.4%) and around 21.9% in Q3 2025
-      </li>
-      <li>
-        <strong>Net margin:</strong> high single-digit to low double-digit range
-        (approx. 13.8% in 2024, approx. 15.9% in Q3 2025)
-      </li>
-    </ul>
-    <p>
-      For a service company, these are strong numbers. The mix of recurring contracts, high utilization,
-      and scalable structures produces stable double-digit operating returns.
-    </p>
-
-    <h3>Cash Flows</h3>
-    <ul>
-      <li>
-        <strong>Operating cash flow 2023:</strong> approximately $528 million USD
-      </li>
-      <li>
-        <strong>Operating cash flow 2024:</strong> approximately $608 million USD (+15% YoY)
-      </li>
-      <li>
-        <strong>Free cash flow 2024:</strong> approximately $580 million USD (CapEx in the low double-digit millions)
-      </li>
-      <li>
-        <strong>Operating cash flow Q3 2025:</strong> approximately $191 million USD (+30% YoY)
-      </li>
-    </ul>
-    <p>
-      The business ties up little capital in machinery and equipment, which means a large share of earnings
-      converts into free cash flow – attractive from an owner's perspective.
-    </p>
-
-    <h3>Debt &amp; Balance Sheet Quality</h3>
-    <ul>
-      <li>
-        <strong>Long-term debt:</strong> bonds of approximately $500 million USD (net around $486 million)
-      </li>
-      <li>
-        <strong>Cash and equivalents:</strong> approximately $127 million USD (as of end of Q3 2025)
-      </li>
-      <li>
-        <strong>Equity:</strong> approximately $1.53 billion USD
-      </li>
-    </ul>
-    <p>
-      The balance sheet is moderately leveraged and far from dangerous debt levels. Covenants are being
-      met, and rating agencies view the capital structure as solid. For a defensive service company,
-      that's a calm setup.
-    </p>
-
-        <!-- ALIEN ANALYZER PROMO -->
-    <div class="box" style="border-color: #00ffcc; background: #020d0a;">
-      <p style="margin: 0 0 0.5em 0; font-size: 0.8em; color: #00ffcc; font-family: monospace; letter-spacing: 1px; text-transform: uppercase;">Tool Tip</p>
-      <p style="margin: 0 0 0.6em 0;"><strong>The metrics in this analysis come from the Alien Analyzer V2</strong> — my own stock screening tool. Fair value, multiples, dividends, and quality check at a glance. Free, no login, no subscription.</p>
-      <p style="margin: 0; font-size: 0.95em;"><a href="https://api.alien-investor.org/alien-analyzer-v2.html?lang=en"><strong>Alien Analyzer V2</strong></a> — Enter a ticker, analyze.</p>
+    <div class="table-scroll" style="overflow-x:auto">
+    <table class="kpi-table">
+      <thead><tr><th>Metric</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Ticker</td><td class="val">ROL (NYSE)</td></tr>
+        <tr><td>Price (close Nov 4, 2026)</td><td class="val">$38.38</td></tr>
+        <tr><td>Distance from record</td><td class="val">&minus;41.5% (close of $65.60 on Feb 11, 2026)</td></tr>
+        <tr><td>Market capitalization</td><td class="val">~$18.3B</td></tr>
+        <tr><td>P/E ratio (trailing)</td><td class="val">35.2 (median since 12/2016: 53.9)</td></tr>
+        <tr><td>EPS (TTM, GAAP diluted)</td><td class="val">$1.09</td></tr>
+        <tr><td>Revenue (TTM)</td><td class="val">$3.99B</td></tr>
+        <tr><td>Free cash flow (TTM)</td><td class="val">$672M (including a $63M tax refund)</td></tr>
+        <tr><td>Dividend yield</td><td class="val">2.1% (new quarterly dividend $0.20)</td></tr>
+        <tr><td>Rollins family stake</td><td class="val">37.9% (as of September 2026)</td></tr>
+        <tr><td>Sector</td><td class="val">Industrials / services (pest control)</td></tr>
+      </tbody>
+    </table>
     </div>
 
-<h2>5) Competition &amp; Moat</h2>
     <p>
-      Rollins competes primarily with other large and mid-sized pest control companies:
-    </p>
-    <ul>
-      <li><strong>Rentokil Initial</strong> (UK)</li>
-      <li><strong>Ecolab</strong> (USA, broader focus including hygiene &amp; cleaning)</li>
-      <li><strong>Anticimex</strong> (Sweden, private equity-backed growth company)</li>
-      <li>Various regional providers and franchises</li>
-    </ul>
-    <p>
-      In terms of growth, Rollins is currently ahead: while Rentokil grew roughly 4–5% in Q3 2025,
-      Rollins posted around 12% revenue growth in the same period. At the same time, margins are strong –
-      and the valuation reflects that accordingly.
-    </p>
-    <p>
-      On a P/E basis (TTM), the picture looks roughly like this:
-    </p>
-    <ul>
-      <li><strong>Rollins:</strong> ~57</li>
-      <li><strong>Rentokil:</strong> ~35</li>
-      <li><strong>Ecolab:</strong> ~39</li>
-      <li><strong>ABM Industries:</strong> ~23</li>
-    </ul>
-    <p>
-      Rollins sits at the top end of sector valuations. The market clearly expects the company to
-      generate particularly high and stable earnings.
+      Rollins is one of the largest pest control companies in the world, focused on North America. More than 2.8 million residential and commercial customers, about 22,000 employees, more than 850 locations (including franchises). The best-known brand is Orkin, alongside a range of others such as HomeTeam Pest Defense, Fox Pest Control, Clark, Western Pest Services and Critter Control. About three quarters of revenue comes from contracts with fixed, recurring visits.
     </p>
 
-    <h3>Moat</h3>
+    <h3>What happened in 2026</h3>
+
+    <div class="table-scroll" style="overflow-x:auto">
+    <table class="kpi-table">
+      <thead><tr><th>Date</th><th>Event</th><th>ROL price</th></tr></thead>
+      <tbody>
+        <tr><td>Feb 11, 2026</td><td>Record close; full-year 2025 results that evening</td><td class="val">$65.60</td></tr>
+        <tr><td>Feb 12, 2026</td><td>Day after the results: weak one-time business, weather</td><td class="val">&minus;10.5%</td></tr>
+        <tr><td>May 14, 2026</td><td>Investor day (release): target of 7&ndash;8% organic growth</td><td class="val">&mdash;</td></tr>
+        <tr><td>Jul 23, 2026</td><td>Day after Q2 results: guidance cut to &ldquo;at least 6%&rdquo;</td><td class="val">&minus;9.3% to $39.44</td></tr>
+        <tr><td>Oct 5, 2026</td><td>Lowest close</td><td class="val">$29.69</td></tr>
+        <tr><td>Oct 22, 2026</td><td>Day after Q3 results: guidance cut to 4&ndash;6%</td><td class="val">+5.6% to $35.31</td></tr>
+        <tr><td>Oct 29, 2026</td><td>The Rollins family buys about $50M of stock</td><td class="val">avg. $34.59</td></tr>
+        <tr><td>Nov 4, 2026</td><td>Close</td><td class="val">$38.38</td></tr>
+      </tbody>
+    </table>
+    </div>
+
     <p>
-      Rollins' competitive advantage is less about a single ultimate patent and more about a combination of:
+      October 22 stands out. The evening before, the stock had fallen 7.5% after hours; it opened at $31.84 and still closed 5.6% higher. Before the results it had already nearly halved from its record (&minus;49%). Much of the bad news was in the price before it arrived.
     </p>
+    <p>Three things came together in 2026:</p>
     <ul>
-      <li><strong>Dense service network</strong> with over 900 locations and strong geographic coverage</li>
-      <li><strong>Strong brands</strong> like Orkin, which have been well-known in many regions for decades</li>
-      <li><strong>Long-term customer relationships</strong> and automated contract renewals</li>
-      <li><strong>Economies of scale</strong> in procurement, marketing, and IT systems</li>
+      <li><strong>Fewer new residential customers:</strong> Residential organic growth fell from 4.2% in the first quarter to 2.3% in the third. Management names AI search as the main reason: language models such as ChatGPT and Gemini recommend a wider range of providers than classic Google search, and fewer leads reach Rollins&rsquo; brands.</li>
+      <li><strong>Two guidance cuts:</strong> In February the annual report still said 7&ndash;8% organic growth for 2026, in July &ldquo;at least 6%&rdquo;, in October 4&ndash;6%. Rollins will not give a number for 2027 before the full-year results in February.</li>
+      <li><strong>Margins below last year:</strong> The operating margin was 20.5% in the third quarter versus 21.9%. Higher insurance and claims costs more than explain the gap, measured against a prior-year quarter with particularly low claims costs.</li>
     </ul>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>2) Business Model &amp; Segments</h2>
+
     <p>
-      For small regional providers, matching this presence and professionalism is difficult. Rollins
-      benefits from ongoing industry consolidation by continuously acquiring smaller competitors
-      and integrating them into its own network.
+      The business is simple and has barely changed in decades. A technician runs a route and visits customers monthly, every other month or quarterly. He treats for insects, rodents or termites and checks bait stations. Most customers pay for ongoing protection, not for a single visit. Rollins puts the mix at year-end 2025 at about 75% recurring services, 10% ancillary services (such as exclusion, insulation, crawlspaces) and 15% one-time services.
     </p>
 
-    <h2>6) Customer Perspective – Solid, But Not Flawless</h2>
+    <div class="table-scroll" style="overflow-x:auto">
+    <table class="kpi-table">
+      <thead><tr><th>Service line</th><th>2025 ($M)</th><th>Share</th><th>Q3 2026 ($M)</th><th>Organic Q3</th></tr></thead>
+      <tbody>
+        <tr><td>Residential</td><td class="val">1,693.2</td><td class="val">45%</td><td class="val">499.7</td><td class="val">+2.3%</td></tr>
+        <tr><td>Commercial</td><td class="val">1,244.7</td><td class="val">33%</td><td class="val">360.7</td><td class="val">+6.6%</td></tr>
+        <tr><td>Termite &amp; ancillary</td><td class="val">781.5</td><td class="val">21%</td><td class="val">217.9</td><td class="val">+5.3%</td></tr>
+        <tr><td>Franchise &amp; other</td><td class="val">41.5</td><td class="val">1%</td><td class="val">11.4</td><td class="val">+11.4%</td></tr>
+        <tr><td><strong>Total</strong></td><td class="val">3,761.1</td><td class="val">100%</td><td class="val">1,089.7</td><td class="val">+4.4%</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="font-size:0.8em; color:#888;">Sources: Rollins 10-K 2025, third-quarter 2026 press release. &ldquo;Organic&rdquo; excludes revenue from acquisitions made in the last twelve months.</p>
+
     <p>
-      An interesting angle is the view from the customer side:
+      Two growth sources come on top of the base. <strong>Price:</strong> Rollins sees itself as a business that pushes through a bit more than inflation every year, according to CFO Will Harkins 3&ndash;4% across the whole portfolio, more in commercial than in residential. <strong>Acquisitions:</strong> In 2025 there were 26 deals (22 companies and 4 franchise buybacks), including Saela Pest Control for $207.2M. Fox Pest Control was added in 2023 for $350M. Acquisitions are meant to add 2&ndash;3% revenue growth every year.
     </p>
-    <ul>
-      <li>
-        On the official Orkin website, there are numerous very positive reviews – punctual,
-        friendly technicians, effective treatments, good accessibility.
-      </li>
-      <li>
-        On independent platforms like the Better Business Bureau (BBB), the picture is more mixed:
-        Rollins scores around 1.5 out of 5 stars there (based on several hundred reviews).
-      </li>
-    </ul>
     <p>
-      Typical complaints in the negative reviews:
-    </p>
-    <ul>
-      <li>missed appointments or poor communication</li>
-      <li>persistent problems despite multiple visits</li>
-      <li>dissatisfaction with contract handling or cancellation</li>
-    </ul>
-    <p>
-      Alien take: Rollins appears to have a working service concept overall,
-      but as with many large service providers, quality varies significantly by region and team.
-      Long-term, persistent service issues can damage brand value and customer loyalty.
+      What matters for the current situation is how Rollins wins new customers. Orkin relies heavily on customers who search and call on their own. Fox and HomeTeam, by contrast, sell a lot door to door, and HomeTeam also through home builders who install pest protection during construction. Exactly this difference shows up in the 2026 numbers.
     </p>
 
-    <h2>7) Employee Perspective – Average with Pressure</h2>
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>3) Growth &amp; Development</h2>
+
+    <!-- SVG Chart: EPS Wachstum -->
+    <div class="chart-wrap">
+      <div class="chart-title">EPS 2021 – 2025 (USD per share, GAAP diluted)</div>
+      <svg viewBox="0 0 720 260" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:720px; display:block; margin:0 auto;">
+        <!-- Scale: 150 px per USD, zero line y=210 -->
+        <line x1="55" y1="22.5"  x2="700" y2="22.5"  stroke="#1a1a1a" stroke-width="1"/>
+        <line x1="55" y1="60"    x2="700" y2="60"    stroke="#1a1a1a" stroke-width="1"/>
+        <line x1="55" y1="97.5"  x2="700" y2="97.5"  stroke="#1a1a1a" stroke-width="1"/>
+        <line x1="55" y1="135"   x2="700" y2="135"   stroke="#1a1a1a" stroke-width="1"/>
+        <line x1="55" y1="172.5" x2="700" y2="172.5" stroke="#1a1a1a" stroke-width="1"/>
+        <line x1="55" y1="210"   x2="700" y2="210"   stroke="#222"    stroke-width="1"/>
+        <text x="50" y="213"   text-anchor="end" fill="#444" font-size="11" font-family="monospace">0</text>
+        <text x="50" y="175.5" text-anchor="end" fill="#444" font-size="11" font-family="monospace">0.25</text>
+        <text x="50" y="138"   text-anchor="end" fill="#444" font-size="11" font-family="monospace">0.50</text>
+        <text x="50" y="100.5" text-anchor="end" fill="#444" font-size="11" font-family="monospace">0.75</text>
+        <text x="50" y="63"    text-anchor="end" fill="#444" font-size="11" font-family="monospace">1.00</text>
+        <text x="50" y="25.5"  text-anchor="end" fill="#444" font-size="11" font-family="monospace">1.25</text>
+
+        <rect x="81"  y="102"   width="70" height="108"   fill="#00ffcc" opacity="0.25" rx="3"/>
+        <rect x="81"  y="102"   width="70" height="108"   fill="none" stroke="#00ffcc" stroke-width="1" rx="3"/>
+        <text x="116" y="96"    text-anchor="middle" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">0.72</text>
+        <text x="116" y="228"   text-anchor="middle" fill="#666" font-size="12" font-family="monospace">2021</text>
+
+        <rect x="211" y="97.5"  width="70" height="112.5" fill="#00ffcc" opacity="0.25" rx="3"/>
+        <rect x="211" y="97.5"  width="70" height="112.5" fill="none" stroke="#00ffcc" stroke-width="1" rx="3"/>
+        <text x="246" y="91.5"  text-anchor="middle" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">0.75</text>
+        <text x="246" y="228"   text-anchor="middle" fill="#666" font-size="12" font-family="monospace">2022</text>
+
+        <rect x="341" y="76.5"  width="70" height="133.5" fill="#00ffcc" opacity="0.25" rx="3"/>
+        <rect x="341" y="76.5"  width="70" height="133.5" fill="none" stroke="#00ffcc" stroke-width="1" rx="3"/>
+        <text x="376" y="70.5"  text-anchor="middle" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">0.89</text>
+        <text x="376" y="228"   text-anchor="middle" fill="#666" font-size="12" font-family="monospace">2023</text>
+
+        <rect x="471" y="66"    width="70" height="144"   fill="#00ffcc" opacity="0.3" rx="3"/>
+        <rect x="471" y="66"    width="70" height="144"   fill="none" stroke="#00ffcc" stroke-width="1" rx="3"/>
+        <text x="506" y="60"    text-anchor="middle" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">0.96</text>
+        <text x="506" y="228"   text-anchor="middle" fill="#666" font-size="12" font-family="monospace">2024</text>
+
+        <rect x="601" y="46.5"  width="70" height="163.5" fill="#00ff88" opacity="0.25" rx="3"/>
+        <rect x="601" y="46.5"  width="70" height="163.5" fill="none" stroke="#00ff88" stroke-width="2" rx="3"/>
+        <text x="636" y="40.5"  text-anchor="middle" fill="#00ff88" font-size="12" font-family="monospace" font-weight="bold">1.09</text>
+        <text x="636" y="228"   text-anchor="middle" fill="#666" font-size="12" font-family="monospace">2025</text>
+        <text x="636" y="242"   text-anchor="middle" fill="#00cc88" font-size="9"  font-family="monospace">RECORD</text>
+      </svg>
+      <div class="chart-legend">
+        <span><span class="legend-dot" style="background:#00ffcc;"></span>Earnings per share</span>
+        <span><span class="legend-dot" style="background:#00ff88;"></span>Record year</span>
+      </div>
+    </div>
+
+    <div class="table-scroll" style="overflow-x:auto">
+    <table class="kpi-table">
+      <thead><tr><th>Year</th><th>Revenue</th><th>EPS</th><th>Op. margin</th></tr></thead>
+      <tbody>
+        <tr><td>2021</td><td class="val">$2,424M</td><td class="val">$0.72</td><td class="val">18.5%</td></tr>
+        <tr><td>2022</td><td class="val">$2,696M</td><td class="val">$0.75</td><td class="val">18.3%</td></tr>
+        <tr><td>2023</td><td class="val">$3,073M</td><td class="val">$0.89</td><td class="val">19.0%</td></tr>
+        <tr><td>2024</td><td class="val">$3,389M</td><td class="val">$0.96</td><td class="val">19.4%</td></tr>
+        <tr><td>2025</td><td class="val">$3,761M</td><td class="val">$1.09</td><td class="val">19.3%</td></tr>
+        <tr><td>Q1&ndash;Q3 2026</td><td class="val">$3,075M (+8.0%)</td><td class="val">$0.85 (PY $0.85)</td><td class="val">18.5% (PY 19.9%)</td></tr>
+      </tbody>
+    </table>
+    </div>
+
     <p>
-      On platforms like Glassdoor, Rollins is rated around 3.3 out of 5 stars – solid middle of the pack.
-      Frequently praised:
-    </p>
-    <ul>
-      <li>fair pay and benefits</li>
-      <li>solid training for new technicians</li>
-      <li>job stability in a relatively recession-resistant industry</li>
-    </ul>
-    <p>
-      Criticisms:
-    </p>
-    <ul>
-      <li>long hours and high scheduling pressure</li>
-      <li>sometimes hierarchical, low-empathy management style</li>
-      <li>communication gaps between management and field staff</li>
-    </ul>
-    <p>
-      This sounds like a classic, rather conservative service company: stable, but not exactly a dream employer.
-      For investors, the key point is that operational problems stemming from overload or high turnover
-      can eventually show up in service quality and therefore in the customer base.
+      Until 2025 Rollins was one of the steadiest growth stories on the US market: revenue up a little over 11% a year from 2021 to 2025, earnings per share up about 11% a year [own calculation], operating margin stable between 18.3 and 19.4%. 2026 breaks that pattern. In the first nine months revenue still grew 8.0%, while earnings per share stalled at $0.85 (adjusted: $0.89 versus $0.87).
     </p>
 
-    <h2>8) Current Strategic Themes</h2>
+    <!-- SVG Chart: Organic growth per quarter -->
+    <div class="chart-wrap">
+      <div class="chart-title">Organic revenue growth per quarter (%)</div>
+      <svg viewBox="0 0 720 260" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:720px; display:block; margin:0 auto;">
+        <!-- Scale: 22 px per percentage point, zero line y=210 -->
+        <rect x="55" y="34" width="645" height="22" fill="#00ffcc" opacity="0.06"/>
+        <text x="695" y="30" text-anchor="end" fill="#00ffcc" font-size="10" font-family="monospace" opacity="0.7">Investor day target 7–8%</text>
+        <line x1="55" y1="78"  x2="700" y2="78"  stroke="#1a1a1a" stroke-width="1"/>
+        <line x1="55" y1="122" x2="700" y2="122" stroke="#1a1a1a" stroke-width="1"/>
+        <line x1="55" y1="166" x2="700" y2="166" stroke="#1a1a1a" stroke-width="1"/>
+        <line x1="55" y1="210" x2="700" y2="210" stroke="#222"    stroke-width="1"/>
+        <text x="50" y="213" text-anchor="end" fill="#444" font-size="11" font-family="monospace">0</text>
+        <text x="50" y="169" text-anchor="end" fill="#444" font-size="11" font-family="monospace">2</text>
+        <text x="50" y="125" text-anchor="end" fill="#444" font-size="11" font-family="monospace">4</text>
+        <text x="50" y="81"  text-anchor="end" fill="#444" font-size="11" font-family="monospace">6</text>
+        <text x="50" y="37"  text-anchor="end" fill="#444" font-size="11" font-family="monospace">8</text>
+
+        <rect x="81"  y="51.6"  width="70" height="158.4" fill="#00ffcc" opacity="0.25" rx="3"/>
+        <rect x="81"  y="51.6"  width="70" height="158.4" fill="none" stroke="#00ffcc" stroke-width="1" rx="3"/>
+        <text x="116" y="47"    text-anchor="middle" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">7.2</text>
+        <text x="116" y="228"   text-anchor="middle" fill="#666" font-size="12" font-family="monospace">Q3/25</text>
+
+        <rect x="211" y="84.6"  width="70" height="125.4" fill="#00ffcc" opacity="0.25" rx="3"/>
+        <rect x="211" y="84.6"  width="70" height="125.4" fill="none" stroke="#00ffcc" stroke-width="1" rx="3"/>
+        <text x="246" y="79"    text-anchor="middle" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">5.7</text>
+        <text x="246" y="228"   text-anchor="middle" fill="#666" font-size="12" font-family="monospace">Q4/25</text>
+
+        <rect x="341" y="64.8"  width="70" height="145.2" fill="#00ffcc" opacity="0.25" rx="3"/>
+        <rect x="341" y="64.8"  width="70" height="145.2" fill="none" stroke="#00ffcc" stroke-width="1" rx="3"/>
+        <text x="376" y="60"    text-anchor="middle" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">6.6</text>
+        <text x="376" y="228"   text-anchor="middle" fill="#666" font-size="12" font-family="monospace">Q1/26</text>
+
+        <rect x="471" y="84.6"  width="70" height="125.4" fill="#ffaa00" opacity="0.2" rx="3"/>
+        <rect x="471" y="84.6"  width="70" height="125.4" fill="none" stroke="#ffaa00" stroke-width="1.5" rx="3"/>
+        <text x="506" y="79"    text-anchor="middle" fill="#ffaa00" font-size="12" font-family="monospace" font-weight="bold">5.7</text>
+        <text x="506" y="228"   text-anchor="middle" fill="#666" font-size="12" font-family="monospace">Q2/26</text>
+
+        <rect x="601" y="113.2" width="70" height="96.8"  fill="#ff4444" opacity="0.25" rx="3"/>
+        <rect x="601" y="113.2" width="70" height="96.8"  fill="none" stroke="#ff4444" stroke-width="2" rx="3"/>
+        <text x="636" y="108"   text-anchor="middle" fill="#ff4444" font-size="12" font-family="monospace" font-weight="bold">4.4</text>
+        <text x="636" y="228"   text-anchor="middle" fill="#666" font-size="12" font-family="monospace">Q3/26</text>
+      </svg>
+      <div class="chart-legend">
+        <span><span class="legend-dot" style="background:#00ffcc;"></span>Before the cuts</span>
+        <span><span class="legend-dot" style="background:#ffaa00;"></span>Guidance cut</span>
+        <span><span class="legend-dot" style="background:#ff4444;"></span>Cut again</span>
+      </div>
+    </div>
+
     <p>
-      Strategically, Rollins pursues a well-known three-pronged approach:
-    </p>
-    <ul>
-      <li>
-        <strong>Organic growth:</strong> new customers, price adjustments, cross-selling around existing
-        contracts.
-      </li>
-      <li>
-        <strong>Acquisitions:</strong> buying smaller providers to expand reach – such as the
-        acquisition of Saela Holdings (approximately $65 million USD in revenue, focused on the western USA).
-      </li>
-      <li>
-        <strong>Digitalization:</strong> expanding customer apps, digital scheduling, real-time service reports,
-        and more efficient back-office processes.
-      </li>
-    </ul>
-    <p>
-      Additionally, there was a recent capital action (secondary share placement) to bolster the balance sheet
-      for further expansion. Regulatorily, the handling of pesticides is the primary focus. Stricter
-      environmental requirements could raise costs or restrict certain products – no dramatic cuts so far.
+      The service lines show where it breaks. Commercial grew 7.7%, 7.2% and 6.6% organically in 2026, only slightly slower. Termite and ancillary went from 9.8% to 5.3%, held back mainly by staffing shortages in some markets; the backlog there was at its high-water mark for the year at quarter-end. Residential went from 4.2% to 3.6% to 2.3%. For the midpoint of the new guidance, management assumes lead volumes stay below last year&rsquo;s level but stabilize at third-quarter levels.
     </p>
 
-    <h2>9) Valuation – Quality at a High Price</h2>
+    <a href="/img/rol/rol-diagramm-wachstum-en.png" target="_blank" title="Open full size"><img src="/img/rol/rol-diagramm-wachstum-en.png" alt="Diagram: Rollins organic growth in Q3 2026 by service line, residential split by sales channel" class="analyzer-img"></a>
+    <p class="img-caption">Where it breaks: commercial and termite keep growing; in residential, the search-and-call channel is weak. Door-to-door and builder channels (Fox, HomeTeam) are still growing according to Rollins, Fox at double digits. <span class="zoom-hint">↗ Click to enlarge</span></p>
+
+    <a href="/img/rol/rol-fairer-wert-en.png" target="_blank" title="Open full size"><img src="/img/rol/rol-fairer-wert-en.png" alt="Alien Analyzer: fair value, price and earnings history of Rollins over 10 years" class="analyzer-img"></a>
+    <p class="img-caption">Alien Analyzer V2, Fair Value tab (Nov 5, 2026): for years the price (white) moved around the fair value line (orange dashed); in 2026 it fell far below it. The indicator reads &ldquo;35% below fair value&rdquo;. Why that is not a buy signal is covered in section 6. <span class="zoom-hint">↗ Click to enlarge</span></p>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>4) Profitability &amp; Balance Sheet</h2>
+
+    <a href="/img/rol/rol-qualitaetscheck-en.png" target="_blank" title="Open full size"><img src="/img/rol/rol-qualitaetscheck-en.png" alt="Alien Analyzer: quality check and scorecard Rollins" class="analyzer-img"></a>
+    <p class="img-caption">Alien Analyzer V2, Quality check (Nov 5, 2026, balance sheet as of Sep 30, 2026). The P/E ratio is rated &ldquo;fair&rdquo;: well below its own average, but well above the sector P/E of 20. The automatic assessment reads &ldquo;mixed picture&rdquo;. <span class="zoom-hint">↗ Click to enlarge</span></p>
+
+    <!-- Ampel Scorecard -->
+    <div class="ampel-grid">
+      <div class="ampel-item">
+        <span class="label">P/E ratio (trailing)</span>
+        <span class="value">35.2</span>
+        <span class="badge badge-gering">FAIR</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">PEG ratio</span>
+        <span class="value">2.65</span>
+        <span class="badge badge-teuer">HIGH</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">P/B ratio</span>
+        <span class="value">13.3</span>
+        <span class="badge badge-teuer">HIGH</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Organic (Q3)</span>
+        <span class="value">+4.4%</span>
+        <span class="badge badge-gering">SLOWER</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Operating margin (Q3)</span>
+        <span class="value">20.5%</span>
+        <span class="badge badge-gering">FALLING</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Free cash flow (TTM)</span>
+        <span class="value">$672M</span>
+        <span class="badge badge-gut">POSITIVE</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Debt / equity</span>
+        <span class="value">0.81</span>
+        <span class="badge badge-gering">FAIR</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Equity ratio</span>
+        <span class="value">41.4%</span>
+        <span class="badge badge-gut">GOOD</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Return on equity (ROE)</span>
+        <span class="value">~38%</span>
+        <span class="badge badge-gut">GOOD</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Dividend yield</span>
+        <span class="value">2.1%</span>
+        <span class="badge badge-gering">FAIR</span>
+      </div>
+    </div>
+
     <p>
-      The crux with Rollins is not the business model, but the price:
+      <strong>About the data:</strong> The values in the screenshot match the quarterly report as of September 30, 2026, with some notes. The debt-to-equity ratio of 0.81 includes $398.6M of lease liabilities (mainly vehicles and buildings). With financial debt of $727M alone it is 0.52. The free cash flow of $672M contains a $63M tax refund from the third quarter; without it, about $609M remains [own calculation]. The tool&rsquo;s return on equity of 36.0% rests on a different equity basis. Using trailing twelve-month earnings and equity at quarter-end it is about 38% [own calculation]. Depending on the count, the share count fell 1.2% (shares outstanding) to 2.4% (weighted diluted shares) over three years; the tool shows &minus;2.3%. The tool&rsquo;s 481 million shares are an older figure; the cover of the quarterly report lists 478.05 million as of Oct 12, 2026, hence the slightly lower market capitalization in the table above ($18.3B instead of $18.5B). The tool&rsquo;s 1.91% dividend yield matches the last twelve months of payments; with the new quarterly dividend it is 2.1%.
     </p>
-    <ul>
-      <li>
-        <strong>P/E ratio (TTM):</strong> approximately 57.5 – well above the S&amp;P 500 market average (~31)
-      </li>
-      <li>
-        <strong>Sector comparison:</strong> Rollins trades at a premium over
-        Rentokil, Ecolab, and ABM.
-      </li>
-    </ul>
     <p>
-      This valuation implies:
+      <strong>Margins:</strong> In the third quarter the operating margin fell 1.4 percentage points to 20.5%. Insurance and claims together cost 1.6 points, fleet and fuel 0.6. Rollins saved 0.4 points on personnel because it adjusted staffing to lower demand after the weak second quarter. The comparison is distorted: in the third quarter of 2025 insurance and claims were only 1.8% of revenue, versus 2.7% for the first nine months of 2025. Excluding that effect, the incremental margin on new revenue would have been above 25%, the company says. The reported figure is &minus;2.8% (adjusted EBITDA). That is a management adjustment, not an audited number.
     </p>
-    <ul>
-      <li>sustained double-digit revenue growth</li>
-      <li>stable or improving margins</li>
-      <li>no major regulatory or reputational shocks</li>
-    </ul>
     <p>
-      From an owner's perspective, this is a clear bet: you're buying a defensive, well-run business model,
-      but paying a hefty premium for it. If growth or margins disappoint over the coming years,
-      the valuation compression on the downside can be substantial.
+      <strong>Cash and balance sheet:</strong> Rollins needs very little capital spending. In the first nine months, $532.7M of operating cash flow faced only $19.9M of capex, leaving $512.8M of free cash flow. Rollins spent $263.1M on dividends, $162.6M on acquisitions and $140.0M on open-market buybacks (3.49 million shares at an average of $40.10, of which $120.0M in the third quarter), more than its free cash flow; short-term borrowings covered the rest. Debt is modest: a $500M bond (5.25%, due 2035) and $239.6M of short-term borrowings, against $129.1M of cash. Rollins puts its adjusted net debt including leases at 1.0 times adjusted earnings before interest, taxes, depreciation, amortization and rent (end of 2025: 0.9). Solid, but not a fortress balance sheet, and in this business it doesn&rsquo;t need to be.
+    </p>
+    <p>
+      <strong>On the dividend:</strong> On October 20 Rollins raised the quarterly dividend by about 10% to $0.20 (payable Dec 10, 2026). That doubles the regular dividend since early 2022. At today&rsquo;s price it yields 2.1%.
     </p>
 
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>5) Strategic Themes</h2>
+
+    <p>
+      <strong>AI search:</strong> CEO Jerry Gahlhoff laid out the explanation on the analyst call on October 22, 2026. Unlike classic search, Gahlhoff said, language models recommend a wider range of providers that varies by platform, market and even day. Brands that live on customers searching on their own receive fewer leads as a result. Rollins&rsquo; response: show price ranges so the models pick them up (done &ldquo;literally in weeks&rdquo;, in Gahlhoff&rsquo;s words), more local content, maintained listings and customer reviews, and first paid ads on ChatGPT and Google Gemini. Explicitly not the plan: simply spending more on marketing.
+    </p>
+    <p>
+      Context: whether AI search is the main cause cannot be verified from the outside. It is management&rsquo;s explanation. In July, management had not yet been able to name a cause. The largest competitor, Rentokil (Terminix), also grew only weakly in North America in the same quarter, but says AI search accounts for only a very small share of its leads.
+    </p>
+    <p>
+      <strong>The guidance path:</strong> At its investor day in May (release dated May 14, 2026) Rollins laid out its medium-term targets: 7&ndash;8% organic growth, 2&ndash;3% from acquisitions, an incremental margin of about 30&ndash;35% on each additional revenue dollar (adjusted EBITDA) and free cash flow above net income. Ten weeks later came the first cut for 2026, three months after that the second. For 2026 the guidance is now 4&ndash;6% organic, 2&ndash;3% from acquisitions, incremental margin &ldquo;slightly positive to 10%&rdquo;. CFO Harkins still sees a path back to 7&ndash;8%, but will only discuss 2027 with the full-year results in February.
+    </p>
+    <p>
+      <strong>Leadership:</strong> William Harkins has been CFO since June 15, 2026. He joined in March 2025 as chief accounting officer and succeeded Kenneth Krause. Gahlhoff left no doubt about the situation: &ldquo;Our third quarter performance did not meet our expectations, and we are not satisfied with these results.&rdquo;
+    </p>
+    <p>
+      <strong>The Rollins family:</strong> A group around the founding family held 37.9% of the shares in September 2026, according to its SEC filing. In November 2025 two family companies (LOR, Inc. and Rollins Holding Company) sold 20 million shares at $57.50, about $1.15B. Rollins itself bought back 3.48 million of those shares for about $200M. On October 29, 2026, LOR bought 1,444,402 shares in the market at an average of $34.59, about $50M. LOR and the R. Randall Rollins Voting Trust each report this purchase on separate forms; it is one purchase, not two. The lock-up from the 2025 sale expires around November 10, 2026.
+    </p>
+    <p>
+      <strong>Non-competes:</strong> On June 22, 2026, the US Federal Trade Commission finalized a consent order: Rollins may no longer enforce non-competes against more than 18,000 current and former employees. There was no fine. Gahlhoff calls the topic &ldquo;pretty much a non-issue&rdquo;.
+    </p>
+    <p>
+      <strong>Outlook (analyst consensus, stockanalysis.com, as of Oct 23, 2026):</strong> Revenue 2026E $4.05B, 2027E $4.35B. Earnings per share 2026E $1.14, 2027E $1.23 [ESTIMATE &mdash; analyst forecast, adjusted per the source]. The consensus rating is &ldquo;hold&rdquo;.
+    </p>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>6) Valuation in Context</h2>
+
+    <a href="/img/rol/rol-multiples-en.png" target="_blank" title="Open full size"><img src="/img/rol/rol-multiples-en.png" alt="Alien Analyzer: multiples P/E P/B P/S P/CF Rollins 10 years" class="analyzer-img"></a>
+    <p class="img-caption">Alien Analyzer V2, Multiples tab (Nov 5, 2026): for ten years the P/E ratio mostly sat between 45 and 60, at times above 70 in 2020. In 2026 it fell below 30. All four multiples are clearly below their median. <span class="zoom-hint">↗ Click to enlarge</span></p>
+
+    <!-- SVG Chart: Multiples Übersicht -->
+    <div class="chart-wrap">
+      <div class="chart-title">Multiples — current vs. median since 2016</div>
+      <svg viewBox="0 0 680 250" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:680px; display:block; margin:0 auto;">
+        <!-- Scale: 8 px per unit, bars from x=90 -->
+        <text x="10" y="44"  fill="#aaa" font-size="13" font-family="monospace">P/E</text>
+        <text x="10" y="94"  fill="#aaa" font-size="13" font-family="monospace">P/E 27E*</text>
+        <text x="10" y="144" fill="#aaa" font-size="13" font-family="monospace">P/B</text>
+        <text x="10" y="194" fill="#aaa" font-size="13" font-family="monospace">P/S</text>
+        <text x="10" y="234" fill="#aaa" font-size="13" font-family="monospace">P/CF</text>
+
+        <rect x="90" y="30"  width="431" height="18" fill="#003333" rx="3"/>
+        <rect x="90" y="80"  width="431" height="18" fill="#003333" rx="3"/>
+        <rect x="90" y="130" width="132" height="18" fill="#003333" rx="3"/>
+        <rect x="90" y="180" width="55"  height="18" fill="#003333" rx="3"/>
+        <rect x="90" y="220" width="327" height="18" fill="#003333" rx="3"/>
+
+        <rect x="90" y="30"  width="282" height="18" fill="#00ffcc" opacity="0.3" rx="3"/>
+        <rect x="90" y="80"  width="250" height="18" fill="#ffaa00" opacity="0.3" rx="3"/>
+        <rect x="90" y="130" width="106" height="18" fill="#00ffcc" opacity="0.3" rx="3"/>
+        <rect x="90" y="180" width="37"  height="18" fill="#00ffcc" opacity="0.3" rx="3"/>
+        <rect x="90" y="220" width="212" height="18" fill="#00ffcc" opacity="0.3" rx="3"/>
+
+        <line x1="521" y1="27"  x2="521" y2="51"  stroke="#ffaa00" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <line x1="521" y1="77"  x2="521" y2="101" stroke="#ffaa00" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <line x1="222" y1="127" x2="222" y2="151" stroke="#ffaa00" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <line x1="145" y1="177" x2="145" y2="201" stroke="#ffaa00" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <line x1="417" y1="217" x2="417" y2="241" stroke="#ffaa00" stroke-width="1.5" stroke-dasharray="3,2"/>
+
+        <text x="378" y="44"  fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">35.2</text>
+        <text x="521" y="24"  fill="#ffaa00" font-size="10" font-family="monospace" text-anchor="middle">Ø 53.9</text>
+        <text x="346" y="94"  fill="#ffaa00" font-size="12" font-family="monospace" font-weight="bold">~31</text>
+        <text x="232" y="144" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">13.3</text>
+        <text x="222" y="124" fill="#ffaa00" font-size="10" font-family="monospace" text-anchor="middle">Ø 16.5</text>
+        <text x="153" y="194" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">4.6</text>
+        <text x="145" y="174" fill="#ffaa00" font-size="10" font-family="monospace" text-anchor="middle">Ø 6.9</text>
+        <text x="308" y="234" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">26.5</text>
+        <text x="425" y="234" fill="#ffaa00" font-size="10" font-family="monospace">Ø 40.9</text>
+      </svg>
+      <div class="chart-legend">
+        <span><span class="legend-dot" style="background:#00ffcc; opacity:0.5;"></span>Current (tool)</span>
+        <span><span class="legend-dot" style="background:#ffaa00;"></span>Median / consensus</span>
+      </div>
+      <p style="font-size:0.75em; color:#666; text-align:center; margin:0.6em 0 0 0;">* Price of $38.38 divided by the 2027 analyst consensus of $1.23 per share (adjusted) [ESTIMATE, own calculation].</p>
+    </div>
+
+    <p>
+      This is the core of the analysis. The Analyzer reads &ldquo;35% below fair value&rdquo;. The math behind it is simple: current earnings per share ($1.09) times the median P/E ratio of the last ten years (53.9) gives about $58.75. That is a model calculation, not a price target, and it rests on one decisive assumption: that the market will again pay 54 times earnings.
+    </p>
+    <p>
+      Rollins earned that multiple in a particular phase: double-digit revenue growth (2021&ndash;2025: 10&ndash;14% a year), recent organic growth of about 7% (2025: 6.9%) and a reliability that is rare on the stock market. Exactly that assumption cracked in 2026. A median from the past says nothing about whether the reasons for the premium still hold. I therefore do not take the indicator as a signal.
+    </p>
+    <p>
+      Three angles on the same $38.38 price [ESTIMATE &mdash; own calculations, not facts]:
+    </p>
+    <ul>
+      <li><strong>Against its own history:</strong> P/E 35.2 instead of 53.9. In the whole period since 2016, Rollins has only been valued this low in the last few months.</li>
+      <li><strong>Against the market:</strong> The sector P/E the Analyzer compares against is 20. Rollins still costs about 75% more. The PEG ratio of 2.65 says the same: for the earnings growth of the last three years (13.3% a year) the stock is not cheap.</li>
+      <li><strong>Looking ahead:</strong> On adjusted consensus 2027 earnings of $1.23 the P/E is about 31. The free cash flow yield is about 3.7%, or 3.3% without the tax refund.</li>
+    </ul>
+    <p>
+      My take: the market has removed a large part of the quality premium, but not all of it. With 4&ndash;6% organic growth, a P/E of 35 is still a bet that Rollins finds its way back to the old growth rates. If it does, the valuation is low by historical standards. If it doesn&rsquo;t, even a P/E of 30 is no bargain.
+    </p>
+
+        <div class="box" style="border-color: #00ffcc; background: #020d0a;">
+      <p style="margin: 0 0 0.5em 0; font-size: 0.8em; color: #00ffcc; font-family: monospace; letter-spacing: 1px; text-transform: uppercase;">Tool Tip</p>
+      <p style="margin: 0 0 0.6em 0;"><strong>The metrics in this analysis come from Alien Analyzer V2</strong> &mdash; the in-house screening tool for stocks. Fair value, multiples, dividends and quality check at a glance. Free, no login, no subscription.</p>
+      <p style="margin: 0; font-size: 0.95em;"><a href="https://api.alien-investor.org/alien-analyzer-v2.html?lang=en"><strong>Alien Analyzer V2</strong></a> &mdash; Enter a ticker and analyze.</p>
+    </div>
+
+    <h2>7) Competitive Landscape &amp; Moat</h2>
+
+    <div class="table-scroll" style="overflow-x:auto">
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Profile</th>
+          <th>Q3 2026</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="highlight">Rollins (ROL)</td>
+          <td>Residential, commercial, termite; focus on North America</td>
+          <td class="highlight">Revenue $1.09B, organic +4.4%</td>
+        </tr>
+        <tr>
+          <td>Rentokil Initial (Terminix)</td>
+          <td>Global market leader, a little over 60% of revenue in North America</td>
+          <td>Revenue $1.89B, organic +3.4%; pest control North America +2.4%</td>
+        </tr>
+        <tr>
+          <td>Ecolab (ECL)</td>
+          <td>Hygiene group with pest control for restaurants and food processing</td>
+          <td>Pest Elimination organic +8% (commercial only)</td>
+        </tr>
+        <tr>
+          <td>Anticimex</td>
+          <td>International, headquartered in Sweden</td>
+          <td>Not listed</td>
+        </tr>
+        <tr>
+          <td>Regional and local firms</td>
+          <td>Countless small providers, highly fragmented market</td>
+          <td>No route density, but visible in AI recommendations</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="font-size:0.8em; color:#888;">Sources: Rollins 10-K 2025 (competitors), Rollins, Rentokil and Ecolab on Q3 2026. Rentokil reports at constant exchange rates.</p>
+
+    <a href="/img/rol/rol-diagramm-routendichte-en.png" target="_blank" title="Open full size"><img src="/img/rol/rol-diagramm-routendichte-en.png" alt="Diagram: the Rollins route density machine as a loop, fed by new customers, the existing base and price" class="analyzer-img"></a>
+    <p class="img-caption">The moat as a loop: more customers per route lower the cost per visit, the higher margin funds acquisitions that densify the network. Three inflows drive it, and exactly one of them thinned in 2026. <span class="zoom-hint">↗ Click to enlarge</span></p>
+
+    <p>
+      <strong>The moat has two sides.</strong> The cost side is route density. A technician with five customers on one street instead of one drives less and fits in more visits per day. A local one-man operation cannot copy that advantage, and Rollins widens it with every acquisition. Nothing changed on this side in 2026.
+    </p>
+    <p>
+      The demand side is the brand. Anyone who saw &ldquo;Orkin&rdquo; on vans and in search results for decades called Orkin. This is exactly where AI search hits. When a language model answers a question about an exterminator with five local firms, the well-known brand counts for less, and reviews, prices and availability count for more. My take: the cost moat stands, the brand moat is getting shallower. How much depends on whether Rollins becomes as visible in the new channels as it used to be on Google. The door-to-door brands show that Rollins can win customers without a search engine.
+    </p>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>8) Customer Perspective</h2>
+
+    <p>
+      Pest control is not something people skip when termites are in the beams or rats in the restaurant kitchen. That supports the recurring contracts and the annual price increases. In October management again called retention &ldquo;strong&rdquo;, and the recurring residential customer count kept growing. The problem is winning new customers, not cancellations.
+    </p>
+    <p>
+      What is new is that customer reviews now directly influence new business: language models also base their recommendations on reviews and listings. Rollins has named this itself as a lever. Systematic, comparable satisfaction data for its many brands is not available for this analysis. [NOT AVAILABLE]
+    </p>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>9) Employee Perspective</h2>
+
+    <p>
+      Rollins employed 21,946 people at the end of 2025, most of them as field technicians. The business depends on them: in termite and ancillary, staffing shortages in some markets held back growth in 2026 while the backlog grew. After the weak second quarter Rollins adjusted staffing to lower demand. Since the FTC order in June, Rollins can no longer enforce non-competes against more than 18,000 current and former employees. Systematic employer reviews could not be evaluated for this analysis. [NOT AVAILABLE]
+    </p>
+
+    <!-- ═══════════════════════════════════════════════ -->
     <h2>10) Opportunities &amp; Risks</h2>
 
-    <h3>Opportunities</h3>
-    <ul>
-      <li>
-        <strong>Structural demand:</strong> Climate change, urbanization, and rising hygiene standards
-        are likely to increase rather than decrease demand for pest protection over the long term.
-      </li>
-      <li>
-        <strong>Geographic expansion:</strong> Outside North America, the market is even more fragmented,
-        offering further acquisition opportunities.
-      </li>
-      <li>
-        <strong>Digitalization &amp; efficiency:</strong> Better route planning, apps, automated
-        documentation – all of this can continue to support margins.
-      </li>
-      <li>
-        <strong>Industry consolidation:</strong> Rollins, as market leader, can acquire smaller providers
-        and integrate their customers into its own system.
-      </li>
-    </ul>
+    <!-- SVG Risk/Opportunity Visual -->
+    <div class="chart-wrap">
+      <div class="chart-title">Opportunities &amp; risks at a glance</div>
+      <svg viewBox="0 0 680 290" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:680px; display:block; margin:0 auto;">
 
-    <h3>Risks</h3>
-    <ul>
-      <li>
-        <strong>Valuation risk:</strong> High entry multiple = little margin for error.
-        Weaker quarters can be punished disproportionately.
-      </li>
-      <li>
-        <strong>Reputational risks:</strong> persistently poor customer reviews in certain regions
-        can weigh on the brand and growth.
-      </li>
-      <li>
-        <strong>Regulation:</strong> Tighter environmental requirements for pesticides could raise costs or
-        ban certain methods.
-      </li>
-      <li>
-        <strong>Market saturation in North America:</strong> In many regions, the market is already well
-        penetrated, which limits organic growth.
-      </li>
-      <li>
-        <strong>Labor costs &amp; skilled worker shortage:</strong> higher wages and bottlenecks among technicians
-        can compress margins.
-      </li>
-    </ul>
+        <text x="160" y="22" text-anchor="middle" fill="#00cc66" font-size="12" font-family="monospace" letter-spacing="2">OPPORTUNITIES</text>
+        <line x1="20" y1="28" x2="300" y2="28" stroke="#00cc66" stroke-width="1" opacity="0.4"/>
 
-    <h2>11) Who Might Rollins Suit?</h2>
-    <p>
-      From the perspective of a long-term co-owner, Rollins could be interesting for investors who:
-    </p>
-    <ul>
-      <li>value defensive, less economically sensitive business models,</li>
-      <li>prefer recurring services and stable cash flows,</li>
-      <li>are willing to pay a high valuation for quality,</li>
-      <li>and can make their peace with a rather "boring" but robust business model.</li>
-    </ul>
-    <p>
-      Rollins is less suited for those who:
-    </p>
-    <ul>
-      <li>are after low P/E ratios and classic value bargains,</li>
-      <li>seek short-term turnarounds or explosive growth stories,</li>
-      <li>or feel uncomfortable with valuation premiums.</li>
-    </ul>
+        <rect x="20"  y="38"  width="280" height="48" fill="#001a0d" rx="5" stroke="#00cc66" stroke-width="0.5" opacity="0.7"/>
+        <text x="32" y="57" fill="#00cc66" font-size="12" font-family="monospace" font-weight="bold">Base and price</text>
+        <text x="32" y="74" fill="#777" font-size="10" font-family="Arial">~75% recurring, prices +3–4% a year</text>
 
-    <h2>12) Alien Verdict <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-8436cb)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-8436cb)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg></h2>
+        <rect x="20"  y="95"  width="280" height="48" fill="#001a0d" rx="5" stroke="#00cc66" stroke-width="0.5" opacity="0.7"/>
+        <text x="32" y="114" fill="#00cc66" font-size="12" font-family="monospace" font-weight="bold">Commercial, door-to-door</text>
+        <text x="32" y="131" fill="#777" font-size="10" font-family="Arial">Commercial +6.6% organic, Fox double digits</text>
+
+        <rect x="20"  y="152" width="280" height="48" fill="#001a0d" rx="5" stroke="#00cc66" stroke-width="0.5" opacity="0.7"/>
+        <text x="32" y="171" fill="#00cc66" font-size="12" font-family="monospace" font-weight="bold">Premium much smaller</text>
+        <text x="32" y="188" fill="#777" font-size="10" font-family="Arial">P/E 35 vs. median 54, ~31 on 2027 consensus</text>
+
+        <rect x="20"  y="209" width="280" height="48" fill="#001a0d" rx="5" stroke="#00cc66" stroke-width="0.5" opacity="0.7"/>
+        <text x="32" y="228" fill="#00cc66" font-size="12" font-family="monospace" font-weight="bold">Cash stays strong</text>
+        <text x="32" y="245" fill="#777" font-size="10" font-family="Arial">$513M FCF in 9 months, dividend +10%</text>
+
+        <text x="520" y="22" text-anchor="middle" fill="#ff4444" font-size="12" font-family="monospace" letter-spacing="2">RISKS</text>
+        <line x1="380" y1="28" x2="660" y2="28" stroke="#ff4444" stroke-width="1" opacity="0.4"/>
+
+        <rect x="380" y="38"  width="280" height="48" fill="#1a0000" rx="5" stroke="#ff4444" stroke-width="0.5" opacity="0.7"/>
+        <text x="392" y="57" fill="#ff4444" font-size="12" font-family="monospace" font-weight="bold">AI search reshuffles leads</text>
+        <text x="392" y="74" fill="#777" font-size="10" font-family="Arial">Residential only +2.3% organic</text>
+
+        <rect x="380" y="95"  width="280" height="48" fill="#1a0000" rx="5" stroke="#ff4444" stroke-width="0.5" opacity="0.7"/>
+        <text x="392" y="114" fill="#ff4444" font-size="12" font-family="monospace" font-weight="bold">Guidance cut twice</text>
+        <text x="392" y="131" fill="#777" font-size="10" font-family="Arial">7–8% → at least 6% → 4–6%, 2027 still open</text>
+
+        <rect x="380" y="152" width="280" height="48" fill="#1a0000" rx="5" stroke="#ff4444" stroke-width="0.5" opacity="0.7"/>
+        <text x="392" y="171" fill="#ff4444" font-size="12" font-family="monospace" font-weight="bold">Costs and staffing</text>
+        <text x="392" y="188" fill="#777" font-size="10" font-family="Arial">Claims, fleet, technician shortages</text>
+
+        <rect x="380" y="209" width="280" height="48" fill="#1a0000" rx="5" stroke="#ff4444" stroke-width="0.5" opacity="0.7"/>
+        <text x="392" y="228" fill="#ff4444" font-size="12" font-family="monospace" font-weight="bold">Still not a value stock</text>
+        <text x="392" y="245" fill="#777" font-size="10" font-family="Arial">P/E 35 vs. sector 20, PEG 2.65</text>
+      </svg>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>11) Alien Verdict <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-rol" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-rol" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-rol)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-rol)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg></h2>
+
+    <a href="/img/rol/rol-dividenden-en.png" target="_blank" title="Open full size"><img src="/img/rol/rol-dividenden-en.png" alt="Alien Analyzer: dividend tab Rollins" class="analyzer-img"></a>
+    <p class="img-caption">Alien Analyzer V2, Dividends tab (Nov 5, 2026): dividends per share grew 13.1% a year over ten years. With the price drop, the yield (blue line) rose to its highest level in the period. The increase to $0.20 is not yet in the chart. <span class="zoom-hint">↗ Click to enlarge</span></p>
+
     <p>
-      For me, Rollins is a classic example of a <strong>defensive quality company</strong>:
-      boring topic, but strong margins, recurring revenue, robust balance sheet, and a solid moat.
+      Operationally Rollins is not a turnaround case. Revenue grows for the 100th quarter in a row, commercial and termite keep adding, free cash flow exceeds net income, the dividend rises 10%. The family that sold $1.15B of stock at $57.50 a year ago is now buying about $50M at $34.59.
     </p>
     <p>
-      The flip side: the market knows this story – which is why the stock, with a P/E ratio above 50,
-      is anything but cheap. Anyone investing here should be aware that part of the return
-      is already priced in, and that disappointments can hurt accordingly.
+      The situation is still serious, and at a specific point: in residential, almost half of revenue, the business grows only 2.3% organically. Management misjudged twice this year and has no number for 2027 yet. Whether AI search is a transition that Rollins absorbs within a year or two through price transparency, reviews and new ad channels, or whether it permanently erodes Orkin&rsquo;s brand advantage, nobody can say today. Rollins can&rsquo;t either.
     </p>
     <p>
-      <strong>For me as Alien Investor:</strong> Rollins looks like a high-quality building block
-      for a defensive portfolio, but more as a complement – and only if you can live with the valuation level.
-      Not a buy or sell recommendation, just an assessment from an owner's perspective.
+      The price has absorbed much of this. Measured against its own history the stock is as cheap as it has been in a long time, measured against today&rsquo;s growth it is not cheap. The Analyzer&rsquo;s &ldquo;35% below fair value&rdquo; assumes a premium that Rollins has to earn back first. The next checkpoints are concrete: lead volumes in the fourth quarter, the 2027 guidance in February, margins once the prior-year claims effect runs out, and whether the family keeps buying or sells again after the lock-up ends around November 10.
     </p>
+
+    <blockquote>
+      &ldquo;A moat made of vans and routes can&rsquo;t be googled. A moat made of name recognition can, and that is the one being re-surveyed right now.&rdquo; <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-footer)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg>
+    </blockquote>
+
+    <p style="font-size:0.8em; color:#888;">
+      Data and sources: prices through the close on Nov 4, 2026 (NYSE). Analyzer screenshots from Nov 5, 2026 (Yahoo Finance data, annual earnings from SEC filings). Quarterly figures from Rollins&rsquo; press releases for the first to third quarter of 2026, the 10-Q as of Sep 30, 2026, the 2025 10-K and the earnings call of Oct 22, 2026. Family stake, sale and purchase per Schedule 13D/A (Sep 21, 2026) and Form 4 (Nov 12, 2025 and Nov 2, 2026), FTC order per FTC release of Jun 22, 2026, Rentokil per its trading update of Oct 22, 2026. Consensus: stockanalysis.com, Oct 23, 2026. Values marked [ESTIMATE] or [own calculation] are own calculations or third-party forecasts, not facts.
+    </p>
+
   </article>
 
-  <div class="offenlegung" style="font-size:0.9em; color:#bbb; border-left:3px solid #00ffcc; padding:10px 14px; margin:24px 0;"><strong>Disclosure (as of 22 Oct 2026):</strong> Analysis published on 30 Nov 2025 at 12:50 CET. I hold shares of Rollins. I have no business relationship with Rollins. Ratings, fair values and price targets are my assessment, not facts. Links marked with * are affiliate links (advertising). How my analyses are made: <a href="/en/analyse-methodik.html">methodology</a>.</div>
+
+  <div class="offenlegung" style="font-size:0.9em; color:#bbb; border-left:3px solid #00ffcc; padding:10px 14px; margin:24px 0;"><strong>Disclosure (as of 5 Nov 2026):</strong> Analysis published on 30 Nov 2025 at 12:50 CET, fully revised on 5 Nov 2026 at 12:37 CET. I hold shares of Rollins. I have no business relationship with Rollins. Ratings, fair values and price targets are my assessment, not facts. Links marked with * are affiliate links (advertising). How my analyses are made: <a href="/en/analyse-methodik.html">methodology</a>.</div>
+
+  <!-- Disclaimer -->
+  <div class="box" style="border-color: #333; border-style: dashed;">
+    <p style="font-size: 0.88em; color: #888; margin: 0;">
+      <strong style="color: #aaa;">Disclaimer:</strong> This analysis is not financial, tax or legal advice &mdash; it's a breakdown of the numbers from an Alien perspective. All information provided to the best of our knowledge, without warranty. Investment decisions are your own responsibility.
+    </p>
+  </div>
+
+  <!-- Tools Box -->
   <div class="box">
     <h3>Tools for Real Owners</h3>
     <p style="font-size:0.95em;">
-      Tools I use myself – for Bitcoin self-custody and digital sovereignty:
+      Tools I use myself &mdash; for Bitcoin self-custody and digital sovereignty:
     </p>
     <ul>
       <li>
-        <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Lightning" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> <strong>Buy Bitcoin in Europe – 21bitcoin:</strong><br>
-        Bitcoin-only app from Europe, ideal for DCA and regular sats stacking – no shitcoins.<br>
-        Use code <strong>ALIENINVESTOR</strong> for a permanent 0.2 percentage point fee reduction
-        on instant and savings plan purchases.<br>
+        <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Lightning bolt" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> <strong>Buy Bitcoin in Europe &ndash; 21bitcoin:</strong><br>
+        Bitcoin-only app from Europe, ideal for DCA and stacking sats regularly &mdash; no shitcoins.<br>
+        Use code <strong>ALIENINVESTOR</strong> for a permanent 0.2 percentage point fee reduction on instant and savings plan purchases.<br>
         <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a><sup class="aff" title="Affiliate link (advertising)">*</sup>
       </li>
       <li>
-        ₿ <strong>Bitcoin in self-custody:</strong><br>
-        Hardware wallet instead of exchange account. I use the BitBox – there's the classic BitBox02 and the new
-        BitBox for iPhone (Nova).<br>
+        &#8383; <strong>Bitcoin in self-custody:</strong><br>
+        Hardware wallet instead of exchange account. I use the BitBox &mdash; there's the classic BitBox02 and the new BitBox for iPhone (Nova).<br>
         <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a><sup class="aff" title="Affiliate link (advertising)">*</sup>
       </li>
       <li>
         <svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-label="Satellite dish" role="img"><path d="M4 24 A16 16 0 0 1 20 8" fill="#00ffcc" fill-opacity="0.06" stroke="#00ffcc" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="8" r="2.8" fill="#00ffcc"/><line x1="20" y1="8" x2="28" y2="4" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><path d="M15 13 A6 6 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/><path d="M12 16 A9 9 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.45"/></svg> <strong>Privacy &amp; Mail:</strong><br>
-        For email, VPN, and cloud I use Proton – data-minimizing and without Big Tech dependency.<br>
+        For email, VPN and cloud I use Proton &mdash; minimal data footprint, no Big Tech dependency.<br>
         <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a><sup class="aff" title="Affiliate link (advertising)">*</sup>
       </li>
     </ul>
@@ -474,7 +658,7 @@
   </div>
 
   <div class="like-button">
-    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-8436cb)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Like this</button>
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-footer)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> Like this</button>
     <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
   </div>
 
@@ -497,10 +681,11 @@
     })();
   </script>
 
+
   <div class="back-links">
     <a href="/en/aktien-analysen.html" style="font-size: 1.1em;"><svg style="width:0.9em;height:0.9em;vertical-align:-0.12em;filter:drop-shadow(0 0 2px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="7" y1="3" x2="7" y2="7" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><rect x="4" y="7" width="6" height="9" rx="1" fill="#00ffcc"/><line x1="7" y1="16" x2="7" y2="21" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><line x1="16" y1="7" x2="16" y2="11" stroke="#00cc88" stroke-width="1.5" stroke-linecap="round"/><rect x="13" y="11" width="6" height="12" rx="1" fill="none" stroke="#00cc88" stroke-width="1.5"/><line x1="16" y1="23" x2="16" y2="27" stroke="#00cc88" stroke-width="1.5" stroke-linecap="round"/><line x1="25" y1="4" x2="25" y2="9" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><rect x="22" y="9" width="6" height="11" rx="1" fill="#00ffcc"/><line x1="25" y1="20" x2="25" y2="26" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/></svg> Back to Stock Analyses</a>
     <a href="/en/blog.html" style="font-size: 1.1em;">← Back to Blog</a>
-    <a href="/en/index.html" style="font-size: 1.1em;">← Back to HQ</a>
+    <a href="/en/index.html" style="font-size: 1.1em;">← Back to Base</a>
   </div>
 
   <hr style="border-color: #222; margin: 3em 0;">
@@ -510,24 +695,21 @@
         <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energy" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Recharge
         <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Donate)</span>
       </h3>
-
       <a href="/en/spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
         Send fuel to the mothership
       </a>
-
       <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
-        Thanks for your support – for free content, financial sovereignty, and the extraterrestrial resistance! <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-8436cb" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-8436cb" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-8436cb)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-8436cb)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg>
+        Thanks for your support — for free content, financial sovereignty and the extraterrestrial resistance! <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-footer" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-footer" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-footer)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-footer)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg>
       </p>
   </div>
 
   <footer>
     <p><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Contact" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> Contact: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a> <span style="color:#666; font-size:0.85em;">·</span> <a href="/kontakt@alien-investor.org/pubkey.asc.key" download="kontakt-alien-investor-pubkey.asc" style="color:#555; font-size:0.8em; text-decoration:none;" title="PGP public key for encrypted messages">PGP Key</a> · <a href="https://www.mein.online-impressum.de/alien-investor/" target="_blank" rel="noopener" style="color:#555; font-size:0.8em; text-decoration:none;">Legal Notice</a></p>
-
     <p style="margin-top: 20px;">
-      <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-8436cb" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-8436cb)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <strong>Disclaimer:</strong><br><br>
-      This article does not constitute financial, tax, or legal advice.<br>
-      I share my personal Alien perspective here – independent, rebellious, and free.<br>
-      Investing involves risks – you can lose money. Verify information yourself
+      <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -16 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-footer" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="13" y1="2" x2="4" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="4" cy="-13" r="2.8" fill="#00ffcc"/><line x1="23" y1="2" x2="32" y2="-12" stroke="#00ffcc" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="-13" r="2.8" fill="#00ffcc"/><path fill="url(#ai-head-footer)" stroke="#00ffcc" stroke-width="0.8" d="M35 17c0 9.389-13.223 19-17 19-3.778 0-17-9.611-17-19S8.611 0 18 0s17 7.611 17 17z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M13.503 14.845c3.124 3.124 4.39 6.923 2.828 8.485-1.562 1.562-5.361.297-8.485-2.828-3.125-3.124-4.391-6.923-2.828-8.485s5.361-.296 8.485 2.828zm8.994 0c-3.124 3.124-4.39 6.923-2.828 8.485 1.562 1.562 5.361.297 8.485-2.828 3.125-3.125 4.391-6.923 2.828-8.485-1.562-1.562-5.361-.297-8.485 2.828z"/><path fill="none" stroke="#001a0e" stroke-width="1.2" stroke-linecap="round" d="M12 27 Q18 33 24 27"/></svg> <strong>Disclaimer:</strong><br><br>
+      This article does not constitute financial, tax or legal advice.<br>
+      I share my personal Alien opinion here — independent, rebellious and free.<br>
+      Investing involves risk — you can lose money. Do your own research
       and act on your own responsibility.
     </p>
     <p class="aff-hinweis" style="font-size:0.8em; color:#888; margin-top:10px;">* Affiliate link (advertising): if you use it, I receive a commission.</p>
