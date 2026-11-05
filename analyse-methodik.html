@@ -248,8 +248,9 @@
         Zwischen einem Geschäftsjahr mit negativem operativem Cashflow und seinen Nachbarjahren gibt es kein KCV. In den
         Schnitt gehen bei allen drei Kennzahlen alle positiven Monatswerte ein. Liegt der Median über 100, zeigt der
         Analyzer keinen. Beim KCV zeigt er auch bei Banken keinen, denn ihr operativer Cashflow schwankt mit Bilanzposten
-        wie Handelsbeständen, Krediten und Einlagen. Das aktuelle KUV ist der Kurs geteilt durch den Umsatz der letzten zwölf Monate je Aktie, das aktuelle
-        KCV der Kurs geteilt durch den operativen Cashflow der letzten zwölf Monate je Aktie (liefert Yahoo Finance keinen
+        wie Handelsbeständen, Krediten und Einlagen. Das aktuelle KUV ist der Kurs geteilt durch den Umsatz der letzten zwölf Monate je Aktie
+        zur heutigen Aktienzahl; liefert Yahoo Finance keinen verwertbaren Zwölfmonatsumsatz, nimmt der Analyzer den Umsatz je Aktie des
+        letzten Geschäftsjahres. Das aktuelle KCV ist der Kurs geteilt durch den operativen Cashflow der letzten zwölf Monate je Aktie (liefert Yahoo Finance keinen
         neueren Zwölfmonatswert, der des letzten Geschäftsjahres, beide zur heutigen Aktienzahl). Bis zum 2. November 2026
         lagen Buchwert und Umsatz je Aktie nur zu den Bilanzstichtagen der letzten rund anderthalb Jahre vor; für die Zeit
         davor setzte der Analyzer den ältesten dieser Werte an. Der Schnitt folgte damit vor allem dem Kurs und lag meist
