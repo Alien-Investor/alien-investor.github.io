@@ -242,15 +242,24 @@
         cash flow per share for each fiscal year using that year's share count and connects the annual figures in a
         straight line. After that come the latest quarterly balance sheets as well as revenue and operating cash flow over
         the last twelve months, each divided by today's share count. It does not calculate anything backwards for the time
-        before the first annual figure. It takes equity, revenue and operating cash flow for the last four or so fiscal
+        before the first annual figure. Book value means common shareholders' equity: excluding minority interests and
+        fixed-claim preferred shares (for example at US banks) and, for banks and insurers on a vetted list, also excluding
+        Additional Tier 1 capital (AT1), perpetual bonds and similar items that sit in equity but do not belong to common
+        shareholders. Preferred shares that trade as a separate share class and count in the share count, as at Volkswagen,
+        Samsung or Petrobras, remain in book value. The equity ratio in the quality check still uses shareholders' equity
+        including preferred shares and AT1. It takes book value, revenue and operating cash flow for the last four or so fiscal
         years from Yahoo Finance, earlier ones from the annual reports filed with the SEC, if they agree with Yahoo Finance
         to within 1% in at least two and at least half of the years covered by both. For revenue this is often not the case, for example at oil and gas companies, banks, brokers and utilities,
         because revenue is defined differently in the SEC data. Without SEC figures the average therefore usually only
-        starts in 2023. If it starts later than ten years ago for P/B or P/S, the sidebar states the month from which it
+        starts in 2023. For book value the analyzer deducts preferred shares from the SEC figures. If the SEC's
+        machine-readable data do not show them separately, for example at the Canadian banks and insurers or at Morgan
+        Stanley (since 2013), the SEC figures do not match Yahoo Finance and the P/B average likewise only starts with the
+        Yahoo Finance years. If it starts later than ten years
+        ago for P/B or P/S, the sidebar states the month from which it
         applies. The analyzer only shows an average from three fiscal years on (for P/CF with positive operating cash
-        flow), for P/B only if equity is positive today, and none if today's share count differs from that of the last
+        flow), for P/B only if book value is positive today, and none if today's share count differs from that of the last
         fiscal year by more than a factor of two (for example at Interactive Brokers, whose listed shares represent just over a quarter of the business). If in that case the latest balance sheet confirms the share count of the last
-        fiscal year, it divides equity for the current P/B by the share count of that balance sheet instead of today's. There is
+        fiscal year, it divides book value for the current P/B by the share count of that balance sheet instead of today's. There is
         no P/CF between a fiscal year with negative operating cash flow and the adjacent years. For all three ratios the
         average includes all positive monthly values. If the median is above 100, the analyzer shows none. For P/CF it
         also shows none for banks, since their operating cash flow moves with balance sheet items such as trading assets,
@@ -266,7 +275,10 @@
         share count, and only included monthly values above 2 and below an upper limit between 20 and 30. For highly
         valued stocks it was therefore too low (Hermès) or missing entirely (Nvidia, Tesla, Eli Lilly). Until 3 November
         2026 the analyzer capped every monthly P/B and P/S value as well as the current P/B at 50. If more than half of the
-        months were above that, the average showed 50.0 (Home Depot's P/B over ten years instead of 63.6).</li>
+        months were above that, the average showed 50.0 (Home Depot's P/B over ten years instead of 63.6). Until
+        6 November 2026 preferred shares and, at the banks and insurers on the list, AT1 capital and similar items counted
+        towards book value. Bank P/B ratios were therefore often
+        too low, at HSBC for example 1.5 instead of 1.7.</li>
       <li><strong>Dividend yield:</strong> The analyzer divides the dividends of the last twelve months by the current price;
         for the yield line it divides the dividends of the twelve months up to the end of each month by that month's price.
         The ex-date counts. So that a payment shifted by a few days does not drop out of the window, the window reaches back

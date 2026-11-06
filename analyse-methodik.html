@@ -241,18 +241,27 @@
         und KUV in der Seitenleiste über zehn Jahre. Buchwert, Umsatz und operativen Cashflow je Aktie rechnet der Analyzer
         für jedes Geschäftsjahr mit der Aktienzahl dieses Jahres und verbindet die Jahreswerte geradlinig. Danach folgen
         die jüngsten Quartalsbilanzen sowie Umsatz und operativer Cashflow der letzten zwölf Monate, jeweils geteilt durch
-        die heutige Aktienzahl. Für die Zeit vor dem ersten Jahreswert rechnet er nichts zurück. Eigenkapital, Umsatz und
+        die heutige Aktienzahl. Für die Zeit vor dem ersten Jahreswert rechnet er nichts zurück. Als Buchwert zählt das
+        Eigenkapital der Stammaktionäre: ohne Minderheitsanteile und ohne Vorzugsaktien mit festem Anspruch (etwa bei
+        US-Banken), bei Banken und Versicherern einer geprüften Liste außerdem ohne zusätzliches Kernkapital (AT1), ewige
+        Anleihen und ähnliche Posten, die im Eigenkapital stehen, aber nicht den Stammaktionären gehören. Vorzugsaktien,
+        die wie bei Volkswagen, Samsung oder Petrobras als eigene Aktiengattung gehandelt werden und in der Aktienzahl
+        mitzählen, bleiben im Buchwert. Die Eigenkapitalquote im Qualitätscheck rechnet weiter mit dem Eigenkapital der
+        Aktionäre samt Vorzugsaktien und AT1. Buchwert, Umsatz und
         operativen Cashflow der letzten rund vier Geschäftsjahre nimmt er von Yahoo Finance, frühere aus den
         Jahresberichten bei der SEC, wenn sie in mindestens zwei und mindestens der Hälfte der gemeinsamen Jahre auf 1 %
         mit Yahoo Finance übereinstimmen. Beim Umsatz ist das
         etwa bei Öl- und Gaskonzernen, Banken, Brokern und Versorgern oft nicht der Fall, weil die SEC-Zahlen den Umsatz
-        anders abgrenzen. Ohne SEC-Zahlen beginnt der Schnitt deshalb meist erst 2023. Beginnt er beim KBV oder KUV später
+        anders abgrenzen. Ohne SEC-Zahlen beginnt der Schnitt deshalb meist erst 2023. Beim Buchwert zieht der Analyzer
+        von den SEC-Zahlen die Vorzugsaktien ab. Weisen die maschinenlesbaren SEC-Daten sie nicht gesondert aus, etwa bei
+        den kanadischen Banken und Versicherern oder bei Morgan Stanley (seit 2013), passen die SEC-Zahlen nicht zu Yahoo
+        Finance, und der KBV-Schnitt beginnt ebenfalls erst mit den Jahren von Yahoo Finance. Beginnt er beim KBV oder KUV später
         als vor zehn Jahren, nennt die Seitenleiste den Monat, ab dem er gilt. Einen Schnitt zeigt der Analyzer erst ab
-        drei Geschäftsjahren (beim KCV mit positivem operativem Cashflow), beim KBV nur, wenn das Eigenkapital heute
+        drei Geschäftsjahren (beim KCV mit positivem operativem Cashflow), beim KBV nur, wenn der Buchwert heute
         positiv ist, und keinen, wenn sich die heutige Aktienzahl von der des letzten Geschäftsjahres um mehr als den
         Faktor zwei unterscheidet (etwa bei Interactive Brokers, dessen börsennotierte Aktien nur gut ein Viertel des
         Unternehmens abbilden). Bestätigt in diesem Fall die jüngste Bilanz die Aktienzahl des letzten Geschäftsjahres,
-        teilt er das Eigenkapital für das aktuelle KBV durch die Aktienzahl dieser Bilanz statt durch die heutige.
+        teilt er den Buchwert für das aktuelle KBV durch die Aktienzahl dieser Bilanz statt durch die heutige.
         Zwischen einem Geschäftsjahr mit negativem operativem Cashflow und seinen Nachbarjahren gibt es kein KCV. In den
         Schnitt gehen bei allen drei Kennzahlen alle positiven Monatswerte ein. Liegt der Median über 100, zeigt der
         Analyzer keinen. Beim KCV zeigt er auch bei Banken keinen, denn ihr operativer Cashflow schwankt mit Bilanzposten
@@ -267,7 +276,9 @@
         enthielt nur Monatswerte über 2 und unter einer Obergrenze zwischen 20 und 30. Bei hoch bewerteten Aktien lag er
         damit zu niedrig (Hermès) oder fehlte ganz (Nvidia, Tesla, Eli Lilly). Bis zum 3. November 2026 begrenzte der
         Analyzer beim KBV und KUV jeden Monatswert und das aktuelle KBV auf 50. Lag mehr als die Hälfte der Monate darüber,
-        stand als Schnitt 50,0 (Home Depot beim KBV über zehn Jahre statt 63,6).</li>
+        stand als Schnitt 50,0 (Home Depot beim KBV über zehn Jahre statt 63,6). Bis zum 6. November 2026 zählten
+        Vorzugsaktien und, bei den Banken und Versicherern der Liste, auch AT1-Kapital und ähnliche Posten zum Buchwert. Das KBV von Banken lag dadurch oft zu niedrig, bei HSBC etwa bei 1,5
+        statt 1,7.</li>
       <li><strong>Dividendenrendite:</strong> Der Analyzer teilt die Dividenden der letzten zwölf Monate durch den aktuellen
         Kurs, für die Renditelinie die Dividenden der zwölf Monate bis zum Ende jedes Monats durch dessen Kurs. Es zählt der
         Ex-Tag. Damit eine Zahlung, die sich um einige Tage verschiebt, nicht aus dem Fenster fällt, reicht es um ein Viertel
