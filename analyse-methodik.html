@@ -177,7 +177,7 @@
     <ul>
       <li><strong>Daten:</strong> Yahoo Finance, abgerufen über meinen eigenen Server. Bei Unternehmen, die bei der
         US-Börsenaufsicht SEC Jahresberichte einreichen (US-Werte, ADRs und einige Heimatbörsen solcher Unternehmen wie
-        SAP.DE, ASML.AS oder 6758.T), zieht der Server zusätzlich die XBRL-Daten aus diesen Berichten heran (siehe
+        SAP.DE, ASML.AS, 6758.T oder ENB.TO), zieht der Server zusätzlich die XBRL-Daten aus diesen Berichten heran (siehe
         KGV-Median sowie KCV, KBV und KUV). Dein Browser fragt keine fremden Datendienste ab. Der Qualitätscheck nennt den Stichtag der Bilanz, aus der Eigenkapitalquote und KBV
         stammen. Er kann älter sein als die Gewinnzahlen. Berichtet ein Unternehmen in einer anderen Währung als der
         Kurs, etwa chinesische ADRs in Renminbi oder Novo Nordisk in dänischen Kronen, rechnet der Analyzer Gewinn je
@@ -185,10 +185,18 @@
         mit dem Kurs des jeweiligen Monats. Beim Free Cashflow steht die Ausgangswährung dabei. Liefert Yahoo Finance
         einen Teil der Abschlusszahlen in einer anderen Währung als die übrigen, rechnet der Analyzer diese Werte zuerst
         mit dem Devisenkurs zum jeweiligen Stichtag in die Währung der übrigen um. Bei Petrobras betrifft das Bilanz und
-        Cashflow, bei Vale auch die Gewinne: Sie kommen in US-Dollar, der Rest in Real.</li>
+        Cashflow, bei Vale auch die Gewinne: Sie kommen in US-Dollar, der Rest in Real. Nennt Yahoo Finance für ein
+        Listing keine Berichtswährung (etwa bei einigen Zweitlistings an deutschen Börsen), kann der Analyzer die
+        Abschlusszahlen nicht sicher umrechnen: Er zeigt dann keinen KGV-Median, keinen Fair Value und keinen Schnitt von
+        KCV, KBV und KUV, ein aktuelles KGV nur, wenn Yahoo Finance selbst eines nennt.</li>
       <li><strong>Fair-Value-Indikator:</strong> Formel wie oben. Der aktuelle Gewinn je Aktie ist der Gewinn der
-        letzten zwölf Monate laut Yahoo Finance. Nach dem letzten Jahresabschluss rechnet der Analyzer nicht mit einer
-        Wachstumsrate weiter, sondern verbindet ihn mit diesem Zwölfmonatswert. Liegt der Kurs mehr als 15 % über oder
+        letzten zwölf Monate laut Yahoo Finance. Nennt Yahoo Finance ihn bei den Kursdaten nicht, nimmt der Analyzer den
+        Zwölfmonatswert aus Yahoos Gewinnrechnung und rechnet ihn, falls nötig, mit dem aktuellen Devisenkurs in die
+        Kurswährung um. Nach dem letzten Jahresabschluss rechnet der Analyzer nicht mit einer Wachstumsrate weiter, sondern
+        verbindet ihn mit diesem Zwölfmonatswert. Fehlt ein verwertbarer Zwölfmonatswert, endet der Gewinnverlauf beim letzten Jahresabschluss:
+        Der KGV-Median läuft dann nur bis dorthin, ein aktuelles KGV und einen aktuellen Fair Value zeigt der Analyzer
+        nicht. Bis zum 6. November 2026 lief in beiden Fällen der Gewinn des letzten Geschäftsjahres flach weiter (Samsung
+        Electronics: KGV-Median 17,4 statt 13,9 und „79 % über“ statt „35 % unter Fair Value“, Stand 5. November 2026). Liegt der Kurs mehr als 15 % über oder
         unter dem Fair Value, zeigt der Analyzer „über“ bzw. „unter Fair Value“, sonst „fair bewertet“. Der KGV-Fächer
         zeigt zum Vergleich den Gewinn je Aktie mal 10, 15, 20, 25 und 30. Bei REITs sowie Bergbau- und Metallwerten
         zeigt der Analyzer keinen Fair Value, weil das KGV dort wenig aussagekräftig ist, ebenso wenn der Median des

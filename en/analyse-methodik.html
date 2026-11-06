@@ -175,8 +175,8 @@
     </p>
     <ul>
       <li><strong>Data:</strong> Yahoo Finance, fetched through my own server. For companies that file annual reports
-        with the US Securities and Exchange Commission (SEC), i.e. US stocks, ADRs and some home listings of such
-        companies such as SAP.DE, ASML.AS or 6758.T, the server also uses the XBRL data from these reports (see P/E
+        with the US Securities and Exchange Commission (SEC), i.e. US stocks, ADRs and some home listings of these
+        companies, e.g. SAP.DE, ASML.AS, 6758.T or ENB.TO, the server also uses the XBRL data from these reports (see P/E
         median as well as P/CF, P/B and P/S). Your browser does not query any third-party data services. The quality check states the date of the balance sheet behind the equity ratio
         and P/B. It can be older than the earnings data. If a company reports in a different currency than its share
         price, such as Chinese ADRs in renminbi or Novo Nordisk in Danish kroner, the analyzer converts earnings per
@@ -185,10 +185,18 @@
         delivers part of the financial figures in a different currency than the rest, the analyzer first converts these
         values into the currency of the other figures at the exchange rate of the respective reporting date. For
         Petrobras this affects balance sheet and cash flow, for Vale also earnings: they come in US dollars, the rest in
-        reais.</li>
+        reais. If Yahoo Finance gives no reporting currency for a listing (as for some secondary listings on German
+        exchanges), the analyzer cannot reliably convert the financial figures: it then shows no P/E median, no fair
+        value and no average P/CF, P/B or P/S, and a current P/E only if Yahoo Finance itself provides one.</li>
       <li><strong>Fair value indicator:</strong> formula as above. Current earnings per share are the earnings of the
-        last twelve months according to Yahoo Finance. After the last annual report, the analyzer does not extrapolate
-        with a growth rate but connects it to this twelve-month figure. If the price is more than 15% above or below fair
+        last twelve months according to Yahoo Finance. If Yahoo Finance does not give them with the price data, the
+        analyzer takes the twelve-month figure from Yahoo's income statement and, if needed, converts it into the price
+        currency at the current exchange rate. After the last annual report, the analyzer does not extrapolate with a growth
+        rate but connects it to this twelve-month figure. If there is no usable twelve-month figure, the earnings history ends at the
+        last annual report: the P/E median then runs only up to that point, and the analyzer shows no current P/E and no
+        current fair value. Until 6 November 2026 the earnings of the last fiscal year were held flat in both cases (Samsung
+        Electronics: P/E median 17.4 instead of 13.9 and "79% above" instead of "35% below fair value", as of 5 November
+        2026). If the price is more than 15% above or below fair
         value, the analyzer shows "above" or "below fair value", otherwise "fairly valued". For comparison, the P/E
         fan shows earnings per share times 10, 15, 20, 25 and 30. For REITs and mining and metals companies the analyzer
         shows no fair value, because the P/E ratio is of little use there, nor when the median P/E is above 60, when
