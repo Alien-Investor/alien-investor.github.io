@@ -2,13 +2,14 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>📦 Amazon.com Inc. (AMZN) – Aktienanalyse für langfristige Eigentümer | Alien Investor</title>
+  <title>Amazon.com Inc. (AMZN) – Warum das KGV von 21 täuscht | Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Aktienanalyse Amazon.com Inc. (AMZN) – Geschäftsmodell, Wachstum, Profitabilität, Bewertung, Chancen & Risiken. Langfristige Einordnung aus Eigentümer-Sicht. Keine Finanzberatung.">
+  <meta name="description" content="Aktienanalyse Amazon (AMZN) nach den Q3-Zahlen 2026: KGV 21, ohne die Buchgewinne aus Anthropic rund 35. AWS wächst um 39 %, die Investitionen steigen auf rund 220 Mrd. USD, der Free Cashflow ist negativ. Einordnung aus Eigentümer-Sicht.">
+  <link rel="alternate" hreflang="en" href="/en/amazon-amzn-analyse.html">
   <style>
     body { background-color: #000; color: #fff; font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 0 15px 20px 15px; }
     h1, h2, h3 { color: #00ffcc; }
-    h1 { margin-top: 40px; text-align: center; }
+    h1 { margin-top: 40px; text-align: center; overflow-wrap: break-word; hyphens: auto; }
     a { color: #00ffcc; text-decoration: none; transition: all 0.2s ease; }
     a:hover { color: #fff; text-shadow: 0 0 8px #00ffcc; }
     code { background-color: #111; padding: 0.2em 0.4em; border-radius: 4px; color: #0f0; font-family: monospace; }
@@ -16,8 +17,6 @@
     .byline { margin-top: -0.8em; margin-bottom: 2em; color: #ccc; font-style: italic; text-align: center; }
     blockquote { border-left: 3px solid #00ffcc; margin: 2em 0; padding: 0.5em 1em; color: #ddd; background: #050505; font-style: italic; }
     .box { border: 1px solid #00ffcc; background: #050505; padding: 1.5em; border-radius: 8px; margin: 2em 0; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
-    .recommendation-box { margin: 2em 0; padding: 1em; border: 1px dashed #00ffcc; border-radius: 8px; text-align: center; background-color: #050505; }
-    .recommendation-box h3 { margin-top: 0; font-size: 1.1em; color: #00ffcc; }
     .like-button { margin: 3em 0; display: flex; align-items: center; justify-content: center; gap: 1em; }
     .like-button button { background: #000; color: #00ffcc; border: 1px solid #00ffcc; padding: 0.6em 1.2em; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.2s ease; }
     .like-button button:hover { background: #00ffcc; color: #000; box-shadow: 0 0 15px #00ffcc; }
@@ -27,6 +26,47 @@
     footer { margin-top: 60px; padding: 20px; font-size: 0.85em; color: #666; border-top: 1px solid #222; text-align: center; }
     ul { padding-left: 1.2em; }
     li { margin-bottom: 0.5em; }
+
+    /* Analyzer Screenshot */
+    .analyzer-img { width: 100%; border-radius: 8px; border: 1px solid #1a1a1a; margin: 1.5em 0; display: block; cursor: zoom-in; transition: border-color 0.2s; }
+    .analyzer-img:hover { border-color: #00ffcc; }
+    .img-caption { font-size: 0.82em; color: #666; text-align: center; margin-top: -1em; margin-bottom: 1.5em; font-style: italic; }
+    .img-caption .zoom-hint { color: #00ffcc; opacity: 0.5; font-style: normal; font-size: 0.9em; }
+
+    /* Kennzahlen-Tabelle */
+    .kpi-table { width: 100%; border-collapse: collapse; margin: 1.5em 0; font-size: 0.95em; }
+    .kpi-table th { background: #050505; color: #00ffcc; border-bottom: 1px solid #00ffcc; padding: 8px 12px; text-align: left; }
+    .kpi-table td { padding: 7px 12px; border-bottom: 1px solid #111; }
+    .kpi-table tr:last-child td { border-bottom: none; }
+    .kpi-table .val { color: #00ffcc; font-weight: bold; font-family: monospace; }
+
+    /* Ampel Scorecard */
+    .ampel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 1.5em 0; }
+    @media (max-width: 480px) { .ampel-grid { grid-template-columns: 1fr; } }
+    .ampel-item { background: #050505; border: 1px solid #1a1a1a; border-radius: 6px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; }
+    .ampel-item .label { font-size: 0.88em; color: #ccc; }
+    .ampel-item .value { font-family: monospace; font-size: 0.9em; color: #fff; margin: 0 8px; }
+    .badge { font-size: 0.72em; font-weight: bold; padding: 2px 8px; border-radius: 4px; white-space: nowrap; }
+    .badge-gut      { background: #003d1a; color: #00cc66; border: 1px solid #00cc66; }
+    .badge-stark    { background: #003d1a; color: #00ff88; border: 1px solid #00ff88; }
+    .badge-negativ  { background: #3d0000; color: #ff4444; border: 1px solid #ff4444; }
+    .badge-teuer    { background: #3d2000; color: #ffaa00; border: 1px solid #ffaa00; }
+    .badge-gering   { background: #1a1a00; color: #cccc00; border: 1px solid #cccc00; }
+    .badge-rueck    { background: #001a3d; color: #44aaff; border: 1px solid #44aaff; }
+    .badge-na       { background: #1a1a1a; color: #888; border: 1px solid #444; }
+
+    /* Wettbewerber-Tabelle */
+    .comp-table { width: 100%; border-collapse: collapse; margin: 1.5em 0; font-size: 0.9em; }
+    .comp-table th { background: #050505; color: #00ffcc; border-bottom: 1px solid #00ffcc; padding: 8px 10px; text-align: left; font-size: 0.85em; }
+    .comp-table td { padding: 8px 10px; border-bottom: 1px solid #111; }
+    .comp-table .highlight { color: #00ffcc; font-weight: bold; }
+    .comp-table tr:last-child td { border-bottom: none; }
+
+    /* Chart Container */
+    .chart-wrap { background: #050505; border: 1px solid #1a1a1a; border-radius: 8px; padding: 1.5em 1em 1em 1em; margin: 1.5em 0; overflow-x: auto; }
+    .chart-title { font-size: 0.85em; color: #888; text-align: center; margin-bottom: 0.8em; font-family: monospace; letter-spacing: 1px; text-transform: uppercase; }
+    .chart-legend { display: flex; gap: 1.5em; justify-content: center; margin-top: 0.8em; font-size: 0.8em; color: #aaa; }
+    .legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: middle; }
   </style>
 </head>
 <body>
@@ -35,358 +75,564 @@
     <a href="index.html">← Zurück zur Zentrale</a>
   </div>
 
-  <h1>Amazon.com Inc. (AMZN) – Aktienanalyse für langfristige Eigentümer</h1>
-  <p class="byline"><em>von Alien Investor – Stand: Ende 2025</em></p>
+  <h1>Amazon.com Inc. (AMZN)<br><span style="font-size:0.6em; color:#aaa;">Warum das KGV von 21 täuscht</span></h1>
+  <p class="byline"><em>von Alien Investor – Stand: 8. November 2026, nach den Zahlen zum dritten Quartal (ersetzt die Analyse vom November 2025)</em></p>
 
   <article id="content">
+
     <p>
-      Amazon ist einer der wichtigsten Tech-Konzerne der Welt: E-Commerce-Gigant, Cloud-Marktführer mit AWS,
-      wachsendes Werbeimperium und Abo-Ökosystem rund um Prime. Diese Analyse schaut auf Geschäftsmodell,
-      Wachstum, Profitabilität, Bewertung, Chancen und Risiken – aus Sicht eines langfristigen Mit-Eigentümers,
-      nicht als Zocker auf dem Kurs-Ticker.
+      Vor einem Jahr kostete die Amazon-Aktie knapp das 33-Fache ihres Gewinns. Heute steht der Kurs 11 % höher, und das KGV liegt bei 21. Auf den ersten Blick wirkt Amazon damit plötzlich günstig. Der zweite Blick zeigt, woher der Sprung im Gewinn kommt: Rund 40 % des Vorsteuergewinns der letzten zwölf Monate stammen nicht aus Handel, Werbung oder Cloud, sondern vor allem aus der Höherbewertung der Beteiligung an Anthropic. Gleichzeitig baut Amazon Rechenzentren in einem Tempo, das mehr Geld verbraucht, als das Geschäft einbringt. Der Free Cashflow ist auf −42 Mrd. USD gefallen, die langfristigen Schulden haben sich seit Jahresbeginn mehr als verdoppelt. Diese Analyse ersetzt die Fassung vom November 2025 und trennt, was davon Geschäft ist und was Buchhaltung.
     </p>
 
     <blockquote>
-      „Vertrau niemandem – auch nicht mir. Schau dir die Zahlen an, denke selbst und entscheide dann,
-      ob Amazon in dein eigenes Freiheits-Setup passt.“ <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -14 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><line x1="10.32" y1="2.98" x2="0.6" y2="-5.2" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><circle cx="0.6" cy="-5.2" r="3" fill="#00ffcc"/><line x1="25.68" y1="2.98" x2="35.4" y2="-5.2" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><circle cx="35.4" cy="-5.2" r="3" fill="#00ffcc"/><path fill="url(#ai-head-5fb821)" stroke="#00ffcc" stroke-width="0.8" d="M1.64 16.04A16.36 16.04 0 0 1 34.36 16.04C34.36 22.24 23.25 36 18 36C12.75 36 1.64 22.24 1.64 16.04Z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M5.41 15.84A6.55 3.52 32 0 0 9.1 22.29A6.55 3.52 32 0 0 16.51 22.78A6.55 3.52 32 0 0 12.83 16.33A6.55 3.52 32 0 0 5.41 15.84ZM19.49 22.78A6.55 3.52 -32 0 0 26.9 22.29A6.55 3.52 -32 0 0 30.59 15.84A6.55 3.52 -32 0 0 23.17 16.33A6.55 3.52 -32 0 0 19.49 22.78Z"/><circle cx="9.49" cy="17.35" r="0.9" fill="#00ffcc"/><circle cx="26.51" cy="17.35" r="0.9" fill="#00ffcc"/></svg>
+      „Ein Gewinn, den man nicht ausgeben kann, ist eine Bewertung. Ein Rechenzentrum, das man bezahlt hat, ist eine Wette.“ <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -14 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><line x1="10.32" y1="2.98" x2="0.6" y2="-5.2" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><circle cx="0.6" cy="-5.2" r="3" fill="#00ffcc"/><line x1="25.68" y1="2.98" x2="35.4" y2="-5.2" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><circle cx="35.4" cy="-5.2" r="3" fill="#00ffcc"/><path fill="url(#ai-head-footer)" stroke="#00ffcc" stroke-width="0.8" d="M1.64 16.04A16.36 16.04 0 0 1 34.36 16.04C34.36 22.24 23.25 36 18 36C12.75 36 1.64 22.24 1.64 16.04Z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M5.41 15.84A6.55 3.52 32 0 0 9.1 22.29A6.55 3.52 32 0 0 16.51 22.78A6.55 3.52 32 0 0 12.83 16.33A6.55 3.52 32 0 0 5.41 15.84ZM19.49 22.78A6.55 3.52 -32 0 0 26.9 22.29A6.55 3.52 -32 0 0 30.59 15.84A6.55 3.52 -32 0 0 23.17 16.33A6.55 3.52 -32 0 0 19.49 22.78Z"/><circle cx="9.49" cy="17.35" r="0.9" fill="#00ffcc"/><circle cx="26.51" cy="17.35" r="0.9" fill="#00ffcc"/></svg>
     </blockquote>
 
+    <!-- ═══════════════════════════════════════════════ -->
     <h2>1) Kurzüberblick</h2>
+
+    <div class="table-scroll" style="overflow-x:auto">
+    <table class="kpi-table">
+      <thead><tr><th>Kennzahl</th><th>Wert</th></tr></thead>
+      <tbody>
+        <tr><td>Ticker</td><td class="val">AMZN (Nasdaq)</td></tr>
+        <tr><td>Kurs (Schluss 06.11.2026)</td><td class="val">259,30 USD</td></tr>
+        <tr><td>Seit der letzten Analyse</td><td class="val">+11,2 % (Schluss 28.11.2025: 233,22 USD)</td></tr>
+        <tr><td>Spanne 2026 (Schlusskurse)</td><td class="val">198,79 USD (13.02.) bis 284,02 USD (03.08., Rekord)</td></tr>
+        <tr><td>Marktkapitalisierung</td><td class="val">~2,80 Bio. USD</td></tr>
+        <tr><td>KGV (trailing, GAAP)</td><td class="val">21,0 (ohne Beteiligungsgewinne rund 35¹)</td></tr>
+        <tr><td>EPS (TTM, GAAP verwässert)</td><td class="val">12,37 USD (ohne Beteiligungsgewinne rund 7,41 USD¹)</td></tr>
+        <tr><td>Umsatz (TTM)</td><td class="val">797,5 Mrd. USD</td></tr>
+        <tr><td>Operatives Ergebnis (TTM)</td><td class="val">104,4 Mrd. USD</td></tr>
+        <tr><td>Free Cashflow (TTM, Amazon-Definition)</td><td class="val">−42,4 Mrd. USD (Vorjahr +14,8 Mrd.)</td></tr>
+        <tr><td>Investitionen 2026 (Prognose)</td><td class="val">rund 220 Mrd. USD</td></tr>
+        <tr><td>Dividende</td><td class="val">keine</td></tr>
+        <tr><td>Sektor</td><td class="val">Handel, Cloud (AWS), Werbung</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="font-size:0.8em; color:#888;">¹ Eigene Rechnung [SCHÄTZUNG]: Vorsteuergewinn der letzten zwölf Monate 174,2 Mrd. USD minus übriges Ergebnis („Other income“) 69,5 Mrd., davon Steuern mit der Zwölfmonatsquote von 22,3 % abgezogen, dazu das Ergebnis aus At-Equity-Beteiligungen (−0,5 Mrd.): 80,8 Mrd. USD. Geteilt durch 10,89 Mrd. verwässerte Aktien ergibt das 7,41 USD je Aktie, bei 259,30 USD ein KGV von 35,0. Näherung: Das übrige Ergebnis enthält neben Anthropic auch Optionsscheine, Wertpapiere und Währungseffekte.</p>
+
     <p>
-      <strong>Amazon.com Inc. (AMZN)</strong> ist ein globaler E-Commerce- und Cloud-Konzern mit Sitz in den USA.
-      Die Aktie notiert an der NASDAQ.
-    </p>
-    <ul>
-      <li><strong>Ticker:</strong> AMZN</li>
-      <li><strong>Börse:</strong> NASDAQ, USA</li>
-      <li><strong>Branche:</strong> E-Commerce, Cloud-Computing, Werbung, digitale Dienste</li>
-      <li><strong>Geschäftstyp:</strong> Plattform-Geschäft (Marktplatz, Cloud), Abo-Modelle, hohe Skalierung</li>
-    </ul>
-    <p>
-      Ende November 2025 liegt der Kurs grob um 200 Euro (ca. 220 US-Dollar), die Marktkapitalisierung
-      bei rund 2,1 Billionen Euro (ca. 2,4 Billionen Dollar). Das Kurs-Gewinn-Verhältnis (TTM) bewegt sich
-      bei etwa 32, also klar über dem S&amp;P-500-Durchschnitt (Forward-KGV um 23). Amazon ist damit kein
-      Billigwert, sondern ein klassischer Quality-Titel mit Bewertungsaufschlag.
+      Amazon betreibt drei Geschäfte unter einem Dach: einen der größten Online-Händler der Welt mit Marktplatz für fremde Händler, eine Werbeplattform auf diesen Seiten und mit AWS den nach Marktanteil größten Cloud-Anbieter. Dazu kommen Prime als Abo, Logistik, Geräte und mit Amazon Leo ein eigenes Satelliten-Internet. Zum 30.09.2026 beschäftigte Amazon 1.638.000 Menschen.
     </p>
 
+    <h3>Was seit der letzten Analyse passiert ist</h3>
+
+    <div class="table-scroll" style="overflow-x:auto">
+    <table class="kpi-table">
+      <thead><tr><th>Datum</th><th>Ereignis</th><th>Kurs AMZN</th></tr></thead>
+      <tbody>
+        <tr><td>05.02.2026</td><td>Zahlen 2025, Investitionsplan „about $200 billion“ für 2026</td><td class="val">06.02.: −5,6 % auf 210,32 USD</td></tr>
+        <tr><td>13.02.2026</td><td>Tiefster Schlusskurs des Jahres</td><td class="val">198,79 USD</td></tr>
+        <tr><td>April 2026</td><td>Bester Börsenmonat seit 2007 (Bloomberg-Daten)</td><td class="val">+27,3 %</td></tr>
+        <tr><td>29.04.2026</td><td>Q1: 16,8 Mrd. USD Vorsteuergewinn aus Anthropic</td><td class="val">—</td></tr>
+        <tr><td>30.07.2026</td><td>Q2: 53,4 Mrd. USD übriges Ergebnis, vor allem Anthropic</td><td class="val">31.07.: +15,3 % auf 271,58 USD</td></tr>
+        <tr><td>03.08.2026</td><td>Rekord-Schlusskurs</td><td class="val">284,02 USD</td></tr>
+        <tr><td>31.08.2026</td><td>FTC und 22 Bundesstaaten klagen wegen der Werbeauktionen</td><td class="val">—</td></tr>
+        <tr><td>26.10.2026</td><td>Anthropic reicht den Börsenprospekt (S-1) öffentlich ein</td><td class="val">—</td></tr>
+        <tr><td>29.10.2026</td><td>Q3: höchste operative Marge der Firmengeschichte, AWS +39 %</td><td class="val">30.10.: −1,4 % auf 240,35 USD</td></tr>
+        <tr><td>06.11.2026</td><td>Schlusskurs</td><td class="val">259,30 USD</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p>Drei Entwicklungen prägen das Jahr:</p>
+    <ul>
+      <li><strong>AWS beschleunigt:</strong> Im dritten Quartal 2025 wuchs die Cloud um 20 %, ein Jahr später um 39 %. Der Auftragsbestand liegt bei 578 Mrd. USD.</li>
+      <li><strong>Investitionen auf neuem Niveau:</strong> In den letzten zwölf Monaten flossen netto 210,7 Mrd. USD in Rechenzentren, Chips, Logistik und Satelliten, 82 % mehr als ein Jahr zuvor. Für 2026 rechnet Amazon mit rund 220 Mrd., für 2027 mit „deutlich mehr“.</li>
+      <li><strong>Gewinne aus Beteiligungen:</strong> Im ersten Halbjahr buchte Amazon rund 70 Mrd. USD Vorsteuergewinn, vor allem aus Anthropic. Geld floss dabei nicht. Diese Gewinne drücken das KGV auf 21.</li>
+    </ul>
+
+    <!-- ═══════════════════════════════════════════════ -->
     <h2>2) Geschäftsmodell &amp; Segmente</h2>
+
     <p>
-      Amazon verdient sein Geld im Kern über drei große Segmente:
-    </p>
-    <ul>
-      <li>
-        <strong>North America:</strong> Online-Einzelhandel, Marktplatzgebühren, Werbung und Abo-Erlöse in Nordamerika.
-        Hier verkauft Amazon sowohl eigene Waren als auch Produkte von Drittanbietern, die für die Nutzung der Plattform
-        Gebühren zahlen. Dazu kommt Werbung auf der Website und in den Apps sowie Prime-Mitgliedschaften.
-      </li>
-      <li>
-        <strong>International:</strong> Entsprechendes Retail- und Marktplatzgeschäft außerhalb Nordamerikas –
-        mit teils geringeren Margen und höherem Investitionsbedarf, aber großer Wachstumsperspektive.
-      </li>
-      <li>
-        <strong>AWS (Amazon Web Services):</strong> Cloud-Plattform mit Infrastruktur, Datenbanken, KI-Services und
-        tausenden Bausteinen, die Unternehmen weltweit nutzen. AWS ist das mit Abstand profitabelste Segment.
-      </li>
-    </ul>
-    <p>
-      2024 entfielen grob 387 Mrd. Dollar Umsatz auf Nordamerika, 143 Mrd. Dollar auf International
-      und 107,6 Mrd. Dollar auf AWS. Beim operativen Ergebnis dominiert AWS noch stärker: Rund 39,8 Mrd. Dollar
-      operativer Gewinn kamen 2024 aus der Cloud, während das Retail-Geschäft deutlich margenschwächer ist.
-    </p>
-    <p>
-      Charakter des Geschäfts: <strong>plattformbasiert, kapitalintensiv, aber hochskalierbar</strong>.
-      Logistiknetzwerk, Rechenzentren und Softwareplattformen erzeugen Skaleneffekte, die Wettbewerber nur schwer
-      nachbauen können – insbesondere im Zusammenspiel aus Marketplace, Prime, AWS und Werbung.
+      Amazon berichtet in drei Segmenten. Der Umsatz kommt überwiegend aus dem Handel, der Gewinn überwiegend aus der Cloud.
     </p>
 
+    <div class="table-scroll" style="overflow-x:auto">
+    <table class="kpi-table">
+      <thead><tr><th>Segment</th><th>Umsatz Q3 2026</th><th>Wachstum</th><th>Op. Ergebnis</th><th>Op. Marge</th></tr></thead>
+      <tbody>
+        <tr><td>North America (Handel USA, Kanada)</td><td class="val">112,9 Mrd. USD</td><td class="val">+6 %</td><td class="val">8,7 Mrd. USD</td><td class="val">7,7 %</td></tr>
+        <tr><td>International (Handel übrige Länder)</td><td class="val">43,1 Mrd. USD</td><td class="val">+5 % (+8 % ohne Währungseffekte)</td><td class="val">1,6 Mrd. USD</td><td class="val">3,7 %</td></tr>
+        <tr><td>AWS (Cloud)</td><td class="val">46,0 Mrd. USD</td><td class="val">+39 %</td><td class="val">17,8 Mrd. USD</td><td class="val">38,7 %</td></tr>
+        <tr><td><strong>Gesamt</strong></td><td class="val">201,9 Mrd. USD</td><td class="val">+12 %</td><td class="val">28,1 Mrd. USD</td><td class="val">13,9 %</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="font-size:0.8em; color:#888;">Quelle: Amazon-Pressemitteilung zum dritten Quartal 2026 (29.10.2026). Margen eigene Rechnung.</p>
+
+    <p>
+      AWS bringt 23 % des Umsatzes, aber 63 % des operativen Ergebnisses [eigene Rechnung]. Im Handel steckt ein zweites Geschäft, das Amazon nicht als Segment ausweist und dessen Marge es nicht nennt: die Werbung. Händler bezahlen dafür, dass ihre Produkte in der Suche weiter oben stehen. Nach Umsatzarten sah das dritte Quartal so aus:
+    </p>
+
+    <div class="table-scroll" style="overflow-x:auto">
+    <table class="kpi-table">
+      <thead><tr><th>Umsatzart</th><th>Q3 2026</th><th>Wachstum</th></tr></thead>
+      <tbody>
+        <tr><td>Online-Shops (eigener Verkauf)</td><td class="val">68,5 Mrd. USD</td><td class="val">+2 %</td></tr>
+        <tr><td>Dienstleistungen für Drittanbieter (Gebühren, Versand)</td><td class="val">46,5 Mrd. USD</td><td class="val">+9 %</td></tr>
+        <tr><td>AWS</td><td class="val">46,0 Mrd. USD</td><td class="val">+39 %</td></tr>
+        <tr><td>Werbung</td><td class="val">19,6 Mrd. USD</td><td class="val">+11 % (+12 % ohne Währungseffekte)</td></tr>
+        <tr><td>Abos (Prime u. a.)</td><td class="val">14,0 Mrd. USD</td><td class="val">+11 %</td></tr>
+        <tr><td>Läden und Sonstiges (Rest)</td><td class="val">7,4 Mrd. USD</td><td class="val">—</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p>
+      Das schwache Wachstum im Handel ist zum Teil ein Kalendereffekt. Prime Day lag 2026 in den meisten großen Ländern im zweiten Quartal, 2025 komplett im dritten. Ohne diese Verschiebung wäre der Konzernumsatz laut Amazon um rund 400 Basispunkte stärker gewachsen. Auch die Werbung nennt Amazon davon betroffen: Ohne Währungseffekte wuchs sie im dritten Quartal um 12 %, nach 26 % im zweiten. Für das vierte Quartal erwartet Amazon wieder ein Wachstum „in the high teens“.
+    </p>
+
+    <!-- ═══════════════════════════════════════════════ -->
     <h2>3) Wachstum &amp; Entwicklung</h2>
+
+    <!-- SVG Chart: EPS 2021–2025 + TTM, TTM aufgeteilt -->
+    <div class="chart-wrap">
+      <div class="chart-title">EPS 2021 – 2025 und letzte zwölf Monate (USD pro Aktie, GAAP verwässert)</div>
+      <svg viewBox="0 0 720 260" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:720px; display:block; margin:0 auto;">
+        <!-- Skala: 13 px pro USD, Nulllinie y=200 -->
+        <line x1="55" y1="44"  x2="700" y2="44"  stroke="#1a1a1a" stroke-width="1"/>
+        <line x1="55" y1="83"  x2="700" y2="83"  stroke="#1a1a1a" stroke-width="1"/>
+        <line x1="55" y1="122" x2="700" y2="122" stroke="#1a1a1a" stroke-width="1"/>
+        <line x1="55" y1="161" x2="700" y2="161" stroke="#1a1a1a" stroke-width="1"/>
+        <line x1="55" y1="200" x2="700" y2="200" stroke="#222"    stroke-width="1"/>
+        <text x="50" y="203" text-anchor="end" fill="#444" font-size="11" font-family="monospace">0</text>
+        <text x="50" y="164" text-anchor="end" fill="#444" font-size="11" font-family="monospace">3</text>
+        <text x="50" y="125" text-anchor="end" fill="#444" font-size="11" font-family="monospace">6</text>
+        <text x="50" y="86"  text-anchor="end" fill="#444" font-size="11" font-family="monospace">9</text>
+        <text x="50" y="47"  text-anchor="end" fill="#444" font-size="11" font-family="monospace">12</text>
+
+        <!-- 2021: 3,24 → h=42,1, y=157,9 -->
+        <rect x="74"  y="157.9" width="70" height="42.1"  fill="#00ffcc" opacity="0.25" rx="3"/>
+        <rect x="74"  y="157.9" width="70" height="42.1"  fill="none" stroke="#00ffcc" stroke-width="1" rx="3"/>
+        <text x="109" y="151"   text-anchor="middle" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">3,24</text>
+        <text x="109" y="222"   text-anchor="middle" fill="#666" font-size="12" font-family="monospace">2021</text>
+
+        <!-- 2022: −0,27 → h=3,5 unter der Nulllinie -->
+        <rect x="181" y="200"   width="70" height="3.5"   fill="#ff4444" opacity="0.6" rx="1"/>
+        <text x="216" y="192"   text-anchor="middle" fill="#ff4444" font-size="12" font-family="monospace" font-weight="bold">−0,27</text>
+        <text x="216" y="222"   text-anchor="middle" fill="#666" font-size="12" font-family="monospace">2022</text>
+
+        <!-- 2023: 2,90 → h=37,7, y=162,3 -->
+        <rect x="289" y="162.3" width="70" height="37.7"  fill="#00ffcc" opacity="0.25" rx="3"/>
+        <rect x="289" y="162.3" width="70" height="37.7"  fill="none" stroke="#00ffcc" stroke-width="1" rx="3"/>
+        <text x="324" y="156"   text-anchor="middle" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">2,90</text>
+        <text x="324" y="222"   text-anchor="middle" fill="#666" font-size="12" font-family="monospace">2023</text>
+
+        <!-- 2024: 5,53 → h=71,9, y=128,1 -->
+        <rect x="396" y="128.1" width="70" height="71.9"  fill="#00ffcc" opacity="0.25" rx="3"/>
+        <rect x="396" y="128.1" width="70" height="71.9"  fill="none" stroke="#00ffcc" stroke-width="1" rx="3"/>
+        <text x="431" y="122"   text-anchor="middle" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">5,53</text>
+        <text x="431" y="222"   text-anchor="middle" fill="#666" font-size="12" font-family="monospace">2024</text>
+
+        <!-- 2025: 7,17 → h=93,2, y=106,8 -->
+        <rect x="504" y="106.8" width="70" height="93.2"  fill="#00ffcc" opacity="0.25" rx="3"/>
+        <rect x="504" y="106.8" width="70" height="93.2"  fill="none" stroke="#00ffcc" stroke-width="1" rx="3"/>
+        <text x="539" y="101"   text-anchor="middle" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">7,17</text>
+        <text x="539" y="222"   text-anchor="middle" fill="#666" font-size="12" font-family="monospace">2025</text>
+
+        <!-- TTM 09/2026: 12,37 = 7,41 ohne übriges Ergebnis (h=96,3, y=103,7) + 4,96 übriges Ergebnis (h=64,5, y=39,2) -->
+        <rect x="611" y="103.7" width="70" height="96.3"  fill="#00ffcc" opacity="0.3" rx="3"/>
+        <rect x="611" y="103.7" width="70" height="96.3"  fill="none" stroke="#00ffcc" stroke-width="2" rx="3"/>
+        <rect x="611" y="39.2"  width="70" height="64.5"  fill="#ffaa00" opacity="0.25" rx="3"/>
+        <rect x="611" y="39.2"  width="70" height="64.5"  fill="none" stroke="#ffaa00" stroke-width="1.5" stroke-dasharray="4,3" rx="3"/>
+        <text x="646" y="33"    text-anchor="middle" fill="#ffaa00" font-size="12" font-family="monospace" font-weight="bold">12,37</text>
+        <text x="646" y="75"    text-anchor="middle" fill="#ffaa00" font-size="11" font-family="monospace">+4,96</text>
+        <text x="646" y="155"   text-anchor="middle" fill="#00ffcc" font-size="11" font-family="monospace">7,41</text>
+        <text x="646" y="222"   text-anchor="middle" fill="#666" font-size="12" font-family="monospace">TTM 09/26</text>
+      </svg>
+      <div class="chart-legend">
+        <span><span class="legend-dot" style="background:#00ffcc;"></span>Gewinn je Aktie</span>
+        <span><span class="legend-dot" style="background:#ffaa00;"></span>davon übriges Ergebnis (v. a. Anthropic) [eigene Rechnung]</span>
+        <span><span class="legend-dot" style="background:#ff4444;"></span>Verlustjahr</span>
+      </div>
+    </div>
+
+    <div class="table-scroll" style="overflow-x:auto">
+    <table class="kpi-table">
+      <thead><tr><th>Jahr</th><th>Umsatz</th><th>Op. Ergebnis</th><th>Op. Marge</th><th>Übriges Ergebnis</th><th>EPS</th></tr></thead>
+      <tbody>
+        <tr><td>2021</td><td class="val">469,8 Mrd.</td><td class="val">24,9 Mrd.</td><td class="val">5,3 %</td><td class="val">+14,6 Mrd.</td><td class="val">3,24 USD</td></tr>
+        <tr><td>2022</td><td class="val">514,0 Mrd.</td><td class="val">12,2 Mrd.</td><td class="val">2,4 %</td><td class="val">−16,8 Mrd.</td><td class="val">−0,27 USD</td></tr>
+        <tr><td>2023</td><td class="val">574,8 Mrd.</td><td class="val">36,9 Mrd.</td><td class="val">6,4 %</td><td class="val">+0,9 Mrd.</td><td class="val">2,90 USD</td></tr>
+        <tr><td>2024</td><td class="val">638,0 Mrd.</td><td class="val">68,6 Mrd.</td><td class="val">10,8 %</td><td class="val">−2,3 Mrd.</td><td class="val">5,53 USD</td></tr>
+        <tr><td>2025</td><td class="val">716,9 Mrd.</td><td class="val">80,0 Mrd.</td><td class="val">11,2 %</td><td class="val">+15,2 Mrd.</td><td class="val">7,17 USD</td></tr>
+        <tr><td>TTM bis 09/2026</td><td class="val">797,5 Mrd.</td><td class="val">104,4 Mrd.</td><td class="val">13,1 %</td><td class="val">+69,5 Mrd.</td><td class="val">12,37 USD</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="font-size:0.8em; color:#888;">Quellen: Amazon 10-K 2021–2025, Pressemitteilung zum dritten Quartal 2026. Beträge in USD. „Übriges Ergebnis“ ist der Posten „Other income (expense), net“ (vor Steuern). Margen eigene Rechnung.</p>
+
     <p>
-      Amazon wächst trotz bereits enormer Größe weiter im hohen einstelligen bis niedrigen zweistelligen Prozentbereich:
+      Der Umsatz wuchs von 2021 bis 2025 um gut 11 % pro Jahr [eigene Rechnung]. Die eigentliche Geschichte ist die Marge: 2022 blieben vom Umsatz 2,4 % als operatives Ergebnis, in den letzten zwölf Monaten 13,1 %. Das liegt vor allem an AWS, dessen Marge mit 38,7 % im dritten Quartal ein Vielfaches der Handelssegmente beträgt, und am Wachstum von Werbung und Händlergebühren, deren Margen Amazon nicht einzeln ausweist.
     </p>
-    <ul>
-      <li>
-        <strong>Gesamtjahr 2024:</strong> Umsatzwachstum von etwa +11 % auf 638 Mrd. Dollar.
-        Im Schlussquartal Q4 2024 stieg der Umsatz um rund 10 % auf 187,8 Mrd. Dollar.
-      </li>
-      <li>
-        <strong>Q3 2025:</strong> Umsatzplus von rund +13 % auf 180,2 Mrd. Dollar gegenüber dem Vorjahr –
-        also weiterhin robustes Wachstum.
-      </li>
-      <li>
-        <strong>AWS:</strong> Die Cloud-Sparte wächst schneller als der Konzern insgesamt.
-        2024 legte AWS um ca. 19 % auf 107,6 Mrd. Dollar zu, in Q3 2025 um rund 20 % auf
-        33 Mrd. Dollar Umsatz.
-      </li>
-      <li>
-        <strong>Gewinnentwicklung:</strong> Das operative Ergebnis hat sich 2024 gegenüber 2023 ungefähr verdoppelt
-        (68,6 Mrd. Dollar vs. 36,9 Mrd. Dollar). Q3 2025 zeigte einen GAAP-Nettogewinn von
-        21,2 Mrd. Dollar (+39 % YoY), inklusive eines hohen Anlageergebnisses.
-      </li>
-    </ul>
     <p>
-      Tendenz: Amazon hat nach schwächeren Jahren wieder einen klaren Profitabilitäts- und Wachstumspfad gefunden,
-      getrieben vor allem durch AWS, Werbung und Effizienzmaßnahmen im Retail-Geschäft.
+      Der Gewinn je Aktie folgt diesem Trend nur grob, weil das übrige Ergebnis ihn seit Jahren in beide Richtungen verbiegt. 2021 brachte die Beteiligung am Elektroautobauer Rivian einen Bewertungsgewinn von 11,8 Mrd. USD, 2022 einen Verlust von 12,7 Mrd. Den Verlust 2022 verursachte die Rivian-Aktie, operativ blieb Amazon mit 12,2 Mrd. USD im Plus. 2026 ist es Anthropic, und der Effekt ist um ein Vielfaches größer: In den letzten zwölf Monaten kamen 69,5 Mrd. USD aus dem übrigen Ergebnis, mehr als das gesamte operative Ergebnis des Jahres 2024 (68,6 Mrd.).
+    </p>
+    <p>
+      <strong>Das dritte Quartal im Detail:</strong> Das operative Ergebnis stieg auf 28,1 Mrd. USD nach 17,4 Mrd. Der Vergleich ist verzerrt. Im Vorjahresquartal standen 2,5 Mrd. für den FTC-Vergleich im Prime-Verfahren und rund 1,8 Mrd. für Abfindungen, ohne beides wären es 21,7 Mrd. gewesen. Der Nettogewinn fiel dagegen leicht auf 20,7 Mrd. USD (Vorjahr 21,2 Mrd.), weil damals 9,5 Mrd. Vorsteuergewinn aus Anthropic darin steckten, diesmal ein übriges Ergebnis von −0,7 Mrd. Amazon nennt die operative Marge von 13,9 % die höchste seiner Geschichte.
     </p>
 
+    <a href="img/amzn/amzn-fairer-wert.png" target="_blank" title="Vollbild öffnen"><img src="img/amzn/amzn-fairer-wert.png" alt="Alien Analyzer: Fairer Wert, Kurs- und Gewinnverlauf Amazon über 10 Jahre" class="analyzer-img"></a>
+    <p class="img-caption">Alien Analyzer V2, Fairer-Wert-Tab (07.11.2026): Die Fair-Value-Linie (orange gestrichelt) schießt am Ende auf fast 600 USD, weil sie den Gewinn je Aktie von 12,37 USD mit dem KGV-Median von 48,3 multipliziert. Genau davor warnt das Tool: Der Indikator zeigt keine Zahl, sondern „VERZERRT – 40 % des Gewinns nicht operativ“. <span class="zoom-hint">↗ Zum Vergrößern klicken</span></p>
+
+    <!-- ═══════════════════════════════════════════════ -->
     <h2>4) Profitabilität &amp; Bilanz</h2>
+
+    <a href="img/amzn/amzn-qualitaetscheck.png" target="_blank" title="Vollbild öffnen"><img src="img/amzn/amzn-qualitaetscheck.png" alt="Alien Analyzer: Qualitätscheck &amp; Ampel-Bilanz Amazon" class="analyzer-img"></a>
+    <p class="img-caption">Alien Analyzer V2, Qualitätscheck (07.11.2026, Bilanzstand 30.09.2026). KGV und Eigenkapitalrendite stehen auf „VERZERRT“, das PEG auf „N/A“. Die Alien-Einordnung erklärt den Grund: 40 % des Vorsteuergewinns stammen nicht aus dem operativen Ergebnis. <span class="zoom-hint">↗ Zum Vergrößern klicken</span></p>
+
+    <!-- Ampel Scorecard -->
+    <div class="ampel-grid">
+      <div class="ampel-item">
+        <span class="label">KGV (GAAP)</span>
+        <span class="value">21,0</span>
+        <span class="badge badge-gering">VERZERRT</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">KGV ohne Beteiligungsgewinne</span>
+        <span class="value">~35</span>
+        <span class="badge badge-teuer">ÜBER BRANCHE</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Operative Marge (Q3)</span>
+        <span class="value">13,9 %</span>
+        <span class="badge badge-gut">REKORD</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">AWS-Wachstum (Q3)</span>
+        <span class="value">+39 %</span>
+        <span class="badge badge-gut">STARK</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Free Cashflow (TTM)</span>
+        <span class="value">−42,4 Mrd. USD</span>
+        <span class="badge badge-teuer">NEGATIV</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Investitionen netto (TTM)</span>
+        <span class="value">210,7 Mrd. USD</span>
+        <span class="badge badge-teuer">+82 %</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Nettoverschuldung</span>
+        <span class="value">~66 Mrd. USD</span>
+        <span class="badge badge-gering">STEIGT</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Eigenkapitalquote</span>
+        <span class="value">49,3 %</span>
+        <span class="badge badge-gut">GUT</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Eigenkapitalrendite</span>
+        <span class="value">27,4 % (~16 %²)</span>
+        <span class="badge badge-gering">VERZERRT</span>
+      </div>
+      <div class="ampel-item">
+        <span class="label">Aktienzahl (3 Jahre)</span>
+        <span class="value">+4,6 %</span>
+        <span class="badge badge-gering">VERWÄSSERUNG</span>
+      </div>
+    </div>
+    <p style="font-size:0.8em; color:#888;">² Ohne übriges Ergebnis, bezogen auf das durchschnittliche Eigenkapital zum 30.09.2025 und 30.09.2026 [SCHÄTZUNG, eigene Rechnung]. Der Analyzer nähert denselben Wert mit 16,4 %.</p>
+
     <p>
-      Amazon ist deutlich profitabler geworden, bleibt aber margenschwächer als reine Software-Konzerne:
+      <strong>Zur Datenbasis:</strong> KGV, KBV, Eigenkapitalquote und Eigenkapitalrendite im Screenshot passen zum Quartalsbericht zum 30.09.2026. Vier Werte brauchen eine Erklärung. Der <strong>Free Cashflow</strong> von −46,9 Mrd. USD im Tool ist operativer Cashflow minus Brutto-Investitionen. Amazon rechnet die Erlöse aus Verkäufen und Zuschüssen von 4,5 Mrd. gegen und kommt auf −42,4 Mrd. Das <strong>Debt/Equity</strong> von 0,50 ergibt sich nur, wenn man Leasing und Finanzierungsverpflichtungen mitzählt. Mit Anleihen und Krediten allein sind es 0,29 [eigene Rechnung]. Das <strong>Gewinnwachstum</strong> von 40,0 % pro Jahr ist die Obergrenze, die der Analyzer anzeigt. Gerechnet vom Gewinn je Aktie 2023 (2,90 USD) bis 2025 (7,17 USD) sind es rund 57 % pro Jahr, auch das mit Beteiligungsgewinnen. Die <strong>Aktienzahl</strong> stieg in drei Jahren um 4,6 % (ausstehende Aktien laut Deckblatt der Quartalsberichte, Oktober 2023 bis Oktober 2026). Das Tool zeigt +4,8 % und noch „STABIL“, weil seine Grenze bei ±5 % liegt. Seit 2023 hat Amazon keine Aktie zurückgekauft, die aktienbasierte Vergütung lag in den letzten zwölf Monaten bei 19,9 Mrd. USD.
     </p>
-    <ul>
-      <li>
-        <strong>Margen:</strong> Bruttomargen liegen grob bei 48–50 %.
-        Die operative Marge betrug 2024 etwa 10–11 % (68,6 Mrd. Dollar operativer Gewinn auf 638 Mrd. Dollar Umsatz),
-        die Nettomarge rund 9 %. Einzelne Quartale können durch Sondereffekte (z. B. FTC-Strafen, Restrukturierungen)
-        stärker schwanken.
-      </li>
-      <li>
-        <strong>Cashflows:</strong> Der operative Cashflow steigt (TTM Q3 2025: 130,7 Mrd. Dollar vs. 112,7 Mrd. im Vorjahr).
-        Der freie Cashflow ist allerdings deutlich gefallen (TTM Q3 2025: 14,8 Mrd. Dollar vs. 47,7 Mrd.),
-        weil Amazon massiv in Infrastruktur investiert – insbesondere Rechenzentren und Logistik.
-      </li>
-      <li>
-        <strong>Bilanz:</strong> Ende 2024 lagen Barmittel und Wertpapiere zusammen bei etwa 100 Mrd. Dollar,
-        langfristige Schulden bei circa 58 Mrd. Dollar. Insgesamt ist Amazon somit nettogeldpositiv
-        mit moderater Verschuldung und solider Flexibilität.
-      </li>
-    </ul>
     <p>
-      Aus Eigentümer-Sicht ist Amazon damit ein <strong>robustes, aber kapitallastiges System</strong>:
-      gute Margen für einen Handels- und Logistikkonzern, starke Cloud-Profite, aber hoher CapEx und damit
-      kurzfristig gedrückter Free Cashflow.
+      Eigenkapitalquote und KBV sehen zudem besser aus, als das Geschäft allein hergibt: Im Eigenkapital von 613,6 Mrd. USD stecken 102,3 Mrd. kumuliertes übriges Ergebnis (AOCI), überwiegend nicht realisierte Gewinne auf die Wandelanleihen von Anthropic. Diese Gewinne laufen nicht durch die Gewinnrechnung, sondern direkt ins Eigenkapital.
     </p>
 
-    <h2>5) Aktuelle strategische Themen</h2>
-    <h3>KI &amp; Cloud-Ausbau</h3>
+    <a href="img/amzn/amzn-diagramm-gewinn-cash.png" target="_blank" title="Vollbild öffnen"><img src="img/amzn/amzn-diagramm-gewinn-cash.png" alt="Diagramm: Gewinnrechnung und Kasse von Amazon nebeneinander, letzte zwölf Monate bis 30.09.2026" class="analyzer-img"></a>
+    <p class="img-caption">Zwei Rechnungen nebeneinander: Links steigt der Gewinn durch Buchgewinne aus Beteiligungen, rechts fließt mehr Geld in Investitionen, als das Geschäft einbringt. Die Lücke schließen neue Schulden. <span class="zoom-hint">↗ Zum Vergrößern klicken</span></p>
+
     <p>
-      Amazon investiert massiv in Künstliche Intelligenz und Cloud-Infrastruktur:
+      <strong>Cash:</strong> Der operative Cashflow der letzten zwölf Monate stieg um 29 % auf 168,3 Mrd. USD. Die Investitionen stiegen schneller, netto um 82 % auf 210,7 Mrd. Allein im dritten Quartal waren es 75,9 Mrd. Unterm Strich steht ein Free Cashflow von −42,4 Mrd. USD, ein Jahr zuvor waren es +14,8 Mrd. Daneben flossen 2026 rund 60 Mrd. USD in Vorzugsaktien von OpenAI und Anthropic. Amazon hält an rund 220 Mrd. USD Investitionen für 2026 fest. In den ersten neun Monaten waren es 172,2 Mrd., rechnerisch blieben für das vierte Quartal also rund 48 Mrd., gut ein Drittel weniger als im dritten. Erläutert hat Amazon das nicht. Für 2027 kündigt Vorstandschef Andy Jassy „meaningfully more“ an.
     </p>
-    <ul>
-      <li>Eigene KI-Chips (Trainium2, Inferentia2) für Training und Inferenz in AWS.</li>
-      <li>Ausbau der Partnerschaft mit Anthropic (Project Rainier mit Hunderttausenden Trainium2-Chips).</li>
-      <li>Integration zahlreicher Foundation Models (z. B. von Anthropic) in Amazon Bedrock und andere AWS-Services.</li>
-    </ul>
     <p>
-      Ziel ist, die führende Rolle im AI-Cloud-Markt zu verteidigen und neue, hochmargige Dienste aufzubauen.
+      <strong>Bilanz:</strong> Ende 2025 hatte Amazon 123,0 Mrd. USD Zahlungsmittel und Wertpapiere bei 68,4 Mrd. Anleihen und Krediten, also mehr Geld als Schulden. Zum 30.09.2026 stehen 114,2 Mrd. Zahlungsmittel und Wertpapiere rund 180 Mrd. Anleihen und Krediten gegenüber, einschließlich des kurzfristig fälligen Teils. Die Nettoverschuldung liegt damit bei rund 66 Mrd. USD [eigene Rechnung], dazu kommen 114,8 Mrd. Leasingverbindlichkeiten. Allein der langfristige Teil der Schulden stieg seit Jahresbeginn von 65,6 auf 173,1 Mrd. USD. Amazon hat 2026 Anleihen in US-Dollar, Euro, Schweizer Franken, kanadischen Dollar und britischen Pfund begeben und einen Bankkredit über 17,5 Mrd. USD aufgenommen. Bei einem operativen Ergebnis von über 100 Mrd. im Jahr ist das tragbar. Es verändert aber das Profil: Aus einem Konzern mit mehr Geld als Schulden ist in neun Monaten einer geworden, der seinen Ausbau zu einem guten Teil über Anleihen finanziert.
     </p>
 
-    <h3>Infrastruktur &amp; CapEx-Welle</h3>
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>5) Strategische Themen</h2>
+
     <p>
-      Parallel läuft eine große Investitionswelle:
+      <strong>AWS und die KI-Nachfrage:</strong> Die Cloud ist der Grund für die Investitionen. AWS kam im dritten Quartal auf 46,0 Mrd. USD Umsatz, aufs Jahr gerechnet 184 Mrd. Andy Jassy, President und CEO, beziffert den Auftragsbestand im Gespräch mit Analysten am 29.10.2026 auf 578 Mrd. USD, „growing triple digits year-over-year“. In der Pressemitteilung nennt er für 2027 und 2028 ein projiziertes Wachstum von jeweils über 40 %. Die Zusagen für Amazons eigene Chips Graviton und Trainium sind laut Jassy jeweils mehr als 20-mal so hoch wie vor einem Jahr. Ende 2027 will Amazon Trainium auch außerhalb von AWS verkaufen.
     </p>
-    <ul>
-      <li>Hohe CapEx für Rechenzentren, Netzwerke und Logistik (Q3 2025: über 50 Mrd. Dollar zusätzliche Ausgaben).</li>
-      <li>Automatisierung in Logistikzentren (Robotik, autonome Systeme, Drohnenprojekte).</li>
-      <li>Neue Geschäftsbereiche in Gesundheit und Pharmazie, die langfristig zusätzliche Umsatzquellen erschließen sollen.</li>
-    </ul>
     <p>
-      Kurzfristig drückt dies den Free Cashflow, langfristig soll es die Plattform noch schwerer angreifbar machen.
+      <strong>Anthropic und OpenAI:</strong> Amazon ist an zwei KI-Laboren beteiligt, die zugleich große AWS-Kunden sind. Zum 30.09.2026 hielt Amazon Anthropic-Vorzugsaktien mit 92,5 Mrd. USD Buchwert und Anthropic-Wandelanleihen mit 146,2 Mrd. Zeitwert, dazu Vorzugsaktien von OpenAI für 50 Mrd. (in drei Raten im Jahr 2026). Dazu hat Amazon Anthropic weitere Finanzierung über bis zu 15 Mrd. USD zugesagt. Umgekehrt hat Anthropic sich bis zu 5 Gigawatt Trainium-Kapazität gesichert und seine AWS-Zusage im zweiten Quartal um mehr als 100 Mrd. USD über zehn Jahre erweitert. OpenAI hat seine bestehende AWS-Zusage über 38 Mrd. um 100 Mrd. über acht Jahre erweitert und will rund 2 Gigawatt Trainium-Kapazität nutzen.
     </p>
 
-    <h3>Regulierung &amp; Politik</h3>
+    <a href="img/amzn/amzn-diagramm-kreislauf.png" target="_blank" title="Vollbild öffnen"><img src="img/amzn/amzn-diagramm-kreislauf.png" alt="Diagramm: Der KI-Kreislauf von Amazon mit Beteiligungen, AWS-Aufträgen, Rechenzentren und Buchgewinnen" class="analyzer-img"></a>
+    <p class="img-caption">Der KI-Kreislauf: Amazon gibt Kapital, die Labore kaufen Rechenleistung, AWS braucht Rechenzentren. Jede neue Finanzierungsrunde von Anthropic zu einem höheren Preis wird bei Amazon zum Buchgewinn. <span class="zoom-hint">↗ Zum Vergrößern klicken</span></p>
+
     <p>
-      Wie andere Big-Tech-Konzerne steht Amazon politisch unter Beschuss:
+      Für die Gewinnrechnung heißt das: Steigt der Preis von Anthropic in einer neuen Finanzierungsrunde, bucht Amazon einen Gewinn. Daraus und aus der Wandlung von Anleihen in Aktien stammen die 16,8 Mrd. USD im ersten Quartal und der größte Teil der 53,4 Mrd. im zweiten. Darauf fielen in den ersten neun Monaten 15,2 Mrd. USD Steueraufwand an, den Amazon vor allem diesen Höherbewertungen zuschreibt. Am 26.10.2026 hat Anthropic seinen Börsenprospekt (S-1) öffentlich bei der SEC eingereicht, geplant ist eine Notierung an der Nasdaq. Laut Amazons Quartalsbericht würden Vorzugsaktien und Wandelanleihen dann in stimmrechtslose Stammaktien getauscht, die Anleihen nur bis zu Amazons Beteiligungsgrenze von 12 %, mit Haltefristen. Meine Einschätzung: Ab dann schwankt das übrige Ergebnis von Amazon mit dem Kurs einer anderen Aktie, nach oben wie nach unten. Welchen Anteil Amazon an Anthropic hält, ist nicht veröffentlicht.
     </p>
-    <ul>
-      <li>FTC-Verfahren und Strafen (z. B. 2,5 Mrd. Dollar im Q3 2025) wegen Wettbewerbs- und Verbraucherschutzfragen.</li>
-      <li>Untersuchungen der EU-Kommission zu AWS unter dem Digitale-Märkte-Gesetz (DMA) und mögliche Gatekeeper-Einstufung.</li>
-      <li>Verfahren nationaler Kartellbehörden (z. B. in Deutschland) zu Marktplatzpraktiken und Preissetzung.</li>
-    </ul>
     <p>
-      Diese Verfahren können Geschäftsmodelle verteuern, Auflagen nach sich ziehen und die Flexibilität von Amazon einschränken.
+      <strong>Die Investitionen:</strong> Jassy im Wortlaut: „We still expect 2026 cash CapEx of approximately $220 billion, the majority for AWS, and expect to spend meaningfully more in 2027 with a clear line of sight to attractive financial returns.“ Die Begründung des Managements ist der Auftragsbestand, den Jassy „well-diversified“ nennt. Wie viel davon auf Anthropic und OpenAI entfällt, weist Amazon nicht aus. Die Frage für Eigentümer ist, ob die Rendite dieser Rechenzentren reicht, auch wenn ein Teil der Nachfrage von zwei Kunden kommt, die Amazon mitfinanziert.
+    </p>
+    <p>
+      <strong>Amazon Leo:</strong> Das Satelliten-Internet, bis November 2025 Projekt Kuiper genannt, soll laut Amazon noch 2026 einen ersten Dienst starten. Mit AT&amp;T gibt es einen Vertrag für Geschäfts- und Behördenkunden. Im April 2026 hat Amazon zudem die Übernahme des Satellitenbetreibers Globalstar vereinbart, der Abschluss ist für 2027 geplant.
+    </p>
+    <p>
+      <strong>Personal:</strong> In der Konzernverwaltung strich Amazon im Oktober 2025 rund 14.000 und im Januar 2026 rund 16.000 Stellen. Die Gesamtzahl der Beschäftigten stieg trotzdem um 4 %.
+    </p>
+    <p>
+      <strong>Recht und Regulierung:</strong> Die Kartellklage der US-Handelsbehörde FTC von 2023 geht am 29.03.2027 vor Richter John H. Chun in Seattle in die Verhandlung, einen Antrag auf Verschiebung hat das Gericht im Oktober abgelehnt. Seit 31.08.2026 klagen die FTC und 22 Bundesstaaten zusätzlich wegen versteckter Aufschläge in Amazons Werbeauktionen. Das Prime-Verfahren ist erledigt: Im September 2025 zahlte Amazon im Vergleich 2,5 Mrd. USD, davon 1,0 Mrd. Zivilstrafe und 1,5 Mrd. Erstattungen an Kunden. In der EU hält die Kommission AWS nach einer vorläufigen Einschätzung vom 25.06.2026 für einen Gatekeeper nach dem Digital Markets Act, endgültig entschieden ist das noch nicht. In Deutschland hat das Bundeskartellamt im Februar 2026 Amazons Preiskontrolle gegenüber Marktplatzhändlern untersagt und zunächst rund 59 Mio. EUR abgeschöpft, nicht bestandskräftig.
+    </p>
+    <p>
+      <strong>Ausblick:</strong> Für das vierte Quartal erwartet Amazon 240 bis 247 Mrd. USD Umsatz (+12 bis +16 %) und 28,5 bis 33,5 Mrd. operatives Ergebnis, nach 25,0 Mrd. im Vorjahresquartal, das 2,4 Mrd. Sonderbelastungen enthielt. Analysten erwarten für 2027 einen Gewinn je Aktie von rund 10,9 USD (stockanalysis.com, laut Quelle bereinigt) bzw. 10,7 USD (Yahoo Finance) [SCHÄTZUNG — Analystenprognose]. Für 2026 mischen die Quellen Werte mit und ohne Anthropic-Gewinne, deshalb nenne ich hier keinen.
     </p>
 
+    <!-- ═══════════════════════════════════════════════ -->
     <h2>6) Bewertung im Kontext</h2>
+
+    <a href="img/amzn/amzn-multiples.png" target="_blank" title="Vollbild öffnen"><img src="img/amzn/amzn-multiples.png" alt="Alien Analyzer: Multiples KGV KBV KUV KCV Amazon 10 Jahre" class="analyzer-img"></a>
+    <p class="img-caption">Alien Analyzer V2, Multiples-Tab (07.11.2026): Das KGV fiel von rund 140 (2018) auf 21. Die Linie beginnt erst 2018, obwohl der Median ab 12/2016 läuft: Monate mit extrem hohem KGV lässt der Analyzer als Ausreißer weg. KUV und KCV schwanken deutlich weniger. <span class="zoom-hint">↗ Zum Vergrößern klicken</span></p>
+
+    <!-- SVG Chart: Multiples Übersicht -->
+    <div class="chart-wrap">
+      <div class="chart-title">Multiples — Aktuell vs. Median seit 2016</div>
+      <svg viewBox="0 0 680 250" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:680px; display:block; margin:0 auto;">
+        <!-- Skala: 8 px pro Einheit, Balken ab x=110 -->
+        <text x="10" y="44"  fill="#aaa" font-size="13" font-family="monospace">KGV GAAP</text>
+        <text x="10" y="94"  fill="#aaa" font-size="13" font-family="monospace">KGV ohne*</text>
+        <text x="10" y="144" fill="#aaa" font-size="13" font-family="monospace">KGV 27E**</text>
+        <text x="10" y="194" fill="#aaa" font-size="13" font-family="monospace">KUV</text>
+        <text x="10" y="234" fill="#aaa" font-size="13" font-family="monospace">KCV</text>
+
+        <!-- Median (Hintergrund): KGV 48,3→386 | KUV 3,4→27 | KCV 24,6→197 -->
+        <rect x="110" y="30"  width="386" height="18" fill="#003333" rx="3"/>
+        <rect x="110" y="80"  width="386" height="18" fill="#003333" rx="3"/>
+        <rect x="110" y="130" width="386" height="18" fill="#003333" rx="3"/>
+        <rect x="110" y="180" width="27"  height="18" fill="#003333" rx="3"/>
+        <rect x="110" y="220" width="197" height="18" fill="#003333" rx="3"/>
+
+        <!-- Aktuell: KGV 21,0→168 | KGV ohne 35,0→280 | KGV 2027E 23,8→190 | KUV 3,5→28 | KCV 16,7→134 -->
+        <rect x="110" y="30"  width="168" height="18" fill="#00ffcc" opacity="0.3" rx="3"/>
+        <rect x="110" y="80"  width="280" height="18" fill="#ffaa00" opacity="0.3" rx="3"/>
+        <rect x="110" y="130" width="190" height="18" fill="#ffaa00" opacity="0.3" rx="3"/>
+        <rect x="110" y="180" width="28"  height="18" fill="#00ffcc" opacity="0.3" rx="3"/>
+        <rect x="110" y="220" width="134" height="18" fill="#00ffcc" opacity="0.3" rx="3"/>
+
+        <!-- Median-Markierungen -->
+        <line x1="496" y1="27"  x2="496" y2="51"  stroke="#ffaa00" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <line x1="496" y1="77"  x2="496" y2="101" stroke="#ffaa00" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <line x1="496" y1="127" x2="496" y2="151" stroke="#ffaa00" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <line x1="137" y1="177" x2="137" y2="201" stroke="#ffaa00" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <line x1="307" y1="217" x2="307" y2="241" stroke="#ffaa00" stroke-width="1.5" stroke-dasharray="3,2"/>
+
+        <!-- Werte -->
+        <text x="284" y="44"  fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">21,0</text>
+        <text x="496" y="24"  fill="#ffaa00" font-size="10" font-family="monospace" text-anchor="middle">Ø 48,3</text>
+        <text x="396" y="94"  fill="#ffaa00" font-size="12" font-family="monospace" font-weight="bold">~35</text>
+        <text x="306" y="144" fill="#ffaa00" font-size="12" font-family="monospace" font-weight="bold">~24</text>
+        <text x="150" y="194" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">3,5</text>
+        <text x="137" y="174" fill="#ffaa00" font-size="10" font-family="monospace" text-anchor="middle">Ø 3,4</text>
+        <text x="250" y="234" fill="#00ffcc" font-size="12" font-family="monospace" font-weight="bold">16,7</text>
+        <text x="315" y="234" fill="#ffaa00" font-size="10" font-family="monospace">Ø 24,6</text>
+      </svg>
+      <div class="chart-legend">
+        <span><span class="legend-dot" style="background:#00ffcc; opacity:0.5;"></span>Aktuell (Tool)</span>
+        <span><span class="legend-dot" style="background:#ffaa00;"></span>Eigene Rechnung / Konsens / Median</span>
+      </div>
+      <p style="font-size:0.75em; color:#666; text-align:center; margin:0.6em 0 0 0;">* KGV ohne übriges Ergebnis, Rechenweg unter der Tabelle in Abschnitt 1. ** Kurs 259,30 USD geteilt durch den Analystenkonsens für 2027 von 10,90 USD je Aktie (stockanalysis.com, bereinigt) [SCHÄTZUNG, eigene Rechnung].</p>
+    </div>
+
     <p>
-      Die aktuelle Bewertung von Amazon wirkt <strong>ambitioniert, aber nicht mehr extrem</strong>:
+      Der Analyzer verweigert hier zu Recht einen Fair Value. Ein Gewinn, der zu 40 % aus Buchgewinnen besteht, ergibt mal ein historisches KGV keinen fairen Wert, sondern die Linie bei fast 600 USD aus Abschnitt 3. Statt einer Zahl vier Blickwinkel auf denselben Kurs von 259,30 USD [SCHÄTZUNG — eigene Rechnungen, keine Tatsachen]:
     </p>
     <ul>
-      <li>
-        <strong>KGV:</strong> Das TTM-KGV liegt um 32 und damit deutlich über dem S&amp;P-500-Forward-KGV von ca. 23.
-      </li>
-      <li>
-        <strong>Peer-Vergleich:</strong> Alphabet handelt grob um 31× Gewinn, Microsoft um 35× – Amazon liegt also
-        im typischen Bereich großer, wachstumsstarker Tech-Konzerne.
-      </li>
-      <li>
-        <strong>Historischer Vergleich:</strong> Der 10-Jahres-Durchschnitt des Amazon-KGV lag bei deutlich über 100.
-        Aus dieser Perspektive wirkt die heutige Bewertung eher „normalisiert“.
-      </li>
+      <li><strong>GAAP-KGV 21:</strong> weniger als die Hälfte des Medians seit 2016 (48,3) und nahe am Branchen-KGV von 20, mit dem der Analyzer vergleicht. Diese Zahl beschreibt den Buchgewinn, nicht das Geschäft.</li>
+      <li><strong>KGV ohne Beteiligungsgewinne rund 35:</strong> weiterhin unter dem eigenen Median, aber deutlich über dem Branchen-KGV. Der Median stammt zudem aus Jahren mit viel niedrigerer Marge (2021: 5,3 %, 2023: 6,4 %). Bei heute 13 % fällt das KGV schon dann niedriger aus, wenn der Markt Amazon gemessen am Umsatz genauso bewertet wie früher. Genau das zeigt das KUV.</li>
+      <li><strong>Umsatz und Cashflow:</strong> Das KUV von 3,5 liegt fast genau auf dem Median von 3,4. Gemessen am Umsatz kostet Amazon so viel wie im Schnitt der letzten zehn Jahre. Das KCV von 16,7 liegt unter dem Median von 24,6, nur bezahlt der operative Cashflow derzeit die Investitionen nicht. Eine Free-Cashflow-Rendite gibt es bei −42,4 Mrd. USD nicht.</li>
+      <li><strong>Nach vorn:</strong> Auf den Analystenkonsens für 2027 gerechnet liegt das KGV bei rund 24. Der Konsens unterstellt, dass die Investitionen Gewinn bringen.</li>
     </ul>
     <p>
-      Unterm Strich ist Amazon <strong>weder offensichtliches Schnäppchen noch klarer Hype-Ballon</strong>.
-      Der Markt preist hohe Wachstumserwartungen (Cloud, KI, Werbung, Prime) ein – Investoren zahlen für die
-      Aussicht, dass diese Story weiter funktioniert.
+      Das KBV von 4,6 gegenüber einem Median von 13,6 übergehe ich: Amazons Eigenkapital ist seit 2016 vervielfacht und enthält heute 102 Mrd. USD kumuliertes übriges Ergebnis, überwiegend nicht realisierte Gewinne auf Anthropic-Wandelanleihen. Ein Vergleich mit dem Median ergibt hier keinen Sinn.
+    </p>
+    <p>
+      Meine Einordnung: Amazon ist nicht so billig, wie das KGV von 21 vermuten lässt, und nicht teuer, gemessen an der eigenen Geschichte. Die Bewertung hängt an einer einzigen Frage, nämlich ob die 220 Mrd. USD dieses Jahres und die höheren Beträge 2027 die Rendite bringen, die das Management in Aussicht stellt. Der Auftragsbestand von 578 Mrd. spricht dafür. Die Kunden dahinter und die Finanzierung über Schulden sind die Punkte, die ein Eigentümer im Blick behalten sollte.
     </p>
 
-        <!-- ALIEN ANALYZER PROMO -->
-    <div class="box" style="border-color: #00ffcc; background: #020d0a;">
+        <div class="box" style="border-color: #00ffcc; background: #020d0a;">
       <p style="margin: 0 0 0.5em 0; font-size: 0.8em; color: #00ffcc; font-family: monospace; letter-spacing: 1px; text-transform: uppercase;">Tool-Tipp</p>
       <p style="margin: 0 0 0.6em 0;"><strong>Die Kennzahlen in dieser Analyse stammen aus dem Alien Analyzer V2</strong> — dem eigenen Screening-Tool für Aktien. Fairer Wert, Multiples, Dividenden und Qualitätscheck auf einen Blick. Kostenlos, kein Login, kein Abo.</p>
       <p style="margin: 0; font-size: 0.95em;"><a href="https://api.alien-investor.org/alien-analyzer-v2.html?lang=de"><strong>Alien Analyzer V2</strong></a> — Ticker eingeben, analysieren.</p>
     </div>
 
-<h2>7) Wettbewerbsumfeld &amp; Konkurrenz</h2>
+    <h2>7) Wettbewerbsumfeld &amp; Moat</h2>
+
+    <div class="table-scroll" style="overflow-x:auto">
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Unternehmen</th>
+          <th>Bereich</th>
+          <th>Lage im 3. Quartal 2026</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="highlight">AWS (Amazon)</td>
+          <td>Cloud</td>
+          <td class="highlight">Umsatz 46,0 Mrd. USD (+39 %), Marktanteil 26 % (Vorjahr 29 %), Auftragsbestand 578 Mrd.</td>
+        </tr>
+        <tr>
+          <td>Microsoft Azure</td>
+          <td>Cloud</td>
+          <td>Umsatz 33,2 Mrd. USD (+48 %), Marktanteil 19 % (Vorjahr 20 %)</td>
+        </tr>
+        <tr>
+          <td>Google Cloud (Alphabet)</td>
+          <td>Cloud</td>
+          <td>Umsatz 30,7 Mrd. USD (+103 %), Marktanteil 16 % (Vorjahr 13 %), Auftragsbestand 561 Mrd.</td>
+        </tr>
+        <tr>
+          <td>Google (Alphabet)</td>
+          <td>Werbung</td>
+          <td>Werbeumsatz 82,0 Mrd. USD (+10,6 %), Amazon: 19,6 Mrd. (+11 %)</td>
+        </tr>
+        <tr>
+          <td>Walmart</td>
+          <td>Handel</td>
+          <td>E-Commerce weltweit +23 % (Quartal bis 31.07.2026)</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="font-size:0.8em; color:#888;">Quellen: Marktanteile Synergy Research Group (über CRN), Pressemitteilungen von Amazon, Microsoft (Quartal bis 30.09.2026), Alphabet und Walmart. Marktanteile und Segmentumsätze sind unterschiedlich abgegrenzt und nicht direkt vergleichbar.</p>
+
     <p>
-      Amazon steht auf mehreren Schlachtfeldern gleichzeitig:
+      <strong>Der Burggraben im Handel</strong> ist das Logistiknetz. Lager, Sortierzentren und eigene Zustellung in der Größe von Amazon lassen sich nicht in ein paar Jahren nachbauen, und sie tragen Prime, den Marktplatz und die Werbung gleichzeitig. Je mehr Händler über Amazon verkaufen, desto mehr zahlen sie für Versand und Anzeigen, und desto mehr Auswahl finden die Kunden. Walmart wächst im Onlinehandel inzwischen schnell, startet aber von einer kleineren Basis.
     </p>
-    <ul>
-      <li>
-        <strong>Cloud (AWS):</strong> Hauptkonkurrenten sind Microsoft (Azure) und Google Cloud.
-        Im Q3 2025 wuchs Google Cloud um etwa 34 %, Microsofts Cloud-Sparte (inkl. Azure) um grob 28 %, AWS um 20 %.
-        AWS bleibt zwar mit rund 33 Mrd. Dollar Quartalsumsatz größte Cloud-Plattform, aber die Konkurrenz holt auf.
-      </li>
-      <li>
-        <strong>E-Commerce:</strong> Im Handel konkurriert Amazon mit Walmart, Alibaba und vielen regionalen Playern.
-        Dazu kommen Plattformen wie Shopify, die Händlern ermöglichen, eigene Shops außerhalb von Amazon aufzubauen.
-      </li>
-      <li>
-        <strong>Werbung:</strong> Im Werbemarkt tritt Amazon gegen Google und Meta an. Werbung auf der eigenen Plattform
-        wächst stark, weil Amazon einzigartige Kaufdaten für Targeting besitzt.
-      </li>
-    </ul>
     <p>
-      In der Gesamtprofitabilität bleibt Amazon hinter reinen Software-Giganten zurück – vor allem wegen des
-      volumenstarken, margenschwachen Retail-Geschäfts. Der Burggraben liegt eher in der Skalierung von Logistik,
-      Cloud-Infrastruktur und der Prime-Verzahnung als in extrem hohen Margen.
+      <strong>In der Cloud</strong> ist AWS weiterhin der größte Anbieter, wächst aber langsamer als die beiden Verfolger und hat in einem Jahr drei Prozentpunkte Marktanteil verloren. Google bringt eigene KI-Modelle und eigene Chips (TPU) mit, die es inzwischen auch an andere verkauft. Amazon setzt auf Trainium und auf die Bindung von Anthropic und OpenAI. Meine Einordnung: Der Graben ist breit, aber er wird gerade von zwei sehr kapitalstarken Konkurrenten gleichzeitig angegriffen, und Amazon verteidigt ihn mit Geld, das derzeit nicht aus dem freien Cashflow kommt.
     </p>
 
-    <h2>8) Kunden- &amp; Mitarbeiterperspektive</h2>
-    <h3>Kunden</h3>
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>8) Kundenperspektive</h2>
+
     <p>
-      Kundenseitig zeigt sich ein ambivalentes Bild:
-    </p>
-    <ul>
-      <li>
-        Bewertungsportale wie Trustpilot bescheinigen Amazon.de und Amazon.com eher schlechte Noten – häufige Kritikpunkte
-        sind verspätete oder ausgefallene Lieferungen, problematischer Kundenservice und zähe Rückerstattungen.
-      </li>
-      <li>
-        Gleichzeitig wird die riesige Produktauswahl und die grundsätzlich schnelle Lieferung positiv hervorgehoben –
-        viele Kunden sind im Alltag dennoch stark von Amazon abhängig.
-      </li>
-      <li>
-        In den App-Stores schneiden die Shopping-Apps unterschiedlich ab: Im Apple App Store gibt es sehr gute Bewertungen,
-        im Google Play Store sind sie etwas verhaltener.
-      </li>
-    </ul>
-    <p>
-      Summe: Aus Kundensicht ist Amazon bequem, aber bei Service- und Kommunikationsqualität gibt es deutliche Reibungspunkte.
+      In der Kundenzufriedenheitsstudie des American Customer Satisfaction Index (ACSI, Januar 2026) erreicht Amazon 82 von 100 Punkten, einen Punkt weniger als im Vorjahr und über dem Schnitt der Online-Händler von 79. Gleichzeitig zeigen die Verfahren, wo es reibt: Im Prime-Vergleich mit der FTC ging es um Abos, die ohne klare Zustimmung abgeschlossen wurden und schwer zu kündigen waren, 1,5 Mrd. USD gehen als Erstattung an Kunden zurück. Die neue Klage zu den Werbeauktionen und die Entscheidung des Bundeskartellamts betreffen die andere Kundengruppe, die Händler auf dem Marktplatz. Wie viele Prime-Mitglieder Amazon hat, veröffentlicht der Konzern nicht. [NICHT VERFÜGBAR]
     </p>
 
-    <h3>Mitarbeiter</h3>
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>9) Mitarbeiterperspektive</h2>
+
     <p>
-      Auch die Mitarbeiterbewertungen sind gemischt:
-    </p>
-    <ul>
-      <li>
-        Auf Plattformen wie kununu liegt Amazon in Deutschland bei etwa 3,3 von 5 Punkten, global bei Glassdoor um 3,6 von 5 –
-        also mittelmäßige Noten mit Luft nach oben.
-      </li>
-      <li>
-        Positiv hervorgehoben werden internationales Umfeld, Kollegialität und gewisse Aufstiegschancen.
-      </li>
-      <li>
-        Kritik gibt es vor allem an hohem Leistungsdruck, starker Kennzahlenorientierung und belastenden Schichtsystemen
-        in Logistik und Fulfillment.
-      </li>
-    </ul>
-    <p>
-      Insgesamt wirkt Amazon als Arbeitgeber stabil, aber fordernd – passend zu einem Unternehmen, das massiv auf Effizienz
-      und Skalierung getrimmt ist.
+      Amazon beschäftigte zum 30.09.2026 1.638.000 Menschen, 4 % mehr als ein Jahr zuvor. In der Verwaltung fielen seit Oktober 2025 rund 30.000 Stellen weg, die Gesamtzahl stieg trotzdem. Auf Glassdoor liegt Amazon bei rund 3,5 von 5 Punkten, je nach Unterseite zwischen 3,4 und 3,6 [Momentaufnahme November 2026]. Für einen Konzern dieser Größe mit sehr unterschiedlichen Tätigkeiten von der Lagerhalle bis zur Chipentwicklung sagt ein Durchschnittswert wenig. Systematische, vergleichbare Daten zur Zufriedenheit der Beschäftigten nach Bereichen liegen für diese Analyse nicht vor. [NICHT VERFÜGBAR]
     </p>
 
-    <h2>9) Chancen</h2>
-    <ul>
-      <li>
-        <strong>Cloud- &amp; KI-Wachstum:</strong> Als Marktführer im Cloud-Computing hat AWS starke Ausgangspositionen.
-        KI-Dienste, spezialisierte Chips und neue Modelle können Wachstum und Margen weiter treiben.
-      </li>
-      <li>
-        <strong>E-Commerce-Dominanz:</strong> Der anhaltende Trend zum Online-Shopping spielt Amazon in die Karten.
-        Marktanteilsgewinne, internationale Expansion und mehr Marketplace-Umsatz (Drittverkäufergebühren, Werbung)
-        sind Wachstumstreiber.
-      </li>
-      <li>
-        <strong>Werbegeschäft:</strong> Amazons Werbeumsätze wachsen schnell und sind hochmargig.
-        Der Zugang zu realen Kaufdaten macht das Werbeinventar besonders attraktiv.
-      </li>
-      <li>
-        <strong>Prime-Ökosystem:</strong> Mehr zahlende Prime-Mitglieder bedeuten wiederkehrende Einnahmen und stärkere
-        Kundenbindung – inklusive zusätzlicher Dienste (Streaming, Gaming, Gesundheit).
-      </li>
-      <li>
-        <strong>Automation &amp; neue Geschäftsbereiche:</strong> Robotik, autonome Fahrzeuge und Gesundheitsangebote
-        können Kosten senken oder neue Ertragssäulen schaffen.
-      </li>
-    </ul>
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>10) Chancen &amp; Risiken</h2>
 
-    <h2>10) Risiken</h2>
-    <ul>
-      <li>
-        <strong>Intensiver Wettbewerb:</strong> In Cloud, Handel und Werbung steht Amazon unter starkem Druck.
-        Microsoft und Google wachsen in der Cloud aktuell schneller, im Handel gewinnen spezialisierte Plattformen
-        und lokale Champions an Gewicht.
-      </li>
-      <li>
-        <strong>Regulierung:</strong> Kartellverfahren, Datenschutzauflagen und neue Gesetze (z. B. DMA, Lieferketten)
-        können Geschäftsmodelle verteuern, Praktiken verbieten oder Strafen nach sich ziehen.
-      </li>
-      <li>
-        <strong>Hohe Investitionen &amp; Free-Cashflow-Druck:</strong> Die aktuelle CapEx-Welle drückt den freien Cashflow.
-        Wenn die erwarteten Renditen aus Cloud und KI ausbleiben, kann das die Rendite für Eigentümer schmälern.
-      </li>
-      <li>
-        <strong>Arbeitskosten &amp; Logistikrisiken:</strong> Streiks, höhere Lohnforderungen und steigende Energie- sowie
-        Transportkosten können die ohnehin dünneren Handelsspannen weiter belasten.
-      </li>
-      <li>
-        <strong>Konjunktur &amp; Technologierisiken:</strong> Eine Rezession kann Konsumausgaben bremsen.
-        Cyberangriffe oder große Cloud-Ausfälle würden Vertrauen und Erträge gefährden.
-      </li>
-    </ul>
+    <!-- SVG Risk/Opportunity Visual -->
+    <div class="chart-wrap">
+      <div class="chart-title">Chancen &amp; Risiken im Überblick</div>
+      <svg viewBox="0 0 680 290" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:680px; display:block; margin:0 auto;">
 
-    <h2>11) Alien-Fazit <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-5fb821)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-5fb821)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg></h2>
+        <!-- Left: Chancen -->
+        <text x="160" y="22" text-anchor="middle" fill="#00cc66" font-size="12" font-family="monospace" letter-spacing="2">CHANCEN</text>
+        <line x1="20" y1="28" x2="300" y2="28" stroke="#00cc66" stroke-width="1" opacity="0.4"/>
+
+        <rect x="20"  y="38"  width="280" height="48" fill="#001a0d" rx="5" stroke="#00cc66" stroke-width="0.5" opacity="0.7"/>
+        <text x="32" y="57" fill="#00cc66" font-size="12" font-family="monospace" font-weight="bold">AWS beschleunigt</text>
+        <text x="32" y="74" fill="#777" font-size="10" font-family="Arial">+39 % im Q3, Auftragsbestand 578 Mrd. USD</text>
+
+        <rect x="20"  y="95"  width="280" height="48" fill="#001a0d" rx="5" stroke="#00cc66" stroke-width="0.5" opacity="0.7"/>
+        <text x="32" y="114" fill="#00cc66" font-size="12" font-family="monospace" font-weight="bold">Marge auf Rekord</text>
+        <text x="32" y="131" fill="#777" font-size="10" font-family="Arial">13,9 % operativ im Q3, Werbung wächst mit</text>
+
+        <rect x="20"  y="152" width="280" height="48" fill="#001a0d" rx="5" stroke="#00cc66" stroke-width="0.5" opacity="0.7"/>
+        <text x="32" y="171" fill="#00cc66" font-size="12" font-family="monospace" font-weight="bold">Beteiligungen ~289 Mrd. USD</text>
+        <text x="32" y="188" fill="#777" font-size="10" font-family="Arial">Anthropic hat den Börsengang beantragt</text>
+
+        <rect x="20"  y="209" width="280" height="48" fill="#001a0d" rx="5" stroke="#00cc66" stroke-width="0.5" opacity="0.7"/>
+        <text x="32" y="228" fill="#00cc66" font-size="12" font-family="monospace" font-weight="bold">Logistik als Burggraben</text>
+        <text x="32" y="245" fill="#777" font-size="10" font-family="Arial">trägt Prime, Marktplatz und Werbung zugleich</text>
+
+        <!-- Right: Risiken -->
+        <text x="520" y="22" text-anchor="middle" fill="#ff4444" font-size="12" font-family="monospace" letter-spacing="2">RISIKEN</text>
+        <line x1="380" y1="28" x2="660" y2="28" stroke="#ff4444" stroke-width="1" opacity="0.4"/>
+
+        <rect x="380" y="38"  width="280" height="48" fill="#1a0000" rx="5" stroke="#ff4444" stroke-width="0.5" opacity="0.7"/>
+        <text x="392" y="57" fill="#ff4444" font-size="12" font-family="monospace" font-weight="bold">Investitionen steigen weiter</text>
+        <text x="392" y="74" fill="#777" font-size="10" font-family="Arial">~220 Mrd. 2026, 2027 mehr, FCF −42,4 Mrd.</text>
+
+        <rect x="380" y="95"  width="280" height="48" fill="#1a0000" rx="5" stroke="#ff4444" stroke-width="0.5" opacity="0.7"/>
+        <text x="392" y="114" fill="#ff4444" font-size="12" font-family="monospace" font-weight="bold">Schulden statt Nettocash</text>
+        <text x="392" y="131" fill="#777" font-size="10" font-family="Arial">Nettoverschuldung ~66 Mrd., plus Leasing</text>
+
+        <rect x="380" y="152" width="280" height="48" fill="#1a0000" rx="5" stroke="#ff4444" stroke-width="0.5" opacity="0.7"/>
+        <text x="392" y="171" fill="#ff4444" font-size="12" font-family="monospace" font-weight="bold">Gewinn hängt an Anthropic</text>
+        <text x="392" y="188" fill="#777" font-size="10" font-family="Arial">40 % des Vorsteuergewinns nicht operativ</text>
+
+        <rect x="380" y="209" width="280" height="48" fill="#1a0000" rx="5" stroke="#ff4444" stroke-width="0.5" opacity="0.7"/>
+        <text x="392" y="228" fill="#ff4444" font-size="12" font-family="monospace" font-weight="bold">Regulierung</text>
+        <text x="392" y="245" fill="#777" font-size="10" font-family="Arial">FTC-Prozess ab 29.03.2027, Werbeklage, DMA</text>
+      </svg>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <h2>11) Alien-Fazit <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-amzn" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-amzn" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-amzn)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-amzn)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg></h2>
+
     <p>
-      Amazon ist aus meiner Sicht ein <strong>hochwertiger, aber komplexer Multiprodukt-Konzern</strong>:
-      starke Marktpositionen in E-Commerce, Cloud und Werbung, robuste Bilanz, kräftiges Wachstum –
-      aber auch hohe Investitionen, politische Risiken und niedrigere Margen als bei reinen Software-Monstern.
+      Gemessen an Marge und operativem Ergebnis steht Amazon so stark da wie nie: höchste operative Marge der Firmengeschichte, eine Cloud, die fast doppelt so schnell wächst wie vor einem Jahr, ein Auftragsbestand von 578 Mrd. USD. Wer nur das Geschäft betrachtet, sieht keinen Grund zur Sorge.
     </p>
     <p>
-      Die Bewertung ist ambitioniert, aber nicht mehr völlig abgehoben. Wer heute einsteigt, wettet darauf,
-      dass Amazon seine Cloud- und KI-Strategie erfolgreich umsetzt, das Werbegeschäft weiter ausbaut und die
-      Regulierungswelle ohne massive Strukturbrüche übersteht.
+      Das KGV von 21 erzählt trotzdem eine falsche Geschichte. Ohne die Buchgewinne aus Anthropic liegt es bei rund 35. Und während der Gewinn auf dem Papier steigt, fließt mehr Geld in Rechenzentren, als das Geschäft einbringt. Amazon, Ende 2025 noch ein Konzern mit mehr Geld als Schulden, finanziert seinen Ausbau jetzt zu einem guten Teil über Anleihen in fünf Währungen. Ein Teil der Nachfrage, die diese Investitionen rechtfertigen soll, kommt von zwei KI-Laboren, an denen Amazon selbst beteiligt ist. Wie groß dieser Teil ist, legt Amazon nicht offen. Das muss nicht schiefgehen. Es ist aber eine andere Firma als die, die ich vor einem Jahr analysiert habe.
     </p>
     <p>
-      <strong>Für mich als Alien-Investor:</strong> Amazon kann als <em>Baustein</em> in einem langfristigen Depot sinnvoll sein –
-      insbesondere für Investoren, die ein Engagement im globalen Infrastruktur-Backbone (Handel + Cloud) suchen
-      und bereit sind, Investitionswellen und politische Risiken auszuhalten.
+      Die nächsten Prüfsteine sind konkret: ob die Investitionen im vierten Quartal tatsächlich auf rund 48 Mrd. USD sinken oder die Prognose von 220 Mrd. überschritten wird, die Zahl für 2027 mit den Jahreszahlen im Februar, ob AWS das Wachstum über 40 % erreicht, zu welchem Preis Anthropic an die Börse geht und wie der Kartellprozess ab dem 29. März 2027 verläuft.
     </p>
+
+    <blockquote>
+      „Den Gewinn aus Anthropic hat Amazon gebucht. Bezahlt wird er erst, wenn jemand die Aktien kauft. Die Rechenzentren dagegen sind schon bezahlt.“ <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -14 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><line x1="10.32" y1="2.98" x2="0.6" y2="-5.2" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><circle cx="0.6" cy="-5.2" r="3" fill="#00ffcc"/><line x1="25.68" y1="2.98" x2="35.4" y2="-5.2" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><circle cx="35.4" cy="-5.2" r="3" fill="#00ffcc"/><path fill="url(#ai-head-footer)" stroke="#00ffcc" stroke-width="0.8" d="M1.64 16.04A16.36 16.04 0 0 1 34.36 16.04C34.36 22.24 23.25 36 18 36C12.75 36 1.64 22.24 1.64 16.04Z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M5.41 15.84A6.55 3.52 32 0 0 9.1 22.29A6.55 3.52 32 0 0 16.51 22.78A6.55 3.52 32 0 0 12.83 16.33A6.55 3.52 32 0 0 5.41 15.84ZM19.49 22.78A6.55 3.52 -32 0 0 26.9 22.29A6.55 3.52 -32 0 0 30.59 15.84A6.55 3.52 -32 0 0 23.17 16.33A6.55 3.52 -32 0 0 19.49 22.78Z"/><circle cx="9.49" cy="17.35" r="0.9" fill="#00ffcc"/><circle cx="26.51" cy="17.35" r="0.9" fill="#00ffcc"/></svg>
+    </blockquote>
+
+    <p style="font-size:0.8em; color:#888;">
+      Datenstand und Quellen: Kurse bis Schluss 06.11.2026 (Nasdaq, Yahoo Finance). Analyzer-Screenshots vom 07.11.2026 (Yahoo-Finance-Basis, Jahresgewinne aus SEC-Berichten). Quartalszahlen aus den Amazon-Pressemitteilungen zum dritten Quartal 2025 bis zum dritten Quartal 2026, dem Quartalsbericht 10-Q zum 30.09.2026 und den Jahresberichten 10-K 2021–2025; Zitate aus der Pressemitteilung und der Telefonkonferenz vom 29.10.2026. Anthropic: Registrierungsantrag S-1 bei der SEC (26.10.2026). FTC-Mitteilungen vom 25.09.2025 und 31.08.2026, EU-Kommission vom 25.06.2026, Bundeskartellamt vom 05.02.2026. Marktanteile: Synergy Research Group (Q3 2026, über CRN). Wettbewerber laut Pressemitteilungen von Microsoft, Alphabet und Walmart. ACSI-Studie vom 27.01.2026. Konsens: stockanalysis.com und Yahoo Finance, 06./07.11.2026. Mit [SCHÄTZUNG] oder [eigene Rechnung] markierte Werte sind eigene Rechnungen oder fremde Prognosen, keine Tatsachen.
+    </p>
+
   </article>
 
-  <div class="offenlegung" style="font-size:0.9em; color:#bbb; border-left:3px solid #00ffcc; padding:10px 14px; margin:24px 0;"><strong>Offenlegung (Stand 22.10.2026):</strong> Analyse veröffentlicht am 30.11.2025 um 12:38 Uhr. Ich halte Aktien von Amazon. Meine Bücher verkaufe ich auch über Amazon (Kindle Direct Publishing) und erhalte dafür Tantiemen. Bewertungen, Fair Value und Kursziele sind meine Einschätzung, keine Tatsachen. Mit * markierte Links sind Affiliate-Links (Werbung). So entstehen meine Analysen: <a href="/analyse-methodik.html">Methodik</a>.</div>
+
+  <div class="offenlegung" style="font-size:0.9em; color:#bbb; border-left:3px solid #00ffcc; padding:10px 14px; margin:24px 0;"><strong>Offenlegung (Stand 08.11.2026):</strong> Analyse veröffentlicht am 30.11.2025 um 12:38 Uhr, komplett überarbeitet am 08.11.2026 um 00:39 Uhr. Ich halte Aktien von Amazon. Meine Bücher verkaufe ich auch über Amazon (Kindle Direct Publishing) und erhalte dafür Tantiemen. Bewertungen, Fair Value und Kursziele sind meine Einschätzung, keine Tatsachen. Mit * markierte Links sind Affiliate-Links (Werbung). So entstehen meine Analysen: <a href="/analyse-methodik.html">Methodik</a>.</div>
+
+  <!-- Disclaimer -->
+  <div class="box" style="border-color: #333; border-style: dashed;">
+    <p style="font-size: 0.88em; color: #888; margin: 0;">
+      <strong style="color: #aaa;">Hinweis:</strong> Diese Analyse ist keine Finanz-, Steuer- oder Rechtsberatung — nur eine Einordnung der Zahlen aus Alien-Perspektive. Alle Angaben nach bestem Wissen, ohne Gewähr. Investitionsentscheidungen liegen in eigener Verantwortung.
+    </p>
+  </div>
+
+  <!-- Tools Box -->
   <div class="box">
     <h3>Tools für echte Eigentümer</h3>
     <p style="font-size:0.95em;">
-      Tools, die ich selbst nutze – für Bitcoin-Selbstverwahrung und digitale Souveränität:
+      Tools, die ich selbst nutze — für Bitcoin-Selbstverwahrung und digitale Souveränität:
     </p>
     <ul>
       <li>
         <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Blitz" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> <strong>Bitcoin kaufen in Europa – 21bitcoin:</strong><br>
-        Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges sats stapeln – ohne Shitcoins.<br>
-        Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du dauerhaft 0,2&nbsp;Prozentpunkte Gebührenreduktion
-        auf Sofort- und Sparplankäufe.<br>
+        Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges Sats stapeln — ohne Shitcoins.<br>
+        Mit dem Code <strong>ALIENINVESTOR</strong> erhältst du dauerhaft 0,2 Prozentpunkte Gebührenreduktion auf Sofort- und Sparplankäufe.<br>
         <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a><sup class="aff" title="Affiliate-Link (Werbung)">*</sup>
       </li>
       <li>
         ₿ <strong>Bitcoin in Selbstverwahrung:</strong><br>
-        Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox – es gibt die klassische BitBox02 und die neue
-        BitBox für iPhone (Nova).<br>
+        Hardware-Wallet statt Börsenkonto. Ich nutze die BitBox — es gibt die klassische BitBox02 und die neue BitBox für iPhone (Nova).<br>
         <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a><sup class="aff" title="Affiliate-Link (Werbung)">*</sup>
       </li>
       <li>
         <svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-label="Satellitenschüssel" role="img"><path d="M4 24 A16 16 0 0 1 20 8" fill="#00ffcc" fill-opacity="0.06" stroke="#00ffcc" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="8" r="2.8" fill="#00ffcc"/><line x1="20" y1="8" x2="28" y2="4" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><path d="M15 13 A6 6 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/><path d="M12 16 A9 9 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.45"/></svg> <strong>Privacy &amp; Mail:</strong><br>
-        Für E-Mail, VPN und Cloud nutze ich Proton – datensparsam und ohne Big-Tech-Abhängigkeit.<br>
+        Für E-Mail, VPN und Cloud nutze ich Proton — datensparsam und ohne Big-Tech-Abhängigkeit.<br>
         <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a><sup class="aff" title="Affiliate-Link (Werbung)">*</sup>
       </li>
     </ul>
@@ -396,7 +642,7 @@
   </div>
 
   <div class="like-button">
-    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -14 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="10.32" y1="2.98" x2="0.6" y2="-5.2" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><circle cx="0.6" cy="-5.2" r="3" fill="#00ffcc"/><line x1="25.68" y1="2.98" x2="35.4" y2="-5.2" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><circle cx="35.4" cy="-5.2" r="3" fill="#00ffcc"/><path fill="url(#ai-head-5fb821)" stroke="#00ffcc" stroke-width="0.8" d="M1.64 16.04A16.36 16.04 0 0 1 34.36 16.04C34.36 22.24 23.25 36 18 36C12.75 36 1.64 22.24 1.64 16.04Z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M5.41 15.84A6.55 3.52 32 0 0 9.1 22.29A6.55 3.52 32 0 0 16.51 22.78A6.55 3.52 32 0 0 12.83 16.33A6.55 3.52 32 0 0 5.41 15.84ZM19.49 22.78A6.55 3.52 -32 0 0 26.9 22.29A6.55 3.52 -32 0 0 30.59 15.84A6.55 3.52 -32 0 0 23.17 16.33A6.55 3.52 -32 0 0 19.49 22.78Z"/><circle cx="9.49" cy="17.35" r="0.9" fill="#00ffcc"/><circle cx="26.51" cy="17.35" r="0.9" fill="#00ffcc"/></svg> Gefällt mir</button>
+    <button id="likeButton"><svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -14 44 51" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="10.32" y1="2.98" x2="0.6" y2="-5.2" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><circle cx="0.6" cy="-5.2" r="3" fill="#00ffcc"/><line x1="25.68" y1="2.98" x2="35.4" y2="-5.2" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><circle cx="35.4" cy="-5.2" r="3" fill="#00ffcc"/><path fill="url(#ai-head-footer)" stroke="#00ffcc" stroke-width="0.8" d="M1.64 16.04A16.36 16.04 0 0 1 34.36 16.04C34.36 22.24 23.25 36 18 36C12.75 36 1.64 22.24 1.64 16.04Z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M5.41 15.84A6.55 3.52 32 0 0 9.1 22.29A6.55 3.52 32 0 0 16.51 22.78A6.55 3.52 32 0 0 12.83 16.33A6.55 3.52 32 0 0 5.41 15.84ZM19.49 22.78A6.55 3.52 -32 0 0 26.9 22.29A6.55 3.52 -32 0 0 30.59 15.84A6.55 3.52 -32 0 0 23.17 16.33A6.55 3.52 -32 0 0 19.49 22.78Z"/><circle cx="9.49" cy="17.35" r="0.9" fill="#00ffcc"/><circle cx="26.51" cy="17.35" r="0.9" fill="#00ffcc"/></svg> Gefällt mir</button>
     <span id="likeMsg" style="color:#888; font-size:0.9em;"></span>
   </div>
 
@@ -419,6 +665,7 @@
     })();
   </script>
 
+
   <div class="back-links">
     <a href="aktien-analysen.html" style="font-size: 1.1em;"><svg style="width:0.9em;height:0.9em;vertical-align:-0.12em;filter:drop-shadow(0 0 2px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="7" y1="3" x2="7" y2="7" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><rect x="4" y="7" width="6" height="9" rx="1" fill="#00ffcc"/><line x1="7" y1="16" x2="7" y2="21" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><line x1="16" y1="7" x2="16" y2="11" stroke="#00cc88" stroke-width="1.5" stroke-linecap="round"/><rect x="13" y="11" width="6" height="12" rx="1" fill="none" stroke="#00cc88" stroke-width="1.5"/><line x1="16" y1="23" x2="16" y2="27" stroke="#00cc88" stroke-width="1.5" stroke-linecap="round"/><line x1="25" y1="4" x2="25" y2="9" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><rect x="22" y="9" width="6" height="11" rx="1" fill="#00ffcc"/><line x1="25" y1="20" x2="25" y2="26" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/></svg> Zurück zu den Aktienanalysen</a>
     <a href="blog.html" style="font-size: 1.1em;">← Zurück zum Blog</a>
@@ -432,21 +679,18 @@
         <svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Energie" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Energie aufladen
         <span style="font-size: 0.6em; color: #888; font-weight: normal; vertical-align: middle;">(Spenden)</span>
       </h3>
-      
       <a href="spenden.html" style="color:#00ffcc; text-decoration:none; font-size:1.2em; border-bottom: 2px solid #00ffcc; padding-bottom: 4px; display: inline-block;">
         Treibstoff für das Mutterschiff senden
       </a>
-      
       <p style="color:#888; font-size: 0.95em; line-height: 1.5; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
-        Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-5fb821" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-5fb821" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-5fb821)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-5fb821)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg>
+        Danke für deine Unterstützung – für freie Inhalte, Finanzsouveränität und den außerirdischen Widerstand! <svg style="width:1.6em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" aria-label="UFO" role="img"><defs><radialGradient id="ufo-dome-footer" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#5fffe0"/><stop offset="60%" stop-color="#1a3a38"/><stop offset="100%" stop-color="#0a1a1e"/></radialGradient><linearGradient id="ufo-body-footer" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a5a5a"/><stop offset="50%" stop-color="#2a3638"/><stop offset="100%" stop-color="#101818"/></linearGradient></defs><path d="M 22 16 A 14 10 0 0 1 50 16 Z" fill="url(#ufo-dome-footer)" stroke="#00ffcc" stroke-width="0.4" opacity="0.9"/><ellipse cx="36" cy="18" rx="34" ry="5" fill="url(#ufo-body-footer)" stroke="#00ffcc" stroke-width="0.4"/><ellipse cx="36" cy="20.5" rx="26" ry="2.2" fill="#0c1416"/><ellipse cx="36" cy="22" rx="20" ry="3" fill="#1a2628" stroke="#00ffcc" stroke-width="0.3" opacity="0.8"/><circle cx="20" cy="20.5" r="1.3" fill="#fff"/><circle cx="27" cy="21.2" r="1.3" fill="#fff"/><circle cx="34" cy="21.6" r="1.3" fill="#fff"/><circle cx="41" cy="21.6" r="1.3" fill="#fff"/><circle cx="48" cy="21.2" r="1.3" fill="#fff"/><circle cx="55" cy="20.5" r="1.3" fill="#fff"/></svg>
       </p>
   </div>
 
   <footer>
     <p><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Kontakt" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> Kontakt: <a href="mailto:kontakt@alien-investor.org">kontakt@alien-investor.org</a> <span style="color:#666; font-size:0.85em;">·</span> <a href="/kontakt@alien-investor.org/pubkey.asc.key" download="kontakt-alien-investor-pubkey.asc" style="color:#555; font-size:0.8em; text-decoration:none;" title="PGP Public Key für verschlüsselte Nachrichten">PGP Key</a> · <a href="https://www.mein.online-impressum.de/alien-investor/" target="_blank" rel="noopener" style="color:#555; font-size:0.8em; text-decoration:none;">Impressum</a> · <a href="/lizenzen.html" class="lizenzen-link" style="color:#555; font-size:0.8em; text-decoration:none;">Lizenzen</a></p>
-    
     <p style="margin-top: 20px;">
-      <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -14 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-5fb821" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="10.32" y1="2.98" x2="0.6" y2="-5.2" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><circle cx="0.6" cy="-5.2" r="3" fill="#00ffcc"/><line x1="25.68" y1="2.98" x2="35.4" y2="-5.2" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><circle cx="35.4" cy="-5.2" r="3" fill="#00ffcc"/><path fill="url(#ai-head-5fb821)" stroke="#00ffcc" stroke-width="0.8" d="M1.64 16.04A16.36 16.04 0 0 1 34.36 16.04C34.36 22.24 23.25 36 18 36C12.75 36 1.64 22.24 1.64 16.04Z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M5.41 15.84A6.55 3.52 32 0 0 9.1 22.29A6.55 3.52 32 0 0 16.51 22.78A6.55 3.52 32 0 0 12.83 16.33A6.55 3.52 32 0 0 5.41 15.84ZM19.49 22.78A6.55 3.52 -32 0 0 26.9 22.29A6.55 3.52 -32 0 0 30.59 15.84A6.55 3.52 -32 0 0 23.17 16.33A6.55 3.52 -32 0 0 19.49 22.78Z"/><circle cx="9.49" cy="17.35" r="0.9" fill="#00ffcc"/><circle cx="26.51" cy="17.35" r="0.9" fill="#00ffcc"/></svg> <strong>Haftungsausschluss:</strong><br><br>
+      <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -14 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-footer" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="10.32" y1="2.98" x2="0.6" y2="-5.2" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><circle cx="0.6" cy="-5.2" r="3" fill="#00ffcc"/><line x1="25.68" y1="2.98" x2="35.4" y2="-5.2" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><circle cx="35.4" cy="-5.2" r="3" fill="#00ffcc"/><path fill="url(#ai-head-footer)" stroke="#00ffcc" stroke-width="0.8" d="M1.64 16.04A16.36 16.04 0 0 1 34.36 16.04C34.36 22.24 23.25 36 18 36C12.75 36 1.64 22.24 1.64 16.04Z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M5.41 15.84A6.55 3.52 32 0 0 9.1 22.29A6.55 3.52 32 0 0 16.51 22.78A6.55 3.52 32 0 0 12.83 16.33A6.55 3.52 32 0 0 5.41 15.84ZM19.49 22.78A6.55 3.52 -32 0 0 26.9 22.29A6.55 3.52 -32 0 0 30.59 15.84A6.55 3.52 -32 0 0 23.17 16.33A6.55 3.52 -32 0 0 19.49 22.78Z"/><circle cx="9.49" cy="17.35" r="0.9" fill="#00ffcc"/><circle cx="26.51" cy="17.35" r="0.9" fill="#00ffcc"/></svg> <strong>Haftungsausschluss:</strong><br><br>
       Dieser Artikel stellt keine Finanz-, Steuer- oder Rechtsberatung dar.<br>
       Ich teile hier meine persönliche Alien-Meinung – unabhängig, rebellisch und frei.<br>
       Investieren ist mit Risiken verbunden – du kannst Geld verlieren. Prüfe Informationen selbst
