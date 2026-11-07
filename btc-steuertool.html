@@ -309,6 +309,16 @@ mkdir Broker</pre>
     </p>
 
     <div class="box" style="border-color: #ffaa00; background: #0a0800;">
+      <h3 style="color: #ffaa00; margin-top: 0;">⚡ Update November 2026 (v1.6): Kurstabellen und Pflege</h3>
+      <ul>
+        <li><strong>Kurstabellen bis 06.11.2026:</strong> BTC/EUR-Tagesschlusskurse (Bitstamp) für in BTC bezahlte Gebühren, vorher bis 14.08.2026, und EZB-Referenzkurse für USD und CHF, vorher bis 01.10.2026. In BTC bezahlte Gebühren vom 15.08. bis 06.11.2026 werden jetzt bewertet statt als „nicht ermittelt“ gemeldet. Käufe und Verkäufe in USD oder CHF vom 02.10. bis 06.11.2026 (z.&nbsp;B. Swissquote, Pocket) werden jetzt umgerechnet; vorher brach die Berechnung dort mit einem Hinweis ab. Die Tabellen bis zum Jahresende folgen im Januar.</li>
+        <li><strong>Bug-Report auf kleinen Handys:</strong> Der Dialog lässt sich jetzt scrollen. Auf kleinen Bildschirmen (z.&nbsp;B. Galaxy A5) waren Titel, Schließen-Kreuz und der Knopf „Senden“ vorher abgeschnitten und nicht erreichbar.</li>
+        <li><strong>Eigenes Käfer-Symbol</strong> vor „Bug melden“ statt des System-Emojis, damit es auf jedem Gerät gleich aussieht.</li>
+        <li><strong>Strengere Kontrollen vor dem Veröffentlichen:</strong> Der eigene Android-Code der fertigen App wird Befehl für Befehl mit dem geprüften Stand verglichen (Bildschirmschutz, Speichern-Dialog, Link-Sperre); die Link-Liste und die Konfiguration ohne Debug-Zugang werden zusätzlich einzeln geprüft. Die Builds brechen ab, wenn unter den Quellen eine nicht versionierte Datei liegt oder ein abgebrochener Lauf Reste hinterlassen hat.</li>
+      </ul>
+    </div>
+
+    <div class="box" style="border-color: #ffaa00; background: #0a0800;">
       <h3 style="color: #ffaa00; margin-top: 0;">⚡ Update Oktober 2026 (v1.5): Pflege-Release</h3>
       <ul>
         <li><strong>Desktop: Browser-Engine aktualisiert</strong> auf Electron 44.7.2 (Chromium 152) – mit den seit 44.5.1 übernommenen Fehlerkorrekturen aus Chromium und seinen Bausteinen (u. a. V8, ANGLE, Skia, PDFium, WebRTC). Die App hat weiterhin keinen Netzzugriff.</li>
@@ -484,7 +494,7 @@ mkdir Broker</pre>
     </p>
     <p><strong>Voraussetzung:</strong> Flatpak mit dem Flathub-Remote (für die Laufzeit <code>org.freedesktop.Platform</code> 25.08, die Flatpak beim Installieren nachlädt):</p>
     <pre><code>flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo</code></pre>
-    <p><strong>1. Drei Dateien laden:</strong> <code>btc-steuertool-1.5-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code>.</p>
+    <p><strong>1. Drei Dateien laden:</strong> <code>btc-steuertool-1.6-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code>.</p>
     <p><strong>2. Signatur prüfen.</strong> Die Prüfsumme ist mit dem GPG-Release-Schlüssel von Alien Investor signiert — derselbe Schlüssel wie bei Alien Pass, Sachwert-Tresor und Alien Notes:
       <a href="alien-investor-release-key.asc">alien-investor-release-key.asc</a>. Den Fingerabdruck über einen zweiten Weg vergleichen:</p>
     <p><code style="display:block; margin:0.35em 0; padding:0.5em 0.6em; font-size:0.8em;">100F 9E25 BFAE A807 DBC3  57D7 50C0 D785 83BF CB81</code></p>
@@ -492,7 +502,7 @@ mkdir Broker</pre>
 gpg --verify SHA256SUMS.asc SHA256SUMS      # „Korrekte Signatur von "Alien Investor (Release-Signatur) …"“
 sha256sum -c SHA256SUMS                     # „…flatpak: OK“</code></pre>
     <p><strong>3. Installieren und starten:</strong></p>
-    <pre><code>flatpak install --user btc-steuertool-1.5-linux-x86_64.flatpak
+    <pre><code>flatpak install --user btc-steuertool-1.6-linux-x86_64.flatpak
 flatpak run org.alieninvestor.steuertool</code></pre>
     <p><strong>Update:</strong> Eine neue Bündel-Datei lässt sich (Flatpak 1.14) nicht über die installierte legen. Neue Version laden und prüfen, dann
       <code>flatpak uninstall --user org.alieninvestor.steuertool</code> und neu installieren. Die App speichert keine Steuerdaten, nur Sprache und Darstellung.</p>
@@ -510,7 +520,7 @@ devices=dri;</code></pre>
       <ul>
         <li><strong>Interne Prüfung, kein unabhängiges Audit.</strong> Vor dem Release lief ein interner Security-Audit über die App-Hüllen und die jüngsten Änderungen am Rechenkern; alle Funde wurden vor der Veröffentlichung behoben.</li>
         <li><strong>Am Desktop kein Schutz vor Bildschirmfotos</strong> — nur die Android-App sperrt Screenshots.</li>
-        <li><strong>Kurstabellen haben einen Datenstand.</strong> Liegt ein Kauf oder Verkauf in USD/CHF nach dem Ende der eingebauten EZB-Tabelle, bricht die Berechnung mit einer Erklärung ab, statt einen alten Kurs zu nehmen. Für in Bitcoin gezahlte Gebühren nach dem Ende der BTC-Kurstabelle (Stand v1.2: 14.08.2026) weist der Report den Gewinn als „nicht ermittelt“ aus und warnt. Neue Kurse kommen mit einem App-Update, spätestens im Januar für das abgelaufene Jahr.</li>
+        <li><strong>Kurstabellen haben einen Datenstand.</strong> Liegt ein Kauf oder Verkauf in USD/CHF nach dem Ende der eingebauten EZB-Tabelle, bricht die Berechnung mit einer Erklärung ab, statt einen alten Kurs zu nehmen. Für in Bitcoin gezahlte Gebühren nach dem Ende der BTC-Kurstabelle (Stand v1.6: 06.11.2026) weist der Report den Gewinn als „nicht ermittelt“ aus und warnt. Neue Kurse kommen mit einem App-Update, spätestens im Januar für das abgelaufene Jahr.</li>
         <li><strong>Keine Steuerberatung.</strong> Die App rechnet, die Verantwortung für die Erklärung bleibt bei dir.</li>
       </ul>
     </div>

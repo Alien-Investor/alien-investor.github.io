@@ -302,6 +302,16 @@ mkdir Broker</pre>
     </p>
 
     <div class="box" style="border-color: #ffaa00; background: #0a0800;">
+      <h3 style="color: #ffaa00; margin-top: 0;">⚡ Update November 2026 (v1.6): rate tables and maintenance</h3>
+      <ul>
+        <li><strong>Rate tables up to 6 November 2026:</strong> BTC/EUR daily closing prices (Bitstamp) for fees paid in BTC, previously up to 14 August 2026, and ECB reference rates for USD and CHF, previously up to 1 October 2026. Fees paid in BTC from 15 August to 6 November 2026 are now valued instead of being reported as “not determined”. Purchases and sales in USD or CHF from 2 October to 6 November 2026 (e.g. Swissquote, Pocket) are now converted; previously the calculation stopped there with a notice. The tables up to the end of the year follow in January.</li>
+        <li><strong>Bug report on small phones:</strong> the dialog now scrolls. On small screens (e.g. Galaxy A5) the title, the close button and the “Send” button were previously cut off and could not be reached.</li>
+        <li><strong>Custom bug icon</strong> in front of “Report a bug” instead of the system emoji, so it looks the same on every device.</li>
+        <li><strong>Stricter checks before publishing:</strong> the app's own Android code in the finished app is compared instruction by instruction with the reviewed state (screen protection, save dialog, link lock); the link list and the configuration without debug access are also checked separately. The builds stop if a source file is not under version control or an aborted run has left leftovers behind.</li>
+      </ul>
+    </div>
+
+    <div class="box" style="border-color: #ffaa00; background: #0a0800;">
       <h3 style="color: #ffaa00; margin-top: 0;">⚡ Update October 2026 (v1.5): maintenance release</h3>
       <ul>
         <li><strong>Desktop: browser engine updated</strong> to Electron 44.7.2 (Chromium 152) – with the fixes backported since 44.5.1 from Chromium and its components (including V8, ANGLE, Skia, PDFium, WebRTC). The app still has no network access.</li>
@@ -477,7 +487,7 @@ mkdir Broker</pre>
     </p>
     <p><strong>Requirement:</strong> Flatpak with the Flathub remote (for the runtime <code>org.freedesktop.Platform</code> 25.08, which Flatpak fetches during installation):</p>
     <pre><code>flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo</code></pre>
-    <p><strong>1. Download three files:</strong> <code>btc-steuertool-1.5-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code>.</p>
+    <p><strong>1. Download three files:</strong> <code>btc-steuertool-1.6-linux-x86_64.flatpak</code>, <code>SHA256SUMS</code>, <code>SHA256SUMS.asc</code>.</p>
     <p><strong>2. Check the signature.</strong> The checksum file is signed with the Alien Investor GPG release key — the same key as for Alien Pass, Sachwert-Tresor and Alien Notes:
       <a href="../alien-investor-release-key.asc">alien-investor-release-key.asc</a>. Compare the fingerprint through a second channel:</p>
     <p><code style="display:block; margin:0.35em 0; padding:0.5em 0.6em; font-size:0.8em;">100F 9E25 BFAE A807 DBC3  57D7 50C0 D785 83BF CB81</code></p>
@@ -485,7 +495,7 @@ mkdir Broker</pre>
 gpg --verify SHA256SUMS.asc SHA256SUMS      # "Good signature from "Alien Investor (Release-Signatur) …""
 sha256sum -c SHA256SUMS                     # "…flatpak: OK"</code></pre>
     <p><strong>3. Install and start:</strong></p>
-    <pre><code>flatpak install --user btc-steuertool-1.5-linux-x86_64.flatpak
+    <pre><code>flatpak install --user btc-steuertool-1.6-linux-x86_64.flatpak
 flatpak run org.alieninvestor.steuertool</code></pre>
     <p><strong>Update:</strong> a new bundle cannot be installed over the existing one (Flatpak 1.14). Download and check the new version, then
       <code>flatpak uninstall --user org.alieninvestor.steuertool</code> and install again. The app stores no tax data, only language and theme.</p>
@@ -503,7 +513,7 @@ devices=dri;</code></pre>
       <ul>
         <li><strong>Internal review, not an independent audit.</strong> Before the release an internal security audit covered the app shells and the latest changes to the calculation core; all findings were fixed before publication.</li>
         <li><strong>No screenshot protection on the desktop</strong> — only the Android app blocks screenshots.</li>
-        <li><strong>Rate tables have a cut-off date.</strong> If a purchase or sale in USD/CHF lies after the end of the built-in ECB table, the calculation stops with an explanation instead of using an old rate. For fees paid in bitcoin after the end of the BTC price table (as of v1.2: 14 August 2026) the report marks the gain as “not determined” and warns. New rates come with an app update, at the latest in January for the past year.</li>
+        <li><strong>Rate tables have a cut-off date.</strong> If a purchase or sale in USD/CHF lies after the end of the built-in ECB table, the calculation stops with an explanation instead of using an old rate. For fees paid in bitcoin after the end of the BTC price table (as of v1.6: 6 November 2026) the report marks the gain as “not determined” and warns. New rates come with an app update, at the latest in January for the past year.</li>
         <li><strong>No tax advice.</strong> The app calculates; responsibility for the tax return stays with you.</li>
       </ul>
     </div>
