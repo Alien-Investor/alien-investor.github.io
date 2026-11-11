@@ -561,7 +561,8 @@
         <li><strong>Read the header:</strong> price with the change from the previous month (1M), market cap, P/E and
           earnings per share over the last twelve months.</li>
         <li><strong>Click through the tabs:</strong> Fair Value, Multiples, Dividends, Quality Check. The small
-          <strong>?</strong> in each tab jumps straight to the matching section of this guide.</li>
+          <strong>?</strong> in each tab jumps straight to the matching section of this guide. If something about a stock's
+          data needs explaining, <a href="#kerstin">Kerstin's box</a> appears below it.</li>
       </ol>
     </div>
 
@@ -586,6 +587,7 @@
       <a href="#multiples">Multiples</a>
       <a href="#dividends">Dividends</a>
       <a href="#quality-check">Quality Check</a>
+      <a href="#kerstin">Kerstin's notes</a>
       <a href="#assessment">Alien Assessment</a>
       <a href="#faq">FAQ</a>
     </nav>
@@ -685,7 +687,7 @@
     <div class="tipp">
       <p class="tipp-titel">Good to know</p>
       <p>
-        If a large share of P/E values is filtered out, for example after big write-downs, the tab shows a yellow note.
+        If a large share of P/E values is filtered out, for example after big write-downs, <a href="#kerstin">Kerstin</a> shows a warning in the tab.
         The stock may then fit a plain P/E grid poorly. For banks the analyzer shows no P/CF average: their operating cash
         flow moves mainly with trading assets.
       </p>
@@ -726,9 +728,10 @@
         October. October therefore stays empty and November's bar holds two payments.
       </p>
       <p>
-        <strong>ADRs and dual listings:</strong> for some US listings of foreign companies whose dividend history at Yahoo Finance has gaps,
-        the analyzer converts the payments on the home exchange using the exchange rate on the ex-date and, for ADRs, the number of
-        shares per ADR (a dual listing such as Enbridge is the same share). The sidebar then says “Dividends converted from …”.
+        <strong>ADRs and dual listings:</strong> for some US listings of foreign companies whose dividend history at Yahoo Finance has gaps
+        or deviations, the analyzer converts the payments on the home exchange using the exchange rate on the ex-date and, for ADRs, the number of
+        shares per ADR (a dual listing such as Enbridge is the same share). <a href="#kerstin">Kerstin</a> then names the home
+        listing in the tab and, where one ADR represents several shares, the ratio.
       </p>
     </div>
 
@@ -788,6 +791,26 @@
         the purchase of their investments in operating cash flow.
       </p>
     </div>
+
+    <h2 id="kerstin">Kerstin's notes</h2>
+    <p>
+      Kerstin, the onboard AI from my books, only speaks up in a tab when something about the selected stock's data is
+      special. Her box sits below the time range buttons and is collapsed; tapping the button opens it. A warning sign on
+      the button means at least one note affects how meaningful a ratio is. Kerstin describes the data, she doesn't rate the
+      stock. For most stocks the box doesn't appear.
+    </p>
+    <ul class="zust">
+      <li><strong>Fair Value:</strong> banks (Yahoo's revenue is essentially a net figure, so their P/S can't be compared with other
+        industries), a gap of more than one fiscal year in the earnings series (losses or no report) and financial statements
+        in another currency without a matching exchange rate.</li>
+      <li><strong>Multiples:</strong> many P/E values outside the plotted range, and a share count that has more than doubled
+        or halved since the last fiscal year. The analyzer then shows no average for P/B, P/S and P/CF.</li>
+      <li><strong>Dividends:</strong> banks and insurers, because a special dividend can lift the yield over the last twelve
+        months, and dividends the analyzer converts from the home exchange.</li>
+    </ul>
+    <p>
+      At the bottom of the box, “More in the guide” leads to the section for that tab.
+    </p>
 
     <h2 id="assessment">Alien Assessment</h2>
     <p>

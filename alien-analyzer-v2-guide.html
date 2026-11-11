@@ -561,7 +561,8 @@
         <li><strong>Kopfzeile lesen:</strong> Kurs mit Veränderung zum Vormonat (1M), Marktkapitalisierung, KGV und
           Gewinn je Aktie der letzten zwölf Monate.</li>
         <li><strong>Tabs durchklicken:</strong> Fairer Wert, Multiples, Dividenden, Qualitätscheck. Das kleine
-          <strong>?</strong> in jedem Tab springt direkt zum passenden Abschnitt dieses Guides.</li>
+          <strong>?</strong> in jedem Tab springt direkt zum passenden Abschnitt dieses Guides. Ist an den Daten einer
+          Aktie etwas besonders, erscheint darunter <a href="#kerstin">Kerstins Kasten</a>.</li>
       </ol>
     </div>
 
@@ -586,6 +587,7 @@
       <a href="#multiples">Multiples</a>
       <a href="#dividenden">Dividenden</a>
       <a href="#qualitaetscheck">Qualitätscheck</a>
+      <a href="#kerstin">Kerstins Hinweise</a>
       <a href="#einordnung">Alien-Einordnung</a>
       <a href="#fragen">Häufige Fragen</a>
     </nav>
@@ -686,7 +688,7 @@
     <div class="tipp">
       <p class="tipp-titel">Gut zu wissen</p>
       <p>
-        Fällt ein großer Teil der KGV-Werte heraus, etwa nach hohen Abschreibungen, zeigt der Tab einen gelben Hinweis.
+        Fällt ein großer Teil der KGV-Werte heraus, etwa nach hohen Abschreibungen, warnt <a href="#kerstin">Kerstin</a> im Tab.
         Die Aktie passt dann möglicherweise schlecht in ein reines KGV-Raster. Bei Banken zeigt der Analyzer keinen KCV-Ø: Ihr operativer
         Cashflow schwankt vor allem mit den Handelsbeständen.
       </p>
@@ -728,8 +730,9 @@
       </p>
       <p>
         <strong>ADRs und Doppel-Listings:</strong> Für einige US-Listings ausländischer Unternehmen, deren Dividendenreihe bei Yahoo Finance
-        Lücken hat, rechnet der Analyzer die Zahlungen der Heimatbörse mit dem Devisenkurs am Ex-Tag und, bei ADRs, der Zahl der
-        Aktien je ADR um (ein Doppel-Listing wie Enbridge ist dieselbe Aktie). In der Seitenleiste steht dann „Dividenden aus … umgerechnet“.
+        Lücken oder Abweichungen hat, rechnet der Analyzer die Zahlungen der Heimatbörse mit dem Devisenkurs am Ex-Tag und, bei ADRs, der Zahl der
+        Aktien je ADR um (ein Doppel-Listing wie Enbridge ist dieselbe Aktie). <a href="#kerstin">Kerstin</a> nennt dann im Tab das
+        Heimatpapier und, wenn ein ADR mehrere Aktien verbrieft, das Verhältnis.
       </p>
     </div>
 
@@ -788,6 +791,27 @@
         BDCs, die den Kauf ihrer Anlagen im operativen Cashflow verbuchen.
       </p>
     </div>
+
+    <h2 id="kerstin">Kerstins Hinweise</h2>
+    <p>
+      Kerstin, die Bord-KI aus meinen Büchern, meldet sich in einem Tab nur, wenn an den Daten der gewählten Aktie etwas
+      besonders ist. Ihr Kasten sitzt unter den Zeitraum-Knöpfen und ist eingeklappt, ein Tipp auf den Knopf öffnet ihn.
+      Ein Warnzeichen am Knopf heißt: Mindestens ein Hinweis betrifft die Aussagekraft einer Kennzahl. Kerstin beschreibt
+      die Datenlage, sie bewertet die Aktie nicht. Bei den meisten Aktien bleibt der Kasten weg.
+    </p>
+    <ul class="zust">
+      <li><strong>Fairer Wert:</strong> Banken (der Umsatz bei Yahoo ist im Wesentlichen eine Nettogröße, das KUV ist deshalb nicht mit
+        anderen Branchen vergleichbar), eine Lücke von mehr als einem Geschäftsjahr in der Gewinnreihe (Verluste oder keine
+        Meldung) und ein Abschluss in anderer Währung ohne passenden Devisenkurs.</li>
+      <li><strong>Multiples:</strong> viele KGV-Werte außerhalb des gezeichneten Bereichs und eine Aktienzahl, die sich
+        gegenüber dem letzten Geschäftsjahr mehr als verdoppelt oder halbiert hat. Dann zeigt der Analyzer für KBV, KUV und
+        KCV keinen Ø.</li>
+      <li><strong>Dividenden:</strong> Banken und Versicherer, weil eine Sonderdividende die Rendite der letzten zwölf Monate
+        heben kann, und Dividenden, die der Analyzer aus der Heimatbörse umrechnet.</li>
+    </ul>
+    <p>
+      Unten im Kasten führt „Mehr dazu im Guide“ zum Abschnitt des jeweiligen Tabs.
+    </p>
 
     <h2 id="einordnung">Alien-Einordnung</h2>
     <p>
