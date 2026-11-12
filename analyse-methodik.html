@@ -198,7 +198,8 @@
         nicht. Bis zum 6. November 2026 lief in beiden Fällen der Gewinn des letzten Geschäftsjahres flach weiter (Samsung
         Electronics: KGV-Median 17,4 statt 13,9 und „79 % über“ statt „35 % unter Fair Value“, Stand 5. November 2026). Liegt der Kurs mehr als 15 % über oder
         unter dem Fair Value, zeigt der Analyzer „über“ bzw. „unter Fair Value“, sonst „fair bewertet“. Der KGV-Fächer
-        zeigt zum Vergleich den Gewinn je Aktie mal 10, 15, 20, 25 und 30. Bei REITs sowie Bergbau- und Metallwerten
+        zeigt zum Vergleich den Gewinn je Aktie mal 10, 15, 20, 25 und 30. Bei REITs (Branche „REIT“ laut Yahoo Finance;
+        Immobilienfirmen ohne REIT-Status rechnet er wie andere Unternehmen) sowie Bergbau- und Metallwerten
         zeigt der Analyzer keinen Fair Value, weil das KGV dort wenig aussagekräftig ist, ebenso wenn der Median des
         KGV über 60 liegt, wenn es weniger als drei Jahresgewinne in Folge gibt (siehe KGV-Median) oder wenn das Unternehmen
         in den letzten zwölf Monaten Verlust gemacht hat.</li>
@@ -322,10 +323,16 @@
         seit 2018 auch die nicht realisierten Kursgewinne und -verluste des Aktienportfolios, der Analyzer behandelt
         ihn deshalb immer als verzerrt.</li>
       <li><strong>PEG:</strong> KGV geteilt durch das eigene Gewinnwachstum der letzten Jahre (jährliche Rate,
-        höchstens 40 %). Analystenschätzungen nutzt der Analyzer dafür nicht.</li>
+        höchstens 40 %). Analystenschätzungen nutzt der Analyzer dafür nicht. Die Rate läuft vom ältesten positiven
+        Jahresgewinn der Yahoo-Jahre bis zum letzten Geschäftsjahr, meist über drei Jahre; endet es mit Verlust, gibt es keine Rate. Der Qualitätscheck zeigt sie in der Zeile
+        „Gewinnwachstum“ mit diesem Zeitraum, über 40 % als „≥ 40 %“.</li>
       <li><strong>Alien-Einordnung:</strong> regelbasierte Textbausteine je nach Branche, Sonderfall und
         Kennzahlenlage. Sie beschreiben, wo die Kennzahlen im historischen Vergleich stehen und worauf es in der
-        Branche ankommt. Sie sind keine Kauf- oder Verkaufsempfehlung und keine Prüfung des Einzelfalls.</li>
+        Branche ankommt. Sie sind keine Kauf- oder Verkaufsempfehlung und keine Prüfung des Einzelfalls. Bei
+        Verlust, negativem Free Cashflow und negativer Eigenkapitalrendite spricht sie von „Pre-Revenue oder tief
+        defizitär“ nur, wenn der Verlust im letzten Geschäftsjahr mindestens ein Viertel des Umsatzes erreicht oder kein
+        Umsatz vorliegt. Die VIE-Struktur nennt sie nur bei einer festen Liste chinesischer Firmen, deren Jahresbericht
+        eine beschreibt; andere erkennt sie nicht.</li>
       <li>Die Daten können falsch oder unvollständig sein. Der Analyzer zeigt bei bekannten Datenproblemen einen
         Hinweis, erkennt aber nicht jeden Fehler.</li>
     </ul>

@@ -773,7 +773,7 @@
           <tr><td>Debt/Equity</td><td>Schulden im Verhältnis zum Eigenkapital.</td></tr>
           <tr><td>Free Cashflow</td><td>Operativer Cashflow minus Investitionen, meist der letzten zwölf Monate (Stand unter „Vergleich“). Bei Banken und BDCs „N/A“.</td></tr>
           <tr><td>Eigenkapitalquote</td><td>Eigenkapital ÷ Bilanzsumme.</td></tr>
-          <tr><td>Gewinnwachstum 3J</td><td>Jährliches Wachstum des Gewinns je Aktie über die letzten Geschäftsjahre.</td></tr>
+          <tr><td>Gewinnwachstum</td><td>Jährliches Wachstum des Gewinns je Aktie über die letzten Geschäftsjahre, der Zeitraum steht unter „Vergleich“ (meist drei Jahre). Über 40 % zeigt der Analyzer „≥ 40 %“.</td></tr>
           <tr><td>Return on Equity</td><td>Gewinn ÷ Eigenkapital.</td></tr>
           <tr><td>Aktienanzahl</td><td>Veränderung der Aktienzahl, der Zeitraum steht unter „Vergleich“:
             <span class="ampel a-gruen"></span>Rückkäufe ab 5 % weniger,
@@ -803,8 +803,8 @@
       <li><strong>Fairer Wert:</strong> Banken (der Umsatz bei Yahoo ist im Wesentlichen eine Nettogröße, das KUV ist deshalb nicht mit
         anderen Branchen vergleichbar), eine Lücke von mehr als einem Geschäftsjahr in der Gewinnreihe (Verluste oder keine
         Meldung), ein Abschluss in anderer Währung ohne passenden Devisenkurs sowie Öl- und Gaskonzerne,
-        Düngemittelhersteller und Reedereien, deren Gewinne mit Rohstoffpreisen bzw. Frachtraten schwanken und damit
-        auch der Fair Value.</li>
+        Düngemittelhersteller, Reedereien, die Autobranche und die Grundstoffchemie, deren Gewinne mit Rohstoffpreisen,
+        Frachtraten bzw. Absatz und Konjunktur schwanken und damit auch der Fair Value.</li>
       <li><strong>Multiples:</strong> viele KGV-Werte außerhalb des gezeichneten Bereichs und eine Aktienzahl, die sich
         gegenüber dem letzten Geschäftsjahr mehr als verdoppelt oder halbiert hat. Dann zeigt der Analyzer für KBV, KUV und
         KCV keinen Ø. Bei REITs erklärt Kerstin, warum Abschreibungen bzw. Neubewertungen der Immobilien die KGV-Linie
@@ -824,10 +824,17 @@
     </p>
     <ul class="zust">
       <li><strong>REITs:</strong> Das KGV ist verzerrt durch Abschreibungen, Maßstab ist der FFO.</li>
+      <li><strong>Immobilienfirmen ohne REIT-Status:</strong> Bestandshalter, Projektentwickler, Makler. Wertänderungen
+        der Immobilien und Projektverkäufe bewegen den Gewinn.</li>
       <li><strong>Banken:</strong> niedrige Eigenkapitalquote ohne Warnsignal, dazu bankeigene Kennzahlen wie Zinsmarge und
         Kernkapitalquote.</li>
       <li><strong>BDCs:</strong> Nettoinventarwert (NAV) und wie gut der Nettoanlageertrag (NII) die Dividende deckt.</li>
-      <li><strong>Rohstoffunternehmen und Düngemittelhersteller:</strong> Zyklische Gewinne verzerren die Multiples.</li>
+      <li><strong>Rohstoffunternehmen, Düngemittelhersteller, Autobranche und Grundstoffchemie:</strong> Zyklische Gewinne
+        verzerren die Multiples.</li>
+      <li><strong>Firmen mit Geschäft in China:</strong> VIE-Struktur bei einer festen Liste belegter Firmen (etwa Alibaba,
+        Tencent, Baidu), sonst Regulierung und Kapitalverkehrskontrollen.</li>
+      <li><strong>Verlustfirmen:</strong> „Pre-Revenue oder tief defizitär“ nur, wenn der Verlust im letzten Geschäftsjahr
+        mindestens ein Viertel des Umsatzes erreicht oder kein Umsatz vorliegt, sonst „Verlust bei laufendem Geschäft“.</li>
       <li><strong>Royalty-Gesellschaften, Pipelines, Luxusmarken:</strong> Geschäftsmodelle mit eigener Bewertungslogik.</li>
       <li><strong>Bitcoin-Vehikel wie Strategy (MSTR):</strong> kein klassisches Unternehmen, der Maßstab ist der Abstand
         zum Bitcoin-Bestand. Den rechnet der Analyzer nicht, weil er die Zahl der gehaltenen Bitcoins nicht einliest. Er zeigt das KBV:

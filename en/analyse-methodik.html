@@ -198,7 +198,8 @@
         Electronics: P/E median 17.4 instead of 13.9 and "79% above" instead of "35% below fair value", as of 5 November
         2026). If the price is more than 15% above or below fair
         value, the analyzer shows "above" or "below fair value", otherwise "fairly valued". For comparison, the P/E
-        fan shows earnings per share times 10, 15, 20, 25 and 30. For REITs and mining and metals companies the analyzer
+        fan shows earnings per share times 10, 15, 20, 25 and 30. For REITs (industry “REIT” according to Yahoo Finance;
+        real estate companies without REIT status are treated like other companies) and mining and metals companies the analyzer
         shows no fair value, because the P/E ratio is of little use there, nor when the median P/E is above 60, when
         there are fewer than three consecutive annual earnings figures (see P/E median) or when the company made a loss over
         the last twelve months.</li>
@@ -322,10 +323,15 @@
         business. Berkshire Hathaway is the exception: its earnings have included unrealized gains and losses on the
         stock portfolio since 2018, so the analyzer always treats them as distorted.</li>
       <li><strong>PEG:</strong> P/E divided by the company's own earnings growth over recent years (annual rate,
-        capped at 40%). The analyzer does not use analyst estimates for it.</li>
+        capped at 40%). The analyzer does not use analyst estimates for it. The rate runs from the oldest positive annual
+        earnings figure in Yahoo's years to the last fiscal year, usually over three years; if that year was a loss, there is no rate. The quality check shows it in the row
+        “Earnings growth” with that period, and above 40% as “≥ 40%”.</li>
       <li><strong>Alien assessment:</strong> rule-based text modules depending on sector, special case and metrics.
         They describe where the metrics stand against their history and what matters in the sector. They are not a
-        recommendation to buy or sell and not a review of the individual case.</li>
+        recommendation to buy or sell and not a review of the individual case. With a loss, negative free cash flow
+        and negative return on equity, it speaks of “pre-revenue or deeply loss-making” only if the loss in the last
+        fiscal year reaches at least a quarter of revenue or no revenue is available. It mentions a VIE structure only for
+        a fixed list of Chinese companies whose annual report describes one; it does not detect others.</li>
       <li>The data can be wrong or incomplete. The analyzer shows a notice for known data problems, but it does not
         catch every error.</li>
     </ul>

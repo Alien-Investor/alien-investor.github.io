@@ -773,7 +773,7 @@
           <tr><td>Debt/Equity</td><td>Debt relative to equity.</td></tr>
           <tr><td>Free cash flow</td><td>Operating cash flow minus capital expenditure, usually over the last twelve months (period under “Benchmark”). “N/A” for banks and BDCs.</td></tr>
           <tr><td>Equity ratio</td><td>Equity ÷ total assets.</td></tr>
-          <tr><td>Earnings growth 3Y</td><td>Annual growth of earnings per share over the last fiscal years.</td></tr>
+          <tr><td>Earnings growth</td><td>Annual growth of earnings per share over the last fiscal years; the period is shown under “Benchmark” (usually three years). Above 40% the analyzer shows “≥ 40%”.</td></tr>
           <tr><td>Return on equity</td><td>Earnings ÷ equity.</td></tr>
           <tr><td>Share count</td><td>Change in the number of shares; the period is shown under “Benchmark”:
             <span class="ampel a-gruen"></span>buybacks from 5% fewer,
@@ -802,8 +802,9 @@
     <ul class="zust">
       <li><strong>Fair Value:</strong> banks (Yahoo's revenue is essentially a net figure, so their P/S can't be compared with other
         industries), a gap of more than one fiscal year in the earnings series (losses or no report) and financial statements
-        in another currency without a matching exchange rate, as well as oil and gas companies, fertilizer producers and
-        shipping companies, whose earnings swing with commodity prices or freight rates, and with them the fair value.</li>
+        in another currency without a matching exchange rate, as well as oil and gas companies, fertilizer producers,
+        shipping companies, the auto industry and commodity chemicals, whose earnings swing with commodity prices, freight
+        rates or sales volumes and the economy, and with them the fair value.</li>
       <li><strong>Multiples:</strong> many P/E values outside the plotted range, and a share count that has more than doubled
         or halved since the last fiscal year. The analyzer then shows no average for P/B, P/S and P/CF. For REITs, Kerstin
         explains why depreciation or revaluation of the properties moves the P/E line without any cash moving, and that the
@@ -823,10 +824,17 @@
     </p>
     <ul class="zust">
       <li><strong>REITs:</strong> P/E is distorted by depreciation, FFO is the yardstick.</li>
+      <li><strong>Real estate companies without REIT status:</strong> property owners, developers, brokers. Changes in
+        property values and project sales move earnings.</li>
       <li><strong>Banks:</strong> a low equity ratio is no warning sign; bank-specific metrics such as net interest margin
         and CET1 ratio matter.</li>
       <li><strong>BDCs:</strong> net asset value (NAV) and how well net investment income covers the dividend.</li>
-      <li><strong>Commodity producers and fertilizer makers:</strong> cyclical earnings distort the multiples.</li>
+      <li><strong>Commodity producers, fertilizer makers, the auto industry and commodity chemicals:</strong> cyclical
+        earnings distort the multiples.</li>
+      <li><strong>Companies with business in China:</strong> VIE structure for a fixed list of verified companies (such as
+        Alibaba, Tencent, Baidu), otherwise regulation and capital controls.</li>
+      <li><strong>Loss-making companies:</strong> “pre-revenue or deeply loss-making” only if the loss in the last fiscal year
+        reaches at least a quarter of revenue or no revenue is available, otherwise “loss with an ongoing business”.</li>
       <li><strong>Royalty companies, pipelines, luxury brands:</strong> business models with their own valuation logic.</li>
       <li><strong>Bitcoin vehicles such as Strategy (MSTR):</strong> not a conventional company, the yardstick is the
         premium or discount to its bitcoin holdings. The analyzer does not calculate it, because it does not read in the
