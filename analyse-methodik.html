@@ -203,6 +203,18 @@
         zeigt der Analyzer keinen Fair Value, weil das KGV dort wenig aussagekräftig ist, ebenso wenn der Median des
         KGV über 60 liegt, wenn es weniger als drei Jahresgewinne in Folge gibt (siehe KGV-Median) oder wenn das Unternehmen
         in den letzten zwölf Monaten Verlust gemacht hat.</li>
+      <li><strong>Kurs in Bitcoin oder Gold:</strong> Auf Wunsch zeigt der Reiter Fairer Wert den Kurs in Satoshi
+        (1 Bitcoin = 100 Millionen Satoshi) oder in Feinunzen Gold statt in der Kurswährung, nur als Kurslinie ohne
+        Fair-Value-Linie und KGV-Fächer. Für jeden Monat teilt der Analyzer den Monatsschlusskurs (im laufenden Monat den
+        letzten Kurs) durch den Bitcoin-Kurs in US-Dollar (BTC-USD bei Yahoo Finance, ab September 2014) bzw. den
+        Monatsschluss der Gold-Futures (GC=F), der meist leicht vom Spotpreis abweicht. Kurse in anderen Währungen rechnet
+        er vorher mit dem Devisenkurs des jeweiligen Monats in US-Dollar um, Kurse in Pence, Cent oder Agorot zuerst in
+        Pfund, Rand oder Schekel. Fehlt der Devisenkurs eines Monats, nimmt er den des Vormonats. Einen Monat, dessen
+        Devisenkurs um mehr als den Faktor 1,5 von beiden Nachbarmonaten abweicht, während diese höchstens um den Faktor 1,2
+        auseinanderliegen, lässt er leer (Stand November 2026 führt Yahoo Finance den koreanischen Won in fünf Monaten
+        zwischen 2015 und 2017 rund um den Faktor 10.000 daneben). Die Zeile darunter
+        vergleicht den ersten und den letzten Monat mit Wert im gewählten Zeitraum, in Bitcoin bzw. Gold und in der
+        Kurswährung, ohne Dividenden. Sie beschreibt die Vergangenheit und ist keine Prognose.</li>
       <li><strong>KGV-Median:</strong> Für jeden Monat teilt der Analyzer den Kurs durch den Gewinn je Aktie. Als Gewinn je
         Aktie eines Geschäftsjahres nimmt er den verwässerten Gewinn je Aktie laut Yahoo Finance, also den Gewinn geteilt
         durch die Aktienzahl dieses Jahres. Yahoo Finance liefert rund vier Jahre. Fehlt dieser Wert für ein Geschäftsjahr,

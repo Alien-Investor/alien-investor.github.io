@@ -650,6 +650,38 @@
       </p>
     </div>
 
+    <h3 id="kurs-in-bitcoin">Kurs in Bitcoin oder Gold</h3>
+    <p>
+      Über dem Chart wählst du, worin der Kurs gemessen wird: in der Kurswährung der Aktie (Standard), in Bitcoin oder in
+      Gold. Bei <strong>BTC</strong> zeigt der Chart, wie viele Satoshi eine Aktie im jeweiligen Monat gekostet hat
+      (1 Bitcoin = 100 Millionen Satoshi), bei <strong>GOLD</strong>, wie viele Feinunzen Gold. Die Achse ist dann
+      logarithmisch, gleiche prozentuale Veränderungen sind gleich hoch. Fair-Value-Linie und KGV-Fächer blendet der
+      Analyzer dabei aus. Seitenleiste und Fair-Value-Indikator bleiben wie in der Kurswährung: Es sind Verhältnisse, sie
+      hängen nicht von der Einheit ab.
+    </p>
+    <p>
+      Unter dem Chart steht dann eine Zeile der Form „Seit MM/JJJJ gegenüber Bitcoin ±X % · Kurs in EUR ±Y %“. Sie
+      vergleicht den ersten und den letzten Monat mit Wert im gewählten Zeitraum, einmal gemessen in Bitcoin bzw. Gold,
+      einmal in der Kurswährung. Gerechnet wird mit Monatsschlusskursen (im laufenden Monat dem letzten Kurs) und ohne
+      Dividenden; mit ihnen läge die Rendite höher. Kurse in anderen Währungen als US-Dollar rechnet der Analyzer mit dem
+      Devisenkurs des jeweiligen Monats in Dollar um und teilt dann durch den Bitcoin-Kurs in Dollar (BTC-USD) bzw. den
+      Goldpreis.
+    </p>
+
+    <div class="tipp">
+      <p class="tipp-titel">Gut zu wissen</p>
+      <p>
+        <strong>Zeitraum:</strong> Bitcoin-Kurse liefert Yahoo Finance ab September 2014. Reicht der gewählte Zeitraum
+        weiter zurück, beginnt die Bitcoin-Linie dort, die Zeile nennt den ersten Monat. Der Goldpreis ist der
+        Monatsschluss der Gold-Futures (GC=F), er weicht meist leicht vom Spotpreis ab. Monate, in denen Yahoos
+        Devisenkurs offensichtlich falsch ist (Sprung um mehr als Faktor 1,5 und im Folgemonat zurück), bleiben leer.
+      </p>
+      <p>
+        Die Zeile beschreibt, wie sich der Kurs gemessen in Bitcoin oder Gold entwickelt hat. Sie sagt nichts darüber,
+        was künftig besser läuft.
+      </p>
+    </div>
+
     <h2 id="multiples">Tab 2 – Multiples</h2>
     <img src="aa2-tab2-titel.webp" width="1200" height="670" loading="lazy" alt="Tab 2 – Multiples" class="tab-title-img">
     <p>

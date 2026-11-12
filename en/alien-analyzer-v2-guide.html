@@ -649,6 +649,36 @@
       </p>
     </div>
 
+    <h3 id="price-in-bitcoin">Price in bitcoin or gold</h3>
+    <p>
+      Above the chart you choose what the price is measured in: the stock's trading currency (default), bitcoin or gold.
+      With <strong>BTC</strong> the chart shows how many satoshis one share cost in each month (1 bitcoin = 100 million
+      satoshis), with <strong>GOLD</strong> how many troy ounces of gold. The axis is then logarithmic, so equal
+      percentage changes have equal height. The analyzer hides the fair value line and the P/E fan in this mode. The
+      sidebar and the fair value indicator stay as in the trading currency: they are ratios and do not depend on the unit.
+    </p>
+    <p>
+      Below the chart a line of the form “Since MM/YYYY versus bitcoin ±X% · price in EUR ±Y%” appears. It compares the
+      first and the last month with a value in the selected period, once measured in bitcoin or gold, once in the
+      trading currency. It uses month-end prices (the latest price in the current month) and leaves out dividends; with
+      them the return would be higher. Prices in currencies other than the US dollar are converted into dollars at each
+      month's exchange rate and then divided by the bitcoin price in dollars (BTC-USD) or the gold price.
+    </p>
+
+    <div class="tipp">
+      <p class="tipp-titel">Good to know</p>
+      <p>
+        <strong>Period:</strong> Yahoo Finance provides bitcoin prices from September 2014. If the selected period reaches
+        further back, the bitcoin line starts there; the line names the first month. The gold price is the month-end close
+        of gold futures (GC=F), which usually deviates slightly from the spot price. Months in which Yahoo's exchange rate
+        is obviously wrong (a jump by more than a factor of 1.5 and back the following month) stay empty.
+      </p>
+      <p>
+        The line describes how the price developed measured in bitcoin or gold. It says nothing about what will do
+        better in the future.
+      </p>
+    </div>
+
     <h2 id="multiples">Tab 2 – Multiples</h2>
     <img src="/aa2-tab2-titel.webp" width="1200" height="670" loading="lazy" alt="Tab 2 – Multiples" class="tab-title-img">
     <p>
