@@ -87,6 +87,12 @@
       border-top: 1px solid #222;
       text-align: center;
     }
+    /* Video (Kanaltrailer), wie grapheneos-sicheres-android.html */
+    .video-wrapper { display: flex; justify-content: center; margin: 2em 0; }
+    .video-container { position: relative; width: 100%; max-width: 560px; padding-bottom: 31.25%; height: 0;
+      border: 1px solid #00ffcc; border-radius: 8px; overflow: hidden; box-shadow: 0 0 15px rgba(0, 255, 204, 0.1); }
+    @media (max-width: 600px) { .video-container { padding-bottom: 56.25%; } }
+    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
   </style>
 </head>
 <body>
@@ -112,6 +118,18 @@
   <p>
     I don't sit in the cockpit alone — <a href="charaktere.html">meet the rest of the crew here</a>.
   </p>
+
+  <div class="video-wrapper">
+    <div class="video-container">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/--TJpEZZ3xE"
+        title="Alien Investor: Bitcoin, GrapheneOS and True Ownership"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
 
   <p>
     Money is stored life energy. Whoever controls your money controls you. Inflation is not an accident — it is a feature. Banks do not hold your money, they owe you money. That distinction is everything when the system breaks.
