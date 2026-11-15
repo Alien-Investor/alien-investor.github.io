@@ -293,7 +293,11 @@
         also shows none for banks, since their operating cash flow moves with balance sheet items such as trading assets,
         loans and deposits. The
         current P/S is the price divided by revenue per share over the last twelve months at today's share count; if Yahoo
-        Finance has no usable twelve-month revenue, the analyzer uses revenue per share of the last fiscal year. The current
+        Finance has no usable twelve-month revenue, the analyzer uses revenue per share of the last fiscal year. For banks
+        and insurers it has used, since 15 November 2026, the twelve-month figure from the same Yahoo Finance time series
+        as the annual values. The twelve-month revenue it otherwise uses defines revenue differently for them; until then,
+        the current P/S and the average compared different quantities for them (as of 15 November 2026: a difference of more
+        than 5% at 23 of the 30 banks in the test list; at Banco do Brasil the figure otherwise used was 52% lower). The current
         P/CF is the price divided by operating cash flow per share over the last twelve months (or of the last fiscal year if Yahoo Finance
         has no more recent twelve-month figure, both at today's share count). Until 2 November 2026,
         book value and revenue per share were only available at the balance sheet dates of roughly the last one and a

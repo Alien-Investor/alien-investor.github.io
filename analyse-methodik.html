@@ -295,7 +295,10 @@
         Analyzer keinen. Beim KCV zeigt er auch bei Banken keinen, denn ihr operativer Cashflow schwankt mit Bilanzposten
         wie Handelsbeständen, Krediten und Einlagen. Das aktuelle KUV ist der Kurs geteilt durch den Umsatz der letzten zwölf Monate je Aktie
         zur heutigen Aktienzahl; liefert Yahoo Finance keinen verwertbaren Zwölfmonatsumsatz, nimmt der Analyzer den Umsatz je Aktie des
-        letzten Geschäftsjahres. Das aktuelle KCV ist der Kurs geteilt durch den operativen Cashflow der letzten zwölf Monate je Aktie (liefert Yahoo Finance keinen
+        letzten Geschäftsjahres. Bei Banken und Versicherern nimmt er seit dem 15. November 2026 den Zwölfmonatswert aus derselben
+        Zeitreihe von Yahoo Finance, aus der auch die Jahreswerte stammen. Der sonst genutzte Zwölfmonatsumsatz grenzt den Umsatz bei
+        ihnen anders ab. Bis dahin verglichen aktuelles KUV und Schnitt bei ihnen verschiedene Größen (Stand 15. November 2026: bei 23
+        von 30 Banken der Testliste mehr als 5 % Unterschied; bei Banco do Brasil lag der sonst genutzte Wert um 52 % niedriger). Das aktuelle KCV ist der Kurs geteilt durch den operativen Cashflow der letzten zwölf Monate je Aktie (liefert Yahoo Finance keinen
         neueren Zwölfmonatswert, der des letzten Geschäftsjahres, beide zur heutigen Aktienzahl). Bis zum 2. November 2026
         lagen Buchwert und Umsatz je Aktie nur zu den Bilanzstichtagen der letzten rund anderthalb Jahre vor; für die Zeit
         davor setzte der Analyzer den ältesten dieser Werte an. Der Schnitt folgte damit vor allem dem Kurs und lag meist
