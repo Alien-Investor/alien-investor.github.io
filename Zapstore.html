@@ -170,6 +170,7 @@
 
   <h1>Nostr Zapstore: Der Angriff auf das App-Store-Monopol von Apple & Google</h1>
   <p class="byline"><em>von Alien Investor</em></p>
+  <p class="byline"><em>Stand: November 2026, Zapstore 2.0.5</em></p>
 
   <article id="content">
     <p>
@@ -204,28 +205,26 @@
       Die Folge: Apple zwang Damus, die Funktion zu beschneiden.“
     </blockquote>
     <p>
-      Das zeigt: Echte Peer-to-Peer-Ökonomie ist in den geschlossenen Stores unerwünscht. Wer das Geschäftsmodell der Gatekeeper bedroht, fliegt raus.
+      Das zeigt: Echte Peer-to-Peer-Ökonomie ist in den geschlossenen Stores unerwünscht. Damus durfte bleiben, aber nur ohne Zaps unter Beiträgen.
     </p>
 
     <h3>Die Illusion der Sicherheit</h3>
     <p>
       Das Argument „Nur der App Store ist sicher“ ist brüchig. Zentrale Instanzen sind ein „Single Point of Failure“.
-      Erinnern wir uns an den Skandal um „Web of Trust“ (WOT): Ein zentrales Tool, das Sicherheit versprach,
+      Erinnern wir uns an den Skandal um die Browser-Erweiterung „Web of Trust“ (WOT): Ein zentrales Tool, das Sicherheit versprach,
       aber im Hintergrund unter anderem Nutzerdaten an Dritte weitergab. Wenn der Wächter korrupt ist oder gehackt wird, sind alle Nutzer gleichzeitig betroffen.
     </p>
 
     <h2>2. Der Nostr Zapstore: Technologische Dekonstruktion</h2>
     <p>
-      Der „Zapstore“ ist keine zentrale Firma und kein zentraler Server. Er ist ein Protokoll. Er basiert auf mehreren Nostr-Standards (NIPs),
-      die zusammen eine dezentrale Infrastruktur bilden.
+      Der Zapstore ist ein App-Laden für Android. Er baut auf Nostr auf, einem offenen Protokoll, und nutzt mehrere seiner Standards (NIPs). Ab Werk ist ein Katalog dabei, der des Zapstore. Du kannst weitere hinzufügen, und jeder Katalog setzt eigene Regeln.
     </p>
 
-    <h3>Das Fundament: App-Events (Kind 32267) & Releases (NIP-51)</h3>
+    <h3>Das Fundament: App-, Release- und Datei-Events (NIP-82)</h3>
     <p>
-      Wie findest du eine App ohne Google? Über Nostr-Events.
-      Entwickler veröffentlichen ein signiertes App-Event (kind:32267, NIP-82) ins Nostr-Netzwerk. Darin stehen Name, Icon, Tags und Verweise auf Releases.
-      Releases werden als „Release Artifact Sets“ (kind:30063, NIP-51) modelliert und referenzieren die Datei-Metadaten (kind:1063, NIP-94) inklusive Download-URL und Hash.
-      Es ist ein dezentrales App-Manifest. Niemand kann verhindern, dass ein Entwickler dieses Event sendet. Es ist „permissionless“.
+      Wie findest du eine App ohne Google? Über Nostr-Events nach NIP-82.
+      Eine App ist ein signiertes Event (kind:32267) mit Name, Icon und Tags. Jedes Release (kind:30063) verweist auf Datei-Events (kind:3063) mit Download-Adresse und Prüfsumme.
+      Signiert werden diese Events vom Entwickler oder vom Katalog. Veröffentlichen kann auf Nostr jeder, was ein Katalog davon zeigt, entscheidet er selbst. Eigene Einträge eines Entwicklers nimmt der Katalog des Zapstore nur mit gültigem Nachweis an. So kann niemand ohne den Signaturschlüssel in seinem Namen veröffentlichen.
     </p>
 
     <h3>Blossom: Dezentraler Speicher</h3>
@@ -234,40 +233,43 @@
       Dateien werden nicht unter einem Namen gespeichert, sondern unter ihrem kryptografischen Fingerabdruck (Hash).
     </p>
     <ul>
-      <li><strong>Integrität:</strong> Ändert sich ein Bit an der Datei, ändert sich der Hash. Manipulation fällt sofort auf.</li>
-      <li><strong>Zensurresistenz:</strong> Da die Datei nur über den Hash abgerufen wird, kann sie auf vielen Servern gespiegelt werden.
-      Bei Apps, die nur der Indexer des Zapstore eingetragen hat, kommt die Datei dagegen von der Download-Adresse des Entwicklers.</li>
+      <li><strong>Integrität:</strong> Ändert sich ein Bit an der Datei, ändert sich der Hash. Eine veränderte Datei fällt beim Prüfen auf.</li>
+      <li><strong>Herkunft:</strong> Die App-Datei lädt der Zapstore von der Adresse im Eintrag, oft der ursprünglichen Quelle wie GitHub. Klappt das nicht, nimmt er den Blossom-Server des Katalogs. Woher die Datei kommt, ist für die Prüfung egal: Vor der Installation vergleicht er ihre Prüfsumme mit dem signierten Eintrag.</li>
     </ul>
 
-    <h3>Kryptografische Identität</h3>
+    <h3>Signatur und Etikett</h3>
     <p>
-      Im Zapstore gibt es keine Accounts mit E-Mail-Adresse. Entwickler identifizieren sich über ihren <strong>Public Key</strong>.
-      Release- und Update-Metadaten werden mit dem privaten Schlüssel signiert. Dein Handy prüft: „Kommt dieses Update wirklich vom gleichen Entwickler wie vorher?“ Viele Apps stellt allerdings der Indexer des Zapstore ein und verweist dabei etwa auf das Release bei GitHub. Dann signiert der Indexer den Nostr-Eintrag, nicht der Entwickler. Die APK selbst trägt weiter die Signatur des Entwicklers. Wer hinter einem Schlüssel steht, beweist erst ein Identity-Proof.
-      Das ist Supply-Chain-Security auf Linux-Niveau, aber nutzbar gemacht für Endanwender.
+      Ein Konto brauchst du nicht. Suchen, installieren und aktualisieren geht ohne Anmeldung. Anmelden musst du dich nur zum Kommentieren, für Stacks oder für Zaps unter deinem Namen. Dein geheimer Schlüssel bleibt dabei in einer Signer-App wie Amber, der Zapstore sieht ihn nie.
+      Vor jeder Installation prüft der Zapstore zwei Dinge: die Prüfsumme der Datei und den Schlüssel, mit dem sie signiert ist. Passt eines nicht, installiert er nichts. Bei einem Update muss die Datei denselben Schlüssel tragen wie die installierte App.
+      Wessen Schlüssel das ist, sagt diese Prüfung noch nicht. Dafür gibt es das Etikett.
+    </p>
+    <ul>
+      <li><strong>„Claimed app“ (grün, beansprucht):</strong> Der Entwickler hat nachgewiesen, dass er den Signaturschlüssel der App hält.</li>
+      <li><strong>„Unclaimed app“ (gelb, nicht beansprucht):</strong> Dieser Nachweis fehlt. Meist hat dann nicht der Entwickler die App eingetragen, sondern der Katalog des Zapstore. Er nimmt sie aus einer öffentlichen Quelle wie GitHub oder F-Droid und signiert den Eintrag selbst.</li>
+    </ul>
+    <p>
+      Unsere <a href="apps.html">eigenen Apps</a> sind im Zapstore beansprucht.
+      Ein gelbes Etikett muss nichts Schlechtes sein. Du musst dann aber selbst prüfen, woher die Datei stammt und wessen Schlüssel sie trägt. Ein Beispiel ist Termux: Der Eintrag ist nicht beansprucht, die Datei trägt einen Testschlüssel, den die Termux-Entwickler öffentlich geteilt haben. Damit kann jeder ein Update bauen, das Android annimmt. Termux holst du deshalb besser bei F-Droid. Dort trägt es den Schlüssel von F-Droid, und der ist nicht öffentlich.
     </p>
 
-    <h2>3. Value Proposition: Freiheit & Money Streaming</h2>
+    <h2>3. Das Geldmodell: Zaps statt Provision</h2>
     <p>
       Warum sollte man sich den Aufwand antun? Weil das ökonomische Modell revolutionär ist.
     </p>
 
     <h3>Value4Value (V4V) statt 30 % Steuer</h3>
     <p>
-      Im Zapstore gibt es keine zentrale Plattformgebühr. Wenn du eine App kaufst oder dem Entwickler Geld sendest, geschieht das über
-      <strong>Bitcoin Lightning</strong>. Das Geld fließt direkt von dir zum Entwickler.
-      Das ermöglicht Mikrotransaktionen (z. B. 10 Cent für ein Feature), die im alten System wegen der Gebühren unmöglich waren.
+      Der Zapstore nimmt keinen Anteil. Ein Zap ist ein Trinkgeld über <strong>Bitcoin Lightning</strong>. Bei beanspruchten Apps geht er direkt an den Entwickler, sonst an den Katalog, der die App eingetragen hat. Auf der App-Seite steht, wen du unterstützt. Die Zahlung selbst wickelt der Zapstore nicht ab.
     </p>
 
     <h3>Web of Trust statt Algorithmus</h3>
     <p>
-      In Googles Play Store siehst du, was am meisten Geld für Werbung ausgibt.
-      Im Zapstore siehst du, was dein Netzwerk empfiehlt. Wenn ein Sicherheitsforscher, dem du vertraust, eine App „zappt“ oder empfiehlt,
-      hat das mehr Gewicht als anonyme 5-Sterne-Bewertungen, die oft von Bots gekauft sind.
+      Der Zapstore vergibt keine Bewertungen. Bei beanspruchten Apps zeigt er vor der Installation, wer dem Entwickler auf Nostr folgt, auf Wunsch aus Sicht der Leute, denen du folgst. Ein Follow ist laut Zapstore aber keine Empfehlung. Dazu kommen Kommentare und Stacks, also App-Listen, die andere zusammengestellt haben. Die sozialen Funktionen lassen sich abschalten.
     </p>
 
     <h2>4. Dezentralität vs. Sicherheit: Ein kritischer Blick</h2>
     <p>
-      Ohne Gatekeeper kann jeder Apps hochladen – auch Malware. Wie schützt uns der Zapstore?
+      Von Hand prüft im Zapstore niemand die Apps. Wie schützt er uns dann vor Schadsoftware?
     </p>
 
     <div style="overflow-x: auto;">
@@ -283,24 +285,24 @@
           <tr>
             <td><strong>Vertrauen</strong></td>
             <td>Du vertraust der Marke (Blind Trust).</td>
-            <td>Du vertraust Signaturen & deinem Netzwerk (Web of Trust).</td>
+            <td>Du prüfst Etikett, Quelle und Signaturschlüssel.</td>
           </tr>
           <tr>
             <td><strong>Zensur</strong></td>
             <td>Globaler Kill-Switch möglich.</td>
-            <td>Deutlich erschwert (Antifragil).</td>
+            <td>Jeder Katalog setzt eigene Regeln. Du kannst weitere hinzufügen oder einen eigenen betreiben.</td>
           </tr>
           <tr>
             <td><strong>Malware-Schutz</strong></td>
             <td>Automatisierte Scanner & Review-Teams.</td>
-            <td>Community-Reporting & Isolation durch OS-Sandbox.</td>
+            <td>Keine Prüfung von Hand. Prüfsumme und Schlüssel vor jeder Installation, Sicherheitsbericht des Katalogs, Android-Sandbox.</td>
           </tr>
         </tbody>
       </table>
     </div>
 
     <p>
-      Der Schutz im Zapstore basiert auf Transparenz und Reputation. Eine App von einem unbekannten Key wird als „unverified“ markiert.
+      Der Schutz im Zapstore beruht auf Prüfungen und Offenheit. Fehlt der Nachweis des Entwicklers, zeigt die App das gelbe Etikett „Unclaimed app“.
       Zudem: Auf Android laufen Apps in einer <strong>Sandbox</strong>. Selbst eine bösartige App aus dem Zapstore kann nicht ohne entsprechende Berechtigungen
       auf deine Kontakte oder Standortdaten zugreifen. Die Sicherheit des Betriebssystems ist die letzte Verteidigungslinie.
     </p>
@@ -309,17 +311,15 @@
 
     <h3>Android: Der „Happy Path“</h3>
     <p>
-      Auf Android funktioniert der Zapstore bereits heute erstaunlich gut. Du musst einmalig das Installieren aus „unbekannten Quellen“ erlauben.
-      Danach fühlt es sich an wie ein F-Droid Store mit Social-Features. Seit Version 1.1 lassen sich automatische Updates im Hintergrund einschalten (Profil → „Data Management“ → „Background auto-updates“). Sie laufen nur in nicht getakteten Netzen und bei ausreichend geladenem Akku, Hash und Signatur werden geprüft. Ohne Nachfrage installiert der Zapstore nur Apps, die er selbst installiert hat.
-      Das Werkzeug <strong>zsp</strong> erlaubt Entwicklern, Updates direkt aus ihrer Programmierumgebung (z. B. CI-Pipelines wie GitHub Actions)
-      in die Welt zu pushen – ohne Wartezeit, ohne Review.
+      Auf Android funktioniert der Zapstore bereits heute erstaunlich gut. Er braucht Android 10 oder neuer und ein Handy mit 64-Bit-ARM-Prozessor. Einmal erlaubst du ihm, Apps zu installieren.
+      Danach fühlt es sich an wie ein F-Droid Store mit Social-Features. In den Einstellungen legst du fest, wie oft er im Hintergrund nach Updates sucht (ab Werk stündlich) und ob er dafür mobile Daten nutzen darf. Wo Android es zulässt, installiert er Updates ohne Nachfrage.
+      Mit dem Werkzeug <strong>zsp</strong> veröffentlichen Entwickler ihre Apps selbst, auf Wunsch automatisch aus der CI-Pipeline (z. B. GitHub Actions). Von Hand prüft das niemand. Der Katalog liest jede Datei selbst und prüft Signaturschlüssel, Architektur und Versionsnummer.
     </p>
 
     <h3>iOS: Souveränität verweigert</h3>
     <p>
-      Eine iOS-Version gibt es bisher nicht. Angekündigt war sie für das dritte Quartal 2026, Anfang Oktober 2026 war sie nicht erschienen. Linux und macOS hat das Projekt mit Version 1.1 als Plattformen aufgegeben.
-      Außerhalb der EU (und Japan) erlaubt Apple ohnehin kein echtes Sideloading.
-      In der EU (und Japan) erlaubt Apple zwar alternative App-Marktplätze und Web-Distribution, aber nur unter strengen Apple-Regeln; echtes, freies Sideloading bleibt stark eingeschränkt.
+      Den Zapstore gibt es nur für Android. Linux und macOS hat das Projekt mit Version 1.1 als Plattformen aufgegeben, eine iOS-Fassung bietet zapstore.dev nicht an.
+      Fremde App-Läden lässt Apple nur in wenigen Regionen zu, etwa in der EU, in Japan und in Brasilien. Auch dort muss Apple jeden Laden erst zulassen.
       Das zeigt deutlich:
       Wer digitale Freiheit will, stößt bei Apple an eine harte Grenze.
     </p>
@@ -378,11 +378,12 @@
       <ul>
         <li>
           📲 <strong>Download (APK & Info):</strong><br>
-          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://zapstore.dev/" target="_blank">zapstore.dev</a>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://zapstore.dev/" target="_blank">zapstore.dev</a><br>
+          Nach der Installation zeigt dir AppVerifier den Fingerabdruck des Signaturschlüssels. Laut zapstore.dev lautet er: <code style="word-break:break-all;">99e33b0c2d07e75fcd9df7e40e886646ff667e3aa6648e1a1160b036cf2b9320</code>
         </li>
         <li>
           🌐 <strong>Web-Katalog (Browser):</strong><br>
-          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://nostrapps.com/" target="_blank">nostrapps.com</a>
+          <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://zapstore.dev/apps" target="_blank">zapstore.dev/apps</a>
         </li>
       </ul>
     </div>
@@ -416,7 +417,7 @@
   <div class="box" style="border-style: dashed; border-color: #333;">
     <h3>Quellen (Auswahl)</h3>
     <p style="font-size:0.95em; color: #ccc;">
-      Diese Analyse basiert auf technischen Spezifikationen des Nostr-Protokolls (u. a. NIP-51, NIP-82, NIP-94, Blossom),
+      Diese Analyse basiert auf technischen Spezifikationen des Nostr-Protokolls (u. a. NIP-82, NIP-C1, Blossom), den Hilfe-Seiten, dem Changelog und dem Code des Zapstore (Stand 2.0.5, November 2026),
       Untersuchungen zum Fall Damus vs. Apple, sowie Dokumentationen zu Sideloading-Sicherheitsarchitekturen (Android Sandbox).
       Weitere Datenpunkte umfassen Entwickler-Dokumentationen zum Zapstore CLI und Analysen zur Zensurresistenz dezentraler Netzwerke.
     </p>

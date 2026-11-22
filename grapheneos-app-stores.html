@@ -68,11 +68,11 @@
 
     <div class="video-wrapper">
       <div class="video-container">
-        <iframe src="https://www.youtube-nocookie.com/embed/iCR53OVWlUs" title="App Stores unter GrapheneOS Guide" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe src="https://www.youtube-nocookie.com/embed/Lo5WEpZMySc" title="GrapheneOS Apps installieren: Welcher Quelle kannst du trauen?" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
     </div>
     <p style="text-align: center; font-size: 0.9em; color: #bbb; margin-top: -1em;">
-      <em>In diesem Video analysieren wir die verschiedenen App-Quellen, und zeigen dir die sicherste Hierarchie.</em>
+      <em>In diesem Video gehen wir die Wege durch und zeigen, worauf es bei jeder Quelle ankommt: auf die Signatur der App.</em>
     </p>
 
     <ul>
@@ -86,8 +86,8 @@
 
     <h2>Wie App-Vertrauen unter GrapheneOS entsteht</h2>
     <p>
-      GrapheneOS folgt einem einfachen, aber strengen Prinzip:<br>
-      Die App-Signatur ist die Identität des Entwicklers.
+      Android folgt einem einfachen, aber strengen Prinzip:<br>
+      Ein Update nimmt Android nur an, wenn es denselben Schlüssel trägt wie die installierte App.
     </p>
     <ul>
       <li>Jede App wird mit einem kryptografischen Schlüssel signiert</li>
@@ -96,14 +96,9 @@
       <li>Ausnahme: ein geplanter Schlüsselwechsel, den der alte Schlüssel selbst beglaubigt (APK Signature Scheme v3)</li>
     </ul>
     <p>
-      Wird diese Kette gebrochen, gibt es nur zwei Möglichkeiten:
+      Dieselbe App kann je nach Quelle verschiedene Schlüssel tragen. Im Play Store signiert meist Google für den Entwickler, bei F-Droid meist F-Droid, auf der Seite des Entwicklers der Entwickler selbst. Die Frage an jede Quelle lautet deshalb: Wessen Unterschrift bekomme ich? Und wer prüft sie beim ersten Mal?
     </p>
-    <ol>
-      <li>Der Entwickler hat den Schlüssel verloren</li>
-      <li>Oder jemand anderes liefert plötzlich Code aus</li>
-    </ol>
     <p>
-      Beides ist aus Sicherheitssicht ein Problem.
       Diese Logik ist die Grundlage dafür, warum manche App Stores unter GrapheneOS sinnvoll sind – und andere nicht.
     </p>
 
@@ -162,7 +157,6 @@
       <li>Falsche Repositories</li>
       <li>Falsche Architektur</li>
       <li>Fehlerhafte Release-Zuordnung</li>
-      <li>Keine automatische Plausibilitätsprüfung</li>
     </ul>
     <blockquote>
       <strong>Kernaussage:</strong><br><br>
@@ -170,18 +164,22 @@
       Wer es nutzt, übernimmt selbst die Verantwortung für die Quelle.
     </blockquote>
 
+    <p>
+      Obtainium hilft beim Prüfen: Es warnt, wenn ein Update einen anderen Schlüssel trägt. Trägst du den Fingerabdruck des Schlüssels ein, blockiert es eine fremde Datei schon bei der ersten Installation. Den Fingerabdruck veröffentlicht ein sorgfältiger Entwickler selbst, die App AppVerifier zeigt ihn dir für eine App auf deinem Handy.
+    </p>
+
     <h3>4. Zapstore – der bequeme Update-Weg</h3>
     <p>
-      Der Zapstore ist ein App-Store auf Nostr-Basis, ohne zentrale Firma und ohne Konto. Für die meisten Apps holt er genau die Datei, die auch Obtainium holen würde, direkt aus dem Release des Entwicklers und mit dessen Original-Signatur. Vor jeder Installation prüft er Hash und Signatur. Den Unterschied macht der Komfort: kein Regex, keine Architektur-Frage, suchen und installieren.
+      Der Zapstore ist ein Laden für Apps auf Nostr-Basis, ohne Konto. Vor jeder Installation prüft er zwei Dinge: die Prüfsumme der Datei und den Schlüssel, mit dem sie signiert ist. Passt eines nicht, installiert er nichts. Wessen Schlüssel das ist, sagt dir diese Prüfung noch nicht. Dafür gibt es das Etikett. Dazu kommt der Komfort: kein Regex, keine Architektur-Frage, suchen und installieren.
     </p>
     <ul>
-      <li>Original-Signatur des Entwicklers</li>
-      <li>Hash- und Zertifikatsprüfung vor jeder Installation</li>
-      <li>Zeigt an, ob der Entwickler selbst veröffentlicht hat („Published by“) oder der Zapstore nur auf die Datei beim Entwickler verweist</li>
-      <li>Kein Konto, Zahlungen über Lightning, bei selbst veröffentlichten Apps direkt an den Entwickler</li>
+      <li>Prüfsumme und Signaturschlüssel werden vor jeder Installation geprüft</li>
+      <li><strong>„Claimed app“ (grün, beansprucht):</strong> Der Entwickler hat nachgewiesen, dass er den Signaturschlüssel der App hält</li>
+      <li><strong>„Unclaimed app“ (gelb, nicht beansprucht):</strong> Dieser Nachweis fehlt. Meist hat dann nicht der Entwickler die App eingetragen, sondern der Katalog des Zapstore. Er nimmt sie aus einer öffentlichen Quelle</li>
+      <li>Kein Konto. Ein Zap ist ein Trinkgeld: Bei beanspruchten Apps geht es direkt an den Entwickler, sonst an den Katalog</li>
     </ul>
     <p>
-      Wichtig: Die meisten Apps dort stellt nicht der Entwickler ein, sondern der Indexer des Zapstore, der auf die Datei im Release des Entwicklers verweist. Die Signatur bleibt dabei die des Entwicklers. Mach dich mit dem Zapstore vertraut, bevor du ihm deine Updates überlässt: Installiere zuerst ein oder zwei Apps darüber und schau dir auf der App-Seite an, wer sie veröffentlicht hat. Danach ist er für die meisten Nutzer der bequemste Update-Weg für alles, was nicht im GrapheneOS App Store oder in Accrescent liegt. Mehr dazu in meinem eigenen Artikel, die Links stehen weiter unten.
+      Wichtig: Ein gelbes Etikett muss nichts Schlechtes sein. Du musst dann aber selbst prüfen, woher die Datei stammt und wessen Schlüssel sie trägt. Ein Beispiel ist Termux, eine Terminal-App: Der Eintrag ist nicht beansprucht. Die Datei trägt einen Testschlüssel, den die Termux-Entwickler öffentlich geteilt haben. Damit kann jeder ein Update bauen, das Android annimmt. Termux holst du deshalb besser bei F-Droid. Dort trägt es den Schlüssel von F-Droid, und der ist nicht öffentlich. Wechseln kannst du die Quelle nur, indem du die App löschst und neu installierst. Sichere vorher deine Daten. Ist eine App beansprucht, ist der Zapstore der bequeme Weg für alles, was nicht im GrapheneOS App Store oder in Accrescent liegt. Gleiche den Fingerabdruck einmal mit dem des Entwicklers ab. Stand: November 2026, Zapstore 2.0.5.
     </p>
 
     <h3>5. F-Droid – situativ nutzbar, aber mit Einschränkungen</h3>
@@ -190,39 +188,31 @@
     </p>
     <ul>
       <li><strong>Ja:</strong> Open Source, Transparente Builds.</li>
-      <li><strong>Aber:</strong> Verzögerte Updates, Rebuilds durch Dritte, Teilweise andere Signaturen als beim Original-Entwickler.</li>
+      <li><strong>Aber:</strong> Updates können später ankommen. Die meisten Apps baut F-Droid selbst und signiert sie mit eigenem Schlüssel, du vertraust also zusätzlich F-Droid. Nur bei manchen Apps trägt die Datei die Signatur des Entwicklers. Auch deshalb rät GrapheneOS von F-Droid ganz ab.</li>
     </ul>
     <p>
-      F-Droid kann sinnvoll sein:
-    </p>
-    <ul>
-      <li>Wenn es keine bessere Quelle gibt</li>
-      <li>Für einfache, nicht sicherheitskritische Tools</li>
-    </ul>
-    <p>
-      Für sensible Anwendungen ist F-Droid jedoch nicht erste Wahl.
+      Wir sind weniger streng. Für einzelne Apps nehmen wir F-Droid, wenn es keinen besseren Weg gibt. Termux ist so ein Fall. Sonst nimm eine andere Quelle.
     </p>
 
     <h3>Warum der Aurora Store problematisch ist</h3>
     <p>
-      Aurora ist bequem. Und genau das ist sein Problem.
-      Sachliche Gründe zur Vorsicht:
+      Aurora ist bequem. Sachliche Gründe zur Vorsicht:
     </p>
     <ul>
-      <li>Fremde App-Signaturen</li>
-      <li>Unklare Update-Kette</li>
-      <li>Umgehung des regulären Play-Ökosystems</li>
-      <li>Kein sauberes Vertrauensmodell</li>
+      <li>Der Aurora Store ist eine inoffizielle Oberfläche für Google Play. Die Apps kommen von Googles Servern, Google vermeidest du damit also nicht</li>
+      <li>An der Signatur der Apps ändert Aurora nichts. Der Unterschied liegt im Weg</li>
+      <li>Ohne eigenes Konto nutzt Aurora geteilte Konten. Laut GrapheneOS verstößt das gegen Googles Nutzungsbedingungen</li>
+      <li>Aurora selbst rechnet bei diesen Konten mit Ausfällen</li>
     </ul>
     
     <blockquote>
-      „Der Aurora Store ist nicht deshalb problematisch, weil er nachweislich schädliche Apps verteilt, sondern weil er das strenge Signatur- und Update-Vertrauensmodell des originalen Play Stores technisch umgeht. Dadurch wird die kryptografische Vertrauenskette für den Nutzer weniger transparent und schwächer abgesichert.“
+      GrapheneOS empfiehlt stattdessen den Play Store selbst. Auf GrapheneOS läuft Google Play als gewöhnliche App in der Sandbox, Sonderrechte hat es nicht. Laut GrapheneOS ist die Play-Store-App der sicherste Weg zu Apps aus dem Play Store. Das gilt für die Installation und für Updates. Du brauchst dafür ein Google-Konto.
     </blockquote>
 
     <blockquote>
       <strong>Merksatz:</strong><br><br>
       Bequemlichkeit ist kein Sicherheitskonzept.<br>
-      Wer Wert auf saubere Herkunft und überprüfbare Updates legt, sollte Aurora meiden.
+      Gibt es eine App nur bei Google Play, nimm den Play Store in einem eigenen Benutzerprofil. Nicht Aurora.
     </blockquote>
 
     <h2>Benutzerprofile – die unterschätzte Superkraft von GrapheneOS</h2>
@@ -277,9 +267,9 @@
     <ul>
       <li>Gibt es die App im GrapheneOS App Store? → nutzen</li>
       <li>Gibt es sie in Accrescent? → nutzen</li>
-      <li>Im Zapstore oder offizielle Quelle + Obtainium? → Zapstore für bequeme Updates (nach ein, zwei Probe-Installationen), Obtainium für alles, was dort fehlt. Beim ersten Installieren die Signatur prüfen</li>
-      <li>Nur F-Droid verfügbar? → abwägen</li>
-      <li>Aurora nötig? → Alternativen suchen</li>
+      <li>Im Zapstore beansprucht oder direkt beim Entwickler? → Der Zapstore ist der bequeme Weg, wenn die App beansprucht ist. Sonst holst du sie mit Obtainium beim Entwickler. In beiden Fällen den Fingerabdruck einmal mit dem des Entwicklers abgleichen</li>
+      <li>Bleibt nur F-Droid, wie bei Termux? → abwägen, welche Daten und Rechte die App bekommt</li>
+      <li>Nur bei Google Play? → Play Store in einem eigenen Benutzerprofil, nicht Aurora</li>
     </ul>
 
     <h2>Fazit</h2>
