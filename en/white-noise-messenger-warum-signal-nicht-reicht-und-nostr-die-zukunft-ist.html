@@ -47,17 +47,17 @@
   </div>
 
   <h1>White Noise Messenger – Why Signal Isn't Enough and Nostr Is the Future</h1>
-  <p class="byline"><em>by Alien Investor · updated October 2026</em></p>
+  <p class="byline"><em>by Alien Investor · updated November 2026</em></p>
 
   <article id="content">
     <p>
-      We are in a digital arms race. On one side: states and intelligence agencies that want to scan every private message under the guise of "child protection" (chat control, client-side scanning). On the other side: us, the citizens, who have a right to privacy.
+      We are in a digital arms race. On one side: states and intelligence agencies that want access to private messages under the guise of "child protection" (chat control, client-side scanning). On the other side: us, the citizens, who have a right to privacy.
     </p>
 
     <div class="video-wrapper">
       <div class="video-container">
         <iframe
-          src="https://www.youtube-nocookie.com/embed/nIFXmOv4PBs"
+          src="https://www.youtube-nocookie.com/embed/YB_j7L1W7iU"
           title="White Noise Messenger Analysis"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin"
@@ -66,7 +66,7 @@
       </div>
     </div>
     <p style="text-align: center; font-size: 0.9em; color: #bbb; margin-top: -1em;">
-      <em>In this video I show you why Signal is no longer enough and how we can protect our privacy with White Noise.</em>
+      <em>In this video we look at why Signal is not enough for everyone, how your chat turns into noise and where White Noise still has limits (as of November 2026, in German with English subtitles).</em>
     </p>
 
     <p>
@@ -82,7 +82,7 @@
     </p>
     <ul>
       <li><strong>The server sees more than it should:</strong> Even if Signal can't read the content, there is still a central server that sees your IP address and usually knows your phone number as well. Signal technically hides the sender ("sealed sender"), but whoever monitors the server could infer from IP addresses and timing that you're messaging an investigative journalist at 2 a.m. That metadata is often more valuable to intelligence agencies than the text itself.</li>
-      <li><strong>Identity coercion:</strong> Normally you need a phone number, which ties your digital identity to your SIM registration. Since October 2026, the Android app has let new accounts sign up without a number, a feature Signal still describes as a beta. The small one-time fee for it can so far only be paid through Google Play.</li>
+      <li><strong>Identity coercion:</strong> Normally you need a phone number, which ties your digital identity to your SIM registration. You can hide the number from the people you chat with, but not from Signal. Without a number, it so far only works in the Android beta.</li>
       <li><strong>Censorship risk:</strong> A central server can be shut down or blocked. An app in the Apple App Store can be removed under government pressure.</li>
     </ul>
 
@@ -92,8 +92,8 @@
     </p>
     <ul>
       <li><strong>No phone number:</strong> Your identity is a cryptographic key pair. Without a number or email the key is not tied to your person, but that does not make you anonymous, because relays see your IP address.</li>
-      <li><strong>No central server:</strong> Messages travel through "dumb" relays. If one relay blocks you, you simply use another. There is no kill switch.</li>
-      <li><strong>Freedom tech:</strong> The project is published by a nonprofit organization, not by investors who want to sell your data.</li>
+      <li><strong>No central server:</strong> Messages travel through "dumb" relays. The project's own relays are preset, and you can add your own. There is no single central point that everything runs through.</li>
+      <li><strong>Freedom tech:</strong> The project is backed by the Internet Privacy Foundation, a nonprofit organization from the United States. The code is open.</li>
     </ul>
 
     <blockquote>
@@ -109,32 +109,32 @@
       In conventional messengers, group communication is inefficient. White Noise uses MLS (IETF RFC 9420). Participants are organized like leaves on a tree.
     </p>
     <ul>
-      <li><strong>Scalability:</strong> Even groups with thousands of participants can be encrypted efficiently.</li>
-      <li><strong>Forward secrecy:</strong> Even if your key is stolen today, old messages cannot be decrypted.</li>
-      <li><strong>Post-compromise security:</strong> The system "heals" itself through automatic key renewal.</li>
+      <li><strong>Scalability:</strong> MLS is designed for very large groups too. White Noise itself warns that from 150 members on, further invitations might not be delivered reliably.</li>
+      <li><strong>Forward secrecy:</strong> MLS keeps renewing its keys. Someone who steals a key later can therefore usually not open older intercepted messages. It does not protect the chats on your phone. That is what the screen lock is for.</li>
+      <li><strong>Post-compromise security:</strong> The system "heals" through key renewal.</li>
     </ul>
     <h3>Cloak for Metadata: One-Time Keys and Gift Wraps</h3>
     <p>
       So that the relay cannot see who is talking to whom, White Noise signs every chat message with a fresh one-time key, never with your Nostr identity. Even a one-on-one conversation is technically a group in Marmot. The relay sees a random group ID, a timestamp and encrypted content. Who wrote the message and who reads along is not part of it.
     </p>
     <p>
-      Invitations to a group travel as a "Gift Wrap" (NIP-59). The wrapping hides the sender and the content, and only the invitee's inbox is addressed. To the relay, the traffic therefore looks largely like white noise. One gap remains, though: your IP address.
+      Invitations to a group travel as a "Gift Wrap" (NIP-59). The wrapping hides the sender and the content, and only the invitee's inbox is addressed. To the relay, the traffic therefore looks largely like white noise. You are still not completely invisible: the timing and size of messages remain visible, and the relay sees your IP address.
     </p>
     <h2>4. Infrastructure: Tor &amp; Blossom</h2>
     <p>
       Even the best app is useless if the server can see your IP address.
     </p>
     <ul>
-      <li><strong>Tor via Orbot:</strong> White Noise has no built-in Tor feature. The project's FAQ states openly that a relay operator can see connection information such as your IP address. If you want to separate your IP from your Nostr identity, route the app through Orbot in VPN mode and select White Noise under "Choose apps." VPN mode does occupy the only VPN slot, so no other VPN, such as Mullvad, can run at the same time.</li>
-      <li><strong>Blossom server (media):</strong> Images and voice messages are encrypted <em>before</em> upload. The server hosts only scrambled data. For now the app decides which Blossom servers it uses. The Android app has no setting for your own server yet, only the relays are freely configurable.</li>
-      <li><strong>Notifications:</strong> Real push notifications on Android run through Google's push service, relayed by a service of the publisher, and on GrapheneOS they only work with Sandboxed Google Play. If it is installed, White Noise turns this route on at first launch, and you can switch it off at any time. Without Google Play, the app instead keeps a persistent connection to the relays and announces new messages locally, with no Google involved. Telemetry is off by default.</li>
+      <li><strong>Tor via Orbot:</strong> White Noise has no built-in Tor feature. The project's FAQ states openly that a relay operator can see connection information such as your IP address. If you want to separate your IP from your Nostr identity, route the app through Orbot in VPN mode and select White Noise under "Choose apps." VPN mode does occupy the only VPN slot, so no other VPN, such as Mullvad, can run at the same time. It is still unclear whether the detour through Orbot works reliably.</li>
+      <li><strong>Blossom server (media):</strong> Images and voice messages in chats are encrypted <em>before</em> upload. For these, the server hosts only scrambled data. For now the app decides which Blossom servers it uses. The Android app has no setting for your own server yet. Profile and group photos are public. Since the version of November 17, 2026, the app removes location, device and timestamp from videos before they are sent. For photos it removes location and device anyway. Other files are sent unchanged.</li>
+      <li><strong>Notifications:</strong> Real push notifications on Android run through Google's push service, relayed by a service of the publisher, and on GrapheneOS they only work with Sandboxed Google Play. If it is installed, White Noise uses this route by default. Google and the notification service then see your push token. You can change this in the settings under Notifications, Delivery &amp; battery. The second route: the app itself keeps a persistent connection to the relays and announces new messages locally, without Google's push service. Entirely without Google, it only works in a profile without Sandboxed Google Play. Telemetry is off by default.</li>
     </ul>
     <h2>5. Where to Get It: Zapstore and GitHub</h2>
     <p>
-      White Noise was rebuilt from the ground up in 2026. Instead of the earlier Flutter app, there have been native apps for Android and iOS since September 2026, both still in beta. The publisher is the Internet Privacy Foundation (IPF).
+      White Noise was rebuilt from the ground up in 2026. Instead of the earlier Flutter app, there have been native apps for Android and iOS since September 2026. The iPhone app has been in the App Store since early November 2026, and the website no longer calls White Noise a beta. The new apps have not been independently audited yet. The publisher is the Internet Privacy Foundation (IPF).
     </p>
     <p>
-      The project publishes the Android app in the <strong>Zapstore</strong> itself, with its own Nostr key. The app page therefore marks it as "Published by Developer", and the publisher is the White Noise Nostr profile. As long as at least one relay hosts the manifest, you can install the app, past the gatekeepers in Silicon Valley. The finished APKs are also available from the project's GitHub releases, and Obtainium keeps the app up to date from there. White Noise is offered on Google Play as well, but on GrapheneOS you do not need that route. On the iPhone, White Noise is so far only available through TestFlight.
+      In the <strong>Zapstore</strong>, the project proves with its own Nostr key that the Android app comes from it. That way the app gets past the gatekeepers in Silicon Valley. The finished APKs are also available from the project's GitHub releases, and Obtainium keeps the app up to date from there. White Noise is offered on Google Play as well, but on GrapheneOS you do not need that route. On the iPhone, White Noise is available in the App Store.
     </p>
     <p>
       <strong>⚠ Switching from the old app:</strong> The new app has a new package name (<code>dev.ipf.whitenoise.android</code> instead of <code>org.parres.whitenoise</code>). The old app will not receive any more updates, and the new one carries over neither chats nor groups. Back up your private key (nsec) before switching, unless it already lives in Amber. Install the new app alongside the old one, and remove the old one only once everything works.
@@ -143,7 +143,7 @@
       <h3>Get Started: Downloads &amp; Links</h3>
       <ul>
         <li>
-          <strong>White Noise App:</strong> Download for Android (Zapstore, Google Play, GitHub) and iOS (TestFlight). <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://www.whitenoise.chat/download" target="_blank" rel="noopener">whitenoise.chat/download</a>
+          <strong>White Noise App:</strong> Download for Android (Zapstore, Google Play, GitHub) and iOS (App Store). <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://www.whitenoise.chat/download" target="_blank" rel="noopener">whitenoise.chat/download</a>
         </li>
         <li>
           <strong>Zapstore:</strong> White Noise in the decentralized Nostr app store. <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://zapstore.dev/apps/dev.ipf.whitenoise.android" target="_blank" rel="noopener">zapstore.dev</a>
@@ -155,7 +155,7 @@
     </div>
     <h2>6. Alien Verdict: Sovereignty Is Not a Feature — It's Work</h2>
     <p>
-      White Noise is currently one of the strongest answers to the surveillance state. If the EU rolls out chat control, White Noise cannot comply by design. There is no central server that messages depend on, and no executive who could hand over chats.
+      White Noise is currently one of the strongest answers to the surveillance state. The EU has been negotiating permanent Chat Control since 2022, and there is still no agreement. But the debate shows where the lever is: with the operator. White Noise has no single central point that everything runs through. White Noise can be blocked too, the project says so itself. And there is no independent audit report for the newly built apps yet.
     </p>
 
     <div class="recommendation-box">
@@ -184,7 +184,7 @@
   <div class="box" style="border-style: dashed; border-color: #333;">
     <h3>Resources &amp; Sources</h3>
     <p style="font-size:0.95em; color: #ccc;">
-      Based on documentation for the <a href="https://www.whitenoise.chat/" target="_blank">White Noise project</a>, the <a href="https://datatracker.ietf.org/doc/rfc9420/" target="_blank">MLS specification (RFC 9420)</a> and the <a href="https://github.com/nostr-protocol/nips" target="_blank">Nostr protocol</a>, plus the <a href="https://github.com/marmot-protocol/marmot" target="_blank">Marmot specification</a>, the White Noise <a href="https://www.whitenoise.chat/faq" target="_blank">FAQ</a> and <a href="https://github.com/marmot-protocol/whitenoise-android/releases" target="_blank">release notes</a> (as of October 2026).
+      Based on documentation for the <a href="https://www.whitenoise.chat/" target="_blank">White Noise project</a>, the <a href="https://datatracker.ietf.org/doc/rfc9420/" target="_blank">MLS specification (RFC 9420)</a> and the <a href="https://github.com/nostr-protocol/nips" target="_blank">Nostr protocol</a>, plus the <a href="https://github.com/marmot-protocol/marmot" target="_blank">Marmot specification</a>, the White Noise <a href="https://www.whitenoise.chat/faq" target="_blank">FAQ</a> and <a href="https://github.com/marmot-protocol/whitenoise-android/releases" target="_blank">release notes</a> (as of November 2026, White Noise for Android 2026.11.17).
     </p>
   </div>
 
