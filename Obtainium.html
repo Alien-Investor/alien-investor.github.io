@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>📱 Obtainium – Der General-Schlüssel für dein Android (Bye bye, Google Play!) | Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Obtainium Analyse: Warum dieser App-Manager die ultimative Waffe für digitale Souveränität auf Android ist. Updates direkt von der Quelle, ohne Google Play und ohne Zensur.">
+  <meta name="description" content="Obtainium Analyse: Wie der App-Manager Apps direkt von der Quelle holt, welche Signatur sie dann tragen, wie du die erste Installation prüfst und wo seine Grenzen liegen.">
   <style>
     body {
       background-color: #000;
@@ -151,22 +151,21 @@
   </div>
 
   <h1>Obtainium – Der General-Schlüssel für dein Android (Bye bye, Google Play!)</h1>
-  <p class="byline"><em>von Alien Investor</em></p>
+  <p class="byline"><em>von Alien Investor · Stand November 2026, Obtainium 1.7.5</em></p>
 
   <article id="content">
     <p>
-      Wir leben in einer digitalen Feudalherrschaft. Dein Smartphone gehört dir zwar physisch, aber was darauf läuft,
-      bestimmen Google und Apple. Ihre App Stores sind „Walled Gardens“ – goldene Käfige, die Sicherheit versprechen,
-      aber Zensur und totale Überwachung liefern.
+      Wir leben in einer digitalen Feudalherrschaft. Dein Smartphone gehört dir zwar physisch, aber auf den meisten Geräten
+      bestimmen Google und Apple, was darauf läuft. Die großen App Stores sind „Walled Gardens“, goldene Käfige, die Sicherheit versprechen.
     </p>
     <p>
       Wenn Google entscheidet, dass eine App „unerwünscht“ ist (wie AdBlocker, bestimmte systemkritische Tools oder Apps, die gegen Store-Policies verstoßen),
-      verschwindet sie. Wenn du echte digitale Souveränität willst, musst du aus diesem System ausbrechen.
+      verschwindet sie aus dem Store. Wenn du echte digitale Souveränität willst, musst du aus diesem System ausbrechen.
     </p>
     <p>
-      Das Werkzeug dafür ist <strong>Obtainium</strong>. Es ist kein weiterer App Store, sondern eine Kriegserklärung
-      an die zentralisierten Plattformen. Hier ist die technische und strategische Analyse, warum dieses Tool auf
-      jedes freie Android-Gerät gehört.
+      Ein Werkzeug dafür ist <strong>Obtainium</strong>. Es ist kein weiterer App Store, sondern eine Unabhängigkeitserklärung
+      gegenüber den zentralen App Stores. Hier ist die technische und strategische Analyse, was dieses Tool kann
+      und wo seine Grenzen liegen.
     </p>
 
     <h2>1. Das Problem: Die Mittelsmänner</h2>
@@ -176,17 +175,19 @@
       Du vertraust nicht nur dem Entwickler, sondern in der Praxis auch dem Store-Betreiber.
     </p>
     <p>
-      <strong>Obtainium</strong> ändert die Spielregeln. Es ist ein „Update-Manager“, der die Mittelsmänner eliminiert.
-      Die App holt sich Updates direkt von der Quelle – meistens direkt von GitHub, GitLab oder der Webseite des Entwicklers.
+      <strong>Obtainium</strong> ändert die Spielregeln. Es ist ein „Update-Manager“: Du gibst ihm eine Quelle, es holt die App von dort
+      und hält sie aktuell. Am besten ist das die Seite des Entwicklers oder seine Release-Seite auf GitHub, GitLab oder Codeberg.
     </p>
 
     <blockquote>
-      „Obtainium ist die direkte Lieferkette für Software. Vom Coder direkt auf dein Gerät. Keine zentrale Zensur, kein Store-Tracking, kein Bullshit.“
+      <strong>Kernaussage:</strong><br><br>
+      Obtainium ist ein Skalpell, kein Küchenmesser.<br>
+      Wer es nutzt, übernimmt selbst die Verantwortung für die Quelle.
     </blockquote>
 
     <h2>2. Architektur & Funktionsweise: Wie es unter der Haube läuft</h2>
     <p>
-      Obtainium hat keine eigenen Server. Es ist ein lokales Tool auf deinem Gerät, das verschiedene Quellen überwacht.
+      Obtainium hat keine eigenen Download-Server. Es ist ein lokales Tool auf deinem Gerät, das die Quellen überwacht, die du ihm gibst.
     </p>
 
     <h3>Direkte API-Anbindung (GitHub, GitLab, Codeberg)</h3>
@@ -195,7 +196,7 @@
       Wenn ja, zieht es die APK.
     </p>
     <ul>
-      <li><strong>Vorteil:</strong> Extrem schnell. Oft hast du das Update Minuten nach dem Release.</li>
+      <li><strong>Vorteil:</strong> Sauber und direkt. Obtainium prüft im Hintergrund auf Updates, ab Werk alle sechs Stunden.</li>
       <li><strong>Das Rate-Limit-Problem:</strong> GitHub erlaubt anonymen Nutzern nur ca. 60 API-Abfragen pro Stunde (pro IP).
       Power-User mit vielen Apps hinterlegen in Obtainium einfach einen „Personal Access Token“ (PAT),
       um typischerweise auf deutlich höhere Limits (z.B. ~5.000 pro Stunde) zu kommen.</li>
@@ -218,12 +219,13 @@
     <h2>3. Sicherheit: „Don't trust, verify“</h2>
     <p>
       Die größte Angst der Nutzer: „Wenn ich nicht den Play Store nutze, fange ich mir Viren ein.“
-      Das Gegenteil ist oft der Fall, wenn man versteht, wie Android-Signaturen funktionieren.
+      Die Antwort liegt darin, wie Android-Signaturen funktionieren.
     </p>
 
     <h3>Die Android-Signatur als Anker</h3>
     <p>
-      Jede Android-App muss vom Entwickler kryptografisch signiert sein. Android installiert ein Update NUR DANN,
+      Jede Android-App ist kryptografisch signiert, und je nach Quelle kann der Schlüssel ein anderer sein: Im Play Store signiert meist Google,
+      bei F-Droid meist F-Droid, auf der Seite des Entwicklers der Entwickler. Android installiert ein Update NUR DANN,
       wenn die Signatur (bzw. die Signatur-Lineage) zur bereits installierten App passt.
     </p>
     <ul>
@@ -231,8 +233,8 @@
         <strong>Szenario:</strong> Ein Hacker kapert den GitHub-Account eines Entwicklers und lädt eine verseuchte APK hoch.
       </li>
       <li>
-        <strong>Schutz:</strong> Da der Hacker (hoffentlich) nicht den privaten Signatur-Schlüssel des Entwicklers hat,
-        wird Android die Installation des Updates verweigern („Signatur stimmt nicht überein“).
+        <strong>Schutz:</strong> Solange der Hacker nicht mit dem Schlüssel des Entwicklers signieren kann,
+        verweigert Android die Installation des Updates („Signatur stimmt nicht überein“).
       </li>
     </ul>
 
@@ -244,7 +246,7 @@
     <ul>
       <li><strong>Automatisch beim Erstinstall:</strong> Der Obtainium-Schalter „Neue Apps mit ‚Verified Apps‘ teilen (falls verfügbar)“ unter Einstellungen → Aktualisierungen ist ab Werk an. Ist <strong>Verified Apps</strong> (Privacy Guides) oder der Original-<strong>AppVerifier</strong> installiert, reicht Obtainium die heruntergeladene APK vor der Installation dorthin weiter. Obtainium selbst wertet das Ergebnis nicht aus, bei einer Abweichung brichst du im Android-Dialog ab.</li>
       <li><strong>Manuell mit AppVerifier:</strong> Fingerabdruck von der Webseite des Entwicklers kopieren, in AppVerifier „Verify APK File“ und dann „Verify from clipboard“. Diesen Vergleich kann nur das Original, Verified Apps prüft ausschließlich gegen seine eigene Datenbank.</li>
-      <li><strong>Direkt in Obtainium (ab Version 1.6.17):</strong> Im Feld „Expected signing certificate hashes“ einer App den Fingerabdruck eintragen. Dann installiert Obtainium nur APKs mit genau diesem Signaturschlüssel, auch beim ersten Mal.</li>
+      <li><strong>Direkt in Obtainium (ab Version 1.6.16):</strong> Im Feld „Expected signing certificate hashes“ einer App den Fingerabdruck eintragen. Dann installiert Obtainium nur APKs mit genau diesem Signaturschlüssel, auch beim ersten Mal.</li>
     </ul>
     <p>
       AppVerifier ist das Open-Source-Projekt eines Entwicklers aus dem GrapheneOS-Team, aber kein offizielles GrapheneOS-Projekt. Am besten installierst du es aus Accrescent, das selbst im GrapheneOS App Store liegt. Ist die erste Installation verifiziert, übernimmt Android den Rest.
@@ -254,30 +256,26 @@
 
     <h3>Obtainium vs. Google Play Store</h3>
     <ul>
-      <li><strong>Google Play:</strong> Zensur, Account-Pflicht (in der Praxis), massives Daten-Tracking. Bequem, aber ein Gefängnis.</li>
-      <li><strong>Obtainium:</strong> Zensur-resistent. Selbst wenn Google eine App bannt, bekommst du deine Updates weiter. Kein Account nötig.</li>
+      <li><strong>Google Play:</strong> Zum Installieren brauchst du ein Google-Konto, und Google entscheidet, welche Apps im Store bleiben. Bequem, aber du hängst an Google.</li>
+      <li><strong>Obtainium:</strong> Kein Konto nötig. Entfernt Google eine App aus dem Store, kannst du sie weiter von der Quelle des Entwicklers holen.</li>
     </ul>
 
     <h3>Obtainium vs. F-Droid</h3>
     <p>
-      Viele FOSS-Fans lieben F-Droid. Aber F-Droid hat ein Problem: Sie bauen Apps oft selbst und signieren sie typischerweise mit
-      eigenen Schlüsseln (bei reproduzierbaren Builds können teils upstream-signierte APKs ausgeliefert werden).
+      Viele FOSS-Fans lieben F-Droid. Der Haken: F-Droid baut die Apps selbst und signiert die meisten mit eigenem Schlüssel
+      (bei reproduzierbaren Builds trägt die APK teils die Signatur des Entwicklers).
     </p>
     <ul>
-      <li><strong>Das Problem:</strong> Du musst F-Droid vertrauen, nicht nur dem Entwickler. Updates dauern oft Tage oder Wochen.</li>
+      <li><strong>Das Problem:</strong> Du musst F-Droid vertrauen, nicht nur dem Entwickler. Updates können dort später ankommen.</li>
       <li><strong>Der Obtainium-Vorteil:</strong> Du bekommst die Original-Signatur des Entwicklers (wenn die Quelle upstream-signiert ausliefert).
-      Und du bekommst das Update sofort. Das schließt die „Patch Gap“ bei Sicherheitslücken massiv.</li>
+      Und du wartest nicht, bis ein Store die App neu baut. Das verkürzt die „Patch Gap“ bei Sicherheitslücken.</li>
     </ul>
 
     <h2>5. Die Vorteile der Rebellion</h2>
     <ul>
       <li>
-        <strong>Unsterblichkeit für Apps:</strong> Als der Manga-Reader <em>Tachiyomi</em> rechtlich angegriffen wurde,
-        konnten Nutzer über Obtainium nahtlos auf Forks (Abspaltungen) wechseln. Im Play Store wäre das Ende gewesen.
-      </li>
-      <li>
         <strong>Privacy by Design:</strong> Obtainium hat keine eigenen Mirror-/Download-Server und keinen zentralen Store-Feed,
-        der sieht, welche Apps du installiert hast. Quellen wie GitHub sehen deine IP beim Abruf – aber kein automatisch aggregiertes Gesamtprofil.
+        der sieht, welche Apps du installiert hast. Die Quellen, etwa GitHub, sehen bei jeder Abfrage deine IP-Adresse.
       </li>
       <li>
         <strong>Hintergrund-Updates:</strong> Unter Android 12+ kann Obtainium bei manchen Apps Updates weitgehend im Hintergrund einspielen
@@ -287,10 +285,10 @@
 
     <h2>6. Die Nachteile (Ehrlichkeit muss sein)</h2>
     <p>
-      Freiheit ist Arbeit. Obtainium ist nichts für Leute, die nicht denken wollen.
+      Souveränität kostet Aufwand. Obtainium ist für Nutzer, die Verantwortung übernehmen wollen.
     </p>
     <ul>
-      <li><strong>Eigenverantwortung:</strong> Du musst wissen, welche CPU-Architektur dein Handy hat (meistens arm64-v8a). Wählst du die falsche APK, stürzt die App ab.</li>
+      <li><strong>Architektur:</strong> Manchmal bietet ein Release mehrere APKs an, und Obtainium erkennt nicht, welche zu deinem Handy passt. Dann wählst du selbst (meistens arm64-v8a).</li>
       <li><strong>Keine Entdeckung:</strong> Es gibt keine „Top Charts“. Du musst wissen, welche App du willst und wo der Quellcode liegt.</li>
       <li><strong>Split APKs / XAPK:</strong> Manche riesigen Apps nutzen komplexe Split-Formate. Obtainium wird hier besser, aber es ist noch immer frickeliger als im Play Store.</li>
     </ul>
@@ -300,11 +298,11 @@
       Obtainium ist mehr als eine App. Es ist <strong>Infrastruktur für digitale Autonomie</strong>.
     </p>
     <p>
-      Für Power-User, Bitcoin-Halter und Privacy-Advokaten ist es das Werkzeug der Wahl. Es entzieht Google die Kontrolle
-      über deine Software-Verteilung. Wer GrapheneOS oder ein anderes freies Android nutzt, kommt an Obtainium kaum vorbei.
+      Für Power-User, Bitcoin-Halter und Privacy-Advokaten ist es ein starkes Werkzeug. Bei den Apps, die du damit holst,
+      entscheidest du, woher sie kommen, nicht Google. Unter GrapheneOS gehört es in den Werkzeugkasten, nach dem eingebauten App Store und Accrescent.
     </p>
     <p>
-      Es verlangt dir Kompetenz ab. Aber im Gegenzug bekommst du ein Gerät, das wirklich dir gehört.
+      Es verlangt dir Kompetenz ab. Im Gegenzug bekommst du mehr Kontrolle über dein Gerät.
       Und genau darum geht es uns.
     </p>
 
@@ -383,8 +381,8 @@
   <div class="recommendation-box">
     <h3>Weiterführender Research</h3>
     <p>
-      Obtainium befreit dich von Google, aber der Zapstore geht noch einen Schritt weiter. Entdecke, wie App-Distribution über Nostr funktioniert – komplett ohne Server und Zensur.<br>
-      <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="Zapstore.html"><svg style="width:0.6em;height:0.85em;vertical-align:-0.1em;filter:drop-shadow(0 0 2px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Zapstore – Die zensurfreie App-Revolution auf Nostr</a>
+      Einen anderen Weg geht der Zapstore: ein App Store auf Nostr, der ohne Konto auskommt.<br>
+      <svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="Zapstore.html"><svg style="width:0.6em;height:0.85em;vertical-align:-0.1em;filter:drop-shadow(0 0 2px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> Nostr Zapstore: Der Angriff auf das App-Store-Monopol von Apple &amp; Google</a>
     </p>
   </div>
 
