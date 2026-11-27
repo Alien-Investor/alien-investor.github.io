@@ -58,8 +58,8 @@
   <article id="content">
     <p>
       Wenn du das hier liest, hast du wahrscheinlich genug von Datensammelei, vorinstallierten Google-Diensten
-      und dem Gefühl, dass dein Smartphone mehr dir <em>gehört</em> als du ihm. Genau hier kommt
-      <strong>GrapheneOS</strong> ins Spiel: ein gehärtetes Android für Google-Pixel-Geräte, das auf
+      und dem Gefühl, dass du eher deinem Smartphone <em>gehörst</em> als es dir. Genau hier kommt
+      <strong>GrapheneOS</strong> ins Spiel: ein Betriebssystem, das auf
       <strong>Sicherheit</strong>, <strong>Privatsphäre</strong> und <strong>Kontrolle</strong> ausgelegt ist.
     </p>
 
@@ -92,8 +92,8 @@
     <h2>Was ist GrapheneOS – und für wen lohnt es sich?</h2>
     <p>
       GrapheneOS ist ein freies, sicherheitsoptimiertes Betriebssystem für aktuelle Google-Pixel-Geräte.
-      Es baut auf Android/Open Source auf, entfernt aber Google-Tracking, härtet das System
-      und gibt dir deutlich mehr Kontrolle.
+      Es baut auf dem Android Open Source Project auf, bringt keine Google-Apps und -Dienste mit und härtet das System.
+      Und du bestimmst genauer, was Apps sehen dürfen.
     </p>
     <ul>
       <li>Kein vorinstalliertes Google-Konto, keine erzwungenen Services.</li>
@@ -106,7 +106,7 @@
       Bevor du den Bootloader öffnest:
     </p>
     <ul>
-      <li><strong>Garantie bleibt meist erhalten:</strong> Verbreiteter Mythos. Der Bootloader-Unlock ist bei Pixel offiziell von Google vorgesehen und vollständig reversibel. Reine Hardwaredefekte (Akku, Display) bleiben in der Regel von der Herstellergarantie gedeckt — Quittung aufbewahren.</li>
+      <li><strong>Garantie:</strong> Der Bootloader-Unlock ist bei Pixel offiziell von Google vorgesehen und lässt sich rückgängig machen. Vor einem Garantiefall setzt du das Pixel auf Stock zurück.</li>
       <li><strong>Datenverlust:</strong> Dein Gerät wird komplett gelöscht. Ohne Backup sind die Daten weg.</li>
       <li><strong>Eigenverantwortung:</strong> Du trägst das Risiko, wenn etwas schiefgeht.</li>
     </ul>
@@ -127,7 +127,7 @@
     <ol>
       <li><strong>Entwickleroptionen aktivieren:</strong> Einstellungen → Über das Telefon → 7x auf „Build-Nummer“ tippen.</li>
       <li><strong>OEM-Entsperrung zulassen:</strong> Zurück zu Einstellungen → System → Entwickleroptionen. Schalter bei „OEM-Entsperrung“ aktivieren. (Ohne das geht nichts!)</li>
-      <li><strong>USB-Debugging aktivieren:</strong> Optional, aber oft hilfreich für die Erkennung.</li>
+      <li><strong>USB-Debugging:</strong> Nicht nötig. Der Installer arbeitet im Fastboot-Modus.</li>
     </ol>
 
     <h2>2. Ab in den Fastboot-Modus</h2>
@@ -138,7 +138,7 @@
       <li>Schalte das Pixel komplett <strong>aus</strong>.</li>
       <li>Verbinde es mit dem Original-Kabel an deinen PC/Laptop.</li>
       <li>Halte nun die <strong>Power-Taste</strong> und die <strong>Leiser-Taste (Volume Down)</strong> gleichzeitig gedrückt.</li>
-      <li>Warte, bis du im <strong>Fastboot Mode</strong> bist (ein schwarzer Screen mit technischem Text).</li>
+      <li>Warte, bis du im <strong>Fastboot Mode</strong> bist.</li>
     </ul>
 
     <h2>3. Installation mit dem Web-Installer</h2>
@@ -149,7 +149,7 @@
 
     <h3>A) Verbindung & Unlock</h3>
     <p>
-      Klicke im Browser auf den blauen Button <strong>„Unlock bootloader“</strong>.
+      Klicke im Browser auf <strong>„Unlock bootloader“</strong>.
     </p>
     <p>
       Daraufhin öffnet sich meist das Auswahl-Fenster für USB-Geräte:
@@ -201,28 +201,33 @@
     <h2>4. Der erste Start & Verifizierung</h2>
     <p>
       Wenn "Locked" angezeigt wird, kannst du das Telefon starten. Drücke dazu die <strong>Power-Taste</strong>
-      (neben dem Punkt "Start" im Display-Menü).
+      (bei ausgewähltem Punkt „Start“).
     </p>
     <p>
-      Beim Hochfahren siehst du einen gelben Warnhinweis:<br><br>
+      Beim Hochfahren siehst du einen Warnhinweis:<br><br>
       <em>„Your device is loading a different operating system.“</em>
     </p>
     <p>
       Das ist <strong>normal</strong> und wird ab jetzt immer so sein – es zeigt dir, dass nicht mehr das Google-Android läuft.
     </p>
     
+    <p>
+      <strong>OEM-Entsperrung abschalten:</strong> Im Einrichtungsassistenten empfiehlt GrapheneOS, die OEM-Entsperrung wieder auszuschalten.
+    </p>
     <blockquote style="border-color: #00ffcc;">
       <strong>Vertrauen ist gut, Kontrolle ist besser:</strong><br><br>
       Auf diesem Warnbildschirm wird auch eine ID angezeigt. Vergleiche diese ID mit dem Abschnitt
       <strong>„Verified boot key hash“</strong> auf der GrapheneOS-Website, auf der wir auch die Installation gemacht haben (scrolle dort runter zu deinem Modell).
-      Wenn die Hashes übereinstimmen: Glückwunsch, dein System ist sauber und sicher installiert! <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -14 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><line x1="10.32" y1="2.98" x2="0.6" y2="-5.2" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><circle cx="0.6" cy="-5.2" r="3" fill="#00ffcc"/><line x1="25.68" y1="2.98" x2="35.4" y2="-5.2" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><circle cx="35.4" cy="-5.2" r="3" fill="#00ffcc"/><path fill="url(#ai-head-39db6d)" stroke="#00ffcc" stroke-width="0.8" d="M1.64 16.04A16.36 16.04 0 0 1 34.36 16.04C34.36 22.24 23.25 36 18 36C12.75 36 1.64 22.24 1.64 16.04Z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M5.41 15.84A6.55 3.52 32 0 0 9.1 22.29A6.55 3.52 32 0 0 16.51 22.78A6.55 3.52 32 0 0 12.83 16.33A6.55 3.52 32 0 0 5.41 15.84ZM19.49 22.78A6.55 3.52 -32 0 0 26.9 22.29A6.55 3.52 -32 0 0 30.59 15.84A6.55 3.52 -32 0 0 23.17 16.33A6.55 3.52 -32 0 0 19.49 22.78Z"/><circle cx="9.49" cy="17.35" r="0.9" fill="#00ffcc"/><circle cx="26.51" cy="17.35" r="0.9" fill="#00ffcc"/></svg>
+      Stimmen beide überein, startet dein Pixel ein GrapheneOS, das mit dem offiziellen Schlüssel signiert ist. <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -14 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><line x1="10.32" y1="2.98" x2="0.6" y2="-5.2" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><circle cx="0.6" cy="-5.2" r="3" fill="#00ffcc"/><line x1="25.68" y1="2.98" x2="35.4" y2="-5.2" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><circle cx="35.4" cy="-5.2" r="3" fill="#00ffcc"/><path fill="url(#ai-head-39db6d)" stroke="#00ffcc" stroke-width="0.8" d="M1.64 16.04A16.36 16.04 0 0 1 34.36 16.04C34.36 22.24 23.25 36 18 36C12.75 36 1.64 22.24 1.64 16.04Z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M5.41 15.84A6.55 3.52 32 0 0 9.1 22.29A6.55 3.52 32 0 0 16.51 22.78A6.55 3.52 32 0 0 12.83 16.33A6.55 3.52 32 0 0 5.41 15.84ZM19.49 22.78A6.55 3.52 -32 0 0 26.9 22.29A6.55 3.52 -32 0 0 30.59 15.84A6.55 3.52 -32 0 0 23.17 16.33A6.55 3.52 -32 0 0 19.49 22.78Z"/><circle cx="9.49" cy="17.35" r="0.9" fill="#00ffcc"/><circle cx="26.51" cy="17.35" r="0.9" fill="#00ffcc"/></svg>
     </blockquote>
 
     <h2>5. Leben mit GrapheneOS</h2>
     <p>
-      Dein Pixel ist jetzt gehärtet. Du hast keinen Play Store (ab Werk), dafür volle Kontrolle.
-      Apps installierst du über F-Droid, Aurora Store oder du nutzt die GrapheneOS-eigenen "Sandboxed Google Play" Dienste,
-      falls du Push-Benachrichtigungen oder Maps zwingend brauchst.
+      Dein Pixel ist jetzt gehärtet. Ein Google-Konto und den Play Store gibt es nur, wenn du sie selbst hinzufügst.
+      GrapheneOS bringt einen eigenen App Store mit. Darin liegen die GrapheneOS-Apps, Accrescent und, für alle, die es brauchen, Google Play.
+      Auf GrapheneOS läuft Google Play als gewöhnliche App in der Sandbox, Sonderrechte hat es nicht. Wer einschränken will, welche Apps Google Play nutzen können,
+      richtet dafür ein eigenes Benutzerprofil ein. Welche Quelle sich für welche App eignet, steht im Artikel
+      <a href="grapheneos-app-stores.html">App Stores unter GrapheneOS</a>.
     </p>
     <p>
       Willkommen auf der anderen Seite.
@@ -247,7 +252,7 @@
         <li><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="4" y="4" width="5" height="28" rx="1" fill="#0d2a28" stroke="#00ffcc" stroke-width="0.7"/><rect x="9" y="4" width="22" height="28" rx="1" fill="#1a3a38" stroke="#00ffcc" stroke-width="0.7"/><line x1="13" y1="12" x2="27" y2="12" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="16" x2="27" y2="16" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="20" x2="27" y2="20" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/><line x1="13" y1="24" x2="22" y2="24" stroke="#00ffcc" stroke-width="0.5" opacity="0.4"/></svg> <strong>Alien-Investor-Handbücher:</strong> Mein eigenes Ebook „GrapheneOS: Android im Überwachungszeitalter" — der komplette Schritt-für-Schritt-Guide zu allem, was hier nur angerissen wird.<br><svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/buecher" target="_blank">https://alien-investor.org/buecher</a></li>
         <li><svg style="width:0.7em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-label="Blitz" role="img"><polygon points="14,2 4,20 12,20 10,34 20,16 12,16" fill="#00ffcc" opacity="0.9" stroke="#00ffcc" stroke-width="0.5" stroke-linejoin="round"/></svg> <strong>21bitcoin:</strong> Bitcoin-only App aus Europa, ideal für DCA und regelmäßiges sats stapeln (Code <strong>ALIENINVESTOR</strong> nutzen).<br><svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/21bitcoin" target="_blank">https://alien-investor.org/21bitcoin</a><sup class="aff" title="Affiliate-Link (Werbung)">*</sup></li>
         <li>₿ <strong>BitBox:</strong> Hardware-Wallet für die sichere Selbstverwahrung deiner Bitcoin (Code <strong>ALIENINVESTOR</strong> nutzen).<br><svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/bitbox" target="_blank">https://alien-investor.org/bitbox</a><sup class="aff" title="Affiliate-Link (Werbung)">*</sup></li>
-        <li><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-label="Satellitenschüssel" role="img"><path d="M4 24 A16 16 0 0 1 20 8" fill="#00ffcc" fill-opacity="0.06" stroke="#00ffcc" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="8" r="2.8" fill="#00ffcc"/><line x1="20" y1="8" x2="28" y2="4" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><path d="M15 13 A6 6 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/><path d="M12 16 A9 9 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.45"/></svg> <strong>Proton:</strong> Schweizer Rundum-Schutz für E-Mail, VPN und Cloud – datensparsam und sicher.<br><svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a><sup class="aff" title="Affiliate-Link (Werbung)">*</sup></li>
+        <li><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-label="Satellitenschüssel" role="img"><path d="M4 24 A16 16 0 0 1 20 8" fill="#00ffcc" fill-opacity="0.06" stroke="#00ffcc" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="8" r="2.8" fill="#00ffcc"/><line x1="20" y1="8" x2="28" y2="4" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><path d="M15 13 A6 6 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/><path d="M12 16 A9 9 0 0 1 21 7" fill="none" stroke="#00ffcc" stroke-width="0.9" stroke-linecap="round" opacity="0.45"/></svg> <strong>Proton:</strong> E-Mail, VPN und Cloud ohne Big Tech. Ich nutze Proton.<br><svg style="width:0.8em;height:0.8em;vertical-align:-0.1em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10,2 L11.5,8.5 L18,10 L11.5,11.5 L10,18 L8.5,11.5 L2,10 L8.5,8.5 Z" fill="#00ffcc" opacity="0.85"/></svg> <a href="https://alien-investor.org/proton" target="_blank">https://alien-investor.org/proton</a><sup class="aff" title="Affiliate-Link (Werbung)">*</sup></li>
       </ul>
       <p style="font-size:0.85em; color:#aaa; margin-top: 15px;">Hinweis: Bei diesen Links handelt es sich um Affiliate-Links. Wenn du sie nutzt, erhalte ich eine Vergütung. Danke! <svg style="width:0.85em;height:1.1em;vertical-align:-0.2em;filter:drop-shadow(0 0 4px #00ffcc88);" viewBox="-4 -14 44 51" xmlns="http://www.w3.org/2000/svg" aria-label="Alien" role="img"><defs><radialGradient id="ai-head-aff" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#3db86a"/><stop offset="70%" stop-color="#1a6635"/><stop offset="100%" stop-color="#0a2016"/></radialGradient></defs><line x1="10.32" y1="2.98" x2="0.6" y2="-5.2" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><circle cx="0.6" cy="-5.2" r="3" fill="#00ffcc"/><line x1="25.68" y1="2.98" x2="35.4" y2="-5.2" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/><circle cx="35.4" cy="-5.2" r="3" fill="#00ffcc"/><path fill="url(#ai-head-aff)" stroke="#00ffcc" stroke-width="0.8" d="M1.64 16.04A16.36 16.04 0 0 1 34.36 16.04C34.36 22.24 23.25 36 18 36C12.75 36 1.64 22.24 1.64 16.04Z"/><path fill="#001a0e" stroke="#00ffcc" stroke-width="0.5" d="M5.41 15.84A6.55 3.52 32 0 0 9.1 22.29A6.55 3.52 32 0 0 16.51 22.78A6.55 3.52 32 0 0 12.83 16.33A6.55 3.52 32 0 0 5.41 15.84ZM19.49 22.78A6.55 3.52 -32 0 0 26.9 22.29A6.55 3.52 -32 0 0 30.59 15.84A6.55 3.52 -32 0 0 23.17 16.33A6.55 3.52 -32 0 0 19.49 22.78Z"/><circle cx="9.49" cy="17.35" r="0.9" fill="#00ffcc"/><circle cx="26.51" cy="17.35" r="0.9" fill="#00ffcc"/></svg></p>
     </div>
