@@ -350,6 +350,10 @@
       transition: all 0.2s ease;
     }
     .mail-btn:hover { background: #00ffcc; color: #000; box-shadow: 0 0 12px #00ffcc; }
+    .mail-btn.alt { border-color: #555; color: #bbb; }
+    .mail-btn.alt:hover { background: #222; color: #fff; box-shadow: none; }
+    .mail-choice { display: block; color: #888; font-size: 0.85em; margin: 2px 0 6px 0; }
+    .hero-text .price-note { order: 10; flex-basis: 100%; color: #888; font-size: 0.8em; }
 
     /* --- ZAHLUNGS-BUTTONS --- */
     .btnrow {
@@ -498,6 +502,26 @@
     }
     .transparenz strong { color: #00ffcc; }
 
+    /* --- RECHTLICHES ZUM KAUF (seit 28.11.2026) --- */
+    .legal {
+      background: #050505;
+      border: 1px solid #222;
+      border-radius: 8px;
+      padding: 1.2em 1.5em;
+      margin: 2em 0;
+      font-size: 0.9em;
+      color: #bbb;
+      line-height: 1.55;
+      overflow-wrap: anywhere;
+    }
+    .legal h3 { color: #00ffcc; font-size: 1.05em; margin: 0 0 0.8em 0; }
+    .legal h4 { color: #ddd; font-size: 1em; margin: 1.1em 0 0.3em 0; }
+    .legal p { margin: 0 0 0.7em 0; }
+    .legal strong { color: #ddd; }
+    .legal ul { margin: 0 0 0.7em 0; padding-left: 1.2em; }
+    .legal details { margin-top: 1em; border-top: 1px solid #222; padding-top: 0.8em; }
+    .legal summary { cursor: pointer; color: #00ffcc; font-weight: bold; }
+
     /* --- FOOTER --- */
     footer {
       margin-top: 50px;
@@ -601,7 +625,8 @@
         <h3>GrapheneOS: Android im Überwachungszeitalter</h3>
         <p>Der komplette Guide – Pixel-Kauf, Installation, Apps ohne Google, SIM-Anonymität, VPN-Killswitch, Browser mit Tor, Proton-Ökosystem, Nutzerprofile, Termux-Verschlüsselung, Aegis 2FA, Reise-OpSec, Bitcoin-Verwahrung mit BitBox02 und mehr. 24 Kapitel, dazu die häufigsten Fragen und ein Quellen-Anhang zum Nachprüfen.</p>
         <div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px;">
-          <span class="price">Richtpreis: 9,99 €</span>
+          <span class="price">Preis: 9,99 €</span>
+          <span class="price-note">Endpreis, keine Umsatzsteuer nach § 19 UStG, keine Versandkosten</span>
           <a class="buy-btn" href="#zahlung" data-lang="de" data-price="9,99 €" data-subject="Buch GrapheneOS DE" data-title="GrapheneOS: Android im Überwachungszeitalter" onclick="return buyBook(this)">Jetzt kaufen</a>
           <span style="display:inline-block; padding: 6px 12px; border: 1px solid #555; border-radius: 6px; color: #aaa; font-size: 0.9em;">
             Aktuelle Ausgabe: <strong style="color:#00ffcc;">v2.11</strong> &middot; Stand 25.10.2026
@@ -625,8 +650,9 @@
         <h3>GrapheneOS: Android in the Age of Surveillance</h3>
         <p>The complete guide – Pixel selection, installation, apps without Google, SIM privacy, VPN kill switch, Tor browser, Proton ecosystem, user profiles, Termux encryption, Aegis 2FA, travel OpSec, Bitcoin self-custody with BitBox02 and more. 24 chapters, plus the most common questions and a sources appendix for checking every claim.</p>
         <div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px;">
-          <span class="price">Suggested price: $9.99</span>
-          <a class="buy-btn" href="#zahlung" data-lang="en" data-price="$9.99" data-subject="Book GrapheneOS English" data-title="GrapheneOS: Android in the Age of Surveillance" onclick="return buyBook(this)">Buy now</a>
+          <span class="price">Price: €9.99</span>
+          <span class="price-note">Final price, no VAT under § 19 UStG, no shipping costs</span>
+          <a class="buy-btn" href="#zahlung" data-lang="en" data-price="€9.99" data-subject="Book GrapheneOS English" data-title="GrapheneOS: Android in the Age of Surveillance" onclick="return buyBook(this)">Buy now</a>
           <span style="display:inline-block; padding: 6px 12px; border: 1px solid #555; border-radius: 6px; color: #aaa; font-size: 0.9em;">
             Current edition: <strong style="color:#00ffcc;">v2.11</strong> &middot; October 25, 2026
           </span>
@@ -650,7 +676,8 @@
         <h3>Digitale Souveränität: Das vollständige System</h3>
         <p>Bazzells „Extreme Privacy" auf deutsches und europäisches Recht adaptiert: Linux-Fundament, GrapheneOS, OPNsense-Netzwerk, DNS &amp; Browser, No-KYC-Kommunikation, Alias-Identität, Nostr, anonymes Eigentum (GmbH/UG), Data-Broker-Löschung, Offline-KI, Disaster Prep, Tails, Bitcoin-Privatsphäre, Monero, EU-Altersverifikation und Sicherheitshygiene im Alltag. 18 Kapitel, dazu die häufigsten Fragen, ein Quellen-Anhang zum Nachprüfen und vier <a href="werkstatt-band2.html" style="color:#00ffcc; text-decoration:none;">Werkstatt-Blätter</a> zum Ausdrucken.</p>
         <div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px;">
-          <span class="price">Richtpreis: 9,99 €</span>
+          <span class="price">Preis: 9,99 €</span>
+          <span class="price-note">Endpreis, keine Umsatzsteuer nach § 19 UStG, keine Versandkosten</span>
           <a class="buy-btn" href="#zahlung" data-lang="de" data-price="9,99 €" data-subject="Buch Souveränität DE" data-title="Digitale Souveränität" onclick="return buyBook(this)">Jetzt kaufen</a>
           <span style="display:inline-block; padding: 6px 12px; border: 1px solid #555; border-radius: 6px; color: #aaa; font-size: 0.9em;">
             Aktuelle Ausgabe: <strong style="color:#00ffcc;">v1.5</strong> &middot; Stand 24.10.2026
@@ -675,8 +702,9 @@
         <h3>Digital Sovereignty: The Complete System</h3>
         <p>Michael Bazzell's "Extreme Privacy" adapted to German and European law: Linux foundation, GrapheneOS, OPNsense network, DNS &amp; browser, No-KYC communication, alias identity, Nostr, anonymous ownership (GmbH/UG), data broker removal, offline AI, disaster prep, Tails, Bitcoin privacy, Monero, EU age verification and everyday security hygiene. 18 chapters, plus the most common questions, a sources appendix for checking every claim and four printable <a href="en/werkstatt-band2.html" style="color:#00ffcc; text-decoration:none;">workshop sheets</a>.</p>
         <div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px;">
-          <span class="price">Suggested price: $9.99</span>
-          <a class="buy-btn" href="#zahlung" data-lang="en" data-price="$9.99" data-subject="Book Sovereignty English" data-title="Digital Sovereignty" onclick="return buyBook(this)">Buy now</a>
+          <span class="price">Price: €9.99</span>
+          <span class="price-note">Final price, no VAT under § 19 UStG, no shipping costs</span>
+          <a class="buy-btn" href="#zahlung" data-lang="en" data-price="€9.99" data-subject="Book Sovereignty English" data-title="Digital Sovereignty" onclick="return buyBook(this)">Buy now</a>
           <span style="display:inline-block; padding: 6px 12px; border: 1px solid #555; border-radius: 6px; color: #aaa; font-size: 0.9em;">
             Current edition: <strong style="color:#00ffcc;">v1.5</strong> &middot; October 24, 2026
           </span>
@@ -701,7 +729,8 @@
         <h3>Das dezentrale System: Bitcoin. Aktien. Echtes Eigentum.</h3>
         <p>Die Finanz-Seite der Souveränität: Bitcoin kaufen mit und ohne KYC, Selbstverwahrung mit BitBox02 und eigener Node, Coin Control, Lightning, Vererben mit Totmannschalter, Monero als Zahlungswerkzeug, US-Aktien per Direct Registration, Schweizer Namensaktien, ETF-Kritik, Auslandsbroker, Edelmetalle, Steuern und Meldepflichten. 18 Kapitel plus FAQ, Glossar, Quellen-Anhang, der Anhang „Aus der eigenen Werkstatt" und vier <a href="werkstatt-band3.html" style="color:#00ffcc; text-decoration:none;">Werkstatt-Blätter</a> zum Ausdrucken.</p>
         <div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px;">
-          <span class="price">Richtpreis: 9,99 €</span>
+          <span class="price">Preis: 9,99 €</span>
+          <span class="price-note">Endpreis, keine Umsatzsteuer nach § 19 UStG, keine Versandkosten</span>
           <a class="buy-btn" href="#zahlung" data-lang="de" data-price="9,99 €" data-subject="Buch Dezentrales System DE" data-title="Das dezentrale System" onclick="return buyBook(this)">Jetzt kaufen</a>
           <span style="display:inline-block; padding: 6px 12px; border: 1px solid #555; border-radius: 6px; color: #aaa; font-size: 0.9em;">
             Aktuelle Ausgabe: <strong style="color:#00ffcc;">v1.0</strong> &middot; Stand 01.11.2026
@@ -726,8 +755,9 @@
         <h3>The Decentralized System: Bitcoin. Stocks. True Ownership.</h3>
         <p>The financial side of sovereignty: buying Bitcoin with and without KYC, self-custody with the BitBox02 and your own node, coin control, Lightning, inheritance with a dead man's switch, Monero as a payment tool, US stocks via Direct Registration, Swiss registered shares, the ETF trap, foreign brokers, precious metals, taxes and reporting duties. 18 chapters plus FAQ, glossary, sources appendix, the "From my own workshop" appendix and four printable <a href="en/werkstatt-band3.html" style="color:#00ffcc; text-decoration:none;">workshop sheets</a>.</p>
         <div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px;">
-          <span class="price">Suggested price: $9.99</span>
-          <a class="buy-btn" href="#zahlung" data-lang="en" data-price="$9.99" data-subject="Book Decentralized System English" data-title="The Decentralized System" onclick="return buyBook(this)">Buy now</a>
+          <span class="price">Price: €9.99</span>
+          <span class="price-note">Final price, no VAT under § 19 UStG, no shipping costs</span>
+          <a class="buy-btn" href="#zahlung" data-lang="en" data-price="€9.99" data-subject="Book Decentralized System English" data-title="The Decentralized System" onclick="return buyBook(this)">Buy now</a>
           <span style="display:inline-block; padding: 6px 12px; border: 1px solid #555; border-radius: 6px; color: #aaa; font-size: 0.9em;">
             Current edition: <strong style="color:#00ffcc;">v1.0</strong> &middot; November 1, 2026
           </span>
@@ -752,7 +782,8 @@
         <h3>Die eigene Bank: Bitcoin meisterlich verwahren</h3>
         <p>Am 30. Juli 2026 wurden in 41 Minuten 1.196 Hardware-Wallet-Adressen leergeräumt, und die Besitzer hatten nichts falsch gemacht. Verschont blieb, wer genug eigene Würfelwürfe in seinen Seed eingespeist hatte. Dieses Buch macht aus dir diesen Besitzer: eigener Seed per Würfel, Passphrase, Stahl-Backups, Restore-Drills, 2-von-3-Multisig mit BitBox02, Trezor und SeedSigner, Vererben mit Zeitschloss in Liana, Versicherung mit Bitsurance und eine Strategie nach Maß. Jede Technik wurde vor dem Schreiben real durchgeführt. 12 Kapitel plus FAQ, Glossar und der Anhang „Aus der eigenen Werkstatt" mit dem <a href="werkstatt-paket.html" style="color:#00ffcc; text-decoration:none;">Werkstatt-Paket</a> zum Ausdrucken. Zum Buch gehört ein kostenloses Werkstatt-Paket mit zehn Druckblättern und den Offline-Werkzeugen Würfel-Check und Nachlassplaner, per QR-Code im Buch erreichbar.</p>
         <div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px;">
-          <span class="price">Richtpreis: 9,99 €</span>
+          <span class="price">Preis: 9,99 €</span>
+          <span class="price-note">Endpreis, keine Umsatzsteuer nach § 19 UStG, keine Versandkosten</span>
           <a class="buy-btn" href="#zahlung" data-lang="de" data-price="9,99 €" data-subject="Buch Eigene Bank DE" data-title="Die eigene Bank" onclick="return buyBook(this)">Jetzt kaufen</a>
           <span style="display:inline-block; padding: 6px 12px; border: 1px solid #555; border-radius: 6px; color: #aaa; font-size: 0.9em;">
             Aktuelle Ausgabe: <strong style="color:#00ffcc;">v1.4</strong> &middot; Stand Oktober 2026
@@ -777,8 +808,9 @@
         <h3>Your Own Bank: Master Bitcoin Self-Custody</h3>
         <p>On 30 July 2026, 1,196 hardware wallet addresses were emptied in 41 minutes, and their owners had done nothing wrong. Anyone who had fed enough of their own dice rolls into the seed was spared. This book turns you into that owner: your own seed from dice, passphrase, steel backups, restore drills, 2-of-3 multisig with BitBox02, Trezor and SeedSigner, inheritance with a timelock in Liana, insurance with Bitsurance and a strategy that fits. Every technique was carried out for real before it was written down. 12 chapters plus FAQ, glossary and the "From my own workshop" appendix with the printable <a href="en/werkstatt-paket.html" style="color:#00ffcc; text-decoration:none;">workshop package</a>. The book comes with a free workshop package of ten printable sheets and the offline tools Dice Check and Estate Planner, reachable via QR codes in the book.</p>
         <div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px;">
-          <span class="price">Suggested price: $9.99</span>
-          <a class="buy-btn" href="#zahlung" data-lang="en" data-price="$9.99" data-subject="Book Own Bank EN" data-title="Your Own Bank" onclick="return buyBook(this)">Buy now</a>
+          <span class="price">Price: €9.99</span>
+          <span class="price-note">Final price, no VAT under § 19 UStG, no shipping costs</span>
+          <a class="buy-btn" href="#zahlung" data-lang="en" data-price="€9.99" data-subject="Book Own Bank EN" data-title="Your Own Bank" onclick="return buyBook(this)">Buy now</a>
           <span style="display:inline-block; padding: 6px 12px; border: 1px solid #555; border-radius: 6px; color: #aaa; font-size: 0.9em;">
             Current edition: <strong style="color:#00ffcc;">v1.4</strong> &middot; October 2026
           </span>
@@ -889,17 +921,20 @@
       <h2><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Kontakt" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> So bekommst du das Buch</h2>
       <div class="flow">
         <ol>
-          <li><strong>Zahle</strong> mit der Methode deiner Wahl (Lightning, Onchain oder Ko-fi).</li>
+          <li><strong>Zahle 9,99 €</strong> mit der Methode deiner Wahl (Lightning, Onchain, Überweisung oder Ko-fi). Bei Bitcoin gilt der Gegenwert zum Kurs im Moment der Zahlung. Vorher bitte <a href="#rechtliches" style="color:#00ffcc;">Rechtliches zum Kauf und Widerrufsbelehrung</a> lesen.</li>
           <li>
-            <strong>Schicke eine E-Mail</strong> an <code>kontakt@alien-investor.org</code><br>
+            <strong>Schicke eine E-Mail</strong> an <code>kontakt@alien-investor.org</code>. Mit Eingang deiner E-Mail kommt der Kaufvertrag zustande.<br>
             <span style="color:#aaa; font-size:0.9em;">
               Betreff: <strong id="subject-de">Buchtitel + Sprache, z.B. „Buch Eigene Bank DE"</strong><br>
-              Inhalt: Zahlungsart + ungefähre Uhrzeit (bei Onchain gerne TxID).
+              Inhalt: Zahlungsart + ungefähre Uhrzeit (bei Onchain gerne TxID).<br>
+              Du wählst selbst: Mit deiner Zustimmung kommt der Link sofort, ohne Zustimmung am Tag nach Ablauf der 14-tägigen Widerrufsfrist.
             </span><br>
-            <a id="mail-de" class="mail-btn" href="mailto:kontakt@alien-investor.org">E-Mail jetzt schreiben &rarr;</a>
+            <a id="mail-de" class="mail-btn" href="mailto:kontakt@alien-investor.org">E-Mail: sofort liefern &rarr;</a>
+            <span class="mail-choice">Mit Zustimmung: Dein Widerrufsrecht erlischt, sobald ich dir den Link schicke.</span>
+            <a id="mail-de-spaet" class="mail-btn alt" href="mailto:kontakt@alien-investor.org">E-Mail: nach Ablauf der Widerrufsfrist liefern &rarr;</a>
           </li>
           <li>
-            <strong>Bundle per Antwort:</strong> Du bekommst innerhalb von 24 Stunden einen
+            <strong>Bundle per Antwort:</strong> Meist am selben Tag, spätestens zwei Werktage nach Eingang von E-Mail und Zahlung, bekommst du einen
             persönlichen <strong>Download-Link</strong> — gültig 30 Tage, max. 3 Downloads,
             nur für dich erstellt. Ein Klick, und das komplette Bundle (EPUB, MOBI, AZW3, PDF + README)
             landet als ZIP bei dir.
@@ -911,7 +946,7 @@
         </p>
       </div>
 
-      <h2>Lebenslange Updates</h2>
+      <h2>Kostenlose Updates</h2>
       <div class="flow" style="border-left-color: #ffaa00;">
         <p style="margin-top:0;">
           Dieses Buch ist <strong>ein lebendiges Handbuch</strong>. GrapheneOS entwickelt sich weiter,
@@ -924,8 +959,8 @@
           Download-Link. Kein Mehrkauf, keine Plattform-Bindung.
         </p>
         <p style="color:#aaa; font-size:0.9em; margin-bottom:0;">
-          Das ist mein Versprechen an Direktkäufer — anders als bei Amazon, wo du für jede neue
-          Auflage erneut zahlen müsstest. Hier zahlst du einmal und bekommst alle Updates.
+          Das ist mein Versprechen an Direktkäufer: Neue Ausgaben deines Buchs (gleicher Titel, gleiche Sprache)
+          bekommst du kostenlos, solange ich das Buch im Direktverkauf anbiete.
         </p>
       </div>
 
@@ -933,13 +968,51 @@
         <strong>Was du bekommst – und was nicht:</strong><br><br>
         ✅ <strong>Kein DRM</strong> – die Dateien sind wirklich deins.<br>
         ✅ <strong>Vier Formate</strong> – EPUB (Kobo/Tolino/Apple), MOBI (alte Kindles, z.B. Kindle 2), AZW3 (aktuelle Kindles), PDF (Desktop/Drucken).<br>
-        ✅ <strong>Lebenslange Updates</strong> – jede neue Ausgabe gratis, einfach kurze Mail.<br>
+        ✅ <strong>Kostenlose Updates</strong> – jede neue Ausgabe deines Buchs gratis, solange ich es direkt verkaufe, einfach kurze Mail.<br>
         ✅ <strong>Persönlicher Download-Link</strong> — gültig 30 Tage, max. 3 Downloads, nur für dich.<br>
         ❌ <strong>Keine Rechnung auf Firma</strong> – wenn du eine brauchst: kurz in der Mail erwähnen, dann klären wir's.<br><br>
         <em style="color:#aaa;">
           Dieser Weg ist bewusst direkt. Keine Plattform, kein Tracking, keine Cookies –
           Alien-Investor-Niveau.
         </em>
+      </div>
+
+      <!-- RECHTLICHES ZUM KAUF (seit 28.11.2026, Grundlage ~/.claude/skills/_recht/fernabsatz.md) -->
+      <div class="legal" id="rechtliches">
+        <h3>Rechtliches zum Kauf</h3>
+        <p><strong>Anbieter:</strong> Alien Investor – Patrik Pietruschka, Europaring 90, 53757 Sankt Augustin, Deutschland. E-Mail (am schnellsten): kontakt@alien-investor.org, Telefon: +49 175 2886377</p>
+        <p><strong>Produkt:</strong> Ebook als ZIP-Datei mit EPUB, MOBI, AZW3 und PDF plus README, ohne DRM (kein Kopierschutz). EPUB für Kobo, Tolino und Apple Books, AZW3 für aktuelle Kindles, MOBI für ältere Kindles, PDF für Computer und Druck. Lieferung über einen persönlichen Download-Link, 30 Tage gültig, höchstens 3 Downloads.</p>
+        <p><strong>Preis:</strong> 9,99 € je Buch (Endpreis). Gemäß § 19 UStG wird keine Umsatzsteuer berechnet. Es fallen keine Versandkosten an. Bei Zahlung in Bitcoin gilt der Gegenwert von 9,99 € zum Kurs im Moment der Zahlung.</p>
+        <p><strong>Zahlung:</strong> im Voraus per Lightning, Bitcoin Onchain, SEPA-Überweisung, Wise oder Ko-fi (PayPal oder Karte).</p>
+        <p><strong>Vertrag und Lieferung:</strong> Die Angebote auf dieser Seite sind verbindlich. Du nimmst ein Angebot an, indem du mir eine E-Mail mit Buchtitel und Sprache schickst; mit Eingang deiner E-Mail kommt der Vertrag zustande. Den Preis zahlst du im Voraus. Bestätigung und Download-Link schicke ich dir spätestens zwei Werktage nach Eingang von E-Mail und Zahlung, meist am selben Tag. Hast du der Lieferung vor Ablauf der Widerrufsfrist nicht zugestimmt, schicke ich den Link am ersten Tag nach Ablauf der Widerrufsfrist. Keine Lieferbeschränkungen.</p>
+        <p><strong>Gewährleistung:</strong> Für digitale Inhalte besteht das gesetzliche Gewährleistungsrecht (§§ 327 ff. BGB). Lässt sich eine Datei nicht öffnen oder ist sie fehlerhaft, schreib mir.</p>
+        <p><strong>Streitbeilegung:</strong> Ich bin nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+        <details>
+          <summary>Widerrufsbelehrung und Muster-Widerrufsformular</summary>
+          <h4>Widerrufsbelehrung</h4>
+          <p><strong>Widerrufsrecht</strong></p>
+          <p>Sie haben das Recht, binnen vierzehn Tagen ohne Angabe von Gründen diesen Vertrag zu widerrufen.</p>
+          <p>Die Widerrufsfrist beträgt vierzehn Tage ab dem Tag des Vertragsabschlusses.</p>
+          <p>Um Ihr Widerrufsrecht auszuüben, müssen Sie uns (Alien Investor – Patrik Pietruschka, Europaring 90, 53757 Sankt Augustin, Telefon: +49 175 2886377, E-Mail: kontakt@alien-investor.org) mittels einer eindeutigen Erklärung (z. B. ein mit der Post versandter Brief oder eine E-Mail) über Ihren Entschluss, diesen Vertrag zu widerrufen, informieren. Sie können dafür das beigefügte Muster-Widerrufsformular verwenden, das jedoch nicht vorgeschrieben ist.</p>
+          <p>Zur Wahrung der Widerrufsfrist reicht es aus, dass Sie die Mitteilung über die Ausübung des Widerrufsrechts vor Ablauf der Widerrufsfrist absenden.</p>
+          <p><strong>Folgen des Widerrufs</strong></p>
+          <p>Wenn Sie diesen Vertrag widerrufen, haben wir Ihnen alle Zahlungen, die wir von Ihnen erhalten haben, einschließlich der Lieferkosten (mit Ausnahme der zusätzlichen Kosten, die sich daraus ergeben, dass Sie eine andere Art der Lieferung als die von uns angebotene, günstigste Standardlieferung gewählt haben), unverzüglich und spätestens binnen vierzehn Tagen ab dem Tag zurückzuzahlen, an dem die Mitteilung über Ihren Widerruf dieses Vertrags bei uns eingegangen ist. Für diese Rückzahlung verwenden wir dasselbe Zahlungsmittel, das Sie bei der ursprünglichen Transaktion eingesetzt haben, es sei denn, mit Ihnen wurde ausdrücklich etwas anderes vereinbart; in keinem Fall werden Ihnen wegen dieser Rückzahlung Entgelte berechnet.</p>
+          <p><em>Ende der Widerrufsbelehrung</em></p>
+          <h4>Hinweis zum vorzeitigen Erlöschen des Widerrufsrechts</h4>
+          <p>Ihr Widerrufsrecht erlischt vorzeitig, wenn wir mit der Lieferung (Versand des Download-Links) begonnen haben, nachdem Sie ausdrücklich zugestimmt haben, dass wir vor Ablauf der Widerrufsfrist mit der Lieferung beginnen, Sie Ihre Kenntnis davon bestätigt haben, dass Sie durch Ihre Zustimmung mit Beginn der Lieferung Ihr Widerrufsrecht verlieren, und wir Ihnen eine Bestätigung des Vertrags zur Verfügung gestellt haben.</p>
+          <h4>Muster-Widerrufsformular</h4>
+          <p>(Wenn Sie den Vertrag widerrufen wollen, dann füllen Sie bitte dieses Formular aus und senden Sie es zurück.)</p>
+          <ul>
+            <li>An Alien Investor – Patrik Pietruschka, Europaring 90, 53757 Sankt Augustin, kontakt@alien-investor.org:</li>
+            <li>Hiermit widerrufe(n) ich/wir (*) den von mir/uns (*) abgeschlossenen Vertrag über den Kauf der folgenden Waren (*)/die Erbringung der folgenden Dienstleistung (*)</li>
+            <li>Bestellt am (*)/erhalten am (*)</li>
+            <li>Name des/der Verbraucher(s)</li>
+            <li>Anschrift des/der Verbraucher(s)</li>
+            <li>Unterschrift des/der Verbraucher(s) (nur bei Mitteilung auf Papier)</li>
+            <li>Datum</li>
+          </ul>
+          <p>(*) Unzutreffendes streichen.</p>
+        </details>
       </div>
     </div>
 
@@ -948,17 +1021,20 @@
       <h2><svg style="width:1em;height:1em;vertical-align:-0.15em;filter:drop-shadow(0 0 3px #00ffcc88);" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Contact" role="img"><circle cx="18" cy="20" r="2" fill="#00ffcc"/><path d="M12 18 A7 7 0 0 1 24 18" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 14 A12 12 0 0 1 28 14" fill="none" stroke="#00ffcc" stroke-width="1" stroke-linecap="round" opacity="0.7"/><path d="M4 10 A17 17 0 0 1 32 10" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><line x1="18" y1="22" x2="18" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/><line x1="13" y1="32" x2="23" y2="32" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round"/></svg> How to get the book</h2>
       <div class="flow">
         <ol>
-          <li><strong>Pay</strong> with the method of your choice (Lightning, Onchain or Ko-fi).</li>
+          <li><strong>Pay €9.99</strong> with the method of your choice (Lightning, Onchain, bank transfer or Ko-fi). For Bitcoin, the equivalent at the exchange rate at the moment of payment applies. Please read the <a href="#legal" style="color:#00ffcc;">legal information and withdrawal instructions</a> first.</li>
           <li>
-            <strong>Send an email</strong> to <code>kontakt@alien-investor.org</code><br>
+            <strong>Send an email</strong> to <code>kontakt@alien-investor.org</code>. The purchase contract is concluded when your email reaches me.<br>
             <span style="color:#aaa; font-size:0.9em;">
               Subject: <strong id="subject-en">Book title + language, e.g. "Book Own Bank EN"</strong><br>
-              Content: payment method + approximate time (for Onchain, the TxID is helpful).
+              Content: payment method + approximate time (for Onchain, the TxID is helpful).<br>
+              You choose: with your consent, the link comes right away; without consent, on the day after the 14-day withdrawal period ends.
             </span><br>
-            <a id="mail-en" class="mail-btn" href="mailto:kontakt@alien-investor.org">Write the email now &rarr;</a>
+            <a id="mail-en" class="mail-btn" href="mailto:kontakt@alien-investor.org">Email: deliver now &rarr;</a>
+            <span class="mail-choice">With consent: your right of withdrawal expires once I send you the link.</span>
+            <a id="mail-en-spaet" class="mail-btn alt" href="mailto:kontakt@alien-investor.org">Email: deliver after the withdrawal period &rarr;</a>
           </li>
           <li>
-            <strong>Bundle by reply:</strong> Within 24 hours you will receive a personal
+            <strong>Bundle by reply:</strong> Usually on the same day, at the latest two working days after receipt of your email and payment, you will receive a personal
             <strong>download link</strong> — valid for 30 days, max. 3 downloads,
             created just for you. One click, and the complete bundle (EPUB, MOBI, AZW3, PDF + README)
             downloads as a ZIP file.
@@ -970,7 +1046,7 @@
         </p>
       </div>
 
-      <h2>Lifetime Updates</h2>
+      <h2>Free Updates</h2>
       <div class="flow" style="border-left-color: #ffaa00;">
         <p style="margin-top:0;">
           This book is <strong>a living handbook</strong>. GrapheneOS keeps evolving,
@@ -983,8 +1059,8 @@
           download link. No repurchase, no platform lock-in.
         </p>
         <p style="color:#aaa; font-size:0.9em; margin-bottom:0;">
-          This is my promise to direct buyers — unlike Amazon, where you would need to pay again
-          for each new edition. Here you pay once and get all updates.
+          This is my promise to direct buyers: you receive new editions of your book (same title, same language)
+          for free for as long as I sell the book directly.
         </p>
       </div>
 
@@ -992,13 +1068,51 @@
         <strong>What you get – and what you don't:</strong><br><br>
         ✅ <strong>No DRM</strong> – the files are truly yours.<br>
         ✅ <strong>Four formats</strong> – EPUB (Kobo/Tolino/Apple Books), MOBI (older Kindles), AZW3 (current Kindles), PDF (desktop/printing).<br>
-        ✅ <strong>Lifetime updates</strong> – every new edition free, just a short email.<br>
+        ✅ <strong>Free updates</strong> – every new edition of your book free for as long as I sell it directly, just a short email.<br>
         ✅ <strong>Personal download link</strong> — valid 30 days, max. 3 downloads, created just for you.<br>
         ❌ <strong>No invoice for companies</strong> – if you need one: mention it in the email and we'll sort it out.<br><br>
         <em style="color:#aaa;">
           This process is intentionally direct. No platform, no tracking, no cookies –
           Alien Investor level.
         </em>
+      </div>
+
+      <!-- LEGAL INFORMATION (since 28.11.2026) -->
+      <div class="legal" id="legal">
+        <h3>Legal information on the purchase</h3>
+        <p><strong>Seller:</strong> Alien Investor – Patrik Pietruschka, Europaring 90, 53757 Sankt Augustin, Germany. Email (fastest): kontakt@alien-investor.org, phone: +49 175 2886377</p>
+        <p><strong>Product:</strong> ebook as a ZIP file with EPUB, MOBI, AZW3 and PDF plus README, without DRM (no copy protection). EPUB for Kobo, Tolino and Apple Books, AZW3 for current Kindles, MOBI for older Kindles, PDF for computers and printing. Delivered via a personal download link, valid for 30 days, max. 3 downloads.</p>
+        <p><strong>Price:</strong> €9.99 per book (final price). As a small business under § 19 of the German VAT Act (UStG), no VAT is charged. No shipping costs. For payment in Bitcoin, the equivalent of €9.99 at the exchange rate at the moment of payment applies.</p>
+        <p><strong>Payment:</strong> in advance via Lightning, Bitcoin Onchain, SEPA transfer, Wise or Ko-fi (PayPal or card).</p>
+        <p><strong>Contract and delivery:</strong> The offers on this page are binding. You accept an offer by sending me an email stating the book title and language; the contract is concluded when your email reaches me. You pay the price in advance. I send you the confirmation and the download link at the latest two working days after receiving your email and payment, usually on the same day. If you have not agreed to delivery before the end of the withdrawal period, I send the link on the first day after the withdrawal period ends. No delivery restrictions.</p>
+        <p><strong>Legal guarantee:</strong> The statutory legal guarantee of conformity for digital content applies (§§ 327 et seq. German Civil Code). If a file does not open or is faulty, write to me.</p>
+        <p><strong>Dispute resolution:</strong> I am neither willing nor obliged to take part in dispute resolution proceedings before a consumer arbitration board.</p>
+        <details>
+          <summary>Withdrawal instructions and model withdrawal form</summary>
+          <h4>Withdrawal instructions</h4>
+          <p><strong>Right of withdrawal</strong></p>
+          <p>You have the right to withdraw from this contract within 14 days without giving any reason.</p>
+          <p>The withdrawal period will expire after 14 days from the day of the conclusion of the contract.</p>
+          <p>To exercise the right of withdrawal, you must inform us (Alien Investor – Patrik Pietruschka, Europaring 90, 53757 Sankt Augustin, Germany, phone: +49 175 2886377, email: kontakt@alien-investor.org) of your decision to withdraw from this contract by an unequivocal statement (e.g. a letter sent by post or e-mail). You may use the attached model withdrawal form, but it is not obligatory.</p>
+          <p>To meet the withdrawal deadline, it is sufficient for you to send your communication concerning your exercise of the right of withdrawal before the withdrawal period has expired.</p>
+          <p><strong>Effects of withdrawal</strong></p>
+          <p>If you withdraw from this contract, we shall reimburse to you all payments received from you, including the costs of delivery (with the exception of the supplementary costs resulting from your choice of a type of delivery other than the least expensive type of standard delivery offered by us), without undue delay and in any event not later than 14 days from the day on which we are informed about your decision to withdraw from this contract. We will carry out such reimbursement using the same means of payment as you used for the initial transaction, unless you have expressly agreed otherwise; in any event, you will not incur any fees as a result of such reimbursement.</p>
+          <p><em>End of withdrawal instructions</em></p>
+          <h4>Note on early expiry of the right of withdrawal</h4>
+          <p>Your right of withdrawal expires early if we have begun delivery (sending the download link) after you have expressly agreed that we begin delivery before the end of the withdrawal period, you have acknowledged that you thereby lose your right of withdrawal once delivery has begun, and we have provided you with a confirmation of the contract.</p>
+          <h4>Model withdrawal form</h4>
+          <p>(Complete and return this form only if you wish to withdraw from the contract.)</p>
+          <ul>
+            <li>To Alien Investor – Patrik Pietruschka, Europaring 90, 53757 Sankt Augustin, Germany, kontakt@alien-investor.org:</li>
+            <li>I/We (*) hereby give notice that I/We (*) withdraw from my/our (*) contract of sale of the following goods (*)/for the provision of the following service (*),</li>
+            <li>Ordered on (*)/received on (*),</li>
+            <li>Name of consumer(s),</li>
+            <li>Address of consumer(s),</li>
+            <li>Signature of consumer(s) (only if this form is notified on paper),</li>
+            <li>Date</li>
+          </ul>
+          <p>(*) Delete as appropriate.</p>
+        </details>
       </div>
     </div>
 
@@ -1059,6 +1173,41 @@
 
     var chosenBook = null;
 
+    /* Vorbelegter Mail-Text mit Zustimmung zur vorzeitigen Lieferung (§ 356 Abs. 6 Nr. 2 BGB), seit 28.11.2026 */
+    var MAIL_BODY = {
+      de: 'Zahlungsart und ungefähre Uhrzeit (bei Onchain gerne die TxID):\r\n\r\n\r\n' +
+          'Ich stimme ausdrücklich zu, dass du vor Ablauf der Widerrufsfrist mit der Lieferung des Ebooks beginnst. ' +
+          'Mir ist bekannt, dass ich durch diese Zustimmung mit Beginn der Lieferung mein Widerrufsrecht verliere.',
+      en: 'Payment method and approximate time (for Onchain, the TxID is helpful):\r\n\r\n\r\n' +
+          'I expressly agree that you begin delivering the ebook before the end of the withdrawal period. ' +
+          'I acknowledge that by giving this consent I lose my right of withdrawal once delivery has begun.'
+    };
+
+    /* Ohne Zustimmung: nur die Zahlungszeile, Lieferung nach Ablauf der Widerrufsfrist */
+    var MAIL_BODY_SPAET = {
+      de: 'Zahlungsart und ungefähre Uhrzeit (bei Onchain gerne die TxID):\r\n\r\n\r\n' +
+          'Bitte liefere nach Ablauf der Widerrufsfrist.',
+      en: 'Payment method and approximate time (for Onchain, the TxID is helpful):\r\n\r\n\r\n' +
+          'Please deliver after the withdrawal period has ended.'
+    };
+
+    function mailHref(lang, subject, spaet) {
+      var bodies = spaet ? MAIL_BODY_SPAET : MAIL_BODY;
+      var q = [];
+      if (subject) q.push('subject=' + encodeURIComponent(subject));
+      q.push('body=' + encodeURIComponent(bodies[lang] || bodies.de));
+      return 'mailto:kontakt@alien-investor.org?' + q.join('&');
+    }
+
+    function setMailLinks(lang, subject) {
+      var sofort = document.getElementById('mail-' + lang);
+      var spaet = document.getElementById('mail-' + lang + '-spaet');
+      if (sofort) sofort.href = mailHref(lang, subject, false);
+      if (spaet) spaet.href = mailHref(lang, subject, true);
+    }
+
+    ['de', 'en'].forEach(function (l) { setMailLinks(l, ''); });
+
     function renderBuyingNote() {
       var note = document.getElementById('buying-note');
       if (!note) return;
@@ -1070,7 +1219,7 @@
       note.appendChild(document.createTextNode(en ? ' \u00b7 Email subject: ' : ' \u00b7 E-Mail-Betreff: '));
       var t2 = document.createElement('strong'); t2.textContent = chosenBook.subject; note.appendChild(t2);
       if (chosenBook.price) {
-        note.appendChild(document.createTextNode(en ? ' \u00b7 Suggested price: ' : ' \u00b7 Richtpreis: '));
+        note.appendChild(document.createTextNode(en ? ' \u00b7 Price: ' : ' \u00b7 Preis: '));
         var t3 = document.createElement('strong'); t3.textContent = chosenBook.price; note.appendChild(t3);
       }
       note.style.display = 'block';
@@ -1087,10 +1236,7 @@
       setLang(lang);
       var subj = document.getElementById('subject-' + lang);
       if (subj && chosenBook.subject) subj.textContent = chosenBook.subject;
-      var mail = document.getElementById('mail-' + lang);
-      if (mail && chosenBook.subject) {
-        mail.href = 'mailto:kontakt@alien-investor.org?subject=' + encodeURIComponent(chosenBook.subject);
-      }
+      setMailLinks(lang, chosenBook.subject);
       var target = document.getElementById('zahlung');
       if (target && target.scrollIntoView) {
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
