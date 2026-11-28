@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>GrapheneOS Sandbox – Which Permissions You Should Actually Grant | Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="How does the sandbox work under GrapheneOS? A guide to permissions for network, location, microphone, and Google Play Services.">
+  <meta name="description" content="How does the sandbox work under GrapheneOS? Setting permissions: what every Android can do and what GrapheneOS adds, with Network, Sensors, Storage Scopes, Contact Scopes and Clipboard access.">
   <style>
     body { background-color: #000; color: #fff; font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 0 15px 20px 15px; }
     h1, h2, h3 { color: #00ffcc; }
@@ -56,20 +56,20 @@
 
     <h2>A False Sense of Security</h2>
     <p>
-      An app launches. Five popups appear. Most users reflexively tap "Allow".
+      An app launches. Five popups appear. Many users reflexively tap "Allow".
       That's exactly where the false sense of security begins.
       The sandbox only protects you if you know how to make decisions. GrapheneOS is not a magic shield. It doesn't make decisions for you. It just ensures that bad decisions cause less damage.
     </p>
 
-    <h2>What Does "Sandbox" Actually Mean Under GrapheneOS?</h2>
-    <p>Under GrapheneOS, every app runs in isolation:</p>
-    <ul>
-      <li>No silent cross-access to other apps</li>
-      <li>No hidden system privileges</li>
-      <li>No special rights running in the background</li>
-    </ul>
+    <h2>The Cage and Its Doors</h2>
     <p>
-      Even Google Play Services are ordinary apps under GrapheneOS. No god mode. No system-wide omnipotence.
+      On Android, every app lives in its own cage. It gets its own user ID and runs in its own process. That keeps it away from the private data of other apps. This cage is called the sandbox. Every Android has it.
+    </p>
+    <p>
+      GrapheneOS makes the bars thicker. It tightens the rules the cage is built from. Breaking out becomes harder for attackers.
+    </p>
+    <p>
+      Permissions are the doors in this cage. Every open door lets the app reach something: your microphone, your location or your photos. You decide which doors are open.
     </p>
     <p><strong>Important:</strong></p>
     <ul>
@@ -77,7 +77,7 @@
       <li>Sandbox means damage is contained</li>
     </ul>
     <p>
-      The responsibility for making sensible decisions stays with you.
+      An app with microphone access can still listen in. But it only gets to your contacts once you open that door too. And whatever has gone out through an open door, no cage brings back. The responsibility for making sensible decisions stays with you.
     </p>
 
     <h2>The Most Important Rule</h2>
@@ -87,55 +87,47 @@
       Everything else is optional convenience – and that's exactly where most problems originate.
     </blockquote>
 
-    <h2>How to Read Typical Permissions</h2>
-
-    <h3>Network Access</h3>
-    <p><strong>Typical claim:</strong> "The app won't work without network access"</p>
-    <p><strong>Assessment:</strong></p>
-    <ul>
-      <li>Messenger, browser, maps → makes sense</li>
-      <li>Flashlight, calculator → red flag</li>
-    </ul>
-    <p><strong>Decision logic:</strong></p>
-    <ul>
-      <li>Core function online? → allow</li>
-      <li>Convenience only? → weigh it up</li>
-      <li>No connection? → deny</li>
-    </ul>
+    <h2>What Every Android Can Do</h2>
+    <p>
+      Many of these doors exist on every Android. That is why GrapheneOS does not count them among its own features.
+    </p>
 
     <h3>Location</h3>
     <p>
-      Location data is among the most sensitive information there is.<br>
-      <strong>Distinction:</strong> Precise / Approximate / Never.
+      Location data is among the most sensitive information there is. For location you decide two things: When may the app see it? And how precisely?
     </p>
     <p><strong>Recommendations:</strong></p>
     <ul>
-      <li>Navigation → precise (temporarily)</li>
-      <li>Weather → approximate</li>
+      <li>Navigation → precise, but only while using the app</li>
+      <li>Weather → approximate is enough</li>
       <li>Social apps → usually no</li>
     </ul>
     <p>
-      GrapheneOS lets you enable location on demand and disable it again immediately.
+      There is also the option "Only this time". Afterwards Android takes the permission back on its own.
     </p>
 
     <h3>Microphone and Camera</h3>
     <p><strong>Clear rules:</strong></p>
     <ul>
-      <li>Only while actively in use</li>
+      <li>Only while using the app, or only this time</li>
       <li>Never permanently</li>
-      <li>System toggles show live access instantly</li>
     </ul>
+    <p>
+      Since Android 12, an icon in the status bar shows when an app uses the camera or microphone. In Quick Settings you can block the camera or microphone for all apps.
+    </p>
     <p>
       Microphone and camera are high-risk permissions. When in doubt, grant less rather than more.
     </p>
 
-    <h3>Files and Storage</h3>
-    <p><strong>Distinction:</strong> Full storage / Individual files / Media only.</p>
-    <p><strong>Recommendation:</strong></p>
-    <ul>
-      <li>Always granular</li>
-      <li>Never blanket access unless absolutely necessary</li>
-    </ul>
+    <h3>Photos and Videos</h3>
+    <p>
+      With photos, too, you don't have to share everything. With limited access ("Allow limited access") you pick individual pictures.
+    </p>
+
+    <h3>Home Network (Android 17)</h3>
+    <p>
+      Android 17 adds protection for your home network, meaning routers, printers or cameras on your own network. Apps built for Android 17 need a separate permission for it. It belongs to the "Nearby devices" permission. Older apps keep access for now. So the protection does not yet apply to every app.
+    </p>
 
     <h3>Notifications</h3>
     <p>Notifications are convenience, not security.</p>
@@ -154,11 +146,88 @@
       <li>Everything else → restrict</li>
     </ul>
 
+    <h2>What GrapheneOS Adds</h2>
+    <p>
+      Now to what regular Android can't do.
+    </p>
+
+    <h3>Network: Internet per App</h3>
+    <p>
+      On regular Android, every app that requests internet access gets it. You are not asked. The permission counts as harmless.
+    </p>
+    <p>
+      GrapheneOS turns it into a toggle. It's called Network. You can untick it the first time you install an app ("Allow Network permission"). By default it is on. If you switch it off, GrapheneOS pretends the network is gone. To the app it looks as if you currently have no signal.
+    </p>
+    <p>
+      You can change it later at any time: in Settings under Apps, tap the app and then Permissions.
+    </p>
+    <p><strong>Assessment:</strong></p>
+    <ul>
+      <li>Messenger, browser, maps → makes sense</li>
+      <li>Flashlight, calculator → red flag</li>
+    </ul>
+    <p><strong>Decision logic:</strong></p>
+    <ul>
+      <li>Core function online? → allow</li>
+      <li>Convenience only? → weigh it up</li>
+      <li>Unrelated to its function? → deny</li>
+    </ul>
+    <p>
+      Our <a href="apps.html">own apps</a> don't ask for internet access at all. So there is nothing to untick when you install them. They run completely offline.
+    </p>
+
+    <h3>Sensors: Motion and Compass</h3>
+    <p>
+      On Android, every app may read acceleration, rotation and the compass. You are not asked. GrapheneOS adds the Sensors toggle for this. It sits in the same list as Network. Here too: a calculator doesn't need a compass.
+    </p>
+
+    <h3>Storage Scopes: Share Files Selectively</h3>
+    <p><strong>Rule of thumb:</strong> always granular, never blanket access unless absolutely necessary.</p>
+    <p>
+      Some apps want to see your entire storage. You don't grant them that permission. Instead you enable Storage Scopes on GrapheneOS, for each app individually, on its page in Settings.
+    </p>
+    <p>
+      The app then believes it has the permission. But it can only see its own files and what you share with it: a folder or individual files.
+    </p>
+    <p>
+      That is how I share a specific folder with Threema, or just individual pictures. Sometimes I use Android's limited access instead, which exists for photos and videos. I take whatever is more convenient at the time.
+    </p>
+
+    <h3>Contact Scopes: Individual Contacts Instead of the Address Book</h3>
+    <p>
+      With contacts, the first question is: Does the app need them at all? If not, it gets none.
+    </p>
+    <p>
+      If it does, Contact Scopes help. When you enable them, the app first sees an empty address book. Then you share individual contacts or groups. The rest of your address book stays invisible to the app.
+    </p>
+
+    <h3>Clipboard Access</h3>
+    <p>
+      Whatever you copy ends up on the clipboard: a password, a home address, a Bitcoin address. By default an app may read it while it is in the foreground.
+    </p>
+    <p>
+      Since September 2026, GrapheneOS lets you block this for any installed app. The toggle is called Clipboard access. You find it in Settings under Apps, for each app under Advanced.
+    </p>
+    <ul>
+      <li><strong>Default:</strong> The app follows the default for all installed apps</li>
+      <li><strong>Allow:</strong> The app may read while it is in the foreground</li>
+      <li><strong>Paste only:</strong> The app can only read what it copied itself and what you paste yourself</li>
+    </ul>
+    <p>
+      You can still paste, via the paste menu or the keyboard. An app's own paste button may fail then. If the app tries to read anyway, GrapheneOS shows a short notice. It isn't completely blind, though: it can still tell whether something has been copied, what kind of content it is and when.
+    </p>
+    <p>
+      You can also set this as the default for all installed apps, under Security &amp; privacy → Privacy controls → Clipboard access. Your keyboard always keeps access. I have set the default to Paste only.
+    </p>
+
     <h2>Google Play Services in the Sandbox</h2>
     <p>
-      A common misconception:<br>
-      Google Play Services have no special privileges under GrapheneOS.
+      On a regular Android phone, Google Play has far-reaching special privileges. It practically always has the location permission there.
     </p>
+    <p>
+      On GrapheneOS the cage applies to Google too. If you install Google Play, it is an ordinary app there. It has to ask for permissions like any other app. For Android Auto and a few other special cases there are separate toggles. Only you set them.
+    </p>
+    <p>For Google Play services, this means:</p>
     <ul>
       <li>They run in isolation</li>
       <li>They are optional</li>
@@ -191,12 +260,18 @@
     </ul>
 
     <h2>Practice: Make Deliberate Decisions</h2>
-    <p>The most effective approach is to consciously review permissions at first launch:</p>
+    <p>
+      The best moment for these decisions is the beginning, because at that point the app hasn't seen anything of yours yet. You decide on Network while installing, much of the rest at first launch. Nobody asks you about Sensors and the clipboard along the way. You change those yourself.
+    </p>
+    <p>Three questions help with every decision:</p>
     <ul>
       <li>What is core functionality?</li>
       <li>What is just convenience?</li>
       <li>What can I grant later if needed?</li>
     </ul>
+    <p>
+      Often the app works fine with a no. If something does stop working, you now know what it really needs. Do you need the feature? Then grant exactly that one permission. For location, camera and microphone ideally only while using the app, or only this time.
+    </p>
     <p>
       Two or three real apps are usually enough to internalize the principle.
     </p>
@@ -207,6 +282,9 @@
       It gives you control.<br>
       Security only emerges from your decisions.
     </p>
+    <blockquote>
+      You can take back a no at any time. Data that is already gone, you can't get back.
+    </blockquote>
 
     <div class="recommendation-box">
       <h3>Further Reading</h3>

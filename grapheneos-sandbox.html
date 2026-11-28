@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>GrapheneOS Sandbox – welche Berechtigungen du wirklich geben solltest | Alien Investor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Wie funktioniert die Sandbox unter GrapheneOS? Ein Leitfaden zu Berechtigungen für Netzwerk, Standort, Mikrofon und Google Play Services.">
+  <meta name="description" content="Wie funktioniert die Sandbox unter GrapheneOS? Berechtigungen einstellen: was jedes Android kann und was GrapheneOS dazugibt, mit Network, Sensors, Storage Scopes, Contact Scopes und Clipboard access.">
   <style>
     body { background-color: #000; color: #fff; font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 0 15px 20px 15px; }
     h1, h2, h3 { color: #00ffcc; }
@@ -59,15 +59,15 @@
       Die Sandbox schützt dich nur, wenn du auch weißt, wie du entscheidest. GrapheneOS ist kein Magie‑Schild. Es nimmt dir keine Entscheidungen ab. Es sorgt nur dafür, dass falsche Entscheidungen weniger Schaden anrichten.
     </p>
 
-    <h2>Was bedeutet „Sandbox“ unter GrapheneOS wirklich?</h2>
-    <p>Unter GrapheneOS läuft jede App isoliert:</p>
-    <ul>
-      <li>Keine stillen Querzugriffe auf andere Apps</li>
-      <li>Keine versteckten Systemprivilegien</li>
-      <li>Keine Sonderrechte im Hintergrund</li>
-    </ul>
+    <h2>Der Käfig und seine Türen</h2>
     <p>
-      Auch Google Play Services sind unter GrapheneOS normale Apps. Kein Gottmodus. Keine systemweite Allmacht.
+      Unter Android lebt jede App in ihrem eigenen Käfig. Sie bekommt eine eigene Kennung und läuft in einem eigenen Prozess. An die privaten Daten anderer Apps kommt sie so nicht heran. Dieser Käfig heißt Sandbox. Jedes Android hat ihn.
+    </p>
+    <p>
+      GrapheneOS macht die Gitterstäbe dicker. Es verschärft die Regeln, aus denen der Käfig besteht. Ausbrechen wird für Angreifer schwerer.
+    </p>
+    <p>
+      Berechtigungen sind die Türen in diesem Käfig. Jede offene Tür lässt die App an etwas heran: an dein Mikrofon, deinen Standort oder deine Fotos. Welche Türen offen sind, entscheidest du.
     </p>
     <p><strong>Wichtig:</strong></p>
     <ul>
@@ -75,7 +75,7 @@
       <li>Sandbox bedeutet, dass Schäden begrenzt werden</li>
     </ul>
     <p>
-      Die Verantwortung für sinnvolle Entscheidungen bleibt beim Nutzer.
+      Eine App mit Mikrofon kann trotzdem mithören. An deine Kontakte kommt sie aber erst, wenn du auch diese Tür öffnest. Und was durch eine offene Tür hinausgeht, holt kein Käfig zurück. Die Verantwortung für sinnvolle Entscheidungen bleibt beim Nutzer.
     </p>
 
     <h2>Die wichtigste Denkregel</h2>
@@ -85,55 +85,47 @@
       Alles andere ist optionaler Komfort – und genau dort entstehen die meisten Probleme.
     </blockquote>
 
-    <h2>Typische Berechtigungen richtig einordnen</h2>
-
-    <h3>Netzwerkzugriff</h3>
-    <p><strong>Typische Nachfrage:</strong> „Ohne Netzwerk funktioniert die App nicht“</p>
-    <p><strong>Einordnung:</strong></p>
-    <ul>
-      <li>Messenger, Browser, Karten → logisch</li>
-      <li>Taschenlampe, Taschenrechner → rote Flagge</li>
-    </ul>
-    <p><strong>Entscheidungslogik:</strong></p>
-    <ul>
-      <li>Kernfunktion online? → erlauben</li>
-      <li>Nur Komfort? → abwägen</li>
-      <li>Kein Zusammenhang? → verweigern</li>
-    </ul>
+    <h2>Was jedes Android kann</h2>
+    <p>
+      Viele dieser Türen hat jedes Android. GrapheneOS zählt sie deshalb nicht zu seinen eigenen Funktionen.
+    </p>
 
     <h3>Standort</h3>
     <p>
-      Standortdaten gehören zu den sensibelsten Informationen.<br>
-      <strong>Unterscheidung:</strong> Exakt / Ungefähr / Nie.
+      Standortdaten gehören zu den sensibelsten Informationen. Beim Standort entscheidest du zwei Dinge: Wann darf die App ihn sehen? Und wie genau?
     </p>
     <p><strong>Empfehlungen:</strong></p>
     <ul>
-      <li>Navigation → exakt (temporär)</li>
-      <li>Wetter → ungefähr</li>
+      <li>Navigation → genau, aber nur bei Nutzung der App</li>
+      <li>Wetter → ungefähr reicht</li>
       <li>Social Apps → meist nein</li>
     </ul>
     <p>
-      GrapheneOS erlaubt es, Standort gezielt zu aktivieren und wieder zu deaktivieren.
+      Es gibt auch die Auswahl „Nur dieses Mal“. Danach nimmt Android die Freigabe von selbst zurück.
     </p>
 
     <h3>Mikrofon und Kamera</h3>
     <p><strong>Klare Regeln:</strong></p>
     <ul>
-      <li>Nur während aktiver Nutzung</li>
+      <li>Nur bei Nutzung der App oder nur dieses Mal</li>
       <li>Nie dauerhaft</li>
-      <li>System-Toggles zeigen sofortigen Zugriff</li>
     </ul>
+    <p>
+      Seit Android 12 zeigt ein Symbol in der Statusleiste, wenn eine App Kamera oder Mikrofon nutzt. In den Schnelleinstellungen sperrst du Kamera oder Mikrofon für alle Apps.
+    </p>
     <p>
       Mikrofon und Kamera sind Hochrisiko‑Berechtigungen. Lieber einmal zu wenig als einmal zu viel.
     </p>
 
-    <h3>Dateien und Speicher</h3>
-    <p><strong>Unterscheidung:</strong> Gesamter Speicher / Einzelne Dateien / Nur Medien.</p>
-    <p><strong>Empfehlung:</strong></p>
-    <ul>
-      <li>Immer granular</li>
-      <li>Nie pauschal, wenn es nicht zwingend nötig ist</li>
-    </ul>
+    <h3>Fotos und Videos</h3>
+    <p>
+      Auch bei Fotos musst du nicht alles freigeben. Mit dem eingeschränkten Zugriff („Eingeschränkten Zugriff zulassen“) wählst du einzelne Bilder aus.
+    </p>
+
+    <h3>Heimnetz (Android 17)</h3>
+    <p>
+      Neu seit Android 17 ist ein Schutz für dein Heimnetz, also für Router, Drucker oder Kameras im eigenen Netz. Apps, die für Android 17 gebaut sind, brauchen dafür eine eigene Erlaubnis. Sie gehört zur Berechtigung „Geräte in der Nähe“. Ältere Apps behalten den Zugriff vorerst. Der Schutz greift also noch nicht bei jeder App.
+    </p>
 
     <h3>Benachrichtigungen</h3>
     <p>Benachrichtigungen sind Komfort, keine Sicherheit.</p>
@@ -152,11 +144,88 @@
       <li>Alles andere → einschränken</li>
     </ul>
 
+    <h2>Was GrapheneOS dazugibt</h2>
+    <p>
+      Jetzt zu dem, was normales Android nicht kann.
+    </p>
+
+    <h3>Network: Internet pro App</h3>
+    <p>
+      Unter normalem Android bekommt jede App Internet, die es anfordert. Gefragt wirst du nicht. Die Berechtigung gilt als unbedenklich.
+    </p>
+    <p>
+      GrapheneOS macht daraus einen Schalter. Er heißt Network. Schon beim ersten Installieren einer App kannst du ihn abwählen („Allow Network permission“). Ab Werk ist er an. Schaltest du ihn aus, tut GrapheneOS so, als wäre das Netz weg. Für die App sieht es aus, als hättest du gerade keinen Empfang.
+    </p>
+    <p>
+      Später geht das jederzeit: In den Einstellungen unter Apps tippst du auf die App und dann auf Berechtigungen.
+    </p>
+    <p><strong>Einordnung:</strong></p>
+    <ul>
+      <li>Messenger, Browser, Karten → logisch</li>
+      <li>Taschenlampe, Taschenrechner → rote Flagge</li>
+    </ul>
+    <p><strong>Entscheidungslogik:</strong></p>
+    <ul>
+      <li>Kernfunktion online? → erlauben</li>
+      <li>Nur Komfort? → abwägen</li>
+      <li>Kein Zusammenhang? → verweigern</li>
+    </ul>
+    <p>
+      Unsere <a href="apps.html">eigenen Apps</a> fragen gar nicht erst nach Internet. Beim Installieren gibt es bei ihnen deshalb nichts abzuwählen. Sie laufen komplett offline.
+    </p>
+
+    <h3>Sensors: Bewegung und Kompass</h3>
+    <p>
+      Beschleunigung, Drehung und Kompass darf unter Android jede App lesen. Gefragt wird nicht. GrapheneOS fügt dafür den Schalter Sensors hinzu. Er steht in derselben Liste wie Network. Auch hier gilt: Ein Taschenrechner braucht keinen Kompass.
+    </p>
+
+    <h3>Storage Scopes: Dateien gezielt freigeben</h3>
+    <p><strong>Faustregel:</strong> immer granular, nie pauschal, wenn es nicht zwingend nötig ist.</p>
+    <p>
+      Manche Apps wollen deinen ganzen Speicher sehen. Diese Berechtigung gibst du ihnen nicht. Stattdessen schaltest du bei GrapheneOS die Storage Scopes ein, für jede App einzeln, auf ihrer Seite in den Einstellungen.
+    </p>
+    <p>
+      Die App glaubt dann, sie hätte die Berechtigung. Sehen kann sie aber nur ihre eigenen Dateien und das, was du ihr freigibst: einen Ordner oder einzelne Dateien.
+    </p>
+    <p>
+      Threema gebe ich so einen bestimmten Ordner frei, oder nur einzelne Bilder. Manchmal nehme ich auch den eingeschränkten Zugriff von Android, den es für Fotos und Videos gibt. Ich nehme, was gerade bequemer ist.
+    </p>
+
+    <h3>Contact Scopes: einzelne Kontakte statt Adressbuch</h3>
+    <p>
+      Bei Kontakten lautet die erste Frage: Braucht die App sie überhaupt? Wenn nicht, bekommt sie keine.
+    </p>
+    <p>
+      Braucht sie welche, helfen die Contact Scopes. Schaltest du sie ein, sieht die App zuerst ein leeres Adressbuch. Dann gibst du einzelne Kontakte oder Gruppen frei. Der Rest deines Adressbuchs bleibt für die App unsichtbar.
+    </p>
+
+    <h3>Clipboard access: die Zwischenablage</h3>
+    <p>
+      Was du kopierst, landet in der Zwischenablage: ein Passwort, eine Anschrift, eine Bitcoin-Adresse. Ab Werk darf eine App dort mitlesen, solange sie im Vordergrund ist.
+    </p>
+    <p>
+      Seit September 2026 kannst du das bei GrapheneOS jeder installierten App verbieten. Der Schalter heißt Clipboard access. Du findest ihn in den Einstellungen unter Apps, bei der jeweiligen App unter Erweitert.
+    </p>
+    <ul>
+      <li><strong>Default:</strong> Die App folgt dem Standard für alle installierten Apps</li>
+      <li><strong>Allow:</strong> Die App darf lesen, solange sie im Vordergrund ist</li>
+      <li><strong>Paste only:</strong> Die App kann nur noch lesen, was sie selbst kopiert hat und was du selbst einfügst</li>
+    </ul>
+    <p>
+      Einfügen kannst du weiterhin, über das Einfügen-Menü oder die Tastatur. Ein eigener Einfügen-Knopf der App kann dann scheitern. Will die App trotzdem lesen, zeigt GrapheneOS einen kurzen Hinweis. Ganz blind ist sie aber nicht: Sie erkennt weiterhin, ob etwas kopiert ist, von welcher Art und wann.
+    </p>
+    <p>
+      Du kannst das auch als Standard für alle installierten Apps setzen, unter Datenschutz &amp; Sicherheit → Datenschutzeinstellungen → Clipboard access. Deine Tastatur behält immer Zugriff. Ich habe den Standard auf Paste only gestellt.
+    </p>
+
     <h2>Google Play Services in der Sandbox</h2>
     <p>
-      Ein häufiges Missverständnis:<br>
-      Google Play Services haben unter GrapheneOS keine Sonderrechte.
+      Auf einem normalen Android-Handy hat Google Play weitreichende Sonderrechte. Die Standort-Berechtigung hat es dort praktisch immer.
     </p>
+    <p>
+      Auf GrapheneOS gilt der Käfig auch für Google. Installierst du Google Play, ist es dort eine gewöhnliche App. Es fragt wie jede andere. Für Android Auto und wenige andere Sonderfälle gibt es eigene Schalter. Die setzt nur du.
+    </p>
+    <p>Für die Google-Play-Dienste heißt das:</p>
     <ul>
       <li>Sie laufen isoliert</li>
       <li>Sie sind optional</li>
@@ -189,12 +258,18 @@
     </ul>
 
     <h2>Praxis: Entscheidungen bewusst treffen</h2>
-    <p>Am sinnvollsten ist es, Berechtigungen beim ersten Start bewusst zu prüfen:</p>
+    <p>
+      Der beste Moment für diese Entscheidungen ist der Anfang. Denn da hat die App noch nichts von dir gesehen. Network entscheidest du schon beim Installieren, vieles andere beim ersten Start. Nach Sensors und der Zwischenablage fragt dich dabei niemand. Die stellst du selbst um.
+    </p>
+    <p>Drei Fragen helfen bei jeder Entscheidung:</p>
     <ul>
       <li>Was ist Kernfunktion?</li>
       <li>Was ist nur Bequemlichkeit?</li>
       <li>Was kann ich später freigeben?</li>
     </ul>
+    <p>
+      Oft läuft die App auch mit einem Nein. Geht doch etwas nicht mehr, weißt du jetzt, was sie wirklich braucht. Brauchst du die Funktion? Dann gib genau diese eine Berechtigung frei. Bei Standort, Kamera und Mikrofon am besten nur bei Nutzung der App, oder nur dieses Mal.
+    </p>
     <p>
       Zwei bis drei reale Apps reichen oft, um das Prinzip zu verstehen.
     </p>
@@ -205,6 +280,9 @@
       Es gibt dir Kontrolle.<br>
       Sicherheit entsteht erst durch deine Entscheidungen.
     </p>
+    <blockquote>
+      Ein Nein kannst du jederzeit zurücknehmen. Daten, die schon weg sind, nicht.
+    </blockquote>
 
     <div class="recommendation-box">
       <h3>Weiterführende Artikel</h3>
